@@ -5,7 +5,8 @@ using UnityEngine;
 public class CamResolution : MonoBehaviour
 {
     //* OutSide Component 
-    public Transform playerTf;
+    public Player player;
+
 
     //* Inside Component 
     Camera cam;
@@ -16,6 +17,7 @@ public class CamResolution : MonoBehaviour
     const int DEVICE_HEIGHT = 16;
 
     void Awake() {
+
         cam = GetComponent<Camera>();
         Rect rect = cam.rect;
         float scaleH = ((float)Screen.width / Screen.height) / ((float)DEVICE_WIDTH / DEVICE_HEIGHT); // (横 / 縦)
@@ -35,20 +37,24 @@ public class CamResolution : MonoBehaviour
 
     void Update() {
         if(Input.GetMouseButtonDown(0)){
-            //* TOUCH SCREEN
+            //* RAY CAST
             const int maxDistance = 50;
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit[] hits = Physics.RaycastAll(this.transform.position, ray.direction, maxDistance);
             //* 処理
+            Transform playerTf = player.gameObject.transform;
             foreach (RaycastHit hit in hits){
                 switch(hit.collider.tag){
-                    case "LeftPosPad": //* 左パッドへプレイヤー配置
-                        playerTf.position = new Vector3(-Mathf.Abs(playerTf.position.x), playerTf.position.y, playerTf.position.z);
-                        playerTf.localScale = new Vector3(+Mathf.Abs(playerTf.localScale.x),playerTf.localScale.y,playerTf.localScale.z);
-                        break;
                     case "RightPosPad": //* 右パッドへプレイヤー配置
                         playerTf.position = new Vector3(+Mathf.Abs(playerTf.position.x), playerTf.position.y, playerTf.position.z);
                         playerTf.localScale = new Vector3(-Mathf.Abs(playerTf.localScale.x),playerTf.localScale.y,playerTf.localScale.z);
+                        return;
+                    case "LeftPosPad": //* 左パッドへプレイヤー配置
+                        playerTf.position = new Vector3(-Mathf.Abs(playerTf.position.x), playerTf.position.y, playerTf.position.z);
+                        playerTf.localScale = new Vector3(+Mathf.Abs(playerTf.localScale.x),playerTf.localScale.y,playerTf.localScale.z);
+                        return;
+                    case "Untagged":
+                        player.setAnimTrigger("Swing");
                         break;
                 }
             };

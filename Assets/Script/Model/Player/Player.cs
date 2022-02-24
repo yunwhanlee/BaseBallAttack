@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    Animator anim;
+
     void Start()
     {
-        
+        anim = GetComponentInChildren<Animator>();
     }
 
-    void Update()
-    {
-        
-    }
+    public void setAnimTrigger(string name) => anim.SetTrigger(name);
 }
