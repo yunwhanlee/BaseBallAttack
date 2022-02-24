@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CamResolution : MonoBehaviour
-{
+{   
     //* OutSide Component 
     public Player player;
+    public GameObject hitBox;
 
 
     //* Inside Component 
     Camera cam;
-    public LayerMask layerMask;
 
     //value
     const int DEVICE_WIDTH = 9;
     const int DEVICE_HEIGHT = 16;
 
     void Awake() {
-
         cam = GetComponent<Camera>();
         Rect rect = cam.rect;
         float scaleH = ((float)Screen.width / Screen.height) / ((float)DEVICE_WIDTH / DEVICE_HEIGHT); // (横 / 縦)
@@ -44,16 +43,20 @@ public class CamResolution : MonoBehaviour
             //* 処理
             Transform playerTf = player.gameObject.transform;
             foreach (RaycastHit hit in hits){
+                Debug.Log("hit="+hit);
                 switch(hit.collider.tag){
-                    case "RightPosPad": //* 右パッドへプレイヤー配置
-                        playerTf.position = new Vector3(+Mathf.Abs(playerTf.position.x), playerTf.position.y, playerTf.position.z);
-                        playerTf.localScale = new Vector3(-Mathf.Abs(playerTf.localScale.x),playerTf.localScale.y,playerTf.localScale.z);
-                        return;
                     case "LeftPosPad": //* 左パッドへプレイヤー配置
+                        Debug.Log("---\nAAA");
                         playerTf.position = new Vector3(-Mathf.Abs(playerTf.position.x), playerTf.position.y, playerTf.position.z);
                         playerTf.localScale = new Vector3(+Mathf.Abs(playerTf.localScale.x),playerTf.localScale.y,playerTf.localScale.z);
                         return;
+                    case "RightPosPad": //* 右パッドへプレイヤー配置
+                        Debug.Log("---\nBBB");
+                        playerTf.position = new Vector3(+Mathf.Abs(playerTf.position.x), playerTf.position.y, playerTf.position.z);
+                        playerTf.localScale = new Vector3(-Mathf.Abs(playerTf.localScale.x),playerTf.localScale.y,playerTf.localScale.z);
+                        return;
                     case "Untagged":
+                        Debug.Log("CCC");
                         player.setAnimTrigger("Swing");
                         break;
                 }
@@ -61,4 +64,6 @@ public class CamResolution : MonoBehaviour
             Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.red, 0.5f);
         }
     }
+
+    
 }

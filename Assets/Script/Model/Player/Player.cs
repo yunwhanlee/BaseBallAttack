@@ -11,5 +11,7 @@ public class Player : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
     }
 
-    public void setAnimTrigger(string name) => anim.SetTrigger(name);
+    public void setAnimTrigger(string name){
+        anim.SetTrigger(name);
+    }
 }
