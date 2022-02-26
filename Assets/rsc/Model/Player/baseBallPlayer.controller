@@ -16,9 +16,6 @@ AnimatorStateMachine:
     m_State: {fileID: -6718299733757509727}
     m_Position: {x: 270, y: -20, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 1675876705392552455}
-    m_Position: {x: 790, y: 50, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: -7703710265642174700}
     m_Position: {x: 270, y: 230, z: 0}
   m_ChildStateMachines: []
@@ -38,8 +35,8 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Swing 0
-  m_Speed: 2
+  m_Name: Swing
+  m_Speed: 2.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4637146927842621706}
@@ -172,7 +169,7 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -186,29 +183,3 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
---- !u!1102 &1675876705392552455
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Swing
-  m_Speed: 1.5
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 6336031161177774121, guid: bd817782ddb796344b27287d1e065dec, type: 3}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 

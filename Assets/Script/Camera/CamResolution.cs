@@ -46,17 +46,14 @@ public class CamResolution : MonoBehaviour
                 Debug.Log("hit="+hit);
                 switch(hit.collider.tag){
                     case "LeftPosPad": //* 左パッドへプレイヤー配置
-                        Debug.Log("---\nAAA");
                         playerTf.position = new Vector3(-Mathf.Abs(playerTf.position.x), playerTf.position.y, playerTf.position.z);
                         playerTf.localScale = new Vector3(+Mathf.Abs(playerTf.localScale.x),playerTf.localScale.y,playerTf.localScale.z);
                         return;
                     case "RightPosPad": //* 右パッドへプレイヤー配置
-                        Debug.Log("---\nBBB");
                         playerTf.position = new Vector3(+Mathf.Abs(playerTf.position.x), playerTf.position.y, playerTf.position.z);
                         playerTf.localScale = new Vector3(-Mathf.Abs(playerTf.localScale.x),playerTf.localScale.y,playerTf.localScale.z);
                         return;
                     case "Untagged":
-                        Debug.Log("CCC");
                         player.setAnimTrigger("Swing");
                         break;
                 }
