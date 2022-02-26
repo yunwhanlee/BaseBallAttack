@@ -18,7 +18,7 @@ public class BallShooter : MonoBehaviour
         //* 発射
         if(time > span){
             time = 0;
-            Debug.Log("🥎BALL 発射！");
+            //Debug.Log("🥎BALL 発射！");
             GameObject instance = Instantiate(ballPref, entranceTf.position, Quaternion.identity);
             instance.GetComponent<Ball_Prefab>().setBallSpeed(ballSpeed);
             Destroy(instance, 5f);
