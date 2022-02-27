@@ -40,10 +40,13 @@ public class CamResolution : MonoBehaviour
             const int maxDistance = 50;
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit[] hits = Physics.RaycastAll(this.transform.position, ray.direction, maxDistance);
+            System.Array.Reverse(hits);//(BUG) hitsが逆にIdx順番で帰ることを正しく直す。
+
             //* 処理
             Transform playerTf = player.gameObject.transform;
+            int idx=0;
             foreach (RaycastHit hit in hits){
-                Debug.Log("hit="+hit);
+                Debug.Log("idx="+idx+", hit.collider.tag="+hit.collider.tag);
                 switch(hit.collider.tag){
                     case "LeftPosPad": //* 左パッドへプレイヤー配置
                         playerTf.position = new Vector3(-Mathf.Abs(playerTf.position.x), playerTf.position.y, playerTf.position.z);
@@ -57,6 +60,7 @@ public class CamResolution : MonoBehaviour
                         player.setAnimTrigger("Swing");
                         break;
                 }
+                idx++;
             };
             Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.red, 0.5f);
         }

@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
         float degY = hitBox.transform.rotation.eulerAngles.y;
         degY = (degY < 180) ? -degY : +(360 - degY);
         float v = degY + hitBoxDegOffset;
-        Debug.Log("GUI:: HitBox degY v=" + v);
+        //Debug.Log("GUI:: HitBox degY v=" + v);
 
         int hitBoxDegSliderMax = hitBoxDegOffset * 2;
         hitBoxDegSlider.value = v / hitBoxDegSliderMax;
