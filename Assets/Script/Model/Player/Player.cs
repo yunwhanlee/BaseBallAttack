@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     Animator anim;
+    public bool doSwing = false;
 
     void Start()
     {
@@ -12,6 +13,8 @@ public class Player : MonoBehaviour
     }
 
     public void setAnimTrigger(string name){
+        //Debug.Log("Player:: Swing");
         anim.SetTrigger(name);
+        doSwing = true;
     }
 }

@@ -5,45 +5,60 @@ using UnityEngine;
 public class Ball_Prefab : MonoBehaviour
 {
     //* OutSide
-    //[SerializeField]int hitAngleMin = 45;
-    //[SerializeField]int hitAngleMax = -45;
-
+    public GameManager gm;
+    public Player player;
     [SerializeField]private int speed = 10;
+    private const int MAX_HIT_DEG = 45;
 
     Rigidbody rigid;
     void Start()
     {
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        player = GameObject.Find("Player").GetComponent<Player>();
         rigid = GetComponent<Rigidbody>();
         rigid.AddForce(-this.transform.forward * speed, ForceMode.Impulse);
+
+        Debug.Log("HitRange:: startPosZ=" + gm.hitRangeStartTf.position.z +  ", endPosZ="+ gm.hitRangeEndTf.position.z);
     }
 
-    private void OnCollisionEnter(Collision col) {
-        if(col.gameObject.tag == "HitBox"){
-            StartCoroutine(coHitBall(col));
-        }
-        else if(col.gameObject.tag == "Wall"){
+    void Update(){
+        //* Hit Range Area Ball Comeing Viewer GUI
+        float startPosZ = gm.hitRangeStartTf.position.z;
+        float endPosZ = gm.hitRangeEndTf.position.z;
+        
+        if(endPosZ <= this.transform.position.z && this.transform.position.z <= startPosZ){
+            float offset = Mathf.Abs(startPosZ);
+            float max = Mathf.Abs(endPosZ) - offset;
+            float v = Mathf.Abs(this.transform.position.z) - offset;
+            gm.hitBoxDegSlider.value = v / max;
         }
     }
 
-    IEnumerator coHitBall(Collision col){
-        //Debug.Log("Hit! HitBox inActive for one hit");
-        col.gameObject.GetComponent<BoxCollider>().enabled = false;
-        GameObject hitBoxObj = col.gameObject;
-        Vector3 dir = hitBoxObj.transform.forward; //打った 方向
-        float degY = hitBoxObj.transform.rotation.eulerAngles.y;
-        degY = (degY < 180) ? degY : 360 - degY; //(BUG)-角度でも、0から360範囲で返す値を正しく変換する。
-        float power = (35 < degY)? 1.5f
-            : (25 < degY)? 2.25f
-            : (15 < degY)? 3
-            : (7.5f < degY)? 4.5f : 6;
-        Debug.Log("coHitBall:: degY=" + degY + ", power=" + power);
+    private void OnTriggerStay(Collider col) {
+        if(player.doSwing){
+            if(col.gameObject.tag == "HitRangeArea"){
+                float v = gm.hitBoxDegSlider.value;
+                float deg = (MAX_HIT_DEG * 2); //真ん中がMAXになり、始めと終わりは0になるため。
+                if(v <= 0.5f){deg = -Mathf.Abs(MAX_HIT_DEG - (v * deg));}
+                else{deg = Mathf.Abs(MAX_HIT_DEG - (v * deg));}
 
-        rigid.velocity = Vector3.zero;
-        rigid.AddForce((dir).normalized * speed * power, ForceMode.Impulse);
+                if(player.doSwing){
+                    Debug.Log("Player:: doSwing=" + player.doSwing);
+                    Debug.Log("Ball_Prefab:: ■hitRangeSlider.v=" + v.ToString("N2") + ", ■deg=" + deg.ToString("N1"));
+                    player.doSwing = false;
 
-        yield return new WaitForSeconds(0.5f);
-        //Debug.Log("Back HitBox active");
-        hitBoxObj.GetComponent<BoxCollider>().enabled = true;
+                    Vector3 dir = new Vector3(deg/MAX_HIT_DEG,0,1); // -45 ~ 45°
+                    float degAbs = Mathf.Abs(deg);
+                    float power = (35 < degAbs)? 1.5f : (25 < degAbs)? 2.25f : (15 < degAbs)? 3 : (7.5f < degAbs)? 4.5f : 6;
+                    Debug.Log("Ball_Prefab:: deg=" + deg + ", power=" + power);
+                    rigid.velocity = Vector3.zero;
+                    rigid.AddForce((dir).normalized * speed * power, ForceMode.Impulse);
+                }
+            }
+            else if(col.gameObject.tag == "Untagged"){
+                player.doSwing = false;
+            }
+        }
     }
 
     public void setBallSpeed(int v){

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CamResolution : MonoBehaviour
 {   
-    //* OutSide Component 
+    //* OutSide Component
+    public GameManager gm;
     public Player player;
-    public GameObject hitBox;
 
 
     //* Inside Component 
@@ -17,21 +17,7 @@ public class CamResolution : MonoBehaviour
     const int DEVICE_HEIGHT = 16;
 
     void Awake() {
-        cam = GetComponent<Camera>();
-        Rect rect = cam.rect;
-        float scaleH = ((float)Screen.width / Screen.height) / ((float)DEVICE_WIDTH / DEVICE_HEIGHT); // (横 / 縦)
-        float scaleW = 1f / scaleH;
-
-        //* calculate
-        if(scaleH < 1){//上・下が超える
-            rect.height = scaleH;
-            rect.y = (1f - scaleH) / 2f;
-        }else{//左・右が超える
-            rect.width = scaleW;
-            rect.x = (1f - scaleW) / 2f;
-        }
-
-        cam.rect = rect;//apply
+        setAutoDeviceCamRatio(DEVICE_WIDTH, DEVICE_HEIGHT);
     }
 
     void Update() {
@@ -40,7 +26,7 @@ public class CamResolution : MonoBehaviour
             const int maxDistance = 50;
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit[] hits = Physics.RaycastAll(this.transform.position, ray.direction, maxDistance);
-            System.Array.Reverse(hits);//(BUG) hitsが逆にIdx順番で帰ることを正しく直す。
+            //? System.Array.Reverse(hits);//(BUG) hitsが逆にIdx順番で帰ることを正しく直す。
 
             //* 処理
             Transform playerTf = player.gameObject.transform;
@@ -66,5 +52,26 @@ public class CamResolution : MonoBehaviour
         }
     }
 
+    //*---------------------------------------
+    //*  関数
+    //*---------------------------------------
+    private void setAutoDeviceCamRatio(int w, int h){
+        cam = GetComponent<Camera>();
+        Rect rect = cam.rect;
+        float scaleH = ((float)Screen.width / Screen.height) / ((float)DEVICE_WIDTH / DEVICE_HEIGHT); // (横 / 縦)
+        float scaleW = 1f / scaleH;
+
+        //* calculate
+        if(scaleH < 1){//上・下が超える
+            rect.height = scaleH;
+            rect.y = (1f - scaleH) / 2f;
+        }else{//左・右が超える
+            rect.width = scaleW;
+            rect.x = (1f - scaleW) / 2f;
+        }
+
+        cam.rect = rect;//apply
+    }
+    //---------------------------------------
     
 }
