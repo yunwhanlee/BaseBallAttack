@@ -26,7 +26,7 @@ public class CamResolution : MonoBehaviour
             const int maxDistance = 50;
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit[] hits = Physics.RaycastAll(this.transform.position, ray.direction, maxDistance);
-            //? System.Array.Reverse(hits);//(BUG) hitsが逆にIdx順番で帰ることを正しく直す。
+            System.Array.Reverse(hits);//(BUG) hitsが逆にIdx順番で帰ることを正しく直す。
 
             //* 処理
             Transform playerTf = player.gameObject.transform;

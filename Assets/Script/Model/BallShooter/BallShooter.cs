@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class BallShooter : MonoBehaviour
 {
+    [SerializeField]private int ballDestroySpan;
     [SerializeField]private int ballSpeed;
 
     [SerializeField]private float time;
-    [SerializeField]private float span = 3;
+    [SerializeField]private float shootSpan = 3;
     [SerializeField]public GameObject ballPref;
     [SerializeField]public Transform entranceTf;
 
@@ -16,12 +17,12 @@ public class BallShooter : MonoBehaviour
         time += Time.deltaTime;
         
         //* 発射
-        if(time > span){
+        if(time > shootSpan){
             time = 0;
             //Debug.Log("🥎BALL 発射！");
             GameObject instance = Instantiate(ballPref, entranceTf.position, Quaternion.identity);
             instance.GetComponent<Ball_Prefab>().setBallSpeed(ballSpeed);
-            Destroy(instance, 5f);
+            Destroy(instance, ballDestroySpan);
         }
     }
 }

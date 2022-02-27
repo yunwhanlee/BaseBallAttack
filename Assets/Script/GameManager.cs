@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
     public Transform hitRangeEndTf;
 
     //* GUI
-    public Slider hitBoxDegSlider;
+    public Slider hitRangeDegSlider;
+    public Image hitRangeHandleImg;
 
 
     void Update()
