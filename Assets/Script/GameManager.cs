@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     //* OutSide
-    public GameObject hitBox;
+    //public GameObject hitBox;
     //[SerializeField]int hitBoxDegOffset = 50;
     public Transform hitRangeStartTf;
     public Transform hitRangeEndTf;

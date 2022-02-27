@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public GameObject hitAxisArrow;
+
     Animator anim;
     public bool doSwing = false;
 
