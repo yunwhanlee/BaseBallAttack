@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Ball_Prefab : MonoBehaviour
 {
+
     //* OutSide
     public GameManager gm;
-    public Player player;
+    public Player pl;
 
     //* Value
-    private const int MAX_HIT_DEG = 45;
     private bool isHited = false;
     private int speed;
 
@@ -17,7 +17,7 @@ public class Ball_Prefab : MonoBehaviour
     void Start()
     {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-        player = GameObject.Find("Player").GetComponent<Player>();
+        pl = GameObject.Find("Player").GetComponent<Player>();
         rigid = GetComponent<Rigidbody>();
         rigid.AddForce(-this.transform.forward * speed, ForceMode.Impulse);
         //Debug.Log("HitRange:: startPosZ=" + gm.hitRangeStartTf.position.z +  ", endPosZ="+ gm.hitRangeEndTf.position.z);
@@ -35,7 +35,7 @@ public class Ball_Prefab : MonoBehaviour
             gm.hitRangeDegSlider.value = v / max;
 
             float deg = calcHitRangeToDegree();
-            player.hitAxisArrow.transform.rotation = Quaternion.AngleAxis(deg, Vector3.up);
+            pl.hitAxisArrow.transform.rotation = Quaternion.AngleAxis(deg, Vector3.up);
         }
     }
 
@@ -43,33 +43,39 @@ public class Ball_Prefab : MonoBehaviour
     private void OnTriggerStay(Collider col) {
         //* Batting
         if(col.gameObject.tag == "HitRangeArea"){
+            pl.setSwingArcColor("red");
             float deg = calcHitRangeToDegree();
-            Debug.Log("Ball_Prefab:: ■hitRangeSlider.value=" + gm.hitRangeDegSlider.value.ToString("N2") + ", ■deg=" + deg.ToString("N1"));
-            if(player.doSwing){
-                Debug.Log("Player:: doSwing=" + player.doSwing);
+            if(pl.doSwing){
+                Debug.Log("Player:: doSwing=" + pl.doSwing);
                 Debug.Log("Ball_Prefab:: ■hitRangeSlider.value=" + gm.hitRangeDegSlider.value.ToString("N2") + ", ■deg=" + deg.ToString("N1"));
                 isHited = true;
-                player.doSwing = false;
+                pl.doSwing = false;
 
                 //offset Axis
                 const int leftSide = -1, rightSide = 1;
-                int sign = player.transform.localScale.x < 0 ? leftSide : rightSide;
-                int offsetAxis = (sign < 0) ? (MAX_HIT_DEG/2) * leftSide : (MAX_HIT_DEG/2) * rightSide;
+                int sign = pl.transform.localScale.x < 0 ? leftSide : rightSide;
+                int offsetAxis = (sign < 0) ? (pl.MAX_HIT_DEG/2) * leftSide : (pl.MAX_HIT_DEG/2) * rightSide;
                 Debug.Log("Ball_Prefab:: ■offsetAxis=" + offsetAxis);
 
-                //Vector3 dir = new Vector3((deg / MAX_HIT_DEG) * sign,0,1); // -45 ~ 45°
+                //Vector3 dir = new Vector3((deg / pl.MAX_HIT_DEG) * sign,0,1); // -45 ~ 45°
                 Vector3 dir = Vector3.forward;
                 dir = Quaternion.AngleAxis(deg, Vector3.up) * dir;
                 
                 float degAbs = Mathf.Abs(deg);
-                float power = (35 < degAbs)? 1.75f : (25 < degAbs)? 2f : (15 < degAbs)? 2.25f : (7.5f < degAbs)? 2.25f : 2.5f;
+                float power = (35 < degAbs)? 2f : (25 < degAbs)? 2.25f : (15 < degAbs)? 2.5f : (7.5f < degAbs)? 2.75f : 3f;
                 Debug.Log("Ball_Prefab:: deg=" + deg + ", power=" + power);
                 rigid.velocity = Vector3.zero;
                 rigid.AddForce((dir).normalized * speed * power, ForceMode.Impulse);
             }
         }
         else if(col.gameObject.tag == "Untagged"){
-            player.doSwing = false;
+            pl.doSwing = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider col) {
+        if(col.gameObject.tag == "HitRangeArea"){
+            pl.setSwingArcColor("yellow");
         }
     }
 
@@ -90,14 +96,14 @@ public class Ball_Prefab : MonoBehaviour
     private float calcHitRangeToDegree(){
         //Degree
         float v = gm.hitRangeDegSlider.value;
-        float deg = (MAX_HIT_DEG * 2); //真ん中がMAXになり、始めと終わりは0になるため。
-        if(v <= 0.5f){deg = -Mathf.Abs(MAX_HIT_DEG - (v * deg));}
-        else{deg = Mathf.Abs(MAX_HIT_DEG - (v * deg));}
+        float deg = (pl.MAX_HIT_DEG * 2); //真ん中がMAXになり、始めと終わりは0になるため。
+        if(v <= 0.5f){deg = -Mathf.Abs(pl.MAX_HIT_DEG - (v * deg));}
+        else{deg = Mathf.Abs(pl.MAX_HIT_DEG - (v * deg));}
         //SetHitAxisDir
         const int leftSide = -1, rightSide = 1;
-        int sign = player.transform.localScale.x < 0 ? leftSide : rightSide;
+        int sign = pl.transform.localScale.x < 0 ? leftSide : rightSide;
         //Offset
-        int offsetAxis = (sign < 0) ? (MAX_HIT_DEG/2) * leftSide : (MAX_HIT_DEG/2) * rightSide;
+        int offsetAxis = (sign < 0) ? (pl.MAX_HIT_DEG/2) * leftSide : (pl.MAX_HIT_DEG/2) * rightSide;
 
         return deg * sign + offsetAxis;
     }
