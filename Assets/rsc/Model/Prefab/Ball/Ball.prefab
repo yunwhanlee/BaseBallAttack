@@ -127,7 +127,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
-  player: {fileID: 0}
+  pl: {fileID: 0}
+  ballShooter: {fileID: 0}
+  aliveTime: 5
 --- !u!1001 &5605884071463329500
 PrefabInstance:
   m_ObjectHideFlags: 0

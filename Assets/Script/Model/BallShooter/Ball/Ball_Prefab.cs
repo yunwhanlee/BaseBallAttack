@@ -8,6 +8,8 @@ public class Ball_Prefab : MonoBehaviour
     //* OutSide
     public GameManager gm;
     public Player pl;
+    public BallShooter ballShooter;
+    public int aliveTime;
 
     //* Value
     private bool isHited = false;
@@ -18,24 +20,34 @@ public class Ball_Prefab : MonoBehaviour
     {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         pl = GameObject.Find("Player").GetComponent<Player>();
+        ballShooter = GameObject.Find("BallShooter").GetComponent<BallShooter>();
+
         rigid = GetComponent<Rigidbody>();
         rigid.AddForce(-this.transform.forward * speed, ForceMode.Impulse);
+
+        Invoke("onDestroyMe",aliveTime);
         //Debug.Log("HitRange:: startPosZ=" + gm.hitRangeStartTf.position.z +  ", endPosZ="+ gm.hitRangeEndTf.position.z);
     }
     void Update(){
-        //* Hit Range Area Ball Comeing Viewer
-        float startPosZ = gm.hitRangeStartTf.position.z;
-        float endPosZ = gm.hitRangeEndTf.position.z;
-        
-        if(!isHited && endPosZ <= this.transform.position.z && this.transform.position.z <= startPosZ){
-            //HitRange Slider UI
-            float offset = Mathf.Abs(startPosZ);
-            float max = Mathf.Abs(endPosZ) - offset;
-            float v = Mathf.Abs(this.transform.position.z) - offset;
-            gm.hitRangeDegSlider.value = v / max;
+        if(gm.state == GameManager.State.PLAY){
+            if(this.transform.position.z < gm.deadLineTf.position.z){
+                gm.setState(GameManager.State.WAIT);
+                return;
+            }
+            //* Hit Range Area Ball Comeing Viewer
+            float startPosZ = gm.hitRangeStartTf.position.z;
+            float endPosZ = gm.hitRangeEndTf.position.z;
+            
+            if(!isHited && endPosZ <= this.transform.position.z && this.transform.position.z <= startPosZ){
+                //HitRange Slider UI
+                float offset = Mathf.Abs(startPosZ);
+                float max = Mathf.Abs(endPosZ) - offset;
+                float v = Mathf.Abs(this.transform.position.z) - offset;
+                gm.hitRangeDegSlider.value = v / max;
 
-            float deg = calcHitRangeToDegree();
-            pl.hitAxisArrow.transform.rotation = Quaternion.AngleAxis(deg, Vector3.up);
+                float deg = calcHitRangeToDegree();
+                pl.hitAxisArrow.transform.rotation = Quaternion.AngleAxis(deg, Vector3.up);
+            }
         }
     }
 
@@ -77,6 +89,10 @@ public class Ball_Prefab : MonoBehaviour
         if(col.gameObject.tag == "HitRangeArea"){
             pl.setSwingArcColor("yellow");
         }
+        //* Ball(自分)を削除
+        else if(col.gameObject.tag == "DestroyBallLine"){
+            onDestroyMe();
+        }
     }
 
     //** Obstacle
@@ -89,6 +105,11 @@ public class Ball_Prefab : MonoBehaviour
     //*---------------------------------------
     //*  関数
     //*---------------------------------------
+    private void onDestroyMe(){
+        gm.setState(GameManager.State.WAIT);
+        ballShooter.setIsShooted(false);
+        Destroy(this.gameObject);
+    }
     public void setBallSpeed(int v){
         speed = v;
     }
