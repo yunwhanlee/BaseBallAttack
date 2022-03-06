@@ -5,17 +5,26 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    [Header("【HIT 角度範囲】")]
     public GameObject hitAxisArrow;
     public Image swingArcArea;
-    public int MAX_HIT_DEG = 45;
+    private float swingArcRange;
+    public int MAX_HIT_DEG = 90; //左右ある方向の最大角度
+    public int offsetHitDeg = 45; // Startが０度(←方向)から、↑ →向きに回る。
 
-    Animator anim;
+    [Header("Status")]
     public bool doSwing = false;
+
+    private Animator anim;
 
     void Start()
     {
-        Debug.Log("swingArcArea.fillOrigin=" + swingArcArea.fillOrigin);
         anim = GetComponentInChildren<Animator>();
+        swingArcRange = MAX_HIT_DEG * 2;//左右合わせるから * 2
+        swingArcArea.fillAmount = swingArcRange / 360;
+        swingArcArea.rectTransform.localRotation = Quaternion.Euler(0,0,offsetHitDeg);
+        hitAxisArrow.transform.rotation = Quaternion.Euler(0,-offsetHitDeg,0);
+        Debug.Log("Start:: swingArcArea表示角度= " + swingArcRange + ", 角度をfillAmount値(0~1)に変換=" + swingArcRange / 360);
     }
 
     void Update(){
@@ -28,10 +37,12 @@ public class Player : MonoBehaviour
         if(this.transform.position.x < 0){
             rect.localScale = new Vector3(Mathf.Abs(rect.localScale.x), rect.localScale.y, rect.localScale.z);
             swingArcArea.fillOrigin = Top;
+            swingArcArea.rectTransform.localRotation = Quaternion.Euler(0,0,offsetHitDeg);
         }
         else{
             rect.localScale = new Vector3(-Mathf.Abs(rect.localScale.x), rect.localScale.y, rect.localScale.z);
             swingArcArea.fillOrigin = Left;
+            swingArcArea.rectTransform.localRotation = Quaternion.Euler(0,0,-offsetHitDeg);
         }
     }
 

@@ -5,12 +5,11 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public enum State {WAIT, PLAY, GAMEOVER};
-    public State state = State.WAIT;
+    public enum State {PLAY, PAUSE, GAMEOVER};
+    public State state = State.PLAY;
 
     //* OutSide
     //public GameObject hitBox;
-    //[SerializeField]int hitBoxDegOffset = 50;
     public Transform hitRangeStartTf;
     public Transform hitRangeEndTf;
 
