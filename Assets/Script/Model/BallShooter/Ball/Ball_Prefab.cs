@@ -29,6 +29,12 @@ public class Ball_Prefab : MonoBehaviour
         //Debug.Log("HitRange:: startPosZ=" + gm.hitRangeStartTf.position.z +  ", endPosZ="+ gm.hitRangeEndTf.position.z);
     }
     void Update(){
+            //* Destroy by Checking Velocity
+            Debug.Log("Ball Velocity.magnitude="+rigid.velocity.magnitude);
+            if(rigid.velocity.magnitude != 0 && rigid.velocity.magnitude < 0.5f){
+                onDestroyMe();
+            }
+
             //* Hit Range Area Ball Comeing Viewer
             float startPosZ = gm.hitRangeStartTf.position.z;
             float endPosZ = gm.hitRangeEndTf.position.z;
@@ -117,7 +123,7 @@ public class Ball_Prefab : MonoBehaviour
         const int leftSide = -1, rightSide = 1;
         int sign = pl.transform.localScale.x < 0 ? leftSide : rightSide;
         //Start Degree Offset
-        int offset = (sign < 0) ? (pl.offsetHitDeg) * leftSide : (pl.offsetHitDeg) * rightSide;
+        float offset = (sign < 0) ? (pl.offsetHitDeg) * leftSide : (pl.offsetHitDeg) * rightSide;
 
         return deg * sign + offset;
     }
