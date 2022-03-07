@@ -43,7 +43,7 @@ public class CamResolution : MonoBehaviour
                         playerTf.localScale = new Vector3(-Mathf.Abs(playerTf.localScale.x),playerTf.localScale.y,playerTf.localScale.z);
                         return;
                     case "Untagged":
-                        player.setAnimTrigger("Swing");
+                        // player.setAnimTrigger("Swing");
                         break;
                 }
                 idx++;

@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     private void setSwingArcPos(){
         RectTransform rect = swingArcArea.rectTransform;
         if(this.transform.position.x < 0){
-            rect.parent.localScale = new Vector3(Mathf.Abs(rect.parent.localScale.x), rect.parent.localScale.y, rect.parent.localScale.z);
+            rect.parent.localScale = new Vector3(Mathf.Abs(rect.parent.localScale.x), rect.parent.localScale.y, rect.parent.localScale.z); //! (BUG) 
             swingArcArea.rectTransform.localRotation = Quaternion.Euler(0,0,-offsetHitDeg + 90);
         }
         else{
