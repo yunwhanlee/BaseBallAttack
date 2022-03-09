@@ -6,6 +6,7 @@ public class Ball_Prefab : MonoBehaviour
 {
     //* OutSide
     public GameManager gm;
+    public BlockMaker bm;
     public Player pl;
     public BallShooter ballShooter;
     public int aliveTime;
@@ -18,6 +19,7 @@ public class Ball_Prefab : MonoBehaviour
     void Start()
     {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        bm = GameObject.Find("BlockMaker").GetComponent<BlockMaker>();
         pl = GameObject.Find("Player").GetComponent<Player>();
         ballShooter = GameObject.Find("BallShooter").GetComponent<BallShooter>();
 
@@ -109,6 +111,7 @@ public class Ball_Prefab : MonoBehaviour
     private void onDestroyMe(){
         gm.setState(GameManager.State.PLAY);
         gm.downWall.isTrigger = true;
+        bm.setCreateBlock(true);
         Destroy(this.gameObject);
     }
     public void setBallSpeed(int v){

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BlockMaker : MonoBehaviour
 {
+    //* OutSide
+    public GameManager gm;
+
     private const float WIDTH = 1.9f;
     private const float HEIGHT = 1;
     private const int MAX_HORIZONTAL_CNT = 6;
@@ -16,6 +19,7 @@ public class BlockMaker : MonoBehaviour
     public Transform blockBundle;
     public Material[] blockColorMts;
     public GameObject blockPref;
+    public bool isCreateBlock;
 
     void Start() {
         for(int v=0; v<MAX_VERTICAL_LINE_CNT;v++){ //縦
@@ -33,7 +37,17 @@ public class BlockMaker : MonoBehaviour
             }
         }
 
-        InvokeRepeating("moveDownBlock", moveDownSpan, moveDownSpan);
+        // InvokeRepeating("moveDownBlock", moveDownSpan, moveDownSpan);
+    }
+    void Update(){
+        if(isCreateBlock){
+            isCreateBlock = false;
+            moveDownBlock();
+        }
+    }
+
+    public void setCreateBlock(bool isActive){
+        isCreateBlock = isActive;
     }
 
     private void moveDownBlock(){

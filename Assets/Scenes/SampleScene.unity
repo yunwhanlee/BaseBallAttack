@@ -877,7 +877,7 @@ GameObject:
   - component: {fileID: 579925510}
   - component: {fileID: 579925511}
   m_Layer: 0
-  m_Name: BlockBundle
+  m_Name: BlockMaker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -909,6 +909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c0cca92c1be834299a399ee5b03c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gm: {fileID: 1623732227}
   moveDownSpan: 10
   createPercent: 70
   blockBundle: {fileID: 579925510}
