@@ -18,6 +18,8 @@ public class BallShooter : MonoBehaviour
 
     void Update()
     {
+        if(gm.state == GameManager.State.WAIT) return;
+
         gm.shootCntTxt.text = time.ToString("N0");
         time -= Time.deltaTime;
     

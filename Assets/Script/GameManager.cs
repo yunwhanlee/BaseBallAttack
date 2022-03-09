@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public enum State {PLAY, PAUSE, GAMEOVER};
+    public enum State {PLAY, WAIT, GAMEOVER};
     public State state = State.PLAY;
 
     //* OutSide
@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public Transform hitRangeEndTf;
 
     public Transform deadLineTf;
+    public BoxCollider downWall;
 
     //* GUI
     public Text stateTxt;
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
         //* State Txt
         stateTxt.text = state.ToString();
 
+        
         //* HitBox Degree Slider
         // float degY = hitBox.transform.rotation.eulerAngles.y;
         // degY = (degY < 180) ? -degY : +(360 - degY);

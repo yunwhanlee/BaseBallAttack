@@ -24,8 +24,6 @@ public class Ball_Prefab : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         rigid.AddForce(-this.transform.forward * speed, ForceMode.Impulse);
 
-        //Invoke("onDestroyMe",aliveTime);
-
         //Debug.Log("HitRange:: startPosZ=" + gm.hitRangeStartTf.position.z +  ", endPosZ="+ gm.hitRangeEndTf.position.z);
     }
     void Update(){
@@ -35,21 +33,16 @@ public class Ball_Prefab : MonoBehaviour
                 onDestroyMe();
             }
 
-            //* Hit Range Area Ball Comeing Viewer
-            // float startPosZ = gm.hitRangeStartTf.position.z;
-            // float endPosZ = gm.hitRangeEndTf.position.z;
-            
-            // if(!isHited && endPosZ <= this.transform.position.z && this.transform.position.z <= startPosZ){
-            //     //HitRange Slider UI
-            //     float offset = Mathf.Abs(startPosZ);
-            //     float max = Mathf.Abs(endPosZ) - offset;
-            //     float v = Mathf.Abs(this.transform.position.z) - offset;
-            //     gm.hitRangeDegSlider.value = v / max;
-
-            //     float deg = calcHitRangeToDegree();
-            //     //Debug.Log("Ball_Prefab:: deg=" + deg);
-            //     pl.hitAxisArrow.transform.rotation = Quaternion.AngleAxis(deg, Vector3.up);
-            // }
+            //* Ball Comeing View Slider
+            float startPosZ = gm.hitRangeStartTf.position.z;
+            float endPosZ = gm.hitRangeEndTf.position.z;
+            if(!isHited && endPosZ <= this.transform.position.z && this.transform.position.z <= startPosZ){
+                //HitRange Slider UI
+                float offset = Mathf.Abs(startPosZ);
+                float max = Mathf.Abs(endPosZ) - offset;
+                float v = Mathf.Abs(this.transform.position.z) - offset;
+                gm.hitRangeDegSlider.value = v / max;
+            }
     }
 
     //** Control
@@ -58,11 +51,13 @@ public class Ball_Prefab : MonoBehaviour
         if(col.gameObject.tag == "HitRangeArea"){
             pl.setSwingArcColor("red");
             //float deg = calcHitRangeToDegree();
-            if(pl.doSwing){
+            if(pl.doSwing && gm.state == GameManager.State.PLAY){
                 // Debug.Log("Player:: doSwing=" + pl.doSwing);
                 // Debug.Log("Ball_Prefab:: hitRangeSlider.value=" + gm.hitRangeDegSlider.value.ToString("N2") + ", deg=" + deg.ToString("N1"));
+                gm.setState(GameManager.State.WAIT);
                 isHited = true;
                 pl.doSwing = false;
+                rigid.useGravity = true;
 
                 //offset Axis
                 const int leftSide = -1, rightSide = 1;
@@ -83,8 +78,11 @@ public class Ball_Prefab : MonoBehaviour
                 rigid.AddForce((dir).normalized * speed * power, ForceMode.Impulse);
             }
         }
-        else if(col.gameObject.tag == "Untagged"){
+        else if(col.gameObject.tag == "ActiveDownWall"){
             pl.doSwing = false;
+            if(gm.state == GameManager.State.WAIT){
+                gm.downWall.isTrigger = false;
+            }
         }
     }
 
@@ -109,6 +107,8 @@ public class Ball_Prefab : MonoBehaviour
     //*  関数
     //*---------------------------------------
     private void onDestroyMe(){
+        gm.setState(GameManager.State.PLAY);
+        gm.downWall.isTrigger = true;
         Destroy(this.gameObject);
     }
     public void setBallSpeed(int v){
