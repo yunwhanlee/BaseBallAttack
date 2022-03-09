@@ -74,7 +74,8 @@ public class Ball_Prefab : MonoBehaviour
                 //dir = Quaternion.AngleAxis(deg, Vector3.up) * dir;
                 
                 //float degAbs = Mathf.Abs(deg);
-                float power = 3f;//(35 < degAbs)? 2f : (25 < degAbs)? 2.25f : (15 < degAbs)? 2.5f : (7.5f < degAbs)? 2.75f : 3f;
+                float power = 4f;//(35 < degAbs)? 2f : (25 < degAbs)? 2.25f : (15 < degAbs)? 2.5f : (7.5f < degAbs)? 2.75f : 3f;
+
                 // Debug.Log("Ball_Prefab:: deg=" + deg + ", power=" + power);
                 rigid.velocity = Vector3.zero;
                 rigid.AddForce(dir * speed * power, ForceMode.Impulse);
