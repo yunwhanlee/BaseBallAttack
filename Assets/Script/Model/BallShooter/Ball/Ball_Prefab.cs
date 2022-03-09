@@ -77,7 +77,7 @@ public class Ball_Prefab : MonoBehaviour
                 float power = 3f;//(35 < degAbs)? 2f : (25 < degAbs)? 2.25f : (15 < degAbs)? 2.5f : (7.5f < degAbs)? 2.75f : 3f;
                 // Debug.Log("Ball_Prefab:: deg=" + deg + ", power=" + power);
                 rigid.velocity = Vector3.zero;
-                rigid.AddForce((dir).normalized * speed * power, ForceMode.Impulse);
+                rigid.AddForce(dir * speed * power, ForceMode.Impulse);
             }
         }
         else if(col.gameObject.tag == "ActiveDownWall"){

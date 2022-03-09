@@ -920,6 +920,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: ef01bc3ad6c4a204698706049449af64, type: 2}
   - {fileID: 2100000, guid: 84325dde9f0d7e5438c388b73e35ee88, type: 2}
   blockPref: {fileID: 1376276108105304710, guid: 71f96bca88b0fd940a48a70f1bfe1885, type: 3}
+  isCreateBlock: 0
 --- !u!1 &587487854
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,7 +1010,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 587487854}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10.03}
+  m_LocalPosition: {x: 0, y: 0, z: -5.17}
   m_LocalScale: {x: 12.5, y: 5, z: 0.04761905}
   m_Children: []
   m_Father: {fileID: 749492863}
@@ -1782,7 +1783,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 896793083}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -17}
+  m_LocalPosition: {x: 0, y: 0, z: -16.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 683396473}
@@ -2290,7 +2291,7 @@ MonoBehaviour:
   gm: {fileID: 1623732227}
   ballSpeed: 20
   time: 0
-  shootSpan: 5
+  shootSpan: 3
   ballPref: {fileID: 2295754910549213891, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
   entranceTf: {fileID: 747844806}
 --- !u!1 &1369034197
@@ -2320,8 +2321,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1369034197}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: -18}
-  m_LocalScale: {x: 1, y: 1.5, z: 2}
+  m_LocalPosition: {x: 0, y: 0.5, z: -17.75}
+  m_LocalScale: {x: 1, y: 1.5, z: 2.5}
   m_Children: []
   m_Father: {fileID: 683396473}
   m_RootOrder: 1
