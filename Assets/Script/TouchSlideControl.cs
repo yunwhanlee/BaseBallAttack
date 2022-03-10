@@ -25,7 +25,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         const int offsetDeg2DTo3D = 90;
         pl.hitAxisArrow.transform.rotation = Quaternion.Euler(0,offsetDeg2DTo3D -deg,0);
 
-        Debug.Log("OnDrag:: Stick Move Deg="+deg);
+        //Debug.Log("OnDrag:: Stick Move Deg="+deg);
     }
 
     public void OnPointerDown(PointerEventData eventData)

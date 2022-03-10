@@ -30,7 +30,7 @@ public class Ball_Prefab : MonoBehaviour
     }
     void Update(){
             //* Destroy by Checking Velocity
-            Debug.Log("Ball Velocity.magnitude="+rigid.velocity.magnitude);
+            // Debug.Log("Ball Velocity.magnitude="+rigid.velocity.magnitude);
             if(rigid.velocity.magnitude != 0 && rigid.velocity.magnitude < 0.5f){
                 onDestroyMe();
             }
@@ -43,12 +43,16 @@ public class Ball_Prefab : MonoBehaviour
                 float offset = Mathf.Abs(startPosZ);
                 float max = Mathf.Abs(endPosZ) - offset;
                 float v = Mathf.Abs(this.transform.position.z) - offset;
-                gm.hitRangeDegSlider.value = v / max;
+                gm.hitRangeSlider.value = v / max;
             }
     }
 
     //** Control
     private void OnTriggerStay(Collider col) {
+        // float v = gm.hitRangeDegSlider.value;
+        // float midMaxV = (v <= 0.5f)? v * 2 : 1 - (v - 0.5f) * 2;
+        // Debug.Log("midMaxV=" + midMaxV);
+
         //* Batting
         if(col.gameObject.tag == "HitRangeArea"){
             pl.setSwingArcColor("red");
@@ -74,11 +78,13 @@ public class Ball_Prefab : MonoBehaviour
                 //dir = Quaternion.AngleAxis(deg, Vector3.up) * dir;
                 
                 //float degAbs = Mathf.Abs(deg);
-                float power = 4f;//(35 < degAbs)? 2f : (25 < degAbs)? 2.25f : (15 < degAbs)? 2.5f : (7.5f < degAbs)? 2.75f : 3f;
 
+                float power = 4f;//(35 < degAbs)? 2f : (25 < degAbs)? 2.25f : (15 < degAbs)? 2.5f : (7.5f < degAbs)? 2.75f : 3f;
+                
                 // Debug.Log("Ball_Prefab:: deg=" + deg + ", power=" + power);
                 rigid.velocity = Vector3.zero;
                 rigid.AddForce(dir * speed * power, ForceMode.Impulse);
+                //Debug.Log("Ball_Prefab:: " + "hitRangeDegSlider.value=" + gm.hitRangeDegSlider.value + ", Power("+ power + ") * Speed(" + speed + ") = " + power * speed);
             }
         }
         else if(col.gameObject.tag == "ActiveDownWall"){

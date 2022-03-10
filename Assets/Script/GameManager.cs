@@ -21,11 +21,14 @@ public class GameManager : MonoBehaviour
     public Text stateTxt;
     public Text shootCntTxt;
 
-    public Slider hitRangeDegSlider;
+    public Slider hitRangeSlider;
+    public RectTransform hitSliderHomeRunRangeTf;
+    public float HomeRunRangePercent = 20;
     public Image hitRangeHandleImg;
 
     void Start() {
         Debug.Log("deadLine.pos.z=" + deadLineTf.position.z);
+        hitSliderHomeRunRangeTf.sizeDelta = new Vector2(hitRangeSlider.GetComponent<RectTransform>().rect.width * (HomeRunRangePercent / 100), 12);
     }
 
 
