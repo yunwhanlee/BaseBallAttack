@@ -22,13 +22,23 @@ public class GameManager : MonoBehaviour
     public Text shootCntTxt;
 
     public Slider hitRangeSlider;
-    public RectTransform hitSliderHomeRunRangeTf;
-    public float HomeRunRangePercent = 20;
+    private RectTransform hitRangeSliderTf;
+    public RectTransform HomeRunRangeTf;
+    public float HomeRunRangePer = 0.2f;
     public Image hitRangeHandleImg;
 
     void Start() {
-        Debug.Log("deadLine.pos.z=" + deadLineTf.position.z);
-        hitSliderHomeRunRangeTf.sizeDelta = new Vector2(hitRangeSlider.GetComponent<RectTransform>().rect.width * (HomeRunRangePercent / 100), 12);
+        // Debug.Log("deadLine.pos.z=" + deadLineTf.position.z);
+        hitRangeSliderTf = hitRangeSlider.GetComponent<RectTransform>();
+
+        //* Set UI HomeRunRange
+        float HomeRunRangeWidth = hitRangeSliderTf.rect.width * HomeRunRangePer;
+        HomeRunRangeTf.sizeDelta = new Vector2(HomeRunRangeWidth, 12);
+
+        float randPosX = Mathf.RoundToInt(Random.Range(0, hitRangeSliderTf.rect.width - HomeRunRangeWidth));
+        float parentPivotOffset = hitRangeSliderTf.rect.width / 2;
+        Debug.Log("random.Range("+0+"～"+ (hitRangeSliderTf.rect.width - HomeRunRangeWidth).ToString() +")"+ ", randPosX=" + randPosX + ", parentPivotOffset=" + parentPivotOffset);
+        HomeRunRangeTf.localPosition = new Vector3(randPosX - parentPivotOffset,0,0);
     }
 
 
