@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public enum State {PLAY, WAIT, GAMEOVER};
     public State state = State.PLAY;
 
+    //* CAMERA
+    public GameObject cam1, cam2;
+
     //* OutSide
     //public GameObject hitBox;
     public Transform hitRangeStartTf;
@@ -26,19 +29,21 @@ public class GameManager : MonoBehaviour
     public RectTransform HomeRunRangeTf;
     public float HomeRunRangePer = 0.2f;
     public Image hitRangeHandleImg;
+    public Button readyBtn;
 
     void Start() {
         // Debug.Log("deadLine.pos.z=" + deadLineTf.position.z);
         hitRangeSliderTf = hitRangeSlider.GetComponent<RectTransform>();
+        readyBtn = readyBtn.GetComponent<Button>();
 
         //* Set UI HomeRunRange
-        float HomeRunRangeWidth = hitRangeSliderTf.rect.width * HomeRunRangePer;
-        HomeRunRangeTf.sizeDelta = new Vector2(HomeRunRangeWidth, 12);
+        // float HomeRunRangeWidth = hitRangeSliderTf.rect.width * HomeRunRangePer;
+        // HomeRunRangeTf.sizeDelta = new Vector2(HomeRunRangeWidth, 12);
 
-        float randPosX = Mathf.RoundToInt(Random.Range(0, hitRangeSliderTf.rect.width - HomeRunRangeWidth));
-        float parentPivotOffset = hitRangeSliderTf.rect.width / 2;
-        Debug.Log("random.Range("+0+"～"+ (hitRangeSliderTf.rect.width - HomeRunRangeWidth).ToString() +")"+ ", randPosX=" + randPosX + ", parentPivotOffset=" + parentPivotOffset);
-        HomeRunRangeTf.localPosition = new Vector3(randPosX - parentPivotOffset,0,0);
+        // float randPosX = Mathf.RoundToInt(Random.Range(0, hitRangeSliderTf.rect.width - HomeRunRangeWidth));
+        // float parentPivotOffset = hitRangeSliderTf.rect.width / 2;
+        // Debug.Log("random.Range("+0+"～"+ (hitRangeSliderTf.rect.width - HomeRunRangeWidth).ToString() +")"+ ", randPosX=" + randPosX + ", parentPivotOffset=" + parentPivotOffset);
+        // HomeRunRangeTf.localPosition = new Vector3(randPosX - parentPivotOffset,0,0);
     }
 
 
@@ -62,5 +67,20 @@ public class GameManager : MonoBehaviour
     public void setState(State st){
         Debug.Log("GameManager:: state=" + st);
         state = st;
+    }
+
+    //* GUI Button
+
+    public void onClickReadyButton(){
+        if(!cam2.activeSelf){
+            cam1.SetActive(false);
+            cam2.SetActive(true);
+            state = GameManager.State.PLAY;
+        }
+        else{
+            cam1.SetActive(true);
+            cam2.SetActive(false);
+            state = GameManager.State.WAIT;
+        }
     }
 }

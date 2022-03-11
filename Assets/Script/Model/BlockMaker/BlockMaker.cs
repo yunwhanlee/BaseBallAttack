@@ -14,7 +14,6 @@ public class BlockMaker : MonoBehaviour
     private const float SPAWN_POS_X = -5;
     private const float SPWAN_POS_Y = -2;
 
-    [SerializeField] int moveDownSpan = 10;
     [SerializeField] int createPercent = 70;
     public Transform blockBundle;
     public Material[] blockColorMts;
@@ -36,8 +35,6 @@ public class BlockMaker : MonoBehaviour
                 blockIns.GetComponent<Renderer>().material = blockColorMts[randIdx];
             }
         }
-
-        // InvokeRepeating("moveDownBlock", moveDownSpan, moveDownSpan);
     }
     void Update(){
         if(isCreateBlock){
