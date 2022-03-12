@@ -26,17 +26,29 @@ public class GameManager : MonoBehaviour
     public Text stateTxt;
     public Text shootCntTxt;
 
+    //View Slider
     public Slider hitRangeSlider;
     private RectTransform hitRangeSliderTf;
     public RectTransform HomeRunRangeTf;
     public float HomeRunRangePer = 0.2f;
     public Image hitRangeHandleImg;
+
+    //Ball Preview Dir Goal
+    public GameObject BallPreviewDirGoal;
+
     public Button readyBtn;
+
+    
 
     void Start() {
         // Debug.Log("deadLine.pos.z=" + deadLineTf.position.z);
         hitRangeSliderTf = hitRangeSlider.GetComponent<RectTransform>();
         readyBtn = readyBtn.GetComponent<Button>();
+
+        //* Ball Preview Dir Goal
+        float startPosZ = hitRangeStartTf.position.z;
+        float endPosZ = hitRangeEndTf.position.z;
+
 
         //* Set UI HomeRunRange
         // float HomeRunRangeWidth = hitRangeSliderTf.rect.width * HomeRunRangePer;
@@ -80,7 +92,7 @@ public class GameManager : MonoBehaviour
     //*  関数
     //*---------------------------------------
     public void switchCamScene(){
-        if(!cam2.activeSelf){//* CAM1 On
+        if(!cam2.activeSelf){//* CAM2 On
             state = GameManager.State.PLAY;
             cam1.SetActive(false);
             cam1Canvas.SetActive(false);
@@ -88,9 +100,10 @@ public class GameManager : MonoBehaviour
             cam2Canvas.SetActive(true);
 
             shootCntTxt.gameObject.SetActive(true);
+            readyBtn.gameObject.GetComponentInChildren<Text>().text = "BACK";
             
         }
-        else{//* CAM2 On
+        else{//* CAM1 On
             state = GameManager.State.WAIT;
             cam1.SetActive(true);
             cam1Canvas.SetActive(true);
@@ -99,6 +112,7 @@ public class GameManager : MonoBehaviour
             
             shootCntTxt.gameObject.SetActive(false);
             StopCoroutine("corSetStrike");
+            readyBtn.gameObject.GetComponentInChildren<Text>().text = "READY";
         }
     }
 

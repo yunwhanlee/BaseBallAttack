@@ -45,6 +45,9 @@ public class Ball_Prefab : MonoBehaviour
                 float v = Mathf.Abs(this.transform.position.z) - offset;
                 gm.hitRangeSlider.value = v / max;
             }
+
+            //* Ball Preview Dir Goal
+
     }
 
     //** Control
