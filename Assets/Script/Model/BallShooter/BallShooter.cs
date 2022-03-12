@@ -10,6 +10,7 @@ public class BallShooter : MonoBehaviour
     [SerializeField]private bool isBallExist;
     [SerializeField]private float time;
     [SerializeField]private float shootSpan = 4f;
+    [SerializeField]public float strikeCnt = 0;
     [SerializeField]public GameObject ballPref;
     [SerializeField]public Transform entranceTf;
 

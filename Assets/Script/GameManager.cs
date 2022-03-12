@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     //* OutSide
     public BallShooter ballShooter;
+    public BlockMaker blockMaker;
     public Transform hitRangeStartTf;
     public Transform hitRangeEndTf;
 
@@ -85,6 +86,7 @@ public class GameManager : MonoBehaviour
             cam1Canvas.SetActive(false);
             cam2.SetActive(true);
             cam2Canvas.SetActive(true);
+
             shootCntTxt.gameObject.SetActive(true);
             
         }
@@ -94,16 +96,35 @@ public class GameManager : MonoBehaviour
             cam1Canvas.SetActive(true);
             cam2.SetActive(false);
             cam2Canvas.SetActive(false);
+            
             shootCntTxt.gameObject.SetActive(false);
+            StopCoroutine("corSetStrike");
         }
     }
 
     //ストライク GUI表示
-    public void showStrikeText(float time) => StartCoroutine(corShowStrikeText(time));
+    public void setStrike(){
+        if(ballShooter.strikeCnt < 2){
+            StartCoroutine(corSetStrike());
+        }
+        else{
+            StartCoroutine(corSetStrike(true));
+        }
+    }
 
-    public IEnumerator corShowStrikeText(float time){
-        setShootCntText("STRIKE!");
-        yield return new WaitForSeconds(time);
-        ballShooter.setIsBallExist(false); //ボール発射 On
+    private IEnumerator corSetStrike(bool isOut = false){
+        if(isOut){
+            ballShooter.strikeCnt = 0;
+            setShootCntText("OUT!");
+            yield return new WaitForSeconds(1.5f);
+            switchCamScene();
+            blockMaker.setCreateBlock(true); //ブロック生成
+        }
+        else{
+            ballShooter.strikeCnt++;
+            setShootCntText("STRIKE!");
+            yield return new WaitForSeconds(1.5f);
+        }
+        ballShooter.setIsBallExist(false); //ボール発射準備 On
     }
 }

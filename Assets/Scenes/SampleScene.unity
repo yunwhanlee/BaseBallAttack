@@ -2889,6 +2889,7 @@ MonoBehaviour:
   isBallExist: 0
   time: 0
   shootSpan: 3
+  strikeCnt: 0
   ballPref: {fileID: 2295754910549213891, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
   entranceTf: {fileID: 747844806}
 --- !u!1 &1369034197
@@ -3180,6 +3181,7 @@ MonoBehaviour:
   cam1Canvas: {fileID: 1462164001}
   cam2Canvas: {fileID: 456845150}
   ballShooter: {fileID: 1350307814}
+  blockMaker: {fileID: 579925511}
   hitRangeStartTf: {fileID: 896793084}
   hitRangeEndTf: {fileID: 2033124274}
   deadLineTf: {fileID: 587487858}

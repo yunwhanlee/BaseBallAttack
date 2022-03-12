@@ -123,7 +123,7 @@ public class Ball_Prefab : MonoBehaviour
             blockMaker.setCreateBlock(true);
             ballShooter.setIsBallExist(false);
         }else{
-            gm.showStrikeText(1.5f);
+            gm.setStrike();
         }
         Destroy(this.gameObject);
     }
