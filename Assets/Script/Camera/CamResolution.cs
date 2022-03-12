@@ -21,6 +21,7 @@ public class CamResolution : MonoBehaviour
     }
 
     void Update() {
+        if(gm.state != GameManager.State.WAIT) return;
         if(Input.GetMouseButtonDown(0)){
             //* RAY CAST
             const int maxDistance = 50;
@@ -42,9 +43,6 @@ public class CamResolution : MonoBehaviour
                         playerTf.position = new Vector3(+Mathf.Abs(playerTf.position.x), playerTf.position.y, playerTf.position.z);
                         playerTf.localScale = new Vector3(-Mathf.Abs(playerTf.localScale.x),playerTf.localScale.y,playerTf.localScale.z);
                         return;
-                    case "Untagged":
-                        // player.setAnimTrigger("Swing");
-                        break;
                 }
                 idx++;
             };

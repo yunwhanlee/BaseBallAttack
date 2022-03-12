@@ -43,8 +43,8 @@ public class BlockMaker : MonoBehaviour
         }
     }
 
-    public void setCreateBlock(bool isActive){
-        isCreateBlock = isActive;
+    public void setCreateBlock(bool boolen){
+        isCreateBlock = boolen;
     }
 
     private void moveDownBlock(){

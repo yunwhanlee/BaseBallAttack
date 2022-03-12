@@ -6,8 +6,8 @@ public class Ball_Prefab : MonoBehaviour
 {
     //* OutSide
     public GameManager gm;
-    public BlockMaker bm;
     public Player pl;
+    public BlockMaker blockMaker;
     public BallShooter ballShooter;
     public int aliveTime;
 
@@ -19,8 +19,8 @@ public class Ball_Prefab : MonoBehaviour
     void Start()
     {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-        bm = GameObject.Find("BlockMaker").GetComponent<BlockMaker>();
         pl = GameObject.Find("Player").GetComponent<Player>();
+        blockMaker = GameObject.Find("BlockMaker").GetComponent<BlockMaker>();
         ballShooter = GameObject.Find("BallShooter").GetComponent<BallShooter>();
 
         rigid = GetComponent<Rigidbody>();
@@ -31,7 +31,7 @@ public class Ball_Prefab : MonoBehaviour
     void Update(){
             //* Destroy by Checking Velocity
             // Debug.Log("Ball Velocity.magnitude="+rigid.velocity.magnitude);
-            if(rigid.velocity.magnitude != 0 && rigid.velocity.magnitude < 0.5f){
+            if(rigid.velocity.magnitude != 0 && rigid.velocity.magnitude < 0.9875f){
                 onDestroyMe();
             }
 
@@ -91,7 +91,7 @@ public class Ball_Prefab : MonoBehaviour
         else if(col.gameObject.tag == "ActiveDownWall"){
             pl.doSwing = false;
             if(gm.state == GameManager.State.WAIT){
-                gm.downWall.isTrigger = false;
+                gm.downWall.isTrigger = false;//*下壁 物理O
             }
         }
     }
@@ -100,9 +100,9 @@ public class Ball_Prefab : MonoBehaviour
         if(col.gameObject.tag == "HitRangeArea"){
             pl.setSwingArcColor("yellow");
         }
-        //* Ball(自分)を削除
-        else if(col.gameObject.tag == "DestroyBallLine"){
-            onDestroyMe();
+        //* ストライク！
+        else if(col.gameObject.tag == "StrikeLine"){
+            onDestroyMe(true);
         }
     }
 
@@ -113,15 +113,21 @@ public class Ball_Prefab : MonoBehaviour
         }
     }
 
-//*---------------------------------------
-//*  関数
-//*---------------------------------------
-    private void onDestroyMe(){
-        gm.setState(GameManager.State.PLAY);
-        gm.downWall.isTrigger = true;
-        bm.setCreateBlock(true);
+    //*---------------------------------------
+    //*  関数
+    //*---------------------------------------
+    private void onDestroyMe(bool isStrike = false){
+        if(!isStrike){
+            gm.setState(GameManager.State.WAIT);
+            gm.downWall.isTrigger = true; //*下壁 物理X
+            blockMaker.setCreateBlock(true);
+            ballShooter.setIsBallExist(false);
+        }else{
+            gm.showStrikeText(1.5f);
+        }
         Destroy(this.gameObject);
     }
+
     public void setBallSpeed(int v){
         speed = v;
     }

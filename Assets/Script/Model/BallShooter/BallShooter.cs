@@ -7,29 +7,37 @@ public class BallShooter : MonoBehaviour
     public GameManager gm;
     [SerializeField]private int ballSpeed;
 
+    [SerializeField]private bool isBallExist;
     [SerializeField]private float time;
-    [SerializeField]private float shootSpan = 3;
+    [SerializeField]private float shootSpan = 4f;
     [SerializeField]public GameObject ballPref;
     [SerializeField]public Transform entranceTf;
+
 
     void Start(){
         time = shootSpan;
     }
 
-    void Update()
-    {
+    void Update(){
         if(gm.state == GameManager.State.WAIT) return;
 
-        gm.shootCntTxt.text = time.ToString("N0");
-        time -= Time.deltaTime;
-    
-        //* 発射
-        if(time <= 0){
-            time = shootSpan;
-            gm.shootCntTxt.text = "";
-            //Debug.Log("🥎BALL 発射！");
-            GameObject instance = Instantiate(ballPref, entranceTf.position, Quaternion.identity);
-            instance.GetComponent<Ball_Prefab>().setBallSpeed(ballSpeed);
+        //* ボールが存在しないときのみ
+        if(!isBallExist){
+            //* 発射前 COUNTING
+            gm.setShootCntText(time.ToString("N0"));
+            time -= Time.deltaTime;
+
+            //* 発射
+            if(time <= 0){
+                Debug.Log("🥎BALL 発射！");
+                isBallExist = true;
+                time = shootSpan;
+                GameObject instance = Instantiate(ballPref, entranceTf.position, Quaternion.identity);
+                instance.GetComponent<Ball_Prefab>().setBallSpeed(ballSpeed);
+            }
         }
+    }
+    public void setIsBallExist(bool boolen){
+        isBallExist = boolen;
     }
 }

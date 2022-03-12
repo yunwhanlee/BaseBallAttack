@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public GameObject cam1Canvas, cam2Canvas;
 
     //* OutSide
-    //public GameObject hitBox;
+    public BallShooter ballShooter;
     public Transform hitRangeStartTf;
     public Transform hitRangeEndTf;
 
@@ -54,7 +54,6 @@ public class GameManager : MonoBehaviour
         //* State Txt
         stateTxt.text = state.ToString();
 
-        
         //* HitBox Degree Slider
         // float degY = hitBox.transform.rotation.eulerAngles.y;
         // degY = (degY < 180) ? -degY : +(360 - degY);
@@ -69,6 +68,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameManager:: state=" + st);
         state = st;
     }
+    public void setShootCntText(string str){
+        shootCntTxt.text = str;
+    }
 
     //* GUI Button
     public void onClickReadyButton() => switchCamScene();
@@ -77,19 +79,31 @@ public class GameManager : MonoBehaviour
     //*  関数
     //*---------------------------------------
     public void switchCamScene(){
-        if(!cam2.activeSelf){
+        if(!cam2.activeSelf){//* CAM1 On
             state = GameManager.State.PLAY;
             cam1.SetActive(false);
             cam1Canvas.SetActive(false);
             cam2.SetActive(true);
             cam2Canvas.SetActive(true);
+            shootCntTxt.gameObject.SetActive(true);
+            
         }
-        else{
+        else{//* CAM2 On
             state = GameManager.State.WAIT;
             cam1.SetActive(true);
             cam1Canvas.SetActive(true);
             cam2.SetActive(false);
             cam2Canvas.SetActive(false);
+            shootCntTxt.gameObject.SetActive(false);
         }
+    }
+
+    //ストライク GUI表示
+    public void showStrikeText(float time) => StartCoroutine(corShowStrikeText(time));
+
+    public IEnumerator corShowStrikeText(float time){
+        setShootCntText("STRIKE!");
+        yield return new WaitForSeconds(time);
+        ballShooter.setIsBallExist(false); //ボール発射 On
     }
 }

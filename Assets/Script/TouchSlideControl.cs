@@ -38,8 +38,9 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        stick.localPosition = Vector2.zero;
         pad.gameObject.SetActive(false);
+        stick.localPosition = Vector2.zero;
+        if(gm.state != GameManager.State.PLAY) return;
         pl.setAnimTrigger("Swing");
     }
 }
