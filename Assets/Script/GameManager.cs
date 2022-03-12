@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     //* CAMERA
     public GameObject cam1, cam2;
+    public GameObject cam1Canvas, cam2Canvas;
 
     //* OutSide
     //public GameObject hitBox;
@@ -70,17 +71,25 @@ public class GameManager : MonoBehaviour
     }
 
     //* GUI Button
+    public void onClickReadyButton() => switchCamScene();
 
-    public void onClickReadyButton(){
+    //*---------------------------------------
+    //*  関数
+    //*---------------------------------------
+    public void switchCamScene(){
         if(!cam2.activeSelf){
-            cam1.SetActive(false);
-            cam2.SetActive(true);
             state = GameManager.State.PLAY;
+            cam1.SetActive(false);
+            cam1Canvas.SetActive(false);
+            cam2.SetActive(true);
+            cam2Canvas.SetActive(true);
         }
         else{
-            cam1.SetActive(true);
-            cam2.SetActive(false);
             state = GameManager.State.WAIT;
+            cam1.SetActive(true);
+            cam1Canvas.SetActive(true);
+            cam2.SetActive(false);
+            cam2Canvas.SetActive(false);
         }
     }
 }

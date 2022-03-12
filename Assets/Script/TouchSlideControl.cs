@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {   //*2D Screen *//
     //* OutSide
+    public GameManager gm;
     public Player pl;
 
     public RectTransform pad;
@@ -13,6 +14,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     private Vector3 dir;
 
     public void OnDrag(PointerEventData eventData){
+        if(gm.state != GameManager.State.WAIT) return;
         stick.position = eventData.position;
 
         //Stick動き制限

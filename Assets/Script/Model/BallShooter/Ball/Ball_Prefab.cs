@@ -60,7 +60,8 @@ public class Ball_Prefab : MonoBehaviour
             if(pl.doSwing && gm.state == GameManager.State.PLAY){
                 // Debug.Log("Player:: doSwing=" + pl.doSwing);
                 // Debug.Log("Ball_Prefab:: hitRangeSlider.value=" + gm.hitRangeDegSlider.value.ToString("N2") + ", deg=" + deg.ToString("N1"));
-                gm.setState(GameManager.State.WAIT);
+                // gm.setState(GameManager.State.WAIT);
+                gm.switchCamScene();
                 isHited = true;
                 pl.doSwing = false;
                 rigid.useGravity = true;
@@ -112,9 +113,9 @@ public class Ball_Prefab : MonoBehaviour
         }
     }
 
-    //*---------------------------------------
-    //*  関数
-    //*---------------------------------------
+//*---------------------------------------
+//*  関数
+//*---------------------------------------
     private void onDestroyMe(){
         gm.setState(GameManager.State.PLAY);
         gm.downWall.isTrigger = true;
