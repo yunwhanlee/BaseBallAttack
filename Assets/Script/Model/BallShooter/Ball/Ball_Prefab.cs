@@ -48,8 +48,6 @@ public class Ball_Prefab : MonoBehaviour
             //* Ball Preview Dir Goal Img
             float distance = Vector3.Distance(gm.ballPreviewDirGoal.transform.position, this.transform.position);
             gm.setBallPreviewImgAlpha(distance);
-            
-
     }
 
     //** Control
@@ -125,6 +123,7 @@ public class Ball_Prefab : MonoBehaviour
         if(!isStrike){
             gm.setState(GameManager.State.WAIT);
             gm.downWall.isTrigger = true; //*下壁 物理X
+            gm.readyBtn.gameObject.SetActive(true);
             blockMaker.setCreateBlock(true);
             ballShooter.setIsBallExist(false);
         }else{

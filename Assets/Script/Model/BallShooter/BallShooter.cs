@@ -16,7 +16,7 @@ public class BallShooter : MonoBehaviour
 
 
     void Start(){
-        time = shootSpan;
+        resetBallShootCnt();
     }
 
     void Update(){
@@ -32,7 +32,8 @@ public class BallShooter : MonoBehaviour
             if(time <= 0){
                 Debug.Log("🥎BALL 発射！");
                 isBallExist = true;
-                time = shootSpan;
+                resetBallShootCnt();
+                gm.setShootCntText("SHOOT");
                 Debug.Log("ballPreviewDirGoalPos="+gm.ballPreviewDirGoal.transform.position+", entranceTfPos="+entranceTf.position);
                 Vector3 goalDir = (gm.ballPreviewDirGoal.transform.position - entranceTf.position).normalized;
                 GameObject instance = Instantiate(ballPref, entranceTf.position, Quaternion.LookRotation(goalDir));
@@ -40,8 +41,11 @@ public class BallShooter : MonoBehaviour
                 instance.GetComponent<Ball_Prefab>().setBallSpeed(ballSpeed);
             }
         }
+        else{
+            gm.readyBtn.gameObject.SetActive(false);
+        }
     }
-    public void setIsBallExist(bool boolen){
-        isBallExist = boolen;
-    }
+
+    public void setIsBallExist(bool boolen) => isBallExist = boolen;
+    public void resetBallShootCnt() => time = shootSpan;
 }

@@ -81,23 +81,10 @@ public class GameManager : MonoBehaviour
         // hitBoxDegSlider.value = v / hitBoxDegSliderMax;
     }
 
-    public void setState(State st){
-        Debug.Log("GameManager:: state=" + st);
-        state = st;
-    }
-    public void setShootCntText(string str){
-        shootCntTxt.text = str;
-    }
-    public void setBallPreviewImgAlpha(float dist){
-        if(dist > 10) return;
-        float alphaApplyMax = 200;
-        float distResponseMax = 10;
-        float unit = alphaApplyMax / distResponseMax;
-        float alpha = (unit * dist) / 255;
-        ballPreviewGoalImg.color = new Color(0.8f,0.8f,0.8f, 1-alpha);
-        Debug.Log("setBallPreviewImgAlpha:: "+"distance("+dist+")"+ " * unit("+unit+") = " + alpha);
-    }
-
+    public void setState(State st) => state = st;
+    public void setShootCntText(string str) => shootCntTxt.text = str;
+    public void setBallPreviewGoalImgRGBA(Color color) => ballPreviewGoalImg.color = color;
+    
     //* GUI Button
     public void onClickReadyButton() => switchCamScene();
 
@@ -114,6 +101,11 @@ public class GameManager : MonoBehaviour
 
             shootCntTxt.gameObject.SetActive(true);
             readyBtn.gameObject.GetComponentInChildren<Text>().text = "BACK";
+
+            ballPreviewGoalImg.gameObject.SetActive(true);
+            setBallPreviewGoalImgRGBA(new Color(0.8f,0.8f,0.8f, 0.2f));
+
+            ballShooter.resetBallShootCnt();
             
         }
         else{//* CAM1 On
@@ -124,19 +116,20 @@ public class GameManager : MonoBehaviour
             cam2Canvas.SetActive(false);
             
             shootCntTxt.gameObject.SetActive(false);
-            StopCoroutine("corSetStrike");
             readyBtn.gameObject.GetComponentInChildren<Text>().text = "READY";
+
+            ballPreviewGoalImg.gameObject.SetActive(false);
+
+            StopCoroutine("corSetStrike");
         }
     }
 
     //ストライク GUI表示
     public void setStrike(){
-        if(ballShooter.strikeCnt < 2){
+        if(ballShooter.strikeCnt < 2)
             StartCoroutine(corSetStrike());
-        }
-        else{
+        else
             StartCoroutine(corSetStrike(true));
-        }
     }
 
     private IEnumerator corSetStrike(bool isOut = false){
@@ -153,5 +146,17 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
         }
         ballShooter.setIsBallExist(false); //ボール発射準備 On
+        setBallPreviewGoalImgRGBA(new Color(0.8f,0.8f,0.8f, 0.2f));
+    }
+
+    //" ボールがHit領域に来ることに当たって、ボール予想イメージ透明度を調整
+    public void setBallPreviewImgAlpha(float dist){
+        if(dist > 10) return;
+        float alphaApplyMax = 200;
+        float distResponseMax = 10;
+        float unit = alphaApplyMax / distResponseMax;
+        float alpha = (unit * dist) / 255;
+        setBallPreviewGoalImgRGBA(new Color(0.8f,0.8f,0.8f, 1-alpha));
+        //Debug.Log("setBallPreviewImgAlpha:: "+"distance("+dist+")"+ " * unit("+unit+") = " + alpha);
     }
 }
