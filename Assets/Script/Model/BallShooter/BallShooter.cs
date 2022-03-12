@@ -33,7 +33,10 @@ public class BallShooter : MonoBehaviour
                 Debug.Log("🥎BALL 発射！");
                 isBallExist = true;
                 time = shootSpan;
-                GameObject instance = Instantiate(ballPref, entranceTf.position, Quaternion.identity);
+                Debug.Log("ballPreviewDirGoalPos="+gm.ballPreviewDirGoal.transform.position+", entranceTfPos="+entranceTf.position);
+                Vector3 goalDir = (gm.ballPreviewDirGoal.transform.position - entranceTf.position).normalized;
+                GameObject instance = Instantiate(ballPref, entranceTf.position, Quaternion.LookRotation(goalDir));
+                
                 instance.GetComponent<Ball_Prefab>().setBallSpeed(ballSpeed);
             }
         }

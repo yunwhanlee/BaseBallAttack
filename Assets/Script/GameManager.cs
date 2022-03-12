@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     public Image hitRangeHandleImg;
 
     //Ball Preview Dir Goal
-    public GameObject BallPreviewDirGoal;
+    public GameObject ballPreviewDirGoal;
 
     public Button readyBtn;
 
@@ -45,9 +45,11 @@ public class GameManager : MonoBehaviour
         hitRangeSliderTf = hitRangeSlider.GetComponent<RectTransform>();
         readyBtn = readyBtn.GetComponent<Button>();
 
-        //* Ball Preview Dir Goal
+        //* Ball Preview Dir Goal Set Z-Center
         float startPosZ = hitRangeStartTf.position.z;
         float endPosZ = hitRangeEndTf.position.z;
+        float zCenter = startPosZ + (endPosZ - startPosZ) / 2;
+        ballPreviewDirGoal.transform.position = new Vector3(0, 0.6f, zCenter);
 
 
         //* Set UI HomeRunRange

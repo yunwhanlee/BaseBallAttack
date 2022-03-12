@@ -24,8 +24,7 @@ public class Ball_Prefab : MonoBehaviour
         ballShooter = GameObject.Find("BallShooter").GetComponent<BallShooter>();
 
         rigid = GetComponent<Rigidbody>();
-        rigid.AddForce(-this.transform.forward * speed, ForceMode.Impulse);
-
+        rigid.AddForce(this.transform.forward * speed, ForceMode.Impulse);
         //Debug.Log("HitRange:: startPosZ=" + gm.hitRangeStartTf.position.z +  ", endPosZ="+ gm.hitRangeEndTf.position.z);
     }
     void Update(){
