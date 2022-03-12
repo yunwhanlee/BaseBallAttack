@@ -45,7 +45,10 @@ public class Ball_Prefab : MonoBehaviour
                 gm.hitRangeSlider.value = v / max;
             }
 
-            //* Ball Preview Dir Goal
+            //* Ball Preview Dir Goal Img
+            float distance = Vector3.Distance(gm.ballPreviewDirGoal.transform.position, this.transform.position);
+            gm.setBallPreviewImgAlpha(distance);
+            
 
     }
 

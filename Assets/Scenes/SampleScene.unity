@@ -3077,7 +3077,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1369034197}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -3325,6 +3325,7 @@ MonoBehaviour:
   HomeRunRangePer: 0.2
   hitRangeHandleImg: {fileID: 1870590508}
   ballPreviewDirGoal: {fileID: 434918240}
+  ballPreviewGoalImg: {fileID: 2000605884}
   readyBtn: {fileID: 543322737}
 --- !u!1 &1634056559
 GameObject:
@@ -4545,7 +4546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 0.5882353}
+  m_Color: {r: 0.8235294, g: 0.8235294, b: 0.8235294, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

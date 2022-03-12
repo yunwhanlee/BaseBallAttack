@@ -22,20 +22,22 @@ public class GameManager : MonoBehaviour
     public Transform deadLineTf;
     public BoxCollider downWall;
 
-    //* GUI
+    [Header("<---- GUI ---->")]
     public Text stateTxt;
     public Text shootCntTxt;
 
-    //View Slider
+    [Header("-View Slider-")]
     public Slider hitRangeSlider;
     private RectTransform hitRangeSliderTf;
     public RectTransform HomeRunRangeTf;
     public float HomeRunRangePer = 0.2f;
     public Image hitRangeHandleImg;
 
-    //Ball Preview Dir Goal
+    [Header("-Ball Preview Dir Goal-")]
     public GameObject ballPreviewDirGoal;
+    public Image ballPreviewGoalImg;
 
+    [Header("-Button-")]
     public Button readyBtn;
 
     
@@ -85,6 +87,15 @@ public class GameManager : MonoBehaviour
     }
     public void setShootCntText(string str){
         shootCntTxt.text = str;
+    }
+    public void setBallPreviewImgAlpha(float dist){
+        if(dist > 10) return;
+        float alphaApplyMax = 200;
+        float distResponseMax = 10;
+        float unit = alphaApplyMax / distResponseMax;
+        float alpha = (unit * dist) / 255;
+        ballPreviewGoalImg.color = new Color(0.8f,0.8f,0.8f, 1-alpha);
+        Debug.Log("setBallPreviewImgAlpha:: "+"distance("+dist+")"+ " * unit("+unit+") = " + alpha);
     }
 
     //* GUI Button
