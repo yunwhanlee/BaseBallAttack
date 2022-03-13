@@ -14,6 +14,7 @@ public class Ball_Prefab : MonoBehaviour
     //* Value
     private bool isHited = false;
     private int speed;
+    private float distance;
 
     Rigidbody rigid;
     void Start()
@@ -46,7 +47,7 @@ public class Ball_Prefab : MonoBehaviour
             }
 
             //* Ball Preview Dir Goal Img
-            float distance = Vector3.Distance(gm.ballPreviewDirGoal.transform.position, this.transform.position);
+            distance = Vector3.Distance(gm.ballPreviewDirGoal.transform.position, this.transform.position);
             gm.setBallPreviewImgAlpha(distance);
     }
 
@@ -59,11 +60,9 @@ public class Ball_Prefab : MonoBehaviour
         //* Batting
         if(col.gameObject.tag == "HitRangeArea"){
             pl.setSwingArcColor("red");
-            //float deg = calcHitRangeToDegree();
             if(pl.doSwing && gm.state == GameManager.State.PLAY){
                 // Debug.Log("Player:: doSwing=" + pl.doSwing);
                 // Debug.Log("Ball_Prefab:: hitRangeSlider.value=" + gm.hitRangeDegSlider.value.ToString("N2") + ", deg=" + deg.ToString("N1"));
-                // gm.setState(GameManager.State.WAIT);
                 gm.switchCamScene();
                 isHited = true;
                 pl.doSwing = false;
@@ -79,11 +78,14 @@ public class Ball_Prefab : MonoBehaviour
                 //Vector3 dir = Vector3.forward;
                 float deg = pl.hitAxisArrow.transform.eulerAngles.y;
                 Vector3 dir = new Vector3(Mathf.Sin(Mathf.Deg2Rad * deg), 0, Mathf.Cos(Mathf.Deg2Rad * deg)).normalized;
-                //dir = Quaternion.AngleAxis(deg, Vector3.up) * dir;
-                
-                //float degAbs = Mathf.Abs(deg);
-
-                float power = 4f;//(35 < degAbs)? 2f : (25 < degAbs)? 2.25f : (15 < degAbs)? 2.5f : (7.5f < degAbs)? 2.75f : 3f;
+                //* Set Power(distance range 1.5f ~ 0)
+                float power = (distance <= 0.1f) ? 10 //* -> BEST HIT (HOMERUH!)
+                : (distance <= 0.25f) ? 7
+                : (distance <= 0.5f) ? 5
+                : (distance <= 0.85f)? 4
+                : (distance <= 1.125f)? 3
+                : 1.5f; // -> WORST HIT (distance <= 1.5f)
+                Debug.Log("HIT! <color=yellow>distance=" + distance.ToString("N2") + "</color> , <color=red>power=" + power + ", Rank: " + ((power==10)? "A" : (power==7)? "B" : (power==5)? "C" : (power==4)? "D" : (power==3)? "E" : "F").ToString() + "</color>");
                 
                 // Debug.Log("Ball_Prefab:: deg=" + deg + ", power=" + power);
                 rigid.velocity = Vector3.zero;

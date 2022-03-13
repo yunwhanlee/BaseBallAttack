@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -157,6 +156,6 @@ public class GameManager : MonoBehaviour
         float unit = alphaApplyMax / distResponseMax;
         float alpha = (unit * dist) / 255;
         setBallPreviewGoalImgRGBA(new Color(0.8f,0.8f,0.8f, 1-alpha));
-        //Debug.Log("setBallPreviewImgAlpha:: "+"distance("+dist+")"+ " * unit("+unit+") = " + alpha);
+        //Debug.Log("setBallPreviewImgAlpha:: "+"distance("+dist+")"+ " * unit("+unit+") = " + "alpha(" + alpha + ")");
     }
 }
