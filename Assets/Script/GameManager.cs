@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject cam1Canvas, cam2Canvas;
 
     //* OutSide
+    public Player pl;
     public BallShooter ballShooter;
     public BlockMaker blockMaker;
     public Transform hitRangeStartTf;
@@ -36,8 +37,13 @@ public class GameManager : MonoBehaviour
     public GameObject ballPreviewDirGoal;
     public Image ballPreviewGoalImg;
 
+    [Header("-Strike Ball Image-")]
+    public GameObject StrikePanel;
+    public Image[] strikeBallImgs; 
+
     [Header("-Button-")]
     public Button readyBtn;
+
 
     
 
@@ -97,15 +103,18 @@ public class GameManager : MonoBehaviour
             cam1Canvas.SetActive(false);
             cam2.SetActive(true);
             cam2Canvas.SetActive(true);
-
+            
             shootCntTxt.gameObject.SetActive(true);
             readyBtn.gameObject.GetComponentInChildren<Text>().text = "BACK";
 
             ballPreviewGoalImg.gameObject.SetActive(true);
             setBallPreviewGoalImgRGBA(new Color(0.8f,0.8f,0.8f, 0.2f));
 
-            ballShooter.resetBallShootCnt();
+            ballShooter.resetCountingTime();
+
+            pl.hitAxisArrow.SetActive(false);
             
+            StrikePanel.SetActive(true);
         }
         else{//* CAM1 On
             state = GameManager.State.WAIT;
@@ -118,6 +127,10 @@ public class GameManager : MonoBehaviour
             readyBtn.gameObject.GetComponentInChildren<Text>().text = "READY";
 
             ballPreviewGoalImg.gameObject.SetActive(false);
+
+            pl.hitAxisArrow.SetActive(true);
+
+            StrikePanel.SetActive(false);
 
             StopCoroutine("corSetStrike");
         }
@@ -132,16 +145,19 @@ public class GameManager : MonoBehaviour
     }
 
     private IEnumerator corSetStrike(bool isOut = false){
+        strikeBallImgs[ballShooter.strikeCnt++].gameObject.SetActive(true);
         if(isOut){
             ballShooter.strikeCnt = 0;
             setShootCntText("OUT!");
             yield return new WaitForSeconds(1.5f);
             switchCamScene();
             blockMaker.setCreateBlock(true); //ブロック生成
+            foreach(var img in strikeBallImgs) img.gameObject.SetActive(false); //GUI非表示 初期化
+            readyBtn.gameObject.SetActive(true);
         }
         else{
-            ballShooter.strikeCnt++;
             setShootCntText("STRIKE!");
+            readyBtn.gameObject.SetActive(true);
             yield return new WaitForSeconds(1.5f);
         }
         ballShooter.setIsBallExist(false); //ボール発射準備 On

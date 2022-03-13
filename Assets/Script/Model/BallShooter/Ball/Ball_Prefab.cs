@@ -79,15 +79,13 @@ public class Ball_Prefab : MonoBehaviour
                 float deg = pl.hitAxisArrow.transform.eulerAngles.y;
                 Vector3 dir = new Vector3(Mathf.Sin(Mathf.Deg2Rad * deg), 0, Mathf.Cos(Mathf.Deg2Rad * deg)).normalized;
                 //* Set Power(distance range 1.5f ~ 0)
-                float power = (distance <= 0.1f) ? 10 //* -> BEST HIT (HOMERUH!)
+                float power = (distance <= 0.1f) ? 10 //-> BEST HIT (HOMERUH!)
                 : (distance <= 0.25f) ? 7
                 : (distance <= 0.5f) ? 5
                 : (distance <= 0.85f)? 4
                 : (distance <= 1.125f)? 3
-                : 1.5f; // -> WORST HIT (distance <= 1.5f)
+                : 1.5f; //-> WORST HIT (distance <= 1.5f)
                 Debug.Log("HIT! <color=yellow>distance=" + distance.ToString("N2") + "</color> , <color=red>power=" + power + ", Rank: " + ((power==10)? "A" : (power==7)? "B" : (power==5)? "C" : (power==4)? "D" : (power==3)? "E" : "F").ToString() + "</color>");
-                
-                // Debug.Log("Ball_Prefab:: deg=" + deg + ", power=" + power);
                 rigid.velocity = Vector3.zero;
                 rigid.AddForce(dir * speed * power, ForceMode.Impulse);
                 //Debug.Log("Ball_Prefab:: " + "hitRangeDegSlider.value=" + gm.hitRangeDegSlider.value + ", Power("+ power + ") * Speed(" + speed + ") = " + power * speed);

@@ -26,9 +26,21 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         //Player矢印角度に適用
         const int offsetDeg2DTo3D = 90;
         pl.hitAxisArrow.transform.rotation = Quaternion.Euler(0,offsetDeg2DTo3D -deg,0);
-
+        
+        //TODO BallPreviewSphere
+        RaycastHit hit;
+        Transform arrowTf = pl.hitAxisArrow.transform;
+        float radius = pl.ballPreviewSphere.GetComponent<SphereCollider>().radius * pl.ballPreviewSphere.transform.localScale.x;
+        if(Physics.SphereCast(arrowTf.position, radius, arrowTf.forward, out hit, 1000, 1 << LayerMask.NameToLayer("BallPreview"))){
+            Debug.Log("OnDrag:: SphereCast.hit.tag=" + hit.collider.gameObject.tag);
+            Vector3 cetner = hit.point + radius * hit.normal; //☆
+            pl.ballPreviewSphere.transform.position = cetner;
+            Debug.DrawRay(arrowTf.position, arrowTf.forward * 1000, Color.red, 1);
+        }
         //Debug.Log("OnDrag:: Stick Move Deg="+deg);
     }
+
+    
 
     public void OnPointerDown(PointerEventData eventData)
     {
