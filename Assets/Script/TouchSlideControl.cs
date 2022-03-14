@@ -13,6 +13,9 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     public RectTransform pad;
     public RectTransform stick;
     private Vector3 dir;
+    private const int MIN_ARROW_Y = 0;
+    private const int MAX_ARROW_Y = 180;
+
 
     public void OnDrag(PointerEventData eventData){
         if(gm.state != GameManager.State.WAIT) return;
@@ -20,20 +23,26 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
         //Stick動き制限
         stick.localPosition = Vector2.ClampMagnitude(eventData.position - (Vector2)pad.position, pad.rect.width * 0.25f);
+        
 
         //Stick角度
         Vector2 dir = (stick.position - pad.gameObject.transform.position).normalized;
         float deg = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        //*(BUG) Clamp Deg with cur Direction
+        const int min = MIN_ARROW_Y, max = MAX_ARROW_Y;
+        deg = Mathf.Clamp(deg, min, max);
+        deg = (deg == 0 && dir.x < min) ? max : deg;
+        
         //Player矢印角度に適用
         const int offsetDeg2DTo3D = 90;
-        pl.arrowAxisAnchor.transform.rotation = Quaternion.Euler(0,offsetDeg2DTo3D -deg,0);
+        pl.arrowAxisAnchor.transform.rotation = Quaternion.Euler(0,offsetDeg2DTo3D - deg,0);
         
         //* Draw Preview
         Transform arrowAnchorTf = pl.arrowAxisAnchor.transform;
         drawBallPreviewSphereCast(arrowAnchorTf);
         drawLinePreview(arrowAnchorTf);
 
-        // Debug.Log("OnDrag:: Stick Move Deg="+deg);
+        Debug.Log("OnDrag:: Stick Deg=" + deg + ", dir=" + dir + ", " + ((dir.x < 0)? "left" : "right").ToString());
     }
 
     public void OnPointerDown(PointerEventData eventData)
