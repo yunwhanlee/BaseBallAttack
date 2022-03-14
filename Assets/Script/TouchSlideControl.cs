@@ -28,26 +28,13 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         const int offsetDeg2DTo3D = 90;
         pl.arrowAxisAnchor.transform.rotation = Quaternion.Euler(0,offsetDeg2DTo3D -deg,0);
         
-        //TODO BallPreviewSphere
-        RaycastHit hit;
+        //* Draw Preview
         Transform arrowAnchorTf = pl.arrowAxisAnchor.transform;
-        //Preview Ball
-        float radius = pl.ballPreviewSphere.GetComponent<SphereCollider>().radius * pl.ballPreviewSphere.transform.localScale.x;
-        if(Physics.SphereCast(arrowAnchorTf.position, radius, arrowAnchorTf.forward, out hit, 1000, 1 << LayerMask.NameToLayer("BallPreview"))){
-            Vector3 cetner = hit.point + radius * hit.normal; //☆
-            pl.ballPreviewSphere.transform.position = cetner;
-            // Debug.DrawRay(arrowTf.position, arrowTf.forward * 1000, Color.red, 1);
-        }
-
-        //Preview Line
-        var arrowPos = arrowAnchorTf.GetChild(0).transform.position;
-        line.SetPosition(0, arrowPos);
-        line.SetPosition(1, pl.ballPreviewSphere.transform.position);
+        drawBallPreviewSphereCast(arrowAnchorTf);
+        drawLinePreview(arrowAnchorTf);
 
         // Debug.Log("OnDrag:: Stick Move Deg="+deg);
     }
-
-    
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -61,5 +48,21 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         stick.localPosition = Vector2.zero;
         if(gm.state != GameManager.State.PLAY) return;
         pl.setAnimTrigger("Swing");
+    }
+
+    private void drawBallPreviewSphereCast(Transform arrowAnchorTf){
+        RaycastHit hit;
+        float radius = pl.ballPreviewSphere.GetComponent<SphereCollider>().radius * pl.ballPreviewSphere.transform.localScale.x;
+        if(Physics.SphereCast(arrowAnchorTf.position, radius, arrowAnchorTf.forward, out hit, 1000, 1 << LayerMask.NameToLayer("BallPreview"))){
+            Vector3 cetner = hit.point + radius * hit.normal; //☆
+            pl.ballPreviewSphere.transform.position = cetner;
+            // Debug.DrawRay(arrowTf.position, arrowTf.forward * 1000, Color.red, 1);
+        }
+    }
+
+    private void drawLinePreview(Transform arrowAnchorTf){
+        var arrowPos = arrowAnchorTf.GetChild(0).transform.position;
+        line.SetPosition(0, arrowPos);
+        line.SetPosition(1, pl.ballPreviewSphere.transform.position);
     }
 }

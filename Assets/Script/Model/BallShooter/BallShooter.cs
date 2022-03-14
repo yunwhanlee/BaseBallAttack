@@ -5,6 +5,7 @@ using UnityEngine;
 public class BallShooter : MonoBehaviour
 {
     public GameManager gm;
+    public Player pl;
     [SerializeField]private int ballSpeed;
 
     [SerializeField]private bool isBallExist;
@@ -44,8 +45,9 @@ public class BallShooter : MonoBehaviour
                 instance.GetComponent<Ball_Prefab>().setBallSpeed(ballSpeed);
             }
         }
-        else{//* ボールが存在し、飛んでいる。
+        else{//* ボールが存在し、飛んでいる。★
             gm.readyBtn.gameObject.SetActive(false);
+            pl.previewBundle.SetActive(false);
         }
     }
 

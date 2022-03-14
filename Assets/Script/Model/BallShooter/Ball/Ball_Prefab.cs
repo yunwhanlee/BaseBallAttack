@@ -126,6 +126,7 @@ public class Ball_Prefab : MonoBehaviour
             gm.readyBtn.gameObject.SetActive(true);
             blockMaker.setCreateBlock(true);
             ballShooter.setIsBallExist(false);
+            pl.previewBundle.SetActive(true);
         }else{
             gm.setStrike();
         }
