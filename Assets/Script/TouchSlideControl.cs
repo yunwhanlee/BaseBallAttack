@@ -8,6 +8,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     //* OutSide
     public GameManager gm;
     public Player pl;
+    public LineRenderer line;
 
     public RectTransform pad;
     public RectTransform stick;
@@ -25,19 +26,25 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         float deg = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         //Player矢印角度に適用
         const int offsetDeg2DTo3D = 90;
-        pl.hitAxisArrow.transform.rotation = Quaternion.Euler(0,offsetDeg2DTo3D -deg,0);
+        pl.arrowAxisAnchor.transform.rotation = Quaternion.Euler(0,offsetDeg2DTo3D -deg,0);
         
         //TODO BallPreviewSphere
         RaycastHit hit;
-        Transform arrowTf = pl.hitAxisArrow.transform;
+        Transform arrowAnchorTf = pl.arrowAxisAnchor.transform;
+        //Preview Ball
         float radius = pl.ballPreviewSphere.GetComponent<SphereCollider>().radius * pl.ballPreviewSphere.transform.localScale.x;
-        if(Physics.SphereCast(arrowTf.position, radius, arrowTf.forward, out hit, 1000, 1 << LayerMask.NameToLayer("BallPreview"))){
-            Debug.Log("OnDrag:: SphereCast.hit.tag=" + hit.collider.gameObject.tag);
+        if(Physics.SphereCast(arrowAnchorTf.position, radius, arrowAnchorTf.forward, out hit, 1000, 1 << LayerMask.NameToLayer("BallPreview"))){
             Vector3 cetner = hit.point + radius * hit.normal; //☆
             pl.ballPreviewSphere.transform.position = cetner;
-            Debug.DrawRay(arrowTf.position, arrowTf.forward * 1000, Color.red, 1);
+            // Debug.DrawRay(arrowTf.position, arrowTf.forward * 1000, Color.red, 1);
         }
-        //Debug.Log("OnDrag:: Stick Move Deg="+deg);
+
+        //Preview Line
+        var arrowPos = arrowAnchorTf.GetChild(0).transform.position;
+        line.SetPosition(0, arrowPos);
+        line.SetPosition(1, pl.ballPreviewSphere.transform.position);
+
+        // Debug.Log("OnDrag:: Stick Move Deg="+deg);
     }
 
     

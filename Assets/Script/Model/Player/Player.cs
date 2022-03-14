@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     [Header("【HIT 角度範囲】")]
-    public GameObject hitAxisArrow;
+    public GameObject arrowAxisAnchor;
     public Image swingArcArea;
     private float swingArcRange;
     public int MAX_HIT_DEG; //左右ある方向の最大角度
@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
         swingArcRange = MAX_HIT_DEG * 2;//左右合わせるから * 2
         swingArcArea.fillAmount = swingArcRange / 360;
         swingArcArea.rectTransform.localRotation = Quaternion.Euler(0,0,offsetHitDeg + 90); 
-        hitAxisArrow.transform.rotation = Quaternion.Euler(0,-offsetHitDeg,0);
+        arrowAxisAnchor.transform.rotation = Quaternion.Euler(0,-offsetHitDeg,0);
         Debug.Log("Start:: swingArcArea表示角度= " + swingArcRange + ", 角度をfillAmount値(0~1)に変換=" + swingArcRange / 360);
     }
 

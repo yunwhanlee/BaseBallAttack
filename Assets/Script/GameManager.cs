@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
 
             ballShooter.resetCountingTime();
 
-            pl.hitAxisArrow.SetActive(false);
+            pl.arrowAxisAnchor.SetActive(false);
             
             StrikePanel.SetActive(true);
         }
@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
 
             ballPreviewGoalImg.gameObject.SetActive(false);
 
-            pl.hitAxisArrow.SetActive(true);
+            pl.arrowAxisAnchor.SetActive(true);
 
             StrikePanel.SetActive(false);
 

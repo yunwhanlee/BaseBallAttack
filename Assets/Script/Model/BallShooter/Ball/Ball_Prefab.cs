@@ -76,7 +76,7 @@ public class Ball_Prefab : MonoBehaviour
 
                 //Vector3 dir = new Vector3((deg / pl.MAX_HIT_DEG) * sign,0,1); // -45 ~ 45°
                 //Vector3 dir = Vector3.forward;
-                float deg = pl.hitAxisArrow.transform.eulerAngles.y;
+                float deg = pl.arrowAxisAnchor.transform.eulerAngles.y;
                 Vector3 dir = new Vector3(Mathf.Sin(Mathf.Deg2Rad * deg), 0, Mathf.Cos(Mathf.Deg2Rad * deg)).normalized;
                 //* Set Power(distance range 1.5f ~ 0)
                 float power = (distance <= 0.1f) ? 10 //-> BEST HIT (HOMERUH!)
