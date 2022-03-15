@@ -37,6 +37,7 @@ public class BallShooter : MonoBehaviour
                 strikeCnt = 0;
                 foreach(var img in gm.strikeBallImgs) img.gameObject.SetActive(false); //GUI非表示 初期化
                 resetCountingTime();
+                
                 gm.setShootCntText("SHOOT");
                 Debug.Log("ballPreviewDirGoalPos="+gm.ballPreviewDirGoal.transform.position+", entranceTfPos="+entranceTf.position);
                 Vector3 goalDir = (gm.ballPreviewDirGoal.transform.position - entranceTf.position).normalized;

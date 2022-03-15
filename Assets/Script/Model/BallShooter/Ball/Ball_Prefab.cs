@@ -130,6 +130,7 @@ public class Ball_Prefab : MonoBehaviour
         }else{
             gm.setStrike();
         }
+        gm.setBallPreviewGoalRandomPos();
         Destroy(this.gameObject);
     }
 
