@@ -109,10 +109,10 @@ public class Ball_Prefab : MonoBehaviour
         }
     }
 
-    //** Obstacle
+    //* Hit Block
     private void OnCollisionEnter(Collision col) {
         if(col.gameObject.tag == "NormalBlock"){
-            Destroy(col.gameObject);
+            col.gameObject.GetComponent<Block_Prefab>().decreaseHp();
         }
     }
 
