@@ -14,7 +14,7 @@ public class BlockMaker : MonoBehaviour
     private const float SPAWN_POS_X = -5;
     private const float SPWAN_POS_Y = -2;
 
-    [SerializeField] int createPercent = 70;
+    public int createPercent = 80;
     public Transform blockBundle;
     public Material[] blockColorMts;
     public GameObject blockPref;

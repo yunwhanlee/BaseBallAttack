@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public BoxCollider downWall;
 
     [Header("<---- GUI ---->")]
+    public int stage = 1;
+    public Text stageTxt;
     public Text stateTxt;
     public Text shootCntTxt;
 
@@ -89,6 +91,7 @@ public class GameManager : MonoBehaviour
     public void setState(State st) => state = st;
     public void setShootCntText(string str) => shootCntTxt.text = str;
     public void setBallPreviewGoalImgRGBA(Color color) => ballPreviewGoalImg.color = color;
+    public void setNextStage() => stageTxt.text = "STAGE : " + (++stage);
     
     //* GUI Button
     public void onClickReadyButton() => switchCamScene();
