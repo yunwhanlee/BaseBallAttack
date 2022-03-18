@@ -55,10 +55,7 @@ public class GameManager : MonoBehaviour
         readyBtn = readyBtn.GetComponent<Button>();
 
         //* Ball Preview Dir Goal Set Z-Center
-        float startPosZ = hitRangeStartTf.position.z;
-        float endPosZ = hitRangeEndTf.position.z;
-        float zCenter = startPosZ + (endPosZ - startPosZ) / 2;
-        ballPreviewDirGoal.transform.position = new Vector3(0, 0.6f, zCenter);
+        setBallPreviewGoalRandomPos();
 
 
         //* Set UI HomeRunRange
@@ -176,5 +173,15 @@ public class GameManager : MonoBehaviour
         float alpha = (unit * dist) / 255;
         setBallPreviewGoalImgRGBA(new Color(0.8f,0.8f,0.8f, 1-alpha));
         //Debug.Log("setBallPreviewImgAlpha:: "+"distance("+dist+")"+ " * unit("+unit+") = " + "alpha(" + alpha + ")");
+    }
+
+    public void setBallPreviewGoalRandomPos(){
+        float startPosZ = hitRangeStartTf.position.z;
+        float endPosZ = hitRangeEndTf.position.z;
+        float zCenter = startPosZ + (endPosZ - startPosZ) / 2;
+        float v = 0.175f;
+        float rx = Random.Range(-v, v);
+        float ry = Random.Range(-v, v);
+        ballPreviewDirGoal.transform.position = new Vector3(0 + rx, 0.6f + ry, zCenter);
     }
 }
