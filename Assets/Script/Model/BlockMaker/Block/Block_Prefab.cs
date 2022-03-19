@@ -10,6 +10,8 @@ public class Block_Prefab : MonoBehaviour
     public Text hpTxt;
 
     void Start() {
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         //TODO Set Hp by Stage Number
         hpTxt.text = hp.ToString();
     }
@@ -19,17 +21,11 @@ public class Block_Prefab : MonoBehaviour
         hpTxt.text = hp.ToString();
     }
 
-    private void OnCollisionEnter(Collision col) {
-        //* GAME OVER
-        if(col.gameObject.tag == "GameOverLine"){
-            Debug.Log("GAME OVER!!!!!!");
-        }
-    }
-
     private void OnTriggerEnter(Collider col) {
         //* GAME OVER
-        if(col.gameObject.tag == "GameOverLine"){
-            Debug.Log("GAME OVER!!!!!!");
+        if(col.gameObject.tag == "GameOverLine" && gm.state != GameManager.State.GAMEOVER){
+            Debug.Log("--GAME OVER--");
+            gm.setState(GameManager.State.GAMEOVER);
         }
     }
 

@@ -53,16 +53,10 @@ public class Ball_Prefab : MonoBehaviour
 
     //** Control
     private void OnTriggerStay(Collider col) {
-        // float v = gm.hitRangeDegSlider.value;
-        // float midMaxV = (v <= 0.5f)? v * 2 : 1 - (v - 0.5f) * 2;
-        // Debug.Log("midMaxV=" + midMaxV);
-
         //* HIT BALL
         if(col.gameObject.tag == "HitRangeArea"){
             pl.setSwingArcColor("red");
             if(pl.doSwing && gm.state == GameManager.State.PLAY){
-                // Debug.Log("Player:: doSwing=" + pl.doSwing);
-                // Debug.Log("Ball_Prefab:: hitRangeSlider.value=" + gm.hitRangeDegSlider.value.ToString("N2") + ", deg=" + deg.ToString("N1"));
                 gm.switchCamScene();
                 isHited = true;
                 pl.doSwing = false;
