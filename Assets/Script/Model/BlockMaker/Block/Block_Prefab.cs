@@ -22,12 +22,13 @@ public class Block_Prefab : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider col) {
-        //* GAME OVER
+        //* GAMEOVER
         if(col.gameObject.tag == "GameOverLine" && gm.state != GameManager.State.GAMEOVER){
-            Debug.Log("--GAME OVER--");
-            gm.setState(GameManager.State.GAMEOVER);
+            gm.setGameOver();
         }
     }
 
     public void decreaseHp() => --hp;
+
+    public void onDestroy() => Destroy(this.gameObject);
 }

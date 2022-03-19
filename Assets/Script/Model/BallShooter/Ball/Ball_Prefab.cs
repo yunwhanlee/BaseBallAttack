@@ -125,7 +125,7 @@ public class Ball_Prefab : MonoBehaviour
             gm.downWall.isTrigger = true; //*下壁 物理X
             gm.readyBtn.gameObject.SetActive(true);
             
-            blockMaker.setCreateBlock(true);
+            blockMaker.setCreateBlockTrigger(true);
             ballShooter.setIsBallExist(false);
             pl.previewBundle.SetActive(true);
             

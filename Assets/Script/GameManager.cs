@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     [Header("<---- GUI ---->")]
     public int stage = 1;
+    public int bestScore;
     public int strikeCnt = 0;
     public Text stageTxt;
     public Text stateTxt;
@@ -44,39 +45,60 @@ public class GameManager : MonoBehaviour
     public GameObject StrikePanel;
     public Image[] strikeBallImgs; 
 
+    [Header("-GameOver-")]
+    public GameObject gameoverPanel;
+    private Text gvStageTxt;
+    private Text gvBestScoreTxt;
+
     [Header("-Button-")]
-    public Button readyBtn;
+    public Button readyBtn; //Normal
+    public Button reGameBtn; //gameoverPanel
 
-
-    
+    //---------------------------------------
 
     void Start() {
         // Debug.Log("deadLine.pos.z=" + deadLineTf.position.z);
         hitRangeSliderTf = hitRangeSlider.GetComponent<RectTransform>();
         readyBtn = readyBtn.GetComponent<Button>();
+        gvStageTxt = gameoverPanel.transform.GetChild(1).GetComponent<Text>();
+        gvBestScoreTxt = gameoverPanel.transform.GetChild(2).GetComponent<Text>();
 
         //* Ball Preview Dir Goal Set Z-Center
         setBallPreviewGoalRandomPos();
     }
 
-
-    void Update()
-    {
-        //* GUI
+    void Update(){
+        //* GUI TEXT
         stateTxt.text = state.ToString();
+        stageTxt.text = "STAGE : " + stage.ToString();
     }
 
     public void setState(State st) => state = st;
     public void setShootCntText(string str) => shootCntTxt.text = str;
     public void setBallPreviewGoalImgRGBA(Color color) => ballPreviewGoalImg.color = color;
-    public void setNextStage() => stageTxt.text = "STAGE : " + (++stage);
-    
+    public void setNextStage() => ++stage;
+    public void setGameOver(){
+        Debug.Log("--GAME OVER--");
+        setState(GameManager.State.GAMEOVER);
+        gameoverPanel.SetActive(true);
+        gvStageTxt.text = "STAGE : " + stage;
+        gvBestScoreTxt.text = "BEST SCORE : " + bestScore;
+    }
     //* GUI Button
     public void onClickReadyButton() => switchCamScene();
+    public void onClickReGameButton() => init();
 
     //*---------------------------------------
     //*  関数
     //*---------------------------------------
+    public void init(){
+        state = GameManager.State.WAIT;
+        stage = 1;
+        strikeCnt = 0;
+        gameoverPanel.SetActive(false);
+        blockMaker.Start();
+    }
+
     public void switchCamScene(){
         if(state == GameManager.State.GAMEOVER) return;
         if(!cam2.activeSelf){//* CAM2 On
@@ -133,7 +155,7 @@ public class GameManager : MonoBehaviour
             setShootCntText("OUT!");
             yield return new WaitForSeconds(1.5f);
             switchCamScene();
-            blockMaker.setCreateBlock(true); //ブロック生成
+            blockMaker.setCreateBlockTrigger(true); //ブロック生成
             foreach(var img in strikeBallImgs) img.gameObject.SetActive(false); //GUI非表示 初期化
             readyBtn.gameObject.SetActive(true);
         }

@@ -42,7 +42,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         drawBallPreviewSphereCast(arrowAnchorTf);
         drawLinePreview(arrowAnchorTf);
 
-        Debug.Log("OnDrag:: Stick Deg=" + deg + ", dir=" + dir + ", " + ((dir.x < 0)? "left" : "right").ToString());
+        //Debug.Log("OnDrag:: Stick Deg=" + deg + ", dir=" + dir + ", " + ((dir.x < 0)? "left" : "right").ToString());
     }
 
     public void OnPointerDown(PointerEventData eventData){
