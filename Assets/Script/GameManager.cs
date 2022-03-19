@@ -58,7 +58,6 @@ public class GameManager : MonoBehaviour
         //* Ball Preview Dir Goal Set Z-Center
         setBallPreviewGoalRandomPos();
 
-
         //* Set UI HomeRunRange
         // float HomeRunRangeWidth = hitRangeSliderTf.rect.width * HomeRunRangePer;
         // HomeRunRangeTf.sizeDelta = new Vector2(HomeRunRangeWidth, 12);
@@ -180,7 +179,7 @@ public class GameManager : MonoBehaviour
         float startPosZ = hitRangeStartTf.position.z;
         float endPosZ = hitRangeEndTf.position.z;
         float zCenter = startPosZ + (endPosZ - startPosZ) / 2;
-        float v = 0;//0.175f; (BUG) BlockがGameOverまである時に、ボールとぶつかる。
+        float v = 0.05f;//0.175f; (BUG) BlockがGameOverまである時に、ボールとぶつかる。
         float rx = Random.Range(-v, v);
         float ry = Random.Range(-v, v);
         ballPreviewDirGoal.transform.position = new Vector3(0 + rx, 0.6f + ry, zCenter);
