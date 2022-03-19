@@ -12,7 +12,10 @@ public class Block_Prefab : MonoBehaviour
     void Start() {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 
-        //TODO Set Hp by Stage Number
+        //TODO Hp Leveling by Stage Number
+        hp = (gm.stage <= 5) ? 1 
+        : (gm.stage <= 10) ? 2
+        : (gm.stage <= 15) ? 3 : 4;
         hpTxt.text = hp.ToString();
     }
 
