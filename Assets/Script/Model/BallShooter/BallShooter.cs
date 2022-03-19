@@ -11,7 +11,6 @@ public class BallShooter : MonoBehaviour
     [SerializeField]private bool isBallExist;
     [SerializeField]private float time;
     [SerializeField]private float shootSpan = 4f;
-    [SerializeField]public int strikeCnt = 0;
     [SerializeField]public GameObject ballPref;
     [SerializeField]public Transform entranceTf;
 
@@ -34,8 +33,6 @@ public class BallShooter : MonoBehaviour
             if(time <= 0){
                 Debug.Log("🥎BALL 発射！");
                 isBallExist = true;
-                strikeCnt = 0;
-                foreach(var img in gm.strikeBallImgs) img.gameObject.SetActive(false); //GUI非表示 初期化
                 resetCountingTime();
                 
                 gm.setShootCntText("SHOOT");

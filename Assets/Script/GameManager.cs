@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     [Header("<---- GUI ---->")]
     public int stage = 1;
+    public int strikeCnt = 0;
     public Text stageTxt;
     public Text stateTxt;
     public Text shootCntTxt;
@@ -138,16 +139,16 @@ public class GameManager : MonoBehaviour
 
     //ストライク GUI表示
     public void setStrike(){
-        if(ballShooter.strikeCnt < 2)
+        if(strikeCnt < 2)
             StartCoroutine(corSetStrike());
         else
             StartCoroutine(corSetStrike(true));
     }
 
     private IEnumerator corSetStrike(bool isOut = false){
-        strikeBallImgs[ballShooter.strikeCnt++].gameObject.SetActive(true);
+        strikeBallImgs[strikeCnt++].gameObject.SetActive(true);
         if(isOut){
-            ballShooter.strikeCnt = 0;
+            strikeCnt = 0;
             setShootCntText("OUT!");
             yield return new WaitForSeconds(1.5f);
             switchCamScene();
@@ -179,7 +180,7 @@ public class GameManager : MonoBehaviour
         float startPosZ = hitRangeStartTf.position.z;
         float endPosZ = hitRangeEndTf.position.z;
         float zCenter = startPosZ + (endPosZ - startPosZ) / 2;
-        float v = 0;//0.175f; (BUG)BlockがGameOverまである時に、ボールとぶつかる。
+        float v = 0;//0.175f; (BUG) BlockがGameOverまである時に、ボールとぶつかる。
         float rx = Random.Range(-v, v);
         float ry = Random.Range(-v, v);
         ballPreviewDirGoal.transform.position = new Vector3(0 + rx, 0.6f + ry, zCenter);

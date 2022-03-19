@@ -45,14 +45,12 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         Debug.Log("OnDrag:: Stick Deg=" + deg + ", dir=" + dir + ", " + ((dir.x < 0)? "left" : "right").ToString());
     }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
+    public void OnPointerDown(PointerEventData eventData){
         pad.position = eventData.position;
         pad.gameObject.SetActive(true);
     }
 
-    public void OnPointerUp(PointerEventData eventData)
-    {
+    public void OnPointerUp(PointerEventData eventData){
         pad.gameObject.SetActive(false);
         stick.localPosition = Vector2.zero;
         if(gm.state != GameManager.State.PLAY) return;

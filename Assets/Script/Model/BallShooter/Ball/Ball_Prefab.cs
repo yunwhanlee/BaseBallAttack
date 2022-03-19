@@ -57,7 +57,7 @@ public class Ball_Prefab : MonoBehaviour
         // float midMaxV = (v <= 0.5f)? v * 2 : 1 - (v - 0.5f) * 2;
         // Debug.Log("midMaxV=" + midMaxV);
 
-        //* Batting
+        //* HIT BALL
         if(col.gameObject.tag == "HitRangeArea"){
             pl.setSwingArcColor("red");
             if(pl.doSwing && gm.state == GameManager.State.PLAY){
@@ -67,6 +67,10 @@ public class Ball_Prefab : MonoBehaviour
                 isHited = true;
                 pl.doSwing = false;
                 rigid.useGravity = true;
+
+                //STRIKEデータ 初期化
+                gm.strikeCnt = 0;
+                foreach(var img in gm.strikeBallImgs) img.gameObject.SetActive(false); 
 
                 //offset Axis
                 const int leftSide = -1, rightSide = 1;
