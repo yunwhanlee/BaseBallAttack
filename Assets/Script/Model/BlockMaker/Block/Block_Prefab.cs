@@ -19,5 +19,19 @@ public class Block_Prefab : MonoBehaviour
         hpTxt.text = hp.ToString();
     }
 
+    private void OnCollisionEnter(Collision col) {
+        //* GAME OVER
+        if(col.gameObject.tag == "GameOverLine"){
+            Debug.Log("GAME OVER!!!!!!");
+        }
+    }
+
+    private void OnTriggerEnter(Collider col) {
+        //* GAME OVER
+        if(col.gameObject.tag == "GameOverLine"){
+            Debug.Log("GAME OVER!!!!!!");
+        }
+    }
+
     public void decreaseHp() => --hp;
 }

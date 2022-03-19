@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 779756}
   m_Layer: 0
   m_Name: DownWall
-  m_TagString: Wall
+  m_TagString: GameOverLine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,8 +167,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 8, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 8, z: 4.182136}
+  m_Center: {x: 0, y: 0, z: -1.5910685}
 --- !u!23 &779757
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -188,7 +188,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 338970dfe3d7f364a9dc75e128bcf626, type: 2}
+  - {fileID: 2100000, guid: 8170ea4c7b3b130419a5071966d60382, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3486,7 +3486,6 @@ MonoBehaviour:
   isBallExist: 0
   time: 0
   shootSpan: 2
-  strikeCnt: 0
   ballPref: {fileID: 2295754910549213891, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
   entranceTf: {fileID: 747844806}
 --- !u!1 &1369034197
@@ -3542,7 +3541,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1369034197}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -3880,6 +3879,7 @@ MonoBehaviour:
   deadLineTf: {fileID: 587487858}
   downWall: {fileID: 779756}
   stage: 1
+  strikeCnt: 0
   stageTxt: {fileID: 1558296299}
   stateTxt: {fileID: 764482078}
   shootCntTxt: {fileID: 550806242}
@@ -5087,8 +5087,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1.1862373}
+  m_Center: {x: 0, y: 0, z: -0.093119375}
 --- !u!23 &1957708817
 MeshRenderer:
   m_ObjectHideFlags: 0
