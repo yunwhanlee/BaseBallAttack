@@ -6,14 +6,24 @@ using UnityEngine.UI;
 public class Block_Prefab : MonoBehaviour
 {
     public GameManager gm;
+
+    //Material Instancing
+    private MeshRenderer meshRenderer;
+    public Color color;
+
     public int hp;
     public Text hpTxt;
 
     void Start() {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 
+        //Material Instancing
+        meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer.material = Instantiate(meshRenderer.material);
+        meshRenderer.material.SetColor("_ColorTint", color);
+
         //TODO Hp Leveling by Stage Number
-        hp = (gm.stage <= 5) ? 1 
+        hp = (gm.stage <= 5) ? 1
         : (gm.stage <= 10) ? 2
         : (gm.stage <= 15) ? 3 : 4;
         hpTxt.text = hp.ToString();

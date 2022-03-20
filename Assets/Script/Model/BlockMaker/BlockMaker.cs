@@ -21,6 +21,7 @@ public class BlockMaker : MonoBehaviour
     public bool isCreateBlock;
 
     public void Start() {
+
         //* Init
         foreach(var block in this.GetComponentsInChildren<Block_Prefab>()) block.onDestroy();
         this.transform.position = new Vector3(0, 0.5f, -2);
