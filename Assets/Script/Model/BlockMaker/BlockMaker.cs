@@ -10,7 +10,7 @@ public class BlockMaker : MonoBehaviour
     private const float WIDTH = 1.9f;
     private const float HEIGHT = 1;
     private const int MAX_HORIZONTAL_CNT = 6;
-    private const int FIRST_CREATE_VERTICAL_CNT = 4; //DEAD_MAX-> 13
+    private const int FIRST_CREATE_VERTICAL_CNT = 12; //DEAD_MAX-> 13
     private const float SPAWN_POS_X = -5;
     private const float SPWAN_POS_Y = -2;
 
@@ -20,9 +20,9 @@ public class BlockMaker : MonoBehaviour
     public bool isCreateBlock;
 
     public void Start() {
-
         //* Init
-        foreach(var block in this.GetComponentsInChildren<Block_Prefab>()) block.onDestroy();
+        var blocks = this.GetComponentsInChildren<Block_Prefab>();
+        foreach(var block in blocks) block.onDestroy(true);
         this.transform.position = new Vector3(0, 0.5f, -2);
         createBlockLine(true, FIRST_CREATE_VERTICAL_CNT);
     }

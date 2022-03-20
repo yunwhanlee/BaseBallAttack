@@ -14,14 +14,14 @@ public class Player : MonoBehaviour
     
     public GameObject previewBundle;
     public GameObject ballPreviewSphere;
-    
-
-    [Header("Down Wall")]
-    BoxCollider downWall_Col;
 
     [Header("Status")]
     public bool doSwing = false;
+    [SerializeField] private int lv = 1;
+    [SerializeField] private float maxExp = 100;
+    [SerializeField] private int exp = 0;
 
+    //* Component
     private Animator anim;
 
     void Start()
@@ -37,8 +37,19 @@ public class Player : MonoBehaviour
 
     void Update(){
         setSwingArcPos();
+        calcLevelUpExp();
     }
 
+    public void setLv(int _lv) => lv = _lv;
+    public float getMaxExp() => maxExp;
+    public void setMaxExp(float _maxExp) => maxExp = _maxExp;
+    public int getExp() => exp;
+    public void setExp(int _exp) => exp = _exp;
+    public void addExp(int _exp) => exp += _exp;
+
+    //*---------------------------------------
+    //*  関数
+    //*---------------------------------------
     private void setSwingArcPos(){
         RectTransform rect = swingArcArea.rectTransform;
         if(this.transform.position.x < 0){
@@ -56,7 +67,21 @@ public class Player : MonoBehaviour
         anim.SetTrigger(name);
         doSwing = true;
     }
+
     public void setSwingArcColor(string color){
         swingArcArea.color = color == "red" ? new Color(1,0,0,0.4f) : new Color(1,1,0,0.4f); //yellow
+    }
+
+    public void calcLevelUpExp(){
+        if(exp > maxExp){
+            setLevelUp();
+        }
+    }
+
+    public void setLevelUp(){
+        Debug.Log("LEVEL UP!");
+        setLv(++lv);
+        setExp(0);
+        setMaxExp(maxExp * 1.75f);
     }
 }

@@ -8,21 +8,27 @@ public class Block_Prefab : MonoBehaviour
     public enum BlockMt {PLAIN, WOOD, SAND, REDBRICK, IRON};
 
     public GameManager gm;
+    public Player pl;
 
     //* Material Instancing
-    private MeshRenderer meshRenderer;
+    private MeshRenderer meshRd;
     public Color[] colors;
-    public Material[] materials;
+    public Material[] mts;
 
-    public int hp;
+    //* Value
+    [SerializeField] private int hp = 1;
+    [SerializeField] private int exp = 10;
+
+    //* GUI
     public Text hpTxt;
 
     void Start() {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        pl = GameObject.Find("Player").GetComponent<Player>();
 
         //* Material Instancing
-        meshRenderer = GetComponent<MeshRenderer>();
-        meshRenderer.material = Instantiate(meshRenderer.material);
+        meshRd = GetComponent<MeshRenderer>();
+        meshRd.material = Instantiate(meshRd.material);
 
         // Leveling HP
         hp = (gm.stage <= 5) ? 1
@@ -34,20 +40,20 @@ public class Block_Prefab : MonoBehaviour
 
         // Material
         switch(hp){
-            case 1 : meshRenderer.material = materials[(int)BlockMt.PLAIN]; break;
-            case 2 : meshRenderer.material = materials[(int)BlockMt.WOOD]; break;
-            case 3 : meshRenderer.material = materials[(int)BlockMt.SAND]; break;
-            case 4 : meshRenderer.material = materials[(int)BlockMt.REDBRICK]; break;
-            case 5 : meshRenderer.material = materials[(int)BlockMt.IRON]; break;
+            case 1 : exp = 10;  meshRd.material = mts[(int)BlockMt.PLAIN]; break;
+            case 2 : exp = 20;  meshRd.material = mts[(int)BlockMt.WOOD]; break;
+            case 3 : exp = 30;  meshRd.material = mts[(int)BlockMt.SAND]; break;
+            case 4 : exp = 40;  meshRd.material = mts[(int)BlockMt.REDBRICK]; break;
+            case 5 : exp = 50;  meshRd.material = mts[(int)BlockMt.IRON]; break;
         }
 
         // 色
         int randIdx = Random.Range(0, colors.Length);
-        meshRenderer.material.SetColor("_ColorTint", colors[randIdx]);
+        meshRd.material.SetColor("_ColorTint", colors[randIdx]);
     }
 
     void Update(){
-        if(hp <= 0) Destroy(this.gameObject);
+        if(hp <= 0) onDestroy();
         hpTxt.text = hp.ToString();
     }
 
@@ -60,5 +66,8 @@ public class Block_Prefab : MonoBehaviour
 
     public void decreaseHp() => --hp;
 
-    public void onDestroy() => Destroy(this.gameObject);
+    public void onDestroy(bool isInitialize = false) {
+        if(!isInitialize) pl.addExp(exp); //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
+        Destroy(this.gameObject);
+    }
 }

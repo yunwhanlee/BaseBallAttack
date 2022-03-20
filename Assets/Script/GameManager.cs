@@ -30,7 +30,10 @@ public class GameManager : MonoBehaviour
     public Text stateTxt;
     public Text shootCntTxt;
 
-    [Header("-View Slider-")]
+    [Header("-Exp Slider Bar-")]
+    public Slider expBar;
+
+    [Header("-View Preview Ball Slider-")] //! あんまり要らないかも。
     public Slider hitRangeSlider;
     private RectTransform hitRangeSliderTf;
     public RectTransform HomeRunRangeTf;
@@ -68,7 +71,8 @@ public class GameManager : MonoBehaviour
     }
 
     void Update(){
-        //* GUI TEXT
+        //* GUI
+        expBar.value = Mathf.Lerp(expBar.value, pl.getExp() / pl.getMaxExp(), Time.deltaTime * 10);
         stateTxt.text = state.ToString();
         stageTxt.text = "STAGE : " + stage.ToString();
     }
@@ -95,6 +99,9 @@ public class GameManager : MonoBehaviour
         state = GameManager.State.WAIT;
         stage = 1;
         strikeCnt = 0;
+        pl.setLv(1);
+        pl.setExp(0);
+        pl.setMaxExp(100);
         gameoverPanel.SetActive(false);
         blockMaker.Start();
     }
