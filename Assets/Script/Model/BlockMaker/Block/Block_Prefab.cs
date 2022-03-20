@@ -5,11 +5,14 @@ using UnityEngine.UI;
 
 public class Block_Prefab : MonoBehaviour
 {
+    public enum BlockMt {PLAIN, WOOD, SAND, REDBRICK, IRON};
+
     public GameManager gm;
 
-    //Material Instancing
+    //* Material Instancing
     private MeshRenderer meshRenderer;
-    public Color color;
+    public Color[] colors;
+    public Material[] materials;
 
     public int hp;
     public Text hpTxt;
@@ -17,16 +20,30 @@ public class Block_Prefab : MonoBehaviour
     void Start() {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 
-        //Material Instancing
+        //* Material Instancing
         meshRenderer = GetComponent<MeshRenderer>();
         meshRenderer.material = Instantiate(meshRenderer.material);
-        meshRenderer.material.SetColor("_ColorTint", color);
 
-        //TODO Hp Leveling by Stage Number
+        // Leveling HP
         hp = (gm.stage <= 5) ? 1
         : (gm.stage <= 10) ? 2
-        : (gm.stage <= 15) ? 3 : 4;
+        : (gm.stage <= 15) ? 3
+        : (gm.stage <= 20) ? 4
+        : 5;
         hpTxt.text = hp.ToString();
+
+        // Material
+        switch(hp){
+            case 1 : meshRenderer.material = materials[(int)BlockMt.PLAIN]; break;
+            case 2 : meshRenderer.material = materials[(int)BlockMt.WOOD]; break;
+            case 3 : meshRenderer.material = materials[(int)BlockMt.SAND]; break;
+            case 4 : meshRenderer.material = materials[(int)BlockMt.REDBRICK]; break;
+            case 5 : meshRenderer.material = materials[(int)BlockMt.IRON]; break;
+        }
+
+        // 色
+        int randIdx = Random.Range(0, colors.Length);
+        meshRenderer.material.SetColor("_ColorTint", colors[randIdx]);
     }
 
     void Update(){

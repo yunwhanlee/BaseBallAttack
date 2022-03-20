@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 74c7b8e3ed8d60740ad629198f468a2e, type: 2}
+  - {fileID: 2100000, guid: a7f4b3a80cce5544186fb7a62b8fabb2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,7 +111,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
-  color: {r: 1, g: 1, b: 1, a: 0}
+  colors:
+  - {r: 1, g: 0.5235849, b: 0.5235849, a: 0}
+  - {r: 0.48584908, g: 0.8739826, b: 1, a: 0}
+  - {r: 0.75299025, g: 1, b: 0.6745283, a: 0}
+  - {r: 1, g: 0.96847254, b: 0.5235849, a: 0}
+  - {r: 1, g: 1, b: 1, a: 0}
+  - {r: 0.9908176, g: 0.6556604, b: 1, a: 0}
+  materials:
+  - {fileID: 2100000, guid: cf3da56f55dc78845aa9ee532679ca9a, type: 2}
+  - {fileID: 2100000, guid: 74c7b8e3ed8d60740ad629198f468a2e, type: 2}
+  - {fileID: 2100000, guid: a7f4b3a80cce5544186fb7a62b8fabb2, type: 2}
+  - {fileID: 2100000, guid: ee19e7bdbd2923340aa8973e1d4230b1, type: 2}
+  - {fileID: 2100000, guid: a5f3265eb027f0e41af7b62f064343df, type: 2}
   hp: 2
   hpTxt: {fileID: 4858394855207509922}
 --- !u!54 &4270761389112764335

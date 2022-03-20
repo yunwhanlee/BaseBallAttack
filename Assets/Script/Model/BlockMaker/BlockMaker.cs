@@ -16,7 +16,6 @@ public class BlockMaker : MonoBehaviour
 
     public int createPercent = 80;
     public Transform blockBundle;
-    public Material[] blockColorMts;
     public GameObject blockPref;
     public bool isCreateBlock;
 
@@ -55,9 +54,6 @@ public class BlockMaker : MonoBehaviour
                     Vector3 pos = new Vector3(x, blockBundle.position.y, SPWAN_POS_Y);
                     blockIns = Instantiate(blockPref, pos, Quaternion.identity, blockBundle);
                 }
-                //* 色
-                int randIdx = Random.Range(0, blockColorMts.Length);
-                blockIns.GetComponent<Renderer>().material = blockColorMts[randIdx];
             }
         }
     }
