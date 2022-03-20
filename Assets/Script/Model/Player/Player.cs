@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 
     [Header("Status")]
     public bool doSwing = false;
+    public bool isLevelUp = false;
     [SerializeField] private int lv = 1;
     [SerializeField] private float maxExp = 100;
     [SerializeField] private int exp = 0;
@@ -24,8 +25,7 @@ public class Player : MonoBehaviour
     //* Component
     private Animator anim;
 
-    void Start()
-    {
+    void Start(){
         Debug.Log("swingArcArea.rectTransform.localRotation.eulerAngles.z=" + swingArcArea.rectTransform.localRotation.eulerAngles.z);//! (BUG) rotation.eulerAnglesしないと、角度の数値ではなく、小数点が出る。
         anim = GetComponentInChildren<Animator>();
         swingArcRange = MAX_HIT_DEG * 2;//左右合わせるから * 2
@@ -46,6 +46,10 @@ public class Player : MonoBehaviour
     public int getExp() => exp;
     public void setExp(int _exp) => exp = _exp;
     public void addExp(int _exp) => exp += _exp;
+    public bool getIsLevelUp() => isLevelUp;
+    public void setIsLevelUp(bool trigger) => isLevelUp = trigger;
+    public bool getDoSwing() => doSwing;
+    public void setDoSwing(bool trigger) => doSwing = trigger;
 
     //*---------------------------------------
     //*  関数
@@ -65,7 +69,7 @@ public class Player : MonoBehaviour
     public void setAnimTrigger(string name){
         //Debug.Log("Player:: Swing");
         anim.SetTrigger(name);
-        doSwing = true;
+        setDoSwing(true);//doSwing = true;
     }
 
     public void setSwingArcColor(string color){
@@ -79,7 +83,8 @@ public class Player : MonoBehaviour
     }
 
     public void setLevelUp(){
-        Debug.Log("LEVEL UP!");
+        Debug.Log("setLevelUp:: LEVEL UP!");
+        isLevelUp = true;
         setLv(++lv);
         setExp(0);
         setMaxExp(maxExp * 1.75f);

@@ -1553,7 +1553,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &456845151
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1996,12 +1996,12 @@ GameObject:
   - component: {fileID: 557986896}
   - component: {fileID: 557986895}
   m_Layer: 5
-  m_Name: 'LevelUpPanel '
+  m_Name: LevelUpPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &557986894
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2447,9 +2447,10 @@ MonoBehaviour:
   previewBundle: {fileID: 1950984583}
   ballPreviewSphere: {fileID: 1721060499}
   doSwing: 0
+  isLevelUp: 0
   lv: 1
   maxExp: 100
-  exp: 0
+  exp: 90
 --- !u!1 &704207288
 GameObject:
   m_ObjectHideFlags: 0
@@ -2485,9 +2486,9 @@ RectTransform:
   m_Father: {fileID: 1161680672}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 490, y: -160}
   m_SizeDelta: {x: 270, y: 270}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &704207290
@@ -3372,9 +3373,9 @@ RectTransform:
   m_Father: {fileID: 1161680672}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 163.33333, y: -160}
   m_SizeDelta: {x: 270, y: 270}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &955063943
@@ -4411,7 +4412,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5213,9 +5214,9 @@ RectTransform:
   m_Father: {fileID: 1161680672}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 816.6666, y: -160}
   m_SizeDelta: {x: 270, y: 270}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1552636719
@@ -5794,6 +5795,7 @@ MonoBehaviour:
   - {fileID: 1964554610}
   - {fileID: 677223623}
   - {fileID: 1138305771}
+  levelUpPanel: {fileID: 557986893}
   gameoverPanel: {fileID: 1572075153}
   readyBtn: {fileID: 543322737}
   reGameBtn: {fileID: 1023542670}
@@ -6797,8 +6799,8 @@ RectTransform:
   m_Father: {fileID: 1705116468}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

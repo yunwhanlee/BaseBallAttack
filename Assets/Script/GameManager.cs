@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public enum State {PLAY, WAIT, GAMEOVER};
-    public State state = State.PLAY;
+    public State state;
 
     //* CAMERA
     public GameObject cam1, cam2;
@@ -46,7 +46,10 @@ public class GameManager : MonoBehaviour
 
     [Header("-Strike Ball Image-")]
     public GameObject StrikePanel;
-    public Image[] strikeBallImgs; 
+    public Image[] strikeBallImgs;
+
+    [Header("-Level Up (Select Skill)-")]
+    public GameObject levelUpPanel;
 
     [Header("-GameOver-")]
     public GameObject gameoverPanel;
@@ -81,13 +84,6 @@ public class GameManager : MonoBehaviour
     public void setShootCntText(string str) => shootCntTxt.text = str;
     public void setBallPreviewGoalImgRGBA(Color color) => ballPreviewGoalImg.color = color;
     public void setNextStage() => ++stage;
-    public void setGameOver(){
-        Debug.Log("--GAME OVER--");
-        setState(GameManager.State.GAMEOVER);
-        gameoverPanel.SetActive(true);
-        gvStageTxt.text = "STAGE : " + stage;
-        gvBestScoreTxt.text = "BEST SCORE : " + bestScore;
-    }
     //* GUI Button
     public void onClickReadyButton() => switchCamScene();
     public void onClickReGameButton() => init();
@@ -194,5 +190,20 @@ public class GameManager : MonoBehaviour
         float rx = Random.Range(-v, v);
         float ry = Random.Range(-v, v);
         ballPreviewDirGoal.transform.position = new Vector3(0 + rx, 0.6f + ry, zCenter);
+    }
+
+    public void setGameOver(){
+        Debug.Log("--GAME OVER--");
+        setState(GameManager.State.GAMEOVER);
+        gameoverPanel.SetActive(true);
+        gvStageTxt.text = "STAGE : " + stage;
+        gvBestScoreTxt.text = "BEST SCORE : " + bestScore;
+    }
+
+    public void checkLevelUp(){
+        if(pl.getIsLevelUp()){
+            pl.setIsLevelUp(false);
+            levelUpPanel.SetActive(true);
+        }
     }
 }

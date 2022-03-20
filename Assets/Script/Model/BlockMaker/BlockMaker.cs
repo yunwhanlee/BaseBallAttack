@@ -34,7 +34,7 @@ public class BlockMaker : MonoBehaviour
         }
     }
 
-    public void setCreateBlockTrigger(bool boolen) => isCreateBlock = boolen;
+    public void setCreateBlockTrigger(bool trigger) => isCreateBlock = trigger;
 
     public void createBlockLine(bool isFirst = false, int verticalCnt = 1){
         for(int v=0; v<verticalCnt;v++){ //縦

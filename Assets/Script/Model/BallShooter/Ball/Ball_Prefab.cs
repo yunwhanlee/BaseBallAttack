@@ -56,10 +56,10 @@ public class Ball_Prefab : MonoBehaviour
         //* HIT BALL
         if(col.gameObject.tag == "HitRangeArea"){
             pl.setSwingArcColor("red");
-            if(pl.doSwing && gm.state == GameManager.State.PLAY){
+            if(pl.getDoSwing() && gm.state == GameManager.State.PLAY){
                 gm.switchCamScene();
                 isHited = true;
-                pl.doSwing = false;
+                pl.setDoSwing(false);
                 rigid.useGravity = true;
 
                 //STRIKEデータ 初期化
@@ -72,8 +72,6 @@ public class Ball_Prefab : MonoBehaviour
                 int offsetAxis = (sign < 0) ? (pl.MAX_HIT_DEG/2) * leftSide : (pl.MAX_HIT_DEG/2) * rightSide;
                 // Debug.Log("Ball_Prefab:: ■offsetAxis=" + offsetAxis);
 
-                //Vector3 dir = new Vector3((deg / pl.MAX_HIT_DEG) * sign,0,1); // -45 ~ 45°
-                //Vector3 dir = Vector3.forward;
                 float deg = pl.arrowAxisAnchor.transform.eulerAngles.y;
                 Vector3 dir = new Vector3(Mathf.Sin(Mathf.Deg2Rad * deg), 0, Mathf.Cos(Mathf.Deg2Rad * deg)).normalized;
                 //* Set Power(distance range 1.5f ~ 0)
@@ -90,7 +88,7 @@ public class Ball_Prefab : MonoBehaviour
             }
         }
         else if(col.gameObject.tag == "ActiveDownWall"){
-            pl.doSwing = false;
+            pl.setDoSwing(false);
             if(gm.state == GameManager.State.WAIT){
                 gm.downWall.isTrigger = false;//*下壁 物理O
             }
@@ -119,7 +117,8 @@ public class Ball_Prefab : MonoBehaviour
     //*---------------------------------------
     private void onDestroyMe(bool isStrike = false){
         if(!isStrike){
-            //* Next Stage
+            //* ★Next Stage：ボールが消えたら次に進む。
+            Debug.Log("onDestroyMe:: NEXT STAGE(Ball Is Destroyed)");
             gm.setNextStage();
             gm.setState(GameManager.State.WAIT);
             gm.downWall.isTrigger = true; //*下壁 物理X
@@ -128,6 +127,9 @@ public class Ball_Prefab : MonoBehaviour
             blockMaker.setCreateBlockTrigger(true);
             ballShooter.setIsBallExist(false);
             pl.previewBundle.SetActive(true);
+
+            //Level Up?
+            gm.checkLevelUp();
             
         }else{
             gm.setStrike();
@@ -139,19 +141,4 @@ public class Ball_Prefab : MonoBehaviour
     public void setBallSpeed(int v){
         speed = v;
     }
-    //----------------------------------------
-    // private float calcHitRangeToDegree(){
-    //     //Degree
-    //     float v = gm.hitRangeDegSlider.value;//0 ~ 1値
-    //     float deg = (pl.MAX_HIT_DEG * 2); //真ん中がMAXになり、始めと終わりは0になるため。
-    //     if(v <= 0.5f){deg = -Mathf.Abs(pl.MAX_HIT_DEG - (v * deg));}
-    //     else{deg = Mathf.Abs(pl.MAX_HIT_DEG - (v * deg));}
-    //     //SetHitAxisDir
-    //     const int leftSide = -1, rightSide = 1;
-    //     int sign = pl.transform.localScale.x < 0 ? leftSide : rightSide;
-    //     //Start Degree Offset
-    //     float offset = (sign < 0) ? (pl.offsetHitDeg) * leftSide : (pl.offsetHitDeg) * rightSide;
-
-    //     return deg * sign + offset;
-    // }
 }
