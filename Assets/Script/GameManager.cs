@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     public GameObject StrikePanel;
     public Image[] strikeBallImgs;
 
-    [Header("-Level Up (Select Skill)-")]
+    [Header("-Level Up-")]
     public GameObject levelUpPanel;
 
     [Header("-GameOver-")]
@@ -87,6 +87,9 @@ public class GameManager : MonoBehaviour
     //* GUI Button
     public void onClickReadyButton() => switchCamScene();
     public void onClickReGameButton() => init();
+    public void onCLickSkillButton(){
+        levelUpPanel.SetActive(false);
+    }
 
     //*---------------------------------------
     //*  関数
