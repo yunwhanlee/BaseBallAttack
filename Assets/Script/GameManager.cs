@@ -207,6 +207,7 @@ public class GameManager : MonoBehaviour
         if(pl.getIsLevelUp()){
             pl.setIsLevelUp(false);
             levelUpPanel.SetActive(true);
+            levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
         }
     }
 }
