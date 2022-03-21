@@ -74,7 +74,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
             else{
                 int randIdx = Random.Range(0, selectList.Count);
                 btn.imgRectTf.localPosition = new Vector3(0,selectList[randIdx].Key,0);
-                btn.name.text = selectList[randIdx].Value.ToString();
+                btn.name.text = selectList[randIdx].Value.name.Split(char.Parse("_"))[1];
                 print("selectList[randIdx].value=" + selectList[randIdx].Value.name);
                 selectList.RemoveAt(randIdx);
                 btnIdx++;
