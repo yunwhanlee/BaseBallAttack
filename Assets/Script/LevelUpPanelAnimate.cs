@@ -15,6 +15,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
     private int skillImgCnt;
     public List<KeyValuePair<int, GameObject>> selectList = new List<KeyValuePair<int, GameObject>>(); //* 同じnewタイプ型を代入しないと、使えない。
     public int scrollingSpeed;
+    public bool isStop = false;
 
     public Button[] skillBtns;
     //[System.Serializable] -> Show Inspector View
@@ -34,6 +35,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
         //Init Value
         time = 0;
         btnIdx = 0;
+        isStop = false;
 
         //* Set SkillBtn
         SkillBtns = new SkillBtn[3]{
@@ -41,7 +43,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
         };
 
         //Init childs of imgRectTf
-        if(0 < SkillBtns[0].imgRectTf.GetChildCount()){
+        if(0 < SkillBtns[0].imgRectTf.childCount){
             foreach(var btn in SkillBtns)
                 foreach(RectTransform befChild in btn.imgRectTf)
                     Destroy(befChild.gameObject);
@@ -69,28 +71,47 @@ public class LevelUpPanelAnimate : MonoBehaviour
     }
 
     void Update(){
-        //* Scroll Animation
-        if(2 <= btnIdx && selectList.Count <= 0) return;
-
-        time += Time.deltaTime;
-        foreach(var btn in SkillBtns){
-            //Scrolling
-            if(time < 2){
-                if(btn.imgRectTf.localPosition.y >= 0){
-                    btn.imgRectTf.Translate(0,-Time.deltaTime * scrollingSpeed, 0);
+        //* Scroll Sprite Animation
+        if(2 >= btnIdx && selectList.Count > 0){
+            time += Time.deltaTime;
+            foreach(var btn in SkillBtns){
+                // #1.Scrolling
+                if(time < 2){
+                    if(btn.imgRectTf.localPosition.y >= 0){
+                        btn.imgRectTf.Translate(0,-Time.deltaTime * scrollingSpeed, 0);
+                    }
+                    else{
+                        btn.imgRectTf.localPosition = new Vector3(0, SPRITE_W * skillImgCnt, 0);
+                    }
                 }
+                // #2.Stop
                 else{
-                    btn.imgRectTf.localPosition = new Vector3(0, SPRITE_W * skillImgCnt, 0);
+                    print("STOP Scrolling Btn[" + btnIdx + "]");
+                    int randIdx = Random.Range(0, selectList.Count);
+                    btn.imgRectTf.localPosition = new Vector3(0, selectList[randIdx].Key + SPRITE_W / 2, 0);// Scroll Down a Half of Height PosY for Animation
+                    btn.name.text = selectList[randIdx].Value.name.Split(char.Parse("_"))[1];
+                    selectList.RemoveAt(randIdx);
+                    btnIdx++;
+                    if(btnIdx == 2){
+                        isStop = true;
+                    }
                 }
-            }
-            //Stop
-            else{
-                int randIdx = Random.Range(0, selectList.Count);
-                btn.imgRectTf.localPosition = new Vector3(0, selectList[randIdx].Key + SPRITE_W / 2, 0);
-                btn.name.text = selectList[randIdx].Value.name.Split(char.Parse("_"))[1];
-                selectList.RemoveAt(randIdx);
-                btnIdx++;
             }
         }
+        // #3.Animation: Scroll Up to Correct PosY
+        else if(isStop){
+            int speed = scrollingSpeed / 2;
+            for(int i=0; i<SkillBtns.Length;i++){
+                float posY = SkillBtns[i].imgRectTf.localPosition.y % SPRITE_W;
+                float lastIdxPosY = SkillBtns[2].imgRectTf.localPosition.y % SPRITE_W;
+                if(SPRITE_W/2 <= posY && posY <= SPRITE_W){
+                    //Scroll Up
+                    SkillBtns[i].imgRectTf.Translate(0, Time.deltaTime * speed / (i+1), 0);
+                    //最後Idxが終わるまで待つ
+                    if(Mathf.RoundToInt(lastIdxPosY) == SPRITE_W) isStop = false;
+                }
+            }
+        }
+
     }
 }
