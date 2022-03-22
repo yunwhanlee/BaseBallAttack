@@ -37,16 +37,19 @@ public class LevelUpPanelAnimate : MonoBehaviour
         btnIdx = 0;
         isStop = false;
 
+
         //* Set SkillBtn
         SkillBtns = new SkillBtn[3]{
             new SkillBtn(skillBtns[0]), new SkillBtn(skillBtns[1]), new SkillBtn(skillBtns[2])
         };
 
-        //Init childs of imgRectTf
+        //Init
         if(0 < SkillBtns[0].imgRectTf.childCount){
-            foreach(var btn in SkillBtns)
+            foreach(var btn in SkillBtns){
+                btn.name.text = "";
                 foreach(RectTransform befChild in btn.imgRectTf)
                     Destroy(befChild.gameObject);
+            }
         }
 
         //Init SelectList
@@ -56,8 +59,8 @@ public class LevelUpPanelAnimate : MonoBehaviour
         skillImgCnt = skillImgObjPrefs.Length - 1; //自然なスクロールのため、末端に1番目Spriteを追加したので、この分は消す-1。
         for(int i=0;i<skillImgCnt;i++){
             int pos = SPRITE_W * i;
-            selectList.Add( new KeyValuePair<int, GameObject>(pos, skillImgObjPrefs[i]));
-            //print("selectList["+i+"]:: key="+ selectList[i].Key +", value="+ selectList[i].Value);
+            selectList.Add( new KeyValuePair<int, GameObject>(pos, skillImgObjPrefs[i+1]));
+            print("selectList["+i+"]:: key="+ selectList[i].Key +", value="+ selectList[i].Value);
         }
         
         //* Set ScrollSpriteImgs
