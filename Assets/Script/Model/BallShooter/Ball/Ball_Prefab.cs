@@ -82,6 +82,12 @@ public class Ball_Prefab : MonoBehaviour
                 : (distance <= 1.125f)? 3
                 : 1.5f; //-> WORST HIT (distance <= 1.5f)
                 Debug.Log("HIT! <color=yellow>distance=" + distance.ToString("N2") + "</color> , <color=red>power=" + power + ", Rank: " + ((power==10)? "A" : (power==7)? "B" : (power==5)? "C" : (power==4)? "D" : (power==3)? "E" : "F").ToString() + "</color>");
+
+                //HomeRun
+                if(power >= 5){
+                    StartCoroutine(coPlayHomeRunAnimation());
+                }
+
                 rigid.velocity = Vector3.zero;
                 rigid.AddForce(dir * speed * power, ForceMode.Impulse);
                 //Debug.Log("Ball_Prefab:: " + "hitRangeDegSlider.value=" + gm.hitRangeDegSlider.value + ", Power("+ power + ") * Speed(" + speed + ") = " + power * speed);
@@ -140,5 +146,12 @@ public class Ball_Prefab : MonoBehaviour
 
     public void setBallSpeed(int v){
         speed = v;
+    }
+
+    IEnumerator coPlayHomeRunAnimation(){        
+        Debug.Log("HOMERUH!!!!");
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(2);
+        Time.timeScale = 1;
     }
 }
