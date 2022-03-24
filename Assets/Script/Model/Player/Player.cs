@@ -67,9 +67,18 @@ public class Player : MonoBehaviour
     }
 
     public void setAnimTrigger(string name){
-        //Debug.Log("Player:: Swing");
+        anim.updateMode = AnimatorUpdateMode.Normal;
         anim.SetTrigger(name);
-        setDoSwing(true);//doSwing = true;
+        switch(name){
+            case "Swing":   
+                setDoSwing(true);   
+                break;
+            case "HomeRun": 
+                anim.updateMode  = AnimatorUpdateMode.UnscaledTime; 
+
+                break;
+        }
+        
     }
 
     public void setSwingArcColor(string color){

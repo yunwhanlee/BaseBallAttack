@@ -151,6 +151,7 @@ public class Ball_Prefab : MonoBehaviour
     IEnumerator coPlayHomeRunAnimation(){        
         Debug.Log("HOMERUH!!!!");
         Time.timeScale = 0;
+        pl.setAnimTrigger("HomeRun");
         yield return new WaitForSecondsRealtime(2);
         Time.timeScale = 1;
     }

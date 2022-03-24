@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2295754910549213890}
   - component: {fileID: 2295754910549213893}
   - component: {fileID: 5457886929489791544}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ball
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -296,6 +296,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 18297f71150203f4686ae12f334b6371, type: 3}
       propertyPath: m_Name
       value: 10483_baseball_v1_L3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 18297f71150203f4686ae12f334b6371, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742780737561719692, guid: 18297f71150203f4686ae12f334b6371, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7742780737561719692, guid: 18297f71150203f4686ae12f334b6371, type: 3}
       propertyPath: m_TagString

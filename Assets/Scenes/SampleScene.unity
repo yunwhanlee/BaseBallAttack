@@ -1391,7 +1391,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &397548993
 Transform:
   m_ObjectHideFlags: 0
@@ -1492,7 +1492,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 767
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -6124,11 +6124,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2295754910549213891, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
       propertyPath: m_Name
-      value: Ball
+      value: Action Ball
+      objectReference: {fileID: 0}
+    - target: {fileID: 2295754910549213891, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2295754910549213891, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2295754910549213893, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
       propertyPath: m_Enabled
@@ -6189,6 +6193,14 @@ PrefabInstance:
     - target: {fileID: 2295754910549213894, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2792227174823619920, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4687525990440280973, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2295754910549213890, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
@@ -8121,6 +8133,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 692ed445e79c20347a545033129c94bb, type: 3}
       propertyPath: m_Name
       value: bat
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 692ed445e79c20347a545033129c94bb, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1103929404197450535, guid: 692ed445e79c20347a545033129c94bb, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 692ed445e79c20347a545033129c94bb, type: 3}
