@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-
 public class LevelUpPanelAnimate : MonoBehaviour
 {
+    //* OutSide Component
+    public Player pl;
+
     private const int SPRITE_W = 270; //Heightも同一
     private int btnIdx;
     private float time;
@@ -115,6 +117,23 @@ public class LevelUpPanelAnimate : MonoBehaviour
                 }
             }
         }
+    }
 
+    //* GUI Button
+    public void onClickSkillUpBtn(int index){//Skill Level Up
+        Debug.Log("onClickSkillUpBtn:: skillName= " + SkillBtns[index].name.text);
+        //* Set Data
+        switch(SkillBtns[index].name.text){
+            case "Dmg Up": 
+                pl.setDmg(pl.getDmg()+1);
+                break;
+            case "Multi Shot":
+                pl.setMultiShot(pl.getMultiShot()+1);
+                break;
+            case "Speed Up":
+                pl.setSpeed(pl.getSpeed()+1);
+                break;
+        }
+        this.gameObject.SetActive(false);
     }
 }

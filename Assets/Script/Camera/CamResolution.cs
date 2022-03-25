@@ -34,7 +34,7 @@ public class CamResolution : MonoBehaviour
             Transform playerTf = player.gameObject.transform;
             int idx=0;
             foreach (RaycastHit hit in hits){
-                Debug.Log("idx="+idx+", hit.collider.tag="+hit.collider.tag);
+                //Debug.Log("idx="+idx+", hit.collider.tag="+hit.collider.tag);
                 switch(hit.collider.tag){
                     case "LeftPosPad": //* 左パッドへプレイヤー配置
                         playerTf.position = new Vector3(-Mathf.Abs(playerTf.position.x), playerTf.position.y, playerTf.position.z);

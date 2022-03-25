@@ -87,9 +87,8 @@ public class GameManager : MonoBehaviour
     //* GUI Button
     public void onClickReadyButton() => switchCamScene();
     public void onClickReGameButton() => init();
-    public void onCLickSkillButton(){
-        levelUpPanel.SetActive(false);
-    }
+    public void onCLickSkillButton() => levelUpPanel.SetActive(false);
+    
 
     //*---------------------------------------
     //*  関数

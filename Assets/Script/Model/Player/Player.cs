@@ -15,12 +15,16 @@ public class Player : MonoBehaviour
     public GameObject previewBundle;
     public GameObject ballPreviewSphere;
 
-    [Header("Status")]
+    [Header("【Status】")]
     public bool doSwing = false;
     public bool isLevelUp = false;
     [SerializeField] private int lv = 1;
     [SerializeField] private float maxExp = 100;
     [SerializeField] private int exp = 0;
+    [Header("Passive Skill")]
+    [SerializeField] private int dmg = 1;
+    [SerializeField] private int multiCnt = 1;
+    [SerializeField] private int speed = 1;
 
     //* Component
     private Animator anim;
@@ -50,6 +54,14 @@ public class Player : MonoBehaviour
     public void setIsLevelUp(bool trigger) => isLevelUp = trigger;
     public bool getDoSwing() => doSwing;
     public void setDoSwing(bool trigger) => doSwing = trigger;
+    //passive skill
+    public int getDmg() => dmg;
+    public void setDmg(int _dmg) => dmg = _dmg;
+    public int getMultiShot() => multiCnt;
+    public void setMultiShot(int _multiCnt) => multiCnt = _multiCnt;
+    public int getSpeed() => speed;
+    public void setSpeed(int _speed) => speed = _speed;
+
 
     //*---------------------------------------
     //*  関数
