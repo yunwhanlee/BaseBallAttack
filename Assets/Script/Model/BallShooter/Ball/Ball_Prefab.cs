@@ -81,7 +81,7 @@ public class Ball_Prefab : MonoBehaviour
                 : (distance <= 0.85f)? 4
                 : (distance <= 1.125f)? 3
                 : 1.5f; //-> WORST HIT (distance <= 1.5f)
-                Debug.Log("HIT! <color=yellow>distance=" + distance.ToString("N2") + "</color> , <color=red>power=" + power + ", Rank: " + ((power==10)? "A" : (power==7)? "B" : (power==5)? "C" : (power==4)? "D" : (power==3)? "E" : "F").ToString() + "</color>");
+                
 
                 //HomeRun
                 if(power >= 5){
@@ -89,8 +89,12 @@ public class Ball_Prefab : MonoBehaviour
                 }
 
                 rigid.velocity = Vector3.zero;
-                rigid.AddForce(dir * speed * power, ForceMode.Impulse);
-                //Debug.Log("Ball_Prefab:: " + "hitRangeDegSlider.value=" + gm.hitRangeDegSlider.value + ", Power("+ power + ") * Speed(" + speed + ") = " + power * speed);
+                float force = speed * power * pl.getSpeedPercent();
+                rigid.AddForce(dir * force, ForceMode.Impulse);
+                Debug.Log(
+                    "HIT Ball! <color=yellow>distance=" + distance.ToString("N2") + "</color>"
+                    + ", <color=red>power=" + power + ", Rank: " + ((power==10)? "A" : (power==7)? "B" : (power==5)? "C" : (power==4)? "D" : (power==3)? "E" : "F").ToString() + "</color>"
+                    + ", Force=" + force);
             }
         }
         else if(col.gameObject.tag == "ActiveDownWall"){
@@ -114,7 +118,7 @@ public class Ball_Prefab : MonoBehaviour
     //* Hit Block
     private void OnCollisionEnter(Collision col) {
         if(col.gameObject.tag == "NormalBlock"){
-            col.gameObject.GetComponent<Block_Prefab>().decreaseHp();
+            col.gameObject.GetComponent<Block_Prefab>().decreaseHp(pl.getDmg());
         }
     }
 

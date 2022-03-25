@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     [Header("Passive Skill")]
     [SerializeField] private int dmg = 1;
     [SerializeField] private int multiCnt = 1;
-    [SerializeField] private int speed = 1;
+    [SerializeField] private float speed = 1;
 
     //* Component
     private Animator anim;
@@ -59,8 +59,8 @@ public class Player : MonoBehaviour
     public void setDmg(int _dmg) => dmg = _dmg;
     public int getMultiShot() => multiCnt;
     public void setMultiShot(int _multiCnt) => multiCnt = _multiCnt;
-    public int getSpeed() => speed;
-    public void setSpeed(int _speed) => speed = _speed;
+    public float getSpeedPercent() => speed;
+    public void setSpeedPercent(float _speed) => speed = _speed;
 
 
     //*---------------------------------------

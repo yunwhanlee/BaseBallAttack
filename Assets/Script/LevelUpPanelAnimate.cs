@@ -131,7 +131,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
                 pl.setMultiShot(pl.getMultiShot()+1);
                 break;
             case "Speed Up":
-                pl.setSpeed(pl.getSpeed()+1);
+                pl.setSpeedPercent(pl.getSpeedPercent() + 0.2f); //20% Up!
                 break;
         }
         this.gameObject.SetActive(false);

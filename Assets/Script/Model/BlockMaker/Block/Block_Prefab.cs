@@ -64,7 +64,7 @@ public class Block_Prefab : MonoBehaviour
         }
     }
 
-    public void decreaseHp() => --hp;
+    public void decreaseHp(int dmg) => hp -= dmg;
 
     public void onDestroy(bool isInitialize = false) {
         if(!isInitialize) pl.addExp(exp); //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
