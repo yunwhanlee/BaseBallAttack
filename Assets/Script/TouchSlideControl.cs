@@ -13,10 +13,10 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     public RectTransform pad;
     public RectTransform stick;
     private Vector3 dir;
-    private const int MIN_ARROW_Y = 0;
-    private const int MAX_ARROW_Y = 180;
+    private const int MIN_ARROW_DEG_Y = 30;
+    private const int MAX_ARROW_DEG_Y = 150;
 
-
+    //*Event
     public void OnDrag(PointerEventData eventData){
         if(gm.state != GameManager.State.WAIT) return;
         stick.position = eventData.position;
@@ -24,18 +24,13 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         //Stick動き制限
         stick.localPosition = Vector2.ClampMagnitude(eventData.position - (Vector2)pad.position, pad.rect.width * 0.25f);
         
-
         //Stick角度
         Vector2 dir = (stick.position - pad.gameObject.transform.position).normalized;
-        float deg = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        //*(BUG) Clamp Deg with cur Direction
-        const int min = MIN_ARROW_Y, max = MAX_ARROW_Y;
-        deg = Mathf.Clamp(deg, min, max);
-        deg = (deg == 0 && dir.x < min) ? max : deg;
+        float deg = convertDir2DegWithRange(dir, MIN_ARROW_DEG_Y, MAX_ARROW_DEG_Y);
         
         //Player矢印角度に適用
         const int offsetDeg2DTo3D = 90;
-        pl.arrowAxisAnchor.transform.rotation = Quaternion.Euler(0,offsetDeg2DTo3D - deg,0);
+        pl.arrowAxisAnchor.transform.rotation = Quaternion.Euler(0,offsetDeg2DTo3D - deg, 0);
         
         //* Draw Preview
         Transform arrowAnchorTf = pl.arrowAxisAnchor.transform;
@@ -57,6 +52,9 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         pl.setAnimTrigger("Swing");
     }
 
+    //*---------------------------------------
+    //*  関数
+    //*---------------------------------------
     private void drawBallPreviewSphereCast(Transform arrowAnchorTf){
         RaycastHit hit;
         float radius = pl.ballPreviewSphere.GetComponent<SphereCollider>().radius * pl.ballPreviewSphere.transform.localScale.x;
@@ -71,5 +69,14 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         var arrowPos = arrowAnchorTf.GetChild(0).transform.position;
         line.SetPosition(0, arrowPos);
         line.SetPosition(1, pl.ballPreviewSphere.transform.position);
+    }
+
+    private float convertDir2DegWithRange(Vector3 dir, int min, int max){
+        float deg = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        //*(BUG) Clamp Deg with cur Direction
+        deg = Mathf.Clamp(deg, MIN_ARROW_DEG_Y, MAX_ARROW_DEG_Y); //! (BUG-2) 角度が－値になるとClampはminを返す。
+        const int LEFT = -1; //const int RIGHT = +1;
+        var dirSign = Mathf.Sign(dir.x);
+        return deg = deg == max || (deg == min && dirSign == LEFT) ? max : deg;
     }
 }
