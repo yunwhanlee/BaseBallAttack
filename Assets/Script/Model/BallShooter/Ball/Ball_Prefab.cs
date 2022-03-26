@@ -30,9 +30,12 @@ public class Ball_Prefab : MonoBehaviour
     }
     void Update(){
             //* Destroy by Checking Velocity
-            // Debug.Log("Ball Velocity.magnitude="+rigid.velocity.magnitude);
+            // Debug.Log("BallGroup.childCount=" + gm.ballGroup.childCount + ", Ball Velocity.magnitude="+rigid.velocity.magnitude);
             if(rigid.velocity.magnitude != 0 && rigid.velocity.magnitude < 0.9875f){
-                onDestroyMe();
+                if(gm.ballGroup.childCount <= 1)
+                    onDestroyMe();
+                else
+                    Destroy(this.gameObject);
             }
 
             //* Ball Comeing View Slider
@@ -73,6 +76,7 @@ public class Ball_Prefab : MonoBehaviour
                 // Debug.Log("Ball_Prefab:: ■offsetAxis=" + offsetAxis);
 
                 float deg = pl.arrowAxisAnchor.transform.eulerAngles.y;
+                Debug.Log("BALL DEGREE:" + deg);
                 Vector3 dir = new Vector3(Mathf.Sin(Mathf.Deg2Rad * deg), 0, Mathf.Cos(Mathf.Deg2Rad * deg)).normalized;
                 //* Set Power(distance range 1.5f ~ 0)
                 float power = (distance <= 0.1f) ? 10 //-> BEST HIT (HOMERUH!)
@@ -95,6 +99,14 @@ public class Ball_Prefab : MonoBehaviour
                     "HIT Ball! <color=yellow>distance=" + distance.ToString("N2") + "</color>"
                     + ", <color=red>power=" + power + ", Rank: " + ((power==10)? "A" : (power==7)? "B" : (power==5)? "C" : (power==4)? "D" : (power==3)? "E" : "F").ToString() + "</color>"
                     + ", Force=" + force);
+
+                //* Skill MultiShot Create Extra Ball
+                for(int i=0; i<pl.getMultiShot();i++){
+                    float [] addDegList = {-15, 15, -30, 30};
+                    Vector3 direction = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (deg + addDegList[i])), 0, Mathf.Cos(Mathf.Deg2Rad * (deg + addDegList[i]))).normalized;
+                    var ins = Instantiate(this.gameObject, this.transform.position, Quaternion.identity, gm.ballGroup) as GameObject;
+                    ins.GetComponent<Rigidbody>().AddForce(direction * force * 0.75f, ForceMode.Impulse);
+                }
             }
         }
         else if(col.gameObject.tag == "ActiveDownWall"){

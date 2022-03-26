@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int exp = 0;
     [Header("Passive Skill")]
     [SerializeField] private int dmg = 1;
-    [SerializeField] private int multiCnt = 1;
+    [SerializeField] private int multiCnt = 0;
     [SerializeField] private float speed = 1;
 
     //* Component

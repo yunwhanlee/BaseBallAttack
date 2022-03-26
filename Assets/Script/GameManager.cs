@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public BlockMaker blockMaker;
     public Transform hitRangeStartTf;
     public Transform hitRangeEndTf;
+    public Transform ballGroup;
 
     public Transform deadLineTf;
     public BoxCollider downWall;

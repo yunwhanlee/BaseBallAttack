@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class BallShooter : MonoBehaviour
 {
+    //* OutSide
     public GameManager gm;
     public Player pl;
-    [SerializeField]private int ballSpeed;
 
+    [SerializeField]private int ballSpeed;
     [SerializeField]private bool isBallExist;
     [SerializeField]private float time;
     [SerializeField]private float shootSpan = 4f;
@@ -39,7 +40,7 @@ public class BallShooter : MonoBehaviour
                 gm.setShootCntText("SHOOT");
                 Debug.Log("ballPreviewDirGoalPos="+gm.ballPreviewDirGoal.transform.position+", entranceTfPos="+entranceTf.position);
                 Vector3 goalDir = (gm.ballPreviewDirGoal.transform.position - entranceTf.position).normalized;
-                GameObject instance = Instantiate(ballPref, entranceTf.position, Quaternion.LookRotation(goalDir));
+                GameObject instance = Instantiate(ballPref, entranceTf.position, Quaternion.LookRotation(goalDir), gm.ballGroup);
 
                 instance.GetComponent<Ball_Prefab>().setBallSpeed(ballSpeed);
             }
