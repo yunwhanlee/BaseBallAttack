@@ -139,6 +139,7 @@ public class GameManager : MonoBehaviour
             ballPreviewGoalImg.gameObject.SetActive(false);
 
             pl.arrowAxisAnchor.SetActive(true);
+            if(0 < strikeCnt && ballGroup.childCount == 0) pl.previewBundle.SetActive(true); //(BUG)STRIKEになってから、BACKボタン押すと、PreviewLineが消えてしまう。
 
             StrikePanel.SetActive(false);
 
