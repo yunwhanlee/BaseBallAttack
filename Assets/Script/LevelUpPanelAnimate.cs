@@ -131,8 +131,18 @@ public class LevelUpPanelAnimate : MonoBehaviour
                 pl.setMultiShot(pl.getMultiShot()+1);
                 break;
             case "Speed Up":
-                pl.setSpeedPercent(pl.getSpeedPercent() + 0.2f); //20% Up!
+                pl.setSpeedPer(pl.getSpeedPer() + 0.2f); //20% Up
                 break;
+            case "Immediate Kill":
+                pl.setImmediateKillPer(pl.getImmediateKillPer() + 0.02f); //2% Up
+                break;
+            case "Critical Up":
+                pl.setCriticalPer(pl.getCriticalPer() + 0.1f); //10% Up
+                break;
+            case "Explosion":
+                pl.setExplosion(pl.getExplosion().per + 0.25f, pl.getExplosion().range + 0.75f); //Active:20% Up, Radius:+0.5
+                break;
+
         }
         this.gameObject.SetActive(false);
     }

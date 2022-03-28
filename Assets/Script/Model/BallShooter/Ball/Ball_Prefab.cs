@@ -93,7 +93,7 @@ public class Ball_Prefab : MonoBehaviour
                 }
 
                 rigid.velocity = Vector3.zero;
-                float force = speed * power * pl.getSpeedPercent();
+                float force = speed * power * pl.getSpeedPer();
                 rigid.AddForce(dir * force, ForceMode.Impulse);
                 Debug.Log(
                     "HIT Ball! <color=yellow>distance=" + distance.ToString("N2") + "</color>"
@@ -129,8 +129,35 @@ public class Ball_Prefab : MonoBehaviour
 
     //* Hit Block
     private void OnCollisionEnter(Collision col) {
+        // Give Damage
         if(col.gameObject.tag == "NormalBlock"){
-            col.gameObject.GetComponent<Block_Prefab>().decreaseHp(pl.getDmg());
+            int result = 0;
+            //Immediate Kill
+            int rand = Random.Range(0, 100);
+            int v = Mathf.RoundToInt(pl.getImmediateKillPer() * 100); //百分率
+            Debug.Log("Hit Block:: ImmediateKill:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=blue>true</color>" : "<color=red>false</color>"));
+            if(rand <= v) Destroy(col.gameObject);
+
+            //Critical x 2
+            rand = Random.Range(0, 100);
+            v = Mathf.RoundToInt(pl.getCriticalPer() * 100); //百分率
+            Debug.Log("Hit Block:: Critical:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=blue>true</color>" : "<color=red>false</color>"));
+            result = (rand <= v)? pl.getDmg() * 2 : pl.getDmg();
+
+            //Explosion
+            rand = Random.Range(0, 100);
+            v = Mathf.RoundToInt(pl.getExplosion().per * 100); //百分率
+            Debug.Log("Hit Block:: Explosion:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=blue>true</color>" : "<color=red>false</color>"));
+            if(rand <= v){
+                //TODO Effect
+                //Sphere Collider
+                RaycastHit[] rayHits = Physics.SphereCastAll(this.transform.position, pl.getExplosion().range, Vector3.up, 0, LayerMask.GetMask("Block"));
+                foreach(var hitObj in rayHits){
+                    hitObj.transform.GetComponent<Block_Prefab>().decreaseHp(result);
+                }
+            }
+
+            col.gameObject.GetComponent<Block_Prefab>().decreaseHp(result);
         }
     }
 
@@ -170,5 +197,11 @@ public class Ball_Prefab : MonoBehaviour
         pl.setAnimTrigger("HomeRun");
         yield return new WaitForSecondsRealtime(2);
         Time.timeScale = 1;
+    }
+
+    void OnDrawGizmos(){
+        // Draw a yellow sphere at the transform's position
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(this.transform.position, pl.getExplosion().range);
     }
 }

@@ -25,6 +25,19 @@ public class Player : MonoBehaviour
     [SerializeField] private int dmg = 1;
     [SerializeField] private int multiCnt = 0;
     [SerializeField] private float speed = 1;
+    [SerializeField] private float immediateKill = 0;
+    [SerializeField] private float critical = 0;
+    // [SerializeField] private float explosion = 0;
+
+    [System.Serializable]
+    public struct Explosion{
+        public float per, range;
+        public Explosion(float _per = 0, float _range = 0){
+            per = _per;
+            range = _range;
+        }
+    }
+    [SerializeField] private Explosion explosion;
 
     //* Component
     private Animator anim;
@@ -37,6 +50,7 @@ public class Player : MonoBehaviour
         swingArcArea.rectTransform.localRotation = Quaternion.Euler(0,0,offsetHitDeg + 90); 
         arrowAxisAnchor.transform.rotation = Quaternion.Euler(0,-offsetHitDeg,0);
         Debug.Log("Start:: swingArcArea表示角度= " + swingArcRange + ", 角度をfillAmount値(0~1)に変換=" + swingArcRange / 360);
+        explosion = new Explosion();
     }
 
     void Update(){
@@ -59,8 +73,18 @@ public class Player : MonoBehaviour
     public void setDmg(int _dmg) => dmg = _dmg;
     public int getMultiShot() => multiCnt;
     public void setMultiShot(int _multiCnt) => multiCnt = _multiCnt;
-    public float getSpeedPercent() => speed;
-    public void setSpeedPercent(float _speed) => speed = _speed;
+    public float getSpeedPer() => speed;
+    public void setSpeedPer(float _speed) => speed = _speed;
+
+    public float getImmediateKillPer() => immediateKill;
+    public void setImmediateKillPer(float _immediateKill) => immediateKill = _immediateKill;
+    public float getCriticalPer() => critical;
+    public void setCriticalPer(float _critical) => critical = _critical;
+    public Explosion getExplosion() => explosion;
+    public void setExplosion(float _per, float _range){
+        explosion.per = _per;
+        explosion.range = _range;
+    }
 
 
     //*---------------------------------------

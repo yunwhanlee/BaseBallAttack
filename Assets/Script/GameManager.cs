@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public int stage = 1;
     public int bestScore;
     public int strikeCnt = 0;
+
     public Text stageTxt;
     public Text stateTxt;
     public Text shootCntTxt;
