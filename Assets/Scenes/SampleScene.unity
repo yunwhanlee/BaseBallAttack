@@ -2766,6 +2766,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectGroup: {fileID: 831947632}
   brokeBlockEF: {fileID: 4643957893822756392, guid: 3ca0e6de066efec42b3c0869596311f9, type: 3}
+  explosionEF: {fileID: 4643957893822756392, guid: f7ce8225f27202143a23c0bd225930bc, type: 3}
 --- !u!1 &702911504
 GameObject:
   m_ObjectHideFlags: 0
@@ -6061,7 +6062,7 @@ MonoBehaviour:
   ballGroup: {fileID: 1179223822}
   deadLineTf: {fileID: 587487858}
   downWall: {fileID: 779756}
-  stage: 1
+  stage: 15
   bestScore: 999
   strikeCnt: 0
   stageTxt: {fileID: 1558296299}

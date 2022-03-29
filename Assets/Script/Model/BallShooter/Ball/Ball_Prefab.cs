@@ -6,6 +6,7 @@ public class Ball_Prefab : MonoBehaviour
 {
     //* OutSide
     public GameManager gm;
+    public EffectManager em;
     public Player pl;
     public BlockMaker blockMaker;
     public BallShooter ballShooter;
@@ -20,6 +21,7 @@ public class Ball_Prefab : MonoBehaviour
     void Start()
     {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        em = GameObject.Find("EffectManager").GetComponent<EffectManager>();
         pl = GameObject.Find("Player").GetComponent<Player>();
         blockMaker = GameObject.Find("BlockMaker").GetComponent<BlockMaker>();
         ballShooter = GameObject.Find("BallShooter").GetComponent<BallShooter>();
@@ -151,7 +153,9 @@ public class Ball_Prefab : MonoBehaviour
             v = Mathf.RoundToInt(pl.getExplosion().per * 100); //百分率
             Debug.Log("Hit Block:: Explosion:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=blue>true</color>" : "<color=red>false</color>"));
             if(rand <= v){
-                //TODO Effect
+                //Effect
+                em.createEffectExplosion(this.transform, pl.getExplosion().range);
+
                 //Sphere Collider
                 RaycastHit[] rayHits = Physics.SphereCastAll(this.transform.position, pl.getExplosion().range, Vector3.up, 0, LayerMask.GetMask("Block"));
                 foreach(var hitObj in rayHits){

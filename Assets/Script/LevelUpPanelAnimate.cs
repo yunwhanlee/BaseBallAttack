@@ -140,7 +140,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
                 pl.setCriticalPer(pl.getCriticalPer() + 0.1f); //10% Up
                 break;
             case "Explosion":
-                pl.setExplosion(pl.getExplosion().per + 0.25f, pl.getExplosion().range + 0.75f); //Active:20% Up, Radius:+0.5
+                pl.setExplosion(pl.getExplosion().per + 0.25f, pl.getExplosion().range + 0.25f); //Active:20% Up, Radius:+0.5
                 break;
 
         }
