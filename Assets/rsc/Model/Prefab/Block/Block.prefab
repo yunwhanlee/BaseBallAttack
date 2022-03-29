@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1376276108105304708}
   - component: {fileID: 3570946891033350550}
   - component: {fileID: 4270761389112764335}
-  m_Layer: 10
+  m_Layer: 6
   m_Name: Block
   m_TagString: NormalBlock
   m_Icon: {fileID: 0}
@@ -111,14 +111,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
+  em: {fileID: 0}
   pl: {fileID: 0}
-  colors:
-  - {r: 1, g: 0.5235849, b: 0.5235849, a: 0}
-  - {r: 0.48584908, g: 0.8739826, b: 1, a: 0}
-  - {r: 0.75299025, g: 1, b: 0.6745283, a: 0}
-  - {r: 1, g: 0.96847254, b: 0.5235849, a: 0}
-  - {r: 1, g: 0.530605, b: 0.19339621, a: 0}
-  - {r: 0.9908176, g: 0.6556604, b: 1, a: 0}
+  colorList:
+  - {r: 1, g: 0.5801887, b: 0.5801887, a: 1}
+  - {r: 0.9778814, g: 1, b: 0.5803922, a: 1}
+  - {r: 0.5803922, g: 1, b: 0.8275699, a: 1}
+  - {r: 0.5803922, g: 0.66654253, b: 1, a: 1}
+  - {r: 0.940842, g: 0.5803922, b: 1, a: 1}
+  - {r: 1, g: 0.7563762, b: 0.5803922, a: 1}
+  color: {r: 1, g: 1, b: 1, a: 1}
   mts:
   - {fileID: 2100000, guid: cf3da56f55dc78845aa9ee532679ca9a, type: 2}
   - {fileID: 2100000, guid: 74c7b8e3ed8d60740ad629198f468a2e, type: 2}
@@ -157,7 +159,7 @@ GameObject:
   - component: {fileID: 2676300111960378750}
   - component: {fileID: 1256770601582255797}
   - component: {fileID: 1391883410486484735}
-  m_Layer: 10
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +258,7 @@ GameObject:
   - component: {fileID: 8749269182739789187}
   - component: {fileID: 5978201447451081066}
   - component: {fileID: 4858394855207509922}
-  m_Layer: 10
+  m_Layer: 6
   m_Name: HpTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}

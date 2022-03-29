@@ -8,11 +8,13 @@ public class Block_Prefab : MonoBehaviour
     public enum BlockMt {PLAIN, WOOD, SAND, REDBRICK, IRON};
 
     public GameManager gm;
+    public EffectManager em;
     public Player pl;
 
     //* Material Instancing
     private MeshRenderer meshRd;
-    public Color[] colors;
+    public Color[] colorList;
+    public Color color;
     public Material[] mts;
     public Material whiteHitMt;
 
@@ -25,6 +27,7 @@ public class Block_Prefab : MonoBehaviour
 
     void Start() {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        em = GameObject.Find("EffectManager").GetComponent<EffectManager>();
         pl = GameObject.Find("Player").GetComponent<Player>();
 
         //* Material Instancing
@@ -49,8 +52,9 @@ public class Block_Prefab : MonoBehaviour
         }
 
         // 色
-        int randIdx = Random.Range(0, colors.Length);
-        meshRd.material.SetColor("_ColorTint", colors[randIdx]);
+        int randIdx = Random.Range(0, colorList.Length);
+        color = colorList[randIdx];
+        meshRd.material.SetColor("_ColorTint", color);
     }
 
     void Update(){
@@ -67,7 +71,10 @@ public class Block_Prefab : MonoBehaviour
     public void decreaseHp(int dmg) {
         hp -= dmg;
         StartCoroutine(coWhiteHitEffect(meshRd.material));
-        if(hp <= 0) onDestroy();
+        if(hp <= 0) {
+            em.createEffectBrokeBlock(this.transform, color);
+            onDestroy();
+        }
     }
     
 
