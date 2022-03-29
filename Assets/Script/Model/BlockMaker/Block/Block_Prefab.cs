@@ -14,6 +14,7 @@ public class Block_Prefab : MonoBehaviour
     private MeshRenderer meshRd;
     public Color[] colors;
     public Material[] mts;
+    public Material whiteHitMt;
 
     //* Value
     [SerializeField] private int hp = 1;
@@ -53,7 +54,6 @@ public class Block_Prefab : MonoBehaviour
     }
 
     void Update(){
-        if(hp <= 0) onDestroy();
         hpTxt.text = hp.ToString();
     }
 
@@ -64,10 +64,21 @@ public class Block_Prefab : MonoBehaviour
         }
     }
 
-    public void decreaseHp(int dmg) => hp -= dmg;
+    public void decreaseHp(int dmg) {
+        hp -= dmg;
+        StartCoroutine(coWhiteHitEffect(meshRd.material));
+        if(hp <= 0) onDestroy();
+    }
+    
 
     public void onDestroy(bool isInitialize = false) {
         if(!isInitialize) pl.addExp(exp); //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
         Destroy(this.gameObject);
+    }
+
+    IEnumerator coWhiteHitEffect(Material curMt){ //* 体力が減ったら、一瞬間白くなって戻すEFFECT
+        meshRd.material = whiteHitMt;
+        yield return new WaitForSeconds(0.05f);
+        meshRd.material = curMt;
     }
 }

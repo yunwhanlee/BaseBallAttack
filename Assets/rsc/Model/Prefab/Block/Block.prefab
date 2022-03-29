@@ -117,7 +117,7 @@ MonoBehaviour:
   - {r: 0.48584908, g: 0.8739826, b: 1, a: 0}
   - {r: 0.75299025, g: 1, b: 0.6745283, a: 0}
   - {r: 1, g: 0.96847254, b: 0.5235849, a: 0}
-  - {r: 1, g: 1, b: 1, a: 0}
+  - {r: 1, g: 0.530605, b: 0.19339621, a: 0}
   - {r: 0.9908176, g: 0.6556604, b: 1, a: 0}
   mts:
   - {fileID: 2100000, guid: cf3da56f55dc78845aa9ee532679ca9a, type: 2}
@@ -125,6 +125,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: a7f4b3a80cce5544186fb7a62b8fabb2, type: 2}
   - {fileID: 2100000, guid: ee19e7bdbd2923340aa8973e1d4230b1, type: 2}
   - {fileID: 2100000, guid: a5f3265eb027f0e41af7b62f064343df, type: 2}
+  whiteHitMt: {fileID: 2100000, guid: ef01bc3ad6c4a204698706049449af64, type: 2}
   hp: 1
   exp: 10
   hpTxt: {fileID: 4858394855207509922}
