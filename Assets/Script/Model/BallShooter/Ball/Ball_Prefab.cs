@@ -133,22 +133,22 @@ public class Ball_Prefab : MonoBehaviour
 
     //* Hit Block
     private void OnCollisionEnter(Collision col) {
-        // Give Damage
+        //* Give Damage
         if(col.gameObject.tag == "NormalBlock"){
             int result = 0;
-            //Immediate Kill
+            //* Immediate Kill
             int rand = Random.Range(0, 100);
             int v = Mathf.RoundToInt(pl.getImmediateKillPer() * 100); //百分率
             Debug.Log("Hit Block:: ImmediateKill:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=blue>true</color>" : "<color=red>false</color>"));
             if(rand <= v) Destroy(col.gameObject);
 
-            //Critical x 2
+            //* Critical x 2
             rand = Random.Range(0, 100);
             v = Mathf.RoundToInt(pl.getCriticalPer() * 100); //百分率
             Debug.Log("Hit Block:: Critical:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=blue>true</color>" : "<color=red>false</color>"));
             result = (rand <= v)? pl.getDmg() * 2 : pl.getDmg();
 
-            //Explosion
+            //* Explosion
             rand = Random.Range(0, 100);
             v = Mathf.RoundToInt(pl.getExplosion().per * 100); //百分率
             Debug.Log("Hit Block:: Explosion:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=blue>true</color>" : "<color=red>false</color>"));
@@ -157,9 +157,10 @@ public class Ball_Prefab : MonoBehaviour
                 em.createEffectExplosion(this.transform, pl.getExplosion().range);
 
                 //Sphere Collider
-                RaycastHit[] rayHits = Physics.SphereCastAll(this.transform.position, pl.getExplosion().range, Vector3.up, 0, LayerMask.GetMask("Block"));
+                RaycastHit[] rayHits = Physics.SphereCastAll(this.transform.position, pl.getExplosion().range, Vector3.up, 0);
                 foreach(var hitObj in rayHits){
-                    hitObj.transform.GetComponent<Block_Prefab>().decreaseHp(result);
+                    if(hitObj.transform.tag == "NormalBlock")
+                        hitObj.transform.GetComponent<Block_Prefab>().decreaseHp(result);
                 }
             }
 

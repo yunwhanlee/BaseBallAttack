@@ -58,7 +58,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     private void drawBallPreviewSphereCast(Transform arrowAnchorTf){
         RaycastHit hit;
         float radius = pl.ballPreviewSphere.GetComponent<SphereCollider>().radius * pl.ballPreviewSphere.transform.localScale.x;
-        if(Physics.SphereCast(arrowAnchorTf.position, radius, arrowAnchorTf.forward, out hit, 1000, 1 << LayerMask.NameToLayer("Block"))){
+        if(Physics.SphereCast(arrowAnchorTf.position, radius, arrowAnchorTf.forward, out hit, 1000, 1 << LayerMask.NameToLayer("BallPreview"))){
             Vector3 cetner = hit.point + radius * hit.normal; //☆
             pl.ballPreviewSphere.transform.position = cetner;
             // Debug.DrawRay(arrowTf.position, arrowTf.forward * 1000, Color.red, 1);
