@@ -125,22 +125,24 @@ public class LevelUpPanelAnimate : MonoBehaviour
         //* Set Data
         switch(SkillBtns[index].name.text){
             case "Dmg Up": 
-                pl.setDmg(pl.getDmg()+1);
+                pl.dmg.setLvUp(pl.dmg.getValue() + pl.dmg.getUnit());
                 break;
             case "Multi Shot":
-                pl.setMultiShot(pl.getMultiShot()+1);
+                pl.multiShot.setLvUp(pl.multiShot.getValue() + pl.multiShot.getUnit());
                 break;
             case "Speed Up":
-                pl.setSpeedPer(pl.getSpeedPer() + 0.2f); //20% Up
+                pl.speed.setLvUp(pl.speed.getValue() + pl.speed.getUnit()); //20% Up
                 break;
             case "Immediate Kill":
-                pl.setImmediateKillPer(pl.getImmediateKillPer() + 0.02f); //2% Up
+                pl.instantKill.setLvUp(pl.instantKill.getValue() + pl.instantKill.getUnit()); //2% Up
                 break;
             case "Critical Up":
-                pl.setCriticalPer(pl.getCriticalPer() + 0.1f); //10% Up
+                pl.critical.setLvUp(pl.critical.getValue() + pl.critical.getUnit()); //10% Up
                 break;
             case "Explosion":
-                pl.setExplosion(pl.getExplosion().per + 0.25f, pl.getExplosion().range + 0.25f); //Active:20% Up, Radius:+0.5
+                var percent = pl.explosion.getValue().per + pl.explosion.getUnit().per;
+                var range = pl.explosion.getValue().range + pl.explosion.getUnit().range;
+                pl.explosion.setLvUp(new Explosion(percent, range)); //Active:20% Up, Radius:+0.25
                 break;
 
         }

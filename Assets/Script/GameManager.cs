@@ -58,9 +58,15 @@ public class GameManager : MonoBehaviour
     private Text gvStageTxt;
     private Text gvBestScoreTxt;
 
+    [Header("-Pause-")]
+    public GameObject pausePanel;
+
+
     [Header("-Button-")]
     public Button readyBtn; //Normal
     public Button reGameBtn; //gameoverPanel
+    public Button continueBtn; //pausePanel
+    public Button homeBtn; //pausePanel
 
     //---------------------------------------
 

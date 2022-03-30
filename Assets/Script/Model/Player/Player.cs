@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+
 public class Player : MonoBehaviour
 {
     [Header("【HIT 角度範囲】")]
@@ -22,27 +24,28 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxExp = 100;
     [SerializeField] private int exp = 0;
     [Header("Passive Skill")]
-    [SerializeField] private int dmg = 1;
-    [SerializeField] private int multiCnt = 0;
-    [SerializeField] private float speed = 1;
-    [SerializeField] private float immediateKill = 0;
-    [SerializeField] private float critical = 0;
-    // [SerializeField] private float explosion = 0;
+    [SerializeField] public Skill<int> dmg;//private int dmg = 1;
+    [SerializeField] public Skill<int> multiShot;//private int multiCnt = 0;
+    [SerializeField] public Skill<float> speed;//private float speed = 1;
+    [SerializeField] public Skill<float> instantKill;//private float immediateKill = 0;
+    [SerializeField] public Skill<float> critical;//private float critical = 0;
+    [SerializeField] public Skill<Explosion> explosion;
 
-    [System.Serializable]
-    public struct Explosion{
-        public float per, range;
-        public Explosion(float _per = 0, float _range = 0.75f){
-            per = _per;
-            range = _range;
-        }
-    }
-    [SerializeField] private Explosion explosion;
+
+    //[SerializeField] private Explosion explosion;
 
     //* Component
     private Animator anim;
 
     void Start(){
+        //* Set Skill : @params { int level, T value, T unit }
+        dmg = new Skill<int>(0, 1, 1);
+        multiShot = new Skill<int>(0, 0, 1);
+        speed = new Skill<float>(0, 1f, 0.2f);
+        instantKill = new Skill<float>(0, 0f, 0.02f);
+        critical = new Skill<float>(0, 0f, 0.1f);
+        explosion = new Skill<Explosion>(0, new Explosion(0f, 0.75f), new Explosion(0.25f, 0.25f));
+        
         Debug.Log("swingArcArea.rectTransform.localRotation.eulerAngles.z=" + swingArcArea.rectTransform.localRotation.eulerAngles.z);//! (BUG) rotation.eulerAnglesしないと、角度の数値ではなく、小数点が出る。
         anim = GetComponentInChildren<Animator>();
         swingArcRange = MAX_HIT_DEG * 2;//左右合わせるから * 2
@@ -50,7 +53,8 @@ public class Player : MonoBehaviour
         swingArcArea.rectTransform.localRotation = Quaternion.Euler(0,0,offsetHitDeg + 90); 
         arrowAxisAnchor.transform.rotation = Quaternion.Euler(0,-offsetHitDeg,0);
         Debug.Log("Start:: swingArcArea表示角度= " + swingArcRange + ", 角度をfillAmount値(0~1)に変換=" + swingArcRange / 360);
-        explosion = new Explosion(0, 0.75f);
+
+
     }
 
     void Update(){
@@ -68,24 +72,6 @@ public class Player : MonoBehaviour
     public void setIsLevelUp(bool trigger) => isLevelUp = trigger;
     public bool getDoSwing() => doSwing;
     public void setDoSwing(bool trigger) => doSwing = trigger;
-    //passive skill
-    public int getDmg() => dmg;
-    public void setDmg(int _dmg) => dmg = _dmg;
-    public int getMultiShot() => multiCnt;
-    public void setMultiShot(int _multiCnt) => multiCnt = _multiCnt;
-    public float getSpeedPer() => speed;
-    public void setSpeedPer(float _speed) => speed = _speed;
-
-    public float getImmediateKillPer() => immediateKill;
-    public void setImmediateKillPer(float _immediateKill) => immediateKill = _immediateKill;
-    public float getCriticalPer() => critical;
-    public void setCriticalPer(float _critical) => critical = _critical;
-    public Explosion getExplosion() => explosion;
-    public void setExplosion(float _per, float _range){
-        explosion.per = _per;
-        explosion.range = _range;
-    }
-
 
     //*---------------------------------------
     //*  関数
@@ -110,8 +96,7 @@ public class Player : MonoBehaviour
                 setDoSwing(true);   
                 break;
             case "HomeRun": 
-                anim.updateMode  = AnimatorUpdateMode.UnscaledTime; 
-
+                anim.updateMode  = AnimatorUpdateMode.UnscaledTime;
                 break;
         }
         

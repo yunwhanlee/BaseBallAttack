@@ -95,7 +95,7 @@ public class Ball_Prefab : MonoBehaviour
                 }
 
                 rigid.velocity = Vector3.zero;
-                float force = speed * power * pl.getSpeedPer();
+                float force = speed * power * pl.speed.getValue();
                 rigid.AddForce(dir * force, ForceMode.Impulse);
                 Debug.Log(
                     "HIT Ball! <color=yellow>distance=" + distance.ToString("N2") + "</color>"
@@ -103,7 +103,7 @@ public class Ball_Prefab : MonoBehaviour
                     + ", Force=" + force);
 
                 //* Multi Shot
-                for(int i=0; i<pl.getMultiShot();i++){
+                for(int i=0; i<pl.multiShot.getValue();i++){
                     float [] addDegList = {-15, 15, -30, 30};
                     Vector3 direction = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (deg + addDegList[i])), 0, Mathf.Cos(Mathf.Deg2Rad * (deg + addDegList[i]))).normalized;
                     var ins = Instantiate(this.gameObject, this.transform.position, Quaternion.identity, gm.ballGroup) as GameObject;
@@ -138,26 +138,26 @@ public class Ball_Prefab : MonoBehaviour
             int result = 0;
             //* Immediate Kill
             int rand = Random.Range(0, 100);
-            int v = Mathf.RoundToInt(pl.getImmediateKillPer() * 100); //百分率
+            int v = Mathf.RoundToInt(pl.instantKill.getValue() * 100); //百分率
             Debug.Log("Hit Block:: ImmediateKill:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=blue>true</color>" : "<color=red>false</color>"));
             if(rand <= v) Destroy(col.gameObject);
 
             //* Critical x 2
             rand = Random.Range(0, 100);
-            v = Mathf.RoundToInt(pl.getCriticalPer() * 100); //百分率
+            v = Mathf.RoundToInt(pl.critical.getValue() * 100); //百分率
             Debug.Log("Hit Block:: Critical:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=blue>true</color>" : "<color=red>false</color>"));
-            result = (rand <= v)? pl.getDmg() * 2 : pl.getDmg();
+            result = (rand <= v)? pl.dmg.getValue() * 2 : pl.dmg.getValue();
 
             //* Explosion
             rand = Random.Range(0, 100);
-            v = Mathf.RoundToInt(pl.getExplosion().per * 100); //百分率
+            v = Mathf.RoundToInt(pl.explosion.getValue().per * 100); //百分率
             Debug.Log("Hit Block:: Explosion:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=blue>true</color>" : "<color=red>false</color>"));
             if(rand <= v){
                 //Effect
-                em.createEffectExplosion(this.transform, pl.getExplosion().range);
+                em.createEffectExplosion(this.transform, pl.explosion.getValue().range);
 
                 //Sphere Collider
-                RaycastHit[] rayHits = Physics.SphereCastAll(this.transform.position, pl.getExplosion().range, Vector3.up, 0);
+                RaycastHit[] rayHits = Physics.SphereCastAll(this.transform.position, pl.explosion.getValue().range, Vector3.up, 0);
                 foreach(var hitObj in rayHits){
                     if(hitObj.transform.tag == "NormalBlock")
                         hitObj.transform.GetComponent<Block_Prefab>().decreaseHp(result);
@@ -211,6 +211,6 @@ public class Ball_Prefab : MonoBehaviour
     void OnDrawGizmos(){
         // Draw a yellow sphere at the transform's position
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(this.transform.position, pl.getExplosion().range);
+        Gizmos.DrawWireSphere(this.transform.position, pl.explosion.getValue().range);
     }
 }
