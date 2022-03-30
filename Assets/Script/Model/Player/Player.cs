@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     [System.Serializable]
     public struct Explosion{
         public float per, range;
-        public Explosion(float _per = 0, float _range = 0){
+        public Explosion(float _per = 0, float _range = 0.75f){
             per = _per;
             range = _range;
         }
@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
         swingArcArea.rectTransform.localRotation = Quaternion.Euler(0,0,offsetHitDeg + 90); 
         arrowAxisAnchor.transform.rotation = Quaternion.Euler(0,-offsetHitDeg,0);
         Debug.Log("Start:: swingArcArea表示角度= " + swingArcRange + ", 角度をfillAmount値(0~1)に変換=" + swingArcRange / 360);
-        explosion = new Explosion();
+        explosion = new Explosion(0, 0.75f);
     }
 
     void Update(){

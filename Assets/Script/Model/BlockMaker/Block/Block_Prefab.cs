@@ -14,8 +14,9 @@ public class Block_Prefab : MonoBehaviour
     //* Material Instancing
     private MeshRenderer meshRd;
     public Color[] colorList;
-    public Color color;
+    private Color color;
     public Material[] mts;
+    private Material originMt;
     public Material whiteHitMt;
 
     //* Value
@@ -33,6 +34,7 @@ public class Block_Prefab : MonoBehaviour
         //* Material Instancing
         meshRd = GetComponent<MeshRenderer>();
         meshRd.material = Instantiate(meshRd.material);
+        originMt = meshRd.material;
 
         // Leveling HP
         hp = (gm.stage <= 5) ? 1
@@ -86,6 +88,6 @@ public class Block_Prefab : MonoBehaviour
     IEnumerator coWhiteHitEffect(Material curMt){ //* 体力が減ったら、一瞬間白くなって戻すEFFECT
         meshRd.material = whiteHitMt;
         yield return new WaitForSeconds(0.05f);
-        meshRd.material = curMt;
+        meshRd.material = originMt;//* (BUG) WaitForSeconds間にまた衝突が発生したら、白くなる。
     }
 }

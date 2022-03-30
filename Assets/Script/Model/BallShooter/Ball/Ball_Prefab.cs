@@ -162,6 +162,8 @@ public class Ball_Prefab : MonoBehaviour
                     if(hitObj.transform.tag == "NormalBlock")
                         hitObj.transform.GetComponent<Block_Prefab>().decreaseHp(result);
                 }
+                
+                return;
             }
 
             col.gameObject.GetComponent<Block_Prefab>().decreaseHp(result);
