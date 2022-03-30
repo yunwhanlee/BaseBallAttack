@@ -34,7 +34,6 @@ public class Block_Prefab : MonoBehaviour
         //* Material Instancing
         meshRd = GetComponent<MeshRenderer>();
         meshRd.material = Instantiate(meshRd.material);
-        originMt = meshRd.material;
 
         // Leveling HP
         hp = (gm.stage <= 5) ? 1
@@ -57,6 +56,8 @@ public class Block_Prefab : MonoBehaviour
         int randIdx = Random.Range(0, colorList.Length);
         color = colorList[randIdx];
         meshRd.material.SetColor("_ColorTint", color);
+        
+        originMt = meshRd.material; // Save Original Material
     }
 
     void Update(){
