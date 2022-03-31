@@ -96,8 +96,8 @@ public class GameManager : MonoBehaviour
     //* GUI Button
     public void onClickReadyButton() => switchCamScene();
     public void onClickReGameButton() => init();
-    public void onCLickSkillButton() => levelUpPanel.SetActive(false);
-    
+    public void onClickSkillButton() => levelUpPanel.SetActive(false);
+    public void onClickSetGameButton(string type) => setGame(type);
 
     //*---------------------------------------
     //*  関数
@@ -205,6 +205,18 @@ public class GameManager : MonoBehaviour
         ballPreviewDirGoal.transform.position = new Vector3(0 + rx, 0.6f + ry, zCenter);
     }
 
+    public void setGame(string type){
+        switch(type){
+            case "PAUSE":
+                Time.timeScale = 0; pausePanel.SetActive(true);  break;
+            case "CONTINUE":
+                Time.timeScale = 1; pausePanel.SetActive(false); break;
+            case "HOME":
+                Debug.Log("FINISH GAME!");
+                //TODO
+                break;
+        }
+    }
     public void setGameOver(){
         Debug.Log("--GAME OVER--");
         setState(GameManager.State.GAMEOVER);

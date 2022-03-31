@@ -120,7 +120,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
     }
 
     //* GUI Button
-    public void onClickSkillUpBtn(int index){//Skill Level Up
+    public void onClickSkillUpBtn(int index){//* Skill Level Up
         Debug.Log("onClickSkillUpBtn:: skillName= " + SkillBtns[index].name.text);
         //* Set Data
         switch(SkillBtns[index].name.text){
