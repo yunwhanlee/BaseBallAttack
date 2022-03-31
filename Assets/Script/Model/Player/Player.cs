@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     //* Component
     private Animator anim;
 
-    void Start(){
+    public void Start(){
         //* Set Skill : @params { int level, T value, T unit }
         dmg = new Skill<int>(0, 1, 1);
         multiShot = new Skill<int>(0, 0, 1);

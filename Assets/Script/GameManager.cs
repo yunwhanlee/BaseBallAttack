@@ -109,6 +109,7 @@ public class GameManager : MonoBehaviour
         pl.setExp(0);
         pl.setMaxExp(100);
         gameoverPanel.SetActive(false);
+        pl.Start();
         blockMaker.Start();
     }
 
