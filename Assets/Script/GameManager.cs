@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
 
     [Header("-Level Up-")]
     public GameObject levelUpPanel;
+    public GameObject[] skillImgObjPrefs;
 
     [Header("-GameOver-")]
     public GameObject gameoverPanel;
@@ -60,6 +61,9 @@ public class GameManager : MonoBehaviour
 
     [Header("-Pause-")]
     public GameObject pausePanel;
+    public RectTransform skillStatusTableTf;
+    public GameObject skillInfoRowPref;
+    
 
 
     [Header("-Button-")]
@@ -93,6 +97,7 @@ public class GameManager : MonoBehaviour
     public void setShootCntText(string str) => shootCntTxt.text = str;
     public void setBallPreviewGoalImgRGBA(Color color) => ballPreviewGoalImg.color = color;
     public void setNextStage() => ++stage;
+    public GameObject[] getSkillImgObjPrefs() => skillImgObjPrefs;
     //* GUI Button
     public void onClickReadyButton() => switchCamScene();
     public void onClickReGameButton() => init();
@@ -208,7 +213,11 @@ public class GameManager : MonoBehaviour
     public void setGame(string type){
         switch(type){
             case "PAUSE":
-                Time.timeScale = 0; pausePanel.SetActive(true);  break;
+                Time.timeScale = 0; 
+                pausePanel.SetActive(true);
+                
+
+                break;
             case "CONTINUE":
                 Time.timeScale = 1; pausePanel.SetActive(false); break;
             case "HOME":
@@ -231,5 +240,9 @@ public class GameManager : MonoBehaviour
             levelUpPanel.SetActive(true);
             levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
         }
+    }
+
+    public void displaySkillInfo(){
+        
     }
 }
