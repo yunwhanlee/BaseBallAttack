@@ -129,6 +129,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
                 break;
             case "Multi Shot":
                 pl.multiShot.setLvUp(pl.multiShot.getValue() + pl.multiShot.getUnit());
+                Debug.Log(pl.multiShot.getCurLv() + pl.multiShot.getValue());
                 break;
             case "Speed Up":
                 pl.speed.setLvUp(pl.speed.getValue() + pl.speed.getUnit()); //20% Up
