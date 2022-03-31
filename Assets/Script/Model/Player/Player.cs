@@ -54,7 +54,6 @@ public class Player : MonoBehaviour
         arrowAxisAnchor.transform.rotation = Quaternion.Euler(0,-offsetHitDeg,0);
         Debug.Log("Start:: swingArcArea表示角度= " + swingArcRange + ", 角度をfillAmount値(0~1)に変換=" + swingArcRange / 360);
 
-
     }
 
     void Update(){
@@ -118,5 +117,18 @@ public class Player : MonoBehaviour
         setLv(++lv);
         setExp(0);
         setMaxExp(maxExp * 1.75f);
+    }
+
+    public List<int> getAllSkillLvList(){
+        List<int> list = new List<int>();
+        //set All Skills curLevel
+        list.Add(dmg.getCurLv());
+        list.Add(multiShot.getCurLv());
+        list.Add(speed.getCurLv());
+        list.Add(instantKill.getCurLv());
+        list.Add(critical.getCurLv());
+        list.Add(explosion.getCurLv());
+
+        return list;
     }
 }

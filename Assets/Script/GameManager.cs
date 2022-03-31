@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -215,13 +217,17 @@ public class GameManager : MonoBehaviour
             case "PAUSE":
                 Time.timeScale = 0; 
                 pausePanel.SetActive(true);
-                
+                displaySkillInfo();
 
                 break;
             case "CONTINUE":
-                Time.timeScale = 1; pausePanel.SetActive(false); break;
+                Time.timeScale = 1; 
+                resetSkillStatusTable();
+                pausePanel.SetActive(false); 
+                break;
             case "HOME":
                 Debug.Log("FINISH GAME!");
+                resetSkillStatusTable();
                 //TODO
                 break;
         }
@@ -243,6 +249,20 @@ public class GameManager : MonoBehaviour
     }
 
     public void displaySkillInfo(){
-        
+        List<int> lvList = pl.getAllSkillLvList();
+        int i=0;
+        lvList.ForEach(lv => {
+            if(lv > 0){
+                var rowTf = Instantiate(skillInfoRowPref, Vector3.zero, Quaternion.identity, skillStatusTableTf).transform;
+                Instantiate(getSkillImgObjPrefs()[i], Vector3.zero, Quaternion.identity, rowTf);
+                rowTf.GetComponentInChildren<Text>().text = "x " + lv;
+            }
+            i++;
+        });
+    }
+    public void resetSkillStatusTable(){
+        foreach(RectTransform child in skillStatusTableTf){
+            Destroy(child.gameObject);
+        }
     }
 }
