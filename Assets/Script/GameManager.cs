@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
     [Header("-Button-")]
     public Button readyBtn; //Normal
     public Button reGameBtn; //gameoverPanel
+    public Button pauseBtn; //pausePanel
     public Button continueBtn; //pausePanel
     public Button homeBtn; //pausePanel
 

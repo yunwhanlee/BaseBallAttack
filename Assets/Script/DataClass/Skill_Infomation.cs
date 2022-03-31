@@ -5,32 +5,32 @@ using UnityEngine;
 [System.Serializable]
 public class Skill<T>{
     //value
-    [SerializeField] int lv;
+    [SerializeField] int level;
     [SerializeField] T value;
     [SerializeField] T unit;
 
     //defualt
-    public Skill(int _level, T _value, T _unit){
-        lv = _level;
-        value = _value;
-        unit = _unit;
+    public Skill(int level, T value, T unit){
+        this.level = level;
+        this.value = value;
+        this.unit = unit;
     }
 
     //method
-    public int getCurLv() => lv;
+    public int getCurLv() => level;
     public T getValue() => value;
     public T getUnit() => unit;
-    public void setLvUp(T _value){
-        lv++;
-        value = _value;
+    public void setLvUp(T value){
+        level++;
+        this.value = value;
     }
 }
 
 [System.Serializable]
 public struct Explosion{
     public float per, range;
-    public Explosion(float _per = 0, float _range = 0.75f){
-        per = _per;
-        range = _range;
+    public Explosion(float per = 0, float range = 0.75f){
+        this.per = per;
+        this.range = range;
     }
 }
