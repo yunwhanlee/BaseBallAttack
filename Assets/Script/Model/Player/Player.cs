@@ -3,7 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
+[System.Serializable]
+public class HitRank{
+    [SerializeField] float dist;
+    [SerializeField] int power;
+    public HitRank(float dist, int power){
+        this.dist = dist;
+        this.power = power;
+    }
+    public float Dist {get => dist;}
+    public float Power {get => power;}
+}
 
 public class Player : MonoBehaviour
 {
@@ -13,9 +23,12 @@ public class Player : MonoBehaviour
     private float swingArcRange;
     public int MAX_HIT_DEG; //左右ある方向の最大角度
     public float offsetHitDeg; // Startが０度(←方向)から、↑ →向きに回る。
-    
     public GameObject previewBundle;
     public GameObject ballPreviewSphere;
+
+    [Header("【HIT ランク】")]
+    public HitRank[] hitRank;
+
 
     [Header("【Status】")]
     public bool doSwing = false;
@@ -23,7 +36,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int lv = 1;
     [SerializeField] private float maxExp = 100;
     [SerializeField] private int exp = 0;
-    [Header("Passive Skill")]
+    [Header("【Passive Skill】")]
     [SerializeField] public Skill<int> dmg;//private int dmg = 1;
     [SerializeField] public Skill<int> multiShot;//private int multiCnt = 0;
     [SerializeField] public Skill<float> speed;//private float speed = 1;
@@ -38,6 +51,16 @@ public class Player : MonoBehaviour
     private Animator anim;
 
     public void Start(){
+        //* Set HitRank Data : @params { char rate, float distance, int power }
+        hitRank = new HitRank[6];
+        const int A=0, B=1, C=2, D=3, E=4, F=5;
+        hitRank[A] = new HitRank(0.1f, 10);
+        hitRank[B] = new HitRank(0.25f, 7);
+        hitRank[C] = new HitRank(0.5f, 5);
+        hitRank[D] = new HitRank(0.85f, 4);
+        hitRank[E] = new HitRank(1.125f, 3);
+        hitRank[F] = new HitRank(1.5f, 2);
+
         //* Set Skill : @params { int level, T value, T unit }
         dmg = new Skill<int>(0, 1, 1);
         multiShot = new Skill<int>(0, 0, 1);

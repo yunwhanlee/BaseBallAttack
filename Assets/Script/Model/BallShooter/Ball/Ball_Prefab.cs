@@ -81,16 +81,18 @@ public class Ball_Prefab : MonoBehaviour
                 Debug.Log("BALL DEGREE:" + deg);
                 Vector3 dir = new Vector3(Mathf.Sin(Mathf.Deg2Rad * deg), 0, Mathf.Cos(Mathf.Deg2Rad * deg)).normalized;
                 //* Set Power(distance range 1.5f ~ 0)
-                float power = (distance <= 0.1f) ? 10 //-> BEST HIT (HOMERUH!)
-                : (distance <= 0.25f) ? 7
-                : (distance <= 0.5f) ? 5
-                : (distance <= 0.85f)? 4
-                : (distance <= 1.125f)? 3
-                : 1.5f; //-> WORST HIT (distance <= 1.5f)
+                
+                const int A=0, B=1, C=2, D=3, E=4, F=5;
+                float power = (distance <= pl.hitRank[A].Dist) ? pl.hitRank[A].Power //-> BEST HIT (HOMERUH!)
+                : (distance <= pl.hitRank[B].Dist) ? pl.hitRank[B].Power
+                : (distance <= pl.hitRank[C].Dist) ? pl.hitRank[C].Power
+                : (distance <= pl.hitRank[D].Dist)? pl.hitRank[D].Power
+                : (distance <= pl.hitRank[E].Dist)? pl.hitRank[E].Power
+                : pl.hitRank[F].Power; //-> WORST HIT (distance <= 1.5f)
                 
 
-                //HomeRun
-                if(power >= 5){
+                //* HomeRun
+                if(power >= pl.hitRank[B].Power){
                     StartCoroutine(coPlayHomeRunAnimation());
                 }
 
@@ -99,7 +101,7 @@ public class Ball_Prefab : MonoBehaviour
                 rigid.AddForce(dir * force, ForceMode.Impulse);
                 Debug.Log(
                     "HIT Ball! <color=yellow>distance=" + distance.ToString("N2") + "</color>"
-                    + ", <color=red>power=" + power + ", Rank: " + ((power==10)? "A" : (power==7)? "B" : (power==5)? "C" : (power==4)? "D" : (power==3)? "E" : "F").ToString() + "</color>"
+                    + ", <color=red>power=" + power + ", Rank: " + ((power==pl.hitRank[A].Power)? "A" : (power==pl.hitRank[B].Power)? "B" : (power==pl.hitRank[C].Power)? "C" : (power==pl.hitRank[D].Power)? "D" : (power==pl.hitRank[E].Power)? "E" : "F").ToString() + "</color>"
                     + ", Force=" + force);
 
                 //* Multi Shot
