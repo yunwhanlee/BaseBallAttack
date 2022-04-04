@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     public float HomeRunRangePer = 0.2f;
     public Image hitRangeHandleImg;
 
-    [Header("-Ball Preview Dir Goal-")]
+    [Header("-Ball Preview Dir Goal (CAM2)-")]
     public GameObject ballPreviewDirGoal;
     public Image ballPreviewGoalImg;
 
@@ -198,8 +198,8 @@ public class GameManager : MonoBehaviour
         float distResponseMax = 10;
         float unit = alphaApplyMax / distResponseMax;
         float alpha = (unit * dist) / 255;
-        setBallPreviewGoalImgRGBA(new Color(0.8f,0.8f,0.8f, 1-alpha));
-        //Debug.Log("setBallPreviewImgAlpha:: "+"distance("+dist+")"+ " * unit("+unit+") = " + "alpha(" + alpha + ")");
+        setBallPreviewGoalImgRGBA(new Color(alpha, alpha, 0.8f, 1-alpha));
+        // Debug.Log("setBallPreviewImgAlpha:: "+"distance("+dist+")"+ " * unit("+unit+") = " + "alpha(" + alpha + ")");
     }
 
     public void setBallPreviewGoalRandomPos(){

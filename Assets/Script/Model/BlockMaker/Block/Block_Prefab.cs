@@ -35,7 +35,7 @@ public class Block_Prefab : MonoBehaviour
         meshRd = GetComponent<MeshRenderer>();
         meshRd.material = Instantiate(meshRd.material);
 
-        // Leveling HP
+        //TODO Leveling HP
         hp = (gm.stage <= 5) ? 1
         : (gm.stage <= 10) ? 2
         : (gm.stage <= 15) ? 3

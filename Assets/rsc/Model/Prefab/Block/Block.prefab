@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1376276108105304708}
   - component: {fileID: 3570946891033350550}
   - component: {fileID: 4270761389112764335}
+  - component: {fileID: 6943514310103692478}
   m_Layer: 6
   m_Name: Block
   m_TagString: NormalBlock
@@ -120,7 +121,6 @@ MonoBehaviour:
   - {r: 0.5803922, g: 0.66654253, b: 1, a: 1}
   - {r: 0.940842, g: 0.5803922, b: 1, a: 1}
   - {r: 1, g: 0.7563762, b: 0.5803922, a: 1}
-  color: {r: 1, g: 1, b: 1, a: 1}
   mts:
   - {fileID: 2100000, guid: cf3da56f55dc78845aa9ee532679ca9a, type: 2}
   - {fileID: 2100000, guid: 74c7b8e3ed8d60740ad629198f468a2e, type: 2}
@@ -147,6 +147,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &6943514310103692478
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376276108105304710}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 462fa07a83499ec49934f5a64a8b818b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1708746701673433510
 GameObject:
   m_ObjectHideFlags: 0

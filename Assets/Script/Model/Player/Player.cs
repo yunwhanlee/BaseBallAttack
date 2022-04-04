@@ -18,6 +18,7 @@ public class HitRank{
 public class Player : MonoBehaviour
 {
     [Header("【HIT 角度範囲】")]
+    // CAM1
     public GameObject arrowAxisAnchor;
     public Image swingArcArea;
     private float swingArcRange;
@@ -54,7 +55,7 @@ public class Player : MonoBehaviour
         //* Set HitRank Data : @params { char rate, float distance, int power }
         hitRank = new HitRank[6];
         const int A=0, B=1, C=2, D=3, E=4, F=5;
-        hitRank[A] = new HitRank(0.1f, 10);
+        hitRank[A] = new HitRank(0.125f, 10);
         hitRank[B] = new HitRank(0.25f, 7);
         hitRank[C] = new HitRank(0.5f, 5);
         hitRank[D] = new HitRank(0.85f, 4);
