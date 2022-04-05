@@ -10,11 +10,11 @@ public class BlockMaker : MonoBehaviour
     private const float WIDTH = 1.9f;
     private const float HEIGHT = 1;
     private const int MAX_HORIZONTAL_CNT = 6;
-    private const int FIRST_CREATE_VERTICAL_CNT = 3; //DEAD_MAX-> 13
+    private const int FIRST_CREATE_VERTICAL_CNT = 4; //DEAD_MAX-> 13
     private const float SPAWN_POS_X = -5;
     private const float SPWAN_POS_Y = -2;
 
-    public int createPercent = 80;
+    public int createPercent;
     public Transform blockBundle;
     public GameObject blockPref;
     public bool isCreateBlock;

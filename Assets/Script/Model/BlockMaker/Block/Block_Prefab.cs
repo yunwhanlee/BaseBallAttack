@@ -35,12 +35,20 @@ public class Block_Prefab : MonoBehaviour
         meshRd = GetComponent<MeshRenderer>();
         meshRd.material = Instantiate(meshRd.material);
 
-        //TODO Leveling HP
-        hp = (gm.stage <= 5) ? 1
-        : (gm.stage <= 10) ? 2
-        : (gm.stage <= 15) ? 3
-        : (gm.stage <= 20) ? 4
-        : 5;
+        //TODO Leveling HP--------------------
+        //hp = (gm.stage <= 5) ? 1 : (gm.stage <= 10) ? 2 : (gm.stage <= 15) ? 3 : (gm.stage <= 20) ? 4 : 5;
+        int rand = Random.Range(0,100);
+        if      (gm.stage <=  5) hp = rand < 85 ? 1 : 2;
+        else if (gm.stage <=  9) hp = rand < 85 ? 2 : 1;
+        else if (gm.stage <= 13) hp = rand < 85 ? 3 : (rand <= 95)? 2 : 1;
+        else if (gm.stage <= 17) hp = rand < 75 ? 4 : (rand <= 90)? 3 : 2;
+        else if (gm.stage <= 21) hp = rand < 50 ? 6 : (rand <= 75)? 5 : (rand <= 85)? 4 : (rand <= 95)? 3 : 2;
+        else if (gm.stage <= 26) hp = rand < 60 ? 7 : (rand <= 85)? 6 : 5;
+        else if (gm.stage <= 31) hp = rand < 65 ? 9 : (rand <= 80)? 8 : 7;
+        else if (gm.stage <= 35) hp = rand < 60 ? 10 : (rand <= 75)? 9 : (rand <= 85)? 8 : 7;
+        else if (gm.stage <= 40) hp = rand < 55 ? 12 : (rand <= 75)? 11 : (rand <= 90)? 10 : 9;
+
+        //------------------------------------
         hpTxt.text = hp.ToString();
 
         // Material

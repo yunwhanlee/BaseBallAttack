@@ -177,24 +177,12 @@ public class Ball_Prefab : MonoBehaviour
     //*---------------------------------------
     private void onDestroyMe(bool isStrike = false){
         if(!isStrike){
-            //* ★Next Stage：ボールが消えたら次に進む。
-            Debug.Log("onDestroyMe:: NEXT STAGE(Ball Is Destroyed)");
-            gm.setNextStage();
-            gm.setState(GameManager.State.WAIT);
-            gm.downWall.isTrigger = true; //*下壁 物理X
-            gm.readyBtn.gameObject.SetActive(true);
-            
-            blockMaker.setCreateBlockTrigger(true);
-            ballShooter.setIsBallExist(false);
-            pl.previewBundle.SetActive(true);
-
-            //Level Up?
-            gm.checkLevelUp();
-            
+            gm.setNextStage();//* ボールが消えたら次に進む。
         }else{
             gm.setStrike();
+            gm.setBallPreviewGoalRandomPos();
         }
-        gm.setBallPreviewGoalRandomPos();
+        
         Destroy(this.gameObject);
     }
 

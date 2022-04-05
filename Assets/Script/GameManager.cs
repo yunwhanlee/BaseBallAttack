@@ -93,12 +93,16 @@ public class GameManager : MonoBehaviour
         expBar.value = Mathf.Lerp(expBar.value, pl.getExp() / pl.getMaxExp(), Time.deltaTime * 10);
         stateTxt.text = state.ToString();
         stageTxt.text = "STAGE : " + stage.ToString();
+
+        //* ボールが複数ある時、同時に消えたら、次に進まないBUG対応
+        if(ballGroup.childCount == 0 && !downWall.isTrigger){
+            setNextStage();
+        }
     }
 
     public void setState(State st) => state = st;
     public void setShootCntText(string str) => shootCntTxt.text = str;
     public void setBallPreviewGoalImgRGBA(Color color) => ballPreviewGoalImg.color = color;
-    public void setNextStage() => ++stage;
     public GameObject[] getSkillImgObjPrefs() => skillImgObjPrefs;
     //* GUI Button
     public void onClickReadyButton() => switchCamScene();
@@ -264,5 +268,18 @@ public class GameManager : MonoBehaviour
         foreach(RectTransform child in skillStatusTableTf){
             Destroy(child.gameObject);
         }
+    }
+
+    public void setNextStage() {
+        Debug.Log("onDestroyMe:: NEXT STAGE(Ball Is Destroyed)");
+        ++stage;
+        setState(GameManager.State.WAIT);
+        downWall.isTrigger = true; //*下壁 物理X
+        readyBtn.gameObject.SetActive(true);
+        blockMaker.setCreateBlockTrigger(true);
+        ballShooter.setIsBallExist(false);
+        pl.previewBundle.SetActive(true);
+        checkLevelUp();
+        setBallPreviewGoalRandomPos();
     }
 }
