@@ -9,6 +9,7 @@ public class EffectManager : MonoBehaviour
 
     public GameObject brokeBlockEF;
     public GameObject explosionEF;
+    public GameObject thunderShotEF;
     void Start()
     {
         
@@ -32,5 +33,10 @@ public class EffectManager : MonoBehaviour
         var ins = Instantiate(explosionEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
         ins.transform.localScale = new Vector3(scale, scale, scale);
         Destroy(ins, 2);
+    }
+
+    public void createEffectThunderShot(Transform parentTf, Quaternion dir){
+        var ins = Instantiate(thunderShotEF, parentTf.position, dir, effectGroup) as GameObject;
+        Destroy(ins, 1);
     }
 }

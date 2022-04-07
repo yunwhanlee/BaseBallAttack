@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
+using System;
 
 public class Ball_Prefab : MonoBehaviour
 {
@@ -80,8 +82,8 @@ public class Ball_Prefab : MonoBehaviour
                 float deg = pl.arrowAxisAnchor.transform.eulerAngles.y;
                 Debug.Log("BALL DEGREE:" + deg);
                 Vector3 dir = new Vector3(Mathf.Sin(Mathf.Deg2Rad * deg), 0, Mathf.Cos(Mathf.Deg2Rad * deg)).normalized;
+
                 //* Set Power(distance range 1.5f ~ 0)
-                
                 const int A=0, B=1, C=2, D=3, E=4, F=5;
                 float power = (distance <= pl.hitRank[A].Dist) ? pl.hitRank[A].Power //-> BEST HIT (HOMERUH!)
                 : (distance <= pl.hitRank[B].Dist) ? pl.hitRank[B].Power
@@ -90,6 +92,11 @@ public class Ball_Prefab : MonoBehaviour
                 : (distance <= pl.hitRank[E].Dist)? pl.hitRank[E].Power
                 : pl.hitRank[F].Power; //-> WORST HIT (distance <= 1.5f)
                 
+                //* Active Skills
+                if(pl.thunderShotTrigger){
+                    StartCoroutine(coPlayThunderShotSkillEffect(dir, 1f));
+                    //return;
+                }
 
                 //* HomeRun
                 if(power >= pl.hitRank[B].Power){
@@ -164,10 +171,8 @@ public class Ball_Prefab : MonoBehaviour
                     if(hitObj.transform.tag == "NormalBlock")
                         hitObj.transform.GetComponent<Block_Prefab>().decreaseHp(result);
                 }
-                
                 return;
             }
-
             col.gameObject.GetComponent<Block_Prefab>().decreaseHp(result);
         }
     }
@@ -198,9 +203,32 @@ public class Ball_Prefab : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    IEnumerator coPlayThunderShotSkillEffect(Vector3 dir, float waitTime){
+        const int maxDistance = 50;
+        const int width = 1;
+        Debug.DrawRay(this.transform.position, dir * maxDistance, Color.blue, 2f);
+
+        RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, Vector3.one * width, dir, Quaternion.identity, maxDistance);
+        Array.ForEach(hits, hit => {
+            if(hit.transform.tag == "NormalBlock"){
+                hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(1);
+            }
+        });
+        pl.thunderShotTrigger = false;
+        em.createEffectThunderShot(this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
+        
+        //Before go up NextStage Wait for Second
+        yield return new WaitForSeconds(waitTime);
+        onDestroyMe();
+    }
+
     void OnDrawGizmos(){
-        // Draw a yellow sphere at the transform's position
+        // Explosion Skill Range Preview
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(this.transform.position, pl.explosion.getValue().range);
+
+        // ThunderShot Skill Range Preview
+        // Gizmos.color = Color.blue;
+        // Gizmos.DrawWireCube(this.transform.position, Vector3.one * 0.5f);
     }
 }

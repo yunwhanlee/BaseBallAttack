@@ -37,6 +37,10 @@ public class Player : MonoBehaviour
     [SerializeField] private int lv = 1;
     [SerializeField] private float maxExp = 100;
     [SerializeField] private int exp = 0;
+
+    [Header("【Active Skill】")]
+    [SerializeField] public bool thunderShotTrigger;
+    
     [Header("【Passive Skill】")]
     [SerializeField] public Skill<int> dmg;//private int dmg = 1;
     [SerializeField] public Skill<int> multiShot;//private int multiCnt = 0;
