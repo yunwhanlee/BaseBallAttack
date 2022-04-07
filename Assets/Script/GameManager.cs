@@ -67,9 +67,9 @@ public class GameManager : MonoBehaviour
     public GameObject skillInfoRowPref;
     
 
-
     [Header("-Button-")]
     public Button readyBtn; //Normal
+    public Button activeSkillBtn1; //Normal
     public Button reGameBtn; //gameoverPanel
     public Button pauseBtn; //pausePanel
     public Button continueBtn; //pausePanel
@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
         stateTxt.text = state.ToString();
         stageTxt.text = "STAGE : " + stage.ToString();
 
-        //* ボールが複数ある時、同時に消えたら、次に進まないBUG対応
+        //* (BUG) ボールが複数ある時、同時に消えたら、次に進まないこと対応
         if(ballGroup.childCount == 0 && !downWall.isTrigger){
             setNextStage();
         }
@@ -109,6 +109,7 @@ public class GameManager : MonoBehaviour
     public void onClickReGameButton() => init();
     public void onClickSkillButton() => levelUpPanel.SetActive(false);
     public void onClickSetGameButton(string type) => setGame(type);
+    public void onClickActiveSkillButton1() => onTriggerActiveSkill();
 
     //*---------------------------------------
     //*  関数
@@ -281,5 +282,10 @@ public class GameManager : MonoBehaviour
         pl.previewBundle.SetActive(true);
         checkLevelUp();
         setBallPreviewGoalRandomPos();
+    }
+
+    private void onTriggerActiveSkill(){
+        bool active = !pl.ActiveSkillTrigger1;
+        pl.ActiveSkillTrigger1 = active;
     }
 }

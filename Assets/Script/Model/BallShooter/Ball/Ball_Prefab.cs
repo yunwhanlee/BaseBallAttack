@@ -93,7 +93,7 @@ public class Ball_Prefab : MonoBehaviour
                 : pl.hitRank[F].Power; //-> WORST HIT (distance <= 1.5f)
                 
                 //* Active Skills
-                if(pl.thunderShotTrigger){
+                if(pl.ActiveSkillTrigger1){
                     StartCoroutine(coPlayThunderShotSkillEffect(dir, 1f));
                     //return;
                 }
@@ -214,7 +214,7 @@ public class Ball_Prefab : MonoBehaviour
                 hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(1);
             }
         });
-        pl.thunderShotTrigger = false;
+        pl.ActiveSkillTrigger1 = false;
         em.createEffectThunderShot(this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
         
         //Before go up NextStage Wait for Second
@@ -224,8 +224,8 @@ public class Ball_Prefab : MonoBehaviour
 
     void OnDrawGizmos(){
         // Explosion Skill Range Preview
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(this.transform.position, pl.explosion.getValue().range);
+        // Gizmos.color = Color.yellow;
+        // Gizmos.DrawWireSphere(this.transform.position, pl.explosion.getValue().range);
 
         // ThunderShot Skill Range Preview
         // Gizmos.color = Color.blue;
