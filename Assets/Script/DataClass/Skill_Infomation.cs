@@ -42,25 +42,51 @@ public struct Explosion{
 [System.Serializable]
 public class ActiveSkillBtn{
     //value
+    [SerializeField] private float unit; //Decrease Fill Amount Unit
+    [SerializeField] private bool trigger;
     [SerializeField] private Image panel;
     [SerializeField] private Image img;
     [SerializeField] private Image grayBG;
+    [SerializeField] private Image selectFence;
+    [SerializeField] private Material activeEFMt;
 
     //contructor
-    public ActiveSkillBtn(Button skillBtn){
+    public ActiveSkillBtn(float unit, Button skillBtn, Material activeSkillEffectMt){
+        this.unit = unit;
         panel = skillBtn.GetComponent<Image>();
         img = skillBtn.transform.GetChild(0).GetComponent<Image>();
         grayBG = skillBtn.transform.GetChild(1).GetComponent<Image>();
+        selectFence = skillBtn.transform.GetChild(2).GetComponent<Image>();
+        activeEFMt = activeSkillEffectMt;
     }
 
     //get set
+    public bool Trigger {get=> trigger; set=> trigger=value;}
     public Image Panel {get=> panel; set=> panel=value;}
     public Image Img {get=> img; set=> img=value;}
     public Image GrayBG {get=> grayBG; set=> grayBG=value;}
+    public Image SelectFence {get=> selectFence; set=> selectFence=value;}
 
     //method
-    public void setFillAmount(float v){
-        GrayBG.fillAmount += v;
+    public void init(){
+        Trigger = false;
+        Panel.material = null;
+        GrayBG.fillAmount = 1;
+        selectFence.gameObject.SetActive(false);
     }
+    public void decreaseFillAmount(){
+        GrayBG.fillAmount -= unit;
+    }
+    public void setActiveSkillEF(){
+        Panel.material = (GrayBG.fillAmount == 0)? activeEFMt : null;
+    }
+    public void onTriggerActive(){
+        Debug.Log("onClickActiveSkillButton");
+        if(GrayBG.fillAmount == 0){
+            Trigger = !Trigger;
+            selectFence.gameObject.SetActive(Trigger);
+        }
+    }
+
 
 }

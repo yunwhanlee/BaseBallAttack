@@ -88,8 +88,8 @@ public class Block_Prefab : MonoBehaviour
         }
 
         //* ActiveSkill CoolTime Amount Down
-        gm.ActiveSkillBtnList.ForEach(btn=>{
-            btn.setFillAmount(-0.1f);
+        gm.activeSkillBtnList.ForEach(btn=>{
+            btn.decreaseFillAmount();
         });
 
     }

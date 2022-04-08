@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     [Header("--Active Skill Btn--")]
     public Material activeSkillEffectMt;
-    public List<ActiveSkillBtn> ActiveSkillBtnList;
+    public List<ActiveSkillBtn> activeSkillBtnList;
 
     [Header("--GameOver--")]
     public GameObject gameoverPanel;
@@ -91,7 +91,9 @@ public class GameManager : MonoBehaviour
         setBallPreviewGoalRandomPos();
 
         //* Active Skill Btns
-        Array.ForEach(activeSkillBtns, btn => ActiveSkillBtnList.Add(new ActiveSkillBtn(btn)));
+        Array.ForEach(activeSkillBtns, btn => {
+            activeSkillBtnList.Add(new ActiveSkillBtn(0.2f, btn, activeSkillEffectMt));
+            });
     }
 
     void Update(){
@@ -106,10 +108,8 @@ public class GameManager : MonoBehaviour
         }
 
         //* ActiveSkill Status
-        ActiveSkillBtnList.ForEach(btn=>{
-            //Material
-            btn.Panel.material = (btn.GrayBG.fillAmount == 0)? activeSkillEffectMt : null;
-
+        activeSkillBtnList.ForEach(btn=>{
+            btn.setActiveSkillEF();
         });
     }
 
@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
     public void onClickReGameButton() => init();
     public void onClickSkillButton() => levelUpPanel.SetActive(false);
     public void onClickSetGameButton(string type) => setGame(type);
-    public void onClickActiveSkillButton1() => onTriggerActiveSkill();
+    public void onClickActiveSkillButton1() => activeSkillBtnList[0].onTriggerActive();
 
     //*---------------------------------------
     //*  関数
@@ -297,8 +297,8 @@ public class GameManager : MonoBehaviour
         setBallPreviewGoalRandomPos();
     }
 
-    private void onTriggerActiveSkill(){
-        bool active = !pl.ActiveSkillTrigger1;
-        pl.ActiveSkillTrigger1 = active;
-    }
+    // private void onTriggerActiveSkill(){
+    //     bool active = !pl.ActiveSkillTrigger1;
+    //     pl.ActiveSkillTrigger1 = active;
+    // }
 }
