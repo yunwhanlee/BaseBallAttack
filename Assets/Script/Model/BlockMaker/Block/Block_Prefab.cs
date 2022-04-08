@@ -86,6 +86,12 @@ public class Block_Prefab : MonoBehaviour
             em.createEffectBrokeBlock(this.transform, color);
             onDestroy();
         }
+
+        //* ActiveSkill CoolTime Amount Down
+        gm.ActiveSkillBtnList.ForEach(btn=>{
+            btn.setFillAmount(-0.1f);
+        });
+
     }
     
 

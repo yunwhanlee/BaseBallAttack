@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class Skill<T>{
@@ -33,4 +34,33 @@ public struct Explosion{
         this.per = per;
         this.range = range;
     }
+}
+
+//-------------------------------------------------
+//-------------------------------------------------
+
+[System.Serializable]
+public class ActiveSkillBtn{
+    //value
+    [SerializeField] private Image panel;
+    [SerializeField] private Image img;
+    [SerializeField] private Image grayBG;
+
+    //contructor
+    public ActiveSkillBtn(Button skillBtn){
+        panel = skillBtn.GetComponent<Image>();
+        img = skillBtn.transform.GetChild(0).GetComponent<Image>();
+        grayBG = skillBtn.transform.GetChild(1).GetComponent<Image>();
+    }
+
+    //get set
+    public Image Panel {get=> panel; set=> panel=value;}
+    public Image Img {get=> img; set=> img=value;}
+    public Image GrayBG {get=> grayBG; set=> grayBG=value;}
+
+    //method
+    public void setFillAmount(float v){
+        GrayBG.fillAmount += v;
+    }
+
 }

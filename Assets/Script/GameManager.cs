@@ -34,42 +34,45 @@ public class GameManager : MonoBehaviour
     public Text stateTxt;
     public Text shootCntTxt;
 
-    [Header("-Exp Slider Bar-")]
+    [Header("--Exp Slider Bar--")]
     public Slider expBar;
 
-    [Header("-View Preview Ball Slider-")] //! あんまり要らないかも。
+    [Header("--View Preview Ball Slider--")] //! あんまり要らないかも。
     public Slider hitRangeSlider;
     private RectTransform hitRangeSliderTf;
     public RectTransform HomeRunRangeTf;
     public float HomeRunRangePer = 0.2f;
     public Image hitRangeHandleImg;
 
-    [Header("-Ball Preview Dir Goal (CAM2)-")]
+    [Header("--Ball Preview Dir Goal (CAM2)--")]
     public GameObject ballPreviewDirGoal;
     public Image ballPreviewGoalImg;
 
-    [Header("-Strike Ball Image-")]
+    [Header("--Strike Ball Image--")]
     public GameObject StrikePanel;
     public Image[] strikeBallImgs;
 
-    [Header("-Level Up-")]
+    [Header("--Level Up--")]
     public GameObject levelUpPanel;
     public GameObject[] skillImgObjPrefs;
 
-    [Header("-GameOver-")]
+    [Header("--Active Skill Btn--")]
+    public Material activeSkillEffectMt;
+    public List<ActiveSkillBtn> ActiveSkillBtnList;
+
+    [Header("--GameOver--")]
     public GameObject gameoverPanel;
     private Text gvStageTxt;
     private Text gvBestScoreTxt;
 
-    [Header("-Pause-")]
+    [Header("--Pause--")]
     public GameObject pausePanel;
     public RectTransform skillStatusTableTf;
     public GameObject skillInfoRowPref;
-    
 
-    [Header("-Button-")]
+    [Header("--Button--")]
     public Button readyBtn; //Normal
-    public Button activeSkillBtn1; //Normal
+    public Button[] activeSkillBtns; //Normal
     public Button reGameBtn; //gameoverPanel
     public Button pauseBtn; //pausePanel
     public Button continueBtn; //pausePanel
@@ -86,6 +89,9 @@ public class GameManager : MonoBehaviour
 
         //* Ball Preview Dir Goal Set Z-Center
         setBallPreviewGoalRandomPos();
+
+        //* Active Skill Btns
+        Array.ForEach(activeSkillBtns, btn => ActiveSkillBtnList.Add(new ActiveSkillBtn(btn)));
     }
 
     void Update(){
@@ -98,6 +104,13 @@ public class GameManager : MonoBehaviour
         if(ballGroup.childCount == 0 && !downWall.isTrigger){
             setNextStage();
         }
+
+        //* ActiveSkill Status
+        ActiveSkillBtnList.ForEach(btn=>{
+            //Material
+            btn.Panel.material = (btn.GrayBG.fillAmount == 0)? activeSkillEffectMt : null;
+
+        });
     }
 
     public void setState(State st) => state = st;
