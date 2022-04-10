@@ -92,8 +92,8 @@ public class GameManager : MonoBehaviour
 
         //* Active Skill Btns
         Array.ForEach(activeSkillBtns, btn => {
-            activeSkillBtnList.Add(new ActiveSkillBtn(0.2f, btn, activeSkillEffectMt));
-            });
+            activeSkillBtnList.Add(new ActiveSkillBtn(0.05f, btn, activeSkillEffectMt));
+        });
     }
 
     void Update(){
@@ -159,6 +159,8 @@ public class GameManager : MonoBehaviour
             pl.arrowAxisAnchor.SetActive(false);
             
             StrikePanel.SetActive(true);
+
+            Array.ForEach(activeSkillBtns, btn => btn.gameObject.SetActive(false));
         }
         else{//* CAM1 On
             state = GameManager.State.WAIT;
@@ -176,6 +178,8 @@ public class GameManager : MonoBehaviour
             if(0 < strikeCnt && ballGroup.childCount == 0) pl.previewBundle.SetActive(true); //(BUG)STRIKEになってから、BACKボタン押すと、PreviewLineが消えてしまう。
 
             StrikePanel.SetActive(false);
+
+            Array.ForEach(activeSkillBtns, btn => btn.gameObject.SetActive(true));
 
             StopCoroutine("corSetStrike");
         }

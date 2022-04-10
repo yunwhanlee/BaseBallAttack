@@ -10,15 +10,6 @@ public class EffectManager : MonoBehaviour
     public GameObject brokeBlockEF;
     public GameObject explosionEF;
     public GameObject thunderShotEF;
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 
     public void createEffectBrokeBlock(Transform parentTf, Color color){
         var ins = Instantiate(brokeBlockEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
