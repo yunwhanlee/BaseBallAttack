@@ -79,7 +79,6 @@ public class GameManager : MonoBehaviour
     public Button homeBtn; //pausePanel
 
     //---------------------------------------
-
     void Start() {
         // Debug.Log("deadLine.pos.z=" + deadLineTf.position.z);
         hitRangeSliderTf = hitRangeSlider.GetComponent<RectTransform>();

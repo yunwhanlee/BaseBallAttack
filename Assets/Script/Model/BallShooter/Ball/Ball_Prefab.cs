@@ -155,7 +155,13 @@ public class Ball_Prefab : MonoBehaviour
             rand = Random.Range(0, 100);
             v = Mathf.RoundToInt(pl.critical.getValue() * 100); //百分率
             Debug.Log("Hit Block:: Critical:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=blue>true</color>" : "<color=red>false</color>"));
-            result = (rand <= v)? pl.dmg.getValue() * 2 : pl.dmg.getValue();
+            if(rand <= v){
+                result = pl.dmg.getValue() * 2;
+                em.createEffectCriticalText(col.transform);
+            }
+            else{
+                result = pl.dmg.getValue();
+            }
 
             //* Explosion
             rand = Random.Range(0, 100);

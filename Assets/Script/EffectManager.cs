@@ -10,6 +10,7 @@ public class EffectManager : MonoBehaviour
     public GameObject brokeBlockEF;
     public GameObject explosionEF;
     public GameObject thunderShotEF;
+    public GameObject criticalTextEF;
 
     public void createEffectBrokeBlock(Transform parentTf, Color color){
         var ins = Instantiate(brokeBlockEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
@@ -29,5 +30,10 @@ public class EffectManager : MonoBehaviour
     public void createEffectThunderShot(Transform parentTf, Quaternion dir){
         var ins = Instantiate(thunderShotEF, parentTf.position, dir, effectGroup) as GameObject;
         Destroy(ins, 1);
+    }
+
+    public void createEffectCriticalText(Transform parentTf){
+        var ins = Instantiate(criticalTextEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
+        Destroy(ins, 1.5f);
     }
 }
