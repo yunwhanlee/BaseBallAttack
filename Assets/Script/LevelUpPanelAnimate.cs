@@ -149,5 +149,6 @@ public class LevelUpPanelAnimate : MonoBehaviour
 
         }
         this.gameObject.SetActive(false);
+        gm.displaySkillInfo("INGAME");
     }
 }

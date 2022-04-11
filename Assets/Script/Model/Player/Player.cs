@@ -39,8 +39,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int exp = 0;
 
     [Header("【Active Skill】")]
-    // [SerializeField] private bool activeSkillTrigger1;
-    // public bool ActiveSkillTrigger1 {get => activeSkillTrigger1; set => activeSkillTrigger1 = value;}
+    // --> GameManager
     
     [Header("【Passive Skill】")]
     [SerializeField] public Skill<int> dmg;//private int dmg = 1;

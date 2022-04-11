@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using System;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -60,15 +61,19 @@ public class GameManager : MonoBehaviour
     public Material activeSkillEffectMt;
     public List<ActiveSkillBtn> activeSkillBtnList;
 
+    [Header("--Passive Skill Table InGame--")]
+    public RectTransform inGameSkillStatusTableTf;
+    public GameObject inGameSkillImgBtnPref;
+    
+    [Header("--Pause--")]
+    public GameObject pausePanel;
+    public RectTransform pauseSkillStatusTableTf;
+    public GameObject skillInfoRowPref;
+
     [Header("--GameOver--")]
     public GameObject gameoverPanel;
     private Text gvStageTxt;
     private Text gvBestScoreTxt;
-
-    [Header("--Pause--")]
-    public GameObject pausePanel;
-    public RectTransform skillStatusTableTf;
-    public GameObject skillInfoRowPref;
 
     [Header("--Button--")]
     public Button readyBtn; //Normal
@@ -91,7 +96,7 @@ public class GameManager : MonoBehaviour
 
         //* Active Skill Btns
         Array.ForEach(activeSkillBtns, btn => {
-            activeSkillBtnList.Add(new ActiveSkillBtn(0.05f, btn, activeSkillEffectMt));
+            activeSkillBtnList.Add(new ActiveSkillBtn(0.5f, btn, activeSkillEffectMt));
         });
     }
 
@@ -238,7 +243,7 @@ public class GameManager : MonoBehaviour
             case "PAUSE":
                 Time.timeScale = 0; 
                 pausePanel.SetActive(true);
-                displaySkillInfo();
+                displaySkillInfo(type);
 
                 break;
             case "CONTINUE":
@@ -269,20 +274,30 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void displaySkillInfo(){
+    public void displaySkillInfo(string type){
         List<int> lvList = pl.getAllSkillLvList();
         int i=0;
         lvList.ForEach(lv => {
             if(lv > 0){
-                var rowTf = Instantiate(skillInfoRowPref, Vector3.zero, Quaternion.identity, skillStatusTableTf).transform;
-                Instantiate(getSkillImgObjPrefs()[i], Vector3.zero, Quaternion.identity, rowTf);
-                rowTf.GetComponentInChildren<Text>().text = "x " + lv;
+                GameObject pref = (type == "PAUSE")? skillInfoRowPref : inGameSkillImgBtnPref;
+                Transform parentTf = (type == "PAUSE")? pauseSkillStatusTableTf : inGameSkillStatusTableTf;
+                String levelTxt = (type == "PAUSE")? ("x " + lv.ToString()) : lv.ToString();
+
+                var rowTf = Instantiate(pref, Vector3.zero, Quaternion.identity, parentTf).transform;
+                var imgObj = Instantiate(getSkillImgObjPrefs()[i], Vector3.zero, Quaternion.identity, rowTf);
+                if(type != "PAUSE"){
+                    imgObj.transform.localScale = Vector3.one * 0.3f;
+                    imgObj.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+                    int index = imgObj.transform.GetSiblingIndex();
+                    imgObj.transform.SetSiblingIndex(index - 1);
+                }
+                rowTf.GetComponentInChildren<TextMeshProUGUI>().text = levelTxt;
             }
             i++;
         });
     }
     public void resetSkillStatusTable(){
-        foreach(RectTransform child in skillStatusTableTf){
+        foreach(RectTransform child in pauseSkillStatusTableTf){
             Destroy(child.gameObject);
         }
     }
