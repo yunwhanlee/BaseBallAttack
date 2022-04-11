@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using System;
-using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject cam1Canvas, cam2Canvas;
 
     //* OutSide
+    public Canvas canvasUI;
     public Player pl;
     public BallShooter ballShooter;
     public BlockMaker blockMaker;
@@ -101,6 +101,9 @@ public class GameManager : MonoBehaviour
     }
 
     void Update(){
+        // canvasUI.additionalShaderChannels = AdditionalCanvasShaderChannels.None;
+        // Debug.Log("canvasUI.additionalShaderChannels=" + canvasUI.additionalShaderChannels);
+
         //* GUI
         expBar.value = Mathf.Lerp(expBar.value, pl.getExp() / pl.getMaxExp(), Time.deltaTime * 10);
         stateTxt.text = state.ToString();
@@ -291,7 +294,7 @@ public class GameManager : MonoBehaviour
                     int index = imgObj.transform.GetSiblingIndex();
                     imgObj.transform.SetSiblingIndex(index - 1);
                 }
-                rowTf.GetComponentInChildren<TextMeshProUGUI>().text = levelTxt;
+                rowTf.GetComponentInChildren<Text>().text = levelTxt;
             }
             i++;
         });

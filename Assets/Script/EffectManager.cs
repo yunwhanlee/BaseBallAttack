@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class EffectManager : MonoBehaviour
 {
@@ -36,7 +36,7 @@ public class EffectManager : MonoBehaviour
 
     public void createEffectCriticalText(Transform parentTf, int damage){
         var ins = Instantiate(criticalTextEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
-        ins.GetComponentInChildren<TextMeshProUGUI>().text = damage.ToString();
+        ins.GetComponentInChildren<Text>().text = damage.ToString();
         Destroy(ins, 1.5f);
     }
         public void createEffectInstantKillText(Transform parentTf){

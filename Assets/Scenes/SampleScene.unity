@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964134, b: 0.5748155, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657934, g: 0.4964136, b: 0.574816, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7137,6 +7137,7 @@ MonoBehaviour:
   cam2: {fileID: 1343411146}
   cam1Canvas: {fileID: 1462164001}
   cam2Canvas: {fileID: 456845150}
+  canvasUI: {fileID: 2001013460}
   pl: {fileID: 702911506}
   ballShooter: {fileID: 1350307814}
   blockMaker: {fileID: 579925511}
@@ -9674,7 +9675,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
