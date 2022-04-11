@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EffectManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class EffectManager : MonoBehaviour
     public GameObject explosionEF;
     public GameObject thunderShotEF;
     public GameObject criticalTextEF;
+    public GameObject instantKillTextEF;
 
     public void createEffectBrokeBlock(Transform parentTf, Color color){
         var ins = Instantiate(brokeBlockEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
@@ -32,8 +34,13 @@ public class EffectManager : MonoBehaviour
         Destroy(ins, 1);
     }
 
-    public void createEffectCriticalText(Transform parentTf){
+    public void createEffectCriticalText(Transform parentTf, int damage){
         var ins = Instantiate(criticalTextEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
+        ins.GetComponentInChildren<TextMeshProUGUI>().text = damage.ToString();
+        Destroy(ins, 1.5f);
+    }
+        public void createEffectInstantKillText(Transform parentTf){
+        var ins = Instantiate(instantKillTextEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
         Destroy(ins, 1.5f);
     }
 }

@@ -145,19 +145,25 @@ public class Ball_Prefab : MonoBehaviour
         //* Give Damage
         if(col.gameObject.tag == "NormalBlock"){
             int result = 0;
-            //* Immediate Kill
+            //* InstantKill
             int rand = Random.Range(0, 100);
             int v = Mathf.RoundToInt(pl.instantKill.getValue() * 100); //百分率
-            Debug.Log("Hit Block:: ImmediateKill:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=blue>true</color>" : "<color=red>false</color>"));
-            if(rand <= v) Destroy(col.gameObject);
+            Debug.Log("Hit Block:: InstantKill:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=blue>true</color>" : "<color=blue>false</color>"));
+            if(rand <= v){
+                em.createEffectInstantKillText(col.transform);
+                Destroy(col.gameObject);
+            }
+            else{
+                result = pl.dmg.getValue();
+            }
 
             //* Critical x 2
             rand = Random.Range(0, 100);
             v = Mathf.RoundToInt(pl.critical.getValue() * 100); //百分率
-            Debug.Log("Hit Block:: Critical:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=blue>true</color>" : "<color=red>false</color>"));
+            Debug.Log("Hit Block:: Critical:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=orange>true</color>" : "<color=orange>false</color>"));
             if(rand <= v){
+                em.createEffectCriticalText(col.transform, pl.dmg.getValue() * 2);
                 result = pl.dmg.getValue() * 2;
-                em.createEffectCriticalText(col.transform);
             }
             else{
                 result = pl.dmg.getValue();
@@ -166,9 +172,8 @@ public class Ball_Prefab : MonoBehaviour
             //* Explosion
             rand = Random.Range(0, 100);
             v = Mathf.RoundToInt(pl.explosion.getValue().per * 100); //百分率
-            Debug.Log("Hit Block:: Explosion:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=blue>true</color>" : "<color=red>false</color>"));
+            Debug.Log("Hit Block:: Explosion:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=purple>true</color>" : "<color=purple>false</color>"));
             if(rand <= v){
-                //Effect
                 em.createEffectExplosion(this.transform, pl.explosion.getValue().range);
 
                 //Sphere Collider
@@ -217,7 +222,8 @@ public class Ball_Prefab : MonoBehaviour
         RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, Vector3.one * width, dir, Quaternion.identity, maxDistance);
         Array.ForEach(hits, hit => {
             if(hit.transform.tag == "NormalBlock"){
-                hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(1);
+                em.createEffectCriticalText(hit.transform, pl.dmg.getValue() * 2);
+                hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(pl.dmg.getValue() * 2);
             }
         });
         em.createEffectThunderShot(this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
