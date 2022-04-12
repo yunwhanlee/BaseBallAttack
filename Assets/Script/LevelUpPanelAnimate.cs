@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Random = UnityEngine.Random;
+using System;
 
 public class LevelUpPanelAnimate : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
     private int skillImgCnt;
     public List<KeyValuePair<int, GameObject>> selectList = new List<KeyValuePair<int, GameObject>>(); //* 同じnewタイプ型を代入しないと、使えない。
     public int scrollingSpeed;
-    public bool isStop = false;
+    public bool isRollingStop = false;
 
     public Button[] skillBtns;
     //[System.Serializable] -> Show Inspector View
@@ -38,7 +39,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
         //Init Value
         time = 0;
         btnIdx = 0;
-        isStop = false;
+        isRollingStop = false;
 
 
         //* Set SkillBtn
@@ -99,13 +100,13 @@ public class LevelUpPanelAnimate : MonoBehaviour
                     selectList.RemoveAt(randIdx);
                     btnIdx++;
                     if(btnIdx == 2){
-                        isStop = true;
+                        isRollingStop = true;
                     }
                 }
             }
         }
         // #3.Animation: Scroll Up to Correct PosY
-        else if(isStop){
+        else if(isRollingStop){
             int speed = scrollingSpeed / 2;
             for(int i=0; i<SkillBtns.Length;i++){
                 float posY = SkillBtns[i].imgRectTf.localPosition.y % SPRITE_W;
@@ -114,7 +115,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
                     //Scroll Up
                     SkillBtns[i].imgRectTf.Translate(0, Time.deltaTime * speed / (i+1), 0);
                     //最後Idxが終わるまで待つ
-                    if(Mathf.RoundToInt(lastIdxPosY) == SPRITE_W) isStop = false;
+                    if(Mathf.RoundToInt(lastIdxPosY) == SPRITE_W) isRollingStop = false;
                 }
             }
         }
@@ -122,7 +123,11 @@ public class LevelUpPanelAnimate : MonoBehaviour
 
     //* GUI Button
     public void onClickSkillUpBtn(int index){//* Skill Level Up
+        //* (BUG)曲がりが終わるまで、クリックできない(スキル名が在るかを確認)。
+        if(Array.Exists(SkillBtns, btn => btn.name.text == "")) return;
+
         Debug.Log("onClickSkillUpBtn:: skillName= " + SkillBtns[index].name.text);
+
         //* Set Data
         switch(SkillBtns[index].name.text){
             case "Dmg Up": 
@@ -148,8 +153,8 @@ public class LevelUpPanelAnimate : MonoBehaviour
                 break;
 
         }
+        //* 終了
         this.gameObject.SetActive(false);
         gm.displaySkillInfo("INGAME");
-
     }
 }
