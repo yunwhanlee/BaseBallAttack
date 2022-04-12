@@ -278,14 +278,18 @@ public class GameManager : MonoBehaviour
     }
 
     public void displaySkillInfo(string type){
+        GameObject pref = (type == "PAUSE")? skillInfoRowPref : inGameSkillImgBtnPref;
+        Transform parentTf = (type == "PAUSE")? pauseSkillStatusTableTf : inGameSkillStatusTableTf;
+
+        //(BUG) 情報が重ならないように、一回 初期化する。
+        if(type != "PAUSE" && parentTf.childCount > 0)
+            foreach(Transform childTf in parentTf){Destroy(childTf.gameObject);}
+
         List<int> lvList = pl.getAllSkillLvList();
         int i=0;
         lvList.ForEach(lv => {
             if(lv > 0){
-                GameObject pref = (type == "PAUSE")? skillInfoRowPref : inGameSkillImgBtnPref;
-                Transform parentTf = (type == "PAUSE")? pauseSkillStatusTableTf : inGameSkillStatusTableTf;
                 String levelTxt = (type == "PAUSE")? ("x " + lv.ToString()) : lv.ToString();
-
                 var rowTf = Instantiate(pref, Vector3.zero, Quaternion.identity, parentTf).transform;
                 var imgObj = Instantiate(getSkillImgObjPrefs()[i], Vector3.zero, Quaternion.identity, rowTf);
                 if(type != "PAUSE"){

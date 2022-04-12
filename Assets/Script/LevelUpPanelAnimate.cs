@@ -46,7 +46,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
             new SkillBtn(skillBtns[0]), new SkillBtn(skillBtns[1]), new SkillBtn(skillBtns[2])
         };
 
-        //Init
+        //* Init Child Obj Remove All
         if(0 < SkillBtns[0].imgRectTf.childCount){
             foreach(var btn in SkillBtns){
                 btn.name.text = "";
@@ -150,5 +150,6 @@ public class LevelUpPanelAnimate : MonoBehaviour
         }
         this.gameObject.SetActive(false);
         gm.displaySkillInfo("INGAME");
+
     }
 }
