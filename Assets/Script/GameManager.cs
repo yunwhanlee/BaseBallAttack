@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
 
     public Text stageTxt;
     public Text stateTxt;
+    public Text levelTxt;
     public Text shootCntTxt;
 
     [Header("--Exp Slider Bar--")]
@@ -107,6 +108,7 @@ public class GameManager : MonoBehaviour
         //* GUI
         expBar.value = Mathf.Lerp(expBar.value, pl.getExp() / pl.getMaxExp(), Time.deltaTime * 10);
         stateTxt.text = state.ToString();
+        levelTxt.text = "LV : " + pl.getLv();
         stageTxt.text = "STAGE : " + stage.ToString();
 
         //* (BUG) ボールが複数ある時、同時に消えたら、次に進まないこと対応

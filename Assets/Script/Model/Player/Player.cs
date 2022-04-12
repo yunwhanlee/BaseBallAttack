@@ -90,6 +90,7 @@ public class Player : MonoBehaviour
     }
 
     public void setLv(int _lv) => lv = _lv;
+    public int getLv() => lv ;
     public float getMaxExp() => maxExp;
     public void setMaxExp(float _maxExp) => maxExp = _maxExp;
     public int getExp() => exp;
