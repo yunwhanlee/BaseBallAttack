@@ -8,12 +8,20 @@ public class EffectManager : MonoBehaviour
     //* OutSide
     public Transform effectGroup;
 
+    //* Obstacle EF
     public GameObject brokeBlockEF;
+
+    //* Passive Skill EF
     public GameObject explosionEF;
-    public GameObject thunderShotEF;
     public GameObject criticalTextEF;
     public GameObject instantKillTextEF;
 
+    //* Active Skill EF
+    public GameObject thunderShotEF, batThunderEF;
+
+    //*---------------------------------------
+    //* 関数
+    //*---------------------------------------
     public void createEffectBrokeBlock(Transform parentTf, Color color){
         var ins = Instantiate(brokeBlockEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
         ParticleSystem ps = ins.GetComponent<ParticleSystem>();
@@ -22,18 +30,13 @@ public class EffectManager : MonoBehaviour
         Destroy(ins, main.duration);
     }
 
+
     public void createEffectExplosion(Transform parentTf, float scale){
         Debug.Log("EFFECT:: Explosion:: scale=" + scale);
         var ins = Instantiate(explosionEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
         ins.transform.localScale = new Vector3(scale, scale, scale);
         Destroy(ins, 2);
     }
-
-    public void createEffectThunderShot(Transform parentTf, Quaternion dir){
-        var ins = Instantiate(thunderShotEF, parentTf.position, dir, effectGroup) as GameObject;
-        Destroy(ins, 1);
-    }
-
     public void createEffectCriticalText(Transform parentTf, int damage){
         var ins = Instantiate(criticalTextEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
         ins.GetComponentInChildren<Text>().text = damage.ToString();
@@ -42,5 +45,11 @@ public class EffectManager : MonoBehaviour
         public void createEffectInstantKillText(Transform parentTf){
         var ins = Instantiate(instantKillTextEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
         Destroy(ins, 1.5f);
+    }
+
+
+    public void createEffectThunderShot(Transform parentTf, Quaternion dir){
+        var ins = Instantiate(thunderShotEF, parentTf.position, dir, effectGroup) as GameObject;
+        Destroy(ins, 1);
     }
 }

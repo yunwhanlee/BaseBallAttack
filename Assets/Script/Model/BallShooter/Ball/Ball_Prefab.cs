@@ -92,7 +92,7 @@ public class Ball_Prefab : MonoBehaviour
                 : (distance <= pl.hitRank[E].Dist)? pl.hitRank[E].Power
                 : pl.hitRank[F].Power; //-> WORST HIT (distance <= 1.5f)
                 
-                //* Active Skills
+                //TODO Active Skills
                 if(gm.activeSkillBtnList[0].Trigger){
                     StartCoroutine(coPlayThunderShotSkillEffect(dir, 1f));
                     //return;
@@ -227,7 +227,7 @@ public class Ball_Prefab : MonoBehaviour
             }
         });
         em.createEffectThunderShot(this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
-        gm.activeSkillBtnList[0].init();
+        gm.activeSkillBtnList[0].init(pl.batEffectTf);
         
         //Before go up NextStage Wait for Second
         yield return new WaitForSeconds(waitTime);

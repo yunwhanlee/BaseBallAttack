@@ -68,11 +68,12 @@ public class ActiveSkillBtn{
     public Image SelectFence {get=> selectFence; set=> selectFence=value;}
 
     //method
-    public void init(){
+    public void init(GameObject plBatEffectTf){
         Trigger = false;
         Panel.material = null;
         GrayBG.fillAmount = 1;
         selectFence.gameObject.SetActive(false);
+        plBatEffectTf.SetActive(false);
     }
     public void decreaseFillAmount(){
         GrayBG.fillAmount -= unit;
@@ -80,13 +81,12 @@ public class ActiveSkillBtn{
     public void setActiveSkillEF(){
         Panel.material = (GrayBG.fillAmount == 0)? activeEFMt : null;
     }
-    public void onTriggerActive(){
+    public void onTriggerActive(GameObject plBatEffectTf){
         Debug.Log("onClickActiveSkillButton");
         if(GrayBG.fillAmount == 0){
             Trigger = !Trigger;
             selectFence.gameObject.SetActive(Trigger);
+            plBatEffectTf.SetActive(Trigger);
         }
     }
-
-
 }

@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
     public void onClickReGameButton() => init();
     public void onClickSkillButton() => levelUpPanel.SetActive(false);
     public void onClickSetGameButton(string type) => setGame(type);
-    public void onClickActiveSkillButton1() => activeSkillBtnList[0].onTriggerActive();
+    public void onClickActiveSkillButton1() => activeSkillBtnList[0].onTriggerActive(pl.batEffectTf);
 
     //*---------------------------------------
     //*  関数

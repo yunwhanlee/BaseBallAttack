@@ -38,8 +38,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxExp = 100;
     [SerializeField] private int exp = 0;
 
-    [Header("【Active Skill】")]
-    // --> GameManager
+    [Header("【Active Bat Effect】")]
+    [SerializeField] public GameObject batEffectTf;
     
     [Header("【Passive Skill】")]
     [SerializeField] public Skill<int> dmg;//private int dmg = 1;
