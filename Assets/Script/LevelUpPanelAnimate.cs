@@ -123,7 +123,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
 
     //* GUI Button
     public void onClickSkillUpBtn(int index){//* Skill Level Up
-        //* (BUG)曲がりが終わるまで、クリックできない(スキル名が在るかを確認)。
+        //* (BUG)曲がりが終わるまで、SkillBtnクリックできないように(スキル名が在るかを確認)。
         if(Array.Exists(SkillBtns, btn => btn.name.text == "")) return;
 
         Debug.Log("onClickSkillUpBtn:: skillName= " + SkillBtns[index].name.text);
