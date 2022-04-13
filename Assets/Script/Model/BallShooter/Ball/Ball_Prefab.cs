@@ -60,6 +60,7 @@ public class Ball_Prefab : MonoBehaviour
 
     //** Control
     private void OnTriggerStay(Collider col) {
+        {
         //* HIT BALL
         if(col.gameObject.tag == "HitRangeArea"){
             pl.setSwingArcColor("red");
@@ -92,12 +93,6 @@ public class Ball_Prefab : MonoBehaviour
                 : (distance <= pl.hitRank[E].Dist)? pl.hitRank[E].Power
                 : pl.hitRank[F].Power; //-> WORST HIT (distance <= 1.5f)
                 
-                //TODO Active Skills
-                if(gm.activeSkillBtnList[0].Trigger){
-                    StartCoroutine(coPlayThunderShotSkillEffect(dir, 1f));
-                    //return;
-                }
-
                 //* HomeRun
                 if(power >= pl.hitRank[B].Power){
                     StartCoroutine(coPlayHomeRunAnimation());
@@ -111,14 +106,26 @@ public class Ball_Prefab : MonoBehaviour
                     + ", <color=red>power=" + power + ", Rank: " + ((power==pl.hitRank[A].Power)? "A" : (power==pl.hitRank[B].Power)? "B" : (power==pl.hitRank[C].Power)? "C" : (power==pl.hitRank[D].Power)? "D" : (power==pl.hitRank[E].Power)? "E" : "F").ToString() + "</color>"
                     + ", Force=" + force);
 
-                //* Multi Shot
-                for(int i=0; i<pl.multiShot.getValue();i++){
-                    float [] addDegList = {-15, 15, -30, 30};
-                    Vector3 direction = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (deg + addDegList[i])), 0, Mathf.Cos(Mathf.Deg2Rad * (deg + addDegList[i]))).normalized;
-                    var ins = Instantiate(this.gameObject, this.transform.position, Quaternion.identity, gm.ballGroup) as GameObject;
-                    ins.GetComponent<Rigidbody>().AddForce(direction * force * 0.75f, ForceMode.Impulse);
-                    var scale = ins.GetComponent<Transform>().localScale;
-                    ins.GetComponent<Transform>().localScale = new Vector3(scale.x * 0.75f, scale.y * 0.75f, scale.z * 0.75f);
+                //! Active Skills
+                if(gm.activeSkillBtnList[0].Trigger){
+                    Debug.Log("Active Skill Trigger ON");
+                    //Thunder
+                    this.gameObject.transform.position = new Vector3(9999,9999,9999); //メインボールを遠い場所に送る。
+                    StartCoroutine(coPlayThunderShotSkillEffect(dir, 1f));
+
+                    //TODO FireBall
+                    //未実装
+                }
+                else{
+                    //* Multi Shot
+                    for(int i=0; i<pl.multiShot.getValue();i++){
+                        float [] addDegList = {-15, 15, -30, 30};
+                        Vector3 direction = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (deg + addDegList[i])), 0, Mathf.Cos(Mathf.Deg2Rad * (deg + addDegList[i]))).normalized;
+                        var ins = Instantiate(this.gameObject, this.transform.position, Quaternion.identity, gm.ballGroup) as GameObject;
+                        ins.GetComponent<Rigidbody>().AddForce(direction * force * 0.75f, ForceMode.Impulse);
+                        var scale = ins.GetComponent<Transform>().localScale;
+                        ins.GetComponent<Transform>().localScale = new Vector3(scale.x * 0.75f, scale.y * 0.75f, scale.z * 0.75f);
+                    }
                 }
             }
         }
@@ -127,6 +134,7 @@ public class Ball_Prefab : MonoBehaviour
             if(gm.state == GameManager.State.WAIT){
                 gm.downWall.isTrigger = false;//*下壁 物理O
             }
+        }
         }
     }
 
@@ -231,6 +239,7 @@ public class Ball_Prefab : MonoBehaviour
         
         //Before go up NextStage Wait for Second
         yield return new WaitForSeconds(waitTime);
+        Debug.Log("coPlayThunderShotSkillEffect:: onDestroyBall");
         onDestroyMe();
     }
 
