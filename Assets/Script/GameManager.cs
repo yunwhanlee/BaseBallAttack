@@ -56,13 +56,13 @@ public class GameManager : MonoBehaviour
 
     [Header("--Level Up--")]
     public GameObject levelUpPanel;
-    public GameObject[] skillImgObjPrefs;
 
     [Header("--Active Skill Btn--")]
     public Material activeSkillEffectMt;
     public List<ActiveSkillBtn> activeSkillBtnList;
 
     [Header("--Passive Skill Table InGame--")]
+    public GameObject[] passiveSkillImgObjPrefs;
     public RectTransform inGameSkillStatusTableTf;
     public GameObject inGameSkillImgBtnPref;
     
@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
     public void setState(State st) => state = st;
     public void setShootCntText(string str) => shootCntTxt.text = str;
     public void setBallPreviewGoalImgRGBA(Color color) => ballPreviewGoalImg.color = color;
-    public GameObject[] getSkillImgObjPrefs() => skillImgObjPrefs;
+    public GameObject[] getSkillImgObjPrefs() => passiveSkillImgObjPrefs;
     //* GUI Button
     public void onClickReadyButton() => switchCamScene();
     public void onClickReGameButton() => init();

@@ -38,16 +38,18 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxExp = 100;
     [SerializeField] private int exp = 0;
 
-    [Header("【Active Bat Effect】")]
-    [SerializeField] public GameObject batEffectTf;
+    [Header("【Set Active Bat Effect】")]
+    public Transform batEffectTf;
+    public ActiveSkill activeSkill_1;
+    
     
     [Header("【Passive Skill】")]
-    [SerializeField] public Skill<int> dmg;//private int dmg = 1;
-    [SerializeField] public Skill<int> multiShot;//private int multiCnt = 0;
-    [SerializeField] public Skill<float> speed;//private float speed = 1;
-    [SerializeField] public Skill<float> instantKill;//private float immediateKill = 0;
-    [SerializeField] public Skill<float> critical;//private float critical = 0;
-    [SerializeField] public Skill<Explosion> explosion;
+    public Skill<int> dmg;//private int dmg = 1;
+    public Skill<int> multiShot;//private int multiCnt = 0;
+    public Skill<float> speed;//private float speed = 1;
+    public Skill<float> instantKill;//private float immediateKill = 0;
+    public Skill<float> critical;//private float critical = 0;
+    public Skill<Explosion> explosion;
 
 
     //[SerializeField] private Explosion explosion;
@@ -65,8 +67,14 @@ public class Player : MonoBehaviour
         hitRank[D] = new HitRank(0.85f, 4);
         hitRank[E] = new HitRank(1.125f, 3);
         hitRank[F] = new HitRank(1.5f, 2);
+        
+        //* Set Active Skill : @params { string name, Image uiImg, GameObject shotEfPref, GameObject batEfPref }
+        Instantiate(activeSkill_1.BatEfPref, 
+            batEffectTf.transform.position, 
+            batEffectTf.transform.rotation, 
+            batEffectTf);
 
-        //* Set Skill : @params { int level, T value, T unit }
+        //* Set Passive Skill : @params { int level, T value, T unit }
         dmg = new Skill<int>(0, 1, 1);
         multiShot = new Skill<int>(0, 0, 1);
         speed = new Skill<float>(0, 1f, 0.2f);

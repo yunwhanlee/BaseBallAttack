@@ -38,11 +38,35 @@ public struct Explosion{
 
 //-------------------------------------------------
 //-------------------------------------------------
+[System.Serializable]
+public class ActiveSkill{
+    //value
+    [SerializeField] private string name;
+    [SerializeField] private Sprite uiSprite;
+    [SerializeField] private GameObject shotEfPref;
+    [SerializeField] private GameObject batEfPref;
+
+    //contructor
+    public ActiveSkill(string name, Sprite uiSprite, GameObject shotEfPref, GameObject batEfPref){
+        this.name = name;
+        this.uiSprite = uiSprite;
+        this.shotEfPref = shotEfPref;
+        this.batEfPref = batEfPref;
+    }
+
+    //get set
+    public string Name {get=> name;} 
+    public Sprite UISprite {get=> uiSprite;}
+    public GameObject ShotEfPref {get=> shotEfPref;}
+    public GameObject BatEfPref {get=> batEfPref;}
+}
+
 
 [System.Serializable]
 public class ActiveSkillBtn{
     //value
     [SerializeField] private float unit; //Decrease Fill Amount Unit
+    [SerializeField] private string name;
     [SerializeField] private bool trigger;
     [SerializeField] private Image panel;
     [SerializeField] private Image img;
@@ -61,6 +85,8 @@ public class ActiveSkillBtn{
     }
 
     //get set
+    public float Unit {get=> unit; set=> unit=value;}
+    public string Name {get=> name; set=> name=value;}
     public bool Trigger {get=> trigger; set=> trigger=value;}
     public Image Panel {get=> panel; set=> panel=value;}
     public Image Img {get=> img; set=> img=value;}
@@ -68,12 +94,20 @@ public class ActiveSkillBtn{
     public Image SelectFence {get=> selectFence; set=> selectFence=value;}
 
     //method
-    public void init(GameObject plBatEffectTf){
+    public void init(Transform plBatEffectTf){
         Trigger = false;
         Panel.material = null;
         GrayBG.fillAmount = 1;
         selectFence.gameObject.SetActive(false);
-        plBatEffectTf.SetActive(false);
+        plBatEffectTf.gameObject.SetActive(false);
+    }
+    public void onTriggerActive(Transform plBatEffectTf){
+        Debug.Log("onClickActiveSkillButton");
+        if(GrayBG.fillAmount == 0){
+            Trigger = !Trigger;
+            selectFence.gameObject.SetActive(Trigger);
+            plBatEffectTf.gameObject.SetActive(Trigger);
+        }
     }
     public void decreaseFillAmount(){
         GrayBG.fillAmount -= unit;
@@ -81,12 +115,5 @@ public class ActiveSkillBtn{
     public void setActiveSkillEF(){
         Panel.material = (GrayBG.fillAmount == 0)? activeEFMt : null;
     }
-    public void onTriggerActive(GameObject plBatEffectTf){
-        Debug.Log("onClickActiveSkillButton");
-        if(GrayBG.fillAmount == 0){
-            Trigger = !Trigger;
-            selectFence.gameObject.SetActive(Trigger);
-            plBatEffectTf.SetActive(Trigger);
-        }
-    }
+
 }

@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9141327660963160652}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.6, y: -0, z: 3.1}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -665,8 +665,8 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 0
     donutRadius: 0.2
-    m_Position: {x: 0.15, y: -0.000000010560265, z: -0.000000027142573}
-    m_Rotation: {x: 2.5048837e-12, y: 0.00084036315, z: 2.3479628e-12}
+    m_Position: {x: -0.1, y: 0, z: 0.1}
+    m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1.02, y: 0.4, z: 0.4}
     placementMode: 0
     m_MeshMaterialIndex: 0
