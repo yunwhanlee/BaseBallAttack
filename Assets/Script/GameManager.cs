@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
 
         //* Active Skill Btns
         Array.ForEach(activeSkillBtns, btn => {
-            activeSkillBtnList.Add(new ActiveSkillBtn(0.5f, btn, activeSkillEffectMt));
+            activeSkillBtnList.Add(new ActiveSkillBtn(0.5f, btn, pl.activeSkill_1.UISprite, activeSkillEffectMt));
         });
     }
 

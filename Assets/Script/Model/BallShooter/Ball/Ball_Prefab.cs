@@ -110,11 +110,11 @@ public class Ball_Prefab : MonoBehaviour
                 if(gm.activeSkillBtnList[0].Trigger){
                     Debug.Log("Active Skill Trigger ON");
                     //Thunder
-                    this.gameObject.transform.position = new Vector3(9999,9999,9999); //メインボールを遠い場所に送る。
-                    StartCoroutine(coPlayThunderShotSkillEffect(dir, 1f));
+                    // this.gameObject.transform.position = new Vector3(9999,9999,9999); //メインボールを遠い場所に送る。
+                    // StartCoroutine(coPlayThunderShotSkillEffect(dir, 1f));
 
-                    //TODO FireBall
-                    //未実装
+                    //FireBall
+                    Instantiate(pl.activeSkill_1.ShotEfPref, transform.position, Quaternion.identity, this.gameObject.transform);
                 }
                 else{
                     //* Multi Shot

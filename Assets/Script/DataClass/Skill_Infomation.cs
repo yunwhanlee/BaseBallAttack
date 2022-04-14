@@ -43,8 +43,8 @@ public class ActiveSkill{
     //value
     [SerializeField] private string name;
     [SerializeField] private Sprite uiSprite;
-    [SerializeField] private GameObject shotEfPref;
     [SerializeField] private GameObject batEfPref;
+    [SerializeField] private GameObject shotEfPref;
 
     //contructor
     public ActiveSkill(string name, Sprite uiSprite, GameObject shotEfPref, GameObject batEfPref){
@@ -75,10 +75,11 @@ public class ActiveSkillBtn{
     [SerializeField] private Material activeEFMt;
 
     //contructor
-    public ActiveSkillBtn(float unit, Button skillBtn, Material activeSkillEffectMt){
+    public ActiveSkillBtn(float unit, Button skillBtn, Sprite sprite, Material activeSkillEffectMt){
         this.unit = unit;
         panel = skillBtn.GetComponent<Image>();
-        img = skillBtn.transform.GetChild(0).GetComponent<Image>();
+        this.img = skillBtn.transform.GetChild(0).GetComponent<Image>();
+        this.img.sprite = sprite;
         grayBG = skillBtn.transform.GetChild(1).GetComponent<Image>();
         selectFence = skillBtn.transform.GetChild(2).GetComponent<Image>();
         activeEFMt = activeSkillEffectMt;
