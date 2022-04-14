@@ -152,6 +152,7 @@ public class Ball_Prefab : MonoBehaviour
     private void OnCollisionEnter(Collision col) {
         //* Give Damage
         if(col.gameObject.tag == "NormalBlock"){
+            // em.createEffectFileBallExplosion(this.transform);
             int result = 0;
             //* InstantKill
             int rand = Random.Range(0, 100);

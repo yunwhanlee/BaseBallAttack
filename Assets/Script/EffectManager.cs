@@ -18,6 +18,7 @@ public class EffectManager : MonoBehaviour
 
     //* Active Skill EF
     public GameObject thunderShotEF, batThunderEF;
+    public GameObject fileBallExplosionEF;
 
     //*---------------------------------------
     //* 関数
@@ -51,5 +52,9 @@ public class EffectManager : MonoBehaviour
     public void createEffectThunderShot(Transform parentTf, Quaternion dir){
         var ins = Instantiate(thunderShotEF, parentTf.position, dir, effectGroup) as GameObject;
         Destroy(ins, 1);
+    }
+    public void createEffectFileBallExplosion(Transform parentTf){
+        var ins = Instantiate(fileBallExplosionEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
+        Destroy(ins, 2);
     }
 }

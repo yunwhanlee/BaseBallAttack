@@ -45,13 +45,15 @@ public class ActiveSkill{
     [SerializeField] private Sprite uiSprite;
     [SerializeField] private GameObject batEfPref;
     [SerializeField] private GameObject shotEfPref;
+    [SerializeField] private GameObject explosionEfPref;
 
     //contructor
-    public ActiveSkill(string name, Sprite uiSprite, GameObject shotEfPref, GameObject batEfPref){
+    public ActiveSkill(string name, Sprite uiSprite, GameObject batEfPref, GameObject shotEfPref, GameObject explosionEfPref){
         this.name = name;
         this.uiSprite = uiSprite;
-        this.shotEfPref = shotEfPref;
         this.batEfPref = batEfPref;
+        this.shotEfPref = shotEfPref;
+        this.explosionEfPref = explosionEfPref;
     }
 
     //get set
@@ -59,6 +61,7 @@ public class ActiveSkill{
     public Sprite UISprite {get=> uiSprite;}
     public GameObject ShotEfPref {get=> shotEfPref;}
     public GameObject BatEfPref {get=> batEfPref;}
+    public GameObject ExplosionEfPref {get=> explosionEfPref;}
 }
 
 
