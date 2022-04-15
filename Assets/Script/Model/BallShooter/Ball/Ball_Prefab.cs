@@ -111,10 +111,13 @@ public class Ball_Prefab : MonoBehaviour
                     Debug.Log("Active Skill Trigger ON");
                     switch(pl.activeSkill1.Name){
                         case "Thunder":
-                            this.gameObject.transform.position = new Vector3(9999,9999,9999); //メインボールを遠い場所に送る。
+                            //(BUG) ボールはなしにする。
+                            this.gameObject.GetComponent<SphereCollider>().enabled = false;
+                            
                             StartCoroutine(coPlayThunderShotSkillEffect(dir, 1f));
                             break;
                         case "FireBall":
+                            //trail Effect
                             Instantiate(pl.activeSkill1.ShotEfPref, transform.position, Quaternion.identity, this.gameObject.transform);
                             break;
                     }

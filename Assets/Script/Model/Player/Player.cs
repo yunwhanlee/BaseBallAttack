@@ -83,7 +83,6 @@ public class Player : MonoBehaviour
         em.activeSkill1_ExplosionEF = activeSkill1.ExplosionEfPref;
         //create bat Effect
         em.createActiveSkillBatEF(batEffectTf);
-        //Instantiate(activeSkill1.BatEfPref, batEffectTf.transform.position, batEffectTf.transform.rotation, batEffectTf);
 
         //* Set Passive Skill : @params { int level, T value, T unit }
         dmg = new Skill<int>(0, 1, 1);
