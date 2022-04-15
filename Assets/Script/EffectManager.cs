@@ -54,8 +54,9 @@ public class EffectManager : MonoBehaviour
         foreach(Transform child in parentTf)  Destroy(child.gameObject);
         var ins = Instantiate(activeSkill1_BatEF, parentTf.position, parentTf.rotation, parentTf) as GameObject;
     }
-    public void createActiveSkillShotEF(Transform parentTf, Quaternion dir){
-        var ins = Instantiate(activeSkill1_ShotEF, parentTf.position, dir, effectGroup) as GameObject;
+    public void createActiveSkillShotEF(Transform parentTf, Quaternion dir, bool isTrailEffect = false){
+        Transform parent = (isTrailEffect)? parentTf : effectGroup;
+        var ins = Instantiate(activeSkill1_ShotEF, parentTf.position, dir, parent) as GameObject;
         Destroy(ins, 1);
     }
     public void createActiveSkillExplosionEF(Transform parentTf){

@@ -109,18 +109,18 @@ public class Ball_Prefab : MonoBehaviour
                 //TODO Shot Active Skills
                 if(gm.activeSkillBtnList[0].Trigger){
                     Debug.Log("Active Skill Trigger ON");
-                    switch(pl.activeSkill1.Name){
-                        case "Thunder":
-                            //(BUG) ボールはなしにする。
-                            this.gameObject.GetComponent<SphereCollider>().enabled = false;
-                            
-                            StartCoroutine(coPlayThunderShotSkillEffect(dir, 1f));
-                            break;
-                        case "FireBall":
-                            //trail Effect
-                            Instantiate(pl.activeSkill1.ShotEfPref, transform.position, Quaternion.identity, this.gameObject.transform);
-                            break;
-                    }
+                    // switch(pl.activeSkill1.Name){
+                    //     case "Thunder":
+                            //(BUG)ボールはなしにする。
+                            // this.gameObject.GetComponent<SphereCollider>().enabled = false;
+                            //処理
+                            StartCoroutine(coPlayActiveSkillShotEF(pl.activeSkill1.Name, 1f, dir));
+                        //     break;
+                        // case "FireBall":
+                        //     //trail Effect
+                        //     Instantiate(pl.activeSkill1.ShotEfPref, transform.position, Quaternion.identity, this.gameObject.transform);
+                        //     break;
+                    // }
                 }
                 else{
                     //* Multi Shot
@@ -164,6 +164,7 @@ public class Ball_Prefab : MonoBehaviour
                         //なし
                         break;
                     case "FireBall":
+
                         em.createActiveSkillExplosionEF(this.transform);
                         gm.activeSkillBtnList[0].init(pl.batEffectTf);
                         break;
@@ -239,21 +240,30 @@ public class Ball_Prefab : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    IEnumerator coPlayThunderShotSkillEffect(Vector3 dir, float waitTime){
-        const int maxDistance = 50;
-        const int width = 1;
-        Debug.DrawRay(this.transform.position, dir * maxDistance, Color.blue, 2f);
+    IEnumerator coPlayActiveSkillShotEF(string name, float waitTime, Vector3 dir){
+        switch(name){
+            case "Thunder":
+                //(BUG)ボールはなしにする。
+                this.gameObject.GetComponent<SphereCollider>().enabled = false;
 
-        RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, Vector3.one * width, dir, Quaternion.identity, maxDistance);
-        Array.ForEach(hits, hit => {
-            if(hit.transform.tag == "NormalBlock"){
-                em.createEffectCriticalText(hit.transform, pl.dmg.getValue() * 2);
-                hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(pl.dmg.getValue() * 2);
-            }
-        });
-        em.createActiveSkillShotEF(this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
-        gm.activeSkillBtnList[0].init(pl.batEffectTf);
-        
+                const int maxDistance = 50;
+                const int width = 1;
+                Debug.DrawRay(this.transform.position, dir * maxDistance, Color.blue, 2f);
+
+                RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, Vector3.one * width, dir, Quaternion.identity, maxDistance);
+                Array.ForEach(hits, hit => {
+                    if(hit.transform.tag == "NormalBlock"){
+                        em.createEffectCriticalText(hit.transform, pl.dmg.getValue() * 2);
+                        hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(pl.dmg.getValue() * 2);
+                    }
+                });
+                em.createActiveSkillShotEF(this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
+                gm.activeSkillBtnList[0].init(pl.batEffectTf);
+                break;
+            case "FireBall":
+                em.createActiveSkillShotEF(this.gameObject.transform, Quaternion.identity, true);
+                break;
+        }
         //Before go up NextStage Wait for Second
         yield return new WaitForSeconds(waitTime);
         onDestroyMe();
