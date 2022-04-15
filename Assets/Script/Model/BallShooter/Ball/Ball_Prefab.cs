@@ -106,21 +106,10 @@ public class Ball_Prefab : MonoBehaviour
                     + ", <color=red>power=" + power + ", Rank: " + ((power==pl.hitRank[A].Power)? "A" : (power==pl.hitRank[B].Power)? "B" : (power==pl.hitRank[C].Power)? "C" : (power==pl.hitRank[D].Power)? "D" : (power==pl.hitRank[E].Power)? "E" : "F").ToString() + "</color>"
                     + ", Force=" + force);
 
-                //TODO Shot Active Skills
+                //TODO Shot Active Skill
                 if(gm.activeSkillBtnList[0].Trigger){
                     Debug.Log("Active Skill Trigger ON");
-                    // switch(pl.activeSkill1.Name){
-                    //     case "Thunder":
-                            //(BUG)ボールはなしにする。
-                            // this.gameObject.GetComponent<SphereCollider>().enabled = false;
-                            //処理
-                            StartCoroutine(coPlayActiveSkillShotEF(pl.activeSkill1.Name, 1f, dir));
-                        //     break;
-                        // case "FireBall":
-                        //     //trail Effect
-                        //     Instantiate(pl.activeSkill1.ShotEfPref, transform.position, Quaternion.identity, this.gameObject.transform);
-                        //     break;
-                    // }
+                    StartCoroutine(coPlayActiveSkillShotEF(pl.activeSkill1.Name, 1f, dir));
                 }
                 else{
                     //* Multi Shot
@@ -158,15 +147,23 @@ public class Ball_Prefab : MonoBehaviour
     private void OnCollisionEnter(Collision col) {//* Give Damage
         
         if(col.gameObject.tag == "NormalBlock"){
+            //TODO Hit Active Skill
             if(gm.activeSkillBtnList[0].Trigger){
                 switch(pl.activeSkill1.Name){
                     case "Thunder":
                         //なし
                         break;
                     case "FireBall":
-
                         em.createActiveSkillExplosionEF(this.transform);
+                        //* Collider 
+                        RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, 5, Vector3.up, 0);
+                        Array.ForEach(hits, hit => {
+                            if(hit.transform.tag == "NormalBlock"){
+                                hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(10);
+                            }
+                        });
                         gm.activeSkillBtnList[0].init(pl.batEffectTf);
+                        this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                         break;
                 }
             }
@@ -243,13 +240,12 @@ public class Ball_Prefab : MonoBehaviour
     IEnumerator coPlayActiveSkillShotEF(string name, float waitTime, Vector3 dir){
         switch(name){
             case "Thunder":
-                //(BUG)ボールはなしにする。
-                this.gameObject.GetComponent<SphereCollider>().enabled = false;
-
                 const int maxDistance = 50;
                 const int width = 1;
                 Debug.DrawRay(this.transform.position, dir * maxDistance, Color.blue, 2f);
 
+                em.createActiveSkillShotEF(this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
+                //* Collider 
                 RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, Vector3.one * width, dir, Quaternion.identity, maxDistance);
                 Array.ForEach(hits, hit => {
                     if(hit.transform.tag == "NormalBlock"){
@@ -257,8 +253,8 @@ public class Ball_Prefab : MonoBehaviour
                         hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(pl.dmg.getValue() * 2);
                     }
                 });
-                em.createActiveSkillShotEF(this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
                 gm.activeSkillBtnList[0].init(pl.batEffectTf);
+                this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                 break;
             case "FireBall":
                 em.createActiveSkillShotEF(this.gameObject.transform, Quaternion.identity, true);
@@ -270,12 +266,17 @@ public class Ball_Prefab : MonoBehaviour
     }
 
     void OnDrawGizmos(){
-        // Explosion Skill Range Preview
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(this.transform.position, pl.explosion.getValue().range);
+        //* Explosion Skill Range Preview
+        // Gizmos.color = Color.yellow;
+        // Gizmos.DrawWireSphere(this.transform.position, pl.explosion.getValue().range);
 
-        // ThunderShot Skill Range Preview
+        //* ThunderShot Skill Range Preview
         // Gizmos.color = Color.blue;
         // Gizmos.DrawWireCube(this.transform.position, Vector3.one * 0.5f);
+
+        //* FireBall Skill Range Preview
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(this.transform.position, 5);
+
     }
 }
