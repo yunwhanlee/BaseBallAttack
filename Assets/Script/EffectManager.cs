@@ -17,8 +17,9 @@ public class EffectManager : MonoBehaviour
     public GameObject instantKillTextEF;
 
     //* Active Skill EF
-    public GameObject thunderShotEF, batThunderEF;
-    public GameObject fileBallExplosionEF;
+    public GameObject activeSkill1_BatEF;
+    public GameObject activeSkill1_ShotEF;
+    public GameObject activeSkill1_ExplosionEF;
 
     //*---------------------------------------
     //* 関数
@@ -48,13 +49,17 @@ public class EffectManager : MonoBehaviour
         Destroy(ins, 1.5f);
     }
 
-
-    public void createEffectThunderShot(Transform parentTf, Quaternion dir){
-        var ins = Instantiate(thunderShotEF, parentTf.position, dir, effectGroup) as GameObject;
+    public void createActiveSkillBatEF(Transform parentTf){
+        //init
+        foreach(Transform child in parentTf)  Destroy(child.gameObject);
+        var ins = Instantiate(activeSkill1_BatEF, parentTf.position, parentTf.rotation, parentTf) as GameObject;
+    }
+    public void createActiveSkillShotEF(Transform parentTf, Quaternion dir){
+        var ins = Instantiate(activeSkill1_ShotEF, parentTf.position, dir, effectGroup) as GameObject;
         Destroy(ins, 1);
     }
-    public void createEffectFileBallExplosion(Transform parentTf){
-        var ins = Instantiate(fileBallExplosionEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
+    public void createActiveSkillExplosionEF(Transform parentTf){
+        var ins = Instantiate(activeSkill1_ExplosionEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
         Destroy(ins, 2);
     }
 }

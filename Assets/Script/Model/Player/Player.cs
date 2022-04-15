@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
 {
     //* OutSide
     public GameManager gm;
+    public EffectManager em;
 
     [Header("【HIT 角度範囲】")]
     // CAM1
@@ -74,16 +75,15 @@ public class Player : MonoBehaviour
         hitRank[F] = new HitRank(1.5f, 2);
         
         //* Set Active Skill From Gm.SkillTable
-        Array.ForEach(gm.activeSkillTable, sk =>{
-            if(registActiveSkill1Name == sk.Name)
-                activeSkill1 = new ActiveSkill(sk.Name, sk.UISprite, sk.BatEfPref, sk.ShotEfPref, sk.ExplosionEfPref);
-        });
-        
-
-
-        //bat Effect
-        // Instantiate(activeSkill_1.BatEfPref, batEffectTf.transform.position, batEffectTf.transform.rotation, batEffectTf);
-        
+        //Regist Select Active Skill
+        activeSkill1 = new ActiveSkill(registActiveSkill1Name, gm.activeSkillTable);
+        //Regist Effect Manager
+        em.activeSkill1_BatEF = activeSkill1.BatEfPref;
+        em.activeSkill1_ShotEF = activeSkill1.ShotEfPref;
+        em.activeSkill1_ExplosionEF = activeSkill1.ExplosionEfPref;
+        //create bat Effect
+        em.createActiveSkillBatEF(batEffectTf);
+        //Instantiate(activeSkill1.BatEfPref, batEffectTf.transform.position, batEffectTf.transform.rotation, batEffectTf);
 
         //* Set Passive Skill : @params { int level, T value, T unit }
         dmg = new Skill<int>(0, 1, 1);

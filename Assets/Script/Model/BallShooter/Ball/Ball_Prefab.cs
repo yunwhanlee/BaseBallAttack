@@ -106,15 +106,18 @@ public class Ball_Prefab : MonoBehaviour
                     + ", <color=red>power=" + power + ", Rank: " + ((power==pl.hitRank[A].Power)? "A" : (power==pl.hitRank[B].Power)? "B" : (power==pl.hitRank[C].Power)? "C" : (power==pl.hitRank[D].Power)? "D" : (power==pl.hitRank[E].Power)? "E" : "F").ToString() + "</color>"
                     + ", Force=" + force);
 
-                //! Active Skills
+                //TODO Shot Active Skills
                 if(gm.activeSkillBtnList[0].Trigger){
                     Debug.Log("Active Skill Trigger ON");
-                    //Thunder
-                    // this.gameObject.transform.position = new Vector3(9999,9999,9999); //メインボールを遠い場所に送る。
-                    // StartCoroutine(coPlayThunderShotSkillEffect(dir, 1f));
-
-                    //FireBall
-                    Instantiate(pl.activeSkill1.ShotEfPref, transform.position, Quaternion.identity, this.gameObject.transform);
+                    switch(pl.activeSkill1.Name){
+                        case "Thunder":
+                            this.gameObject.transform.position = new Vector3(9999,9999,9999); //メインボールを遠い場所に送る。
+                            StartCoroutine(coPlayThunderShotSkillEffect(dir, 1f));
+                            break;
+                        case "FireBall":
+                            Instantiate(pl.activeSkill1.ShotEfPref, transform.position, Quaternion.identity, this.gameObject.transform);
+                            break;
+                    }
                 }
                 else{
                     //* Multi Shot
@@ -149,10 +152,20 @@ public class Ball_Prefab : MonoBehaviour
     }
 
     //* Hit Block
-    private void OnCollisionEnter(Collision col) {
-        //* Give Damage
+    private void OnCollisionEnter(Collision col) {//* Give Damage
+        
         if(col.gameObject.tag == "NormalBlock"){
-            // em.createEffectFileBallExplosion(this.transform);
+            if(gm.activeSkillBtnList[0].Trigger){
+                switch(pl.activeSkill1.Name){
+                    case "Thunder":
+                        //なし
+                        break;
+                    case "FireBall":
+                        em.createActiveSkillExplosionEF(this.transform);
+                        gm.activeSkillBtnList[0].init(pl.batEffectTf);
+                        break;
+                }
+            }
             int result = 0;
             //* InstantKill
             int rand = Random.Range(0, 100);
@@ -235,7 +248,7 @@ public class Ball_Prefab : MonoBehaviour
                 hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(pl.dmg.getValue() * 2);
             }
         });
-        em.createEffectThunderShot(this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
+        em.createActiveSkillShotEF(this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
         gm.activeSkillBtnList[0].init(pl.batEffectTf);
         
         //Before go up NextStage Wait for Second

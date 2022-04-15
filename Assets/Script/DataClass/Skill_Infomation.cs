@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 [System.Serializable]
 public class Skill<T>{
@@ -48,12 +49,16 @@ public class ActiveSkill{
     [SerializeField] private GameObject explosionEfPref;
 
     //contructor
-    public ActiveSkill(string name, Sprite uiSprite, GameObject batEfPref, GameObject shotEfPref, GameObject explosionEfPref){
-        this.name = name;
-        this.uiSprite = uiSprite;
-        this.batEfPref = batEfPref;
-        this.shotEfPref = shotEfPref;
-        this.explosionEfPref = explosionEfPref;
+    public ActiveSkill(string name, ActiveSkill[] activeSkillTable){//Sprite uiSprite, GameObject batEfPref, GameObject shotEfPref, GameObject explosionEfPref){
+        Array.ForEach(activeSkillTable, skillList=>{
+            if(name == skillList.Name){//* Regist Select Active Skill
+                this.name = skillList.Name;
+                this.uiSprite = skillList.uiSprite;
+                this.batEfPref = skillList.batEfPref;
+                this.shotEfPref = skillList.shotEfPref;
+                this.explosionEfPref = skillList.explosionEfPref;
+            }
+        });
     }
 
     //get set

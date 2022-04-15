@@ -3144,9 +3144,9 @@ MonoBehaviour:
   explosionEF: {fileID: 4643957893822756392, guid: f7ce8225f27202143a23c0bd225930bc, type: 3}
   criticalTextEF: {fileID: 3436073781772722895, guid: 61dc174dba28d954c9d42ce5e8dbcc60, type: 3}
   instantKillTextEF: {fileID: 3436073781772722895, guid: 58b2160a5a2f7994bb5ff653a164e704, type: 3}
-  thunderShotEF: {fileID: 734253401335635100, guid: edc9de1432b5e054f82ade07a1e91b75, type: 3}
-  batThunderEF: {fileID: 0}
-  fileBallExplosionEF: {fileID: 0}
+  activeSkill1_BatEF: {fileID: 0}
+  activeSkill1_ShotEF: {fileID: 0}
+  activeSkill1_ExplosionEF: {fileID: 0}
 --- !u!1 &702911504
 GameObject:
   m_ObjectHideFlags: 0
@@ -3177,7 +3177,7 @@ Transform:
   m_Children:
   - {fileID: 1820585578}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &702911506
 MonoBehaviour:
@@ -3192,6 +3192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gm: {fileID: 1623732227}
+  em: {fileID: 689221855}
   arrowAxisAnchor: {fileID: 1758083608}
   swingArcArea: {fileID: 1085245472}
   MAX_HIT_DEG: 90
@@ -3205,7 +3206,7 @@ MonoBehaviour:
   maxExp: 100
   exp: 0
   batEffectTf: {fileID: 1126524771}
-  registActiveSkill1Name: FireBall
+  registActiveSkill1Name: Thunder
   activeSkill1:
     name: 
     uiSprite: {fileID: 0}
@@ -3331,7 +3332,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 50, y: -145, z: 0}
 --- !u!1 &721110434
 GameObject:
@@ -3945,7 +3946,7 @@ Transform:
   - {fileID: 1855926415}
   - {fileID: 1634056560}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &764482076
 GameObject:
@@ -9558,7 +9559,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
@@ -9733,7 +9734,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1023542668
 GameObject:
@@ -11091,7 +11092,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1343411151
 MonoBehaviour:
@@ -14805,7 +14806,7 @@ RectTransform:
   - {fileID: 557986894}
   - {fileID: 1572075154}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
