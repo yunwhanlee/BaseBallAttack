@@ -62,6 +62,8 @@ public class ActiveSkill{
     public GameObject ShotEfPref {get=> shotEfPref;}
     public GameObject BatEfPref {get=> batEfPref;}
     public GameObject ExplosionEfPref {get=> explosionEfPref;}
+
+    //method
 }
 
 

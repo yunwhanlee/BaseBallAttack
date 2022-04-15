@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 [System.Serializable]
 public class HitRank{
@@ -17,6 +18,9 @@ public class HitRank{
 
 public class Player : MonoBehaviour
 {
+    //* OutSide
+    public GameManager gm;
+
     [Header("【HIT 角度範囲】")]
     // CAM1
     public GameObject arrowAxisAnchor;
@@ -40,7 +44,8 @@ public class Player : MonoBehaviour
 
     [Header("【Set Active Bat Effect】")]
     public Transform batEffectTf;
-    public ActiveSkill activeSkill_1;
+    public string registActiveSkill1Name;
+    public ActiveSkill activeSkill1;
     
     
     [Header("【Passive Skill】")]
@@ -68,11 +73,17 @@ public class Player : MonoBehaviour
         hitRank[E] = new HitRank(1.125f, 3);
         hitRank[F] = new HitRank(1.5f, 2);
         
-        //* Set Active Skill : @params { string name, Image uiImg, GameObject shotEfPref, GameObject batEfPref }
-        Instantiate(activeSkill_1.BatEfPref, 
-            batEffectTf.transform.position, 
-            batEffectTf.transform.rotation, 
-            batEffectTf);
+        //* Set Active Skill From Gm.SkillTable
+        Array.ForEach(gm.activeSkillTable, sk =>{
+            if(registActiveSkill1Name == sk.Name)
+                activeSkill1 = new ActiveSkill(sk.Name, sk.UISprite, sk.BatEfPref, sk.ShotEfPref, sk.ExplosionEfPref);
+        });
+        
+
+
+        //bat Effect
+        // Instantiate(activeSkill_1.BatEfPref, batEffectTf.transform.position, batEffectTf.transform.rotation, batEffectTf);
+        
 
         //* Set Passive Skill : @params { int level, T value, T unit }
         dmg = new Skill<int>(0, 1, 1);

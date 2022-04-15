@@ -114,7 +114,7 @@ public class Ball_Prefab : MonoBehaviour
                     // StartCoroutine(coPlayThunderShotSkillEffect(dir, 1f));
 
                     //FireBall
-                    Instantiate(pl.activeSkill_1.ShotEfPref, transform.position, Quaternion.identity, this.gameObject.transform);
+                    Instantiate(pl.activeSkill1.ShotEfPref, transform.position, Quaternion.identity, this.gameObject.transform);
                 }
                 else{
                     //* Multi Shot
@@ -240,7 +240,6 @@ public class Ball_Prefab : MonoBehaviour
         
         //Before go up NextStage Wait for Second
         yield return new WaitForSeconds(waitTime);
-        Debug.Log("coPlayThunderShotSkillEffect:: onDestroyBall");
         onDestroyMe();
     }
 

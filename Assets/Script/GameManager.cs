@@ -58,7 +58,8 @@ public class GameManager : MonoBehaviour
     public GameObject levelUpPanel;
 
     [Header("--Active Skill Btn--")]
-    public Material activeSkillEffectMt;
+    public ActiveSkill[] activeSkillTable;
+    public Material activeSkillBtnEfMt;
     public List<ActiveSkillBtn> activeSkillBtnList;
 
     [Header("--Passive Skill Table InGame--")]
@@ -97,7 +98,7 @@ public class GameManager : MonoBehaviour
 
         //* Active Skill Btns
         Array.ForEach(activeSkillBtns, btn => {
-            activeSkillBtnList.Add(new ActiveSkillBtn(0.5f, btn, pl.activeSkill_1.UISprite, activeSkillEffectMt));
+            activeSkillBtnList.Add(new ActiveSkillBtn(0.5f, btn, pl.activeSkill1.UISprite, activeSkillBtnEfMt));
         });
     }
 
