@@ -47,6 +47,7 @@ public class Player : MonoBehaviour
     public Transform batEffectTf;
     public string registActiveSkill1Name;
     public ActiveSkill activeSkill1;
+    public ActiveSkill activeSkill2;
     
     
     [Header("【Passive Skill】")]

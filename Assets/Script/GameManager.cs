@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
 
     [Header("--Button--")]
     public Button readyBtn; //Normal
-    public Button[] activeSkillBtns; //Normal
+    public Transform activeSkillBtnGroup; //Normal
     public Button reGameBtn; //gameoverPanel
     public Button pauseBtn; //pausePanel
     public Button continueBtn; //pausePanel
@@ -97,9 +97,10 @@ public class GameManager : MonoBehaviour
         setBallPreviewGoalRandomPos();
 
         //* Active Skill Btns
-        Array.ForEach(activeSkillBtns, btn => {
+        foreach(Transform child in activeSkillBtnGroup){
+            Button btn = child.GetComponent<Button>();
             activeSkillBtnList.Add(new ActiveSkillBtn(0.5f, btn, pl.activeSkill1.UISprite, activeSkillBtnEfMt));
-        });
+        }
     }
 
     void Update(){
@@ -170,7 +171,10 @@ public class GameManager : MonoBehaviour
             
             StrikePanel.SetActive(true);
 
-            Array.ForEach(activeSkillBtns, btn => btn.gameObject.SetActive(false));
+            foreach(Transform child in activeSkillBtnGroup){
+                Button btn = child.GetComponent<Button>();
+                btn.gameObject.SetActive(false);
+            }
         }
         else{//* CAM1 On
             state = GameManager.State.WAIT;
@@ -189,7 +193,10 @@ public class GameManager : MonoBehaviour
 
             StrikePanel.SetActive(false);
 
-            Array.ForEach(activeSkillBtns, btn => btn.gameObject.SetActive(true));
+            foreach(Transform child in activeSkillBtnGroup){
+                Button btn = child.GetComponent<Button>();
+                btn.gameObject.SetActive(true);
+            }
 
             StopCoroutine("corSetStrike");
         }

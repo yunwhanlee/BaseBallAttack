@@ -145,7 +145,6 @@ public class Ball_Prefab : MonoBehaviour
 
     //* Hit Block
     private void OnCollisionEnter(Collision col) {//* Give Damage
-        
         if(col.gameObject.tag == "NormalBlock"){
             //TODO Hit Active Skill
             if(gm.activeSkillBtnList[0].Trigger){
@@ -167,6 +166,7 @@ public class Ball_Prefab : MonoBehaviour
                         break;
                 }
             }
+
             int result = 0;
             //* InstantKill
             int rand = Random.Range(0, 100);
@@ -257,13 +257,15 @@ public class Ball_Prefab : MonoBehaviour
                 this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                 break;
             case "FireBall":
-                em.createActiveSkillShotEF(this.gameObject.transform, Quaternion.identity, true);
+                em.createActiveSkillShotEF(this.gameObject.transform, Quaternion.identity, true); //Trail
                 break;
         }
         //Before go up NextStage Wait for Second
         yield return new WaitForSeconds(waitTime);
         onDestroyMe();
     }
+
+    
 
     void OnDrawGizmos(){
         //* Explosion Skill Range Preview
