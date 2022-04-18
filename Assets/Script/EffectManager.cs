@@ -17,9 +17,9 @@ public class EffectManager : MonoBehaviour
     public GameObject instantKillTextEF;
 
     //* Active Skill EF
-    public GameObject activeSkill1_BatEF;
-    public GameObject activeSkill1_ShotEF;
-    public GameObject activeSkill1_ExplosionEF;
+    public GameObject[] activeSkillBatEFs = new GameObject[2];
+    public GameObject[] activeSkillShotEFs = new GameObject[2];
+    public GameObject[] activeSkillExplosionEFs = new GameObject[2];
 
     //*---------------------------------------
     //* 関数
@@ -49,18 +49,17 @@ public class EffectManager : MonoBehaviour
         Destroy(ins, 1.5f);
     }
 
-    public void createActiveSkillBatEF(Transform parentTf){
-        //init
-        foreach(Transform child in parentTf)  Destroy(child.gameObject);
-        var ins = Instantiate(activeSkill1_BatEF, parentTf.position, parentTf.rotation, parentTf) as GameObject;
+    public void createActiveSkillBatEF(int idx, Transform parentTf){
+        // foreach(Transform child in parentTf)  Destroy(child.gameObject); //init
+        var ins = Instantiate(activeSkillBatEFs[idx], parentTf.position, parentTf.rotation, parentTf) as GameObject;
     }
-    public void createActiveSkillShotEF(Transform parentTf, Quaternion dir, bool isTrailEffect = false){
+    public void createActiveSkillShotEF(int idx, Transform parentTf, Quaternion dir, bool isTrailEffect = false){
         Transform parent = (isTrailEffect)? parentTf : effectGroup;
-        var ins = Instantiate(activeSkill1_ShotEF, parentTf.position, dir, parent) as GameObject;
+        var ins = Instantiate(activeSkillShotEFs[idx], parentTf.position, dir, parent) as GameObject;
         Destroy(ins, 1);
     }
-    public void createActiveSkillExplosionEF(Transform parentTf){
-        var ins = Instantiate(activeSkill1_ExplosionEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
+    public void createActiveSkillExplosionEF(int idx, Transform parentTf){
+        var ins = Instantiate(activeSkillExplosionEFs[idx], parentTf.position, Quaternion.identity, effectGroup) as GameObject;
         Destroy(ins, 2);
     }
 }

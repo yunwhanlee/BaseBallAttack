@@ -3220,9 +3220,15 @@ MonoBehaviour:
   explosionEF: {fileID: 4643957893822756392, guid: f7ce8225f27202143a23c0bd225930bc, type: 3}
   criticalTextEF: {fileID: 3436073781772722895, guid: 61dc174dba28d954c9d42ce5e8dbcc60, type: 3}
   instantKillTextEF: {fileID: 3436073781772722895, guid: 58b2160a5a2f7994bb5ff653a164e704, type: 3}
-  activeSkill1_BatEF: {fileID: 0}
-  activeSkill1_ShotEF: {fileID: 0}
-  activeSkill1_ExplosionEF: {fileID: 0}
+  activeSkillBatEFs:
+  - {fileID: 0}
+  - {fileID: 0}
+  activeSkillShotEFs:
+  - {fileID: 0}
+  - {fileID: 0}
+  activeSkillExplosionEFs:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &702911504
 GameObject:
   m_ObjectHideFlags: 0
@@ -3282,15 +3288,16 @@ MonoBehaviour:
   maxExp: 100
   exp: 0
   batEffectTf: {fileID: 1126524771}
-  registActiveSkill1Name: FireBall
-  activeSkill1:
-    name: 
+  registAtvSkillNames:
+  - Thunder
+  - FireBall
+  activeSkills:
+  - name: 
     uiSprite: {fileID: 0}
     batEfPref: {fileID: 0}
     shotEfPref: {fileID: 0}
     explosionEfPref: {fileID: 0}
-  activeSkill2:
-    name: 
+  - name: 
     uiSprite: {fileID: 0}
     batEfPref: {fileID: 0}
     shotEfPref: {fileID: 0}
@@ -3598,8 +3605,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1623732227}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: onClickActiveSkillButton1
-        m_Mode: 1
+        m_MethodName: onClickActiveSkillButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -17324,18 +17331,18 @@ MonoBehaviour:
   - {fileID: 1138305771}
   levelUpPanel: {fileID: 557986893}
   activeSkillTable:
-  - name: FireBall
-    uiSprite: {fileID: 21300000, guid: 3dfe47261e46cd34982aed5e5caea167, type: 3}
-    batEfPref: {fileID: 7978549474777294668, guid: a168f941c26568247919f4f555ed90d6, type: 3}
-    shotEfPref: {fileID: 6303178564355127388, guid: 8eb5b757eb71b92478dffd67335020f6, type: 3}
-    explosionEfPref: {fileID: 5182104163466940332, guid: 2060b7cde9a14fd4a87386529f2db108, type: 3}
   - name: Thunder
     uiSprite: {fileID: 21300000, guid: cd21a2aefb1cb5a4db7fe2a1a14b5c06, type: 3}
     batEfPref: {fileID: 9141327660963160652, guid: 1f89a66d3d044ac48bf60a148cf1b559, type: 3}
     shotEfPref: {fileID: 734253401335635100, guid: edc9de1432b5e054f82ade07a1e91b75, type: 3}
     explosionEfPref: {fileID: 0}
-  activeSkillBtnEfMt: {fileID: 2100000, guid: f5741323f9a2ef44abe392a3008f0a3f, type: 2}
+  - name: FireBall
+    uiSprite: {fileID: 21300000, guid: 3dfe47261e46cd34982aed5e5caea167, type: 3}
+    batEfPref: {fileID: 7978549474777294668, guid: a168f941c26568247919f4f555ed90d6, type: 3}
+    shotEfPref: {fileID: 6303178564355127388, guid: 8eb5b757eb71b92478dffd67335020f6, type: 3}
+    explosionEfPref: {fileID: 5182104163466940332, guid: 2060b7cde9a14fd4a87386529f2db108, type: 3}
   activeSkillBtnList: []
+  activeSkillBtnEfMt: {fileID: 2100000, guid: f5741323f9a2ef44abe392a3008f0a3f, type: 2}
   passiveSkillImgObjPrefs:
   - {fileID: 5646658460974134969, guid: 9c3959f2820441145a232b352b0eddc0, type: 3}
   - {fileID: 2024090791339072515, guid: 82aeceecafe4e05488db05c172108681, type: 3}
@@ -17351,8 +17358,6 @@ MonoBehaviour:
   skillInfoRowPref: {fileID: 3622790578802042750, guid: ee31cff3369478142bf23697ccda1b04, type: 3}
   gameoverPanel: {fileID: 1572075153}
   readyBtn: {fileID: 543322737}
-  activeSkillBtns:
-  - {fileID: 722172428}
   activeSkillBtnGroup: {fileID: 467978857}
   reGameBtn: {fileID: 1023542670}
   pauseBtn: {fileID: 1542116614}
@@ -17761,12 +17766,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1623732227}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: onClickActiveSkillButton1
-        m_Mode: 1
+        m_MethodName: onClickActiveSkillButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

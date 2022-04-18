@@ -106,22 +106,23 @@ public class Ball_Prefab : MonoBehaviour
                     + ", <color=red>power=" + power + ", Rank: " + ((power==pl.hitRank[A].Power)? "A" : (power==pl.hitRank[B].Power)? "B" : (power==pl.hitRank[C].Power)? "C" : (power==pl.hitRank[D].Power)? "D" : (power==pl.hitRank[E].Power)? "E" : "F").ToString() + "</color>"
                     + ", Force=" + force);
 
-                //TODO Shot Active Skill
-                if(gm.activeSkillBtnList[0].Trigger){
-                    Debug.Log("Active Skill Trigger ON");
-                    StartCoroutine(coPlayActiveSkillShotEF(pl.activeSkill1.Name, 1f, dir));
-                }
-                else{
-                    //* Multi Shot
-                    for(int i=0; i<pl.multiShot.getValue();i++){
-                        float [] addDegList = {-15, 15, -30, 30};
-                        Vector3 direction = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (deg + addDegList[i])), 0, Mathf.Cos(Mathf.Deg2Rad * (deg + addDegList[i]))).normalized;
-                        var ins = Instantiate(this.gameObject, this.transform.position, Quaternion.identity, gm.ballGroup) as GameObject;
-                        ins.GetComponent<Rigidbody>().AddForce(direction * force * 0.75f, ForceMode.Impulse);
-                        var scale = ins.GetComponent<Transform>().localScale;
-                        ins.GetComponent<Transform>().localScale = new Vector3(scale.x * 0.75f, scale.y * 0.75f, scale.z * 0.75f);
+                //* #1. Active SHOT Skill
+                gm.activeSkillBtnList.ForEach(skillBtn=>{
+                    if(skillBtn.Trigger){
+                        StartCoroutine(coPlayActiveSkillShotEF(skillBtn.Name, 1f, dir));
                     }
-                }
+                    else{
+                        //* Multi Shot
+                        for(int i=0; i<pl.multiShot.getValue();i++){
+                            float [] addDegList = {-15, 15, -30, 30};
+                            Vector3 direction = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (deg + addDegList[i])), 0, Mathf.Cos(Mathf.Deg2Rad * (deg + addDegList[i]))).normalized;
+                            var ins = Instantiate(this.gameObject, this.transform.position, Quaternion.identity, gm.ballGroup) as GameObject;
+                            ins.GetComponent<Rigidbody>().AddForce(direction * force * 0.75f, ForceMode.Impulse);
+                            var scale = ins.GetComponent<Transform>().localScale;
+                            ins.GetComponent<Transform>().localScale = new Vector3(scale.x * 0.75f, scale.y * 0.75f, scale.z * 0.75f);
+                        }
+                    }
+                });
             }
         }
         else if(col.gameObject.tag == "ActiveDownWall"){
@@ -146,26 +147,28 @@ public class Ball_Prefab : MonoBehaviour
     //* Hit Block
     private void OnCollisionEnter(Collision col) {//* Give Damage
         if(col.gameObject.tag == "NormalBlock"){
-            //TODO Hit Active Skill
-            if(gm.activeSkillBtnList[0].Trigger){
-                switch(pl.activeSkill1.Name){
-                    case "Thunder":
-                        //なし
-                        break;
-                    case "FireBall":
-                        em.createActiveSkillExplosionEF(this.transform);
-                        //* Collider 
-                        RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, 5, Vector3.up, 0);
-                        Array.ForEach(hits, hit => {
-                            if(hit.transform.tag == "NormalBlock"){
-                                hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(10);
-                            }
-                        });
-                        gm.activeSkillBtnList[0].init(pl.batEffectTf);
-                        this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
-                        break;
+            //* #2. Active HIT Skill
+            gm.activeSkillBtnList.ForEach(skillBtn => {
+                if(skillBtn.Trigger){
+                    switch(skillBtn.Name){
+                        case "Thunder":
+                            //なし
+                            break;
+                        case "FireBall":
+                            em.createActiveSkillExplosionEF(1, this.transform);
+                            //* Collider 
+                            RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, 5, Vector3.up, 0);
+                            Array.ForEach(hits, hit => {
+                                if(hit.transform.tag == "NormalBlock"){
+                                    hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(10);
+                                }
+                            });
+                            skillBtn.init(pl.batEffectTf);
+                            this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
+                            break;
+                    }
                 }
-            }
+            });
 
             int result = 0;
             //* InstantKill
@@ -244,7 +247,7 @@ public class Ball_Prefab : MonoBehaviour
                 const int width = 1;
                 Debug.DrawRay(this.transform.position, dir * maxDistance, Color.blue, 2f);
 
-                em.createActiveSkillShotEF(this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
+                em.createActiveSkillShotEF(0, this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
                 //* Collider 
                 RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, Vector3.one * width, dir, Quaternion.identity, maxDistance);
                 Array.ForEach(hits, hit => {
@@ -257,7 +260,7 @@ public class Ball_Prefab : MonoBehaviour
                 this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                 break;
             case "FireBall":
-                em.createActiveSkillShotEF(this.gameObject.transform, Quaternion.identity, true); //Trail
+                em.createActiveSkillShotEF(1, this.gameObject.transform, Quaternion.identity, true); //Trail
                 break;
         }
         //Before go up NextStage Wait for Second

@@ -59,8 +59,8 @@ public class GameManager : MonoBehaviour
 
     [Header("--Active Skill Btn--")]
     public ActiveSkill[] activeSkillTable;
-    public Material activeSkillBtnEfMt;
     public List<ActiveSkillBtn> activeSkillBtnList;
+    public Material activeSkillBtnEfMt;
 
     [Header("--Passive Skill Table InGame--")]
     public GameObject[] passiveSkillImgObjPrefs;
@@ -97,9 +97,11 @@ public class GameManager : MonoBehaviour
         setBallPreviewGoalRandomPos();
 
         //* Active Skill Btns
+        int i=0;
         foreach(Transform child in activeSkillBtnGroup){
             Button btn = child.GetComponent<Button>();
-            activeSkillBtnList.Add(new ActiveSkillBtn(0.5f, btn, pl.activeSkill1.UISprite, activeSkillBtnEfMt));
+            activeSkillBtnList.Add(new ActiveSkillBtn(0.5f, pl.activeSkills[i].Name,btn, pl.activeSkills[i].UISprite, activeSkillBtnEfMt));
+            i++;
         }
     }
 
@@ -133,7 +135,7 @@ public class GameManager : MonoBehaviour
     public void onClickReGameButton() => init();
     public void onClickSkillButton() => levelUpPanel.SetActive(false);
     public void onClickSetGameButton(string type) => setGame(type);
-    public void onClickActiveSkillButton1() => activeSkillBtnList[0].onTriggerActive(pl.batEffectTf);
+    public void onClickActiveSkillButton(int i) => activeSkillBtnList[i].onTriggerActive(i, pl.batEffectTf);
 
     //*---------------------------------------
     //*  関数

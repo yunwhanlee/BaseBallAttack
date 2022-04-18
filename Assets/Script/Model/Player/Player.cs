@@ -45,9 +45,8 @@ public class Player : MonoBehaviour
 
     [Header("【Set Active Bat Effect】")]
     public Transform batEffectTf;
-    public string registActiveSkill1Name;
-    public ActiveSkill activeSkill1;
-    public ActiveSkill activeSkill2;
+    public string[] registAtvSkillNames = new string[2];
+    public ActiveSkill[] activeSkills = new ActiveSkill[2];
     
     
     [Header("【Passive Skill】")]
@@ -75,15 +74,18 @@ public class Player : MonoBehaviour
         hitRank[E] = new HitRank(1.125f, 3);
         hitRank[F] = new HitRank(1.5f, 2);
         
-        //* Set Active Skill From Gm.SkillTable
-        //Regist Select Active Skill
-        activeSkill1 = new ActiveSkill(registActiveSkill1Name, gm.activeSkillTable);
-        //Regist Effect Manager
-        em.activeSkill1_BatEF = activeSkill1.BatEfPref;
-        em.activeSkill1_ShotEF = activeSkill1.ShotEfPref;
-        em.activeSkill1_ExplosionEF = activeSkill1.ExplosionEfPref;
-        //create bat Effect
-        em.createActiveSkillBatEF(batEffectTf);
+        //* Regist Active Skill From Gm.SkillTable
+        activeSkills[0] = new ActiveSkill(registAtvSkillNames[0], gm.activeSkillTable);
+        em.activeSkillBatEFs[0] = activeSkills[0].BatEfPref;
+        em.activeSkillShotEFs[0] = activeSkills[0].ShotEfPref;
+        em.activeSkillExplosionEFs[0] = activeSkills[0].ExplosionEfPref;
+        em.createActiveSkillBatEF(0, batEffectTf);
+
+        activeSkills[1] = new ActiveSkill(registAtvSkillNames[1], gm.activeSkillTable);
+        em.activeSkillBatEFs[1] = activeSkills[1].BatEfPref;
+        em.activeSkillShotEFs[1] = activeSkills[1].ShotEfPref;
+        em.activeSkillExplosionEFs[1] = activeSkills[1].ExplosionEfPref;
+        em.createActiveSkillBatEF(1, batEffectTf);
 
         //* Set Passive Skill : @params { int level, T value, T unit }
         dmg = new Skill<int>(0, 1, 1);

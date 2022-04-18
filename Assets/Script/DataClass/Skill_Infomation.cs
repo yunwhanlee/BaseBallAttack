@@ -85,8 +85,9 @@ public class ActiveSkillBtn{
     [SerializeField] private Material activeEFMt;
 
     //contructor
-    public ActiveSkillBtn(float unit, Button skillBtn, Sprite sprite, Material activeSkillEffectMt){
+    public ActiveSkillBtn(float unit, string name, Button skillBtn, Sprite sprite, Material activeSkillEffectMt){
         this.unit = unit;
+        this.name = name;
         panel = skillBtn.GetComponent<Image>();
         this.img = skillBtn.transform.GetChild(0).GetComponent<Image>();
         this.img.sprite = sprite;
@@ -112,12 +113,20 @@ public class ActiveSkillBtn{
         selectFence.gameObject.SetActive(false);
         plBatEffectTf.gameObject.SetActive(false);
     }
-    public void onTriggerActive(Transform plBatEffectTf){
+    public void onTriggerActive(int selectIdx, Transform plBatEffectTf){
         Debug.Log("onClickActiveSkillButton");
         if(GrayBG.fillAmount == 0){
             Trigger = !Trigger;
             selectFence.gameObject.SetActive(Trigger);
             plBatEffectTf.gameObject.SetActive(Trigger);
+            foreach(Transform child in plBatEffectTf){
+                int childIdx = child.GetSiblingIndex();
+                if(selectIdx == childIdx)
+                    child.gameObject.SetActive(true);
+                else 
+                    child.gameObject.SetActive(false);
+            }
+
         }
     }
     public void decreaseFillAmount(){
