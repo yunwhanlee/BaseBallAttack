@@ -73,7 +73,7 @@ public class ActiveSkill{
 
 
 [System.Serializable]
-public class ActiveSkillBtn{
+public class ActiveSkillBtnUI{
     //value
     [SerializeField] private float unit; //Decrease Fill Amount Unit
     [SerializeField] private string name;
@@ -85,7 +85,7 @@ public class ActiveSkillBtn{
     [SerializeField] private Material activeEFMt;
 
     //contructor
-    public ActiveSkillBtn(float unit, string name, Button skillBtn, Sprite sprite, Material activeSkillEffectMt){
+    public ActiveSkillBtnUI(float unit, string name, Button skillBtn, Sprite sprite, Material activeSkillEffectMt){
         this.unit = unit;
         this.name = name;
         panel = skillBtn.GetComponent<Image>();
@@ -114,7 +114,6 @@ public class ActiveSkillBtn{
         plBatEffectTf.gameObject.SetActive(false);
     }
     public void onTriggerActive(int selectIdx, Transform plBatEffectTf){
-        Debug.Log("onClickActiveSkillButton");
         if(GrayBG.fillAmount == 0){
             Trigger = !Trigger;
             selectFence.gameObject.SetActive(Trigger);

@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
 
     [Header("--Active Skill Btn--")]
     public ActiveSkill[] activeSkillTable;
-    public List<ActiveSkillBtn> activeSkillBtnList;
+    public List<ActiveSkillBtnUI> activeSkillBtnList;
     public Material activeSkillBtnEfMt;
 
     [Header("--Passive Skill Table InGame--")]
@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
         int i=0;
         foreach(Transform child in activeSkillBtnGroup){
             Button btn = child.GetComponent<Button>();
-            activeSkillBtnList.Add(new ActiveSkillBtn(0.5f, pl.activeSkills[i].Name,btn, pl.activeSkills[i].UISprite, activeSkillBtnEfMt));
+            activeSkillBtnList.Add(new ActiveSkillBtnUI(0.5f, pl.activeSkills[i].Name,btn, pl.activeSkills[i].UISprite, activeSkillBtnEfMt));
             i++;
         }
     }
@@ -135,7 +135,7 @@ public class GameManager : MonoBehaviour
     public void onClickReGameButton() => init();
     public void onClickSkillButton() => levelUpPanel.SetActive(false);
     public void onClickSetGameButton(string type) => setGame(type);
-    public void onClickActiveSkillButton(int i) => activeSkillBtnList[i].onTriggerActive(i, pl.batEffectTf);
+    public void onClickActiveSkillButton(int i) {if(ballGroup.childCount == 0)  activeSkillBtnList[i].onTriggerActive(i, pl.batEffectTf);} //(BUG)途中でスキル活性化ダメ
 
     //*---------------------------------------
     //*  関数
