@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public GameObject cam1Canvas, cam2Canvas;
 
     //* OutSide
+    [Header("<---- OutSide ---->")]
+    public EffectManager em;
     public Canvas canvasUI;
     public Player pl;
     public BallShooter ballShooter;
@@ -135,7 +137,10 @@ public class GameManager : MonoBehaviour
     public void onClickReGameButton() => init();
     public void onClickSkillButton() => levelUpPanel.SetActive(false);
     public void onClickSetGameButton(string type) => setGame(type);
-    public void onClickActiveSkillButton(int i) {if(ballGroup.childCount == 0)  activeSkillBtnList[i].onTriggerActive(i, pl.batEffectTf);} //(BUG)途中でスキル活性化ダメ
+    public void onClickActiveSkillButton(int i) {
+        if(ballGroup.childCount == 0)  
+            activeSkillBtnList[i].onTriggerActive(i, pl, em);
+    } //(BUG)途中でスキル活性化ダメ
 
     //*---------------------------------------
     //*  関数

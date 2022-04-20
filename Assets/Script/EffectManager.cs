@@ -20,6 +20,7 @@ public class EffectManager : MonoBehaviour
     public GameObject[] activeSkillBatEFs = new GameObject[2];
     public GameObject[] activeSkillShotEFs = new GameObject[2];
     public GameObject[] activeSkillExplosionEFs = new GameObject[2];
+    public GameObject[] activeSkillCastEFs = new GameObject[2];
 
     //*---------------------------------------
     //* 関数
@@ -61,5 +62,9 @@ public class EffectManager : MonoBehaviour
     public void createActiveSkillExplosionEF(int idx, Transform parentTf){
         var ins = Instantiate(activeSkillExplosionEFs[idx], parentTf.position, Quaternion.identity, effectGroup) as GameObject;
         Destroy(ins, 2);
+    }
+
+    public void createActiveSkillCastEF(int idx, Transform parentTf){
+        var ins = Instantiate(activeSkillCastEFs[idx], parentTf.position, parentTf.rotation, parentTf) as GameObject;
     }
 }

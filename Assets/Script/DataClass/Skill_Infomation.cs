@@ -47,6 +47,7 @@ public class ActiveSkill{
     [SerializeField] private GameObject batEfPref;
     [SerializeField] private GameObject shotEfPref;
     [SerializeField] private GameObject explosionEfPref;
+    [SerializeField] private GameObject castEfPref;
 
     //contructor
     public ActiveSkill(string name, ActiveSkill[] activeSkillTable){//Sprite uiSprite, GameObject batEfPref, GameObject shotEfPref, GameObject explosionEfPref){
@@ -57,6 +58,7 @@ public class ActiveSkill{
                 this.batEfPref = skillList.batEfPref;
                 this.shotEfPref = skillList.shotEfPref;
                 this.explosionEfPref = skillList.explosionEfPref;
+                this.castEfPref = skillList.castEfPref;
             }
         });
     }
@@ -67,6 +69,7 @@ public class ActiveSkill{
     public GameObject ShotEfPref {get=> shotEfPref;}
     public GameObject BatEfPref {get=> batEfPref;}
     public GameObject ExplosionEfPref {get=> explosionEfPref;}
+    public GameObject CastEfPref {get=> castEfPref;}
 
     //method
 }
@@ -106,24 +109,42 @@ public class ActiveSkillBtnUI{
     public Image SelectFence {get=> selectFence; set=> selectFence=value;}
 
     //method
-    public void init(Transform plBatEffectTf){
+    public void init(Player pl){
         Trigger = false;
         Panel.material = null;
         GrayBG.fillAmount = 1;
         selectFence.gameObject.SetActive(false);
-        plBatEffectTf.gameObject.SetActive(false);
+        pl.BatEffectTf.gameObject.SetActive(false);
+        foreach(Transform child in pl.castEFArrowTf) GameObject.Destroy(child.gameObject);
+        foreach(Transform child in pl.castEFBallPreviewTf) GameObject.Destroy(child.gameObject);
     }
-    public void onTriggerActive(int selectIdx, Transform plBatEffectTf){
+    public void onTriggerActive(int selectIdx, Player pl, EffectManager em){
         if(GrayBG.fillAmount == 0){
             Trigger = !Trigger;
             selectFence.gameObject.SetActive(Trigger);
-            plBatEffectTf.gameObject.SetActive(Trigger);
-            foreach(Transform child in plBatEffectTf){
+            //* Bat Effect
+            pl.BatEffectTf.gameObject.SetActive(Trigger);
+            foreach(Transform child in pl.BatEffectTf){
                 int childIdx = child.GetSiblingIndex();
                 if(selectIdx == childIdx)
                     child.gameObject.SetActive(true);
                 else 
                     child.gameObject.SetActive(false);
+            }
+
+            //* Cast Effect
+            Debug.Log("ActiveSkillBtnUI:: this.name=" + this.name);
+            if(Trigger){
+                Transform parentTf = null;
+                switch(this.name){
+                    case "Thunder":     parentTf = pl.castEFArrowTf;        break;
+                    case "FireBall":    parentTf = pl.castEFBallPreviewTf;  break;
+                }
+                em.createActiveSkillCastEF(selectIdx, parentTf);
+            }
+            else{
+                foreach(Transform child in pl.castEFArrowTf) GameObject.Destroy(child.gameObject);
+                foreach(Transform child in pl.castEFBallPreviewTf) GameObject.Destroy(child.gameObject);
             }
         }
     }

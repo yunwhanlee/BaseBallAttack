@@ -164,7 +164,7 @@ public class Ball_Prefab : MonoBehaviour
                                     hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(10);
                                 }
                             });
-                            skillBtn.init(pl.batEffectTf);
+                            skillBtn.init(pl);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
                     }
@@ -257,7 +257,7 @@ public class Ball_Prefab : MonoBehaviour
                         hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(pl.dmg.getValue() * 2);
                     }
                 });
-                gm.activeSkillBtnList[0].init(pl.batEffectTf);
+                gm.activeSkillBtnList[0].init(pl);
                 this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                 break;
             case "FireBall":

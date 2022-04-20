@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
 
     [Header("【Set Active Bat Effect】")]
     public Transform batEffectTf;
+    public Transform castEFArrowTf, castEFBallPreviewTf;
     public string[] registAtvSkillNames = new string[2];
     public ActiveSkill[] activeSkills = new ActiveSkill[2];
     
@@ -74,17 +75,23 @@ public class Player : MonoBehaviour
         hitRank[E] = new HitRank(1.125f, 3);
         hitRank[F] = new HitRank(1.5f, 2);
         
-        //* Regist Active Skill From Gm.SkillTable
+        //* Regist Active Skill
+        // Set <- From GameManager Table
         activeSkills[0] = new ActiveSkill(registAtvSkillNames[0], gm.activeSkillTable);
+        // Set -> To EffectManager Effect
         em.activeSkillBatEFs[0] = activeSkills[0].BatEfPref;
         em.activeSkillShotEFs[0] = activeSkills[0].ShotEfPref;
         em.activeSkillExplosionEFs[0] = activeSkills[0].ExplosionEfPref;
+        em.activeSkillCastEFs[0] = activeSkills[0].CastEfPref;
         em.createActiveSkillBatEF(0, batEffectTf);
-
+        
+        // Set <- From GameManager Table
         activeSkills[1] = new ActiveSkill(registAtvSkillNames[1], gm.activeSkillTable);
+        // Set -> To EffectManager Effect
         em.activeSkillBatEFs[1] = activeSkills[1].BatEfPref;
         em.activeSkillShotEFs[1] = activeSkills[1].ShotEfPref;
         em.activeSkillExplosionEFs[1] = activeSkills[1].ExplosionEfPref;
+        em.activeSkillCastEFs[1] = activeSkills[1].CastEfPref;
         em.createActiveSkillBatEF(1, batEffectTf);
 
         //* Set Passive Skill : @params { int level, T value, T unit }
@@ -121,6 +128,9 @@ public class Player : MonoBehaviour
     public void setIsLevelUp(bool trigger) => isLevelUp = trigger;
     public bool getDoSwing() => doSwing;
     public void setDoSwing(bool trigger) => doSwing = trigger;
+    public Transform BatEffectTf {get => batEffectTf;}
+    public Transform CastEFArrowTf {get => castEFArrowTf;}
+    public Transform CastEFBallPreviewTf {get => castEFBallPreviewTf;}
 
     //*---------------------------------------
     //*  関数
