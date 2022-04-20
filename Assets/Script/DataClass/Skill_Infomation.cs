@@ -125,7 +125,6 @@ public class ActiveSkillBtnUI{
                 else 
                     child.gameObject.SetActive(false);
             }
-
         }
     }
     public void decreaseFillAmount(){

@@ -110,6 +110,7 @@ public class Ball_Prefab : MonoBehaviour
                 gm.activeSkillBtnList.ForEach(skillBtn=>{
                     if(skillBtn.Trigger){
                         StartCoroutine(coPlayActiveSkillShotEF(skillBtn.Name, 1f, dir));
+                        return;
                     }
                     else{
                         //* Multi Shot
