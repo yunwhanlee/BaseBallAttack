@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Block_Prefab : MonoBehaviour
 {
     public enum BlockMt {PLAIN, WOOD, SAND, REDBRICK, IRON};
+    public enum BlockType {NORMAL, BOMB, LR_ARROW, UPDOWN_ARROW};
 
     public GameManager gm;
     public EffectManager em;
@@ -18,10 +19,12 @@ public class Block_Prefab : MonoBehaviour
     public Material[] mts;
     private Material originMt;
     public Material whiteHitMt;
+    public Transform itemTypeImgGroup;
 
     //* Value
     [SerializeField] private int hp = 1;
     [SerializeField] private int exp = 10;
+    [SerializeField] private int itemTypePer = 10;
 
     //* GUI
     public Text hpTxt;
@@ -35,9 +38,36 @@ public class Block_Prefab : MonoBehaviour
         meshRd = GetComponent<MeshRenderer>();
         meshRd.material = Instantiate(meshRd.material);
 
-        //TODO Leveling HP--------------------
-        //hp = (gm.stage <= 5) ? 1 : (gm.stage <= 10) ? 2 : (gm.stage <= 15) ? 3 : (gm.stage <= 20) ? 4 : 5;
         int rand = Random.Range(0,100);
+
+        //* Type
+        BlockType itemType = BlockType.NORMAL;
+        bool isItemType = false;
+        
+        if(gm.stage <= 50) isItemType = (rand < itemTypePer)? true : false;
+
+        if(isItemType){
+            int itemTypeCnt = System.Enum.GetValues(typeof(BlockType)).Length - 1; // enum Type Cnt Without Normal
+            itemType = (BlockType)Random.Range(0, itemTypeCnt);
+
+            itemTypeImgGroup.GetChild((int)itemType).gameObject.SetActive(true);
+
+            switch (itemType){
+                case BlockType.BOMB:
+                    break;
+                case BlockType.LR_ARROW:
+                    break;
+                case BlockType.UPDOWN_ARROW:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
+        //TODO Leveling HP
+        //hp = (gm.stage <= 5) ? 1 : (gm.stage <= 10) ? 2 : (gm.stage <= 15) ? 3 : (gm.stage <= 20) ? 4 : 5;
+        rand = Random.Range(0,100);
         if      (gm.stage <=  5) hp = rand < 85 ? 1 : 2;
         else if (gm.stage <=  9) hp = rand < 85 ? 2 : 1;
         else if (gm.stage <= 13) hp = rand < 85 ? 3 : (rand <= 95)? 2 : 1;
@@ -47,11 +77,9 @@ public class Block_Prefab : MonoBehaviour
         else if (gm.stage <= 31) hp = rand < 65 ? 9 : (rand <= 80)? 8 : 7;
         else if (gm.stage <= 35) hp = rand < 60 ? 10 : (rand <= 75)? 9 : (rand <= 85)? 8 : 7;
         else if (gm.stage <= 40) hp = rand < 55 ? 12 : (rand <= 75)? 11 : (rand <= 90)? 10 : 9;
-
-        //------------------------------------
         hpTxt.text = hp.ToString();
 
-        // Material
+        //* Material
         switch(hp){
             case 1 : exp = 10;  meshRd.material = mts[(int)BlockMt.PLAIN]; break;
             case 2 : exp = 20;  meshRd.material = mts[(int)BlockMt.WOOD]; break;
@@ -60,7 +88,7 @@ public class Block_Prefab : MonoBehaviour
             case 5 : exp = 50;  meshRd.material = mts[(int)BlockMt.IRON]; break;
         }
 
-        // 色
+        //* 色
         int randIdx = Random.Range(0, colorList.Length);
         color = colorList[randIdx];
         meshRd.material.SetColor("_ColorTint", color);
