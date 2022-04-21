@@ -99,7 +99,7 @@ public class Ball_Prefab : MonoBehaviour
                 }
 
                 rigid.velocity = Vector3.zero;
-                float force = speed * power * pl.speed.getValue();
+                float force = speed * power * pl.speed.Value;
                 rigid.AddForce(dir * force, ForceMode.Impulse);
                 Debug.Log(
                     "HIT Ball! <color=yellow>distance=" + distance.ToString("N2") + "</color>"
@@ -114,7 +114,7 @@ public class Ball_Prefab : MonoBehaviour
                     }
                     else{
                         //* Multi Shot
-                        for(int i=0; i<pl.multiShot.getValue();i++){
+                        for(int i=0; i<pl.multiShot.Value;i++){
                             float [] addDegList = {-15, 15, -30, 30};
                             Vector3 direction = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (deg + addDegList[i])), 0, Mathf.Cos(Mathf.Deg2Rad * (deg + addDegList[i]))).normalized;
                             var ins = Instantiate(this.gameObject, this.transform.position, Quaternion.identity, gm.ballGroup) as GameObject;
@@ -174,37 +174,37 @@ public class Ball_Prefab : MonoBehaviour
             int result = 0;
             //* InstantKill
             int rand = Random.Range(0, 100);
-            int v = Mathf.RoundToInt(pl.instantKill.getValue() * 100); //百分率
+            int v = Mathf.RoundToInt(pl.instantKill.Value * 100); //百分率
             Debug.Log("Hit Block:: InstantKill:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=blue>true</color>" : "<color=blue>false</color>"));
             if(rand <= v){
                 em.createEffectInstantKillText(col.transform);
                 Destroy(col.gameObject);
             }
             else{
-                result = pl.dmg.getValue();
+                result = pl.dmg.Value;
             }
 
             //* Critical x 2
             rand = Random.Range(0, 100);
-            v = Mathf.RoundToInt(pl.critical.getValue() * 100); //百分率
+            v = Mathf.RoundToInt(pl.critical.Value * 100); //百分率
             Debug.Log("Hit Block:: Critical:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=orange>true</color>" : "<color=orange>false</color>"));
             if(rand <= v){
-                em.createEffectCriticalText(col.transform, pl.dmg.getValue() * 2);
-                result = pl.dmg.getValue() * 2;
+                em.createEffectCriticalText(col.transform, pl.dmg.Value * 2);
+                result = pl.dmg.Value * 2;
             }
             else{
-                result = pl.dmg.getValue();
+                result = pl.dmg.Value;
             }
 
             //* Explosion
             rand = Random.Range(0, 100);
-            v = Mathf.RoundToInt(pl.explosion.getValue().per * 100); //百分率
+            v = Mathf.RoundToInt(pl.explosion.Value.per * 100); //百分率
             Debug.Log("Hit Block:: Explosion:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=purple>true</color>" : "<color=purple>false</color>"));
             if(rand <= v){
-                em.createEffectExplosion(this.transform, pl.explosion.getValue().range);
+                em.createEffectExplosion(this.transform, pl.explosion.Value.range);
 
                 //Sphere Collider
-                RaycastHit[] rayHits = Physics.SphereCastAll(this.transform.position, pl.explosion.getValue().range, Vector3.up, 0);
+                RaycastHit[] rayHits = Physics.SphereCastAll(this.transform.position, pl.explosion.Value.range, Vector3.up, 0);
                 foreach(var hitObj in rayHits){
                     if(hitObj.transform.tag == "NormalBlock")
                         hitObj.transform.GetComponent<Block_Prefab>().decreaseHp(result);
@@ -253,8 +253,8 @@ public class Ball_Prefab : MonoBehaviour
                 RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, Vector3.one * width, dir, Quaternion.identity, maxDistance);
                 Array.ForEach(hits, hit => {
                     if(hit.transform.tag == "NormalBlock"){
-                        em.createEffectCriticalText(hit.transform, pl.dmg.getValue() * 2);
-                        hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(pl.dmg.getValue() * 2);
+                        em.createEffectCriticalText(hit.transform, pl.dmg.Value * 2);
+                        hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(pl.dmg.Value * 2);
                     }
                 });
                 gm.activeSkillBtnList[0].init(pl);

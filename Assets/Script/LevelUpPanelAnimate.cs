@@ -131,24 +131,24 @@ public class LevelUpPanelAnimate : MonoBehaviour
         //* Set Data
         switch(SkillBtns[index].name.text){
             case "Dmg Up": 
-                pl.dmg.setLvUp(pl.dmg.getValue() + pl.dmg.getUnit());
+                pl.dmg.setLvUp(pl.dmg.Value + pl.dmg.Unit);
                 break;
             case "Multi Shot":
-                pl.multiShot.setLvUp(pl.multiShot.getValue() + pl.multiShot.getUnit());
-                Debug.Log(pl.multiShot.getCurLv() + pl.multiShot.getValue());
+                pl.multiShot.setLvUp(pl.multiShot.Value + pl.multiShot.Unit);
+                Debug.Log(pl.multiShot.Level + pl.multiShot.Value);
                 break;
             case "Speed Up":
-                pl.speed.setLvUp(pl.speed.getValue() + pl.speed.getUnit()); //20% Up
+                pl.speed.setLvUp(pl.speed.Value + pl.speed.Unit); //20% Up
                 break;
             case "Immediate Kill":
-                pl.instantKill.setLvUp(pl.instantKill.getValue() + pl.instantKill.getUnit()); //2% Up
+                pl.instantKill.setLvUp(pl.instantKill.Value + pl.instantKill.Unit); //2% Up
                 break;
             case "Critical Up":
-                pl.critical.setLvUp(pl.critical.getValue() + pl.critical.getUnit()); //10% Up
+                pl.critical.setLvUp(pl.critical.Value + pl.critical.Unit); //10% Up
                 break;
             case "Explosion":
-                var percent = pl.explosion.getValue().per + pl.explosion.getUnit().per;
-                var range = pl.explosion.getValue().range + pl.explosion.getUnit().range;
+                var percent = pl.explosion.Value.per + pl.explosion.Unit.per;
+                var range = pl.explosion.Value.range + pl.explosion.Unit.range;
                 pl.explosion.setLvUp(new Explosion(percent, range)); //Active:20% Up, Radius:+0.25
                 break;
 

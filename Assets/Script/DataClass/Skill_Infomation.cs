@@ -6,22 +6,19 @@ using System;
 
 [System.Serializable]
 public class Skill<T>{
-    //value
-    [SerializeField] int level;
-    [SerializeField] T value;
-    [SerializeField] T unit;
+    //*value                     //*get set
+    [SerializeField] int level; public int Level {get=>level;}
+    [SerializeField] T value;   public T Value {get=>value;}
+    [SerializeField] T unit;    public T Unit {get=>unit;}
 
-    //defualt
+    //*constructor
     public Skill(int level, T value, T unit){
         this.level = level;
         this.value = value;
         this.unit = unit;
     }
 
-    //method
-    public int getCurLv() => level;
-    public T getValue() => value;
-    public T getUnit() => unit;
+    //*method
     public void setLvUp(T value){
         level++;
         this.value = value;
@@ -41,15 +38,15 @@ public struct Explosion{
 //-------------------------------------------------
 [System.Serializable]
 public class ActiveSkill{
-    //value
-    [SerializeField] private string name;
-    [SerializeField] private Sprite uiSprite;
-    [SerializeField] private GameObject batEfPref;
-    [SerializeField] private GameObject shotEfPref;
-    [SerializeField] private GameObject explosionEfPref;
-    [SerializeField] private GameObject castEfPref;
+    //*value                        //*get set
+    [SerializeField] string name;    public string Name {get=> name;} 
+    [SerializeField] Sprite uiSprite;    public Sprite UISprite {get=> uiSprite;}
+    [SerializeField] GameObject batEfPref;    public GameObject ShotEfPref {get=> shotEfPref;}
+    [SerializeField] GameObject shotEfPref;    public GameObject BatEfPref {get=> batEfPref;}
+    [SerializeField] GameObject explosionEfPref;    public GameObject ExplosionEfPref {get=> explosionEfPref;}
+    [SerializeField] GameObject castEfPref;    public GameObject CastEfPref {get=> castEfPref;}
 
-    //contructor
+    //*constructor
     public ActiveSkill(string name, ActiveSkill[] activeSkillTable){//Sprite uiSprite, GameObject batEfPref, GameObject shotEfPref, GameObject explosionEfPref){
         Array.ForEach(activeSkillTable, skillList=>{
             if(name == skillList.Name){//* Regist Select Active Skill
@@ -62,32 +59,24 @@ public class ActiveSkill{
             }
         });
     }
-
-    //get set
-    public string Name {get=> name;} 
-    public Sprite UISprite {get=> uiSprite;}
-    public GameObject ShotEfPref {get=> shotEfPref;}
-    public GameObject BatEfPref {get=> batEfPref;}
-    public GameObject ExplosionEfPref {get=> explosionEfPref;}
-    public GameObject CastEfPref {get=> castEfPref;}
-
-    //method
+    //*method
 }
 
 
 [System.Serializable]
 public class ActiveSkillBtnUI{
-    //value
-    [SerializeField] private float unit; //Decrease Fill Amount Unit
-    [SerializeField] private string name;
-    [SerializeField] private bool trigger;
-    [SerializeField] private Image panel;
-    [SerializeField] private Image img;
-    [SerializeField] private Image grayBG;
-    [SerializeField] private Image selectFence;
-    [SerializeField] private Material activeEFMt;
+    //*value                        //*get set
 
-    //contructor
+    [SerializeField] float unit;    public float Unit {get=> unit; set=> unit=value;}// Decrease Fill Amount Unit
+    [SerializeField] string name;    public string Name {get=> name; set=> name=value;}
+    [SerializeField] bool trigger;    public bool Trigger {get=> trigger; set=> trigger=value;}
+    [SerializeField] Image panel;    public Image Panel {get=> panel; set=> panel=value;}
+    [SerializeField] Image img;    public Image Img {get=> img; set=> img=value;}
+    [SerializeField] Image grayBG;    public Image GrayBG {get=> grayBG; set=> grayBG=value;}
+    [SerializeField] Image selectFence;    public Image SelectFence {get=> selectFence; set=> selectFence=value;}
+    [SerializeField] Material activeEFMt;   public Material ActiveEFMt {get=> activeEFMt;}
+
+    //*contructor
     public ActiveSkillBtnUI(float unit, string name, Button skillBtn, Sprite sprite, Material activeSkillEffectMt){
         this.unit = unit;
         this.name = name;
@@ -99,16 +88,7 @@ public class ActiveSkillBtnUI{
         activeEFMt = activeSkillEffectMt;
     }
 
-    //get set
-    public float Unit {get=> unit; set=> unit=value;}
-    public string Name {get=> name; set=> name=value;}
-    public bool Trigger {get=> trigger; set=> trigger=value;}
-    public Image Panel {get=> panel; set=> panel=value;}
-    public Image Img {get=> img; set=> img=value;}
-    public Image GrayBG {get=> grayBG; set=> grayBG=value;}
-    public Image SelectFence {get=> selectFence; set=> selectFence=value;}
-
-    //method
+    //*method
     public void init(Player pl){
         Trigger = false;
         Panel.material = null;

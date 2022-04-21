@@ -182,12 +182,12 @@ public class Player : MonoBehaviour
     public List<int> getAllSkillLvList(){
         List<int> list = new List<int>();
         //set All Skills curLevel
-        list.Add(dmg.getCurLv());
-        list.Add(multiShot.getCurLv());
-        list.Add(speed.getCurLv());
-        list.Add(instantKill.getCurLv());
-        list.Add(critical.getCurLv());
-        list.Add(explosion.getCurLv());
+        list.Add(dmg.Level);
+        list.Add(multiShot.Level);
+        list.Add(speed.Level);
+        list.Add(instantKill.Level);
+        list.Add(critical.Level);
+        list.Add(explosion.Level);
 
         return list;
     }
