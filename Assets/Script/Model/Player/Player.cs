@@ -51,12 +51,12 @@ public class Player : MonoBehaviour
     
     
     [Header("【Passive Skill】")]
-    public Skill<int> dmg;//private int dmg = 1;
-    public Skill<int> multiShot;//private int multiCnt = 0;
-    public Skill<float> speed;//private float speed = 1;
-    public Skill<float> instantKill;//private float immediateKill = 0;
-    public Skill<float> critical;//private float critical = 0;
-    public Skill<Explosion> explosion;
+    public PassiveSkill<int> dmg;//private int dmg = 1;
+    public PassiveSkill<int> multiShot;//private int multiCnt = 0;
+    public PassiveSkill<float> speed;//private float speed = 1;
+    public PassiveSkill<float> instantKill;//private float immediateKill = 0;
+    public PassiveSkill<float> critical;//private float critical = 0;
+    public PassiveSkill<Explosion> explosion;
 
 
     //[SerializeField] private Explosion explosion;
@@ -65,6 +65,8 @@ public class Player : MonoBehaviour
     private Animator anim;
 
     public void Start(){
+        
+
         //* Set HitRank Data : @params { char rate, float distance, int power }
         hitRank = new HitRank[6];
         const int A=0, B=1, C=2, D=3, E=4, F=5;
@@ -95,12 +97,12 @@ public class Player : MonoBehaviour
         em.createActiveSkillBatEF(1, batEffectTf);
 
         //* Set Passive Skill : @params { int level, T value, T unit }
-        dmg = new Skill<int>(0, 1, 1);
-        multiShot = new Skill<int>(0, 0, 1);
-        speed = new Skill<float>(0, 1f, 0.2f);
-        instantKill = new Skill<float>(0, 0f, 0.02f);
-        critical = new Skill<float>(0, 0f, 0.1f);
-        explosion = new Skill<Explosion>(0, new Explosion(0f, 0.75f), new Explosion(0.25f, 0.25f));
+        dmg = new PassiveSkill<int>("dmg", 0, 1, 1);
+        multiShot = new PassiveSkill<int>("multiShot", 0, 0, 1);
+        speed = new PassiveSkill<float>("speed", 0, 1f, 0.2f);
+        instantKill = new PassiveSkill<float>("instantKill", 0, 0f, 0.02f);
+        critical = new PassiveSkill<float>("critical", 0, 0f, 0.1f);
+        explosion = new PassiveSkill<Explosion>("explosion", 0, new Explosion(0f, 0.75f), new Explosion(0.25f, 0.25f));
         
         Debug.Log("swingArcArea.rectTransform.localRotation.eulerAngles.z=" + swingArcArea.rectTransform.localRotation.eulerAngles.z);//! (BUG) rotation.eulerAnglesしないと、角度の数値ではなく、小数点が出る。
         anim = GetComponentInChildren<Animator>();
@@ -109,7 +111,6 @@ public class Player : MonoBehaviour
         swingArcArea.rectTransform.localRotation = Quaternion.Euler(0,0,offsetHitDeg + 90); 
         arrowAxisAnchor.transform.rotation = Quaternion.Euler(0,-offsetHitDeg,0);
         Debug.Log("Start:: swingArcArea表示角度= " + swingArcRange + ", 角度をfillAmount値(0~1)に変換=" + swingArcRange / 360);
-
     }
 
     void Update(){

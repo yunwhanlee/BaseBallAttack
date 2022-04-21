@@ -170,48 +170,21 @@ public class Ball_Prefab : MonoBehaviour
                     }
                 }
             });
-
+            
+            //* HIT Base Passive Skills
             int result = 0;
-            //* InstantKill
-            int rand = Random.Range(0, 100);
-            int v = Mathf.RoundToInt(pl.instantKill.Value * 100); //百分率
-            Debug.Log("Hit Block:: InstantKill:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=blue>true</color>" : "<color=blue>false</color>"));
-            if(rand <= v){
-                em.createEffectInstantKillText(col.transform);
-                Destroy(col.gameObject);
-            }
-            else{
-                result = pl.dmg.Value;
-            }
+            float per = 0f;
+            // InstantKill
+            per = pl.instantKill.Value;
+            pl.instantKill.setHitBasePsvSkill(per, ref result, col, em, pl);
+            
+            // Critical
+            per = pl.critical.Value;
+            pl.critical.setHitBasePsvSkill(per, ref result, col, em, pl);
 
-            //* Critical x 2
-            rand = Random.Range(0, 100);
-            v = Mathf.RoundToInt(pl.critical.Value * 100); //百分率
-            Debug.Log("Hit Block:: Critical:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=orange>true</color>" : "<color=orange>false</color>"));
-            if(rand <= v){
-                em.createEffectCriticalText(col.transform, pl.dmg.Value * 2);
-                result = pl.dmg.Value * 2;
-            }
-            else{
-                result = pl.dmg.Value;
-            }
-
-            //* Explosion
-            rand = Random.Range(0, 100);
-            v = Mathf.RoundToInt(pl.explosion.Value.per * 100); //百分率
-            Debug.Log("Hit Block:: Explosion:: rand("+rand+") <= v("+v+") : " + ((rand <= v)? "<color=purple>true</color>" : "<color=purple>false</color>"));
-            if(rand <= v){
-                em.createEffectExplosion(this.transform, pl.explosion.Value.range);
-
-                //Sphere Collider
-                RaycastHit[] rayHits = Physics.SphereCastAll(this.transform.position, pl.explosion.Value.range, Vector3.up, 0);
-                foreach(var hitObj in rayHits){
-                    if(hitObj.transform.tag == "NormalBlock")
-                        hitObj.transform.GetComponent<Block_Prefab>().decreaseHp(result);
-                }
-                return;
-            }
-            col.gameObject.GetComponent<Block_Prefab>().decreaseHp(result);
+            // Explosion（最後 ダメージ適用）
+            per = pl.explosion.Value.per;
+            pl.explosion.setHitBasePsvSkill(per, ref result, col, em, pl, this.gameObject);
         }
     }
 

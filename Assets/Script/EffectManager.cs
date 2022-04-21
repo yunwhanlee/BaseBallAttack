@@ -33,21 +33,20 @@ public class EffectManager : MonoBehaviour
         Destroy(ins, main.duration);
     }
 
-
-    public void createEffectExplosion(Transform parentTf, float scale){
-        Debug.Log("EFFECT:: Explosion:: scale=" + scale);
-        var ins = Instantiate(explosionEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
-        ins.transform.localScale = new Vector3(scale, scale, scale);
-        Destroy(ins, 2);
+    public void createEffectInstantKillText(Transform parentTf){
+        var ins = Instantiate(instantKillTextEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
+        Destroy(ins, 1.5f);
     }
     public void createEffectCriticalText(Transform parentTf, int damage){
         var ins = Instantiate(criticalTextEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
         ins.GetComponentInChildren<Text>().text = damage.ToString();
         Destroy(ins, 1.5f);
     }
-        public void createEffectInstantKillText(Transform parentTf){
-        var ins = Instantiate(instantKillTextEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
-        Destroy(ins, 1.5f);
+    public void createEffectExplosion(Transform parentTf, float scale){
+        Debug.Log("EFFECT:: Explosion:: scale=" + scale);
+        var ins = Instantiate(explosionEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
+        ins.transform.localScale = new Vector3(scale, scale, scale);
+        Destroy(ins, 2);
     }
 
     public void createActiveSkillBatEF(int idx, Transform parentTf){

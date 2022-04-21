@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using Random = UnityEngine.Random;
 
 [System.Serializable]
-public class Skill<T>{
+public class PassiveSkill<T>{
     //*value                     //*get set
+    [SerializeField] string name;    public string Name {get=> name;} 
     [SerializeField] int level; public int Level {get=>level;}
     [SerializeField] T value;   public T Value {get=>value;}
     [SerializeField] T unit;    public T Unit {get=>unit;}
 
     //*constructor
-    public Skill(int level, T value, T unit){
+    public PassiveSkill(string name, int level, T value, T unit){
+        this.name = name;
         this.level = level;
         this.value = value;
         this.unit = unit;
@@ -22,6 +25,39 @@ public class Skill<T>{
     public void setLvUp(T value){
         level++;
         this.value = value;
+    }
+
+    public void setHitBasePsvSkill(float per, ref int result, Collision col, EffectManager em, Player pl, GameObject ballPref = null){
+        bool isLastExplosionSkill = (ballPref)? true : false;
+        int rand = Random.Range(0, 100);
+        int percent = Mathf.RoundToInt(per * 100); //百分率
+        Debug.Log("PassiveSkill:: setHitBasePsvSkill:: 「" + Name.ToString() + "」 rand("+rand+") <= per("+per+") : " + ((rand <= per)? "<color=blue>true</color>" : "<color=blue>false</color>"));
+        if(Level > 0 && rand <= percent){
+            switch(Name){
+                case "instantKill": 
+                    em.createEffectInstantKillText(col.transform);
+                    result =  pl.dmg.Value * 999999;
+                    break;
+                case "critical": 
+                    em.createEffectCriticalText(col.transform, pl.dmg.Value * 2);
+                    result = pl.dmg.Value * 2;
+                    break;
+                case "explosion":
+                    em.createEffectExplosion(ballPref.transform, pl.explosion.Value.range);
+                    //Sphere Collider
+                    RaycastHit[] rayHits = Physics.SphereCastAll(ballPref.transform.position, pl.explosion.Value.range, Vector3.up, 0);
+                    foreach(var hit in rayHits){
+                        if(hit.transform.tag == "NormalBlock")
+                            hit.transform.GetComponent<Block_Prefab>().decreaseHp(result);
+                    }
+                    break;
+            }
+        }
+        //* result
+        if(!isLastExplosionSkill)
+            result = pl.dmg.Value;
+        else
+            col.gameObject.GetComponent<Block_Prefab>().decreaseHp(result);
     }
 }
 
