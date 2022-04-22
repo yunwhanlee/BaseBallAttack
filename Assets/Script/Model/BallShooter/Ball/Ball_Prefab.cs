@@ -177,11 +177,9 @@ public class Ball_Prefab : MonoBehaviour
             // InstantKill
             per = pl.instantKill.Value;
             pl.instantKill.setHitBasePsvSkill(per, ref result, col, em, pl);
-            
             // Critical
             per = pl.critical.Value;
             pl.critical.setHitBasePsvSkill(per, ref result, col, em, pl);
-
             // Explosion（最後 ダメージ適用）
             per = pl.explosion.Value.per;
             pl.explosion.setHitBasePsvSkill(per, ref result, col, em, pl, this.gameObject);

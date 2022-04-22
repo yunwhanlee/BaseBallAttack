@@ -3341,26 +3341,32 @@ MonoBehaviour:
     explosionEfPref: {fileID: 0}
     castEfPref: {fileID: 0}
   dmg:
+    name: 
     level: 0
     value: 0
     unit: 0
   multiShot:
+    name: 
     level: 0
     value: 0
     unit: 0
   speed:
+    name: 
     level: 0
     value: 0
     unit: 0
   instantKill:
+    name: 
     level: 0
     value: 0
     unit: 0
   critical:
+    name: 
     level: 0
     value: 1
     unit: 0
   explosion:
+    name: 
     level: 0
     value:
       per: 0
@@ -20453,6 +20459,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7333948877035792801, guid: 06cc18cbc236da74a83cfe9b9743586b, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7333948877035792801, guid: 06cc18cbc236da74a83cfe9b9743586b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d7944ec59142d5d419d51d3301b5895b, type: 3}
+    - target: {fileID: 7333948878355200340, guid: 06cc18cbc236da74a83cfe9b9743586b, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7333948878355200340, guid: 06cc18cbc236da74a83cfe9b9743586b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d7944ec59142d5d419d51d3301b5895b, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06cc18cbc236da74a83cfe9b9743586b, type: 3}
 --- !u!1001 &8808624349107508548
@@ -20462,6 +20484,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 661754778}
     m_Modifications:
+    - target: {fileID: 4519404607714465907, guid: 7b569f01f8e19984d82166687e883df4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6b164606017c46044b3aa0e5e145b06e, type: 3}
     - target: {fileID: 4519404608316719708, guid: 7b569f01f8e19984d82166687e883df4, type: 3}
       propertyPath: m_Name
       value: FireBallCastEffect
