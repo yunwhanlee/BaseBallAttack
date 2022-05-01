@@ -107,23 +107,25 @@ public class Ball_Prefab : MonoBehaviour
                     + ", Force=" + force);
 
                 //* #1. Active SHOT Skill
+                bool isActiveSkillTrigger = false;
                 gm.activeSkillBtnList.ForEach(skillBtn=>{
                     if(skillBtn.Trigger){
                         StartCoroutine(coPlayActiveSkillShotEF(skillBtn.Name, 1f, dir));
-                        return;
-                    }
-                    else{
-                        //* Multi Shot
-                        for(int i=0; i<pl.multiShot.Value;i++){
-                            float [] addDegList = {-15, 15, -30, 30};
-                            Vector3 direction = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (deg + addDegList[i])), 0, Mathf.Cos(Mathf.Deg2Rad * (deg + addDegList[i]))).normalized;
-                            var ins = Instantiate(this.gameObject, this.transform.position, Quaternion.identity, gm.ballGroup) as GameObject;
-                            ins.GetComponent<Rigidbody>().AddForce(direction * force * 0.75f, ForceMode.Impulse);
-                            var scale = ins.GetComponent<Transform>().localScale;
-                            ins.GetComponent<Transform>().localScale = new Vector3(scale.x * 0.75f, scale.y * 0.75f, scale.z * 0.75f);
-                        }
+                        isActiveSkillTrigger = true;
                     }
                 });
+
+                if(isActiveSkillTrigger) return;
+                
+                //* Multi Shot
+                for(int i=0; i<pl.multiShot.Value;i++){
+                    float [] addDegList = {-15, 15, -30, 30};
+                    Vector3 direction = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (deg + addDegList[i])), 0, Mathf.Cos(Mathf.Deg2Rad * (deg + addDegList[i]))).normalized;
+                    var ins = Instantiate(this.gameObject, this.transform.position, Quaternion.identity, gm.ballGroup) as GameObject;
+                    ins.GetComponent<Rigidbody>().AddForce(direction * force * 0.75f, ForceMode.Impulse);
+                    var scale = ins.GetComponent<Transform>().localScale;
+                    ins.GetComponent<Transform>().localScale = new Vector3(scale.x * 0.75f, scale.y * 0.75f, scale.z * 0.75f);
+                }
             }
         }
         else if(col.gameObject.tag == "ActiveDownWall"){
