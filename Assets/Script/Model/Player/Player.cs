@@ -48,6 +48,8 @@ public class Player : MonoBehaviour
     public Transform castEFArrowTf, castEFBallPreviewTf;
     public string[] registAtvSkillNames = new string[2];
     public ActiveSkill[] activeSkills = new ActiveSkill[2];
+    private float thunderCastWidth = 1;  public float ThunderCastWidth {get=> thunderCastWidth;}
+    private float fireBallCastWidth = 4; public float FireBallCastWidth {get=> fireBallCastWidth;}
     
     
     [Header("【Passive Skill】")]

@@ -160,7 +160,7 @@ public class Ball_Prefab : MonoBehaviour
                         case "FireBall":
                             em.createActiveSkillExplosionEF(1, this.transform);
                             //* Collider 
-                            RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, 5, Vector3.up, 0);
+                            RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.FireBallCastWidth, Vector3.up, 0);
                             Array.ForEach(hits, hit => {
                                 if(hit.transform.tag == "NormalBlock"){
                                     hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(10);
@@ -249,13 +249,10 @@ public class Ball_Prefab : MonoBehaviour
         // Gizmos.color = Color.yellow;
         // Gizmos.DrawWireSphere(this.transform.position, pl.explosion.getValue().range);
 
-        //* ThunderShot Skill Range Preview
-        // Gizmos.color = Color.blue;
-        // Gizmos.DrawWireCube(this.transform.position, Vector3.one * 0.5f);
+        //* ThunderShot Skill Range Preview => ArrowAxisAnchorObjに付いているThunderGizmosスクリプト。
 
         //* FireBall Skill Range Preview
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(this.transform.position, 5);
-
+        Gizmos.DrawWireSphere(this.transform.position, pl.FireBallCastWidth);
     }
 }
