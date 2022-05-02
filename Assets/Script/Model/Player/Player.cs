@@ -37,38 +37,37 @@ public class Player : MonoBehaviour
 
 
     [Header("【Status】")]
-    public bool doSwing = false;
-    public bool isLevelUp = false;
-    [SerializeField] private int lv = 1;
-    [SerializeField] private float maxExp = 100;
-    [SerializeField] private int exp = 0;
+    [SerializeField] bool doSwing = false;      public bool DoSwing {get=> doSwing; set=> doSwing=value;}
+    [SerializeField] bool isLevelUp = false;    public bool IsLevelUp {get=> isLevelUp; set=> isLevelUp=value;}
+    [SerializeField] int lv = 1;                public int Lv {get=> lv; set=> lv=value;}
+    [SerializeField] float maxExp = 100;        public float MaxExp {get=> maxExp; set=> maxExp=value;}
+    [SerializeField] int exp = 0;               public int Exp {get=> exp; set=> exp=value;}
 
     [Header("【Set Active Bat Effect】")]
-    public Transform batEffectTf;
-    public Transform castEFArrowTf, castEFBallPreviewTf;
     public string[] registAtvSkillNames = new string[2];
     public ActiveSkill[] activeSkills = new ActiveSkill[2];
-    private float thunderCastWidth = 1;  public float ThunderCastWidth {get=> thunderCastWidth;}
-    private float fireBallCastWidth = 4; public float FireBallCastWidth {get=> fireBallCastWidth;}
+    [SerializeField] Transform batEffectTf;           public Transform BatEffectTf {get => batEffectTf;}
+    [SerializeField] Transform castEFArrowTf;         public Transform CastEFArrowTf {get => castEFArrowTf;}
+    [SerializeField] Transform castEFBallPreviewTf;   public Transform CastEFBallPreviewTf {get => castEFBallPreviewTf;}
+    float thunderCastWidth = 1;     public float ThunderCastWidth {get=> thunderCastWidth;}
+    float fireBallCastWidth = 4;    public float FireBallCastWidth {get=> fireBallCastWidth;}
     
     
     [Header("【Passive Skill】")]
-    public PassiveSkill<int> dmg;//private int dmg = 1;
-    public PassiveSkill<int> multiShot;//private int multiCnt = 0;
-    public PassiveSkill<float> speed;//private float speed = 1;
-    public PassiveSkill<float> instantKill;//private float immediateKill = 0;
-    public PassiveSkill<float> critical;//private float critical = 0;
+    public PassiveSkill<int> dmg;
+    public PassiveSkill<int> multiShot;
+    public PassiveSkill<float> speed;
+    public PassiveSkill<float> instantKill;
+    public PassiveSkill<float> critical;
     public PassiveSkill<Explosion> explosion;
-
-
-    //[SerializeField] private Explosion explosion;
+    public PassiveSkill<float> expUp;
+    public PassiveSkill<float> itemSpawn;
 
     //* Component
     private Animator anim;
 
     public void Start(){
         
-
         //* Set HitRank Data : @params { char rate, float distance, int power }
         hitRank = new HitRank[6];
         const int A=0, B=1, C=2, D=3, E=4, F=5;
@@ -79,24 +78,18 @@ public class Player : MonoBehaviour
         hitRank[E] = new HitRank(1.125f, 3);
         hitRank[F] = new HitRank(1.5f, 2);
         
-        //* Regist Active Skill
-        // Set <- From GameManager Table
-        activeSkills[0] = new ActiveSkill(registAtvSkillNames[0], gm.activeSkillTable);
-        // Set -> To EffectManager Effect
-        em.activeSkillBatEFs[0] = activeSkills[0].BatEfPref;
-        em.activeSkillShotEFs[0] = activeSkills[0].ShotEfPref;
-        em.activeSkillExplosionEFs[0] = activeSkills[0].ExplosionEfPref;
-        em.activeSkillCastEFs[0] = activeSkills[0].CastEfPref;
-        em.createActiveSkillBatEF(0, batEffectTf);
-        
-        // Set <- From GameManager Table
-        activeSkills[1] = new ActiveSkill(registAtvSkillNames[1], gm.activeSkillTable);
-        // Set -> To EffectManager Effect
-        em.activeSkillBatEFs[1] = activeSkills[1].BatEfPref;
-        em.activeSkillShotEFs[1] = activeSkills[1].ShotEfPref;
-        em.activeSkillExplosionEFs[1] = activeSkills[1].ExplosionEfPref;
-        em.activeSkillCastEFs[1] = activeSkills[1].CastEfPref;
-        em.createActiveSkillBatEF(1, batEffectTf);
+        //* Set Active Skill
+        Debug.Log("Player:: gm.activeSkillBtnGroup.childCount= " + gm.activeSkillBtnGroup.childCount);
+        for(int i=0;i<gm.activeSkillBtnGroup.childCount;i++){
+            //* Set <- From GameManager Table
+            activeSkills[i] = new ActiveSkill(registAtvSkillNames[i], gm.activeSkillTable);
+            //* Set -> To EffectManager Effect
+            em.activeSkillBatEFs[i] = activeSkills[i].BatEfPref;
+            em.activeSkillShotEFs[i] = activeSkills[i].ShotEfPref;
+            em.activeSkillExplosionEFs[i] = activeSkills[i].ExplosionEfPref;
+            em.activeSkillCastEFs[i] = activeSkills[i].CastEfPref;
+            em.createActiveSkillBatEF(i, BatEffectTf);
+        }
 
         //* Set Passive Skill : @params { int level, T value, T unit }
         dmg = new PassiveSkill<int>("dmg", 0, 1, 1);
@@ -105,6 +98,9 @@ public class Player : MonoBehaviour
         instantKill = new PassiveSkill<float>("instantKill", 0, 0f, 0.02f);
         critical = new PassiveSkill<float>("critical", 0, 0f, 0.1f);
         explosion = new PassiveSkill<Explosion>("explosion", 0, new Explosion(0f, 0.75f), new Explosion(0.25f, 0.25f));
+        expUp = new PassiveSkill<float>("expUp", 0, 1f, 0.2f);
+        itemSpawn = new PassiveSkill<float>("itemSpawn", 0, 1f, 0.1f);
+
         
         Debug.Log("swingArcArea.rectTransform.localRotation.eulerAngles.z=" + swingArcArea.rectTransform.localRotation.eulerAngles.z);//! (BUG) rotation.eulerAnglesしないと、角度の数値ではなく、小数点が出る。
         anim = GetComponentInChildren<Animator>();
@@ -120,20 +116,8 @@ public class Player : MonoBehaviour
         calcLevelUpExp();
     }
 
-    public void setLv(int _lv) => lv = _lv;
-    public int getLv() => lv ;
-    public float getMaxExp() => maxExp;
-    public void setMaxExp(float _maxExp) => maxExp = _maxExp;
-    public int getExp() => exp;
-    public void setExp(int _exp) => exp = _exp;
+
     public void addExp(int _exp) => exp += _exp;
-    public bool getIsLevelUp() => isLevelUp;
-    public void setIsLevelUp(bool trigger) => isLevelUp = trigger;
-    public bool getDoSwing() => doSwing;
-    public void setDoSwing(bool trigger) => doSwing = trigger;
-    public Transform BatEffectTf {get => batEffectTf;}
-    public Transform CastEFArrowTf {get => castEFArrowTf;}
-    public Transform CastEFBallPreviewTf {get => castEFBallPreviewTf;}
 
     //*---------------------------------------
     //*  関数
@@ -155,7 +139,7 @@ public class Player : MonoBehaviour
         anim.SetTrigger(name);
         switch(name){
             case "Swing":   
-                setDoSwing(true);   
+                DoSwing = true;
                 break;
             case "HomeRun": 
                 anim.updateMode  = AnimatorUpdateMode.UnscaledTime;
@@ -176,10 +160,10 @@ public class Player : MonoBehaviour
 
     public void setLevelUp(){
         Debug.Log("setLevelUp:: LEVEL UP!");
-        isLevelUp = true;
-        setLv(++lv);
-        setExp(0);
-        setMaxExp(maxExp * 1.75f);
+        IsLevelUp = true;
+        Lv = ++lv;
+        Exp = 0;
+        MaxExp = maxExp * 1.75f;
     }
 
     public List<int> getAllSkillLvList(){
@@ -191,6 +175,8 @@ public class Player : MonoBehaviour
         list.Add(instantKill.Level);
         list.Add(critical.Level);
         list.Add(explosion.Level);
+        list.Add(expUp.Level);
+        list.Add(itemSpawn.Level);
 
         return list;
     }

@@ -27,11 +27,11 @@ public class PassiveSkill<T>{
         this.value = value;
     }
 
-    public void setHitBasePsvSkill(float per, ref int result, Collision col, EffectManager em, Player pl, GameObject ballPref = null){
+    public void setHitTypePsvSkill(float per, ref int result, Collision col, EffectManager em, Player pl, GameObject ballPref = null){
         bool isLastExplosionSkill = (ballPref)? true : false;
         int rand = Random.Range(0, 100);
         int percent = Mathf.RoundToInt(per * 100); //百分率
-        Debug.Log("PassiveSkill:: setHitBasePsvSkill:: 「" + Name.ToString() + "」 rand("+rand+") <= per("+per+") : " + ((rand <= per)? "<color=blue>true</color>" : "<color=blue>false</color>"));
+        Debug.Log("PassiveSkill:: setHitTypePsvSkill:: 「" + Name.ToString() + "」 rand("+rand+") <= per("+per+") : " + ((rand <= per)? "<color=blue>true</color>" : "<color=blue>false</color>"));
         if(Level > 0 && rand <= percent){
             switch(Name){
                 case "instantKill": 
@@ -131,8 +131,8 @@ public class ActiveSkillBtnUI{
         GrayBG.fillAmount = 1;
         selectFence.gameObject.SetActive(false);
         pl.BatEffectTf.gameObject.SetActive(false);
-        foreach(Transform child in pl.castEFArrowTf) GameObject.Destroy(child.gameObject);
-        foreach(Transform child in pl.castEFBallPreviewTf) GameObject.Destroy(child.gameObject);
+        foreach(Transform child in pl.CastEFArrowTf) GameObject.Destroy(child.gameObject);
+        foreach(Transform child in pl.CastEFBallPreviewTf) GameObject.Destroy(child.gameObject);
     }
     public void onTriggerActive(int selectIdx, Player pl, EffectManager em){
         if(GrayBG.fillAmount == 0){
@@ -153,14 +153,14 @@ public class ActiveSkillBtnUI{
             if(Trigger){
                 Transform parentTf = null;
                 switch(this.name){
-                    case "Thunder":     parentTf = pl.castEFArrowTf;        break;
-                    case "FireBall":    parentTf = pl.castEFBallPreviewTf;  break;
+                    case "Thunder":     parentTf = pl.CastEFArrowTf;        break;
+                    case "FireBall":    parentTf = pl.CastEFBallPreviewTf;  break;
                 }
                 em.createActiveSkillCastEF(selectIdx, parentTf);
             }
             else{
-                foreach(Transform child in pl.castEFArrowTf) GameObject.Destroy(child.gameObject);
-                foreach(Transform child in pl.castEFBallPreviewTf) GameObject.Destroy(child.gameObject);
+                foreach(Transform child in pl.CastEFArrowTf) GameObject.Destroy(child.gameObject);
+                foreach(Transform child in pl.CastEFBallPreviewTf) GameObject.Destroy(child.gameObject);
             }
         }
     }

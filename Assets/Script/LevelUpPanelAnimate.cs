@@ -151,10 +151,18 @@ public class LevelUpPanelAnimate : MonoBehaviour
                 var range = pl.explosion.Value.range + pl.explosion.Unit.range;
                 pl.explosion.setLvUp(new Explosion(percent, range)); //Active:20% Up, Radius:+0.25
                 break;
+            case "Exp Up":
+                pl.expUp.setLvUp(pl.expUp.Value + pl.expUp.Unit);
+                Debug.Log("Exp Up : 未実装");
+                break;
+            case "ItemSwpan Up":
+                pl.itemSpawn.setLvUp(pl.itemSpawn.Value + pl.itemSpawn.Unit);
+                Debug.Log("ItemSwpan Up : 未実装");
+                break;
 
         }
         //* 終了
         this.gameObject.SetActive(false);
-        gm.displaySkillInfo("INGAME");
+        gm.displayCurPassiveSkillStatus("INGAME");
     }
 }

@@ -112,9 +112,9 @@ public class GameManager : MonoBehaviour
         // Debug.Log("canvasUI.additionalShaderChannels=" + canvasUI.additionalShaderChannels);
 
         //* GUI
-        expBar.value = Mathf.Lerp(expBar.value, pl.getExp() / pl.getMaxExp(), Time.deltaTime * 10);
+        expBar.value = Mathf.Lerp(expBar.value, pl.Exp / pl.MaxExp, Time.deltaTime * 10);
         stateTxt.text = state.ToString();
-        levelTxt.text = "LV : " + pl.getLv();
+        levelTxt.text = "LV : " + pl.Lv;
         stageTxt.text = "STAGE : " + stage.ToString();
 
         //* (BUG) ボールが複数ある時、同時に消えたら、次に進まないこと対応
@@ -149,9 +149,9 @@ public class GameManager : MonoBehaviour
         state = GameManager.State.WAIT;
         stage = 1;
         strikeCnt = 0;
-        pl.setLv(1);
-        pl.setExp(0);
-        pl.setMaxExp(100);
+        pl.Lv = 1;
+        pl.Exp = 0;
+        pl.MaxExp = 100;
         gameoverPanel.SetActive(false);
         pl.Start();
         blockMaker.Start();
@@ -263,7 +263,7 @@ public class GameManager : MonoBehaviour
             case "PAUSE":
                 Time.timeScale = 0; 
                 pausePanel.SetActive(true);
-                displaySkillInfo(type);
+                displayCurPassiveSkillStatus(type);
 
                 break;
             case "CONTINUE":
@@ -287,14 +287,14 @@ public class GameManager : MonoBehaviour
     }
 
     public void checkLevelUp(){
-        if(pl.getIsLevelUp()){
-            pl.setIsLevelUp(false);
+        if(pl.IsLevelUp){
+            pl.IsLevelUp = false;
             levelUpPanel.SetActive(true);
             levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
         }
     }
 
-    public void displaySkillInfo(string type){
+    public void displayCurPassiveSkillStatus(string type){
         GameObject pref = (type == "PAUSE")? skillInfoRowPref : inGameSkillImgBtnPref;
         Transform parentTf = (type == "PAUSE")? pauseSkillStatusTableTf : inGameSkillStatusTableTf;
 

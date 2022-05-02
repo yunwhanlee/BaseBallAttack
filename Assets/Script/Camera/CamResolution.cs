@@ -23,6 +23,7 @@ public class CamResolution : MonoBehaviour
     void Update() {
         if(gm.state != GameManager.State.WAIT) return;
 
+        //! クリックでしなくてもいいかも。
         if(Input.GetMouseButtonDown(0)){
             //* RAY CAST
             const int maxDistance = 50;

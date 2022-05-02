@@ -64,10 +64,10 @@ public class Ball_Prefab : MonoBehaviour
         //* HIT BALL
         if(col.gameObject.tag == "HitRangeArea"){
             pl.setSwingArcColor("red");
-            if(pl.getDoSwing() && gm.state == GameManager.State.PLAY){
+            if(pl.DoSwing && gm.state == GameManager.State.PLAY){
                 gm.switchCamScene();
                 isHited = true;
-                pl.setDoSwing(false);
+                pl.DoSwing = false;
                 rigid.useGravity = true;
 
                 //STRIKEデータ 初期化
@@ -129,7 +129,7 @@ public class Ball_Prefab : MonoBehaviour
             }
         }
         else if(col.gameObject.tag == "ActiveDownWall"){
-            pl.setDoSwing(false);
+            pl.DoSwing = false;
             if(gm.state == GameManager.State.WAIT){
                 gm.downWall.isTrigger = false;//*下壁 物理O
             }
@@ -178,13 +178,13 @@ public class Ball_Prefab : MonoBehaviour
             float per = 0f;
             // InstantKill
             per = pl.instantKill.Value;
-            pl.instantKill.setHitBasePsvSkill(per, ref result, col, em, pl);
+            pl.instantKill.setHitTypePsvSkill(per, ref result, col, em, pl);
             // Critical
             per = pl.critical.Value;
-            pl.critical.setHitBasePsvSkill(per, ref result, col, em, pl);
+            pl.critical.setHitTypePsvSkill(per, ref result, col, em, pl);
             // Explosion（最後 ダメージ適用）
             per = pl.explosion.Value.per;
-            pl.explosion.setHitBasePsvSkill(per, ref result, col, em, pl, this.gameObject);
+            pl.explosion.setHitTypePsvSkill(per, ref result, col, em, pl, this.gameObject);
         }
     }
 
