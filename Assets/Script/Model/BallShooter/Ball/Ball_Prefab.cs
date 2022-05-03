@@ -93,9 +93,21 @@ public class Ball_Prefab : MonoBehaviour
                 : (distance <= pl.hitRank[E].Dist)? pl.hitRank[E].Power
                 : pl.hitRank[F].Power; //-> WORST HIT (distance <= 1.5f)
                 
-                //* HomeRun
-                if(power >= pl.hitRank[B].Power){
-                    StartCoroutine(coPlayHomeRunAnimation());
+                //* #1. Active SHOT Skill
+                bool isActiveSkillTrigger = false;
+                gm.activeSkillBtnList.ForEach(skillBtn=>{
+                    if(skillBtn.Trigger){
+                        StartCoroutine(coPlayActiveSkillShotEF(skillBtn.Name, 1f, dir));
+                        isActiveSkillTrigger = true;
+                    }
+                });
+
+                //* Anim
+                if(power >= pl.hitRank[B].Power){//* HomeRun
+                    StartCoroutine(coPlayHomeRunAnim(isActiveSkillTrigger));
+                }
+                else if(isActiveSkillTrigger){ //* ActiveSkill Before
+                    StartCoroutine(coPlayActiveSkillBefSpotLightAnim());
                 }
 
                 rigid.velocity = Vector3.zero;
@@ -105,15 +117,6 @@ public class Ball_Prefab : MonoBehaviour
                     "HIT Ball! <color=yellow>distance=" + distance.ToString("N2") + "</color>"
                     + ", <color=red>power=" + power + ", Rank: " + ((power==pl.hitRank[A].Power)? "A" : (power==pl.hitRank[B].Power)? "B" : (power==pl.hitRank[C].Power)? "C" : (power==pl.hitRank[D].Power)? "D" : (power==pl.hitRank[E].Power)? "E" : "F").ToString() + "</color>"
                     + ", Force=" + force);
-
-                //* #1. Active SHOT Skill
-                bool isActiveSkillTrigger = false;
-                gm.activeSkillBtnList.ForEach(skillBtn=>{
-                    if(skillBtn.Trigger){
-                        StartCoroutine(coPlayActiveSkillShotEF(skillBtn.Name, 1f, dir));
-                        isActiveSkillTrigger = true;
-                    }
-                });
 
                 if(isActiveSkillTrigger) return;
                 
@@ -205,11 +208,21 @@ public class Ball_Prefab : MonoBehaviour
         speed = v;
     }
 
-    IEnumerator coPlayHomeRunAnimation(){        
+    IEnumerator coPlayHomeRunAnim(bool isActiveSkillTrigger){
+        if(isActiveSkillTrigger){
+            yield return coPlayActiveSkillBefSpotLightAnim();
+        }
         Debug.Log("HOMERUH!!!!");
         Time.timeScale = 0;
         pl.setAnimTrigger("HomeRun");
         yield return new WaitForSecondsRealtime(2);
+        Time.timeScale = 1;
+    }
+
+    IEnumerator coPlayActiveSkillBefSpotLightAnim(){
+        Debug.Log("ActiveSkill Before Anim");
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(1);
         Time.timeScale = 1;
     }
 

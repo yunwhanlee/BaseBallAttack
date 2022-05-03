@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
     [SerializeField] Transform castEFArrowTf;         public Transform CastEFArrowTf {get => castEFArrowTf;}
     [SerializeField] Transform castEFBallPreviewTf;   public Transform CastEFBallPreviewTf {get => castEFBallPreviewTf;}
     float thunderCastWidth = 1;     public float ThunderCastWidth {get=> thunderCastWidth;}
-    float fireBallCastWidth = 4;    public float FireBallCastWidth {get=> fireBallCastWidth;}
+    float fireBallCastWidth = 3;    public float FireBallCastWidth {get=> fireBallCastWidth;}
     
     
     [Header("【Passive Skill】")]

@@ -107,7 +107,6 @@ public class Block_Prefab : MonoBehaviour
             switch (itemType){
                 case BlockType.BOMB:
                     em.createItemBlockExplosionEF(this.transform);
-                    // RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, itemBlockExplostionRadius, Vector3.up, 0);
                     RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, itemBlockExplostionBoxSize / 2, Vector3.up);
                     Array.ForEach(hits, hit => {
                         if(hit.transform.tag == "NormalBlock")  onDestroy(hit.transform.gameObject);

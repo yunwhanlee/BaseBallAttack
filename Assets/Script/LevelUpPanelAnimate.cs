@@ -64,7 +64,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
         for(int i=0;i<skillImgCnt;i++){
             int pos = SPRITE_W * i;
             selectList.Add( new KeyValuePair<int, GameObject>(pos, gm.getSkillImgObjPrefs()[i+1]));
-            print("selectList["+i+"]:: key="+ selectList[i].Key +", value="+ selectList[i].Value);
+            // print("selectList["+i+"]:: key="+ selectList[i].Key +", value="+ selectList[i].Value);
         }
         
         //* Set ScrollSpriteImgs
