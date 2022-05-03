@@ -8,8 +8,11 @@ public class EffectManager : MonoBehaviour
     //* OutSide
     public Transform effectGroup;
 
-    //* Obstacle EF
+    //* Block EF
     public GameObject brokeBlockEF;
+    public GameObject itemBlockExplosionEF;
+    public GameObject itemBlockDirLineTrailEF;
+    
 
     //* Passive Skill EF
     public GameObject explosionEF;
@@ -25,24 +28,34 @@ public class EffectManager : MonoBehaviour
     //*---------------------------------------
     //* 関数
     //*---------------------------------------
-    public void createEffectBrokeBlock(Transform parentTf, Color color){
+    public void createBrokeBlockEF(Transform parentTf, Color color){
         var ins = Instantiate(brokeBlockEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
         ParticleSystem ps = ins.GetComponent<ParticleSystem>();
         ParticleSystem.MainModule main = ps.main;
         main.startColor = new ParticleSystem.MinMaxGradient(color, new Color(1,1,1,0.5f));
         Destroy(ins, main.duration);
     }
+    public void createItemBlockExplosionEF(Transform parentTf){
+        var ins = Instantiate(itemBlockExplosionEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
+        Destroy(ins, 1.5f);
+    }
+    public void createItemBlockDirLineTrailEF(Transform parentTf, Vector3 dir){
+        var ins = Instantiate(itemBlockDirLineTrailEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
+        const int speed = 10;
+        ins.GetComponent<Rigidbody>().AddForce(dir * speed, ForceMode.Impulse);
+        Destroy(ins, 3f);
+    }
 
-    public void createEffectInstantKillText(Transform parentTf){
+    public void createInstantKillTextEF(Transform parentTf){
         var ins = Instantiate(instantKillTextEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
         Destroy(ins, 1.5f);
     }
-    public void createEffectCriticalText(Transform parentTf, int damage){
+    public void createCriticalTextEF(Transform parentTf, int damage){
         var ins = Instantiate(criticalTextEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
         ins.GetComponentInChildren<Text>().text = damage.ToString();
         Destroy(ins, 1.5f);
     }
-    public void createEffectExplosion(Transform parentTf, float scale){
+    public void createExplosionEF(Transform parentTf, float scale){
         Debug.Log("EFFECT:: Explosion:: scale=" + scale);
         var ins = Instantiate(explosionEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
         ins.transform.localScale = new Vector3(scale, scale, scale);

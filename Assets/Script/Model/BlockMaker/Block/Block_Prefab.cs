@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+using Random = UnityEngine.Random;
 
 public class Block_Prefab : MonoBehaviour
 {
     public enum BlockMt {PLAIN, WOOD, SAND, REDBRICK, IRON};
-    public enum BlockType {NORMAL, BOMB, LR_ARROW, UPDOWN_ARROW};
+    public enum BlockType {BOMB, LR_ARROW, UPDOWN_ARROW, NORMAL};
 
     public GameManager gm;
     public EffectManager em;
@@ -22,9 +24,11 @@ public class Block_Prefab : MonoBehaviour
     public Transform itemTypeImgGroup;
 
     //* Value
+    [SerializeField] BlockType itemType;
     [SerializeField] private int hp = 1;
     [SerializeField] private int exp = 10;
     [SerializeField] private int itemTypePer = 10;
+    private Vector3 itemBlockExplostionBoxSize = new Vector3(3,2,2);
 
     //* GUI
     public Text hpTxt;
@@ -38,32 +42,20 @@ public class Block_Prefab : MonoBehaviour
         meshRd = GetComponent<MeshRenderer>();
         meshRd.material = Instantiate(meshRd.material);
 
+        itemType = BlockType.NORMAL;
+
+        //* Type Apply
+        bool isItemBlock = false;
         int rand = Random.Range(0,100);
+        if(gm.stage <= 50) isItemBlock = (rand < itemTypePer)? true : false;
+        if(isItemBlock){
+            int typeCnt = System.Enum.GetValues(typeof(BlockType)).Length - 1; //enum Type Cnt Without Normal
+            itemType = (BlockType)Random.Range(0, typeCnt);
+            Debug.Log("Block_Prefab:: typeCnt= " + typeCnt + ", itemType=" + itemType + " " + (int)itemType);
 
-        //* Type
-        BlockType itemType = BlockType.NORMAL;
-        bool isItemType = false;
-        
-        if(gm.stage <= 50) isItemType = (rand < itemTypePer)? true : false;
-
-        if(isItemType){
-            int itemTypeCnt = System.Enum.GetValues(typeof(BlockType)).Length - 1; // enum Type Cnt Without Normal
-            itemType = (BlockType)Random.Range(0, itemTypeCnt);
-
+            //既にあるイメージObj中の一つをランダムで活性化
             itemTypeImgGroup.GetChild((int)itemType).gameObject.SetActive(true);
-
-            switch (itemType){
-                case BlockType.BOMB:
-                    break;
-                case BlockType.LR_ARROW:
-                    break;
-                case BlockType.UPDOWN_ARROW:
-                    break;
-                default:
-                    break;
-            }
         }
-
 
         //TODO Leveling HP
         //hp = (gm.stage <= 5) ? 1 : (gm.stage <= 10) ? 2 : (gm.stage <= 15) ? 3 : (gm.stage <= 20) ? 4 : 5;
@@ -111,26 +103,52 @@ public class Block_Prefab : MonoBehaviour
         hp -= dmg;
         StartCoroutine(coWhiteHitEffect(meshRd.material));
         if(hp <= 0) {
-            em.createEffectBrokeBlock(this.transform, color);
-            onDestroy();
+            //* アイテムブロック 処理
+            switch (itemType){
+                case BlockType.BOMB:
+                    em.createItemBlockExplosionEF(this.transform);
+                    // RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, itemBlockExplostionRadius, Vector3.up, 0);
+                    RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, itemBlockExplostionBoxSize / 2, Vector3.up);
+                    Array.ForEach(hits, hit => {
+                        if(hit.transform.tag == "NormalBlock")  onDestroy(hit.transform.gameObject);
+                    });
+                    break;
+                case BlockType.LR_ARROW:
+                    em.createItemBlockDirLineTrailEF(this.transform, transform.right);
+                    em.createItemBlockDirLineTrailEF(this.transform, -transform.right);
+                    break;
+                case BlockType.UPDOWN_ARROW:
+                    em.createItemBlockDirLineTrailEF(this.transform, transform.forward);
+                    em.createItemBlockDirLineTrailEF(this.transform, -transform.forward);
+                    break;
+            }
+            onDestroy(this.gameObject);
         }
 
         //* ActiveSkill CoolTime Amount Down
         gm.activeSkillBtnList.ForEach(btn=>{
             btn.decreaseFillAmount();
         });
-
     }
     
 
-    public void onDestroy(bool isInitialize = false) {
+    public void onDestroy(GameObject target, bool isInitialize = false) {
+        em.createBrokeBlockEF(target.transform, color);
         if(!isInitialize) pl.addExp(exp); //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
-        Destroy(this.gameObject);
+        Destroy(target);
     }
 
     IEnumerator coWhiteHitEffect(Material curMt){ //* 体力が減ったら、一瞬間白くなって戻すEFFECT
         meshRd.material = whiteHitMt;
         yield return new WaitForSeconds(0.05f);
         meshRd.material = originMt;//* (BUG) WaitForSeconds間にまた衝突が発生したら、白くなる。
+    }
+
+    void OnDrawGizmos(){
+        if(itemType == BlockType.BOMB){
+            Gizmos.color = Color.black;
+            // Gizmos.DrawWireSphere(this.transform.position, itemBlockExplostionRadius);
+            Gizmos.DrawWireCube(this.transform.position, new Vector3(3,2,2));
+        }
     }
 }

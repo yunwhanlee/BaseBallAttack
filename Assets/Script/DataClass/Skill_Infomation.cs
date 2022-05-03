@@ -35,15 +35,15 @@ public class PassiveSkill<T>{
         if(Level > 0 && rand <= percent){
             switch(Name){
                 case "instantKill": 
-                    em.createEffectInstantKillText(col.transform);
+                    em.createInstantKillTextEF(col.transform);
                     result =  pl.dmg.Value * 999999;
                     break;
                 case "critical": 
-                    em.createEffectCriticalText(col.transform, pl.dmg.Value * 2);
+                    em.createCriticalTextEF(col.transform, pl.dmg.Value * 2);
                     result = pl.dmg.Value * 2;
                     break;
                 case "explosion":
-                    em.createEffectExplosion(ballPref.transform, pl.explosion.Value.range);
+                    em.createExplosionEF(ballPref.transform, pl.explosion.Value.range);
                     //Sphere Collider
                     RaycastHit[] rayHits = Physics.SphereCastAll(ballPref.transform.position, pl.explosion.Value.range, Vector3.up, 0);
                     foreach(var hit in rayHits){

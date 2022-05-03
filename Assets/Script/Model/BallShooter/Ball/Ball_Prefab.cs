@@ -172,17 +172,16 @@ public class Ball_Prefab : MonoBehaviour
                     }
                 }
             });
-            
             //* HIT Base Passive Skills
             int result = 0;
             float per = 0f;
-            // InstantKill
+            //* InstantKill
             per = pl.instantKill.Value;
             pl.instantKill.setHitTypePsvSkill(per, ref result, col, em, pl);
-            // Critical
+            //* Critical
             per = pl.critical.Value;
             pl.critical.setHitTypePsvSkill(per, ref result, col, em, pl);
-            // Explosion（最後 ダメージ適用）
+            //* Explosion（最後 ダメージ適用）
             per = pl.explosion.Value.per;
             pl.explosion.setHitTypePsvSkill(per, ref result, col, em, pl, this.gameObject);
         }
@@ -226,7 +225,7 @@ public class Ball_Prefab : MonoBehaviour
                 RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, Vector3.one * width, dir, Quaternion.identity, maxDistance);
                 Array.ForEach(hits, hit => {
                     if(hit.transform.tag == "NormalBlock"){
-                        em.createEffectCriticalText(hit.transform, pl.dmg.Value * 2);
+                        em.createCriticalTextEF(hit.transform, pl.dmg.Value * 2);
                         hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(pl.dmg.Value * 2);
                     }
                 });

@@ -22,7 +22,7 @@ public class BlockMaker : MonoBehaviour
     public void Start() {
         //* Init
         var blocks = this.GetComponentsInChildren<Block_Prefab>();
-        foreach(var block in blocks) block.onDestroy(true);
+        foreach(var block in blocks) block.onDestroy(block.gameObject, true);
         this.transform.position = new Vector3(0, 0.5f, -2);
         createBlockLine(true, FIRST_CREATE_VERTICAL_CNT);
     }
