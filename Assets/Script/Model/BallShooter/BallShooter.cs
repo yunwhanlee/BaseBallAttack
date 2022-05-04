@@ -24,7 +24,7 @@ public class BallShooter : MonoBehaviour
         if(gm.state == GameManager.State.GAMEOVER) return;
         if(gm.state == GameManager.State.WAIT) return;
 
-        //* ボールが存在しない、発射前
+        //* 発射 前) ボールが存在しない
         if(!isBallExist){
             //* COUNTING
             time -= Time.deltaTime;
@@ -35,6 +35,7 @@ public class BallShooter : MonoBehaviour
             if(time <= 0){
                 Debug.Log("🥎BALL 発射！");
                 isBallExist = true;
+                gm.throwScreenAnimSetTrigger("ThrowBall");
                 resetCountingTime();
                 
                 gm.setShootCntText("SHOOT");

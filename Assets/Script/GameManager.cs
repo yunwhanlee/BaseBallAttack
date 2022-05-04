@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public Player pl;
     public BallShooter ballShooter;
     public BlockMaker blockMaker;
+    public GameObject throwScreen;
     public Transform hitRangeStartTf;
     public Transform hitRangeEndTf;
     public Transform ballGroup;
@@ -132,6 +133,7 @@ public class GameManager : MonoBehaviour
     public void setShootCntText(string str) => shootCntTxt.text = str;
     public void setBallPreviewGoalImgRGBA(Color color) => ballPreviewGoalImg.color = color;
     public GameObject[] getSkillImgObjPrefs() => passiveSkillImgObjPrefs;
+    public void throwScreenAnimSetTrigger(string name) => throwScreen.GetComponent<Animator>().SetTrigger(name);
     //* GUI Button
     public void onClickReadyButton() => switchCamScene();
     public void onClickReGameButton() => init();
