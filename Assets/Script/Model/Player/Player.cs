@@ -142,6 +142,7 @@ public class Player : MonoBehaviour
                 DoSwing = true;
                 break;
             case "HomeRun": 
+            case "ActiveSkillBefSpotLight":
                 anim.updateMode  = AnimatorUpdateMode.UnscaledTime;
                 break;
         }
