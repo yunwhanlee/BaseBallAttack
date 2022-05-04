@@ -125,10 +125,10 @@ public class ActiveSkillBtnUI{
     }
 
     //*method
-    public void init(Player pl){
+    public void init(Player pl, bool isSelectBtnInit = false){
         Trigger = false;
-        Panel.material = null;
-        GrayBG.fillAmount = 1;
+        if(!isSelectBtnInit)   Panel.material = null;
+        if(!isSelectBtnInit)   GrayBG.fillAmount = 1;
         selectFence.gameObject.SetActive(false);
         pl.BatEffectTf.gameObject.SetActive(false);
         foreach(Transform child in pl.CastEFArrowTf) GameObject.Destroy(child.gameObject);
@@ -136,8 +136,11 @@ public class ActiveSkillBtnUI{
     }
     public void onTriggerActive(int selectIdx, Player pl, EffectManager em){
         if(GrayBG.fillAmount == 0){
+            Debug.Log("ActiveSkillBtnUI:: onTriggerActive:: trigger= " + Trigger);
+
             Trigger = !Trigger;
             selectFence.gameObject.SetActive(Trigger);
+
             //* Bat Effect
             pl.BatEffectTf.gameObject.SetActive(Trigger);
             foreach(Transform child in pl.BatEffectTf){

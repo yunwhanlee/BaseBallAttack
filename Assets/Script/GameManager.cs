@@ -140,6 +140,16 @@ public class GameManager : MonoBehaviour
     public void onClickSkillButton() => levelUpPanel.SetActive(false);
     public void onClickSetGameButton(string type) => setGame(type);
     public void onClickActiveSkillButton(int i) {
+        //(BUG)再クリック。Cancel Selected Btn
+        if(activeSkillBtnList[i].SelectFence.gameObject.activeSelf){
+            activeSkillBtnList[i].init(pl, true);
+            return;
+        }
+        //(BUG)重複選択禁止。初期化
+        activeSkillBtnList.ForEach(btn=>{
+            btn.init(pl, true);
+        });
+
         if(ballGroup.childCount == 0)  
             activeSkillBtnList[i].onTriggerActive(i, pl, em);
     } //(BUG)途中でスキル活性化ダメ
