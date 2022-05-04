@@ -99,7 +99,7 @@ public class Player : MonoBehaviour
         critical = new PassiveSkill<float>("critical", 0, 0f, 0.1f);
         explosion = new PassiveSkill<Explosion>("explosion", 0, new Explosion(0f, 0.75f), new Explosion(0.25f, 0.25f));
         expUp = new PassiveSkill<float>("expUp", 0, 1f, 0.2f);
-        itemSpawn = new PassiveSkill<float>("itemSpawn", 0, 1f, 0.1f);
+        itemSpawn = new PassiveSkill<float>("itemSpawn", 0, 0.1f, 0.05f);
 
         
         Debug.Log("swingArcArea.rectTransform.localRotation.eulerAngles.z=" + swingArcArea.rectTransform.localRotation.eulerAngles.z);//! (BUG) rotation.eulerAnglesしないと、角度の数値ではなく、小数点が出る。

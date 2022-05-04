@@ -27,7 +27,7 @@ public class Block_Prefab : MonoBehaviour
     [SerializeField] BlockType itemType;
     [SerializeField] private int hp = 1;
     [SerializeField] private int exp = 10;
-    [SerializeField] private int itemTypePer = 10;
+    [SerializeField] private int itemTypePer;
     private Vector3 itemBlockExplostionBoxSize = new Vector3(3,2,2);
 
     //* GUI
@@ -47,7 +47,9 @@ public class Block_Prefab : MonoBehaviour
         //* Type Apply
         bool isItemBlock = false;
         int rand = Random.Range(0,100);
-        if(gm.stage <= 50) isItemBlock = (rand < itemTypePer)? true : false;
+        itemTypePer = (int)(100 * pl.itemSpawn.Value); //百分率
+        Debug.Log("PassiveSkill:: Block_Prefab:: 「ItemSwpan Up」 rand("+rand+") <= per("+itemTypePer+") : " + ((rand <= itemTypePer)? "<color=green>true</color>" : "false"));
+        isItemBlock = (rand < itemTypePer)? true : false;
         if(isItemBlock){
             int typeCnt = System.Enum.GetValues(typeof(BlockType)).Length - 1; //enum Type Cnt Without Normal
             itemType = (BlockType)Random.Range(0, typeCnt);
@@ -133,7 +135,8 @@ public class Block_Prefab : MonoBehaviour
 
     public void onDestroy(GameObject target, bool isInitialize = false) {
         em.createBrokeBlockEF(target.transform, color);
-        if(!isInitialize) pl.addExp(exp); //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
+        int resultExp = (int)(exp * pl.expUp.Value);
+        if(!isInitialize) pl.addExp(resultExp); //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
         Destroy(target);
     }
 

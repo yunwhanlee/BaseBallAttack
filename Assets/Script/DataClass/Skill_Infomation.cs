@@ -31,7 +31,7 @@ public class PassiveSkill<T>{
         bool isLastExplosionSkill = (ballPref)? true : false;
         int rand = Random.Range(0, 100);
         int percent = Mathf.RoundToInt(per * 100); //百分率
-        Debug.Log("PassiveSkill:: setHitTypePsvSkill:: 「" + Name.ToString() + "」 rand("+rand+") <= per("+per+") : " + ((rand <= per)? "<color=blue>true</color>" : "<color=blue>false</color>"));
+        Debug.Log("PassiveSkill:: setHitTypePsvSkill:: 「" + Name.ToString() + "」 rand("+rand+") <= per("+per+") : " + ((rand <= per)? "<color=blue>true</color>" : "false"));
         if(Level > 0 && rand <= percent){
             switch(Name){
                 case "instantKill": 

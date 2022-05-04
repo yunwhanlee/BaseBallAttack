@@ -153,7 +153,6 @@ public class LevelUpPanelAnimate : MonoBehaviour
                 break;
             case "Exp Up":
                 pl.expUp.setLvUp(pl.expUp.Value + pl.expUp.Unit);
-                Debug.Log("Exp Up : 未実装");
                 break;
             case "ItemSwpan Up":
                 pl.itemSpawn.setLvUp(pl.itemSpawn.Value + pl.itemSpawn.Unit);
