@@ -188,6 +188,10 @@ public class Ball_Prefab : MonoBehaviour
             per = pl.explosion.Value.per;
             pl.explosion.setHitTypePsvSkill(per, ref result, col, em, pl, this.gameObject);
         }
+        else if(col.gameObject.tag == "Wall" && col.gameObject.name == "DownWall"){
+            Vector3 pos = new Vector3(this.transform.position.x, col.gameObject.transform.position.y, col.gameObject.transform.position.z);
+            em.createDownWallHitEF(pos);
+        }
     }
 
     //*---------------------------------------
@@ -223,7 +227,7 @@ public class Ball_Prefab : MonoBehaviour
         Debug.Log("ActiveSkill Before Anim");
         Time.timeScale = 0;
         pl.setAnimTrigger("ActiveSkillBefSpotLight");
-        yield return new WaitForSecondsRealtime(0.35f);
+        yield return new WaitForSecondsRealtime(0.325f);
         Time.timeScale = 1;
     }
 

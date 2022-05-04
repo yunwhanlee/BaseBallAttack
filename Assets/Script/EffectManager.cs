@@ -12,8 +12,8 @@ public class EffectManager : MonoBehaviour
     public GameObject brokeBlockEF;
     public GameObject itemBlockExplosionEF;
     public GameObject itemBlockDirLineTrailEF;
+    public GameObject downWallHitEF;
     
-
     //* Passive Skill EF
     public GameObject explosionEF;
     public GameObject criticalTextEF;
@@ -44,6 +44,10 @@ public class EffectManager : MonoBehaviour
         const int speed = 10;
         ins.GetComponent<Rigidbody>().AddForce(dir * speed, ForceMode.Impulse);
         Destroy(ins, 3f);
+    }
+    public void createDownWallHitEF(Vector3 parentPos){
+        var ins = Instantiate(downWallHitEF, parentPos, Quaternion.identity, effectGroup) as GameObject;
+        Destroy(ins, 1);
     }
 
     public void createInstantKillTextEF(Transform parentTf){
