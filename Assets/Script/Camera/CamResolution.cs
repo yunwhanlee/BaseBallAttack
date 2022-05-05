@@ -6,7 +6,7 @@ public class CamResolution : MonoBehaviour
 {   
     //* OutSide Component
     public GameManager gm;
-    public Player player;
+    public Player pl;
 
 
     //* Inside Component 
@@ -17,39 +17,40 @@ public class CamResolution : MonoBehaviour
     const int DEVICE_HEIGHT = 16;
 
     void Awake() {
+        pl = GameObject.Find("Player").GetComponent<Player>();
         setAutoDeviceCamRatio(DEVICE_WIDTH, DEVICE_HEIGHT);
     }
 
     void Update() {
         if(gm.state != GameManager.State.WAIT) return;
 
-        //! クリックでしなくてもいいかも。
-        if(Input.GetMouseButtonDown(0)){
-            //* RAY CAST
-            const int maxDistance = 50;
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit[] hits = Physics.RaycastAll(this.transform.position, ray.direction, maxDistance);
-            System.Array.Reverse(hits);//(BUG) hitsが逆にIdx順番で帰ることを正しく直す。
+        //? TouchSlideControlスクリプトでPlayer位置を自動調整。
+        // if(Input.GetMouseButtonDown(0)){
+        //     //* RAY CAST
+        //     const int maxDistance = 50;
+        //     Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        //     RaycastHit[] hits = Physics.RaycastAll(this.transform.position, ray.direction, maxDistance);
+        //     System.Array.Reverse(hits);//(BUG) hitsが逆にIdx順番で帰ることを正しく直す。
 
-            //* 処理
-            Transform playerTf = player.gameObject.transform;
-            int idx=0;
-            foreach (RaycastHit hit in hits){
-                //Debug.Log("idx="+idx+", hit.collider.tag="+hit.collider.tag);
-                switch(hit.collider.tag){
-                    case "LeftPosPad": //* 左パッドへプレイヤー配置
-                        playerTf.position = new Vector3(-Mathf.Abs(playerTf.position.x), playerTf.position.y, playerTf.position.z);
-                        playerTf.localScale = new Vector3(+Mathf.Abs(playerTf.localScale.x),playerTf.localScale.y,playerTf.localScale.z);
-                        return;
-                    case "RightPosPad": //* 右パッドへプレイヤー配置
-                        playerTf.position = new Vector3(+Mathf.Abs(playerTf.position.x), playerTf.position.y, playerTf.position.z);
-                        playerTf.localScale = new Vector3(-Mathf.Abs(playerTf.localScale.x),playerTf.localScale.y,playerTf.localScale.z);
-                        return;
-                }
-                idx++;
-            };
-            Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.red, 0.5f);
-        }
+        //     //* 処理
+        //     Transform player = pl.gameObject.transform;
+        //     int idx=0;
+        //     foreach (RaycastHit hit in hits){
+        //         //Debug.Log("idx="+idx+", hit.collider.tag="+hit.collider.tag);
+        //         switch(hit.collider.tag){
+        //             case "LeftPosPad": //* 左パッドへプレイヤー配置
+        //                 player.position = new Vector3(-Mathf.Abs(player.position.x), player.position.y, player.position.z);
+        //                 player.localScale = new Vector3(+Mathf.Abs(player.localScale.x),player.localScale.y,player.localScale.z);
+        //                 return;
+        //             case "RightPosPad": //* 右パッドへプレイヤー配置
+        //                 player.position = new Vector3(+Mathf.Abs(player.position.x), player.position.y, player.position.z);
+        //                 player.localScale = new Vector3(-Mathf.Abs(player.localScale.x),player.localScale.y,player.localScale.z);
+        //                 return;
+        //         }
+        //         idx++;
+        //     };
+        //     Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.red, 0.5f);
+        // }
     }
 
     //*---------------------------------------

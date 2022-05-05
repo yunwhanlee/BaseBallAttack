@@ -24,11 +24,24 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         //Stick動き制限
         stick.localPosition = Vector2.ClampMagnitude(eventData.position - (Vector2)pad.position, pad.rect.width * 0.25f);
         
-        //Stick角度
+        //Stick角度  
         Vector2 dir = (stick.position - pad.gameObject.transform.position).normalized;
         float deg = convertDir2DegWithRange(dir, MIN_ARROW_DEG_Y, MAX_ARROW_DEG_Y);
+        //* Stick(Arrow)角度によって、Player位置が自動で左右移動。
+        Debug.Log("OnDrag:: Stick(Arrow) Deg=" + deg + ", dir=" + dir + ", " + ((dir.x < 0)? "left" : "right").ToString());
+        Transform player = pl.gameObject.transform;
+        if(dir.x < 0){
+            //Right
+            player.position = new Vector3(+Mathf.Abs(player.position.x), player.position.y, player.position.z);
+            player.localScale = new Vector3(-Mathf.Abs(player.localScale.x),player.localScale.y,player.localScale.z);
+        }
+        else{
+            //Left
+            player.position = new Vector3(-Mathf.Abs(player.position.x), player.position.y, player.position.z);
+            player.localScale = new Vector3(+Mathf.Abs(player.localScale.x),player.localScale.y,player.localScale.z);
+        }
         
-        //Player矢印角度に適用
+        //Player矢印(Arrow)角度に適用
         const int offsetDeg2DTo3D = 90;
         pl.arrowAxisAnchor.transform.rotation = Quaternion.Euler(0,offsetDeg2DTo3D - deg, 0);
         
@@ -37,7 +50,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         drawBallPreviewSphereCast(arrowAnchorTf);
         drawLinePreview(arrowAnchorTf);
 
-        //Debug.Log("OnDrag:: Stick Deg=" + deg + ", dir=" + dir + ", " + ((dir.x < 0)? "left" : "right").ToString());
+        
     }
 
     public void OnPointerDown(PointerEventData eventData){

@@ -43,15 +43,15 @@ public class Ball_Prefab : MonoBehaviour
             }
 
             //* Ball Comeing View Slider
-            float startPosZ = gm.hitRangeStartTf.position.z;
-            float endPosZ = gm.hitRangeEndTf.position.z;
-            if(!isHited && endPosZ <= this.transform.position.z && this.transform.position.z <= startPosZ){
-                //HitRange Slider UI
-                float offset = Mathf.Abs(startPosZ);
-                float max = Mathf.Abs(endPosZ) - offset;
-                float v = Mathf.Abs(this.transform.position.z) - offset;
-                gm.hitRangeSlider.value = v / max;
-            }
+            // float startPosZ = gm.hitRangeStartTf.position.z;
+            // float endPosZ = gm.hitRangeEndTf.position.z;
+            // if(!isHited && endPosZ <= this.transform.position.z && this.transform.position.z <= startPosZ){
+            //     //HitRange Slider UI
+            //     float offset = Mathf.Abs(startPosZ);
+            //     float max = Mathf.Abs(endPosZ) - offset;
+            //     float v = Mathf.Abs(this.transform.position.z) - offset;
+            //     gm.hitRangeSlider.value = v / max;
+            // }
 
             //* Ball Preview Dir Goal Img
             distance = Vector3.Distance(gm.ballPreviewDirGoal.transform.position, this.transform.position);

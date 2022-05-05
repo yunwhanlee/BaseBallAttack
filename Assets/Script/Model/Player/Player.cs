@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     public GameManager gm;
     public EffectManager em;
 
-    [Header("【HIT 角度範囲】")]
+    [Header("<---- HIT 角度範囲 ---->")]
     // CAM1
     public GameObject arrowAxisAnchor;
     public Image swingArcArea;
@@ -32,18 +32,19 @@ public class Player : MonoBehaviour
     public GameObject previewBundle;
     public GameObject ballPreviewSphere;
 
-    [Header("【HIT ランク】")]
+    [Header("<---- HIT RANK ---->")]
     public HitRank[] hitRank;
 
 
-    [Header("【Status】")]
+    [Header("<---- Status ---->")]
     [SerializeField] bool doSwing = false;      public bool DoSwing {get=> doSwing; set=> doSwing=value;}
     [SerializeField] bool isLevelUp = false;    public bool IsLevelUp {get=> isLevelUp; set=> isLevelUp=value;}
     [SerializeField] int lv = 1;                public int Lv {get=> lv; set=> lv=value;}
     [SerializeField] float maxExp = 100;        public float MaxExp {get=> maxExp; set=> maxExp=value;}
     [SerializeField] int exp = 0;               public int Exp {get=> exp; set=> exp=value;}
 
-    [Header("【Set Active Bat Effect】")]
+    [Header("<---- Active Skill ---->")]
+    public float atvSkillCoolDownUnit = 0.05f;  public float AtvSkillCoolDownUnit {get=> atvSkillCoolDownUnit;}
     public string[] registAtvSkillNames = new string[2];
     public ActiveSkill[] activeSkills = new ActiveSkill[2];
     [SerializeField] Transform batEffectTf;           public Transform BatEffectTf {get => batEffectTf;}
@@ -53,7 +54,7 @@ public class Player : MonoBehaviour
     float fireBallCastWidth = 3;    public float FireBallCastWidth {get=> fireBallCastWidth;}
     
     
-    [Header("【Passive Skill】")]
+    [Header("<---- Passive Skill ---->")]
     public PassiveSkill<int> dmg;
     public PassiveSkill<int> multiShot;
     public PassiveSkill<float> speed;

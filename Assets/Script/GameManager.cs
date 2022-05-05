@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
         int i=0;
         foreach(Transform child in activeSkillBtnGroup){
             Button btn = child.GetComponent<Button>();
-            activeSkillBtnList.Add(new ActiveSkillBtnUI(0.5f, pl.activeSkills[i].Name,btn, pl.activeSkills[i].UISprite, activeSkillBtnEfMt));
+            activeSkillBtnList.Add(new ActiveSkillBtnUI(pl.AtvSkillCoolDownUnit, pl.activeSkills[i].Name, btn, pl.activeSkills[i].UISprite, activeSkillBtnEfMt));
             i++;
         }
     }
