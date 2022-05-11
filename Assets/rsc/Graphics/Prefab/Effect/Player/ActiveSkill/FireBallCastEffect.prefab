@@ -176,7 +176,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6b164606017c46044b3aa0e5e145b06e, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.009601116, a: 0.3254902}
+  m_Color: {r: 1, g: 0, b: 0.009601116, a: 0.3137255}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -199,9 +199,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   glowColor: {r: 1, g: 0, b: 0, a: 1}
-  glowBrightness: 3.5
+  glowBrightness: 5.66
   outlineWidth: 1
-  alphaThreshold: 0.089
+  alphaThreshold: 0.142
   drawOutside: 1
   enableInstancing: 0
 --- !u!1 &4519404608316719708
