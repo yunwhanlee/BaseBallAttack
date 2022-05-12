@@ -68,7 +68,36 @@ public class Player : MonoBehaviour
     private Animator anim;
 
     public void Start(){
-        
+        var atvSkillDb = gm.activeSkillDataBase;
+        registAtvSkillNames = new string[atvSkillDb.Length];
+        activeSkills = new ActiveSkill[atvSkillDb.Length];
+
+        int i=0;
+        //* Set Active Skills
+        Array.ForEach(atvSkillDb, dt=>{
+            // Get All Skill Names
+            registAtvSkillNames[i] = dt.Name;
+            // Get All Skill Data
+            activeSkills[i] = new ActiveSkill(registAtvSkillNames[i], atvSkillDb);
+            // Set EffectManager All Skill Effects
+            em.activeSkillBatEFs[i] = activeSkills[i].BatEfPref;
+            em.activeSkillShotEFs[i] = activeSkills[i].ShotEfPref;
+            em.activeSkillExplosionEFs[i] = activeSkills[i].ExplosionEfPref;
+            em.activeSkillCastEFs[i] = activeSkills[i].CastEfPref;
+            em.createActiveSkillBatEF(i, BatEffectTf);
+            i++;
+        });
+
+        //* Set Passive Skills : @params { int level, T value, T unit }
+        dmg = new PassiveSkill<int>("dmg", 0, 1, 1);
+        multiShot = new PassiveSkill<int>("multiShot", 0, 0, 1);
+        speed = new PassiveSkill<float>("speed", 0, 1f, 0.2f);
+        instantKill = new PassiveSkill<float>("instantKill", 0, 0f, 0.02f);
+        critical = new PassiveSkill<float>("critical", 0, 0f, 0.1f);
+        explosion = new PassiveSkill<Explosion>("explosion", 0, new Explosion(0f, 0.75f), new Explosion(0.25f, 0.25f));
+        expUp = new PassiveSkill<float>("expUp", 0, 1f, 0.2f);
+        itemSpawn = new PassiveSkill<float>("itemSpawn", 0, 0.1f, 0.05f);
+
         //* Set HitRank Data : @params { char rate, float distance, int power }
         hitRank = new HitRank[6];
         const int A=0, B=1, C=2, D=3, E=4, F=5;
@@ -78,29 +107,7 @@ public class Player : MonoBehaviour
         hitRank[D] = new HitRank(0.85f, 4);
         hitRank[E] = new HitRank(1.125f, 3);
         hitRank[F] = new HitRank(1.5f, 2);
-        
-        //* Set Active Skill
-        Debug.Log("Player:: gm.activeSkillDataBase.Length= " + gm.activeSkillDataBase.Length);
-        for(int i=0;i<gm.activeSkillDataBase.Length;i++){
-            //* Set <- From GameManager Table
-            activeSkills[i] = new ActiveSkill(registAtvSkillNames[i], gm.activeSkillDataBase);
-            //* Set -> To EffectManager Effect
-            em.activeSkillBatEFs[i] = activeSkills[i].BatEfPref;
-            em.activeSkillShotEFs[i] = activeSkills[i].ShotEfPref;
-            em.activeSkillExplosionEFs[i] = activeSkills[i].ExplosionEfPref;
-            em.activeSkillCastEFs[i] = activeSkills[i].CastEfPref;
-            em.createActiveSkillBatEF(i, BatEffectTf);
-        }
 
-        //* Set Passive Skill : @params { int level, T value, T unit }
-        dmg = new PassiveSkill<int>("dmg", 0, 1, 1);
-        multiShot = new PassiveSkill<int>("multiShot", 0, 0, 1);
-        speed = new PassiveSkill<float>("speed", 0, 1f, 0.2f);
-        instantKill = new PassiveSkill<float>("instantKill", 0, 0f, 0.02f);
-        critical = new PassiveSkill<float>("critical", 0, 0f, 0.1f);
-        explosion = new PassiveSkill<Explosion>("explosion", 0, new Explosion(0f, 0.75f), new Explosion(0.25f, 0.25f));
-        expUp = new PassiveSkill<float>("expUp", 0, 1f, 0.2f);
-        itemSpawn = new PassiveSkill<float>("itemSpawn", 0, 0.1f, 0.05f);
 
         
         Debug.Log("swingArcArea.rectTransform.localRotation.eulerAngles.z=" + swingArcArea.rectTransform.localRotation.eulerAngles.z);//! (BUG) rotation.eulerAnglesしないと、角度の数値ではなく、小数点が出る。
