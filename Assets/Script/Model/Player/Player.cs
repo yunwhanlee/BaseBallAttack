@@ -45,8 +45,8 @@ public class Player : MonoBehaviour
 
     [Header("<---- Active Skill ---->")]
     public float atvSkillCoolDownUnit = 0.05f;  public float AtvSkillCoolDownUnit {get=> atvSkillCoolDownUnit;}
-    public string[] registAtvSkillNames = new string[2];
-    public ActiveSkill[] activeSkills = new ActiveSkill[2];
+    public string[] registAtvSkillNames;// = new string[3];
+    public ActiveSkill[] activeSkills;// = new ActiveSkill[3];
     [SerializeField] Transform batEffectTf;           public Transform BatEffectTf {get => batEffectTf;}
     [SerializeField] Transform castEFArrowTf;         public Transform CastEFArrowTf {get => castEFArrowTf;}
     [SerializeField] Transform castEFBallPreviewTf;   public Transform CastEFBallPreviewTf {get => castEFBallPreviewTf;}
@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
         
         //* Set Active Skill
         Debug.Log("Player:: gm.activeSkillBtnGroup.childCount= " + gm.activeSkillBtnGroup.childCount);
-        for(int i=0;i<gm.activeSkillBtnGroup.childCount;i++){
+        for(int i=0;i<gm.activeSkillTable.Length;i++){
             //* Set <- From GameManager Table
             activeSkills[i] = new ActiveSkill(registAtvSkillNames[i], gm.activeSkillTable);
             //* Set -> To EffectManager Effect

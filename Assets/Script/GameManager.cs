@@ -99,11 +99,18 @@ public class GameManager : MonoBehaviour
         //* Ball Preview Dir Goal Set Z-Center
         setBallPreviewGoalRandomPos();
 
-        //* Active Skill Btns
+        //* Active Skill Btns(2個)
         int i=0;
+        Debug.Log("GM:: activeSkillBtnGroup.childCount=" + activeSkillBtnGroup.childCount);
         foreach(Transform child in activeSkillBtnGroup){
             Button btn = child.GetComponent<Button>();
-            activeSkillBtnList.Add(new ActiveSkillBtnUI(pl.AtvSkillCoolDownUnit, pl.activeSkills[i].Name, btn, pl.activeSkills[i].UISprite, activeSkillBtnEfMt));
+            activeSkillBtnList.Add(new ActiveSkillBtnUI(
+                pl.AtvSkillCoolDownUnit,
+                pl.activeSkills[i].Name,
+                btn,
+                pl.activeSkills[i].UISprite,
+                activeSkillBtnEfMt)
+            );
             i++;
         }
     }

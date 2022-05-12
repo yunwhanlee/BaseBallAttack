@@ -3779,6 +3779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca4e449bf987f9545921ada63a900bf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gm: {fileID: 1623732227}
   effectGroup: {fileID: 831947632}
   brokeBlockEF: {fileID: 4643957893822756392, guid: 3ca0e6de066efec42b3c0869596311f9, type: 3}
   itemBlockExplosionEF: {fileID: 5286410048939786173, guid: 1b974900968d1be4d80ee5f4efcad58e, type: 3}
@@ -3790,13 +3791,17 @@ MonoBehaviour:
   activeSkillBatEFs:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   activeSkillShotEFs:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   activeSkillExplosionEFs:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   activeSkillCastEFs:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
 --- !u!1 &702911504
@@ -3860,8 +3865,15 @@ MonoBehaviour:
   atvSkillCoolDownUnit: 0.5
   registAtvSkillNames:
   - Thunder
+  - ColorBall
   - FireBall
   activeSkills:
+  - name: 
+    uiSprite: {fileID: 0}
+    batEfPref: {fileID: 0}
+    shotEfPref: {fileID: 0}
+    explosionEfPref: {fileID: 0}
+    castEfPref: {fileID: 0}
   - name: 
     uiSprite: {fileID: 0}
     batEfPref: {fileID: 0}
@@ -12024,7 +12036,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cd21a2aefb1cb5a4db7fe2a1a14b5c06, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d16dfcf01b857164e8d5e1a0e57e5b75, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18548,6 +18560,12 @@ MonoBehaviour:
     shotEfPref: {fileID: 6303178564355127388, guid: 8eb5b757eb71b92478dffd67335020f6, type: 3}
     explosionEfPref: {fileID: 5182104163466940332, guid: 2060b7cde9a14fd4a87386529f2db108, type: 3}
     castEfPref: {fileID: 4519404608316719708, guid: 7b569f01f8e19984d82166687e883df4, type: 3}
+  - name: ColorBall
+    uiSprite: {fileID: 21300000, guid: d16dfcf01b857164e8d5e1a0e57e5b75, type: 3}
+    batEfPref: {fileID: 1250908186256046591, guid: 66631e338ee66ce42a40703badf84095, type: 3}
+    shotEfPref: {fileID: 8795254971110652698, guid: 57d587ac5e5c18646ab645de2ff5f753, type: 3}
+    explosionEfPref: {fileID: 0}
+    castEfPref: {fileID: 0}
   activeSkillBtnList: []
   activeSkillBtnEfMt: {fileID: 2100000, guid: f5741323f9a2ef44abe392a3008f0a3f, type: 2}
   passiveSkillImgObjPrefs:
@@ -21772,6 +21790,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71f96bca88b0fd940a48a70f1bfe1885, type: 3}
+--- !u!1001 &3874429281969611986
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8795254971110652698, guid: 57d587ac5e5c18646ab645de2ff5f753, type: 3}
+      propertyPath: m_Name
+      value: ColorBallShotTrailEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 8795254971110652703, guid: 57d587ac5e5c18646ab645de2ff5f753, type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8795254971110652703, guid: 57d587ac5e5c18646ab645de2ff5f753, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8795254971110652703, guid: 57d587ac5e5c18646ab645de2ff5f753, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.498
+      objectReference: {fileID: 0}
+    - target: {fileID: 8795254971110652703, guid: 57d587ac5e5c18646ab645de2ff5f753, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 8795254971110652703, guid: 57d587ac5e5c18646ab645de2ff5f753, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8795254971110652703, guid: 57d587ac5e5c18646ab645de2ff5f753, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8795254971110652703, guid: 57d587ac5e5c18646ab645de2ff5f753, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8795254971110652703, guid: 57d587ac5e5c18646ab645de2ff5f753, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8795254971110652703, guid: 57d587ac5e5c18646ab645de2ff5f753, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8795254971110652703, guid: 57d587ac5e5c18646ab645de2ff5f753, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8795254971110652703, guid: 57d587ac5e5c18646ab645de2ff5f753, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 57d587ac5e5c18646ab645de2ff5f753, type: 3}
 --- !u!4 &4937813979290638105 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4519404608316719709, guid: 7b569f01f8e19984d82166687e883df4, type: 3}

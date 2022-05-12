@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class EffectManager : MonoBehaviour
 {
     //* OutSide
+    public GameManager gm;
     public Transform effectGroup;
 
     //* Block EF
@@ -20,10 +21,21 @@ public class EffectManager : MonoBehaviour
     public GameObject instantKillTextEF;
 
     //* Active Skill EF
-    public GameObject[] activeSkillBatEFs = new GameObject[2];
-    public GameObject[] activeSkillShotEFs = new GameObject[2];
-    public GameObject[] activeSkillExplosionEFs = new GameObject[2];
-    public GameObject[] activeSkillCastEFs = new GameObject[2];
+    public GameObject[] activeSkillBatEFs = new GameObject[3];
+    public GameObject[] activeSkillShotEFs = new GameObject[3];
+    public GameObject[] activeSkillExplosionEFs = new GameObject[3];
+    public GameObject[] activeSkillCastEFs = new GameObject[3];
+
+    void Start()
+    {
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        Debug.Log("EffectManager:: gm.ActiveSkillTable.Length=" + gm.activeSkillTable.Length);
+        int cnt = gm.activeSkillTable.Length;
+        activeSkillBatEFs = new GameObject[cnt];
+        activeSkillShotEFs = new GameObject[cnt];
+        activeSkillExplosionEFs = new GameObject[cnt];
+        activeSkillCastEFs = new GameObject[cnt];
+    }
 
     //*---------------------------------------
     //* 関数
