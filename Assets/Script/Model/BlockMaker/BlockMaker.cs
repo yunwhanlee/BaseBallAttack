@@ -18,6 +18,8 @@ public class BlockMaker : MonoBehaviour
     public Transform blockBundle;
     public GameObject blockPref;
     public bool isCreateBlock;
+    public Color[] colors;   public Color[] Colors {get => colors;}
+    public Material[] mts;   public Material[] Mts {get => mts;}
 
     public void Start() {
         //* Init

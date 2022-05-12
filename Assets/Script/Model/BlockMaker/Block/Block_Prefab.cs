@@ -10,13 +10,13 @@ public class Block_Prefab : MonoBehaviour
     public enum BlockMt {PLAIN, WOOD, SAND, REDBRICK, IRON};
     public enum BlockType {BOMB, LR_ARROW, UPDOWN_ARROW, NORMAL};
 
-    public GameManager gm;
-    public EffectManager em;
-    public Player pl;
+    private GameManager gm;
+    private EffectManager em;
+    private Player pl;
+    private BlockMaker bm;
 
     //* Material Instancing
     private MeshRenderer meshRd;
-    public Color[] colorList;
     private Color color;
     public Material[] mts;
     private Material originMt;
@@ -37,6 +37,7 @@ public class Block_Prefab : MonoBehaviour
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         em = GameObject.Find("EffectManager").GetComponent<EffectManager>();
         pl = GameObject.Find("Player").GetComponent<Player>();
+        bm = GameObject.Find("BlockMaker").GetComponent<BlockMaker>();
 
         //* Material Instancing
         meshRd = GetComponent<MeshRenderer>();
@@ -75,16 +76,16 @@ public class Block_Prefab : MonoBehaviour
 
         //* Material
         switch(hp){
-            case 1 : exp = 10;  meshRd.material = mts[(int)BlockMt.PLAIN]; break;
-            case 2 : exp = 20;  meshRd.material = mts[(int)BlockMt.WOOD]; break;
-            case 3 : exp = 30;  meshRd.material = mts[(int)BlockMt.SAND]; break;
-            case 4 : exp = 40;  meshRd.material = mts[(int)BlockMt.REDBRICK]; break;
-            case 5 : exp = 50;  meshRd.material = mts[(int)BlockMt.IRON]; break;
+            case 1 : exp = 10;  meshRd.material = bm.Mts[(int)BlockMt.PLAIN]; break;
+            case 2 : exp = 20;  meshRd.material = bm.Mts[(int)BlockMt.WOOD]; break;
+            case 3 : exp = 30;  meshRd.material = bm.Mts[(int)BlockMt.SAND]; break;
+            case 4 : exp = 40;  meshRd.material = bm.Mts[(int)BlockMt.REDBRICK]; break;
+            case 5 : exp = 50;  meshRd.material = bm.Mts[(int)BlockMt.IRON]; break;
         }
 
         //* 色
-        int randIdx = Random.Range(0, colorList.Length);
-        color = colorList[randIdx];
+        int randIdx = Random.Range(0, bm.Colors.Length);
+        color = bm.Colors[randIdx];
         meshRd.material.SetColor("_ColorTint", color);
         
         originMt = meshRd.material; // Save Original Material
