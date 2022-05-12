@@ -18535,6 +18535,7 @@ MonoBehaviour:
     castEfPref: {fileID: 4519404608316719708, guid: 7b569f01f8e19984d82166687e883df4, type: 3}
   activeSkillBtnList: []
   activeSkillBtnEfMt: {fileID: 2100000, guid: f5741323f9a2ef44abe392a3008f0a3f, type: 2}
+  selectBtnIdx: -1
   passiveSkillImgObjPrefs:
   - {fileID: 5646658460974134969, guid: 9c3959f2820441145a232b352b0eddc0, type: 3}
   - {fileID: 2024090791339072515, guid: 82aeceecafe4e05488db05c172108681, type: 3}
@@ -21774,7 +21775,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8795254971110652703, guid: 57d587ac5e5c18646ab645de2ff5f753, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.13
+      value: -0.29
       objectReference: {fileID: 0}
     - target: {fileID: 8795254971110652703, guid: 57d587ac5e5c18646ab645de2ff5f753, type: 3}
       propertyPath: m_LocalPosition.y
@@ -21782,7 +21783,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8795254971110652703, guid: 57d587ac5e5c18646ab645de2ff5f753, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.71
+      value: -6.79
       objectReference: {fileID: 0}
     - target: {fileID: 8795254971110652703, guid: 57d587ac5e5c18646ab645de2ff5f753, type: 3}
       propertyPath: m_LocalRotation.w

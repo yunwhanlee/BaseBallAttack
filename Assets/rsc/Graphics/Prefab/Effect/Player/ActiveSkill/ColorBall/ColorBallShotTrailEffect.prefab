@@ -287,8 +287,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
-      minScalar: 0.25
+      scalar: 0.125
+      minScalar: 0.05
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4873,11 +4873,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5749892945899594868, guid: 797ee248261f4504f9071cdf2c4300d4, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.5
+      value: 0.125
       objectReference: {fileID: 0}
     - target: {fileID: 5749892945899594868, guid: 797ee248261f4504f9071cdf2c4300d4, type: 3}
       propertyPath: InitialModule.startSize.minScalar
-      value: 0.25
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 5749892945899594869, guid: 797ee248261f4504f9071cdf2c4300d4, type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -4947,11 +4947,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5749892945899594868, guid: 797ee248261f4504f9071cdf2c4300d4, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.5
+      value: 0.125
       objectReference: {fileID: 0}
     - target: {fileID: 5749892945899594868, guid: 797ee248261f4504f9071cdf2c4300d4, type: 3}
       propertyPath: InitialModule.startSize.minScalar
-      value: 0.25
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 5749892945899594869, guid: 797ee248261f4504f9071cdf2c4300d4, type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -5021,11 +5021,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5749892945899594868, guid: 797ee248261f4504f9071cdf2c4300d4, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.5
+      value: 0.125
       objectReference: {fileID: 0}
     - target: {fileID: 5749892945899594868, guid: 797ee248261f4504f9071cdf2c4300d4, type: 3}
       propertyPath: InitialModule.startSize.minScalar
-      value: 0.25
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 5749892945899594869, guid: 797ee248261f4504f9071cdf2c4300d4, type: 3}
       propertyPath: m_Materials.Array.data[1]

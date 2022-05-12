@@ -158,6 +158,7 @@ public class ActiveSkillBtnUI{
                 switch(this.name){
                     case "Thunder":     parentTf = pl.CastEFArrowTf;        break;
                     case "FireBall":    parentTf = pl.CastEFBallPreviewTf;  break;
+                    case "ColorBall":   parentTf = pl.CastEFBallPreviewTf;  break;
                 }
                 em.createActiveSkillCastEF(selectIdx, parentTf);
             }

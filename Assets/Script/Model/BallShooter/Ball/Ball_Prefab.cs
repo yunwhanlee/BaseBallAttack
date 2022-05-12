@@ -172,6 +172,8 @@ public class Ball_Prefab : MonoBehaviour
                             skillBtn.init(pl);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
+                        case "ColorBall":
+                            break;
                     }
                 }
             });
@@ -251,6 +253,7 @@ public class Ball_Prefab : MonoBehaviour
                 this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                 break;
             case "FireBall":
+            case "ColorBall":
                 em.createActiveSkillShotEF(1, this.gameObject.transform, Quaternion.identity, true); //Trail
                 break;
         }
