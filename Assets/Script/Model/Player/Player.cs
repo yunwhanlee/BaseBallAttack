@@ -80,10 +80,10 @@ public class Player : MonoBehaviour
         hitRank[F] = new HitRank(1.5f, 2);
         
         //* Set Active Skill
-        Debug.Log("Player:: gm.activeSkillBtnGroup.childCount= " + gm.activeSkillBtnGroup.childCount);
-        for(int i=0;i<gm.activeSkillTable.Length;i++){
+        Debug.Log("Player:: gm.activeSkillDataBase.Length= " + gm.activeSkillDataBase.Length);
+        for(int i=0;i<gm.activeSkillDataBase.Length;i++){
             //* Set <- From GameManager Table
-            activeSkills[i] = new ActiveSkill(registAtvSkillNames[i], gm.activeSkillTable);
+            activeSkills[i] = new ActiveSkill(registAtvSkillNames[i], gm.activeSkillDataBase);
             //* Set -> To EffectManager Effect
             em.activeSkillBatEFs[i] = activeSkills[i].BatEfPref;
             em.activeSkillShotEFs[i] = activeSkills[i].ShotEfPref;

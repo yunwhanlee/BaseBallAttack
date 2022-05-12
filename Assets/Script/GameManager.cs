@@ -61,8 +61,8 @@ public class GameManager : MonoBehaviour
     public GameObject levelUpPanel;
 
     [Header("--Active Skill Btn--")]
-    public ActiveSkill[] activeSkillTable;
-    public List<ActiveSkillBtnUI> activeSkillBtnList;
+    public ActiveSkill[] activeSkillDataBase; //* 全てActiveSkillsのデータベース
+    public List<ActiveSkillBtnUI> activeSkillBtnList; //* ActiveSkillボタン
     public Material activeSkillBtnEfMt;
 
     [Header("--Passive Skill Table InGame--")]

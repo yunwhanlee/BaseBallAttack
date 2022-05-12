@@ -29,8 +29,9 @@ public class EffectManager : MonoBehaviour
     void Start()
     {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-        Debug.Log("EffectManager:: gm.ActiveSkillTable.Length=" + gm.activeSkillTable.Length);
-        int cnt = gm.activeSkillTable.Length;
+        
+        Debug.Log("EffectManager:: gm.activeSkillDataBase.Length=" + gm.activeSkillDataBase.Length);
+        int cnt = gm.activeSkillDataBase.Length;
         activeSkillBatEFs = new GameObject[cnt];
         activeSkillShotEFs = new GameObject[cnt];
         activeSkillExplosionEFs = new GameObject[cnt];
