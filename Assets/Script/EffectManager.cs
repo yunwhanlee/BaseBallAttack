@@ -21,10 +21,10 @@ public class EffectManager : MonoBehaviour
     public GameObject instantKillTextEF;
 
     //* Active Skill EF
-    public GameObject[] activeSkillBatEFs = new GameObject[3];
-    public GameObject[] activeSkillShotEFs = new GameObject[3];
-    public GameObject[] activeSkillExplosionEFs = new GameObject[3];
-    public GameObject[] activeSkillCastEFs = new GameObject[3];
+    public GameObject[] activeSkillBatEFs;
+    public GameObject[] activeSkillShotEFs;
+    public GameObject[] activeSkillExplosionEFs;
+    public GameObject[] activeSkillCastEFs;
 
     void Start()
     {

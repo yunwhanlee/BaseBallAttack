@@ -3788,22 +3788,10 @@ MonoBehaviour:
   explosionEF: {fileID: 4643957893822756392, guid: f7ce8225f27202143a23c0bd225930bc, type: 3}
   criticalTextEF: {fileID: 3436073781772722895, guid: 61dc174dba28d954c9d42ce5e8dbcc60, type: 3}
   instantKillTextEF: {fileID: 3436073781772722895, guid: 58b2160a5a2f7994bb5ff653a164e704, type: 3}
-  activeSkillBatEFs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  activeSkillShotEFs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  activeSkillExplosionEFs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  activeSkillCastEFs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  activeSkillBatEFs: []
+  activeSkillShotEFs: []
+  activeSkillExplosionEFs: []
+  activeSkillCastEFs: []
 --- !u!1 &702911504
 GameObject:
   m_ObjectHideFlags: 0
