@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
     public ActiveSkill[] activeSkillDataBase; //* 全てActiveSkillsのデータベース
     public List<ActiveSkillBtnUI> activeSkillBtnList; //* ActiveSkillボタン
     public Material activeSkillBtnEfMt;
-    [SerializeField] int selectBtnIdx; public int SelectBtnIdx { get=> selectBtnIdx; set=> selectBtnIdx=value;}
+    public Material[] blockGlowColorMts;
 
     [Header("--Passive Skill Table InGame--")]
     public GameObject[] passiveSkillImgObjPrefs;
@@ -115,8 +115,6 @@ public class GameManager : MonoBehaviour
             );
             i++;
         }
-
-        selectBtnIdx = -1;
     }
 
     void Update(){
@@ -160,12 +158,9 @@ public class GameManager : MonoBehaviour
         activeSkillBtnList.ForEach(btn=>{
             btn.init(pl, true);
         });
-        
-        SelectBtnIdx = -1;
 
         if(ballGroup.childCount == 0){
             activeSkillBtnList[i].onTriggerActive(i, pl, em);
-            SelectBtnIdx = i;
         }
     } //(BUG)途中でスキル活性化ダメ
 

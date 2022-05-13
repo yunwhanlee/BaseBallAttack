@@ -75,6 +75,12 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
             Vector3 cetner = hit.point + radius * hit.normal; //☆
             pl.ballPreviewSphere.transform.position = cetner;
             // Debug.DrawRay(arrowTf.position, arrowTf.forward * 1000, Color.red, 1);
+
+            //* ColorBall ActiveSkill
+            if(hit.transform.CompareTag("NormalBlock")){
+                var block = hit.transform.GetComponent<Block_Prefab>();
+                block.setEnabledSpriteGlowEF(true);
+            }
         }
     }
 

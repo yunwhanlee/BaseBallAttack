@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using Random = UnityEngine.Random;
+using SpriteGlow;
 
 public class Block_Prefab : MonoBehaviour
 {
+    public enum ColorIndex{RED, YELLOW, GREEN, BLUE};
     public enum BlockMt {PLAIN, WOOD, SAND, REDBRICK, IRON};
     public enum BlockType {BOMB, LR_ARROW, UPDOWN_ARROW, NORMAL};
 
@@ -22,6 +24,7 @@ public class Block_Prefab : MonoBehaviour
     private Material originMt;
     public Material whiteHitMt;
     public Transform itemTypeImgGroup;
+    public SpriteGlowEffect sprGlowEf;
 
     //* Value
     [SerializeField] BlockType itemType;
@@ -38,8 +41,9 @@ public class Block_Prefab : MonoBehaviour
         em = GameObject.Find("EffectManager").GetComponent<EffectManager>();
         pl = GameObject.Find("Player").GetComponent<Player>();
         bm = GameObject.Find("BlockMaker").GetComponent<BlockMaker>();
+        sprGlowEf = GetComponentInChildren<SpriteGlowEffect>();
 
-        //* 🌟Material Instancing
+        //* Material Instancing🌟
         meshRd = GetComponent<MeshRenderer>();
         meshRd.material = Instantiate(meshRd.material);
 
@@ -87,12 +91,24 @@ public class Block_Prefab : MonoBehaviour
         int randIdx = Random.Range(0, bm.Colors.Length);
         color = bm.Colors[randIdx];
         meshRd.material.SetColor("_ColorTint", color);
+        switch(randIdx){
+            case (int)ColorIndex.RED:       color = Color.red; break;
+            case (int)ColorIndex.YELLOW:    color = Color.yellow; break;
+            case (int)ColorIndex.GREEN:     color = Color.green; break;
+            case (int)ColorIndex.BLUE:      color = Color.blue; break;
+        }
+        sprGlowEf.GlowColor = color;
         
         originMt = meshRd.material; // Save Original Material
     }
 
     void Update(){
         hpTxt.text = hp.ToString();
+    }
+
+    public void setEnabledSpriteGlowEF(bool isTrigger){
+        if(isTrigger){sprGlowEf.GlowBrightness = 8;   sprGlowEf.OutlineWidth = 8;}
+        else{sprGlowEf.GlowBrightness = 0;   sprGlowEf.OutlineWidth = 0;}
     }
 
     private void OnTriggerEnter(Collider col) {
