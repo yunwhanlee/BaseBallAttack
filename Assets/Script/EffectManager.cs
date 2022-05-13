@@ -94,6 +94,7 @@ public class EffectManager : MonoBehaviour
     }
 
     public void createActiveSkillCastEF(int idx, Transform parentTf){
+        if(!activeSkillCastEFs[idx]) return;
         var ins = Instantiate(activeSkillCastEFs[idx], parentTf.position, parentTf.rotation, parentTf) as GameObject;
     }
 }

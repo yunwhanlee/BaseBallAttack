@@ -103,6 +103,7 @@ public class ActiveSkill{
 public class ActiveSkillBtnUI{
     //*value                        //*get set
 
+    [SerializeField] int index;  public int Index {get=> index;}
     [SerializeField] float unit;    public float Unit {get=> unit; set=> unit=value;}// Decrease Fill Amount Unit
     [SerializeField] string name;    public string Name {get=> name; set=> name=value;}
     [SerializeField] bool trigger;    public bool Trigger {get=> trigger; set=> trigger=value;}
@@ -113,7 +114,8 @@ public class ActiveSkillBtnUI{
     [SerializeField] Material activeEFMt;   public Material ActiveEFMt {get=> activeEFMt;}
 
     //*contructor
-    public ActiveSkillBtnUI(float unit, string name, Button skillBtn, Sprite sprite, Material activeSkillEffectMt){
+    public ActiveSkillBtnUI(int index, float unit, string name, Button skillBtn, Sprite sprite, Material activeSkillEffectMt){
+        this.index = index;
         this.unit = unit;
         this.name = name;
         panel = skillBtn.GetComponent<Image>();
@@ -158,7 +160,7 @@ public class ActiveSkillBtnUI{
                 switch(this.name){
                     case "Thunder":     parentTf = pl.CastEFArrowTf;        break;
                     case "FireBall":    parentTf = pl.CastEFBallPreviewTf;  break;
-                    case "ColorBall":   parentTf = pl.CastEFBallPreviewTf;  break;
+                    case "ColorBall":   parentTf = pl.CastEFArrowTf;        break;
                 }
                 em.createActiveSkillCastEF(selectIdx, parentTf);
             }

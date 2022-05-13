@@ -97,7 +97,7 @@ public class Ball_Prefab : MonoBehaviour
                 bool isActiveSkillTrigger = false;
                 gm.activeSkillBtnList.ForEach(skillBtn=>{
                     if(skillBtn.Trigger){
-                        StartCoroutine(coPlayActiveSkillShotEF(skillBtn.Name, 1f, dir));
+                        StartCoroutine(coPlayActiveSkillShotEF(skillBtn, 1f, dir));
                         isActiveSkillTrigger = true;
                     }
                 });
@@ -161,7 +161,7 @@ public class Ball_Prefab : MonoBehaviour
                             //なし
                             break;
                         case "FireBall":
-                            em.createActiveSkillExplosionEF(1, this.transform);
+                            em.createActiveSkillExplosionEF(skillBtn.Index, this.transform);
                             //* Collider 
                             RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.FireBallCastWidth, Vector3.up, 0);
                             Array.ForEach(hits, hit => {
@@ -233,14 +233,14 @@ public class Ball_Prefab : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    IEnumerator coPlayActiveSkillShotEF(string name, float waitTime, Vector3 dir){
-        switch(name){
+    IEnumerator coPlayActiveSkillShotEF(ActiveSkillBtnUI btn, float waitTime, Vector3 dir){
+        switch(btn.Name){
             case "Thunder":
                 const int maxDistance = 50;
                 const int width = 1;
                 Debug.DrawRay(this.transform.position, dir * maxDistance, Color.blue, 2f);
 
-                em.createActiveSkillShotEF(0, this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
+                em.createActiveSkillShotEF(btn.Index, this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
                 //* Collider 
                 RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, Vector3.one * width, dir, Quaternion.identity, maxDistance);
                 Array.ForEach(hits, hit => {
@@ -254,7 +254,7 @@ public class Ball_Prefab : MonoBehaviour
                 break;
             case "FireBall":
             case "ColorBall":
-                em.createActiveSkillShotEF(1, this.gameObject.transform, Quaternion.identity, true); //Trail
+                em.createActiveSkillShotEF(btn.Index, this.gameObject.transform, Quaternion.identity, true); //Trail
                 break;
         }
         //Before go up NextStage Wait for Second
