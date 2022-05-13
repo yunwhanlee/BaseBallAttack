@@ -173,6 +173,23 @@ public class Ball_Prefab : MonoBehaviour
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
                         case "ColorBall":
+                            //* Hit Color
+                            var meshRd = col.gameObject.GetComponent<MeshRenderer>();
+                            Color hitColor = meshRd.material.GetColor("_ColorTint");
+                            Debug.Log("OnCollisionEnter:: ColorBall AtvSkill -> hitColor=" + hitColor);
+                            //* Find Same Color Blocks
+                            var blocks = gm.blockMaker.GetComponentsInChildren<Block_Prefab>();
+                            var sameColorBlocks = Array.FindAll(blocks, bl => 
+                                bl.GetComponent<MeshRenderer>().material.GetColor("_ColorTint") == hitColor
+                            );
+                            //* Destroy
+                            Array.ForEach(sameColorBlocks, bl => {
+                                em.createActiveSkillExplosionEF(skillBtn.Index, bl.transform);
+                                bl.onDestroy(bl.gameObject, true);
+                            });
+
+                            skillBtn.init(pl);
+                            this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
                     }
                 }
@@ -253,9 +270,12 @@ public class Ball_Prefab : MonoBehaviour
                 this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                 break;
             case "FireBall":
+                em.createActiveSkillShotEF(btn.Index, this.gameObject.transform, Quaternion.identity, true); //Trail
+                break;
             case "ColorBall":
                 em.createActiveSkillShotEF(btn.Index, this.gameObject.transform, Quaternion.identity, true); //Trail
                 break;
+            
         }
         //Before go up NextStage Wait for Second
         yield return new WaitForSeconds(waitTime);

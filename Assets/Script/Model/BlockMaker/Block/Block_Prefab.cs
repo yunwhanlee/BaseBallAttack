@@ -39,7 +39,7 @@ public class Block_Prefab : MonoBehaviour
         pl = GameObject.Find("Player").GetComponent<Player>();
         bm = GameObject.Find("BlockMaker").GetComponent<BlockMaker>();
 
-        //* Material Instancing
+        //* 🌟Material Instancing
         meshRd = GetComponent<MeshRenderer>();
         meshRd.material = Instantiate(meshRd.material);
 
