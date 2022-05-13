@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {   //*2D Screen *//
@@ -13,6 +14,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     public RectTransform pad;
     public RectTransform stick;
     private Vector3 dir;
+    public GameObject hitBlockByBallPreview;
     private const int MIN_ARROW_DEG_Y = 30;
     private const int MAX_ARROW_DEG_Y = 150;
 
@@ -78,8 +80,26 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
             //* ColorBall ActiveSkill
             if(hit.transform.CompareTag("NormalBlock")){
-                var block = hit.transform.GetComponent<Block_Prefab>();
-                block.setEnabledSpriteGlowEF(true);
+                //* Hit Color
+                var meshRd = hit.transform.gameObject.GetComponent<MeshRenderer>();
+                Color hitColor = meshRd.material.GetColor("_ColorTint");
+
+                //* Find Same Color Blocks
+                var blocks = gm.blockMaker.GetComponentsInChildren<Block_Prefab>();
+                var sameColorBlocks = Array.FindAll(blocks, bl => 
+                    bl.GetComponent<MeshRenderer>().material.GetColor("_ColorTint") == hitColor
+                );
+
+                //* Glow Effect On
+                Array.ForEach(sameColorBlocks, bl => {
+                    bl.setEnabledSpriteGlowEF(true);
+                });
+                
+                //* Reset
+                if(hitBlockByBallPreview != hit.transform.gameObject){
+                    Array.ForEach(blocks, bl => bl.setEnabledSpriteGlowEF(false));
+                }
+                hitBlockByBallPreview = hit.transform.gameObject;
             }
         }
     }
