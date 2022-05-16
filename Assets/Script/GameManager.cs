@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public Canvas canvasUI;
     public Player pl;
     public BallShooter ballShooter;
-    public BlockMaker blockMaker;
+    public BlockMaker bm;
     public GameObject throwScreen;
     public Transform hitRangeStartTf;
     public Transform hitRangeEndTf;
@@ -152,6 +152,10 @@ public class GameManager : MonoBehaviour
         //(BUG)再クリック。Cancel Selected Btn
         if(activeSkillBtnList[i].SelectFence.gameObject.activeSelf){
             activeSkillBtnList[i].init(pl, true);
+
+            var blocks = bm.GetComponentsInChildren<Block_Prefab>();
+            bm.setGlowEFBlocks(blocks, false);
+            
             return;
         }
         //(BUG)重複選択禁止。初期化
@@ -176,7 +180,7 @@ public class GameManager : MonoBehaviour
         pl.MaxExp = 100;
         gameoverPanel.SetActive(false);
         pl.Start();
-        blockMaker.Start();
+        bm.Start();
     }
 
     public void switchCamScene(){
@@ -246,7 +250,7 @@ public class GameManager : MonoBehaviour
             setShootCntText("OUT!");
             yield return new WaitForSeconds(1.5f);
             switchCamScene();
-            blockMaker.setCreateBlockTrigger(true); //ブロック生成
+            bm.setCreateBlockTrigger(true); //ブロック生成
             foreach(var img in strikeBallImgs) img.gameObject.SetActive(false); //GUI非表示 初期化
             readyBtn.gameObject.SetActive(true);
         }
@@ -354,7 +358,7 @@ public class GameManager : MonoBehaviour
         setState(GameManager.State.WAIT);
         downWall.isTrigger = true; //*下壁 物理X
         readyBtn.gameObject.SetActive(true);
-        blockMaker.setCreateBlockTrigger(true);
+        bm.setCreateBlockTrigger(true);
         ballShooter.setIsBallExist(false);
         pl.previewBundle.SetActive(true);
         checkLevelUp();

@@ -9,6 +9,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     //* OutSide
     public GameManager gm;
     public Player pl;
+    public BlockMaker bm;
     public LineRenderer line;
 
     public RectTransform pad;
@@ -86,19 +87,17 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
                 Color hitColor = meshRd.material.GetColor("_ColorTint");
 
                 //* Find Same Color Blocks
-                var blocks = gm.blockMaker.GetComponentsInChildren<Block_Prefab>();
+                var blocks = bm.GetComponentsInChildren<Block_Prefab>();
                 var sameColorBlocks = Array.FindAll(blocks, bl => 
                     bl.GetComponent<MeshRenderer>().material.GetColor("_ColorTint") == hitColor
                 );
 
                 //* Glow Effect On
-                Array.ForEach(sameColorBlocks, bl => {
-                    bl.setEnabledSpriteGlowEF(true);
-                });
+                bm.setGlowEFBlocks(sameColorBlocks, true);
                 
                 //* Reset
                 if(hitBlockByBallPreview != hit.transform.gameObject){
-                    Array.ForEach(blocks, bl => bl.setEnabledSpriteGlowEF(false));
+                    bm.setGlowEFBlocks(blocks, false);
                 }
                 hitBlockByBallPreview = hit.transform.gameObject;
             }

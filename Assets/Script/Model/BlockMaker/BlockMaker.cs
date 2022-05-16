@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using Random = UnityEngine.Random;
 
 public class BlockMaker : MonoBehaviour
 {
@@ -63,5 +65,11 @@ public class BlockMaker : MonoBehaviour
         Debug.Log("moveDownBlock:: MOVE DOWN BLOCK ↓");
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z - 1);
         createBlockLine();
+    }
+
+    public void setGlowEFBlocks(Block_Prefab[] targetBlcoks, bool isOn){
+        Array.ForEach(targetBlcoks, bl => {
+            bl.GetComponent<Block_Prefab>().setEnabledSpriteGlowEF(isOn);
+        });
     }
 }

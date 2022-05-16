@@ -629,6 +629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gm: {fileID: 1623732227}
   pl: {fileID: 702911506}
+  bm: {fileID: 579925511}
   line: {fileID: 12470623}
   pad: {fileID: 1273725561}
   stick: {fileID: 1665828883}
@@ -17718,7 +17719,7 @@ MonoBehaviour:
   canvasUI: {fileID: 2001013460}
   pl: {fileID: 702911506}
   ballShooter: {fileID: 1350307814}
-  blockMaker: {fileID: 579925511}
+  bm: {fileID: 0}
   throwScreen: {fileID: 1322018822}
   hitRangeStartTf: {fileID: 896793084}
   hitRangeEndTf: {fileID: 2033124274}
@@ -20756,7 +20757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7626118294757544462, guid: 04573c6df0a194c4b84f76b7b6ebe5e3, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04573c6df0a194c4b84f76b7b6ebe5e3, type: 3}
@@ -20918,7 +20919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8711436689206771315, guid: 5d6e338ed6963184b914949e876788b4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d6e338ed6963184b914949e876788b4, type: 3}
