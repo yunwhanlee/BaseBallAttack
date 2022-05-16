@@ -96,6 +96,7 @@ public class GameManager : MonoBehaviour
         readyBtn = readyBtn.GetComponent<Button>();
         gvStageTxt = gameoverPanel.transform.GetChild(1).GetComponent<Text>();
         gvBestScoreTxt = gameoverPanel.transform.GetChild(2).GetComponent<Text>();
+        
 
         //* Ball Preview Dir Goal Set Z-Center
         setBallPreviewGoalRandomPos();
