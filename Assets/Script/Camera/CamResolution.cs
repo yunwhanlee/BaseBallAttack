@@ -5,9 +5,7 @@ using UnityEngine;
 public class CamResolution : MonoBehaviour
 {   
     //* OutSide Component
-    public GameManager gm;
-    public Player pl;
-
+    public bool isHome;
 
     //* Inside Component 
     Camera cam;
@@ -17,13 +15,11 @@ public class CamResolution : MonoBehaviour
     const int DEVICE_HEIGHT = 16;
 
     void Awake() {
-        pl = GameObject.Find("Player").GetComponent<Player>();
         setAutoDeviceCamRatio(DEVICE_WIDTH, DEVICE_HEIGHT);
+        
     }
 
     void Update() {
-        if(gm.STATE != GameManager.State.WAIT) return;
-
         //? TouchSlideControlスクリプトでPlayer位置を自動調整。
         // if(Input.GetMouseButtonDown(0)){
         //     //* RAY CAST
