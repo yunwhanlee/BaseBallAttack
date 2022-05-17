@@ -64,7 +64,7 @@ public class Ball_Prefab : MonoBehaviour
         //* HIT BALL
         if(col.gameObject.tag == "HitRangeArea"){
             pl.setSwingArcColor("red");
-            if(pl.DoSwing && gm.state == GameManager.State.PLAY){
+            if(pl.DoSwing && gm.STATE == GameManager.State.PLAY){
                 gm.switchCamScene();
                 isHited = true;
                 pl.DoSwing = false;
@@ -133,7 +133,7 @@ public class Ball_Prefab : MonoBehaviour
         }
         else if(col.gameObject.tag == "ActiveDownWall"){
             pl.DoSwing = false;
-            if(gm.state == GameManager.State.WAIT){
+            if(gm.STATE == GameManager.State.WAIT){
                 gm.downWall.isTrigger = false;//*下壁 物理O
             }
         }

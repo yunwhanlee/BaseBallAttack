@@ -113,7 +113,7 @@ public class Block_Prefab : MonoBehaviour
 
     private void OnTriggerEnter(Collider col) {
         //* GAMEOVER
-        if(col.gameObject.tag == "GameOverLine" && gm.state != GameManager.State.GAMEOVER){
+        if(col.gameObject.tag == "GameOverLine" && gm.STATE != GameManager.State.GAMEOVER){
             gm.setGameOver();
         }
     }

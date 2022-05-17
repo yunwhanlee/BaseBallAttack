@@ -8,7 +8,7 @@ using System;
 public class GameManager : MonoBehaviour
 {
     public enum State {PLAY, WAIT, GAMEOVER};
-    public State state;
+    public State state;     public State STATE {get => state; set => state = value;}
 
     //* CAMERA
     public GameObject cam1, cam2;
@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
 
         //* GUI
         expBar.value = Mathf.Lerp(expBar.value, pl.Exp / pl.MaxExp, Time.deltaTime * 10);
-        stateTxt.text = state.ToString();
+        stateTxt.text = STATE.ToString();
         levelTxt.text = "LV : " + pl.Lv;
         stageTxt.text = "STAGE : " + stage.ToString();
 
@@ -139,7 +139,6 @@ public class GameManager : MonoBehaviour
         });
     }
 
-    public void setState(State st) => state = st;
     public void setShootCntText(string str) => shootCntTxt.text = str;
     public void setBallPreviewGoalImgRGBA(Color color) => ballPreviewGoalImg.color = color;
     public GameObject[] getSkillImgObjPrefs() => passiveSkillImgObjPrefs;
@@ -173,7 +172,7 @@ public class GameManager : MonoBehaviour
     //*  関数
     //*---------------------------------------
     public void init(){
-        state = GameManager.State.WAIT;
+        STATE = GameManager.State.WAIT;
         stage = 1;
         strikeCnt = 0;
         pl.Lv = 1;
@@ -185,9 +184,9 @@ public class GameManager : MonoBehaviour
     }
 
     public void switchCamScene(){
-        if(state == GameManager.State.GAMEOVER) return;
+        if(STATE == GameManager.State.GAMEOVER) return;
         if(!cam2.activeSelf){//* CAM2 On
-            state = GameManager.State.PLAY;
+            STATE = GameManager.State.PLAY;
             cam1.SetActive(false);
             cam1Canvas.SetActive(false);
             cam2.SetActive(true);
@@ -211,7 +210,7 @@ public class GameManager : MonoBehaviour
             }
         }
         else{//* CAM1 On
-            state = GameManager.State.WAIT;
+            STATE = GameManager.State.WAIT;
             cam1.SetActive(true);
             cam1Canvas.SetActive(true);
             cam2.SetActive(false);
@@ -307,7 +306,7 @@ public class GameManager : MonoBehaviour
     }
     public void setGameOver(){
         Debug.Log("--GAME OVER--");
-        setState(GameManager.State.GAMEOVER);
+        STATE = GameManager.State.GAMEOVER;
         gameoverPanel.SetActive(true);
         gvStageTxt.text = "STAGE : " + stage;
         gvBestScoreTxt.text = "BEST SCORE : " + bestScore;
@@ -356,7 +355,7 @@ public class GameManager : MonoBehaviour
     public void setNextStage() {
         Debug.Log("onDestroyMe:: NEXT STAGE(Ball Is Destroyed)");
         ++stage;
-        setState(GameManager.State.WAIT);
+        STATE = GameManager.State.WAIT;
         downWall.isTrigger = true; //*下壁 物理X
         readyBtn.gameObject.SetActive(true);
         bm.setCreateBlockTrigger(true);

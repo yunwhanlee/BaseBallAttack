@@ -22,7 +22,7 @@ public class CamResolution : MonoBehaviour
     }
 
     void Update() {
-        if(gm.state != GameManager.State.WAIT) return;
+        if(gm.STATE != GameManager.State.WAIT) return;
 
         //? TouchSlideControlスクリプトでPlayer位置を自動調整。
         // if(Input.GetMouseButtonDown(0)){
