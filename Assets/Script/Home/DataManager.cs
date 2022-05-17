@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using System;
 
 public class DataManager : MonoBehaviour
 {
-    
     public static DataManager ins;
 
     [Header("--Select Charactor--")]
@@ -33,17 +31,5 @@ public class DataManager : MonoBehaviour
         if(ins == null) ins = this;
         else if(ins != null) return;
         DontDestroyOnLoad(this.gameObject);
-    }
-
-    public void getScrollViewPos(RectTransform pos){ //* －が右側
-        // Debug.Log("Scroll View Pos =" + pos.anchoredPosition.x + ", " + pos.anchoredPosition.y);
-        float width = Mathf.Abs(540);
-        float offset = -(width + width/2);
-        float curPosX = pos.anchoredPosition.x - offset;
-        float max = width * charaPfs.Length - width;
-        Debug.Log("curPosX=" + (curPosX) + " / " + max + ", idx=" + Mathf.Abs(Mathf.FloorToInt((curPosX) / width)));
-
-        
-
     }
 }
