@@ -1176,10 +1176,10 @@ MonoBehaviour:
   m_Content: {fileID: 810525562}
   m_Horizontal: 1
   m_Vertical: 0
-  m_MovementType: 2
+  m_MovementType: 1
   m_Elasticity: 0.1
   m_Inertia: 1
-  m_DecelerationRate: 0.03
+  m_DecelerationRate: 0.01
   m_ScrollSensitivity: 1
   m_Viewport: {fileID: 1699766374}
   m_HorizontalScrollbar: {fileID: 1058590837}
@@ -1893,7 +1893,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100
+  m_Text: 9999
 --- !u!222 &1544578273
 CanvasRenderer:
   m_ObjectHideFlags: 0

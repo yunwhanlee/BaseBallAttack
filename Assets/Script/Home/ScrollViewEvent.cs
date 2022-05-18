@@ -34,12 +34,12 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData){
         //* (BUG) スクロールが先端と末端だったら、イベント起動しない。
-        int posX = (int)DataManager.ins.ScrollContentTf.anchoredPosition.x;
-        Debug.Log("<color=white> ScrollViewEvent:: Drag End:: PosX=" + posX + ", curIdx=" + curIdx + "Charas.Len=" + (DataManager.ins.CharaPfs.Length - 1) + "</color>");
+        // int posX = (int)DataManager.ins.ScrollContentTf.anchoredPosition.x;
+        // Debug.Log("<color=white> ScrollViewEvent:: Drag End:: PosX=" + posX + ", curIdx=" + curIdx + "Charas.Len=" + (DataManager.ins.CharaPfs.Length - 1) + "</color>");
 
-        if(curIdx == 0 || curIdx == DataManager.ins.CharaPfs.Length-1){
-            setScrollStopCharaInfo();
-        }
+        // if(curIdx == 0 || curIdx == DataManager.ins.CharaPfs.Length-1){
+        //     setScrollStopCharaInfo();
+        // }
     }
 
     public void OnScrollViewPos(RectTransform pos){ //* －が右側
@@ -54,10 +54,11 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         scrollSpeed = Mathf.Abs(scrollBefFramePosX - pos.anchoredPosition.x);
         // Debug.Log(scrollBefFramePosX + " - " + pos.anchoredPosition.x + " = " + scrollSpeed);
 
+        Debug.Log("getScrollViewPos:: Stop Scrolling:: curPosX=" + (curPosX) + " / " + max + ", idx=" + curIdx + " (curIdxBasePos=" + curIdxBasePos + "), scrollSpeed=" + scrollSpeed);
+
         //* Stop Scrolling Near Index Chara
         if(scrollSpeed < 1){
             setScrollStopCharaInfo();
-            // Debug.Log("getScrollViewPos:: Stop Scrolling:: curPosX=" + (curPosX) + " / " + max + ", idx=" + curIdx + " (curIdxBasePos=" + curIdxBasePos + "), scrollSpeed=" + scrollSpeed);
         }
 
         //* update Before Frame PosX
