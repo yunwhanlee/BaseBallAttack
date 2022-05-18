@@ -6,6 +6,7 @@ using System;
 public class DataManager : MonoBehaviour
 {
     public static DataManager ins;
+    public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
 
     [Header("--Select Charactor--")]
     [SerializeField] RectTransform scrollContentTf; public RectTransform ScrollContentTf {get => scrollContentTf; set => scrollContentTf = value;}
