@@ -8,8 +8,7 @@ public class CharactorInfo : MonoBehaviour
     [SerializeField] RANK rank;     public RANK Rank {get => rank; set => rank = value;}
     [SerializeField] int price;     public int Price {get => price; set => price = value;}
     [SerializeField] int psvSkillAbility;     public int PsvSkillAbility {get => psvSkillAbility;}
-    void Start()
-    {
+    void Start(){
         //* Set Price By Rank
         switch(rank){
             case RANK.GENERAL : Price = 100; break;

@@ -20,7 +20,8 @@ public class DataManager : MonoBehaviour
         //* Charactors Regist
         Array.ForEach(charaPfs, chara=>{
             Transform parentTf = Instantiate(charaParentTf, charaParentTf.localPosition, charaParentTf.localRotation, scrollContentTf).transform;
-            Instantiate(chara, Vector3.zero, Quaternion.identity, parentTf);
+            GameObject ins = Instantiate(chara, Vector3.zero, Quaternion.identity, parentTf);
+            ins.name = chara.name;//名前上書き：しないと後ろに(clone)が残る。
         });
     }
 

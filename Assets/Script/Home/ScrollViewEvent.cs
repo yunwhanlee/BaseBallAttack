@@ -16,6 +16,8 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     float scrollBefFramePosX;
 
     [Header("--UI--")]
+    public Text rankTxt;
+    public Text priceTxt;
     public Text nameTxt;
 
 
@@ -66,12 +68,19 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         //* Set PosX
         DataManager.ins.ScrollContentTf.anchoredPosition = new Vector2(curIdxBasePos, -500);
         
-        //* Set Name
-        string objName = DataManager.ins.CharaPfs[curIdx].name;
-        string charaName = objName.Split('_')[1];
-        nameTxt.text = charaName;
+        // var charaPref = DataManager.ins.CharaPfs[curIdx];
+        var charaPrefs = DataManager.ins.ScrollContentTf.GetComponentsInChildren<CharactorInfo>();
+        var charaInfo = charaPrefs[curIdx];
+
+        //* Show Rank Text
+        rankTxt.text = charaInfo.Rank.ToString();
 
         //* Set Price
-        
+        priceTxt.text = charaInfo.Price.ToString();
+
+        //* Set Name
+        string name = charaInfo.name.Split('_')[1];
+        nameTxt.text = name;
+
     }
 }
