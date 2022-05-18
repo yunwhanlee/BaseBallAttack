@@ -8,8 +8,8 @@ public class DataManager : MonoBehaviour
     public static DataManager ins;
 
     [Header("--Select Charactor--")]
-    public RectTransform scrollContentTf;
-    public RectTransform charaRectTf;
+    public RectTransform scrollContentTf; public RectTransform ScrollContentTf {get => scrollContentTf; set => scrollContentTf = value;}
+    public RectTransform charaParentTf;
     public GameObject[] charaPfs;
     public int selectCharaIdx = 0;
     void Awake() => singleton();
@@ -17,7 +17,7 @@ public class DataManager : MonoBehaviour
     {
         //* Charactors Regist
         Array.ForEach(charaPfs, chara=>{
-            Transform parentTf = Instantiate(charaRectTf, charaRectTf.localPosition, charaRectTf.localRotation, scrollContentTf).transform;
+            Transform parentTf = Instantiate(charaParentTf, charaParentTf.localPosition, charaParentTf.localRotation, scrollContentTf).transform;
             Instantiate(chara, Vector3.zero, Quaternion.identity, parentTf);
         });
     }
