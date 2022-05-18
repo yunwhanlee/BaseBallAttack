@@ -1101,8 +1101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52997f4069f577141a26ca62981ca997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 0}
-  pl: {fileID: 0}
+  isHome: 0
 --- !u!114 &8368906722487939209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1233,8 +1232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52997f4069f577141a26ca62981ca997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 0}
-  pl: {fileID: 0}
+  isHome: 0
 --- !u!114 &8368906722527887598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1543,6 +1541,7 @@ GameObject:
   - component: {fileID: 8368906721333363493}
   - component: {fileID: 8368906721333363494}
   - component: {fileID: 8368906721333363495}
+  - component: {fileID: 9128709339014469648}
   m_Layer: 3
   m_Name: baseBallPlayer1_Default
   m_TagString: Untagged
@@ -1617,6 +1616,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &9128709339014469648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8711436689206771315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rank: 0
+  price: 0
+  psvSkillAbility: 0
 --- !u!1 &8909088090326060186
 GameObject:
   m_ObjectHideFlags: 0
