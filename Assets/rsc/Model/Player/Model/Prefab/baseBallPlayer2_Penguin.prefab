@@ -1360,8 +1360,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7106322337004374196}
-  - component: {fileID: 7283450890079219490}
   - component: {fileID: 5320451663197592233}
+  - component: {fileID: 7283450890079219490}
   m_Layer: 0
   m_Name: baseBallPlayer2_Penguin
   m_TagString: Untagged
@@ -1387,6 +1387,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5320451663197592233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7626118294757544462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLock: 1
+  meshRdrList: []
+  rank: 1
+  price: 0
+  psvSkillAbility: 0
 --- !u!95 &7283450890079219490
 Animator:
   serializedVersion: 3
@@ -1406,21 +1423,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5320451663197592233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7626118294757544462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rank: 2
-  price: 0
-  psvSkillAbility: 0
 --- !u!1 &7679525521655636199
 GameObject:
   m_ObjectHideFlags: 0
