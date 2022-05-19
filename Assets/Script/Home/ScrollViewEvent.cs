@@ -8,8 +8,8 @@ using UnityEngine.EventSystems;
 public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 {
     float rectWidth;
-    float curIdxBasePos;
-    int curIdx;
+    float curIdxBasePos;    public float CurIdxBasePos {get => curIdxBasePos; set => curIdxBasePos = value;}
+    int curIdx;     public int CurIdx {get => curIdx; set => curIdx = value;}
 
     [Header("--Scroll Speed--")]
     [SerializeField] float scrollStopSpeed;
@@ -37,9 +37,9 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public void OnEndDrag(PointerEventData eventData){
         //* (BUG) スクロールが先端と末端だったら、イベント起動しない。
         // int posX = (int)DataManager.ins.ScrollContentTf.anchoredPosition.x;
-        // Debug.Log("<color=white> ScrollViewEvent:: Drag End:: PosX=" + posX + ", curIdx=" + curIdx + "Charas.Len=" + (DataManager.ins.CharaPfs.Length - 1) + "</color>");
+        // Debug.Log("<color=white> ScrollViewEvent:: Drag End:: PosX=" + posX + ", CurIdx=" + CurIdx + "Charas.Len=" + (DataManager.ins.CharaPfs.Length - 1) + "</color>");
 
-        // if(curIdx == 0 || curIdx == DataManager.ins.CharaPfs.Length-1){
+        // if(CurIdx == 0 || CurIdx == DataManager.ins.CharaPfs.Length-1){
         //     setScrollStopCharaInfo();
         // }
     }
@@ -49,14 +49,14 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         float offset = -(width + width/2);
         float curPosX = pos.anchoredPosition.x - offset;
         float max = width * DataManager.ins.CharaPfs.Length - width;
-        curIdx = Mathf.Abs(Mathf.FloorToInt((curPosX) / width));
-        curIdxBasePos = -((curIdx+1) * width);
+        CurIdx = Mathf.Abs(Mathf.FloorToInt((curPosX) / width));
+        CurIdxBasePos = -((CurIdx+1) * width);
 
         //* Scroll Speed
         scrollSpeed = Mathf.Abs(scrollBefFramePosX - pos.anchoredPosition.x);
         // Debug.Log(scrollBefFramePosX + " - " + pos.anchoredPosition.x + " = " + scrollSpeed);
 
-        Debug.Log("getScrollViewPos:: Stop Scrolling:: curPosX=" + (curPosX) + " / " + max + ", idx=" + curIdx + " (curIdxBasePos=" + curIdxBasePos + "), scrollSpeed=" + scrollSpeed);
+        Debug.Log("getScrollViewPos:: Stop Scrolling:: curPosX=" + (curPosX) + " / " + max + ", idx=" + CurIdx + " (CurIdxBasePos=" + CurIdxBasePos + "), scrollSpeed=" + scrollSpeed);
 
         //* Stop Scrolling Near Index Chara
         if(scrollSpeed < 1){
@@ -69,11 +69,11 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     private void setScrollStopCharaInfo(){
         //* Set PosX
-        DataManager.ins.ScrollContentTf.anchoredPosition = new Vector2(curIdxBasePos, -500);
+        DataManager.ins.ScrollContentTf.anchoredPosition = new Vector2(CurIdxBasePos, -500);
         
         // var charaPref = DataManager.ins.CharaPfs[curIdx];
         var charaPrefs = DataManager.ins.ScrollContentTf.GetComponentsInChildren<CharactorInfo>();
-        var curChara = charaPrefs[curIdx];
+        var curChara = charaPrefs[CurIdx];
 
         //* Show Rank Text
         rankTxt.text = curChara.Rank.ToString();
@@ -86,6 +86,12 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }else{
             checkMarkImg.gameObject.SetActive(true);
             priceTxt.gameObject.SetActive(false);
+            
+            //* Select or Not
+            if(DataManager.ins.SelectCharaIdx == CurIdx)
+                checkMarkImg.color = Color.green;
+            else
+                checkMarkImg.color = Color.gray;
         }
         
 
@@ -110,5 +116,9 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         boxGlowEf.GlowColor = color;
         boxGlowEf.GlowBrightness = brightness;
         boxGlowEf.OutlineWidth = outline;
+    }
+
+    public void onClickBtnSelectCharactor(){
+        DataManager.ins.SelectCharaIdx = CurIdx;
     }
 }
