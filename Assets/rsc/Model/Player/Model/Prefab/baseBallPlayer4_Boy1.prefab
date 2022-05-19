@@ -1651,6 +1651,7 @@ GameObject:
   - component: {fileID: 8501176813485937408}
   - component: {fileID: 159826068574038462}
   - component: {fileID: 8246238493046802859}
+  - component: {fileID: -8466028271674821219}
   m_Layer: 0
   m_Name: baseBallPlayer4_Boy1
   m_TagString: Untagged
@@ -1712,6 +1713,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-8466028271674821219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9129341707256433082}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.63589305, g: 1, b: 0.16509432, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &8246238493903064479
 PrefabInstance:
   m_ObjectHideFlags: 0

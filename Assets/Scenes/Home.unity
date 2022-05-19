@@ -375,7 +375,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: baseBallPlayer_Def
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5803576595628446449, guid: 5d6e338ed6963184b914949e876788b4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5d6e338ed6963184b914949e876788b4, type: 3}
 --- !u!4 &299625499 stripped
 Transform:

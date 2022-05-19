@@ -9,11 +9,14 @@ public class CharactorInfo : MonoBehaviour
     [SerializeField] bool isLock = true;    public bool IsLock {get => isLock; set => isLock = value;}
     [SerializeField] List<MeshRenderer> meshRdrList;   public List<MeshRenderer> MeshRdrs {get => meshRdrList; set => meshRdrList = value;}
     [SerializeField] DataManager.RANK rank;     public DataManager.RANK Rank {get => rank; set => rank = value;}
+    Outline outline3D;    public Outline Outline3D{get => outline3D; set => outline3D = value;}
     [SerializeField] int price;     public int Price {get => price; set => price = value;}
     [SerializeField] int psvSkillAbility;     public int PsvSkillAbility {get => psvSkillAbility;}
     void Start(){
+        outline3D = this.GetComponent<Outline>();
+
         //* Set MeshRenderer ChildList
-        var childs = this.gameObject.GetComponentsInChildren<MeshRenderer>();
+        var childs = this.GetComponentsInChildren<MeshRenderer>();
         Array.ForEach(childs, chd => meshRdrList.Add(chd));
 
         //* Is Buy(UnLock)?

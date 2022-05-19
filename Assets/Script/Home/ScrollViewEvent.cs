@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using SpriteGlow;
 using UnityEngine.EventSystems;
+using System;
 
 public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 {
@@ -88,10 +89,15 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             priceTxt.gameObject.SetActive(false);
             
             //* Select or Not
-            if(DataManager.ins.SelectCharaIdx == CurIdx)
+            if(DataManager.ins.SelectCharaIdx == CurIdx){
                 checkMarkImg.color = Color.green;
-            else
+                Array.ForEach(charaPrefs, chara => chara.Outline3D.enabled = false);
+                curChara.Outline3D.enabled = true;
+            }
+            else{
                 checkMarkImg.color = Color.gray;
+                curChara.Outline3D.enabled = false;
+            }
         }
         
 
