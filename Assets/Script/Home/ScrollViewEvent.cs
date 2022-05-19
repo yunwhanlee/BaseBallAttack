@@ -16,14 +16,14 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     float scrollSpeed;
     float scrollBefFramePosX;
 
-    [Header("--UI--")]
+    [Header("<--UI-->")]
     public SpriteRenderer boxSprRdr;
     public Text rankTxt;
-    public Text priceTxt;
     public Text nameTxt;
 
-
-    
+    [Header("--Select Btn Child--")]
+    public Image checkMarkImg;
+    public Text priceTxt;
 
     void Start(){
         rectWidth = DataManager.ins.CharaParentTf.rect.width;
@@ -73,16 +73,24 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         
         // var charaPref = DataManager.ins.CharaPfs[curIdx];
         var charaPrefs = DataManager.ins.ScrollContentTf.GetComponentsInChildren<CharactorInfo>();
-        var charaInfo = charaPrefs[curIdx];
+        var curChara = charaPrefs[curIdx];
 
         //* Show Rank Text
-        rankTxt.text = charaInfo.Rank.ToString();
+        rankTxt.text = curChara.Rank.ToString();
 
-        //* Set Price
-        priceTxt.text = charaInfo.Price.ToString();
+        //* Is Buy(UnLock)? Set Price or CheckMark
+        if(curChara.IsLock){
+            checkMarkImg.gameObject.SetActive(false);
+            priceTxt.gameObject.SetActive(true);
+            priceTxt.text = curChara.Price.ToString();
+        }else{
+            checkMarkImg.gameObject.SetActive(true);
+            priceTxt.gameObject.SetActive(false);
+        }
+        
 
         //* Set Name
-        string name = charaInfo.name.Split('_')[1];
+        string name = curChara.name.Split('_')[1];
         nameTxt.text = name;
 
         //* Set Rank UI Color
@@ -90,7 +98,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         var boxGlowEf = boxSprRdr.GetComponent<SpriteGlowEffect>();
         float brightness = 0;
         int outline = 2;
-        switch(charaInfo.Rank){
+        switch(curChara.Rank){
             case DataManager.RANK.GENERAL : color = Color.white; brightness=1; outline=2;   break;
             case DataManager.RANK.RARE : color = Color.blue; brightness=8; outline=2;   break;
             case DataManager.RANK.UNIQUE : color = Color.red; brightness=8.5f; outline=5; break;
