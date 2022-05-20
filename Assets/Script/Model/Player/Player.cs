@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
     public float atvSkillCoolDownUnit = 0.05f;  public float AtvSkillCoolDownUnit {get=> atvSkillCoolDownUnit;}
     public string[] registAtvSkillNames;// = new string[3];
     public ActiveSkill[] activeSkills;// = new ActiveSkill[3];
-    [SerializeField] Transform batEffectTf;           public Transform BatEffectTf {get => batEffectTf;}
+    [SerializeField] Transform batEffectTf;           public Transform BatEffectTf {get => batEffectTf; set => batEffectTf = value;}
     [SerializeField] Transform castEFArrowTf;         public Transform CastEFArrowTf {get => castEFArrowTf;}
     [SerializeField] Transform castEFBallPreviewTf;   public Transform CastEFBallPreviewTf {get => castEFBallPreviewTf;}
     float thunderCastWidth = 1;     public float ThunderCastWidth {get=> thunderCastWidth;}
@@ -71,6 +71,11 @@ public class Player : MonoBehaviour
         var atvSkillDb = gm.activeSkillDataBase;
         registAtvSkillNames = new string[atvSkillDb.Length];
         activeSkills = new ActiveSkill[atvSkillDb.Length];
+
+        //* Player Charaは 必ず０番目のINDEXにすること！！
+        var charaTf = this.transform.GetChild(0);
+        BatEffectTf = charaTf.Find("Bone").Find("Bone_R.001").Find("Bone_R.002").Find("RightArm").Find("Bat").Find("BatEffectTf");
+        Debug.Log("Player:: charaTf= " + charaTf + ", BatEffectTf= " + BatEffectTf);
 
         int i=0;
         //* Set Active Skills
