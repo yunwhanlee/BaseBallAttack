@@ -166,6 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5489195237a0cb498fb93984fbf39dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinTxt: {fileID: 207406971}
+  diamondTxt: {fileID: 944239660}
   grayBlackNoBuyMt: {fileID: 2100000, guid: 85881ae3c4cea344aa748905176006ae, type: 2}
   scrollContentTf: {fileID: 810525562}
   charaParentTf: {fileID: 17662701153362729, guid: 12ff8c72a9f74b44fa610bbd585e404b, type: 3}
@@ -176,7 +178,10 @@ MonoBehaviour:
   - {fileID: 9129341707256433082, guid: d4a8bbdb549c86743ab7a5f93b0a360f, type: 3}
   - {fileID: 7345153623724933264, guid: 56025c0d5a6d01949873ad4c37ffa566, type: 3}
   selectCharaIdx: 0
-  selectCharaName: 
+  personalData:
+    coin: 0
+    diamond: 0
+    selectCharaIdx: 0
 --- !u!1 &147774241
 GameObject:
   m_ObjectHideFlags: 0
