@@ -21,4 +21,8 @@ public class PersonalData {
     }
 
     //* method
+    //TODO load()
+    
+    //TODO save()
+
 }

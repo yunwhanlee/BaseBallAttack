@@ -8,6 +8,9 @@ using System;
 
 public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 {
+    //* OutSide
+    public HomeEffectManager em;
+
     float rectWidth;
     float curIdxBasePos;    public float CurIdxBasePos {get => curIdxBasePos; set => curIdxBasePos = value;}
     int curIdx;     public int CurIdx {get => curIdx; set => curIdx = value;}
@@ -72,35 +75,19 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         //* Set PosX
         DataManager.ins.ScrollContentTf.anchoredPosition = new Vector2(CurIdxBasePos, -500);
         
-        // var charaPref = DataManager.ins.CharaPfs[curIdx];
-        var charaPrefs = DataManager.ins.ScrollContentTf.GetComponentsInChildren<CharactorInfo>();
-        var curChara = charaPrefs[CurIdx];
+        var curChara = getCurChara();
 
         //* Show Rank Text
         rankTxt.text = curChara.Rank.ToString();
 
         //* Is Buy(UnLock)? Set Price or CheckMark
         if(curChara.IsLock){
-            checkMarkImg.gameObject.SetActive(false);
-            priceTxt.gameObject.SetActive(true);
-            priceTxt.text = curChara.Price.ToString();
+            setButtonUI();
         }else{
-            checkMarkImg.gameObject.SetActive(true);
-            priceTxt.gameObject.SetActive(false);
-            
-            //* Select or Not
-            if(DataManager.ins.SelectCharaIdx == CurIdx){
-                checkMarkImg.color = Color.green;
-                Array.ForEach(charaPrefs, chara => chara.Outline3D.enabled = false);
-                curChara.Outline3D.enabled = true;
-            }
-            else{
-                checkMarkImg.color = Color.gray;
-                curChara.Outline3D.enabled = false;
-            }
+            setButtonUI();
+            setCharaOutLine();
         }
         
-
         //* Set Name
         string name = curChara.name.Split('_')[1];
         nameTxt.text = name;
@@ -124,7 +111,62 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         boxGlowEf.OutlineWidth = outline;
     }
 
+    private CharactorInfo getCurChara(){
+        var charaPrefs = DataManager.ins.ScrollContentTf.GetComponentsInChildren<CharactorInfo>();
+        var curChara = charaPrefs[CurIdx];
+        return curChara;
+    }
+
+    public void setButtonUI(){
+        var curChara = getCurChara();
+        //処理
+        if(curChara.IsLock){
+            checkMarkImg.gameObject.SetActive(false);
+            priceTxt.gameObject.SetActive(true);
+            priceTxt.text = curChara.Price.ToString();
+        }else{
+            checkMarkImg.gameObject.SetActive(true);
+            priceTxt.gameObject.SetActive(false);
+        }
+    }
+
+    public void setCharaOutLine(){
+        var charaPrefs = DataManager.ins.ScrollContentTf.GetComponentsInChildren<CharactorInfo>();
+        var curChara = charaPrefs[CurIdx];
+        //処理
+        if(DataManager.ins.SelectCharaIdx == CurIdx){
+            checkMarkImg.color = Color.green;
+            Array.ForEach(charaPrefs, chara => chara.Outline3D.enabled = false);
+            curChara.Outline3D.enabled = true;
+        }
+        else{
+            checkMarkImg.color = Color.gray;
+            curChara.Outline3D.enabled = false;
+        }
+    }
+
+    //* ----------------------------------------------------------------
+    //*   UI Button
+    //* ----------------------------------------------------------------
     public void onClickBtnSelectCharactor(){
         DataManager.ins.SelectCharaIdx = CurIdx;
+        var curChara = getCurChara();
+
+        //* Is Lock?
+        // Debug.Log("onClickBtnSelectCharactor:: isLock= " + curChara.IsLock +  ", coin= " + DataManager.ins.personalData.Coin + ", curChara.Price= " + curChara.Price);
+        if(curChara.IsLock){
+            if(DataManager.ins.personalData.Coin >= curChara.Price){
+                //* Buy
+                em.createItemBuyEF();
+                curChara.IsLock = false;
+                curChara.setMeterialIsLock();//curChara.MeshRdrList.ForEach(meshRdr=> meshRdr.materials = new Material[] {meshRdr.material});
+                DataManager.ins.personalData.Coin -= curChara.Price;
+
+                setButtonUI();
+            }
+            else{
+                //TODO No Coin
+            }
+        }
     }
 }

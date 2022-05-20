@@ -7,7 +7,7 @@ using System;
 public class CharactorInfo : MonoBehaviour
 {
     [SerializeField] bool isLock = true;    public bool IsLock {get => isLock; set => isLock = value;}
-    [SerializeField] List<MeshRenderer> meshRdrList;   public List<MeshRenderer> MeshRdrs {get => meshRdrList; set => meshRdrList = value;}
+    [SerializeField] List<MeshRenderer> meshRdrList;   public List<MeshRenderer> MeshRdrList {get => meshRdrList; set => meshRdrList = value;}
     [SerializeField] DataManager.RANK rank;     public DataManager.RANK Rank {get => rank; set => rank = value;}
     Outline outline3D;    public Outline Outline3D{get => outline3D; set => outline3D = value;}
     [SerializeField] int price;     public int Price {get => price; set => price = value;}
@@ -17,16 +17,10 @@ public class CharactorInfo : MonoBehaviour
 
         //* Set MeshRenderer ChildList
         var childs = this.GetComponentsInChildren<MeshRenderer>();
-        Array.ForEach(childs, chd => meshRdrList.Add(chd));
+        Array.ForEach(childs, chd => MeshRdrList.Add(chd));
 
         //* Is Buy(UnLock)?
-        if(isLock){
-            var grayBlackMt = DataManager.ins.grayBlackNoBuyMt;
-            meshRdrList.ForEach(meshRdr=>{
-                //* grayBlack Material 追加
-                meshRdr.materials = new Material[] {meshRdr.material, grayBlackMt}; //meshRdr.materialsが配列だから、再代入する
-            });
-        }
+        setMeterialIsLock();
         
         //* Set Price By Rank
         switch(rank){
@@ -38,8 +32,16 @@ public class CharactorInfo : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        
+    public void setMeterialIsLock(){
+        if(IsLock){
+            var grayBlackMt = DataManager.ins.grayBlackNoBuyMt;
+            MeshRdrList.ForEach(meshRdr=>{
+                //* grayBlack Material 追加
+                meshRdr.materials = new Material[] {meshRdr.material, grayBlackMt}; //meshRdr.materialsが配列だから、再代入する
+            });
+        }
+        else{
+            MeshRdrList.ForEach(meshRdr=> meshRdr.materials = new Material[] {meshRdr.material});
+        }
     }
 }
