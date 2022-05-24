@@ -20,7 +20,7 @@ public class DataManager : MonoBehaviour
     [SerializeField] GameObject[] charaPfs;         public GameObject[] CharaPfs {get => charaPfs; set => charaPfs = value;}
 
     //* Personal Data Class (Save・Load)
-    [SerializeField] int selectCharaIdx = 0;    public int SelectCharaIdx {get => selectCharaIdx; set => selectCharaIdx = value;}
+    // [SerializeField] int selectCharaIdx = 0;    public int SelectCharaIdx {get => selectCharaIdx; set => selectCharaIdx = value;}
     
     [SerializeField] List<bool> charaLockList;
 

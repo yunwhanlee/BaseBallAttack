@@ -134,7 +134,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         var charaPrefs = DataManager.ins.ScrollContentTf.GetComponentsInChildren<CharactorInfo>();
         var curChara = charaPrefs[CurIdx];
         //処理
-        if(DataManager.ins.SelectCharaIdx == CurIdx){
+        if(DataManager.ins.personalData.SelectCharaIdx == CurIdx){
             checkMarkImg.color = Color.green;
             Array.ForEach(charaPrefs, chara => chara.Outline3D.enabled = false);
             curChara.Outline3D.enabled = true;
@@ -149,7 +149,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //*   UI Button
     //* ----------------------------------------------------------------
     public void onClickBtnSelectCharactor(){
-        DataManager.ins.SelectCharaIdx = CurIdx;
+        DataManager.ins.personalData.SelectCharaIdx = CurIdx;
         var curChara = getCurChara();
 
         //* Is Lock?

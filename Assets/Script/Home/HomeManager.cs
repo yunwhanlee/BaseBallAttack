@@ -34,6 +34,7 @@ public class HomeManager : MonoBehaviour
 
     void Start()
     {
+        onClickBtnGoToDialog("Home");
     }
 
     void Update()
@@ -44,7 +45,7 @@ public class HomeManager : MonoBehaviour
     //* Btn Event
     public void onClickBtnGoToDialog(string name){
         //* Current Model Data & ParentTf
-        var curChara = DataManager.ins.CharaPfs[DataManager.ins.SelectCharaIdx];
+        var curChara = DataManager.ins.CharaPfs[DataManager.ins.personalData.SelectCharaIdx];
         var parentTf = homeDialog.Panel.transform.Find("BackGround").transform.Find("Model");
         var childs = parentTf.GetComponentsInChildren<Transform>();
         
@@ -52,7 +53,6 @@ public class HomeManager : MonoBehaviour
         switch(name){
             case "Home" : 
                 //* Model Create
-
                 Instantiate(curChara, Vector3.zero, Quaternion.identity, parentTf);
 
                 //* UI
