@@ -9,24 +9,32 @@ public class PersonalData {
     [SerializeField] int coin; public int Coin {get => coin; set => coin = value;}
     [SerializeField] int diamond; public int Diamond {get => diamond; set => diamond = value;}
     [SerializeField] int selectCharaIdx;  public int SelectCharaIdx {get => selectCharaIdx; set => selectCharaIdx = value;}
+    [SerializeField] List<bool> charaLockList;  public List<bool> CharaLockList {get => charaLockList; set => charaLockList = value;}
     
-    //* 必ず、受け取るDataの名をこちに入れること！
+    //* PlayerPrefs キー リスト => privateは jsonには追加しない。
     private List<string> keyList;  public List<string> KeyList {get => keyList; set => keyList = value;}
-    
-    //TODO Chara OnLock List
 
     //TODO Item OnLock List
 
     //* constructor
-    public PersonalData(){
+    public PersonalData(GameObject[] charaPfs){
+        //* 初期化
         KeyList = new List<string>();
+
+        charaLockList = new List<bool>();
+        Array.ForEach(charaPfs, chara => charaLockList.Add(chara.GetComponent<CharactorInfo>().IsLock));
+
+        // int i=0;
+        // CharaLockList.ForEach(charaLock => {Debug.Log("chara["+(i++)+"].IsLock= " + charaLock);});
     }
 
     //* method
     //TODO reset()
 
     public void load(){
-        getKeyDtList(PlayerPrefs.GetString("Json"));
+        // PlayerPrefs.DeleteAll();
+
+        // getKeyDtList(PlayerPrefs.GetString("Json"));
         processDt("load");
     }
     
@@ -50,31 +58,33 @@ public class PersonalData {
             });
             i++;
         });
-        KeyList.ForEach(key => Debug.Log("key= " + key));
     }
 
     private void processDt(string type){
         switch(type){
             case "load" : {
-                Debug.Log("---------LOAD---------");
-                //* Data
-                this.Coin = PlayerPrefs.GetInt(keyList[0]);
-                this.Diamond = PlayerPrefs.GetInt(keyList[1]);
-                this.SelectCharaIdx = PlayerPrefs.GetInt(keyList[2]);
+                Debug.Log("LOAD");
                 //* Check Json
-                Debug.Log("PersonalData:: Json= " + JsonUtility.ToJson(this));
+                string json = PlayerPrefs.GetString("Json");
+                Debug.Log("PersonalData:: Load Data =" + json);
+
+                //* Load Data
+                var data = JsonUtility.FromJson<PersonalData>(json); //* Convert Json To Class Data
+                //* Set Data
+                this.Coin = data.Coin;
+                this.Diamond = data.Diamond;
+                this.SelectCharaIdx = data.SelectCharaIdx;
+                this.charaLockList = data.CharaLockList;
+
                 break;
             }
             case "save" : {
-                Debug.Log("---------SAVE---------");
-                //* Data
-                PlayerPrefs.SetInt(keyList[0], this.Coin);
-                PlayerPrefs.SetInt(keyList[1], this.Diamond);
-                PlayerPrefs.SetInt(keyList[2], this.SelectCharaIdx);
-                //* Serialize To Json
-                PlayerPrefs.SetString("Json", JsonUtility.ToJson(this));
+                Debug.Log("SAVE");
+                PlayerPrefs.SetString("Json", JsonUtility.ToJson(this, true)); //* Serialize To Json
                 break;
             }
         }
     }
+
+
 }

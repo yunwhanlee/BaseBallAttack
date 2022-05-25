@@ -16,8 +16,6 @@ using System;
     }
 
     //* Method
-
-
 }
 
 public class HomeManager : MonoBehaviour

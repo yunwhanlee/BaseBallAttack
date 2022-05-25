@@ -29,7 +29,7 @@ public class DataManager : MonoBehaviour
     void Awake() => singleton();
     void Start()
     {
-        personalData = new PersonalData();
+        personalData = new PersonalData(charaPfs);
         personalData.load();
 
         //* Charactors Regist
