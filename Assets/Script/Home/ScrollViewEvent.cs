@@ -73,7 +73,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     private void setScrollStopCharaInfo(){
         //* Set PosX
-        DataManager.ins.ScrollContentTf.anchoredPosition = new Vector2(CurIdxBasePos, -500);
+        DataManager.ins.ContentTf.anchoredPosition = new Vector2(CurIdxBasePos, -500);
         
         var curChara = getCurChara();
 
@@ -112,7 +112,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
 
     private CharactorInfo getCurChara(){
-        var charaPrefs = DataManager.ins.ScrollContentTf.GetComponentsInChildren<CharactorInfo>();
+        var charaPrefs = DataManager.ins.ContentTf.GetComponentsInChildren<CharactorInfo>();
         var curChara = charaPrefs[CurIdx];
         return curChara;
     }
@@ -131,7 +131,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
 
     public void setCharaOutLine(){
-        var charaPrefs = DataManager.ins.ScrollContentTf.GetComponentsInChildren<CharactorInfo>();
+        var charaPrefs = DataManager.ins.ContentTf.GetComponentsInChildren<CharactorInfo>();
         var curChara = charaPrefs[CurIdx];
         //処理
         if(DataManager.ins.personalData.SelectCharaIdx == CurIdx){
@@ -159,6 +159,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 //* Buy
                 em.createItemBuyEF();
                 curChara.IsLock = false;
+                
                 curChara.setMeterialIsLock();//curChara.MeshRdrList.ForEach(meshRdr=> meshRdr.materials = new Material[] {meshRdr.material});
                 DataManager.ins.personalData.Coin -= curChara.Price;
 
