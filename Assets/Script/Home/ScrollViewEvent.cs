@@ -85,7 +85,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             setButtonUI();
         }else{
             setButtonUI();
-            setCharaOutLine();
+            setCheckUIAndCharaOutLine();
         }
         
         //* Set Name
@@ -119,6 +119,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     public void setButtonUI(){
         var curChara = getCurChara();
+
         //処理
         if(curChara.IsLock){
             checkMarkImg.gameObject.SetActive(false);
@@ -130,9 +131,10 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }
     }
 
-    public void setCharaOutLine(){
+    public void setCheckUIAndCharaOutLine(){
         var charaPrefs = DataManager.ins.ContentTf.GetComponentsInChildren<CharactorInfo>();
         var curChara = charaPrefs[CurIdx];
+
         //処理
         if(DataManager.ins.personalData.SelectCharaIdx == CurIdx){
             checkMarkImg.color = Color.green;
@@ -149,7 +151,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //*   UI Button
     //* ----------------------------------------------------------------
     public void onClickBtnSelectCharactor(){
-        DataManager.ins.personalData.SelectCharaIdx = CurIdx;
+        
         var curChara = getCurChara();
 
         //* Is Lock?
@@ -157,6 +159,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         if(curChara.IsLock){
             if(DataManager.ins.personalData.Coin >= curChara.Price){
                 //* Buy
+                DataManager.ins.personalData.SelectCharaIdx = CurIdx;
                 em.createItemBuyEF();
                 curChara.IsLock = false;
                 

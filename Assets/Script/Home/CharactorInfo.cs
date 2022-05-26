@@ -16,6 +16,7 @@ public class CharactorInfo : MonoBehaviour
         outline3D = this.GetComponent<Outline>();
 
         //* Set MeshRenderer ChildList
+        
         var childs = this.GetComponentsInChildren<MeshRenderer>();
         Array.ForEach(childs, chd => MeshRdrList.Add(chd));
 

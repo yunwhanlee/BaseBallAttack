@@ -74,7 +74,6 @@ public class PersonalData {
         }
     }
 
-    
     // private void getKeyDtList(string json){
     //     //* JSON '{' と '}' 削除。
     //     int strLen = json.ToCharArray().Length-1;
