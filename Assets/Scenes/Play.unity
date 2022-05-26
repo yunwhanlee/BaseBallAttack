@@ -2019,6 +2019,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 481750531}
   m_CullTransparentMesh: 1
+--- !u!1001 &486795893
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8368906722885479756}
+    m_Modifications:
+    - target: {fileID: 1156106783884835902, guid: 075f288b6612be84c86ef7a6fb79023a, type: 3}
+      propertyPath: m_Name
+      value: Bat_Pepero
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963710527300413060, guid: 075f288b6612be84c86ef7a6fb79023a, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963710527300413060, guid: 075f288b6612be84c86ef7a6fb79023a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.031921413
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963710527300413060, guid: 075f288b6612be84c86ef7a6fb79023a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.047888096
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963710527300413060, guid: 075f288b6612be84c86ef7a6fb79023a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.04788809
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963710527300413060, guid: 075f288b6612be84c86ef7a6fb79023a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.058326516
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963710527300413060, guid: 075f288b6612be84c86ef7a6fb79023a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.022813352
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963710527300413060, guid: 075f288b6612be84c86ef7a6fb79023a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.2835331
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963710527300413060, guid: 075f288b6612be84c86ef7a6fb79023a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.06341214
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963710527300413060, guid: 075f288b6612be84c86ef7a6fb79023a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.00000011726538
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963710527300413060, guid: 075f288b6612be84c86ef7a6fb79023a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.99798745
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963710527300413060, guid: 075f288b6612be84c86ef7a6fb79023a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0000000018626451
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963710527300413060, guid: 075f288b6612be84c86ef7a6fb79023a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963710527300413060, guid: 075f288b6612be84c86ef7a6fb79023a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963710527300413060, guid: 075f288b6612be84c86ef7a6fb79023a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 075f288b6612be84c86ef7a6fb79023a, type: 3}
 --- !u!1 &529065814
 GameObject:
   m_ObjectHideFlags: 0
@@ -21101,6 +21170,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: baseBallPlayer5_Cat
       objectReference: {fileID: 0}
+    - target: {fileID: 7345153623724933264, guid: 56025c0d5a6d01949873ad4c37ffa566, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7972755494194125354, guid: 56025c0d5a6d01949873ad4c37ffa566, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -21391,6 +21464,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -89.30022
       objectReference: {fileID: 0}
+    - target: {fileID: 8711436688938164515, guid: 5d6e338ed6963184b914949e876788b4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8711436689206771315, guid: 5d6e338ed6963184b914949e876788b4, type: 3}
       propertyPath: m_Name
       value: baseBallPlayer_Def
@@ -21401,6 +21478,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d6e338ed6963184b914949e876788b4, type: 3}
+--- !u!4 &8368906722885479756 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3509889584905484317, guid: 5d6e338ed6963184b914949e876788b4, type: 3}
+  m_PrefabInstance: {fileID: 8368906722885479755}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8808624349107508548
 PrefabInstance:
   m_ObjectHideFlags: 0
