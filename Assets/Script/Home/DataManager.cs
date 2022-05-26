@@ -28,14 +28,15 @@ public class DataManager : MonoBehaviour
 
     void Awake() => singleton();
     void Start(){
-        personalData = new PersonalData(ref charaPfs);
-
         //* Charactors Regist
         Array.ForEach(charaPfs, chara=>{
             Transform parentTf = Instantiate(charaParentTf, charaParentTf.localPosition, charaParentTf.localRotation, contentTf).transform;
             GameObject ins = Instantiate(chara, Vector3.zero, Quaternion.identity, parentTf);
             ins.name = chara.name;//名前上書き：しないと後ろに(clone)が残る。
         });
+
+        CharactorInfo[] charaContents = ContentTf.GetComponentsInChildren<CharactorInfo>();
+        personalData = new PersonalData(ref charaContents);
     }
 
     void Update(){
@@ -46,7 +47,6 @@ public class DataManager : MonoBehaviour
     private void OnApplicationQuit(){
         CharactorInfo[] charaContents = ContentTf.GetComponentsInChildren<CharactorInfo>();
         personalData.save(ref charaContents);
-        // personalData.reset();
     }
 
     void singleton(){

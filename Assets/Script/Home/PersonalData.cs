@@ -17,34 +17,24 @@ public class PersonalData {
     //TODO Item OnLock List
 
     //* constructor
-    public PersonalData(ref GameObject[] charaPfs){
+    public PersonalData(ref CharactorInfo[] charaContents){
         //* 初期化
         KeyList = new List<string>();
         charaLockList = new List<bool>();
         
-        load(ref charaPfs);
+        load(ref charaContents);
     }
 
     //* method
-    public void load(ref GameObject[] charaPfs){
+    public void load(ref CharactorInfo[] charaContents){
         Debug.Log("LOAD");
         //* Check Json
         string json = PlayerPrefs.GetString("Json");
-        Debug.Log("PersonalData:: LOAD Data =" + json + (json == ""));
-
-        if(json == ""){
-            this.Coin = 222;
-            this.Diamond = 0;
-            this.SelectCharaIdx = 0;
-            for(int i=0; i<charaPfs.Length; i++){
-                if(i==0) this.CharaLockList.Add(true);
-                else     this.CharaLockList.Add(false);
-            }
-            return;
-        }
+        
 
         //* Load Data
         var data = JsonUtility.FromJson<PersonalData>(json); //* Convert Json To Class Data
+
         //* Set Data
         this.Coin = data.Coin;
         this.Diamond = data.Diamond;
@@ -52,29 +42,39 @@ public class PersonalData {
         this.CharaLockList = data.CharaLockList;
 
         //* Set Charactor Prefab IsLock
-        for(int i=0; i<charaPfs.Length; i++){
-            charaPfs[i].GetComponent<CharactorInfo>().IsLock = this.CharaLockList[i];
+        for(int i=0; i<charaContents.Length; i++){
+            charaContents[i].GetComponent<CharactorInfo>().IsLock = this.CharaLockList[i];
         }
     }
     
     public void save(ref CharactorInfo[] charaContents){
         Debug.Log("SAVE");
-
         for(int i=0; i<charaContents.Length; i++){
             CharaLockList[i] = charaContents[i].IsLock;
         }
 
         PlayerPrefs.SetString("Json", JsonUtility.ToJson(this, true)); //* Serialize To Json
+
+        //* Print
         string json = PlayerPrefs.GetString("Json");
         Debug.Log("PersonalData:: SAVE Data =" + json);
     }
 
-    public void reset(){
+    public void reset(ref CharactorInfo[] charaContents){
+        Debug.Log("RESET");
         PlayerPrefs.DeleteAll();
+
+        this.Coin = 0;
+        this.Diamond = 0;
+        this.SelectCharaIdx = 0;
+        this.CharaLockList = new List<bool>();
+        for(int i=0; i<charaContents.Length; i++){
+            if(i==0) {this.CharaLockList.Add(false);    charaContents[0].IsLock = false;}
+            else     {this.CharaLockList.Add(true);     charaContents[i].IsLock = true;}
+        }
     }
+
     
-
-
     // private void getKeyDtList(string json){
     //     //* JSON '{' と '}' 削除。
     //     int strLen = json.ToCharArray().Length-1;

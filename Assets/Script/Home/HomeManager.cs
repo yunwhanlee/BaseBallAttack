@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System;
 
 [System.Serializable]   public class DialogUI{
@@ -40,13 +41,15 @@ public class HomeManager : MonoBehaviour
         
     }
 
-    //* Btn Event
+    //* ----------------------------------------------------------------
+    //*   UI Button
+    //* ----------------------------------------------------------------
     public void onClickBtnGoToDialog(string name){
         //* Current Model Data & ParentTf
         var curChara = DataManager.ins.CharaPfs[DataManager.ins.personalData.SelectCharaIdx];
+        
         var parentTf = homeDialog.Panel.transform.Find("BackGround").transform.Find("Model");
         var childs = parentTf.GetComponentsInChildren<Transform>();
-        
         
         switch(name){
             case "Home" : 
@@ -77,5 +80,14 @@ public class HomeManager : MonoBehaviour
                 selectCharaDialog.Panel.gameObject.SetActive(true);
                 break;
         }
+    }
+    public void onClickResetBtn(){
+        CharactorInfo[] charaContents = DataManager.ins.ContentTf.GetComponentsInChildren<CharactorInfo>();
+        DataManager.ins.personalData.reset(ref charaContents);
+
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+        Application.Quit();
     }
 }
