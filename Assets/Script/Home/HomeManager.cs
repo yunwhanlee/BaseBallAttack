@@ -62,7 +62,16 @@ public class HomeManager : MonoBehaviour
                 selectCharaDialog.Panel.gameObject.SetActive(false);
 
                 break;
-            case "SelectChara" : 
+            case "Chara" : 
+                int idx=0;
+                Array.ForEach(DataManager.ins.ContentTf.GetComponentsInChildren<Transform>(), child=>{
+                    if(idx > 0) GameObject.Destroy(child.gameObject);
+                    idx++;
+                });
+
+                //* Object 生成
+                DataManager.ins.createObject(name);
+
                 //* Model Delete
                 if(0 < parentTf.childCount){
                     int i = 0;

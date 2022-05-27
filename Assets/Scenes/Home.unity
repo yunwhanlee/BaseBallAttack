@@ -177,6 +177,32 @@ MonoBehaviour:
   - {fileID: 3442606834111591561, guid: bfdf4266cb0e99f418f9f18fe911f116, type: 3}
   - {fileID: 9129341707256433082, guid: d4a8bbdb549c86743ab7a5f93b0a360f, type: 3}
   - {fileID: 7345153623724933264, guid: 56025c0d5a6d01949873ad4c37ffa566, type: 3}
+  batPfs:
+  - {fileID: 4604932161339017364, guid: 5da00c612cd56d7429bc1f4cc8042531, type: 3}
+  - {fileID: 4604932161339017364, guid: d025bfff1f1aa1046a1aebd4bb208a3d, type: 3}
+  - {fileID: 4604932161339017364, guid: 1db413430b3802945b28443a997bfccf, type: 3}
+  - {fileID: 4604932161339017364, guid: 310a8f5d7c0e3ca448d074d9a8ee6e92, type: 3}
+  - {fileID: 4604932161339017364, guid: bcd472af02200174983f51445ee200a2, type: 3}
+  - {fileID: 4604932161339017364, guid: e21e4baacc014a244a21c2e10dee92e1, type: 3}
+  - {fileID: 4604932161339017364, guid: 8382acf27592a324c8cde4ce8aebbee9, type: 3}
+  - {fileID: 4604932161339017364, guid: 84d82db7908a6f246aa1dc5140f92a7a, type: 3}
+  - {fileID: 4604932161339017364, guid: 7ff2aaf459a9176468d44ea8383629c0, type: 3}
+  - {fileID: 4604932161339017364, guid: 7ac307d59af33664199c435106115260, type: 3}
+  - {fileID: 4604932161339017364, guid: 785c597045c527749988d2e63cac15cc, type: 3}
+  - {fileID: 4604932161339017364, guid: c116e88c5a8241647abcffdb2bc2e7c0, type: 3}
+  - {fileID: 4604932161339017364, guid: 4c4026dc753b97b499545bed4446085c, type: 3}
+  - {fileID: 4604932161339017364, guid: 22b9b2bad4f15fc4e9ad0b9489b6dd52, type: 3}
+  - {fileID: 5298460928622142381, guid: aac363076cbbb6a48b22f91e3e34484a, type: 3}
+  - {fileID: 2222256120878265870, guid: 7ffabcdc9d32383439a5a0d2e57cba0c, type: 3}
+  - {fileID: 7991760111659861724, guid: 0dc8e809c66398d478fccfaf26d38dc0, type: 3}
+  - {fileID: 9066435181333296440, guid: 5121df8aa6eb2014db3f3d20b0f0051a, type: 3}
+  - {fileID: 5687438631906306784, guid: 0d0ca3d258e805b46b45c19b58c31afc, type: 3}
+  - {fileID: 2495441748581357621, guid: 6bb78e766d9109648a00cdb89a81c7ee, type: 3}
+  - {fileID: 5690907937734692007, guid: b251d485c1113e9449e5681d46247a47, type: 3}
+  - {fileID: 130111081111786611, guid: df97e2fd4fc330b44bf01ea6caec6a36, type: 3}
+  - {fileID: 1156106783884835902, guid: 075f288b6612be84c86ef7a6fb79023a, type: 3}
+  - {fileID: 439132220079943380, guid: 585ed3214e359524fb17fbb48e900326, type: 3}
+  - {fileID: 8792708891350454873, guid: 940a190e29ae0f344b09be4dc580b1df, type: 3}
   personalData:
     coin: 0
     diamond: 0
@@ -434,7 +460,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: SelectChara
+          m_StringArgument: Chara
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &173923954
@@ -911,7 +937,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1081,7 +1107,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -540, y: -500}
-  m_SizeDelta: {x: 540, y: 1000}
+  m_SizeDelta: {x: 0, y: 1000}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &810525563
 MonoBehaviour:
@@ -2168,7 +2194,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1072798420
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3579,7 +3605,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: SelectChara
+          m_StringArgument: Bat
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1836562022
