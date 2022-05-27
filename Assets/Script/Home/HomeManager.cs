@@ -63,6 +63,7 @@ public class HomeManager : MonoBehaviour
 
                 break;
             case "Chara" : 
+            case "Bat" : 
                 int idx=0;
                 Array.ForEach(DataManager.ins.ContentTf.GetComponentsInChildren<Transform>(), child=>{
                     if(idx > 0) GameObject.Destroy(child.gameObject);

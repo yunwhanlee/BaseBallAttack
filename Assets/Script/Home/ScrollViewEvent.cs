@@ -30,7 +30,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public Text priceTxt;
 
     void Start(){
-        rectWidth = DataManager.ins.CharaParentTf.rect.width;
+        rectWidth = DataManager.ins.ModelParentTf.rect.width;
     }
 
     //* Drag Event
