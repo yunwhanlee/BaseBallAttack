@@ -151,15 +151,14 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //*   UI Button
     //* ----------------------------------------------------------------
     public void onClickBtnSelectCharactor(){
-        
         var curChara = getCurChara();
-
+        int befIdx = DataManager.ins.personalData.SelectCharaIdx; //* (BUG) 買わないのにロードしたら選択されるバグ防止。
+        DataManager.ins.personalData.SelectCharaIdx = CurIdx;
         //* Is Lock?
         // Debug.Log("onClickBtnSelectCharactor:: isLock= " + curChara.IsLock +  ", coin= " + DataManager.ins.personalData.Coin + ", curChara.Price= " + curChara.Price);
         if(curChara.IsLock){
             if(DataManager.ins.personalData.Coin >= curChara.Price){
                 //* Buy
-                DataManager.ins.personalData.SelectCharaIdx = CurIdx;
                 em.createItemBuyEF();
                 curChara.IsLock = false;
                 
@@ -170,6 +169,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             }
             else{
                 //TODO No Coin
+                DataManager.ins.personalData.SelectCharaIdx = befIdx;
             }
         }
     }

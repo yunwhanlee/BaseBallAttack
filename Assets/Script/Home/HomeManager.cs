@@ -48,7 +48,7 @@ public class HomeManager : MonoBehaviour
         //* Current Model Data & ParentTf
         var curChara = DataManager.ins.CharaPfs[DataManager.ins.personalData.SelectCharaIdx];
         
-        var parentTf = homeDialog.Panel.transform.Find("BackGround").transform.Find("Model");
+        var parentTf = homeDialog.Panel.transform.Find("BackGroundGroup").transform.Find("ModelTf");
         var childs = parentTf.GetComponentsInChildren<Transform>();
         
         switch(name){
