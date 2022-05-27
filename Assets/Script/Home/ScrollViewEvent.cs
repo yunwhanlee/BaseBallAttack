@@ -152,7 +152,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //* ----------------------------------------------------------------
     public void onClickBtnSelectCharactor(){
         var curChara = getCurChara();
-        int befIdx = DataManager.ins.personalData.SelectCharaIdx; //* (BUG) 買わないのにロードしたら選択されるバグ防止。
+        int befIdx = DataManager.ins.personalData.SelectCharaIdx; //* (BUG) 買わないのにロードしたらChara選択されるバグ防止。
         DataManager.ins.personalData.SelectCharaIdx = CurIdx;
         //* Is Lock?
         // Debug.Log("onClickBtnSelectCharactor:: isLock= " + curChara.IsLock +  ", coin= " + DataManager.ins.personalData.Coin + ", curChara.Price= " + curChara.Price);
