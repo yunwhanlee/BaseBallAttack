@@ -3,7 +3,12 @@ guid: 692ed445e79c20347a545033129c94bb
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 10485_Baseball_bat_v1_max8Mat
+    second: {fileID: 2100000, guid: 6d8b8af3d9646184bbba17c0c3bafa7f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
