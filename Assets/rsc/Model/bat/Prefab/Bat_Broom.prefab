@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4813286461711284503}
   - component: {fileID: 8458852042997266098}
   - component: {fileID: 5946746384414704248}
-  - component: {fileID: -7098607818051922731}
   m_Layer: 0
   m_Name: Bat_Broom
   m_TagString: Untagged
@@ -26,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5298460928622142381}
-  m_LocalRotation: {x: 0.5467966, y: 0.44834527, z: 0.06961561, w: 0.7036716}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.4824076, y: 5.60301, z: 3.75}
+  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
+  m_LocalPosition: {x: -0.000005994524, y: 0.000000087582336, z: -0.00000009031928}
+  m_LocalScale: {x: 0.045, y: 0.045, z: 0.045}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 45, y: 90, z: 56.3}
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!33 &8458852042997266098
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -40,7 +39,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5298460928622142381}
-  m_Mesh: {fileID: 2659281348788793263, guid: 4c7418c23a0962244b60a34e8fa13810, type: 3}
+  m_Mesh: {fileID: 2659281348788793263, guid: 0298266024adda544949d0f1539af62c, type: 3}
 --- !u!23 &5946746384414704248
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -82,20 +81,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-7098607818051922731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5298460928622142381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isLock: 1
-  meshRdrList: []
-  rank: 2
-  price: 0
-  psvSkillAbility: 0
