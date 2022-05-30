@@ -13,8 +13,9 @@ public class DataManager : MonoBehaviour
     [SerializeField] Text coinTxt; public Text CoinTxt {get => coinTxt; set => coinTxt = value;}
     [SerializeField] Text diamondTxt; public Text DiamondTxt {get => diamondTxt; set => diamondTxt = value;}
 
-    [Header("--Select Charactor--")]
+    [Header("--Select Item--")]
     public Material grayBlackNoBuyMt;
+    [SerializeField] string selectType = "";
     [SerializeField] RectTransform contentTf; public RectTransform ContentTf {get => contentTf; set => contentTf = value;}
     [SerializeField] RectTransform modelParentTf;   public RectTransform ModelParentTf {get => modelParentTf; set => modelParentTf = value;}
     [SerializeField] GameObject[] charaPfs;         public GameObject[] CharaPfs {get => charaPfs; set => charaPfs = value;}
@@ -29,7 +30,7 @@ public class DataManager : MonoBehaviour
 
     void Awake() => singleton();
     void Start(){
-        CharactorInfo[] charaContents = ContentTf.GetComponentsInChildren<CharactorInfo>();
+        ItemInfo[] charaContents = ContentTf.GetComponentsInChildren<ItemInfo>();
         personalData = new PersonalData(ref charaContents);
     }
 
@@ -39,7 +40,7 @@ public class DataManager : MonoBehaviour
     }
 
     private void OnApplicationQuit(){
-        CharactorInfo[] charaContents = ContentTf.GetComponentsInChildren<CharactorInfo>();
+        ItemInfo[] charaContents = ContentTf.GetComponentsInChildren<ItemInfo>();
         personalData.save(ref charaContents);
     }
 
@@ -50,7 +51,7 @@ public class DataManager : MonoBehaviour
                 objs = charaPfs;
                 
                 break;
-            case "Bat"   :
+            case "Bat" :
                 objs = batPfs;
                 break;
         }
@@ -60,6 +61,19 @@ public class DataManager : MonoBehaviour
         Array.ForEach(objs, obj=>{
             Transform parentTf = Instantiate(modelParentTf, modelParentTf.localPosition, modelParentTf.localRotation, contentTf).transform;
             GameObject ins = Instantiate(obj, Vector3.zero, Quaternion.identity, parentTf);
+
+            switch(type){
+            case "Chara" : 
+                break;
+            case "Bat" :
+                parentTf.GetComponent<RectTransform>().localPosition = new Vector3(0,200,800); //* xとyは自動調整される。
+                ins.transform.localPosition = new Vector3(ins.transform.localPosition.x, 0.75f, ins.transform.localPosition.z);
+                ins.transform.localRotation = Quaternion.Euler(ins.transform.localRotation.x, ins.transform.localRotation.y, -45);
+                break;
+        }
+            
+
+            Debug.Log("modelParentTf.pos=" + modelParentTf.position + ", modelParentTf.localPos=" + modelParentTf.localPosition);
             ins.name = obj.name;//名前上書き：しないと後ろに(clone)が残る。
         });
     }

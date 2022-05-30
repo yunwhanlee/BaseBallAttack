@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class CharactorInfo : MonoBehaviour
+public class ItemInfo : MonoBehaviour
 {
     [SerializeField] bool isLock = true;    public bool IsLock {get => isLock; set => isLock = value;}
     [SerializeField] List<MeshRenderer> meshRdrList;   public List<MeshRenderer> MeshRdrList {get => meshRdrList; set => meshRdrList = value;}

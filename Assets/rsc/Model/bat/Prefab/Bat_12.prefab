@@ -120,6 +120,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3793105983162683950}
+  - component: {fileID: -3757684280995648920}
   m_Layer: 3
   m_Name: Bat_12
   m_TagString: Untagged
@@ -134,7 +135,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4604932161339017364}
-  m_LocalRotation: {x: 0.00000004470348, y: 0.66084456, z: -0.00000005681067, w: 0.7505228}
+  m_LocalRotation: {x: -0.000035585792, y: 0.000035585792, z: -0.38268346, w: 0.9238795}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.03, y: 0.045, z: 0.045}
   m_Children:
@@ -143,3 +144,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &-3757684280995648920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4604932161339017364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLock: 1
+  meshRdrList: []
+  rank: 3
+  price: 0
+  psvSkillAbility: 0

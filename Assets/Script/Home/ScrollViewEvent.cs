@@ -111,9 +111,9 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         boxGlowEf.OutlineWidth = outline;
     }
 
-    private CharactorInfo getCurChara(){
-        var charaPrefs = DataManager.ins.ContentTf.GetComponentsInChildren<CharactorInfo>();
-        var curChara = charaPrefs[CurIdx];
+    private ItemInfo getCurChara(){
+        var charaObjs = DataManager.ins.ContentTf.GetComponentsInChildren<ItemInfo>();
+        var curChara = charaObjs[CurIdx];
         return curChara;
     }
 
@@ -132,7 +132,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
 
     public void setCheckUIAndCharaOutLine(){
-        var charaPrefs = DataManager.ins.ContentTf.GetComponentsInChildren<CharactorInfo>();
+        var charaPrefs = DataManager.ins.ContentTf.GetComponentsInChildren<ItemInfo>();
         var curChara = charaPrefs[CurIdx];
 
         //処理

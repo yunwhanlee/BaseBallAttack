@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8164509947618167011}
   - component: {fileID: 5107628569989973830}
   - component: {fileID: 6991000965498499980}
+  - component: {fileID: 5581793248763419323}
   m_Layer: 0
   m_Name: Bat_Wrench
   m_TagString: Untagged
@@ -25,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8792708891350454873}
-  m_LocalRotation: {x: 0.5701596, y: -0.35372, z: 0.6794898, w: 0.2968063}
+  m_LocalRotation: {x: 0, y: 0, z: -0.38268343, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 11.206018, y: 11.206018, z: 11.206018}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 125, y: -100, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
 --- !u!33 &5107628569989973830
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -81,3 +82,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5581793248763419323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8792708891350454873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLock: 1
+  meshRdrList: []
+  rank: 3
+  price: 0
+  psvSkillAbility: 0

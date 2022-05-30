@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1963710527300413060}
+  - component: {fileID: 6422588919203588320}
   m_Layer: 0
   m_Name: Bat_Pepero
   m_TagString: Untagged
@@ -23,15 +24,32 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1156106783884835902}
-  m_LocalRotation: {x: 0.00000011726538, y: 0.99798745, z: 0.0000000018626451, w: 0.06341214}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.27059805, y: 0.6532815, z: -0.27059805, w: 0.6532815}
+  m_LocalPosition: {x: 8.256544, y: -8.043212, z: 6.0627213}
   m_LocalScale: {x: 0.031921413, y: 0.047888096, z: 0.04788809}
   m_Children:
   - {fileID: 2674890714429344597}
   - {fileID: 8180640153104638983}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 90, z: 0}
+--- !u!114 &6422588919203588320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156106783884835902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLock: 1
+  meshRdrList: []
+  rank: 3
+  price: 0
+  psvSkillAbility: 0
 --- !u!1 &1448982696504698119
 GameObject:
   m_ObjectHideFlags: 0

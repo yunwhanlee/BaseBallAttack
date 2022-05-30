@@ -17,7 +17,7 @@ public class PersonalData {
     //TODO Item OnLock List
 
     //* constructor
-    public PersonalData(ref CharactorInfo[] charaContents){
+    public PersonalData(ref ItemInfo[] charaContents){
         //* 初期化
         KeyList = new List<string>();
         charaLockList = new List<bool>();
@@ -26,7 +26,7 @@ public class PersonalData {
     }
 
     //* method
-    public void load(ref CharactorInfo[] charaContents){
+    public void load(ref ItemInfo[] charaContents){
         Debug.Log("LOAD");
         //* Check Json
         string json = PlayerPrefs.GetString("Json");
@@ -43,11 +43,11 @@ public class PersonalData {
 
         //* Set Charactor Prefab IsLock
         for(int i=0; i<charaContents.Length; i++){
-            charaContents[i].GetComponent<CharactorInfo>().IsLock = this.CharaLockList[i];
+            charaContents[i].GetComponent<ItemInfo>().IsLock = this.CharaLockList[i];
         }
     }
     
-    public void save(ref CharactorInfo[] charaContents){
+    public void save(ref ItemInfo[] charaContents){
         Debug.Log("SAVE");
         for(int i=0; i<charaContents.Length; i++){
             CharaLockList[i] = charaContents[i].IsLock;
@@ -60,7 +60,7 @@ public class PersonalData {
         Debug.Log("PersonalData:: SAVE Data =" + json);
     }
 
-    public void reset(ref CharactorInfo[] charaContents){
+    public void reset(ref ItemInfo[] charaContents){
         Debug.Log("RESET");
         PlayerPrefs.DeleteAll();
 

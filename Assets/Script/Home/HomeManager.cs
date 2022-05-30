@@ -46,8 +46,11 @@ public class HomeManager : MonoBehaviour
     //* ----------------------------------------------------------------
     public void onClickBtnGoToDialog(string name){
         //* Current Model Data & ParentTf
+
         var curChara = DataManager.ins.CharaPfs[DataManager.ins.personalData.SelectCharaIdx];
-        
+        //TODO
+        var curBat = DataManager.ins.BatPfs[0];//[DataManager.ins.personalData.SelectCharaIdx];
+
         var parentTf = homeDialog.Panel.transform.Find("BackGroundGroup").transform.Find("ModelTf");
         var childs = parentTf.GetComponentsInChildren<Transform>();
         
@@ -92,7 +95,7 @@ public class HomeManager : MonoBehaviour
         }
     }
     public void onClickResetBtn(){
-        CharactorInfo[] charaContents = DataManager.ins.ContentTf.GetComponentsInChildren<CharactorInfo>();
+        ItemInfo[] charaContents = DataManager.ins.ContentTf.GetComponentsInChildren<ItemInfo>();
         DataManager.ins.personalData.reset(ref charaContents);
 
         #if UNITY_EDITOR
