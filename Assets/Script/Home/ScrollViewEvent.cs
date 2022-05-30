@@ -75,7 +75,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         //* Set PosX
         DataManager.ins.ContentTf.anchoredPosition = new Vector2(CurIdxBasePos, -500);
         
-        var curChara = getCurChara();
+        var curChara = getCurItem();
 
         //* Show Rank Text
         rankTxt.text = curChara.Rank.ToString();
@@ -111,20 +111,20 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         boxGlowEf.OutlineWidth = outline;
     }
 
-    private ItemInfo getCurChara(){
-        var charaObjs = DataManager.ins.ContentTf.GetComponentsInChildren<ItemInfo>();
-        var curChara = charaObjs[CurIdx];
-        return curChara;
+    private ItemInfo getCurItem(){
+        var items = DataManager.ins.ContentTf.GetComponentsInChildren<ItemInfo>();
+        var curItem = items[CurIdx];
+        return curItem;
     }
 
     public void setButtonUI(){
-        var curChara = getCurChara();
+        var curItem = getCurItem();
 
         //処理
-        if(curChara.IsLock){
+        if(curItem.IsLock){
             checkMarkImg.gameObject.SetActive(false);
             priceTxt.gameObject.SetActive(true);
-            priceTxt.text = curChara.Price.ToString();
+            priceTxt.text = curItem.Price.ToString();
         }else{
             checkMarkImg.gameObject.SetActive(true);
             priceTxt.gameObject.SetActive(false);
@@ -132,18 +132,18 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
 
     public void setCheckUIAndCharaOutLine(){
-        var charaPrefs = DataManager.ins.ContentTf.GetComponentsInChildren<ItemInfo>();
-        var curChara = charaPrefs[CurIdx];
+        var items = DataManager.ins.ContentTf.GetComponentsInChildren<ItemInfo>();
+        var curItem = items[CurIdx];
 
         //処理
         if(DataManager.ins.personalData.SelectCharaIdx == CurIdx){
             checkMarkImg.color = Color.green;
-            Array.ForEach(charaPrefs, chara => chara.Outline3D.enabled = false);
-            curChara.Outline3D.enabled = true;
+            Array.ForEach(items, item => item.Outline3D.enabled = false);
+            curItem.Outline3D.enabled = true;
         }
         else{
             checkMarkImg.color = Color.gray;
-            curChara.Outline3D.enabled = false;
+            curItem.Outline3D.enabled = false;
         }
     }
 
@@ -151,7 +151,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //*   UI Button
     //* ----------------------------------------------------------------
     public void onClickBtnSelectCharactor(){
-        var curChara = getCurChara();
+        var curChara = getCurItem();
         int befIdx = DataManager.ins.personalData.SelectCharaIdx; //* (BUG) 買わないのにロードしたらChara選択されるバグ防止。
         DataManager.ins.personalData.SelectCharaIdx = CurIdx;
         //* Is Lock?

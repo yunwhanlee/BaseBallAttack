@@ -30,8 +30,9 @@ public class DataManager : MonoBehaviour
 
     void Awake() => singleton();
     void Start(){
-        ItemInfo[] charaContents = ContentTf.GetComponentsInChildren<ItemInfo>();
-        personalData = new PersonalData(ref charaContents);
+        // ItemInfo[] items = ContentTf.GetComponentsInChildren<ItemInfo>();
+        personalData = new PersonalData();
+        personalData.load();
     }
 
     void Update(){
@@ -40,8 +41,8 @@ public class DataManager : MonoBehaviour
     }
 
     private void OnApplicationQuit(){
-        ItemInfo[] charaContents = ContentTf.GetComponentsInChildren<ItemInfo>();
-        personalData.save(ref charaContents);
+        ItemInfo[] items = ContentTf.GetComponentsInChildren<ItemInfo>();
+        personalData.save(ref items);
     }
 
     public void createObject(string type){
