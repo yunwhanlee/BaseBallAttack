@@ -34,9 +34,16 @@ public class DataManager : MonoBehaviour
 
     void Awake() => singleton();
     void Start(){
-        // ItemInfo[] items = ContentTf.GetComponentsInChildren<ItemInfo>();
+        //* contents Prefab 生成
+        createObject("Chara");
+        createObject("Bat");
+        //* Items of Content
+        ItemInfo[] charas = ContentCharaTf.GetComponentsInChildren<ItemInfo>();
+        ItemInfo[] bats = ContentBatTf.GetComponentsInChildren<ItemInfo>();
         personalData = new PersonalData();
-        personalData.load();
+
+        personalData.load(ref charas, ref bats);
+        
     }
 
     void Update(){

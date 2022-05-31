@@ -34,10 +34,6 @@ public class HomeManager : MonoBehaviour
     void Start()
     {
         onClickBtnGoToDialog("Home");
-
-        //* contents Prefab 生成
-        DataManager.ins.createObject("Chara");
-        DataManager.ins.createObject("Bat");
     }
 
     void Update()

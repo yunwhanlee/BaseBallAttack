@@ -29,11 +29,11 @@ public class PersonalData {
     }
 
     //* method
-    public void load(){
+    public void load(ref ItemInfo[] charas, ref ItemInfo[] bats){
         Debug.Log("LOAD");
         //* Check Json
         string json = PlayerPrefs.GetString("Json");
-        
+        Debug.Log("JSON:: LOAD Data =" + json);
 
         //* Load Data
         var data = JsonUtility.FromJson<PersonalData>(json); //* Convert Json To Class Data
@@ -46,10 +46,14 @@ public class PersonalData {
         this.SelectBatIdx = data.SelectBatIdx;
         this.BatLockList = data.BatLockList;
 
-        //* Set Item Prefabs.IsLock
-        // for(int i=0; i<items.Length; i++){
-        //     items[i].GetComponent<ItemInfo>().IsLock = this.CharaLockList[i];
-        // }
+        //* Set Real Content Items IsLock
+        for(int i=0; i<charas.Length; i++){
+            Debug.Log("CharaLockList["+i+"].IsLock=" + this.CharaLockList[i]);
+            charas[i].GetComponent<ItemInfo>().IsLock = this.CharaLockList[i];
+        }
+        for(int i=0; i<bats.Length; i++){
+            bats[i].GetComponent<ItemInfo>().IsLock = this.BatLockList[i];
+        }
     }
     
     public void save(ref ItemInfo[] items){
@@ -58,7 +62,7 @@ public class PersonalData {
 
         //* Print
         string json = PlayerPrefs.GetString("Json");
-        Debug.Log("PersonalData:: SAVE Data =" + json);
+        Debug.Log("JSON:: SAVE Data =" + json);
     }
 
     public void reset(){
