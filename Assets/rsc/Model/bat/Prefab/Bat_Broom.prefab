@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4813286461711284503}
   - component: {fileID: 8458852042997266098}
   - component: {fileID: 5946746384414704248}
+  - component: {fileID: 8417302948592140613}
   - component: {fileID: 4448247955000760146}
   m_Layer: 0
   m_Name: Bat_Broom
@@ -82,6 +83,23 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8417302948592140613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5298460928622142381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLock: 1
+  meshRdrList: []
+  rank: 3
+  price: 0
+  psvSkillAbility: 0
 --- !u!114 &4448247955000760146
 MonoBehaviour:
   m_ObjectHideFlags: 0

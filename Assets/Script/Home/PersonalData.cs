@@ -48,10 +48,11 @@ public class PersonalData {
 
         //* Set Real Content Items IsLock
         for(int i=0; i<charas.Length; i++){
-            Debug.Log("CharaLockList["+i+"].IsLock=" + this.CharaLockList[i]);
+            Debug.Log("CharaLockList["+i+"].IsLock=" + this.CharaLockList[i] + "length= " + charas.Length);
             charas[i].GetComponent<ItemInfo>().IsLock = this.CharaLockList[i];
         }
         for(int i=0; i<bats.Length; i++){
+            Debug.Log("BatLockList["+i+"].IsLock=" + this.BatLockList[i] + "length= " + bats.Length);
             bats[i].GetComponent<ItemInfo>().IsLock = this.BatLockList[i];
         }
     }

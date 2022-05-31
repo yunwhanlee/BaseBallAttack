@@ -120,6 +120,10 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     private ItemInfo getCurItem(){
         var contentTf = (DataManager.ins.SelectType == "Chara")? DataManager.ins.ContentCharaTf : DataManager.ins.ContentBatTf;
         var items = contentTf.GetComponentsInChildren<ItemInfo>();
+        foreach(var item in items){
+            Debug.Log("getCurItem:: Item=" + item);
+        }
+        
         var curItem = items[CurIdx];
         return curItem;
     }
