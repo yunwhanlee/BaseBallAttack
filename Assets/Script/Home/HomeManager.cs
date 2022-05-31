@@ -50,7 +50,7 @@ public class HomeManager : MonoBehaviour
 
         var curChara = DataManager.ins.CharaPfs[DataManager.ins.personalData.SelectCharaIdx];
         //TODO
-        var curBat = DataManager.ins.BatPfs[DataManager.ins.personalData.SelectBatIdx];//[DataManager.ins.personalData.SelectCharaIdx];
+        var curBat = DataManager.ins.BatPfs[DataManager.ins.personalData.SelectBatIdx];
 
         var parentTf = homeDialog.Panel.transform.Find("BackGroundGroup").transform.Find("ModelTf");
         var childs = parentTf.GetComponentsInChildren<Transform>();
@@ -59,8 +59,13 @@ public class HomeManager : MonoBehaviour
         
         switch(name){
             case "Home" : 
-                //* Model Create
-                Instantiate(curChara, Vector3.zero, Quaternion.identity, parentTf);
+                //* Select Chara Create
+                var charaIns = Instantiate(curChara, Vector3.zero, Quaternion.identity, parentTf) as GameObject;
+                //* Select Bat Create
+                Transform rightArmTf = charaIns.transform.Find("Bone").transform.Find("Bone_R.001").transform.Find("Bone_R.002").transform.Find("RightArm");
+                Instantiate(curBat, curBat.transform.position, curBat.transform.rotation, rightArmTf);
+                
+
 
                 //* Home Model Delete
                 if(0 < parentTf.childCount){

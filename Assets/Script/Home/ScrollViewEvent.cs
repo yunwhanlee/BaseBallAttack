@@ -14,7 +14,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     float rectWidth;
     float curIdxBasePos;    public float CurIdxBasePos {get => curIdxBasePos; set => curIdxBasePos = value;}
-    int curIdx;     public int CurIdx {get => curIdx; set => curIdx = value;}
+    [SerializeField] int curIdx;     public int CurIdx {get => curIdx; set => curIdx = value;}
 
     [Header("--Scroll Speed--")]
     [SerializeField] float scrollStopSpeed;
@@ -63,7 +63,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         scrollSpeed = Mathf.Abs(scrollBefFramePosX - pos.anchoredPosition.x);
         // Debug.Log(scrollBefFramePosX + " - " + pos.anchoredPosition.x + " = " + scrollSpeed);
 
-        Debug.Log("getScrollViewPos:: Stop Scrolling:: curPosX=" + (curPosX) + " / " + max + ", idx=" + CurIdx + " (CurIdxBasePos=" + CurIdxBasePos + "), scrollSpeed=" + scrollSpeed);
+        Debug.Log("getScrollViewPos:: Stop Scrolling:: curPosX=" + (curPosX) + " / " + max + ", CurIdx=" + CurIdx + " (CurIdxBasePos=" + CurIdxBasePos + "), scrollSpeed=" + scrollSpeed);
 
         //* Stop Scrolling Near Index Chara
         if(scrollSpeed < 1){
@@ -120,10 +120,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     private ItemInfo getCurItem(){
         var contentTf = (DataManager.ins.SelectType == "Chara")? DataManager.ins.ContentCharaTf : DataManager.ins.ContentBatTf;
         var items = contentTf.GetComponentsInChildren<ItemInfo>();
-        foreach(var item in items){
-            Debug.Log("getCurItem:: Item=" + item);
-        }
-        
+        // foreach(var item in items){Debug.Log("getCurItem:: Item=" + item);}
         var curItem = items[CurIdx];
         return curItem;
     }
@@ -171,8 +168,9 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //* ----------------------------------------------------------------
     //*   UI Button
     //* ----------------------------------------------------------------
-    public void onClickBtnSelectItem(){
-        string type = DataManager.ins.SelectType;
+    public void onClickBtnSelectItem(string type){
+        if(DataManager.ins.SelectType != type) return;
+        Debug.Log("onClickBtnSelectItem:: type= " + type + ", CurIdx= " + CurIdx);
         var curItem = getCurItem();
         //* (BUG) 買わないのにロードしたらChara選択されるバグ防止。
         int befIdx = (type == "Chara")? 
