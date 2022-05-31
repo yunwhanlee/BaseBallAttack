@@ -173,8 +173,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         Debug.Log("onClickBtnSelectItem:: type= " + type + ", CurIdx= " + CurIdx);
         var curItem = getCurItem();
         //* (BUG) 買わないのにロードしたらChara選択されるバグ防止。
-        int befIdx = (type == "Chara")? 
-            DataManager.ins.personalData.SelectCharaIdx : DataManager.ins.personalData.SelectBatIdx; 
+        int befIdx = (type == "Chara")? DataManager.ins.personalData.SelectCharaIdx : DataManager.ins.personalData.SelectBatIdx; 
         
         if(type == "Chara")
             DataManager.ins.personalData.SelectCharaIdx = CurIdx;
@@ -188,6 +187,10 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 //* Buy
                 em.createItemBuyEF();
                 curItem.IsLock = false;
+                if(type == "Chara")
+                    DataManager.ins.personalData.CharaLockList[CurIdx] = false;
+                else
+                    DataManager.ins.personalData.BatLockList[CurIdx] = false;
                 
                 curItem.setMeterialIsLock();//curChara.MeshRdrList.ForEach(meshRdr=> meshRdr.materials = new Material[] {meshRdr.material});
                 DataManager.ins.personalData.Coin -= curItem.Price;
