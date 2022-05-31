@@ -54,10 +54,6 @@ public class PersonalData {
     
     public void save(ref ItemInfo[] items){
         Debug.Log("SAVE");
-        for(int i=0; i<items.Length; i++){
-            CharaLockList[i] = items[i].IsLock;
-        }
-
         PlayerPrefs.SetString("Json", JsonUtility.ToJson(this, true)); //* Serialize To Json
 
         //* Print
@@ -65,7 +61,7 @@ public class PersonalData {
         Debug.Log("PersonalData:: SAVE Data =" + json);
     }
 
-    public void reset(ref ItemInfo[] items){
+    public void reset(){
         Debug.Log("RESET");
         PlayerPrefs.DeleteAll();
 
@@ -73,9 +69,17 @@ public class PersonalData {
         this.Diamond = 0;
         this.SelectCharaIdx = 0;
         this.CharaLockList = new List<bool>();
-        for(int i=0; i<items.Length; i++){
-            if(i==0) {this.CharaLockList.Add(false);    items[0].IsLock = false;}
-            else     {this.CharaLockList.Add(true);     items[i].IsLock = true;}
+        this.BatLockList = new List<bool>();
+
+        for(int i=0; i<DataManager.ins.CharaPfs.Length; i++){
+            if(i==0) this.CharaLockList.Add(false);//    items[0].IsLock = false;}
+            else     this.CharaLockList.Add(true);//     items[i].IsLock = true;}
+        }
+
+        // hm.onClickBtnGoToDialog("Bat");
+        for(int i=0; i<DataManager.ins.BatPfs.Length; i++){
+            if(i==0) this.BatLockList.Add(false);//    items[0].IsLock = false;}
+            else     this.BatLockList.Add(true);//     items[i].IsLock = true;}
         }
     }
 }

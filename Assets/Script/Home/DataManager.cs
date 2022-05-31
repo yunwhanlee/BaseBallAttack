@@ -15,9 +15,13 @@ public class DataManager : MonoBehaviour
 
     [Header("--Select Item--")]
     public Material grayBlackNoBuyMt;
-    [SerializeField] string selectType = "";
-    [SerializeField] RectTransform contentTf; public RectTransform ContentTf {get => contentTf; set => contentTf = value;}
-    [SerializeField] RectTransform modelParentTf;   public RectTransform ModelParentTf {get => modelParentTf; set => modelParentTf = value;}
+    [SerializeField] string selectType = "";    public string SelectType {get => selectType; set => selectType = value;}
+    [SerializeField] RectTransform scrollViewChara; public RectTransform ScrollViewChara {get => scrollViewChara; set => scrollViewChara = value;}
+    [SerializeField] RectTransform scrollViewBat;   public RectTransform ScrollViewBat {get => scrollViewBat; set => scrollViewBat = value;}
+    [SerializeField] RectTransform contentCharaTf; public RectTransform ContentCharaTf {get => contentCharaTf; set => contentCharaTf = value;}
+    [SerializeField] RectTransform contentBatTf; public RectTransform ContentBatTf {get => contentBatTf; set => contentBatTf = value;}
+    
+    [SerializeField] RectTransform modelParentPref;   public RectTransform ModelParentPref {get => modelParentPref; set => modelParentPref = value;}
     [SerializeField] GameObject[] charaPfs;         public GameObject[] CharaPfs {get => charaPfs; set => charaPfs = value;}
     [SerializeField] GameObject[] batPfs;         public GameObject[] BatPfs {get => batPfs; set => batPfs = value;}
 
@@ -41,26 +45,28 @@ public class DataManager : MonoBehaviour
     }
 
     private void OnApplicationQuit(){
-        ItemInfo[] items = ContentTf.GetComponentsInChildren<ItemInfo>();
-        personalData.save(ref items);
+        ItemInfo[] charas = ContentCharaTf.GetComponentsInChildren<ItemInfo>();
+        personalData.save(ref charas);
     }
 
     public void createObject(string type){
-        GameObject[] objs = null;
+        GameObject[] prefs = null;
+        Transform contentTf = null;
         switch(type){
             case "Chara" : 
-                objs = charaPfs;
-                
+                prefs = CharaPfs;
+                contentTf = ContentCharaTf;
                 break;
             case "Bat" :
-                objs = batPfs;
+                prefs = BatPfs;
+                contentTf = ContentBatTf;
                 break;
         }
-        if(objs == null) return; //* 終了
+        if(prefs == null) return; //* 終了
 
         //* Prefabs 生成
-        Array.ForEach(objs, obj=>{
-            Transform parentTf = Instantiate(modelParentTf, modelParentTf.localPosition, modelParentTf.localRotation, contentTf).transform;
+        Array.ForEach(prefs, obj=>{
+            Transform parentTf = Instantiate(modelParentPref, modelParentPref.localPosition, modelParentPref.localRotation, contentTf).transform;
             GameObject ins = Instantiate(obj, Vector3.zero, Quaternion.identity, parentTf);
 
             switch(type){
@@ -74,7 +80,7 @@ public class DataManager : MonoBehaviour
         }
             
 
-            Debug.Log("modelParentTf.pos=" + modelParentTf.position + ", modelParentTf.localPos=" + modelParentTf.localPosition);
+            Debug.Log("modelParentTf.pos=" + modelParentPref.position + ", modelParentTf.localPos=" + modelParentPref.localPosition);
             ins.name = obj.name;//名前上書き：しないと後ろに(clone)が残る。
         });
     }

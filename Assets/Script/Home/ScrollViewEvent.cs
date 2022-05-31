@@ -10,6 +10,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 {
     //* OutSide
     public HomeEffectManager em;
+    public ScrollRect scrollRect;
 
     float rectWidth;
     float curIdxBasePos;    public float CurIdxBasePos {get => curIdxBasePos; set => curIdxBasePos = value;}
@@ -30,7 +31,8 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public Text priceTxt;
 
     void Start(){
-        rectWidth = DataManager.ins.ModelParentTf.rect.width;
+        scrollRect = GetComponent<ScrollRect>();
+        rectWidth = DataManager.ins.ModelParentPref.rect.width;
     }
 
     //* Drag Event
@@ -64,32 +66,33 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
         //* Stop Scrolling Near Index Chara
         if(scrollSpeed < 1){
-            setScrollStopCharaInfo();
+            setScrollStopItemInfo();
         }
 
         //* update Before Frame PosX
         scrollBefFramePosX = pos.anchoredPosition.x;
     }
 
-    private void setScrollStopCharaInfo(){
+    private void setScrollStopItemInfo(){
         //* Set PosX
-        DataManager.ins.ContentTf.anchoredPosition = new Vector2(CurIdxBasePos, -500);
+        DataManager.ins.ContentCharaTf.anchoredPosition = new Vector2(CurIdxBasePos, -500);
         
-        var curChara = getCurItem();
+        var curItem = getCurItem();
+        Debug.Log("<color>CurItem= " + curItem.name + "</color>");
 
         //* Show Rank Text
-        rankTxt.text = curChara.Rank.ToString();
+        rankTxt.text = curItem.Rank.ToString();
 
         //* Is Buy(UnLock)? Set Price or CheckMark
-        if(curChara.IsLock){
+        if(curItem.IsLock){
             setButtonUI();
         }else{
             setButtonUI();
-            setCheckUIAndCharaOutLine();
+            setCheckUIAndItemOutLine();
         }
         
         //* Set Name
-        string name = curChara.name.Split('_')[1];
+        string name = curItem.name.Split('_')[1];
         nameTxt.text = name;
 
         //* Set Rank UI Color
@@ -97,7 +100,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         var boxGlowEf = boxSprRdr.GetComponent<SpriteGlowEffect>();
         float brightness = 0;
         int outline = 2;
-        switch(curChara.Rank){
+        switch(curItem.Rank){
             case DataManager.RANK.GENERAL : color = Color.white; brightness=1; outline=2;   break;
             case DataManager.RANK.RARE : color = Color.blue; brightness=8; outline=2;   break;
             case DataManager.RANK.UNIQUE : color = Color.red; brightness=8.5f; outline=5; break;
@@ -112,7 +115,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
 
     private ItemInfo getCurItem(){
-        var items = DataManager.ins.ContentTf.GetComponentsInChildren<ItemInfo>();
+        var items = DataManager.ins.ContentCharaTf.GetComponentsInChildren<ItemInfo>();
         var curItem = items[CurIdx];
         return curItem;
     }
@@ -131,14 +134,26 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }
     }
 
-    public void setCheckUIAndCharaOutLine(){
-        var items = DataManager.ins.ContentTf.GetComponentsInChildren<ItemInfo>();
-        var curItem = items[CurIdx];
+    public void setCheckUIAndItemOutLine(){
+        string type = DataManager.ins.SelectType;
 
-        //処理
-        if(DataManager.ins.personalData.SelectCharaIdx == CurIdx){
+        RectTransform contentTf = (type == "Chara")? 
+            DataManager.ins.ContentCharaTf : DataManager.ins.ContentBatTf;
+
+        var items = contentTf.GetComponentsInChildren<ItemInfo>();
+        int i=0;
+        Array.ForEach(items, item=> Debug.Log("ContentTf:: " + DataManager.ins.SelectType + " item["+(i++)+"]= " + item));
+        var curItem = items[CurIdx];
+        
+        int selectItemIdx = (type == "Chara")?
+            DataManager.ins.personalData.SelectCharaIdx : DataManager.ins.personalData.SelectBatIdx;
+
+        if(selectItemIdx == CurIdx){
             checkMarkImg.color = Color.green;
-            Array.ForEach(items, item => item.Outline3D.enabled = false);
+            
+            Array.ForEach(items, item => {
+                item.Outline3D.enabled = false;
+            });
             curItem.Outline3D.enabled = true;
         }
         else{
@@ -150,7 +165,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //* ----------------------------------------------------------------
     //*   UI Button
     //* ----------------------------------------------------------------
-    public void onClickBtnSelectCharactor(){
+    public void onClickBtnSelectItem(){
         var curChara = getCurItem();
         int befIdx = DataManager.ins.personalData.SelectCharaIdx; //* (BUG) 買わないのにロードしたらChara選択されるバグ防止。
         DataManager.ins.personalData.SelectCharaIdx = CurIdx;

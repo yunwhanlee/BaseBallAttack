@@ -34,6 +34,10 @@ public class HomeManager : MonoBehaviour
     void Start()
     {
         onClickBtnGoToDialog("Home");
+
+        //* contents Prefab 生成
+        DataManager.ins.createObject("Chara");
+        DataManager.ins.createObject("Bat");
     }
 
     void Update()
@@ -46,37 +50,23 @@ public class HomeManager : MonoBehaviour
     //* ----------------------------------------------------------------
     public void onClickBtnGoToDialog(string name){
         //* Current Model Data & ParentTf
+        DataManager.ins.SelectType = name;
 
         var curChara = DataManager.ins.CharaPfs[DataManager.ins.personalData.SelectCharaIdx];
         //TODO
-        var curBat = DataManager.ins.BatPfs[0];//[DataManager.ins.personalData.SelectCharaIdx];
+        var curBat = DataManager.ins.BatPfs[DataManager.ins.personalData.SelectBatIdx];//[DataManager.ins.personalData.SelectCharaIdx];
 
         var parentTf = homeDialog.Panel.transform.Find("BackGroundGroup").transform.Find("ModelTf");
         var childs = parentTf.GetComponentsInChildren<Transform>();
+
+        
         
         switch(name){
             case "Home" : 
                 //* Model Create
                 Instantiate(curChara, Vector3.zero, Quaternion.identity, parentTf);
 
-                //* UI
-                homeDialog.Panel.gameObject.SetActive(true);
-                homeDialog.GoBtn.gameObject.SetActive(false);
-                selectCharaDialog.Panel.gameObject.SetActive(false);
-
-                break;
-            case "Chara" : 
-            case "Bat" : 
-                int idx=0;
-                Array.ForEach(DataManager.ins.ContentTf.GetComponentsInChildren<Transform>(), child=>{
-                    if(idx > 0) GameObject.Destroy(child.gameObject);
-                    idx++;
-                });
-
-                //* Object 生成
-                DataManager.ins.createObject(name);
-
-                //* Model Delete
+                //* Home Model Delete
                 if(0 < parentTf.childCount){
                     int i = 0;
                     Array.ForEach(childs, child => {
@@ -88,6 +78,27 @@ public class HomeManager : MonoBehaviour
                 }
 
                 //* UI
+                homeDialog.Panel.gameObject.SetActive(true);
+                homeDialog.GoBtn.gameObject.SetActive(false);
+                selectCharaDialog.Panel.gameObject.SetActive(false);
+                DataManager.ins.ScrollViewChara.gameObject.SetActive(false);
+                DataManager.ins.ScrollViewBat.gameObject.SetActive(false);
+
+                break;
+
+            case "Chara" : 
+                DataManager.ins.ScrollViewChara.gameObject.SetActive(true);
+
+                //* UI
+                homeDialog.Panel.gameObject.SetActive(false);
+                homeDialog.GoBtn.gameObject.SetActive(true);
+                selectCharaDialog.Panel.gameObject.SetActive(true);
+                break;
+                
+            case "Bat" : 
+                DataManager.ins.ScrollViewBat.gameObject.SetActive(true);
+
+                //* UI
                 homeDialog.Panel.gameObject.SetActive(false);
                 homeDialog.GoBtn.gameObject.SetActive(true);
                 selectCharaDialog.Panel.gameObject.SetActive(true);
@@ -95,8 +106,8 @@ public class HomeManager : MonoBehaviour
         }
     }
     public void onClickResetBtn(){
-        ItemInfo[] charaContents = DataManager.ins.ContentTf.GetComponentsInChildren<ItemInfo>();
-        DataManager.ins.personalData.reset(ref charaContents);
+        // ItemInfo[] items = DataManager.ins.ContentTf.GetComponentsInChildren<ItemInfo>();
+        DataManager.ins.personalData.reset();
 
         #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
