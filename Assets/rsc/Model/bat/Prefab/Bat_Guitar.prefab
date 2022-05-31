@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 758275970807549641}
   - component: {fileID: 4564306373964699299}
+  - component: {fileID: 7396163607073586501}
   m_Layer: 0
   m_Name: Bat_Guitar
   m_TagString: Untagged
@@ -49,6 +50,24 @@ MonoBehaviour:
   rank: 4
   price: 0
   psvSkillAbility: 0
+--- !u!114 &7396163607073586501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130111081111786611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.63589305, g: 1, b: 0.16509432, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &1894514497705490378
 GameObject:
   m_ObjectHideFlags: 0

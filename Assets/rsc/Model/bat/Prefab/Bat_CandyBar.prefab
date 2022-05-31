@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1557359841940516020}
   - component: {fileID: 2464314602760807185}
   - component: {fileID: 421075959983986651}
+  - component: {fileID: 6802404800736002789}
   m_Layer: 0
   m_Name: Bat_CandyBar
   m_TagString: Untagged
@@ -82,6 +83,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6802404800736002789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2222256120878265870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.63589305, g: 1, b: 0.16509432, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &5072531120222042739
 GameObject:
   m_ObjectHideFlags: 0

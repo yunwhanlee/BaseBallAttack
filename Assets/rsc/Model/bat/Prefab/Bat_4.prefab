@@ -121,6 +121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3793105983162683950}
   - component: {fileID: -4514153790878738973}
+  - component: {fileID: -6351384454230780770}
   m_Layer: 3
   m_Name: Bat_4
   m_TagString: Untagged
@@ -161,3 +162,21 @@ MonoBehaviour:
   rank: 0
   price: 0
   psvSkillAbility: 0
+--- !u!114 &-6351384454230780770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4604932161339017364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.63589305, g: 1, b: 0.16509432, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

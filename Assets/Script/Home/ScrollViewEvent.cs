@@ -54,7 +54,8 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         float width = Mathf.Abs(rectWidth);
         float offset = -(width + width/2);
         float curPosX = pos.anchoredPosition.x - offset;
-        float max = width * DataManager.ins.CharaPfs.Length - width;
+        var prefs = (DataManager.ins.SelectType == "Chara")? DataManager.ins.CharaPfs : DataManager.ins.BatPfs;
+        float max = width * prefs.Length - width;
         CurIdx = Mathf.Abs(Mathf.FloorToInt((curPosX) / width));
         CurIdxBasePos = -((CurIdx+1) * width);
 
@@ -74,8 +75,10 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
 
     private void setScrollStopItemInfo(){
+        string type = DataManager.ins.SelectType;
+        var contentTf = (type == "Chara")? DataManager.ins.ContentCharaTf : DataManager.ins.ContentBatTf;
         //* Set PosX
-        DataManager.ins.ContentCharaTf.anchoredPosition = new Vector2(CurIdxBasePos, -500);
+        contentTf.anchoredPosition = new Vector2(CurIdxBasePos, -500);
         
         var curItem = getCurItem();
         Debug.Log("<color>CurItem= " + curItem.name + "</color>");
@@ -115,7 +118,8 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
 
     private ItemInfo getCurItem(){
-        var items = DataManager.ins.ContentCharaTf.GetComponentsInChildren<ItemInfo>();
+        var contentTf = (DataManager.ins.SelectType == "Chara")? DataManager.ins.ContentCharaTf : DataManager.ins.ContentBatTf;
+        var items = contentTf.GetComponentsInChildren<ItemInfo>();
         var curItem = items[CurIdx];
         return curItem;
     }
@@ -140,20 +144,18 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         RectTransform contentTf = (type == "Chara")? 
             DataManager.ins.ContentCharaTf : DataManager.ins.ContentBatTf;
 
+        //* (BUG) CharaのRightArmにあるBatにも<ItemInfo>有ったので、重複される。CharaPrefのBatを全て非活性化してOK。
         var items = contentTf.GetComponentsInChildren<ItemInfo>();
         int i=0;
         Array.ForEach(items, item=> Debug.Log("ContentTf:: " + DataManager.ins.SelectType + " item["+(i++)+"]= " + item));
         var curItem = items[CurIdx];
         
-        int selectItemIdx = (type == "Chara")?
+        int selectItemIdx = (type == "Chara")? 
             DataManager.ins.personalData.SelectCharaIdx : DataManager.ins.personalData.SelectBatIdx;
 
         if(selectItemIdx == CurIdx){
             checkMarkImg.color = Color.green;
-            
-            Array.ForEach(items, item => {
-                item.Outline3D.enabled = false;
-            });
+            Array.ForEach(items, item => item.Outline3D.enabled = false);
             curItem.Outline3D.enabled = true;
         }
         else{
@@ -166,25 +168,36 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //*   UI Button
     //* ----------------------------------------------------------------
     public void onClickBtnSelectItem(){
-        var curChara = getCurItem();
-        int befIdx = DataManager.ins.personalData.SelectCharaIdx; //* (BUG) 買わないのにロードしたらChara選択されるバグ防止。
-        DataManager.ins.personalData.SelectCharaIdx = CurIdx;
+        string type = DataManager.ins.SelectType;
+        var curItem = getCurItem();
+        //* (BUG) 買わないのにロードしたらChara選択されるバグ防止。
+        int befIdx = (type == "Chara")? 
+            DataManager.ins.personalData.SelectCharaIdx : DataManager.ins.personalData.SelectBatIdx; 
+        
+        if(type == "Chara")
+            DataManager.ins.personalData.SelectCharaIdx = CurIdx;
+        else 
+            DataManager.ins.personalData.SelectBatIdx = CurIdx;
+
         //* Is Lock?
         // Debug.Log("onClickBtnSelectCharactor:: isLock= " + curChara.IsLock +  ", coin= " + DataManager.ins.personalData.Coin + ", curChara.Price= " + curChara.Price);
-        if(curChara.IsLock){
-            if(DataManager.ins.personalData.Coin >= curChara.Price){
+        if(curItem.IsLock){
+            if(DataManager.ins.personalData.Coin >= curItem.Price){
                 //* Buy
                 em.createItemBuyEF();
-                curChara.IsLock = false;
+                curItem.IsLock = false;
                 
-                curChara.setMeterialIsLock();//curChara.MeshRdrList.ForEach(meshRdr=> meshRdr.materials = new Material[] {meshRdr.material});
-                DataManager.ins.personalData.Coin -= curChara.Price;
+                curItem.setMeterialIsLock();//curChara.MeshRdrList.ForEach(meshRdr=> meshRdr.materials = new Material[] {meshRdr.material});
+                DataManager.ins.personalData.Coin -= curItem.Price;
 
                 setButtonUI();
             }
             else{
                 //TODO No Coin
-                DataManager.ins.personalData.SelectCharaIdx = befIdx;
+                if(type == "Chara")
+                    DataManager.ins.personalData.SelectCharaIdx = befIdx;
+                else 
+                    DataManager.ins.personalData.SelectBatIdx = befIdx;
             }
         }
     }

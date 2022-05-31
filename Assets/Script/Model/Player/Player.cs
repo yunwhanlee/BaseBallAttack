@@ -117,6 +117,7 @@ public class Player : MonoBehaviour
         
         Debug.Log("swingArcArea.rectTransform.localRotation.eulerAngles.z=" + swingArcArea.rectTransform.localRotation.eulerAngles.z);//! (BUG) rotation.eulerAnglesしないと、角度の数値ではなく、小数点が出る。
         anim = GetComponentInChildren<Animator>();
+        anim.SetBool("IsIdle", false);
         swingArcRange = MAX_HIT_DEG * 2;//左右合わせるから * 2
         swingArcArea.fillAmount = swingArcRange / 360;
         swingArcArea.rectTransform.localRotation = Quaternion.Euler(0,0,offsetHitDeg + 90); 
