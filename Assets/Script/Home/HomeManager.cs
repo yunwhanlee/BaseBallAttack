@@ -21,6 +21,11 @@ using System;
 
 public class HomeManager : MonoBehaviour
 {
+    [Header("--Select Panel Color--")]
+    [SerializeField] Image selectPanelImg;  public Image SelectPanelImg {get => selectPanelImg; set => selectPanelImg = value;}
+    [SerializeField] Color selectPanelCharaColor;
+    [SerializeField] Color selectPanelBatColor;
+
     [Header("<-- UI Dialog -->")]
     public DialogUI homeDialog;
     public DialogUI selectCharaDialog;
@@ -59,9 +64,10 @@ public class HomeManager : MonoBehaviour
         
         switch(name){
             case "Home" : 
-                //* Select Chara Create
+                //* Create Select Model 
+                // Chara
                 var charaIns = Instantiate(curChara, Vector3.zero, Quaternion.identity, parentTf) as GameObject;
-                //* Select Bat Create
+                // Bat
                 Transform rightArmTf = charaIns.transform.Find("Bone").transform.Find("Bone_R.001").transform.Find("Bone_R.002").transform.Find("RightArm");
                 Instantiate(curBat, curBat.transform.position, curBat.transform.rotation, rightArmTf);
                 
@@ -88,6 +94,7 @@ public class HomeManager : MonoBehaviour
                 break;
 
             case "Chara" : 
+                SelectPanelImg.color = selectPanelCharaColor;
                 DataManager.ins.ScrollViewChara.gameObject.SetActive(true);
 
                 //* UI
@@ -97,6 +104,7 @@ public class HomeManager : MonoBehaviour
                 break;
                 
             case "Bat" : 
+            SelectPanelImg.color = selectPanelBatColor;
                 DataManager.ins.ScrollViewBat.gameObject.SetActive(true);
 
                 //* UI
