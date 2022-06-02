@@ -32,9 +32,6 @@ public class HomeManager : MonoBehaviour
 
     //TODO public DialogUI selectBat;
     //TODO public DialogUI cashShop;
-    
-    
-    
 
     void Start()
     {
