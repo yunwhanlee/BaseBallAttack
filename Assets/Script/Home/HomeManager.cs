@@ -22,7 +22,7 @@ using System;
 public class HomeManager : MonoBehaviour
 {
     [Header("--Select Panel Color--")]
-    [SerializeField] Image selectPanelImg;  public Image SelectPanelImg {get => selectPanelImg; set => selectPanelImg = value;}
+    [SerializeField] Image selectPanelBG;  public Image SelectPanelBG {get => selectPanelBG; set => selectPanelBG = value;}
     [SerializeField] Color selectPanelCharaColor;
     [SerializeField] Color selectPanelBatColor;
 
@@ -91,7 +91,7 @@ public class HomeManager : MonoBehaviour
                 break;
 
             case "Chara" : 
-                SelectPanelImg.color = selectPanelCharaColor;
+                SelectPanelBG.color = selectPanelCharaColor;
                 DataManager.ins.ScrollViewChara.gameObject.SetActive(true);
 
                 //* UI
@@ -101,7 +101,7 @@ public class HomeManager : MonoBehaviour
                 break;
                 
             case "Bat" : 
-            SelectPanelImg.color = selectPanelBatColor;
+            SelectPanelBG.color = selectPanelBatColor;
                 DataManager.ins.ScrollViewBat.gameObject.SetActive(true);
 
                 //* UI
