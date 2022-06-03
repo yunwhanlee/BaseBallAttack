@@ -22,13 +22,17 @@ using System;
 public class HomeManager : MonoBehaviour
 {
     [Header("--Select Panel Color--")]
-    [SerializeField] Image selectPanelBG;  public Image SelectPanelBG {get => selectPanelBG; set => selectPanelBG = value;}
+    [SerializeField] Image selectPanelScrollBG;  public Image SelectPanelScrollBG {get => selectPanelScrollBG; set => selectPanelScrollBG = value;}
     [SerializeField] Color selectPanelCharaColor;
     [SerializeField] Color selectPanelBatColor;
 
     [Header("<-- UI Dialog -->")]
     public DialogUI homeDialog;
-    public DialogUI selectCharaDialog;
+    public DialogUI selectPanelDialog;
+    public Button   startGameBtn;
+
+
+
 
     //TODO public DialogUI selectBat;
     //TODO public DialogUI cashShop;
@@ -84,35 +88,38 @@ public class HomeManager : MonoBehaviour
                 //* UI
                 homeDialog.Panel.gameObject.SetActive(true);
                 homeDialog.GoBtn.gameObject.SetActive(false);
-                selectCharaDialog.Panel.gameObject.SetActive(false);
+                selectPanelDialog.Panel.gameObject.SetActive(false);
                 DataManager.ins.ScrollViewChara.gameObject.SetActive(false);
                 DataManager.ins.ScrollViewBat.gameObject.SetActive(false);
-
                 break;
 
             case "Chara" : 
-                SelectPanelBG.color = selectPanelCharaColor;
+                SelectPanelScrollBG.color = selectPanelCharaColor;
                 DataManager.ins.ScrollViewChara.gameObject.SetActive(true);
 
                 //* UI
                 homeDialog.Panel.gameObject.SetActive(false);
                 homeDialog.GoBtn.gameObject.SetActive(true);
-                selectCharaDialog.Panel.gameObject.SetActive(true);
+                selectPanelDialog.Panel.gameObject.SetActive(true);
                 break;
                 
             case "Bat" : 
-            SelectPanelBG.color = selectPanelBatColor;
+            SelectPanelScrollBG.color = selectPanelBatColor;
                 DataManager.ins.ScrollViewBat.gameObject.SetActive(true);
 
                 //* UI
                 homeDialog.Panel.gameObject.SetActive(false);
                 homeDialog.GoBtn.gameObject.SetActive(true);
-                selectCharaDialog.Panel.gameObject.SetActive(true);
+                selectPanelDialog.Panel.gameObject.SetActive(true);
                 break;
         }
     }
+
+    public void onClickStartGameBtn(){
+        SceneManager.LoadScene("Play");
+    }
+
     public void onClickResetBtn(){
-        // ItemInfo[] items = DataManager.ins.ContentTf.GetComponentsInChildren<ItemInfo>();
         DataManager.ins.personalData.reset();
 
         #if UNITY_EDITOR

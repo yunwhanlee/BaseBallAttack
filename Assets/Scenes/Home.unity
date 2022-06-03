@@ -792,8 +792,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1887670884}
         m_TargetAssemblyTypeName: HomeManager, Assembly-CSharp
-        m_MethodName: onClickBtnGoToDialog
-        m_Mode: 5
+        m_MethodName: onClickStartGameBtn
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4798,15 +4798,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77cb010ad95db524d8ccf492a6a68e4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectPanelBG: {fileID: 671806328}
+  selectPanelScrollBG: {fileID: 0}
   selectPanelCharaColor: {r: 0.15686275, g: 0.9568628, b: 0.52156866, a: 1}
   selectPanelBatColor: {r: 0.9568628, g: 0.5529412, b: 0.21568629, a: 1}
   homeDialog:
     panel: {fileID: 1227366031}
     goBtn: {fileID: 935471164}
-  selectCharaDialog:
+  selectPanelDialog:
     panel: {fileID: 1072798419}
-    goBtn: {fileID: 173923953}
+    goBtn: {fileID: 0}
+  startGameBtn: {fileID: 251569728}
 --- !u!1 &1919530733
 GameObject:
   m_ObjectHideFlags: 0
