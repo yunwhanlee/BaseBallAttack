@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System;
 
 public class DataManager : MonoBehaviour
@@ -19,9 +20,6 @@ public class DataManager : MonoBehaviour
 
     //* [0] : Chara, [1] : Bat, [2] : Skill, [3] : CashShop
     [SerializeField] RectTransform[] scrollViews; public RectTransform[] ScrollViews {get => scrollViews; set => scrollViews = value;}
-
-    // [SerializeField] RectTransform scrollViewChara; public RectTransform ScrollViewChara {get => scrollViewChara; set => scrollViewChara = value;}
-    // [SerializeField] RectTransform scrollViewBat;   public RectTransform ScrollViewBat {get => scrollViewBat; set => scrollViewBat = value;}
     [SerializeField] RectTransform contentCharaTf; public RectTransform ContentCharaTf {get => contentCharaTf; set => contentCharaTf = value;}
     [SerializeField] RectTransform contentBatTf; public RectTransform ContentBatTf {get => contentBatTf; set => contentBatTf = value;}
     
@@ -56,8 +54,12 @@ public class DataManager : MonoBehaviour
     }
 
     private void OnApplicationQuit(){
-        ItemInfo[] charas = ContentCharaTf.GetComponentsInChildren<ItemInfo>();
-        personalData.save(ref charas);
+        Debug.Log("END GAME:: Scene= " + SceneManager.GetActiveScene().name);
+        //* (BUG) SceneがHomeのみセーブできる。
+        if(SceneManager.GetActiveScene().name == "Home"){
+            ItemInfo[] charas = ContentCharaTf.GetComponentsInChildren<ItemInfo>();
+            personalData.save(ref charas);
+        }
     }
 
     public void createObject(string type){
