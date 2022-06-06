@@ -24,16 +24,18 @@ public class HomeManager : MonoBehaviour
     //* OutSide
     DataManager dm;
 
-    [Header("--Select Panel Color--")]
+    [Header("<--Select Panel Color-->")]
     [SerializeField] Image selectPanelScrollBG;  public Image SelectPanelScrollBG {get => selectPanelScrollBG; set => selectPanelScrollBG = value;}
     public enum DlgBGColor {Chara, Bat, Skill, CashShop}
     [SerializeField] Color[] selectPanelColors;
     
-    [Header("<-- UI Dialog -->")]
+    [Header("<-- UI -->")]
     public DialogUI homeDialog;
     public DialogUI selectDialog;
     public Button   startGameBtn;
 
+    [Header("<-- Model -->")]
+    [SerializeField] Transform modelTf;   public Transform ModelTf {get => modelTf; set => modelTf = value;}
 
 
 
@@ -54,7 +56,7 @@ public class HomeManager : MonoBehaviour
         dm.SelectType = name;
         var curChara = dm.CharaPfs[dm.personalData.SelectCharaIdx];
         var curBat = dm.BatPfs[dm.personalData.SelectBatIdx];
-        var modelTf = homeDialog.Panel.transform.Find("BackGroundGroup").transform.Find("ModelTf");
+        // var modelTf = homeDialog.Panel.transform.Find("BackGroundGroup").transform.Find("ModelTf");
         
         switch(name){
             case "Home" : 
@@ -126,6 +128,11 @@ public class HomeManager : MonoBehaviour
     //*   UI Button
     //* ----------------------------------------------------------------
     public void onClickStartGameBtn(){
+        //* Model Copy
+        var playerModel = modelTf.GetChild(0);
+        playerModel.GetComponent<Animator>().SetBool("IsIdle", false); //Ready Pose
+        Instantiate(playerModel, Vector3.zero, Quaternion.identity, DataManager.ins.transform);
+
         SceneManager.LoadScene("Play");
     }
 

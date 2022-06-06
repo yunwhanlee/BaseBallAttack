@@ -68,6 +68,10 @@ public class Player : MonoBehaviour
     private Animator anim;
 
     public void Start(){
+        //* Model Load
+        var playerModel = DataManager.ins.transform.GetChild(0);
+        playerModel.SetParent(this.gameObject.transform);
+
         var atvSkillDb = gm.activeSkillDataBase;
         registAtvSkillNames = new string[atvSkillDb.Length];
         activeSkills = new ActiveSkill[atvSkillDb.Length];
