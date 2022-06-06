@@ -170,8 +170,9 @@ MonoBehaviour:
   diamondTxt: {fileID: 944239660}
   grayBlackNoBuyMt: {fileID: 2100000, guid: 85881ae3c4cea344aa748905176006ae, type: 2}
   selectType: 
-  scrollViewChara: {fileID: 927224955}
-  scrollViewBat: {fileID: 365502386}
+  scrollViews:
+  - {fileID: 927224955}
+  - {fileID: 365502386}
   contentCharaTf: {fileID: 810525562}
   contentBatTf: {fileID: 1919530734}
   modelParentPref: {fileID: 17662701153362729, guid: 12ff8c72a9f74b44fa610bbd585e404b, type: 3}
@@ -979,7 +980,7 @@ GameObject:
   - component: {fileID: 327609489}
   - component: {fileID: 327609488}
   m_Layer: 5
-  m_Name: Background
+  m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1485,7 +1486,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1730,7 +1731,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -540, y: -500}
-  m_SizeDelta: {x: 0, y: 1000}
+  m_SizeDelta: {x: 540, y: 1000}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &810525563
 MonoBehaviour:
@@ -2131,7 +2132,7 @@ GameObject:
   - component: {fileID: 925401119}
   - component: {fileID: 925401118}
   m_Layer: 5
-  m_Name: HomePanel
+  m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3089,12 +3090,12 @@ GameObject:
   - component: {fileID: 1072798422}
   - component: {fileID: 1072798421}
   m_Layer: 5
-  m_Name: SelectPanel
+  m_Name: SelectItemPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1072798420
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4798,13 +4799,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77cb010ad95db524d8ccf492a6a68e4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectPanelScrollBG: {fileID: 0}
-  selectPanelCharaColor: {r: 0.15686275, g: 0.9568628, b: 0.52156866, a: 1}
-  selectPanelBatColor: {r: 0.9568628, g: 0.5529412, b: 0.21568629, a: 1}
+  selectPanelScrollBG: {fileID: 327609488}
+  selectPanelColors:
+  - {r: 0.15686275, g: 0.96470594, b: 0.52156866, a: 1}
+  - {r: 0.96470594, g: 0.5568628, b: 0.21960786, a: 1}
+  - {r: 0.96470594, g: 0.9490197, b: 0.27450982, a: 1}
   homeDialog:
     panel: {fileID: 1227366031}
     goBtn: {fileID: 935471164}
-  selectPanelDialog:
+  selectDialog:
     panel: {fileID: 1072798419}
     goBtn: {fileID: 0}
   startGameBtn: {fileID: 251569728}

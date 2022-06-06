@@ -16,8 +16,12 @@ public class DataManager : MonoBehaviour
     [Header("--Select Item--")]
     public Material grayBlackNoBuyMt;
     [SerializeField] string selectType = "";    public string SelectType {get => selectType; set => selectType = value;}
-    [SerializeField] RectTransform scrollViewChara; public RectTransform ScrollViewChara {get => scrollViewChara; set => scrollViewChara = value;}
-    [SerializeField] RectTransform scrollViewBat;   public RectTransform ScrollViewBat {get => scrollViewBat; set => scrollViewBat = value;}
+
+    //* [0] : Chara, [1] : Bat, [2] : Skill, [3] : CashShop
+    [SerializeField] RectTransform[] scrollViews; public RectTransform[] ScrollViews {get => scrollViews; set => scrollViews = value;}
+
+    // [SerializeField] RectTransform scrollViewChara; public RectTransform ScrollViewChara {get => scrollViewChara; set => scrollViewChara = value;}
+    // [SerializeField] RectTransform scrollViewBat;   public RectTransform ScrollViewBat {get => scrollViewBat; set => scrollViewBat = value;}
     [SerializeField] RectTransform contentCharaTf; public RectTransform ContentCharaTf {get => contentCharaTf; set => contentCharaTf = value;}
     [SerializeField] RectTransform contentBatTf; public RectTransform ContentBatTf {get => contentBatTf; set => contentBatTf = value;}
     

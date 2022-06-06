@@ -21,14 +21,17 @@ using System;
 
 public class HomeManager : MonoBehaviour
 {
+    //* OutSide
+    DataManager dm;
+
     [Header("--Select Panel Color--")]
     [SerializeField] Image selectPanelScrollBG;  public Image SelectPanelScrollBG {get => selectPanelScrollBG; set => selectPanelScrollBG = value;}
-    [SerializeField] Color selectPanelCharaColor;
-    [SerializeField] Color selectPanelBatColor;
-
+    public enum DlgBGColor {Chara, Bat, Skill, CashShop}
+    [SerializeField] Color[] selectPanelColors;
+    
     [Header("<-- UI Dialog -->")]
     public DialogUI homeDialog;
-    public DialogUI selectPanelDialog;
+    public DialogUI selectDialog;
     public Button   startGameBtn;
 
 
@@ -39,12 +42,8 @@ public class HomeManager : MonoBehaviour
 
     void Start()
     {
+        dm = DataManager.ins;
         onClickBtnGoToDialog("Home");
-    }
-
-    void Update()
-    {
-        
     }
 
     //* ----------------------------------------------------------------
@@ -52,69 +51,80 @@ public class HomeManager : MonoBehaviour
     //* ----------------------------------------------------------------
     public void onClickBtnGoToDialog(string name){
         //* Current Model Data & ParentTf
-        DataManager.ins.SelectType = name;
-
-        var curChara = DataManager.ins.CharaPfs[DataManager.ins.personalData.SelectCharaIdx];
-        //TODO
-        var curBat = DataManager.ins.BatPfs[DataManager.ins.personalData.SelectBatIdx];
-
-        var parentTf = homeDialog.Panel.transform.Find("BackGroundGroup").transform.Find("ModelTf");
-        var childs = parentTf.GetComponentsInChildren<Transform>();
-
-        
+        dm.SelectType = name;
+        var curChara = dm.CharaPfs[dm.personalData.SelectCharaIdx];
+        var curBat = dm.BatPfs[dm.personalData.SelectBatIdx];
+        var modelTf = homeDialog.Panel.transform.Find("BackGroundGroup").transform.Find("ModelTf");
         
         switch(name){
             case "Home" : 
-                //* Create Select Model 
-                // Chara
-                var charaIns = Instantiate(curChara, Vector3.zero, Quaternion.identity, parentTf) as GameObject;
-                // Bat
-                Transform rightArmTf = charaIns.transform.Find("Bone").transform.Find("Bone_R.001").transform.Find("Bone_R.002").transform.Find("RightArm");
-                Instantiate(curBat, curBat.transform.position, curBat.transform.rotation, rightArmTf);
-                
-
-
-                //* Home Model Delete
-                if(0 < parentTf.childCount){
-                    int i = 0;
-                    Array.ForEach(childs, child => {
-                        if(i != 0){ //* (BUG) [0]は親だから処理しない。
-                            Destroy(child.gameObject);
-                        }
-                        i++;
-                    });
-                }
-
-                //* UI
-                homeDialog.Panel.gameObject.SetActive(true);
-                homeDialog.GoBtn.gameObject.SetActive(false);
-                selectPanelDialog.Panel.gameObject.SetActive(false);
-                DataManager.ins.ScrollViewChara.gameObject.SetActive(false);
-                DataManager.ins.ScrollViewBat.gameObject.SetActive(false);
+                createCurModel(curChara, curBat, modelTf);
+                setGUI(name);
                 break;
 
             case "Chara" : 
-                SelectPanelScrollBG.color = selectPanelCharaColor;
-                DataManager.ins.ScrollViewChara.gameObject.SetActive(true);
-
-                //* UI
-                homeDialog.Panel.gameObject.SetActive(false);
-                homeDialog.GoBtn.gameObject.SetActive(true);
-                selectPanelDialog.Panel.gameObject.SetActive(true);
+                setGUI(name);
                 break;
-                
-            case "Bat" : 
-            SelectPanelScrollBG.color = selectPanelBatColor;
-                DataManager.ins.ScrollViewBat.gameObject.SetActive(true);
 
-                //* UI
+            case "Bat" : 
+                setGUI(name);
+                break;
+            case "Skill" : 
+                //TODO
+                break;
+
+            case "CashShop":
+                //TODO
+                break;
+        }
+    }
+    private void createCurModel(GameObject chara, GameObject bat, Transform modelTf){
+        var childs = modelTf.GetComponentsInChildren<Transform>();
+        // Chara
+        var charaIns = Instantiate(chara, Vector3.zero, Quaternion.identity, modelTf) as GameObject;
+        // Bat
+        Transform rightArmTf = charaIns.transform.Find("Bone").transform.Find("Bone_R.001").transform.Find("Bone_R.002").transform.Find("RightArm");
+        Instantiate(bat, bat.transform.position, bat.transform.rotation, rightArmTf);
+        
+        //* Home Model Delete
+        if(0 < modelTf.childCount){
+            for(int i=0;i<childs.Length;i++){
+                if(i != 0) //* (BUG) [0]は親だから処理しない。
+                    Destroy(childs[i].gameObject);
+            }
+        }
+    }
+    private void setGUI(string type){
+        //* Set Type Hash Index
+        DlgBGColor dlgBgClr = (type == "Chara")? DlgBGColor.Chara
+        : (type == "Bat")? DlgBGColor.Bat
+        : (type == "Bat")? DlgBGColor.Skill
+        : DlgBGColor.CashShop;
+
+        //* Active GUI
+        switch(type){
+            case "Home":
+                homeDialog.Panel.gameObject.SetActive(true);
+                homeDialog.GoBtn.gameObject.SetActive(false);
+                selectDialog.Panel.gameObject.SetActive(false);
+                Array.ForEach(dm.ScrollViews, sv => sv.gameObject.SetActive(false));
+                break;
+            default : 
                 homeDialog.Panel.gameObject.SetActive(false);
                 homeDialog.GoBtn.gameObject.SetActive(true);
-                selectPanelDialog.Panel.gameObject.SetActive(true);
+                selectDialog.Panel.gameObject.SetActive(true);
+                SelectPanelScrollBG.color = selectPanelColors[(int)dlgBgClr];
+                dm.ScrollViews[(int)dlgBgClr].gameObject.SetActive(true);
                 break;
         }
     }
 
+
+
+
+    //* ----------------------------------------------------------------
+    //*   UI Button
+    //* ----------------------------------------------------------------
     public void onClickStartGameBtn(){
         SceneManager.LoadScene("Play");
     }
