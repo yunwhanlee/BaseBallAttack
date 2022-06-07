@@ -72,7 +72,7 @@ public class HomeManager : MonoBehaviour
                 setGUI(name);
                 break;
             case "Skill" : 
-                //TODO
+                setGUI(name);
                 break;
 
             case "CashShop":
@@ -100,7 +100,7 @@ public class HomeManager : MonoBehaviour
         //* Set Type Hash Index
         DlgBGColor dlgBgClr = (type == "Chara")? DlgBGColor.Chara
         : (type == "Bat")? DlgBGColor.Bat
-        : (type == "Bat")? DlgBGColor.Skill
+        : (type == "Skill")? DlgBGColor.Skill
         : DlgBGColor.CashShop;
 
         //* Active GUI

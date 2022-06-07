@@ -50,6 +50,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         // }
     }
 
+    //* Update()
     public void OnScrollViewPos(RectTransform pos){ //* －が右側
         float width = Mathf.Abs(rectWidth);
         float offset = -(width + width/2);
