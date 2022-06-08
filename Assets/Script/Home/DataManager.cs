@@ -50,9 +50,11 @@ public class ScrollView {
                     break;
                 case "Skill" : 
                     ins.transform.localPosition = new Vector3(0,0,0); //* posZがずれるから、調整
+                    Button btn = ins.GetComponent<Button>();
+                    var svEvent = ScrollRect.GetComponent<ScrollViewEvent>();
+                    btn.onClick.AddListener(delegate{svEvent.onClickBtnSelectSkill(ins);});
                     break;
         }
-            
             Debug.Log("modelParentTf.pos=" + modelParentPref.position + ", modelParentTf.localPos=" + modelParentPref.localPosition);
             ins.name = obj.name;//名前上書き：しないと後ろに(clone)が残る。
         });
@@ -72,7 +74,6 @@ public class DataManager : MonoBehaviour
     public Material grayBlackNoBuyMt;
     [SerializeField] string selectType = "";    public string SelectType {get => selectType; set => selectType = value;}
 
-    
     [SerializeField] RectTransform modelParentPref;   public RectTransform ModelParentPref {get => modelParentPref; set => modelParentPref = value;}
     
     public ScrollView[] scrollviews; //* [0] : Chara, [1] : Bat, [2] : Skill, [3] : CashShop

@@ -209,4 +209,8 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             }
         }
     }
+
+    public void onClickBtnSelectSkill(GameObject ins){
+        Debug.Log("You have clicked the button! obj=" + ins);
+    }
 }
