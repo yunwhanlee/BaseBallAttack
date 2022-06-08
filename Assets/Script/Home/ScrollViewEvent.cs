@@ -57,7 +57,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         float width = Mathf.Abs(rectWidth);
         float offset = -(width + width/2);
         float curPosX = pos.anchoredPosition.x - offset;
-        var prefs = (dm.SelectType == "Chara")? dm.CharaPfs : dm.BatPfs;
+        var prefs = (dm.SelectType == "Chara")? dm.scrollviews[0].Prefs : dm.scrollviews[1].Prefs;
         float max = width * prefs.Length - width;
         CurIdx = Mathf.Abs(Mathf.FloorToInt((curPosX) / width));
         CurIdxBasePos = -((CurIdx+1) * width);
@@ -121,7 +121,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
 
     private ItemInfo getCurItem(){
-        var contentTf = (dm.SelectType == "Chara")? dm.ContentCharaTf : dm.ContentBatTf;
+        var contentTf = (dm.SelectType == "Chara")? dm.scrollviews[0].ContentTf : dm.scrollviews[1].ContentTf;
         var items = contentTf.GetComponentsInChildren<ItemInfo>();
         // foreach(var item in items){Debug.Log("getCurItem:: Item=" + item);}
         var curItem = items[CurIdx];
@@ -146,7 +146,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         string type = dm.SelectType;
 
         RectTransform contentTf = (type == "Chara")? 
-            dm.ContentCharaTf : dm.ContentBatTf;
+            dm.scrollviews[0].ContentTf : dm.scrollviews[1].ContentTf;
 
         //* (BUG) CharaのRightArmにあるBatにも<ItemInfo>有ったので、重複される。CharaPrefのBatを全て非活性化してOK。
         var items = contentTf.GetComponentsInChildren<ItemInfo>();

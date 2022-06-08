@@ -77,12 +77,12 @@ public class PersonalData {
         this.CharaLockList = new List<bool>();
         this.BatLockList = new List<bool>();
 
-        for(int i=0; i<DataManager.ins.CharaPfs.Length; i++){
+        for(int i=0; i<DataManager.ins.scrollviews[0].Prefs.Length; i++){
             if(i==0) this.CharaLockList.Add(false);//    items[0].IsLock = false;}
             else     this.CharaLockList.Add(true);//     items[i].IsLock = true;}
         }
 
-        for(int i=0; i<DataManager.ins.BatPfs.Length; i++){
+        for(int i=0; i<DataManager.ins.scrollviews[1].Prefs.Length; i++){
             if(i==0) this.BatLockList.Add(false);//    items[0].IsLock = false;}
             else     this.BatLockList.Add(true);//     items[i].IsLock = true;}
         }

@@ -30,7 +30,8 @@ public class ScrollView {
                 case "Skill" :
                     ins = GameObject.Instantiate(obj, Vector3.zero, Quaternion.identity, contentTf);
                     break;
-                default : 
+                case "Chara" : 
+                case "Bat" :
                     parentTf = GameObject.Instantiate(modelParentPref, modelParentPref.localPosition, modelParentPref.localRotation, contentTf).transform;
                     ins = GameObject.Instantiate(obj, Vector3.zero, Quaternion.identity, parentTf);
                     break;
@@ -71,23 +72,10 @@ public class DataManager : MonoBehaviour
     public Material grayBlackNoBuyMt;
     [SerializeField] string selectType = "";    public string SelectType {get => selectType; set => selectType = value;}
 
-    //* [0] : Chara, [1] : Bat, [2] : Skill, [3] : CashShop
-    [SerializeField] RectTransform[] scrollViews; public RectTransform[] ScrollViews {get => scrollViews; set => scrollViews = value;}
-    [SerializeField] RectTransform contentCharaTf; public RectTransform ContentCharaTf {get => contentCharaTf; set => contentCharaTf = value;}
-    [SerializeField] RectTransform contentBatTf; public RectTransform ContentBatTf {get => contentBatTf; set => contentBatTf = value;}
-    [SerializeField] RectTransform contentSkillTf; public RectTransform ContentSkillTf {get => contentSkillTf; set => contentSkillTf = value;}
     
     [SerializeField] RectTransform modelParentPref;   public RectTransform ModelParentPref {get => modelParentPref; set => modelParentPref = value;}
-    [SerializeField] GameObject[] charaPfs;         public GameObject[] CharaPfs {get => charaPfs; set => charaPfs = value;}
-    [SerializeField] GameObject[] batPfs;         public GameObject[] BatPfs {get => batPfs; set => batPfs = value;}
-    [SerializeField] GameObject[] skillPfs;         public GameObject[] SkillPfs {get => skillPfs; set => skillPfs = value;}
-
-    //* Personal Data Class (Save・Load)
-    // [SerializeField] int selectCharaIdx = 0;    public int SelectCharaIdx {get => selectCharaIdx; set => selectCharaIdx = value;}
     
-    // [SerializeField] List<bool> charaLockList;
-
-    public ScrollView[] scrollviews; 
+    public ScrollView[] scrollviews; //* [0] : Chara, [1] : Bat, [2] : Skill, [3] : CashShop
     public PersonalData personalData;
     
 
