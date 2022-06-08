@@ -22,10 +22,12 @@ public class DataManager : MonoBehaviour
     [SerializeField] RectTransform[] scrollViews; public RectTransform[] ScrollViews {get => scrollViews; set => scrollViews = value;}
     [SerializeField] RectTransform contentCharaTf; public RectTransform ContentCharaTf {get => contentCharaTf; set => contentCharaTf = value;}
     [SerializeField] RectTransform contentBatTf; public RectTransform ContentBatTf {get => contentBatTf; set => contentBatTf = value;}
+    [SerializeField] RectTransform contentSkillTf; public RectTransform ContentSkillTf {get => contentSkillTf; set => contentSkillTf = value;}
     
     [SerializeField] RectTransform modelParentPref;   public RectTransform ModelParentPref {get => modelParentPref; set => modelParentPref = value;}
     [SerializeField] GameObject[] charaPfs;         public GameObject[] CharaPfs {get => charaPfs; set => charaPfs = value;}
     [SerializeField] GameObject[] batPfs;         public GameObject[] BatPfs {get => batPfs; set => batPfs = value;}
+    [SerializeField] GameObject[] skillPfs;         public GameObject[] SkillPfs {get => skillPfs; set => skillPfs = value;}
 
     //* Personal Data Class (Save・Load)
     // [SerializeField] int selectCharaIdx = 0;    public int SelectCharaIdx {get => selectCharaIdx; set => selectCharaIdx = value;}
@@ -39,6 +41,7 @@ public class DataManager : MonoBehaviour
         //* contents Prefab 生成
         createObject("Chara");
         createObject("Bat");
+        createObject("Skill");
         //* Items of Content
         ItemInfo[] charas = ContentCharaTf.GetComponentsInChildren<ItemInfo>();
         ItemInfo[] bats = ContentBatTf.GetComponentsInChildren<ItemInfo>();
@@ -74,22 +77,41 @@ public class DataManager : MonoBehaviour
                 prefs = BatPfs;
                 contentTf = ContentBatTf;
                 break;
+            case "Skill" :
+                prefs = SkillPfs;
+                contentTf = ContentSkillTf;
+                break;
+            
         }
         if(prefs == null) return; //* 終了
 
         //* Prefabs 生成
         Array.ForEach(prefs, obj=>{
-            Transform parentTf = Instantiate(modelParentPref, modelParentPref.localPosition, modelParentPref.localRotation, contentTf).transform;
-            GameObject ins = Instantiate(obj, Vector3.zero, Quaternion.identity, parentTf);
+            Transform parentTf = null;
+            GameObject ins = null;
+            switch(type){
+                case "Skill" :
+                    ins = Instantiate(obj, Vector3.zero, Quaternion.identity, contentTf);
+                    break;
+                default : 
+                    parentTf = Instantiate(modelParentPref, modelParentPref.localPosition, modelParentPref.localRotation, contentTf).transform;
+                    ins = Instantiate(obj, Vector3.zero, Quaternion.identity, parentTf);
+                    break;
+            }
+
+            if(!ins) return;
 
             switch(type){
-            case "Chara" : 
-                break;
-            case "Bat" :
-                parentTf.GetComponent<RectTransform>().localPosition = new Vector3(0,200,800); //* xとyは自動調整される。
-                ins.transform.localPosition = new Vector3(ins.transform.localPosition.x, 0.75f, ins.transform.localPosition.z);
-                ins.transform.localRotation = Quaternion.Euler(ins.transform.localRotation.x, ins.transform.localRotation.y, -45);
-                break;
+                case "Chara" : 
+                    break;
+                case "Bat" :
+                    parentTf.GetComponent<RectTransform>().localPosition = new Vector3(0,200,800); //* xとyは自動調整される。
+                    ins.transform.localPosition = new Vector3(ins.transform.localPosition.x, 0.75f, ins.transform.localPosition.z);
+                    ins.transform.localRotation = Quaternion.Euler(ins.transform.localRotation.x, ins.transform.localRotation.y, -45);
+                    break;
+                case "Skill" : 
+                    ins.transform.localPosition = new Vector3(0,0,0); //* posZがずれるから、調整
+                    break;
         }
             
 
