@@ -211,6 +211,18 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
 
     public void onClickBtnSelectSkill(GameObject ins){
-        Debug.Log("You have clicked the button! obj=" + ins);
+        Debug.Log("You have clicked the button! ins.name=" + ins.name);
+        var btns = dm.scrollviews[2].ContentTf.GetComponentsInChildren<Button>();
+        Array.ForEach(btns, btn=>{
+            ColorBlock cb = btn.colors;
+            cb.normalColor = new Color(1,1,1,0.58f);
+            //* Select
+            if(ins.name == btn.name)
+                cb.normalColor = Color.blue;
+            
+            btn.colors = cb;
+        });
+        
+        
     }
 }

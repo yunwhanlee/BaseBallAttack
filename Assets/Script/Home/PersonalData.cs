@@ -14,6 +14,9 @@ public class PersonalData {
     [Header("--Bat--")]
     [SerializeField] int selectBatIdx;  public int SelectBatIdx {get => selectBatIdx; set => selectBatIdx = value;}
     [SerializeField] List<bool> batLockList;  public List<bool> BatLockList {get => batLockList; set => batLockList = value;}
+    [Header("--Skill--")]
+    [SerializeField] int selectSkillIdx;  public int SelectSkillIdx {get => selectSkillIdx; set => selectSkillIdx = value;}
+    [SerializeField] List<bool> skillLockList;  public List<bool> SkillLockList {get => skillLockList; set => skillLockList = value;}
     
     //* PlayerPrefs キー リスト => privateは jsonには追加しない。
     private List<string> keyList;  public List<string> KeyList {get => keyList; set => keyList = value;}
@@ -41,10 +44,14 @@ public class PersonalData {
         //* Set Data
         this.Coin = data.Coin;
         this.Diamond = data.Diamond;
+
         this.SelectCharaIdx = data.SelectCharaIdx;
         this.CharaLockList = data.CharaLockList;
+
         this.SelectBatIdx = data.SelectBatIdx;
         this.BatLockList = data.BatLockList;
+
+        //TODO SKill        
 
         //* Set Real Content Items IsLock
         for(int i=0; i<charas.Length; i++){
@@ -76,6 +83,7 @@ public class PersonalData {
         this.SelectBatIdx = 0;
         this.CharaLockList = new List<bool>();
         this.BatLockList = new List<bool>();
+        //TODO SKill
 
         for(int i=0; i<DataManager.ins.scrollviews[0].Prefs.Length; i++){
             if(i==0) this.CharaLockList.Add(false);//    items[0].IsLock = false;}
