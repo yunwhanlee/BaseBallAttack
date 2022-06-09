@@ -61,9 +61,9 @@ public class ScrollView {
     }
 }
 
-public class DataManager : MonoBehaviour
+public class DM : MonoBehaviour
 {
-    public static DataManager ins;
+    public static DM ins;
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
 
     [Header("--Personal Data--")]
@@ -78,6 +78,7 @@ public class DataManager : MonoBehaviour
     
     public ScrollView[] scrollviews; //* [0] : Chara, [1] : Bat, [2] : Skill, [3] : CashShop
     public PersonalData personalData;
+    public bool isUIUpdate;
     
 
     void Awake() => singleton();
@@ -93,7 +94,7 @@ public class DataManager : MonoBehaviour
         ItemInfo[] skills = scrollviews[2].ContentTf.GetComponentsInChildren<ItemInfo>();
         
         personalData = new PersonalData();
-        personalData.load(ref charas, ref bats); //TODO Add skills
+        personalData.load(ref charas, ref bats, ref skills); //TODO Add skills
         
     }
 

@@ -29,10 +29,11 @@ public class PersonalData {
         KeyList = new List<string>();
         charaLockList = new List<bool>();
         batLockList = new List<bool>();
+        skillLockList = new List<bool>();
     }
 
     //* method
-    public void load(ref ItemInfo[] charas, ref ItemInfo[] bats){
+    public void load(ref ItemInfo[] charas, ref ItemInfo[] bats, ref ItemInfo[] skills){
         Debug.Log("LOAD");
         //* Check Json
         string json = PlayerPrefs.GetString("Json");
@@ -51,16 +52,21 @@ public class PersonalData {
         this.SelectBatIdx = data.SelectBatIdx;
         this.BatLockList = data.BatLockList;
 
-        //TODO SKill        
+        this.SelectSkillIdx = data.SelectSkillIdx;
+        this.SkillLockList = data.SkillLockList;
 
         //* Set Real Content Items IsLock
         for(int i=0; i<charas.Length; i++){
-            Debug.Log("CharaLockList["+i+"].IsLock=" + this.CharaLockList[i] + "length= " + charas.Length);
+            Debug.Log("CharaLockList["+i+"].IsLock=" + this.CharaLockList[i] + ", length= " + charas.Length);
             charas[i].GetComponent<ItemInfo>().IsLock = this.CharaLockList[i];
         }
         for(int i=0; i<bats.Length; i++){
-            Debug.Log("BatLockList["+i+"].IsLock=" + this.BatLockList[i] + "length= " + bats.Length);
+            Debug.Log("BatLockList["+i+"].IsLock=" + this.BatLockList[i] + ", length= " + bats.Length);
             bats[i].GetComponent<ItemInfo>().IsLock = this.BatLockList[i];
+        }
+        for(int i=0; i<skills.Length; i++){
+            Debug.Log("SkillLockList["+i+"].IsLock=" + this.SkillLockList[i] + ", length= " + skills.Length);
+            skills[i].GetComponent<ItemInfo>().IsLock = this.SkillLockList[i];
         }
     }
     
@@ -79,20 +85,28 @@ public class PersonalData {
 
         this.Coin = 0;
         this.Diamond = 0;
-        this.SelectCharaIdx = 0;
-        this.SelectBatIdx = 0;
-        this.CharaLockList = new List<bool>();
-        this.BatLockList = new List<bool>();
-        //TODO SKill
 
-        for(int i=0; i<DataManager.ins.scrollviews[0].Prefs.Length; i++){
+        this.SelectCharaIdx = 0;
+        this.CharaLockList = new List<bool>();
+
+        this.SelectBatIdx = 0;
+        this.BatLockList = new List<bool>();
+
+        this.SelectSkillIdx = 0;
+        this.SkillLockList = new List<bool>();
+
+        for(int i=0; i<DM.ins.scrollviews[0].Prefs.Length; i++){
             if(i==0) this.CharaLockList.Add(false);//    items[0].IsLock = false;}
             else     this.CharaLockList.Add(true);//     items[i].IsLock = true;}
         }
 
-        for(int i=0; i<DataManager.ins.scrollviews[1].Prefs.Length; i++){
+        for(int i=0; i<DM.ins.scrollviews[1].Prefs.Length; i++){
             if(i==0) this.BatLockList.Add(false);//    items[0].IsLock = false;}
             else     this.BatLockList.Add(true);//     items[i].IsLock = true;}
+        }
+
+        for(int i=0; i<DM.ins.scrollviews[2].Prefs.Length; i++){
+            this.SkillLockList.Add(true);
         }
     }
 }

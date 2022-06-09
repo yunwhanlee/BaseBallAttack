@@ -22,7 +22,6 @@ using System;
 public class HomeManager : MonoBehaviour
 {
     //* OutSide
-    DataManager dm;
 
     [Header("<--Select Panel Color-->")]
     [SerializeField] Image selectPanelScrollBG;  public Image SelectPanelScrollBG {get => selectPanelScrollBG; set => selectPanelScrollBG = value;}
@@ -44,7 +43,6 @@ public class HomeManager : MonoBehaviour
 
     void Start()
     {
-        dm = DataManager.ins;
         onClickBtnGoToDialog("Home");
     }
 
@@ -52,10 +50,11 @@ public class HomeManager : MonoBehaviour
     //*   UI Button
     //* ----------------------------------------------------------------
     public void onClickBtnGoToDialog(string name){
+        DM.ins.isUIUpdate = true;
         //* Current Model Data & ParentTf
-        dm.SelectType = name;
-        var curChara = dm.scrollviews[0].Prefs[dm.personalData.SelectCharaIdx];
-        var curBat = dm.scrollviews[1].Prefs[dm.personalData.SelectBatIdx];
+        DM.ins.SelectType = name;
+        var curChara = DM.ins.scrollviews[0].Prefs[DM.ins.personalData.SelectCharaIdx];
+        var curBat = DM.ins.scrollviews[1].Prefs[DM.ins.personalData.SelectBatIdx];
         // var modelTf = homeDialog.Panel.transform.Find("BackGroundGroup").transform.Find("ModelTf");
         
         switch(name){
@@ -63,11 +62,9 @@ public class HomeManager : MonoBehaviour
                 createCurModel(curChara, curBat, modelTf);
                 setGUI(name);
                 break;
-
             case "Chara" : 
                 setGUI(name);
                 break;
-
             case "Bat" : 
                 setGUI(name);
                 break;
@@ -109,14 +106,14 @@ public class HomeManager : MonoBehaviour
                 homeDialog.Panel.gameObject.SetActive(true);
                 homeDialog.GoBtn.gameObject.SetActive(false);
                 selectDialog.Panel.gameObject.SetActive(false);
-                Array.ForEach(dm.scrollviews, sv => sv.ScrollRect.gameObject.SetActive(false));
+                Array.ForEach(DM.ins.scrollviews, sv => sv.ScrollRect.gameObject.SetActive(false));
                 break;
             default : 
                 homeDialog.Panel.gameObject.SetActive(false);
                 homeDialog.GoBtn.gameObject.SetActive(true);
                 selectDialog.Panel.gameObject.SetActive(true);
                 SelectPanelScrollBG.color = selectPanelColors[(int)dlgBgClr];
-                dm.scrollviews[(int)dlgBgClr].ScrollRect.gameObject.SetActive(true);
+                DM.ins.scrollviews[(int)dlgBgClr].ScrollRect.gameObject.SetActive(true);
                 break;
         }
     }
@@ -128,13 +125,13 @@ public class HomeManager : MonoBehaviour
         //* Model Copy
         var playerModel = modelTf.GetChild(0);
         playerModel.GetComponent<Animator>().SetBool("IsIdle", false); //Ready Pose
-        Instantiate(playerModel, Vector3.zero, Quaternion.identity, DataManager.ins.transform);
+        Instantiate(playerModel, Vector3.zero, Quaternion.identity, DM.ins.transform);
 
         SceneManager.LoadScene("Play");
     }
 
     public void onClickResetBtn(){
-        DataManager.ins.personalData.reset();
+        DM.ins.personalData.reset();
 
         #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;

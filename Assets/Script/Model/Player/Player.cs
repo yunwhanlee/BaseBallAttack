@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
 
     public void Start(){
         //* Model Load
-        var playerModel = DataManager.ins.transform.GetChild(0);
+        var playerModel = DM.ins.transform.GetChild(0);
         playerModel.SetParent(this.gameObject.transform);
 
         var atvSkillDb = gm.activeSkillDataBase;
