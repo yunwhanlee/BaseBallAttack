@@ -63,7 +63,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         float width = Mathf.Abs(rectWidth);
         float offset = -(width + width/2);
         float curPosX = pos.anchoredPosition.x - offset;
-        var prefs = (DM.ins.SelectType == "Chara")? DM.ins.scrollviews[0].Prefs : DM.ins.scrollviews[1].Prefs;
+        var prefs = (DM.ins.SelectType == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].Prefs : DM.ins.scrollviews[(int)DM.ITEM.Bat].Prefs;
         float max = width * prefs.Length - width;
         CurIdx = Mathf.Abs(Mathf.FloorToInt((curPosX) / width));
         CurIdxBasePos = -((CurIdx+1) * width);
@@ -85,7 +85,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     public void updateItemInfo(){
         string type = DM.ins.SelectType;
-        var contentTf = (type == "Chara")? DM.ins.scrollviews[0].ContentTf : DM.ins.scrollviews[1].ContentTf;
+        var contentTf = (type == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf : DM.ins.scrollviews[(int)DM.ITEM.Bat].ContentTf;
         //* Set PosX
         contentTf.anchoredPosition = new Vector2(CurIdxBasePos, -500);
         
@@ -127,7 +127,10 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
 
     private ItemInfo getCurItem(){
-        var contentTf = (DM.ins.SelectType == "Chara")? DM.ins.scrollviews[0].ContentTf : DM.ins.scrollviews[1].ContentTf;
+        var contentTf = (DM.ins.SelectType == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf
+            : (DM.ins.SelectType == "Bat")? DM.ins.scrollviews[(int)DM.ITEM.Bat].ContentTf
+            : (DM.ins.SelectType == "Skill")? DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf
+            : null;
         var items = contentTf.GetComponentsInChildren<ItemInfo>();
         // foreach(var item in items){Debug.Log("getCurItem:: Item=" + item);}
         var curItem = items[CurIdx];
@@ -151,8 +154,9 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public void setCheckUIAndItemOutLine(){
         string type = DM.ins.SelectType;
 
-        RectTransform contentTf = (type == "Chara")? 
-            DM.ins.scrollviews[0].ContentTf : DM.ins.scrollviews[1].ContentTf;
+        RectTransform contentTf = (type == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf
+            : (type == "Bat")? DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf
+            : (type == "Skill")? DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf : null;
 
         //* (BUG) CharaのRightArmにあるBatにも<ItemInfo>有ったので、重複される。CharaPrefのBatを全て非活性化してOK。
         var items = contentTf.GetComponentsInChildren<ItemInfo>();
@@ -217,18 +221,20 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
 
     public void onClickBtnSelectSkill(GameObject ins){
-        Debug.Log("You have clicked the button! ins.name=" + ins.name);
-        var btns = DM.ins.scrollviews[2].ContentTf.GetComponentsInChildren<Button>();
+        //* Color
+        var btns = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf.GetComponentsInChildren<Button>();
         Array.ForEach(btns, btn=>{
             ColorBlock cb = btn.colors;
-            cb.normalColor = new Color(1,1,1,0.58f);
+            cb.normalColor = new Color(1,1,1,0.5f);
             //* Select
             if(ins.name == btn.name)
                 cb.normalColor = Color.blue;
-            
+
             btn.colors = cb;
         });
         
-        
+        //* Current Index
+        CurIdx = Array.FindIndex(btns, btn => btn.name == ins.name);
+        Debug.Log("SelectSkill():: CurIdx= " + CurIdx + ", ins.name= " + ins.name);
     }
 }

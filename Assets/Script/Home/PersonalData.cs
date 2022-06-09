@@ -95,17 +95,17 @@ public class PersonalData {
         this.SelectSkillIdx = 0;
         this.SkillLockList = new List<bool>();
 
-        for(int i=0; i<DM.ins.scrollviews[0].Prefs.Length; i++){
+        for(int i=0; i<DM.ins.scrollviews[(int)DM.ITEM.Chara].Prefs.Length; i++){
             if(i==0) this.CharaLockList.Add(false);//    items[0].IsLock = false;}
             else     this.CharaLockList.Add(true);//     items[i].IsLock = true;}
         }
 
-        for(int i=0; i<DM.ins.scrollviews[1].Prefs.Length; i++){
+        for(int i=0; i<DM.ins.scrollviews[(int)DM.ITEM.Bat].Prefs.Length; i++){
             if(i==0) this.BatLockList.Add(false);//    items[0].IsLock = false;}
             else     this.BatLockList.Add(true);//     items[i].IsLock = true;}
         }
 
-        for(int i=0; i<DM.ins.scrollviews[2].Prefs.Length; i++){
+        for(int i=0; i<DM.ins.scrollviews[(int)DM.ITEM.Skill].Prefs.Length; i++){
             this.SkillLockList.Add(true);
         }
     }

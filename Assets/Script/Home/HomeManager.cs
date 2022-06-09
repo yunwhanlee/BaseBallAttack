@@ -53,8 +53,8 @@ public class HomeManager : MonoBehaviour
         DM.ins.isUIUpdate = true;
         //* Current Model Data & ParentTf
         DM.ins.SelectType = name;
-        var curChara = DM.ins.scrollviews[0].Prefs[DM.ins.personalData.SelectCharaIdx];
-        var curBat = DM.ins.scrollviews[1].Prefs[DM.ins.personalData.SelectBatIdx];
+        var curChara = DM.ins.scrollviews[(int)DM.ITEM.Chara].Prefs[DM.ins.personalData.SelectCharaIdx];
+        var curBat = DM.ins.scrollviews[(int)DM.ITEM.Bat].Prefs[DM.ins.personalData.SelectBatIdx];
         // var modelTf = homeDialog.Panel.transform.Find("BackGroundGroup").transform.Find("ModelTf");
         
         switch(name){

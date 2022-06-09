@@ -65,6 +65,7 @@ public class DM : MonoBehaviour
 {
     public static DM ins;
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
+    public enum ITEM {Chara, Bat, Skill};
 
     [Header("--Personal Data--")]
     [SerializeField] Text coinTxt; public Text CoinTxt {get => coinTxt; set => coinTxt = value;}
@@ -84,14 +85,14 @@ public class DM : MonoBehaviour
     void Awake() => singleton();
     void Start(){
         //* contents Prefab 生成
-        scrollviews[0].createObject(modelParentPref);
-        scrollviews[1].createObject(modelParentPref);
-        scrollviews[2].createObject(modelParentPref);
+        scrollviews[(int)DM.ITEM.Chara].createObject(modelParentPref);
+        scrollviews[(int)DM.ITEM.Bat].createObject(modelParentPref);
+        scrollviews[(int)DM.ITEM.Skill].createObject(modelParentPref);
 
         //* Items of Content
-        ItemInfo[] charas = scrollviews[0].ContentTf.GetComponentsInChildren<ItemInfo>();
-        ItemInfo[] bats = scrollviews[1].ContentTf.GetComponentsInChildren<ItemInfo>();
-        ItemInfo[] skills = scrollviews[2].ContentTf.GetComponentsInChildren<ItemInfo>();
+        ItemInfo[] charas = scrollviews[(int)DM.ITEM.Chara].ContentTf.GetComponentsInChildren<ItemInfo>();
+        ItemInfo[] bats = scrollviews[(int)DM.ITEM.Bat].ContentTf.GetComponentsInChildren<ItemInfo>();
+        ItemInfo[] skills = scrollviews[(int)DM.ITEM.Skill].ContentTf.GetComponentsInChildren<ItemInfo>();
         
         personalData = new PersonalData();
         personalData.load(ref charas, ref bats, ref skills); //TODO Add skills
@@ -108,9 +109,9 @@ public class DM : MonoBehaviour
         //* (BUG) SceneがHomeのみセーブできる。
         if(SceneManager.GetActiveScene().name == "Home"){
                     //* Items of Content
-            ItemInfo[] charas = scrollviews[0].ContentTf.GetComponentsInChildren<ItemInfo>();
-            ItemInfo[] bats = scrollviews[1].ContentTf.GetComponentsInChildren<ItemInfo>();
-            ItemInfo[] skills = scrollviews[2].ContentTf.GetComponentsInChildren<ItemInfo>();
+            ItemInfo[] charas = scrollviews[(int)DM.ITEM.Chara].ContentTf.GetComponentsInChildren<ItemInfo>();
+            ItemInfo[] bats = scrollviews[(int)DM.ITEM.Bat].ContentTf.GetComponentsInChildren<ItemInfo>();
+            ItemInfo[] skills = scrollviews[(int)DM.ITEM.Skill].ContentTf.GetComponentsInChildren<ItemInfo>();
 
             personalData.save(ref charas); //TODO Add bats, skills
         }

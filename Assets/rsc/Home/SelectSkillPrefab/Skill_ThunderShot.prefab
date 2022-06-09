@@ -200,9 +200,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5168663472484879911}
   - component: {fileID: 5168663472484879909}
+  - component: {fileID: 4250172640457067011}
   - component: {fileID: 5168663472484879910}
   - component: {fileID: 5168663472484879908}
-  - component: {fileID: 8163106024487738095}
   m_Layer: 5
   m_Name: Skill_ThunderShot
   m_TagString: Untagged
@@ -240,6 +240,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5168663472484879904}
   m_CullTransparentMesh: 1
+--- !u!114 &4250172640457067011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5168663472484879904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLock: 1
+  meshRdrList: []
+  rank: 0
+  price: 0
+  psvSkillAbility: 0
 --- !u!114 &5168663472484879910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,7 +331,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: dd7085416d7ef374a8916d5e7fd4d181, type: 3}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ScrollViewEvent, Assembly-CSharp
         m_MethodName: 
         m_Mode: 1
@@ -326,23 +343,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8163106024487738095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5168663472484879904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isLock: 1
-  meshRdrList: []
-  rank: 0
-  price: 0
-  psvSkillAbility: 0
 --- !u!1 &5168663473030286794
 GameObject:
   m_ObjectHideFlags: 0
