@@ -22,9 +22,10 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     float scrollBefFramePosX;
 
     [Header("<--UI-->")]
-    public SpriteRenderer boxSprRdr;
-    public Text rankTxt;
-    public Text nameTxt;
+    public RectTransform uiGroup;   public RectTransform UIGroup {get => uiGroup;}
+    public SpriteRenderer boxSprRdr;    public SpriteRenderer BoxSprRdr {get => boxSprRdr; set => boxSprRdr = value;}
+    public Text rankTxt;    public Text RankTxt {get => rankTxt; set => rankTxt = value;}
+    public Text nameTxt;    public Text NameTxt {get => nameTxt; set => nameTxt = value;}
 
     [Header("--Select Btn Child--")]
     public Image checkMarkImg;
@@ -33,6 +34,12 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     void Start(){
         scrollRect = GetComponent<ScrollRect>();
         rectWidth = DM.ins.ModelParentPref.rect.width;
+
+        if(this.gameObject.name != "ScrollView_Skill"){
+            BoxSprRdr = UIGroup.GetChild(0).GetComponent<SpriteRenderer>();
+            RankTxt = UIGroup.GetChild(1).GetComponent<Text>();
+            NameTxt = UIGroup.GetChild(2).GetComponent<Text>();
+        }
     }
 
     //* Drag Event
@@ -85,7 +92,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         Debug.Log("<color>CurItem= " + curItem.name + "</color>");
 
         //* Show Rank Text
-        rankTxt.text = curItem.Rank.ToString();
+        RankTxt.text = curItem.Rank.ToString();
 
         //* Is Buy(UnLock)? Set Price or CheckMark
         if(curItem.IsLock){
@@ -97,11 +104,11 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         
         //* Set Name
         string name = curItem.name.Split('_')[1];
-        nameTxt.text = name;
+        NameTxt.text = name;
 
-        //* Set Rank UI Color
+        //* Set Rank UI Box Color
         Color color = Color.white;
-        var boxGlowEf = boxSprRdr.GetComponent<SpriteGlowEffect>();
+        var boxGlowEf = BoxSprRdr.GetComponent<SpriteGlowEffect>();
         float brightness = 0;
         int outline = 2;
         switch(curItem.Rank){
@@ -112,7 +119,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             case DM.RANK.GOD : color = Color.yellow; brightness=10; outline=5; break;
         }
         rankTxt.color = color;
-        boxSprRdr.color = color;
+        BoxSprRdr.color = color;
         boxGlowEf.GlowColor = color;
         boxGlowEf.GlowBrightness = brightness;
         boxGlowEf.OutlineWidth = outline;
