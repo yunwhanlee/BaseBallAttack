@@ -278,6 +278,7 @@ GameObject:
   - component: {fileID: 2652509117237417104}
   - component: {fileID: 5168663472484879910}
   - component: {fileID: 5168663472484879908}
+  - component: {fileID: 1866156417910932802}
   m_Layer: 5
   m_Name: Skill_ColorBall
   m_TagString: Untagged
@@ -332,6 +333,8 @@ MonoBehaviour:
   meshRdrList: []
   grayPanel: {fileID: 0}
   rank: 3
+  outline3D: {fileID: 0}
+  outline2D: {fileID: 0}
   price: 0
   psvSkillAbility: 0
 --- !u!114 &5168663472484879910
@@ -385,10 +388,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 0.5882353}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 0.8156863}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_SelectedColor: {r: 0, g: 0.10449934, b: 1, a: 1}
+    m_SelectedColor: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -420,6 +423,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1866156417910932802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5168663472484879904}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db125c7de00668f4e98849d0aaf366d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.22078538, g: 1, b: 0, a: 1}
+  m_EffectDistance: {x: 10, y: -10}
+  m_UseGraphicAlpha: 1
 --- !u!1 &5168663473030286794
 GameObject:
   m_ObjectHideFlags: 0

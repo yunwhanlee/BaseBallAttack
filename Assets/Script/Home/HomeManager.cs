@@ -95,9 +95,9 @@ public class HomeManager : MonoBehaviour
     private void setGUI(string type){
         //* Set Type Hash Index
         DlgBGColor dlgBgClr = (type == "Chara")? DlgBGColor.Chara
-        : (type == "Bat")? DlgBGColor.Bat
-        : (type == "Skill")? DlgBGColor.Skill
-        : DlgBGColor.CashShop;
+            : (type == "Bat")? DlgBGColor.Bat
+            : (type == "Skill")? DlgBGColor.Skill
+            : DlgBGColor.CashShop;
 
         //* Active GUI
         switch(type){

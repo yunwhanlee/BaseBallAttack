@@ -95,10 +95,8 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         RankTxt.text = curItem.Rank.ToString();
 
         //* Is Buy(UnLock)? Set Price or CheckMark
-        if(curItem.IsLock){
-            setButtonUI();
-        }else{
-            setButtonUI();
+        setChoiceBtnUI();
+        if(!curItem.IsLock){
             setCheckUIAndItemOutLine();
         }
         
@@ -136,15 +134,14 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         return curItem;
     }
 
-    public void setButtonUI(){
+    public void setChoiceBtnUI(){
         var curItem = getCurItem();
-
         //処理
-        if(curItem.IsLock){
+        if(curItem.IsLock){//* 💲表示
             checkMarkImg.gameObject.SetActive(false);
             priceTxt.gameObject.SetActive(true);
             priceTxt.text = curItem.Price.ToString();
-        }else{
+        }else{//* ✅表示
             checkMarkImg.gameObject.SetActive(true);
             priceTxt.gameObject.SetActive(false);
         }
@@ -180,17 +177,18 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //* ----------------------------------------------------------------
     //*   UI Button
     //* ----------------------------------------------------------------
-    public void onClickBtnSelectItem(string type){
+    public void onClickCheckBtn(string type){
         if(DM.ins.SelectType != type) return;
         Debug.Log("onClickBtnSelectItem:: type= " + type + ", CurIdx= " + CurIdx);
         var curItem = getCurItem();
         //* (BUG) 買わないのにロードしたらChara選択されるバグ防止。
-        int befIdx = (type == "Chara")? DM.ins.personalData.SelectCharaIdx : DM.ins.personalData.SelectBatIdx; 
+        int befIdx = (type == "Chara")? DM.ins.personalData.SelectCharaIdx
+            :(type == "Bat")? DM.ins.personalData.SelectBatIdx
+            :(type == "Skill")? DM.ins.personalData.SelectSkillIdx : -1;
         
-        if(type == "Chara")
-            DM.ins.personalData.SelectCharaIdx = CurIdx;
-        else 
-            DM.ins.personalData.SelectBatIdx = CurIdx;
+        if(type == "Chara") DM.ins.personalData.SelectCharaIdx = CurIdx;
+        else if(type == "Bat") DM.ins.personalData.SelectBatIdx = CurIdx;
+        else if(type == "Skill") DM.ins.personalData.SelectSkillIdx = CurIdx;
 
         //* Is Lock?
         // Debug.Log("onClickBtnSelectCharactor:: isLock= " + curChara.IsLock +  ", coin= " + DataManager.ins.personalData.Coin + ", curChara.Price= " + curChara.Price);
@@ -199,22 +197,20 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 //* Buy
                 em.createItemBuyEF();
                 curItem.IsLock = false;
-                if(type == "Chara")
-                    DM.ins.personalData.CharaLockList[CurIdx] = false;
-                else
-                    DM.ins.personalData.BatLockList[CurIdx] = false;
+                if(type == "Chara") DM.ins.personalData.CharaLockList[CurIdx] = false;
+                else if(type == "Bat") DM.ins.personalData.BatLockList[CurIdx] = false;
+                else if(type == "Skill") DM.ins.personalData.SkillLockList[CurIdx] = false;
                 
-                curItem.setMeterialIsLock();//curChara.MeshRdrList.ForEach(meshRdr=> meshRdr.materials = new Material[] {meshRdr.material});
+                curItem.setGrayMtIsLock();
                 DM.ins.personalData.Coin -= curItem.Price;
 
-                setButtonUI();
+                setChoiceBtnUI();
             }
             else{
                 //TODO No Coin
-                if(type == "Chara")
-                    DM.ins.personalData.SelectCharaIdx = befIdx;
-                else 
-                    DM.ins.personalData.SelectBatIdx = befIdx;
+                if(type == "Chara") DM.ins.personalData.SelectCharaIdx = befIdx;
+                else if(type == "Bat") DM.ins.personalData.SelectBatIdx = befIdx;
+                else if(type == "Skill") DM.ins.personalData.SelectBatIdx = befIdx;
             }
         }
     }
@@ -222,18 +218,34 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public void onClickBtnSelectSkill(GameObject ins){
         //* Color
         var btns = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf.GetComponentsInChildren<Button>();
-        Array.ForEach(btns, btn=>{
-            ColorBlock cb = btn.colors;
-            cb.normalColor = new Color(1,1,1,0.5f);
-            //* Select
-            if(ins.name == btn.name)
-                cb.normalColor = Color.blue;
-
-            btn.colors = cb;
-        });
+        // Array.ForEach(btns, btn=>{
+        //     ColorBlock cb = btn.colors;
+        //     cb.normalColor = new Color(1,1,1,0.5f);
+        //     //* Select
+        //     if(ins.name == btn.name)
+        //         cb.normalColor = Color.blue;
+            
+        //     btn.colors = cb;
+        // });
         
         //* Current Index
         CurIdx = Array.FindIndex(btns, btn => btn.name == ins.name);
         Debug.Log("SelectSkill():: CurIdx= " + CurIdx + ", ins.name= " + ins.name);
+
+        setChoiceBtnUI();
+
+        var items = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf.GetComponentsInChildren<ItemInfo>();
+        var curItem = items[CurIdx];
+
+        int selectItemIdx = DM.ins.personalData.SelectSkillIdx;
+        if(selectItemIdx == CurIdx){
+            checkMarkImg.color = Color.green;
+            Array.ForEach(items, item => item.Outline2D.enabled = false);
+            curItem.Outline2D.enabled = true;
+        }
+        else{
+            checkMarkImg.color = Color.gray;
+            curItem.Outline2D.enabled = false;
+        }
     }
 }
