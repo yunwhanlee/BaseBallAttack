@@ -178,39 +178,28 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //*   UI Button
     //* ----------------------------------------------------------------
     public void onClickCheckBtn(string type){
-        if(DM.ins.SelectType != type) return;
         Debug.Log("onClickBtnSelectItem:: type= " + type + ", CurIdx= " + CurIdx);
+        if(DM.ins.SelectType != type) return;
         var curItem = getCurItem();
-        //* (BUG) 買わないのにロードしたらChara選択されるバグ防止。
-        int befIdx = (type == "Chara")? DM.ins.personalData.SelectCharaIdx
-            :(type == "Bat")? DM.ins.personalData.SelectBatIdx
-            :(type == "Skill")? DM.ins.personalData.SelectSkillIdx : -1;
-        
-        if(type == "Chara") DM.ins.personalData.SelectCharaIdx = CurIdx;
-        else if(type == "Bat") DM.ins.personalData.SelectBatIdx = CurIdx;
-        else if(type == "Skill") DM.ins.personalData.SelectSkillIdx = CurIdx;
 
-        //* Is Lock?
-        // Debug.Log("onClickBtnSelectCharactor:: isLock= " + curChara.IsLock +  ", coin= " + DataManager.ins.personalData.Coin + ", curChara.Price= " + curChara.Price);
+        //* (BUG) 買わないのにロードしたらChara選択されるバグ防止。
+        int befIdx = DM.ins.personalData.getSelectIdx(type);
+        DM.ins.personalData.setSelectIdx(type, CurIdx);
+
+        //* Check
         if(curItem.IsLock){
             if(DM.ins.personalData.Coin >= curItem.Price){
                 //* Buy
                 em.createItemBuyEF();
                 curItem.IsLock = false;
-                if(type == "Chara") DM.ins.personalData.CharaLockList[CurIdx] = false;
-                else if(type == "Bat") DM.ins.personalData.BatLockList[CurIdx] = false;
-                else if(type == "Skill") DM.ins.personalData.SkillLockList[CurIdx] = false;
-                
                 curItem.setGrayMtIsLock();
+                DM.ins.personalData.setUnLockCurList(type, CurIdx);
                 DM.ins.personalData.Coin -= curItem.Price;
-
                 setChoiceBtnUI();
             }
             else{
-                //TODO No Coin
-                if(type == "Chara") DM.ins.personalData.SelectCharaIdx = befIdx;
-                else if(type == "Bat") DM.ins.personalData.SelectBatIdx = befIdx;
-                else if(type == "Skill") DM.ins.personalData.SelectBatIdx = befIdx;
+                //TODO Audio
+                DM.ins.personalData.setSelectIdx(type, befIdx);
             }
         }
     }
@@ -221,10 +210,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         // Array.ForEach(btns, btn=>{
         //     ColorBlock cb = btn.colors;
         //     cb.normalColor = new Color(1,1,1,0.5f);
-        //     //* Select
-        //     if(ins.name == btn.name)
-        //         cb.normalColor = Color.blue;
-            
+        //     if(ins.name == btn.name)    cb.normalColor = Color.blue;//* Select
         //     btn.colors = cb;
         // });
         

@@ -110,4 +110,26 @@ public class PersonalData {
             else     this.SkillLockList.Add(true);//     items[i].IsLock = true;}
         }
     }
+
+    public int getSelectIdx(string type){
+        return (type == "Chara")? SelectCharaIdx
+            :(type == "Bat")? SelectBatIdx
+            :(type == "Skill")? SelectSkillIdx :-1;
+    }
+
+    public void setSelectIdx(string type, int index){
+        switch(type){
+            case "Chara" :  SelectCharaIdx = index; break;
+            case "Bat" :    SelectBatIdx = index;   break;
+            case "Skill" :  SelectSkillIdx = index; break;
+        }
+    }
+
+    public void setUnLockCurList(string type, int curIdx){
+        switch(type){
+            case "Chara" :  CharaLockList[curIdx] = false; break;
+            case "Bat" :    BatLockList[curIdx] = false;   break;
+            case "Skill" :  SkillLockList[curIdx] = false; break;
+        }
+    }
 }
