@@ -70,7 +70,7 @@ public class PersonalData {
         }
     }
     
-    public void save(ref ItemInfo[] items){
+    public void save(){
         Debug.Log("SAVE");
         PlayerPrefs.SetString("Json", JsonUtility.ToJson(this, true)); //* Serialize To Json
 
@@ -106,7 +106,8 @@ public class PersonalData {
         }
 
         for(int i=0; i<DM.ins.scrollviews[(int)DM.ITEM.Skill].Prefs.Length; i++){
-            this.SkillLockList.Add(true);
+            if(i==0) this.SkillLockList.Add(false);//    items[0].IsLock = false;}
+            else     this.SkillLockList.Add(true);//     items[i].IsLock = true;}
         }
     }
 }

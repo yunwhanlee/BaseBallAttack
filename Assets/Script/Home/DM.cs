@@ -72,7 +72,7 @@ public class DM : MonoBehaviour
     [SerializeField] Text diamondTxt; public Text DiamondTxt {get => diamondTxt; set => diamondTxt = value;}
 
     [Header("--Select Item--")]
-    public Material grayBlackNoBuyMt;
+    public Material grayItemLock;
     [SerializeField] string selectType = "";    public string SelectType {get => selectType; set => selectType = value;}
 
     [SerializeField] RectTransform modelParentPref;   public RectTransform ModelParentPref {get => modelParentPref; set => modelParentPref = value;}
@@ -107,12 +107,7 @@ public class DM : MonoBehaviour
         Debug.Log("END GAME:: Scene= " + SceneManager.GetActiveScene().name);
         //* (BUG) SceneがHomeのみセーブできる。
         if(SceneManager.GetActiveScene().name == "Home"){
-                    //* Items of Content
-            ItemInfo[] charas = scrollviews[(int)DM.ITEM.Chara].ContentTf.GetComponentsInChildren<ItemInfo>();
-            ItemInfo[] bats = scrollviews[(int)DM.ITEM.Bat].ContentTf.GetComponentsInChildren<ItemInfo>();
-            ItemInfo[] skills = scrollviews[(int)DM.ITEM.Skill].ContentTf.GetComponentsInChildren<ItemInfo>();
-
-            personalData.save(ref charas); //TODO Add bats, skills
+            personalData.save();
         }
     }
 
