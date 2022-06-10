@@ -50,7 +50,6 @@ public class HomeManager : MonoBehaviour
     //*   UI Button
     //* ----------------------------------------------------------------
     public void onClickBtnGoToDialog(string name){
-        DM.ins.isUIUpdate = true;
         //* Current Model Data & ParentTf
         DM.ins.SelectType = name;
         var curChara = DM.ins.scrollviews[(int)DM.ITEM.Chara].Prefs[DM.ins.personalData.SelectCharaIdx];

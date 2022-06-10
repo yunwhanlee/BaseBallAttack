@@ -35,14 +35,6 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         rectWidth = DM.ins.ModelParentPref.rect.width;
     }
 
-    void Update() {
-        //* Enter Dialog Data Update.
-        if(DM.ins.isUIUpdate){
-            updateItemInfo();
-            DM.ins.isUIUpdate = false;
-        }
-    }
-
     //* Drag Event
     public void OnBeginDrag(PointerEventData eventData){
         // Debug.Log("<color=white> ScrollViewEvent:: Drag Begin </color>");

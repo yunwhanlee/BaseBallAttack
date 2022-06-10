@@ -79,7 +79,6 @@ public class DM : MonoBehaviour
     
     public ScrollView[] scrollviews; //* [0] : Chara, [1] : Bat, [2] : Skill, [3] : CashShop
     public PersonalData personalData;
-    public bool isUIUpdate;
     
 
     void Awake() => singleton();
