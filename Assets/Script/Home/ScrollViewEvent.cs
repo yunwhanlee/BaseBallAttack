@@ -132,60 +132,6 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }
     }
 
-
-    //* ----------------------------------------------------------------
-    //* Private Function
-    //* ----------------------------------------------------------------
-    private ItemInfo[] getItemArr(){
-        var contentTf = (DM.ins.SelectType == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf
-        : (DM.ins.SelectType == "Bat")? DM.ins.scrollviews[(int)DM.ITEM.Bat].ContentTf
-        : (DM.ins.SelectType == "Skill")? DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf
-        : null;
-        var items = contentTf.GetComponentsInChildren<ItemInfo>();
-        return items;
-    }
-
-    private ItemInfo getCurItem(){
-        var items = getItemArr();        
-        var curItem = items[CurIdx];
-        return curItem;
-    }
-
-    private void setCheckIconColorAndOutline(){// (BUG) CharaのRightArmにあるBatにも<ItemInfo>有ったので、重複される。CharaPrefのBatを全て非活性化してOK。
-        string type = DM.ins.SelectType;
-        var items = getItemArr();
-        var curItem = getCurItem();
-
-        int selectItemIdx = (type == DM.ITEM.Chara.ToString())? DM.ins.personalData.SelectCharaIdx
-            :(type == DM.ITEM.Bat.ToString())? DM.ins.personalData.SelectBatIdx
-            :(type == DM.ITEM.Skill.ToString())? DM.ins.personalData.SelectSkillIdx : -1;
-
-        if(selectItemIdx==-1) return;
-        
-        if(selectItemIdx == CurIdx){
-            checkMarkImg.color = Color.green;
-
-            //* OutLine
-            Array.ForEach(items, item => {
-                switch(type){
-                    case "Chara": case "Bat":   item.Outline3D.enabled = false; break;
-                    case "Skill":               item.Outline2D.enabled = false; break;
-                }
-            });
-            switch(type){
-                case "Chara": case "Bat":   curItem.Outline3D.enabled = true; break;
-                case "Skill":               curItem.Outline2D.enabled = true; break;
-            }
-        }
-        else{
-            checkMarkImg.color = Color.gray;
-            switch(type){
-                case "Chara": case "Bat":   curItem.Outline3D.enabled = false; break;
-                case "Skill":               curItem.Outline2D.enabled = false; break;
-            }
-        }
-    }
-
     //* ----------------------------------------------------------------
     //*   UI Button
     //* ----------------------------------------------------------------
@@ -229,5 +175,55 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
         drawChoiceBtnUI();
         setCheckIconColorAndOutline();
+
+        var sprite = btns[CurIdx].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
+        Debug.Log(sprite);
+    }
+
+    //* ----------------------------------------------------------------
+    //* Private Function
+    //* ----------------------------------------------------------------
+    private ItemInfo[] getItemArr(){
+        var contentTf = (DM.ins.SelectType == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf
+        : (DM.ins.SelectType == "Bat")? DM.ins.scrollviews[(int)DM.ITEM.Bat].ContentTf
+        : (DM.ins.SelectType == "Skill")? DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf
+        : null;
+        var items = contentTf.GetComponentsInChildren<ItemInfo>();
+        return items;
+    }
+
+    private ItemInfo getCurItem(){      
+        return getItemArr()[CurIdx];
+    }
+
+    private void setCheckIconColorAndOutline(){// (BUG) CharaのRightArmにあるBatにも<ItemInfo>有ったので、重複される。CharaPrefのBatを全て非活性化してOK。
+        string type = DM.ins.SelectType;
+        var items = getItemArr();
+        var curItem = getCurItem();
+
+        int selectItemIdx = (type == DM.ITEM.Chara.ToString())? DM.ins.personalData.SelectCharaIdx
+            :(type == DM.ITEM.Bat.ToString())? DM.ins.personalData.SelectBatIdx
+            :(type == DM.ITEM.Skill.ToString())? DM.ins.personalData.SelectSkillIdx : -1;
+
+        if(selectItemIdx==-1) return;
+        
+        if(selectItemIdx == CurIdx){
+            checkMarkImg.color = Color.green;
+            Array.ForEach(items, item => activeOutline(item, false));
+            activeOutline(curItem, true);
+            // setSelectSkillImgAtHome();
+        }
+        else{
+            checkMarkImg.color = Color.gray;
+            activeOutline(curItem, false);
+        }
+    }
+
+    private void activeOutline(ItemInfo item, bool isActive){
+        string type = DM.ins.SelectType;
+        switch(type){
+            case "Chara": case "Bat":   item.Outline3D.enabled = isActive; break;
+            case "Skill":               item.Outline2D.enabled = isActive; break;
+        }
     }
 }

@@ -31,14 +31,12 @@ public class HomeManager : MonoBehaviour
     [Header("<-- UI -->")]
     public DialogUI homeDialog;
     public DialogUI selectDialog;
-    public Button   startGameBtn;
+    public Button startGameBtn;
+    [SerializeField] Image selectSkillImg;  public Image SelectSkillImg {get => selectSkillImg; set => selectSkillImg = value;}
 
     [Header("<-- Model -->")]
     [SerializeField] Transform modelTf;   public Transform ModelTf {get => modelTf; set => modelTf = value;}
 
-
-
-    //TODO public DialogUI selectBat;
     //TODO public DialogUI cashShop;
 
     void Start()
@@ -54,11 +52,11 @@ public class HomeManager : MonoBehaviour
         DM.ins.SelectType = name;
         var curChara = DM.ins.scrollviews[(int)DM.ITEM.Chara].Prefs[DM.ins.personalData.SelectCharaIdx];
         var curBat = DM.ins.scrollviews[(int)DM.ITEM.Bat].Prefs[DM.ins.personalData.SelectBatIdx];
-        // var modelTf = homeDialog.Panel.transform.Find("BackGroundGroup").transform.Find("ModelTf");
         
         switch(name){
             case "Home" : 
                 createCurModel(curChara, curBat, modelTf);
+                setSelectSkillImg();
                 setGUI(name);
                 break;
             case "Chara" : 
@@ -70,12 +68,33 @@ public class HomeManager : MonoBehaviour
             case "Skill" : 
                 setGUI(name);
                 break;
-
             case "CashShop":
                 //TODO
                 break;
         }
     }
+
+    public void onClickStartGameBtn(){
+        //* Model Copy
+        var playerModel = modelTf.GetChild(0);
+        playerModel.GetComponent<Animator>().SetBool("IsIdle", false); //Ready Pose
+        Instantiate(playerModel, Vector3.zero, Quaternion.identity, DM.ins.transform);
+
+        SceneManager.LoadScene("Play");
+    }
+
+    public void onClickResetBtn(){
+        DM.ins.personalData.reset();
+
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+        Application.Quit();
+    }
+
+    //* ----------------------------------------------------------------
+    //* Private Function
+    //* ----------------------------------------------------------------
     private void createCurModel(GameObject chara, GameObject bat, Transform modelTf){
         var childs = modelTf.GetComponentsInChildren<Transform>();
         // Chara
@@ -106,6 +125,7 @@ public class HomeManager : MonoBehaviour
                 homeDialog.GoBtn.gameObject.SetActive(false);
                 selectDialog.Panel.gameObject.SetActive(false);
                 Array.ForEach(DM.ins.scrollviews, sv => sv.ScrollRect.gameObject.SetActive(false));
+                
                 break;
             default : 
                 homeDialog.Panel.gameObject.SetActive(false);
@@ -117,24 +137,12 @@ public class HomeManager : MonoBehaviour
         }
     }
 
-    //* ----------------------------------------------------------------
-    //*   UI Button
-    //* ----------------------------------------------------------------
-    public void onClickStartGameBtn(){
-        //* Model Copy
-        var playerModel = modelTf.GetChild(0);
-        playerModel.GetComponent<Animator>().SetBool("IsIdle", false); //Ready Pose
-        Instantiate(playerModel, Vector3.zero, Quaternion.identity, DM.ins.transform);
+    private void setSelectSkillImg(){
+        Debug.Log("setSelectSkillImgAtHome():: DM.ins.personalData.SelectSkillIdx= " + DM.ins.personalData.SelectSkillIdx);
+        var btns = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf.GetComponentsInChildren<Button>();
+        int curIdx = DM.ins.personalData.SelectSkillIdx;
+        var sprite = btns[curIdx].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
 
-        SceneManager.LoadScene("Play");
-    }
-
-    public void onClickResetBtn(){
-        DM.ins.personalData.reset();
-
-        #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-        #endif
-        Application.Quit();
+        SelectSkillImg.sprite = sprite;
     }
 }
