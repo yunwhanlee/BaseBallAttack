@@ -50,9 +50,10 @@ public class ScrollView {
                     break;
                 case "Skill" : 
                     ins.transform.localPosition = new Vector3(0,0,0); //* posZがずれるから、調整
+                    //* Add "OnClick()" EventListner
                     Button btn = ins.GetComponent<Button>();
                     var svEvent = ScrollRect.GetComponent<ScrollViewEvent>();
-                    btn.onClick.AddListener(delegate{svEvent.onClickBtnSelectSkill(ins);});
+                    btn.onClick.AddListener(delegate{svEvent.onClickSkillPanel(ins);});
                     break;
         }
             Debug.Log("modelParentTf.pos=" + modelParentPref.position + ", modelParentTf.localPos=" + modelParentPref.localPosition);
@@ -110,6 +111,8 @@ public class DM : MonoBehaviour
             personalData.save();
         }
     }
+
+    
 
     void singleton(){
         //* Singleton

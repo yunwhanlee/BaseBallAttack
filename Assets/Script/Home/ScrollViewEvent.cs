@@ -57,6 +57,21 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         // }
     }
 
+    private ItemInfo[] getItemArr(){
+        var contentTf = (DM.ins.SelectType == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf
+        : (DM.ins.SelectType == "Bat")? DM.ins.scrollviews[(int)DM.ITEM.Bat].ContentTf
+        : (DM.ins.SelectType == "Skill")? DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf
+        : null;
+        var items = contentTf.GetComponentsInChildren<ItemInfo>();
+        return items;
+    }
+
+    private ItemInfo getCurItem(){
+        var items = getItemArr();        
+        var curItem = items[CurIdx];
+        return curItem;
+    }
+
     //* Update()
     public void OnScrollViewPos(RectTransform pos){ //* －が右側
         float width = Mathf.Abs(rectWidth);
@@ -70,13 +85,11 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         //* Scroll Speed
         scrollSpeed = Mathf.Abs(scrollBefFramePosX - pos.anchoredPosition.x);
         // Debug.Log(scrollBefFramePosX + " - " + pos.anchoredPosition.x + " = " + scrollSpeed);
-
         Debug.Log("getScrollViewPos:: Stop Scrolling:: curPosX=" + (curPosX) + " / " + max + ", CurIdx=" + CurIdx + " (CurIdxBasePos=" + CurIdxBasePos + "), scrollSpeed=" + scrollSpeed);
 
         //* Stop Scrolling Near Index Chara
-        if(scrollSpeed < 1){
+        if(scrollSpeed < 1)
             updateItemInfo();
-        }
 
         //* update Before Frame PosX
         scrollBefFramePosX = pos.anchoredPosition.x;
@@ -95,10 +108,9 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         RankTxt.text = curItem.Rank.ToString();
 
         //* Is Buy(UnLock)? Set Price or CheckMark
-        setChoiceBtnUI();
-        if(!curItem.IsLock){
+        drawChoiceBtnUI();
+        if(!curItem.IsLock)
             setCheckUIAndItemOutLine();
-        }
         
         //* Set Name
         string name = curItem.name.Split('_')[1];
@@ -123,20 +135,8 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         boxGlowEf.OutlineWidth = outline;
     }
 
-    private ItemInfo getCurItem(){
-        var contentTf = (DM.ins.SelectType == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf
-            : (DM.ins.SelectType == "Bat")? DM.ins.scrollviews[(int)DM.ITEM.Bat].ContentTf
-            : (DM.ins.SelectType == "Skill")? DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf
-            : null;
-        var items = contentTf.GetComponentsInChildren<ItemInfo>();
-        // foreach(var item in items){Debug.Log("getCurItem:: Item=" + item);}
-        var curItem = items[CurIdx];
-        return curItem;
-    }
-
-    public void setChoiceBtnUI(){
+    public void drawChoiceBtnUI(){
         var curItem = getCurItem();
-        //処理
         if(curItem.IsLock){//* 💲表示
             checkMarkImg.gameObject.SetActive(false);
             priceTxt.gameObject.SetActive(true);
@@ -147,18 +147,10 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }
     }
 
-    public void setCheckUIAndItemOutLine(){
+    public void setCheckUIAndItemOutLine(){//! (BUG) CharaのRightArmにあるBatにも<ItemInfo>有ったので、重複される。CharaPrefのBatを全て非活性化してOK。
         string type = DM.ins.SelectType;
-
-        RectTransform contentTf = (type == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf
-            : (type == "Bat")? DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf
-            : (type == "Skill")? DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf : null;
-
-        //* (BUG) CharaのRightArmにあるBatにも<ItemInfo>有ったので、重複される。CharaPrefのBatを全て非活性化してOK。
-        var items = contentTf.GetComponentsInChildren<ItemInfo>();
-        int i=0;
-        Array.ForEach(items, item=> Debug.Log("ContentTf:: " + DM.ins.SelectType + " item["+(i++)+"]= " + item));
-        var curItem = items[CurIdx];
+        var items = getItemArr();
+        var curItem = getCurItem();
         
         int selectItemIdx = (type == "Chara")? 
             DM.ins.personalData.SelectCharaIdx : DM.ins.personalData.SelectBatIdx;
@@ -178,8 +170,8 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //*   UI Button
     //* ----------------------------------------------------------------
     public void onClickCheckBtn(string type){
-        Debug.Log("onClickBtnSelectItem:: type= " + type + ", CurIdx= " + CurIdx);
         if(DM.ins.SelectType != type) return;
+        Debug.Log("onClickCheckBtn:: type= " + type + ", CurIdx= " + CurIdx);
         var curItem = getCurItem();
 
         //* (BUG) 買わないのにロードしたらChara選択されるバグ防止。
@@ -195,42 +187,41 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 curItem.setGrayMtIsLock();
                 DM.ins.personalData.setUnLockCurList(type, CurIdx);
                 DM.ins.personalData.Coin -= curItem.Price;
-                setChoiceBtnUI();
+                drawChoiceBtnUI();
             }
             else{
                 //TODO Audio
                 DM.ins.personalData.setSelectIdx(type, befIdx);
             }
         }
+
+        //* Skill Panel UI Update
+        if(DM.ins.SelectType == DM.ITEM.Skill.ToString()){
+            onClickSkillPanel(curItem.gameObject);
+        }
     }
 
-    public void onClickBtnSelectSkill(GameObject ins){
-        //* Color
-        var btns = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf.GetComponentsInChildren<Button>();
-        // Array.ForEach(btns, btn=>{
-        //     ColorBlock cb = btn.colors;
-        //     cb.normalColor = new Color(1,1,1,0.5f);
-        //     if(ins.name == btn.name)    cb.normalColor = Color.blue;//* Select
-        //     btn.colors = cb;
-        // });
-        
+    public void onClickSkillPanel(GameObject ins){
         //* Current Index
+        var btns = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf.GetComponentsInChildren<Button>();
         CurIdx = Array.FindIndex(btns, btn => btn.name == ins.name);
-        Debug.Log("SelectSkill():: CurIdx= " + CurIdx + ", ins.name= " + ins.name);
+        Debug.Log("onClickSkillPanelBtn():: CurIdx= " + CurIdx + ", ins.name= " + ins.name);
 
-        setChoiceBtnUI();
+        drawChoiceBtnUI();
 
-        var items = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf.GetComponentsInChildren<ItemInfo>();
-        var curItem = items[CurIdx];
+        var items = getItemArr();
+        var curItem = getCurItem();
 
         int selectItemIdx = DM.ins.personalData.SelectSkillIdx;
         if(selectItemIdx == CurIdx){
             checkMarkImg.color = Color.green;
+            //* OutLine
             Array.ForEach(items, item => item.Outline2D.enabled = false);
             curItem.Outline2D.enabled = true;
         }
         else{
             checkMarkImg.color = Color.gray;
+            //* OutLine
             curItem.Outline2D.enabled = false;
         }
     }
