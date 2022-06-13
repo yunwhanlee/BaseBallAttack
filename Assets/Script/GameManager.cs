@@ -109,9 +109,9 @@ public class GameManager : MonoBehaviour
             activeSkillBtnList.Add(new ActiveSkillBtnUI(
                 i,
                 pl.AtvSkillCoolDownUnit,
-                pl.activeSkills[i].Name,
+                pl.activeSkills[DM.ins.personalData.SelectSkillIdx].Name,
                 btn,
-                pl.activeSkills[i].UISprite,
+                pl.activeSkills[DM.ins.personalData.SelectSkillIdx].UISprite,
                 activeSkillBtnEfMt)
             );
             i++;
