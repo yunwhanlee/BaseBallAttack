@@ -6,6 +6,25 @@ using System;
 using Random = UnityEngine.Random;
 
 [System.Serializable]
+public class PassiveSkillList{
+    [SerializeField] int dmg; public int Dmg {get => dmg; set => dmg = value;}
+    [SerializeField] int multiShot; public int MultiShot {get => multiShot; set => multiShot = value;}
+    [SerializeField] int speed; public int Speed {get => speed; set => speed = value;}
+    [SerializeField] int instantKill; public int InstantKill {get => instantKill; set => instantKill = value;}
+    [SerializeField] int critical; public int Critical {get => critical; set => critical = value;}
+    [SerializeField] int explosion; public int Explosion {get => explosion; set => explosion = value;}
+    [SerializeField] int expUp; public int ExpUp {get => expUp; set => expUp = value;}
+    [SerializeField] int itemSpawn; public int ItemSpawn {get => itemSpawn; set => itemSpawn = value;}
+
+    [SerializeField] GameObject[] imgPrefs; GameObject[] ImgPrefs {get => imgPrefs; set => imgPrefs = value;}
+
+    public int[] getLvArr(){
+        int[] result = {Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn};
+        return result;
+    }
+}
+
+[System.Serializable]
 public class PassiveSkill<T>{
     //*value                     //*get set
     [SerializeField] string name;    public string Name {get=> name;} 
@@ -69,6 +88,8 @@ public struct Explosion{
         this.range = range;
     }
 }
+
+
 
 //-------------------------------------------------
 //-------------------------------------------------

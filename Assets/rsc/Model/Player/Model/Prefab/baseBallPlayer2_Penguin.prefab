@@ -1402,9 +1402,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLock: 0
   meshRdrList: []
+  grayPanel: {fileID: 0}
   rank: 1
+  outline3D: {fileID: 0}
+  outline2D: {fileID: 0}
   price: 0
-  psvSkillAbility: 0
+  itemPassive:
+    dmg: 0
+    multiShot: 0
+    speed: 1
+    instantKill: 0
+    critical: 0
+    explosion: 0
+    expUp: 0
+    itemSpawn: 0
+    imgPrefs: []
 --- !u!95 &7283450890079219490
 Animator:
   serializedVersion: 3
