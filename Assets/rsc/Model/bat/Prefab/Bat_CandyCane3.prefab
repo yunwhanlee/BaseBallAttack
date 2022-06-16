@@ -47,9 +47,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLock: 0
   meshRdrList: []
+  grayPanel: {fileID: 0}
   rank: 2
+  outline3D: {fileID: 0}
+  outline2D: {fileID: 0}
   price: 0
-  psvSkillAbility: 0
+  itemPassive:
+    dmg:
+      lv: 1
+      imgPref: {fileID: 0}
+    multiShot:
+      lv: 0
+      imgPref: {fileID: 0}
+    speed:
+      lv: 0
+      imgPref: {fileID: 0}
+    instantKill:
+      lv: 0
+      imgPref: {fileID: 0}
+    critical:
+      lv: 1
+      imgPref: {fileID: 0}
+    explosion:
+      lv: 0
+      imgPref: {fileID: 0}
+    expUp:
+      lv: 0
+      imgPref: {fileID: 0}
+    itemSpawn:
+      lv: 0
+      imgPref: {fileID: 0}
+    imgPrefs: []
 --- !u!114 &137157554703518854
 MonoBehaviour:
   m_ObjectHideFlags: 0
