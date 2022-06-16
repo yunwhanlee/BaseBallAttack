@@ -80,6 +80,11 @@ public class HomeManager : MonoBehaviour
         playerModel.GetComponent<Animator>().SetBool("IsIdle", false); //Ready Pose
         Instantiate(playerModel, Vector3.zero, Quaternion.identity, DM.ins.transform);
 
+        ItemInfo[] itemInfoArr = playerModel.GetComponentsInChildren<ItemInfo>();
+        Array.ForEach(itemInfoArr, itemInfo=>{
+            DM.ins.personalData.itemPassive.setLvArr(itemInfo.ItemPassive);
+        });
+
         SceneManager.LoadScene("Play");
     }
 

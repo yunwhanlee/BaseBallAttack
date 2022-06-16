@@ -38,13 +38,12 @@ public class ScrollView {
 
                     //* Item Passive UI Ready
                     psvPanel = GameObject.Instantiate(itemPassivePanel, itemPassivePanel.localPosition, itemPassivePanel.localRotation, parentTf).transform;
-                    var passiveDtArr = DM.ins.personalData.itemPassive.getDtArr();
-                    model.GetComponent<ItemInfo>().ItemPassive.setImgPrefs(passiveDtArr);
+                    model.GetComponent<ItemInfo>().ItemPassive.setImgPrefs(DM.ins.personalData.itemPassive);
                     break;
             }
 
             if(!model) return;
-            var itemPassiveList = model.GetComponent<ItemInfo>().ItemPassive.getDtArr();
+            var itemPassiveList = model.GetComponent<ItemInfo>().ItemPassive.Arr;
             //* 調整
             switch(this.type){
                 case "Chara" : 
@@ -70,7 +69,7 @@ public class ScrollView {
         });
     }
 
-    private void showItemPassiveUI(string type, ItemPassiveDt[] itemPassiveList, RectTransform itemSkillBoxPref, Transform psvPanel){
+    private void showItemPassiveUI(string type, ItemPsvDt[] itemPassiveList, RectTransform itemSkillBoxPref, Transform psvPanel){
         Array.ForEach(itemPassiveList, list=>{
             if(list.lv > 0){
                 Debug.Log(list.imgPref.name + "= " + list.lv);

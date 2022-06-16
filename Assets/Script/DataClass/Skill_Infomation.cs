@@ -6,37 +6,35 @@ using System;
 using Random = UnityEngine.Random;
 
 [System.Serializable]
-public class ItemPassiveDt {
+public class ItemPsvDt {
+    public string name;
     public int lv;
     public GameObject imgPref;
+
+    public ItemPsvDt(string name){
+        this.name = name;
+    }
 }
 
 [System.Serializable]
 public class ItemPassiveList{
-    [SerializeField] ItemPassiveDt dmg; public ItemPassiveDt Dmg {get => dmg; set => dmg = value;}
-    [SerializeField] ItemPassiveDt multiShot; public ItemPassiveDt MultiShot {get => multiShot; set => multiShot = value;}
-    [SerializeField] ItemPassiveDt speed; public ItemPassiveDt Speed {get => speed; set => speed = value;}
-    [SerializeField] ItemPassiveDt instantKill; public ItemPassiveDt InstantKill {get => instantKill; set => instantKill = value;}
-    [SerializeField] ItemPassiveDt critical; public ItemPassiveDt Critical {get => critical; set => critical = value;}
-    [SerializeField] ItemPassiveDt explosion; public ItemPassiveDt Explosion {get => explosion; set => explosion = value;}
-    [SerializeField] ItemPassiveDt expUp; public ItemPassiveDt ExpUp {get => expUp; set => expUp = value;}
-    [SerializeField] ItemPassiveDt itemSpawn; public ItemPassiveDt ItemSpawn {get => itemSpawn; set => itemSpawn = value;}
+    [SerializeField] ItemPsvDt[] arr = {
+        new ItemPsvDt("Dmg"), new ItemPsvDt("MultiShot"), new ItemPsvDt("Speed"), 
+        new ItemPsvDt("InstantKill"), new ItemPsvDt("Critical"), new ItemPsvDt("Explosion"), 
+        new ItemPsvDt("ExpUp"), new ItemPsvDt("ItemSpawn")
+    };
+    public ItemPsvDt[] Arr {get => arr; set => arr = value;}
 
     [SerializeField] GameObject[] imgPrefs; GameObject[] ImgPrefs {get => imgPrefs; set => imgPrefs = value;}
 
-    public ItemPassiveDt[] getDtArr(){
-        ItemPassiveDt[] result = {Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn};
-        return result;
+    public void setImgPrefs(ItemPassiveList itemPsvList){
+        int i=0;
+        Array.ForEach(itemPsvList.arr, dtArr => arr[i++].imgPref = dtArr.imgPref);
     }
-    public void setImgPrefs(ItemPassiveDt[] itemPassiveDts){
-        dmg.imgPref = itemPassiveDts[0].imgPref;
-        multiShot.imgPref = itemPassiveDts[1].imgPref;
-        speed.imgPref = itemPassiveDts[2].imgPref;
-        instantKill.imgPref = itemPassiveDts[3].imgPref;
-        critical.imgPref = itemPassiveDts[4].imgPref;
-        explosion.imgPref = itemPassiveDts[5].imgPref;
-        expUp.imgPref = itemPassiveDts[6].imgPref;
-        itemSpawn.imgPref = itemPassiveDts[7].imgPref;
+
+    public void setLvArr(ItemPassiveList itemPsvList){
+        int i=0;
+        Array.ForEach(itemPsvList.Arr, dtArr => arr[i++].lv += dtArr.lv);
     }
 }
 

@@ -165,28 +165,29 @@ MonoBehaviour:
   outline2D: {fileID: 0}
   price: 0
   itemPassive:
-    dmg:
-      lv: 1
-      imgPref: {fileID: 0}
-    multiShot:
-      lv: 1
-      imgPref: {fileID: 0}
-    speed:
-      lv: 1
-      imgPref: {fileID: 0}
-    instantKill:
-      lv: 1
-      imgPref: {fileID: 0}
-    critical:
+    arr:
+    - name: Dmg
       lv: 0
       imgPref: {fileID: 0}
-    explosion:
+    - name: MultiShot
       lv: 0
       imgPref: {fileID: 0}
-    expUp:
+    - name: Speed
+      lv: 1
+      imgPref: {fileID: 0}
+    - name: InstantKill
+      lv: 1
+      imgPref: {fileID: 0}
+    - name: Critical
+      lv: 1
+      imgPref: {fileID: 0}
+    - name: Explosion
+      lv: 1
+      imgPref: {fileID: 0}
+    - name: ExpUp
       lv: 0
       imgPref: {fileID: 0}
-    itemSpawn:
+    - name: ItemSpawn
       lv: 0
       imgPref: {fileID: 0}
     imgPrefs: []

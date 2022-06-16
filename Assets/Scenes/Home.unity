@@ -308,28 +308,29 @@ MonoBehaviour:
     selectSkillIdx: 0
     skillLockList: 
     itemPassive:
-      dmg:
+      arr:
+      - name: Dmg
         lv: 0
         imgPref: {fileID: 5646658460974134969, guid: 9c3959f2820441145a232b352b0eddc0, type: 3}
-      multiShot:
+      - name: MultiShot
         lv: 0
         imgPref: {fileID: 2024090791339072515, guid: 82aeceecafe4e05488db05c172108681, type: 3}
-      speed:
+      - name: Speed
         lv: 0
         imgPref: {fileID: 8545373082022302642, guid: a3c4a152d08c6704a81968af44e34a69, type: 3}
-      instantKill:
+      - name: InstantKill
         lv: 0
         imgPref: {fileID: 1858101229020714837, guid: 198bfe0001865ea49940c8ae9fe0e224, type: 3}
-      critical:
+      - name: Critical
         lv: 0
         imgPref: {fileID: 8212382597434242863, guid: f487776b436107c4eababd8c4daa3eea, type: 3}
-      explosion:
+      - name: Explosion
         lv: 0
         imgPref: {fileID: 7576626188995224481, guid: 59d287638614759459a37d34a20bb023, type: 3}
-      expUp:
+      - name: ExpUp
         lv: 0
         imgPref: {fileID: 7576626188995224481, guid: ecbad7884bde5ad49a6e22d5550160f8, type: 3}
-      itemSpawn:
+      - name: ItemSpawn
         lv: 0
         imgPref: {fileID: 7576626188995224481, guid: 5def4e1839c7dd64a899af359f634973, type: 3}
       imgPrefs:
@@ -575,7 +576,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -250, y: -379.99997}
+  m_AnchoredPosition: {x: -250, y: -346.99997}
   m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &173923953
@@ -1861,7 +1862,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2288,7 +2289,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -540, y: -500}
-  m_SizeDelta: {x: 0, y: 1000}
+  m_SizeDelta: {x: 540, y: 1000}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &810525563
 MonoBehaviour:
@@ -3422,7 +3423,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 250, y: -380}
+  m_AnchoredPosition: {x: 250, y: -347}
   m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &988653907
@@ -3890,7 +3891,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1072798420
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4268,7 +4269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1227366032
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5687,7 +5688,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -379.99997}
+  m_AnchoredPosition: {x: 0, y: -346.99997}
   m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1836562020
