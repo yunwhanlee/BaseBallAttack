@@ -20,44 +20,60 @@ public class ScrollView {
         this.prefs = prefs;
     }
 
-    public void createObject(RectTransform modelParentPref){
+    public void createObject(RectTransform modelParentPref, RectTransform itemPassivePanel, RectTransform itemSkillBoxPref){
         //* Prefabs 生成
         Array.ForEach(prefs, obj=>{
             //* 生成
             Transform parentTf = null;
-            GameObject ins = null;
+            GameObject model = null;
+            Transform psvPanel = null;
             switch(this.type){
                 case "Skill" :
-                    ins = GameObject.Instantiate(obj, Vector3.zero, Quaternion.identity, contentTf);
+                    model = GameObject.Instantiate(obj, Vector3.zero, Quaternion.identity, contentTf);
                     break;
                 case "Chara" : 
                 case "Bat" :
                     parentTf = GameObject.Instantiate(modelParentPref, modelParentPref.localPosition, modelParentPref.localRotation, contentTf).transform;
-                    ins = GameObject.Instantiate(obj, Vector3.zero, Quaternion.identity, parentTf);
+                    model = GameObject.Instantiate(obj, Vector3.zero, Quaternion.identity, parentTf);
+
+                    psvPanel = GameObject.Instantiate(itemPassivePanel, itemPassivePanel.localPosition, itemPassivePanel.localRotation, parentTf).transform;
+                    var passiveDtArr = DM.ins.personalData.itemPassive.getDtArr();
+                    model.GetComponent<ItemInfo>().ItemPassive.setImgPrefs(passiveDtArr);
                     break;
             }
 
-            if(!ins) return;
+            if(!model) return;
 
             //* 調整
             switch(this.type){
                 case "Chara" : 
+                    var itemPassiveList = model.GetComponent<ItemInfo>().ItemPassive.getDtArr();
+                    Array.ForEach(itemPassiveList, list=>{
+                        if(list.lv > 0){
+                            Debug.Log(list.imgPref.name + "= " + list.lv);
+                            var boxTf = GameObject.Instantiate(itemSkillBoxPref, itemSkillBoxPref.localPosition, itemSkillBoxPref.localRotation, psvPanel);
+                            var prefTf = GameObject.Instantiate(list.imgPref, Vector3.zero, Quaternion.identity, boxTf).transform;
+                            boxTf.GetComponent<RectTransform>().localPosition = new Vector3(0,0,0);
+                            // boxTf.GetComponent<RectTransform>().localScale = new Vector3(0.5f,0.5f,0.5f);
+                        }
+                    });
+                    Debug.Log("--------------------------------------------");
                     break;
                 case "Bat" :
                     parentTf.GetComponent<RectTransform>().localPosition = new Vector3(0,200,800); //* xとyは自動調整される。
-                    ins.transform.localPosition = new Vector3(ins.transform.localPosition.x, 0.75f, ins.transform.localPosition.z);
-                    ins.transform.localRotation = Quaternion.Euler(ins.transform.localRotation.x, ins.transform.localRotation.y, -45);
+                    model.transform.localPosition = new Vector3(model.transform.localPosition.x, 0.75f, model.transform.localPosition.z);
+                    model.transform.localRotation = Quaternion.Euler(model.transform.localRotation.x, model.transform.localRotation.y, -45);
                     break;
                 case "Skill" : 
-                    ins.transform.localPosition = new Vector3(0,0,0); //* posZがずれるから、調整
+                    model.transform.localPosition = new Vector3(0,0,0); //* posZがずれるから、調整
                     //* Add "OnClick()" EventListner
-                    Button btn = ins.GetComponent<Button>();
+                    Button btn = model.GetComponent<Button>();
                     var svEvent = ScrollRect.GetComponent<ScrollViewEvent>();
-                    btn.onClick.AddListener(delegate{svEvent.onClickSkillPanel(ins);});
+                    btn.onClick.AddListener(delegate{svEvent.onClickSkillPanel(model);});
                     break;
         }
             Debug.Log("modelParentTf.pos=" + modelParentPref.position + ", modelParentTf.localPos=" + modelParentPref.localPosition);
-            ins.name = obj.name;//名前上書き：しないと後ろに(clone)が残る。
+            model.name = obj.name;//名前上書き：しないと後ろに(clone)が残る。
         });
     }
 }
@@ -78,7 +94,8 @@ public class DM : MonoBehaviour
     [SerializeField] string selectType = "";    public string SelectType {get => selectType; set => selectType = value;}
 
     [SerializeField] RectTransform modelParentPref;   public RectTransform ModelParentPref {get => modelParentPref; set => modelParentPref = value;}
-    
+    [SerializeField] RectTransform itemPassivePanel;   public RectTransform ItemPassivePanel {get => itemPassivePanel; set => itemPassivePanel = value;}
+    [SerializeField] RectTransform itemSkillBoxPref;   public RectTransform ItemSkillBoxPref {get => itemSkillBoxPref; set => itemSkillBoxPref = value;}
     public ScrollView[] scrollviews; //* [0] : Chara, [1] : Bat, [2] : Skill, [3] : CashShop
     public PersonalData personalData;
     
@@ -86,9 +103,9 @@ public class DM : MonoBehaviour
     void Awake() => singleton();
     void Start(){
         //* contents Prefab 生成
-        scrollviews[(int)DM.ITEM.Chara].createObject(modelParentPref);
-        scrollviews[(int)DM.ITEM.Bat].createObject(modelParentPref);
-        scrollviews[(int)DM.ITEM.Skill].createObject(modelParentPref);
+        scrollviews[(int)DM.ITEM.Chara].createObject(modelParentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.ITEM.Bat].createObject(modelParentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.ITEM.Skill].createObject(modelParentPref, itemPassivePanel, itemSkillBoxPref);
 
         //* Items of Content
         ItemInfo[] charas = scrollviews[(int)DM.ITEM.Chara].ContentTf.GetComponentsInChildren<ItemInfo>();
@@ -97,7 +114,6 @@ public class DM : MonoBehaviour
         
         personalData = new PersonalData();
         personalData.load(ref charas, ref bats, ref skills); //TODO Add skills
-        
     }
 
     void Update(){
@@ -112,8 +128,6 @@ public class DM : MonoBehaviour
             personalData.save();
         }
     }
-
-    
 
     void singleton(){
         //* Singleton

@@ -1109,14 +1109,30 @@ MonoBehaviour:
   outline2D: {fileID: 0}
   price: 0
   itemPassive:
-    dmg: 0
-    multiShot: 0
-    speed: 1
-    instantKill: 0
-    critical: 1
-    explosion: 0
-    expUp: 0
-    itemSpawn: 0
+    dmg:
+      lv: 0
+      imgPref: {fileID: 0}
+    multiShot:
+      lv: 0
+      imgPref: {fileID: 0}
+    speed:
+      lv: 1
+      imgPref: {fileID: 0}
+    instantKill:
+      lv: 0
+      imgPref: {fileID: 0}
+    critical:
+      lv: 1
+      imgPref: {fileID: 0}
+    explosion:
+      lv: 0
+      imgPref: {fileID: 0}
+    expUp:
+      lv: 0
+      imgPref: {fileID: 0}
+    itemSpawn:
+      lv: 0
+      imgPref: {fileID: 0}
     imgPrefs: []
 --- !u!95 &2524251635010537925
 Animator:

@@ -26,7 +26,6 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public SpriteRenderer boxSprRdr;    public SpriteRenderer BoxSprRdr {get => boxSprRdr; set => boxSprRdr = value;}
     public Text rankTxt;    public Text RankTxt {get => rankTxt; set => rankTxt = value;}
     public Text nameTxt;    public Text NameTxt {get => nameTxt; set => nameTxt = value;}
-    public Transform itemPassivePanel;    public Transform ItemPassivePanel {get => itemPassivePanel; set => itemPassivePanel = value;}
 
     [Header("--Select Btn Child--")]
     public Image checkMarkImg;
@@ -60,6 +59,8 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     //* Update()
     public void OnScrollViewPos(RectTransform pos){ //* －が右側
+        if(gameObject.name == "ItemPassivePanel(Clone)") return;
+
         float width = Mathf.Abs(rectWidth);
         float offset = -(width + width/2);
         float curPosX = pos.anchoredPosition.x - offset;
@@ -121,15 +122,15 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         boxGlowEf.OutlineWidth = outline;
 
         //* Show Item Passive Ability
-        var childs = itemPassivePanel.GetComponentsInChildren<Transform>();
-        var passiveList = curItem.GetComponent<ItemInfo>().ItemPassive;
-        int i=0;
-        Array.ForEach(passiveList.getLvArr(), psvLv=>{
-            if(psvLv > 0){
-                Debug.Log("psvLv=" + psvLv);
-            }
-            i++;
-        });
+        // var childs = itemPassivePanel.GetComponentsInChildren<Transform>();
+        // var passiveList = curItem.GetComponent<ItemInfo>().ItemPassive;
+        // int i=0;
+        // Array.ForEach(passiveList.getLvArr(), psvLv=>{
+        //     if(psvLv > 0){
+        //         Debug.Log("psvLv=" + psvLv);
+        //     }
+        //     i++;
+        // });
         
         // DM.ins.personalData.itemPassive
     }

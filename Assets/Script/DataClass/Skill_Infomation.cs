@@ -6,21 +6,37 @@ using System;
 using Random = UnityEngine.Random;
 
 [System.Serializable]
-public class PassiveSkillList{
-    [SerializeField] int dmg; public int Dmg {get => dmg; set => dmg = value;}
-    [SerializeField] int multiShot; public int MultiShot {get => multiShot; set => multiShot = value;}
-    [SerializeField] int speed; public int Speed {get => speed; set => speed = value;}
-    [SerializeField] int instantKill; public int InstantKill {get => instantKill; set => instantKill = value;}
-    [SerializeField] int critical; public int Critical {get => critical; set => critical = value;}
-    [SerializeField] int explosion; public int Explosion {get => explosion; set => explosion = value;}
-    [SerializeField] int expUp; public int ExpUp {get => expUp; set => expUp = value;}
-    [SerializeField] int itemSpawn; public int ItemSpawn {get => itemSpawn; set => itemSpawn = value;}
+public class ItemPassiveDt {
+    public int lv;
+    public GameObject imgPref;
+}
+
+[System.Serializable]
+public class ItemPassiveList{
+    [SerializeField] ItemPassiveDt dmg; public ItemPassiveDt Dmg {get => dmg; set => dmg = value;}
+    [SerializeField] ItemPassiveDt multiShot; public ItemPassiveDt MultiShot {get => multiShot; set => multiShot = value;}
+    [SerializeField] ItemPassiveDt speed; public ItemPassiveDt Speed {get => speed; set => speed = value;}
+    [SerializeField] ItemPassiveDt instantKill; public ItemPassiveDt InstantKill {get => instantKill; set => instantKill = value;}
+    [SerializeField] ItemPassiveDt critical; public ItemPassiveDt Critical {get => critical; set => critical = value;}
+    [SerializeField] ItemPassiveDt explosion; public ItemPassiveDt Explosion {get => explosion; set => explosion = value;}
+    [SerializeField] ItemPassiveDt expUp; public ItemPassiveDt ExpUp {get => expUp; set => expUp = value;}
+    [SerializeField] ItemPassiveDt itemSpawn; public ItemPassiveDt ItemSpawn {get => itemSpawn; set => itemSpawn = value;}
 
     [SerializeField] GameObject[] imgPrefs; GameObject[] ImgPrefs {get => imgPrefs; set => imgPrefs = value;}
 
-    public int[] getLvArr(){
-        int[] result = {Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn};
+    public ItemPassiveDt[] getDtArr(){
+        ItemPassiveDt[] result = {Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn};
         return result;
+    }
+    public void setImgPrefs(ItemPassiveDt[] itemPassiveDts){
+        dmg.imgPref = itemPassiveDts[0].imgPref;
+        multiShot.imgPref = itemPassiveDts[1].imgPref;
+        speed.imgPref = itemPassiveDts[2].imgPref;
+        instantKill.imgPref = itemPassiveDts[3].imgPref;
+        critical.imgPref = itemPassiveDts[4].imgPref;
+        explosion.imgPref = itemPassiveDts[5].imgPref;
+        expUp.imgPref = itemPassiveDts[6].imgPref;
+        itemSpawn.imgPref = itemPassiveDts[7].imgPref;
     }
 }
 
