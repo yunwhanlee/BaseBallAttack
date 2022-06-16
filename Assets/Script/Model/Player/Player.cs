@@ -98,14 +98,15 @@ public class Player : MonoBehaviour
         });
 
         //* Set Passive Skills : @params { int level, T value, T unit }
-        dmg = new PassiveSkill<int>("dmg", 0, 1, 1);
-        multiShot = new PassiveSkill<int>("multiShot", 0, 0, 1);
-        speed = new PassiveSkill<float>("speed", 0, 1f, 0.2f);
-        instantKill = new PassiveSkill<float>("instantKill", 0, 0f, 0.02f);
-        critical = new PassiveSkill<float>("critical", 0, 0f, 0.1f);
-        explosion = new PassiveSkill<Explosion>("explosion", 0, new Explosion(0f, 0.75f), new Explosion(0.25f, 0.25f));
-        expUp = new PassiveSkill<float>("expUp", 0, 1f, 0.2f);
-        itemSpawn = new PassiveSkill<float>("itemSpawn", 0, 0.1f, 0.05f);
+        var psvLvArr = DM.ins.personalData.itemPassive.Arr;
+        dmg = new PassiveSkill<int>("dmg", psvLvArr[(int)DM.PSV_INDEX.DMG].lv, 1, 1);
+        multiShot = new PassiveSkill<int>("multiShot", psvLvArr[(int)DM.PSV_INDEX.MULTISHOT].lv, 0, 1);
+        speed = new PassiveSkill<float>("speed", psvLvArr[(int)DM.PSV_INDEX.SPEED].lv, 1f, 0.2f);
+        instantKill = new PassiveSkill<float>("instantKill", psvLvArr[(int)DM.PSV_INDEX.INSTANT_KILL].lv, 0f, 0.02f);
+        critical = new PassiveSkill<float>("critical", psvLvArr[(int)DM.PSV_INDEX.CRITICAL].lv, 0f, 0.1f);
+        explosion = new PassiveSkill<Explosion>("explosion", psvLvArr[(int)DM.PSV_INDEX.EXPLOSION].lv, new Explosion(0f, 0.75f), new Explosion(0.25f, 0.25f));
+        expUp = new PassiveSkill<float>("expUp", psvLvArr[(int)DM.PSV_INDEX.EXP_UP].lv, 1f, 0.2f);
+        itemSpawn = new PassiveSkill<float>("itemSpawn", psvLvArr[(int)DM.PSV_INDEX.ITEM_SPAWN].lv, 0.1f, 0.05f);
 
         //* Set HitRank Data : @params { char rate, float distance, int power }
         hitRank = new HitRank[6];
