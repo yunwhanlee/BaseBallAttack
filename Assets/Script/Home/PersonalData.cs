@@ -59,15 +59,15 @@ public class PersonalData {
 
         //* Set Real Content Items IsLock
         for(int i=0; i<charas.Length; i++){
-            Debug.Log("CharaLockList["+i+"].IsLock=" + this.CharaLockList[i] + ", length= " + charas.Length);
+            if(i==0)    Debug.Log("<color=green>Chara</color>LockList["+i+"].IsLock=" + this.CharaLockList[i] + ", length= <color=green>" + charas.Length + "</color>");
             charas[i].GetComponent<ItemInfo>().IsLock = this.CharaLockList[i];
         }
         for(int i=0; i<bats.Length; i++){
-            Debug.Log("BatLockList["+i+"].IsLock=" + this.BatLockList[i] + ", length= " + bats.Length);
+            if(i==0)    Debug.Log("<color=orange>Bat</color>LockList["+i+"].IsLock=" + this.BatLockList[i] + ", length= <color=orange>" + bats.Length + "</color>");
             bats[i].GetComponent<ItemInfo>().IsLock = this.BatLockList[i];
         }
         for(int i=0; i<skills.Length; i++){
-            Debug.Log("SkillLockList["+i+"].IsLock=" + this.SkillLockList[i] + ", length= " + skills.Length);
+            if(i==0)    Debug.Log("<color=yellow>Skill</color>LockList["+i+"].IsLock=" + this.SkillLockList[i] + ", length= <color=yellow>" + skills.Length + "</color>");
             skills[i].GetComponent<ItemInfo>().IsLock = this.SkillLockList[i];
         }
     }
