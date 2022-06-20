@@ -81,11 +81,9 @@ public class HomeManager : MonoBehaviour
         playerModel.SetParent(DM.ins.transform);
         // var copyModel = Instantiate(playerModel, Vector3.zero, Quaternion.identity, DM.ins.transform);
 
-        ItemInfo[] childs = playerModel.GetComponentsInChildren<ItemInfo>();
-        Array.ForEach(childs, obj=>{
-            Debug.LogFormat("<b>Name= {0}, Arr= {1}</b>", obj.name, obj.ItemPassive.Arr);
-            DM.ins.personalData.ItemPassive.setLvArr(obj.ItemPassive);
-        });
+        //* Set Item Passive Data
+        int[] lvArrTemp = getItemPsvLvArr(playerModel);
+        DM.ins.personalData.ItemPassive.setLvArr(lvArrTemp);
 
         SceneManager.LoadScene("Play");
     }
@@ -102,6 +100,17 @@ public class HomeManager : MonoBehaviour
     //* ----------------------------------------------------------------
     //* Private Function
     //* ----------------------------------------------------------------
+    private int[] getItemPsvLvArr(Transform playerModel){
+        ItemInfo[] childs = playerModel.GetComponentsInChildren<ItemInfo>();
+        int len = childs[0].ItemPassive.Arr.Length;
+        int[] lvArrTemp = new int[len];
+        Array.ForEach(childs, child=>{
+            for(int i=0; i<len; i++)
+                lvArrTemp[i] += child.ItemPassive.Arr[i].lv;
+        });
+        return lvArrTemp;
+    }
+
     private void createCurModel(GameObject chara, GameObject bat, Transform modelTf){
         var childs = modelTf.GetComponentsInChildren<Transform>();
         // Chara

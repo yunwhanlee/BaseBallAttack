@@ -6,6 +6,89 @@ using SpriteGlow;
 using UnityEngine.EventSystems;
 using System;
 
+[System.Serializable]
+public class ScrollView {
+    //* Value
+    [SerializeField] String type;  public String Type {get => type; set => type = value;} 
+    [SerializeField] RectTransform scrollRect;  public RectTransform ScrollRect {get => scrollRect; set => scrollRect = value;}
+    [SerializeField] RectTransform contentTf;  public RectTransform ContentTf {get => contentTf; set => contentTf = value;}
+    [SerializeField] GameObject[] prefs;  public GameObject[] Prefs {get => prefs; set => prefs = value;}
+
+    public ScrollView(RectTransform scrollRect, RectTransform contentTf, GameObject[] prefs){
+        this.type = scrollRect.gameObject.name.Split('_')[1];
+        this.scrollRect = scrollRect;
+        this.contentTf = contentTf;
+        this.prefs = prefs;
+    }
+
+    public void createObject(RectTransform modelParentPref, RectTransform itemPassivePanel, RectTransform itemSkillBoxPref){
+        //* Prefabs 生成
+        Array.ForEach(prefs, obj=>{
+            //* 生成
+            Transform parentTf = null;
+            GameObject model = null;
+            Transform psvPanel = null;
+            switch(this.type){
+                case "Skill" :
+                    model = GameObject.Instantiate(obj, Vector3.zero, Quaternion.identity, contentTf);
+                    break;
+                case "Chara" : 
+                case "Bat" :
+                    parentTf = GameObject.Instantiate(modelParentPref, modelParentPref.localPosition, modelParentPref.localRotation, contentTf).transform;
+                    model = GameObject.Instantiate(obj, Vector3.zero, Quaternion.identity, parentTf);
+
+                    //* Item Passive UI Ready
+                    psvPanel = GameObject.Instantiate(itemPassivePanel, itemPassivePanel.localPosition, itemPassivePanel.localRotation, parentTf).transform;
+                    model.GetComponent<ItemInfo>().ItemPassive.setImgPrefs(DM.ins.personalData.ItemPassive);
+                    break;
+            }
+
+            if(!model) return;
+            var itemPassiveList = model.GetComponent<ItemInfo>().ItemPassive.Arr;
+            //* 調整
+            switch(this.type){
+                case "Chara" : 
+                    showItemPassiveUI(type, itemPassiveList, itemSkillBoxPref, psvPanel);
+                    break;
+                case "Bat" :
+                    parentTf.GetComponent<RectTransform>().localPosition = new Vector3(0,200,800); //* xとyは自動調整される。
+                    model.transform.localPosition = new Vector3(model.transform.localPosition.x, 0.75f, model.transform.localPosition.z);
+                    model.transform.localRotation = Quaternion.Euler(model.transform.localRotation.x, model.transform.localRotation.y, -45);
+
+                    showItemPassiveUI(type, itemPassiveList, itemSkillBoxPref, psvPanel);
+                    break;
+                case "Skill" : 
+                    model.transform.localPosition = new Vector3(0,0,0); //* posZがずれるから、調整
+                    //* Add "OnClick()" EventListner
+                    Button btn = model.GetComponent<Button>();
+                    var svEvent = ScrollRect.GetComponent<ScrollViewEvent>();
+                    btn.onClick.AddListener(delegate{svEvent.onClickSkillPanel(model);});
+                    break;
+        }
+            Debug.Log("modelParentTf.pos=" + modelParentPref.position + ", modelParentTf.localPos=" + modelParentPref.localPosition);
+            model.name = obj.name;//名前上書き：しないと後ろに(clone)が残る。
+        });
+    }
+
+    private void showItemPassiveUI(string type, ItemPsvDt[] itemPassiveList, RectTransform itemSkillBoxPref, Transform psvPanel){
+        Array.ForEach(itemPassiveList, list=>{
+            if(list.lv > 0){
+                Debug.Log(list.imgPref.name + "= " + list.lv);
+                var boxPref = GameObject.Instantiate(itemSkillBoxPref, itemSkillBoxPref.localPosition, itemSkillBoxPref.localRotation, psvPanel);
+                var imgPref = GameObject.Instantiate(list.imgPref, Vector3.zero, Quaternion.identity, boxPref).transform;
+                boxPref.GetComponent<RectTransform>().localPosition = new Vector3(0,0,0);
+                switch(type){
+                    case "Chara" : break;
+                    case "Bat": psvPanel.GetComponent<RectTransform>().localPosition = new Vector3(2.4f, -2, 6.5f); break;
+                }
+                boxPref.GetComponentInChildren<Text>().text = list.lv.ToString();
+                boxPref.GetComponentInChildren<Text>().transform.SetAsLastSibling();
+            }
+        });
+        Debug.Log("--------------------------------------------");
+    }
+}
+
 public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 {
     //* OutSide

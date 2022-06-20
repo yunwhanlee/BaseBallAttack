@@ -30,9 +30,11 @@ public class ItemPassiveList{
         Array.ForEach(itemPsvList.arr, dtArr => arr[i++].imgPref = dtArr.imgPref);
     }
 
-    public void setLvArr(ItemPassiveList itemPsvList){
-        int i=0;
-        Array.ForEach(itemPsvList.Arr, dtArr => arr[i++].lv += dtArr.lv);
+    public void setLvArr(int[] lvArrTemp){
+        for(int i=0;i<lvArrTemp.Length;i++){
+            Debug.Log("result-> lv["+i+"]=" + lvArrTemp[i]);
+            Arr[i].lv = lvArrTemp[i];
+        }
     }
 }
 
