@@ -18,7 +18,7 @@ public class PersonalData {
     [SerializeField] int selectSkillIdx;  public int SelectSkillIdx {get => selectSkillIdx; set => selectSkillIdx = value;}
     [SerializeField] List<bool> skillLockList;  public List<bool> SkillLockList {get => skillLockList; set => skillLockList = value;}
     [Header("--Item Passive--")]
-    public ItemPassiveList itemPassive;
+    [SerializeField] ItemPassiveList itemPassive; public ItemPassiveList ItemPassive {get => itemPassive; set => itemPassive = value;}
     
     //* PlayerPrefs キー リスト => privateは jsonには追加しない。
     private List<string> keyList;  public List<string> KeyList {get => keyList; set => keyList = value;}
@@ -111,6 +111,7 @@ public class PersonalData {
             if(i==0) this.SkillLockList.Add(false);//    items[0].IsLock = false;}
             else     this.SkillLockList.Add(true);//     items[i].IsLock = true;}
         }
+
     }
 
     public int getSelectIdx(string type){

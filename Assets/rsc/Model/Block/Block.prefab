@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 2321822276686827807}
   - component: {fileID: 5001239095227304454}
   - component: {fileID: 9054334007495445324}
+  - component: {fileID: 103983159092759430}
   m_Layer: 6
   m_Name: UPDOWN_ARROW
   m_TagString: Untagged
@@ -113,6 +114,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &103983159092759430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917898648971131533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b30dd83a12669d4f973ff5a79ca9842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1376276108105304710
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,6 +402,7 @@ GameObject:
   - component: {fileID: 5052066736788326536}
   - component: {fileID: 129522917729464165}
   - component: {fileID: 8063940056987781692}
+  - component: {fileID: 1281725069080591091}
   m_Layer: 6
   m_Name: BOMB
   m_TagString: Untagged
@@ -450,6 +467,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1281725069080591091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981637139153723002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db125c7de00668f4e98849d0aaf366d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 0
 --- !u!1 &5492674936841116292
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,6 +588,7 @@ GameObject:
   - component: {fileID: 5829186097608608403}
   - component: {fileID: 7559016449060398348}
   - component: {fileID: 4784085544204527993}
+  - component: {fileID: 7815777032643245793}
   m_Layer: 6
   m_Name: LR_ARROW
   m_TagString: Untagged
@@ -620,6 +653,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7815777032643245793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5955417342935560102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b30dd83a12669d4f973ff5a79ca9842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &6006247087584313065
 GameObject:
   m_ObjectHideFlags: 0

@@ -38,7 +38,7 @@ public class ScrollView {
 
                     //* Item Passive UI Ready
                     psvPanel = GameObject.Instantiate(itemPassivePanel, itemPassivePanel.localPosition, itemPassivePanel.localRotation, parentTf).transform;
-                    model.GetComponent<ItemInfo>().ItemPassive.setImgPrefs(DM.ins.personalData.itemPassive);
+                    model.GetComponent<ItemInfo>().ItemPassive.setImgPrefs(DM.ins.personalData.ItemPassive);
                     break;
             }
 

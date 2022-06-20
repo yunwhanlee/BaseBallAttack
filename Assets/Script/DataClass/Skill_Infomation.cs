@@ -25,8 +25,6 @@ public class ItemPassiveList{
     };
     public ItemPsvDt[] Arr {get => arr; set => arr = value;}
 
-    [SerializeField] GameObject[] imgPrefs; GameObject[] ImgPrefs {get => imgPrefs; set => imgPrefs = value;}
-
     public void setImgPrefs(ItemPassiveList itemPsvList){
         int i=0;
         Array.ForEach(itemPsvList.arr, dtArr => arr[i++].imgPref = dtArr.imgPref);

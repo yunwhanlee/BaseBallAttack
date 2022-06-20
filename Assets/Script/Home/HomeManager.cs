@@ -78,11 +78,13 @@ public class HomeManager : MonoBehaviour
         //* Model Copy
         var playerModel = modelTf.GetChild(0);
         playerModel.GetComponent<Animator>().SetBool("IsIdle", false); //Ready Pose
-        Instantiate(playerModel, Vector3.zero, Quaternion.identity, DM.ins.transform);
+        playerModel.SetParent(DM.ins.transform);
+        // var copyModel = Instantiate(playerModel, Vector3.zero, Quaternion.identity, DM.ins.transform);
 
-        ItemInfo[] itemInfoArr = playerModel.GetComponentsInChildren<ItemInfo>();
-        Array.ForEach(itemInfoArr, itemInfo=>{
-            DM.ins.personalData.itemPassive.setLvArr(itemInfo.ItemPassive);
+        ItemInfo[] childs = playerModel.GetComponentsInChildren<ItemInfo>();
+        Array.ForEach(childs, obj=>{
+            Debug.LogFormat("<b>Name= {0}, Arr= {1}</b>", obj.name, obj.ItemPassive.Arr);
+            DM.ins.personalData.ItemPassive.setLvArr(obj.ItemPassive);
         });
 
         SceneManager.LoadScene("Play");

@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
     private Animator anim;
 
     public void Start(){
-        //* Model Load
+        //* Player Model Move Parent
         var playerModel = DM.ins.transform.GetChild(0);
         playerModel.SetParent(this.gameObject.transform);
 
@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
         });
 
         //* Set Passive Skills : @params { int level, T value, T unit }
-        var psvLvArr = DM.ins.personalData.itemPassive.Arr;
+        var psvLvArr = DM.ins.personalData.ItemPassive.Arr;
         dmg = new PassiveSkill<int>("dmg", psvLvArr[(int)DM.PSV_INDEX.DMG].lv, 1, 1);
         multiShot = new PassiveSkill<int>("multiShot", psvLvArr[(int)DM.PSV_INDEX.MULTISHOT].lv, 0, 1);
         speed = new PassiveSkill<float>("speed", psvLvArr[(int)DM.PSV_INDEX.SPEED].lv, 1f, 0.2f);

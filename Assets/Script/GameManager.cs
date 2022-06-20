@@ -143,7 +143,10 @@ public class GameManager : MonoBehaviour
     public void setBallPreviewGoalImgRGBA(Color color) => ballPreviewGoalImg.color = color;
     public GameObject[] getSkillImgObjPrefs() => passiveSkillImgObjPrefs;
     public void throwScreenAnimSetTrigger(string name) => throwScreen.GetComponent<Animator>().SetTrigger(name);
+    
+    //* --------------------------------------------------------------------------------------
     //* GUI Button
+    //* --------------------------------------------------------------------------------------
     public void onClickReadyButton() => switchCamScene();
     public void onClickReGameButton() => init();
     public void onClickSkillButton() => levelUpPanel.SetActive(false);
