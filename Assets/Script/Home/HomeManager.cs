@@ -83,6 +83,8 @@ public class HomeManager : MonoBehaviour
 
         //* Set Item Passive Data
         int[] lvArrTemp = getItemPsvLvArr(playerModel);
+        Debug.Log("DM.ins.personalData.ItemPassive= " + DM.ins.personalData.ItemPassive);
+        //! (BUG) NullReferance Instance Error  
         DM.ins.personalData.ItemPassive.setLvArr(lvArrTemp);
 
         SceneManager.LoadScene("Play");
@@ -101,12 +103,16 @@ public class HomeManager : MonoBehaviour
     //* Private Function
     //* ----------------------------------------------------------------
     private int[] getItemPsvLvArr(Transform playerModel){
+        // Debug.Log("getItemPsvLvArr:: playerModel= " + playerModel);
         ItemInfo[] childs = playerModel.GetComponentsInChildren<ItemInfo>();
         int len = childs[0].ItemPassive.Arr.Length;
+        Debug.Log("lenght= " + len);
         int[] lvArrTemp = new int[len];
         Array.ForEach(childs, child=>{
-            for(int i=0; i<len; i++)
+            for(int i=0; i<len; i++){
                 lvArrTemp[i] += child.ItemPassive.Arr[i].lv;
+                // Debug.LogFormat("lvArrTemp[{0}]= {1}", i,lvArrTemp[i]);
+            }
         });
         return lvArrTemp;
     }
