@@ -22,6 +22,7 @@ public class ScrollView {
     }
 
     public void createObject(RectTransform modelParentPref, RectTransform itemPassivePanel, RectTransform itemSkillBoxPref){
+        Debug.LogFormat("createObject:: {0}, {1}, {2}",modelParentPref, itemPassivePanel, itemSkillBoxPref);
         //* Prefabs 生成
         Array.ForEach(prefs, obj=>{
             //* 生成

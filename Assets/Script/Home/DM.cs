@@ -67,9 +67,15 @@ public class DM : MonoBehaviour
             Array.ForEach(DM.ins.scrollviews, sv => {
                 sv.ScrollRect = this.scrollviews[i].ScrollRect;
                 sv.ContentTf = this.scrollviews[i].ContentTf;
+                sv.Prefs = this.scrollviews[i].Prefs;
                 i++;
-            });            
+            });
 
+            //! (BUG-防止) "Home"シーンに戻った場合、scrollViewsがnullなくても、ItemPassiveが宣言しないためエラー。
+            DM.ins.personalData.ItemPassive = this.personalData.ItemPassive;
+
+            DM.ins.Start();
+            
             Destroy(this.gameObject);
             return;
         }

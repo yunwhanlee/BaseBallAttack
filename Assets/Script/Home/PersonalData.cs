@@ -58,6 +58,8 @@ public class PersonalData {
         this.SelectSkillIdx = data.SelectSkillIdx;
         this.SkillLockList = data.SkillLockList;
 
+        // this.ItemPassive = data.ItemPassive;
+
         //* Set Real Content Items IsLock
         for(int i=0; i<charas.Length; i++){
             if(i==0)    Debug.Log("<color=green>Chara</color>LockList["+i+"].IsLock=" + this.CharaLockList[i] + ", length= <color=green>" + charas.Length + "</color>");
@@ -97,6 +99,8 @@ public class PersonalData {
 
         this.SelectSkillIdx = 0;
         this.SkillLockList = new List<bool>();
+
+        // this.ItemPassive = new ItemPassiveList();
 
         for(int i=0; i<DM.ins.scrollviews[(int)DM.ITEM.Chara].Prefs.Length; i++){
             if(i==0) this.CharaLockList.Add(false);//    items[0].IsLock = false;}
