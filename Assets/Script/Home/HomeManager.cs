@@ -83,8 +83,6 @@ public class HomeManager : MonoBehaviour
 
         //* Set Item Passive Data
         int[] lvArrTemp = getItemPsvLvArr(playerModel);
-        //! (BUG) NullReferance Instance Error  
-        Debug.Log("DM.ins.personalData= " + DM.ins.personalData.ItemPassive);
         DM.ins.personalData.ItemPassive.setLvArr(lvArrTemp);
 
         SceneManager.LoadScene("Play");
@@ -161,10 +159,9 @@ public class HomeManager : MonoBehaviour
 
     public void setSelectSkillImg(){
         Debug.Log("setSelectSkillImgAtHome():: DM.ins.personalData.SelectSkillIdx= " + DM.ins.personalData.SelectSkillIdx);
-        var btns = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf.GetComponentsInChildren<Button>();
+        var prefs = DM.ins.scrollviews[(int)DM.ITEM.Skill].Prefs;
         int curIdx = DM.ins.personalData.SelectSkillIdx;
-        var sprite = btns[curIdx].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
-
+        var sprite = prefs[curIdx].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
         SelectSkillImg.sprite = sprite;
     }
 }

@@ -26,12 +26,13 @@ public class PersonalData {
     //TODO Item OnLock List
 
     //* constructor
-    public PersonalData(){
+    public PersonalData(){  
         //* 初期化
         KeyList = new List<string>();
         charaLockList = new List<bool>();
         batLockList = new List<bool>();
         skillLockList = new List<bool>();
+        ItemPassive = new ItemPassiveList();
     }
 
     //* method

@@ -68,10 +68,7 @@ public class DM : MonoBehaviour
                 sv.ScrollRect = this.scrollviews[i].ScrollRect;
                 sv.ContentTf = this.scrollviews[i].ContentTf;
                 i++;
-            });
-            
-            var hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
-            hm.setSelectSkillImg();
+            });            
 
             Destroy(this.gameObject);
             return;

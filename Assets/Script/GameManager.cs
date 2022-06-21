@@ -291,20 +291,19 @@ public class GameManager : MonoBehaviour
     public void setGame(string type){
         switch(type){
             case "PAUSE":
-                Time.timeScale = 0; 
+                Time.timeScale = 0;
                 pausePanel.SetActive(true);
                 displayCurPassiveSkillStatus(type);
-
                 break;
             case "CONTINUE":
-                Time.timeScale = 1; 
+                Time.timeScale = 1;
                 resetSkillStatusTable();
-                pausePanel.SetActive(false); 
+                pausePanel.SetActive(false);
                 break;
             case "HOME":
+                Time.timeScale = 1;
                 Debug.Log("FINISH GAME!");
                 resetSkillStatusTable();
-                //TODO
                 SceneManager.LoadScene("Home");
                 break;
         }
