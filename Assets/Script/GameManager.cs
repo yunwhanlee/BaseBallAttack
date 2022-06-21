@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -304,6 +305,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log("FINISH GAME!");
                 resetSkillStatusTable();
                 //TODO
+                SceneManager.LoadScene("Home");
                 break;
         }
     }

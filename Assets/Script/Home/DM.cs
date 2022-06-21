@@ -59,7 +59,23 @@ public class DM : MonoBehaviour
     void singleton(){
         //* Singleton
         if(ins == null) ins = this;
-        else if(ins != null) return;
+        else if(ins != null) {
+            DM.ins.CoinTxt = this.CoinTxt;
+            DM.ins.DiamondTxt = this.DiamondTxt;
+            
+            int i=0;
+            Array.ForEach(DM.ins.scrollviews, sv => {
+                sv.ScrollRect = this.scrollviews[i].ScrollRect;
+                sv.ContentTf = this.scrollviews[i].ContentTf;
+                i++;
+            });
+            
+            var hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
+            hm.setSelectSkillImg();
+
+            Destroy(this.gameObject);
+            return;
+        }
         DontDestroyOnLoad(this.gameObject);
     }
 }

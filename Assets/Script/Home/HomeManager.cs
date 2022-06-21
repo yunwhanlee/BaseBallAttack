@@ -83,8 +83,8 @@ public class HomeManager : MonoBehaviour
 
         //* Set Item Passive Data
         int[] lvArrTemp = getItemPsvLvArr(playerModel);
-        Debug.Log("DM.ins.personalData.ItemPassive= " + DM.ins.personalData.ItemPassive);
         //! (BUG) NullReferance Instance Error  
+        Debug.Log("DM.ins.personalData= " + DM.ins.personalData.ItemPassive);
         DM.ins.personalData.ItemPassive.setLvArr(lvArrTemp);
 
         SceneManager.LoadScene("Play");
@@ -159,7 +159,7 @@ public class HomeManager : MonoBehaviour
         }
     }
 
-    private void setSelectSkillImg(){
+    public void setSelectSkillImg(){
         Debug.Log("setSelectSkillImgAtHome():: DM.ins.personalData.SelectSkillIdx= " + DM.ins.personalData.SelectSkillIdx);
         var btns = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf.GetComponentsInChildren<Button>();
         int curIdx = DM.ins.personalData.SelectSkillIdx;
