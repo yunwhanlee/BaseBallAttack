@@ -20,7 +20,7 @@ public class DM : MonoBehaviour
     public Material grayItemLock;
     [SerializeField] string selectType = "";    public string SelectType {get => selectType; set => selectType = value;}
 
-    [SerializeField] RectTransform modelParentPref;   public RectTransform ModelParentPref {get => modelParentPref; set => modelParentPref = value;}
+    [SerializeField] RectTransform modelContentPref;   public RectTransform ModelContentPref {get => modelContentPref; set => modelContentPref = value;}
     [SerializeField] RectTransform itemPassivePanel;   public RectTransform ItemPassivePanel {get => itemPassivePanel; set => itemPassivePanel = value;}
     [SerializeField] RectTransform itemSkillBoxPref;   public RectTransform ItemSkillBoxPref {get => itemSkillBoxPref; set => itemSkillBoxPref = value;}
     public ScrollView[] scrollviews; //* [0] : Chara, [1] : Bat, [2] : Skill, [3] : CashShop
@@ -30,9 +30,9 @@ public class DM : MonoBehaviour
     void Awake() => singleton();
     void Start(){
         //* contents Prefab 生成
-        scrollviews[(int)DM.ITEM.Chara].createObject(modelParentPref, itemPassivePanel, itemSkillBoxPref);
-        scrollviews[(int)DM.ITEM.Bat].createObject(modelParentPref, itemPassivePanel, itemSkillBoxPref);
-        scrollviews[(int)DM.ITEM.Skill].createObject(modelParentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.ITEM.Chara].createObject(modelContentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.ITEM.Bat].createObject(modelContentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.ITEM.Skill].createObject(modelContentPref, itemPassivePanel, itemSkillBoxPref);
 
         //* Items of Content
         ItemInfo[] charas = scrollviews[(int)DM.ITEM.Chara].ContentTf.GetComponentsInChildren<ItemInfo>();

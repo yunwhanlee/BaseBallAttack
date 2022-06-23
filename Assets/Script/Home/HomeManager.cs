@@ -133,10 +133,10 @@ public class HomeManager : MonoBehaviour
     }
     private void setGUI(string type){
         //* Set Type Hash Index
-        DlgBGColor dlgBgClr = (type == "Chara")? DlgBGColor.Chara
-            : (type == "Bat")? DlgBGColor.Bat
-            : (type == "Skill")? DlgBGColor.Skill
-            : DlgBGColor.CashShop;
+        int selectType = (type == DM.ITEM.Chara.ToString())? (int)DM.ITEM.Chara
+            : (type == DM.ITEM.Bat.ToString())? (int)DM.ITEM.Bat
+            : (type == DM.ITEM.Skill.ToString())? (int)DM.ITEM.Skill
+            : -9999;
 
         //* Active GUI
         switch(type){
@@ -151,8 +151,13 @@ public class HomeManager : MonoBehaviour
                 homeDialog.Panel.gameObject.SetActive(false);
                 homeDialog.GoBtn.gameObject.SetActive(true);
                 selectDialog.Panel.gameObject.SetActive(true);
-                SelectPanelScrollBG.color = selectPanelColors[(int)dlgBgClr];
-                DM.ins.scrollviews[(int)dlgBgClr].ScrollRect.gameObject.SetActive(true);
+                SelectPanelScrollBG.color = selectPanelColors[selectType];
+                DM.ins.scrollviews[selectType].ScrollRect.gameObject.SetActive(true);
+
+                float width = Mathf.Abs(DM.ins.ModelContentPref.rect.width);
+                int index = (type == DM.ITEM.Chara.ToString())? DM.ins.personalData.SelectCharaIdx : DM.ins.personalData.SelectBatIdx;
+                float saveModelPosX = -Mathf.Abs(Mathf.FloorToInt(width * (index+1)));
+                DM.ins.scrollviews[selectType].ContentTf.anchoredPosition = new Vector2(saveModelPosX, -500);
                 break;
         }
     }

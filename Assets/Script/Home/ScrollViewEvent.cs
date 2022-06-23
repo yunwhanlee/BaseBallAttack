@@ -96,7 +96,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public HomeEffectManager em;
     public ScrollRect scrollRect;
 
-    float rectWidth;
+    // float rectWidth;
     float curIdxBasePos;    public float CurIdxBasePos {get => curIdxBasePos; set => curIdxBasePos = value;}
     [SerializeField] int curIdx;     public int CurIdx {get => curIdx; set => curIdx = value;}
 
@@ -117,7 +117,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     void Start(){
         scrollRect = GetComponent<ScrollRect>();
-        rectWidth = DM.ins.ModelParentPref.rect.width;
+        
 
         if(this.gameObject.name != "ScrollView_Skill"){
             BoxSprRdr = UIGroup.GetChild(0).GetComponent<SpriteRenderer>();
@@ -145,7 +145,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public void OnScrollViewPos(RectTransform pos){ //* －が右側
         if(gameObject.name == "ItemPassivePanel(Clone)") return;
 
-        float width = Mathf.Abs(rectWidth);
+        float width = Mathf.Abs(DM.ins.ModelContentPref.rect.width);
         float offset = -(width + width/2);
         float curPosX = pos.anchoredPosition.x - offset;
         var prefs = (DM.ins.SelectType == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].Prefs : DM.ins.scrollviews[(int)DM.ITEM.Bat].Prefs;
@@ -204,19 +204,6 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         boxGlowEf.GlowColor = color;
         boxGlowEf.GlowBrightness = brightness;
         boxGlowEf.OutlineWidth = outline;
-
-        //* Show Item Passive Ability
-        // var childs = itemPassivePanel.GetComponentsInChildren<Transform>();
-        // var passiveList = curItem.GetComponent<ItemInfo>().ItemPassive;
-        // int i=0;
-        // Array.ForEach(passiveList.getLvArr(), psvLv=>{
-        //     if(psvLv > 0){
-        //         Debug.Log("psvLv=" + psvLv);
-        //     }
-        //     i++;
-        // });
-        
-        // DM.ins.personalData.itemPassive
     }
 
     public void drawChoiceBtnUI(){
