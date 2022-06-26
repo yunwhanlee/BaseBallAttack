@@ -156,12 +156,13 @@ public class Ball_Prefab : MonoBehaviour
             //* #2. Active HIT Skill
             gm.activeSkillBtnList.ForEach(skillBtn => {
                 if(skillBtn.Trigger){
+                    int selectAtvSkillIdx = DM.ins.personalData.SelectSkillIdx;
                     switch(skillBtn.Name){
                         case "Thunder":
                             //なし
                             break;
                         case "FireBall":
-                            em.createActiveSkillExplosionEF(skillBtn.Index, this.transform);
+                            em.createActiveSkillExplosionEF(selectAtvSkillIdx, this.transform);
                             //* Collider 
                             RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.FireBallCastWidth, Vector3.up, 0);
                             Array.ForEach(hits, hit => {
@@ -184,7 +185,7 @@ public class Ball_Prefab : MonoBehaviour
                             );
                             //* Destroy
                             Array.ForEach(sameColorBlocks, bl => {
-                                em.createActiveSkillExplosionEF(skillBtn.Index, bl.transform);
+                                em.createActiveSkillExplosionEF(selectAtvSkillIdx, bl.transform);
                                 bl.onDestroy(bl.gameObject, true);
                             });
 

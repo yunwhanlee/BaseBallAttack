@@ -172,6 +172,9 @@ public class ActiveSkillBtnUI{
         foreach(Transform child in pl.CastEFBallPreviewTf) GameObject.Destroy(child.gameObject);
     }
     public void onTriggerActive(int selectIdx, Player pl, EffectManager em){
+        //TODO selectIdx Btn処理しないと、現在はスキルボタン１個として対応。
+        int selectAtvSkillIdx = DM.ins.personalData.SelectSkillIdx;
+
         if(GrayBG.fillAmount == 0){
             Debug.LogFormat("ActiveSkillBtnUI:: onTriggerActive:: trigger= {0}, selectIdx= {1}, name= {2}",Trigger, selectIdx, name);
 
@@ -180,13 +183,7 @@ public class ActiveSkillBtnUI{
 
             //* Bat Effect
             pl.BatEffectTf.gameObject.SetActive(Trigger);
-            foreach(Transform child in pl.BatEffectTf){
-                int childIdx = child.GetSiblingIndex();
-                if(DM.ins.personalData.SelectSkillIdx == childIdx)
-                    child.gameObject.SetActive(true);
-                else 
-                    child.gameObject.SetActive(false);
-            }
+            em.enableSelectedActiveSkillBatEF(pl.BatEffectTf);
 
             //* Cast Effect
             if(Trigger){
@@ -196,7 +193,7 @@ public class ActiveSkillBtnUI{
                     case "FireBall":    parentTf = pl.CastEFBallPreviewTf;  break;
                     case "ColorBall":   parentTf = pl.CastEFArrowTf;        break;
                 }
-                em.createActiveSkillCastEF(selectIdx, parentTf);
+                em.createActiveSkillCastEF(selectAtvSkillIdx, parentTf);
             }
             else{
                 foreach(Transform child in pl.CastEFArrowTf) GameObject.Destroy(child.gameObject);

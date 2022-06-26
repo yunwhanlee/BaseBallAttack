@@ -21,6 +21,7 @@ public class EffectManager : MonoBehaviour
     public GameObject instantKillTextEF;
 
     //* Active Skill EF
+    public int selectAtvSkillIdx;
     public GameObject[] activeSkillBatEFs;
     public GameObject[] activeSkillShotEFs;
     public GameObject[] activeSkillExplosionEFs;
@@ -31,6 +32,7 @@ public class EffectManager : MonoBehaviour
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         
         Debug.Log("EffectManager:: gm.activeSkillDataBase.Length=" + gm.activeSkillDataBase.Length);
+        selectAtvSkillIdx = DM.ins.personalData.SelectSkillIdx;
         int cnt = gm.activeSkillDataBase.Length;
         activeSkillBatEFs = new GameObject[cnt];
         activeSkillShotEFs = new GameObject[cnt];
@@ -78,12 +80,24 @@ public class EffectManager : MonoBehaviour
         ins.transform.localScale = new Vector3(scale, scale, scale);
         Destroy(ins, 2);
     }
-
+    //* -------------------------------------------------------------
+    //* ActiveSkill Effect
+    //* -------------------------------------------------------------
     public void createActiveSkillBatEF(int idx, Transform parentTf){
         Debug.LogFormat("createActiveSkillBatEF:: BatEfs[{0}].name={1}", idx, activeSkillBatEFs[idx].name);
         // foreach(Transform child in parentTf)  Destroy(child.gameObject); //init
         var ins = Instantiate(activeSkillBatEFs[idx], parentTf.position, parentTf.rotation, parentTf) as GameObject;
     }
+    public void enableSelectedActiveSkillBatEF(Transform batEfs){
+        foreach(Transform batEf in batEfs){
+            int childIdx = batEf.GetSiblingIndex();
+            if(selectAtvSkillIdx == childIdx)
+                batEf.gameObject.SetActive(true);
+            else 
+                batEf.gameObject.SetActive(false);
+        }
+    }
+
     public void createActiveSkillShotEF(int idx, Transform parentTf, Quaternion dir, bool isTrailEffect = false){
         Transform parent = (isTrailEffect)? parentTf : effectGroup;
         var ins = Instantiate(activeSkillShotEFs[idx], parentTf.position, dir, parent) as GameObject;
