@@ -70,7 +70,8 @@ public class Player : MonoBehaviour
     public void Start(){
         //* Player Model Set Parent
         var playerModel = DM.ins.transform.GetChild(0);
-        playerModel.SetParent(this.gameObject.transform);
+        playerModel.SetParent(this.gameObject.transform);// Parent TfをPlayerに移動。
+        playerModel.SetSiblingIndex(0); // Child INDEXを０番に移動。
 
         var atvSkillDb = gm.activeSkillDataBase;
         registAtvSkillNames = new string[atvSkillDb.Length];
@@ -78,11 +79,15 @@ public class Player : MonoBehaviour
 
         //* Player Charaは 必ず０番目のINDEXにすること！！
         var charaTf = this.transform.GetChild(0);
-        BatEffectTf = charaTf.Find("Bone").Find("Bone_R.001").Find("Bone_R.002").Find("RightArm").Find("Bat").Find("BatEffectTf");
+        Transform RightArm = charaTf.Find("Bone").Find("Bone_R.001").Find("Bone_R.002").Find("RightArm");
+        int childLastIdx = RightArm.childCount - 1;
+        Transform bat = RightArm.GetChild(childLastIdx);
+        BatEffectTf = bat.Find("BatEffectTf");
+        Debug.Log("Player:: Start:: RightArm.childCount= " + RightArm.childCount + ", RightArm= " + RightArm);
         Debug.Log("Player:: charaTf= " + charaTf + ", BatEffectTf= " + BatEffectTf);
 
         int i=0;
-        //* Set Active Skills
+        //* Set Active Skills DataBase
         Array.ForEach(atvSkillDb, dt=>{
             // Get All Skill Names
             registAtvSkillNames[i] = dt.Name;

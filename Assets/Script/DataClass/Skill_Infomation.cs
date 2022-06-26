@@ -173,7 +173,7 @@ public class ActiveSkillBtnUI{
     }
     public void onTriggerActive(int selectIdx, Player pl, EffectManager em){
         if(GrayBG.fillAmount == 0){
-            Debug.Log("ActiveSkillBtnUI:: onTriggerActive:: trigger= " + Trigger);
+            Debug.LogFormat("ActiveSkillBtnUI:: onTriggerActive:: trigger= {0}, selectIdx= {1}, name= {2}",Trigger, selectIdx, name);
 
             Trigger = !Trigger;
             selectFence.gameObject.SetActive(Trigger);
@@ -182,14 +182,13 @@ public class ActiveSkillBtnUI{
             pl.BatEffectTf.gameObject.SetActive(Trigger);
             foreach(Transform child in pl.BatEffectTf){
                 int childIdx = child.GetSiblingIndex();
-                if(selectIdx == childIdx)
+                if(DM.ins.personalData.SelectSkillIdx == childIdx)
                     child.gameObject.SetActive(true);
                 else 
                     child.gameObject.SetActive(false);
             }
 
             //* Cast Effect
-            Debug.Log("ActiveSkillBtnUI:: this.name=" + this.name);
             if(Trigger){
                 Transform parentTf = null;
                 switch(this.name){

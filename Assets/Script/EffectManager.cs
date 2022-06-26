@@ -80,6 +80,7 @@ public class EffectManager : MonoBehaviour
     }
 
     public void createActiveSkillBatEF(int idx, Transform parentTf){
+        Debug.LogFormat("createActiveSkillBatEF:: BatEfs[{0}].name={1}", idx, activeSkillBatEFs[idx].name);
         // foreach(Transform child in parentTf)  Destroy(child.gameObject); //init
         var ins = Instantiate(activeSkillBatEFs[idx], parentTf.position, parentTf.rotation, parentTf) as GameObject;
     }

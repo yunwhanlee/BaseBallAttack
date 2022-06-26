@@ -92,7 +92,6 @@ public class GameManager : MonoBehaviour
 
     //---------------------------------------
     void Start() {
-        // Debug.Log("deadLine.pos.z=" + deadLineTf.position.z);
         hitRangeSliderTf = hitRangeSlider.GetComponent<RectTransform>();
         readyBtn = readyBtn.GetComponent<Button>();
         gvStageTxt = gameoverPanel.transform.GetChild(1).GetComponent<Text>();
@@ -102,7 +101,7 @@ public class GameManager : MonoBehaviour
         //* Ball Preview Dir Goal Set Z-Center
         setBallPreviewGoalRandomPos();
 
-        //* Active Skill Btns(2個)
+        //* Active Skill Btns(最大2個)
         int i=0;
         Debug.Log("GM:: activeSkillBtnGroup.childCount=" + activeSkillBtnGroup.childCount);
         foreach(Transform child in activeSkillBtnGroup){
