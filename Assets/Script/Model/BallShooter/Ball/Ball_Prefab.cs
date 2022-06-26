@@ -153,7 +153,7 @@ public class Ball_Prefab : MonoBehaviour
     //* Hit Block
     private void OnCollisionEnter(Collision col) {//* Give Damage
         if(col.gameObject.tag == "NormalBlock"){
-            //* #2. Active HIT Skill
+            //* #2. Active Skill HIT
             gm.activeSkillBtnList.ForEach(skillBtn => {
                 if(skillBtn.Trigger){
                     int selectAtvSkillIdx = DM.ins.personalData.SelectSkillIdx;
@@ -186,7 +186,7 @@ public class Ball_Prefab : MonoBehaviour
                             //* Destroy
                             Array.ForEach(sameColorBlocks, bl => {
                                 em.createActiveSkillExplosionEF(selectAtvSkillIdx, bl.transform);
-                                bl.onDestroy(bl.gameObject, true);
+                                bl.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(100);
                             });
 
                             skillBtn.init(pl);

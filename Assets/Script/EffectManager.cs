@@ -21,7 +21,6 @@ public class EffectManager : MonoBehaviour
     public GameObject instantKillTextEF;
 
     //* Active Skill EF
-    public int selectAtvSkillIdx;
     public GameObject[] activeSkillBatEFs;
     public GameObject[] activeSkillShotEFs;
     public GameObject[] activeSkillExplosionEFs;
@@ -32,7 +31,6 @@ public class EffectManager : MonoBehaviour
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         
         Debug.Log("EffectManager:: gm.activeSkillDataBase.Length=" + gm.activeSkillDataBase.Length);
-        selectAtvSkillIdx = DM.ins.personalData.SelectSkillIdx;
         int cnt = gm.activeSkillDataBase.Length;
         activeSkillBatEFs = new GameObject[cnt];
         activeSkillShotEFs = new GameObject[cnt];
@@ -91,9 +89,9 @@ public class EffectManager : MonoBehaviour
     public void enableSelectedActiveSkillBatEF(Transform batEfs){
         foreach(Transform batEf in batEfs){
             int childIdx = batEf.GetSiblingIndex();
-            if(selectAtvSkillIdx == childIdx)
+            if(DM.ins.personalData.SelectSkillIdx == childIdx)
                 batEf.gameObject.SetActive(true);
-            else 
+            else
                 batEf.gameObject.SetActive(false);
         }
     }
