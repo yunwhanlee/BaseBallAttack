@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6616234246092764648}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2246457684362142071}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 804976952670218699}
   - component: {fileID: 2358639111509798664}
   - component: {fileID: 1699279950286883447}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 289030347217021077}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone_R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 768727512281380844}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone_L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8935724796454553351}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone_L.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 772206710994964520}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +278,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6968044589767975716}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone_L.002_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -312,7 +312,7 @@ GameObject:
   - component: {fileID: 2524251634496801917}
   - component: {fileID: 2524251634496801918}
   - component: {fileID: 2524251634496801919}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Action Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -477,7 +477,7 @@ GameObject:
   - component: {fileID: 2524251635105666516}
   - component: {fileID: 2524251635105666517}
   - component: {fileID: 2524251635105666518}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Action Camera2
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -807,7 +807,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5304678552850431989}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone_L.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -841,7 +841,7 @@ GameObject:
   - component: {fileID: 5150077727983549367}
   - component: {fileID: 5872607071910289059}
   - component: {fileID: 1013239461104058344}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -922,7 +922,7 @@ GameObject:
   - component: {fileID: 6337142288803324232}
   - component: {fileID: 1591831946414114779}
   - component: {fileID: 3701899953591274428}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RightLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1001,7 +1001,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1317028200486573370}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone_L.004_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1034,9 +1034,10 @@ GameObject:
   - component: {fileID: 5552249374014735836}
   - component: {fileID: 2524251635010537925}
   - component: {fileID: 9133811995639592125}
-  m_Layer: 0
+  - component: {fileID: 2782221361267661700}
+  m_Layer: 3
   m_Name: baseBallPlayer3_Bear
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1141,6 +1142,20 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!136 &2782221361267661700
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3442606834111591561}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.95325816
+  m_Height: 4.2327
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9540937, z: 0.45325816}
 --- !u!1 &3879407351389472378
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,7 +1165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1107049582318012184}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1186,7 +1201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2561006988665822734}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1217,7 +1232,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 113557754988831030}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone.003_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1247,7 +1262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7042139739121503228}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1279,7 +1294,7 @@ GameObject:
   - component: {fileID: 4499996772110062294}
   - component: {fileID: 8924798530720581301}
   - component: {fileID: 5118080452277873095}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1358,7 +1373,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 44451677576402327}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone_R.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1389,7 +1404,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2515007873072702759}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1420,7 +1435,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 568473114892041135}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1451,7 +1466,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8216829192879090242}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1482,7 +1497,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2458302806355567317}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone_R.004_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1512,7 +1527,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7060139403874965618}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone_R.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1544,7 +1559,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 631215827418241791}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bone_R.002_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1576,7 +1591,7 @@ GameObject:
   - component: {fileID: 5815636054015396845}
   - component: {fileID: 7266394424488978187}
   - component: {fileID: 8747531075230312796}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LeftLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1657,7 +1672,7 @@ GameObject:
   - component: {fileID: 6041682395871350457}
   - component: {fileID: 5693298223936256176}
   - component: {fileID: 950340899751969574}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RightArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1745,7 +1760,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2295754910549213891, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2295754910549213891, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
       propertyPath: m_IsActive
@@ -1813,11 +1828,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2792227174823619920, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4687525990440280973, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2295754910549213889, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
@@ -1838,7 +1853,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 870096551138628750, guid: fca4c80c52330524cbd4309c118af89c, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 898198825697390366, guid: fca4c80c52330524cbd4309c118af89c, type: 3}
       propertyPath: looping
@@ -1918,7 +1933,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3315550395074986093, guid: fca4c80c52330524cbd4309c118af89c, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5998523726804007684, guid: fca4c80c52330524cbd4309c118af89c, type: 3}
       propertyPath: m_Materials.Array.size
@@ -1982,7 +1997,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8856629436882153003, guid: fca4c80c52330524cbd4309c118af89c, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8856629437223374440, guid: fca4c80c52330524cbd4309c118af89c, type: 3}
       propertyPath: looping
@@ -2030,7 +2045,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8856629437223374447, guid: fca4c80c52330524cbd4309c118af89c, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8856629437242833156, guid: fca4c80c52330524cbd4309c118af89c, type: 3}
       propertyPath: m_RootOrder
@@ -2138,7 +2153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8856629437242833163, guid: fca4c80c52330524cbd4309c118af89c, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8856629437242833163, guid: fca4c80c52330524cbd4309c118af89c, type: 3}
       propertyPath: m_IsActive

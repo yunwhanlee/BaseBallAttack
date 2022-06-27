@@ -361,6 +361,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1376276108105304709, guid: 71f96bca88b0fd940a48a70f1bfe1885, type: 3}
   m_PrefabInstance: {fileID: 681275808}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &54044118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 54044119}
+  m_Layer: 0
+  m_Name: DropItemGroup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &54044119
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54044118}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.2668319, y: -10.859961, z: -0.33374214}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &63989821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1470,7 +1500,7 @@ GameObject:
   - component: {fileID: 405760899}
   - component: {fileID: 405760898}
   - component: {fileID: 405760897}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: LeftPosPad
   m_TagString: LeftPosPad
   m_Icon: {fileID: 0}
@@ -3123,9 +3153,10 @@ GameObject:
   m_Component:
   - component: {fileID: 702911505}
   - component: {fileID: 702911506}
+  - component: {fileID: 702911507}
   m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3223,6 +3254,19 @@ MonoBehaviour:
     level: 0
     value: 0
     unit: 0
+--- !u!65 &702911507
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702911504}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 3, z: 2}
+  m_Center: {x: 0, y: 0.59, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -4636,7 +4680,7 @@ Transform:
   - {fileID: 1134914429}
   - {fileID: 2110732040}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -7472,6 +7516,8 @@ MonoBehaviour:
   ballGroup: {fileID: 1179223822}
   deadLineTf: {fileID: 587487858}
   downWall: {fileID: 779756}
+  dropItemGroup: {fileID: 54044119}
+  dropCoinOrbPf: {fileID: 8648117785770068642, guid: 9c5c87122054a5f42a6d0f065b398386, type: 3}
   stage: 1
   bestScore: 999
   strikeCnt: 0
@@ -8729,7 +8775,7 @@ GameObject:
   - component: {fileID: 1855926414}
   - component: {fileID: 1855926413}
   - component: {fileID: 1855926412}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: RightPosPad
   m_TagString: RightPosPad
   m_Icon: {fileID: 0}
