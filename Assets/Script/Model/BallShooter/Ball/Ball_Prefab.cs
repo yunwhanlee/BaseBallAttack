@@ -240,6 +240,7 @@ public class Ball_Prefab : MonoBehaviour
         Time.timeScale = 0;
         pl.setAnimTrigger("HomeRun");
         yield return new WaitForSecondsRealtime(2);
+        gm.cam1.GetComponent<CamResolution>().setAnimTrigger("doShake");
         Time.timeScale = 1;
     }
 

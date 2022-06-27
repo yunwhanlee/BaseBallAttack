@@ -9,6 +9,7 @@ public class CamResolution : MonoBehaviour
 
     //* Inside Component 
     Camera cam;
+    Animator anim;
 
     //value
     const int DEVICE_WIDTH = 9;
@@ -16,7 +17,11 @@ public class CamResolution : MonoBehaviour
 
     void Awake() {
         setAutoDeviceCamRatio(DEVICE_WIDTH, DEVICE_HEIGHT);
-        
+    }
+
+    void Start()
+    {
+        anim = GetComponent<Animator>();
     }
 
     void Update() {
@@ -70,5 +75,11 @@ public class CamResolution : MonoBehaviour
         cam.rect = rect;//apply
     }
     //---------------------------------------
-    
+    public void setAnimTrigger(string type){
+        switch(type){
+            case "doShake":
+                anim.SetTrigger(type);
+                break;
+        }
+    }
 }
