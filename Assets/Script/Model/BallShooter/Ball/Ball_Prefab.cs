@@ -247,7 +247,7 @@ public class Ball_Prefab : MonoBehaviour
         Debug.Log("ActiveSkill Before Anim");
         Time.timeScale = 0;
         pl.setAnimTrigger("ActiveSkillBefSpotLight");
-        yield return new WaitForSecondsRealtime(0.35f);
+        yield return new WaitForSecondsRealtime(0.3f);
         Time.timeScale = 1;
     }
 
