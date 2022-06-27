@@ -49,24 +49,24 @@ public class HomeManager : MonoBehaviour
     //* ----------------------------------------------------------------
     public void onClickBtnGoToDialog(string name){
         //* Current Model Data & ParentTf
-        DM.ins.SelectType = name;
+        DM.ins.SelectItemType = name;
         var curChara = DM.ins.scrollviews[(int)DM.ITEM.Chara].Prefs[DM.ins.personalData.SelectCharaIdx];
         var curBat = DM.ins.scrollviews[(int)DM.ITEM.Bat].Prefs[DM.ins.personalData.SelectBatIdx];
         
-        switch(name){
+        switch(DM.ins.SelectItemType){
             case "Home" : 
                 createCurModel(curChara, curBat, modelTf);
                 setSelectSkillImg();
-                setGUI(name);
+                setGUI();
                 break;
             case "Chara" : 
-                setGUI(name);
+                setGUI();
                 break;
             case "Bat" : 
-                setGUI(name);
+                setGUI();
                 break;
             case "Skill" : 
-                setGUI(name);
+                setGUI();
                 break;
             case "CashShop":
                 //TODO
@@ -131,35 +131,28 @@ public class HomeManager : MonoBehaviour
             }
         }
     }
-    private void setGUI(string type){
-        //* Set Type Hash Index
-        int selectType = (type == DM.ITEM.Chara.ToString())? (int)DM.ITEM.Chara
-            : (type == DM.ITEM.Bat.ToString())? (int)DM.ITEM.Bat
-            : (type == DM.ITEM.Skill.ToString())? (int)DM.ITEM.Skill
-            : -9999;
-
-        //* Active GUI
-        switch(type){
+    private void setGUI(){
+        setActiveDialogGUI(DM.ins.SelectItemType);
+        switch(DM.ins.SelectItemType){
             case "Home":
-                homeDialog.Panel.gameObject.SetActive(true);
-                homeDialog.GoBtn.gameObject.SetActive(false);
-                selectDialog.Panel.gameObject.SetActive(false);
-                Array.ForEach(DM.ins.scrollviews, sv => sv.ScrollRect.gameObject.SetActive(false));
-                
+                Array.ForEach(DM.ins.scrollviews, sv => 
+                    sv.ScrollRect.gameObject.SetActive(false));
                 break;
             default : 
-                homeDialog.Panel.gameObject.SetActive(false);
-                homeDialog.GoBtn.gameObject.SetActive(true);
-                selectDialog.Panel.gameObject.SetActive(true);
-                SelectPanelScrollBG.color = selectPanelColors[selectType];
-                DM.ins.scrollviews[selectType].ScrollRect.gameObject.SetActive(true);
+                int typeIdx = DM.ins.convertSelectItemTypeStr2Idx();
+                SelectPanelScrollBG.color = selectPanelColors[typeIdx];
+                DM.ins.scrollviews[typeIdx].ScrollRect.gameObject.SetActive(true);
 
-                float width = Mathf.Abs(DM.ins.ModelContentPref.rect.width);
-                int index = (type == DM.ITEM.Chara.ToString())? DM.ins.personalData.SelectCharaIdx : DM.ins.personalData.SelectBatIdx;
-                float saveModelPosX = -Mathf.Abs(Mathf.FloorToInt(width * (index+1)));
-                DM.ins.scrollviews[selectType].ContentTf.anchoredPosition = new Vector2(saveModelPosX, -500);
+                var scrollViewEvent = DM.ins.scrollviews[typeIdx].ScrollRect.GetComponent<ScrollViewEvent>();
+                scrollViewEvent.setCurSelectedItem(typeIdx);
                 break;
         }
+    }
+    private void setActiveDialogGUI(string type){
+        bool isHome = (type == "Home")? true : false;
+        homeDialog.Panel.gameObject.SetActive(isHome);
+        homeDialog.GoBtn.gameObject.SetActive(!isHome);
+        selectDialog.Panel.gameObject.SetActive(!isHome);
     }
 
     public void setSelectSkillImg(){

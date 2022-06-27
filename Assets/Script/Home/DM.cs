@@ -18,7 +18,7 @@ public class DM : MonoBehaviour
 
     [Header("--Select Item--")]
     public Material grayItemLock;
-    [SerializeField] string selectType = "";    public string SelectType {get => selectType; set => selectType = value;}
+    [SerializeField] string selectItemType = "";    public string SelectItemType {get => selectItemType; set => selectItemType = value;}
 
     [SerializeField] RectTransform modelContentPref;   public RectTransform ModelContentPref {get => modelContentPref; set => modelContentPref = value;}
     [SerializeField] RectTransform itemPassivePanel;   public RectTransform ItemPassivePanel {get => itemPassivePanel; set => itemPassivePanel = value;}
@@ -80,5 +80,12 @@ public class DM : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    public int convertSelectItemTypeStr2Idx(){
+        return (SelectItemType == DM.ITEM.Chara.ToString())? (int)DM.ITEM.Chara
+            : (SelectItemType == DM.ITEM.Bat.ToString())? (int)DM.ITEM.Bat
+            : (SelectItemType == DM.ITEM.Skill.ToString())? (int)DM.ITEM.Skill
+            : -9999;
     }
 }

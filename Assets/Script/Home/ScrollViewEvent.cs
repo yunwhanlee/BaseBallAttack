@@ -55,7 +55,6 @@ public class ScrollView {
                     parentTf.GetComponent<RectTransform>().localPosition = new Vector3(0,200,800); //* xとyは自動調整される。
                     model.transform.localPosition = new Vector3(model.transform.localPosition.x, 0.75f, model.transform.localPosition.z);
                     model.transform.localRotation = Quaternion.Euler(model.transform.localRotation.x, model.transform.localRotation.y, -45);
-
                     showItemPassiveUI(type, itemPassiveList, itemSkillBoxPref, psvPanel);
                     break;
                 case "Skill" : 
@@ -118,7 +117,6 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     void Start(){
         scrollRect = GetComponent<ScrollRect>();
         
-
         if(this.gameObject.name != "ScrollView_Skill"){
             BoxSprRdr = UIGroup.GetChild(0).GetComponent<SpriteRenderer>();
             RankTxt = UIGroup.GetChild(1).GetComponent<Text>();
@@ -148,7 +146,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         float width = Mathf.Abs(DM.ins.ModelContentPref.rect.width);
         float offset = -(width + width/2);
         float curPosX = pos.anchoredPosition.x - offset;
-        var prefs = (DM.ins.SelectType == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].Prefs : DM.ins.scrollviews[(int)DM.ITEM.Bat].Prefs;
+        var prefs = (DM.ins.SelectItemType == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].Prefs : DM.ins.scrollviews[(int)DM.ITEM.Bat].Prefs;
         float max = width * prefs.Length - width;
         CurIdx = Mathf.Abs(Mathf.FloorToInt((curPosX) / width));
         CurIdxBasePos = -((CurIdx+1) * width);
@@ -167,7 +165,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
 
     public void updateItemInfo(){
-        string type = DM.ins.SelectType;
+        string type = DM.ins.SelectItemType;
         var contentTf = (type == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf : DM.ins.scrollviews[(int)DM.ITEM.Bat].ContentTf;
         //* Set PosX
         contentTf.anchoredPosition = new Vector2(CurIdxBasePos, -500);
@@ -218,11 +216,25 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }
     }
 
+    public void setCurSelectedItem(int typeIdx){
+        string type = DM.ins.SelectItemType;
+        if(type == DM.ITEM.Chara.ToString() || type == DM.ITEM.Bat.ToString()){
+            float width = Mathf.Abs(DM.ins.ModelContentPref.rect.width);
+            int index = (type == DM.ITEM.Chara.ToString())? DM.ins.personalData.SelectCharaIdx : DM.ins.personalData.SelectBatIdx;
+            float saveModelPosX = -Mathf.Abs(Mathf.FloorToInt(width * (index+1)));
+            DM.ins.scrollviews[typeIdx].ContentTf.anchoredPosition = new Vector2(saveModelPosX, -500);
+        }
+        else{ //* DM.ITEM.Skill
+            var saveSkillTf = DM.ins.scrollviews[typeIdx].ContentTf.GetChild(DM.ins.personalData.SelectSkillIdx);
+            saveSkillTf.GetComponent<UnityEngine.UI.Extensions.NicerOutline>().enabled = true;
+        }
+    }
+
     //* ----------------------------------------------------------------
     //*   UI Button
     //* ----------------------------------------------------------------
     public void onClickCheckBtn(string type){
-        if(DM.ins.SelectType != type) return;
+        if(DM.ins.SelectItemType != type) return;
         Debug.Log("onClickCheckBtn:: type= " + type + ", CurIdx= " + CurIdx);
         var curItem = getCurItem();
 
@@ -248,7 +260,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }
 
         //* Skill Panel UI Update
-        if(DM.ins.SelectType == DM.ITEM.Skill.ToString()){
+        if(DM.ins.SelectItemType == DM.ITEM.Skill.ToString()){
             onClickSkillPanel(curItem.gameObject);
         }
     }
@@ -269,21 +281,19 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //* ----------------------------------------------------------------
     //* Private Function
     //* ----------------------------------------------------------------
+    private ItemInfo getCurItem(){      
+        return getItemArr()[CurIdx];
+    }
     private ItemInfo[] getItemArr(){
-        var contentTf = (DM.ins.SelectType == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf
-        : (DM.ins.SelectType == "Bat")? DM.ins.scrollviews[(int)DM.ITEM.Bat].ContentTf
-        : (DM.ins.SelectType == "Skill")? DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf
+        var contentTf = (DM.ins.SelectItemType == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf
+        : (DM.ins.SelectItemType == "Bat")? DM.ins.scrollviews[(int)DM.ITEM.Bat].ContentTf
+        : (DM.ins.SelectItemType == "Skill")? DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf
         : null;
         var items = contentTf.GetComponentsInChildren<ItemInfo>();
         return items;
     }
-
-    private ItemInfo getCurItem(){      
-        return getItemArr()[CurIdx];
-    }
-
     private void setCheckIconColorAndOutline(){// (BUG) CharaのRightArmにあるBatにも<ItemInfo>有ったので、重複される。CharaPrefのBatを全て非活性化してOK。
-        string type = DM.ins.SelectType;
+        string type = DM.ins.SelectItemType;
         var items = getItemArr();
         var curItem = getCurItem();
 
@@ -306,7 +316,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
 
     private void activeOutline(ItemInfo item, bool isActive){
-        string type = DM.ins.SelectType;
+        string type = DM.ins.SelectItemType;
         switch(type){
             case "Chara": case "Bat":   item.Outline3D.enabled = isActive; break;
             case "Skill":               item.Outline2D.enabled = isActive; break;

@@ -17,7 +17,7 @@ public class ItemInfo : MonoBehaviour
 
 
     void Start(){
-        switch(DM.ins.SelectType){
+        switch(DM.ins.SelectItemType){
             //* 3D Model 形式
             case "Chara" :
             case "Bat" :{
