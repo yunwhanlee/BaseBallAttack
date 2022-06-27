@@ -31,6 +31,7 @@ Transform:
   m_Children:
   - {fileID: 2674890714429344597}
   - {fileID: 8180640153104638983}
+  - {fileID: 5950153710166343639}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -54,31 +55,31 @@ MonoBehaviour:
   outline2D: {fileID: 0}
   price: 0
   itemPassive:
-    dmg:
+    arr:
+    - name: Dmg
       lv: 0
       imgPref: {fileID: 0}
-    multiShot:
+    - name: MultiShot
       lv: 0
       imgPref: {fileID: 0}
-    speed:
-      lv: 1
-      imgPref: {fileID: 0}
-    instantKill:
+    - name: Speed
       lv: 0
       imgPref: {fileID: 0}
-    critical:
-      lv: 1
-      imgPref: {fileID: 0}
-    explosion:
-      lv: 1
-      imgPref: {fileID: 0}
-    expUp:
-      lv: 1
-      imgPref: {fileID: 0}
-    itemSpawn:
+    - name: InstantKill
       lv: 0
       imgPref: {fileID: 0}
-    imgPrefs: []
+    - name: Critical
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: Explosion
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: ExpUp
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: ItemSpawn
+      lv: 0
+      imgPref: {fileID: 0}
 --- !u!114 &-4953633340158557156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,6 +179,36 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &4379951661569209357
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5950153710166343639}
+  m_Layer: 3
+  m_Name: BatEffectTf
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5950153710166343639
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4379951661569209357}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1963710527300413060}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6966608606646842691
 GameObject:
   m_ObjectHideFlags: 0

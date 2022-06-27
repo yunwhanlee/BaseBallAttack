@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &628187612920707658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 479052174500893298}
+  m_Layer: 3
+  m_Name: BatEffectTf
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &479052174500893298
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628187612920707658}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4813286461711284503}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5298460928622142381
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,7 +60,8 @@ Transform:
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.87, y: 0.12, z: 1.23}
   m_LocalScale: {x: 0.03, y: 0.045, z: 0.045}
-  m_Children: []
+  m_Children:
+  - {fileID: 479052174500893298}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
@@ -103,31 +134,31 @@ MonoBehaviour:
   outline2D: {fileID: 0}
   price: 0
   itemPassive:
-    dmg:
+    arr:
+    - name: Dmg
       lv: 0
       imgPref: {fileID: 0}
-    multiShot:
+    - name: MultiShot
       lv: 0
       imgPref: {fileID: 0}
-    speed:
+    - name: Speed
       lv: 0
       imgPref: {fileID: 0}
-    instantKill:
-      lv: 1
-      imgPref: {fileID: 0}
-    critical:
-      lv: 1
-      imgPref: {fileID: 0}
-    explosion:
+    - name: InstantKill
       lv: 0
       imgPref: {fileID: 0}
-    expUp:
-      lv: 1
-      imgPref: {fileID: 0}
-    itemSpawn:
+    - name: Critical
       lv: 0
       imgPref: {fileID: 0}
-    imgPrefs: []
+    - name: Explosion
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: ExpUp
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: ItemSpawn
+      lv: 0
+      imgPref: {fileID: 0}
 --- !u!114 &4448247955000760146
 MonoBehaviour:
   m_ObjectHideFlags: 0
