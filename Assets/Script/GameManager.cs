@@ -29,9 +29,7 @@ public class GameManager : MonoBehaviour
     public Transform deadLineTf;
     public BoxCollider downWall;
 
-    [Header("<---- DROP ITEMS ---->")]
-    public Transform dropItemGroup;
-    public GameObject dropCoinOrbPf;
+
 
     [Header("<---- GUI ---->")]
     public int stage = 1;
@@ -371,20 +369,8 @@ public class GameManager : MonoBehaviour
         setBallPreviewGoalRandomPos();
 
         //* Collect Drop Items
-        var dropObjs = dropItemGroup.GetComponentsInChildren<DropItem>();
-        Debug.Log(dropObjs.Length);
-        Array.ForEach(dropObjs, dropObj=>{
-            dropObj.moveToTarget(pl.transform);
-        });
-        
+        var dropObjs = bm.dropItemGroup.GetComponentsInChildren<DropItem>();
+        Debug.Log("setNextStage:: dropObjs.Length= " + dropObjs.Length);
+        Array.ForEach(dropObjs, dropObj=>dropObj.moveToTarget(pl.transform));
     }
-
-    // IEnumerator coCollectDropItems(){
-    //     yield return new WaitForSeconds(1.5f);
-    // }
-
-    // private void onTriggerActiveSkill(){
-    //     bool active = !pl.ActiveSkillTrigger1;
-    //     pl.ActiveSkillTrigger1 = active;
-    // }
 }

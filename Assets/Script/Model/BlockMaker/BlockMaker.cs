@@ -23,6 +23,10 @@ public class BlockMaker : MonoBehaviour
     public Color[] colors;   public Color[] Colors {get => colors;}
     public Material[] mts;   public Material[] Mts {get => mts;}
 
+    [Header("<---- DROP ITEMS ---->")]
+    public Transform dropItemGroup;
+    public GameObject dropCoinOrbPf;
+
     public void Start() {
         //* Init
         var blocks = this.GetComponentsInChildren<Block_Prefab>();
@@ -59,6 +63,13 @@ public class BlockMaker : MonoBehaviour
                     blockIns = Instantiate(blockPref, pos, Quaternion.identity, blockBundle);
                 }
             }
+        }
+    }
+    public void createDropItemOrb(string type, Transform blockTf){
+        switch(type){
+            case "Exp" : 
+                var ins = Instantiate(dropCoinOrbPf, blockTf.position, Quaternion.identity, dropItemGroup) as GameObject;
+                break;
         }
     }
     private void moveDownBlock(){

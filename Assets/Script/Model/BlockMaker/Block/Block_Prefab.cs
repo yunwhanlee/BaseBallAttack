@@ -154,7 +154,7 @@ public class Block_Prefab : MonoBehaviour
         em.createBrokeBlockEF(target.transform, color);
         int resultExp = (int)(exp * pl.expUp.Value);
         if(!isInitialize) pl.addExp(resultExp); //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
-        Instantiate(gm.dropCoinOrbPf, this.transform.position, Quaternion.identity, gm.dropItemGroup);
+        bm.createDropItemOrb("Exp", this.transform);
         Destroy(target);
     }
 
