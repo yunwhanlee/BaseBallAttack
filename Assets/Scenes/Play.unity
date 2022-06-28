@@ -3145,6 +3145,7 @@ MonoBehaviour:
   activeSkillShotEFs: []
   activeSkillExplosionEFs: []
   activeSkillCastEFs: []
+  dropItemExpOrbEF: {fileID: 6169633472775575342, guid: a1349e9b2b124854db93b83447f69426, type: 3}
 --- !u!1 &702911504
 GameObject:
   m_ObjectHideFlags: 0
@@ -7518,8 +7519,6 @@ MonoBehaviour:
   ballGroup: {fileID: 1179223822}
   deadLineTf: {fileID: 587487858}
   downWall: {fileID: 779756}
-  dropItemGroup: {fileID: 54044119}
-  dropCoinOrbPf: {fileID: 8648117785770068642, guid: 9c5c87122054a5f42a6d0f065b398386, type: 3}
   stage: 1
   bestScore: 999
   strikeCnt: 0

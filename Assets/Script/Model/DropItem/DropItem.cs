@@ -37,6 +37,7 @@ public class DropItem : MonoBehaviour
     void OnCollisionEnter(Collision col){
         if(col.gameObject.tag == "Player"){
             gm.pl.addExp(ExpVal); //* (BUG) GAMEOVER後、再スタート場合、EXPが増えないように。
+            gm.em.createDropItemExpOrbEF(this.transform);
             Destroy(this.gameObject);
         }
     }

@@ -26,6 +26,9 @@ public class EffectManager : MonoBehaviour
     public GameObject[] activeSkillExplosionEFs;
     public GameObject[] activeSkillCastEFs;
 
+    //* Drop Items EF
+    public GameObject dropItemExpOrbEF;
+
     void Start()
     {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -109,5 +112,13 @@ public class EffectManager : MonoBehaviour
     public void createActiveSkillCastEF(int idx, Transform parentTf){
         if(!activeSkillCastEFs[idx]) return;
         var ins = Instantiate(activeSkillCastEFs[idx], parentTf.position, parentTf.rotation, parentTf) as GameObject;
+    }
+
+    //* -------------------------------------------------------------
+    //* Drop Items EF
+    //* -------------------------------------------------------------
+    public void createDropItemExpOrbEF(Transform parentTf){
+        var ins = Instantiate(dropItemExpOrbEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
+        Destroy(ins, 1.5f);
     }
 }
