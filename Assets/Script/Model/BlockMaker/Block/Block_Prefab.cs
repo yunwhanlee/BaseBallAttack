@@ -29,7 +29,7 @@ public class Block_Prefab : MonoBehaviour
     //* Value
     [SerializeField] BlockType itemType;
     [SerializeField] private int hp = 1;
-    [SerializeField] private int exp = 10;
+    [SerializeField] private int exp = 10;  public int Exp {get => exp; set=> exp = value;}
     [SerializeField] private int itemTypePer;
     private Vector3 itemBlockExplostionBoxSize = new Vector3(3,2,2);
 
@@ -80,11 +80,11 @@ public class Block_Prefab : MonoBehaviour
 
         //* Material
         switch(hp){
-            case 1 : exp = 10;  meshRd.material = bm.Mts[(int)BlockMt.PLAIN]; break;
-            case 2 : exp = 20;  meshRd.material = bm.Mts[(int)BlockMt.WOOD]; break;
-            case 3 : exp = 30;  meshRd.material = bm.Mts[(int)BlockMt.SAND]; break;
-            case 4 : exp = 40;  meshRd.material = bm.Mts[(int)BlockMt.REDBRICK]; break;
-            case 5 : exp = 50;  meshRd.material = bm.Mts[(int)BlockMt.IRON]; break;
+            case 1 : Exp = 10;  meshRd.material = bm.Mts[(int)BlockMt.PLAIN]; break;
+            case 2 : Exp = 20;  meshRd.material = bm.Mts[(int)BlockMt.WOOD]; break;
+            case 3 : Exp = 30;  meshRd.material = bm.Mts[(int)BlockMt.SAND]; break;
+            case 4 : Exp = 40;  meshRd.material = bm.Mts[(int)BlockMt.REDBRICK]; break;
+            case 5 : Exp = 50;  meshRd.material = bm.Mts[(int)BlockMt.IRON]; break;
         }
 
         //* 色
@@ -152,9 +152,8 @@ public class Block_Prefab : MonoBehaviour
 
     public void onDestroy(GameObject target, bool isInitialize = false) {
         em.createBrokeBlockEF(target.transform, color);
-        int resultExp = (int)(exp * pl.expUp.Value);
-        if(!isInitialize) pl.addExp(resultExp); //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
-        bm.createDropItemOrb("Exp", this.transform);
+        int resultExp = (!isInitialize)? (int)(exp * pl.expUp.Value) : 0; //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
+        bm.createDropItemOrb(this.transform, resultExp);
         Destroy(target);
     }
 

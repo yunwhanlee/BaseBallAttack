@@ -65,12 +65,10 @@ public class BlockMaker : MonoBehaviour
             }
         }
     }
-    public void createDropItemOrb(string type, Transform blockTf){
-        switch(type){
-            case "Exp" : 
-                var ins = Instantiate(dropCoinOrbPf, blockTf.position, Quaternion.identity, dropItemGroup) as GameObject;
-                break;
-        }
+    public void createDropItemOrb(Transform blockTf, int resultExp){
+        var ins = Instantiate(dropCoinOrbPf, blockTf.position, Quaternion.identity, dropItemGroup) as GameObject;
+        var block = blockTf.GetComponent<Block_Prefab>();
+        ins.GetComponent<DropItem>().ExpVal = block.Exp;
     }
     private void moveDownBlock(){
         Debug.Log("moveDownBlock:: MOVE DOWN BLOCK ↓");

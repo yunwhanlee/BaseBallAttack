@@ -219,6 +219,7 @@ public class Ball_Prefab : MonoBehaviour
     //*---------------------------------------
     private void onDestroyMe(bool isStrike = false){
         if(!isStrike){
+            Debug.Log("✓Ball＿Prefab:: onDestroyMe:: gm.setNextStage()");
             gm.setNextStage();//* ボールが消えたら次に進む。
         }else{
             gm.setStrike();

@@ -120,9 +120,6 @@ public class GameManager : MonoBehaviour
     }
 
     void Update(){
-        // canvasUI.additionalShaderChannels = AdditionalCanvasShaderChannels.None;
-        // Debug.Log("canvasUI.additionalShaderChannels=" + canvasUI.additionalShaderChannels);
-
         //* GUI
         expBar.value = Mathf.Lerp(expBar.value, pl.Exp / pl.MaxExp, Time.deltaTime * 10);
         stateTxt.text = STATE.ToString();
@@ -131,6 +128,7 @@ public class GameManager : MonoBehaviour
 
         //* (BUG) ボールが複数ある時、同時に消えたら、次に進まないこと対応
         if(ballGroup.childCount == 0 && !downWall.isTrigger){
+            Debug.Log("GM:: Update:: setNextStage()");
             setNextStage();
         }
 
@@ -357,7 +355,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void setNextStage() {
-        Debug.Log("onDestroyMe:: NEXT STAGE(Ball Is Destroyed)");
+        Debug.Log("<color=black>setNextStage:: NEXT STAGE(Ball Is Destroyed)</color>");
         ++stage;
         STATE = GameManager.State.WAIT;
         downWall.isTrigger = true; //*下壁 物理X
@@ -365,12 +363,19 @@ public class GameManager : MonoBehaviour
         bm.setCreateBlockTrigger(true);
         ballShooter.setIsBallExist(false);
         pl.previewBundle.SetActive(true);
-        checkLevelUp();
+        StartCoroutine(coWaitPlayerCollectOrb());
         setBallPreviewGoalRandomPos();
 
-        //* Collect Drop Items
+        //* Collect Drop Items Exp
         var dropObjs = bm.dropItemGroup.GetComponentsInChildren<DropItem>();
         Debug.Log("setNextStage:: dropObjs.Length= " + dropObjs.Length);
         Array.ForEach(dropObjs, dropObj=>dropObj.moveToTarget(pl.transform));
+    }
+
+    IEnumerator coWaitPlayerCollectOrb(){
+        float sec = 1.5f;
+        yield return new WaitForSeconds(sec);
+        Debug.LogFormat("<color=black>coWaitCollectOrb:: checkLevelUp() wait: {0}sec</color>",sec);
+        checkLevelUp();
     }
 }
