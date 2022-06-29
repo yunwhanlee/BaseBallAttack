@@ -3213,6 +3213,8 @@ MonoBehaviour:
   batEffectTf: {fileID: 0}
   castEFArrowTf: {fileID: 716473780}
   castEFBallPreviewTf: {fileID: 661754778}
+  thunderCastWidth: 1
+  fireBallCastWidth: 0
   dmg:
     name: 
     level: 0
@@ -3341,7 +3343,7 @@ Light:
   m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -7519,6 +7521,7 @@ MonoBehaviour:
   ballGroup: {fileID: 1179223822}
   deadLineTf: {fileID: 587487858}
   downWall: {fileID: 779756}
+  light: {fileID: 705507994}
   stage: 1
   bestScore: 999
   strikeCnt: 0
@@ -10434,6 +10437,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1623732227}
+    - target: {fileID: 4875220179049382148, guid: 8b8423f5606814d4dbbc29404dcc9045, type: 3}
+      propertyPath: m_Name
+      value: SelectCircleEF
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b8423f5606814d4dbbc29404dcc9045, type: 3}
 --- !u!4 &4937813979290638105 stripped

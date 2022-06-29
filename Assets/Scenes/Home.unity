@@ -231,7 +231,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &93080668
 MonoBehaviour:
@@ -248,7 +248,7 @@ MonoBehaviour:
   coinTxt: {fileID: 207406971}
   diamondTxt: {fileID: 944239660}
   grayItemLock: {fileID: 2100000, guid: 85881ae3c4cea344aa748905176006ae, type: 2}
-  selectType: 
+  selectItemType: 
   modelContentPref: {fileID: 17662701153362729, guid: 12ff8c72a9f74b44fa610bbd585e404b, type: 3}
   itemPassivePanel: {fileID: 8075552467672712851, guid: 260e4fe9ade9512468cb31d12861f67c, type: 3}
   itemSkillBoxPref: {fileID: 3227531064289134896, guid: a469440f60e7f894a9b38eaf14a06b4e, type: 3}
@@ -2034,7 +2034,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -2062,7 +2062,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 38.2, y: -364.4, z: 0}
 --- !u!1 &713419080
 GameObject:
@@ -4736,7 +4736,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1584740706
 MonoBehaviour:
@@ -5788,7 +5788,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1887670884
 MonoBehaviour:

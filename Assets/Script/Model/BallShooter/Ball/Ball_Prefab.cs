@@ -170,7 +170,7 @@ public class Ball_Prefab : MonoBehaviour
                                     hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(10);
                                 }
                             });
-                            skillBtn.init(pl);
+                            skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
                         case "ColorBall":
@@ -189,7 +189,7 @@ public class Ball_Prefab : MonoBehaviour
                                 bl.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(100);
                             });
 
-                            skillBtn.init(pl);
+                            skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
                     }
@@ -269,7 +269,7 @@ public class Ball_Prefab : MonoBehaviour
                         hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(pl.dmg.Value * 2);
                     }
                 });
-                gm.activeSkillBtnList[0].init(pl);
+                gm.activeSkillBtnList[0].init(gm);
                 this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                 break;
             case "FireBall":

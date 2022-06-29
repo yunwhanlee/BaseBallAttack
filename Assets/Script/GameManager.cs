@@ -28,8 +28,7 @@ public class GameManager : MonoBehaviour
     public Transform ballGroup;
     public Transform deadLineTf;
     public BoxCollider downWall;
-
-
+    public Light light;
 
     [Header("<---- GUI ---->")]
     public int stage = 1;
@@ -93,6 +92,7 @@ public class GameManager : MonoBehaviour
 
     //---------------------------------------
     void Start() {
+        light = GameObject.Find("Directional Light").GetComponent<Light>();
         hitRangeSliderTf = hitRangeSlider.GetComponent<RectTransform>();
         readyBtn = readyBtn.GetComponent<Button>();
         gvStageTxt = gameoverPanel.transform.GetChild(1).GetComponent<Text>();
@@ -142,6 +142,9 @@ public class GameManager : MonoBehaviour
     public void setBallPreviewGoalImgRGBA(Color color) => ballPreviewGoalImg.color = color;
     public GameObject[] getSkillImgObjPrefs() => passiveSkillImgObjPrefs;
     public void throwScreenAnimSetTrigger(string name) => throwScreen.GetComponent<Animator>().SetTrigger(name);
+    public void setLightDarkness(bool isOn){ //* During Skill Casting ...
+        light.type = (isOn)? LightType.Spot : LightType.Directional;
+    }
     
     //* --------------------------------------------------------------------------------------
     //* GUI Button
@@ -152,8 +155,8 @@ public class GameManager : MonoBehaviour
     public void onClickSetGameButton(string type) => setGame(type);
     public void onClickActiveSkillButton(int i) {
         //(BUG)再クリック。Cancel Selected Btn
-        if(activeSkillBtnList[i].SelectFence.gameObject.activeSelf){
-            activeSkillBtnList[i].init(pl, true);
+        if(activeSkillBtnList[i].SelectCircleEF.gameObject.activeSelf){
+            activeSkillBtnList[i].init(this, true);
 
             var blocks = bm.GetComponentsInChildren<Block_Prefab>();
             bm.setGlowEFBlocks(blocks, false);
@@ -162,11 +165,11 @@ public class GameManager : MonoBehaviour
         }
         //(BUG)重複選択禁止。初期化
         activeSkillBtnList.ForEach(btn=>{
-            btn.init(pl, true);
+            btn.init(this, true);
         });
 
         if(ballGroup.childCount == 0){
-            activeSkillBtnList[i].onTriggerActive(i, pl, em);
+            activeSkillBtnList[i].onTriggerActive(i, this);
         }
     } //(BUG)途中でスキル活性化ダメ
 
@@ -210,6 +213,8 @@ public class GameManager : MonoBehaviour
                 Button btn = child.GetComponent<Button>();
                 btn.gameObject.SetActive(false);
             }
+
+            setLightDarkness(false); //* Light -> Normal
         }
         else{//* CAM1 On
             STATE = GameManager.State.WAIT;
@@ -232,7 +237,12 @@ public class GameManager : MonoBehaviour
                 Button btn = child.GetComponent<Button>();
                 btn.gameObject.SetActive(true);
             }
+        
+            //* Check Before Cam1 Light : Darkness or Normal
+            bool isBefLightDark = activeSkillBtnList.Exists(btn => btn.SelectCircleEF.gameObject.activeSelf);
+            if(isBefLightDark)  setLightDarkness(true);
 
+            //* ActiveSkill Status
             StopCoroutine("corSetStrike");
         }
     }
@@ -372,7 +382,7 @@ public class GameManager : MonoBehaviour
         Array.ForEach(dropObjs, dropObj=>dropObj.moveToTarget(pl.transform));
     }
 
-    IEnumerator coWaitPlayerCollectOrb(){
+    private IEnumerator coWaitPlayerCollectOrb(){
         float sec = 1.5f;
         yield return new WaitForSeconds(sec);
         Debug.LogFormat("<color=black>coWaitCollectOrb:: checkLevelUp() wait: {0}sec</color>",sec);

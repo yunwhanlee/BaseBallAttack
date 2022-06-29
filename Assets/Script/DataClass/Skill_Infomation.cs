@@ -145,7 +145,7 @@ public class ActiveSkillBtnUI{
     [SerializeField] Image panel;    public Image Panel {get=> panel; set=> panel=value;}
     [SerializeField] Image img;    public Image Img {get=> img; set=> img=value;}
     [SerializeField] Image grayBG;    public Image GrayBG {get=> grayBG; set=> grayBG=value;}
-    [SerializeField] Image selectFence;    public Image SelectFence {get=> selectFence; set=> selectFence=value;}
+    [SerializeField] Image selectCircleEF;    public Image SelectCircleEF {get=> selectCircleEF; set=> selectCircleEF=value;}
     [SerializeField] Material activeEFMt;   public Material ActiveEFMt {get=> activeEFMt;}
 
     //*contructor
@@ -157,47 +157,48 @@ public class ActiveSkillBtnUI{
         this.img = skillBtn.transform.GetChild(0).GetComponent<Image>();
         this.img.sprite = sprite;
         grayBG = skillBtn.transform.GetChild(1).GetComponent<Image>();
-        selectFence = skillBtn.transform.GetChild(2).GetComponent<Image>();
+        selectCircleEF = skillBtn.transform.GetChild(2).GetComponent<Image>();
         activeEFMt = activeSkillEffectMt;
     }
 
     //*method
-    public void init(Player pl, bool isSelectBtnInit = false){
+    public void init(GameManager gm, bool isSelectBtnInit = false){
         Trigger = false;
         if(!isSelectBtnInit)   Panel.material = null;
         if(!isSelectBtnInit)   GrayBG.fillAmount = 1;
-        selectFence.gameObject.SetActive(false);
-        pl.BatEffectTf.gameObject.SetActive(false);
-        foreach(Transform child in pl.CastEFArrowTf) GameObject.Destroy(child.gameObject);
-        foreach(Transform child in pl.CastEFBallPreviewTf) GameObject.Destroy(child.gameObject);
+        selectCircleEF.gameObject.SetActive(false);
+        gm.pl.BatEffectTf.gameObject.SetActive(false);
+        foreach(Transform child in gm.pl.CastEFArrowTf) GameObject.Destroy(child.gameObject);
+        foreach(Transform child in gm.pl.CastEFBallPreviewTf) GameObject.Destroy(child.gameObject);
+        gm.setLightDarkness(false);
     }
-    public void onTriggerActive(int selectIdx, Player pl, EffectManager em){
+    public void onTriggerActive(int selectIdx, GameManager gm){
         //TODO selectIdx Btn処理しないと、現在はスキルボタン１個として対応。
         int selectAtvSkillIdx = DM.ins.personalData.SelectSkillIdx;
 
         if(GrayBG.fillAmount == 0){
             Debug.LogFormat("ActiveSkillBtnUI:: onTriggerActive:: trigger= {0}, selectIdx= {1}, name= {2}",Trigger, selectIdx, name);
-
             Trigger = !Trigger;
-            selectFence.gameObject.SetActive(Trigger);
+            gm.setLightDarkness(true);
+            selectCircleEF.gameObject.SetActive(Trigger);
 
             //* Bat Effect
-            pl.BatEffectTf.gameObject.SetActive(Trigger);
-            em.enableSelectedActiveSkillBatEF(pl.BatEffectTf);
+            gm.pl.BatEffectTf.gameObject.SetActive(Trigger);
+            gm.em.enableSelectedActiveSkillBatEF(gm.pl.BatEffectTf);
 
             //* Cast Effect
             if(Trigger){
                 Transform parentTf = null;
                 switch(this.name){
-                    case "Thunder":     parentTf = pl.CastEFArrowTf;        break;
-                    case "FireBall":    parentTf = pl.CastEFBallPreviewTf;  break;
-                    case "ColorBall":   parentTf = pl.CastEFArrowTf;        break;
+                    case "Thunder":     parentTf = gm.pl.CastEFArrowTf;        break;
+                    case "FireBall":    parentTf = gm.pl.CastEFBallPreviewTf;  break;
+                    case "ColorBall":   parentTf = gm.pl.CastEFArrowTf;        break;
                 }
-                em.createActiveSkillCastEF(selectAtvSkillIdx, parentTf);
+                gm.em.createActiveSkillCastEF(selectAtvSkillIdx, parentTf);
             }
             else{
-                foreach(Transform child in pl.CastEFArrowTf) GameObject.Destroy(child.gameObject);
-                foreach(Transform child in pl.CastEFBallPreviewTf) GameObject.Destroy(child.gameObject);
+                foreach(Transform child in gm.pl.CastEFArrowTf) GameObject.Destroy(child.gameObject);
+                foreach(Transform child in gm.pl.CastEFBallPreviewTf) GameObject.Destroy(child.gameObject);
             }
         }
     }
