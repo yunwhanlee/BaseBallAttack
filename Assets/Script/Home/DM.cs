@@ -10,8 +10,8 @@ public class DM : MonoBehaviour
     public static DM ins;
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
     public enum ITEM {Chara, Bat, Skill};
-    public enum ATV_IDX{FireBall, Thunder, ColorBall};
-    public enum PSV_IDX{DMG, MULTISHOT, SPEED, INSTANT_KILL, CRITICAL, EXPLOSION, EXP_UP, ITEM_SPAWN};
+    public enum ATVSKILL{FireBall, Thunder, ColorBall};
+    public enum PSVSKILL{DMG, MULTISHOT, SPEED, INSTANT_KILL, CRITICAL, EXPLOSION, EXP_UP, ITEM_SPAWN};
 
 
     [Header("--Personal Data--")]
@@ -31,6 +31,10 @@ public class DM : MonoBehaviour
 
     void Awake() => singleton();
     void Start(){
+        foreach(DM.ATVSKILL list in Enum.GetValues(typeof(DM.ATVSKILL))){
+            Debug.LogFormat("Enums GetFindVal:: {0}", list.ToString());
+        }
+
         //* contents Prefab 生成
         scrollviews[(int)DM.ITEM.Chara].createObject(modelContentPref, itemPassivePanel, itemSkillBoxPref);
         scrollviews[(int)DM.ITEM.Bat].createObject(modelContentPref, itemPassivePanel, itemSkillBoxPref);

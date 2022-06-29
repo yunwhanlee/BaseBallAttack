@@ -13,9 +13,17 @@ public class FileBallGizmos : MonoBehaviour
         gm.pl.FireBallCastWidth = width;
     }
 
-    void OnTriggerEnter(Collider col)
-    {
-        Debug.Log(col.name);
+    void OnTriggerEnter(Collider col){
+        if(col.gameObject.CompareTag("NormalBlock")){
+            Debug.Log("FileBallGizmos:: OnTriggerEnter:: col.name= " + col.name);
+            col.GetComponent<Block_Prefab>().setEnabledSpriteGlowEF(true);
+        }
+    }
+    void OnTriggerExit(Collider col){
+        if(col.gameObject.CompareTag("NormalBlock")){
+            Debug.Log("FileBallGizmos:: OnTriggerExit:: col.name= " + col.name);
+            col.GetComponent<Block_Prefab>().setEnabledSpriteGlowEF(false);
+        }
     }
 
     void OnDrawGizmos(){
