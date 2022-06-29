@@ -10,7 +10,9 @@ public class DM : MonoBehaviour
     public static DM ins;
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
     public enum ITEM {Chara, Bat, Skill};
+    public enum ATV_IDX{FireBall, Thunder, ColorBall};
     public enum PSV_IDX{DMG, MULTISHOT, SPEED, INSTANT_KILL, CRITICAL, EXPLOSION, EXP_UP, ITEM_SPAWN};
+
 
     [Header("--Personal Data--")]
     [SerializeField] Text coinTxt; public Text CoinTxt {get => coinTxt; set => coinTxt = value;}

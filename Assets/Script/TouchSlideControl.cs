@@ -79,7 +79,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
             pl.ballPreviewSphere.transform.position = cetner;
             // Debug.DrawRay(arrowTf.position, arrowTf.forward * 1000, Color.red, 1);
 
-            //* ColorBall ActiveSkill
+            //* 🌟ColorBall ActiveSkill
             bool isColorBallSkill = gm.activeSkillBtnList.Exists(btn => btn.Trigger && btn.Name == "ColorBall");
             if(isColorBallSkill && hit.transform.CompareTag("NormalBlock")){
                 //* Hit Color

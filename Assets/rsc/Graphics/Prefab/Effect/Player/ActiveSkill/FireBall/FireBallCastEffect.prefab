@@ -68,9 +68,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4519404607714465906}
   - component: {fileID: 4519404607714465904}
+  - component: {fileID: 777363405507784413}
   - component: {fileID: 4519404607714465907}
   - component: {fileID: 6160856041123038798}
   - component: {fileID: 3088802923213203738}
+  - component: {fileID: 5189006728373185642}
   m_Layer: 5
   m_Name: CastImgRadius
   m_TagString: Untagged
@@ -105,6 +107,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4519404607714465869}
   m_CullTransparentMesh: 1
+--- !u!114 &777363405507784413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519404607714465869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5553ee3c46cfb784fbc3710bce5a7ae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 5.2
 --- !u!114 &4519404607714465907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +219,19 @@ MonoBehaviour:
   alphaThreshold: 0.142
   drawOutside: 1
   enableInstancing: 0
+--- !u!135 &5189006728373185642
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519404607714465869}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.5600007
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4519404608316719708
 GameObject:
   m_ObjectHideFlags: 0
