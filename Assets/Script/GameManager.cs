@@ -383,7 +383,7 @@ public class GameManager : MonoBehaviour
     }
 
     private IEnumerator coWaitPlayerCollectOrb(){
-        float sec = 1.5f;
+        float sec = 1f;
         yield return new WaitForSeconds(sec);
         Debug.LogFormat("<color=black>coWaitCollectOrb:: checkLevelUp() wait: {0}sec</color>",sec);
         checkLevelUp();

@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
     [SerializeField] Transform batEffectTf;           public Transform BatEffectTf {get => batEffectTf; set => batEffectTf = value;}
     [SerializeField] Transform castEFArrowTf;         public Transform CastEFArrowTf {get => castEFArrowTf;}
     [SerializeField] Transform castEFBallPreviewTf;   public Transform CastEFBallPreviewTf {get => castEFBallPreviewTf;}
-    [SerializeField] float thunderCastWidth = 1;     public float ThunderCastWidth {get=> thunderCastWidth;}
+    [SerializeField] float thunderCastWidth;     public float ThunderCastWidth {get=> thunderCastWidth;   set => fireBallCastWidth = value;}
     [SerializeField] float fireBallCastWidth;    public float FireBallCastWidth {get=> fireBallCastWidth;   set => fireBallCastWidth = value;}
     
     

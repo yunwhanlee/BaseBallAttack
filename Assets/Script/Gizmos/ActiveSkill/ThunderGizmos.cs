@@ -4,18 +4,35 @@ using UnityEngine;
 
 public class ThunderGizmos : MonoBehaviour
 {
-    public Player pl;
+    [SerializeField]  Player pl;
+    [SerializeField] float width;
+    [SerializeField] bool isGizmosOn;
     void Start()
     {
         pl = GameObject.Find("Player").GetComponent<Player>();
+        pl.ThunderCastWidth = width;
     }
-    void OnDrawGizmos(){
-        //* ThunderShot Skill Range Preview        
+
+    void OnTriggerEnter(Collider col){
+        if(col.gameObject.CompareTag("NormalBlock")){
+            Debug.Log("ThunderGizmos:: OnTriggerEnter:: col.name= " + col.name);
+            col.GetComponent<Block_Prefab>().setEnabledSpriteGlowEF(true);
+        }
+    }
+    void OnTriggerExit(Collider col){
+        if(col.gameObject.CompareTag("NormalBlock")){
+            Debug.Log("ThunderGizmos:: OnTriggerExit:: col.name= " + col.name);
+            col.GetComponent<Block_Prefab>().setEnabledSpriteGlowEF(false);
+        }
+    }
+
+    void OnDrawGizmos(){//* ThunderShot Skill Range Preview
+        if(!isGizmosOn) return;
         Gizmos.color = Color.yellow;
         Gizmos.matrix = this.transform.localToWorldMatrix;//rotation
-        float w = pl.ThunderCastWidth;
         const float offset = 1.35f;
         Gizmos.DrawWireCube(Vector3.zero + new Vector3(0,0,12),
-            new Vector3(w * offset,w * offset,20));
+            new Vector3(width * offset, width * offset, 20)
+        );
     }
 }
