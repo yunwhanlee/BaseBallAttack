@@ -68,23 +68,33 @@ public class Block_Prefab : MonoBehaviour
         //hp = (gm.stage <= 5) ? 1 : (gm.stage <= 10) ? 2 : (gm.stage <= 15) ? 3 : (gm.stage <= 20) ? 4 : 5;
         rand = Random.Range(0,100);
         if      (gm.stage <=  5) hp = rand < 85 ? 1 : 2;
-        else if (gm.stage <=  9) hp = rand < 85 ? 2 : 1;
-        else if (gm.stage <= 13) hp = rand < 85 ? 3 : (rand <= 95)? 2 : 1;
-        else if (gm.stage <= 17) hp = rand < 75 ? 4 : (rand <= 90)? 3 : 2;
-        else if (gm.stage <= 21) hp = rand < 50 ? 6 : (rand <= 75)? 5 : (rand <= 85)? 4 : (rand <= 95)? 3 : 2;
-        else if (gm.stage <= 26) hp = rand < 60 ? 7 : (rand <= 85)? 6 : 5;
-        else if (gm.stage <= 31) hp = rand < 65 ? 9 : (rand <= 80)? 8 : 7;
-        else if (gm.stage <= 35) hp = rand < 60 ? 10 : (rand <= 75)? 9 : (rand <= 85)? 8 : 7;
-        else if (gm.stage <= 40) hp = rand < 55 ? 12 : (rand <= 75)? 11 : (rand <= 90)? 10 : 9;
+        else if (gm.stage <=  9) hp = rand < 85 ? 3 : 4;
+        else if (gm.stage <= 13) hp = rand < 85 ? 5 : (rand <= 95)? 6 : 7;
+        else if (gm.stage <= 17) hp = rand < 75 ? 7 : (rand <= 90)? 8 : 9;
+        else if (gm.stage <= 21) hp = rand < 50 ? 10 : (rand <= 75)? 11 : (rand <= 85)? 12 : (rand <= 95)? 13 : 14;
+        else if (gm.stage <= 26) hp = rand < 60 ? 14 : (rand <= 85)? 15 : 16;
+        else if (gm.stage <= 31) hp = rand < 65 ? 15 : (rand <= 80)? 16 : 17;
+        else if (gm.stage <= 35) hp = rand < 60 ? 17 : (rand <= 75)? 18 : (rand <= 85)? 19 : 20;
+        else if (gm.stage <= 40) hp = rand < 55 ? 19 : (rand <= 75)? 20 : (rand <= 90)? 21 : 22;
+        else if (gm.stage <= 46) hp = rand < 52 ? 21 : (rand <= 75)? 22 : (rand <= 90)? 23 : 24;
+        else if (gm.stage <= 52) hp = rand < 50 ? 23 : (rand <= 75)? 24 : (rand <= 90)? 25 : 26;
         hpTxt.text = hp.ToString();
 
         //* Material
-        switch(hp){
-            case 1 : Exp = 10;  meshRd.material = bm.Mts[(int)BlockMt.PLAIN]; break;
-            case 2 : Exp = 20;  meshRd.material = bm.Mts[(int)BlockMt.WOOD]; break;
-            case 3 : Exp = 30;  meshRd.material = bm.Mts[(int)BlockMt.SAND]; break;
-            case 4 : Exp = 40;  meshRd.material = bm.Mts[(int)BlockMt.REDBRICK]; break;
-            case 5 : Exp = 50;  meshRd.material = bm.Mts[(int)BlockMt.IRON]; break;
+        if(0 < hp && hp <= 4){
+            Exp = 10;  meshRd.material = bm.Mts[(int)BlockMt.PLAIN]; 
+        }
+        else if(5 < hp && hp <= 9){
+            Exp = 20;  meshRd.material = bm.Mts[(int)BlockMt.WOOD];
+        }
+        else if(10 < hp && hp <= 14){
+            Exp = 20;  meshRd.material = bm.Mts[(int)BlockMt.SAND];
+        }
+        else if(15 < hp && hp <= 19){
+            Exp = 20;  meshRd.material = bm.Mts[(int)BlockMt.REDBRICK];
+        }
+        else if(20 < hp && hp <= 25){
+            Exp = 20;  meshRd.material = bm.Mts[(int)BlockMt.IRON];
         }
 
         //* 色
