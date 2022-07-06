@@ -301,7 +301,7 @@ public class GameManager : MonoBehaviour
             case "PAUSE":
                 Time.timeScale = 0;
                 pausePanel.SetActive(true);
-                displayCurPassiveSkillStatus(type);
+                displayCurPassiveSkillUI(type);
                 break;
             case "CONTINUE":
                 Time.timeScale = 1;
@@ -332,7 +332,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void displayCurPassiveSkillStatus(string type){
+    public void displayCurPassiveSkillUI(string type){
         GameObject pref = (type == "PAUSE")? skillInfoRowPref : inGameSkillImgBtnPref;
         Transform parentTf = (type == "PAUSE")? pauseSkillStatusTableTf : inGameSkillStatusTableTf;
 

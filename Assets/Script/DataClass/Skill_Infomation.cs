@@ -39,7 +39,7 @@ public class ItemPassiveList{
 }
 
 [System.Serializable]
-public class PassiveSkill<T>{
+public class PassiveSkill<T> where T: struct {
     //*value                     //*get set
     [SerializeField] string name;    public string Name {get=> name;} 
     [SerializeField] int level; public int Level {get=>level;}
@@ -58,6 +58,11 @@ public class PassiveSkill<T>{
     public void setLvUp(T value){
         level++;
         this.value = value;
+    }
+
+    public void initPsvSkillDt(T value){
+        if(level > 0)
+            this.value = value;
     }
 
     public void setHitTypePsvSkill(float per, ref int result, Collision col, EffectManager em, Player pl, GameObject ballPref = null){

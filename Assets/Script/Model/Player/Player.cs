@@ -113,7 +113,18 @@ public class Player : MonoBehaviour
         expUp = new PassiveSkill<float>("expUp", psvLvArr[(int)DM.PSVSKILL.EXP_UP].lv, 1f, 0.2f);
         itemSpawn = new PassiveSkill<float>("itemSpawn", psvLvArr[(int)DM.PSVSKILL.ITEM_SPAWN].lv, 0.1f, 0.05f);
 
-        gm.displayCurPassiveSkillStatus("INGAME");
+        //* Apply Psv Data
+        dmg.initPsvSkillDt(dmg.Value + dmg.Unit);
+        multiShot.initPsvSkillDt(multiShot.Value + multiShot.Unit);
+        speed.initPsvSkillDt(speed.Value + speed.Unit);
+        instantKill.initPsvSkillDt(instantKill.Value + instantKill.Unit);
+        critical.initPsvSkillDt(critical.Value + critical.Unit);
+        explosion.initPsvSkillDt(new Explosion(explosion.Value.per + explosion.Unit.per, explosion.Value.range + explosion.Unit.range));
+        expUp.initPsvSkillDt(expUp.Value + expUp.Unit);
+        itemSpawn.initPsvSkillDt(itemSpawn.Value + itemSpawn.Unit);
+
+        //* Show Psv UI
+        gm.displayCurPassiveSkillUI("INGAME");
 
         //* Set HitRank Data : @params { char rate, float distance, int power }
         hitRank = new HitRank[6];

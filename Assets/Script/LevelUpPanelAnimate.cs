@@ -130,7 +130,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
 
         //* Set Data
         switch(SkillBtns[index].name.text){
-            case "Dmg Up": 
+            case "Dmg Up":
                 pl.dmg.setLvUp(pl.dmg.Value + pl.dmg.Unit);
                 break;
             case "Multi Shot":
@@ -158,10 +158,9 @@ public class LevelUpPanelAnimate : MonoBehaviour
                 pl.itemSpawn.setLvUp(pl.itemSpawn.Value + pl.itemSpawn.Unit);
                 Debug.Log("ItemSwpan Up : 未実装");
                 break;
-
         }
         //* 終了
         this.gameObject.SetActive(false);
-        gm.displayCurPassiveSkillStatus("INGAME");
+        gm.displayCurPassiveSkillUI("INGAME");
     }
 }
