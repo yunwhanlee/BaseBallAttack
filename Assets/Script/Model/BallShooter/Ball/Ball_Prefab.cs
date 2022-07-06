@@ -15,7 +15,8 @@ public class Ball_Prefab : MonoBehaviour
     public int aliveTime;
 
     //* Value
-    private bool isHited = false;
+    private bool isHitedByBlock = false;
+    private float deleteLimitTime = 2.0f;
     private int speed;
     private float distance;
 
@@ -31,6 +32,7 @@ public class Ball_Prefab : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         rigid.AddForce(this.transform.forward * speed, ForceMode.Impulse);
         //Debug.Log("HitRange:: startPosZ=" + gm.hitRangeStartTf.position.z +  ", endPosZ="+ gm.hitRangeEndTf.position.z);
+
     }
     void Update(){
             //* Destroy by Checking Velocity
@@ -56,6 +58,8 @@ public class Ball_Prefab : MonoBehaviour
             //* Ball Preview Dir Goal Img
             distance = Vector3.Distance(gm.ballPreviewDirGoal.transform.position, this.transform.position);
             gm.setBallPreviewImgAlpha(distance);
+
+            
     }
 
     //** Control
@@ -66,7 +70,7 @@ public class Ball_Prefab : MonoBehaviour
             pl.setSwingArcColor("red");
             if(pl.DoSwing && gm.STATE == GameManager.State.PLAY){
                 gm.switchCamScene();
-                isHited = true;
+                // isHited = true;
                 pl.DoSwing = false;
                 rigid.useGravity = true;
 
@@ -141,18 +145,29 @@ public class Ball_Prefab : MonoBehaviour
     }
 
     private void OnTriggerExit(Collider col) {
-        if(col.gameObject.tag == "HitRangeArea"){
+        //* SWING Ball
+        if(col.gameObject.tag == "HitRangeArea"){ //* HIT BALL
+            Debug.Log("OnTriggerExit:: BAT SWING BALL");
             pl.setSwingArcColor("yellow");
+            //* 日程時間が過ぎたら、ボール削除。
+            isHitedByBlock = true;
+            InvokeRepeating("checkLimitTimeToDeleteBall", 0, deleteLimitTime);
         }
-        //* ストライク！
-        else if(col.gameObject.tag == "StrikeLine"){
+        else if(col.gameObject.tag == "StrikeLine"){ //* ストライク
             onDestroyMe(true);
         }
+    }
+    private void checkLimitTimeToDeleteBall(){
+        if(isHitedByBlock)
+            isHitedByBlock = false;
+        else
+            onDestroyMe();
     }
 
     //* Hit Block
     private void OnCollisionEnter(Collision col) {//* Give Damage
         if(col.gameObject.tag == "NormalBlock"){
+            isHitedByBlock = true;
             //* #2. Active Skill HIT
             gm.activeSkillBtnList.ForEach(skillBtn => {
                 if(skillBtn.Trigger){
