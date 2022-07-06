@@ -38,10 +38,7 @@ public class Ball_Prefab : MonoBehaviour
             //* Destroy by Checking Velocity
             // Debug.Log("BallGroup.childCount=" + gm.ballGroup.childCount + ", Ball Velocity.magnitude="+rigid.velocity.magnitude);
             if(rigid.velocity.magnitude != 0 && rigid.velocity.magnitude < 0.9875f){
-                if(gm.ballGroup.childCount <= 1)
-                    onDestroyMe();
-                else
-                    Destroy(this.gameObject);
+                checkDestroyBall();
             }
 
             //* Ball Comeing View Slider
@@ -160,8 +157,9 @@ public class Ball_Prefab : MonoBehaviour
     private void checkLimitTimeToDeleteBall(){
         if(isHitedByBlock)
             isHitedByBlock = false;
-        else
-            onDestroyMe();
+        else{
+            checkDestroyBall();
+        }
     }
 
     //* Hit Block
@@ -242,6 +240,13 @@ public class Ball_Prefab : MonoBehaviour
         }
         
         Destroy(this.gameObject);
+    }
+
+    private void checkDestroyBall(){
+        if(this.name == "Ball(Clone)" && this.transform.localScale.x == 0.4f)
+            onDestroyMe();
+        else
+            Destroy(this.gameObject);
     }
 
     public void setBallSpeed(int v){
