@@ -8,20 +8,28 @@ public class DropItem : MonoBehaviour
     GameManager gm;
 
     //* Value
-    private int expVal; public int ExpVal{ get => expVal; set => expVal = value;}
+    int expVal; public int ExpVal{ get => expVal; set => expVal = value;}
+    bool isMoveToPlayer = false; public bool IsMoveToPlayer{ get => isMoveToPlayer; set => isMoveToPlayer = value;}
+    float moveSpeed = 0.02f;
 
     Rigidbody rigid;
-    void Start()
-    {
+    void Start(){
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         rigid = GetComponent<Rigidbody>();
         spawnPopUp();
     }
 
+    void Update(){
+        if(isMoveToPlayer){
+            transform.position = Vector3.Lerp(transform.position, gm.pl.transform.position, moveSpeed);
+        }
+    }
+
     public void moveToTarget(Transform target){
-        Vector3 dir = target.position - this.rigid.transform.position;
-        float force = 800 * Time.deltaTime;
-        this.rigid.AddForce(dir * force, ForceMode.Impulse);
+        isMoveToPlayer = true;
+        // Vector3 dir = target.position - this.rigid.transform.position;
+        // float force = 800 * Time.deltaTime;
+        // this.rigid.AddForce(dir * force, ForceMode.Impulse);
     }
 
     public void spawnPopUp(){
