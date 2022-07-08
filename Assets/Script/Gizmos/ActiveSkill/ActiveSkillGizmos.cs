@@ -13,6 +13,7 @@ public class ActiveSkillGizmos : MonoBehaviour
         switch(type){
             case DM.ATVSKILL.Thunder : pl.ThunderCastWidth = width; break;
             case DM.ATVSKILL.FireBall : pl.FireBallCastWidth = width;   break;
+            case DM.ATVSKILL.PoisonSmoke : pl.PoisonSmokeCastWidth = width;   break;
             case DM.ATVSKILL.ColorBall :    break;
         }
     }

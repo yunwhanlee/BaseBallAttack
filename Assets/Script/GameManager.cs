@@ -375,6 +375,7 @@ public class GameManager : MonoBehaviour
         pl.previewBundle.SetActive(true);
         StartCoroutine(coWaitPlayerCollectOrb());
         setBallPreviewGoalRandomPos();
+        checkBlocksIsDotDmg();
 
         //* Collect Drop Items Exp
         var dropObjs = bm.dropItemGroup.GetComponentsInChildren<DropItem>();
@@ -387,5 +388,11 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(sec);
         Debug.LogFormat("<color=black>coWaitCollectOrb:: checkLevelUp() wait: {0}sec</color>",sec);
         checkLevelUp();
+    }
+    private void checkBlocksIsDotDmg(){
+        var blocks = bm.GetComponentsInChildren<Block_Prefab>();
+        Array.ForEach(blocks, block => {
+            if(block.IsDotDmg)  block.decreaseHp(block.getDotDmg(2));
+        });
     }
 }

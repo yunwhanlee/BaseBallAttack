@@ -28,9 +28,10 @@ public class Block_Prefab : MonoBehaviour
 
     //* Value
     [SerializeField] BlockType itemType;
-    [SerializeField] private int hp = 1;
-    [SerializeField] private int exp = 10;  public int Exp {get => exp; set=> exp = value;}
-    [SerializeField] private int itemTypePer;
+    [SerializeField] int hp = 1;    public int Hp {get => hp; set => hp = value;}
+    [SerializeField] int exp = 10;  public int Exp {get => exp; set => exp = value;}
+    [SerializeField] bool isDotDmg;  public bool IsDotDmg {get => isDotDmg; set => isDotDmg = value;}
+    [SerializeField] int itemTypePer;
     private Vector3 itemBlockExplostionBoxSize = new Vector3(3,2,2);
 
     //* GUI
@@ -171,6 +172,10 @@ public class Block_Prefab : MonoBehaviour
         meshRd.material = whiteHitMt;
         yield return new WaitForSeconds(0.05f);
         meshRd.material = originMt;//* (BUG) WaitForSeconds間にまた衝突が発生したら、白くなる。
+    }
+
+    public int getDotDmg(int devideVal){
+        return (Hp > 1)? Hp / devideVal : 1;
     }
 
     void OnDrawGizmos(){

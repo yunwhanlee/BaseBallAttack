@@ -174,18 +174,22 @@ public class Ball_Prefab : MonoBehaviour
                         case "Thunder":
                             //なし
                             break;
-                        case "FireBall":
+                        case "FireBall":{
                             em.createActiveSkillExplosionEF(selectAtvSkillIdx, this.transform);
-                            //* Collider 
-                            RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.FireBallCastWidth, Vector3.up, 0);
-                            Array.ForEach(hits, hit => {
-                                if(hit.transform.tag == "NormalBlock"){
-                                    hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(10);
-                                }
-                            });
+                            decreaseHpSphereCastAll(10);
                             skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
+                        }
+                        case "PoisonSmoke":{
+                            em.createActiveSkillExplosionEF(selectAtvSkillIdx, this.transform, 999);
+                            
+                            RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.PoisonSmokeCastWidth, Vector3.up, 0);
+                            decreaseHpSphereCastAll(0, 2);
+                            skillBtn.init(gm);
+                            this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
+                            break;
+                        }
                         case "ColorBall":
                             //* Hit Color
                             var meshRd = col.gameObject.GetComponent<MeshRenderer>();
@@ -202,11 +206,6 @@ public class Ball_Prefab : MonoBehaviour
                                 bl.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(100);
                             });
 
-                            skillBtn.init(gm);
-                            this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
-                            break;
-                        case "PoisonSmoke":
-                            em.createActiveSkillExplosionEF(selectAtvSkillIdx, this.transform, 999);
                             skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
@@ -230,6 +229,16 @@ public class Ball_Prefab : MonoBehaviour
             Vector3 pos = new Vector3(this.transform.position.x, col.gameObject.transform.position.y, col.gameObject.transform.position.z);
             em.createDownWallHitEF(pos);
         }
+    }
+
+    private void decreaseHpSphereCastAll(int dmg, int dotDmgDevideVal = 0){
+        RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.FireBallCastWidth, Vector3.up, 0);
+        Array.ForEach(hits, hit => {
+            if(hit.transform.tag == "NormalBlock"){
+                var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
+                block.decreaseHp((dotDmgDevideVal==0)? dmg : block.getDotDmg(dotDmgDevideVal));
+            }
+        });
     }
 
     //*---------------------------------------

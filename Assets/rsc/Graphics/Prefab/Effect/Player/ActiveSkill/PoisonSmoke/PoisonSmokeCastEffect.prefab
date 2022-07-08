@@ -68,11 +68,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4519404607714465906}
   - component: {fileID: 4519404607714465904}
-  - component: {fileID: 777363405507784413}
   - component: {fileID: 4519404607714465907}
   - component: {fileID: 6160856041123038798}
   - component: {fileID: 3088802923213203738}
   - component: {fileID: 5189006728373185642}
+  - component: {fileID: 4237910625630707934}
   m_Layer: 5
   m_Name: CastImgRadius
   m_TagString: Untagged
@@ -107,22 +107,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4519404607714465869}
   m_CullTransparentMesh: 1
---- !u!114 &777363405507784413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4519404607714465869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5553ee3c46cfb784fbc3710bce5a7ae1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pl: {fileID: 0}
-  width: 5.2
-  isGizmosOn: 1
-  type: 0
 --- !u!114 &4519404607714465907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +219,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2.5600007
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4237910625630707934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519404607714465869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82142c2b994a08e409f69069e76d41cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pl: {fileID: 0}
+  width: 4.1
+  isGizmosOn: 0
+  type: 3
 --- !u!1 &4519404608316719708
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +260,7 @@ Transform:
   m_GameObject: {fileID: 4519404608316719708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.4999995, y: 2.5, z: 2.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4519404607397406959}
   m_Father: {fileID: 0}
