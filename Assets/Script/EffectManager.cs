@@ -104,9 +104,9 @@ public class EffectManager : MonoBehaviour
         var ins = Instantiate(activeSkillShotEFs[idx], parentTf.position, dir, parent) as GameObject;
         Destroy(ins, 1);
     }
-    public void createActiveSkillExplosionEF(int idx, Transform parentTf){
+    public void createActiveSkillExplosionEF(int idx, Transform parentTf, int time = 2){
         var ins = Instantiate(activeSkillExplosionEFs[idx], parentTf.position, Quaternion.identity, effectGroup) as GameObject;
-        Destroy(ins, 2);
+        Destroy(ins, time);
     }
 
     public void createActiveSkillCastEF(int idx, Transform parentTf){

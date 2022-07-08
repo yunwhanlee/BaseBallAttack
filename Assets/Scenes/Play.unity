@@ -7581,6 +7581,12 @@ MonoBehaviour:
     shotEfPref: {fileID: 8795254971110652698, guid: 57d587ac5e5c18646ab645de2ff5f753, type: 3}
     explosionEfPref: {fileID: 4791652185781354435, guid: 2d3122fda6e11bb4782767e4c1235164, type: 3}
     castEfPref: {fileID: 4519404608316719708, guid: 9e828cfc2900d8f40b449dffaea05750, type: 3}
+  - name: PoisonSmoke
+    uiSprite: {fileID: 21300000, guid: 67e41520382120944a06f9621515aec3, type: 3}
+    batEfPref: {fileID: 7978549474777294668, guid: 6435e3b4e15edf04eb06488bfdc5ae3a, type: 3}
+    shotEfPref: {fileID: 6303178564355127388, guid: 8edfd97a0c8690d4493043ab3eda818a, type: 3}
+    explosionEfPref: {fileID: 2875716881810836004, guid: 204dfe6f4dc862746be1c8c55553842e, type: 3}
+    castEfPref: {fileID: 4519404608316719708, guid: 222c2e9cec0eb0b4fac6fdfc8e281198, type: 3}
   activeSkillBtnList: []
   activeSkillBtnEfMt: {fileID: 2100000, guid: f5741323f9a2ef44abe392a3008f0a3f, type: 2}
   blockGlowColorMts:
@@ -9116,7 +9122,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1911869558
 Transform:
   m_ObjectHideFlags: 0

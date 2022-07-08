@@ -151,7 +151,6 @@ public class Player : MonoBehaviour
         calcLevelUpExp();
     }
 
-
     public void addExp(int _exp) => exp += _exp;
 
     //*---------------------------------------
@@ -168,7 +167,6 @@ public class Player : MonoBehaviour
             swingArcArea.rectTransform.localRotation = Quaternion.Euler(0,0,+offsetHitDeg + 90);
         }
     }
-
     public void setAnimTrigger(string name){
         anim.updateMode = AnimatorUpdateMode.Normal;
         anim.SetTrigger(name);
@@ -183,17 +181,14 @@ public class Player : MonoBehaviour
         }
         
     }
-
     public void setSwingArcColor(string color){
         swingArcArea.color = color == "red" ? new Color(1,0,0,0.4f) : new Color(1,1,0,0.4f); //yellow
     }
-
     public void calcLevelUpExp(){
         if(exp > maxExp){
             setLevelUp();
         }
     }
-
     public void setLevelUp(){
         Debug.Log("setLevelUp:: LEVEL UP!");
         IsLevelUp = true;
@@ -201,7 +196,6 @@ public class Player : MonoBehaviour
         Exp = 0;
         MaxExp = maxExp * 1.75f;
     }
-
     public List<int> getAllSkillLvList(){
         List<int> list = new List<int>();
         //set All Skills curLevel

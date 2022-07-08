@@ -249,7 +249,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ThunderShot
+  m_Text: PoisonSmoke
 --- !u!114 &5168663472110520688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 5168663472484879908}
   - component: {fileID: 9098747030647486247}
   m_Layer: 5
-  m_Name: Skill_ThunderShot
+  m_Name: Skill_PoisonSmoke
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -604,7 +604,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cd21a2aefb1cb5a4db7fe2a1a14b5c06, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6ba40148a00b71749b8ca40a1154d9ca, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -692,7 +692,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u7BC4\u56F2\u653B\u6483"
+  m_Text: "\u30C9\u30C3\u30C8\u653B\u6483"
 --- !u!1 &5168663473766654844
 GameObject:
   m_ObjectHideFlags: 0

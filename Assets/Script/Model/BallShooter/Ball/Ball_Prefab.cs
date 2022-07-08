@@ -108,7 +108,7 @@ public class Ball_Prefab : MonoBehaviour
                     StartCoroutine(coPlayHomeRunAnim(isActiveSkillTrigger));
                 }
                 else if(isActiveSkillTrigger){ //* ActiveSkill Before
-                    StartCoroutine(coPlayActiveSkillBefSpotLightAnim());
+                    // StartCoroutine(coPlayActiveSkillBefSpotLightAnim());
                 }
 
                 rigid.velocity = Vector3.zero;
@@ -205,6 +205,11 @@ public class Ball_Prefab : MonoBehaviour
                             skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
+                        case "PoisonSmoke":
+                            em.createActiveSkillExplosionEF(selectAtvSkillIdx, this.transform, 999);
+                            skillBtn.init(gm);
+                            this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
+                            break;
                     }
                 }
             });
@@ -254,9 +259,9 @@ public class Ball_Prefab : MonoBehaviour
     }
 
     IEnumerator coPlayHomeRunAnim(bool isActiveSkillTrigger){
-        if(isActiveSkillTrigger){
-            yield return coPlayActiveSkillBefSpotLightAnim();
-        }
+        // if(isActiveSkillTrigger){
+        //     yield return coPlayActiveSkillBefSpotLightAnim();
+        // }
         Debug.Log("HOMERUH!!!!");
         Time.timeScale = 0;
         pl.setAnimTrigger("HomeRun");
@@ -274,13 +279,15 @@ public class Ball_Prefab : MonoBehaviour
     }
 
     IEnumerator coPlayActiveSkillShotEF(ActiveSkillBtnUI btn, float waitTime, Vector3 dir){
+        Debug.LogFormat("coPlayActiveSkillShotEF:: btn={0}, waitTite={1}, dir={2}", btn.Name, waitTime, dir);
+        int selectAtvSkillIdx = DM.ins.personalData.SelectSkillIdx;
         switch(btn.Name){
             case "Thunder":
                 const int maxDistance = 50;
                 const int width = 1;
                 Debug.DrawRay(this.transform.position, dir * maxDistance, Color.blue, 2f);
 
-                em.createActiveSkillShotEF(btn.Index, this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
+                em.createActiveSkillShotEF(selectAtvSkillIdx, this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
                 //* Collider 
                 RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, Vector3.one * width, dir, Quaternion.identity, maxDistance);
                 Array.ForEach(hits, hit => {
@@ -293,10 +300,13 @@ public class Ball_Prefab : MonoBehaviour
                 this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                 break;
             case "FireBall":
-                em.createActiveSkillShotEF(btn.Index, this.gameObject.transform, Quaternion.identity, true); //Trail
+                em.createActiveSkillShotEF(selectAtvSkillIdx, this.gameObject.transform, Quaternion.identity, true); //Trail
                 break;
             case "ColorBall":
-                em.createActiveSkillShotEF(btn.Index, this.gameObject.transform, Quaternion.identity, true); //Trail
+                em.createActiveSkillShotEF(selectAtvSkillIdx, this.gameObject.transform, Quaternion.identity, true); //Trail
+                break;
+            case "PoisonSmoke":
+                em.createActiveSkillShotEF(selectAtvSkillIdx, this.gameObject.transform, Quaternion.identity, true); //Trail
                 break;
             
         }
