@@ -198,6 +198,7 @@ public class ActiveSkillBtnUI{
                     case "Thunder":     parentTf = gm.pl.CastEFArrowTf;        break;
                     case "FireBall":    parentTf = gm.pl.CastEFBallPreviewTf;  break;
                     case "PoisonSmoke": parentTf = gm.pl.CastEFBallPreviewTf;  break;
+                    case "IceWave": parentTf = gm.pl.CastEFBallPreviewTf;  break;
                     case "ColorBall":   parentTf = gm.pl.CastEFArrowTf;        break;
                 }
                 gm.em.createActiveSkillCastEF(selectAtvSkillIdx, parentTf);

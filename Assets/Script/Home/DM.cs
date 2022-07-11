@@ -10,7 +10,7 @@ public class DM : MonoBehaviour
     public static DM ins;
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
     public enum ITEM {Chara, Bat, Skill};
-    public enum ATVSKILL{FireBall, Thunder, ColorBall, PoisonSmoke};
+    public enum ATVSKILL{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave};
     public enum PSVSKILL{DMG, MULTISHOT, SPEED, INSTANT_KILL, CRITICAL, EXPLOSION, EXP_UP, ITEM_SPAWN};
 
 

@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
         //* Ball Preview Dir Goal Set Z-Center
         setBallPreviewGoalRandomPos();
 
-        //* Active Skill Btns(最大2個)
+        //* Active Skill Btns(現在は１個、最大2個)
         int i=0;
         Debug.Log("GM:: activeSkillBtnGroup.childCount=" + activeSkillBtnGroup.childCount);
         foreach(Transform child in activeSkillBtnGroup){

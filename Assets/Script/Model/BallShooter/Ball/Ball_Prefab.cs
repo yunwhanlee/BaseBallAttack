@@ -182,7 +182,8 @@ public class Ball_Prefab : MonoBehaviour
                             break;
                         }
                         case "PoisonSmoke":{
-                            em.createActiveSkillExplosionEF(selectAtvSkillIdx, this.transform, 999);
+                            int destroyCnt = 999;
+                            em.createActiveSkillExplosionEF(selectAtvSkillIdx, this.transform, destroyCnt);
                             
                             RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.PoisonSmokeCastWidth, Vector3.up, 0);
                             decreaseHpSphereCastAll(0, 2);
@@ -209,6 +210,12 @@ public class Ball_Prefab : MonoBehaviour
                             skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
+                        case "IceWave":
+                            em.createActiveSkillExplosionEF(selectAtvSkillIdx, this.transform);
+                            skillBtn.init(gm);
+                            this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
+                            break;
+
                     }
                 }
             });
@@ -315,6 +322,9 @@ public class Ball_Prefab : MonoBehaviour
                 em.createActiveSkillShotEF(selectAtvSkillIdx, this.gameObject.transform, Quaternion.identity, true); //Trail
                 break;
             case "PoisonSmoke":
+                em.createActiveSkillShotEF(selectAtvSkillIdx, this.gameObject.transform, Quaternion.identity, true); //Trail
+                break;
+            case "IceWave":
                 em.createActiveSkillShotEF(selectAtvSkillIdx, this.gameObject.transform, Quaternion.identity, true); //Trail
                 break;
             

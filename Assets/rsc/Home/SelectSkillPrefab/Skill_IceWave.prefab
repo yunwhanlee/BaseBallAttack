@@ -249,7 +249,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: IceWave
+  m_Text: PoisonSmoke
 --- !u!114 &5168663472110520688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 5168663472484879908}
   - component: {fileID: 9098747030647486247}
   m_Layer: 5
-  m_Name: Skill_PoisonSmoke
+  m_Name: Skill_IceWave
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -604,7 +604,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9172d67c36da385408901c57a6c87c80, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c467c1634e6a0d34191f33759c21c45b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -692,7 +692,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30A2\u30A4\u30B9\u653B\u6483"
+  m_Text: "\u30C9\u30C3\u30C8\u653B\u6483"
 --- !u!1 &5168663473766654844
 GameObject:
   m_ObjectHideFlags: 0
