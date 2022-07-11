@@ -18,6 +18,7 @@ public class ActiveSkillGizmos : MonoBehaviour
         }
     }
 
+
     protected void OnTriggerEnter(Collider col){
         if(col.gameObject.CompareTag("NormalBlock")){
             Debug.Log("ActiveSkillGizmos:: OnTriggerEnter:: col.name= " + col.name);
