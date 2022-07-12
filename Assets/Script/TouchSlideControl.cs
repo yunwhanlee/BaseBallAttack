@@ -62,6 +62,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     }
 
     public void OnPointerUp(PointerEventData eventData){
+        gm.isPointUp = true;
         pad.gameObject.SetActive(false);
         stick.localPosition = Vector2.zero;
         if(gm.STATE != GameManager.State.PLAY) return;

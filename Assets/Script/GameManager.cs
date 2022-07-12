@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
     public List<ActiveSkillBtnUI> activeSkillBtnList; //* ActiveSkillボタン
     public Material activeSkillBtnEfMt;
     public Material[] blockGlowColorMts;
+    public bool isPointUp; //* SectorGizmos Colliderへ活用するため。
 
     [Header("--Passive Skill Table InGame--")]
     public GameObject[] passiveSkillImgObjPrefs;

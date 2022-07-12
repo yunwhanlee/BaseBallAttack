@@ -35,6 +35,8 @@ public class Ball_Prefab : MonoBehaviour
 
     }
     void Update(){
+            // Debug.Log("BALL:: Vector3.Normalize(rigid.velocity) =>"+ Vector3.Normalize(rigid.velocity));
+
             //* Destroy by Checking Velocity
             // Debug.Log("BallGroup.childCount=" + gm.ballGroup.childCount + ", Ball Velocity.magnitude="+rigid.velocity.magnitude);
             if(rigid.velocity.magnitude != 0 && rigid.velocity.magnitude < 0.9875f){
