@@ -171,6 +171,7 @@ public class Ball_Prefab : MonoBehaviour
             //* #2. Active Skill HIT
             gm.activeSkillBtnList.ForEach(skillBtn => {
                 if(skillBtn.Trigger){
+                    float delayTime = 2;
                     int selectAtvSkillIdx = DM.ins.personalData.SelectSkillIdx;
                     switch(skillBtn.Name){
                         case "Thunder":
@@ -213,12 +214,15 @@ public class Ball_Prefab : MonoBehaviour
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
                         case "IceWave":
+                            delayTime = 2f;
                             em.createActiveSkillExplosionEF(selectAtvSkillIdx, this.transform);
                             skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
-
                     }
+
+                    //* Delay Next Stage
+                    Invoke("onDestroyMeInvoke", delayTime);
                 }
             });
             //* HIT Base Passive Skills
@@ -239,6 +243,9 @@ public class Ball_Prefab : MonoBehaviour
             em.createDownWallHitEF(pos);
         }
     }
+
+    private void onDestroyMeInvoke() => onDestroyMe();
+    
 
     private void decreaseHpSphereCastAll(int dmg, int dotDmgDevideVal = 0){
         RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.FireBallCastWidth, Vector3.up, 0);
@@ -261,7 +268,6 @@ public class Ball_Prefab : MonoBehaviour
             gm.setStrike();
             gm.setBallPreviewGoalRandomPos();
         }
-        
         Destroy(this.gameObject);
     }
 
@@ -332,8 +338,8 @@ public class Ball_Prefab : MonoBehaviour
             
         }
         //Before go up NextStage Wait for Second
-        yield return new WaitForSeconds(waitTime);
-        onDestroyMe();
+        yield return new WaitForSeconds(0);
+        // onDestroyMe();
     }
 
     

@@ -128,10 +128,10 @@ public class GameManager : MonoBehaviour
         stageTxt.text = "STAGE : " + stage.ToString();
 
         //* (BUG) ボールが複数ある時、同時に消えたら、次に進まないこと対応
-        if(ballGroup.childCount == 0 && !downWall.isTrigger){
-            Debug.Log("GM:: Update:: setNextStage()");
-            setNextStage();
-        }
+        // if(ballGroup.childCount == 0 && !downWall.isTrigger){
+        //     Debug.Log("GM:: Update:: setNextStage()");
+        //     setNextStage();
+        // }
 
         //* ActiveSkill Status
         activeSkillBtnList.ForEach(btn=>{
