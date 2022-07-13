@@ -304,9 +304,11 @@ public class Ball_Prefab : MonoBehaviour
 
     IEnumerator coPlayActiveSkillShotEF(ActiveSkillBtnUI btn, float waitTime, Vector3 dir){
         Debug.LogFormat("coPlayActiveSkillShotEF:: btn={0}, waitTite={1}, dir={2}", btn.Name, waitTime, dir);
+        float delayTime = 0;
         int selectAtvSkillIdx = DM.ins.personalData.SelectSkillIdx;
         switch(btn.Name){
             case "Thunder":
+                delayTime = 2;
                 const int maxDistance = 50;
                 const int width = 1;
                 Debug.DrawRay(this.transform.position, dir * maxDistance, Color.blue, 2f);
@@ -322,24 +324,17 @@ public class Ball_Prefab : MonoBehaviour
                 });
                 gm.activeSkillBtnList[0].init(gm);
                 this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
+                yield return new WaitForSeconds(delayTime);
+                onDestroyMe();
                 break;
             case "FireBall":
-                em.createActiveSkillShotEF(selectAtvSkillIdx, this.gameObject.transform, Quaternion.identity, true); //Trail
-                break;
             case "ColorBall":
-                em.createActiveSkillShotEF(selectAtvSkillIdx, this.gameObject.transform, Quaternion.identity, true); //Trail
-                break;
             case "PoisonSmoke":
-                em.createActiveSkillShotEF(selectAtvSkillIdx, this.gameObject.transform, Quaternion.identity, true); //Trail
-                break;
             case "IceWave":
                 em.createActiveSkillShotEF(selectAtvSkillIdx, this.gameObject.transform, Quaternion.identity, true); //Trail
                 break;
-            
         }
         //Before go up NextStage Wait for Second
-        yield return new WaitForSeconds(0);
-        // onDestroyMe();
     }
 
     
