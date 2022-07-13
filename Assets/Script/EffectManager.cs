@@ -116,6 +116,7 @@ public class EffectManager : MonoBehaviour
         if(!activeSkillCastEFs[idx]) return;
         Debug.Log("createActiveSkillCastEF:: name= " + activeSkillCastEFs[idx].name);
         var ins = Instantiate(activeSkillCastEFs[idx], parentTf.position, Quaternion.identity, parentTf) as GameObject;
+        ins.transform.localRotation = Quaternion.Euler(0,0,0); //* 角度がずらす部分対応。
     }
 
     //* -------------------------------------------------------------
