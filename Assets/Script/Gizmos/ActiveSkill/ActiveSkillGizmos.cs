@@ -15,6 +15,7 @@ public class ActiveSkillGizmos : MonoBehaviour
             case DM.ATVSKILL.FireBall : pl.FireBallCastWidth = width;   break;
             case DM.ATVSKILL.PoisonSmoke : pl.PoisonSmokeCastWidth = width;   break;
             case DM.ATVSKILL.ColorBall :    break;
+            case DM.ATVSKILL.IceWave :    break;
         }
     }
 

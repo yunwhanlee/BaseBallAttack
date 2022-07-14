@@ -161,10 +161,6 @@ public class GameManager : MonoBehaviour
         //(BUG)再クリック。Cancel Selected Btn
         if(activeSkillBtnList[i].SelectCircleEF.gameObject.activeSelf){
             activeSkillBtnList[i].init(this, true);
-
-            var blocks = bm.GetComponentsInChildren<Block_Prefab>();
-            bm.setGlowEFBlocks(blocks, false);
-            
             return;
         }
         //(BUG)重複選択禁止。初期化
@@ -394,6 +390,8 @@ public class GameManager : MonoBehaviour
         var dropObjs = bm.dropItemGroup.GetComponentsInChildren<DropItem>();
         Debug.Log("setNextStage:: dropObjs.Length= " + dropObjs.Length);
         Array.ForEach(dropObjs, dropObj=>dropObj.moveToTarget(pl.transform));
+
+        
     }
 
     private IEnumerator coWaitPlayerCollectOrb(){

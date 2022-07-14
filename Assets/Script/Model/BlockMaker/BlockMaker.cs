@@ -76,9 +76,12 @@ public class BlockMaker : MonoBehaviour
         createBlockLine();
     }
 
-    public void setGlowEFBlocks(Block_Prefab[] targetBlcoks, bool isOn){
-        Array.ForEach(targetBlcoks, bl => {
-            bl.GetComponent<Block_Prefab>().setEnabledSpriteGlowEF(isOn);
-        });
+    public void setGlowEF(Block_Prefab[] targetBlocks, bool isOn){
+        Array.ForEach(targetBlocks, bl => bl.GetComponent<Block_Prefab>().setEnabledSpriteGlowEF(isOn));
+    }
+
+    public void setGlowEFAllBlocks(bool isOn){ //* Block Grow EF 解除
+        var blocks = GetComponentsInChildren<Block_Prefab>();
+        setGlowEF(blocks, isOn);
     }
 }

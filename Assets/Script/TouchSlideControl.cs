@@ -89,16 +89,14 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
                 //* Find Same Color Blocks
                 var blocks = bm.GetComponentsInChildren<Block_Prefab>();
-                var sameColorBlocks = Array.FindAll(blocks, bl => 
-                    bl.GetComponent<MeshRenderer>().material.GetColor("_ColorTint") == hitColor
-                );
+                var sameColorBlocks = Array.FindAll(blocks, bl => bl.GetComponent<MeshRenderer>().material.GetColor("_ColorTint") == hitColor);
 
                 //* Glow Effect On
-                bm.setGlowEFBlocks(sameColorBlocks, true);
+                bm.setGlowEF(sameColorBlocks, true);
                 
                 //* Reset
                 if(hitBlockByBallPreview != hit.transform.gameObject){
-                    bm.setGlowEFBlocks(blocks, false);
+                    bm.setGlowEF(blocks, false);
                 }
                 hitBlockByBallPreview = hit.transform.gameObject;
             }

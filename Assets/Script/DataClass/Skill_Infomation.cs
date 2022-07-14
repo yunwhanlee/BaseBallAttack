@@ -176,6 +176,7 @@ public class ActiveSkillBtnUI{
         foreach(Transform child in gm.pl.CastEFArrowTf) GameObject.Destroy(child.gameObject);
         foreach(Transform child in gm.pl.CastEFBallPreviewTf) GameObject.Destroy(child.gameObject);
         gm.setLightDarkness(false);
+        gm.bm.setGlowEFAllBlocks(false);
     }
     public void onTriggerActive(int selectIdx, GameManager gm){
         //TODO selectIdx Btn処理しないと、現在はスキルボタン１個として対応。
