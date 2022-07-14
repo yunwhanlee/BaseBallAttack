@@ -34,11 +34,13 @@ public class GameManager : MonoBehaviour
     public int stage = 1;
     public int bestScore;
     public int strikeCnt = 0;
+    public int comboCnt = 0;
 
     public Text stageTxt;
     public Text stateTxt;
     public Text levelTxt;
     public Text shootCntTxt;
+    public Text comboTxt;
 
     [Header("--Exp Slider Bar--")]
     public Slider expBar;
@@ -98,7 +100,6 @@ public class GameManager : MonoBehaviour
         readyBtn = readyBtn.GetComponent<Button>();
         gvStageTxt = gameoverPanel.transform.GetChild(1).GetComponent<Text>();
         gvBestScoreTxt = gameoverPanel.transform.GetChild(2).GetComponent<Text>();
-        
 
         //* Ball Preview Dir Goal Set Z-Center
         setBallPreviewGoalRandomPos();
@@ -126,6 +127,7 @@ public class GameManager : MonoBehaviour
         stateTxt.text = STATE.ToString();
         levelTxt.text = "LV : " + pl.Lv;
         stageTxt.text = "STAGE : " + stage.ToString();
+        comboTxt.text = "COMBO\n" + comboCnt.ToString();
 
         //* (BUG) ボールが複数ある時、同時に消えたら、次に進まないこと対応
         // if(ballGroup.childCount == 0 && !downWall.isTrigger){
@@ -137,6 +139,7 @@ public class GameManager : MonoBehaviour
         activeSkillBtnList.ForEach(btn=>{
             btn.setActiveSkillEF();
         });
+        
     }
 
     public void setShootCntText(string str) => shootCntTxt.text = str;
@@ -181,12 +184,14 @@ public class GameManager : MonoBehaviour
         STATE = GameManager.State.WAIT;
         stage = 1;
         strikeCnt = 0;
+        comboCnt = 0;
         pl.Lv = 1;
         pl.Exp = 0;
         pl.MaxExp = 100;
         gameoverPanel.SetActive(false);
         pl.Start();
         bm.Start();
+        
     }
 
     public void switchCamScene(){
@@ -372,6 +377,13 @@ public class GameManager : MonoBehaviour
         downWall.isTrigger = true; //*下壁 物理X
         readyBtn.gameObject.SetActive(true);
         bm.setCreateBlockTrigger(true);
+        comboCnt = 0;
+        if(bm.transform.childCount == 0){
+            Debug.Log("PERFECT!");
+            ++stage;
+            bm.moveDownBlock();
+        }
+
         ballShooter.setIsBallExist(false);
         pl.previewBundle.SetActive(true);
         StartCoroutine(coWaitPlayerCollectOrb());

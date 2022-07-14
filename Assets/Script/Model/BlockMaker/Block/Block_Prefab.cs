@@ -131,6 +131,10 @@ public class Block_Prefab : MonoBehaviour
 
     public void decreaseHp(int dmg) {
         hp -= dmg;
+        
+        gm.comboCnt++;
+        gm.comboTxt.GetComponent<Animator>().SetTrigger("isHit");
+
         StartCoroutine(coWhiteHitEffect(meshRd.material));
         if(hp <= 0) {
             //* アイテムブロック 処理

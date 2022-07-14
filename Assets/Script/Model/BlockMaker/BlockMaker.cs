@@ -70,7 +70,7 @@ public class BlockMaker : MonoBehaviour
         var block = blockTf.GetComponent<Block_Prefab>();
         ins.GetComponent<DropItem>().ExpVal = block.Exp;
     }
-    private void moveDownBlock(){
+    public void moveDownBlock(){
         Debug.Log("moveDownBlock:: MOVE DOWN BLOCK ↓");
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z - 1);
         createBlockLine();

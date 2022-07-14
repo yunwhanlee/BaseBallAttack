@@ -3227,7 +3227,7 @@ MonoBehaviour:
   lv: 1
   maxExp: 100
   exp: 0
-  atvSkillCoolDownUnit: 0.5
+  atvSkillCoolDownUnit: 0.025
   registAtvSkillNames: []
   activeSkills: []
   batEffectTf: {fileID: 0}
@@ -3701,12 +3701,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: abc60a2946f48a34185d008594c7095b, type: 3}
     m_FontSize: 50
     m_FontStyle: 1
     m_BestFit: 1
     m_MinSize: 0
-    m_MaxSize: 50
+    m_MaxSize: 80
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -3722,6 +3722,123 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 738043201}
   m_CullTransparentMesh: 1
+--- !u!1 &744198043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 744198044}
+  - component: {fileID: 744198047}
+  - component: {fileID: 744198046}
+  - component: {fileID: 744198045}
+  - component: {fileID: 744198048}
+  m_Layer: 5
+  m_Name: ComboTxt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &744198044
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744198043}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2001013461}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 600, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &744198045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744198043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db125c7de00668f4e98849d0aaf366d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0, b: 0.96657753, a: 0.5019608}
+  m_EffectDistance: {x: 4, y: -4}
+  m_UseGraphicAlpha: 1
+--- !u!114 &744198046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744198043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: abc60a2946f48a34185d008594c7095b, type: 3}
+    m_FontSize: 105
+    m_FontStyle: 2
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 105
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'COMBO
+
+    1'
+--- !u!222 &744198047
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744198043}
+  m_CullTransparentMesh: 1
+--- !u!95 &744198048
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744198043}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bc5d47ebbe0df484c90f08f97a36a703, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &747844802
 GameObject:
   m_ObjectHideFlags: 0
@@ -7547,10 +7664,12 @@ MonoBehaviour:
   stage: 1
   bestScore: 999
   strikeCnt: 0
+  comboCnt: 0
   stageTxt: {fileID: 1558296299}
   stateTxt: {fileID: 764482078}
   levelTxt: {fileID: 738043204}
   shootCntTxt: {fileID: 946186242}
+  comboTxt: {fileID: 744198046}
   expBar: {fileID: 1579494044}
   hitRangeSlider: {fileID: 1926558710}
   HomeRunRangeTf: {fileID: 364375264}
@@ -7602,6 +7721,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 7492866593a6d3a469eaf08153046ccc, type: 2}
   - {fileID: 2100000, guid: b3c8a3dfb572425479acd5f9ee5168d9, type: 2}
   - {fileID: 2100000, guid: 58d9dc3167d5d5840a1386985aedc2c4, type: 2}
+  isPointUp: 0
   passiveSkillImgObjPrefs:
   - {fileID: 5646658460974134969, guid: 9c3959f2820441145a232b352b0eddc0, type: 3}
   - {fileID: 2024090791339072515, guid: 82aeceecafe4e05488db05c172108681, type: 3}
@@ -9931,6 +10051,7 @@ RectTransform:
   - {fileID: 1965303885}
   - {fileID: 557986894}
   - {fileID: 1572075154}
+  - {fileID: 744198044}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
