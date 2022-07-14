@@ -173,6 +173,7 @@ public class Ball_Prefab : MonoBehaviour
                 if(skillBtn.Trigger){
                     float delayTime = 2;
                     int selectAtvSkillIdx = DM.ins.personalData.SelectSkillIdx;
+                    gm.cam1.GetComponent<CamResolution>().setAnimTrigger("doShake");
                     switch(skillBtn.Name){
                         case "Thunder":
                             //なし
@@ -187,7 +188,6 @@ public class Ball_Prefab : MonoBehaviour
                         case "PoisonSmoke":{
                             int destroyCnt = 999;
                             em.createActiveSkillExplosionEF(selectAtvSkillIdx, this.transform, destroyCnt);
-                            
                             RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.PoisonSmokeCastWidth, Vector3.up, 0);
                             decreaseHpSphereCastAll(0, 2);
                             skillBtn.init(gm);
@@ -312,6 +312,7 @@ public class Ball_Prefab : MonoBehaviour
                 const int maxDistance = 50;
                 const int width = 1;
                 Debug.DrawRay(this.transform.position, dir * maxDistance, Color.blue, 2f);
+                gm.cam1.GetComponent<CamResolution>().setAnimTrigger("doShake");
 
                 em.createActiveSkillShotEF(selectAtvSkillIdx, this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
                 //* Collider 
