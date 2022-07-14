@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     public Text levelTxt;
     public Text shootCntTxt;
     public Text comboTxt;
+    public Text perfectTxt;
 
     [Header("--Exp Slider Bar--")]
     public Slider expBar;
@@ -372,13 +373,10 @@ public class GameManager : MonoBehaviour
         STATE = GameManager.State.WAIT;
         downWall.isTrigger = true; //*下壁 物理X
         readyBtn.gameObject.SetActive(true);
-        bm.setCreateBlockTrigger(true);
+        
         comboCnt = 0;
-        if(bm.transform.childCount == 0){
-            Debug.Log("PERFECT!");
-            ++stage;
-            bm.moveDownBlock();
-        }
+
+
 
         ballShooter.setIsBallExist(false);
         pl.previewBundle.SetActive(true);
@@ -395,8 +393,19 @@ public class GameManager : MonoBehaviour
     }
 
     private IEnumerator coWaitPlayerCollectOrb(){
+        bm.setCreateBlockTrigger(true);
+        if(bm.transform.childCount == 0){//* Remove All Blocks Perfect Bonus!
+            Debug.Log("PERFECT!");
+            ++stage;
+            bm.moveDownBlock();
+            perfectTxt.GetComponent<Animator>().SetTrigger("doSpawn");
+            em.enableUIPerfectTxtEF();
+            yield return new WaitForSeconds(1);
+        }
+
         float sec = 1f;
         yield return new WaitForSeconds(sec);
+
         Debug.LogFormat("<color=black>coWaitCollectOrb:: checkLevelUp() wait: {0}sec</color>",sec);
         checkLevelUp();
     }

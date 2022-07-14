@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UI.Extensions;
 
 public class EffectManager : MonoBehaviour
 {
@@ -28,6 +29,9 @@ public class EffectManager : MonoBehaviour
 
     //* Drop Items EF
     public GameObject dropItemExpOrbEF;
+
+    //* UI EF
+    public GameObject perfectTxtEF;
 
     void Start()
     {
@@ -125,5 +129,17 @@ public class EffectManager : MonoBehaviour
     public void createDropItemExpOrbEF(Transform parentTf){
         var ins = Instantiate(dropItemExpOrbEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
         Destroy(ins, 1.5f);
+    }
+
+    //* -------------------------------------------------------------
+    //* UI EF
+    //* -------------------------------------------------------------
+    public void enableUIPerfectTxtEF(){
+        StartCoroutine(coUnActivePerfectTxtEF());
+    }
+    IEnumerator coUnActivePerfectTxtEF(){
+        perfectTxtEF.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        perfectTxtEF.SetActive(false);
     }
 }

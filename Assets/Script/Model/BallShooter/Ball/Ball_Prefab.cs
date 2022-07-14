@@ -180,7 +180,7 @@ public class Ball_Prefab : MonoBehaviour
                             break;
                         case "FireBall":{
                             em.createActiveSkillExplosionEF(selectAtvSkillIdx, this.transform);
-                            decreaseHpSphereCastAll(1);
+                            decreaseHpSphereCastAll(10);
                             skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
