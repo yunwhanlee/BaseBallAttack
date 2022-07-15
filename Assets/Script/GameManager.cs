@@ -327,14 +327,6 @@ public class GameManager : MonoBehaviour
         gvBestScoreTxt.text = "BEST SCORE : " + bestScore;
     }
 
-    public void checkLevelUp(){
-        if(pl.IsLevelUp){
-            pl.IsLevelUp = false;
-            levelUpPanel.SetActive(true);
-            levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
-        }
-    }
-
     public void displayCurPassiveSkillUI(string type){
         GameObject pref = (type == "PAUSE")? skillInfoRowPref : inGameSkillImgBtnPref;
         Transform parentTf = (type == "PAUSE")? pauseSkillStatusTableTf : inGameSkillStatusTableTf;
@@ -373,10 +365,7 @@ public class GameManager : MonoBehaviour
         STATE = GameManager.State.WAIT;
         downWall.isTrigger = true; //*下壁 物理X
         readyBtn.gameObject.SetActive(true);
-        
         comboCnt = 0;
-
-
 
         ballShooter.setIsBallExist(false);
         pl.previewBundle.SetActive(true);
@@ -388,8 +377,6 @@ public class GameManager : MonoBehaviour
         var dropObjs = bm.dropItemGroup.GetComponentsInChildren<DropItem>();
         Debug.Log("setNextStage:: dropObjs.Length= " + dropObjs.Length);
         Array.ForEach(dropObjs, dropObj=>dropObj.moveToTarget(pl.transform));
-
-        
     }
 
     private IEnumerator coWaitPlayerCollectOrb(){
@@ -403,7 +390,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1);
         }
 
-        float sec = 1f;
+        float sec = 0.8f;
         yield return new WaitForSeconds(sec);
 
         Debug.LogFormat("<color=black>coWaitCollectOrb:: checkLevelUp() wait: {0}sec</color>",sec);
@@ -414,5 +401,13 @@ public class GameManager : MonoBehaviour
         Array.ForEach(blocks, block => {
             if(block.IsDotDmg)  block.decreaseHp(block.getDotDmg(2));
         });
+    }
+
+    private void checkLevelUp(){
+        if(pl.IsLevelUp){
+            pl.IsLevelUp = false;
+            levelUpPanel.SetActive(true);
+            levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
+        }
     }
 }

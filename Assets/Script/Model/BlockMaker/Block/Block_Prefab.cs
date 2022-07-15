@@ -66,36 +66,37 @@ public class Block_Prefab : MonoBehaviour
         }
 
         //TODO Leveling HP
+        hp = gm.stage;
         //hp = (gm.stage <= 5) ? 1 : (gm.stage <= 10) ? 2 : (gm.stage <= 15) ? 3 : (gm.stage <= 20) ? 4 : 5;
-        rand = Random.Range(0,100);
-        if      (gm.stage <=  4) hp = rand < 85 ? 1 : 2;
-        else if (gm.stage <=  8) hp = rand < 85 ? 3 : 4;
-        else if (gm.stage <= 12) hp = rand < 85 ? 5 : (rand <= 95)? 6 : 7;
-        else if (gm.stage <= 16) hp = rand < 75 ? 7 : (rand <= 90)? 8 : 9;
-        else if (gm.stage <= 20) hp = rand < 50 ? 10 : (rand <= 75)? 11 : (rand <= 85)? 12 : (rand <= 95)? 13 : 14;
-        else if (gm.stage <= 25) hp = rand < 60 ? 14 : (rand <= 85)? 15 : 16;
-        else if (gm.stage <= 30) hp = rand < 65 ? 15 : (rand <= 80)? 16 : 17;
-        else if (gm.stage <= 34) hp = rand < 60 ? 17 : (rand <= 75)? 18 : (rand <= 85)? 19 : 20;
-        else if (gm.stage <= 39) hp = rand < 55 ? 19 : (rand <= 75)? 20 : (rand <= 90)? 21 : 22;
-        else if (gm.stage <= 45) hp = rand < 52 ? 21 : (rand <= 75)? 22 : (rand <= 90)? 23 : 24;
-        else if (gm.stage <= 51) hp = rand < 50 ? 23 : (rand <= 75)? 24 : (rand <= 90)? 25 : 26;
+        // rand = Random.Range(0,100);
+        // if      (gm.stage <=  4) hp = rand < 85 ? 1 : 2;
+        // else if (gm.stage <=  8) hp = rand < 85 ? 3 : 4;
+        // else if (gm.stage <= 12) hp = rand < 85 ? 5 : (rand <= 95)? 6 : 7;
+        // else if (gm.stage <= 16) hp = rand < 75 ? 7 : (rand <= 90)? 8 : 9;
+        // else if (gm.stage <= 20) hp = rand < 50 ? 10 : (rand <= 75)? 11 : (rand <= 85)? 12 : (rand <= 95)? 13 : 14;
+        // else if (gm.stage <= 25) hp = rand < 60 ? 14 : (rand <= 85)? 15 : 16;
+        // else if (gm.stage <= 30) hp = rand < 65 ? 15 : (rand <= 80)? 16 : 17;
+        // else if (gm.stage <= 34) hp = rand < 60 ? 17 : (rand <= 75)? 18 : (rand <= 85)? 19 : 20;
+        // else if (gm.stage <= 39) hp = rand < 55 ? 19 : (rand <= 75)? 20 : (rand <= 90)? 21 : 22;
+        // else if (gm.stage <= 45) hp = rand < 52 ? 21 : (rand <= 75)? 22 : (rand <= 90)? 23 : 24;
+        // else if (gm.stage <= 51) hp = rand < 50 ? 23 : (rand <= 75)? 24 : (rand <= 90)? 25 : 26;
         hpTxt.text = hp.ToString();
 
         //* Material
-        if(0 < hp && hp <= 4){
+        if(1 < hp && hp <= 10){
             Exp = 10;  meshRd.material = bm.Mts[(int)BlockMt.PLAIN]; 
         }
-        else if(5 < hp && hp <= 9){
+        else if(11 < hp && hp <= 20){
             Exp = 20;  meshRd.material = bm.Mts[(int)BlockMt.WOOD];
         }
-        else if(10 < hp && hp <= 14){
-            Exp = 20;  meshRd.material = bm.Mts[(int)BlockMt.SAND];
+        else if(21 < hp && hp <= 30){
+            Exp = 30;  meshRd.material = bm.Mts[(int)BlockMt.SAND];
         }
-        else if(15 < hp && hp <= 19){
-            Exp = 20;  meshRd.material = bm.Mts[(int)BlockMt.REDBRICK];
+        else if(31 < hp && hp <= 40){
+            Exp = 40;  meshRd.material = bm.Mts[(int)BlockMt.REDBRICK];
         }
-        else if(20 < hp && hp <= 25){
-            Exp = 20;  meshRd.material = bm.Mts[(int)BlockMt.IRON];
+        else if(41 < hp){
+            Exp = 50;  meshRd.material = bm.Mts[(int)BlockMt.IRON];
         }
 
         //* 色
