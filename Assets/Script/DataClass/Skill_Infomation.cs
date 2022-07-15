@@ -22,14 +22,13 @@ public class ItemPassiveList{
         new ItemPsvDt("Dmg"), new ItemPsvDt("MultiShot"), new ItemPsvDt("Speed"), 
         new ItemPsvDt("InstantKill"), new ItemPsvDt("Critical"), new ItemPsvDt("Explosion"), 
         new ItemPsvDt("ExpUp"), new ItemPsvDt("ItemSpawn")
-    };
-    public ItemPsvDt[] Arr {get => arr; set => arr = value;}
+    };  public ItemPsvDt[] Arr {get => arr; set => arr = value;}
 
     public void setImgPrefs(ItemPassiveList itemPsvList){
         int i=0;
         Array.ForEach(itemPsvList.arr, dtArr => arr[i++].imgPref = dtArr.imgPref);
     }
-
+    
     public void setLvArr(int[] lvArrTemp){
         for(int i=0;i<lvArrTemp.Length;i++){
             Debug.Log("result-> lv["+i+"]=" + lvArrTemp[i]);

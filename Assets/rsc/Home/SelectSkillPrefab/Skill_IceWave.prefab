@@ -636,8 +636,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -75, y: -52}
-  m_SizeDelta: {x: 400, y: 100}
+  m_AnchoredPosition: {x: 24, y: -52}
+  m_SizeDelta: {x: 600, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5168663473538576041
 CanvasRenderer:
@@ -680,7 +680,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30C9\u30C3\u30C8\u653B\u6483"
+  m_Text: give the damage inside sector range.
 --- !u!1 &5168663473766654844
 GameObject:
   m_ObjectHideFlags: 0

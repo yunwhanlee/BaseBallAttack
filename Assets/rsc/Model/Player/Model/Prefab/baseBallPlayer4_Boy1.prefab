@@ -1190,7 +1190,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52997f4069f577141a26ca62981ca997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHome: 0
 --- !u!114 &8246238493965262686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1321,7 +1320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52997f4069f577141a26ca62981ca997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHome: 0
 --- !u!114 &8246238494395149600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1669,10 +1667,10 @@ MonoBehaviour:
   itemPassive:
     arr:
     - name: Dmg
-      lv: 0
+      lv: 1
       imgPref: {fileID: 0}
     - name: MultiShot
-      lv: 0
+      lv: 1
       imgPref: {fileID: 0}
     - name: Speed
       lv: 0
@@ -1692,6 +1690,7 @@ MonoBehaviour:
     - name: ItemSpawn
       lv: 0
       imgPref: {fileID: 0}
+  is2ndSkillBtn: 0
 --- !u!95 &8246238493046802859
 Animator:
   serializedVersion: 3

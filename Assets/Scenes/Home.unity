@@ -256,7 +256,7 @@ MonoBehaviour:
   - type: Chara
     scrollRect: {fileID: 927224955}
     contentTf: {fileID: 810525562}
-    prefs:
+    itemPrefs:
     - {fileID: 8711436689206771315, guid: 5d6e338ed6963184b914949e876788b4, type: 3}
     - {fileID: 7626118294757544462, guid: 04573c6df0a194c4b84f76b7b6ebe5e3, type: 3}
     - {fileID: 3442606834111591561, guid: bfdf4266cb0e99f418f9f18fe911f116, type: 3}
@@ -266,7 +266,7 @@ MonoBehaviour:
   - type: Bat
     scrollRect: {fileID: 365502386}
     contentTf: {fileID: 1919530734}
-    prefs:
+    itemPrefs:
     - {fileID: 4604932161339017364, guid: 5da00c612cd56d7429bc1f4cc8042531, type: 3}
     - {fileID: 4604932161339017364, guid: d025bfff1f1aa1046a1aebd4bb208a3d, type: 3}
     - {fileID: 4604932161339017364, guid: 1db413430b3802945b28443a997bfccf, type: 3}
@@ -295,7 +295,7 @@ MonoBehaviour:
   - type: Skill
     scrollRect: {fileID: 1338635736}
     contentTf: {fileID: 1931609520}
-    prefs:
+    itemPrefs:
     - {fileID: 5168663472484879904, guid: a3f8506c64b02194b83a851f1bdb42e2, type: 3}
     - {fileID: 5168663472484879904, guid: 8866152942c30b748bbd79a7eadcf90d, type: 3}
     - {fileID: 5168663472484879904, guid: 91f0572703310f7498427661085eaef6, type: 3}
@@ -3346,7 +3346,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52997f4069f577141a26ca62981ca997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHome: 0
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0

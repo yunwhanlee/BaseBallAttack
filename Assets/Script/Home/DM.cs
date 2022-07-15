@@ -10,7 +10,7 @@ public class DM : MonoBehaviour
     public static DM ins;
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
     public enum ITEM {Chara, Bat, Skill};
-    public enum ATVSKILL{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave};
+    public enum ATVSKILL{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave, Unlock2ndSkillBtn};
     public enum PSVSKILL{DMG, MULTISHOT, SPEED, INSTANT_KILL, CRITICAL, EXPLOSION, EXP_UP, ITEM_SPAWN};
 
 
@@ -36,9 +36,9 @@ public class DM : MonoBehaviour
         }
 
         //* contents Prefab 生成
-        scrollviews[(int)DM.ITEM.Chara].createObject(modelContentPref, itemPassivePanel, itemSkillBoxPref);
-        scrollviews[(int)DM.ITEM.Bat].createObject(modelContentPref, itemPassivePanel, itemSkillBoxPref);
-        scrollviews[(int)DM.ITEM.Skill].createObject(modelContentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.ITEM.Chara].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.ITEM.Bat].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.ITEM.Skill].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
 
         //* Items of Content
         ItemInfo[] charas = scrollviews[(int)DM.ITEM.Chara].ContentTf.GetComponentsInChildren<ItemInfo>();
@@ -73,7 +73,7 @@ public class DM : MonoBehaviour
             Array.ForEach(DM.ins.scrollviews, sv => {
                 sv.ScrollRect = this.scrollviews[i].ScrollRect;
                 sv.ContentTf = this.scrollviews[i].ContentTf;
-                sv.Prefs = this.scrollviews[i].Prefs;
+                sv.ItemPrefs = this.scrollviews[i].ItemPrefs;
                 i++;
             });
 

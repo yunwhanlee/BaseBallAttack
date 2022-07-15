@@ -83,7 +83,7 @@ public class Block_Prefab : MonoBehaviour
         hpTxt.text = hp.ToString();
 
         //* Material
-        if(1 < hp && hp <= 10){
+        if(0 < hp && hp <= 10){
             Exp = 10;  meshRd.material = bm.Mts[(int)BlockMt.PLAIN]; 
         }
         else if(11 < hp && hp <= 20){

@@ -102,17 +102,17 @@ public class PersonalData {
 
         // this.ItemPassive = new ItemPassiveList();
 
-        for(int i=0; i<DM.ins.scrollviews[(int)DM.ITEM.Chara].Prefs.Length; i++){
+        for(int i=0; i<DM.ins.scrollviews[(int)DM.ITEM.Chara].ItemPrefs.Length; i++){
             if(i==0) this.CharaLockList.Add(false);//    items[0].IsLock = false;}
             else     this.CharaLockList.Add(true);//     items[i].IsLock = true;}
         }
 
-        for(int i=0; i<DM.ins.scrollviews[(int)DM.ITEM.Bat].Prefs.Length; i++){
+        for(int i=0; i<DM.ins.scrollviews[(int)DM.ITEM.Bat].ItemPrefs.Length; i++){
             if(i==0) this.BatLockList.Add(false);//    items[0].IsLock = false;}
             else     this.BatLockList.Add(true);//     items[i].IsLock = true;}
         }
 
-        for(int i=0; i<DM.ins.scrollviews[(int)DM.ITEM.Skill].Prefs.Length; i++){
+        for(int i=0; i<DM.ins.scrollviews[(int)DM.ITEM.Skill].ItemPrefs.Length; i++){
             if(i==0) this.SkillLockList.Add(false);//    items[0].IsLock = false;}
             else     this.SkillLockList.Add(true);//     items[i].IsLock = true;}
         }

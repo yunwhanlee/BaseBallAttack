@@ -50,8 +50,8 @@ public class HomeManager : MonoBehaviour
     public void onClickBtnGoToDialog(string name){
         //* Current Model Data & ParentTf
         DM.ins.SelectItemType = name;
-        var curChara = DM.ins.scrollviews[(int)DM.ITEM.Chara].Prefs[DM.ins.personalData.SelectCharaIdx];
-        var curBat = DM.ins.scrollviews[(int)DM.ITEM.Bat].Prefs[DM.ins.personalData.SelectBatIdx];
+        var curChara = DM.ins.scrollviews[(int)DM.ITEM.Chara].ItemPrefs[DM.ins.personalData.SelectCharaIdx];
+        var curBat = DM.ins.scrollviews[(int)DM.ITEM.Bat].ItemPrefs[DM.ins.personalData.SelectBatIdx];
         
         switch(DM.ins.SelectItemType){
             case "Home" : 
@@ -157,7 +157,7 @@ public class HomeManager : MonoBehaviour
 
     public void setSelectSkillImg(){
         Debug.Log("setSelectSkillImgAtHome():: DM.ins.personalData.SelectSkillIdx= " + DM.ins.personalData.SelectSkillIdx);
-        var prefs = DM.ins.scrollviews[(int)DM.ITEM.Skill].Prefs;
+        var prefs = DM.ins.scrollviews[(int)DM.ITEM.Skill].ItemPrefs;
         int curIdx = DM.ins.personalData.SelectSkillIdx;
         var sprite = prefs[curIdx].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
         SelectSkillImg.sprite = sprite;

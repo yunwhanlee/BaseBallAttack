@@ -12,19 +12,19 @@ public class ScrollView {
     [SerializeField] String type;  public String Type {get => type; set => type = value;} 
     [SerializeField] RectTransform scrollRect;  public RectTransform ScrollRect {get => scrollRect; set => scrollRect = value;}
     [SerializeField] RectTransform contentTf;  public RectTransform ContentTf {get => contentTf; set => contentTf = value;}
-    [SerializeField] GameObject[] prefs;  public GameObject[] Prefs {get => prefs; set => prefs = value;}
+    [SerializeField] GameObject[] itemPrefs;  public GameObject[] ItemPrefs {get => itemPrefs; set => itemPrefs = value;}
 
-    public ScrollView(RectTransform scrollRect, RectTransform contentTf, GameObject[] prefs){
+    public ScrollView(RectTransform scrollRect, RectTransform contentTf, GameObject[] itemPrefs){
         this.type = scrollRect.gameObject.name.Split('_')[1];
         this.scrollRect = scrollRect;
         this.contentTf = contentTf;
-        this.prefs = prefs;
+        this.itemPrefs = itemPrefs;
     }
 
-    public void createObject(RectTransform modelParentPref, RectTransform itemPassivePanel, RectTransform itemSkillBoxPref){
+    public void createItem(RectTransform modelParentPref, RectTransform itemPassivePanel, RectTransform itemSkillBoxPref){
         Debug.LogFormat("createObject:: {0}, {1}, {2}",modelParentPref, itemPassivePanel, itemSkillBoxPref);
         //* Prefabs 生成
-        Array.ForEach(prefs, obj=>{
+        Array.ForEach(itemPrefs, obj=>{
             //* 生成
             Transform parentTf = null;
             GameObject model = null;
@@ -49,13 +49,13 @@ public class ScrollView {
             //* 調整
             switch(this.type){
                 case "Chara" : 
-                    showItemPassiveUI(type, itemPassiveList, itemSkillBoxPref, psvPanel);
+                    displayItemPassiveUI(type, itemPassiveList, itemSkillBoxPref, psvPanel);
                     break;
                 case "Bat" :
                     parentTf.GetComponent<RectTransform>().localPosition = new Vector3(0,200,800); //* xとyは自動調整される。
                     model.transform.localPosition = new Vector3(model.transform.localPosition.x, 0.75f, model.transform.localPosition.z);
                     model.transform.localRotation = Quaternion.Euler(model.transform.localRotation.x, model.transform.localRotation.y, -45);
-                    showItemPassiveUI(type, itemPassiveList, itemSkillBoxPref, psvPanel);
+                    displayItemPassiveUI(type, itemPassiveList, itemSkillBoxPref, psvPanel);
                     break;
                 case "Skill" : 
                     model.transform.localPosition = new Vector3(0,0,0); //* posZがずれるから、調整
@@ -70,7 +70,7 @@ public class ScrollView {
         });
     }
 
-    private void showItemPassiveUI(string type, ItemPsvDt[] itemPassiveList, RectTransform itemSkillBoxPref, Transform psvPanel){
+    private void displayItemPassiveUI(string type, ItemPsvDt[] itemPassiveList, RectTransform itemSkillBoxPref, Transform psvPanel){
         Array.ForEach(itemPassiveList, list=>{
             if(list.lv > 0){
                 Debug.Log(list.imgPref.name + "= " + list.lv);
@@ -146,7 +146,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         float width = Mathf.Abs(DM.ins.ModelContentPref.rect.width);
         float offset = -(width + width/2);
         float curPosX = pos.anchoredPosition.x - offset;
-        var prefs = (DM.ins.SelectItemType == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].Prefs : DM.ins.scrollviews[(int)DM.ITEM.Bat].Prefs;
+        var prefs = (DM.ins.SelectItemType == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].ItemPrefs : DM.ins.scrollviews[(int)DM.ITEM.Bat].ItemPrefs;
         float max = width * prefs.Length - width;
         CurIdx = Mathf.Abs(Mathf.FloorToInt((curPosX) / width));
         CurIdxBasePos = -((CurIdx+1) * width);
