@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CamResolution : MonoBehaviour
 {   
-    //* OutSide Component
-    public bool isHome;
 
     //* Inside Component 
     Camera cam;
