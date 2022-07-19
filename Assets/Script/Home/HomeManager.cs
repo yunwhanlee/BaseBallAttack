@@ -31,7 +31,10 @@ public class HomeManager : MonoBehaviour
     [Header("<-- UI -->")]
     public DialogUI homeDialog;
     public DialogUI selectDialog;
+    public DialogUI unlock2ndSkillDialog;
+
     public Button startGameBtn;
+    
     [SerializeField] Image selectSkillImg;  public Image SelectSkillImg {get => selectSkillImg; set => selectSkillImg = value;}
 
     [Header("<-- Model -->")]
@@ -72,6 +75,28 @@ public class HomeManager : MonoBehaviour
                 //TODO
                 break;
         }
+    }
+
+    public void onClickBtnDisplayUnlock2ndSkillDialog(bool isActive){
+        if(DM.ins.personalData.IsUnlock2ndSkill) return;
+        unlock2ndSkillDialog.Panel.SetActive(isActive);
+    }
+
+    private void drawGrayPanel(bool isActive){
+        var childs = unlock2ndSkillDialog.GoBtn.GetComponentsInChildren<Transform>();
+        var obj = childs[1];
+        Debug.Log("drawGrayPanel:: childs[1].name= " + obj.name);
+        if(obj.name == "GrayPanel") obj.gameObject.SetActive(isActive);
+    }
+
+    public void onclickBtnBuyUnlock2ndSkill(){
+        int price = 1000;
+        if(DM.ins.personalData.Coin < price) return;
+        
+        DM.ins.personalData.IsUnlock2ndSkill = true;
+        DM.ins.personalData.Coin -= price;
+        unlock2ndSkillDialog.Panel.SetActive(false);
+        drawGrayPanel(false);
     }
 
     public void onClickStartGameBtn(){
@@ -155,11 +180,18 @@ public class HomeManager : MonoBehaviour
         selectDialog.Panel.gameObject.SetActive(!isHome);
     }
 
+
+
     public void setSelectSkillImg(){
         Debug.Log("setSelectSkillImgAtHome():: DM.ins.personalData.SelectSkillIdx= " + DM.ins.personalData.SelectSkillIdx);
         var prefs = DM.ins.scrollviews[(int)DM.ITEM.Skill].ItemPrefs;
         int curIdx = DM.ins.personalData.SelectSkillIdx;
         var sprite = prefs[curIdx].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
         SelectSkillImg.sprite = sprite;
+
+        //Unlock 2ndSkill?
+        if(DM.ins.personalData.IsUnlock2ndSkill){
+            drawGrayPanel(false);
+        }
     }
 }
