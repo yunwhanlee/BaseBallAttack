@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.UI.Extensions;
 
 [System.Serializable]   public class DialogUI{
     //* Value
@@ -32,6 +33,9 @@ public class HomeManager : MonoBehaviour
     public DialogUI homeDialog;
     public DialogUI selectDialog;
     public DialogUI unlock2ndSkillDialog;
+    public int selectedSkillBtnIdx;
+    public Text selectedSkillBtnIdxTxt;
+    public Button[] skillBtns;
 
     public Button startGameBtn;
     
@@ -75,6 +79,21 @@ public class HomeManager : MonoBehaviour
                 //TODO
                 break;
         }
+    }
+
+    public void onClickBtnSelectSkillImg(int idx){
+        Array.ForEach(skillBtns, skillBtn => {
+            var outline = skillBtn.GetComponent<NicerOutline>();
+            outline.enabled = false;
+        });
+        //* 2ndSkillがUnLockまだされた状態。
+        if(idx == 1 && !DM.ins.personalData.IsUnlock2ndSkill) {
+            skillBtns[0].GetComponent<NicerOutline>().enabled = true;
+            return;
+        }
+        selectedSkillBtnIdx = idx;
+        skillBtns[idx].GetComponent<NicerOutline>().enabled = true;
+        selectedSkillBtnIdxTxt.text = (idx == 0)? "1st Skill" : "2nd Skill";
     }
 
     public void onClickBtnDisplayUnlock2ndSkillDialog(bool isActive){
