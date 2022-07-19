@@ -17,6 +17,7 @@ public class PersonalData {
     [Header("--Skill--")]
     [SerializeField] bool isUnlock2ndSkill;  public bool IsUnlock2ndSkill {get => isUnlock2ndSkill; set => isUnlock2ndSkill = value;}
     [SerializeField] int selectSkillIdx;  public int SelectSkillIdx {get => selectSkillIdx; set => selectSkillIdx = value;}
+    [SerializeField] int selectSkill2Idx;  public int SelectSkill2Idx {get => selectSkill2Idx; set => selectSkill2Idx = value;}
     [SerializeField] List<bool> skillLockList;  public List<bool> SkillLockList {get => skillLockList; set => skillLockList = value;}
     [Header("--Item Passive--")]
     [SerializeField] ItemPassiveList itemPassive; public ItemPassiveList ItemPassive {get => itemPassive; set => itemPassive = value;}
@@ -56,8 +57,9 @@ public class PersonalData {
         this.SelectBatIdx = data.SelectBatIdx;
         this.BatLockList = data.BatLockList;
 
-        this.IsUnlock2ndSkill = data.IsUnlock2ndSkill;
         this.SelectSkillIdx = data.SelectSkillIdx;
+        this.IsUnlock2ndSkill = data.IsUnlock2ndSkill;
+        if(this.IsUnlock2ndSkill) this.SelectSkill2Idx = data.SelectSkill2Idx;
         this.SkillLockList = data.SkillLockList;
 
         // this.ItemPassive = data.ItemPassive;
@@ -99,8 +101,9 @@ public class PersonalData {
         this.SelectBatIdx = 0;
         this.BatLockList = new List<bool>();
 
-        this.IsUnlock2ndSkill = false;
         this.SelectSkillIdx = 0;
+        this.IsUnlock2ndSkill = false;
+        this.SelectSkill2Idx = 0;
         this.SkillLockList = new List<bool>();
 
         // this.ItemPassive = new ItemPassiveList();

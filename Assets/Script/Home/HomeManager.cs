@@ -102,10 +102,9 @@ public class HomeManager : MonoBehaviour
     }
 
     private void drawGrayPanel(bool isActive){
-        var childs = unlock2ndSkillDialog.GoBtn.GetComponentsInChildren<Transform>();
-        var obj = childs[1];
-        Debug.Log("drawGrayPanel:: childs[1].name= " + obj.name);
-        if(obj.name == "GrayPanel") obj.gameObject.SetActive(isActive);
+        var child = unlock2ndSkillDialog.GoBtn.transform.GetChild(1);
+        Debug.Log("drawGrayPanel:: child.name= " + child.name);
+        if(child.name == "GrayPanel") child.gameObject.SetActive(isActive);
     }
 
     public void onclickBtnBuyUnlock2ndSkill(){
@@ -116,6 +115,21 @@ public class HomeManager : MonoBehaviour
         DM.ins.personalData.Coin -= price;
         unlock2ndSkillDialog.Panel.SetActive(false);
         drawGrayPanel(false);
+
+        //* Set SkillImg without overlap
+        var prefs = DM.ins.scrollviews[(int)DM.ITEM.Skill].ItemPrefs;
+        List<int> remainedSkillIdxList = new List<int>();
+        for(int i = 0; i < prefs.Length; i++){
+            if(DM.ins.personalData.SelectSkillIdx != i)
+                remainedSkillIdxList.Add(i);
+        }
+        var sprite = prefs[remainedSkillIdxList[0]].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
+
+        var secondSkillImg = skillBtns[1].transform.GetChild(0).GetComponent<Image>();
+
+        secondSkillImg.sprite = sprite;
+        secondSkillImg.color = Color.white;
+
     }
 
     public void onClickStartGameBtn(){
@@ -206,7 +220,10 @@ public class HomeManager : MonoBehaviour
         var prefs = DM.ins.scrollviews[(int)DM.ITEM.Skill].ItemPrefs;
         int curIdx = DM.ins.personalData.SelectSkillIdx;
         var sprite = prefs[curIdx].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
-        SelectSkillImg.sprite = sprite;
+
+        var skillImg = skillBtns[selectedSkillBtnIdx].transform.GetChild(0).GetComponent<Image>();
+
+        skillImg.sprite = sprite;
 
         //Unlock 2ndSkill?
         if(DM.ins.personalData.IsUnlock2ndSkill){
