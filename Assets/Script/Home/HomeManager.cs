@@ -44,6 +44,10 @@ public class HomeManager : MonoBehaviour
     [Header("<-- Model -->")]
     [SerializeField] Transform modelTf;   public Transform ModelTf {get => modelTf; set => modelTf = value;}
 
+    [Header("<-- Notice Message Txt -->")]
+    public Text noticeMessageTxtPref;
+    public Transform mainPanelTf;
+
     //TODO public DialogUI cashShop;
 
     void Start()
@@ -101,15 +105,25 @@ public class HomeManager : MonoBehaviour
         unlock2ndSkillDialog.Panel.SetActive(isActive);
     }
 
-    private void drawGrayPanel(bool isActive){
-        var child = unlock2ndSkillDialog.GoBtn.transform.GetChild(1);
-        Debug.Log("drawGrayPanel:: child.name= " + child.name);
-        if(child.name == "GrayPanel") child.gameObject.SetActive(isActive);
-    }
-
     public void onclickBtnBuyUnlock2ndSkill(){
         int price = 1000;
-        if(DM.ins.personalData.Coin < price) return;
+        var unlockSkillList = DM.ins.personalData.SkillLockList.FindAll(list => list == false);
+        int unlockSkillListCnt = unlockSkillList.Count;
+        Debug.Log("unlockSkillListCnt= " + unlockSkillListCnt);
+        if(DM.ins.personalData.Coin < price) {
+            noticeMessageTxtPref.text = "NO MONEY!";
+            var ins = Instantiate(noticeMessageTxtPref, mainPanelTf.transform.position, Quaternion.identity, mainPanelTf);
+            ins.rectTransform.localPosition = new Vector3(0,-900,-400);
+            Destroy(ins.gameObject,2);
+            return;
+        }
+        else if(unlockSkillListCnt < 2){
+            noticeMessageTxtPref.text = "NO SKILL!";
+            var ins = Instantiate(noticeMessageTxtPref, mainPanelTf.transform.position, Quaternion.identity, mainPanelTf);
+            ins.rectTransform.localPosition = new Vector3(0,-900,-400);
+            Destroy(ins.gameObject,2);
+            return;
+        }
         
         DM.ins.personalData.IsUnlock2ndSkill = true;
         DM.ins.personalData.Coin -= price;
@@ -123,13 +137,11 @@ public class HomeManager : MonoBehaviour
             if(DM.ins.personalData.SelectSkillIdx != i)
                 remainedSkillIdxList.Add(i);
         }
+        DM.ins.personalData.SelectSkill2Idx = remainedSkillIdxList[0];
         var sprite = prefs[remainedSkillIdxList[0]].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
-
         var secondSkillImg = skillBtns[1].transform.GetChild(0).GetComponent<Image>();
 
-        secondSkillImg.sprite = sprite;
-        secondSkillImg.color = Color.white;
-
+        secondSkillImg.sprite = sprite;        
     }
 
     public void onClickStartGameBtn(){
@@ -153,6 +165,23 @@ public class HomeManager : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
         #endif
         Application.Quit();
+    }
+
+    public void setSelectSkillImg(){
+        Debug.Log("setSelectSkillImgAtHome():: DM.ins.personalData.SelectSkillIdx= " + DM.ins.personalData.SelectSkillIdx);
+        var prefs = DM.ins.scrollviews[(int)DM.ITEM.Skill].ItemPrefs;
+
+        var sprite = prefs[DM.ins.personalData.SelectSkillIdx].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
+        var skillImg = skillBtns[0].transform.GetChild(0).GetComponent<Image>();
+        skillImg.sprite = sprite;
+
+        //Unlock 2ndSkill?
+        if(DM.ins.personalData.IsUnlock2ndSkill){
+            drawGrayPanel(false);
+            var sprite2 = prefs[DM.ins.personalData.SelectSkill2Idx].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
+            var skillImg2 = skillBtns[1].transform.GetChild(0).GetComponent<Image>();
+            skillImg2.sprite = sprite2;
+        }
     }
 
     //* ----------------------------------------------------------------
@@ -212,22 +241,9 @@ public class HomeManager : MonoBehaviour
         homeDialog.GoBtn.gameObject.SetActive(!isHome);
         selectDialog.Panel.gameObject.SetActive(!isHome);
     }
-
-
-
-    public void setSelectSkillImg(){
-        Debug.Log("setSelectSkillImgAtHome():: DM.ins.personalData.SelectSkillIdx= " + DM.ins.personalData.SelectSkillIdx);
-        var prefs = DM.ins.scrollviews[(int)DM.ITEM.Skill].ItemPrefs;
-        int curIdx = DM.ins.personalData.SelectSkillIdx;
-        var sprite = prefs[curIdx].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
-
-        var skillImg = skillBtns[selectedSkillBtnIdx].transform.GetChild(0).GetComponent<Image>();
-
-        skillImg.sprite = sprite;
-
-        //Unlock 2ndSkill?
-        if(DM.ins.personalData.IsUnlock2ndSkill){
-            drawGrayPanel(false);
-        }
+    private void drawGrayPanel(bool isActive){
+        var child = unlock2ndSkillDialog.GoBtn.transform.GetChild(1);
+        Debug.Log("drawGrayPanel:: child.name= " + child.name);
+        if(child.name == "GrayPanel") child.gameObject.SetActive(isActive);
     }
 }

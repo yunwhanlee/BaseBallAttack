@@ -1170,7 +1170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.088020325, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1694,6 +1694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   em: {fileID: 1584740706}
   scrollRect: {fileID: 0}
+  hm: {fileID: 0}
   curIdx: 0
   scrollStopSpeed: 1
   uiGroup: {fileID: 206912272}
@@ -1954,7 +1955,7 @@ GameObject:
   - component: {fileID: 445535725}
   - component: {fileID: 445535724}
   m_Layer: 5
-  m_Name: Unlock2ndSkillPanel
+  m_Name: Unlock2ndSkillDialogPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3892,6 +3893,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   em: {fileID: 1584740706}
   scrollRect: {fileID: 0}
+  hm: {fileID: 0}
   curIdx: 0
   scrollStopSpeed: 1
   uiGroup: {fileID: 144212381}
@@ -5606,6 +5608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   em: {fileID: 1584740706}
   scrollRect: {fileID: 0}
+  hm: {fileID: 0}
   curIdx: 0
   scrollStopSpeed: 1
   uiGroup: {fileID: 0}
@@ -7346,6 +7349,8 @@ MonoBehaviour:
   startGameBtn: {fileID: 251569728}
   selectSkillImg: {fileID: 1646267407}
   modelTf: {fileID: 150785606}
+  noticeMessageTxtPref: {fileID: 357732499089971375, guid: c1a4e857d0aae0b4ba90ed2c60068da3, type: 3}
+  mainPanelTf: {fileID: 925401117}
 --- !u!1 &1919530733
 GameObject:
   m_ObjectHideFlags: 0

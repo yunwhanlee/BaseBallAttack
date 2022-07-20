@@ -103,7 +103,7 @@ public class PersonalData {
 
         this.SelectSkillIdx = 0;
         this.IsUnlock2ndSkill = false;
-        this.SelectSkill2Idx = 0;
+        this.SelectSkill2Idx = -1;
         this.SkillLockList = new List<bool>();
 
         // this.ItemPassive = new ItemPassiveList();

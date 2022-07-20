@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using SpriteGlow;
 using UnityEngine.EventSystems;
 using System;
+using UnityEngine.UI.Extensions;
 
 [System.Serializable]
 public class ScrollView {
@@ -94,6 +95,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //* OutSide
     public HomeEffectManager em;
     public ScrollRect scrollRect;
+    public HomeManager hm;
 
     // float rectWidth;
     float curIdxBasePos;    public float CurIdxBasePos {get => curIdxBasePos; set => curIdxBasePos = value;}
@@ -116,6 +118,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     void Start(){
         scrollRect = GetComponent<ScrollRect>();
+        hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
         
         if(this.gameObject.name != "ScrollView_Skill"){
             BoxSprRdr = UIGroup.GetChild(0).GetComponent<SpriteRenderer>();
@@ -225,8 +228,9 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             DM.ins.scrollviews[typeIdx].ContentTf.anchoredPosition = new Vector2(saveModelPosX, -500);
         }
         else{ //* DM.ITEM.Skill
+            // Outline
             var saveSkillTf = DM.ins.scrollviews[typeIdx].ContentTf.GetChild(DM.ins.personalData.SelectSkillIdx);
-            saveSkillTf.GetComponent<UnityEngine.UI.Extensions.NicerOutline>().enabled = true;
+            saveSkillTf.GetComponent<NicerOutline>().enabled = true;
         }
     }
 
