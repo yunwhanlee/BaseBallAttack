@@ -25,7 +25,7 @@ public class ItemInfo : MonoBehaviour
 
                 var childs = this.GetComponentsInChildren<MeshRenderer>();
                 Array.ForEach(childs, chd => MeshRdrList.Add(chd));
-                break; 
+                break;
             }
             //* 2D UI Sprite 形式
             case "Skill" :{

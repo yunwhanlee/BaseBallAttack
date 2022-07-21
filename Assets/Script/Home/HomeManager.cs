@@ -111,17 +111,11 @@ public class HomeManager : MonoBehaviour
         int unlockSkillListCnt = unlockSkillList.Count;
         Debug.Log("unlockSkillListCnt= " + unlockSkillListCnt);
         if(DM.ins.personalData.Coin < price) {
-            noticeMessageTxtPref.text = "NO MONEY!";
-            var ins = Instantiate(noticeMessageTxtPref, mainPanelTf.transform.position, Quaternion.identity, mainPanelTf);
-            ins.rectTransform.localPosition = new Vector3(0,-900,-400);
-            Destroy(ins.gameObject,2);
+            displayMessageDialog("NO MONEY!");
             return;
         }
         else if(unlockSkillListCnt < 2){
-            noticeMessageTxtPref.text = "NO SKILL!";
-            var ins = Instantiate(noticeMessageTxtPref, mainPanelTf.transform.position, Quaternion.identity, mainPanelTf);
-            ins.rectTransform.localPosition = new Vector3(0,-900,-400);
-            Destroy(ins.gameObject,2);
+            displayMessageDialog("NO SKILL!");
             return;
         }
         
@@ -142,6 +136,12 @@ public class HomeManager : MonoBehaviour
         var secondSkillImg = skillBtns[1].transform.GetChild(0).GetComponent<Image>();
 
         secondSkillImg.sprite = sprite;        
+    }
+    private void displayMessageDialog(string msg){
+        noticeMessageTxtPref.text = msg;
+        var ins = Instantiate(noticeMessageTxtPref, mainPanelTf.transform.position, Quaternion.identity, mainPanelTf);
+        ins.rectTransform.localPosition = new Vector3(0,-900,-400);
+        Destroy(ins.gameObject,2);
     }
 
     public void onClickStartGameBtn(){
@@ -232,6 +232,9 @@ public class HomeManager : MonoBehaviour
 
                 var scrollViewEvent = DM.ins.scrollviews[typeIdx].ScrollRect.GetComponent<ScrollViewEvent>();
                 scrollViewEvent.setCurSelectedItem(typeIdx);
+
+                //* Skill2 Unlock?
+                scrollViewEvent.exceptAlreadySelectedAnotherSkill(selectedSkillBtnIdx, skillBtns);
                 break;
         }
     }

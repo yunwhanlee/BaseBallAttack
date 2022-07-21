@@ -234,6 +234,34 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }
     }
 
+    public void exceptAlreadySelectedAnotherSkill(int selectedSkillBtnIdx, Button[] skillBtns){
+        //* Skill2 Unlock?
+        if(DM.ins.personalData.IsUnlock2ndSkill && DM.ins.SelectItemType == DM.ITEM.Skill.ToString()){
+            // 除外するスキル名
+            int anotherIdx = (selectedSkillBtnIdx == 0)? 1 : 0;
+            string exceptSkillName = skillBtns[anotherIdx].transform.GetChild(0).GetComponent<Image>().sprite.name;
+
+            // スクロールにあるスキル目録
+            var contentTf = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf;
+            var skillTfs = contentTf.GetComponentsInChildren<Transform>();
+            skillTfs = Array.FindAll(skillTfs, tf => tf.name.Contains("Skill_"));
+
+            // 初期化
+            for(int i=0; i<contentTf.childCount; i++){
+                contentTf.GetChild(i).gameObject.SetActive(true);
+            }
+
+            // 除外するスキルObj 非表示
+            Array.ForEach(skillTfs, tf => {
+                string skillName = tf.name.Split('_')[1];
+                Debug.LogFormat("{0}.Contain({1}) => {2}", exceptSkillName, skillName, exceptSkillName.Contains(skillName));
+                if(exceptSkillName.Contains(skillName)){
+                    tf.gameObject.SetActive(false);
+                }
+            });
+        }
+    }
+
     //* ----------------------------------------------------------------
     //*   UI Button
     //* ----------------------------------------------------------------
