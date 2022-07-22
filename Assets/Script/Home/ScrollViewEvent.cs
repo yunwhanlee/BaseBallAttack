@@ -288,7 +288,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             }
         }
 
-        //* Skill Panel UI Update
+        //* Skill Panel UI Extra Update
         if(DM.ins.SelectItemType == DM.ITEM.Skill.ToString()){
             onClickSkillPanel(curItem.gameObject);
         }

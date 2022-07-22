@@ -168,14 +168,14 @@ public class HomeManager : MonoBehaviour
     }
 
     public void setSelectSkillImg(){
-        Debug.Log("setSelectSkillImgAtHome():: DM.ins.personalData.SelectSkillIdx= " + DM.ins.personalData.SelectSkillIdx);
+        Debug.LogFormat("setSelectSkillImg():: SelectSkillIdx({0}), SelectSkillIdx({1}) ", DM.ins.personalData.SelectSkillIdx, DM.ins.personalData.SelectSkill2Idx);
         var prefs = DM.ins.scrollviews[(int)DM.ITEM.Skill].ItemPrefs;
 
         var sprite = prefs[DM.ins.personalData.SelectSkillIdx].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
         var skillImg = skillBtns[0].transform.GetChild(0).GetComponent<Image>();
         skillImg.sprite = sprite;
 
-        //Unlock 2ndSkill?
+        //* Unlock 2ndSkill?
         if(DM.ins.personalData.IsUnlock2ndSkill){
             drawGrayPanel(false);
             var sprite2 = prefs[DM.ins.personalData.SelectSkill2Idx].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
@@ -232,7 +232,6 @@ public class HomeManager : MonoBehaviour
 
                 var scrollViewEvent = DM.ins.scrollviews[typeIdx].ScrollRect.GetComponent<ScrollViewEvent>();
                 scrollViewEvent.setCurSelectedItem(typeIdx);
-
                 scrollViewEvent.exceptAlreadySelectedAnotherSkill(selectedSkillBtnIdx, skillBtns);
                 break;
         }

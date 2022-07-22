@@ -135,7 +135,13 @@ public class PersonalData {
         switch(type){
             case "Chara" :  SelectCharaIdx = index; break;
             case "Bat" :    SelectBatIdx = index;   break;
-            case "Skill" :  SelectSkillIdx = index; break;
+            case "Skill" :  
+                var hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
+                if(hm.selectedSkillBtnIdx == 0)
+                    SelectSkillIdx = index; 
+                else
+                    SelectSkill2Idx = index; 
+                break;
         }
     }
 
