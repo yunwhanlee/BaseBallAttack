@@ -67,8 +67,8 @@ public class HomeManager : MonoBehaviour
         switch(DM.ins.SelectItemType){
             case "Home" : 
                 createCurModel(curChara, curBat, modelTf);
-                setSelectSkillImg();
                 setGUI();
+                setSelectSkillImg();
                 break;
             case "Chara" : 
                 setGUI();
@@ -168,20 +168,34 @@ public class HomeManager : MonoBehaviour
     }
 
     public void setSelectSkillImg(){
-        Debug.LogFormat("setSelectSkillImg():: SelectSkillIdx({0}), SelectSkillIdx({1}) ", DM.ins.personalData.SelectSkillIdx, DM.ins.personalData.SelectSkill2Idx);
-        var prefs = DM.ins.scrollviews[(int)DM.ITEM.Skill].ItemPrefs;
-
-        var sprite = prefs[DM.ins.personalData.SelectSkillIdx].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
-        var skillImg = skillBtns[0].transform.GetChild(0).GetComponent<Image>();
-        skillImg.sprite = sprite;
-
-        //* Unlock 2ndSkill?
-        if(DM.ins.personalData.IsUnlock2ndSkill){
-            drawGrayPanel(false);
-            var sprite2 = prefs[DM.ins.personalData.SelectSkill2Idx].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
-            var skillImg2 = skillBtns[1].transform.GetChild(0).GetComponent<Image>();
-            skillImg2.sprite = sprite2;
+        Debug.LogFormat("------setSelectSkillImg():: selectedSkillBtnIdx({0}) SelectSkillIdx({1}), SelectSkill2Idx({2})------", selectedSkillBtnIdx, DM.ins.personalData.SelectSkillIdx, DM.ins.personalData.SelectSkill2Idx);
+        var ctt = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf;
+        int skillIdx = (selectedSkillBtnIdx == 0)? DM.ins.personalData.SelectSkillIdx : DM.ins.personalData.SelectSkill2Idx;
+        if(selectedSkillBtnIdx == 0){
+            setSelectSkillSprite(selectedSkillBtnIdx, ctt, skillIdx);
+        }else{
+            if(DM.ins.personalData.IsUnlock2ndSkill){
+                drawGrayPanel(false);
+                setSelectSkillSprite(selectedSkillBtnIdx, ctt, skillIdx);
+            }
         }
+    }
+
+    private List<Transform> getActiveSkillList(RectTransform content){
+        List<Transform> skillList = new List<Transform>();
+        for(int i=0; i<content.childCount;i++){
+            if(content.GetChild(i).gameObject.activeSelf)
+                skillList.Add(content.GetChild(i));
+        }
+        // skillList.ForEach(list => Debug.Log("list.name " + list.name));
+        return skillList;
+    }
+
+    private void setSelectSkillSprite(int btnIdx, RectTransform content, int idx){
+        Sprite spr = getActiveSkillList(content)[idx].GetChild(0).GetChild(0).GetComponent<Image>().sprite;
+        Debug.Log("spr.name=" + spr.name);
+        var skillImg = skillBtns[btnIdx].transform.GetChild(0).GetComponent<Image>();
+        skillImg.sprite = spr;
     }
 
     //* ----------------------------------------------------------------
