@@ -233,7 +233,6 @@ public class HomeManager : MonoBehaviour
                 var scrollViewEvent = DM.ins.scrollviews[typeIdx].ScrollRect.GetComponent<ScrollViewEvent>();
                 scrollViewEvent.setCurSelectedItem(typeIdx);
 
-                //* Skill2 Unlock?
                 scrollViewEvent.exceptAlreadySelectedAnotherSkill(selectedSkillBtnIdx, skillBtns);
                 break;
         }
