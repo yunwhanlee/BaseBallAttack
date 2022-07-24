@@ -171,13 +171,22 @@ public class HomeManager : MonoBehaviour
         Debug.LogFormat("------setSelectSkillImg():: selectedSkillBtnIdx({0}) SelectSkillIdx({1}), SelectSkill2Idx({2})------", selectedSkillBtnIdx, DM.ins.personalData.SelectSkillIdx, DM.ins.personalData.SelectSkill2Idx);
         var ctt = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf;
         int skillIdx = (selectedSkillBtnIdx == 0)? DM.ins.personalData.SelectSkillIdx : DM.ins.personalData.SelectSkill2Idx;
-        if(selectedSkillBtnIdx == 0){
-            setSelectSkillSprite(selectedSkillBtnIdx, ctt, skillIdx);
+        // if(selectedSkillBtnIdx == 0){
+        //     setSelectSkillSprite(0, ctt, skillIdx);
+        // }else{
+        //     if(DM.ins.personalData.IsUnlock2ndSkill){
+        //         drawGrayPanel(false);
+        //         setSelectSkillSprite(1, ctt, skillIdx);
+        //     }
+        // }
+
+        if(!DM.ins.personalData.IsUnlock2ndSkill){
+            setSelectSkillSprite(0, ctt, skillIdx);
         }else{
-            if(DM.ins.personalData.IsUnlock2ndSkill){
-                drawGrayPanel(false);
-                setSelectSkillSprite(selectedSkillBtnIdx, ctt, skillIdx);
-            }
+            skillIdx++;
+            setSelectSkillSprite(0, ctt, skillIdx);
+            drawGrayPanel(false);
+            setSelectSkillSprite(1, ctt, skillIdx);
         }
     }
 
