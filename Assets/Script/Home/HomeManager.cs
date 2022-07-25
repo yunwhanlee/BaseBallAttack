@@ -187,15 +187,6 @@ public class HomeManager : MonoBehaviour
                 setSelectSkillSprite(1, ctt, skillIdx);
             }
         }
-
-        // if(!DM.ins.personalData.IsUnlock2ndSkill){
-        //     setSelectSkillSprite(0, ctt, skillIdx);
-        // }else{
-        //     skillIdx++;
-        //     setSelectSkillSprite(0, ctt, skillIdx);
-        //     drawGrayPanel(false);
-        //     setSelectSkillSprite(1, ctt, skillIdx);
-        // }
     }
 
     private List<Transform> getActiveSkillList(RectTransform content){

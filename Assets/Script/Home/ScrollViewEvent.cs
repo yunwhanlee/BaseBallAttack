@@ -239,11 +239,11 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public void exceptAlreadySelectedAnotherSkill(int selectedSkillBtnIdx, Button[] skillBtns){
         //* Skill2 Unlock?
         if(DM.ins.personalData.IsUnlock2ndSkill && DM.ins.SelectItemType == DM.ITEM.Skill.ToString()){
-            // 除外するスキル名
+            //* 除外するスキル名
             int anotherIdx = (selectedSkillBtnIdx == 0)? 1 : 0;
             string exceptSkillName = skillBtns[anotherIdx].transform.GetChild(0).GetComponent<Image>().sprite.name;
 
-            // 初期化：スクロールにあるスキル目録
+            //* 初期化：スクロールにあるスキル目録
             var contentTf = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf;
             for(int i=0; i<contentTf.childCount; i++){
                 Debug.Log("exceptAlreadySelectedAnotherSkill()::初期化 " + contentTf.GetChild(i).name);
@@ -251,7 +251,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 contentTf.GetChild(i).GetComponent<ItemInfo>().IsCheckedImgObj.SetActive(false);
             }
 
-            // 除外するスキルObj 表示
+            //* 除外するスキルObj 表示
             var childs = contentTf.GetComponentsInChildren<Transform>();
             var skillTfs = Array.FindAll(childs, tf => tf.name.Contains("Skill_"));
             Array.ForEach(skillTfs, tf => {
@@ -260,6 +260,8 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 if(exceptSkillName.Contains(objName)){
                     tf.GetComponent<ItemInfo>().IsChecked = true;//gameObject.SetActive(false);
                     tf.GetComponent<ItemInfo>().IsCheckedImgObj.SetActive(true);
+                    var txt = tf.GetComponent<ItemInfo>().IsCheckedImgObj.transform.GetChild(0).GetComponent<Text>();
+                    txt.text = (hm.selectedSkillBtnIdx == 0)? "2nd Skill" : "1st Skill";
                 }
             });
         }
@@ -341,7 +343,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             :(type == DM.ITEM.Bat.ToString())? DM.ins.personalData.SelectBatIdx
             :(type == DM.ITEM.Skill.ToString())?
                 (hm.selectedSkillBtnIdx == 0)? DM.ins.personalData.SelectSkillIdx
-                :DM.ins.personalData.SelectSkill2Idx : -1;
+                    :DM.ins.personalData.SelectSkill2Idx : -1;
 
         if(selectItemIdx==-1) return;
         
@@ -360,8 +362,12 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     private void activeOutline(ItemInfo item, bool isActive){
         string type = DM.ins.SelectItemType;
         switch(type){
-            case "Chara": case "Bat":   item.Outline3D.enabled = isActive; break;
-            case "Skill":               item.Outline2D.enabled = isActive; break;
+            case "Chara": case "Bat":   
+                item.Outline3D.enabled = isActive; 
+                break;
+            case "Skill":               
+                item.Outline2D.enabled = isActive;
+                break;
         }
     }
 }
