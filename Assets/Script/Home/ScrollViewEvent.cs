@@ -230,7 +230,9 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         else{ //* DM.ITEM.Skill
             // Outline
             var saveSkillTf = DM.ins.scrollviews[typeIdx].ContentTf.GetChild(DM.ins.personalData.SelectSkillIdx);
-            saveSkillTf.GetComponent<NicerOutline>().enabled = true;
+            if(!saveSkillTf.GetComponent<ItemInfo>().IsChecked){
+                saveSkillTf.GetComponent<NicerOutline>().enabled = true;
+            }
         }
     }
 
@@ -244,17 +246,21 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             // 初期化：スクロールにあるスキル目録
             var contentTf = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf;
             for(int i=0; i<contentTf.childCount; i++){
-                contentTf.GetChild(i).gameObject.SetActive(true);
+                Debug.Log("exceptAlreadySelectedAnotherSkill()::初期化 " + contentTf.GetChild(i).name);
+                contentTf.GetChild(i).GetComponent<ItemInfo>().IsChecked = false;//gameObject.SetActive(true);
+                contentTf.GetChild(i).GetComponent<ItemInfo>().IsCheckedImgObj.SetActive(false);
             }
 
-            // 除外するスキルObj 非表示
+            // 除外するスキルObj 表示
             var childs = contentTf.GetComponentsInChildren<Transform>();
             var skillTfs = Array.FindAll(childs, tf => tf.name.Contains("Skill_"));
             Array.ForEach(skillTfs, tf => {
                 string objName = tf.name.Split('_')[1];
                 Debug.LogFormat("{0}.Contain({1}) => {2}", exceptSkillName, objName, exceptSkillName.Contains(objName));
-                if(exceptSkillName.Contains(objName))
-                    tf.gameObject.SetActive(false);
+                if(exceptSkillName.Contains(objName)){
+                    tf.GetComponent<ItemInfo>().IsChecked = true;//gameObject.SetActive(false);
+                    tf.GetComponent<ItemInfo>().IsCheckedImgObj.SetActive(true);
+                }
             });
         }
     }
@@ -266,6 +272,12 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         if(DM.ins.SelectItemType != type) return;
         Debug.Log("onClickCheckBtn:: type= " + type + ", CurIdx= " + CurIdx);
         var curItem = getCurItem();
+
+        if(type == DM.ITEM.Skill.ToString() && curItem.IsChecked){
+            hm.displayMessageDialog("This Skill is Already Registed");
+            return;
+        }
+        
 
         //* (BUG) 買わないのにロードしたらChara選択されるバグ防止。
         int befIdx = DM.ins.personalData.getSelectIdx(type);
@@ -298,13 +310,12 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         //* Current Index
         var btns = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf.GetComponentsInChildren<Button>();
         CurIdx = Array.FindIndex(btns, btn => btn.name == ins.name);
-        Debug.Log("onClickSkillPanelBtn():: CurIdx= " + CurIdx + ", ins.name= " + ins.name);
 
         drawChoiceBtnUI();
         setCheckIconColorAndOutline();
 
         var sprite = btns[CurIdx].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
-        Debug.Log(sprite);
+        Debug.Log("onClickSkillPanel():: CurIdx= " + CurIdx + ", ins.name= " + ins.name + ", sprite= " + sprite);
     }
 
     //* ----------------------------------------------------------------
@@ -328,7 +339,9 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
         int selectItemIdx = (type == DM.ITEM.Chara.ToString())? DM.ins.personalData.SelectCharaIdx
             :(type == DM.ITEM.Bat.ToString())? DM.ins.personalData.SelectBatIdx
-            :(type == DM.ITEM.Skill.ToString())? DM.ins.personalData.SelectSkillIdx : -1;
+            :(type == DM.ITEM.Skill.ToString())?
+                (hm.selectedSkillBtnIdx == 0)? DM.ins.personalData.SelectSkillIdx
+                :DM.ins.personalData.SelectSkill2Idx : -1;
 
         if(selectItemIdx==-1) return;
         

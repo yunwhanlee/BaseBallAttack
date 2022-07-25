@@ -53,6 +53,14 @@ public class HomeManager : MonoBehaviour
     void Start()
     {
         onClickBtnGoToDialog("Home");
+
+        //* Set Skill Img
+        var ctt = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf;
+        setSelectSkillSprite(0, ctt, DM.ins.personalData.SelectSkillIdx);
+        if(DM.ins.personalData.IsUnlock2ndSkill){
+            drawGrayPanel(false);
+            setSelectSkillSprite(1, ctt, DM.ins.personalData.SelectSkill2Idx);
+        }
     }
 
     //* ----------------------------------------------------------------
@@ -137,7 +145,7 @@ public class HomeManager : MonoBehaviour
 
         secondSkillImg.sprite = sprite;        
     }
-    private void displayMessageDialog(string msg){
+    public void displayMessageDialog(string msg){
         noticeMessageTxtPref.text = msg;
         var ins = Instantiate(noticeMessageTxtPref, mainPanelTf.transform.position, Quaternion.identity, mainPanelTf);
         ins.rectTransform.localPosition = new Vector3(0,-900,-400);
@@ -171,23 +179,23 @@ public class HomeManager : MonoBehaviour
         Debug.LogFormat("------setSelectSkillImg():: selectedSkillBtnIdx({0}) SelectSkillIdx({1}), SelectSkill2Idx({2})------", selectedSkillBtnIdx, DM.ins.personalData.SelectSkillIdx, DM.ins.personalData.SelectSkill2Idx);
         var ctt = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf;
         int skillIdx = (selectedSkillBtnIdx == 0)? DM.ins.personalData.SelectSkillIdx : DM.ins.personalData.SelectSkill2Idx;
-        // if(selectedSkillBtnIdx == 0){
-        //     setSelectSkillSprite(0, ctt, skillIdx);
-        // }else{
-        //     if(DM.ins.personalData.IsUnlock2ndSkill){
-        //         drawGrayPanel(false);
-        //         setSelectSkillSprite(1, ctt, skillIdx);
-        //     }
-        // }
-
-        if(!DM.ins.personalData.IsUnlock2ndSkill){
+        if(selectedSkillBtnIdx == 0){
             setSelectSkillSprite(0, ctt, skillIdx);
         }else{
-            skillIdx++;
-            setSelectSkillSprite(0, ctt, skillIdx);
-            drawGrayPanel(false);
-            setSelectSkillSprite(1, ctt, skillIdx);
+            if(DM.ins.personalData.IsUnlock2ndSkill){
+                drawGrayPanel(false);
+                setSelectSkillSprite(1, ctt, skillIdx);
+            }
         }
+
+        // if(!DM.ins.personalData.IsUnlock2ndSkill){
+        //     setSelectSkillSprite(0, ctt, skillIdx);
+        // }else{
+        //     skillIdx++;
+        //     setSelectSkillSprite(0, ctt, skillIdx);
+        //     drawGrayPanel(false);
+        //     setSelectSkillSprite(1, ctt, skillIdx);
+        // }
     }
 
     private List<Transform> getActiveSkillList(RectTransform content){

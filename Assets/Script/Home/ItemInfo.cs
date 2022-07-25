@@ -7,6 +7,8 @@ using System;
 public class ItemInfo : MonoBehaviour
 {
     [SerializeField] bool isLock = true;    public bool IsLock {get => isLock; set => isLock = value;}
+    [SerializeField] bool isChecked = true;    public bool IsChecked {get => isChecked; set => isChecked = value;}
+    [SerializeField] GameObject isCheckedImgObj;    public GameObject IsCheckedImgObj {get => isCheckedImgObj; set => isCheckedImgObj = value;}
     [SerializeField] List<MeshRenderer> meshRdrList;   public List<MeshRenderer> MeshRdrList {get => meshRdrList; set => meshRdrList = value;}
     [SerializeField] Image grayPanel;   public Image GrayPanel {get => grayPanel; set => grayPanel = value;}
     [SerializeField] DM.RANK rank;     public DM.RANK Rank {get => rank; set => rank = value;}
@@ -50,6 +52,9 @@ public class ItemInfo : MonoBehaviour
             case DM.RANK.LEGEND : Price = 1500; break;
             case DM.RANK.GOD : Price = 4000; break;
         }
+    }
+
+    void Update(){
     }
 
     public void setGrayMtIsLock(){
