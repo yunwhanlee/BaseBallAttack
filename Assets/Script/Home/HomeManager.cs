@@ -53,14 +53,7 @@ public class HomeManager : MonoBehaviour
     void Start()
     {
         onClickBtnGoToDialog("Home");
-
-        //* Set Skill Img
-        var ctt = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf;
-        setSelectSkillSprite(0, ctt, DM.ins.personalData.SelectSkillIdx);
-        if(DM.ins.personalData.IsUnlock2ndSkill){
-            drawGrayPanel(false);
-            setSelectSkillSprite(1, ctt, DM.ins.personalData.SelectSkill2Idx);
-        }
+        setSelectSkillImg(true);
     }
 
     //* ----------------------------------------------------------------
@@ -175,35 +168,33 @@ public class HomeManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void setSelectSkillImg(){
+    public void setSelectSkillImg(bool isInit = false){
         Debug.LogFormat("------setSelectSkillImg():: selectedSkillBtnIdx({0}) SelectSkillIdx({1}), SelectSkill2Idx({2})------", selectedSkillBtnIdx, DM.ins.personalData.SelectSkillIdx, DM.ins.personalData.SelectSkill2Idx);
         var ctt = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf;
-        int skillIdx = (selectedSkillBtnIdx == 0)? DM.ins.personalData.SelectSkillIdx : DM.ins.personalData.SelectSkill2Idx;
-        if(selectedSkillBtnIdx == 0){
-            setSelectSkillSprite(0, ctt, skillIdx);
-        }else{
-            if(DM.ins.personalData.IsUnlock2ndSkill){
-                drawGrayPanel(false);
-                setSelectSkillSprite(1, ctt, skillIdx);
-            }
+        if(isInit){
+            setSelectSkillSprite(0, ctt, DM.ins.personalData.SelectSkillIdx);
+            check2ndSkillSprite(ctt, DM.ins.personalData.SelectSkill2Idx);
+            return;
         }
-    }
 
-    private List<Transform> getActiveSkillList(RectTransform content){
-        List<Transform> skillList = new List<Transform>();
-        for(int i=0; i<content.childCount;i++){
-            if(content.GetChild(i).gameObject.activeSelf)
-                skillList.Add(content.GetChild(i));
+        if(selectedSkillBtnIdx == 0){
+            setSelectSkillSprite(0, ctt, DM.ins.personalData.SelectSkillIdx);
+        }else{
+            check2ndSkillSprite(ctt, DM.ins.personalData.SelectSkill2Idx);
         }
-        // skillList.ForEach(list => Debug.Log("list.name " + list.name));
-        return skillList;
     }
 
     private void setSelectSkillSprite(int btnIdx, RectTransform content, int idx){
-        Sprite spr = getActiveSkillList(content)[idx].GetChild(0).GetChild(0).GetComponent<Image>().sprite;
+        Sprite spr = content.GetChild(idx).GetChild(0).GetChild(0).GetComponent<Image>().sprite;
         Debug.Log("spr.name=" + spr.name);
         var skillImg = skillBtns[btnIdx].transform.GetChild(0).GetComponent<Image>();
         skillImg.sprite = spr;
+    }
+    private void check2ndSkillSprite(RectTransform ctt, int skillIdx){
+        if(DM.ins.personalData.IsUnlock2ndSkill){
+            drawGrayPanel(false);
+            setSelectSkillSprite(1, ctt, skillIdx);
+        }
     }
 
     //* ----------------------------------------------------------------

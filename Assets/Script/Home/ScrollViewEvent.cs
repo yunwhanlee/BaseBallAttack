@@ -228,12 +228,22 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             DM.ins.scrollviews[typeIdx].ContentTf.anchoredPosition = new Vector2(saveModelPosX, -500);
         }
         else{ //* DM.ITEM.Skill
-            // Outline
-            var saveSkillTf = DM.ins.scrollviews[typeIdx].ContentTf.GetChild(DM.ins.personalData.SelectSkillIdx);
-            if(!saveSkillTf.GetComponent<ItemInfo>().IsChecked){
-                saveSkillTf.GetComponent<NicerOutline>().enabled = true;
-            }
+            drawSkillPanelOutline();
         }
+    }
+
+    private void drawSkillPanelOutline(){
+            //* 初期化
+            var content = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf;
+            for(int i=0; i<content.childCount; i++){
+                content.GetChild(i).GetComponent<NicerOutline>().enabled = false;
+            }
+
+            //* Set Outline
+            int skillldx = (hm.selectedSkillBtnIdx == 0)? DM.ins.personalData.SelectSkillIdx : DM.ins.personalData.SelectSkill2Idx;
+            var selectedSkillTf = content.GetChild(skillldx);
+            Debug.Log("setCurSelectedItem:: selectedSkillTf= " + selectedSkillTf);
+            selectedSkillTf.GetComponent<NicerOutline>().enabled = true;
     }
 
     public void exceptAlreadySelectedAnotherSkill(int selectedSkillBtnIdx, Button[] skillBtns){
@@ -246,7 +256,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             //* 初期化：スクロールにあるスキル目録
             var contentTf = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf;
             for(int i=0; i<contentTf.childCount; i++){
-                Debug.Log("exceptAlreadySelectedAnotherSkill()::初期化 " + contentTf.GetChild(i).name);
+                Debug.Log("exceptAlreadySelectedAnotherSkill():: 初期化 " + contentTf.GetChild(i).name);
                 contentTf.GetChild(i).GetComponent<ItemInfo>().IsChecked = false;//gameObject.SetActive(true);
                 contentTf.GetChild(i).GetComponent<ItemInfo>().IsCheckedImgObj.SetActive(false);
             }
@@ -258,7 +268,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 string objName = tf.name.Split('_')[1];
                 Debug.LogFormat("{0}.Contain({1}) => {2}", exceptSkillName, objName, exceptSkillName.Contains(objName));
                 if(exceptSkillName.Contains(objName)){
-                    tf.GetComponent<ItemInfo>().IsChecked = true;//gameObject.SetActive(false);
+                    tf.GetComponent<ItemInfo>().IsChecked = true;
                     tf.GetComponent<ItemInfo>().IsCheckedImgObj.SetActive(true);
                     var txt = tf.GetComponent<ItemInfo>().IsCheckedImgObj.transform.GetChild(0).GetComponent<Text>();
                     txt.text = (hm.selectedSkillBtnIdx == 0)? "2nd Skill" : "1st Skill";

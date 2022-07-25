@@ -1694,7 +1694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   em: {fileID: 1584740706}
   scrollRect: {fileID: 0}
-  hm: {fileID: 0}
+  hm: {fileID: 1887670884}
   curIdx: 0
   scrollStopSpeed: 1
   uiGroup: {fileID: 206912272}
@@ -3893,7 +3893,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   em: {fileID: 1584740706}
   scrollRect: {fileID: 0}
-  hm: {fileID: 0}
+  hm: {fileID: 1887670884}
   curIdx: 0
   scrollStopSpeed: 1
   uiGroup: {fileID: 144212381}
@@ -5608,7 +5608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   em: {fileID: 1584740706}
   scrollRect: {fileID: 0}
-  hm: {fileID: 0}
+  hm: {fileID: 1887670884}
   curIdx: 0
   scrollStopSpeed: 1
   uiGroup: {fileID: 0}
@@ -6259,7 +6259,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d16dfcf01b857164e8d5e1a0e57e5b75, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3dfe47261e46cd34982aed5e5caea167, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6437,7 +6437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 1, g: 0.995273, b: 0, a: 1}
-  m_EffectDistance: {x: 15, y: -15}
+  m_EffectDistance: {x: 20, y: -20}
   m_UseGraphicAlpha: 1
 --- !u!1 &1682729392
 GameObject:
@@ -8136,5 +8136,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 1, g: 0.995273, b: 0, a: 1}
-  m_EffectDistance: {x: 15, y: -15}
+  m_EffectDistance: {x: 20, y: -20}
   m_UseGraphicAlpha: 1
