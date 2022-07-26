@@ -10,6 +10,7 @@ public class ItemInfo : MonoBehaviour
     [SerializeField] bool isChecked = true;    public bool IsChecked {get => isChecked; set => isChecked = value;}
     [SerializeField] GameObject isCheckedImgObj;    public GameObject IsCheckedImgObj {get => isCheckedImgObj; set => isCheckedImgObj = value;}
     [SerializeField] List<MeshRenderer> meshRdrList;   public List<MeshRenderer> MeshRdrList {get => meshRdrList; set => meshRdrList = value;}
+    [SerializeField] List<Material> originMtList;    public List<Material> OriginMtList {get => originMtList; set => originMtList = value;} //* MatalicとGrayが有った場合、黒くならないBUG対応。
     [SerializeField] Image grayPanel;   public Image GrayPanel {get => grayPanel; set => grayPanel = value;}
     [SerializeField] DM.RANK rank;     public DM.RANK Rank {get => rank; set => rank = value;}
     [SerializeField] Outline outline3D;    public Outline Outline3D{get => outline3D; set => outline3D = value;}
@@ -27,6 +28,7 @@ public class ItemInfo : MonoBehaviour
 
                 var childs = this.GetComponentsInChildren<MeshRenderer>();
                 Array.ForEach(childs, chd => MeshRdrList.Add(chd));
+                Array.ForEach(childs, chd => OriginMtList.Add(chd.material));
                 break;
             }
             //* 2D UI Sprite 形式
@@ -60,11 +62,17 @@ public class ItemInfo : MonoBehaviour
     public void setGrayMtIsLock(){
         if(IsLock){//* gray Material 追加
             if(GrayPanel)   GrayPanel.gameObject.SetActive(true);
-            else    MeshRdrList.ForEach(mesh=>mesh.materials = new Material[] {mesh.material, DM.ins.grayItemLock});
+            else{
+                MeshRdrList.ForEach(mesh=> mesh.materials = new Material[] {DM.ins.grayItemLock});
+            }
         }
         else{
             if(GrayPanel)   GrayPanel.gameObject.SetActive(false);
-            else    MeshRdrList.ForEach(mesh=> mesh.materials = new Material[] {mesh.material});
+            else{
+                int i = 0;
+                //* MatalicとGrayが有った場合、黒くならないBUG対応。
+                MeshRdrList.ForEach(mesh=> mesh.materials = new Material[] {originMtList[i++]});
+            }
         }
     }
 }
