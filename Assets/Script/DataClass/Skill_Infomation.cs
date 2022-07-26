@@ -177,19 +177,19 @@ public class ActiveSkillBtnUI{
         gm.setLightDarkness(false);
         gm.bm.setGlowEFAllBlocks(false);
     }
-    public void onTriggerActiveSkillBtn(int btnIdx, GameManager gm){
+    public void onTriggerActiveSkillBtn(GameManager gm){
         //TODO idxの処理しないと、現在はスキルボタン１個として対応。
-        int skillIdx = (btnIdx == 0)? DM.ins.personalData.SelectSkillIdx : DM.ins.personalData.SelectSkill2Idx;
+        int skillIdx = gm.getCurSkillIdx();
 
         if(GrayBG.fillAmount == 0){
-            Debug.LogFormat("ActiveSkillBtnUI:: onTriggerActive:: trigger= {0}, btnIdx= {1}, name= {2}",Trigger, btnIdx, name);
+            Debug.LogFormat("ActiveSkillBtnUI:: onTriggerActive:: trigger= {0}, skillIdx= {1}, name= {2}",Trigger, skillIdx, name);
             Trigger = !Trigger;
             gm.setLightDarkness(true);
             selectCircleEF.gameObject.SetActive(Trigger);
 
             //* Bat Effect
             gm.pl.BatEffectTf.gameObject.SetActive(Trigger);
-            gm.em.enableSelectedActiveSkillBatEF(gm.pl.BatEffectTf);
+            gm.em.enableSelectedActiveSkillBatEF(skillIdx, gm.pl.BatEffectTf);
 
             //* Cast Effect
             if(Trigger){

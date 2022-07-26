@@ -93,10 +93,10 @@ public class EffectManager : MonoBehaviour
         // foreach(Transform child in parentTf)  Destroy(child.gameObject); //init
         var ins = Instantiate(activeSkillBatEFs[idx], parentTf.position, parentTf.rotation, parentTf) as GameObject;
     }
-    public void enableSelectedActiveSkillBatEF(Transform batEfs){
+    public void enableSelectedActiveSkillBatEF(int skillIdx, Transform batEfs){
         foreach(Transform batEf in batEfs){
             int childIdx = batEf.GetSiblingIndex();
-            if(DM.ins.personalData.SelectSkillIdx == childIdx)
+            if(skillIdx == childIdx)
                 batEf.gameObject.SetActive(true);
             else
                 batEf.gameObject.SetActive(false);

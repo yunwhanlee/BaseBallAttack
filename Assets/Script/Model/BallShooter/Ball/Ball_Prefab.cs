@@ -63,7 +63,6 @@ public class Ball_Prefab : MonoBehaviour
 
     //** Control
     private void OnTriggerStay(Collider col) {
-        {
         //* HIT BALL
         if(col.gameObject.tag == "HitRangeArea"){
             pl.setSwingArcColor("red");
@@ -140,7 +139,7 @@ public class Ball_Prefab : MonoBehaviour
                 gm.downWall.isTrigger = false;//*下壁 物理O
             }
         }
-        }
+        
     }
 
     private void OnTriggerExit(Collider col) {
@@ -164,22 +163,24 @@ public class Ball_Prefab : MonoBehaviour
         }
     }
 
-    //* Hit Block
+    //* ---------------------------------------------------------------------------------
+    //* Hit Block (Explosion EF)
+    //* ---------------------------------------------------------------------------------
     private void OnCollisionEnter(Collision col) {//* Give Damage
         if(col.gameObject.tag == "NormalBlock"){
             isHitedByBlock = true;
-            //* #2. Active Skill HIT
+            //* #2. Active Skill HIT 
             gm.activeSkillBtnList.ForEach(skillBtn => {
                 if(skillBtn.Trigger){
                     float delayTime = 2;
-                    int selectAtvSkillIdx = DM.ins.personalData.SelectSkillIdx;
+                    int skillIdx = gm.getCurSkillIdx();
                     gm.cam1.GetComponent<CamResolution>().setAnimTrigger("doShake");
                     switch(skillBtn.Name){
                         case "Thunder":
                             //なし
                             break;
                         case "FireBall":{
-                            em.createActiveSkillExplosionEF(selectAtvSkillIdx, this.transform);
+                            em.createActiveSkillExplosionEF(skillIdx, this.transform);
                             decreaseHpSphereCastAll(10);
                             skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
@@ -187,7 +188,7 @@ public class Ball_Prefab : MonoBehaviour
                         }
                         case "PoisonSmoke":{
                             int destroyCnt = 999;
-                            em.createActiveSkillExplosionEF(selectAtvSkillIdx, this.transform, destroyCnt);
+                            em.createActiveSkillExplosionEF(skillIdx, this.transform, destroyCnt);
                             RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.PoisonSmokeCastWidth, Vector3.up, 0);
                             decreaseHpSphereCastAll(0, 2);
                             skillBtn.init(gm);
@@ -206,7 +207,7 @@ public class Ball_Prefab : MonoBehaviour
                             );
                             //* Destroy
                             Array.ForEach(sameColorBlocks, bl => {
-                                em.createActiveSkillExplosionEF(selectAtvSkillIdx, bl.transform);
+                                em.createActiveSkillExplosionEF(skillIdx, bl.transform);
                                 bl.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(100);
                             });
 
@@ -215,7 +216,7 @@ public class Ball_Prefab : MonoBehaviour
                             break;
                         case "IceWave":
                             delayTime = 2f;
-                            em.createActiveSkillExplosionEF(selectAtvSkillIdx, this.transform);
+                            em.createActiveSkillExplosionEF(skillIdx, this.transform);
                             skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
@@ -302,10 +303,13 @@ public class Ball_Prefab : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    //* ---------------------------------------------------------------------------------
+    //* Swing Ball (Shot EF)
+    //* ---------------------------------------------------------------------------------
     IEnumerator coPlayActiveSkillShotEF(ActiveSkillBtnUI btn, float waitTime, Vector3 dir){
         Debug.LogFormat("coPlayActiveSkillShotEF:: btn={0}, waitTite={1}, dir={2}", btn.Name, waitTime, dir);
         float delayTime = 0;
-        int selectAtvSkillIdx = DM.ins.personalData.SelectSkillIdx;
+        int skillIdx = gm.getCurSkillIdx();
         switch(btn.Name){
             case "Thunder":
                 delayTime = 2;
@@ -314,7 +318,7 @@ public class Ball_Prefab : MonoBehaviour
                 Debug.DrawRay(this.transform.position, dir * maxDistance, Color.blue, 2f);
                 gm.cam1.GetComponent<CamResolution>().setAnimTrigger("doShake");
 
-                em.createActiveSkillShotEF(selectAtvSkillIdx, this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
+                em.createActiveSkillShotEF(skillIdx, this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
                 //* Collider 
                 RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, Vector3.one * width, dir, Quaternion.identity, maxDistance);
                 Array.ForEach(hits, hit => {
@@ -332,7 +336,7 @@ public class Ball_Prefab : MonoBehaviour
             case "ColorBall":
             case "PoisonSmoke":
             case "IceWave":
-                em.createActiveSkillShotEF(selectAtvSkillIdx, this.gameObject.transform, Quaternion.identity, true); //Trail
+                em.createActiveSkillShotEF(skillIdx, this.gameObject.transform, Quaternion.identity, true); //Trail
                 break;
         }
         //Before go up NextStage Wait for Second

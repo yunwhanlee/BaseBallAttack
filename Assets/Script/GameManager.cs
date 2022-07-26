@@ -68,8 +68,9 @@ public class GameManager : MonoBehaviour
     public ActiveSkill[] activeSkillDataBase; //* 全てActiveSkillsのデータベース
     public List<ActiveSkillBtnUI> activeSkillBtnList; //* ActiveSkillボタン
     public Material activeSkillBtnEfMt;
-    public Material[] blockGlowColorMts;
+    [SerializeField] int selectAtvSkillBtnIdx;  public int SelectAtvSkillBtnIdx { get=> selectAtvSkillBtnIdx; set=> selectAtvSkillBtnIdx = value;}
     public bool isPointUp; //* SectorGizmos Colliderへ活用するため。
+    public Material[] blockGlowColorMts;
 
     [Header("--Passive Skill Table InGame--")]
     public GameObject[] passiveSkillImgObjPrefs;
@@ -155,6 +156,7 @@ public class GameManager : MonoBehaviour
     public void onClickSkillButton() => levelUpPanel.SetActive(false);
     public void onClickSetGameButton(string type) => setGame(type);
     public void onClickActiveSkillButton(int i) {
+        SelectAtvSkillBtnIdx = i;
         //(BUG)再クリック。Cancel Selected Btn
         if(activeSkillBtnList[i].SelectCircleEF.gameObject.activeSelf){
             activeSkillBtnList[i].init(this, true);
@@ -166,7 +168,7 @@ public class GameManager : MonoBehaviour
         });
 
         if(ballGroup.childCount == 0){
-            activeSkillBtnList[i].onTriggerActiveSkillBtn(i, this);
+            activeSkillBtnList[i].onTriggerActiveSkillBtn(this);
         }
     } //(BUG)途中でスキル活性化ダメ
 
@@ -374,7 +376,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("setNextStage:: dropObjs.Length= " + dropObjs.Length);
         Array.ForEach(dropObjs, dropObj=>dropObj.moveToTarget(pl.transform));
     }
-
     private IEnumerator coWaitPlayerCollectOrb(){
         bm.setCreateBlockTrigger(true);
         if(bm.transform.childCount == 0){//* Remove All Blocks Perfect Bonus!
@@ -398,12 +399,15 @@ public class GameManager : MonoBehaviour
             if(block.IsDotDmg)  block.decreaseHp(block.getDotDmg(2));
         });
     }
-
     private void checkLevelUp(){
         if(pl.IsLevelUp){
             pl.IsLevelUp = false;
             levelUpPanel.SetActive(true);
             levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
         }
+    }
+
+    public int getCurSkillIdx(){
+        return (SelectAtvSkillBtnIdx == 0)? DM.ins.personalData.SelectSkillIdx : DM.ins.personalData.SelectSkill2Idx;
     }
 }
