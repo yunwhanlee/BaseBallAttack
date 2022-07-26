@@ -96,6 +96,8 @@ public class GameManager : MonoBehaviour
 
     //---------------------------------------
     void Start() {
+        Debug.Log("<color=red>----------------------------------------------P L A Y   S C E N E----------------------------------------------</color>");
+
         light = GameObject.Find("Directional Light").GetComponent<Light>();
         hitRangeSliderTf = hitRangeSlider.GetComponent<RectTransform>();
         readyBtn = readyBtn.GetComponent<Button>();
@@ -105,20 +107,14 @@ public class GameManager : MonoBehaviour
         //* Ball Preview Dir Goal Set Z-Center
         setBallPreviewGoalRandomPos();
 
-        //* Active Skill Btns(現在は１個、最大2個)
-        int i=0;
-        Debug.Log("GM:: activeSkillBtnGroup.childCount=" + activeSkillBtnGroup.childCount);
-        foreach(Transform child in activeSkillBtnGroup){
-            Button btn = child.GetComponent<Button>();
-            activeSkillBtnList.Add(new ActiveSkillBtnUI(
-                i,
-                pl.AtvSkillCoolDownUnit,
-                pl.activeSkills[DM.ins.personalData.SelectSkillIdx].Name,
-                btn,
-                pl.activeSkills[DM.ins.personalData.SelectSkillIdx].UISprite,
-                activeSkillBtnEfMt)
-            );
-            i++;
+        //* Active Skill Btns
+        int len =  (DM.ins.personalData.IsUnlock2ndSkill)? 2 : 1;
+        Debug.Log("GM:: Active Skill Btns len= <color=yellow>" + len + "</color>");
+        for(int i=0; i<len; i++){
+            var btn = activeSkillBtnGroup.GetChild(i).GetComponent<Button>();
+            btn.gameObject.SetActive(true);
+            int idx = (i==0)? DM.ins.personalData.SelectSkillIdx : DM.ins.personalData.SelectSkill2Idx;
+            activeSkillBtnList.Add(new ActiveSkillBtnUI(i, pl.AtvSkillCoolDownUnit, pl.activeSkills[idx].Name, btn, pl.activeSkills[idx].UISprite, activeSkillBtnEfMt));
         }
     }
 
