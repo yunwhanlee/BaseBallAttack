@@ -14806,6 +14806,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1623732227}
+    - target: {fileID: 4875220178185329758, guid: 8b8423f5606814d4dbbc29404dcc9045, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4875220179049382148, guid: 8b8423f5606814d4dbbc29404dcc9045, type: 3}
       propertyPath: m_Name
       value: SelectCircleEF

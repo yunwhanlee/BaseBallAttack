@@ -166,7 +166,7 @@ public class GameManager : MonoBehaviour
         });
 
         if(ballGroup.childCount == 0){
-            activeSkillBtnList[i].onTriggerActive(i, this);
+            activeSkillBtnList[i].onTriggerActiveSkillBtn(i, this);
         }
     } //(BUG)途中でスキル活性化ダメ
 

@@ -177,12 +177,12 @@ public class ActiveSkillBtnUI{
         gm.setLightDarkness(false);
         gm.bm.setGlowEFAllBlocks(false);
     }
-    public void onTriggerActive(int selectIdx, GameManager gm){
-        //TODO selectIdx Btn処理しないと、現在はスキルボタン１個として対応。
-        int selectAtvSkillIdx = DM.ins.personalData.SelectSkillIdx;
+    public void onTriggerActiveSkillBtn(int btnIdx, GameManager gm){
+        //TODO idxの処理しないと、現在はスキルボタン１個として対応。
+        int skillIdx = (btnIdx == 0)? DM.ins.personalData.SelectSkillIdx : DM.ins.personalData.SelectSkill2Idx;
 
         if(GrayBG.fillAmount == 0){
-            Debug.LogFormat("ActiveSkillBtnUI:: onTriggerActive:: trigger= {0}, selectIdx= {1}, name= {2}",Trigger, selectIdx, name);
+            Debug.LogFormat("ActiveSkillBtnUI:: onTriggerActive:: trigger= {0}, btnIdx= {1}, name= {2}",Trigger, btnIdx, name);
             Trigger = !Trigger;
             gm.setLightDarkness(true);
             selectCircleEF.gameObject.SetActive(Trigger);
@@ -201,7 +201,7 @@ public class ActiveSkillBtnUI{
                     case "IceWave":     parentTf = gm.pl.CastEFBallPreviewTf;  break;
                     case "ColorBall":   parentTf = gm.pl.CastEFArrowTf;        break;
                 }
-                gm.em.createActiveSkillCastEF(selectAtvSkillIdx, parentTf);
+                gm.em.createActiveSkillCastEF(skillIdx, parentTf);
             }
             else{
                 foreach(Transform child in gm.pl.CastEFArrowTf) GameObject.Destroy(child.gameObject);
