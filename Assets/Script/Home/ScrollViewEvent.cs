@@ -120,11 +120,10 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         scrollRect = GetComponent<ScrollRect>();
         hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
         
-        if(this.gameObject.name != "ScrollView_Skill"){
-            
-            if(BoxSprRdr) BoxSprRdr = UIGroup.GetChild(0).GetComponent<SpriteRenderer>();
-            if(RankTxt) RankTxt = UIGroup.GetChild(1).GetComponent<Text>();
-            if(NameTxt) NameTxt = UIGroup.GetChild(2).GetComponent<Text>();
+        if(this.gameObject.name != "ScrollView_Skill" && this.gameObject.name != "ScrollView_CashShop"){
+            BoxSprRdr = UIGroup.GetChild(0).GetComponent<SpriteRenderer>();
+            RankTxt = UIGroup.GetChild(1).GetComponent<Text>();
+            NameTxt = UIGroup.GetChild(2).GetComponent<Text>();
         }
     }
 
