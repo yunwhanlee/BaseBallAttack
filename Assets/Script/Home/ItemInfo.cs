@@ -16,6 +16,7 @@ public class ItemInfo : MonoBehaviour
     [SerializeField] Outline outline3D;    public Outline Outline3D{get => outline3D; set => outline3D = value;}
     [SerializeField] UnityEngine.UI.Extensions.NicerOutline outline2D;    public UnityEngine.UI.Extensions.NicerOutline Outline2D{get => outline2D; set => outline2D = value;}
     [SerializeField] int price;     public int Price {get => price; set => price = value;}
+    [SerializeField] Text cashShopPriceTxt;     public Text CashShopPriceTxt {get => cashShopPriceTxt; set => cashShopPriceTxt = value;}
     [SerializeField] ItemPassiveList itemPassive;  public ItemPassiveList ItemPassive {get => itemPassive; set=> itemPassive = value;}
 
 
@@ -39,6 +40,14 @@ public class ItemInfo : MonoBehaviour
                 var imgs = this.GetComponentsInChildren<Image>();
                 grayPanel = Array.FindLast(imgs, img => img.gameObject.name == "GrayPanel");
                 break; 
+            }
+            default : { 
+                if(cashShopPriceTxt){ //* CashShop
+                    Debug.Log("CashShop:: this.name= " + this.name);
+                    cashShopPriceTxt.text = price.ToString();
+                }
+
+                break;
             }
         }
 

@@ -121,9 +121,10 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
         
         if(this.gameObject.name != "ScrollView_Skill"){
-            BoxSprRdr = UIGroup.GetChild(0).GetComponent<SpriteRenderer>();
-            RankTxt = UIGroup.GetChild(1).GetComponent<Text>();
-            NameTxt = UIGroup.GetChild(2).GetComponent<Text>();
+            
+            if(BoxSprRdr) BoxSprRdr = UIGroup.GetChild(0).GetComponent<SpriteRenderer>();
+            if(RankTxt) RankTxt = UIGroup.GetChild(1).GetComponent<Text>();
+            if(NameTxt) NameTxt = UIGroup.GetChild(2).GetComponent<Text>();
         }
     }
 
@@ -332,6 +333,12 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         Debug.Log("onClickSkillPanel():: CurIdx= " + CurIdx + ", ins.name= " + ins.name + ", sprite= " + sprite);
     }
 
+    public void onClickCashShopList(ItemInfo myItemInfo){
+        Debug.Log("onClickCashShopList():: ");
+        var btns = DM.ins.scrollviews[(int)DM.ITEM.CashShop].ContentTf.GetComponentsInChildren<Button>();
+        drawChoiceBtnUI();
+    }
+
     //* ----------------------------------------------------------------
     //* Private Function
     //* ----------------------------------------------------------------
@@ -342,6 +349,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         var contentTf = (DM.ins.SelectItemType == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf
         : (DM.ins.SelectItemType == "Bat")? DM.ins.scrollviews[(int)DM.ITEM.Bat].ContentTf
         : (DM.ins.SelectItemType == "Skill")? DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf
+        : (DM.ins.SelectItemType == "CashShop")? DM.ins.scrollviews[(int)DM.ITEM.CashShop].ContentTf
         : null;
         var items = contentTf.GetComponentsInChildren<ItemInfo>();
         return items;
@@ -373,7 +381,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     private void activeOutline(ItemInfo item, bool isActive){
         if(item.Outline3D == null) return;
-        
+
         string type = DM.ins.SelectItemType;
         switch(type){
             case "Chara": case "Bat":
