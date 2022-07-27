@@ -52,14 +52,14 @@ public class HomeManager : MonoBehaviour
 
     void Start()
     {
-        onClickBtnGoToDialog("Home");
+        onClickBtnGoToPanel("Home");
         setSelectSkillImg(true);
     }
 
     //* ----------------------------------------------------------------
     //*   UI Button
     //* ----------------------------------------------------------------
-    public void onClickBtnGoToDialog(string name){
+    public void onClickBtnGoToPanel(string name){
         //* Current Model Data & ParentTf
         DM.ins.SelectItemType = name;
         var curChara = DM.ins.scrollviews[(int)DM.ITEM.Chara].ItemPrefs[DM.ins.personalData.SelectCharaIdx];
@@ -72,16 +72,10 @@ public class HomeManager : MonoBehaviour
                 setSelectSkillImg();
                 break;
             case "Chara" : 
-                setGUI();
-                break;
             case "Bat" : 
-                setGUI();
-                break;
             case "Skill" : 
-                setGUI();
-                break;
             case "CashShop":
-                //TODO
+                setGUI();
                 break;
         }
     }
@@ -239,7 +233,7 @@ public class HomeManager : MonoBehaviour
                     sv.ScrollRect.gameObject.SetActive(false));
                 break;
             default : 
-                int typeIdx = DM.ins.convertSelectItemTypeStr2Idx();
+                int typeIdx = DM.ins.convertItemType2Idx();
                 SelectPanelScrollBG.color = selectPanelColors[typeIdx];
                 DM.ins.scrollviews[typeIdx].ScrollRect.gameObject.SetActive(true);
 

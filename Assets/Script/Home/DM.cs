@@ -9,7 +9,7 @@ public class DM : MonoBehaviour
 {
     public static DM ins;
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
-    public enum ITEM {Chara, Bat, Skill};
+    public enum ITEM {Chara, Bat, Skill, CashShop};
     public enum ATVSKILL{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave, Unlock2ndSkillBtn};
     public enum PSVSKILL{DMG, MULTISHOT, SPEED, INSTANT_KILL, CRITICAL, EXPLOSION, EXP_UP, ITEM_SPAWN};
 
@@ -88,10 +88,11 @@ public class DM : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public int convertSelectItemTypeStr2Idx(){
+    public int convertItemType2Idx(){
         return (SelectItemType == DM.ITEM.Chara.ToString())? (int)DM.ITEM.Chara
             : (SelectItemType == DM.ITEM.Bat.ToString())? (int)DM.ITEM.Bat
             : (SelectItemType == DM.ITEM.Skill.ToString())? (int)DM.ITEM.Skill
+            : (SelectItemType == DM.ITEM.CashShop.ToString())? (int)DM.ITEM.CashShop
             : -9999;
     }
 }
