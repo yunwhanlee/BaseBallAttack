@@ -157,7 +157,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         //* Scroll Speed
         scrollSpeed = Mathf.Abs(scrollBefFramePosX - pos.anchoredPosition.x);
         // Debug.Log(scrollBefFramePosX + " - " + pos.anchoredPosition.x + " = " + scrollSpeed);
-        Debug.Log("getScrollViewPos:: Stop Scrolling:: curPosX=" + (curPosX) + " / " + max + ", CurIdx=" + CurIdx + " (CurIdxBasePos=" + CurIdxBasePos + "), scrollSpeed=" + scrollSpeed);
+        // Debug.Log("getScrollViewPos:: Stop Scrolling:: curPosX=" + (curPosX) + " / " + max + ", CurIdx=" + CurIdx + " (CurIdxBasePos=" + CurIdxBasePos + "), scrollSpeed=" + scrollSpeed);
 
         //* Stop Scrolling Near Index Chara
         if(scrollSpeed < 1)
@@ -168,6 +168,8 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
 
     public void updateItemInfo(){
+        if(BoxSprRdr == null) return; // Error) Object Null
+
         string type = DM.ins.SelectItemType;
         var contentTf = (type == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf : DM.ins.scrollviews[(int)DM.ITEM.Bat].ContentTf;
         //* Set PosX
@@ -333,7 +335,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //* ----------------------------------------------------------------
     //* Private Function
     //* ----------------------------------------------------------------
-    private ItemInfo getCurItem(){      
+    private ItemInfo getCurItem(){ 
         return getItemArr()[CurIdx];
     }
     private ItemInfo[] getItemArr(){
@@ -370,9 +372,11 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
 
     private void activeOutline(ItemInfo item, bool isActive){
+        if(item.Outline3D == null) return;
+        
         string type = DM.ins.SelectItemType;
         switch(type){
-            case "Chara": case "Bat":   
+            case "Chara": case "Bat":
                 item.Outline3D.enabled = isActive; 
                 break;
             case "Skill":               
