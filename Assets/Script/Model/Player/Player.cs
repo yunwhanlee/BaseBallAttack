@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
         var psvLvArr = DM.ins.personalData.ItemPassive.Arr;
         dmg = new PassiveSkill<int>("dmg", psvLvArr[(int)DM.PSVSKILL.DMG].lv, 1, 1);
         multiShot = new PassiveSkill<int>("multiShot", psvLvArr[(int)DM.PSVSKILL.MULTISHOT].lv, 0, 1);
-        speed = new PassiveSkill<float>("speed", psvLvArr[(int)DM.PSVSKILL.SPEED].lv, 1f, 0.2f);
+        speed = new PassiveSkill<float>("speed", psvLvArr[(int)DM.PSVSKILL.SPEED].lv, 1f, 0.35f);
         instantKill = new PassiveSkill<float>("instantKill", psvLvArr[(int)DM.PSVSKILL.INSTANT_KILL].lv, 0f, 0.02f);
         critical = new PassiveSkill<float>("critical", psvLvArr[(int)DM.PSVSKILL.CRITICAL].lv, 0f, 0.1f);
         explosion = new PassiveSkill<Explosion>("explosion", psvLvArr[(int)DM.PSVSKILL.EXPLOSION].lv, new Explosion(0f, 0.75f), new Explosion(0.25f, 0.25f));

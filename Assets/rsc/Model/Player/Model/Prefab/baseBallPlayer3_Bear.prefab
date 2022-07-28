@@ -396,7 +396,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52997f4069f577141a26ca62981ca997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHome: 0
 --- !u!114 &2524251634496801919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -561,7 +560,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52997f4069f577141a26ca62981ca997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHome: 0
 --- !u!114 &2524251635105666518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1073,12 +1071,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLock: 0
+  isChecked: 1
+  isCheckedImgObj: {fileID: 0}
   meshRdrList: []
+  originMtList: []
   grayPanel: {fileID: 0}
   rank: 2
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
   price: 0
+  cashShopPriceTxt: {fileID: 0}
   itemPassive:
     arr:
     - name: Dmg
@@ -1088,7 +1090,7 @@ MonoBehaviour:
       lv: 0
       imgPref: {fileID: 0}
     - name: Speed
-      lv: 0
+      lv: 3
       imgPref: {fileID: 0}
     - name: InstantKill
       lv: 0
