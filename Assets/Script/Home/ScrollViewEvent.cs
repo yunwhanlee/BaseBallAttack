@@ -90,6 +90,9 @@ public class ScrollView {
     }
 }
 
+//* -----------------------------------------------------------------------------------
+//* スクロールビュー イベント
+//* -----------------------------------------------------------------------------------
 public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 {
     //* OutSide
@@ -98,7 +101,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public HomeManager hm;
 
     // float rectWidth;
-    float curIdxBasePos;    public float CurIdxBasePos {get => curIdxBasePos; set => curIdxBasePos = value;}
+    [SerializeField] float curIdxBasePosX;    public float CurIdxBasePosX {get => curIdxBasePosX; set => curIdxBasePosX = value;}
     [SerializeField] int curIdx;     public int CurIdx {get => curIdx; set => curIdx = value;}
 
     [Header("--Scroll Speed--")]
@@ -125,6 +128,19 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             RankTxt = UIGroup.GetChild(1).GetComponent<Text>();
             NameTxt = UIGroup.GetChild(2).GetComponent<Text>();
         }
+
+        //* 初期化
+        // Set Current Index
+        CurIdx = (this.gameObject.name.Contains(DM.ITEM.Chara.ToString()))? DM.ins.personalData.SelectCharaIdx
+            :(this.gameObject.name.Contains(DM.ITEM.Bat.ToString()))? DM.ins.personalData.SelectBatIdx
+            :(this.gameObject.name.Contains(DM.ITEM.Skill.ToString()))? DM.ins.personalData.SelectSkillIdx : 0;
+
+        // Set Scroll PosX
+        float width = Mathf.Abs(DM.ins.ModelContentPref.rect.width);
+        CurIdxBasePosX = -((CurIdx+1) * width);
+
+        // Set Rank Color & Text & OutLine
+        updateItemInfo();
     }
 
     //* Drag Event
@@ -152,7 +168,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         var prefs = (DM.ins.SelectItemType == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].ItemPrefs : DM.ins.scrollviews[(int)DM.ITEM.Bat].ItemPrefs;
         float max = width * prefs.Length - width;
         CurIdx = Mathf.Abs(Mathf.FloorToInt((curPosX) / width));
-        CurIdxBasePos = -((CurIdx+1) * width);
+        CurIdxBasePosX = -((CurIdx+1) * width);
 
         //* Scroll Speed
         scrollSpeed = Mathf.Abs(scrollBefFramePosX - pos.anchoredPosition.x);
@@ -173,7 +189,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         string type = DM.ins.SelectItemType;
         var contentTf = (type == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf : DM.ins.scrollviews[(int)DM.ITEM.Bat].ContentTf;
         //* Set PosX
-        contentTf.anchoredPosition = new Vector2(CurIdxBasePos, -500);
+        contentTf.anchoredPosition = new Vector2(CurIdxBasePosX, -500);
         
         var curItem = getCurItem();
         Debug.Log("<color>CurItem= " + curItem.name + "</color>");
@@ -222,16 +238,26 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
 
     public void setCurSelectedItem(int typeIdx){
-        string type = DM.ins.SelectItemType;
-        if(type == DM.ITEM.Chara.ToString() || type == DM.ITEM.Bat.ToString()){
-            float width = Mathf.Abs(DM.ins.ModelContentPref.rect.width);
-            int index = (type == DM.ITEM.Chara.ToString())? DM.ins.personalData.SelectCharaIdx : DM.ins.personalData.SelectBatIdx;
-            float saveModelPosX = -Mathf.Abs(Mathf.FloorToInt(width * (index+1)));
-            DM.ins.scrollviews[typeIdx].ContentTf.anchoredPosition = new Vector2(saveModelPosX, -500);
+        switch(typeIdx){
+            case (int)DM.ITEM.Chara: 
+            case (int)DM.ITEM.Bat: 
+                setScrollViewAnchoredPosX(typeIdx);
+                break;
+            case (int)DM.ITEM.Skill: 
+                drawSkillPanelOutline();
+                break;
+            case (int)DM.ITEM.CashShop: 
+                checkMarkImg.gameObject.SetActive(true);
+                priceTxt.gameObject.SetActive(false);
+                break;
         }
-        else{ //* DM.ITEM.Skill
-            drawSkillPanelOutline();
-        }
+    }
+
+    private void setScrollViewAnchoredPosX(int typeIdx){
+        int index = (typeIdx==(int)DM.ITEM.Chara)? DM.ins.personalData.SelectCharaIdx : DM.ins.personalData.SelectBatIdx;
+        float width = Mathf.Abs(DM.ins.ModelContentPref.rect.width);
+        float saveModelPosX = -Mathf.Abs(Mathf.FloorToInt(width * (index+1)));
+        DM.ins.scrollviews[typeIdx].ContentTf.anchoredPosition = new Vector2(saveModelPosX, -500);
     }
 
     private void drawSkillPanelOutline(){
@@ -335,7 +361,6 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public void onClickCashShopList(ItemInfo myItemInfo){
         Debug.Log("onClickCashShopList():: ");
         var btns = DM.ins.scrollviews[(int)DM.ITEM.CashShop].ContentTf.GetComponentsInChildren<Button>();
-        drawChoiceBtnUI();
     }
 
     //* ----------------------------------------------------------------
