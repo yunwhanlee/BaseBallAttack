@@ -50,8 +50,7 @@ public class HomeManager : MonoBehaviour
 
     //TODO public DialogUI cashShop;
 
-    void Start()
-    {
+    void Start(){
         onClickBtnGoToPanel("Home");
         setSelectSkillImg(true);
     }

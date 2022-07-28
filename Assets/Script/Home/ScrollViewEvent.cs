@@ -310,15 +310,14 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //* ----------------------------------------------------------------
     public void onClickCheckBtn(string type){
         if(DM.ins.SelectItemType != type) return;
-        Debug.Log("onClickCheckBtn:: type= " + type + ", CurIdx= " + CurIdx);
         var curItem = getCurItem();
+        Debug.LogFormat("onClickCheckBtn:: type= {0}, CurIdx= {1}, curItem= {2}, IsLock= {3}",type, CurIdx, curItem, curItem.IsLock);
 
         if(type == DM.ITEM.Skill.ToString() && curItem.IsChecked){
             hm.displayMessageDialog("This Skill is Already Registed");
             return;
         }
         
-
         //* (BUG) 買わないのにロードしたらChara選択されるバグ防止。
         int befIdx = DM.ins.personalData.getSelectIdx(type);
         DM.ins.personalData.setSelectIdx(type, CurIdx);
@@ -358,9 +357,12 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         Debug.Log("onClickSkillPanel():: CurIdx= " + CurIdx + ", ins.name= " + ins.name + ", sprite= " + sprite);
     }
 
-    public void onClickCashShopList(ItemInfo myItemInfo){
-        Debug.Log("onClickCashShopList():: ");
+    public void onClickCashShopList(ItemInfo selectItemInfo){
         var btns = DM.ins.scrollviews[(int)DM.ITEM.CashShop].ContentTf.GetComponentsInChildren<Button>();
+        CurIdx = Array.FindIndex(btns, btn => btn.name == selectItemInfo.name);
+        Debug.Log("onClickCashShopList():: price= " + selectItemInfo.Price + ", CurIdx= " + CurIdx);
+
+        //TODO PROCESS 
     }
 
     //* ----------------------------------------------------------------
