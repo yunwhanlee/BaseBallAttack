@@ -414,10 +414,10 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         switch(type){
             case (int)DM.ITEM.Chara:
             case (int)DM.ITEM.Bat:
-                item.Outline3D.enabled = isActive; 
+                if(item.Outline3D) item.Outline3D.enabled = isActive; 
                 break;
             case (int)DM.ITEM.Skill:
-                item.Outline2D.enabled = isActive;
+                if(item.Outline2D) item.Outline2D.enabled = isActive;
                 break;
         }
     }

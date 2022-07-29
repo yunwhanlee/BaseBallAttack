@@ -32,7 +32,13 @@ public class Block_Prefab : MonoBehaviour
     [SerializeField] int exp = 10;  public int Exp {get => exp; set => exp = value;}
     [SerializeField] bool isDotDmg;  public bool IsDotDmg {get => isDotDmg; set => isDotDmg = value;}
     [SerializeField] int itemTypePer;
-    private Vector3 itemBlockExplostionBoxSize = new Vector3(3,2,2);
+
+    // Spawn Animation
+    [SerializeField] Vector3 defScale;
+    [SerializeField] float minLimitVal;
+    [SerializeField] float spawnAnimSpeed;
+
+    Vector3 itemBlockExplostionBoxSize = new Vector3(3,2,2);
 
     //* GUI
     public Text hpTxt;
@@ -112,10 +118,23 @@ public class Block_Prefab : MonoBehaviour
         sprGlowEf.GlowColor = color;
         
         originMt = meshRd.material; // Save Original Material
+
+        //* Init Scale For Spawn Anim
+        spawnAnimSpeed = 6f;
+        minLimitVal = defScale.x * 0.99f;
+        defScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        transform.localScale = Vector3.zero;
     }
 
     void Update(){
         hpTxt.text = hp.ToString();
+
+        //* Spawn Animation
+        if(transform.localScale.x < defScale.x){
+            //* 99%まで大きくなったら、既存のサイズにする。(無駄な処理をしないため)
+            if(transform.localScale.x >= minLimitVal) transform.localScale = defScale;
+            transform.localScale = Vector3.Lerp(transform.localScale, defScale, Time.deltaTime * spawnAnimSpeed);
+        }
     }
 
     public void setEnabledSpriteGlowEF(bool isTrigger){
