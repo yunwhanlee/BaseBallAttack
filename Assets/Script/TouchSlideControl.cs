@@ -81,7 +81,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
             // Debug.DrawRay(arrowTf.position, arrowTf.forward * 1000, Color.red, 1);
 
             //* 🌟ColorBall ActiveSkill
-            bool isColorBallSkill = gm.activeSkillBtnList.Exists(btn => btn.Trigger && btn.Name == DM.ATVSKILL.ColorBall.ToString());
+            bool isColorBallSkill = gm.activeSkillBtnList.Exists(btn => btn.Trigger && btn.Name == DM.ATV.ColorBall.ToString());
             if(isColorBallSkill && hit.transform.CompareTag("NormalBlock")){
                 //* Hit Color
                 var meshRd = hit.transform.gameObject.GetComponent<MeshRenderer>();

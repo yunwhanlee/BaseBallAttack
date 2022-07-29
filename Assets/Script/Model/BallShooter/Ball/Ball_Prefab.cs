@@ -175,27 +175,19 @@ public class Ball_Prefab : MonoBehaviour
                     float delayTime = 2;
                     int skillIdx = gm.getCurSkillIdx();
                     gm.cam1.GetComponent<CamResolution>().setAnimTrigger("doShake");
-                    switch(skillBtn.Name){
-                        case "Thunder":
+                    var atv = DM.ins.convertAtvSkillStr2Enum(skillBtn.Name);
+                    switch(atv){
+                        case DM.ATV.Thunder:
                             //なし
                             break;
-                        case "FireBall":{
+                        case DM.ATV.FireBall:{
                             em.createActiveSkillExplosionEF(skillIdx, this.transform);
                             decreaseHpSphereCastAll(10);
                             skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
                         }
-                        case "PoisonSmoke":{
-                            int destroyCnt = 999;
-                            em.createActiveSkillExplosionEF(skillIdx, this.transform, destroyCnt);
-                            RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.PoisonSmokeCastWidth, Vector3.up, 0);
-                            decreaseHpSphereCastAll(0, 2);
-                            skillBtn.init(gm);
-                            this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
-                            break;
-                        }
-                        case "ColorBall":
+                        case DM.ATV.ColorBall:{
                             //* Hit Color
                             var meshRd = col.gameObject.GetComponent<MeshRenderer>();
                             Color hitColor = meshRd.material.GetColor("_ColorTint");
@@ -214,27 +206,41 @@ public class Ball_Prefab : MonoBehaviour
                             skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
-                        case "IceWave":
+                        }
+                        case DM.ATV.PoisonSmoke:{
+                            int destroyCnt = 999;
+                            em.createActiveSkillExplosionEF(skillIdx, this.transform, destroyCnt);
+                            RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.PoisonSmokeCastWidth, Vector3.up, 0);
+                            decreaseHpSphereCastAll(0, 2);
+                            skillBtn.init(gm);
+                            this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
+                            break;
+                        }
+                        case DM.ATV.IceWave:{
                             delayTime = 2f;
                             em.createActiveSkillExplosionEF(skillIdx, this.transform);
                             skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
+                        }
                     }
-
                     //* Delay Next Stage
                     Invoke("onDestroyMeInvoke", delayTime);
                 }
             });
-            //* HIT Base Passive Skills
+
+            //! HIT Type Passive Skills
             int result = 0;
             float per = 0f;
+
             //* InstantKill
             per = pl.instantKill.Value;
             pl.instantKill.setHitTypePsvSkill(per, ref result, col, em, pl);
+
             //* Critical
             per = pl.critical.Value;
             pl.critical.setHitTypePsvSkill(per, ref result, col, em, pl);
+
             //* Explosion（最後 ダメージ適用）
             per = pl.explosion.Value.per;
             pl.explosion.setHitTypePsvSkill(per, ref result, col, em, pl, this.gameObject);
@@ -247,7 +253,6 @@ public class Ball_Prefab : MonoBehaviour
 
     private void onDestroyMeInvoke() => onDestroyMe();
     
-
     private void decreaseHpSphereCastAll(int dmg, int dotDmgDevideVal = 0){
         RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.FireBallCastWidth, Vector3.up, 0);
         Array.ForEach(hits, hit => {
@@ -273,8 +278,11 @@ public class Ball_Prefab : MonoBehaviour
     }
 
     private void checkDestroyBall(){
-        if(this.name == "Ball(Clone)" && this.transform.localScale.x == 0.4f)
+        if(this.name == "Ball(Clone)" && this.transform.localScale.x == 0.4f){
             onDestroyMe();
+            for(int i=0;i<gm.ballGroup.childCount;i++)
+                Destroy(gm.ballGroup.GetChild(i));
+        }
         else
             Destroy(this.gameObject);
     }
@@ -310,8 +318,9 @@ public class Ball_Prefab : MonoBehaviour
         Debug.LogFormat("coPlayActiveSkillShotEF:: btn={0}, waitTite={1}, dir={2}", btn.Name, waitTime, dir);
         float delayTime = 0;
         int skillIdx = gm.getCurSkillIdx();
-        switch(btn.Name){
-            case "Thunder":
+        var atv = DM.ins.convertAtvSkillStr2Enum(btn.Name);
+        switch(atv){
+            case DM.ATV.Thunder:
                 delayTime = 2;
                 const int maxDistance = 50;
                 const int width = 1;
@@ -332,17 +341,15 @@ public class Ball_Prefab : MonoBehaviour
                 yield return new WaitForSeconds(delayTime);
                 onDestroyMe();
                 break;
-            case "FireBall":
-            case "ColorBall":
-            case "PoisonSmoke":
-            case "IceWave":
+            case DM.ATV.FireBall:
+            case DM.ATV.ColorBall:
+            case DM.ATV.PoisonSmoke:
+            case DM.ATV.IceWave:
                 em.createActiveSkillShotEF(skillIdx, this.gameObject.transform, Quaternion.identity, true); //Trail
                 break;
         }
         //Before go up NextStage Wait for Second
     }
-
-    
 
     void OnDrawGizmos(){
         //* Explosion Skill Range Preview

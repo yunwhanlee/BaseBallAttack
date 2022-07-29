@@ -7,15 +7,15 @@ public class ActiveSkillGizmos : MonoBehaviour
     [SerializeField] protected Player pl;
     [SerializeField] protected float width;
     [SerializeField] protected bool isGizmosOn = true;
-    [SerializeField] protected DM.ATVSKILL type;
+    [SerializeField] protected DM.ATV type;
     protected void Start(){
         pl = GameObject.Find("Player").GetComponent<Player>();
         switch(type){
-            case DM.ATVSKILL.Thunder : pl.ThunderCastWidth = width; break;
-            case DM.ATVSKILL.FireBall : pl.FireBallCastWidth = width;   break;
-            case DM.ATVSKILL.PoisonSmoke : pl.PoisonSmokeCastWidth = width;   break;
-            case DM.ATVSKILL.ColorBall :    break;
-            case DM.ATVSKILL.IceWave :    break;
+            case DM.ATV.Thunder : pl.ThunderCastWidth = width; break;
+            case DM.ATV.FireBall : pl.FireBallCastWidth = width;   break;
+            case DM.ATV.PoisonSmoke : pl.PoisonSmokeCastWidth = width;   break;
+            case DM.ATV.ColorBall :    break;
+            case DM.ATV.IceWave :    break;
         }
     }
 

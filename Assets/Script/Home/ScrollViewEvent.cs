@@ -372,11 +372,12 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         return getItemArr()[CurIdx];
     }
     private ItemInfo[] getItemArr(){
-        var contentTf = (DM.ins.SelectItemType == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf
-        : (DM.ins.SelectItemType == "Bat")? DM.ins.scrollviews[(int)DM.ITEM.Bat].ContentTf
-        : (DM.ins.SelectItemType == "Skill")? DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf
-        : (DM.ins.SelectItemType == "CashShop")? DM.ins.scrollviews[(int)DM.ITEM.CashShop].ContentTf
+        var contentTf = (DM.ins.SelectItemType == DM.ITEM.Chara.ToString())? DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf
+        : (DM.ins.SelectItemType == DM.ITEM.Bat.ToString())? DM.ins.scrollviews[(int)DM.ITEM.Bat].ContentTf
+        : (DM.ins.SelectItemType == DM.ITEM.Skill.ToString())? DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf
+        : (DM.ins.SelectItemType == DM.ITEM.CashShop.ToString())? DM.ins.scrollviews[(int)DM.ITEM.CashShop].ContentTf
         : null;
+        Debug.Log("getItemArr():: contentTf= " + contentTf);
         var items = contentTf.GetComponentsInChildren<ItemInfo>();
         return items;
     }
@@ -394,6 +395,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         if(selectItemIdx==-1) return;
         
         if(selectItemIdx == CurIdx){
+            Debug.LogFormat("setCheckIconColorAndOutline():: selectItemIdx({0}) == CurIdx({1}) ? -> {2}, curItem= {3}", selectItemIdx, CurIdx, selectItemIdx == CurIdx, curItem);
             checkMarkImg.color = Color.green;
             Array.ForEach(items, item => activeOutline(item, false));
             activeOutline(curItem, true);
@@ -406,14 +408,15 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
 
     private void activeOutline(ItemInfo item, bool isActive){
-        if(item.Outline3D == null) return;
-
-        string type = DM.ins.SelectItemType;
+        // if(item.Outline3D == null) return;
+        var type = DM.ins.convertItemType2Idx();
+        Debug.LogFormat("activeOutline():: type= {0}, isActive= {1}", type, isActive);
         switch(type){
-            case "Chara": case "Bat":
+            case (int)DM.ITEM.Chara:
+            case (int)DM.ITEM.Bat:
                 item.Outline3D.enabled = isActive; 
                 break;
-            case "Skill":               
+            case (int)DM.ITEM.Skill:
                 item.Outline2D.enabled = isActive;
                 break;
         }

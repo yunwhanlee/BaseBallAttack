@@ -21,10 +21,12 @@ public class ItemInfo : MonoBehaviour
 
 
     void Start(){
-        switch(DM.ins.SelectItemType){
+        var type = DM.ins.convertItemType2Idx();
+
+        switch(type){
             //* 3D Model 形式
-            case "Chara" :
-            case "Bat" :{
+            case (int)DM.ITEM.Chara :
+            case (int)DM.ITEM.Bat :{
                 Outline3D = this.GetComponent<Outline>();
 
                 var childs = this.GetComponentsInChildren<MeshRenderer>();
@@ -33,9 +35,9 @@ public class ItemInfo : MonoBehaviour
                 break;
             }
             //* 2D UI Sprite 形式
-            case "Skill" :{
+            case (int)DM.ITEM.Skill :{
                 Outline2D = this.GetComponent<UnityEngine.UI.Extensions.NicerOutline>();
-                // Debug.Log("Skill Outline2D=" + Outline2D);
+                Debug.Log("Skill Outline2D=" + Outline2D);
 
                 var imgs = this.GetComponentsInChildren<Image>();
                 grayPanel = Array.FindLast(imgs, img => img.gameObject.name == "GrayPanel");

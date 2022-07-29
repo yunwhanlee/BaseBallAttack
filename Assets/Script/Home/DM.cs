@@ -10,9 +10,8 @@ public class DM : MonoBehaviour
     public static DM ins;
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
     public enum ITEM {Chara, Bat, Skill, CashShop};
-    public enum ATVSKILL{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave, Unlock2ndSkillBtn};
-    public enum PSVSKILL{DMG, MULTISHOT, SPEED, INSTANT_KILL, CRITICAL, EXPLOSION, EXP_UP, ITEM_SPAWN};
-
+    public enum ATV{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave};
+    public enum PSV{Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn};
 
     [Header("--Personal Data--")]
     [SerializeField] Text coinTxt; public Text CoinTxt {get => coinTxt; set => coinTxt = value;}
@@ -31,7 +30,7 @@ public class DM : MonoBehaviour
 
     void Awake() => singleton();
     void Start(){
-        foreach(DM.ATVSKILL list in Enum.GetValues(typeof(DM.ATVSKILL))){
+        foreach(DM.ATV list in Enum.GetValues(typeof(DM.ATV))){
             Debug.LogFormat("Enums GetFindVal:: {0}", list.ToString());
         }
 
@@ -94,5 +93,20 @@ public class DM : MonoBehaviour
             : (SelectItemType == DM.ITEM.Skill.ToString())? (int)DM.ITEM.Skill
             : (SelectItemType == DM.ITEM.CashShop.ToString())? (int)DM.ITEM.CashShop
             : -9999;
+    }
+
+    public PSV convertPsvSkillStr2Enum(string name){
+        return (name == DM.PSV.InstantKill.ToString())? DM.PSV.InstantKill 
+            :(name == DM.PSV.Critical.ToString())? DM.PSV.Critical
+            :(name == DM.PSV.Explosion.ToString())? DM.PSV.Explosion
+            : DM.PSV.Dmg; //-> ダミーデータ
+    }
+
+    public ATV convertAtvSkillStr2Enum(string name){
+        return (name == DM.ATV.Thunder.ToString())? DM.ATV.Thunder
+            :(name == DM.ATV.FireBall.ToString())? DM.ATV.FireBall
+            :(name == DM.ATV.ColorBall.ToString())? DM.ATV.ColorBall
+            :(name == DM.ATV.PoisonSmoke.ToString())? DM.ATV.PoisonSmoke
+            :DM.ATV.IceWave;
     }
 }

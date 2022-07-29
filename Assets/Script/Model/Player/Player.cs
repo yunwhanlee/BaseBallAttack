@@ -105,14 +105,14 @@ public class Player : MonoBehaviour
 
         //* Set Passive Skills : @params { int level, T value, T unit }
         var psvLvArr = DM.ins.personalData.ItemPassive.Arr;
-        dmg = new PassiveSkill<int>("dmg", psvLvArr[(int)DM.PSVSKILL.DMG].lv, 1, 1);
-        multiShot = new PassiveSkill<int>("multiShot", psvLvArr[(int)DM.PSVSKILL.MULTISHOT].lv, 0, 1);
-        speed = new PassiveSkill<float>("speed", psvLvArr[(int)DM.PSVSKILL.SPEED].lv, 1f, 0.35f);
-        instantKill = new PassiveSkill<float>("instantKill", psvLvArr[(int)DM.PSVSKILL.INSTANT_KILL].lv, 0f, 0.02f);
-        critical = new PassiveSkill<float>("critical", psvLvArr[(int)DM.PSVSKILL.CRITICAL].lv, 0f, 0.1f);
-        explosion = new PassiveSkill<Explosion>("explosion", psvLvArr[(int)DM.PSVSKILL.EXPLOSION].lv, new Explosion(0f, 0.75f), new Explosion(0.25f, 0.25f));
-        expUp = new PassiveSkill<float>("expUp", psvLvArr[(int)DM.PSVSKILL.EXP_UP].lv, 1f, 0.2f);
-        itemSpawn = new PassiveSkill<float>("itemSpawn", psvLvArr[(int)DM.PSVSKILL.ITEM_SPAWN].lv, 0.1f, 0.05f);
+        dmg = new PassiveSkill<int>(DM.PSV.Dmg.ToString(), psvLvArr[(int)DM.PSV.Dmg].lv, 1, 1);
+        multiShot = new PassiveSkill<int>(DM.PSV.MultiShot.ToString(), psvLvArr[(int)DM.PSV.MultiShot].lv, 0, 1);
+        speed = new PassiveSkill<float>(DM.PSV.Speed.ToString(), psvLvArr[(int)DM.PSV.Speed].lv, 1f, 0.35f);
+        instantKill = new PassiveSkill<float>(DM.PSV.InstantKill.ToString(), psvLvArr[(int)DM.PSV.InstantKill].lv, 0f, 0.02f);
+        critical = new PassiveSkill<float>(DM.PSV.Critical.ToString(), psvLvArr[(int)DM.PSV.Critical].lv, 0f, 0.1f);
+        explosion = new PassiveSkill<Explosion>(DM.PSV.Explosion.ToString(), psvLvArr[(int)DM.PSV.Explosion].lv, new Explosion(0f, 0.75f), new Explosion(0.25f, 0.25f));
+        expUp = new PassiveSkill<float>(DM.PSV.ExpUp.ToString(), psvLvArr[(int)DM.PSV.ExpUp].lv, 1f, 0.2f);
+        itemSpawn = new PassiveSkill<float>(DM.PSV.ItemSpawn.ToString(), psvLvArr[(int)DM.PSV.ItemSpawn].lv, 0.1f, 0.05f);
 
         //* Apply Psv Data
         dmg.initPsvSkillDt(dmg.Value + dmg.Unit);

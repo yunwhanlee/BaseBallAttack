@@ -37,7 +37,7 @@ public class SectorGizmos : MonoBehaviour
         pos = new Vector3(transform.position.x, transform.position.y, transform.position.z - offsetZ);
 
         //* IceWave
-        if(this.transform.name.Contains(DM.ATVSKILL.IceWave.ToString())){
+        if(this.transform.name.Contains(DM.ATV.IceWave.ToString())){
             this.transform.rotation = Quaternion.Euler(0,gm.pl.arrowAxisAnchor.transform.rotation.eulerAngles.y,0);
         }
 

@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using Random = UnityEngine.Random;
-
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 [System.Serializable]
 public class ItemPsvDt {
     public string name;
@@ -15,13 +17,20 @@ public class ItemPsvDt {
         this.name = name;
     }
 }
-
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 [System.Serializable]
 public class ItemPassiveList{
     [SerializeField] ItemPsvDt[] arr = {
-        new ItemPsvDt("Dmg"), new ItemPsvDt("MultiShot"), new ItemPsvDt("Speed"), 
-        new ItemPsvDt("InstantKill"), new ItemPsvDt("Critical"), new ItemPsvDt("Explosion"), 
-        new ItemPsvDt("ExpUp"), new ItemPsvDt("ItemSpawn")
+        new ItemPsvDt(DM.PSV.Dmg.ToString()),
+        new ItemPsvDt(DM.PSV.MultiShot.ToString()),
+        new ItemPsvDt(DM.PSV.Speed.ToString()), 
+        new ItemPsvDt(DM.PSV.InstantKill.ToString()), 
+        new ItemPsvDt(DM.PSV.Critical.ToString()), 
+        new ItemPsvDt(DM.PSV.Explosion.ToString()), 
+        new ItemPsvDt(DM.PSV.ExpUp.ToString()), 
+        new ItemPsvDt(DM.PSV.ItemSpawn.ToString())
     };  public ItemPsvDt[] Arr {get => arr; set => arr = value;}
 
     public void setImgPrefs(ItemPassiveList itemPsvList){
@@ -36,7 +45,9 @@ public class ItemPassiveList{
         }
     }
 }
-
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 [System.Serializable]
 public class PassiveSkill<T> where T: struct {
     //*value                     //*get set
@@ -69,17 +80,20 @@ public class PassiveSkill<T> where T: struct {
         int rand = Random.Range(0, 100);
         int percent = Mathf.RoundToInt(per * 100); //百分率
         Debug.Log("PassiveSkill:: setHitTypePsvSkill:: 「" + Name.ToString() + "」 rand("+rand+") <= per("+per+") : " + ((rand <= per)? "<color=blue>true</color>" : "false"));
+        
+        var psv = DM.ins.convertPsvSkillStr2Enum(Name);
+
         if(Level > 0 && rand <= percent){
-            switch(Name){
-                case "instantKill": 
+            switch(psv){
+                case DM.PSV.InstantKill: 
                     em.createInstantKillTextEF(col.transform);
                     result =  pl.dmg.Value * 999999;
                     break;
-                case "critical": 
+                case DM.PSV.Critical: 
                     em.createCriticalTextEF(col.transform, pl.dmg.Value * 2);
                     result = pl.dmg.Value * 2;
                     break;
-                case "explosion":
+                case DM.PSV.Explosion:
                     em.createExplosionEF(ballPref.transform, pl.explosion.Value.range);
                     //Sphere Collider
                     RaycastHit[] rayHits = Physics.SphereCastAll(ballPref.transform.position, pl.explosion.Value.range, Vector3.up, 0);
@@ -97,7 +111,9 @@ public class PassiveSkill<T> where T: struct {
             col.gameObject.GetComponent<Block_Prefab>().decreaseHp(result);
     }
 }
-
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 [System.Serializable]
 public struct Explosion{
     public float per, range;
@@ -106,11 +122,9 @@ public struct Explosion{
         this.range = range;
     }
 }
-
-
-
-//-------------------------------------------------
-//-------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 [System.Serializable]
 public class ActiveSkill{
     //*value                        //*get set
@@ -136,8 +150,9 @@ public class ActiveSkill{
     }
     //*method
 }
-
-
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 [System.Serializable]
 public class ActiveSkillBtnUI{
     //*value                        //*get set
@@ -194,12 +209,13 @@ public class ActiveSkillBtnUI{
             //* Cast Effect
             if(Trigger){
                 Transform parentTf = null;
-                switch(this.name){
-                    case "Thunder":     parentTf = gm.pl.CastEFArrowTf;        break;
-                    case "FireBall":    parentTf = gm.pl.CastEFBallPreviewTf;  break;
-                    case "PoisonSmoke": parentTf = gm.pl.CastEFBallPreviewTf;  break;
-                    case "IceWave":     parentTf = gm.pl.CastEFBallPreviewTf;  break;
-                    case "ColorBall":   parentTf = gm.pl.CastEFArrowTf;        break;
+                var atv = DM.ins.convertAtvSkillStr2Enum(this.name);
+                switch(atv){
+                    case DM.ATV.Thunder:     parentTf = gm.pl.CastEFArrowTf;        break;
+                    case DM.ATV.FireBall:    parentTf = gm.pl.CastEFBallPreviewTf;  break;
+                    case DM.ATV.PoisonSmoke: parentTf = gm.pl.CastEFBallPreviewTf;  break;
+                    case DM.ATV.IceWave:     parentTf = gm.pl.CastEFBallPreviewTf;  break;
+                    case DM.ATV.ColorBall:   parentTf = gm.pl.CastEFArrowTf;        break;
                 }
                 gm.em.createActiveSkillCastEF(skillIdx, parentTf);
             }
