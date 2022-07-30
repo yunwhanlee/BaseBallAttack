@@ -120,9 +120,9 @@ public class Block_Prefab : MonoBehaviour
         originMt = meshRd.material; // Save Original Material
 
         //* Init Scale For Spawn Anim
+        defScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
         spawnAnimSpeed = 6f;
         minLimitVal = defScale.x * 0.99f;
-        defScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
         transform.localScale = Vector3.zero;
     }
 
@@ -132,7 +132,10 @@ public class Block_Prefab : MonoBehaviour
         //* Spawn Animation
         if(transform.localScale.x < defScale.x){
             //* 99%まで大きくなったら、既存のサイズにする。(無駄な処理をしないため)
-            if(transform.localScale.x >= minLimitVal) transform.localScale = defScale;
+            Debug.Log("Block_Prefab:: Update():: transform.localScale= " + transform.localScale);
+            if(transform.localScale.x >= minLimitVal) {
+                transform.localScale = defScale;
+            }
             transform.localScale = Vector3.Lerp(transform.localScale, defScale, Time.deltaTime * spawnAnimSpeed);
         }
     }
