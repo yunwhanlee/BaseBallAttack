@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public enum State {PLAY, WAIT, GAMEOVER};
-    public State state;     public State STATE {get => state; set => state = value;}
+    [SerializeField] private State state;     public State STATE {get => state; set => state = value;}
 
     //* CAMERA
     public GameObject cam1, cam2;
@@ -98,6 +98,8 @@ public class GameManager : MonoBehaviour
     //---------------------------------------
     void Start() {
         Debug.Log("<color=red>----------------------------------------------P L A Y   S C E N E----------------------------------------------</color>");
+        //! init()宣言したら、キャラクターモデルを読み込むことができないBUG
+
         light = GameObject.Find("Directional Light").GetComponent<Light>();
         hitRangeSliderTf = hitRangeSlider.GetComponent<RectTransform>();
         readyBtn = readyBtn.GetComponent<Button>();

@@ -12,13 +12,13 @@ public class BlockMaker : MonoBehaviour
     const float WIDTH = 1.9f;
     const float HEIGHT = 1;
     const int MAX_HORIZONTAL_GRID = 6;
-    const int FIRST_CREATE_VERTICAL_GRID = 4; //DEAD_MAX-> 13
-    const float SPAWN_POS_X = -5;
+    const int FIRST_CREATE_VERTICAL_CNT = 4; //DEAD_MAX-> 13
+    // const float SPAWN_POS_X = -5;
     const float SPWAN_POS_Y = -2;
 
     public int createPercent;
     public Transform blockBundle;
-    public GameObject blockPref;
+    public GameObject[] blockPrefs;
     public bool isCreateBlock;
     public Color[] colors;   public Color[] Colors {get => colors;}
     public Material[] mts;   public Material[] Mts {get => mts;}
@@ -32,7 +32,7 @@ public class BlockMaker : MonoBehaviour
         var blocks = this.GetComponentsInChildren<Block_Prefab>();
         foreach(var block in blocks) block.onDestroy(block.gameObject, true);
         this.transform.position = new Vector3(0, 0.5f, -2);
-        createBlockRow(true, FIRST_CREATE_VERTICAL_GRID);
+        createBlockRow("block1", true, FIRST_CREATE_VERTICAL_CNT);
     }
 
     void Update(){
@@ -44,20 +44,40 @@ public class BlockMaker : MonoBehaviour
 
     public void setCreateBlockTrigger(bool trigger) => isCreateBlock = trigger;
 
-    public void createBlockRow(bool isFirst = false, int verticalCnt = 1){
-        for(int v=0; v<verticalCnt;v++){ //縦
-            int offsetCnt = 1;
-            for(int h=0; h<MAX_HORIZONTAL_GRID;h++){ //横
-                //* ランダムで生成  
-                int rand = Random.Range(0,100);
-                if(createPercent < rand) continue;
-                float x = h < 3 ? (SPAWN_POS_X + h * WIDTH) : (SPAWN_POS_X + h * WIDTH + 0.5f * offsetCnt);
+    public void createBlockRow(string type = "block1", bool isFirst = false, int verticalCnt = 1){
+        //* Value
+        GameObject ins = (type=="block1")? blockPrefs[0] : blockPrefs[1];
+        float xs = ins.transform.localScale.x;
+        float spawnPosX = (type=="block1")? -5 : -3.1f;
+        float middleGap = 0.5f; // センターのボールが来る隙間
 
-                //* Newゲーム開始なのか、次のステージなのか？
-                Vector3 pos = new Vector3(x, (isFirst)? 0 : blockBundle.position.y, (isFirst)? -v : SPWAN_POS_Y);
-                var ins = Instantiate(blockPref, (isFirst)? pos + blockBundle.position : pos, Quaternion.identity, blockBundle);
-            }
+        switch(type){
+            case "block1" : 
+                for(int v=0; v<verticalCnt;v++){ //縦
+                    int offsetCnt = 1;
+                    for(int h=0; h<MAX_HORIZONTAL_GRID;h++){ //横
+                        //* ランダムで生成  
+                        int rand = Random.Range(0,100);
+                        if(createPercent < rand) continue;
+                        //* Newゲーム開始なのか、次のステージなのか？
+                        float x = h < 3 ? (spawnPosX + h * xs) : (spawnPosX + h * xs + middleGap * offsetCnt);
+                        float y = (isFirst)? 0 : blockBundle.position.y;
+                        float z = (isFirst)? -v : SPWAN_POS_Y;
+                        Vector3 pos = new Vector3(x, y, z);
+                        Vector3 setPos = (isFirst)? pos + blockBundle.position : pos;
+                        Instantiate(ins, setPos, Quaternion.identity, blockBundle);
+                    }
+                }
+                break;
+            case "block2" : 
+                for(int h=0; h<2; h++){
+                    float x = h < 1 ? spawnPosX + h * xs : spawnPosX + h * xs + middleGap;
+                    Vector3 pos = new Vector3(x, blockBundle.position.y, SPWAN_POS_Y);
+                    Instantiate(ins, pos, Quaternion.identity, blockBundle);
+                }
+                break;
         }
+
     }
 
     public void createDropItemOrb(Transform blockTf, int resultExp){
@@ -67,9 +87,13 @@ public class BlockMaker : MonoBehaviour
     }
 
     public void moveDownBlock(){
-        Debug.Log("moveDownBlock:: MOVE DOWN BLOCK ↓");
+        Debug.Log("moveDownBlock:: MOVE DOWN BLOCK ↓, gm.stage= " + gm.stage);
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z - 1);
-        createBlockRow();
+        if(gm.stage % 10 == 0){
+            createBlockRow("block2");
+        }else{
+            createBlockRow();
+        }
     }
 
     public void setGlowEF(Block_Prefab[] targetBlocks, bool isOn){

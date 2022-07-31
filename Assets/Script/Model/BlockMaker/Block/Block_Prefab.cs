@@ -72,7 +72,7 @@ public class Block_Prefab : MonoBehaviour
         }
 
         //TODO Leveling HP
-        hp = gm.stage;
+        hp = (gm.stage % 10 == 0)? gm.stage * 4 : gm.stage; //* Block2 : Block1
         //hp = (gm.stage <= 5) ? 1 : (gm.stage <= 10) ? 2 : (gm.stage <= 15) ? 3 : (gm.stage <= 20) ? 4 : 5;
         // rand = Random.Range(0,100);
         // if      (gm.stage <=  4) hp = rand < 85 ? 1 : 2;
@@ -132,7 +132,7 @@ public class Block_Prefab : MonoBehaviour
         //* Spawn Animation
         if(transform.localScale.x < defScale.x){
             //* 99%まで大きくなったら、既存のサイズにする。(無駄な処理をしないため)
-            Debug.Log("Block_Prefab:: Update():: transform.localScale= " + transform.localScale);
+            // Debug.Log("Block_Prefab:: Update():: transform.localScale= " + transform.localScale);
             if(transform.localScale.x >= minLimitVal) {
                 transform.localScale = defScale;
             }
