@@ -72,7 +72,7 @@ public class Block_Prefab : MonoBehaviour
         }
 
         //TODO Leveling HP
-        hp = (gm.stage % 10 == 0)? gm.stage * 4 : gm.stage; //* Block2 : Block1
+        Hp = (gm.stage % 10 == 0)? gm.stage * 4 : gm.stage; //* Block2 : Block1
         //hp = (gm.stage <= 5) ? 1 : (gm.stage <= 10) ? 2 : (gm.stage <= 15) ? 3 : (gm.stage <= 20) ? 4 : 5;
         // rand = Random.Range(0,100);
         // if      (gm.stage <=  4) hp = rand < 85 ? 1 : 2;
@@ -86,22 +86,22 @@ public class Block_Prefab : MonoBehaviour
         // else if (gm.stage <= 39) hp = rand < 55 ? 19 : (rand <= 75)? 20 : (rand <= 90)? 21 : 22;
         // else if (gm.stage <= 45) hp = rand < 52 ? 21 : (rand <= 75)? 22 : (rand <= 90)? 23 : 24;
         // else if (gm.stage <= 51) hp = rand < 50 ? 23 : (rand <= 75)? 24 : (rand <= 90)? 25 : 26;
-        hpTxt.text = hp.ToString();
+        hpTxt.text = Hp.ToString();
 
         //* Material
-        if(0 < hp && hp <= 10){
+        if(0 < Hp && Hp <= 10){
             Exp = 10;  meshRd.material = bm.Mts[(int)BlockMt.PLAIN]; 
         }
-        else if(11 < hp && hp <= 20){
+        else if(11 < Hp && Hp <= 20){
             Exp = 20;  meshRd.material = bm.Mts[(int)BlockMt.WOOD];
         }
-        else if(21 < hp && hp <= 30){
+        else if(21 < Hp && Hp <= 30){
             Exp = 30;  meshRd.material = bm.Mts[(int)BlockMt.SAND];
         }
-        else if(31 < hp && hp <= 40){
+        else if(31 < Hp && Hp <= 40){
             Exp = 40;  meshRd.material = bm.Mts[(int)BlockMt.REDBRICK];
         }
-        else if(41 < hp){
+        else if(41 < Hp){
             Exp = 50;  meshRd.material = bm.Mts[(int)BlockMt.IRON];
         }
 
@@ -153,13 +153,13 @@ public class Block_Prefab : MonoBehaviour
     }
 
     public void decreaseHp(int dmg) {
-        hp -= dmg;
+        Hp -= dmg;
         
         gm.comboCnt++;
         gm.comboTxt.GetComponent<Animator>().SetTrigger("isHit");
 
         StartCoroutine(coWhiteHitEffect(meshRd.material));
-        if(hp <= 0) {
+        if(Hp <= 0) {
             //* アイテムブロック 処理
             switch (itemType){
                 case BlockType.BOMB:

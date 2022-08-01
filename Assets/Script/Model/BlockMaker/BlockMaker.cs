@@ -6,6 +6,8 @@ using Random = UnityEngine.Random;
 
 public class BlockMaker : MonoBehaviour
 {
+    public enum BLOCK {Block1, Block2};
+
     //* OutSide
     public GameManager gm;
 
@@ -28,11 +30,12 @@ public class BlockMaker : MonoBehaviour
     public GameObject dropCoinOrbPf;
 
     public void Start() {
+        
         //* Init
         var blocks = this.GetComponentsInChildren<Block_Prefab>();
         foreach(var block in blocks) block.onDestroy(block.gameObject, true);
         this.transform.position = new Vector3(0, 0.5f, -2);
-        createBlockRow("block1", true, FIRST_CREATE_VERTICAL_CNT);
+        createBlockRow(BLOCK.Block1.ToString(), true, FIRST_CREATE_VERTICAL_CNT);
     }
 
     void Update(){
@@ -44,19 +47,21 @@ public class BlockMaker : MonoBehaviour
 
     public void setCreateBlockTrigger(bool trigger) => isCreateBlock = trigger;
 
-    public void createBlockRow(string type = "block1", bool isFirst = false, int verticalCnt = 1){
+    public void createBlockRow(string type, bool isFirst = false, int verticalCnt = 1){
         //* Value
-        GameObject ins = (type=="block1")? blockPrefs[0] : blockPrefs[1];
+        GameObject ins = (type == BLOCK.Block1.ToString())? blockPrefs[0] : blockPrefs[1];
         float xs = ins.transform.localScale.x;
-        float spawnPosX = (type=="block1")? -5 : -3.1f;
+        float spawnPosX = (type == BLOCK.Block1.ToString())? -5 : -3.1f;
         float middleGap = 0.5f; // センターのボールが来る隙間
 
-        switch(type){
-            case "block1" : 
+        BLOCK blockType = convertBlockStr2Enum(type);
+
+        switch(blockType){
+            case BLOCK.Block1 : 
                 for(int v=0; v<verticalCnt;v++){ //縦
                     int offsetCnt = 1;
                     for(int h=0; h<MAX_HORIZONTAL_GRID;h++){ //横
-                        //* ランダムで生成  
+                        //* ランダムで生成
                         int rand = Random.Range(0,100);
                         if(createPercent < rand) continue;
                         //* Newゲーム開始なのか、次のステージなのか？
@@ -69,7 +74,7 @@ public class BlockMaker : MonoBehaviour
                     }
                 }
                 break;
-            case "block2" : 
+            case BLOCK.Block2 : 
                 for(int h=0; h<2; h++){
                     float x = h < 1 ? spawnPosX + h * xs : spawnPosX + h * xs + middleGap;
                     Vector3 pos = new Vector3(x, blockBundle.position.y, SPWAN_POS_Y);
@@ -90,9 +95,9 @@ public class BlockMaker : MonoBehaviour
         Debug.Log("moveDownBlock:: MOVE DOWN BLOCK ↓, gm.stage= " + gm.stage);
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z - 1);
         if(gm.stage % 10 == 0){
-            createBlockRow("block2");
+            createBlockRow(BLOCK.Block2.ToString());
         }else{
-            createBlockRow();
+            createBlockRow(BLOCK.Block1.ToString());
         }
     }
 
@@ -103,5 +108,10 @@ public class BlockMaker : MonoBehaviour
     public void setGlowEFAllBlocks(bool isOn){ //* Block Grow EF 解除
         var blocks = GetComponentsInChildren<Block_Prefab>();
         setGlowEF(blocks, isOn);
+    }
+
+    public BLOCK convertBlockStr2Enum(string name){
+        return (name == BLOCK.Block1.ToString())? BLOCK.Block1 
+        : BLOCK.Block2;
     }
 }
