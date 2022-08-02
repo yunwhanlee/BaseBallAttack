@@ -87,6 +87,9 @@ public class GameManager : MonoBehaviour
     private Text gvStageTxt;
     private Text gvBestScoreTxt;
 
+    [Header("--statusFolder--")]
+    public Text statusInfoTxt;
+
     [Header("--Button--")]
     public Button readyBtn; //Normal
     public Transform activeSkillBtnGroup; //Normal
@@ -94,6 +97,7 @@ public class GameManager : MonoBehaviour
     public Button pauseBtn; //pausePanel
     public Button continueBtn; //pausePanel
     public Button homeBtn; //pausePanel
+    public Button statusFolderBtn;
 
     //---------------------------------------
     void Start() {
@@ -172,6 +176,27 @@ public class GameManager : MonoBehaviour
             activeSkillBtnList[i].onTriggerActiveSkillBtn(this);
         }
     } //(BUG)途中でスキル活性化ダメ
+
+    public void onClickStatusFolderButton(bool isTrigger){
+        var statusPanel = statusFolderBtn.GetComponentInParent<RectTransform>().parent;
+        float pivotX = statusPanel.GetComponent<RectTransform>().pivot.x;
+        if(pivotX == -1) isTrigger = false;
+        else isTrigger = true;
+        Debug.Log("onClickStatusFolderButton():: isTrigger= " + isTrigger + ", pivotX=" + pivotX);
+        statusPanel.GetComponent<RectTransform>().pivot = new Vector2(isTrigger? -1 : 0, 0.5f);
+
+        //Set InfoTxt
+        string res = pl.dmg.Name + " : " + pl.dmg.Value + "\n" + 
+        pl.multiShot.Name + " : " + (pl.multiShot.Value + 1) + "\n" + 
+        pl.speed.Name + " : " + pl.speed.Value + "\n" + 
+        pl.instantKill.Name + " : " + pl.instantKill.Value + "%\n" + 
+        pl.critical.Name + " : " + pl.critical.Value + "%\n" + 
+        pl.explosion.Name + " : " + pl.explosion.Value.per + "%\n" + 
+        pl.expUp.Name + " : " + pl.expUp.Value + "%\n" + 
+        pl.itemSpawn.Name + " : " + pl.itemSpawn.Value + "%\n";
+
+        statusInfoTxt.text = res;
+    }
 
     public void onClickBtnShowAD(string type){
         DM.ins.showAD(type);

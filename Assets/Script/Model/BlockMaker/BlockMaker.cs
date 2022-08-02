@@ -74,6 +74,7 @@ public class BlockMaker : MonoBehaviour
                         Instantiate(ins, setPos, Quaternion.identity, blockBundle);
                     }
                 }
+                
                 break;
             case BLOCK.Block2 : 
                 for(int h=0; h<2; h++){
