@@ -32,7 +32,6 @@ public class Ball_Prefab : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         rigid.AddForce(this.transform.forward * speed, ForceMode.Impulse);
         //Debug.Log("HitRange:: startPosZ=" + gm.hitRangeStartTf.position.z +  ", endPosZ="+ gm.hitRangeEndTf.position.z);
-
     }
     void Update(){
             // Debug.Log("BALL:: Vector3.Normalize(rigid.velocity) =>"+ Vector3.Normalize(rigid.velocity));
@@ -266,6 +265,18 @@ public class Ball_Prefab : MonoBehaviour
     //*---------------------------------------
     //*  関数
     //*---------------------------------------
+
+
+    private void checkDestroyBall(){
+        if(this.name == "Ball(Clone)" && this.transform.localScale.x == 0.4f){
+            onDestroyMe();
+            // for(int i=0;i<gm.ballGroup.childCount;i++)
+            //     Destroy(gm.ballGroup.GetChild(i));
+        }
+        else
+            Destroy(this.gameObject);
+    }
+
     private void onDestroyMe(bool isStrike = false){
         if(!isStrike){
             Debug.Log("✓Ball＿Prefab:: onDestroyMe:: gm.setNextStage()");
@@ -275,16 +286,6 @@ public class Ball_Prefab : MonoBehaviour
             gm.setBallPreviewGoalRandomPos();
         }
         Destroy(this.gameObject);
-    }
-
-    private void checkDestroyBall(){
-        if(this.name == "Ball(Clone)" && this.transform.localScale.x == 0.4f){
-            onDestroyMe();
-            for(int i=0;i<gm.ballGroup.childCount;i++)
-                Destroy(gm.ballGroup.GetChild(i));
-        }
-        else
-            Destroy(this.gameObject);
     }
 
     public void setBallSpeed(int v){
