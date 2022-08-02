@@ -2621,7 +2621,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &541951202
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2636,7 +2636,7 @@ RectTransform:
   - {fileID: 744198044}
   - {fileID: 687656591}
   m_Father: {fileID: 2001013461}
-  m_RootOrder: 15
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2891,7 +2891,7 @@ RectTransform:
   - {fileID: 960649139}
   - {fileID: 1161680672}
   m_Father: {fileID: 2001013461}
-  m_RootOrder: 12
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3096,7 +3096,7 @@ RectTransform:
   - {fileID: 1780982164}
   - {fileID: 740355440}
   m_Father: {fileID: 2001013461}
-  m_RootOrder: 14
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -13530,7 +13530,7 @@ RectTransform:
   - {fileID: 2065883584}
   - {fileID: 165696104}
   m_Father: {fileID: 2001013461}
-  m_RootOrder: 13
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -13898,6 +13898,7 @@ MonoBehaviour:
   pauseSkillStatusTableTf: {fileID: 114093873}
   skillInfoRowPref: {fileID: 3622790578802042750, guid: ee31cff3369478142bf23697ccda1b04, type: 3}
   gameoverPanel: {fileID: 1572075153}
+  statusFolderPanel: {fileID: 579425676}
   statusInfoTxt: {fileID: 418559924}
   readyBtn: {fileID: 543322737}
   activeSkillBtnGroup: {fileID: 467978857}
@@ -16239,7 +16240,7 @@ RectTransform:
   - {fileID: 1150618590}
   - {fileID: 1658447946}
   m_Father: {fileID: 2001013461}
-  m_RootOrder: 11
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -16536,11 +16537,11 @@ RectTransform:
   - {fileID: 543322736}
   - {fileID: 467978857}
   - {fileID: 790088329}
+  - {fileID: 541951202}
+  - {fileID: 579425676}
   - {fileID: 1965303885}
   - {fileID: 557986894}
   - {fileID: 1572075154}
-  - {fileID: 579425676}
-  - {fileID: 541951202}
   - {fileID: 1148311321}
   m_Father: {fileID: 0}
   m_RootOrder: 7

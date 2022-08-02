@@ -88,6 +88,7 @@ public class GameManager : MonoBehaviour
     private Text gvBestScoreTxt;
 
     [Header("--statusFolder--")]
+    public RectTransform statusFolderPanel;
     public Text statusInfoTxt;
 
     [Header("--Button--")]
@@ -178,12 +179,11 @@ public class GameManager : MonoBehaviour
     } //(BUG)途中でスキル活性化ダメ
 
     public void onClickStatusFolderButton(bool isTrigger){
-        var statusPanel = statusFolderBtn.GetComponentInParent<RectTransform>().parent;
-        float pivotX = statusPanel.GetComponent<RectTransform>().pivot.x;
+        float pivotX = statusFolderPanel.pivot.x;
         if(pivotX == -1) isTrigger = false;
         else isTrigger = true;
         Debug.Log("onClickStatusFolderButton():: isTrigger= " + isTrigger + ", pivotX=" + pivotX);
-        statusPanel.GetComponent<RectTransform>().pivot = new Vector2(isTrigger? -1 : 0, 0.5f);
+        statusFolderPanel.pivot = new Vector2(isTrigger? -1 : 0, 0.5f);
 
         //Set InfoTxt
         string res = pl.dmg.Name + " : " + pl.dmg.Value + "\n" + 
@@ -240,6 +240,8 @@ public class GameManager : MonoBehaviour
             
             StrikePanel.SetActive(true);
 
+            statusFolderPanel.gameObject.SetActive(false);
+
             foreach(Transform child in activeSkillBtnGroup){
                 Button btn = child.GetComponent<Button>();
                 btn.gameObject.SetActive(false);
@@ -263,6 +265,8 @@ public class GameManager : MonoBehaviour
             if(0 < strikeCnt && ballGroup.childCount == 0) pl.previewBundle.SetActive(true); //(BUG)STRIKEになってから、BACKボタン押すと、PreviewLineが消えてしまう。
 
             StrikePanel.SetActive(false);
+
+            statusFolderPanel.gameObject.SetActive(true);
 
             foreach(Transform child in activeSkillBtnGroup){
                 Button btn = child.GetComponent<Button>();
