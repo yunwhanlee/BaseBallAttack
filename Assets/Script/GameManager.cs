@@ -173,6 +173,10 @@ public class GameManager : MonoBehaviour
         }
     } //(BUG)途中でスキル活性化ダメ
 
+    public void onClickBtnShowAD(string type){
+        DM.ins.showAD(type);
+    }
+
     //*---------------------------------------
     //*  関数
     //*---------------------------------------
@@ -314,6 +318,7 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1;
                 Debug.Log("FINISH GAME!");
                 resetSkillStatusTable();
+                DM.ins.personalData.save();
                 SceneManager.LoadScene("Home");
                 break;
         }

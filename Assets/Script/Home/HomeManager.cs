@@ -23,7 +23,6 @@ using UnityEngine.UI.Extensions;
 public class HomeManager : MonoBehaviour
 {
     //* OutSide
-
     [Header("<--Select Panel Color-->")]
     [SerializeField] Image selectPanelScrollBG;  public Image SelectPanelScrollBG {get => selectPanelScrollBG; set => selectPanelScrollBG = value;}
     public enum DlgBGColor {Chara, Bat, Skill, CashShop}

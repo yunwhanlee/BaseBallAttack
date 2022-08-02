@@ -72,7 +72,7 @@ public class Block_Prefab : MonoBehaviour
         }
 
         //TODO Leveling HP
-        Hp = (gm.stage % 10 == 0)? gm.stage * 4 : gm.stage; //* Block2 : Block1
+        Hp = (gm.stage % bm.BLOCK2_SPAN == 0)? gm.stage * 5 : gm.stage; //* Block2 : Block1
         //hp = (gm.stage <= 5) ? 1 : (gm.stage <= 10) ? 2 : (gm.stage <= 15) ? 3 : (gm.stage <= 20) ? 4 : 5;
         // rand = Random.Range(0,100);
         // if      (gm.stage <=  4) hp = rand < 85 ? 1 : 2;

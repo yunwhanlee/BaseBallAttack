@@ -17,6 +17,7 @@ public class BlockMaker : MonoBehaviour
     const int FIRST_CREATE_VERTICAL_CNT = 4; //DEAD_MAX-> 13
     // const float SPAWN_POS_X = -5;
     const float SPWAN_POS_Y = -2;
+    public float BLOCK2_SPAN = 5;
 
     public int createPercent;
     public Transform blockBundle;
@@ -66,7 +67,7 @@ public class BlockMaker : MonoBehaviour
                         if(createPercent < rand) continue;
                         //* Newゲーム開始なのか、次のステージなのか？
                         float x = h < 3 ? (spawnPosX + h * xs) : (spawnPosX + h * xs + middleGap * offsetCnt);
-                        float y = (isFirst)? 0 : blockBundle.position.y;
+                        float y = (isFirst)? 0 : ins.transform.position.y + blockBundle.position.y;
                         float z = (isFirst)? -v : SPWAN_POS_Y;
                         Vector3 pos = new Vector3(x, y, z);
                         Vector3 setPos = (isFirst)? pos + blockBundle.position : pos;
@@ -77,14 +78,13 @@ public class BlockMaker : MonoBehaviour
             case BLOCK.Block2 : 
                 for(int h=0; h<2; h++){
                     float x = h < 1 ? spawnPosX + h * xs : spawnPosX + h * xs + middleGap;
-                    Vector3 pos = new Vector3(x, blockBundle.position.y, SPWAN_POS_Y);
+                    float y = ins.transform.position.y + blockBundle.position.y;
+                    Vector3 pos = new Vector3(x, y, SPWAN_POS_Y);
                     Instantiate(ins, pos, Quaternion.identity, blockBundle);
                 }
                 break;
         }
-
     }
-
     public void createDropItemOrb(Transform blockTf, int resultExp){
         var ins = Instantiate(dropCoinOrbPf, blockTf.position, Quaternion.identity, dropItemGroup) as GameObject;
         var block = blockTf.GetComponent<Block_Prefab>();
@@ -94,7 +94,7 @@ public class BlockMaker : MonoBehaviour
     public void moveDownBlock(){
         Debug.Log("moveDownBlock:: MOVE DOWN BLOCK ↓, gm.stage= " + gm.stage);
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z - 1);
-        if(gm.stage % 10 == 0){
+        if(gm.stage % BLOCK2_SPAN == 0){
             createBlockRow(BLOCK.Block2.ToString());
         }else{
             createBlockRow(BLOCK.Block1.ToString());

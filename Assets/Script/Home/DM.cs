@@ -26,7 +26,9 @@ public class DM : MonoBehaviour
     [SerializeField] RectTransform itemSkillBoxPref;   public RectTransform ItemSkillBoxPref {get => itemSkillBoxPref; set => itemSkillBoxPref = value;}
     public ScrollView[] scrollviews; //* [0] : Chara, [1] : Bat, [2] : Skill, [3] : CashShop
     public PersonalData personalData;
-    
+
+    [Header("--AD--")]
+    [SerializeField] bool isRemoveAD;   public bool IsRemoveAD {get => isRemoveAD; set => isRemoveAD = value;}
 
     void Awake() => singleton();
     void Start(){
@@ -58,6 +60,17 @@ public class DM : MonoBehaviour
         //* (BUG) SceneがHomeのみセーブできる。
         if(SceneManager.GetActiveScene().name == "Home"){
             personalData.save();
+        }
+    }
+
+    public void showAD(string type){
+        Debug.Log("<color=yellow> showAD(" + type.ToString() + ")</color>");
+        //TODO
+        switch(type){
+            case "CoinX2":
+                break;
+            default:
+                break;
         }
     }
 
