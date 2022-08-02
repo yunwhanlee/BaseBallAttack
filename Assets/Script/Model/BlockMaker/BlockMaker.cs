@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class BlockMaker : MonoBehaviour
 {
-    public enum BLOCK {Block1, Block2};
+    public enum BLOCK {Normal, Long, TreasureChest};
 
     //* OutSide
     public GameManager gm;
@@ -36,7 +36,7 @@ public class BlockMaker : MonoBehaviour
         var blocks = this.GetComponentsInChildren<Block_Prefab>();
         foreach(var block in blocks) block.onDestroy(block.gameObject, true);
         this.transform.position = new Vector3(0, 0.5f, -2);
-        createBlockRow(BLOCK.Block1.ToString(), true, FIRST_CREATE_VERTICAL_CNT);
+        createBlockRow(BLOCK.Normal.ToString(), true, FIRST_CREATE_VERTICAL_CNT);
     }
 
     void Update(){
@@ -50,15 +50,15 @@ public class BlockMaker : MonoBehaviour
 
     public void createBlockRow(string type, bool isFirst = false, int verticalCnt = 1){
         //* Value
-        GameObject ins = (type == BLOCK.Block1.ToString())? blockPrefs[0] : blockPrefs[1];
+        GameObject ins = (type == BLOCK.Normal.ToString())? blockPrefs[(int)BLOCK.Normal] : blockPrefs[(int)BLOCK.Long];
         float xs = ins.transform.localScale.x;
-        float spawnPosX = (type == BLOCK.Block1.ToString())? -5 : -3.1f;
+        float spawnPosX = (type == BLOCK.Normal.ToString())? -5 : -3.1f;
         float middleGap = 0.5f; // センターのボールが来る隙間
 
         BLOCK blockType = convertBlockStr2Enum(type);
 
         switch(blockType){
-            case BLOCK.Block1 : 
+            case BLOCK.Normal : 
                 for(int v=0; v<verticalCnt;v++){ //縦
                     int offsetCnt = 1;
                     for(int h=0; h<MAX_HORIZONTAL_GRID;h++){ //横
@@ -76,7 +76,7 @@ public class BlockMaker : MonoBehaviour
                 }
                 
                 break;
-            case BLOCK.Block2 : 
+            case BLOCK.Long : 
                 for(int h=0; h<2; h++){
                     float x = h < 1 ? spawnPosX + h * xs : spawnPosX + h * xs + middleGap;
                     float y = ins.transform.position.y + blockBundle.position.y;
@@ -96,9 +96,9 @@ public class BlockMaker : MonoBehaviour
         Debug.Log("moveDownBlock:: MOVE DOWN BLOCK ↓, gm.stage= " + gm.stage);
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z - 1);
         if(gm.stage % BLOCK2_SPAN == 0){
-            createBlockRow(BLOCK.Block2.ToString());
+            createBlockRow(BLOCK.Long.ToString());
         }else{
-            createBlockRow(BLOCK.Block1.ToString());
+            createBlockRow(BLOCK.Normal.ToString());
         }
     }
 
@@ -112,7 +112,7 @@ public class BlockMaker : MonoBehaviour
     }
 
     public BLOCK convertBlockStr2Enum(string name){
-        return (name == BLOCK.Block1.ToString())? BLOCK.Block1 
-        : BLOCK.Block2;
+        return (name == BLOCK.Normal.ToString())? BLOCK.Normal 
+        : BLOCK.Long;
     }
 }

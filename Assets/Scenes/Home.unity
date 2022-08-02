@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45015454, g: 0.5001945, b: 0.57542807, a: 1}
+  m_IndirectSpecularColor: {r: 0.45015407, g: 0.500194, b: 0.5754274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -514,6 +514,7 @@ MonoBehaviour:
       - name: ItemSpawn
         lv: 0
         imgPref: {fileID: 7576626188995224481, guid: 5def4e1839c7dd64a899af359f634973, type: 3}
+  isRemoveAD: 0
 --- !u!1 &102004497
 GameObject:
   m_ObjectHideFlags: 0

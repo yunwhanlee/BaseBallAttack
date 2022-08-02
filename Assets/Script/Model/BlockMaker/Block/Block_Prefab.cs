@@ -18,10 +18,10 @@ public class Block_Prefab : MonoBehaviour
     private BlockMaker bm;
 
     //* Material Instancing
-    private MeshRenderer meshRd;
+    [SerializeField] private MeshRenderer[] meshRds;
     private Color color;
     public Material[] mts;
-    private Material originMt;
+    private Material[] originMts;
     public Material whiteHitMt;
     public Transform itemTypeImgGroup;
     public SpriteGlowEffect sprGlowEf;
@@ -51,8 +51,11 @@ public class Block_Prefab : MonoBehaviour
         sprGlowEf = GetComponentInChildren<SpriteGlowEffect>();
 
         //* Material Instancing🌟
-        meshRd = GetComponent<MeshRenderer>();
-        meshRd.material = Instantiate(meshRd.material);
+        meshRds = GetComponents<MeshRenderer>();
+        Array.ForEach(meshRds, meshRd=> {
+            meshRd.material = Instantiate(meshRd.material);
+        });
+        // meshRds.material = Instantiate(meshRds.material);
 
         itemType = BlockType.NORMAL;
 
@@ -89,26 +92,28 @@ public class Block_Prefab : MonoBehaviour
         hpTxt.text = Hp.ToString();
 
         //* Material
-        if(0 < Hp && Hp <= 10){
-            Exp = 10;  meshRd.material = bm.Mts[(int)BlockMt.PLAIN]; 
-        }
-        else if(11 < Hp && Hp <= 20){
-            Exp = 20;  meshRd.material = bm.Mts[(int)BlockMt.WOOD];
-        }
-        else if(21 < Hp && Hp <= 30){
-            Exp = 30;  meshRd.material = bm.Mts[(int)BlockMt.SAND];
-        }
-        else if(31 < Hp && Hp <= 40){
-            Exp = 40;  meshRd.material = bm.Mts[(int)BlockMt.REDBRICK];
-        }
-        else if(41 < Hp){
-            Exp = 50;  meshRd.material = bm.Mts[(int)BlockMt.IRON];
+        if(!this.gameObject.name.Contains("Block3")){
+            if(0 < Hp && Hp <= 10){
+                Exp = 10;  meshRds[0].material = bm.Mts[(int)BlockMt.PLAIN]; 
+            }
+            else if(11 < Hp && Hp <= 20){
+                Exp = 20;  meshRds[0].material = bm.Mts[(int)BlockMt.WOOD];
+            }
+            else if(21 < Hp && Hp <= 30){
+                Exp = 30;  meshRds[0].material = bm.Mts[(int)BlockMt.SAND];
+            }
+            else if(31 < Hp && Hp <= 40){
+                Exp = 40;  meshRds[0].material = bm.Mts[(int)BlockMt.REDBRICK];
+            }
+            else if(41 < Hp){
+                Exp = 50;  meshRds[0].material = bm.Mts[(int)BlockMt.IRON];
+            }
         }
 
         //* 色
         int randIdx = Random.Range(0, bm.Colors.Length);
         color = bm.Colors[randIdx];
-        meshRd.material.SetColor("_ColorTint", color);
+        meshRds[0].material.SetColor("_ColorTint", color);
         switch(randIdx){
             case (int)ColorIndex.RED:       color = Color.red; break;
             case (int)ColorIndex.YELLOW:    color = Color.yellow; break;
@@ -117,7 +122,9 @@ public class Block_Prefab : MonoBehaviour
         }
         sprGlowEf.GlowColor = color;
         
-        originMt = meshRd.material; // Save Original Material
+        for(int i=0; i<meshRds.Length;i++){
+            originMts[i] = meshRds[i].material; // Save Original Material
+        }
 
         //* Init Scale For Spawn Anim
         defScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
@@ -158,7 +165,9 @@ public class Block_Prefab : MonoBehaviour
         gm.comboCnt++;
         gm.comboTxt.GetComponent<Animator>().SetTrigger("isHit");
 
-        StartCoroutine(coWhiteHitEffect(meshRd.material));
+        Array.ForEach(meshRds, meshRd=> {
+            StartCoroutine(coWhiteHitEffect(meshRd.material));
+        });
         if(Hp <= 0) {
             //* アイテムブロック 処理
             switch (itemType){
@@ -196,9 +205,14 @@ public class Block_Prefab : MonoBehaviour
     }
 
     IEnumerator coWhiteHitEffect(Material curMt){ //* 体力が減ったら、一瞬間白くなって戻すEFFECT
-        meshRd.material = whiteHitMt;
+        Array.ForEach(meshRds, meshRd => {
+            meshRd.material = whiteHitMt;
+        });
         yield return new WaitForSeconds(0.05f);
-        meshRd.material = originMt;//* (BUG) WaitForSeconds間にまた衝突が発生したら、白くなる。
+
+        for(int i=0; i<meshRds.Length; i++){
+            meshRds[i].material = originMts[i];//* (BUG) WaitForSeconds間にまた衝突が発生したら、白くなる。
+        }
     }
 
     public int getDotDmg(int devideVal){
