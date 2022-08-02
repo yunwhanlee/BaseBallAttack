@@ -50,7 +50,7 @@ public class BlockMaker : MonoBehaviour
 
     public void createBlockRow(string type, bool isFirst = false, int verticalCnt = 1){
         //* Value
-        GameObject ins = (type == BLOCK.Normal.ToString())? blockPrefs[(int)BLOCK.Normal] : blockPrefs[(int)BLOCK.Long];
+        GameObject ins = (type == BLOCK.Normal.ToString())? blockPrefs[(int)BLOCK.TreasureChest] : blockPrefs[(int)BLOCK.Long];
         float xs = ins.transform.localScale.x;
         float spawnPosX = (type == BLOCK.Normal.ToString())? -5 : -3.1f;
         float middleGap = 0.5f; // センターのボールが来る隙間
@@ -74,7 +74,6 @@ public class BlockMaker : MonoBehaviour
                         Instantiate(ins, setPos, Quaternion.identity, blockBundle);
                     }
                 }
-                
                 break;
             case BLOCK.Long : 
                 for(int h=0; h<2; h++){

@@ -403,7 +403,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7185378944005286976}
-  - component: {fileID: 7185378944015090600}
   - component: {fileID: 448206033}
   - component: {fileID: 448206034}
   - component: {fileID: 6054201552203119240}
@@ -430,25 +429,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &7185378944015090600
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7185378944005582944}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 06ea7c297c651d84189cea1b5e62b3e6, type: 3}
-  m_Controller: {fileID: 9100000, guid: d366db58b2e95b94db0807594896093f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!65 &448206033
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -490,6 +470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eff9542434690c4390141f8db6a8735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meshRds: []
   mts:
   - {fileID: 2100000, guid: cf3da56f55dc78845aa9ee532679ca9a, type: 2}
   - {fileID: 2100000, guid: 74c7b8e3ed8d60740ad629198f468a2e, type: 2}

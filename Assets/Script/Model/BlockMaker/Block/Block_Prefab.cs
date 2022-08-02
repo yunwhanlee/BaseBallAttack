@@ -64,7 +64,9 @@ public class Block_Prefab : MonoBehaviour
         int rand = Random.Range(0,100);
         itemTypePer = (int)(100 * pl.itemSpawn.Value); //百分率
         Debug.Log("PassiveSkill:: Block_Prefab:: 「ItemSwpan Up」 rand("+rand+") <= per("+itemTypePer+") : " + ((rand <= itemTypePer)? "<color=green>true</color>" : "false"));
-        isItemBlock = (rand < itemTypePer)? true : false;
+        if(!this.gameObject.name.Contains(BlockMaker.BLOCK.TreasureChest.ToString())){
+            isItemBlock = (rand < itemTypePer)? true : false;
+        }
         if(isItemBlock){
             int typeCnt = System.Enum.GetValues(typeof(BlockType)).Length - 1; //enum Type Cnt Without Normal
             itemType = (BlockType)Random.Range(0, typeCnt);
@@ -92,7 +94,7 @@ public class Block_Prefab : MonoBehaviour
         hpTxt.text = Hp.ToString();
 
         //* Material
-        if(!this.gameObject.name.Contains("Block3")){
+        if(!this.gameObject.name.Contains(BlockMaker.BLOCK.TreasureChest.ToString())){
             if(0 < Hp && Hp <= 10){
                 Exp = 10;  meshRds[0].material = bm.Mts[(int)BlockMt.PLAIN]; 
             }
@@ -201,6 +203,10 @@ public class Block_Prefab : MonoBehaviour
         em.createBrokeBlockEF(target.transform, color);
         int resultExp = (!isInitialize)? (int)(exp * pl.expUp.Value) : 0; //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
         bm.createDropItemOrb(this.transform, resultExp);
+        if(this.gameObject.name.Contains(BlockMaker.BLOCK.TreasureChest.ToString())){
+            for(int i=0; i<15; i++)
+                bm.createDropItemOrb(this.transform, resultExp);
+        }
         Destroy(target);
     }
 
