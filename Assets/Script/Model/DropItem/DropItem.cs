@@ -36,7 +36,7 @@ public class DropItem : MonoBehaviour
         float v = 0.3f;
         float randX = Random.Range(-v, v);
         float randZ = Random.Range(-v, v);
-        Debug.LogFormat("DropItem:: shootPopUp():: randX= {0}, randZ= {1}", randX, randZ);
+        // Debug.LogFormat("DropItem:: shootPopUp():: randX= {0}, randZ= {1}", randX, randZ);
         Vector3 dir = new Vector3(randX, 1, randZ);
         float force = 350 * Time.deltaTime;
         this.rigid.AddForce(dir * force, ForceMode.Impulse);

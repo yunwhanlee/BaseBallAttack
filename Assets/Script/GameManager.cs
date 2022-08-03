@@ -393,7 +393,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void setNextStage() {
-        Debug.Log("<color=black>setNextStage:: NEXT STAGE(Ball Is Destroyed)</color>");
+        Debug.LogFormat("<color=white>setNextStage:: NEXT STAGE(ballCount = {0})</color>", ballGroup.childCount);
         ++stage;
         STATE = GameManager.State.WAIT;
         downWall.isTrigger = true; //*下壁 物理X
@@ -403,6 +403,7 @@ public class GameManager : MonoBehaviour
         ballShooter.setIsBallExist(false);
         pl.previewBundle.SetActive(true);
         StartCoroutine(coWaitPlayerCollectOrb());
+        destroyEveryBalls();
         setBallPreviewGoalRandomPos();
         checkBlocksIsDotDmg();
 
@@ -421,12 +422,17 @@ public class GameManager : MonoBehaviour
             em.enableUIPerfectTxtEF();
             yield return new WaitForSeconds(1);
         }
-
         float sec = 0.8f;
         yield return new WaitForSeconds(sec);
 
-        Debug.LogFormat("<color=black>coWaitCollectOrb:: checkLevelUp() wait: {0}sec</color>",sec);
+        Debug.LogFormat("<color=white>coWaitCollectOrb:: checkLevelUp() wait: {0}sec</color>",sec);
         checkLevelUp();
+    }
+    private void destroyEveryBalls(){
+        if(ballGroup.childCount > 0){
+            for(int i=0; i<ballGroup.childCount; i++)
+                Destroy(ballGroup.GetChild(i).gameObject);
+        }
     }
     private void checkBlocksIsDotDmg(){
         var blocks = bm.GetComponentsInChildren<Block_Prefab>();
@@ -434,7 +440,8 @@ public class GameManager : MonoBehaviour
             if(block.IsDotDmg)  block.decreaseHp(block.getDotDmg(2));
         });
     }
-    private void checkLevelUp(){
+    public void checkLevelUp(){
+        Debug.LogFormat("<color=blue>checkLevelUp():: pl.BefLv= {0}, pl.Lv= {1}</color>", pl.BefLv, pl.Lv);
         if(pl.IsLevelUp){
             pl.IsLevelUp = false;
             levelUpPanel.SetActive(true);

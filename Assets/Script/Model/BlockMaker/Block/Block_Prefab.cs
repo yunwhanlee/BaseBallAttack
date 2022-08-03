@@ -11,6 +11,7 @@ public class Block_Prefab : MonoBehaviour
     public enum ColorIndex{RED, YELLOW, GREEN, BLUE};
     public enum BlockMt {PLAIN, WOOD, SAND, REDBRICK, IRON};
     public enum BlockType {BOMB, LR_ARROW, UPDOWN_ARROW, NORMAL};
+    const int TREASURECHEST_ORB_CNT = 15;
 
     private GameManager gm;
     private EffectManager em;
@@ -204,7 +205,7 @@ public class Block_Prefab : MonoBehaviour
         int resultExp = (!isInitialize)? (int)(exp * pl.expUp.Value) : 0; //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
         bm.createDropItemOrb(this.transform, resultExp);
         if(this.gameObject.name.Contains(BlockMaker.BLOCK.TreasureChest.ToString())){
-            for(int i=0; i<15; i++)
+            for(int i=0; i<TREASURECHEST_ORB_CNT; i++)
                 bm.createDropItemOrb(this.transform, resultExp);
         }
         Destroy(target);

@@ -31,7 +31,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         Vector2 dir = (stick.position - pad.gameObject.transform.position).normalized;
         float deg = convertDir2DegWithRange(dir, MIN_ARROW_DEG_Y, MAX_ARROW_DEG_Y);
         //* Stick(Arrow)角度によって、Player位置が自動で左右移動。
-        Debug.Log("OnDrag:: Stick(Arrow) Deg=" + deg + ", dir=" + dir + ", " + ((dir.x < 0)? "left" : "right").ToString());
+        // Debug.Log("OnDrag:: Stick(Arrow) Deg=" + deg + ", dir=" + dir + ", " + ((dir.x < 0)? "left" : "right").ToString());
         Transform player = pl.gameObject.transform;
         if(dir.x < 0){
             //Right

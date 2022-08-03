@@ -31,7 +31,6 @@ public class BlockMaker : MonoBehaviour
     public GameObject dropCoinOrbPf;
 
     public void Start() {
-        
         //* Init
         var blocks = this.GetComponentsInChildren<Block_Prefab>();
         foreach(var block in blocks) block.onDestroy(block.gameObject, true);

@@ -125,8 +125,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
     public void onClickSkillUpBtn(int index){//* Skill Level Up
         //* (BUG)曲がりが終わるまで、SkillBtnクリックできないように(スキル名が在るかを確認)。
         if(Array.Exists(SkillBtns, btn => btn.name.text == "")) return;
-
-        Debug.Log("onClickSkillUpBtn:: skillName= " + SkillBtns[index].name.text);
+        Debug.LogFormat("onClickSkillUpBtn({0}):: skillName= {1}",index ,pl.Lv);
 
         //* Set Data
         switch(SkillBtns[index].name.text){
@@ -160,7 +159,17 @@ public class LevelUpPanelAnimate : MonoBehaviour
                 break;
         }
         //* 終了
+        pl.BefLv++;
+        Debug.LogFormat("onClickSkillUpBtn({0}):: <color=yellow> pl.Lv= {1}, pl.befLv= {2}</color>",index, pl.Lv, pl.BefLv);
+
         this.gameObject.SetActive(false);
         gm.displayCurPassiveSkillUI("INGAME");
+        
+        //* １回以上 LEVEL-UPした場合、順番に進む
+        if(pl.BefLv != pl.Lv){
+            pl.Lv--;
+            pl.setLevelUp();
+            gm.checkLevelUp();
+        }
     }
 }

@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     [Header("<---- Status ---->")]
     [SerializeField] bool doSwing = false;      public bool DoSwing {get=> doSwing; set=> doSwing=value;}
     [SerializeField] bool isLevelUp = false;    public bool IsLevelUp {get=> isLevelUp; set=> isLevelUp=value;}
+    [SerializeField] int befLv = 0;                public int BefLv {get=> befLv; set=> befLv=value;}
     [SerializeField] int lv = 1;                public int Lv {get=> lv; set=> lv=value;}
     [SerializeField] float maxExp = 100;        public float MaxExp {get=> maxExp; set=> maxExp=value;}
     [SerializeField] int exp = 0;               public int Exp {get=> exp; set=> exp=value;}
@@ -152,7 +153,7 @@ public class Player : MonoBehaviour
         calcLevelUpExp();
     }
 
-    public void addExp(int _exp) => exp += _exp;
+    public void addExp(int _exp) => Exp += _exp;
 
     //*---------------------------------------
     //*  関数
