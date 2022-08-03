@@ -31,6 +31,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
         }
     }
     public SkillBtn[] SkillBtns; //struct宣言
+    public Text LvTxt;
 
 
     public void Start(){
@@ -40,7 +41,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
         time = 0;
         btnIdx = 0;
         isRollingStop = false;
-
+        LvTxt.text = "LV : " + (pl.BefLv + 1).ToString();
 
         //* Set SkillBtn
         SkillBtns = new SkillBtn[3]{
