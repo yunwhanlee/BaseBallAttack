@@ -189,11 +189,11 @@ public class GameManager : MonoBehaviour
         string res = pl.dmg.Name + " : " + pl.dmg.Value + "\n" + 
         pl.multiShot.Name + " : " + (pl.multiShot.Value + 1) + "\n" + 
         pl.speed.Name + " : " + pl.speed.Value + "\n" + 
-        pl.instantKill.Name + " : " + pl.instantKill.Value + "%\n" + 
-        pl.critical.Name + " : " + pl.critical.Value + "%\n" + 
-        pl.explosion.Name + " : " + pl.explosion.Value.per + "%\n" + 
-        pl.expUp.Name + " : " + pl.expUp.Value + "%\n" + 
-        pl.itemSpawn.Name + " : " + pl.itemSpawn.Value + "%\n";
+        pl.instantKill.Name + " : " + pl.instantKill.Value * 100 + "%\n" + 
+        pl.critical.Name + " : " + pl.critical.Value * 100 + "%\n" + 
+        pl.explosion.Name + " : " + pl.explosion.Value.per * 100 + "%\n" + 
+        pl.expUp.Name + " : " + pl.expUp.Value * 100 + "%\n" + 
+        pl.itemSpawn.Name + " : " + pl.itemSpawn.Value * 100 + "%\n";
 
         statusInfoTxt.text = res;
     }
