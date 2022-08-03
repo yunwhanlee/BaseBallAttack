@@ -27,7 +27,7 @@ public class Block_Prefab : MonoBehaviour
     public SpriteGlowEffect sprGlowEf;
 
     //* Value
-    [SerializeField] BlockMaker.BLOCK kind;
+    public BlockMaker.BLOCK kind;
     [SerializeField] BlockType itemType;
     [SerializeField] int hp = 1;    public int Hp {get => hp; set => hp = value;}
     [SerializeField] int exp = 10;  public int Exp {get => exp; set => exp = value;}

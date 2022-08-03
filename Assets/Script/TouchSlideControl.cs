@@ -83,6 +83,9 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
             //* 🌟ColorBall ActiveSkill
             bool isColorBallSkill = gm.activeSkillBtnList.Exists(btn => btn.Trigger && btn.Name == DM.ATV.ColorBall.ToString());
             if(isColorBallSkill && hit.transform.CompareTag("NormalBlock")){
+                if(hit.transform.GetComponent<Block_Prefab>().kind == BlockMaker.BLOCK.TreasureChest){
+                    return;
+                }
                 //* Hit Color
                 var meshRd = hit.transform.gameObject.GetComponent<MeshRenderer>();
                 Color hitColor = meshRd.material.GetColor("_ColorTint");

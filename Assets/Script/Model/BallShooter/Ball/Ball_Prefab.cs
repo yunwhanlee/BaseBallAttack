@@ -187,20 +187,22 @@ public class Ball_Prefab : MonoBehaviour
                             break;
                         }
                         case DM.ATV.ColorBall:{
-                            //* Hit Color
-                            var meshRd = col.gameObject.GetComponent<MeshRenderer>();
-                            Color hitColor = meshRd.material.GetColor("_ColorTint");
-                            Debug.Log("OnCollisionEnter:: ColorBall AtvSkill -> hitColor=" + hitColor);
-                            //* Find Same Color Blocks
-                            var blocks = gm.bm.GetComponentsInChildren<Block_Prefab>();
-                            var sameColorBlocks = Array.FindAll(blocks, bl => 
-                                bl.GetComponent<MeshRenderer>().material.GetColor("_ColorTint") == hitColor
-                            );
-                            //* Destroy
-                            Array.ForEach(sameColorBlocks, bl => {
-                                em.createActiveSkillExplosionEF(skillIdx, bl.transform);
-                                bl.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(100);
-                            });
+                            if(col.gameObject.GetComponent<Block_Prefab>().kind != BlockMaker.BLOCK.TreasureChest){
+                                //* Hit Color
+                                var meshRd = col.gameObject.GetComponent<MeshRenderer>();
+                                Color hitColor = meshRd.material.GetColor("_ColorTint");
+                                Debug.Log("OnCollisionEnter:: ColorBall AtvSkill -> hitColor=" + hitColor);
+                                //* Find Same Color Blocks
+                                var blocks = gm.bm.GetComponentsInChildren<Block_Prefab>();
+                                var sameColorBlocks = Array.FindAll(blocks, bl => 
+                                    bl.GetComponent<MeshRenderer>().material.GetColor("_ColorTint") == hitColor
+                                );
+                                //* Destroy
+                                Array.ForEach(sameColorBlocks, bl => {
+                                    em.createActiveSkillExplosionEF(skillIdx, bl.transform);
+                                    bl.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(100);
+                                });
+                            }
 
                             skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
