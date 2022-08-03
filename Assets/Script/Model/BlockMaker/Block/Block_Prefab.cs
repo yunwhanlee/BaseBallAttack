@@ -45,7 +45,6 @@ public class Block_Prefab : MonoBehaviour
     public Text hpTxt;
 
     void Start() {
-        //* set Block Kind
         kind = setBlockKindEnum();
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         em = GameObject.Find("EffectManager").GetComponent<EffectManager>();
@@ -71,7 +70,7 @@ public class Block_Prefab : MonoBehaviour
         int rand = Random.Range(0,100);
         itemTypePer = (int)(100 * pl.itemSpawn.Value); //百分率
         Debug.Log("PassiveSkill:: Block_Prefab:: 「ItemSwpan Up」 rand("+rand+") <= per("+itemTypePer+") : " + ((rand <= itemTypePer)? "<color=green>true</color>" : "false"));
-        if(!this.gameObject.name.Contains(BlockMaker.BLOCK.TreasureChest.ToString())){
+        if(kind != BlockMaker.BLOCK.TreasureChest){
             isItemBlock = (rand < itemTypePer)? true : false;
         }
         if(isItemBlock){
@@ -101,7 +100,7 @@ public class Block_Prefab : MonoBehaviour
         hpTxt.text = Hp.ToString();
 
         //* Material
-        if(!this.gameObject.name.Contains(BlockMaker.BLOCK.TreasureChest.ToString())){
+        if(kind != BlockMaker.BLOCK.TreasureChest){
             if(0 < Hp && Hp <= 10){
                 Exp = 10;  meshRds[0].material = bm.Mts[(int)BlockMt.PLAIN]; 
             }
@@ -150,12 +149,6 @@ public class Block_Prefab : MonoBehaviour
             }
             transform.localScale = Vector3.Lerp(transform.localScale, defScale, Time.deltaTime * spawnAnimSpeed);
         }
-    }
-
-    private BlockMaker.BLOCK setBlockKindEnum(){
-        return gameObject.name.Contains(BlockMaker.BLOCK.Normal.ToString())? kind = BlockMaker.BLOCK.Normal
-                : gameObject.name.Contains(BlockMaker.BLOCK.Normal.ToString())? kind = BlockMaker.BLOCK.Long
-                : gameObject.name.Contains(BlockMaker.BLOCK.Normal.ToString())? kind = BlockMaker.BLOCK.TreasureChest : BlockMaker.BLOCK.Normal;
     }
 
     public void setEnabledSpriteGlowEF(bool isTrigger){
@@ -212,7 +205,7 @@ public class Block_Prefab : MonoBehaviour
         em.createBrokeBlockEF(target.transform, color);
         int resultExp = (!isInitialize)? (int)(exp * pl.expUp.Value) : 0; //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
         bm.createDropItemOrb(this.transform, resultExp);
-        if(this.gameObject.name.Contains(BlockMaker.BLOCK.TreasureChest.ToString())){
+        if(kind == BlockMaker.BLOCK.TreasureChest){
             for(int i=0; i<TREASURECHEST_ORB_CNT; i++)
                 bm.createDropItemOrb(this.transform, resultExp);
         }
@@ -240,5 +233,11 @@ public class Block_Prefab : MonoBehaviour
             // Gizmos.DrawWireSphere(this.transform.position, itemBlockExplostionRadius);
             Gizmos.DrawWireCube(this.transform.position, new Vector3(3,2,2));
         }
+    }
+
+    private BlockMaker.BLOCK setBlockKindEnum(){
+        return gameObject.name.Contains(BlockMaker.BLOCK.Normal.ToString())? kind = BlockMaker.BLOCK.Normal
+                : gameObject.name.Contains(BlockMaker.BLOCK.Long.ToString())? kind = BlockMaker.BLOCK.Long
+                : gameObject.name.Contains(BlockMaker.BLOCK.TreasureChest.ToString())? kind = BlockMaker.BLOCK.TreasureChest : BlockMaker.BLOCK.Null;
     }
 }
