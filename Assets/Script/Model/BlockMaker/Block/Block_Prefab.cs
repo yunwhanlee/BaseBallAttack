@@ -12,7 +12,6 @@ public class Block_Prefab : MonoBehaviour
     public enum BlockMt {PLAIN, WOOD, SAND, REDBRICK, IRON};
     public enum BlockType {BOMB, LR_ARROW, UPDOWN_ARROW, NORMAL};
     const int TREASURECHEST_ORB_CNT = 15;
-
     private GameManager gm;
     private EffectManager em;
     private Player pl;
@@ -28,6 +27,7 @@ public class Block_Prefab : MonoBehaviour
     public SpriteGlowEffect sprGlowEf;
 
     //* Value
+    [SerializeField] BlockMaker.BLOCK kind;
     [SerializeField] BlockType itemType;
     [SerializeField] int hp = 1;    public int Hp {get => hp; set => hp = value;}
     [SerializeField] int exp = 10;  public int Exp {get => exp; set => exp = value;}
@@ -45,6 +45,8 @@ public class Block_Prefab : MonoBehaviour
     public Text hpTxt;
 
     void Start() {
+        //* set Block Kind
+        kind = setBlockKindEnum();
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         em = GameObject.Find("EffectManager").GetComponent<EffectManager>();
         pl = GameObject.Find("Player").GetComponent<Player>();
@@ -148,6 +150,12 @@ public class Block_Prefab : MonoBehaviour
             }
             transform.localScale = Vector3.Lerp(transform.localScale, defScale, Time.deltaTime * spawnAnimSpeed);
         }
+    }
+
+    private BlockMaker.BLOCK setBlockKindEnum(){
+        return gameObject.name.Contains(BlockMaker.BLOCK.Normal.ToString())? kind = BlockMaker.BLOCK.Normal
+                : gameObject.name.Contains(BlockMaker.BLOCK.Normal.ToString())? kind = BlockMaker.BLOCK.Long
+                : gameObject.name.Contains(BlockMaker.BLOCK.Normal.ToString())? kind = BlockMaker.BLOCK.TreasureChest : BlockMaker.BLOCK.Normal;
     }
 
     public void setEnabledSpriteGlowEF(bool isTrigger){
