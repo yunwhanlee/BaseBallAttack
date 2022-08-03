@@ -35,7 +35,6 @@ public class DM : MonoBehaviour
         foreach(DM.ATV list in Enum.GetValues(typeof(DM.ATV))){
             Debug.LogFormat("Enums GetFindVal:: {0}", list.ToString());
         }
-
         //* contents Prefab 生成
         scrollviews[(int)DM.ITEM.Chara].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
         scrollviews[(int)DM.ITEM.Bat].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);

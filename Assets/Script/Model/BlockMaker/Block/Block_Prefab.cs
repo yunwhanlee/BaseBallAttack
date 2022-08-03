@@ -19,9 +19,9 @@ public class Block_Prefab : MonoBehaviour
 
     //* Material Instancing
     [SerializeField] private MeshRenderer[] meshRds;
+    [SerializeField] private Material[] originMts;
     private Color color;
     public Material[] mts;
-    private Material[] originMts;
     public Material whiteHitMt;
     public Transform itemTypeImgGroup;
     public SpriteGlowEffect sprGlowEf;
@@ -51,11 +51,15 @@ public class Block_Prefab : MonoBehaviour
         sprGlowEf = GetComponentInChildren<SpriteGlowEffect>();
 
         //* Material Instancing🌟
-        meshRds = GetComponents<MeshRenderer>();
+        meshRds = GetComponentsInChildren<MeshRenderer>();
         Array.ForEach(meshRds, meshRd=> {
             meshRd.material = Instantiate(meshRd.material);
         });
-        // meshRds.material = Instantiate(meshRds.material);
+        
+        originMts = new Material[meshRds.Length];
+        for(int i=0; i<meshRds.Length;i++){
+            originMts[i] = meshRds[i].material; // Save Original Material
+        }
 
         itemType = BlockType.NORMAL;
 
@@ -110,22 +114,18 @@ public class Block_Prefab : MonoBehaviour
             else if(41 < Hp){
                 Exp = 50;  meshRds[0].material = bm.Mts[(int)BlockMt.IRON];
             }
-        }
 
-        //* 色
-        int randIdx = Random.Range(0, bm.Colors.Length);
-        color = bm.Colors[randIdx];
-        meshRds[0].material.SetColor("_ColorTint", color);
-        switch(randIdx){
-            case (int)ColorIndex.RED:       color = Color.red; break;
-            case (int)ColorIndex.YELLOW:    color = Color.yellow; break;
-            case (int)ColorIndex.GREEN:     color = Color.green; break;
-            case (int)ColorIndex.BLUE:      color = Color.blue; break;
-        }
-        sprGlowEf.GlowColor = color;
-        
-        for(int i=0; i<meshRds.Length;i++){
-            originMts[i] = meshRds[i].material; // Save Original Material
+            //* 色
+            int randIdx = Random.Range(0, bm.Colors.Length);
+            color = bm.Colors[randIdx];
+            meshRds[0].material.SetColor("_ColorTint", color);
+            switch(randIdx){
+                case (int)ColorIndex.RED:       color = Color.red; break;
+                case (int)ColorIndex.YELLOW:    color = Color.yellow; break;
+                case (int)ColorIndex.GREEN:     color = Color.green; break;
+                case (int)ColorIndex.BLUE:      color = Color.blue; break;
+            }
+            sprGlowEf.GlowColor = color;
         }
 
         //* Init Scale For Spawn Anim
