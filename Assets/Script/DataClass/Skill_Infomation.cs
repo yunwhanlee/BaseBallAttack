@@ -30,7 +30,8 @@ public class ItemPassiveList{
         new ItemPsvDt(DM.PSV.Critical.ToString()), 
         new ItemPsvDt(DM.PSV.Explosion.ToString()), 
         new ItemPsvDt(DM.PSV.ExpUp.ToString()), 
-        new ItemPsvDt(DM.PSV.ItemSpawn.ToString())
+        new ItemPsvDt(DM.PSV.ItemSpawn.ToString()),
+        new ItemPsvDt(DM.PSV.VerticalMultiShot.ToString()),
     };  public ItemPsvDt[] Arr {get => arr; set => arr = value;}
 
     public void setImgPrefs(ItemPassiveList itemPsvList){

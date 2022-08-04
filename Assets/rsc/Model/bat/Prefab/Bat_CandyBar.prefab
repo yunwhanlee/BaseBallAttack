@@ -98,12 +98,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLock: 0
+  isChecked: 1
+  isCheckedImgObj: {fileID: 0}
   meshRdrList: []
+  originMtList: []
   grayPanel: {fileID: 0}
   rank: 0
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
   price: 0
+  cashShopPriceTxt: {fileID: 0}
   itemPassive:
     arr:
     - name: Dmg
@@ -128,6 +132,9 @@ MonoBehaviour:
       lv: 0
       imgPref: {fileID: 0}
     - name: ItemSpawn
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: VerticalMultiShot
       lv: 0
       imgPref: {fileID: 0}
 --- !u!114 &6802404800736002789

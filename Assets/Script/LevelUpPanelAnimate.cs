@@ -158,6 +158,10 @@ public class LevelUpPanelAnimate : MonoBehaviour
                 pl.itemSpawn.setLvUp(pl.itemSpawn.Value + pl.itemSpawn.Unit);
                 Debug.Log("ItemSwpan Up : 未実装");
                 break;
+            case "Vertical Multi Shot":{
+                pl.itemSpawn.setLvUp(pl.verticalMultiShot.Value + pl.verticalMultiShot.Unit);
+                break;
+            }
         }
         //* 終了
         pl.BefLv++;

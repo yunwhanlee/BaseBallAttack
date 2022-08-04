@@ -65,6 +65,7 @@ public class Player : MonoBehaviour
     public PassiveSkill<Explosion> explosion;
     public PassiveSkill<float> expUp;
     public PassiveSkill<float> itemSpawn;
+    public PassiveSkill<int> verticalMultiShot;
 
     //* Component
     private Animator anim;
@@ -114,6 +115,7 @@ public class Player : MonoBehaviour
         explosion = new PassiveSkill<Explosion>(DM.PSV.Explosion.ToString(), psvLvArr[(int)DM.PSV.Explosion].lv, new Explosion(0f, 0.75f), new Explosion(0.25f, 0.25f));
         expUp = new PassiveSkill<float>(DM.PSV.ExpUp.ToString(), psvLvArr[(int)DM.PSV.ExpUp].lv, 1f, 0.2f);
         itemSpawn = new PassiveSkill<float>(DM.PSV.ItemSpawn.ToString(), psvLvArr[(int)DM.PSV.ItemSpawn].lv, 0.1f, 0.05f);
+        verticalMultiShot = new PassiveSkill<int>(DM.PSV.VerticalMultiShot.ToString(), psvLvArr[(int)DM.PSV.VerticalMultiShot].lv, 0, 1);
 
         //* Apply Psv Data
         dmg.initPsvSkillDt(dmg.Value + dmg.Unit);
@@ -124,6 +126,7 @@ public class Player : MonoBehaviour
         explosion.initPsvSkillDt(new Explosion(explosion.Value.per + explosion.Unit.per, explosion.Value.range + explosion.Unit.range));
         expUp.initPsvSkillDt(expUp.Value + expUp.Unit);
         itemSpawn.initPsvSkillDt(itemSpawn.Value + itemSpawn.Unit);
+        verticalMultiShot.initPsvSkillDt(verticalMultiShot.Value + verticalMultiShot.Unit);
 
         //* Show Psv UI
         gm.displayCurPassiveSkillUI("INGAME");
@@ -209,6 +212,7 @@ public class Player : MonoBehaviour
         list.Add(explosion.Level);
         list.Add(expUp.Level);
         list.Add(itemSpawn.Level);
+        list.Add(verticalMultiShot.Level);
 
         return list;
     }

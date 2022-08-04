@@ -130,6 +130,16 @@ public class Ball_Prefab : MonoBehaviour
                     var scale = ins.GetComponent<Transform>().localScale;
                     ins.GetComponent<Transform>().localScale = new Vector3(scale.x * 0.75f, scale.y * 0.75f, scale.z * 0.75f);
                 }
+
+                //* Vertical Multi Shot
+                for(int i=0; i<pl.verticalMultiShot.Value;i++){
+                    Debug.Log("<color=white>Ball_Prefab.cs:: Vertical Multi Shot= " + pl.verticalMultiShot.Value);
+                    
+                    var ins = Instantiate(this.gameObject, this.transform.position, Quaternion.identity, gm.ballGroup) as GameObject;
+                    ins.GetComponent<Rigidbody>().AddForce(pl.arrowAxisAnchor.transform.forward * force * 0.85f, ForceMode.Impulse);
+                    var scale = ins.GetComponent<Transform>().localScale;
+                    ins.GetComponent<Transform>().localScale = new Vector3(scale.x * 0.8f, scale.y * 0.8f, scale.z * 0.8f);
+                }
             }
         }
         else if(col.gameObject.tag == "ActiveDownWall"){

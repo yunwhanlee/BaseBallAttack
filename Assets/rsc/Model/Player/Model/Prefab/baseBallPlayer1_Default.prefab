@@ -1070,7 +1070,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52997f4069f577141a26ca62981ca997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHome: 0
 --- !u!114 &8368906722487939209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1201,7 +1200,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52997f4069f577141a26ca62981ca997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHome: 0
 --- !u!114 &8368906722527887598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1550,12 +1548,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLock: 0
+  isChecked: 1
+  isCheckedImgObj: {fileID: 0}
   meshRdrList: []
+  originMtList: []
   grayPanel: {fileID: 0}
   rank: 0
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
   price: 0
+  cashShopPriceTxt: {fileID: 0}
   itemPassive:
     arr:
     - name: Dmg
@@ -1580,6 +1582,9 @@ MonoBehaviour:
       lv: 0
       imgPref: {fileID: 0}
     - name: ItemSpawn
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: VerticalMultiShot
       lv: 0
       imgPref: {fileID: 0}
 --- !u!54 &8368906721333363493

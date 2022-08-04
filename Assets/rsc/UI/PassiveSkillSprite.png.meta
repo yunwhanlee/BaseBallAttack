@@ -1,31 +1,7 @@
 fileFormatVersion: 2
-guid: a76c891d09389f14a8b249c4b268d357
+guid: 710c99ac0a7cd8347a27be7ab6c4dd89
 TextureImporter:
   internalIDToNameTable:
-  - first:
-      213: 3022441733741400822
-    second: PassiveSkillSprite 1_0
-  - first:
-      213: 7664128123278667581
-    second: PassiveSkillSprite 1_1
-  - first:
-      213: 9127423197153601824
-    second: PassiveSkillSprite 1_2
-  - first:
-      213: 819117497857225752
-    second: PassiveSkillSprite 1_3
-  - first:
-      213: 6512346148945283836
-    second: PassiveSkillSprite 1_4
-  - first:
-      213: -5447646577162066692
-    second: PassiveSkillSprite 1_5
-  - first:
-      213: 5169688831908918579
-    second: PassiveSkillSprite 1_6
-  - first:
-      213: -1183667871557456570
-    second: PassiveSkillSprite 1_7
   - first:
       213: 5386589919392347121
     second: PassiveSkillSprite_0
@@ -50,6 +26,9 @@ TextureImporter:
   - first:
       213: -1131460798096475074
     second: PassiveSkillSprite_7
+  - first:
+      213: -9041489297681419698
+    second: PassiveSkillSprite_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -80,7 +59,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -136,7 +115,19 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: WebGL
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -318,10 +309,31 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: PassiveSkillSprite_8
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e42f33b336d268280800000000000000
+      internalID: -9041489297681419698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 2c01f5e1079f35d409cea2790a370405
     internalID: 0
     vertices: []
     indices: 

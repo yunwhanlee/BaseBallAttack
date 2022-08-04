@@ -158,10 +158,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLock: 0
+  isChecked: 1
+  isCheckedImgObj: {fileID: 0}
   meshRdrList: []
-  rank: 0
+  originMtList: []
+  grayPanel: {fileID: 0}
+  rank: 4
+  outline3D: {fileID: 0}
+  outline2D: {fileID: 0}
   price: 0
-  psvSkillAbility: 0
+  cashShopPriceTxt: {fileID: 0}
+  itemPassive:
+    arr:
+    - name: Dmg
+      lv: 1
+      imgPref: {fileID: 0}
+    - name: MultiShot
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: Speed
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: InstantKill
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: Critical
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: Explosion
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: ExpUp
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: ItemSpawn
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: VerticalMultiShot
+      lv: 1
+      imgPref: {fileID: 0}
 --- !u!114 &-8555743995361135100
 MonoBehaviour:
   m_ObjectHideFlags: 0

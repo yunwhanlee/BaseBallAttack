@@ -11,7 +11,7 @@ public class DM : MonoBehaviour
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
     public enum ITEM {Chara, Bat, Skill, CashShop};
     public enum ATV{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave};
-    public enum PSV{Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn};
+    public enum PSV{Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn, VerticalMultiShot};
 
     [Header("--Personal Data--")]
     [SerializeField] Text coinTxt; public Text CoinTxt {get => coinTxt; set => coinTxt = value;}

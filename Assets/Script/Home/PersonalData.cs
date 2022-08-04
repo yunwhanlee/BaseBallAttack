@@ -92,7 +92,7 @@ public class PersonalData {
         Debug.Log("RESET");
         PlayerPrefs.DeleteAll();
 
-        this.Coin = 0;
+        this.Coin = 100000;
         this.Diamond = 0;
 
         this.SelectCharaIdx = 0;
