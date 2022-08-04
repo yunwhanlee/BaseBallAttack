@@ -129,40 +129,41 @@ public class LevelUpPanelAnimate : MonoBehaviour
         Debug.LogFormat("onClickSkillUpBtn({0}):: skillName= {1}",index ,pl.Lv);
 
         //* Set Data
-        switch(SkillBtns[index].name.text){
-            case "Dmg Up":
+        var psv = DM.ins.convertPsvSkillStr2Enum(SkillBtns[index].name.text);
+        switch(psv){
+            case DM.PSV.Dmg:
                 pl.dmg.setLvUp(pl.dmg.Value + pl.dmg.Unit);
                 break;
-            case "Multi Shot":
+            case DM.PSV.MultiShot:
                 pl.multiShot.setLvUp(pl.multiShot.Value + pl.multiShot.Unit);
                 Debug.Log(pl.multiShot.Level + pl.multiShot.Value);
                 break;
-            case "Speed Up":
+            case DM.PSV.Speed:
                 pl.speed.setLvUp(pl.speed.Value + pl.speed.Unit); //20% Up
                 break;
-            case "Immediate Kill":
+            case DM.PSV.InstantKill:
                 pl.instantKill.setLvUp(pl.instantKill.Value + pl.instantKill.Unit); //2% Up
                 break;
-            case "Critical Up":
+            case DM.PSV.Critical:
                 pl.critical.setLvUp(pl.critical.Value + pl.critical.Unit); //10% Up
                 break;
-            case "Explosion":
+            case DM.PSV.Explosion:
                 var percent = pl.explosion.Value.per + pl.explosion.Unit.per;
                 var range = pl.explosion.Value.range + pl.explosion.Unit.range;
                 pl.explosion.setLvUp(new Explosion(percent, range)); //Active:20% Up, Radius:+0.25
                 break;
-            case "Exp Up":
+            case DM.PSV.ExpUp:
                 pl.expUp.setLvUp(pl.expUp.Value + pl.expUp.Unit);
                 break;
-            case "ItemSwpan Up":
+            case DM.PSV.ItemSpawn:
                 pl.itemSpawn.setLvUp(pl.itemSpawn.Value + pl.itemSpawn.Unit);
                 Debug.Log("ItemSwpan Up : 未実装");
                 break;
-            case "Vertical Multi Shot":{
+            case DM.PSV.VerticalMultiShot:
                 pl.itemSpawn.setLvUp(pl.verticalMultiShot.Value + pl.verticalMultiShot.Unit);
                 break;
-            }
         }
+        
         //* 終了
         pl.BefLv++;
         Debug.LogFormat("onClickSkillUpBtn({0}):: <color=yellow> pl.Lv= {1}, pl.befLv= {2}</color>",index, pl.Lv, pl.BefLv);

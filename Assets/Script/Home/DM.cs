@@ -11,7 +11,7 @@ public class DM : MonoBehaviour
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
     public enum ITEM {Chara, Bat, Skill, CashShop};
     public enum ATV{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave};
-    public enum PSV{Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn, VerticalMultiShot};
+    public enum PSV{Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn, VerticalMultiShot, NULL};
 
     [Header("--Personal Data--")]
     [SerializeField] Text coinTxt; public Text CoinTxt {get => coinTxt; set => coinTxt = value;}
@@ -108,10 +108,16 @@ public class DM : MonoBehaviour
     }
 
     public PSV convertPsvSkillStr2Enum(string name){
-        return (name == DM.PSV.InstantKill.ToString())? DM.PSV.InstantKill 
+        return (name == DM.PSV.Dmg.ToString())? DM.PSV.Dmg
+            :(name == DM.PSV.MultiShot.ToString())? DM.PSV.MultiShot
+            :(name == DM.PSV.Speed.ToString())? DM.PSV.Speed
+            :(name == DM.PSV.InstantKill.ToString())? DM.PSV.InstantKill
             :(name == DM.PSV.Critical.ToString())? DM.PSV.Critical
             :(name == DM.PSV.Explosion.ToString())? DM.PSV.Explosion
-            : DM.PSV.Dmg; //-> ダミーデータ
+            :(name == DM.PSV.ExpUp.ToString())? DM.PSV.ExpUp
+            :(name == DM.PSV.ItemSpawn.ToString())? DM.PSV.ItemSpawn
+            :(name == DM.PSV.VerticalMultiShot.ToString())? DM.PSV.VerticalMultiShot
+            : DM.PSV.NULL; //-> ダミーデータ
     }
 
     public ATV convertAtvSkillStr2Enum(string name){
