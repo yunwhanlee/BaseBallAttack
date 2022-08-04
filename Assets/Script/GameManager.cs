@@ -89,7 +89,8 @@ public class GameManager : MonoBehaviour
 
     [Header("--statusFolder--")]
     public RectTransform statusFolderPanel;
-    public Text statusInfoTxt;
+    public Transform statusInfoContents;
+    public Text statusInfoTxtPf;
 
     [Header("--Button--")]
     public Button readyBtn; //Normal
@@ -185,17 +186,27 @@ public class GameManager : MonoBehaviour
         Debug.Log("onClickStatusFolderButton():: isTrigger= " + isTrigger + ", pivotX=" + pivotX);
         statusFolderPanel.pivot = new Vector2(isTrigger? -1 : 0, 0.5f);
 
-        //Set InfoTxt
-        string res = pl.dmg.Name + " : " + pl.dmg.Value + "\n" + 
-        pl.multiShot.Name + " : " + (pl.multiShot.Value + 1) + "\n" + 
-        pl.speed.Name + " : " + pl.speed.Value + "\n" + 
-        pl.instantKill.Name + " : " + pl.instantKill.Value * 100 + "%\n" + 
-        pl.critical.Name + " : " + pl.critical.Value * 100 + "%\n" + 
-        pl.explosion.Name + " : " + pl.explosion.Value.per * 100 + "%\n" + 
-        pl.expUp.Name + " : " + pl.expUp.Value * 100 + "%\n" + 
-        pl.itemSpawn.Name + " : " + pl.itemSpawn.Value * 100 + "%\n";
+        // Init
+        for(int i=0;i<statusInfoContents.childCount; i++)
+            Destroy(statusInfoContents.GetChild(i).gameObject);
 
-        statusInfoTxt.text = res;
+        // Set InfoTxt List
+        List<string> infoTxtList = new List<string>(){
+            pl.dmg.Name,            (pl.dmg.Value.ToString()),
+            pl.multiShot.Name,      (pl.multiShot.Value + 1).ToString(),
+            pl.speed.Name,          (pl.speed.Value * 100).ToString() + "%",
+            pl.instantKill.Name,    (pl.instantKill.Value * 100 + "%").ToString(),
+            pl.critical.Name,       (pl.critical.Value * 100 + "%").ToString(),
+            pl.explosion.Name,      (pl.explosion.Value.per * 100 + "%").ToString(),
+            pl.expUp.Name,          (pl.expUp.Value * 100 + "%").ToString(),
+            pl.itemSpawn.Name,      (pl.itemSpawn.Value * 100 + "%").ToString()
+        };
+
+        // Apply InfoTxt List
+        infoTxtList.ForEach(infoTxt => {
+            statusInfoTxtPf.text = infoTxt;
+            Instantiate(statusInfoTxtPf, Vector3.zero, Quaternion.identity, statusInfoContents);
+        });
     }
 
     public void onClickBtnShowAD(string type){
