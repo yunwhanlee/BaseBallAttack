@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
     public GameObject levelUpPanel;
 
     [Header("--Active Skill Btn--")]
+    public RectTransform activeSkillBtnPf;
     public ActiveSkill[] activeSkillDataBase; //* 全てActiveSkillsのデータベース
     public List<ActiveSkillBtnUI> activeSkillBtnList; //* ActiveSkillボタン
     public Material activeSkillBtnEfMt;
@@ -119,10 +120,19 @@ public class GameManager : MonoBehaviour
         int len =  (DM.ins.personalData.IsUnlock2ndSkill)? 2 : 1;
         Debug.Log("GM:: Active Skill Btns len= <color=yellow>" + len + "</color>");
         for(int i=0; i<len; i++){
-            var btn = activeSkillBtnGroup.GetChild(i).GetComponent<Button>();
-            btn.gameObject.SetActive(true);
+            Vector3 pos = new Vector3(activeSkillBtnPf.anchoredPosition3D.x, 
+                (i == 0)? activeSkillBtnPf.anchoredPosition3D.y : activeSkillBtnPf.anchoredPosition3D.y - 170, 
+                activeSkillBtnPf.anchoredPosition3D.z);
+            RectTransform btn = Instantiate(activeSkillBtnPf, Vector3.zero, Quaternion.identity, activeSkillBtnGroup);
+            btn.anchoredPosition3D = pos;
+            // var btn = activeSkillBtnGroup.GetChild(i).GetComponent<Button>();
+            // btn.gameObject.SetActive(true);
             int idx = (i==0)? DM.ins.personalData.SelectSkillIdx : DM.ins.personalData.SelectSkill2Idx;
-            activeSkillBtnList.Add(new ActiveSkillBtnUI(i, pl.AtvSkillCoolDownUnit, pl.activeSkills[idx].Name, btn, pl.activeSkills[idx].UISprite, activeSkillBtnEfMt));
+            //* ReActive AddEventListener
+            int btnIdx = (idx==DM.ins.personalData.SelectSkillIdx)? 0 : 1;
+            btn.GetComponent<Button>().onClick.AddListener(() => onClickActiveSkillButton(btnIdx));
+            Debug.LogFormat("activeSkillBtn[{0}].onClick.AddListener => onClickActiveSkillButton({1})", i,btnIdx);
+            activeSkillBtnList.Add(new ActiveSkillBtnUI(i, pl.AtvSkillCoolDownUnit, pl.activeSkills[idx].Name, btn.GetComponent<Button>(), pl.activeSkills[idx].UISprite, activeSkillBtnEfMt));
         }
     }
 
@@ -163,6 +173,7 @@ public class GameManager : MonoBehaviour
     public void onClickSkillButton() => levelUpPanel.SetActive(false);
     public void onClickSetGameButton(string type) => setGame(type);
     public void onClickActiveSkillButton(int i) {
+        Debug.LogFormat("onClickActiveSkillButton({0})", i);
         SelectAtvSkillBtnIdx = i;
         //(BUG)再クリック。Cancel Selected Btn
         if(activeSkillBtnList[i].SelectCircleEF.gameObject.activeSelf){
