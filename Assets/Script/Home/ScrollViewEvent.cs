@@ -27,7 +27,7 @@ public class ScrollView {
         //* Prefabs 生成
         Array.ForEach(itemPrefs, obj=>{
             //* 生成
-            Transform parentTf = null;
+            Transform modelContentPf = null;
             GameObject model = null;
             Transform psvPanel = null;
             switch(this.type){
@@ -36,11 +36,13 @@ public class ScrollView {
                     break;
                 case "Chara" : 
                 case "Bat" :
-                    parentTf = GameObject.Instantiate(modelParentPref, modelParentPref.localPosition, modelParentPref.localRotation, contentTf).transform;
-                    model = GameObject.Instantiate(obj, Vector3.zero, Quaternion.identity, parentTf);
+                    modelContentPf = GameObject.Instantiate(modelParentPref, modelParentPref.localPosition, modelParentPref.localRotation, contentTf).transform;
+                    modelContentPf.GetComponent<RectTransform>().anchoredPosition3D = Vector3.zero; //* 親(ModelContentPf)ずれること対応。
+                    model = GameObject.Instantiate(obj, Vector3.zero, Quaternion.identity, modelContentPf);
 
                     //* Item Passive UI Ready
-                    psvPanel = GameObject.Instantiate(itemPassivePanel, itemPassivePanel.localPosition, itemPassivePanel.localRotation, parentTf).transform;
+                    psvPanel = GameObject.Instantiate(itemPassivePanel, itemPassivePanel.localPosition, itemPassivePanel.localRotation, modelContentPf).transform;
+                    psvPanel.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(0,-2,0);
                     model.GetComponent<ItemInfo>().ItemPassive.setImgPrefs(DM.ins.personalData.ItemPassive);
                     break;
             }
@@ -53,9 +55,9 @@ public class ScrollView {
                     displayItemPassiveUI(type, itemPassiveList, itemSkillBoxPref, psvPanel);
                     break;
                 case "Bat" :
-                    parentTf.GetComponent<RectTransform>().localPosition = new Vector3(0,200,800); //* xとyは自動調整される。
-                    model.transform.localPosition = new Vector3(model.transform.localPosition.x, 0.75f, model.transform.localPosition.z);
-                    model.transform.localRotation = Quaternion.Euler(model.transform.localRotation.x, model.transform.localRotation.y, -45);
+                    // parentTf.GetComponent<RectTransform>().localPosition = new Vector3(0,200,800); //* xとyは自動調整される。
+                    // model.transform.localPosition = new Vector3(model.transform.localPosition.x, 0.75f, model.transform.localPosition.z);
+                    // model.transform.localRotation = Quaternion.Euler(model.transform.localRotation.x, model.transform.localRotation.y, -45);
                     displayItemPassiveUI(type, itemPassiveList, itemSkillBoxPref, psvPanel);
                     break;
                 case "Skill" : 
