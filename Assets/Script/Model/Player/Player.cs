@@ -127,14 +127,10 @@ public class Player : MonoBehaviour
             DM.PSV.VerticalMultiShot.ToString(), psvLvArr[(int)DM.PSV.VerticalMultiShot].lv, 0, 1);
 
         //* Apply Psv Data
-        Debug.Log("dmg " + dmg.Value + " + " + dmg.Unit);
         dmg.initPsvSkillDt(dmg.Value + dmg.Unit);
         multiShot.initPsvSkillDt(multiShot.Value + multiShot.Unit);
-        Debug.Log("speed " + speed.Value + " + " + speed.Unit);
         speed.initPsvSkillDt(speed.Value + speed.Unit);
-        Debug.Log("instantKill " + instantKill.Value + " + " + instantKill.Unit);
         instantKill.initPsvSkillDt(instantKill.Value + instantKill.Unit * instantKill.Level);
-        Debug.Log("critical " + critical.Value + " + " + critical.Unit);
         critical.initPsvSkillDt(critical.Value + critical.Unit * critical.Level);
         explosion.initPsvSkillDt(new Explosion(explosion.Value.per + explosion.Unit.per, explosion.Value.range + explosion.Unit.range));
         expUp.initPsvSkillDt(expUp.Value + expUp.Unit);

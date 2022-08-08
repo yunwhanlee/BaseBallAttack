@@ -53,14 +53,16 @@ public class Block_Prefab : MonoBehaviour
         sprGlowEf = GetComponentInChildren<SpriteGlowEffect>();
 
         //* Material Instancing🌟
-        meshRds = GetComponentsInChildren<MeshRenderer>();
+        meshRds = this.GetComponentsInChildren<MeshRenderer>();
+        
         Array.ForEach(meshRds, meshRd=> {
+            Debug.Log("meshRd= " + meshRd);
             meshRd.material = Instantiate(meshRd.material);
         });
         
         originMts = new Material[meshRds.Length];
         for(int i=0; i<meshRds.Length;i++){
-            originMts[i] = meshRds[i].material; // Save Original Material
+            originMts[i] = meshRds[i].material; //! Save Original Material
         }
 
         itemType = BlockType.NORMAL;
@@ -128,6 +130,8 @@ public class Block_Prefab : MonoBehaviour
                 case (int)ColorIndex.BLUE:      color = Color.blue; break;
             }
             sprGlowEf.GlowColor = color;
+
+            originMts[0] = meshRds[0].material;
         }
 
         //* Init Scale For Spawn Anim
