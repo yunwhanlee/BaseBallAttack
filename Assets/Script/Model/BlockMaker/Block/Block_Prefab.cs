@@ -45,27 +45,24 @@ public class Block_Prefab : MonoBehaviour
     public Text hpTxt;
 
     void Start() {
-        kind = setBlockKindEnum();
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         em = GameObject.Find("EffectManager").GetComponent<EffectManager>();
         pl = GameObject.Find("Player").GetComponent<Player>();
         bm = GameObject.Find("BlockMaker").GetComponent<BlockMaker>();
-        sprGlowEf = GetComponentInChildren<SpriteGlowEffect>();
+
+        kind = setBlockKindEnum();
+        itemType = BlockType.NORMAL;
 
         //* Material Instancing🌟
-        meshRds = this.GetComponentsInChildren<MeshRenderer>();
+        sprGlowEf = GetComponentInChildren<SpriteGlowEffect>();
+        meshRds = this.GetComponentsInChildren<MeshRenderer>(); 
         
-        Array.ForEach(meshRds, meshRd=> {
-            Debug.Log("meshRd= " + meshRd);
-            meshRd.material = Instantiate(meshRd.material);
-        });
+        Array.ForEach(meshRds, meshRd=> meshRd.material = Instantiate(meshRd.material));
         
         originMts = new Material[meshRds.Length];
         for(int i=0; i<meshRds.Length;i++){
-            originMts[i] = meshRds[i].material; //! Save Original Material
+            originMts[i] = meshRds[i].material; //* オリジナルMt 保存。(材質X、色X ➡ TreasureChest用)
         }
-
-        itemType = BlockType.NORMAL;
 
         //* Type Apply
         bool isItemBlock = false;
@@ -86,6 +83,7 @@ public class Block_Prefab : MonoBehaviour
 
         //TODO Leveling HP
         Hp = (gm.stage % bm.BLOCK2_SPAN == 0)? gm.stage * 5 : gm.stage; //* Block2 : Block1
+        #region Leveling
         //hp = (gm.stage <= 5) ? 1 : (gm.stage <= 10) ? 2 : (gm.stage <= 15) ? 3 : (gm.stage <= 20) ? 4 : 5;
         // rand = Random.Range(0,100);
         // if      (gm.stage <=  4) hp = rand < 85 ? 1 : 2;
@@ -99,24 +97,31 @@ public class Block_Prefab : MonoBehaviour
         // else if (gm.stage <= 39) hp = rand < 55 ? 19 : (rand <= 75)? 20 : (rand <= 90)? 21 : 22;
         // else if (gm.stage <= 45) hp = rand < 52 ? 21 : (rand <= 75)? 22 : (rand <= 90)? 23 : 24;
         // else if (gm.stage <= 51) hp = rand < 50 ? 23 : (rand <= 75)? 24 : (rand <= 90)? 25 : 26;
+        #endregion
         hpTxt.text = Hp.ToString();
 
-        //* Material
-        if(kind != BlockMaker.BLOCK.TreasureChestBlock){
+        //* Set Block Style (TreasureChest除外)
+        if(kind != BlockMaker.BLOCK.NormalBlock || kind != BlockMaker.BLOCK.LongBlock){
+            //* Material
             if(0 < Hp && Hp <= 10){
-                Exp = 10;  meshRds[0].material = bm.Mts[(int)BlockMt.PLAIN]; 
+                Exp = 10;
+                meshRds[0].material = bm.Mts[(int)BlockMt.PLAIN]; 
             }
             else if(11 < Hp && Hp <= 20){
-                Exp = 20;  meshRds[0].material = bm.Mts[(int)BlockMt.WOOD];
+                Exp = 20;
+                meshRds[0].material = bm.Mts[(int)BlockMt.WOOD];
             }
             else if(21 < Hp && Hp <= 30){
-                Exp = 30;  meshRds[0].material = bm.Mts[(int)BlockMt.SAND];
+                Exp = 30;  
+                meshRds[0].material = bm.Mts[(int)BlockMt.SAND];
             }
             else if(31 < Hp && Hp <= 40){
-                Exp = 40;  meshRds[0].material = bm.Mts[(int)BlockMt.REDBRICK];
+                Exp = 40;  
+                meshRds[0].material = bm.Mts[(int)BlockMt.REDBRICK];
             }
             else if(41 < Hp){
-                Exp = 50;  meshRds[0].material = bm.Mts[(int)BlockMt.IRON];
+                Exp = 50;  
+                meshRds[0].material = bm.Mts[(int)BlockMt.IRON];
             }
 
             //* 色
@@ -130,8 +135,7 @@ public class Block_Prefab : MonoBehaviour
                 case (int)ColorIndex.BLUE:      color = Color.blue; break;
             }
             sprGlowEf.GlowColor = color;
-
-            originMts[0] = meshRds[0].material;
+            originMts[0] = meshRds[0].material; //* オリジナルMt 保存。(材質O、色O ➡ Block用)
         }
 
         //* Init Scale For Spawn Anim
