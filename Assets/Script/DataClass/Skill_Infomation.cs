@@ -72,6 +72,7 @@ public class PassiveSkill<T> where T: struct {
     }
 
     public void initPsvSkillDt(T value){
+        // Debug.LogFormat("<color=yellow>initPsvSkillDt():: this.value({0}) = para({1})</color>", this.value, value);
         if(level > 0)
             this.value = value;
     }

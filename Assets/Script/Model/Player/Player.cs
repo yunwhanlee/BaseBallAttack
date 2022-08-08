@@ -107,22 +107,35 @@ public class Player : MonoBehaviour
 
         //* Set Passive Skills : @params { int level, T value, T unit }
         var psvLvArr = DM.ins.personalData.ItemPassive.Arr;
-        dmg = new PassiveSkill<int>(DM.PSV.Dmg.ToString(), psvLvArr[(int)DM.PSV.Dmg].lv, 1, 1);
-        multiShot = new PassiveSkill<int>(DM.PSV.MultiShot.ToString(), psvLvArr[(int)DM.PSV.MultiShot].lv, 0, 1);
-        speed = new PassiveSkill<float>(DM.PSV.Speed.ToString(), psvLvArr[(int)DM.PSV.Speed].lv, 1f, 0.35f);
-        instantKill = new PassiveSkill<float>(DM.PSV.InstantKill.ToString(), psvLvArr[(int)DM.PSV.InstantKill].lv, 0f, 0.02f);
-        critical = new PassiveSkill<float>(DM.PSV.Critical.ToString(), psvLvArr[(int)DM.PSV.Critical].lv, 0f, 0.1f);
-        explosion = new PassiveSkill<Explosion>(DM.PSV.Explosion.ToString(), psvLvArr[(int)DM.PSV.Explosion].lv, new Explosion(0f, 0.75f), new Explosion(0.25f, 0.25f));
-        expUp = new PassiveSkill<float>(DM.PSV.ExpUp.ToString(), psvLvArr[(int)DM.PSV.ExpUp].lv, 1f, 0.2f);
-        itemSpawn = new PassiveSkill<float>(DM.PSV.ItemSpawn.ToString(), psvLvArr[(int)DM.PSV.ItemSpawn].lv, 0.1f, 0.05f);
-        verticalMultiShot = new PassiveSkill<int>(DM.PSV.VerticalMultiShot.ToString(), psvLvArr[(int)DM.PSV.VerticalMultiShot].lv, 0, 1);
+        dmg = new PassiveSkill<int>(
+            DM.PSV.Dmg.ToString(), psvLvArr[(int)DM.PSV.Dmg].lv, 1, 1);
+        multiShot = new PassiveSkill<int>(
+            DM.PSV.MultiShot.ToString(), psvLvArr[(int)DM.PSV.MultiShot].lv, 0, 1);
+        speed = new PassiveSkill<float>(
+            DM.PSV.Speed.ToString(), psvLvArr[(int)DM.PSV.Speed].lv, 1f, 0.35f);
+        instantKill = new PassiveSkill<float>(
+            DM.PSV.InstantKill.ToString(), psvLvArr[(int)DM.PSV.InstantKill].lv, 0f, 0.02f);
+        critical = new PassiveSkill<float>(
+            DM.PSV.Critical.ToString(), psvLvArr[(int)DM.PSV.Critical].lv, 0f, 0.2f);
+        explosion = new PassiveSkill<Explosion>(
+            DM.PSV.Explosion.ToString(), psvLvArr[(int)DM.PSV.Explosion].lv, new Explosion(0f, 0.75f), new Explosion(0.25f, 0.25f));
+        expUp = new PassiveSkill<float>(
+            DM.PSV.ExpUp.ToString(), psvLvArr[(int)DM.PSV.ExpUp].lv, 1f, 0.2f);
+        itemSpawn = new PassiveSkill<float>(
+            DM.PSV.ItemSpawn.ToString(), psvLvArr[(int)DM.PSV.ItemSpawn].lv, 0.1f, 0.05f);
+        verticalMultiShot = new PassiveSkill<int>(
+            DM.PSV.VerticalMultiShot.ToString(), psvLvArr[(int)DM.PSV.VerticalMultiShot].lv, 0, 1);
 
         //* Apply Psv Data
+        Debug.Log("dmg " + dmg.Value + " + " + dmg.Unit);
         dmg.initPsvSkillDt(dmg.Value + dmg.Unit);
         multiShot.initPsvSkillDt(multiShot.Value + multiShot.Unit);
+        Debug.Log("speed " + speed.Value + " + " + speed.Unit);
         speed.initPsvSkillDt(speed.Value + speed.Unit);
-        instantKill.initPsvSkillDt(instantKill.Value + instantKill.Unit);
-        critical.initPsvSkillDt(critical.Value + critical.Unit);
+        Debug.Log("instantKill " + instantKill.Value + " + " + instantKill.Unit);
+        instantKill.initPsvSkillDt(instantKill.Value + instantKill.Unit * instantKill.Level);
+        Debug.Log("critical " + critical.Value + " + " + critical.Unit);
+        critical.initPsvSkillDt(critical.Value + critical.Unit * critical.Level);
         explosion.initPsvSkillDt(new Explosion(explosion.Value.per + explosion.Unit.per, explosion.Value.range + explosion.Unit.range));
         expUp.initPsvSkillDt(expUp.Value + expUp.Unit);
         itemSpawn.initPsvSkillDt(itemSpawn.Value + itemSpawn.Unit);

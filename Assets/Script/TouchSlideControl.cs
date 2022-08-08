@@ -84,7 +84,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
             bool isColorBallSkill = gm.activeSkillBtnList.Exists(btn => btn.Trigger && btn.Name == DM.ATV.ColorBall.ToString());
             if(isColorBallSkill && hit.transform.CompareTag("NormalBlock")){
                 Debug.Log(hit.transform.GetComponent<Block_Prefab>().kind);
-                if(hit.transform.GetComponent<Block_Prefab>().kind == BlockMaker.BLOCK.TreasureChest){//* 宝箱は場外
+                if(hit.transform.GetComponent<Block_Prefab>().kind == BlockMaker.BLOCK.TreasureChestBlock){//* 宝箱は場外
                     return;
                 }
                 //* Hit Color
@@ -94,7 +94,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
                 //* Find Same Color Blocks
                 var blocks = bm.GetComponentsInChildren<Block_Prefab>();
                 var sameColorBlocks = Array.FindAll(blocks, bl => 
-                    (bl.GetComponent<Block_Prefab>().kind != BlockMaker.BLOCK.TreasureChest) //* 宝箱は場外
+                    (bl.GetComponent<Block_Prefab>().kind != BlockMaker.BLOCK.TreasureChestBlock) //* 宝箱は場外
                     && (bl.GetComponent<MeshRenderer>().material.GetColor("_ColorTint") == hitColor)
                 );
 

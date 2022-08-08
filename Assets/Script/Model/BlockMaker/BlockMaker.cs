@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class BlockMaker : MonoBehaviour
 {
-    public enum BLOCK {Normal, Long, TreasureChest, Null};
+    public enum BLOCK {NormalBlock, LongBlock, TreasureChestBlock, Null};
 
     //* OutSide
     public GameManager gm;
@@ -36,7 +36,7 @@ public class BlockMaker : MonoBehaviour
         var blocks = this.GetComponentsInChildren<Block_Prefab>();
         foreach(var block in blocks) block.onDestroy(block.gameObject, true);
         this.transform.position = new Vector3(0, 0.5f, -2);
-        createBlockRow(BLOCK.Normal, true, FIRST_CREATE_VERTICAL_CNT);
+        createBlockRow(BLOCK.NormalBlock, true, FIRST_CREATE_VERTICAL_CNT);
     }
 
     void Update(){
@@ -51,11 +51,11 @@ public class BlockMaker : MonoBehaviour
     public void createBlockRow(BLOCK type, bool isFirst = false, int verticalCnt = 1){
         //* Value
         float xs = blockPrefs[(int)type].transform.localScale.x;
-        float spawnPosX = (type == BLOCK.Normal)? -5 : -3.1f;
+        float spawnPosX = (type == BLOCK.NormalBlock)? -5 : -3.1f;
         float middleGap = 0.5f; // センターのボールが来る隙間
 
         switch(type){
-            case BLOCK.Normal : 
+            case BLOCK.NormalBlock : 
                 for(int v=0; v<verticalCnt;v++){ //縦
                     int offsetCnt = 1;
                     Debug.Log("---------------------");
@@ -67,7 +67,7 @@ public class BlockMaker : MonoBehaviour
 
                         //* #2. Block TreasureChest?
                         rand = Random.Range(0,100);
-                        if(rand < treasureChestBlockPer)   ins = blockPrefs[(int)BLOCK.TreasureChest];
+                        if(rand < treasureChestBlockPer)   ins = blockPrefs[(int)BLOCK.TreasureChestBlock];
 
                         //* #3. Block Normal
                         //* Newゲーム開始なのか、次のステージなのか？
@@ -80,7 +80,7 @@ public class BlockMaker : MonoBehaviour
                     }
                 }
                 break;
-            case BLOCK.Long : 
+            case BLOCK.LongBlock : 
                 for(int h=0; h<2; h++){
                     var ins = blockPrefs[(int)type];
                     float x = h < 1 ? spawnPosX + h * xs : spawnPosX + h * xs + middleGap;
@@ -103,9 +103,9 @@ public class BlockMaker : MonoBehaviour
 
         //* Next Set Block Type
         if(gm.stage % BLOCK2_SPAN == 0){
-            createBlockRow(BLOCK.Long);
+            createBlockRow(BLOCK.LongBlock);
         }else{
-            createBlockRow(BLOCK.Normal);
+            createBlockRow(BLOCK.NormalBlock);
         }
     }
 
@@ -119,7 +119,7 @@ public class BlockMaker : MonoBehaviour
     }
 
     public BLOCK convertBlockStr2Enum(string name){
-        return (name == BLOCK.Normal.ToString())? BLOCK.Normal 
-        : BLOCK.Long;
+        return (name == BLOCK.NormalBlock.ToString())? BLOCK.NormalBlock 
+        : BLOCK.LongBlock;
     }
 }

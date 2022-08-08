@@ -157,7 +157,6 @@ public class LevelUpPanelAnimate : MonoBehaviour
                 break;
             case DM.PSV.ItemSpawn:
                 pl.itemSpawn.setLvUp(pl.itemSpawn.Value + pl.itemSpawn.Unit);
-                Debug.Log("ItemSwpan Up : 未実装");
                 break;
             case DM.PSV.VerticalMultiShot:
                 pl.itemSpawn.setLvUp(pl.verticalMultiShot.Value + pl.verticalMultiShot.Unit);
