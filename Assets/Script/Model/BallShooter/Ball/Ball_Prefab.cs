@@ -197,7 +197,7 @@ public class Ball_Prefab : MonoBehaviour
                             break;
                         }
                         case DM.ATV.ColorBall:{
-                            if(col.gameObject.GetComponent<Block_Prefab>().kind != BlockMaker.BLOCK.TreasureChestBlock){
+                            if(col.gameObject.GetComponent<Block_Prefab>().kind != BlockMaker.BLOCK.TreasureChest){
                                 //* Hit Color
                                 var meshRd = col.gameObject.GetComponent<MeshRenderer>();
                                 Color hitColor = meshRd.material.GetColor("_ColorTint");
@@ -267,7 +267,7 @@ public class Ball_Prefab : MonoBehaviour
     private void decreaseHpSphereCastAll(int dmg, int dotDmgDevideVal = 0){
         RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.FireBallCastWidth, Vector3.up, 0);
         Array.ForEach(hits, hit => {
-            if(hit.transform.tag == BlockMaker.BLOCK.NormalBlock.ToString()){
+            if(hit.transform.tag == BlockMaker.BLOCK.Normal.ToString()){
                 var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
                 block.decreaseHp((dotDmgDevideVal==0)? dmg : block.getDotDmg(dotDmgDevideVal));
             }
@@ -344,7 +344,7 @@ public class Ball_Prefab : MonoBehaviour
                 //* Collider 
                 RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, Vector3.one * width, dir, Quaternion.identity, maxDistance);
                 Array.ForEach(hits, hit => {
-                    if(hit.transform.tag == BlockMaker.BLOCK.NormalBlock.ToString()){
+                    if(hit.transform.tag == BlockMaker.BLOCK.Normal.ToString()){
                         em.createCriticalTextEF(hit.transform, pl.dmg.Value * 2);
                         hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(pl.dmg.Value * 2);
                     }

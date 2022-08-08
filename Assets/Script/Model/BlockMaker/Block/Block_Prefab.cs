@@ -69,7 +69,7 @@ public class Block_Prefab : MonoBehaviour
         int rand = Random.Range(0,100);
         itemTypePer = (int)(100 * pl.itemSpawn.Value); //百分率
         Debug.Log("PassiveSkill:: Block_Prefab:: 「ItemSwpan Up」 rand("+rand+") <= per("+itemTypePer+") : " + ((rand <= itemTypePer)? "<color=green>true</color>" : "false"));
-        if(kind == BlockMaker.BLOCK.NormalBlock){
+        if(kind == BlockMaker.BLOCK.Normal){
             isItemBlock = (rand < itemTypePer)? true : false;
         }
         if(isItemBlock){
@@ -101,7 +101,8 @@ public class Block_Prefab : MonoBehaviour
         hpTxt.text = Hp.ToString();
 
         //* Set Block Style (TreasureChest除外)
-        if(kind != BlockMaker.BLOCK.NormalBlock || kind != BlockMaker.BLOCK.LongBlock){
+        if(kind != BlockMaker.BLOCK.TreasureChest){
+            Debug.LogFormat("Block_Prefab:: kind={0}", kind);
             //* Material
             if(0 < Hp && Hp <= 10){
                 Exp = 10;
@@ -187,7 +188,7 @@ public class Block_Prefab : MonoBehaviour
                     em.createItemBlockExplosionEF(this.transform);
                     RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, itemBlockExplostionBoxSize / 2, Vector3.up);
                     Array.ForEach(hits, hit => {
-                        if(hit.transform.tag == BlockMaker.BLOCK.NormalBlock.ToString())  onDestroy(hit.transform.gameObject);
+                        if(hit.transform.tag == BlockMaker.BLOCK.Normal.ToString())  onDestroy(hit.transform.gameObject);
                     });
                     break;
                 case BlockType.LR_ARROW:
@@ -213,7 +214,7 @@ public class Block_Prefab : MonoBehaviour
         em.createBrokeBlockEF(target.transform, color);
         int resultExp = (!isInitialize)? (int)(exp * pl.expUp.Value) : 0; //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
         bm.createDropItemOrb(this.transform, resultExp);
-        if(kind == BlockMaker.BLOCK.TreasureChestBlock){
+        if(kind == BlockMaker.BLOCK.TreasureChest){
             for(int i=0; i<TREASURECHEST_ORB_CNT; i++)
                 bm.createDropItemOrb(this.transform, resultExp);
         }
@@ -244,8 +245,10 @@ public class Block_Prefab : MonoBehaviour
     }
 
     private BlockMaker.BLOCK setBlockKindEnum(){
-        return gameObject.name.Contains(BlockMaker.BLOCK.NormalBlock.ToString())? kind = BlockMaker.BLOCK.NormalBlock
-                : gameObject.name.Contains(BlockMaker.BLOCK.LongBlock.ToString())? kind = BlockMaker.BLOCK.LongBlock
-                : gameObject.name.Contains(BlockMaker.BLOCK.TreasureChestBlock.ToString())? kind = BlockMaker.BLOCK.TreasureChestBlock : BlockMaker.BLOCK.Null;
+        var res = gameObject.name.Contains(BlockMaker.BLOCK.Normal.ToString())? kind = BlockMaker.BLOCK.Normal
+                : gameObject.name.Contains(BlockMaker.BLOCK.Long.ToString())? kind = BlockMaker.BLOCK.Long
+                : gameObject.name.Contains(BlockMaker.BLOCK.TreasureChest.ToString())? kind = BlockMaker.BLOCK.TreasureChest : BlockMaker.BLOCK.Null;
+        Debug.Log("setBlockKindEnum():: res= " + res);
+        return res;
     }
 }
