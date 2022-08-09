@@ -103,7 +103,7 @@ public class PassiveSkill<T> where T: struct {
                         if(hit.transform.tag == "NormalBlock")
                             hit.transform.GetComponent<Block_Prefab>().decreaseHp(result);
                     }
-                    break;
+                    return;
             }
         }
         //* result

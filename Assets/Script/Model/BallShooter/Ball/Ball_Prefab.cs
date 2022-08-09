@@ -256,6 +256,7 @@ public class Ball_Prefab : MonoBehaviour
             //* Explosion（最後 ダメージ適用）
             per = pl.explosion.Value.per;
             pl.explosion.setHitTypePsvSkill(per, ref result, col, em, pl, this.gameObject);
+            
         }
         else if(col.gameObject.tag == "Wall" && col.gameObject.name == "DownWall"){
             Vector3 pos = new Vector3(this.transform.position.x, col.gameObject.transform.position.y, col.gameObject.transform.position.z);
@@ -345,7 +346,7 @@ public class Ball_Prefab : MonoBehaviour
                 //* Collider 
                 RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, Vector3.one * width, dir, Quaternion.identity, maxDistance);
                 Array.ForEach(hits, hit => {
-                    if(hit.transform.tag == BlockMaker.BLOCK.Normal.ToString()){
+                    if(hit.transform.tag == "NormalBlock"){
                         em.createCriticalTextEF(hit.transform, pl.dmg.Value * 2);
                         hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(pl.dmg.Value * 2);
                     }
