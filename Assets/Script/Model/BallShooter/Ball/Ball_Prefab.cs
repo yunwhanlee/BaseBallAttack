@@ -241,22 +241,31 @@ public class Ball_Prefab : MonoBehaviour
                 }
             });
 
-            //Todo HIT Type Passive Skills -----------------------------
+            //* HIT Type Passive Skills -----------------------------
+            bool isOnExplosion = false;
             int result = 0;
-            float per = 0f;
 
             //* InstantKill
-            per = pl.instantKill.Value;
-            pl.instantKill.setHitTypePsvSkill(per, ref result, col, em, pl);
+            pl.instantKill.setHitTypePsvSkill(pl.instantKill.Value, ref result, col, em, pl);
 
             //* Critical
-            per = pl.critical.Value;
-            pl.critical.setHitTypePsvSkill(per, ref result, col, em, pl);
+            pl.critical.setHitTypePsvSkill(pl.critical.Value, ref result, col, em, pl);
 
             //* Explosion（最後 ダメージ適用）
-            per = pl.explosion.Value.per;
-            pl.explosion.setHitTypePsvSkill(per, ref result, col, em, pl, this.gameObject);
+            isOnExplosion = pl.explosion.setHitTypePsvSkill(pl.explosion.Value.per, ref result, col, em, pl);
             
+            //* Apply Damage Result
+            Debug.Log("result= " + result);
+            if(isOnExplosion){
+                //Sphere Collider
+                RaycastHit[] rayHits = Physics.SphereCastAll(this.gameObject.transform.position, pl.explosion.Value.range, Vector3.up, 0);
+                foreach(var hit in rayHits){
+                    if(hit.transform.tag == BlockMaker.NORMAL_BLOCK)
+                        hit.transform.GetComponent<Block_Prefab>().decreaseHp(result);
+                }
+            }else{
+                col.gameObject.GetComponent<Block_Prefab>().decreaseHp(result);
+            }
         }
         else if(col.gameObject.tag == "Wall" && col.gameObject.name == "DownWall"){
             Vector3 pos = new Vector3(this.transform.position.x, col.gameObject.transform.position.y, col.gameObject.transform.position.z);

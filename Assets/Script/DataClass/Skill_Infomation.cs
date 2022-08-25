@@ -77,19 +77,18 @@ public class PassiveSkill<T> where T: struct {
             this.value = value;
     }
 
-    public void setHitTypePsvSkill(float per, ref int result, Collision col, EffectManager em, Player pl, GameObject ballPref = null){
-        bool isLastExplosionSkill = (ballPref)? true : false;
+    public bool setHitTypePsvSkill(float per, ref int result, Collision col, EffectManager em, Player pl, GameObject ballPref = null){
         int rand = Random.Range(0, 100);
         int percent = Mathf.RoundToInt(per * 100); //百分率
-        Debug.Log("PassiveSkill:: setHitTypePsvSkill:: 「" + Name.ToString() + "」 rand("+rand+") <= per("+per+") : " + ((rand <= per)? "<color=blue>true</color>" : "false"));
-        
+        Debug.LogFormat("PassiveSkill:: setHitTypePsvSkill::「{0}」rand({1}) <= per({2}) : {3}",
+            Name.ToString(), rand, percent, ((rand <= percent)? "<color=blue>true</color>" : "false"));
         var psv = DM.ins.convertPsvSkillStr2Enum(Name);
 
         if(Level > 0 && rand <= percent){
             switch(psv){
                 case DM.PSV.InstantKill: 
                     em.createInstantKillTextEF(col.transform);
-                    result =  pl.dmg.Value * 999999;
+                    result = pl.dmg.Value * 999999;
                     break;
                 case DM.PSV.Critical: 
                     em.createCriticalTextEF(col.transform, pl.dmg.Value * 2);
@@ -97,20 +96,15 @@ public class PassiveSkill<T> where T: struct {
                     break;
                 case DM.PSV.Explosion:
                     em.createExplosionEF(ballPref.transform, pl.explosion.Value.range);
-                    //Sphere Collider
-                    RaycastHit[] rayHits = Physics.SphereCastAll(ballPref.transform.position, pl.explosion.Value.range, Vector3.up, 0);
-                    foreach(var hit in rayHits){
-                        if(hit.transform.tag == "NormalBlock")
-                            hit.transform.GetComponent<Block_Prefab>().decreaseHp(result);
-                    }
-                    return;
+                    return true;
             }
         }
-        //* result
-        if(!isLastExplosionSkill)
-            result = pl.dmg.Value;
-        else
-            col.gameObject.GetComponent<Block_Prefab>().decreaseHp(result);
+
+        //*「InstantKill」とか「Critical」が発動しなかったら
+        if(result == 0){
+            result = pl.dmg.Value; //普通のダメージをそのまま代入。
+        }
+        return false;
     }
 }
 //--------------------------------------------------------------------------------------------------
