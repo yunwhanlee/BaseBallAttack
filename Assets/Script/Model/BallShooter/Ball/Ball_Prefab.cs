@@ -176,7 +176,7 @@ public class Ball_Prefab : MonoBehaviour
     //* Hit Block (Explosion EF)
     //* ---------------------------------------------------------------------------------
     private void OnCollisionEnter(Collision col) {//* Give Damage
-        if(col.gameObject.tag == "NormalBlock"){
+        if(col.gameObject.tag == BlockMaker.NORMAL_BLOCK){
             isHitedByBlock = true;
             //* #2. Active Skill HIT 
             gm.activeSkillBtnList.ForEach(skillBtn => {
@@ -269,7 +269,7 @@ public class Ball_Prefab : MonoBehaviour
     private void decreaseHpSphereCastAll(int dmg, int dotDmgDevideVal = 0){
         RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.FireBallCastWidth, Vector3.up, 0);
         Array.ForEach(hits, hit => {
-            if(hit.transform.tag == BlockMaker.BLOCK.Normal.ToString()){
+            if(hit.transform.tag == BlockMaker.NORMAL_BLOCK){
                 var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
                 block.decreaseHp((dotDmgDevideVal==0)? dmg : block.getDotDmg(dotDmgDevideVal));
             }
@@ -346,7 +346,7 @@ public class Ball_Prefab : MonoBehaviour
                 //* Collider 
                 RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, Vector3.one * width, dir, Quaternion.identity, maxDistance);
                 Array.ForEach(hits, hit => {
-                    if(hit.transform.tag == "NormalBlock"){
+                    if(hit.transform.tag == BlockMaker.NORMAL_BLOCK){
                         em.createCriticalTextEF(hit.transform, pl.dmg.Value * 2);
                         hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(pl.dmg.Value * 2);
                     }
