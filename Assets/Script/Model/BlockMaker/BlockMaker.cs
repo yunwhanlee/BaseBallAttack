@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 
 public class BlockMaker : MonoBehaviour
 {
+    public const string NORMAL_BLOCK = "NormalBlock";
     public enum BLOCK {Normal, Long, TreasureChest, Null};
 
     //* OutSide

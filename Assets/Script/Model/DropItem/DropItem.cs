@@ -10,7 +10,7 @@ public class DropItem : MonoBehaviour
     //* Value
     int expVal; public int ExpVal{ get => expVal; set => expVal = value;}
     bool isMoveToPlayer = false; public bool IsMoveToPlayer{ get => isMoveToPlayer; set => isMoveToPlayer = value;}
-    float moveSpeed = 0.02f;
+    float moveSpeed = 5f;
 
     Rigidbody rigid;
     void Start(){
@@ -21,7 +21,7 @@ public class DropItem : MonoBehaviour
 
     void Update(){
         if(isMoveToPlayer){
-            transform.position = Vector3.Lerp(transform.position, gm.pl.transform.position, moveSpeed);
+            transform.position = Vector3.Lerp(transform.position, gm.pl.transform.position, moveSpeed * Time.deltaTime);
         }
     }
 

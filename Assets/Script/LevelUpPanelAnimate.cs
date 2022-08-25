@@ -114,7 +114,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
                 float lastIdxPosY = SkillBtns[2].imgRectTf.localPosition.y % SPRITE_W;
                 if(SPRITE_W/2 <= posY && posY <= SPRITE_W){
                     //Scroll Up
-                    SkillBtns[i].imgRectTf.Translate(0, Time.deltaTime * speed / (i+1), 0);
+                    SkillBtns[i].imgRectTf.Translate(0, (speed / (i+1)) * Time.deltaTime, 0);
                     //最後Idxが終わるまで待つ
                     if(Mathf.RoundToInt(lastIdxPosY) == SPRITE_W) isRollingStop = false;
                 }
