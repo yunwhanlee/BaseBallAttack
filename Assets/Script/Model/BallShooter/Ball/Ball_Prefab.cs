@@ -360,8 +360,9 @@ public class Ball_Prefab : MonoBehaviour
                         hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(pl.dmg.Value * 2);
                     }
                 });
-                gm.activeSkillBtnList[0].init(gm);
                 this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
+
+                gm.activeSkillBtnList.ForEach(btn => btn.init(gm));
                 yield return new WaitForSeconds(delayTime);
                 onDestroyMe();
                 break;
