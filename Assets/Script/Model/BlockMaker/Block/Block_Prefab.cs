@@ -24,6 +24,14 @@ public class Block_Prefab : MonoBehaviour
     public Material[] mts;
     public Material whiteHitMt;
     public Transform itemTypeImgGroup;
+
+    private SpriteGlowEffect itemUISprGlowEf;
+    private const int iTEM_UI_SPR_GLOW_MIN = 1;
+    private float itemUISprGlowCnt = 0;
+    private float itemUISprGlowSpan = 7.5f;
+    private int itemUISprGlowSpd = 5;
+    private bool itemUISprGlowTrigger = false;
+
     public SpriteGlowEffect sprGlowEf;
 
     //* Value
@@ -78,7 +86,9 @@ public class Block_Prefab : MonoBehaviour
             // Debug.Log("Block_Prefab:: typeCnt= " + typeCnt + ", itemType=" + itemType + " " + (int)itemType);
 
             //既にあるイメージObj中の一つをランダムで活性化
-            itemTypeImgGroup.GetChild((int)itemType).gameObject.SetActive(true);
+            var obj = itemTypeImgGroup.GetChild((int)itemType).gameObject;//.SetActive(true);
+            obj.SetActive(true);
+            itemUISprGlowEf = obj.GetComponent<SpriteGlowEffect>();
         }
 
         //* HP
@@ -151,6 +161,28 @@ public class Block_Prefab : MonoBehaviour
                 transform.localScale = defScale;
             }
             transform.localScale = Vector3.Lerp(transform.localScale, defScale, Time.deltaTime * spawnAnimSpeed);
+        }
+
+        //* ItemType Glow Animation
+        animateItemTypeUISprGlowEF(ref itemUISprGlowCnt);
+    }
+
+    private void animateItemTypeUISprGlowEF(ref float cnt){
+        if(itemUISprGlowEf){
+            int min = iTEM_UI_SPR_GLOW_MIN;
+            float span = itemUISprGlowSpan;
+            cnt = Mathf.Clamp(cnt, min, span);
+            float val = (Time.deltaTime * itemUISprGlowSpd);
+
+            // Set Trigger
+            if(cnt == min)         itemUISprGlowTrigger = true;
+            else if(cnt == span)   itemUISprGlowTrigger = false;
+
+            // Set Value
+            cnt += (itemUISprGlowTrigger)? val : -val;
+
+            // Apply
+            itemUISprGlowEf.GlowBrightness = cnt;
         }
     }
 
