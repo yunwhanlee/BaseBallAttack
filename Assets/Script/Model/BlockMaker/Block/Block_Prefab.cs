@@ -182,7 +182,7 @@ public class Block_Prefab : MonoBehaviour
                     em.createItemBlockExplosionEF(this.transform);
                     RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, itemBlockExplostionBoxSize / 2, Vector3.up);
                     Array.ForEach(hits, hit => {
-                        if(hit.transform.tag == BlockMaker.BLOCK.Normal.ToString())  onDestroy(hit.transform.gameObject);
+                        if(hit.transform.tag == BlockMaker.NORMAL_BLOCK)  onDestroy(hit.transform.gameObject);
                     });
                     break;
                 case BlockType.LR_ARROW:
