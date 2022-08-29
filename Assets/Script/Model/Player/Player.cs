@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
     
     
     [Header("<---- Passive Skill ---->")]
+    public int INSTANTKILL_FIXED_DMG = 999999;
     public PassiveSkill<int> dmg;
     public PassiveSkill<int> multiShot;
     public PassiveSkill<float> speed;

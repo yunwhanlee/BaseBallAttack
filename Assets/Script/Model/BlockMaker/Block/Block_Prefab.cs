@@ -68,14 +68,14 @@ public class Block_Prefab : MonoBehaviour
         bool isItemBlock = false;
         int rand = Random.Range(0,100);
         itemTypePer = (int)(100 * pl.itemSpawn.Value); //百分率
-        Debug.Log("PassiveSkill:: Block_Prefab:: 「ItemSwpan Up」 rand("+rand+") <= per("+itemTypePer+") : " + ((rand <= itemTypePer)? "<color=green>true</color>" : "false"));
+        // Debug.Log("PassiveSkill:: Block_Prefab:: 「ItemSwpan Up」 rand("+rand+") <= per("+itemTypePer+") : " + ((rand <= itemTypePer)? "<color=green>true</color>" : "false"));
         if(kind == BlockMaker.BLOCK.Normal){
             isItemBlock = (rand < itemTypePer)? true : false;
         }
         if(isItemBlock){
             int typeCnt = System.Enum.GetValues(typeof(BlockType)).Length - 1; //enum Type Cnt Without Normal
             itemType = (BlockType)Random.Range(0, typeCnt);
-            Debug.Log("Block_Prefab:: typeCnt= " + typeCnt + ", itemType=" + itemType + " " + (int)itemType);
+            // Debug.Log("Block_Prefab:: typeCnt= " + typeCnt + ", itemType=" + itemType + " " + (int)itemType);
 
             //既にあるイメージObj中の一つをランダムで活性化
             itemTypeImgGroup.GetChild((int)itemType).gameObject.SetActive(true);
@@ -89,21 +89,6 @@ public class Block_Prefab : MonoBehaviour
             case BlockMaker.BLOCK.Normal:
             case BlockMaker.BLOCK.Long:
                 Hp = (gm.stage % bm.BLOCK2_SPAN == 0)? gm.stage * 5 : gm.stage; //* Block2 : Block1
-                #region Leveling
-                //hp = (gm.stage <= 5) ? 1 : (gm.stage <= 10) ? 2 : (gm.stage <= 15) ? 3 : (gm.stage <= 20) ? 4 : 5;
-                // rand = Random.Range(0,100);
-                // if      (gm.stage <=  4) hp = rand < 85 ? 1 : 2;
-                // else if (gm.stage <=  8) hp = rand < 85 ? 3 : 4;
-                // else if (gm.stage <= 12) hp = rand < 85 ? 5 : (rand <= 95)? 6 : 7;
-                // else if (gm.stage <= 16) hp = rand < 75 ? 7 : (rand <= 90)? 8 : 9;
-                // else if (gm.stage <= 20) hp = rand < 50 ? 10 : (rand <= 75)? 11 : (rand <= 85)? 12 : (rand <= 95)? 13 : 14;
-                // else if (gm.stage <= 25) hp = rand < 60 ? 14 : (rand <= 85)? 15 : 16;
-                // else if (gm.stage <= 30) hp = rand < 65 ? 15 : (rand <= 80)? 16 : 17;
-                // else if (gm.stage <= 34) hp = rand < 60 ? 17 : (rand <= 75)? 18 : (rand <= 85)? 19 : 20;
-                // else if (gm.stage <= 39) hp = rand < 55 ? 19 : (rand <= 75)? 20 : (rand <= 90)? 21 : 22;
-                // else if (gm.stage <= 45) hp = rand < 52 ? 21 : (rand <= 75)? 22 : (rand <= 90)? 23 : 24;
-                // else if (gm.stage <= 51) hp = rand < 50 ? 23 : (rand <= 75)? 24 : (rand <= 90)? 25 : 26;
-                #endregion
                 break;
         }
         

@@ -4,9 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using Random = UnityEngine.Random;
-//--------------------------------------------------------------------------------------------------
-//--------------------------------------------------------------------------------------------------
-//--------------------------------------------------------------------------------------------------
+
 [System.Serializable]
 public class ItemPsvDt {
     public string name;
@@ -88,7 +86,7 @@ public class PassiveSkill<T> where T: struct {
             switch(psv){
                 case DM.PSV.InstantKill: 
                     em.createInstantKillTextEF(col.transform);
-                    result = pl.dmg.Value * 999999;
+                    result = pl.INSTANTKILL_FIXED_DMG;
                     break;
                 case DM.PSV.Critical: 
                     em.createCriticalTextEF(col.transform, pl.dmg.Value * 2);

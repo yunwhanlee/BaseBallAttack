@@ -177,8 +177,8 @@ public class Ball_Prefab : MonoBehaviour
     //* ---------------------------------------------------------------------------------
     private void OnCollisionEnter(Collision col) {//* Give Damage
         if(col.gameObject.tag == BlockMaker.NORMAL_BLOCK){
+#region #2. Active Skill HIT
             isHitedByBlock = true;
-            //* #2. Active Skill HIT 
             gm.activeSkillBtnList.ForEach(skillBtn => {
                 if(skillBtn.Trigger){
                     float delayTime = 2;
@@ -240,19 +240,22 @@ public class Ball_Prefab : MonoBehaviour
                     Invoke("onDestroyMeInvoke", delayTime);
                 }
             });
-
-            //* HIT Type Passive Skills -----------------------------
+#endregion
+#region Passive Skill HIT
             bool isOnExplosion = false;
             int result = 0;
 
             //* InstantKill
             pl.instantKill.setHitTypePsvSkill(pl.instantKill.Value, ref result, col, em, pl);
 
-            //* Critical
-            pl.critical.setHitTypePsvSkill(pl.critical.Value, ref result, col, em, pl);
+            if(result != pl.INSTANTKILL_FIXED_DMG){
+                //* Critical
+                pl.critical.setHitTypePsvSkill(pl.critical.Value, ref result, col, em, pl);
 
-            //* Explosion（最後 ダメージ適用）
-            isOnExplosion = pl.explosion.setHitTypePsvSkill(pl.explosion.Value.per, ref result, col, em, pl);
+                //* Explosion（最後 ダメージ適用）
+                isOnExplosion = pl.explosion.setHitTypePsvSkill(pl.explosion.Value.per, ref result, col, em, pl);
+            }
+
             
             //* Apply Damage Result
             Debug.Log("result= " + result);
@@ -266,6 +269,7 @@ public class Ball_Prefab : MonoBehaviour
             }else{
                 col.gameObject.GetComponent<Block_Prefab>().decreaseHp(result);
             }
+#endregion            
         }
         else if(col.gameObject.tag == "Wall" && col.gameObject.name == "DownWall"){
             Vector3 pos = new Vector3(this.transform.position.x, col.gameObject.transform.position.y, col.gameObject.transform.position.z);
