@@ -46,7 +46,6 @@ public class BlockMaker : MonoBehaviour
             moveDownBlock();
         }
     }
-
     public void setCreateBlockTrigger(bool trigger) => isCreateBlock = trigger;
 
     public void createBlockRow(BLOCK type, bool isFirst = false, int verticalCnt = 1){
@@ -62,6 +61,7 @@ public class BlockMaker : MonoBehaviour
                     Debug.Log("---------------------");
                     for(int h=0; h<MAX_HORIZONTAL_GRID;h++){ //横
                         var ins = blockPrefs[(int)type];
+
                         //* #1. Block Skip?
                         int rand = Random.Range(0,100);
                         if(rand < skipBlockPer) continue; //Skip Block
@@ -70,8 +70,7 @@ public class BlockMaker : MonoBehaviour
                         rand = Random.Range(0,100);
                         if(rand < treasureChestBlockPer)   ins = blockPrefs[(int)BLOCK.TreasureChest];
 
-                        //* #3. Block Normal
-                        //* Newゲーム開始なのか、次のステージなのか？
+                        //* #3. Block Normal + Newゲーム開始なのか、次のステージなのか？
                         float x = h < 3 ? (spawnPosX + h * xs) : (spawnPosX + h * xs + middleGap * offsetCnt);
                         float y = (isFirst)? 0 : ins.transform.position.y + blockBundle.position.y;
                         float z = (isFirst)? -v : SPWAN_POS_Y;

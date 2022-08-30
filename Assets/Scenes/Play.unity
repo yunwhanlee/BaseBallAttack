@@ -4509,6 +4509,7 @@ MonoBehaviour:
   thunderCastWidth: 1
   fireBallCastWidth: 0
   poisonSmokeCastWidth: 0
+  INSTANTKILL_FIXED_DMG: 999999
   dmg:
     name: 
     level: 0
@@ -14361,7 +14362,7 @@ MonoBehaviour:
   deadLineTf: {fileID: 587487858}
   downWall: {fileID: 779756}
   light: {fileID: 705507994}
-  stage: 6
+  stage: 2
   bestScore: 999
   strikeCnt: 0
   comboCnt: 0

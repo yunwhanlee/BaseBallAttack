@@ -438,11 +438,12 @@ public class GameManager : MonoBehaviour
         bm.setCreateBlockTrigger(true);
         if(bm.transform.childCount == 0){//* Remove All Blocks Perfect Bonus!
             Debug.Log("PERFECT!");
-            ++stage;
-            bm.moveDownBlock();
             perfectTxt.GetComponent<Animator>().SetTrigger("doSpawn");
             em.enableUIPerfectTxtEF();
             yield return new WaitForSeconds(1);
+            //* LONGブロックが続けて生成するBUG対応。
+            ++stage;
+            bm.setCreateBlockTrigger(true);
         }
         float sec = 0.8f;
         yield return new WaitForSeconds(sec);
