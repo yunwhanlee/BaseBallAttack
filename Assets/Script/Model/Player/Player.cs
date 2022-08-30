@@ -129,14 +129,14 @@ public class Player : MonoBehaviour
 
         //* Apply Psv Data
         dmg.initPsvSkillDt(dmg.Value + dmg.Unit);
-        multiShot.initPsvSkillDt(multiShot.Value + multiShot.Unit);
+        multiShot.initPsvSkillDt(multiShot.Value + multiShot.Unit * multiShot.Level);
         speed.initPsvSkillDt(speed.Value + speed.Unit);
         instantKill.initPsvSkillDt(instantKill.Value + instantKill.Unit * instantKill.Level);
         critical.initPsvSkillDt(critical.Value + critical.Unit * critical.Level);
         explosion.initPsvSkillDt(new Explosion(explosion.Value.per + explosion.Unit.per, explosion.Value.range + explosion.Unit.range));
         expUp.initPsvSkillDt(expUp.Value + expUp.Unit);
         itemSpawn.initPsvSkillDt(itemSpawn.Value + itemSpawn.Unit);
-        verticalMultiShot.initPsvSkillDt(verticalMultiShot.Value + verticalMultiShot.Unit);
+        verticalMultiShot.initPsvSkillDt(verticalMultiShot.Value + verticalMultiShot.Unit * verticalMultiShot.Level);
 
         //* Show Psv UI
         gm.displayCurPassiveSkillUI("INGAME");

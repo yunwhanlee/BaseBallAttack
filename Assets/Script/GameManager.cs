@@ -441,7 +441,7 @@ public class GameManager : MonoBehaviour
             perfectTxt.GetComponent<Animator>().SetTrigger("doSpawn");
             em.enableUIPerfectTxtEF();
             yield return new WaitForSeconds(1);
-            //* LONGブロックが続けて生成するBUG対応。
+            //* STAGE % 5 == 0だったら、LONGブロックが続けて生成するBUG対応。
             ++stage;
             bm.setCreateBlockTrigger(true);
         }
