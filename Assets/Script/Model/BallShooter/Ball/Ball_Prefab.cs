@@ -56,8 +56,6 @@ public class Ball_Prefab : MonoBehaviour
             //* Ball Preview Dir Goal Img
             distance = Vector3.Distance(gm.ballPreviewDirGoal.transform.position, this.transform.position);
             gm.setBallPreviewImgAlpha(distance);
-
-            
     }
 
     //** Control
