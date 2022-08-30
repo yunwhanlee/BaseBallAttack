@@ -327,7 +327,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         
         //* (BUG) 買わないのにロードしたらChara選択されるバグ防止。
         int befIdx = DM.ins.personalData.getSelectIdx(type);
-        DM.ins.personalData.setSelectIdx(type, CurIdx);
+        DM.ins.personalData.setSelectIdx(CurIdx);
 
         //* Check
         if(curItem.IsLock){
@@ -336,13 +336,13 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 em.createItemBuyEF();
                 curItem.IsLock = false;
                 curItem.setGrayMtIsLock();
-                DM.ins.personalData.setUnLockCurList(type, CurIdx);
+                DM.ins.personalData.setUnLockCurList(CurIdx);
                 DM.ins.personalData.Coin -= curItem.Price;
                 drawChoiceBtnUI();
             }
             else{
                 //TODO Audio
-                DM.ins.personalData.setSelectIdx(type, befIdx);
+                DM.ins.personalData.setSelectIdx(befIdx);
             }
         }
 
