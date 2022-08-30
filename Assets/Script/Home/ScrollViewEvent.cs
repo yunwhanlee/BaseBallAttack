@@ -380,8 +380,10 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //* ----------------------------------------------------------------
     //* Private Function
     //* ----------------------------------------------------------------
-    private ItemInfo getCurItem(){ 
-        return getItemArr()[CurIdx];
+    private ItemInfo getCurItem(){
+        var contents = getItemArr();
+        int lastIdx = contents.Length - 1;
+        return contents[Mathf.Clamp(CurIdx, 0, lastIdx)];
     }
     private ItemInfo[] getItemArr(){
         var contentTf = (DM.ins.SelectItemType == DM.ITEM.Chara.ToString())? DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf
