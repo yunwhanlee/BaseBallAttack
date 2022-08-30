@@ -9,7 +9,7 @@ public class BallShooter : MonoBehaviour
     public Player pl;
 
     [SerializeField]private int ballSpeed;
-    [SerializeField]private bool isBallExist;
+    [SerializeField]private bool isBallExist;   public bool IsBallExist { get => isBallExist; set => isBallExist = value;}
     [SerializeField]private float time;
     [SerializeField]private float shootSpan = 4f;
     [SerializeField]public GameObject ballPref;
@@ -25,16 +25,22 @@ public class BallShooter : MonoBehaviour
         if(gm.STATE == GameManager.State.WAIT) return;
 
         //* 発射 前) ボールが存在しない
-        if(!isBallExist){
+        if(!IsBallExist){
             //* COUNTING
             time -= Time.deltaTime;
             gm.setShootCntText(time.ToString("N0"));
             gm.readyBtn.gameObject.SetActive(true);
 
+            //TODO ボール投げる　レベルリング
+            int rand = Random.Range(0, 100);
+            if(time <= 1f && 10 < rand){
+                time = 0;
+            }
+
             //* 発射
             if(time <= 0){
                 Debug.Log("🥎BALL 発射！");
-                isBallExist = true;
+                IsBallExist = true;
                 gm.throwScreenAnimSetTrigger("ThrowBall");
                 resetCountingTime();
                 
@@ -51,7 +57,5 @@ public class BallShooter : MonoBehaviour
             pl.previewBundle.SetActive(false);
         }
     }
-
-    public void setIsBallExist(bool boolen) => isBallExist = boolen;
     public void resetCountingTime() => time = shootSpan;
 }

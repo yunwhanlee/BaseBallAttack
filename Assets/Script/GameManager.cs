@@ -328,7 +328,7 @@ public class GameManager : MonoBehaviour
             readyBtn.gameObject.SetActive(true);
             yield return new WaitForSeconds(1.5f);
         }
-        ballShooter.setIsBallExist(false); //ボール発射準備 On
+        ballShooter.IsBallExist = false; //ボール発射準備 On
         setBallPreviewGoalImgRGBA(new Color(0.8f,0.8f,0.8f, 0.2f));
     }
 
@@ -422,7 +422,7 @@ public class GameManager : MonoBehaviour
         readyBtn.gameObject.SetActive(true);
         comboCnt = 0;
 
-        ballShooter.setIsBallExist(false);
+        ballShooter.IsBallExist = false;
         pl.previewBundle.SetActive(true);
         StartCoroutine(coWaitPlayerCollectOrb());
         destroyEveryBalls();
