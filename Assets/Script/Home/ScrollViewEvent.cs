@@ -121,6 +121,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public SpriteRenderer boxSprRdr;    public SpriteRenderer BoxSprRdr {get => boxSprRdr; set => boxSprRdr = value;}
     public Text rankTxt;    public Text RankTxt {get => rankTxt; set => rankTxt = value;}
     public Text nameTxt;    public Text NameTxt {get => nameTxt; set => nameTxt = value;}
+    public Image downArrowImg;  public Image DownArrowImg {get => downArrowImg; set => downArrowImg = value;}
 
     [Header("--Select Btn Child--")]
     public Image checkMarkImg;
@@ -134,6 +135,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             BoxSprRdr = UIGroup.GetChild(0).GetComponent<SpriteRenderer>();
             RankTxt = UIGroup.GetChild(1).GetComponent<Text>();
             NameTxt = UIGroup.GetChild(2).GetComponent<Text>();
+            DownArrowImg = UIGroup.GetChild(3).GetComponent<Image>();
         }
 
         //* 初期化
@@ -225,15 +227,18 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             case DM.RANK.LEGEND : color = Color.magenta; brightness=9; outline=8; break;
             case DM.RANK.GOD : color = Color.yellow; brightness=10; outline=5; break;
         }
+        DownArrowImg.color = color;
         rankTxt.color = color;
         BoxSprRdr.color = color;
         boxGlowEf.GlowColor = color;
         boxGlowEf.GlowBrightness = brightness;
         boxGlowEf.OutlineWidth = outline;
+        
     }
 
     public void drawChoiceBtnUI(){
         var curItem = getCurItem();
+        Debug.Log("drawChoiceBtnUI():: curItem.IsLock= " + curItem.IsLock);
         if(curItem.IsLock){//* 💲表示
             checkMarkImg.gameObject.SetActive(false);
             priceTxt.gameObject.SetActive(true);
@@ -383,7 +388,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         : (DM.ins.SelectItemType == DM.ITEM.Bat.ToString())? DM.ins.scrollviews[(int)DM.ITEM.Bat].ContentTf
         : (DM.ins.SelectItemType == DM.ITEM.Skill.ToString())? DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf
         : (DM.ins.SelectItemType == DM.ITEM.CashShop.ToString())? DM.ins.scrollviews[(int)DM.ITEM.CashShop].ContentTf
-        : null;
+        : DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf;
         Debug.Log("getItemArr():: contentTf= " + contentTf);
         var items = contentTf.GetComponentsInChildren<ItemInfo>();
         return items;
