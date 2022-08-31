@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BallShooter : MonoBehaviour
 {
@@ -10,14 +11,17 @@ public class BallShooter : MonoBehaviour
 
     [SerializeField]private int ballSpeed;
     [SerializeField]private bool isBallExist;   public bool IsBallExist { get => isBallExist; set => isBallExist = value;}
+    [SerializeField]private bool isExclamationMarkOn;   public bool IsExclamationMarkOn { get => isExclamationMarkOn; set => isExclamationMarkOn = value;}
     [SerializeField]private float time;
-    [SerializeField]private float shootSpan = 4f;
+    [SerializeField]private float shootSpan = 2;
     [SerializeField]public GameObject ballPref;
     [SerializeField]public Transform entranceTf;
+    [SerializeField]private GameObject exclamationMarkObj;   public GameObject ExclamationMarkObj { get => exclamationMarkObj; set => exclamationMarkObj = value;}
 
 
     void Start(){
-        resetCountingTime();
+        init();
+        ExclamationMarkObj.SetActive(false);
     }
 
     void Update(){
@@ -32,18 +36,22 @@ public class BallShooter : MonoBehaviour
             gm.readyBtn.gameObject.SetActive(true);
 
             //TODO ボール投げる　レベルリング
-            int rand = Random.Range(0, 100);
-            if(time <= 1f && 10 < rand){
-                time = 0;
+            if(time <= 1f && !IsExclamationMarkOn){
+                IsExclamationMarkOn = true;
+                int rand = Random.Range(0, 100);
+                int per = 50;
+                Debug.LogFormat("「！」マーク登場： per({0}) < rand({1})? -> {2} </color>", per, rand, (rand > per)? "<color=blue>TRUE" : "<color=red>FALSE");
+                if(rand > per){
+                    StartCoroutine(coShowExclamationMark());
+                }
             }
 
             //* 発射
             if(time <= 0){
-                Debug.Log("🥎BALL 発射！");
+                Debug.Log("〇 BALL 発射！");
                 IsBallExist = true;
                 gm.throwScreenAnimSetTrigger("ThrowBall");
-                resetCountingTime();
-                
+
                 gm.setShootCntText("SHOOT");
                 Debug.Log("ballPreviewDirGoalPos="+gm.ballPreviewDirGoal.transform.position+", entranceTfPos="+entranceTf.position);
                 Vector3 goalDir = (gm.ballPreviewDirGoal.transform.position - entranceTf.position).normalized;
@@ -57,5 +65,15 @@ public class BallShooter : MonoBehaviour
             pl.previewBundle.SetActive(false);
         }
     }
-    public void resetCountingTime() => time = shootSpan;
+    public void init() {
+        time = shootSpan;
+        IsExclamationMarkOn = false;
+    }
+
+    IEnumerator coShowExclamationMark(){
+        ExclamationMarkObj.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+        time = 0;
+        ExclamationMarkObj.SetActive(false);
+    }
 }

@@ -256,7 +256,7 @@ public class GameManager : MonoBehaviour
             ballPreviewGoalImg.gameObject.SetActive(true);
             setBallPreviewGoalImgRGBA(new Color(0.8f,0.8f,0.8f, 0.2f));
 
-            ballShooter.resetCountingTime();
+            ballShooter.init();
 
             pl.arrowAxisAnchor.SetActive(false);
             
@@ -318,6 +318,7 @@ public class GameManager : MonoBehaviour
             strikeCnt = 0;
             setShootCntText("OUT!");
             yield return new WaitForSeconds(1.5f);
+            ballShooter.init();
             switchCamScene();
             bm.setCreateBlockTrigger(true); //ブロック生成
             foreach(var img in strikeBallImgs) img.gameObject.SetActive(false); //GUI非表示 初期化
@@ -327,6 +328,7 @@ public class GameManager : MonoBehaviour
             setShootCntText("STRIKE!");
             readyBtn.gameObject.SetActive(true);
             yield return new WaitForSeconds(1.5f);
+            ballShooter.init();
         }
         ballShooter.IsBallExist = false; //ボール発射準備 On
         setBallPreviewGoalImgRGBA(new Color(0.8f,0.8f,0.8f, 0.2f));
