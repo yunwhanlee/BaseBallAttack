@@ -54,21 +54,23 @@ public class DM : MonoBehaviour
         DiamondTxt.text = personalData.Diamond.ToString();
     }
 
+#if UNITY_EDITOR
     void OnApplicationQuit(){
-        Debug.Log("END GAME:: Scene= " + SceneManager.GetActiveScene().name);
+        Debug.Log("PC -> OnApplicationQuit():: END GAME:: Scene= " + SceneManager.GetActiveScene().name);
         //* (BUG) SceneがHomeのみセーブできる。
         if(SceneManager.GetActiveScene().name == "Home"){
             personalData.save();
         }
     }
-    void OnApplicationPause() //* For Android
-    {
-        Debug.Log("END GAME:: Scene= " + SceneManager.GetActiveScene().name);
-        //* (BUG) SceneがHomeのみセーブできる。
-        if(SceneManager.GetActiveScene().name == "Home"){
+#elif UNITY_ANDROID
+#elif UNITY_IPHONE
+    void OnApplicationPause(bool paused){
+        Debug.Log("Mobile -> OnApplicationPause():: END GAME:: Scene= " + SceneManager.GetActiveScene().name);
+        if(paused && SceneManager.GetActiveScene().name == "Home"){
             personalData.save();
         }
     }
+#endif
 
     public void showAD(string type){
         Debug.Log("<color=yellow> showAD(" + type.ToString() + ")</color>");
