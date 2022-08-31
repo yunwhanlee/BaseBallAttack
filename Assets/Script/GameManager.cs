@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     public Text shootCntTxt;
     public Text comboTxt;
     public Text perfectTxt;
+    public RectTransform homeRunTxtTf;
 
     [Header("--Exp Slider Bar--")]
     public Slider expBar;

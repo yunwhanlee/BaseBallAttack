@@ -101,11 +101,15 @@ public class Ball_Prefab : MonoBehaviour
                     }
                 });
 
-                //* Anim
-                if(power >= pl.hitRank[B].Power){//* HomeRun
+                //* Anim & Hit Spark EF
+                em.createNormalHitSparkEF(this.transform);
+
+                if(power >= pl.hitRank[C].Power){//* HomeRun
+                    em.createHomeRunHitSparkEF(this.transform);
                     StartCoroutine(coPlayHomeRunAnim(isActiveSkillTrigger));
                 }
                 else if(isActiveSkillTrigger){ //* ActiveSkill Before
+                    
                     // StartCoroutine(coPlayActiveSkillBefSpotLightAnim());
                 }
 
@@ -251,7 +255,7 @@ public class Ball_Prefab : MonoBehaviour
                 pl.critical.setHitTypePsvSkill(pl.critical.Value, ref result, col, em, pl);
 
                 //* Explosion（最後 ダメージ適用）
-                isOnExplosion = pl.explosion.setHitTypePsvSkill(pl.explosion.Value.per, ref result, col, em, pl);
+                isOnExplosion = pl.explosion.setHitTypePsvSkill(pl.explosion.Value.per, ref result, col, em, pl, this.gameObject);
             }
 
             
@@ -326,6 +330,9 @@ public class Ball_Prefab : MonoBehaviour
         pl.setAnimTrigger("HomeRun");
         yield return new WaitForSecondsRealtime(2);
         gm.cam1.GetComponent<CamResolution>().setAnimTrigger("doShake");
+
+        gm.homeRunTxtTf.GetComponent<Animator>().SetTrigger("doSpawn");
+        em.enableUIHomeRunTxtEF();
         Time.timeScale = 1;
     }
 

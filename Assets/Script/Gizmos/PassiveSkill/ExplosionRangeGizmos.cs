@@ -11,9 +11,9 @@ public class ExplosionRangeGizmos : MonoBehaviour
     }
     public float range;
 
-    void OnDrawGizmos(){
-        // Draw a yellow sphere at the transform's position
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(this.transform.position, pl.explosion.Value.range);
-    }
+    // void OnDrawGizmos(){
+    //     // Draw a yellow sphere at the transform's position
+    //     Gizmos.color = Color.yellow;
+    //     Gizmos.DrawWireSphere(this.transform.position, pl.explosion.Value.range);
+    // }
 }

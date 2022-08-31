@@ -10,6 +10,10 @@ public class EffectManager : MonoBehaviour
     public GameManager gm;
     public Transform effectGroup;
 
+    //* Hit Spark EF
+    public GameObject normalHitSparkEF;
+    public GameObject HomeRunHitSparkEF;
+
     //* Block EF
     public GameObject brokeBlockEF;
     public GameObject itemBlockExplosionEF;
@@ -32,6 +36,7 @@ public class EffectManager : MonoBehaviour
 
     //* UI EF
     public GameObject perfectTxtEF;
+    public GameObject homeRunTxtEF;
 
     void Start()
     {
@@ -48,6 +53,14 @@ public class EffectManager : MonoBehaviour
     //*---------------------------------------
     //* 関数
     //*---------------------------------------
+    public void createNormalHitSparkEF(Transform parentTf){
+        var ins = Instantiate(normalHitSparkEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
+    }
+
+    public void createHomeRunHitSparkEF(Transform parentTf){
+        var ins = Instantiate(HomeRunHitSparkEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
+    }
+
     public void createBrokeBlockEF(Transform parentTf, Color color){
         var ins = Instantiate(brokeBlockEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
         ParticleSystem ps = ins.GetComponent<ParticleSystem>();
@@ -141,5 +154,13 @@ public class EffectManager : MonoBehaviour
         perfectTxtEF.SetActive(true);
         yield return new WaitForSeconds(3f);
         perfectTxtEF.SetActive(false);
+    }
+    public void enableUIHomeRunTxtEF(){
+        StartCoroutine(coUnActiveHomeRunTxtEF());
+    }
+    IEnumerator coUnActiveHomeRunTxtEF(){
+        homeRunTxtEF.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        homeRunTxtEF.SetActive(false);
     }
 }
