@@ -54,7 +54,15 @@ public class DM : MonoBehaviour
         DiamondTxt.text = personalData.Diamond.ToString();
     }
 
-    private void OnApplicationQuit(){
+    void OnApplicationQuit(){
+        Debug.Log("END GAME:: Scene= " + SceneManager.GetActiveScene().name);
+        //* (BUG) SceneがHomeのみセーブできる。
+        if(SceneManager.GetActiveScene().name == "Home"){
+            personalData.save();
+        }
+    }
+    void OnApplicationPause() //* For Android
+    {
         Debug.Log("END GAME:: Scene= " + SceneManager.GetActiveScene().name);
         //* (BUG) SceneがHomeのみセーブできる。
         if(SceneManager.GetActiveScene().name == "Home"){
