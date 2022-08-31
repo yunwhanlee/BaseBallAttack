@@ -17,7 +17,7 @@ public class Ball_Prefab : MonoBehaviour
     //* Value
     private bool isHitedByBlock = false;
     private float deleteLimitTime = 2.0f;
-    private int speed;
+    private float speed;
     private float distance;
 
     Rigidbody rigid;
@@ -313,7 +313,7 @@ public class Ball_Prefab : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    public void setBallSpeed(int v){
+    public void setBallSpeed(float v){
         speed = v;
     }
 

@@ -8,13 +8,14 @@ public class BallShooter : MonoBehaviour
     //* OutSide
     public GameManager gm;
     public Player pl;
-
-    [SerializeField]private int ballSpeed;
+    
+    const float DEF_BALL_SPEED = 20;
     [SerializeField]private bool isBallExist;   public bool IsBallExist { get => isBallExist; set => isBallExist = value;}
     [SerializeField]private bool isExclamationMarkOn;   public bool IsExclamationMarkOn { get => isExclamationMarkOn; set => isExclamationMarkOn = value;}
-    [SerializeField]private float time;
-    [SerializeField]private float shootSpan = 2;
     [SerializeField]private int exclamationThrowPer = 50;
+    [SerializeField]private float time;
+    [SerializeField]private float ballSpeed = DEF_BALL_SPEED;
+    [SerializeField]private float shootSpan = 2;
     [SerializeField]public GameObject ballPref;
     [SerializeField]public Transform entranceTf;
     [SerializeField]private GameObject exclamationMarkObj;   public GameObject ExclamationMarkObj { get => exclamationMarkObj; set => exclamationMarkObj = value;}
@@ -37,7 +38,7 @@ public class BallShooter : MonoBehaviour
             gm.readyBtn.gameObject.SetActive(true);
 
             //* 「！」マークいきなりボール投げる。
-            suddenlyThrowBall(exclamationThrowPer);
+            setSuddenlyThrowBall(exclamationThrowPer);
 
             //* 発射
             if(time <= 0){
@@ -50,7 +51,8 @@ public class BallShooter : MonoBehaviour
                 Vector3 goalDir = (gm.ballPreviewDirGoal.transform.position - entranceTf.position).normalized;
                 GameObject instance = Instantiate(ballPref, entranceTf.position, Quaternion.LookRotation(goalDir), gm.ballGroup);
 
-                instance.GetComponent<Ball_Prefab>().setBallSpeed(ballSpeed);
+                int extraRandVal = Random.Range(0, 4);
+                instance.GetComponent<Ball_Prefab>().setBallSpeed(ballSpeed + extraRandVal);
             }
         }
         else{//* ボールが存在し、飛んでいる。★
@@ -61,15 +63,18 @@ public class BallShooter : MonoBehaviour
     public void init() {
         time = shootSpan;
         IsExclamationMarkOn = false;
+        ballSpeed = DEF_BALL_SPEED;
     }
 
-    private void suddenlyThrowBall(int per){
+    private void setSuddenlyThrowBall(int per){
         if(time <= 1f && !IsExclamationMarkOn){
             IsExclamationMarkOn = true;
             int rand = Random.Range(0, 100);
             Debug.LogFormat("「！」マーク登場： per({0}) < rand({1})? -> {2} </color>", per, rand, (rand > per)? "<color=blue>TRUE" : "<color=red>FALSE");
-            if(rand > per)
+            if(rand > per){
+                ballSpeed *= 1.35f;
                 StartCoroutine(coShowExclamationMark());
+            }
         }
     }
 
