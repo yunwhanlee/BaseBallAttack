@@ -12,6 +12,7 @@ public class DropItem : MonoBehaviour
     bool isMoveToPlayer = false; public bool IsMoveToPlayer{ get => isMoveToPlayer; set => isMoveToPlayer = value;}
     float moveSpeed = 5f;
 
+    public float cnt = 0;
     Rigidbody rigid;
     void Start(){
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -21,7 +22,9 @@ public class DropItem : MonoBehaviour
 
     void Update(){
         if(isMoveToPlayer){
-            transform.position = Vector3.Lerp(transform.position, gm.pl.transform.position, moveSpeed * Time.deltaTime);
+            // transform.position = Vector3.Lerp(transform.position, gm.pl.transform.position, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.Slerp(transform.position, gm.pl.transform.position, moveSpeed * Time.deltaTime); //* 放物線
+            
         }
     }
 

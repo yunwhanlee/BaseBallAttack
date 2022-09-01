@@ -155,7 +155,6 @@ public class GameManager : MonoBehaviour
         activeSkillBtnList.ForEach(btn=>{
             btn.setActiveSkillEF();
         });
-        
     }
 
     public void setShootCntText(string str) => shootCntTxt.text = str;
