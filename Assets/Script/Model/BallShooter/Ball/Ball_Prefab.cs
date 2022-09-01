@@ -16,6 +16,7 @@ public class Ball_Prefab : MonoBehaviour
 
     //* Value
     private bool isHitedByBlock = false;
+    private bool isHomeRun = false;
     private float deleteLimitTime = 2.0f;
     private float speed;
     private float distance;
@@ -101,15 +102,15 @@ public class Ball_Prefab : MonoBehaviour
                     }
                 });
 
-                //* Anim & Hit Spark EF
+                //* Bat Hit Ball SparkEF
                 em.createNormalHitSparkEF(this.transform);
 
-                if(power >= pl.hitRank[C].Power){//* HomeRun
+                //* HomeRun
+                if(power >= pl.hitRank[C].Power){
                     em.createHomeRunHitSparkEF(this.transform);
                     StartCoroutine(coPlayHomeRunAnim(isActiveSkillTrigger));
                 }
                 else if(isActiveSkillTrigger){ //* ActiveSkill Before
-                    
                     // StartCoroutine(coPlayActiveSkillBefSpotLightAnim());
                 }
 
@@ -325,7 +326,8 @@ public class Ball_Prefab : MonoBehaviour
         // if(isActiveSkillTrigger){
         //     yield return coPlayActiveSkillBefSpotLightAnim();
         // }
-        Debug.Log("HOMERUH!!!!");
+        isHomeRun = true;
+        Debug.Log("HOMERUH!!!!" + "isHomeRun= " + isHomeRun);
         Time.timeScale = 0;
         pl.setAnimTrigger("HomeRun");
         yield return new WaitForSecondsRealtime(2);
@@ -347,13 +349,15 @@ public class Ball_Prefab : MonoBehaviour
     //* ---------------------------------------------------------------------------------
     //* Swing Ball (Shot EF)
     //* ---------------------------------------------------------------------------------
+#region Passive Skill SHOT
     IEnumerator coPlayActiveSkillShotEF(ActiveSkillBtnUI btn, float waitTime, Vector3 dir){
-        Debug.LogFormat("coPlayActiveSkillShotEF:: btn={0}, waitTite={1}, dir={2}", btn.Name, waitTime, dir);
+        Debug.LogFormat("coPlayActiveSkillShotEF:: btn={0}, waitTite={1}, dir={2}, isHomeRun={3}", btn.Name, waitTime, dir, isHomeRun);
         float delayTime = 0;
         int skillIdx = gm.getCurSkillIdx();
         var atv = DM.ins.convertAtvSkillStr2Enum(btn.Name);
         switch(atv){
             case DM.ATV.Thunder:
+
                 delayTime = 2;
                 const int maxDistance = 50;
                 const int width = 1;
@@ -366,14 +370,7 @@ public class Ball_Prefab : MonoBehaviour
                 Array.ForEach(hits, hit => {
                     //* Multi Critical Dmg
                     if(hit.transform.tag == BlockMaker.NORMAL_BLOCK){
-                        const int multiCnt = 5;
-                        List<GameObject> effectList = new List<GameObject>(); //* HPが０になったら、発生するERROR対応。
-                        for(int i=0; i<multiCnt; i++){
-                            effectList.Add(em.createCriticalTextEF(hit.transform, pl.dmg.Value * 2));
-                            hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(pl.dmg.Value * 2);
-                        }
-                        effectList.ForEach(obj => obj.SetActive(false));
-                        StartCoroutine(coMultiThunderCriticalDmg(effectList, multiCnt));
+                        StartCoroutine(coSetThunderSkill(hit));
                     }
                 });
                 this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
@@ -391,8 +388,27 @@ public class Ball_Prefab : MonoBehaviour
         }
         //Before go up NextStage Wait for Second
     }
+#endregion
 
-    IEnumerator coMultiThunderCriticalDmg(List<GameObject> list, int cnt){
+    IEnumerator coSetThunderSkill(RaycastHit hit){
+        yield return new WaitForSeconds(0.1f);
+        Debug.Log("<color=red>coSetThunderSkill():: isHomeRun= " + isHomeRun + "</color>");
+        const int multiCnt = 5;
+        List<GameObject> effectList = new List<GameObject>(); //* HPが０になったら、発生するERROR対応。
+
+        //* HomeRun Bonus
+        int ratio = (isHomeRun)? 3 : 2;
+
+        //* Set Dmg & Multi CriticalTextEF
+        hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp((pl.dmg.Value * ratio) * multiCnt);
+        for(int i=0; i<multiCnt; i++){
+            var obj = em.createCriticalTextEF(hit.transform, (pl.dmg.Value * ratio));
+            obj.SetActive(false);
+            effectList.Add(obj);
+        }
+        StartCoroutine(coMultiThunderCriticalDmgEF(effectList, multiCnt));
+    }
+    IEnumerator coMultiThunderCriticalDmgEF(List<GameObject> list, int cnt){
         float span = 0.0875f;
         for(int i=0; i<cnt; i++){
             list[i].SetActive(true);
