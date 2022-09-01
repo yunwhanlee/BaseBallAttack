@@ -364,9 +364,16 @@ public class Ball_Prefab : MonoBehaviour
                 //* Collider 
                 RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, Vector3.one * width, dir, Quaternion.identity, maxDistance);
                 Array.ForEach(hits, hit => {
+                    //* Multi Critical Dmg
                     if(hit.transform.tag == BlockMaker.NORMAL_BLOCK){
-                        em.createCriticalTextEF(hit.transform, pl.dmg.Value * 2);
-                        hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(pl.dmg.Value * 2);
+                        const int multiCnt = 5;
+                        List<GameObject> effectList = new List<GameObject>(); //* HPが０になったら、発生するERROR対応。
+                        for(int i=0; i<multiCnt; i++){
+                            effectList.Add(em.createCriticalTextEF(hit.transform, pl.dmg.Value * 2));
+                            hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(pl.dmg.Value * 2);
+                        }
+                        effectList.ForEach(obj => obj.SetActive(false));
+                        StartCoroutine(coMultiThunderCriticalDmg(effectList, multiCnt));
                     }
                 });
                 this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
@@ -383,6 +390,14 @@ public class Ball_Prefab : MonoBehaviour
                 break;
         }
         //Before go up NextStage Wait for Second
+    }
+
+    IEnumerator coMultiThunderCriticalDmg(List<GameObject> list, int cnt){
+        float span = 0.0875f;
+        for(int i=0; i<cnt; i++){
+            list[i].SetActive(true);
+            yield return new WaitForSeconds(i * span);
+        }
     }
 
     void OnDrawGizmos(){
