@@ -50,7 +50,7 @@ public class ItemPassiveList{
 [System.Serializable]
 public class PassiveSkill<T> where T: struct {
     //*value                     //*get set
-    const int MAX_LV = 5;
+    public const int MAX_LV = 5;
     [SerializeField] string name;    public string Name {get=> name;} 
     [SerializeField] int level; public int Level {get=>level;}
     [SerializeField] T value;   public T Value {get=>value;}

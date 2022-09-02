@@ -211,19 +211,19 @@ public class Player : MonoBehaviour
         Exp = 0;
         MaxExp = maxExp * 1.75f;
     }
-    public List<int> getAllSkillLvList(){
-        List<int> list = new List<int>();
-        //set All Skills curLevel
-        list.Add(dmg.Level);
-        list.Add(multiShot.Level);
-        list.Add(speed.Level);
-        list.Add(instantKill.Level);
-        list.Add(critical.Level);
-        list.Add(explosion.Level);
-        list.Add(expUp.Level);
-        list.Add(itemSpawn.Level);
-        list.Add(verticalMultiShot.Level);
-
+    public List<KeyValuePair<string, int>> getAllSkillLvList(){ 
+        //* Key : Name, Value : Level
+        List<KeyValuePair<string, int>> list = new List<KeyValuePair<string, int>>();
+        //* set All Skills curLevel
+        list.Add(new KeyValuePair<string, int>(dmg.Name, dmg.Level));
+        list.Add(new KeyValuePair<string, int>(multiShot.Name, multiShot.Level));
+        list.Add(new KeyValuePair<string, int>(speed.Name, speed.Level));
+        list.Add(new KeyValuePair<string, int>(instantKill.Name, instantKill.Level));
+        list.Add(new KeyValuePair<string, int>(critical.Name, critical.Level));
+        list.Add(new KeyValuePair<string, int>(explosion.Name, explosion.Level));
+        list.Add(new KeyValuePair<string, int>(expUp.Name, expUp.Level));
+        list.Add(new KeyValuePair<string, int>(itemSpawn.Name, itemSpawn.Level));
+        list.Add(new KeyValuePair<string, int>(verticalMultiShot.Name, verticalMultiShot.Level));
         return list;
     }
 }

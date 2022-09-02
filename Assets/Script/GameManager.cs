@@ -43,28 +43,28 @@ public class GameManager : MonoBehaviour
     public Text perfectTxt;
     public RectTransform homeRunTxtTf;
 
-    [Header("--Exp Slider Bar--")]
+    [Header("-- Exp Slider Bar --")]
     public Slider expBar;
 
-    [Header("--View Preview Ball Slider--")] //! あんまり要らないかも。
+    [Header("-- View Preview Ball Slider --")] //! あんまり要らないかも。
     public Slider hitRangeSlider;
     private RectTransform hitRangeSliderTf;
     public RectTransform HomeRunRangeTf;
     public float HomeRunRangePer = 0.2f;
     public Image hitRangeHandleImg;
 
-    [Header("--Ball Preview Dir Goal (CAM2)--")]
+    [Header("-- Ball Preview Dir Goal (CAM2) --")]
     public GameObject ballPreviewDirGoal;
     public Image ballPreviewGoalImg;
 
-    [Header("--Strike Ball Image--")]
+    [Header("-- Strike Ball Image --")]
     public GameObject StrikePanel;
     public Image[] strikeBallImgs;
 
-    [Header("--Level Up--")]
+    [Header("-- Level Up --")]
     public GameObject levelUpPanel;
 
-    [Header("--Active Skill Btn--")]
+    [Header("-- Active Btn --")]
     public RectTransform activeSkillBtnPf;
     public ActiveSkill[] activeSkillDataBase; //* 全てActiveSkillsのデータベース
     public List<ActiveSkillBtnUI> activeSkillBtnList; //* ActiveSkillボタン
@@ -73,27 +73,27 @@ public class GameManager : MonoBehaviour
     public bool isPointUp; //* SectorGizmos Colliderへ活用するため。
     public Material[] blockGlowColorMts;
 
-    [Header("--Passive Skill Table InGame--")]
-    [SerializeField] private GameObject[] psvSkillImgObjPrefs;    public GameObject[] PsvSkillImgObjPrefs { get => psvSkillImgObjPrefs; set => psvSkillImgObjPrefs = value;}
+    [Header("-- Passive Table --")]
+    [SerializeField] private GameObject[] psvSkillImgPrefs;    public GameObject[] PsvSkillImgPrefs { get => psvSkillImgPrefs; set => psvSkillImgPrefs = value;}
     public RectTransform inGameSkillStatusTableTf;
     public GameObject inGameSkillImgBtnPref;
     
-    [Header("--Pause--")]
+    [Header("-- Pause --")]
     public GameObject pausePanel;
     public RectTransform pauseSkillStatusTableTf;
     public GameObject skillInfoRowPref;
 
-    [Header("--GameOver--")]
+    [Header("-- GameOver --")]
     public GameObject gameoverPanel;
     private Text gvStageTxt;
     private Text gvBestScoreTxt;
 
-    [Header("--statusFolder--")]
+    [Header("-- StatusFolder --")]
     public RectTransform statusFolderPanel;
     public Transform statusInfoContents;
     public Text statusInfoTxtPf;
 
-    [Header("--Button--")]
+    [Header("-- Button --")]
     public Button readyBtn; //Normal
     public Transform activeSkillBtnGroup; //Normal
     public Button reGameBtn; //gameoverPanel
@@ -388,20 +388,22 @@ public class GameManager : MonoBehaviour
         if(type != STATE.PAUSE.ToString() && parentTf.childCount > 0)
             foreach(Transform childTf in parentTf){Destroy(childTf.gameObject);}
 
-        List<int> lvList = pl.getAllSkillLvList();
+        List<KeyValuePair<string, int>> lvObjList = pl.getAllSkillLvList();
         int i=0;
-        lvList.ForEach(lv => {
-            if(lv > 0){
-                String levelTxt = (type == STATE.PAUSE.ToString())? ("x " + lv.ToString()) : lv.ToString();
+        lvObjList.ForEach(lv => {
+            if(lv.Value > 0){
+                String levelTxt = (type == STATE.PAUSE.ToString())? ("x " + lv.Value.ToString()) : lv.Value.ToString();
                 var rowTf = Instantiate(pref, Vector3.zero, Quaternion.identity, parentTf).transform;
-                var imgObj = Instantiate(PsvSkillImgObjPrefs[i], Vector3.zero, Quaternion.identity, rowTf);
+
+                var imgObj = Instantiate(PsvSkillImgPrefs[i], Vector3.zero, Quaternion.identity, rowTf);
+                Debug.Log("displayCurPassiveSkillUI:: imgObj.name= <color=red>" + imgObj.name + "</color>");
                 if(type != STATE.PAUSE.ToString()){
                     imgObj.transform.localScale = Vector3.one * 0.3f;
                     imgObj.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
                     int index = imgObj.transform.GetSiblingIndex();
                     imgObj.transform.SetSiblingIndex(index - 1);
                 }
-                rowTf.GetComponentInChildren<Text>().text = (lv < 5)? levelTxt : "MAX";
+                rowTf.GetComponentInChildren<Text>().text = (lv.Value < 5)? levelTxt : "MAX";
             }
             i++;
         });
