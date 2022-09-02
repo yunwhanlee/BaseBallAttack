@@ -396,7 +396,7 @@ public class GameManager : MonoBehaviour
                 var rowTf = Instantiate(pref, Vector3.zero, Quaternion.identity, parentTf).transform;
 
                 var imgObj = Instantiate(PsvSkillImgPrefs[i], Vector3.zero, Quaternion.identity, rowTf);
-                Debug.Log("displayCurPassiveSkillUI:: imgObj.name= <color=red>" + imgObj.name + "</color>");
+                Debug.Log("displayCurPassiveSkillUI:: imgObj.name= " + imgObj.name);
                 if(type != STATE.PAUSE.ToString()){
                     imgObj.transform.localScale = Vector3.one * 0.3f;
                     imgObj.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;

@@ -17,7 +17,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
 
     private int skillImgCnt;
     public List<KeyValuePair<int, GameObject>> selectSkillList = new List<KeyValuePair<int, GameObject>>(); //* 同じnewタイプ型を代入しないと、使えない。
-    private List<string> exceptSkNameList = new List<string>();
+    [SerializeField] private List<string> exceptSkNameList = new List<string>();
     public int scrollingSpeed;
     public bool isRollingStop = false;
 
@@ -43,6 +43,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
         btnIdx = 0;
         isRollingStop = false;
         LvTxt.text = "LV : " + (pl.BefLv + 1).ToString();
+        exceptSkNameList = new List<string>();
 
         //* Set SkillBtn
         SkillBtns = new SkillBtn[3]{
@@ -111,19 +112,22 @@ public class LevelUpPanelAnimate : MonoBehaviour
                 // #2.Stop
                 else{
                     int randIdx = Random.Range(0, selectSkillList.Count);
-                    bool isSkLvMax = exceptSkNameList.Exists(name => selectSkillList[randIdx].Value.name.Contains(name));
-                    Debug.LogFormat("<color=white>STOP</color> Scroll Btn[{0}], Max= {1}, randIdx= {2} / {3}, name= {4}"
-                        , btnIdx, isSkLvMax, randIdx, selectSkillList.Count, selectSkillList[randIdx].Value.name);
-
-                    if(isSkLvMax){
-                        Debug.LogFormat("<color=red>MAX SKILLなので、randIdx: {0} => {1}, name= {2} , Count= {3}</color>"
-                        , randIdx, ++randIdx % selectSkillList.Count, selectSkillList[randIdx].Value.name, selectSkillList.Count);
-
-                        randIdx = ++randIdx % selectSkillList.Count;
-                    }
-
                     btn.imgRectTf.localPosition = new Vector3(0, selectSkillList[randIdx].Key + SPRITE_W / 2, 0);// Scroll Down a Half of Height PosY for Animation
                     btn.name.text = selectSkillList[randIdx].Value.name.Split(char.Parse("_"))[1];
+
+                    //* MAXレベールだったら、できるまで他に切り替える。
+                    bool isSkLvMax = exceptSkNameList.Exists(name => btn.name.text.Contains(name));
+                    while(isSkLvMax){
+                        Debug.LogFormat("<color=yellow>BEF: btn[{0}]-----------------------\n, btn.skillName= {1}, randIdx= {2}", btnIdx, btn.name.text, randIdx);
+
+                        randIdx = ++randIdx % selectSkillList.Count;
+                        btn.imgRectTf.localPosition = new Vector3(0, selectSkillList[randIdx].Key + SPRITE_W / 2, 0);// Scroll Down a Half of Height PosY for Animation
+                        btn.name.text = selectSkillList[randIdx].Value.name.Split(char.Parse("_"))[1];
+
+                        Debug.Log("<color=yellow>AFT: btn.name.text= " + btn.name.text + "randIdx= " + randIdx + "</color>");
+                        isSkLvMax = exceptSkNameList.Exists(name => btn.name.text.Contains(name));
+                    }
+
                     selectSkillList.RemoveAt(randIdx);
                     btnIdx++;
                     if(btnIdx == 2){
