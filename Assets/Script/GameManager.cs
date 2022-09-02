@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
     public Material[] blockGlowColorMts;
 
     [Header("--Passive Skill Table InGame--")]
-    public GameObject[] passiveSkillImgObjPrefs;
+    [SerializeField] private GameObject[] psvSkillImgObjPrefs;    public GameObject[] PsvSkillImgObjPrefs { get => psvSkillImgObjPrefs; set => psvSkillImgObjPrefs = value;}
     public RectTransform inGameSkillStatusTableTf;
     public GameObject inGameSkillImgBtnPref;
     
@@ -103,7 +103,6 @@ public class GameManager : MonoBehaviour
     public Button homeBtn; //pausePanel
     public Button statusFolderBtn;
 
-    //---------------------------------------
     void Start() {
         Debug.Log("<color=red>----------------------------------------------P L A Y   S C E N E----------------------------------------------</color>");
         //! init()宣言したら、キャラクターモデルを読み込むことができないBUG
@@ -159,7 +158,6 @@ public class GameManager : MonoBehaviour
 
     public void setShootCntText(string str) => shootCntTxt.text = str;
     public void setBallPreviewGoalImgRGBA(Color color) => ballPreviewGoalImg.color = color;
-    public GameObject[] getSkillImgObjPrefs() => passiveSkillImgObjPrefs;
     public void throwScreenAnimSetTrigger(string name) => throwScreen.GetComponent<Animator>().SetTrigger(name);
     public void setLightDarkness(bool isOn){ //* During Skill Casting ...
         light.type = (isOn)? LightType.Spot : LightType.Directional;
@@ -399,14 +397,14 @@ public class GameManager : MonoBehaviour
             if(lv > 0){
                 String levelTxt = (type == STATE.PAUSE.ToString())? ("x " + lv.ToString()) : lv.ToString();
                 var rowTf = Instantiate(pref, Vector3.zero, Quaternion.identity, parentTf).transform;
-                var imgObj = Instantiate(getSkillImgObjPrefs()[i], Vector3.zero, Quaternion.identity, rowTf);
+                var imgObj = Instantiate(PsvSkillImgObjPrefs[i], Vector3.zero, Quaternion.identity, rowTf);
                 if(type != STATE.PAUSE.ToString()){
                     imgObj.transform.localScale = Vector3.one * 0.3f;
                     imgObj.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
                     int index = imgObj.transform.GetSiblingIndex();
                     imgObj.transform.SetSiblingIndex(index - 1);
                 }
-                rowTf.GetComponentInChildren<Text>().text = levelTxt;
+                rowTf.GetComponentInChildren<Text>().text = (lv < 5)? levelTxt : "MAX";
             }
             i++;
         });

@@ -16,7 +16,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
     private float time;
 
     private int skillImgCnt;
-    public List<KeyValuePair<int, GameObject>> selectList = new List<KeyValuePair<int, GameObject>>(); //* 同じnewタイプ型を代入しないと、使えない。
+    public List<KeyValuePair<int, GameObject>> selectSkillList = new List<KeyValuePair<int, GameObject>>(); //* 同じnewタイプ型を代入しないと、使えない。
     public int scrollingSpeed;
     public bool isRollingStop = false;
 
@@ -58,20 +58,20 @@ public class LevelUpPanelAnimate : MonoBehaviour
         }
 
         //Init SelectList
-        selectList = new List<KeyValuePair<int, GameObject>>();
+        selectSkillList = new List<KeyValuePair<int, GameObject>>();
 
         //* Set SelectList
-        skillImgCnt = gm.getSkillImgObjPrefs().Length - 1; //自然なスクロールのため、末端に1番目Spriteを追加したので、この分は消す-1。
+        skillImgCnt = gm.PsvSkillImgObjPrefs.Length - 1; //自然なスクロールのため、末端に1番目Spriteを追加したので、この分は消す-1。
         for(int i=0;i<skillImgCnt;i++){
             int pos = SPRITE_W * i;
-            selectList.Add( new KeyValuePair<int, GameObject>(pos, gm.getSkillImgObjPrefs()[i+1]));
-            // print("selectList["+i+"]:: key="+ selectList[i].Key +", value="+ selectList[i].Value);
+            selectSkillList.Add( new KeyValuePair<int, GameObject>(pos, gm.PsvSkillImgObjPrefs[i+1]));
+            print("selectList["+i+"]:: key="+ selectSkillList[i].Key +", value="+ selectSkillList[i].Value);
         }
         
         //* Set ScrollSpriteImgs
         foreach(var btn in SkillBtns){
             //Insert SkillSprite into btnImgRectTf as Child
-            foreach(var child in gm.getSkillImgObjPrefs())
+            foreach(var child in gm.PsvSkillImgObjPrefs)
                 Instantiate(child, Vector3.zero, Quaternion.identity, btn.imgRectTf);
             //Set Auto Scroll Start Pos
             btn.imgRectTf.localPosition = new Vector3(0, SPRITE_W * skillImgCnt, 0);
@@ -80,7 +80,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
 
     void Update(){
         //* Scroll Sprite Animation
-        if(2 >= btnIdx && selectList.Count > 0){
+        if(2 >= btnIdx && selectSkillList.Count > 0){
             time += Time.deltaTime;
             foreach(var btn in SkillBtns){
                 // #1.Scrolling
@@ -95,10 +95,10 @@ public class LevelUpPanelAnimate : MonoBehaviour
                 // #2.Stop
                 else{
                     print("STOP Scrolling Btn[" + btnIdx + "]");
-                    int randIdx = Random.Range(0, selectList.Count);
-                    btn.imgRectTf.localPosition = new Vector3(0, selectList[randIdx].Key + SPRITE_W / 2, 0);// Scroll Down a Half of Height PosY for Animation
-                    btn.name.text = selectList[randIdx].Value.name.Split(char.Parse("_"))[1];
-                    selectList.RemoveAt(randIdx);
+                    int randIdx = Random.Range(0, selectSkillList.Count);
+                    btn.imgRectTf.localPosition = new Vector3(0, selectSkillList[randIdx].Key + SPRITE_W / 2, 0);// Scroll Down a Half of Height PosY for Animation
+                    btn.name.text = selectSkillList[randIdx].Value.name.Split(char.Parse("_"))[1];
+                    selectSkillList.RemoveAt(randIdx);
                     btnIdx++;
                     if(btnIdx == 2){
                         isRollingStop = true;
