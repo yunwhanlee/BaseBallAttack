@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public enum State {PLAY, WAIT, GAMEOVER};
-    [SerializeField] private State state;     public State STATE {get => state; set => state = value;}
+    public enum STATE {PLAY, WAIT, GAMEOVER, PAUSE, CONTINUE, HOME, NULL};
+    [SerializeField] private STATE state;     public STATE State {get => state; set => state = value;}
 
     //* CAMERA
     public GameObject cam1, cam2;
@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
     void Update(){
         //* GUI
         expBar.value = Mathf.Lerp(expBar.value, pl.Exp / pl.MaxExp, Time.deltaTime * 10);
-        stateTxt.text = STATE.ToString();
+        stateTxt.text = State.ToString();
         levelTxt.text = "LV : " + pl.Lv;
         stageTxt.text = "STAGE : " + stage.ToString();
         comboTxt.text = "COMBO\n" + comboCnt.ToString();
@@ -228,7 +228,7 @@ public class GameManager : MonoBehaviour
     //*  関数
     //*---------------------------------------
     public void init(){
-        STATE = GameManager.State.WAIT;
+        State = GameManager.STATE.WAIT;
         stage = 1;
         strikeCnt = 0;
         comboCnt = 0;
@@ -242,9 +242,9 @@ public class GameManager : MonoBehaviour
     }
 
     public void switchCamScene(){
-        if(STATE == GameManager.State.GAMEOVER) return;
+        if(State == GameManager.STATE.GAMEOVER) return;
         if(!cam2.activeSelf){//* CAM2 On
-            STATE = GameManager.State.PLAY;
+            State = GameManager.STATE.PLAY;
             cam1.SetActive(false);
             cam1Canvas.SetActive(false);
             cam2.SetActive(true);
@@ -272,7 +272,7 @@ public class GameManager : MonoBehaviour
             setLightDarkness(false); //* Light -> Normal
         }
         else{//* CAM1 On
-            STATE = GameManager.State.WAIT;
+            State = GameManager.STATE.WAIT;
             cam1.SetActive(true);
             cam1Canvas.SetActive(true);
             cam2.SetActive(false);
@@ -356,18 +356,19 @@ public class GameManager : MonoBehaviour
     }
 
     public void setGame(string type){
-        switch(type){
-            case "PAUSE":
+        STATE state = DM.ins.convertGameState2Enum(type);
+        switch(state){
+            case STATE.PAUSE:
                 Time.timeScale = 0;
                 pausePanel.SetActive(true);
                 displayCurPassiveSkillUI(type);
                 break;
-            case "CONTINUE":
+            case STATE.CONTINUE:
                 Time.timeScale = 1;
                 resetSkillStatusTable();
                 pausePanel.SetActive(false);
                 break;
-            case "HOME":
+            case STATE.HOME:
                 Time.timeScale = 1;
                 Debug.Log("FINISH GAME!");
                 resetSkillStatusTable();
@@ -378,28 +379,28 @@ public class GameManager : MonoBehaviour
     }
     public void setGameOver(){
         Debug.Log("--GAME OVER--");
-        STATE = GameManager.State.GAMEOVER;
+        State = GameManager.STATE.GAMEOVER;
         gameoverPanel.SetActive(true);
         gvStageTxt.text = "STAGE : " + stage;
         gvBestScoreTxt.text = "BEST SCORE : " + bestScore;
     }
 
     public void displayCurPassiveSkillUI(string type){
-        GameObject pref = (type == "PAUSE")? skillInfoRowPref : inGameSkillImgBtnPref;
-        Transform parentTf = (type == "PAUSE")? pauseSkillStatusTableTf : inGameSkillStatusTableTf;
+        GameObject pref = (type == STATE.PAUSE.ToString())? skillInfoRowPref : inGameSkillImgBtnPref;
+        Transform parentTf = (type == STATE.PAUSE.ToString())? pauseSkillStatusTableTf : inGameSkillStatusTableTf;
 
         //(BUG) 情報が重ならないように、一回 初期化する。
-        if(type != "PAUSE" && parentTf.childCount > 0)
+        if(type != STATE.PAUSE.ToString() && parentTf.childCount > 0)
             foreach(Transform childTf in parentTf){Destroy(childTf.gameObject);}
 
         List<int> lvList = pl.getAllSkillLvList();
         int i=0;
         lvList.ForEach(lv => {
             if(lv > 0){
-                String levelTxt = (type == "PAUSE")? ("x " + lv.ToString()) : lv.ToString();
+                String levelTxt = (type == STATE.PAUSE.ToString())? ("x " + lv.ToString()) : lv.ToString();
                 var rowTf = Instantiate(pref, Vector3.zero, Quaternion.identity, parentTf).transform;
                 var imgObj = Instantiate(getSkillImgObjPrefs()[i], Vector3.zero, Quaternion.identity, rowTf);
-                if(type != "PAUSE"){
+                if(type != STATE.PAUSE.ToString()){
                     imgObj.transform.localScale = Vector3.one * 0.3f;
                     imgObj.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
                     int index = imgObj.transform.GetSiblingIndex();
@@ -419,7 +420,7 @@ public class GameManager : MonoBehaviour
     public void setNextStage() {
         Debug.LogFormat("<color=white>setNextStage:: NEXT STAGE(ballCount = {0})</color>", ballGroup.childCount);
         ++stage;
-        STATE = GameManager.State.WAIT;
+        State = GameManager.STATE.WAIT;
         downWall.isTrigger = true; //*下壁 物理X
         readyBtn.gameObject.SetActive(true);
         comboCnt = 0;

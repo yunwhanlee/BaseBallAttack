@@ -27,8 +27,8 @@ public class BallShooter : MonoBehaviour
     }
 
     void Update(){
-        if(gm.STATE == GameManager.State.GAMEOVER) return;
-        if(gm.STATE == GameManager.State.WAIT) return;
+        if(gm.State == GameManager.STATE.GAMEOVER) return;
+        if(gm.State == GameManager.STATE.WAIT) return;
 
         //* 発射 前) ボールが存在しない
         if(!IsBallExist){

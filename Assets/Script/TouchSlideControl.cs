@@ -21,7 +21,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
     //*Event
     public void OnDrag(PointerEventData eventData){
-        if(gm.STATE != GameManager.State.WAIT) return;
+        if(gm.State != GameManager.STATE.WAIT) return;
         stick.position = eventData.position;
 
         //Stick動き制限
@@ -65,7 +65,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         gm.isPointUp = true;
         pad.gameObject.SetActive(false);
         stick.localPosition = Vector2.zero;
-        if(gm.STATE != GameManager.State.PLAY) return;
+        if(gm.State != GameManager.STATE.PLAY) return;
         pl.setAnimTrigger("Swing");
     }
 

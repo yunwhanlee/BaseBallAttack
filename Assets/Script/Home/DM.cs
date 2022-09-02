@@ -109,12 +109,24 @@ public class DM : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+
+
     public int convertItemType2Idx(){
         return (SelectItemType == DM.ITEM.Chara.ToString())? (int)DM.ITEM.Chara
             : (SelectItemType == DM.ITEM.Bat.ToString())? (int)DM.ITEM.Bat
             : (SelectItemType == DM.ITEM.Skill.ToString())? (int)DM.ITEM.Skill
             : (SelectItemType == DM.ITEM.CashShop.ToString())? (int)DM.ITEM.CashShop
             : -9999;
+    }
+
+    public GameManager.STATE convertGameState2Enum(string name){
+        return (name == GameManager.STATE.PLAY.ToString())? GameManager.STATE.PLAY
+            :(name == GameManager.STATE.WAIT.ToString())? GameManager.STATE.WAIT
+            :(name == GameManager.STATE.GAMEOVER.ToString())? GameManager.STATE.GAMEOVER
+            :(name == GameManager.STATE.PAUSE.ToString())? GameManager.STATE.PAUSE
+            :(name == GameManager.STATE.CONTINUE.ToString())? GameManager.STATE.CONTINUE
+            :(name == GameManager.STATE.HOME.ToString())? GameManager.STATE.HOME
+            : GameManager.STATE.NULL;
     }
 
     public PSV convertPsvSkillStr2Enum(string name){
