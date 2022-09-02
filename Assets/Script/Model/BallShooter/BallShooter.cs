@@ -34,7 +34,7 @@ public class BallShooter : MonoBehaviour
         if(!IsBallExist){
             //* COUNTING
             time -= Time.deltaTime;
-            gm.setShootCntText(time.ToString("N0"));
+            gm.ShootCntTxt.text = time.ToString("N0");
             gm.readyBtn.gameObject.SetActive(true);
 
             //* 「！」マークいきなりボール投げる。
@@ -46,7 +46,7 @@ public class BallShooter : MonoBehaviour
                 IsBallExist = true;
                 gm.throwScreenAnimSetTrigger("ThrowBall");
 
-                gm.setShootCntText("SHOOT");
+                gm.ShootCntTxt.text = "SHOOT";
                 Debug.Log("ballPreviewDirGoalPos="+gm.ballPreviewDirGoal.transform.position+", entranceTfPos="+entranceTf.position);
                 Vector3 goalDir = (gm.ballPreviewDirGoal.transform.position - entranceTf.position).normalized;
                 GameObject instance = Instantiate(ballPref, entranceTf.position, Quaternion.LookRotation(goalDir), gm.ballGroup);

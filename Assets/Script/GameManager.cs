@@ -35,11 +35,10 @@ public class GameManager : MonoBehaviour
     public int bestScore;
     public int strikeCnt = 0;
     public int comboCnt = 0;
-
     public Text stageTxt;
     public Text stateTxt;
     public Text levelTxt;
-    public Text shootCntTxt;
+    [SerializeField] private Text shootCntTxt;      public Text ShootCntTxt { get => shootCntTxt; set => shootCntTxt = value;}
     public Text comboTxt;
     public Text perfectTxt;
     public RectTransform homeRunTxtTf;
@@ -155,8 +154,6 @@ public class GameManager : MonoBehaviour
             btn.setActiveSkillEF();
         });
     }
-
-    public void setShootCntText(string str) => shootCntTxt.text = str;
     public void setBallPreviewGoalImgRGBA(Color color) => ballPreviewGoalImg.color = color;
     public void throwScreenAnimSetTrigger(string name) => throwScreen.GetComponent<Animator>().SetTrigger(name);
     public void setLightDarkness(bool isOn){ //* During Skill Casting ...
@@ -314,7 +311,7 @@ public class GameManager : MonoBehaviour
         strikeBallImgs[strikeCnt++].gameObject.SetActive(true);
         if(isOut){
             strikeCnt = 0;
-            setShootCntText("OUT!");
+            ShootCntTxt.text = "OUT!";
             yield return new WaitForSeconds(1.5f);
             ballShooter.init();
             switchCamScene();
@@ -323,7 +320,7 @@ public class GameManager : MonoBehaviour
             readyBtn.gameObject.SetActive(true);
         }
         else{
-            setShootCntText("STRIKE!");
+            ShootCntTxt.text = "STRIKE!";
             readyBtn.gameObject.SetActive(true);
             yield return new WaitForSeconds(1.5f);
             ballShooter.init();
