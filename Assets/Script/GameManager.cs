@@ -403,7 +403,14 @@ public class GameManager : MonoBehaviour
                     int index = imgObj.transform.GetSiblingIndex();
                     imgObj.transform.SetSiblingIndex(index - 1);
                 }
-                rowTf.GetComponentInChildren<Text>().text = (lv.Value < 5)? levelTxt : "MAX";
+                
+                if(lv.Value < 5){
+                    rowTf.GetComponentInChildren<Text>().text = levelTxt;
+                }else{
+                    rowTf.GetComponentInChildren<Text>().text = "MAX";
+                    Color orange = new Color(1.0f, 0.4f, 0.0f);
+                    rowTf.GetComponentInChildren<Text>().color = orange;
+                }
             }
             i++;
         });
