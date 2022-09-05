@@ -31,6 +31,9 @@ public class EffectManager : MonoBehaviour
     public GameObject[] activeSkillExplosionEFs;
     public GameObject[] activeSkillCastEFs;
 
+    //* Active HomeRun Bonus
+    public GameObject fireBallDotEF;
+
     //* Drop Items EF
     public GameObject dropItemExpOrbEF;
 
@@ -135,6 +138,9 @@ public class EffectManager : MonoBehaviour
         Debug.Log("createActiveSkillCastEF:: name= " + activeSkillCastEFs[idx].name);
         var ins = Instantiate(activeSkillCastEFs[idx], parentTf.position, Quaternion.identity, parentTf) as GameObject;
         ins.transform.localRotation = Quaternion.Euler(0,0,0); //* 角度がずらす部分対応。
+    }
+    public void createAtvSkFireBallDotEF(Transform parentTf){
+        var ins = Instantiate(fireBallDotEF, parentTf.position, Quaternion.identity, parentTf) as GameObject;
     }
 
     //* -------------------------------------------------------------

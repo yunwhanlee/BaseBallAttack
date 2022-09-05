@@ -198,7 +198,10 @@ public class Ball_Prefab : MonoBehaviour
                             break;
                         case DM.ATV.FireBall:{
                             em.createActiveSkillExplosionEF(skillIdx, this.transform);
-                            decreaseHpSphereCastAll(AtvSkill.FIREBALL_DMG);
+                            decreaseHpSphereCastAll(atv, AtvSkill.FIREBALL_DMG);
+                            if(isHomeRun){
+                                decreaseHpSphereCastAll(atv, 0, AtvSkill.POISONSMOKE_PER);
+                            }
                             skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
@@ -230,7 +233,7 @@ public class Ball_Prefab : MonoBehaviour
                             int destroyCnt = 999;
                             em.createActiveSkillExplosionEF(skillIdx, this.transform, destroyCnt);
                             RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.PoisonSmokeCastWidth, Vector3.up, 0);
-                            decreaseHpSphereCastAll(0, AtvSkill.POISONSMOKE_PER);
+                            decreaseHpSphereCastAll(atv, 0, AtvSkill.POISONSMOKE_PER);
                             skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
@@ -286,11 +289,20 @@ public class Ball_Prefab : MonoBehaviour
 
     private void onDestroyMeInvoke() => onDestroyMe();
     
-    private void decreaseHpSphereCastAll(int dmg, float dotDmgPer = 0){
+    private void decreaseHpSphereCastAll(DM.ATV atv, int dmg, float dotDmgPer = 0){
         RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.FireBallCastWidth, Vector3.up, 0);
         Array.ForEach(hits, hit => {
             if(hit.transform.tag == BlockMaker.NORMAL_BLOCK){
                 var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
+                //* Is DotDmg Type?
+                if(!(dotDmgPer == 0) && !block.IsDotDmg){
+                    block.IsDotDmg = true;
+                    switch(atv){
+                        case DM.ATV.FireBall:
+                            em.createAtvSkFireBallDotEF(block.transform);
+                            break;
+                    }
+                }
                 //* Check Dot Dmg or General Dmg
                 int val = (dotDmgPer == 0)? dmg : block.getDotDmg(dotDmgPer);
                 block.decreaseHp(val);

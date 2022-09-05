@@ -5,11 +5,14 @@ using UnityEngine;
 public class ActiveSkillGizmos : MonoBehaviour
 {
     [SerializeField] protected Player pl;
+    [SerializeField] protected SpriteRenderer sprRdr;
     [SerializeField] protected float width;
     [SerializeField] protected bool isGizmosOn = true;
     [SerializeField] protected DM.ATV type;
     protected void Start(){
         pl = GameObject.Find("Player").GetComponent<Player>();
+        sprRdr = GetComponent<SpriteRenderer>();
+
         switch(type){
             case DM.ATV.Thunder : pl.ThunderCastWidth = width; break;
             case DM.ATV.FireBall : pl.FireBallCastWidth = width;   break;
@@ -21,13 +24,13 @@ public class ActiveSkillGizmos : MonoBehaviour
 
 
     protected void OnTriggerEnter(Collider col){
-        if(col.gameObject.CompareTag("NormalBlock")){
+        if(col.gameObject.CompareTag(BlockMaker.NORMAL_BLOCK)){
             Debug.Log("ActiveSkillGizmos:: OnTriggerEnter:: col.name= " + col.name);
             col.GetComponent<Block_Prefab>().setEnabledSpriteGlowEF(true);
         }
     }
     protected void OnTriggerExit(Collider col){
-        if(col.gameObject.CompareTag("NormalBlock")){
+        if(col.gameObject.CompareTag(BlockMaker.NORMAL_BLOCK)){
             Debug.Log("ActiveSkillGizmos:: OnTriggerExit:: col.name= " + col.name);
             col.GetComponent<Block_Prefab>().setEnabledSpriteGlowEF(false);
         }

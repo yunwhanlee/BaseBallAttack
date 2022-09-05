@@ -10,7 +10,7 @@ public class DM : MonoBehaviour
     public static DM ins;
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
     public enum ITEM {Chara, Bat, Skill, CashShop};
-    public enum ATV{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave};
+    public enum ATV{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave, NULL};
     public enum PSV{Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn, VerticalMultiShot, NULL};
 
     [Header("--Personal Data--")]

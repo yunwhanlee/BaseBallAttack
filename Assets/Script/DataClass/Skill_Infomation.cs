@@ -158,7 +158,7 @@ public class AtvSkill{
     public AtvSkill(GameManager gm, Player pl){ //@ Overload
         // Debug.Log("ActiveSkill(gm, pl):: gm=" + gm.stage + ", pl=" + pl.dmg.Value);
         THUNDERSHOT_CRT = 2;
-        FIREBALL_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.25f);
+        FIREBALL_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.15f);
         COLORBALL_DMG = Player.ONE_KILL;
         POISONSMOKE_PER = 0.3f;
         ICEWAVE_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.3f);

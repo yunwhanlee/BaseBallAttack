@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4519404607397406959}
   - component: {fileID: 4519404607397406866}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 3088802923213203738}
   - component: {fileID: 5189006728373185642}
   - component: {fileID: 4237910625630707934}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: CastImgRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,6 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pl: {fileID: 0}
+  sprRdr: {fileID: 0}
   width: 4.1
   isGizmosOn: 0
   type: 3
@@ -246,7 +247,7 @@ GameObject:
   - component: {fileID: 4519404608316719709}
   m_Layer: 0
   m_Name: PoisonSmokeCastEffect
-  m_TagString: Untagged
+  m_TagString: AtvSkillCast
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

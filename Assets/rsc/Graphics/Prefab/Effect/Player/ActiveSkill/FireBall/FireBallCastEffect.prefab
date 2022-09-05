@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4519404607397406959}
   - component: {fileID: 4519404607397406866}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 6160856041123038798}
   - component: {fileID: 3088802923213203738}
   - component: {fileID: 5189006728373185642}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: CastImgRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5553ee3c46cfb784fbc3710bce5a7ae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pl: {fileID: 0}
+  sprRdr: {fileID: 0}
   width: 5.2
+  isGizmosOn: 1
+  type: 0
 --- !u!114 &4519404607714465907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +247,7 @@ GameObject:
   - component: {fileID: 4519404608316719709}
   m_Layer: 0
   m_Name: FireBallCastEffect
-  m_TagString: Untagged
+  m_TagString: AtvSkillCast
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
