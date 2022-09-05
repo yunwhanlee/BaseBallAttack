@@ -434,7 +434,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(coWaitPlayerCollectOrb());
         destroyEveryBalls();
         setBallPreviewGoalRandomPos();
-        checkBlocksIsDotDmg();
+        activeSkillDataBase[0].checkBlocksIsDotDmg(bm, em);
 
         //* Collect Drop Items Exp
         var dropObjs = bm.dropItemGroup.GetComponentsInChildren<DropItem>();
@@ -463,15 +463,6 @@ public class GameManager : MonoBehaviour
             for(int i=0; i<ballGroup.childCount; i++)
                 Destroy(ballGroup.GetChild(i).gameObject);
         }
-    }
-    private void checkBlocksIsDotDmg(){
-        var blocks = bm.GetComponentsInChildren<Block_Prefab>();
-        Array.ForEach(blocks, bl => {
-            if(bl.IsDotDmg) {
-                bl.decreaseHp(bl.getDotDmg(AtvSkill.POISONSMOKE_PER));
-                em.createCritTxtEF(bl.transform, bl.getDotDmg(AtvSkill.POISONSMOKE_PER));
-            }
-        });
     }
     public void checkLevelUp(){
         Debug.LogFormat("<color=blue>checkLevelUp():: pl.BefLv= {0}, pl.Lv= {1}</color>", pl.BefLv, pl.Lv);

@@ -135,8 +135,9 @@ public class AtvSkill{
     //* Damage value
     public static float THUNDERSHOT_CRT;
     public static int FIREBALL_DMG;
+    public static float FIREBALL_DOT;
     public static int COLORBALL_DMG;
-    public static float POISONSMOKE_PER;
+    public static float POISONSMOKE_DOT;
     public static int ICEWAVE_DMG;
 
     //* constructor
@@ -159,13 +160,29 @@ public class AtvSkill{
         // Debug.Log("ActiveSkill(gm, pl):: gm=" + gm.stage + ", pl=" + pl.dmg.Value);
         THUNDERSHOT_CRT = 2;
         FIREBALL_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.15f);
+        FIREBALL_DOT = 0.15f;
         COLORBALL_DMG = Player.ONE_KILL;
-        POISONSMOKE_PER = 0.3f;
+        POISONSMOKE_DOT = 0.25f;
         ICEWAVE_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.3f);
     }
 
     //* method
-    //* なし
+    public void checkBlocksIsDotDmg(BlockMaker bm, EffectManager em){
+        var blocks = bm.GetComponentsInChildren<Block_Prefab>();
+        Array.ForEach(blocks, bl => {
+            if(bl.IsDotDmg) {
+                float dmg = AtvSkill.POISONSMOKE_DOT;
+                for(int i=0; i<bl.transform.childCount; i++){
+                    if(bl.transform.GetChild(i).name.Contains("FireBallDotEffect")){
+                        dmg = AtvSkill.FIREBALL_DOT;
+                        break;
+                    }
+                }
+                bl.decreaseHp(bl.getDotDmg(dmg));
+                em.createCritTxtEF(bl.transform, bl.getDotDmg(AtvSkill.POISONSMOKE_DOT));
+            }
+        });
+    }
 }
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------

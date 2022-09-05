@@ -200,7 +200,7 @@ public class Ball_Prefab : MonoBehaviour
                             em.createActiveSkillExplosionEF(skillIdx, this.transform);
                             decreaseHpSphereCastAll(atv, AtvSkill.FIREBALL_DMG);
                             if(isHomeRun){
-                                decreaseHpSphereCastAll(atv, 0, AtvSkill.POISONSMOKE_PER);
+                                decreaseHpSphereCastAll(atv, 0, AtvSkill.POISONSMOKE_DOT);
                             }
                             skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
@@ -233,7 +233,7 @@ public class Ball_Prefab : MonoBehaviour
                             int destroyCnt = 999;
                             em.createActiveSkillExplosionEF(skillIdx, this.transform, destroyCnt);
                             RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.PoisonSmokeCastWidth, Vector3.up, 0);
-                            decreaseHpSphereCastAll(atv, 0, AtvSkill.POISONSMOKE_PER);
+                            decreaseHpSphereCastAll(atv, 0, AtvSkill.POISONSMOKE_DOT);
                             skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
