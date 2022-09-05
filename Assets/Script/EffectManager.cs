@@ -87,7 +87,7 @@ public class EffectManager : MonoBehaviour
         var ins = Instantiate(instantKillTextEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
         Destroy(ins, 1.5f);
     }
-    public GameObject createCriticalTextEF(Transform parentTf, int damage){
+    public GameObject createCritTxtEF(Transform parentTf, int damage){
         var ins = Instantiate(criticalTextEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
         ins.GetComponentInChildren<Text>().text = damage.ToString();
         Destroy(ins, 1.5f);

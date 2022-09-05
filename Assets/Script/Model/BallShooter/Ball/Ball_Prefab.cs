@@ -218,7 +218,7 @@ public class Ball_Prefab : MonoBehaviour
                                 //* Destroy
                                 Array.ForEach(sameColorBlocks, bl => {
                                     em.createActiveSkillExplosionEF(skillIdx, bl.transform);
-                                    bl.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(100);
+                                    bl.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(AtvSkill.COLORBALL_DMG);
                                 });
                             }
 
@@ -292,8 +292,9 @@ public class Ball_Prefab : MonoBehaviour
             if(hit.transform.tag == BlockMaker.NORMAL_BLOCK){
                 var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
                 //* Check Dot Dmg or General Dmg
-                block.decreaseHp((dotDmgPer == 0)? dmg
-                    : block.getDotDmg(dotDmgPer));
+                int val = (dotDmgPer == 0)? dmg : block.getDotDmg(dotDmgPer);
+                block.decreaseHp(val);
+                em.createCritTxtEF(hit.transform, val);
             }
         });
     }
@@ -408,7 +409,7 @@ public class Ball_Prefab : MonoBehaviour
         //* Set Dmg & Multi CriticalTextEF
         hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(((int)(pl.dmg.Value * critDmgRatio) * multiCnt));
         for(int i=0; i<multiCnt; i++){
-            var obj = em.createCriticalTextEF(hit.transform, (int)(pl.dmg.Value * critDmgRatio));
+            var obj = em.createCritTxtEF(hit.transform, (int)(pl.dmg.Value * critDmgRatio));
             obj.SetActive(false);
             effectList.Add(obj);
         }

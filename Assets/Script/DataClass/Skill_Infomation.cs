@@ -92,7 +92,7 @@ public class PsvSkill<T> where T: struct {
                     result = Player.ONE_KILL;
                     break;
                 case DM.PSV.Critical: 
-                    em.createCriticalTextEF(col.transform, pl.dmg.Value * 2);
+                    em.createCritTxtEF(col.transform, pl.dmg.Value * 2);
                     result = pl.dmg.Value * 2;
                     break;
                 case DM.PSV.Explosion:

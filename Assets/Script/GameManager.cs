@@ -466,8 +466,11 @@ public class GameManager : MonoBehaviour
     }
     private void checkBlocksIsDotDmg(){
         var blocks = bm.GetComponentsInChildren<Block_Prefab>();
-        Array.ForEach(blocks, block => {
-            if(block.IsDotDmg)  block.decreaseHp(block.getDotDmg(AtvSkill.POISONSMOKE_PER));
+        Array.ForEach(blocks, bl => {
+            if(bl.IsDotDmg) {
+                bl.decreaseHp(bl.getDotDmg(AtvSkill.POISONSMOKE_PER));
+                em.createCritTxtEF(bl.transform, bl.getDotDmg(AtvSkill.POISONSMOKE_PER));
+            }
         });
     }
     public void checkLevelUp(){

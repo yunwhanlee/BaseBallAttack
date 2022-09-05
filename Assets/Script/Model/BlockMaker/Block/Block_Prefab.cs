@@ -259,8 +259,10 @@ public class Block_Prefab : MonoBehaviour
     }
 
     public int getDotDmg(float per){
-        Debug.LogFormat("getDotDmg(per):: {0} * {1} = {2}", Hp, per, (Hp > 1)? (int)(Hp * per) : 1);
-        return (Hp > 1)? (int)(Hp * per) : 1;
+        int res = (Hp >= 1)? (int)(Hp * per) : 1;
+        res = (res <= 0)? 1 : res;
+        Debug.LogFormat("<color=green>getDotDmg(per):: {0} * {1} = {2}</color>", Hp, per, res);
+        return res;
     }
 
     void OnDrawGizmos(){
