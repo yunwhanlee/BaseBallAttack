@@ -17,7 +17,7 @@ public class ItemInfo : MonoBehaviour
     [SerializeField] UnityEngine.UI.Extensions.NicerOutline outline2D;    public UnityEngine.UI.Extensions.NicerOutline Outline2D{get => outline2D; set => outline2D = value;}
     [SerializeField] int price;     public int Price {get => price; set => price = value;}
     [SerializeField] Text cashShopPriceTxt;     public Text CashShopPriceTxt {get => cashShopPriceTxt; set => cashShopPriceTxt = value;}
-    [SerializeField] ItemPassiveList itemPassive;  public ItemPassiveList ItemPassive {get => itemPassive; set=> itemPassive = value;}
+    [SerializeField] ItemPsvList itemPassive;  public ItemPsvList ItemPassive {get => itemPassive; set=> itemPassive = value;}
 
 
     void Start(){

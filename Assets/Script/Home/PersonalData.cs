@@ -20,7 +20,7 @@ public class PersonalData {
     [SerializeField] int selectSkill2Idx;  public int SelectSkill2Idx {get => selectSkill2Idx; set => selectSkill2Idx = value;}
     [SerializeField] List<bool> skillLockList;  public List<bool> SkillLockList {get => skillLockList; set => skillLockList = value;}
     [Header("--Item Passive--")]
-    [SerializeField] ItemPassiveList itemPassive; public ItemPassiveList ItemPassive {get => itemPassive; set => itemPassive = value;}
+    [SerializeField] ItemPsvList itemPassive; public ItemPsvList ItemPassive {get => itemPassive; set => itemPassive = value;}
     
     //* PlayerPrefs キー リスト => privateは jsonには追加しない。
     private List<string> keyList;  public List<string> KeyList {get => keyList; set => keyList = value;}
@@ -34,7 +34,7 @@ public class PersonalData {
         charaLockList = new List<bool>();
         batLockList = new List<bool>();
         skillLockList = new List<bool>();
-        ItemPassive = new ItemPassiveList();
+        ItemPassive = new ItemPsvList();
     }
 
     //* method

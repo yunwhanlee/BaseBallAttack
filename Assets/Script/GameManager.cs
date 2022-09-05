@@ -66,8 +66,8 @@ public class GameManager : MonoBehaviour
 
     [Header("-- Active Btn --")]
     public RectTransform activeSkillBtnPf;
-    public ActiveSkill[] activeSkillDataBase; //* 全てActiveSkillsのデータベース
-    public List<ActiveSkillBtnUI> activeSkillBtnList; //* ActiveSkillボタン
+    public AtvSkill[] activeSkillDataBase; //* 全てActiveSkillsのデータベース
+    public List<AtvSkillBtnUI> activeSkillBtnList; //* ActiveSkillボタン
     public Material activeSkillBtnEfMt;
     [SerializeField] int selectAtvSkillBtnIdx;  public int SelectAtvSkillBtnIdx { get=> selectAtvSkillBtnIdx; set=> selectAtvSkillBtnIdx = value;}
     public bool isPointUp; //* SectorGizmos Colliderへ活用するため。
@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
             int btnIdx = (idx==DM.ins.personalData.SelectSkillIdx)? 0 : 1;
             btn.GetComponent<Button>().onClick.AddListener(() => onClickActiveSkillButton(btnIdx));
             Debug.LogFormat("activeSkillBtn[{0}].onClick.AddListener => onClickActiveSkillButton({1})", i,btnIdx);
-            activeSkillBtnList.Add(new ActiveSkillBtnUI(i, pl.AtvSkillCoolDownUnit, pl.activeSkills[idx].Name, btn.GetComponent<Button>(), pl.activeSkills[idx].UISprite, activeSkillBtnEfMt));
+            activeSkillBtnList.Add(new AtvSkillBtnUI(i, pl.AtvSkillCoolDownUnit, pl.activeSkills[idx].Name, btn.GetComponent<Button>(), pl.activeSkills[idx].UISprite, activeSkillBtnEfMt));
         }
     }
 
@@ -467,7 +467,7 @@ public class GameManager : MonoBehaviour
     private void checkBlocksIsDotDmg(){
         var blocks = bm.GetComponentsInChildren<Block_Prefab>();
         Array.ForEach(blocks, block => {
-            if(block.IsDotDmg)  block.decreaseHp(block.getDotDmg(2));
+            if(block.IsDotDmg)  block.decreaseHp(block.getDotDmg(AtvSkill.POISONSMOKE_PER));
         });
     }
     public void checkLevelUp(){

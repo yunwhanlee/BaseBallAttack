@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
     [Header("<---- Active Skill ---->")]
     public float atvSkillCoolDownUnit = 0.05f;  public float AtvSkillCoolDownUnit {get=> atvSkillCoolDownUnit;}
     public string[] registAtvSkillNames;// = new string[3];
-    public ActiveSkill[] activeSkills;// = new ActiveSkill[3];
+    public AtvSkill[] activeSkills;// = new ActiveSkill[3];
     [SerializeField] Transform batEffectTf;           public Transform BatEffectTf {get => batEffectTf; set => batEffectTf = value;}
     [SerializeField] Transform castEFArrowTf;         public Transform CastEFArrowTf {get => castEFArrowTf;}
     [SerializeField] Transform castEFBallPreviewTf;   public Transform CastEFBallPreviewTf {get => castEFBallPreviewTf;}
@@ -57,16 +57,16 @@ public class Player : MonoBehaviour
     
     
     [Header("<---- Passive Skill ---->")]
-    public int INSTANTKILL_FIXED_DMG = 999999;
-    public PassiveSkill<int> dmg;
-    public PassiveSkill<int> multiShot;
-    public PassiveSkill<float> speed;
-    public PassiveSkill<float> instantKill;
-    public PassiveSkill<float> critical;
-    public PassiveSkill<Explosion> explosion;
-    public PassiveSkill<float> expUp;
-    public PassiveSkill<float> itemSpawn;
-    public PassiveSkill<int> verticalMultiShot;
+    public const int ONE_KILL = 999999;
+    public PsvSkill<int> dmg;
+    public PsvSkill<int> multiShot;
+    public PsvSkill<float> speed;
+    public PsvSkill<float> instantKill;
+    public PsvSkill<float> critical;
+    public PsvSkill<Explosion> explosion;
+    public PsvSkill<float> expUp;
+    public PsvSkill<float> itemSpawn;
+    public PsvSkill<int> verticalMultiShot;
 
     //* Component
     private Animator anim;
@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
 
         var atvSkillDb = gm.activeSkillDataBase;
         registAtvSkillNames = new string[atvSkillDb.Length];
-        activeSkills = new ActiveSkill[atvSkillDb.Length];
+        activeSkills = new AtvSkill[atvSkillDb.Length];
 
         //* Player Charaは 必ず０番目のINDEXにすること！！
         var charaTf = this.transform.GetChild(0);
@@ -90,13 +90,14 @@ public class Player : MonoBehaviour
         Debug.Log("Player:: Start:: RightArm.childCount= " + RightArm.childCount + ", RightArm= " + RightArm);
         Debug.Log("Player:: charaTf= " + charaTf + ", BatEffectTf= " + BatEffectTf);
 
+#region Set ATV Skill DataBase
+        //* A. Resource
         int i=0;
-        //* Set Active Skills DataBase
         Array.ForEach(atvSkillDb, dt=>{
             // Get All Skill Names
             registAtvSkillNames[i] = dt.Name;
             // Get All Skill Data
-            activeSkills[i] = new ActiveSkill(registAtvSkillNames[i], atvSkillDb);
+            activeSkills[i] = new AtvSkill(registAtvSkillNames[i], atvSkillDb);
             // Set EffectManager All Skill Effects
             em.activeSkillBatEFs[i] = activeSkills[i].BatEfPref;
             em.activeSkillShotEFs[i] = activeSkills[i].ShotEfPref;
@@ -105,29 +106,30 @@ public class Player : MonoBehaviour
             em.createActiveSkillBatEF(i, BatEffectTf);
             i++;
         });
-
-        //* Set Passive Skills : @params { int level, T value, T unit }
+#endregion
+#region Set PSV Skill DataBase
+        //* Init
         var psvLvArr = DM.ins.personalData.ItemPassive.Arr;
-        dmg = new PassiveSkill<int>(
+        dmg = new PsvSkill<int>(
             DM.PSV.Dmg.ToString(), psvLvArr[(int)DM.PSV.Dmg].lv, 1, 1);
-        multiShot = new PassiveSkill<int>(
+        multiShot = new PsvSkill<int>(
             DM.PSV.MultiShot.ToString(), psvLvArr[(int)DM.PSV.MultiShot].lv, 0, 1);
-        speed = new PassiveSkill<float>(
+        speed = new PsvSkill<float>(
             DM.PSV.Speed.ToString(), psvLvArr[(int)DM.PSV.Speed].lv, 1f, 0.35f);
-        instantKill = new PassiveSkill<float>(
+        instantKill = new PsvSkill<float>(
             DM.PSV.InstantKill.ToString(), psvLvArr[(int)DM.PSV.InstantKill].lv, 0f, 0.02f);
-        critical = new PassiveSkill<float>(
+        critical = new PsvSkill<float>(
             DM.PSV.Critical.ToString(), psvLvArr[(int)DM.PSV.Critical].lv, 0f, 0.2f);
-        explosion = new PassiveSkill<Explosion>(
+        explosion = new PsvSkill<Explosion>(
             DM.PSV.Explosion.ToString(), psvLvArr[(int)DM.PSV.Explosion].lv, new Explosion(0f, 0.75f), new Explosion(0.25f, 0.25f));
-        expUp = new PassiveSkill<float>(
+        expUp = new PsvSkill<float>(
             DM.PSV.ExpUp.ToString(), psvLvArr[(int)DM.PSV.ExpUp].lv, 1f, 0.2f);
-        itemSpawn = new PassiveSkill<float>(
+        itemSpawn = new PsvSkill<float>(
             DM.PSV.ItemSpawn.ToString(), psvLvArr[(int)DM.PSV.ItemSpawn].lv, 0.1f, 0.05f);
-        verticalMultiShot = new PassiveSkill<int>(
+        verticalMultiShot = new PsvSkill<int>(
             DM.PSV.VerticalMultiShot.ToString(), psvLvArr[(int)DM.PSV.VerticalMultiShot].lv, 0, 1);
 
-        //* Apply Psv Data
+        //* Apply
         dmg.initPsvSkillDt(dmg.Value + dmg.Unit);
         multiShot.initPsvSkillDt(multiShot.Value + multiShot.Unit * multiShot.Level);
         speed.initPsvSkillDt(speed.Value + speed.Unit);
@@ -137,6 +139,7 @@ public class Player : MonoBehaviour
         expUp.initPsvSkillDt(expUp.Value + expUp.Unit);
         itemSpawn.initPsvSkillDt(itemSpawn.Value + itemSpawn.Unit);
         verticalMultiShot.initPsvSkillDt(verticalMultiShot.Value + verticalMultiShot.Unit * verticalMultiShot.Level);
+#endregion
 
         //* Show Psv UI
         gm.displayCurPassiveSkillUI("INGAME");

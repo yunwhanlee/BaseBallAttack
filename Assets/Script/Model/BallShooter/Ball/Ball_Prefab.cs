@@ -32,6 +32,9 @@ public class Ball_Prefab : MonoBehaviour
 
         rigid = GetComponent<Rigidbody>();
         rigid.AddForce(this.transform.forward * speed, ForceMode.Impulse);
+
+        //* B. Dmg
+        new AtvSkill(gm, pl);
         //Debug.Log("HitRange:: startPosZ=" + gm.hitRangeStartTf.position.z +  ", endPosZ="+ gm.hitRangeEndTf.position.z);
     }
     void Update(){
@@ -126,8 +129,9 @@ public class Ball_Prefab : MonoBehaviour
                 
                 //* Multi Shot
                 for(int i=0; i<pl.multiShot.Value;i++){
-                    float [] addDegList = {-15, 15, -30, 30};
-                    Vector3 direction = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (deg + addDegList[i])), 0, Mathf.Cos(Mathf.Deg2Rad * (deg + addDegList[i]))).normalized;
+                    const int DEG = 15;
+                    float [] addDegList = {-DEG, DEG, -(DEG*2), (DEG*2)};
+                    Vector3 direction = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (DEG + addDegList[i])), 0, Mathf.Cos(Mathf.Deg2Rad * (DEG + addDegList[i]))).normalized;
                     var ins = Instantiate(this.gameObject, this.transform.position, Quaternion.identity, gm.ballGroup) as GameObject;
                     ins.GetComponent<Rigidbody>().AddForce(direction * force * 0.75f, ForceMode.Impulse);
                     var scale = ins.GetComponent<Transform>().localScale;
@@ -180,7 +184,7 @@ public class Ball_Prefab : MonoBehaviour
     //* ---------------------------------------------------------------------------------
     private void OnCollisionEnter(Collision col) {//* Give Damage
         if(col.gameObject.tag == BlockMaker.NORMAL_BLOCK){
-#region #2. Active Skill HIT
+#region #2. Active Skill 「HIT BALL」
             isHitedByBlock = true;
             gm.activeSkillBtnList.ForEach(skillBtn => {
                 if(skillBtn.Trigger){
@@ -194,7 +198,7 @@ public class Ball_Prefab : MonoBehaviour
                             break;
                         case DM.ATV.FireBall:{
                             em.createActiveSkillExplosionEF(skillIdx, this.transform);
-                            decreaseHpSphereCastAll(10);
+                            decreaseHpSphereCastAll(AtvSkill.FIREBALL_DMG);
                             skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
@@ -226,7 +230,7 @@ public class Ball_Prefab : MonoBehaviour
                             int destroyCnt = 999;
                             em.createActiveSkillExplosionEF(skillIdx, this.transform, destroyCnt);
                             RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.PoisonSmokeCastWidth, Vector3.up, 0);
-                            decreaseHpSphereCastAll(0, 2);
+                            decreaseHpSphereCastAll(0, AtvSkill.POISONSMOKE_PER);
                             skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
@@ -244,14 +248,14 @@ public class Ball_Prefab : MonoBehaviour
                 }
             });
 #endregion
-#region Passive Skill HIT
+#region Passive Skill 「HIT BALL」
             bool isOnExplosion = false;
             int result = 0;
 
             //* InstantKill
             pl.instantKill.setHitTypePsvSkill(pl.instantKill.Value, ref result, col, em, pl);
 
-            if(result != pl.INSTANTKILL_FIXED_DMG){
+            if(result != Player.ONE_KILL){
                 //* Critical
                 pl.critical.setHitTypePsvSkill(pl.critical.Value, ref result, col, em, pl);
 
@@ -282,12 +286,14 @@ public class Ball_Prefab : MonoBehaviour
 
     private void onDestroyMeInvoke() => onDestroyMe();
     
-    private void decreaseHpSphereCastAll(int dmg, int dotDmgDevideVal = 0){
+    private void decreaseHpSphereCastAll(int dmg, float dotDmgPer = 0){
         RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.FireBallCastWidth, Vector3.up, 0);
         Array.ForEach(hits, hit => {
             if(hit.transform.tag == BlockMaker.NORMAL_BLOCK){
                 var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
-                block.decreaseHp((dotDmgDevideVal==0)? dmg : block.getDotDmg(dotDmgDevideVal));
+                //* Check Dot Dmg or General Dmg
+                block.decreaseHp((dotDmgPer == 0)? dmg
+                    : block.getDotDmg(dotDmgPer));
             }
         });
     }
@@ -349,15 +355,14 @@ public class Ball_Prefab : MonoBehaviour
     //* ---------------------------------------------------------------------------------
     //* Swing Ball (Shot EF)
     //* ---------------------------------------------------------------------------------
-#region Passive Skill SHOT
-    IEnumerator coPlayActiveSkillShotEF(ActiveSkillBtnUI btn, float waitTime, Vector3 dir){
+#region Passive Skill 「HIT BAT」
+    IEnumerator coPlayActiveSkillShotEF(AtvSkillBtnUI btn, float waitTime, Vector3 dir){
         Debug.LogFormat("coPlayActiveSkillShotEF:: btn={0}, waitTite={1}, dir={2}, isHomeRun={3}", btn.Name, waitTime, dir, isHomeRun);
         float delayTime = 0;
         int skillIdx = gm.getCurSkillIdx();
         var atv = DM.ins.convertAtvSkillStr2Enum(btn.Name);
         switch(atv){
             case DM.ATV.Thunder:
-
                 delayTime = 2;
                 const int maxDistance = 50;
                 const int width = 1;
@@ -368,9 +373,8 @@ public class Ball_Prefab : MonoBehaviour
                 //* Collider 
                 RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, Vector3.one * width, dir, Quaternion.identity, maxDistance);
                 Array.ForEach(hits, hit => {
-                    //* Multi Critical Dmg
                     if(hit.transform.tag == BlockMaker.NORMAL_BLOCK){
-                        StartCoroutine(coSetThunderSkill(hit));
+                        StartCoroutine(coSetThunderSkill(hit)); //* With HomeRun Bonus
                     }
                 });
                 this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
@@ -390,6 +394,7 @@ public class Ball_Prefab : MonoBehaviour
     }
 #endregion
 
+
     IEnumerator coSetThunderSkill(RaycastHit hit){
         yield return new WaitForSeconds(0.1f);
         Debug.Log("<color=red>coSetThunderSkill():: isHomeRun= " + isHomeRun + "</color>");
@@ -397,18 +402,19 @@ public class Ball_Prefab : MonoBehaviour
         List<GameObject> effectList = new List<GameObject>(); //* HPが０になったら、発生するERROR対応。
 
         //* HomeRun Bonus
-        int ratio = (isHomeRun)? 3 : 2;
+        float critDmgRatio = (isHomeRun)? 
+            AtvSkill.THUNDERSHOT_CRT + 1 : AtvSkill.THUNDERSHOT_CRT;
 
         //* Set Dmg & Multi CriticalTextEF
-        hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp((pl.dmg.Value * ratio) * multiCnt);
+        hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(((int)(pl.dmg.Value * critDmgRatio) * multiCnt));
         for(int i=0; i<multiCnt; i++){
-            var obj = em.createCriticalTextEF(hit.transform, (pl.dmg.Value * ratio));
+            var obj = em.createCriticalTextEF(hit.transform, (int)(pl.dmg.Value * critDmgRatio));
             obj.SetActive(false);
             effectList.Add(obj);
         }
-        StartCoroutine(coMultiThunderCriticalDmgEF(effectList, multiCnt));
+        StartCoroutine(coMultiCriticalDmgEF(effectList, multiCnt));
     }
-    IEnumerator coMultiThunderCriticalDmgEF(List<GameObject> list, int cnt){
+    IEnumerator coMultiCriticalDmgEF(List<GameObject> list, int cnt){
         float span = 0.0875f;
         for(int i=0; i<cnt; i++){
             list[i].SetActive(true);

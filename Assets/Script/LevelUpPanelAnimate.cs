@@ -68,7 +68,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
         var skLvObjList = pl.getAllSkillLvList();
         
         skLvObjList.ForEach(lvObj => {
-            if(lvObj.Value >= PassiveSkill<int>.MAX_LV){
+            if(lvObj.Value >= PsvSkill<int>.MAX_LV){
                 exceptSkNameList.Add(lvObj.Key);
             }
         });

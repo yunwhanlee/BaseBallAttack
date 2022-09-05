@@ -3655,6 +3655,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gm: {fileID: 1623732227}
   pl: {fileID: 702911506}
+  exceptSkNameList: []
   scrollingSpeed: 2300
   isRollingStop: 0
   skillBtns:
@@ -3893,7 +3894,7 @@ MonoBehaviour:
   gm: {fileID: 1623732227}
   BLOCK2_SPAN: 5
   skipBlockPer: 20
-  treasureChestBlockPer: 100
+  treasureChestBlockPer: 10
   blockBundle: {fileID: 579925510}
   blockPrefs:
   - {fileID: 1376276108105304710, guid: 71f96bca88b0fd940a48a70f1bfe1885, type: 3}

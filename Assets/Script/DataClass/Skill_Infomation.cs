@@ -19,7 +19,7 @@ public class ItemPsvDt {
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------
 [System.Serializable]
-public class ItemPassiveList{
+public class ItemPsvList{
     [SerializeField] ItemPsvDt[] arr = {
         new ItemPsvDt(DM.PSV.Dmg.ToString()),
         new ItemPsvDt(DM.PSV.MultiShot.ToString()),
@@ -32,7 +32,7 @@ public class ItemPassiveList{
         new ItemPsvDt(DM.PSV.VerticalMultiShot.ToString()),
     };  public ItemPsvDt[] Arr {get => arr; set => arr = value;}
 
-    public void setImgPrefs(ItemPassiveList itemPsvList){
+    public void setImgPrefs(ItemPsvList itemPsvList){
         int i=0;
         Array.ForEach(itemPsvList.arr, dtArr => arr[i++].imgPref = dtArr.imgPref);
     }
@@ -48,7 +48,7 @@ public class ItemPassiveList{
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------
 [System.Serializable]
-public class PassiveSkill<T> where T: struct {
+public class PsvSkill<T> where T: struct {
     //*value                     //*get set
     public const int MAX_LV = 5;
     [SerializeField] string name;    public string Name {get=> name;} 
@@ -57,7 +57,7 @@ public class PassiveSkill<T> where T: struct {
     [SerializeField] T unit;    public T Unit {get=>unit;}
 
     //*constructor
-    public PassiveSkill(string name, int level, T value, T unit){
+    public PsvSkill(string name, int level, T value, T unit){
         this.name = name;
         this.level = level;
         this.value = value;
@@ -89,7 +89,7 @@ public class PassiveSkill<T> where T: struct {
             switch(psv){
                 case DM.PSV.InstantKill: 
                     em.createInstantKillTextEF(col.transform);
-                    result = pl.INSTANTKILL_FIXED_DMG;
+                    result = Player.ONE_KILL;
                     break;
                 case DM.PSV.Critical: 
                     em.createCriticalTextEF(col.transform, pl.dmg.Value * 2);
@@ -123,8 +123,8 @@ public struct Explosion{
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------
 [System.Serializable]
-public class ActiveSkill{
-    //*value                        //*get set
+public class AtvSkill{
+    //* Resource value                        //* get set
     [SerializeField] string name;    public string Name {get=> name;} 
     [SerializeField] Sprite uiSprite;    public Sprite UISprite {get=> uiSprite;}
     [SerializeField] GameObject batEfPref;    public GameObject ShotEfPref {get=> shotEfPref;}
@@ -132,8 +132,16 @@ public class ActiveSkill{
     [SerializeField] GameObject explosionEfPref;    public GameObject ExplosionEfPref {get=> explosionEfPref;}
     [SerializeField] GameObject castEfPref;    public GameObject CastEfPref {get=> castEfPref;}
 
-    //*constructor
-    public ActiveSkill(string name, ActiveSkill[] activeSkillTable){//Sprite uiSprite, GameObject batEfPref, GameObject shotEfPref, GameObject explosionEfPref){
+    //* Damage value
+    public static float THUNDERSHOT_CRT;
+    public static int FIREBALL_DMG;
+    public static int COLORBALL_DMG;
+    public static float POISONSMOKE_PER;
+    public static int ICEWAVE_DMG;
+
+    //* constructor
+    //* A. Resource
+    public AtvSkill(string name, AtvSkill[] activeSkillTable){//Sprite uiSprite, GameObject batEfPref, GameObject shotEfPref, GameObject explosionEfPref){
         Array.ForEach(activeSkillTable, skillList=>{
             if(name == skillList.Name){//* Regist Select Active Skill
                 this.name = skillList.Name;
@@ -145,13 +153,25 @@ public class ActiveSkill{
             }
         });
     }
-    //*method
+
+    //* B. Set Dmg
+    public AtvSkill(GameManager gm, Player pl){ //@ Overload
+        // Debug.Log("ActiveSkill(gm, pl):: gm=" + gm.stage + ", pl=" + pl.dmg.Value);
+        THUNDERSHOT_CRT = 2;
+        FIREBALL_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.25f);
+        COLORBALL_DMG = Player.ONE_KILL;
+        POISONSMOKE_PER = 0.3f;
+        ICEWAVE_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.3f);
+    }
+
+    //* method
+    //* なし
 }
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------
 [System.Serializable]
-public class ActiveSkillBtnUI{
+public class AtvSkillBtnUI{
     //*value                        //*get set
 
     [SerializeField] int index;  public int Index {get=> index;}
@@ -165,7 +185,7 @@ public class ActiveSkillBtnUI{
     [SerializeField] Material activeEFMt;   public Material ActiveEFMt {get=> activeEFMt;}
 
     //*contructor
-    public ActiveSkillBtnUI(int index, float unit, string name, Button skillBtn, Sprite sprite, Material activeSkillEffectMt){
+    public AtvSkillBtnUI(int index, float unit, string name, Button skillBtn, Sprite sprite, Material activeSkillEffectMt){
         this.index = index;
         this.unit = unit;
         this.name = name;
