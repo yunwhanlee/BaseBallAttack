@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     public float offsetHitDeg; // Startが０度(←方向)から、↑ →向きに回る。
     public GameObject previewBundle;
     public GameObject ballPreviewSphere;
+    public GameObject ballPreviewSphere2;
 
     [Header("<---- HIT RANK ---->")]
     public HitRank[] hitRank;
