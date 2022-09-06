@@ -4756,8 +4756,9 @@ MonoBehaviour:
   MAX_HIT_DEG: 90
   offsetHitDeg: 0
   previewBundle: {fileID: 1950984583}
-  ballPreviewSphere: {fileID: 1721060499}
-  ballPreviewSphere2: {fileID: 725560445}
+  ballPreviewSphere:
+  - {fileID: 1721060499}
+  - {fileID: 725560445}
   hitRank: []
   doSwing: 0
   isLevelUp: 0

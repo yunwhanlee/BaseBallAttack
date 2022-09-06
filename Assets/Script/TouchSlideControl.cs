@@ -74,69 +74,59 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     //*---------------------------------------
     //*  関数
     //*---------------------------------------
-
     private void drawBallPreviewSphereCast(Transform arrowAnchorTf){
         RaycastHit hit;
-        float radius = pl.ballPreviewSphere.GetComponent<SphereCollider>().radius * pl.ballPreviewSphere.transform.localScale.x;
+        float radius = pl.ballPreviewSphere[0].GetComponent<SphereCollider>().radius * pl.ballPreviewSphere[0].transform.localScale.x;
         if(Physics.SphereCast(arrowAnchorTf.position, radius, arrowAnchorTf.forward, out hit, 1000, 1 << LayerMask.NameToLayer("BallPreview"))){
-            //* BallPreview 1
-            Vector3 cetner = hit.point + radius * hit.normal; //☆
-            pl.ballPreviewSphere.transform.position = cetner;
-
+            setBallPreviewCenterPos(ref pl.ballPreviewSphere[0], hit, radius);
             if(hit.transform.CompareTag("Wall")){
                 //* Set 法線ベクトル
                 wallNormalVec = (hit.transform.position.x < 0)? Vector3.right : Vector3.left;
 
                 //* 反射角
                 var originPos = arrowAnchorTf.GetChild(0).transform.position;
-                var hitPos = pl.ballPreviewSphere.transform.position;
+                var hitPos = pl.ballPreviewSphere[0].transform.position;
                 var reflectVec = calcReflectVec(originPos, hitPos, wallNormalVec);
-                Debug.DrawRay(hit.point, reflectVec, Color.red, 1);
+                // Debug.DrawRay(hit.point, reflectVec, Color.red, 1);
 
                 RaycastHit hit2;
                 if(Physics.SphereCast(hit.point, radius, reflectVec, out hit2, 1000, 1 << LayerMask.NameToLayer("BallPreview"))){
-                    //* BallPreview 2
-                    Vector3 cetner2 = hit2.point + radius * hit2.normal; //☆
-                    pl.ballPreviewSphere2.transform.position = cetner2;
+                    setBallPreviewCenterPos(ref pl.ballPreviewSphere[1], hit2, radius);
                 }
-
             }else{
                 wallNormalVec = Vector3.zero;
             }
-            // wallNormalVec = (hit.transform.CompareTag("Wall"))? (hit.transform.position.x < 0)? Vector3.right : Vector3.left : Vector3.zero;
 
             //* 🌟ColorBall ActiveSkill
             gm.activeSkillDataBase[0].setColorBallSkillGlowEF(gm, ref bm, hit, ref hitBlockByBallPreview);
         }
     }
+    private void setBallPreviewCenterPos(ref GameObject ballPrevObj, RaycastHit hit, float radius){
+        Vector3 center = hit.point + radius * hit.normal;
+        ballPrevObj.transform.position = center;
+    }
+    private Vector3 calcReflectVec(Vector3 originPos, Vector3 hitPos, Vector3 wallNormalVec){
+        //* ★原点
+        Vector3 originalToMirrowVector = transform.position - originPos;
+        //* 入射角
+        Vector3 dir = hitPos - originPos;
+        Vector3 incomingVec = dir.normalized;
+        //* 法線ベクトル
+        Vector3 normalVec = wallNormalVec;
+        //* 反射角
+        Vector3 reflectVec = hitPos + originalToMirrowVector.magnitude * Vector3.Reflect(incomingVec, normalVec).normalized;
+        //* 結果
+        return (normalVec == Vector3.zero)? hitPos : hitPos + reflectVec;
+    }
 
     private void drawLinePreview(Transform arrowAnchorTf){
         var originPos = arrowAnchorTf.GetChild(0).transform.position;
-        var hitPos = pl.ballPreviewSphere.transform.position;
-        var hitPos2 = pl.ballPreviewSphere2.transform.position;
+        var hitPos = pl.ballPreviewSphere[0].transform.position;
+        var hitPos2 = pl.ballPreviewSphere[1].transform.position;
 
         line.SetPosition(0, originPos);
         line.SetPosition(1, hitPos);
         line.SetPosition(2, hitPos2);
-    }
-
-    private Vector3 calcReflectVec(Vector3 originPos, Vector3 hitPos, Vector3 wallNormalVec){
-        //* ★原点
-        Vector3 originalToMirrowVector = transform.position - originPos;
-
-        //* 入射角
-        Vector3 dir = hitPos - originPos;
-        Vector3 incomingVec = dir.normalized;
-
-        //* 法線ベクトル
-        Vector3 normalVec = wallNormalVec;
-
-        //* 反射角
-        Vector3 reflectVec = hitPos + originalToMirrowVector.magnitude * Vector3.Reflect(incomingVec, normalVec).normalized;
-
-        //* 結果
-        Vector3 result = (normalVec == Vector3.zero)? hitPos : hitPos + reflectVec;
-        return result;
     }
 
     private float convertDir2DegWithRange(Vector3 dir, int min, int max){

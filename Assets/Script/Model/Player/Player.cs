@@ -30,8 +30,7 @@ public class Player : MonoBehaviour
     public int MAX_HIT_DEG; //左右ある方向の最大角度
     public float offsetHitDeg; // Startが０度(←方向)から、↑ →向きに回る。
     public GameObject previewBundle;
-    public GameObject ballPreviewSphere;
-    public GameObject ballPreviewSphere2;
+    public GameObject[] ballPreviewSphere; // 2個
 
     [Header("<---- HIT RANK ---->")]
     public HitRank[] hitRank;
