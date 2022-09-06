@@ -183,6 +183,35 @@ public class AtvSkill{
             }
         });
     }
+
+    public void setColorBallSkillGlowEF(GameManager gm, ref BlockMaker bm, RaycastHit hit, ref GameObject hitBlockByBallPreview){
+        bool isColorBallSkill = gm.activeSkillBtnList.Exists(btn => btn.Trigger && btn.Name == DM.ATV.ColorBall.ToString());
+        if(isColorBallSkill && hit.transform.CompareTag(BlockMaker.NORMAL_BLOCK)){
+            Debug.Log(hit.transform.GetComponent<Block_Prefab>().kind);
+            if(hit.transform.GetComponent<Block_Prefab>().kind == BlockMaker.BLOCK.TreasureChest){//* 宝箱は場外
+                return;
+            }
+            //* Hit Color
+            var meshRd = hit.transform.gameObject.GetComponent<MeshRenderer>();
+            Color hitColor = meshRd.material.GetColor("_ColorTint");
+
+            //* Find Same Color Blocks
+            var blocks = bm.GetComponentsInChildren<Block_Prefab>();
+            var sameColorBlocks = Array.FindAll(blocks, bl =>
+                (bl.GetComponent<Block_Prefab>().kind != BlockMaker.BLOCK.TreasureChest) //* 宝箱は場外
+                && (bl.GetComponent<MeshRenderer>().material.GetColor("_ColorTint") == hitColor)
+            );
+
+            //* Glow Effect On
+            bm.setGlowEF(sameColorBlocks, true);
+            
+            //* Reset
+            if(hitBlockByBallPreview != hit.transform.gameObject){
+                bm.setGlowEF(blocks, false);
+            }
+            hitBlockByBallPreview = hit.transform.gameObject;
+        }
+    }
 }
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------
