@@ -78,13 +78,13 @@ public class PsvSkill<T> where T: struct {
         }
     }
 
-    public void initPsvSkillDt(T value){
+    public void initSkillDt(T value){
         // Debug.LogFormat("<color=yellow>initPsvSkillDt():: this.value({0}) = para({1})</color>", this.value, value);
         if(level > 0)
             this.value = value;
     }
 
-    public bool setHitTypePsvSkill(float per, ref int result, Collision col, EffectManager em, Player pl, GameObject ballPref = null){
+    public bool setHitTypeSkill(float per, ref int result, Collision col, EffectManager em, Player pl, GameObject ballPref = null){
         int rand = Random.Range(0, 100);
         int percent = Mathf.RoundToInt(per * 100); //百分率
         Debug.LogFormat("PassiveSkill:: setHitTypePsvSkill::「{0}」rand({1}) <= per({2}) : {3}",
@@ -113,6 +113,21 @@ public class PsvSkill<T> where T: struct {
             result = pl.dmg.Value; //普通のダメージをそのまま代入。
         }
         return false;
+    }
+
+    public static List<string> getAllSkillInfo2Str(Player pl){
+        return new List<string>(){
+            pl.dmg.Name,                    (pl.dmg.Value.ToString()),
+            pl.multiShot.Name,              (pl.multiShot.Value + 1).ToString(),
+            pl.speed.Name,                  (pl.speed.Value * 100).ToString() + "%",
+            pl.instantKill.Name,            (pl.instantKill.Value * 100 + "%").ToString(),
+            pl.critical.Name,               (pl.critical.Value * 100 + "%").ToString(),
+            pl.explosion.Name,              (pl.explosion.Value.per * 100 + "%").ToString(),
+            pl.expUp.Name,                  (pl.expUp.Value * 100 + "%").ToString(),
+            pl.itemSpawn.Name,              (pl.itemSpawn.Value * 100 + "%").ToString(),
+            pl.verticalMultiShot.Name,      (pl.verticalMultiShot.Value * 1 + "%").ToString(),
+            pl.criticalDamage.Name,         (CRIT_DMG_DEF + (pl.criticalDamage.Value * 100) + "%").ToString(),
+        };
     }
 }
 //--------------------------------------------------------------------------------------------------

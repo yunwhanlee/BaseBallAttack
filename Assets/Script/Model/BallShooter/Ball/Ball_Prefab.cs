@@ -261,14 +261,14 @@ public class Ball_Prefab : MonoBehaviour
             int result = 0;
 
             //* InstantKill
-            pl.instantKill.setHitTypePsvSkill(pl.instantKill.Value, ref result, col, em, pl);
+            pl.instantKill.setHitTypeSkill(pl.instantKill.Value, ref result, col, em, pl);
 
             if(result != Player.ONE_KILL){
                 //* Critical
-                pl.critical.setHitTypePsvSkill(pl.critical.Value, ref result, col, em, pl);
+                pl.critical.setHitTypeSkill(pl.critical.Value, ref result, col, em, pl);
 
                 //* Explosion（最後 ダメージ適用）
-                isOnExplosion = pl.explosion.setHitTypePsvSkill(pl.explosion.Value.per, ref result, col, em, pl, this.gameObject);
+                isOnExplosion = pl.explosion.setHitTypeSkill(pl.explosion.Value.per, ref result, col, em, pl, this.gameObject);
             }
 
             

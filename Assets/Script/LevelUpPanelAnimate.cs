@@ -65,7 +65,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
         //* Set SelectList
         skillImgCnt = gm.PsvSkillImgPrefs.Length - 1; //* ★ 自然なスクロールのため、末端に1番目Imageを追加したので、この分は消す-1。
 
-        var skLvObjList = pl.getAllSkillLvList();
+        var skLvObjList = pl.getAllPsvSkillLVList();
         
         skLvObjList.ForEach(lvObj => {
             if(lvObj.Value >= PsvSkill<int>.MAX_LV){

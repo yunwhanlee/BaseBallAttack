@@ -108,7 +108,7 @@ public class Player : MonoBehaviour
             i++;
         });
 #endregion
-#region Set PSV Skill DataBase
+#region Set PSV Skill Data
         //* Init
         var psvLvArr = DM.ins.personalData.ItemPassive.Arr;
         dmg = new PsvSkill<int>(
@@ -133,16 +133,16 @@ public class Player : MonoBehaviour
             DM.PSV.CriticalDamage.ToString(), psvLvArr[(int)DM.PSV.CriticalDamage].lv, 0, 0.5f);
 
         //* Apply
-        dmg.initPsvSkillDt(dmg.Value + dmg.Unit);
-        multiShot.initPsvSkillDt(multiShot.Value + multiShot.Unit * multiShot.Level);
-        speed.initPsvSkillDt(speed.Value + speed.Unit);
-        instantKill.initPsvSkillDt(instantKill.Value + instantKill.Unit * instantKill.Level);
-        critical.initPsvSkillDt(critical.Value + critical.Unit * critical.Level);
-        explosion.initPsvSkillDt(new Explosion(explosion.Value.per + explosion.Unit.per, explosion.Value.range + explosion.Unit.range));
-        expUp.initPsvSkillDt(expUp.Value + expUp.Unit);
-        itemSpawn.initPsvSkillDt(itemSpawn.Value + itemSpawn.Unit);
-        verticalMultiShot.initPsvSkillDt(verticalMultiShot.Value + verticalMultiShot.Unit * verticalMultiShot.Level);
-        criticalDamage.initPsvSkillDt(criticalDamage.Value + criticalDamage.Unit * criticalDamage.Level);
+        dmg.initSkillDt(dmg.Value + dmg.Unit);
+        multiShot.initSkillDt(multiShot.Value + multiShot.Unit * multiShot.Level);
+        speed.initSkillDt(speed.Value + speed.Unit);
+        instantKill.initSkillDt(instantKill.Value + instantKill.Unit * instantKill.Level);
+        critical.initSkillDt(critical.Value + critical.Unit * critical.Level);
+        explosion.initSkillDt(new Explosion(explosion.Value.per + explosion.Unit.per, explosion.Value.range + explosion.Unit.range));
+        expUp.initSkillDt(expUp.Value + expUp.Unit);
+        itemSpawn.initSkillDt(itemSpawn.Value + itemSpawn.Unit);
+        verticalMultiShot.initSkillDt(verticalMultiShot.Value + verticalMultiShot.Unit * verticalMultiShot.Level);
+        criticalDamage.initSkillDt(criticalDamage.Value + criticalDamage.Unit * criticalDamage.Level);
 #endregion
 
         //* Show Psv UI
@@ -218,7 +218,7 @@ public class Player : MonoBehaviour
         Exp = 0;
         MaxExp = maxExp * 1.75f;
     }
-    public List<KeyValuePair<string, int>> getAllSkillLvList(){ 
+    public List<KeyValuePair<string, int>> getAllPsvSkillLVList(){ 
         //* Key : Name, Value : Level
         List<KeyValuePair<string, int>> list = new List<KeyValuePair<string, int>>();
         //* set All Skills curLevel

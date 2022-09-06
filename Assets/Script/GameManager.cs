@@ -197,18 +197,7 @@ public class GameManager : MonoBehaviour
             Destroy(statusInfoContents.GetChild(i).gameObject);
 
         // Set InfoTxt List
-        List<string> infoTxtList = new List<string>(){
-            pl.dmg.Name,                    (pl.dmg.Value.ToString()),
-            pl.multiShot.Name,              (pl.multiShot.Value + 1).ToString(),
-            pl.speed.Name,                  (pl.speed.Value * 100).ToString() + "%",
-            pl.instantKill.Name,            (pl.instantKill.Value * 100 + "%").ToString(),
-            pl.critical.Name,               (pl.critical.Value * 100 + "%").ToString(),
-            pl.explosion.Name,              (pl.explosion.Value.per * 100 + "%").ToString(),
-            pl.expUp.Name,                  (pl.expUp.Value * 100 + "%").ToString(),
-            pl.itemSpawn.Name,              (pl.itemSpawn.Value * 100 + "%").ToString(),
-            pl.verticalMultiShot.Name,      (pl.verticalMultiShot.Value * 1 + "%").ToString(),
-            pl.criticalDamage.Name,         (PsvSkill<int>.CRIT_DMG_DEF + (pl.criticalDamage.Value * 100) + "%").ToString(),
-        };
+        List<string> infoTxtList = PsvSkill<int>.getAllSkillInfo2Str(pl);
 
         // Apply InfoTxt List
         infoTxtList.ForEach(infoTxt => {
@@ -390,7 +379,7 @@ public class GameManager : MonoBehaviour
         if(type != STATE.PAUSE.ToString() && parentTf.childCount > 0)
             foreach(Transform childTf in parentTf){Destroy(childTf.gameObject);}
 
-        List<KeyValuePair<string, int>> lvObjList = pl.getAllSkillLvList();
+        List<KeyValuePair<string, int>> lvObjList = pl.getAllPsvSkillLVList();
         int i=0;
         lvObjList.ForEach(lv => {
             if(lv.Value > 0){
