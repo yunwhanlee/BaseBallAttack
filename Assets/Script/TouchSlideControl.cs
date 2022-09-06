@@ -15,7 +15,9 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     public RectTransform pad;
     public RectTransform stick;
     private Vector3 dir;
+    private Vector3 wallNormalVec;
     public GameObject hitBlockByBallPreview;
+    
     private const int MIN_ARROW_DEG_Y = 30;
     private const int MAX_ARROW_DEG_Y = 150;
 
@@ -72,17 +74,23 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     //*---------------------------------------
     //*  関数
     //*---------------------------------------
+
     private void drawBallPreviewSphereCast(Transform arrowAnchorTf){
         RaycastHit hit;
         float radius = pl.ballPreviewSphere.GetComponent<SphereCollider>().radius * pl.ballPreviewSphere.transform.localScale.x;
         if(Physics.SphereCast(arrowAnchorTf.position, radius, arrowAnchorTf.forward, out hit, 1000, 1 << LayerMask.NameToLayer("BallPreview"))){
+            //* Set 法線ベクトル
+            wallNormalVec = (hit.transform.CompareTag("Wall"))?
+                (hit.transform.position.x < 0)? Vector3.right : Vector3.left
+                : Vector3.zero;
+
             Vector3 cetner = hit.point + radius * hit.normal; //☆
             pl.ballPreviewSphere.transform.position = cetner;
             // Debug.DrawRay(arrowTf.position, arrowTf.forward * 1000, Color.red, 1);
 
             //* 🌟ColorBall ActiveSkill
             bool isColorBallSkill = gm.activeSkillBtnList.Exists(btn => btn.Trigger && btn.Name == DM.ATV.ColorBall.ToString());
-            if(isColorBallSkill && hit.transform.CompareTag("NormalBlock")){
+            if(isColorBallSkill && hit.transform.CompareTag(BlockMaker.NORMAL_BLOCK)){
                 Debug.Log(hit.transform.GetComponent<Block_Prefab>().kind);
                 if(hit.transform.GetComponent<Block_Prefab>().kind == BlockMaker.BLOCK.TreasureChest){//* 宝箱は場外
                     return;
@@ -111,9 +119,32 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     }
 
     private void drawLinePreview(Transform arrowAnchorTf){
-        var arrowPos = arrowAnchorTf.GetChild(0).transform.position;
-        line.SetPosition(0, arrowPos);
-        line.SetPosition(1, pl.ballPreviewSphere.transform.position);
+        var originPos = arrowAnchorTf.GetChild(0).transform.position;
+        var hitPos = pl.ballPreviewSphere.transform.position;
+
+        line.SetPosition(0, originPos);
+        line.SetPosition(1, hitPos);
+
+
+        line.SetPosition(2, calcReflectVec(originPos, hitPos, wallNormalVec));
+    }
+
+    private Vector3 calcReflectVec(Vector3 origin, Vector3 hitPos, Vector3 wallNormalVec){
+        //* ★原点
+        Vector3 originalToMirrowVector = transform.position - origin;
+
+        //* 入射角
+        Vector3 dir = hitPos - origin;
+        Vector3 incomingVec = dir.normalized;
+
+        //* 法線ベクトル
+        Vector3 normalVec = wallNormalVec;
+
+        //* 反射角
+        Vector3 reflectVec = hitPos + originalToMirrowVector.magnitude * Vector3.Reflect(incomingVec, normalVec).normalized;
+
+        //* 結果
+        return (normalVec == Vector3.zero)? hitPos : hitPos + reflectVec;
     }
 
     private float convertDir2DegWithRange(Vector3 dir, int min, int max){

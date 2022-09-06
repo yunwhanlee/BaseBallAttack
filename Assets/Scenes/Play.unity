@@ -292,6 +292,7 @@ LineRenderer:
   m_Positions:
   - {x: 0, y: 0.5, z: -16}
   - {x: 0, y: 0.5, z: 1}
+  - {x: 0, y: 0.5, z: 1}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.2
@@ -15420,6 +15421,10 @@ PrefabInstance:
     - target: {fileID: 2295754910549213889, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
       propertyPath: m_Material
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2295754910549213889, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2295754910549213890, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
       propertyPath: m_UseGravity
