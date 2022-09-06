@@ -129,6 +129,23 @@ public class PsvSkill<T> where T: struct {
             pl.criticalDamage.Name,         (CRIT_DMG_DEF + (pl.criticalDamage.Value * 100) + "%").ToString(),
         };
     }
+
+    public static List<KeyValuePair<string, int>> getAllPsvSkillLVList(Player pl){
+        //* Key : Name, Value : Level
+        List<KeyValuePair<string, int>> list = new List<KeyValuePair<string, int>>();
+        //* set All Skills curLevel
+        list.Add(new KeyValuePair<string, int>(pl.dmg.Name, pl.dmg.Level));
+        list.Add(new KeyValuePair<string, int>(pl.multiShot.Name, pl.multiShot.Level));
+        list.Add(new KeyValuePair<string, int>(pl.speed.Name, pl.speed.Level));
+        list.Add(new KeyValuePair<string, int>(pl.instantKill.Name, pl.instantKill.Level));
+        list.Add(new KeyValuePair<string, int>(pl.critical.Name, pl.critical.Level));
+        list.Add(new KeyValuePair<string, int>(pl.explosion.Name, pl.explosion.Level));
+        list.Add(new KeyValuePair<string, int>(pl.expUp.Name, pl.expUp.Level));
+        list.Add(new KeyValuePair<string, int>(pl.itemSpawn.Name, pl.itemSpawn.Level));
+        list.Add(new KeyValuePair<string, int>(pl.verticalMultiShot.Name, pl.verticalMultiShot.Level));
+        list.Add(new KeyValuePair<string, int>(pl.criticalDamage.Name, pl.criticalDamage.Level));
+        return list;
+    }
 }
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------

@@ -379,7 +379,7 @@ public class GameManager : MonoBehaviour
         if(type != STATE.PAUSE.ToString() && parentTf.childCount > 0)
             foreach(Transform childTf in parentTf){Destroy(childTf.gameObject);}
 
-        List<KeyValuePair<string, int>> lvObjList = pl.getAllPsvSkillLVList();
+        List<KeyValuePair<string, int>> lvObjList = PsvSkill<int>.getAllPsvSkillLVList(pl);
         int i=0;
         lvObjList.ForEach(lv => {
             if(lv.Value > 0){

@@ -56,8 +56,8 @@ public class Player : MonoBehaviour
     [SerializeField] float poisonSmokeCastWidth;    public float PoisonSmokeCastWidth {get=> poisonSmokeCastWidth;   set => poisonSmokeCastWidth = value;}
     
     
-    [Header("<---- Passive Skill ---->")]
     public const int ONE_KILL = 999999;
+    [Header("<---- Passive Skill ---->")]
     public PsvSkill<int> dmg;
     public PsvSkill<int> multiShot;
     public PsvSkill<float> speed;
@@ -217,21 +217,5 @@ public class Player : MonoBehaviour
         Lv = ++lv;
         Exp = 0;
         MaxExp = maxExp * 1.75f;
-    }
-    public List<KeyValuePair<string, int>> getAllPsvSkillLVList(){ 
-        //* Key : Name, Value : Level
-        List<KeyValuePair<string, int>> list = new List<KeyValuePair<string, int>>();
-        //* set All Skills curLevel
-        list.Add(new KeyValuePair<string, int>(dmg.Name, dmg.Level));
-        list.Add(new KeyValuePair<string, int>(multiShot.Name, multiShot.Level));
-        list.Add(new KeyValuePair<string, int>(speed.Name, speed.Level));
-        list.Add(new KeyValuePair<string, int>(instantKill.Name, instantKill.Level));
-        list.Add(new KeyValuePair<string, int>(critical.Name, critical.Level));
-        list.Add(new KeyValuePair<string, int>(explosion.Name, explosion.Level));
-        list.Add(new KeyValuePair<string, int>(expUp.Name, expUp.Level));
-        list.Add(new KeyValuePair<string, int>(itemSpawn.Name, itemSpawn.Level));
-        list.Add(new KeyValuePair<string, int>(verticalMultiShot.Name, verticalMultiShot.Level));
-        list.Add(new KeyValuePair<string, int>(criticalDamage.Name, criticalDamage.Level));
-        return list;
     }
 }
