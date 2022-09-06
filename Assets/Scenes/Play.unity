@@ -8282,6 +8282,22 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.maxColor.r
       value: 0.2971698
       objectReference: {fileID: 0}
+    - target: {fileID: 1233565973789183876, guid: e6c8b773db6089b46bedb5d125fc5d63, type: 3}
+      propertyPath: InitialModule.startColor.minColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233565973789183876, guid: e6c8b773db6089b46bedb5d125fc5d63, type: 3}
+      propertyPath: InitialModule.startColor.minColor.g
+      value: 0.50979185
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233565973789183876, guid: e6c8b773db6089b46bedb5d125fc5d63, type: 3}
+      propertyPath: InitialModule.startColor.minColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233565973789183876, guid: e6c8b773db6089b46bedb5d125fc5d63, type: 3}
+      propertyPath: InitialModule.startColor.minMaxState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1233565973789183877, guid: e6c8b773db6089b46bedb5d125fc5d63, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -8308,7 +8324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1233565973789183877, guid: e6c8b773db6089b46bedb5d125fc5d63, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.1
+      value: -2.8
       objectReference: {fileID: 0}
     - target: {fileID: 1233565973789183877, guid: e6c8b773db6089b46bedb5d125fc5d63, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8341,6 +8357,10 @@ PrefabInstance:
     - target: {fileID: 1233565973789183878, guid: e6c8b773db6089b46bedb5d125fc5d63, type: 3}
       propertyPath: m_Name
       value: Rain (Basic)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1233565973789183878, guid: e6c8b773db6089b46bedb5d125fc5d63, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1233565973789183879, guid: e6c8b773db6089b46bedb5d125fc5d63, type: 3}
       propertyPath: m_Materials.Array.size

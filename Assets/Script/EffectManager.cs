@@ -125,13 +125,14 @@ public class EffectManager : MonoBehaviour
         var ins = Instantiate(activeSkillShotEFs[idx], parentTf.position, dir, parent) as GameObject;
         Destroy(ins, 1);
     }
-    public void createActiveSkillExplosionEF(int idx, Transform parentTf, int time = 2){
+    public GameObject createActiveSkillExplosionEF(int idx, Transform parentTf, int time = 2){
         var dir = Vector3.Normalize(parentTf.GetComponent<Rigidbody>().velocity);
         Debug.Log("createActiveSkillExplosionEF:: dir=" + dir);
         float dirZ = (dir.z < 0)? Mathf.Abs(dir.z) : -Mathf.Abs(dir.z);
         Quaternion rot = Quaternion.LookRotation(new Vector3(dir.x, dir.y, dirZ));
         var ins = Instantiate(activeSkillExplosionEFs[idx], parentTf.position, rot, effectGroup) as GameObject;
         Destroy(ins, time);
+        return ins;
     }
     public void createActiveSkillCastEF(int idx, Transform parentTf){
         if(!activeSkillCastEFs[idx]) return;
