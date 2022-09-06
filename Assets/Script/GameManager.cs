@@ -198,14 +198,16 @@ public class GameManager : MonoBehaviour
 
         // Set InfoTxt List
         List<string> infoTxtList = new List<string>(){
-            pl.dmg.Name,            (pl.dmg.Value.ToString()),
-            pl.multiShot.Name,      (pl.multiShot.Value + 1).ToString(),
-            pl.speed.Name,          (pl.speed.Value * 100).ToString() + "%",
-            pl.instantKill.Name,    (pl.instantKill.Value * 100 + "%").ToString(),
-            pl.critical.Name,       (pl.critical.Value * 100 + "%").ToString(),
-            pl.explosion.Name,      (pl.explosion.Value.per * 100 + "%").ToString(),
-            pl.expUp.Name,          (pl.expUp.Value * 100 + "%").ToString(),
-            pl.itemSpawn.Name,      (pl.itemSpawn.Value * 100 + "%").ToString()
+            pl.dmg.Name,                    (pl.dmg.Value.ToString()),
+            pl.multiShot.Name,              (pl.multiShot.Value + 1).ToString(),
+            pl.speed.Name,                  (pl.speed.Value * 100).ToString() + "%",
+            pl.instantKill.Name,            (pl.instantKill.Value * 100 + "%").ToString(),
+            pl.critical.Name,               (pl.critical.Value * 100 + "%").ToString(),
+            pl.explosion.Name,              (pl.explosion.Value.per * 100 + "%").ToString(),
+            pl.expUp.Name,                  (pl.expUp.Value * 100 + "%").ToString(),
+            pl.itemSpawn.Name,              (pl.itemSpawn.Value * 100 + "%").ToString(),
+            pl.verticalMultiShot.Name,      (pl.verticalMultiShot.Value * 1 + "%").ToString(),
+            pl.criticalDamage.Name,         (PsvSkill<int>.CRIT_DMG_DEF + (pl.criticalDamage.Value * 100) + "%").ToString(),
         };
 
         // Apply InfoTxt List

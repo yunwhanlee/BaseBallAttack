@@ -67,6 +67,7 @@ public class Player : MonoBehaviour
     public PsvSkill<float> expUp;
     public PsvSkill<float> itemSpawn;
     public PsvSkill<int> verticalMultiShot;
+    public PsvSkill<float> criticalDamage;
 
     //* Component
     private Animator anim;
@@ -128,6 +129,8 @@ public class Player : MonoBehaviour
             DM.PSV.ItemSpawn.ToString(), psvLvArr[(int)DM.PSV.ItemSpawn].lv, 0.1f, 0.05f);
         verticalMultiShot = new PsvSkill<int>(
             DM.PSV.VerticalMultiShot.ToString(), psvLvArr[(int)DM.PSV.VerticalMultiShot].lv, 0, 1);
+        criticalDamage = new PsvSkill<float>(
+            DM.PSV.CriticalDamage.ToString(), psvLvArr[(int)DM.PSV.CriticalDamage].lv, 0, 0.5f);
 
         //* Apply
         dmg.initPsvSkillDt(dmg.Value + dmg.Unit);
@@ -139,6 +142,7 @@ public class Player : MonoBehaviour
         expUp.initPsvSkillDt(expUp.Value + expUp.Unit);
         itemSpawn.initPsvSkillDt(itemSpawn.Value + itemSpawn.Unit);
         verticalMultiShot.initPsvSkillDt(verticalMultiShot.Value + verticalMultiShot.Unit * verticalMultiShot.Level);
+        criticalDamage.initPsvSkillDt(criticalDamage.Value + criticalDamage.Unit * criticalDamage.Level);
 #endregion
 
         //* Show Psv UI
@@ -227,6 +231,7 @@ public class Player : MonoBehaviour
         list.Add(new KeyValuePair<string, int>(expUp.Name, expUp.Level));
         list.Add(new KeyValuePair<string, int>(itemSpawn.Name, itemSpawn.Level));
         list.Add(new KeyValuePair<string, int>(verticalMultiShot.Name, verticalMultiShot.Level));
+        list.Add(new KeyValuePair<string, int>(criticalDamage.Name, criticalDamage.Level));
         return list;
     }
 }

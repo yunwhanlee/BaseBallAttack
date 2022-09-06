@@ -201,7 +201,7 @@ public class HomeManager : MonoBehaviour
         Array.ForEach(childs, child=>{
             for(int i=0; i<len; i++){
                 lvArrTemp[i] += child.ItemPassive.Arr[i].lv;
-                // Debug.LogFormat("lvArrTemp[{0}]= {1}", i,lvArrTemp[i]);
+                Debug.LogFormat("lvArrTemp[{0}]= {1}", i,lvArrTemp[i]);
             }
         });
         return lvArrTemp;

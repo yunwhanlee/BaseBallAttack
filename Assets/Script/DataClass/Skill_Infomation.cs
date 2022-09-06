@@ -20,6 +20,7 @@ public class ItemPsvDt {
 //--------------------------------------------------------------------------------------------------
 [System.Serializable]
 public class ItemPsvList{
+    //* value
     [SerializeField] ItemPsvDt[] arr = {
         new ItemPsvDt(DM.PSV.Dmg.ToString()),
         new ItemPsvDt(DM.PSV.MultiShot.ToString()),
@@ -30,8 +31,11 @@ public class ItemPsvList{
         new ItemPsvDt(DM.PSV.ExpUp.ToString()), 
         new ItemPsvDt(DM.PSV.ItemSpawn.ToString()),
         new ItemPsvDt(DM.PSV.VerticalMultiShot.ToString()),
-    };  public ItemPsvDt[] Arr {get => arr; set => arr = value;}
+        new ItemPsvDt(DM.PSV.CriticalDamage.ToString()),
+    };  
+    public ItemPsvDt[] Arr {get => arr; set => arr = value;}
 
+    //* method
     public void setImgPrefs(ItemPsvList itemPsvList){
         int i=0;
         Array.ForEach(itemPsvList.arr, dtArr => arr[i++].imgPref = dtArr.imgPref);
@@ -51,6 +55,8 @@ public class ItemPsvList{
 public class PsvSkill<T> where T: struct {
     //*value                     //*get set
     public const int MAX_LV = 5;
+    public const int CRIT_DMG_DEF = 200;
+
     [SerializeField] string name;    public string Name {get=> name;} 
     [SerializeField] int level; public int Level {get=>level;}
     [SerializeField] T value;   public T Value {get=>value;}
@@ -92,8 +98,9 @@ public class PsvSkill<T> where T: struct {
                     result = Player.ONE_KILL;
                     break;
                 case DM.PSV.Critical: 
-                    em.createCritTxtEF(col.transform, pl.dmg.Value * 2);
-                    result = pl.dmg.Value * 2;
+                    int dmg = (int)(pl.dmg.Value * (2 + pl.criticalDamage.Value));
+                    em.createCritTxtEF(col.transform, dmg);
+                    result = dmg;
                     break;
                 case DM.PSV.Explosion:
                     em.createExplosionEF(ballPref.transform, pl.explosion.Value.range);

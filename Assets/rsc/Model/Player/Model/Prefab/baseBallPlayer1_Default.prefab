@@ -1564,16 +1564,16 @@ MonoBehaviour:
       lv: 1
       imgPref: {fileID: 0}
     - name: MultiShot
-      lv: 1
+      lv: 0
       imgPref: {fileID: 0}
     - name: Speed
       lv: 1
       imgPref: {fileID: 0}
     - name: InstantKill
-      lv: 1
+      lv: 0
       imgPref: {fileID: 0}
     - name: Critical
-      lv: 0
+      lv: 4
       imgPref: {fileID: 0}
     - name: Explosion
       lv: 0
@@ -1585,7 +1585,10 @@ MonoBehaviour:
       lv: 0
       imgPref: {fileID: 0}
     - name: VerticalMultiShot
-      lv: 0
+      lv: 1
+      imgPref: {fileID: 0}
+    - name: CriticalDamage
+      lv: 2
       imgPref: {fileID: 0}
 --- !u!54 &8368906721333363493
 Rigidbody:

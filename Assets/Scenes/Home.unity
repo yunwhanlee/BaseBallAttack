@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45015454, g: 0.5001945, b: 0.57542807, a: 1}
+  m_IndirectSpecularColor: {r: 0.45015407, g: 0.500194, b: 0.5754274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -517,6 +517,9 @@ MonoBehaviour:
       - name: VerticalMultiShot
         lv: 0
         imgPref: {fileID: 7576626188995224481, guid: e5a4a35706515fb43b875cf1e943057b, type: 3}
+      - name: CriticalDamage
+        lv: 0
+        imgPref: {fileID: 7576626188995224481, guid: 4349654243a452547b2c25e9e965d0b3, type: 3}
   isRemoveAD: 0
 --- !u!1 &102004497
 GameObject:
