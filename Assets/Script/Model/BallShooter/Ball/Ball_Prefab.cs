@@ -200,7 +200,7 @@ public class Ball_Prefab : MonoBehaviour
                             em.createActiveSkillExplosionEF(skillIdx, this.transform);
                             decreaseHpSphereCastAll(atv, AtvSkill.FIREBALL_DMG);
                             if(isHomeRun){
-                                decreaseHpSphereCastAll(atv, 0, AtvSkill.POISONSMOKE_DOT);
+                                decreaseHpSphereCastAll(atv, 0, AtvSkill.FIREBALL_DOT);
                             }
                             skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
