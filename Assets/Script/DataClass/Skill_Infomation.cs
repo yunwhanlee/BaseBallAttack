@@ -289,8 +289,7 @@ public class AtvSkillBtnUI{
         if(!isSelectBtnInit)   GrayBG.fillAmount = 1;
         selectCircleEF.gameObject.SetActive(false);
         gm.pl.BatEffectTf.gameObject.SetActive(false);
-        foreach(Transform child in gm.pl.CastEFArrowTf) GameObject.Destroy(child.gameObject);
-        foreach(Transform child in gm.pl.CastEFBallPreviewTf) GameObject.Destroy(child.gameObject);
+        gm.pl.destroyAllCastEF();
         gm.setLightDarkness(false);
         gm.bm.setGlowEFAllBlocks(false);
     }
@@ -310,20 +309,24 @@ public class AtvSkillBtnUI{
 
             //* Cast Effect
             if(Trigger){
-                Transform parentTf = null;
+                List<Transform> parentTfList = new List<Transform>();
                 var atv = DM.ins.convertAtvSkillStr2Enum(this.name);
                 switch(atv){
-                    case DM.ATV.Thunder:     parentTf = gm.pl.CastEFArrowTf;        break;
-                    case DM.ATV.FireBall:    parentTf = gm.pl.CastEFBallPreviewTf;  break;
-                    case DM.ATV.PoisonSmoke: parentTf = gm.pl.CastEFBallPreviewTf;  break;
-                    case DM.ATV.IceWave:     parentTf = gm.pl.CastEFBallPreviewTf;  break;
-                    case DM.ATV.ColorBall:   parentTf = gm.pl.CastEFArrowTf;        break;
+                    case DM.ATV.Thunder:     
+                    case DM.ATV.ColorBall:   
+                        parentTfList.Add(gm.pl.CastEFArrowTf);
+                        break;
+                    case DM.ATV.FireBall:
+                    case DM.ATV.PoisonSmoke:
+                    case DM.ATV.IceWave: 
+                        Array.ForEach(gm.pl.CastEFBallPreviewTfs, tf => parentTfList.Add(tf));
+                        break;
                 }
-                gm.em.createActiveSkillCastEF(skillIdx, parentTf);
+                //* CastEF 生成
+                parentTfList.ForEach(parentTf => gm.em.createActiveSkillCastEF(skillIdx, parentTf));
             }
             else{
-                foreach(Transform child in gm.pl.CastEFArrowTf) GameObject.Destroy(child.gameObject);
-                foreach(Transform child in gm.pl.CastEFBallPreviewTf) GameObject.Destroy(child.gameObject);
+                gm.pl.destroyAllCastEF();
             }
         }
     }

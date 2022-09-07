@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44479504, g: 0.49434292, b: 0.57354003, a: 1}
+  m_IndirectSpecularColor: {r: 0.44479525, g: 0.49434352, b: 0.5735407, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4771,7 +4771,9 @@ MonoBehaviour:
   activeSkills: []
   batEffectTf: {fileID: 0}
   castEFArrowTf: {fileID: 716473780}
-  castEFBallPreviewTf: {fileID: 661754778}
+  castEFBallPreviewTfs:
+  - {fileID: 661754778}
+  - {fileID: 1508718078}
   thunderCastWidth: 1
   fireBallCastWidth: 0
   poisonSmokeCastWidth: 0
@@ -4820,6 +4822,11 @@ MonoBehaviour:
     value: 0
     unit: 0
   verticalMultiShot:
+    name: 
+    level: 0
+    value: 0
+    unit: 0
+  criticalDamage:
     name: 
     level: 0
     value: 0

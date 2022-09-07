@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
     public AtvSkill[] activeSkills;// = new ActiveSkill[3];
     [SerializeField] Transform batEffectTf;           public Transform BatEffectTf {get => batEffectTf; set => batEffectTf = value;}
     [SerializeField] Transform castEFArrowTf;         public Transform CastEFArrowTf {get => castEFArrowTf;}
-    [SerializeField] Transform castEFBallPreviewTf;   public Transform CastEFBallPreviewTf {get => castEFBallPreviewTf;}
+    [SerializeField] Transform[] castEFBallPreviewTfs;   public Transform[] CastEFBallPreviewTfs {get => castEFBallPreviewTfs; set => castEFBallPreviewTfs = value;}
     [SerializeField] float thunderCastWidth;     public float ThunderCastWidth {get=> thunderCastWidth;   set => fireBallCastWidth = value;}
     [SerializeField] float fireBallCastWidth;    public float FireBallCastWidth {get=> fireBallCastWidth;   set => fireBallCastWidth = value;}
     [SerializeField] float poisonSmokeCastWidth;    public float PoisonSmokeCastWidth {get=> poisonSmokeCastWidth;   set => poisonSmokeCastWidth = value;}
@@ -217,5 +217,13 @@ public class Player : MonoBehaviour
         Lv = ++lv;
         Exp = 0;
         MaxExp = maxExp * 1.75f;
+    }
+    public void destroyAllCastEF(){
+        //* Arrow Tf
+        foreach(Transform child in gm.pl.CastEFArrowTf) GameObject.Destroy(child.gameObject);
+        //* BallPreview Tf
+        Array.ForEach(gm.pl.CastEFBallPreviewTfs, tf => {
+            foreach(Transform child in tf) GameObject.Destroy(child.gameObject);
+        });
     }
 }

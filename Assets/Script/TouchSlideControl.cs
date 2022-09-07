@@ -127,7 +127,13 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         line.SetPosition(0, originPos);
         line.SetPosition(1, hitPos);
         line.SetPosition(2, (wallNormalVec == Vector3.zero)? hitPos : hitPos2);
+
+        //* Second BallPreviewSphere 活性化
         pl.ballPreviewSphere[1].SetActive((wallNormalVec == Vector3.zero)? false : true);
+        bool is2ndBallPreviewOn = pl.ballPreviewSphere[1].activeSelf;
+
+        pl.ballPreviewSphere[0].SetActive(is2ndBallPreviewOn? false : true);
+        pl.ballPreviewSphere[1].SetActive(is2ndBallPreviewOn? true : false);
     }
 
     private float convertDir2DegWithRange(Vector3 dir, int min, int max){
