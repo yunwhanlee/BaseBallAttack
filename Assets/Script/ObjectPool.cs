@@ -33,6 +33,8 @@ public class ObjectPool : MonoBehaviour
         
 
         foreach(var dic in poolObjDtDict){
+            Debug.LogFormat("poolObjDtDict[{0}]= {1}", dic.Key, dic.Value);
+            if(dic.Value == null) continue; //* (BUG) nullなら、生成しなくて、次に飛ぶ。
             createNewObject(dic.Key);
         }
     }
