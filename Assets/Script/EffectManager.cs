@@ -120,25 +120,34 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    public void createActiveSkillShotEF(int idx, Transform parentTf, Quaternion dir, bool isTrailEffect = false){
+    public void createAtvSkShotEF(int idx, Transform parentTf, Quaternion dir, bool isTrailEffect = false){
         Transform parent = (isTrailEffect)? parentTf : effectGroup;
-        var ins = Instantiate(activeSkillShotEFs[idx], parentTf.position, dir, parent) as GameObject;
-        Destroy(ins, 1);
+        // var ins = Instantiate(activeSkillShotEFs[idx], parentTf.position, dir, parent) as GameObject;
+        string key = "AtvSkShotEF" + (gm.SelectAtvSkillBtnIdx == 0 ? "" : "2");
+        var ins = ObjectPool.getObject(key);
+        ins.transform.position = parentTf.position;
+        ins.transform.rotation = dir;
+        ins.transform.SetParent(parent);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, 1));
     }
-    public GameObject createActiveSkillExplosionEF(int idx, Transform parentTf, int time = 2){
+    public GameObject createAtvSkExplosionEF(int idx, Transform parentTf, int time = 2){
         var dir = Vector3.Normalize(parentTf.GetComponent<Rigidbody>().velocity);
         Debug.Log("createActiveSkillExplosionEF:: dir=" + dir);
         float dirZ = (dir.z < 0)? Mathf.Abs(dir.z) : -Mathf.Abs(dir.z);
-        Quaternion rot = Quaternion.LookRotation(new Vector3(dir.x, dir.y, dirZ));
-        var ins = Instantiate(activeSkillExplosionEFs[idx], parentTf.position, rot, effectGroup) as GameObject;
-        Destroy(ins, time);
+        Quaternion rotate = Quaternion.LookRotation(new Vector3(dir.x, dir.y, dirZ));
+        // var ins = Instantiate(activeSkillExplosionEFs[idx], parentTf.position, rotate, effectGroup) as GameObject;
+        string key = "AtvSkExplosionEF" + (gm.SelectAtvSkillBtnIdx == 0 ? "" : "2");
+        var ins = ObjectPool.getObject(key);
+        ins.transform.position = parentTf.position;
+        ins.transform.rotation = rotate;
+        StartCoroutine(ObjectPool.coDestroyObject(ins, time));
         return ins;
     }
-    public void createActiveSkillCastEF(int idx, Transform parentTf){
+    public void createAtvSkCastEF(int idx, Transform parentTf){
         if(!activeSkillCastEFs[idx]) return;
         Debug.Log("createActiveSkillCastEF:: name= " + activeSkillCastEFs[idx].name);
         var ins = Instantiate(activeSkillCastEFs[idx], parentTf.position, Quaternion.identity, parentTf) as GameObject;
-        ins.transform.localRotation = Quaternion.Euler(0,0,0); //* 角度がずらす部分対応。
+        ins.transform.localRotation = Quaternion.Euler(0,0,0);
     }
     public void createAtvSkFireBallDotEF(Transform parentTf){
         var ins = Instantiate(fireBallDotEF, parentTf.position, Quaternion.identity, parentTf) as GameObject;

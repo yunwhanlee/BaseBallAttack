@@ -197,7 +197,7 @@ public class Ball_Prefab : MonoBehaviour
                             //なし
                             break;
                         case DM.ATV.FireBall:{
-                            em.createActiveSkillExplosionEF(skillIdx, this.transform);
+                            em.createAtvSkExplosionEF(skillIdx, this.transform);
                             decreaseHpSphereCastAll(atv, AtvSkill.FIREBALL_DMG);
                             if(isHomeRun){
                                 decreaseHpSphereCastAll(atv, 0, AtvSkill.FIREBALL_DOT);
@@ -220,7 +220,7 @@ public class Ball_Prefab : MonoBehaviour
                                 );
                                 //* Destroy
                                 Array.ForEach(sameColorBlocks, bl => {
-                                    em.createActiveSkillExplosionEF(skillIdx, bl.transform);
+                                    em.createAtvSkExplosionEF(skillIdx, bl.transform);
                                     bl.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(AtvSkill.COLORBALL_DMG);
                                 });
                             }
@@ -231,7 +231,7 @@ public class Ball_Prefab : MonoBehaviour
                         }
                         case DM.ATV.PoisonSmoke:{
                             int destroyCnt = 999;
-                            var ins = em.createActiveSkillExplosionEF(skillIdx, this.transform, destroyCnt);
+                            var ins = em.createAtvSkExplosionEF(skillIdx, this.transform, destroyCnt);
                              if(isHomeRun){
                                 ins.GetComponent<PoisonSmoke>().KeepStageSpan += 2;
                                 float sc = 1.3f;
@@ -245,7 +245,7 @@ public class Ball_Prefab : MonoBehaviour
                         }
                         case DM.ATV.IceWave:{
                             delayTime = 2f;
-                            em.createActiveSkillExplosionEF(skillIdx, this.transform);
+                            em.createAtvSkExplosionEF(skillIdx, this.transform);
                             skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
@@ -387,7 +387,7 @@ public class Ball_Prefab : MonoBehaviour
                 Debug.DrawRay(this.transform.position, dir * maxDistance, Color.blue, 2f);
                 gm.cam1.GetComponent<CamResolution>().setAnimTrigger("doShake");
 
-                em.createActiveSkillShotEF(skillIdx, this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
+                em.createAtvSkShotEF(skillIdx, this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
                 //* Collider 
                 RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, Vector3.one * width, dir, Quaternion.identity, maxDistance);
                 Array.ForEach(hits, hit => {
@@ -405,7 +405,7 @@ public class Ball_Prefab : MonoBehaviour
             case DM.ATV.ColorBall:
             case DM.ATV.PoisonSmoke:
             case DM.ATV.IceWave:
-                em.createActiveSkillShotEF(skillIdx, this.gameObject.transform, Quaternion.identity, true); //Trail
+                em.createAtvSkShotEF(skillIdx, this.gameObject.transform, Quaternion.identity, true); //Trail
                 break;
         }
         //Before go up NextStage Wait for Second

@@ -323,7 +323,7 @@ public class AtvSkillBtnUI{
                         break;
                 }
                 //* CastEF 生成
-                parentTfList.ForEach(parentTf => gm.em.createActiveSkillCastEF(skillIdx, parentTf));
+                parentTfList.ForEach(parentTf => gm.em.createAtvSkCastEF(skillIdx, parentTf));
             }
             else{
                 gm.pl.destroyAllCastEF();
