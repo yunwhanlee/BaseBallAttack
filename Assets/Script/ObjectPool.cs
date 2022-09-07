@@ -5,6 +5,18 @@ using System;
 
 public class ObjectPool : MonoBehaviour
 {
+    struct PoolData{
+        string key;         public string Key {get => key; set => key = value;}
+        GameObject obj;     public GameObject Obj {get => obj; set => obj = value;}
+        int cnt;            public int Cnt {get => cnt; set => cnt = value;}
+
+        public PoolData(string key, GameObject obj, int cnt = 1){
+            this.key = key;
+            this.obj = obj;
+            this.cnt = cnt;
+        }
+    }
+
     public static ObjectPool Ins;
     public GameManager gm;
     private EffectManager em;
@@ -21,24 +33,29 @@ public class ObjectPool : MonoBehaviour
     }
 
     private void init(){
+        //* Set Data 
+        List<PoolData> poolDtList = new List<PoolData>(){};
+        poolDtList.Add(new PoolData("AtvSkShotEF", em.activeSkillShotEFs[DM.ins.personalData.SelectSkillIdx]));
+        poolDtList.Add(new PoolData("AtvSkExplosionEF", em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkillIdx]));
+        if(DM.ins.personalData.IsUnlock2ndSkill){
+            poolDtList.Add(new PoolData("AtvSkShotEF2", em.activeSkillShotEFs[DM.ins.personalData.SelectSkill2Idx]));
+            poolDtList.Add(new PoolData("AtvSkExplosionEF2", em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkill2Idx]));
+        }
+        poolDtList.Add(new PoolData("DropItemExpOrbEF", em.dropItemExpOrbEF, 30));
+        poolDtList.Add(new PoolData("InstantKillTextEF", em.instantKillTextEF, 5));
+        poolDtList.Add(new PoolData("CritTxtEF", em.criticalTextEF, 20));
+        
         poolObjDtDict = new Dictionary<string, GameObject>();
 
-        //* Add Dic
-        poolObjDtDict.Add("AtvSkShotEF", em.activeSkillShotEFs[DM.ins.personalData.SelectSkillIdx]);
-        poolObjDtDict.Add("AtvSkExplosionEF", em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkillIdx]);
-        if(DM.ins.personalData.IsUnlock2ndSkill){
-            poolObjDtDict.Add("AtvSkShotEF2", em.activeSkillShotEFs[DM.ins.personalData.SelectSkill2Idx]);
-            poolObjDtDict.Add("AtvSkExplosionEF2", em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkill2Idx]);
-        }
-        poolObjDtDict.Add("DropItemExpOrbEF", em.dropItemExpOrbEF);
-        poolObjDtDict.Add("InstantKillTextEF", em.instantKillTextEF);
-        poolObjDtDict.Add("CritTxtEF", em.criticalTextEF);
+        //* Enroll Dic
+        poolDtList.ForEach(dt => poolObjDtDict.Add(dt.Key, dt.Obj));
         
-        //* Create Obj Into Transform
-        foreach(var dic in poolObjDtDict){
-            Debug.LogFormat("poolObjDtDict[{0}]= {1}", dic.Key, dic.Value);
-            if(dic.Value == null) continue; //* (BUG) nullなら、生成しなくて、次に飛ぶ。
-            createNewObject(dic.Key);
+        //* Create Obj
+        foreach(var dt in poolDtList){
+            // Debug.LogFormat("poolObjDtDict[{0}]= {1}", dt.Key, dt.Obj);
+            if(dt.Obj == null) continue; //* (BUG) nullなら、生成しなくて、次に飛ぶ。
+            for(int i=0; i<dt.Cnt; i++)
+                createNewObject(dt.Key);
         }
     }
 
@@ -66,6 +83,7 @@ public class ObjectPool : MonoBehaviour
     }
 
     private GameObject createNewObject(string key){
+        Debug.LogFormat("createNewObject(string key):: key= {0}", key);
         var newObj = Instantiate(poolObjDtDict[key], this.transform);
         newObj.name = key.ToString();
         newObj.gameObject.SetActive(false);
@@ -75,7 +93,8 @@ public class ObjectPool : MonoBehaviour
     static void returnObject(GameObject ins){
         ins.SetActive(false);
         ins.transform.SetParent(Ins.transform);
-        // Ins.poolObjDict.Remove(key);
+
+
     }
     public static IEnumerator coDestroyObject(GameObject ins, float sec){
         yield return new WaitForSeconds(sec);
