@@ -94,7 +94,7 @@ public class PsvSkill<T> where T: struct {
         if(Level > 0 && rand <= percent){
             switch(psv){
                 case DM.PSV.InstantKill: 
-                    em.createInstantKillTextEF(col.transform);
+                    em.createInstantKillTextEF(col.transform.position);
                     result = Player.ONE_KILL;
                     break;
                 case DM.PSV.Critical: 

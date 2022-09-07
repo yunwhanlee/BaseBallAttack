@@ -31,6 +31,7 @@ public class ObjectPool : MonoBehaviour
             poolObjDtDict.Add("AtvSkExplosionEF2", em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkill2Idx]);
         }
         poolObjDtDict.Add("DropItemExpOrbEF", em.dropItemExpOrbEF);
+        poolObjDtDict.Add("InstantKillTextEF", em.instantKillTextEF);
         poolObjDtDict.Add("CritTxtEF", em.criticalTextEF);
         
         //* Create Obj Into Transform

@@ -86,9 +86,12 @@ public class EffectManager : MonoBehaviour
         Destroy(ins, 1);
     }
 
-    public void createInstantKillTextEF(Transform parentTf){
-        var ins = Instantiate(instantKillTextEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
-        Destroy(ins, 1.5f);
+    public void createInstantKillTextEF(Vector3 parentPos){
+        // var ins = Instantiate(instantKillTextEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
+        var ins = ObjectPool.getObject("InstantKillTextEF", parentPos, Quaternion.identity);
+        // Destroy(ins, 1.5f);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, 1.5f));
+
     }
     public GameObject createCritTxtEF(Vector3 parentPos, int damage){
         // var ins = Instantiate(criticalTextEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;

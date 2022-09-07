@@ -319,8 +319,6 @@ public class Ball_Prefab : MonoBehaviour
     //*---------------------------------------
     //*  関数
     //*---------------------------------------
-
-
     private void checkDestroyBall(){
         if(this.name == "Ball(Clone)" && this.transform.localScale.x == 0.4f){
             onDestroyMe();
@@ -430,7 +428,6 @@ public class Ball_Prefab : MonoBehaviour
     IEnumerator coMultiCriticalDmgEF(float critDmgRatio, int cnt, Vector3 hitPos){
         float span = 0.0875f;
         for(int i=0; i<cnt; i++){
-            // list[i].SetActive(true);
             em.createCritTxtEF(hitPos, (int)(pl.dmg.Value * critDmgRatio));
             yield return new WaitForSeconds(i * span);
         }
