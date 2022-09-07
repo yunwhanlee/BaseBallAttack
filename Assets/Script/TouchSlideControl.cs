@@ -75,7 +75,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     //*  関数
     //*---------------------------------------
     private void drawBallPreviewSphereCast(Transform arrowAnchorTf){
-        RaycastHit hit;
+        RaycastHit hit, hit2;
         float radius = pl.ballPreviewSphere[0].GetComponent<SphereCollider>().radius * pl.ballPreviewSphere[0].transform.localScale.x;
         if(Physics.SphereCast(arrowAnchorTf.position, radius, arrowAnchorTf.forward, out hit, 1000, 1 << LayerMask.NameToLayer("BallPreview"))){
             setBallPreviewCenterPos(ref pl.ballPreviewSphere[0], hit, radius);
@@ -89,16 +89,20 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
                 var reflectVec = calcReflectVec(originPos, hitPos, wallNormalVec);
                 // Debug.DrawRay(hit.point, reflectVec, Color.red, 1);
 
-                RaycastHit hit2;
+                // RaycastHit ;
                 if(Physics.SphereCast(hit.point, radius, reflectVec, out hit2, 1000, 1 << LayerMask.NameToLayer("BallPreview"))){
                     setBallPreviewCenterPos(ref pl.ballPreviewSphere[1], hit2, radius);
                 }
+                //* 🌟ColorBall ActiveSkill
+                if(hit2.transform)
+                    gm.activeSkillDataBase[0].setColorBallSkillGlowEF(gm, ref bm, hit2, ref hitBlockByBallPreview);
+                return;
             }else{
                 wallNormalVec = Vector3.zero;
             }
-
             //* 🌟ColorBall ActiveSkill
             gm.activeSkillDataBase[0].setColorBallSkillGlowEF(gm, ref bm, hit, ref hitBlockByBallPreview);
+            
         }
     }
     private void setBallPreviewCenterPos(ref GameObject ballPrevObj, RaycastHit hit, float radius){

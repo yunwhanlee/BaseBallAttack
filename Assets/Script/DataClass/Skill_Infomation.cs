@@ -225,6 +225,7 @@ public class AtvSkill{
 
     public void setColorBallSkillGlowEF(GameManager gm, ref BlockMaker bm, RaycastHit hit, ref GameObject hitBlockByBallPreview){
         bool isColorBallSkill = gm.activeSkillBtnList.Exists(btn => btn.Trigger && btn.Name == DM.ATV.ColorBall.ToString());
+        Debug.Log("setColorBallSkillGlowEF():: hit= " + hit);
         if(isColorBallSkill && hit.transform.CompareTag(BlockMaker.NORMAL_BLOCK)){
             Debug.Log(hit.transform.GetComponent<Block_Prefab>().kind);
             if(hit.transform.GetComponent<Block_Prefab>().kind == BlockMaker.BLOCK.TreasureChest){//* 宝箱は場外
