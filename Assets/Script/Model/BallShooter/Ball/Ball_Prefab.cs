@@ -232,11 +232,11 @@ public class Ball_Prefab : MonoBehaviour
                         case DM.ATV.PoisonSmoke:{
                             int destroyCnt = 999;
                             var ins = em.createAtvSkExplosionEF(skillIdx, this.transform, destroyCnt);
-                             if(isHomeRun){
+                            if(isHomeRun){
                                 ins.GetComponent<PoisonSmoke>().KeepStageSpan += 2;
                                 float sc = 1.3f;
                                 ins.transform.localScale = new Vector3(sc, sc, sc);
-                             }
+                            }
                             RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.PoisonSmokeCastWidth, Vector3.up, 0);
                             decreaseHpSphereCastAll(atv, 0, AtvSkill.POISONSMOKE_DOT);
                             skillBtn.init(gm);

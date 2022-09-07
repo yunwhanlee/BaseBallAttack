@@ -140,7 +140,7 @@ public class EffectManager : MonoBehaviour
     }
     public void createAtvSkCastEF(int idx, Transform parentTf){
         if(!activeSkillCastEFs[idx]) return;
-        Debug.Log("createActiveSkillCastEF:: name= " + activeSkillCastEFs[idx].name);
+        Debug.Log("createActiveSkillCastEF:: name= " + activeSkillCastEFs[idx].name + ", parentTf= " + parentTf.name);
         var ins = Instantiate(activeSkillCastEFs[idx], parentTf.position, Quaternion.identity, parentTf) as GameObject;
         ins.transform.localRotation = Quaternion.Euler(0,0,0);
     }

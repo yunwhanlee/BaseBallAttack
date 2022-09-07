@@ -15,7 +15,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     public RectTransform pad;
     public RectTransform stick;
     private Vector3 dir;
-    private Vector3 wallNormalVec;
+    public Vector3 wallNormalVec;
     public GameObject hitBlockByBallPreview;
     
     private const int MIN_ARROW_DEG_Y = 30;

@@ -7,6 +7,7 @@ using System;
 public class SectorGizmos : MonoBehaviour
 {
     GameManager gm;
+    TouchSlideControl touchSlideCtr;
 
     public float angleRange = 45f;
     public float distance = 5f;
@@ -26,6 +27,7 @@ public class SectorGizmos : MonoBehaviour
     void Start()
     {   
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        touchSlideCtr = GameObject.Find("TouchSlideControlPanel").GetComponent<TouchSlideControl>();
         var childs = GameObject.Find("BlockMaker").GetComponentsInChildren<Transform>();
         var blocks = Array.FindAll(childs, child => child.name.Contains("Block") && child.name != "BlockMaker");
         blockList = new List<Transform>(blocks);
@@ -36,13 +38,20 @@ public class SectorGizmos : MonoBehaviour
     {
         pos = new Vector3(transform.position.x, transform.position.y, transform.position.z - offsetZ);
 
-        //* IceWave
+        //* 🍧 IceWave BallPreviewSphere[0],[1]の角度　調整。
         if(this.transform.name.Contains(DM.ATV.IceWave.ToString())){
-            this.transform.rotation = Quaternion.Euler(0,gm.pl.arrowAxisAnchor.transform.rotation.eulerAngles.y,0);
+            float rotY = 0;
+            if(touchSlideCtr.wallNormalVec == Vector3.zero){
+                rotY = gm.pl.arrowAxisAnchor.transform.rotation.eulerAngles.y;
+            }else{
+                gm.pl.ballPreviewSphere[0].transform.LookAt(gm.pl.ballPreviewSphere[1].transform);
+                Vector3 rot = gm.pl.ballPreviewSphere[0].transform.rotation.eulerAngles;
+                rotY = rot.y;
+            }
+            this.transform.rotation = Quaternion.Euler(0, rotY, 0);
         }
 
         if(gm.isPointUp){
-            
             var childs = GameObject.Find("BlockMaker").GetComponentsInChildren<Transform>();
             var blocks = Array.FindAll(childs, child => child.name.Contains("Block") && child.name != "BlockMaker");
             blockList = new List<Transform>(blocks);
