@@ -124,10 +124,7 @@ public class EffectManager : MonoBehaviour
         Transform parent = (isTrailEffect)? parentTf : effectGroup;
         // var ins = Instantiate(activeSkillShotEFs[idx], parentTf.position, dir, parent) as GameObject;
         string key = "AtvSkShotEF" + (gm.SelectAtvSkillBtnIdx == 0 ? "" : "2");
-        var ins = ObjectPool.getObject(key);
-        ins.transform.position = parentTf.position;
-        ins.transform.rotation = dir;
-        ins.transform.SetParent(parent);
+        var ins = ObjectPool.getObject(key, parentTf, dir, parent);
         StartCoroutine(ObjectPool.coDestroyObject(ins, 1));
     }
     public GameObject createAtvSkExplosionEF(int idx, Transform parentTf, int time = 2){
@@ -137,9 +134,7 @@ public class EffectManager : MonoBehaviour
         Quaternion rotate = Quaternion.LookRotation(new Vector3(dir.x, dir.y, dirZ));
         // var ins = Instantiate(activeSkillExplosionEFs[idx], parentTf.position, rotate, effectGroup) as GameObject;
         string key = "AtvSkExplosionEF" + (gm.SelectAtvSkillBtnIdx == 0 ? "" : "2");
-        var ins = ObjectPool.getObject(key);
-        ins.transform.position = parentTf.position;
-        ins.transform.rotation = rotate;
+        var ins = ObjectPool.getObject(key, parentTf, rotate);
         StartCoroutine(ObjectPool.coDestroyObject(ins, time));
         return ins;
     }

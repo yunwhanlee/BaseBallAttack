@@ -37,23 +37,27 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    public static GameObject getObject(string key){
-        List<Transform> childList = new List<Transform>();
+    public static GameObject getObject(string key, Transform tf, Quaternion rot, Transform parent = null){
+        List<GameObject> childList = new List<GameObject>();
         for(int i=0; i< Ins.transform.childCount; i++)
-            childList.Add(Ins.transform.GetChild(i));
+            childList.Add(Ins.transform.GetChild(i).gameObject);
 
         var obj = childList.Find(ch => ch.name == key && !ch.gameObject.activeSelf);
         if(obj){
-            Debug.Log("getObject():: Active obj= " + obj.gameObject);
-            obj.gameObject.SetActive(true);
-            return obj.gameObject;
+            Debug.Log("getObject():: Active obj= " + obj);
         }
         else{
             Debug.Log("getObject():: New Create!");
-            var newObj = Ins.createNewObject(key);
-            newObj.gameObject.SetActive(true);
-            return newObj;
+            obj = Ins.createNewObject(key);
         }
+        
+        //* 属性
+        obj.SetActive(true);
+        obj.transform.position = tf.position;
+        obj.transform.localRotation = rot;
+        if(parent != null)  obj.transform.SetParent(parent);
+
+        return obj;
     }
 
     private GameObject createNewObject(string key){
