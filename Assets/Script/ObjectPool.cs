@@ -23,15 +23,17 @@ public class ObjectPool : MonoBehaviour
     private void init(){
         poolObjDtDict = new Dictionary<string, GameObject>();
 
-        //* Add EF
+        //* Add Dic
         poolObjDtDict.Add("AtvSkShotEF", em.activeSkillShotEFs[DM.ins.personalData.SelectSkillIdx]);
         poolObjDtDict.Add("AtvSkExplosionEF", em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkillIdx]);
         if(DM.ins.personalData.IsUnlock2ndSkill){
             poolObjDtDict.Add("AtvSkShotEF2", em.activeSkillShotEFs[DM.ins.personalData.SelectSkill2Idx]);
             poolObjDtDict.Add("AtvSkExplosionEF2", em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkill2Idx]);
         }
+        poolObjDtDict.Add("DropItemExpOrbEF", em.dropItemExpOrbEF);
+        poolObjDtDict.Add("CritTxtEF", em.criticalTextEF);
         
-
+        //* Create Obj Into Transform
         foreach(var dic in poolObjDtDict){
             Debug.LogFormat("poolObjDtDict[{0}]= {1}", dic.Key, dic.Value);
             if(dic.Value == null) continue; //* (BUG) nullなら、生成しなくて、次に飛ぶ。
@@ -39,7 +41,7 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    public static GameObject getObject(string key, Transform tf, Quaternion rot, Transform parent = null){
+    public static GameObject getObject(string key, Vector3 pos, Quaternion rot, Transform parent = null){
         List<GameObject> childList = new List<GameObject>();
         for(int i=0; i< Ins.transform.childCount; i++)
             childList.Add(Ins.transform.GetChild(i).gameObject);
@@ -55,7 +57,7 @@ public class ObjectPool : MonoBehaviour
         
         //* 属性
         obj.SetActive(true);
-        obj.transform.position = tf.position;
+        obj.transform.position = pos;
         obj.transform.localRotation = rot;
         if(parent != null)  obj.transform.SetParent(parent);
 

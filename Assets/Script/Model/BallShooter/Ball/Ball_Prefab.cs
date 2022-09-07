@@ -311,7 +311,7 @@ public class Ball_Prefab : MonoBehaviour
                 //* Check Dot Dmg or General Dmg
                 int val = (dotDmgPer == 0)? dmg : block.getDotDmg(dotDmgPer);
                 block.decreaseHp(val);
-                em.createCritTxtEF(hit.transform, val);
+                em.createCritTxtEF(hit.transform.position, val);
             }
         });
     }
@@ -425,17 +425,13 @@ public class Ball_Prefab : MonoBehaviour
 
         //* Set Dmg & Multi CriticalTextEF
         hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(((int)(pl.dmg.Value * critDmgRatio) * multiCnt));
-        for(int i=0; i<multiCnt; i++){
-            var obj = em.createCritTxtEF(hit.transform, (int)(pl.dmg.Value * critDmgRatio));
-            obj.SetActive(false);
-            effectList.Add(obj);
-        }
-        StartCoroutine(coMultiCriticalDmgEF(effectList, multiCnt));
+        StartCoroutine(coMultiCriticalDmgEF(critDmgRatio, multiCnt, hit.transform.position));
     }
-    IEnumerator coMultiCriticalDmgEF(List<GameObject> list, int cnt){
+    IEnumerator coMultiCriticalDmgEF(float critDmgRatio, int cnt, Vector3 hitPos){
         float span = 0.0875f;
         for(int i=0; i<cnt; i++){
-            list[i].SetActive(true);
+            // list[i].SetActive(true);
+            em.createCritTxtEF(hitPos, (int)(pl.dmg.Value * critDmgRatio));
             yield return new WaitForSeconds(i * span);
         }
     }

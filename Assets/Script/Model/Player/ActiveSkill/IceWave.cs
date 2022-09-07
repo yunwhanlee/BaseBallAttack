@@ -13,7 +13,7 @@ public class IceWave : MonoBehaviour
     {
         if(col.CompareTag(BlockMaker.NORMAL_BLOCK)){
             col.GetComponent<Block_Prefab>().decreaseHp(AtvSkill.ICEWAVE_DMG);
-            em.createCritTxtEF(col.transform, AtvSkill.ICEWAVE_DMG);
+            em.createCritTxtEF(col.transform.position, AtvSkill.ICEWAVE_DMG);
         }
     }
 }

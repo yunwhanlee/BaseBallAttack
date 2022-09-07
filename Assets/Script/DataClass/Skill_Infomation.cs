@@ -99,7 +99,7 @@ public class PsvSkill<T> where T: struct {
                     break;
                 case DM.PSV.Critical: 
                     int dmg = (int)(pl.dmg.Value * (2 + pl.criticalDamage.Value));
-                    em.createCritTxtEF(col.transform, dmg);
+                    em.createCritTxtEF(col.transform.position, dmg);
                     result = dmg;
                     break;
                 case DM.PSV.Explosion:
@@ -218,7 +218,7 @@ public class AtvSkill{
                     }
                 }
                 bl.decreaseHp(bl.getDotDmg(dmg));
-                em.createCritTxtEF(bl.transform, bl.getDotDmg(AtvSkill.POISONSMOKE_DOT));
+                em.createCritTxtEF(bl.transform.position, bl.getDotDmg(AtvSkill.POISONSMOKE_DOT));
             }
         });
     }

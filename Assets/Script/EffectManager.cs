@@ -90,10 +90,12 @@ public class EffectManager : MonoBehaviour
         var ins = Instantiate(instantKillTextEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
         Destroy(ins, 1.5f);
     }
-    public GameObject createCritTxtEF(Transform parentTf, int damage){
-        var ins = Instantiate(criticalTextEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
+    public GameObject createCritTxtEF(Vector3 parentPos, int damage){
+        // var ins = Instantiate(criticalTextEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
+        var ins = ObjectPool.getObject("CritTxtEF", parentPos, Quaternion.identity);
         ins.GetComponentInChildren<Text>().text = damage.ToString();
-        Destroy(ins, 1.5f);
+        // Destroy(ins, 1.5f);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, 1.5f));
         return ins;
     }
     public void createExplosionEF(Transform parentTf, float scale){
@@ -124,7 +126,7 @@ public class EffectManager : MonoBehaviour
         Transform parent = (isTrailEffect)? parentTf : effectGroup;
         // var ins = Instantiate(activeSkillShotEFs[idx], parentTf.position, dir, parent) as GameObject;
         string key = "AtvSkShotEF" + (gm.SelectAtvSkillBtnIdx == 0 ? "" : "2");
-        var ins = ObjectPool.getObject(key, parentTf, dir, parent);
+        var ins = ObjectPool.getObject(key, parentTf.position, dir, parent);
         StartCoroutine(ObjectPool.coDestroyObject(ins, 1));
     }
     public GameObject createAtvSkExplosionEF(int idx, Transform parentTf, int time = 2){
@@ -134,7 +136,7 @@ public class EffectManager : MonoBehaviour
         Quaternion rotate = Quaternion.LookRotation(new Vector3(dir.x, dir.y, dirZ));
         // var ins = Instantiate(activeSkillExplosionEFs[idx], parentTf.position, rotate, effectGroup) as GameObject;
         string key = "AtvSkExplosionEF" + (gm.SelectAtvSkillBtnIdx == 0 ? "" : "2");
-        var ins = ObjectPool.getObject(key, parentTf, rotate);
+        var ins = ObjectPool.getObject(key, parentTf.position, rotate);
         StartCoroutine(ObjectPool.coDestroyObject(ins, time));
         return ins;
     }
@@ -152,8 +154,10 @@ public class EffectManager : MonoBehaviour
     //* Drop Items EF
     //* -------------------------------------------------------------
     public void createDropItemExpOrbEF(Transform parentTf){
-        var ins = Instantiate(dropItemExpOrbEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
-        Destroy(ins, 1.5f);
+        // var ins = Instantiate(dropItemExpOrbEF, parentTf.position, Quaternion.identity, effectGroup) as GameObject;
+        var ins = ObjectPool.getObject("DropItemExpOrbEF", parentTf.position, Quaternion.identity);
+        // Destroy(ins, 1.5f);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, 1.5f));
     }
 
     //* -------------------------------------------------------------
