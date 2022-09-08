@@ -91,7 +91,6 @@ public class BlockMaker : MonoBehaviour
         }
     }
     public void createDropItemExpOrbPf(Transform blockTf, int resultExp){
-        // var ins = Instantiate(dropItemExpOrbPf, blockTf.position, Quaternion.identity, dropItemGroup) as GameObject;
         var ins = ObjectPool.getObject(ObjectPool.DIC.DropItemExpOrbPf.ToString(), blockTf.position, Quaternion.identity, dropItemGroup);
         var block = blockTf.GetComponent<Block_Prefab>();
         ins.GetComponent<DropItem>().ExpVal = block.Exp;

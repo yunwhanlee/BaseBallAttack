@@ -53,30 +53,31 @@ public class ObjectPool : MonoBehaviour
         //* Set Data 
         // EF
         List<PoolData> poolDtList = new List<PoolData>(){};
-        poolDtList.Add(new PoolData(DIC.AtvSkShotEF.ToString(), em.activeSkillShotEFs[DM.ins.personalData.SelectSkillIdx]));
-        poolDtList.Add(new PoolData(DIC.AtvSkExplosionEF.ToString(), em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkillIdx]));
+        poolDtList.Add(new PoolData(DIC.AtvSkShotEF.ToString(), em.activeSkillShotEFs[DM.ins.personalData.SelectSkillIdx], 1, em.effectGroup));
+        poolDtList.Add(new PoolData(DIC.AtvSkExplosionEF.ToString(), em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkillIdx], 1, em.effectGroup));
         if(DM.ins.personalData.IsUnlock2ndSkill){
-            poolDtList.Add(new PoolData(DIC.AtvSkShotEF2.ToString(), em.activeSkillShotEFs[DM.ins.personalData.SelectSkill2Idx]));
-            poolDtList.Add(new PoolData(DIC.AtvSkExplosionEF2.ToString(), em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkill2Idx]));
+            poolDtList.Add(new PoolData(DIC.AtvSkShotEF2.ToString(), em.activeSkillShotEFs[DM.ins.personalData.SelectSkill2Idx], 1, em.effectGroup));
+            poolDtList.Add(new PoolData(DIC.AtvSkExplosionEF2.ToString(), em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkill2Idx], 1, em.effectGroup));
         }
-        poolDtList.Add(new PoolData(DIC.DropItemExpOrbEF.ToString(), em.dropItemExpOrbEF, 30));
-        poolDtList.Add(new PoolData(DIC.InstantKillTextEF.ToString(), em.instantKillTextEF, 5));
-        poolDtList.Add(new PoolData(DIC.CritTxtEF.ToString(), em.criticalTextEF, 20));
-        poolDtList.Add(new PoolData(DIC.DownWallHitEF.ToString(), em.downWallHitEF, 10));
-        poolDtList.Add(new PoolData(DIC.ItemBlockDirLineTrailEF.ToString(), em.itemBlockDirLineTrailEF, 3));
-        poolDtList.Add(new PoolData(DIC.ItemBlockExplosionEF.ToString(), em.itemBlockExplosionEF, 3));
-        poolDtList.Add(new PoolData(DIC.BrokeBlockEF.ToString(), em.brokeBlockEF, 15));
-        poolDtList.Add(new PoolData(DIC.BatHitSparkEF.ToString(), em.batHitSparkEF));
-        poolDtList.Add(new PoolData(DIC.HomeRunHitSparkEF.ToString(), em.homeRunHitSparkEF));
-        poolDtList.Add(new PoolData(DIC.ExplosionEF.ToString(), em.explosionEF, 5));
+        poolDtList.Add(new PoolData(DIC.DropItemExpOrbEF.ToString(), em.dropItemExpOrbEF, 30, em.effectGroup));
+        poolDtList.Add(new PoolData(DIC.InstantKillTextEF.ToString(), em.instantKillTextEF, 5, em.effectGroup));
+        poolDtList.Add(new PoolData(DIC.CritTxtEF.ToString(), em.criticalTextEF, 20, em.effectGroup));
+        poolDtList.Add(new PoolData(DIC.DownWallHitEF.ToString(), em.downWallHitEF, 10, em.effectGroup));
+        poolDtList.Add(new PoolData(DIC.ItemBlockDirLineTrailEF.ToString(), em.itemBlockDirLineTrailEF, 3, em.effectGroup));
+        poolDtList.Add(new PoolData(DIC.ItemBlockExplosionEF.ToString(), em.itemBlockExplosionEF, 3, em.effectGroup));
+        poolDtList.Add(new PoolData(DIC.BrokeBlockEF.ToString(), em.brokeBlockEF, 15, em.effectGroup));
+        poolDtList.Add(new PoolData(DIC.BatHitSparkEF.ToString(), em.batHitSparkEF, 1, em.effectGroup));
+        poolDtList.Add(new PoolData(DIC.HomeRunHitSparkEF.ToString(), em.homeRunHitSparkEF, 1, em.effectGroup));
+        poolDtList.Add(new PoolData(DIC.ExplosionEF.ToString(), em.explosionEF, 5, em.effectGroup));
 
         // OBJ 
         poolDtList.Add(new PoolData(DIC.DropItemExpOrbPf.ToString(), bm.dropItemExpOrbPf, 50, bm.dropItemGroup));
 
+
         //* Enroll Dic
         poolObjDtDict = new Dictionary<string, GameObject>();
         poolDtList.ForEach(dt => poolObjDtDict.Add(dt.Key, dt.Obj));
-        
+
         //* Create Obj
         foreach(var dt in poolDtList){
             // Debug.LogFormat("poolObjDtDict[{0}]= {1}", dt.Key, dt.Obj);
