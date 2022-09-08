@@ -224,7 +224,8 @@ public class GameManager : MonoBehaviour
         gameoverPanel.SetActive(false);
         pl.Start();
         bm.Start();
-        
+        //* Collect Drop Items Exp
+        var dropObjs = bm.dropItemGroup.GetComponentsInChildren<DropItem>();
     }
 
     public void switchCamScene(){
@@ -430,7 +431,7 @@ public class GameManager : MonoBehaviour
         //* Collect Drop Items Exp
         var dropObjs = bm.dropItemGroup.GetComponentsInChildren<DropItem>();
         Debug.Log("setNextStage:: dropObjs.Length= " + dropObjs.Length);
-        Array.ForEach(dropObjs, dropObj=>dropObj.moveToTarget(pl.transform));
+        Array.ForEach(dropObjs, dropObj => dropObj.IsMoveToPlayer = true);
     }
 
     private void destroyEveryBalls(){

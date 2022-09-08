@@ -89,8 +89,8 @@ public class ObjectPool : MonoBehaviour
 
     public static GameObject getObject(string key, Vector3 pos, Quaternion rot, Transform groupTf = null){
         List<GameObject> childList = new List<GameObject>();
-        for(int i=0; i< Ins.transform.childCount; i++)
-            childList.Add(Ins.transform.GetChild(i).gameObject);
+        for(int i=0; i< groupTf.childCount; i++)
+            childList.Add(groupTf.GetChild(i).gameObject);
 
         var obj = childList.Find(ch => ch.name == key && !ch.gameObject.activeSelf);
         if(obj){
@@ -119,12 +119,13 @@ public class ObjectPool : MonoBehaviour
         return newObj;
     }
 
-    static void returnObject(GameObject ins){
+    static void returnObject(GameObject ins, Transform groupTf){
+        // Debug.Log("<color=red>ObjectPool:: returnObject() ins= " + ins.name + "</color>");
         ins.SetActive(false);
-        ins.transform.SetParent(Ins.transform);
+        ins.transform.SetParent(groupTf);
     }
-    public static IEnumerator coDestroyObject(GameObject ins, float sec = 0.1f){
+    public static IEnumerator coDestroyObject(GameObject ins, Transform groupTf, float sec = 0){
         yield return new WaitForSeconds(sec);
-        returnObject(ins);
+        returnObject(ins, groupTf);
     }
 }

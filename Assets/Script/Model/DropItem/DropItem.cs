@@ -9,31 +9,34 @@ public class DropItem : MonoBehaviour
 
     //* Value
     int expVal; public int ExpVal{ get => expVal; set => expVal = value;}
-    bool isMoveToPlayer = false; public bool IsMoveToPlayer{ get => isMoveToPlayer; set => isMoveToPlayer = value;}
-    float moveSpeed = 5f;
-
+    [SerializeField] bool isMoveToPlayer; public bool IsMoveToPlayer{ get => isMoveToPlayer; set => isMoveToPlayer = value;}
+    [SerializeField] float moveSpeed = 5f;
     public float cnt = 0;
-    Rigidbody rigid;
-    void Start(){
+    [SerializeField] Rigidbody rigid;
+
+    void Awake() {
+        Debug.Log("<color=yellow>DropItem Awake() </color>");
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         rigid = GetComponent<Rigidbody>();
-        
+    }
+
+    void OnEnable() {
+        Debug.Log("<color=yellow>DropItem OnEnable() </color>");
         spawnPopUp();
     }
 
+    void OnDisable() { //* (BUG) 再活性化するときに、動きOFF。
+        IsMoveToPlayer = false;
+    }
+
     void Update(){
-        if(isMoveToPlayer){
-            // transform.position = Vector3.Lerp(transform.position, gm.pl.transform.position, moveSpeed * Time.deltaTime);
-            transform.position = Vector3.Slerp(transform.position, gm.pl.transform.position, moveSpeed * Time.deltaTime); //* 放物線
+        if(IsMoveToPlayer){
+            //* 放物線
+            transform.position = Vector3.Slerp(transform.position, gm.pl.transform.position, moveSpeed * Time.deltaTime); // transform.position = Vector3.Lerp(transform.position, gm.pl.transform.position, moveSpeed * Time.deltaTime);
         }
     }
 
-    public void moveToTarget(Transform target){
-        isMoveToPlayer = true;
-        // Vector3 dir = target.position - this.rigid.transform.position;
-        // float force = 800 * Time.deltaTime;
-        // this.rigid.AddForce(dir * force, ForceMode.Impulse);
-    }
+    public void moveToTarget(Transform target) => IsMoveToPlayer = true;
 
     public void spawnPopUp(){
         float v = 0.3f;
@@ -68,7 +71,7 @@ public class DropItem : MonoBehaviour
             gm.pl.addExp(ExpVal); //* (BUG) GAMEOVER後、再スタート場合、EXPが増えないように。
             gm.em.createDropItemExpOrbEF(this.transform);
             // Destroy(this.gameObject);
-            StartCoroutine(ObjectPool.coDestroyObject(this.gameObject));
+            StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.bm.dropItemGroup));
         }
     }
 }
