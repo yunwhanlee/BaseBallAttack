@@ -306,7 +306,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             ballShooter.init();
             switchCamScene();
-            bm.setCreateBlockTrigger(true); //ブロック生成
+            bm.IsCreateBlock = true; //ブロック生成
             foreach(var img in strikeBallImgs) img.gameObject.SetActive(false); //GUI非表示 初期化
             readyBtn.gameObject.SetActive(true);
         }
@@ -422,7 +422,7 @@ public class GameManager : MonoBehaviour
 
         ballShooter.IsBallExist = false;
         pl.previewBundle.SetActive(true);
-        StartCoroutine(coWaitPlayerCollectOrb());
+        StartCoroutine(DropItem.coWaitPlayerCollectOrb(this));
         destroyEveryBalls();
         setBallPreviewGoalRandomPos();
         activeSkillDataBase[0].checkBlocksIsDotDmg(bm, em);
@@ -432,23 +432,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("setNextStage:: dropObjs.Length= " + dropObjs.Length);
         Array.ForEach(dropObjs, dropObj=>dropObj.moveToTarget(pl.transform));
     }
-    private IEnumerator coWaitPlayerCollectOrb(){
-        bm.setCreateBlockTrigger(true);
-        if(bm.transform.childCount == 0){//* Remove All Blocks Perfect Bonus!
-            Debug.Log("PERFECT!");
-            perfectTxt.GetComponent<Animator>().SetTrigger("doSpawn");
-            em.enableUIPerfectTxtEF();
-            yield return new WaitForSeconds(1);
-            //* STAGE % 5 == 0だったら、LONGブロックが続けて生成するBUG対応。
-            ++stage;
-            bm.setCreateBlockTrigger(true);
-        }
-        float sec = 0.8f;
-        yield return new WaitForSeconds(sec);
 
-        Debug.LogFormat("<color=white>coWaitCollectOrb:: checkLevelUp() wait: {0}sec</color>",sec);
-        checkLevelUp();
-    }
     private void destroyEveryBalls(){
         if(ballGroup.childCount > 0){
             for(int i=0; i<ballGroup.childCount; i++)

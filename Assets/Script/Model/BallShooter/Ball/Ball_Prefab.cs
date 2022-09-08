@@ -106,11 +106,11 @@ public class Ball_Prefab : MonoBehaviour
                 });
 
                 //* Bat Hit Ball SparkEF
-                em.createNormalHitSparkEF(this.transform);
+                em.createBatHitSparkEF(this.transform.position);
 
                 //* HomeRun
                 if(power >= pl.hitRank[C].Power){
-                    em.createHomeRunHitSparkEF(this.transform);
+                    em.createHomeRunHitSparkEF(this.transform.position);
                     StartCoroutine(coPlayHomeRunAnim(isActiveSkillTrigger));
                 }
                 else if(isActiveSkillTrigger){ //* ActiveSkill Before
@@ -304,7 +304,7 @@ public class Ball_Prefab : MonoBehaviour
                     block.IsDotDmg = true;
                     switch(atv){
                         case DM.ATV.FireBall:
-                            em.createAtvSkFireBallDotEF(block.transform);
+                            em.directlyCreateFireBallDotEF(block.transform);
                             break;
                     }
                 }
@@ -356,7 +356,7 @@ public class Ball_Prefab : MonoBehaviour
         gm.cam1.GetComponent<CamResolution>().setAnimTrigger("doShake");
 
         gm.homeRunTxtTf.GetComponent<Animator>().SetTrigger("doSpawn");
-        em.enableUIHomeRunTxtEF();
+        em.enableUIStageTxtEF("HomeRun");
         Time.timeScale = 1;
     }
 

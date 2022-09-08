@@ -465,12 +465,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 54044118}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.2668319, y: -10.859961, z: -0.33374214}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_Father: {fileID: 2121181892}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &63989821
 GameObject:
@@ -745,6 +745,7 @@ MonoBehaviour:
   line: {fileID: 12470623}
   pad: {fileID: 1273725561}
   stick: {fileID: 1665828883}
+  wallNormalVec: {x: 0, y: 0, z: 0}
   hitBlockByBallPreview: {fileID: 0}
 --- !u!1 &149300362
 GameObject:
@@ -3914,7 +3915,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: ee19e7bdbd2923340aa8973e1d4230b1, type: 2}
   - {fileID: 2100000, guid: a5f3265eb027f0e41af7b62f064343df, type: 2}
   dropItemGroup: {fileID: 54044119}
-  dropCoinOrbPf: {fileID: 8648117785770068642, guid: 9c5c87122054a5f42a6d0f065b398386, type: 3}
+  dropItemExpOrbPf: {fileID: 8648117785770068642, guid: 9c5c87122054a5f42a6d0f065b398386, type: 3}
 --- !u!1 &585957426
 GameObject:
   m_ObjectHideFlags: 0
@@ -4503,7 +4504,7 @@ Transform:
   - {fileID: 434918241}
   - {fileID: 2033124274}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &687656590
 GameObject:
@@ -4685,8 +4686,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gm: {fileID: 1623732227}
   effectGroup: {fileID: 831947632}
-  normalHitSparkEF: {fileID: 4380031107053313720, guid: f79910ae338189947854faa1ca06703d, type: 3}
-  HomeRunHitSparkEF: {fileID: 171099692236483078, guid: f8dc79df7fb294b49a40a44e0c6d9893, type: 3}
+  batHitSparkEF: {fileID: 4380031107053313720, guid: f79910ae338189947854faa1ca06703d, type: 3}
+  homeRunHitSparkEF: {fileID: 171099692236483078, guid: f8dc79df7fb294b49a40a44e0c6d9893, type: 3}
   brokeBlockEF: {fileID: 4643957893822756392, guid: 3ca0e6de066efec42b3c0869596311f9, type: 3}
   itemBlockExplosionEF: {fileID: 5286410048939786173, guid: 1b974900968d1be4d80ee5f4efcad58e, type: 3}
   itemBlockDirLineTrailEF: {fileID: 6289083441792240399, guid: 7b5e87a242f2f4f4d964ae78ea141740, type: 3}
@@ -6100,7 +6101,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &840195234
 GameObject:
@@ -6850,7 +6851,7 @@ Transform:
   - {fileID: 411146043}
   - {fileID: 448206031}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -8169,7 +8170,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1182312207
 GameObject:
@@ -23084,7 +23085,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 54044119}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -23100,7 +23102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8749e09ad71023b498e40176f6f2a44e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 0}
 --- !u!1001 &2147219412
 PrefabInstance:
   m_ObjectHideFlags: 0

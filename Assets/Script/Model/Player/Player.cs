@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
             em.activeSkillShotEFs[i] = activeSkills[i].ShotEfPref;
             em.activeSkillExplosionEFs[i] = activeSkills[i].ExplosionEfPref;
             em.activeSkillCastEFs[i] = activeSkills[i].CastEfPref;
-            em.createActiveSkillBatEF(i, BatEffectTf);
+            em.directlyCreateActiveSkillBatEF(i, BatEffectTf);
             i++;
         });
 #endregion

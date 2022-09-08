@@ -24,13 +24,13 @@ public class BlockMaker : MonoBehaviour
     public int treasureChestBlockPer = 10;
     public Transform blockBundle;
     public GameObject[] blockPrefs;
-    public bool isCreateBlock;
+    public bool isCreateBlock;  public bool IsCreateBlock {get => isCreateBlock; set => isCreateBlock = value;}
     public Color[] colors;   public Color[] Colors {get => colors;}
     public Material[] mts;   public Material[] Mts {get => mts;}
 
     [Header("<---- DROP ITEMS ---->")]
     public Transform dropItemGroup;
-    public GameObject dropCoinOrbPf;
+    public GameObject dropItemExpOrbPf;
 
     public void Start() {
         //* Init
@@ -41,12 +41,11 @@ public class BlockMaker : MonoBehaviour
     }
 
     void Update(){
-        if(isCreateBlock){
-            isCreateBlock = false;
+        if(IsCreateBlock){
+            IsCreateBlock = false;
             moveDownBlock();
         }
     }
-    public void setCreateBlockTrigger(bool trigger) => isCreateBlock = trigger;
 
     public void createBlockRow(BLOCK type, bool isFirst = false, int verticalCnt = 1){
         //* Value
@@ -91,8 +90,9 @@ public class BlockMaker : MonoBehaviour
                 break;
         }
     }
-    public void createDropItemOrb(Transform blockTf, int resultExp){
-        var ins = Instantiate(dropCoinOrbPf, blockTf.position, Quaternion.identity, dropItemGroup) as GameObject;
+    public void createDropItemExpOrbPf(Transform blockTf, int resultExp){
+        // var ins = Instantiate(dropItemExpOrbPf, blockTf.position, Quaternion.identity, dropItemGroup) as GameObject;
+        var ins = ObjectPool.getObject(ObjectPool.DIC.DropItemExpOrbPf.ToString(), blockTf.position, Quaternion.identity, dropItemGroup);
         var block = blockTf.GetComponent<Block_Prefab>();
         ins.GetComponent<DropItem>().ExpVal = block.Exp;
     }

@@ -211,19 +211,19 @@ public class Block_Prefab : MonoBehaviour
             //* アイテムブロック 処理
             switch (itemType){
                 case BlockType.BOMB:
-                    em.createItemBlockExplosionEF(this.transform);
+                    em.createItemBlockExplosionEF(this.transform.position);
                     RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, itemBlockExplostionBoxSize / 2, Vector3.up);
                     Array.ForEach(hits, hit => {
                         if(hit.transform.tag == BlockMaker.NORMAL_BLOCK)  onDestroy(hit.transform.gameObject);
                     });
                     break;
                 case BlockType.LR_ARROW:
-                    em.createItemBlockDirLineTrailEF(this.transform, transform.right);
-                    em.createItemBlockDirLineTrailEF(this.transform, -transform.right);
+                    em.createItemBlockDirLineTrailEF(this.transform.position, transform.right);
+                    em.createItemBlockDirLineTrailEF(this.transform.position, -transform.right);
                     break;
                 case BlockType.UPDOWN_ARROW:
-                    em.createItemBlockDirLineTrailEF(this.transform, transform.forward);
-                    em.createItemBlockDirLineTrailEF(this.transform, -transform.forward);
+                    em.createItemBlockDirLineTrailEF(this.transform.position, transform.forward);
+                    em.createItemBlockDirLineTrailEF(this.transform.position, -transform.forward);
                     break;
             }
             onDestroy(this.gameObject);
@@ -237,12 +237,12 @@ public class Block_Prefab : MonoBehaviour
     
 
     public void onDestroy(GameObject target, bool isInitialize = false) {
-        em.createBrokeBlockEF(target.transform, color);
+        em.createBrokeBlockEF(target.transform.position, color);
         int resultExp = (!isInitialize)? (int)(exp * pl.expUp.Value) : 0; //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
-        bm.createDropItemOrb(this.transform, resultExp);
+        bm.createDropItemExpOrbPf(this.transform, resultExp);
         if(kind == BlockMaker.BLOCK.TreasureChest){
             for(int i=0; i<TREASURECHEST_ORB_CNT; i++)
-                bm.createDropItemOrb(this.transform, resultExp);
+                bm.createDropItemExpOrbPf(this.transform, resultExp);
         }
         Destroy(target);
     }

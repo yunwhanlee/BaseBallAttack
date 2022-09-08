@@ -103,7 +103,7 @@ public class PsvSkill<T> where T: struct {
                     result = dmg;
                     break;
                 case DM.PSV.Explosion:
-                    em.createExplosionEF(ballPref.transform, pl.explosion.Value.range);
+                    em.createExplosionEF(ballPref.transform.position, pl.explosion.Value.range);
                     return true;
             }
         }
@@ -324,7 +324,7 @@ public class AtvSkillBtnUI{
                         break;
                 }
                 //* CastEF 生成
-                parentTfList.ForEach(parentTf => gm.em.createAtvSkCastEF(skillIdx, parentTf));
+                parentTfList.ForEach(parentTf => gm.em.directlyCreateAtvSkCastEF(skillIdx, parentTf));
             }
             else{
                 gm.pl.destroyAllCastEF();
