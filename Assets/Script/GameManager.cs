@@ -433,7 +433,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(DropItem.coWaitPlayerCollectOrb(this));
         destroyEveryBalls();
         setBallPreviewGoalRandomPos();
-        activeSkillDataBase[0].checkBlocksIsDotDmg(bm, em);
+        activeSkillDataBase[0].checkBlocksIsDotDmg(this);
 
         //* Collect Drop Items Exp
         var dropObjs = dropItemGroup.GetComponentsInChildren<DropItem>();

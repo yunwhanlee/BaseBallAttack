@@ -213,7 +213,7 @@ public class Ball_Prefab : MonoBehaviour
                                 Color hitColor = meshRd.material.GetColor("_ColorTint");
                                 Debug.Log("OnCollisionEnter:: ColorBall AtvSkill -> hitColor=" + hitColor);
                                 //* Find Same Color Blocks
-                                var blocks = gm.bm.GetComponentsInChildren<Block_Prefab>();
+                                var blocks = gm.blockGroup.GetComponentsInChildren<Block_Prefab>();
                                 var sameColorBlocks = Array.FindAll(blocks, bl => 
                                     bl.kind != BlockMaker.BLOCK.TreasureChest && //* (BUG) 宝箱はmeshRendererがないので場外。
                                     bl.GetComponent<MeshRenderer>().material.GetColor("_ColorTint") == hitColor

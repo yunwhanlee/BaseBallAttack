@@ -240,6 +240,7 @@ public class Block_Prefab : MonoBehaviour
         em.createBrokeBlockEF(target.transform.position, color);
         int resultExp = (!isInitialize)? (int)(exp * pl.expUp.Value) : 0; //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
         bm.createDropItemExpOrbPf(this.transform, resultExp);
+        
         if(kind == BlockMaker.BLOCK.TreasureChest){
             for(int i=0; i<TREASURECHEST_ORB_CNT; i++){
                 bm.createDropItemExpOrbPf(this.transform, resultExp);

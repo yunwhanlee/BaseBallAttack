@@ -112,7 +112,7 @@ public class ObjectPool : MonoBehaviour
     }
 
     private GameObject createNewObject(string key, Transform groupTf = null){
-        Debug.LogFormat("createNewObject(string key):: key= {0}", key);
+        // Debug.LogFormat("createNewObject(string key):: key= {0}", key);
         var newObj = Instantiate(poolObjDtDict[key], this.transform);
         newObj.name = key.ToString();
         newObj.gameObject.SetActive(false);
@@ -122,6 +122,7 @@ public class ObjectPool : MonoBehaviour
 
     static void returnObject(GameObject ins, Transform groupTf){
         // Debug.Log("<color=red>ObjectPool:: returnObject() ins= " + ins.name + "</color>");
+        if(!ins) return;
         ins.SetActive(false);
         ins.transform.SetParent(groupTf);
     }

@@ -206,19 +206,19 @@ public class AtvSkill{
     }
 
     //* method
-    public void checkBlocksIsDotDmg(BlockMaker bm, EffectManager em){
-        var blocks = bm.GetComponentsInChildren<Block_Prefab>();
-        Array.ForEach(blocks, bl => {
-            if(bl.IsDotDmg) {
+    public void checkBlocksIsDotDmg(GameManager gm){
+        var blocks = gm.blockGroup.GetComponentsInChildren<Block_Prefab>();
+        Array.ForEach(blocks, block => {
+            if(block.IsDotDmg) {
                 float dmg = AtvSkill.POISONSMOKE_DOT;
-                for(int i=0; i<bl.transform.childCount; i++){
-                    if(bl.transform.GetChild(i).name.Contains("FireBallDotEffect")){
+                for(int i=0; i<block.transform.childCount; i++){
+                    if(block.transform.GetChild(i).name.Contains("FireBallDotEffect")){
                         dmg = AtvSkill.FIREBALL_DOT;
                         break;
                     }
                 }
-                bl.decreaseHp(bl.getDotDmg(dmg));
-                em.createCritTxtEF(bl.transform.position, bl.getDotDmg(AtvSkill.POISONSMOKE_DOT));
+                block.decreaseHp(block.getDotDmg(dmg));
+                gm.em.createCritTxtEF(block.transform.position, block.getDotDmg(AtvSkill.POISONSMOKE_DOT));
             }
         });
     }
@@ -236,7 +236,7 @@ public class AtvSkill{
             Color hitColor = meshRd.material.GetColor("_ColorTint");
 
             //* Find Same Color Blocks
-            var blocks = bm.GetComponentsInChildren<Block_Prefab>();
+            var blocks = gm.blockGroup.GetComponentsInChildren<Block_Prefab>();
             var sameColorBlocks = Array.FindAll(blocks, bl =>
                 (bl.GetComponent<Block_Prefab>().kind != BlockMaker.BLOCK.TreasureChest) //* 宝箱は場外
                 && (bl.GetComponent<MeshRenderer>().material.GetColor("_ColorTint") == hitColor)
