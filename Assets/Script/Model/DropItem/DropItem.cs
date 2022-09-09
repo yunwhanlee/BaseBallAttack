@@ -50,7 +50,7 @@ public class DropItem : MonoBehaviour
 
     public static IEnumerator coWaitPlayerCollectOrb(GameManager gm){
         gm.bm.IsCreateBlock = true;
-        if(gm.bm.transform.childCount == 0){//* Remove All Blocks Perfect Bonus!
+        if(gm.blockGroup.childCount == 0){//* Remove All Blocks Perfect Bonus!
             Debug.Log("PERFECT!");
             gm.perfectTxt.GetComponent<Animator>().SetTrigger("doSpawn");
             gm.em.enableUIStageTxtEF("Perfect");

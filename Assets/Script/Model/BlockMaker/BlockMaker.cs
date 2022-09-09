@@ -96,7 +96,7 @@ public class BlockMaker : MonoBehaviour
 
     public void moveDownBlock(){
         Debug.Log("moveDownBlock:: MOVE DOWN BLOCK ↓, gm.stage= " + gm.stage);
-        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z - 1);
+        gm.blockGroup.position = new Vector3(gm.blockGroup.position.x, gm.blockGroup.position.y, gm.blockGroup.position.z - 1);
 
         //* Next Set Block Type
         if(gm.stage % BLOCK2_SPAN == 0){
