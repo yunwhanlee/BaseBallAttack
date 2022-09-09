@@ -470,7 +470,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2121181892}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &63989821
 GameObject:
@@ -2334,6 +2334,36 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5440346775204380778, guid: 6db33d0b3b6844c4d94c44afe4f9d09f, type: 3}
   m_PrefabInstance: {fileID: 376391823}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &397967614
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 397967615}
+  m_Layer: 0
+  m_Name: BlockGroup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &397967615
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 397967614}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: -2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &402199513 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2441973986350872081, guid: 71f96bca88b0fd940a48a70f1bfe1885, type: 3}
@@ -3897,7 +3927,6 @@ MonoBehaviour:
   BLOCK2_SPAN: 5
   skipBlockPer: 20
   treasureChestBlockPer: 10
-  blockBundle: {fileID: 579925510}
   blockPrefs:
   - {fileID: 1376276108105304710, guid: 71f96bca88b0fd940a48a70f1bfe1885, type: 3}
   - {fileID: 1376276108105304710, guid: dd9607447bace8c439bb5466658dbfbb, type: 3}
@@ -3914,7 +3943,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: a7f4b3a80cce5544186fb7a62b8fabb2, type: 2}
   - {fileID: 2100000, guid: ee19e7bdbd2923340aa8973e1d4230b1, type: 2}
   - {fileID: 2100000, guid: a5f3265eb027f0e41af7b62f064343df, type: 2}
-  dropItemGroup: {fileID: 54044119}
   dropItemExpOrbPf: {fileID: 8648117785770068642, guid: 9c5c87122054a5f42a6d0f065b398386, type: 3}
 --- !u!1 &585957426
 GameObject:
@@ -4504,7 +4532,7 @@ Transform:
   - {fileID: 434918241}
   - {fileID: 2033124274}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &687656590
 GameObject:
@@ -4685,7 +4713,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gm: {fileID: 1623732227}
-  effectGroup: {fileID: 831947632}
   batHitSparkEF: {fileID: 4380031107053313720, guid: f79910ae338189947854faa1ca06703d, type: 3}
   homeRunHitSparkEF: {fileID: 171099692236483078, guid: f8dc79df7fb294b49a40a44e0c6d9893, type: 3}
   brokeBlockEF: {fileID: 4643957893822756392, guid: 3ca0e6de066efec42b3c0869596311f9, type: 3}
@@ -6101,7 +6128,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2121181892}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &840195234
 GameObject:
@@ -6851,7 +6878,7 @@ Transform:
   - {fileID: 411146043}
   - {fileID: 448206031}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -8165,12 +8192,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1179223821}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1182312207
 GameObject:
@@ -14998,19 +15025,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 1
+  effectGroup: {fileID: 831947632}
+  ballGroup: {fileID: 1179223822}
+  blockGroup: {fileID: 397967615}
+  dropItemGroup: {fileID: 54044119}
   cam1: {fileID: 963194225}
   cam2: {fileID: 1343411146}
   cam1Canvas: {fileID: 1462164001}
   cam2Canvas: {fileID: 456845150}
-  em: {fileID: 689221855}
   canvasUI: {fileID: 2001013460}
+  em: {fileID: 689221855}
   pl: {fileID: 702911506}
-  ballShooter: {fileID: 1350307814}
+  bs: {fileID: 1350307814}
   bm: {fileID: 579925511}
   throwScreen: {fileID: 1322018822}
   hitRangeStartTf: {fileID: 896793084}
   hitRangeEndTf: {fileID: 2033124274}
-  ballGroup: {fileID: 1179223822}
   deadLineTf: {fileID: 587487858}
   downWall: {fileID: 779756}
   light: {fileID: 705507994}
@@ -23086,8 +23116,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 54044119}
   - {fileID: 831947632}
+  - {fileID: 54044119}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

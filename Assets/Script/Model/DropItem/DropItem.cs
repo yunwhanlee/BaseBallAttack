@@ -71,7 +71,7 @@ public class DropItem : MonoBehaviour
             gm.pl.addExp(ExpVal); //* (BUG) GAMEOVER後、再スタート場合、EXPが増えないように。
             gm.em.createDropItemExpOrbEF(this.transform);
             // Destroy(this.gameObject);
-            StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.bm.dropItemGroup));
+            StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropItemGroup));
         }
     }
 }

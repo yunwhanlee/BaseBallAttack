@@ -22,14 +22,12 @@ public class BlockMaker : MonoBehaviour
 
     public int skipBlockPer = 20;
     public int treasureChestBlockPer = 10;
-    public Transform blockBundle;
     public GameObject[] blockPrefs;
     public bool isCreateBlock;  public bool IsCreateBlock {get => isCreateBlock; set => isCreateBlock = value;}
     public Color[] colors;   public Color[] Colors {get => colors;}
     public Material[] mts;   public Material[] Mts {get => mts;}
 
     [Header("<---- DROP ITEMS ---->")]
-    public Transform dropItemGroup;
     public GameObject dropItemExpOrbPf;
 
     public void Start() {
@@ -71,11 +69,11 @@ public class BlockMaker : MonoBehaviour
 
                         //* #3. Block Normal + Newゲーム開始なのか、次のステージなのか？
                         float x = h < 3 ? (spawnPosX + h * xs) : (spawnPosX + h * xs + middleGap * offsetCnt);
-                        float y = (isFirst)? 0 : ins.transform.position.y + blockBundle.position.y;
+                        float y = (isFirst)? 0 : ins.transform.position.y + gm.blockGroup.position.y;
                         float z = (isFirst)? -v : SPWAN_POS_Y;
                         Vector3 pos = new Vector3(x, y, z);
-                        Vector3 setPos = (isFirst)? pos + blockBundle.position : pos;
-                        Instantiate(ins, setPos, Quaternion.identity, blockBundle);
+                        Vector3 setPos = (isFirst)? pos + gm.blockGroup.position : pos;
+                        Instantiate(ins, setPos, Quaternion.identity, gm.blockGroup);
                     }
                 }
                 break;
@@ -83,15 +81,15 @@ public class BlockMaker : MonoBehaviour
                 for(int h=0; h<2; h++){
                     var ins = blockPrefs[(int)type];
                     float x = h < 1 ? spawnPosX + h * xs : spawnPosX + h * xs + middleGap;
-                    float y = ins.transform.position.y + blockBundle.position.y;
+                    float y = ins.transform.position.y + gm.blockGroup.position.y;
                     Vector3 pos = new Vector3(x, y, SPWAN_POS_Y);
-                    Instantiate(ins, pos, Quaternion.identity, blockBundle);
+                    Instantiate(ins, pos, Quaternion.identity, gm.blockGroup);
                 }
                 break;
         }
     }
     public void createDropItemExpOrbPf(Transform blockTf, int resultExp){
-        var ins = ObjectPool.getObject(ObjectPool.DIC.DropItemExpOrbPf.ToString(), blockTf.position, Quaternion.identity, dropItemGroup);
+        var ins = ObjectPool.getObject(ObjectPool.DIC.DropItemExpOrbPf.ToString(), blockTf.position, Quaternion.identity, gm.dropItemGroup);
         var block = blockTf.GetComponent<Block_Prefab>();
         ins.GetComponent<DropItem>().ExpVal = block.Exp;
     }

@@ -11,21 +11,28 @@ public class GameManager : MonoBehaviour
     public enum STATE {PLAY, WAIT, GAMEOVER, PAUSE, CONTINUE, HOME, NULL};
     [SerializeField] private STATE state;     public STATE State {get => state; set => state = value;}
 
+    //* Group
+    public Transform effectGroup;
+    public Transform ballGroup;
+    public Transform blockGroup;
+    public Transform dropItemGroup;
+
+
     //* CAMERA
     public GameObject cam1, cam2;
     public GameObject cam1Canvas, cam2Canvas;
 
     //* OutSide
     [Header("<---- OutSide ---->")]
-    public EffectManager em;
     public Canvas canvasUI;
+    public EffectManager em;
     public Player pl;
-    public BallShooter ballShooter;
+    public BallShooter bs;
     public BlockMaker bm;
     public GameObject throwScreen;
     public Transform hitRangeStartTf;
     public Transform hitRangeEndTf;
-    public Transform ballGroup;
+    
     public Transform deadLineTf;
     public BoxCollider downWall;
     public Light light;
@@ -225,7 +232,7 @@ public class GameManager : MonoBehaviour
         pl.Start();
         bm.Start();
         //* Collect Drop Items Exp
-        var dropObjs = bm.dropItemGroup.GetComponentsInChildren<DropItem>();
+        var dropObjs = dropItemGroup.GetComponentsInChildren<DropItem>();
     }
 
     public void switchCamScene(){
@@ -243,7 +250,7 @@ public class GameManager : MonoBehaviour
             ballPreviewGoalImg.gameObject.SetActive(true);
             setBallPreviewGoalImgRGBA(new Color(0.8f,0.8f,0.8f, 0.2f));
 
-            ballShooter.init();
+            bs.init();
 
             pl.arrowAxisAnchor.SetActive(false);
             
@@ -305,7 +312,7 @@ public class GameManager : MonoBehaviour
             strikeCnt = 0;
             ShootCntTxt.text = "OUT!";
             yield return new WaitForSeconds(1.5f);
-            ballShooter.init();
+            bs.init();
             switchCamScene();
             bm.IsCreateBlock = true; //ブロック生成
             foreach(var img in strikeBallImgs) img.gameObject.SetActive(false); //GUI非表示 初期化
@@ -315,9 +322,9 @@ public class GameManager : MonoBehaviour
             ShootCntTxt.text = "STRIKE!";
             readyBtn.gameObject.SetActive(true);
             yield return new WaitForSeconds(1.5f);
-            ballShooter.init();
+            bs.init();
         }
-        ballShooter.IsBallExist = false; //ボール発射準備 On
+        bs.IsBallExist = false; //ボール発射準備 On
         setBallPreviewGoalImgRGBA(new Color(0.8f,0.8f,0.8f, 0.2f));
     }
 
@@ -421,7 +428,7 @@ public class GameManager : MonoBehaviour
         readyBtn.gameObject.SetActive(true);
         comboCnt = 0;
 
-        ballShooter.IsBallExist = false;
+        bs.IsBallExist = false;
         pl.previewBundle.SetActive(true);
         StartCoroutine(DropItem.coWaitPlayerCollectOrb(this));
         destroyEveryBalls();
@@ -429,7 +436,7 @@ public class GameManager : MonoBehaviour
         activeSkillDataBase[0].checkBlocksIsDotDmg(bm, em);
 
         //* Collect Drop Items Exp
-        var dropObjs = bm.dropItemGroup.GetComponentsInChildren<DropItem>();
+        var dropObjs = dropItemGroup.GetComponentsInChildren<DropItem>();
         Debug.Log("setNextStage:: dropObjs.Length= " + dropObjs.Length);
         Array.ForEach(dropObjs, dropObj => dropObj.IsMoveToPlayer = true);
     }
