@@ -10,8 +10,8 @@ public class Ball_Prefab : MonoBehaviour
     public GameManager gm;
     public EffectManager em;
     public Player pl;
-    public BlockMaker blockMaker;
-    public BallShooter ballShooter;
+    public BlockMaker bm;
+    public BallShooter bs;
     public int aliveTime;
 
     //* Value
@@ -25,10 +25,10 @@ public class Ball_Prefab : MonoBehaviour
     void Start()
     {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-        em = GameObject.Find("EffectManager").GetComponent<EffectManager>();
-        pl = GameObject.Find("Player").GetComponent<Player>();
-        blockMaker = GameObject.Find("BlockMaker").GetComponent<BlockMaker>();
-        ballShooter = GameObject.Find("BallShooter").GetComponent<BallShooter>();
+        em = gm.em;
+        pl = gm.pl;
+        bm = gm.bm;
+        bs = gm.bs;
 
         rigid = GetComponent<Rigidbody>();
         rigid.AddForce(this.transform.forward * speed, ForceMode.Impulse);

@@ -25,8 +25,8 @@ public class GameManager : MonoBehaviour
     //* OutSide
     [Header("<---- OutSide ---->")]
     public Canvas canvasUI;
-    public EffectManager em;
     public Player pl;
+    public EffectManager em;
     public BallShooter bs;
     public BlockMaker bm;
     public GameObject throwScreen;
@@ -112,6 +112,10 @@ public class GameManager : MonoBehaviour
     void Start() {
         Debug.Log("<color=red>----------------------------------------------P L A Y   S C E N E----------------------------------------------</color>");
         //! init()宣言したら、キャラクターモデルを読み込むことができないBUG
+        pl = GameObject.Find("Player").GetComponent<Player>();
+        em = GameObject.Find("EffectManager").GetComponent<EffectManager>();
+        bs = GameObject.Find("BallShooter").GetComponent<BallShooter>();
+        bm = GameObject.Find("BlockMaker").GetComponent<BlockMaker>();
 
         light = GameObject.Find("Directional Light").GetComponent<Light>();
         hitRangeSliderTf = hitRangeSlider.GetComponent<RectTransform>();

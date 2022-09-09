@@ -54,9 +54,9 @@ public class Block_Prefab : MonoBehaviour
 
     void Start() {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-        em = GameObject.Find("EffectManager").GetComponent<EffectManager>();
-        pl = GameObject.Find("Player").GetComponent<Player>();
-        bm = GameObject.Find("BlockMaker").GetComponent<BlockMaker>();
+        em = gm.em;
+        pl = gm.pl;
+        bm = gm.bm;
 
         kind = setBlockKindEnum();
         itemType = BlockType.NORMAL;
@@ -91,7 +91,37 @@ public class Block_Prefab : MonoBehaviour
             itemUISprGlowEf = obj.GetComponent<SpriteGlowEffect>();
         }
 
-        //* HP
+        setHp();
+        setStyle(); //* (TreasureChest除外)
+
+        //* Init Scale For Spawn Anim
+        defScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        spawnAnimSpeed = 6f;
+        minLimitVal = defScale.x * 0.99f;
+        transform.localScale = Vector3.zero;
+    }
+
+    void Update(){
+        hpTxt.text = hp.ToString();
+
+        //* Spawn Animation
+        if(transform.localScale.x < defScale.x){
+            //* 99%まで大きくなったら、既存のサイズにする。(無駄な処理をしないため)
+            // Debug.Log("Block_Prefab:: Update():: transform.localScale= " + transform.localScale);
+            if(transform.localScale.x >= minLimitVal) {
+                transform.localScale = defScale;
+            }
+            transform.localScale = Vector3.Lerp(transform.localScale, defScale, Time.deltaTime * spawnAnimSpeed);
+        }
+
+        //* ItemType Glow Animation
+        animateItemTypeUISprGlowEF(ref itemUISprGlowCnt);
+    }
+
+//*-----------------------------------------
+//* 関数
+//*-----------------------------------------
+    private void setHp(){
         switch(kind){
             case BlockMaker.BLOCK.TreasureChest:
                 Hp = 1;
@@ -101,12 +131,12 @@ public class Block_Prefab : MonoBehaviour
                 Hp = (gm.stage % bm.BLOCK2_SPAN == 0)? gm.stage * 5 : gm.stage; //* Block2 : Block1
                 break;
         }
-        
         hpTxt.text = Hp.ToString();
-
-        //* Set Block Style (TreasureChest除外)
+    }
+    private void setStyle(){
         if(kind != BlockMaker.BLOCK.TreasureChest){
             Debug.LogFormat("Block_Prefab:: kind={0}", kind);
+
             //* Material
             if(0 < Hp && Hp <= 10){
                 Exp = 10;
@@ -139,32 +169,11 @@ public class Block_Prefab : MonoBehaviour
                 case (int)ColorIndex.GREEN:     color = Color.green; break;
                 case (int)ColorIndex.BLUE:      color = Color.blue; break;
             }
+
+            //* Apply
             sprGlowEf.GlowColor = color;
             originMts[0] = meshRds[0].material; //* オリジナルMt 保存。(材質O、色O ➡ Block用)
         }
-
-        //* Init Scale For Spawn Anim
-        defScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
-        spawnAnimSpeed = 6f;
-        minLimitVal = defScale.x * 0.99f;
-        transform.localScale = Vector3.zero;
-    }
-
-    void Update(){
-        hpTxt.text = hp.ToString();
-
-        //* Spawn Animation
-        if(transform.localScale.x < defScale.x){
-            //* 99%まで大きくなったら、既存のサイズにする。(無駄な処理をしないため)
-            // Debug.Log("Block_Prefab:: Update():: transform.localScale= " + transform.localScale);
-            if(transform.localScale.x >= minLimitVal) {
-                transform.localScale = defScale;
-            }
-            transform.localScale = Vector3.Lerp(transform.localScale, defScale, Time.deltaTime * spawnAnimSpeed);
-        }
-
-        //* ItemType Glow Animation
-        animateItemTypeUISprGlowEF(ref itemUISprGlowCnt);
     }
 
     private void animateItemTypeUISprGlowEF(ref float cnt){
