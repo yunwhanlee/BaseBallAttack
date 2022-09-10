@@ -52,8 +52,8 @@ public class SectorGizmos : MonoBehaviour
         }
 
         if(gm.isPointUp){
-            var childs = GameObject.Find("BlockMaker").GetComponentsInChildren<Transform>();
-            var blocks = Array.FindAll(childs, child => child.name.Contains("Block") && child.name != "BlockMaker");
+            var childs = GameObject.Find("BlockGroup").GetComponentsInChildren<Transform>();
+            var blocks = Array.FindAll(childs, child => child.name.Contains("Block") && child.name != "BlockGroup");
             blockList = new List<Transform>(blocks);
             blockList.ForEach(block =>block.GetComponent<Block_Prefab>().setEnabledSpriteGlowEF(false));
             hitList = new List<Transform>();
