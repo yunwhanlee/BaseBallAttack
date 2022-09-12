@@ -228,7 +228,8 @@ public class AtvSkill{
         // Debug.Log("setColorBallSkillGlowEF():: hit= " + hit);
         if(isColorBallSkill && hit.transform.CompareTag(BlockMaker.NORMAL_BLOCK)){
             Debug.Log(hit.transform.GetComponent<Block_Prefab>().kind);
-            if(hit.transform.GetComponent<Block_Prefab>().kind == BlockMaker.BLOCK.TreasureChest){//* 宝箱は場外
+            if(hit.transform.GetComponent<Block_Prefab>().kind == BlockMaker.BLOCK.TreasureChest
+                || hit.transform.GetComponent<Block_Prefab>().kind == BlockMaker.BLOCK.Heal){//* 宝箱は場外
                 return;
             }
             //* Hit Color

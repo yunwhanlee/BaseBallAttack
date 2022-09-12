@@ -43,6 +43,7 @@ public class Block_Prefab : MonoBehaviour
     [SerializeField] int itemTypePer;
     [SerializeField] bool isHeal;   public bool IsHeal {get => isHeal; set => isHeal = value;}
     [SerializeField] float healRadius = 1.5f;   public float HealRadius {get => healRadius; set => healRadius = value;}
+    [SerializeField] float healValPer = 0.5f;   public float HealValPer {get => healValPer; set => healValPer = value;}
 
     //* Spawn Animation
     [SerializeField] Vector3 defScale;
@@ -124,8 +125,11 @@ public class Block_Prefab : MonoBehaviour
                 //Sphere Collider
                 RaycastHit[] rayHits = Physics.SphereCastAll(this.gameObject.transform.position, HealRadius, Vector3.up, 0);
                 foreach(var hit in rayHits){
-                    if(hit.transform.tag == BlockMaker.NORMAL_BLOCK)
-                        hit.transform.GetComponent<Block_Prefab>().increaseHp(10);
+                    var hitBlock = hit.transform.GetComponent<Block_Prefab>();
+                    if(hit.transform.tag == BlockMaker.NORMAL_BLOCK && hitBlock.kind != BlockMaker.BLOCK.TreasureChest){
+                        int addHp = (int)(hitBlock.hp * healValPer);
+                        hit.transform.GetComponent<Block_Prefab>().increaseHp(addHp);
+                    }
                 }
             }
         }
@@ -138,14 +142,16 @@ public class Block_Prefab : MonoBehaviour
         switch(kind){
             case BlockMaker.BLOCK.TreasureChest:
                 Hp = 1;
-                break;
+                break;    
             case BlockMaker.BLOCK.Normal:
             case BlockMaker.BLOCK.Long:
+            case BlockMaker.BLOCK.Heal:
                 Hp = (gm.stage % bm.BLOCK2_SPAN == 0)? gm.stage * 5 : gm.stage; //* Block2 : Block1
                 break;
         }
         hpTxt.text = Hp.ToString();
     }
+
     private void setStyle(){
         if(kind == BlockMaker.BLOCK.Normal || kind == BlockMaker.BLOCK.Long){
             Debug.LogFormat("Block_Prefab:: kind={0}", kind);
