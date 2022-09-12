@@ -3927,10 +3927,12 @@ MonoBehaviour:
   BLOCK2_SPAN: 5
   skipBlockPer: 20
   treasureChestBlockPer: 10
+  healBlockPer: 10
   blockPrefs:
   - {fileID: 1376276108105304710, guid: 71f96bca88b0fd940a48a70f1bfe1885, type: 3}
   - {fileID: 1376276108105304710, guid: dd9607447bace8c439bb5466658dbfbb, type: 3}
   - {fileID: 7185378944005582944, guid: d48bf2c8c54c1f14ca86424176f854ba, type: 3}
+  - {fileID: 7185378944005582944, guid: 0731fd787974668449f9293b50b786f4, type: 3}
   isCreateBlock: 0
   colors:
   - {r: 1, g: 0.4575472, b: 0.4575472, a: 1}
@@ -4719,9 +4721,11 @@ MonoBehaviour:
   itemBlockExplosionEF: {fileID: 5286410048939786173, guid: 1b974900968d1be4d80ee5f4efcad58e, type: 3}
   itemBlockDirLineTrailEF: {fileID: 6289083441792240399, guid: 7b5e87a242f2f4f4d964ae78ea141740, type: 3}
   downWallHitEF: {fileID: 7257234144255657970, guid: eb8378333712c7f4591f6942beae0a55, type: 3}
+  healTxtEF: {fileID: 3436073781772722895, guid: 38010c2078962ee43887d5670d9f0005, type: 3}
+  heartEF: {fileID: 4378705977135561785, guid: c4ba19e6834c8ad45abe901b9cf9b9c4, type: 3}
   explosionEF: {fileID: 4643957893822756392, guid: f7ce8225f27202143a23c0bd225930bc, type: 3}
-  criticalTextEF: {fileID: 3436073781772722895, guid: 61dc174dba28d954c9d42ce5e8dbcc60, type: 3}
-  instantKillTextEF: {fileID: 3436073781772722895, guid: 58b2160a5a2f7994bb5ff653a164e704, type: 3}
+  criticalTxtEF: {fileID: 3436073781772722895, guid: 61dc174dba28d954c9d42ce5e8dbcc60, type: 3}
+  instantKillTxtEF: {fileID: 3436073781772722895, guid: 58b2160a5a2f7994bb5ff653a164e704, type: 3}
   activeSkillBatEFs: []
   activeSkillShotEFs: []
   activeSkillExplosionEFs: []
@@ -15034,8 +15038,8 @@ MonoBehaviour:
   cam1Canvas: {fileID: 1462164001}
   cam2Canvas: {fileID: 456845150}
   canvasUI: {fileID: 2001013460}
-  em: {fileID: 689221855}
   pl: {fileID: 702911506}
+  em: {fileID: 689221855}
   bs: {fileID: 1350307814}
   bm: {fileID: 579925511}
   throwScreen: {fileID: 1322018822}

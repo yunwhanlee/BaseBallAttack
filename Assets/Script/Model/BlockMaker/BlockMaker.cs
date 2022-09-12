@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class BlockMaker : MonoBehaviour
 {
     public const string NORMAL_BLOCK = "NormalBlock";
-    public enum BLOCK {Normal, Long, TreasureChest, Null};
+    public enum BLOCK {Normal, Long, TreasureChest, Heal, Null};
 
     //* OutSide
     public GameManager gm;
@@ -21,7 +21,7 @@ public class BlockMaker : MonoBehaviour
     public float BLOCK2_SPAN = 5;
 
     public int skipBlockPer = 20;
-    public int treasureChestBlockPer = 10;
+    public int treasureChestBlockPer = 10, healBlockPer = 10;
     public GameObject[] blockPrefs;
     public bool isCreateBlock;  public bool IsCreateBlock {get => isCreateBlock; set => isCreateBlock = value;}
     public Color[] colors;   public Color[] Colors {get => colors;}
@@ -58,7 +58,7 @@ public class BlockMaker : MonoBehaviour
                     Debug.Log("---------------------");
                     for(int h=0; h<MAX_HORIZONTAL_GRID;h++){ //横
                         var ins = blockPrefs[(int)type];
-
+#region Block Kind or Skip
                         //* #1. Block Skip?
                         int rand = Random.Range(0,100);
                         if(rand < skipBlockPer) continue; //Skip Block
@@ -67,6 +67,10 @@ public class BlockMaker : MonoBehaviour
                         rand = Random.Range(0,100);
                         if(rand < treasureChestBlockPer)   ins = blockPrefs[(int)BLOCK.TreasureChest];
 
+                        //* #3. Block HealBlock?
+                        rand = Random.Range(0,100);
+                        if(rand < healBlockPer)   ins = blockPrefs[(int)BLOCK.Heal];
+
                         //* #3. Block Normal + Newゲーム開始なのか、次のステージなのか？
                         float x = h < 3 ? (spawnPosX + h * xs) : (spawnPosX + h * xs + middleGap * offsetCnt);
                         float y = (isFirst)? 0 : ins.transform.position.y + gm.blockGroup.position.y;
@@ -74,6 +78,7 @@ public class BlockMaker : MonoBehaviour
                         Vector3 pos = new Vector3(x, y, z);
                         Vector3 setPos = (isFirst)? pos + gm.blockGroup.position : pos;
                         Instantiate(ins, setPos, Quaternion.identity, gm.blockGroup);
+#endregion
                     }
                 }
                 break;
@@ -119,5 +124,13 @@ public class BlockMaker : MonoBehaviour
     public BLOCK convertBlockStr2Enum(string name){
         return (name == BLOCK.Normal.ToString())? BLOCK.Normal 
         : BLOCK.Long;
+    }
+    public void checkIsHealBlock(){
+        var blocks = gm.blockGroup.GetComponentsInChildren<Block_Prefab>();
+        Array.ForEach(blocks, block => {
+            if(block.kind == BLOCK.Heal){
+                block.IsHeal = true;
+            }
+        });
     }
 }

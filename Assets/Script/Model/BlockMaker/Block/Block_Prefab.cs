@@ -10,7 +10,7 @@ public class Block_Prefab : MonoBehaviour
 {
     public enum ColorIndex{RED, YELLOW, GREEN, BLUE};
     public enum BlockMt {PLAIN, WOOD, SAND, REDBRICK, IRON};
-    public enum BlockType {BOMB, LR_ARROW, UPDOWN_ARROW, NORMAL};
+    public enum BlockType {NORMAL, BOMB, LR_ARROW, UPDOWN_ARROW};
     const int TREASURECHEST_ORB_CNT = 15;
     private GameManager gm;
     private EffectManager em;
@@ -36,13 +36,15 @@ public class Block_Prefab : MonoBehaviour
 
     //* Value
     public BlockMaker.BLOCK kind;
-    [SerializeField] BlockType itemType;
+    [SerializeField] BlockType type = BlockType.NORMAL;
     [SerializeField] int hp = 1;    public int Hp {get => hp; set => hp = value;}
     [SerializeField] int exp = 10;  public int Exp {get => exp; set => exp = value;}
     [SerializeField] bool isDotDmg;  public bool IsDotDmg {get => isDotDmg; set => isDotDmg = value;}
     [SerializeField] int itemTypePer;
+    [SerializeField] bool isHeal;   public bool IsHeal {get => isHeal; set => isHeal = value;}
+    [SerializeField] float healRadius = 1.5f;   public float HealRadius {get => healRadius; set => healRadius = value;}
 
-    // Spawn Animation
+    //* Spawn Animation
     [SerializeField] Vector3 defScale;
     [SerializeField] float minLimitVal;
     [SerializeField] float spawnAnimSpeed;
@@ -57,9 +59,6 @@ public class Block_Prefab : MonoBehaviour
         em = gm.em;
         pl = gm.pl;
         bm = gm.bm;
-
-        kind = setBlockKindEnum();
-        itemType = BlockType.NORMAL;
 
         //* Material Instancing🌟
         sprGlowEf = GetComponentInChildren<SpriteGlowEffect>();
@@ -82,11 +81,11 @@ public class Block_Prefab : MonoBehaviour
         }
         if(isItemBlock){
             int typeCnt = System.Enum.GetValues(typeof(BlockType)).Length - 1; //enum Type Cnt Without Normal
-            itemType = (BlockType)Random.Range(0, typeCnt);
+            type = (BlockType)Random.Range(0, typeCnt);
             // Debug.Log("Block_Prefab:: typeCnt= " + typeCnt + ", itemType=" + itemType + " " + (int)itemType);
 
             //既にあるイメージObj中の一つをランダムで活性化
-            var obj = itemTypeImgGroup.GetChild((int)itemType).gameObject;//.SetActive(true);
+            var obj = itemTypeImgGroup.GetChild((int)type).gameObject;//.SetActive(true);
             obj.SetActive(true);
             itemUISprGlowEf = obj.GetComponent<SpriteGlowEffect>();
         }
@@ -116,6 +115,20 @@ public class Block_Prefab : MonoBehaviour
 
         //* ItemType Glow Animation
         animateItemTypeUISprGlowEF(ref itemUISprGlowCnt);
+
+        //* Heal Block
+        if(kind == BlockMaker.BLOCK.Heal){
+            Debug.Log("Heal! around Blocks");
+            if(IsHeal){
+                IsHeal = false;
+                //Sphere Collider
+                RaycastHit[] rayHits = Physics.SphereCastAll(this.gameObject.transform.position, HealRadius, Vector3.up, 0);
+                foreach(var hit in rayHits){
+                    if(hit.transform.tag == BlockMaker.NORMAL_BLOCK)
+                        hit.transform.GetComponent<Block_Prefab>().increaseHp(10);
+                }
+            }
+        }
     }
 
 //*-----------------------------------------
@@ -134,29 +147,23 @@ public class Block_Prefab : MonoBehaviour
         hpTxt.text = Hp.ToString();
     }
     private void setStyle(){
-        if(kind != BlockMaker.BLOCK.TreasureChest){
+        if(kind == BlockMaker.BLOCK.Normal || kind == BlockMaker.BLOCK.Long){
             Debug.LogFormat("Block_Prefab:: kind={0}", kind);
-
             //* Material
             if(0 < Hp && Hp <= 10){
-                Exp = 10;
-                meshRds[0].material = bm.Mts[(int)BlockMt.PLAIN]; 
+                Exp = 10;   meshRds[0].material = bm.Mts[(int)BlockMt.PLAIN]; 
             }
             else if(11 < Hp && Hp <= 20){
-                Exp = 20;
-                meshRds[0].material = bm.Mts[(int)BlockMt.WOOD];
+                Exp = 20;   meshRds[0].material = bm.Mts[(int)BlockMt.WOOD];
             }
             else if(21 < Hp && Hp <= 30){
-                Exp = 30;  
-                meshRds[0].material = bm.Mts[(int)BlockMt.SAND];
+                Exp = 30;   meshRds[0].material = bm.Mts[(int)BlockMt.SAND];
             }
             else if(31 < Hp && Hp <= 40){
-                Exp = 40;  
-                meshRds[0].material = bm.Mts[(int)BlockMt.REDBRICK];
+                Exp = 40;   meshRds[0].material = bm.Mts[(int)BlockMt.REDBRICK];
             }
             else if(41 < Hp){
-                Exp = 50;  
-                meshRds[0].material = bm.Mts[(int)BlockMt.IRON];
+                Exp = 50;   meshRds[0].material = bm.Mts[(int)BlockMt.IRON];
             }
 
             //* 色
@@ -207,6 +214,12 @@ public class Block_Prefab : MonoBehaviour
         }
     }
 
+    public void increaseHp(int heal){
+        Hp += heal;
+        em.createHealTxtEF(this.transform.position, heal);
+        em.createHeartEF(new Vector3(transform.position.x, transform.position.y+2, transform.position.z));
+    }
+
     public void decreaseHp(int dmg) {
         Hp -= dmg;
         
@@ -218,7 +231,7 @@ public class Block_Prefab : MonoBehaviour
         });
         if(Hp <= 0) {
             //* アイテムブロック 処理
-            switch (itemType){
+            switch (type){
                 case BlockType.BOMB:
                     em.createItemBlockExplosionEF(this.transform.position);
                     RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, itemBlockExplostionBoxSize / 2, Vector3.up);
@@ -276,19 +289,19 @@ public class Block_Prefab : MonoBehaviour
         return res;
     }
 
+
+
     void OnDrawGizmos(){
-        if(itemType == BlockType.BOMB){
+        //* Type
+        if(type == BlockType.BOMB){
             Gizmos.color = Color.black;
             // Gizmos.DrawWireSphere(this.transform.position, itemBlockExplostionRadius);
-            Gizmos.DrawWireCube(this.transform.position, new Vector3(3,2,2));
+            // Gizmos.DrawWireCube(this.transform.position, new Vector3(3,2,2));
         }
-    }
 
-    private BlockMaker.BLOCK setBlockKindEnum(){
-        var res = gameObject.name.Contains(BlockMaker.BLOCK.Normal.ToString())? kind = BlockMaker.BLOCK.Normal
-                : gameObject.name.Contains(BlockMaker.BLOCK.Long.ToString())? kind = BlockMaker.BLOCK.Long
-                : gameObject.name.Contains(BlockMaker.BLOCK.TreasureChest.ToString())? kind = BlockMaker.BLOCK.TreasureChest : BlockMaker.BLOCK.Null;
-        Debug.Log("setBlockKindEnum():: res= " + res);
-        return res;
+        //* Kind
+        if(kind == BlockMaker.BLOCK.Heal){
+            Gizmos.DrawWireSphere(this.transform.position, HealRadius);
+        }
     }
 }

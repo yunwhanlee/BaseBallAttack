@@ -22,11 +22,12 @@ public class EffectManager : MonoBehaviour
     public GameObject itemBlockExplosionEF;
     public GameObject itemBlockDirLineTrailEF;
     public GameObject downWallHitEF;
+    public GameObject healTxtEF, heartEF;
     
     //* Passive Skill EF
     public GameObject explosionEF;
-    public GameObject criticalTextEF;
-    public GameObject instantKillTextEF;
+    public GameObject criticalTxtEF;
+    public GameObject instantKillTxtEF;
 
     //* Active Skill EF
     public GameObject[] activeSkillBatEFs;
@@ -96,6 +97,17 @@ public class EffectManager : MonoBehaviour
     public GameObject createCritTxtEF(Vector3 parentPos, int damage){
         var ins = ObjectPool.getObject(ObjectPool.DIC.CritTxtEF.ToString(), parentPos, QI, gm.effectGroup);
         ins.GetComponentInChildren<Text>().text = damage.ToString();
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
+        return ins;
+    }
+    public GameObject createHealTxtEF(Vector3 parentPos, int heal){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.HealTxtEF.ToString(), parentPos, QI, gm.effectGroup);
+        ins.GetComponentInChildren<Text>().text = "+" + heal.ToString();
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
+        return ins;
+    }
+    public GameObject createHeartEF(Vector3 parentPos){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.HeartEF.ToString(), parentPos, QI, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
         return ins;
     }

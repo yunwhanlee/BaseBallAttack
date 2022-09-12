@@ -10,7 +10,7 @@ public class ObjectPool : MonoBehaviour
         AtvSkShotEF, AtvSkExplosionEF, AtvSkShotEF2, AtvSkExplosionEF2, 
         DropItemExpOrbEF, DownWallHitEF, BrokeBlockEF,
         ItemBlockDirLineTrailEF, ItemBlockExplosionEF,
-        InstantKillTextEF, CritTxtEF,
+        InstantKillTextEF, CritTxtEF, HealTxtEF, HeartEF,
         BatHitSparkEF, HomeRunHitSparkEF, 
         ExplosionEF,
 
@@ -61,8 +61,10 @@ public class ObjectPool : MonoBehaviour
             poolDtList.Add(new PoolData(DIC.AtvSkExplosionEF2.ToString(), em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkill2Idx], 1, em.gm.effectGroup));
         }
         poolDtList.Add(new PoolData(DIC.DropItemExpOrbEF.ToString(), em.dropItemExpOrbEF, 30, em.gm.effectGroup));
-        poolDtList.Add(new PoolData(DIC.InstantKillTextEF.ToString(), em.instantKillTextEF, 5, em.gm.effectGroup));
-        poolDtList.Add(new PoolData(DIC.CritTxtEF.ToString(), em.criticalTextEF, 20, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.InstantKillTextEF.ToString(), em.instantKillTxtEF, 5, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.CritTxtEF.ToString(), em.criticalTxtEF, 20, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.HealTxtEF.ToString(), em.healTxtEF, 10, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.HeartEF.ToString(), em.heartEF, 10, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.DownWallHitEF.ToString(), em.downWallHitEF, 10, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.ItemBlockDirLineTrailEF.ToString(), em.itemBlockDirLineTrailEF, 3, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.ItemBlockExplosionEF.ToString(), em.itemBlockExplosionEF, 3, em.gm.effectGroup));

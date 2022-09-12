@@ -150,4 +150,13 @@ public class DM : MonoBehaviour
             :(name == DM.ATV.PoisonSmoke.ToString())? DM.ATV.PoisonSmoke
             :DM.ATV.IceWave;
     }
+
+    // public BlockMaker.BLOCK convertBlockKind2Enum(string name){
+    //     var res = gameObject.name.Contains(BlockMaker.BLOCK.Normal.ToString())? kind = BlockMaker.BLOCK.Normal
+    //         : gameObject.name.Contains(BlockMaker.BLOCK.Long.ToString())? kind = BlockMaker.BLOCK.Long
+    //         : gameObject.name.Contains(BlockMaker.BLOCK.TreasureChest.ToString())? kind = BlockMaker.BLOCK.TreasureChest
+    //         : gameObject.name.Contains(BlockMaker.BLOCK.Heal.ToString())? kind = BlockMaker.BLOCK.Heal
+    //         : BlockMaker.BLOCK.Null;
+    //     return res;
+    // }
 }
