@@ -72,8 +72,8 @@ public class PsvSkill<T> where T: struct {
     }
 
     //*method
-    public void setLvUp(T value){
-        if(level <= MAX_LV){
+    public void setLvUp(T value, int maxLevel = MAX_LV){
+        if(level <= maxLevel){
             level++;
             this.value = value;
         }

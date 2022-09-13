@@ -13,6 +13,9 @@ A. Script
         b. class PsvSkillのgetAllSkillInfo2Str(Player pl)へ追加。
         c. class PsvSkillのgetAllPsvSkillLVList(Player pl)へ追加。
 
+    4. LevelUpPanelAnimate.cs  
+        a. onClickSkillUpBtn()へ追加。
+
 B. Editor(hierarchy)
     1.Prefab
         a. Model/Player/Model/Prefab/全てOBJECT：Item InfoスクリプトでItem Passiveの▼Arrへ追加。

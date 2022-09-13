@@ -194,6 +194,9 @@ public class LevelUpPanelAnimate : MonoBehaviour
             case DM.PSV.VerticalMultiShot:
                 pl.verticalMultiShot.setLvUp(pl.verticalMultiShot.Value + pl.verticalMultiShot.Unit);
                 break;
+            case DM.PSV.Laser:
+                pl.laser.setLvUp(pl.laser.Value + pl.laser.Unit, 3);
+                break;
         }
         
         //* 終了

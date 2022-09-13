@@ -64,7 +64,7 @@ public class Ball_Prefab : MonoBehaviour
 
     //** Control
     private void OnTriggerStay(Collider col) {
-        //* HIT BALL
+#region Hit Ball
         if(col.gameObject.tag == "HitRangeArea"){
             pl.setSwingArcColor("red");
             if(pl.DoSwing && gm.State == GameManager.STATE.PLAY){
@@ -73,18 +73,18 @@ public class Ball_Prefab : MonoBehaviour
                 pl.DoSwing = false;
                 rigid.useGravity = true;
 
-                //STRIKEデータ 初期化
+                //* STRIKEデータ 初期化
                 gm.strikeCnt = 0;
                 foreach(var img in gm.strikeBallImgs) img.gameObject.SetActive(false); 
 
-                //offset Axis
+                //* offset Axis
                 const int leftSide = -1, rightSide = 1;
                 int sign = pl.transform.localScale.x < 0 ? leftSide : rightSide;
                 int offsetAxis = (sign < 0) ? (pl.MAX_HIT_DEG/2) * leftSide : (pl.MAX_HIT_DEG/2) * rightSide;
                 // Debug.Log("Ball_Prefab:: ■offsetAxis=" + offsetAxis);
 
-                float deg = pl.arrowAxisAnchor.transform.eulerAngles.y;
-                Debug.Log("BALL DEGREE:" + deg);
+                float deg = pl.arrowAxisAnchor.transform.eulerAngles.y; //*🌟HIT BALL DIRECTION (DEG)🌟
+                Debug.Log("🌟HIT BALL DIRECTION (DEG)🌟:" + deg);
                 Vector3 dir = new Vector3(Mathf.Sin(Mathf.Deg2Rad * deg), 0, Mathf.Cos(Mathf.Deg2Rad * deg)).normalized;
 
                 //* Set Power(distance range 1.5f ~ 0)
@@ -125,12 +125,14 @@ public class Ball_Prefab : MonoBehaviour
                     + ", <color=red>power=" + power + ", Rank: " + ((power==pl.hitRank[A].Power)? "A" : (power==pl.hitRank[B].Power)? "B" : (power==pl.hitRank[C].Power)? "C" : (power==pl.hitRank[D].Power)? "D" : (power==pl.hitRank[E].Power)? "E" : "F").ToString() + "</color>"
                     + ", Force=" + force);
 
+                //* Active Skillなら、下記は実行しない----------------------------------------
                 if(isActiveSkillTrigger) return;
-                
+                #region PSV Hit Type
                 //* Multi Shot
                 for(int i=0; i<pl.multiShot.Value;i++){
+                    Debug.Log("PSV MULTI SHOT");
                     const int DEG = 15;
-                    float [] addDegList = {-DEG, DEG, -(DEG*2), (DEG*2)};
+                    float [] addDegList = {-DEG + deg, DEG + deg, -(DEG*2) + deg, (DEG*2) + deg}; //! BUG) Hit Ball Direction (Deg)が 設定されていなかったので対応。
                     Vector3 direction = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (DEG + addDegList[i])), 0, Mathf.Cos(Mathf.Deg2Rad * (DEG + addDegList[i]))).normalized;
                     var ins = Instantiate(this.gameObject, this.transform.position, Quaternion.identity, gm.ballGroup) as GameObject;
                     ins.GetComponent<Rigidbody>().AddForce(direction * force * 0.75f, ForceMode.Impulse);
@@ -149,7 +151,7 @@ public class Ball_Prefab : MonoBehaviour
                 }
 
                 //* Laser
-                if(pl.laser.Value > 0){
+                if(pl.laser.Level > 0){
                     var start = pl.arrowAxisAnchor.transform.position;
                     var direction = pl.arrowAxisAnchor.transform.forward;
                     em.createLaserEF(start, direction);
@@ -165,6 +167,7 @@ public class Ball_Prefab : MonoBehaviour
                         }
                     });
                 }
+                #endregion
             }
         }
         else if(col.gameObject.tag == "ActiveDownWall"){
@@ -173,7 +176,7 @@ public class Ball_Prefab : MonoBehaviour
                 gm.downWall.isTrigger = false;//*下壁 物理O
             }
         }
-        
+#endregion
     }
 
     private void OnTriggerExit(Collider col) {
