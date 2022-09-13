@@ -32,6 +32,7 @@ public class ItemPsvList{
         new ItemPsvDt(DM.PSV.ItemSpawn.ToString()),
         new ItemPsvDt(DM.PSV.VerticalMultiShot.ToString()),
         new ItemPsvDt(DM.PSV.CriticalDamage.ToString()),
+        new ItemPsvDt(DM.PSV.Laser.ToString()),
     };  
     public ItemPsvDt[] Arr {get => arr; set => arr = value;}
 
@@ -125,8 +126,9 @@ public class PsvSkill<T> where T: struct {
             pl.explosion.Name,              (pl.explosion.Value.per * 100 + "%").ToString(),
             pl.expUp.Name,                  (pl.expUp.Value * 100 + "%").ToString(),
             pl.itemSpawn.Name,              (pl.itemSpawn.Value * 100 + "%").ToString(),
-            pl.verticalMultiShot.Name,      (pl.verticalMultiShot.Value * 1 + "%").ToString(),
+            pl.verticalMultiShot.Name,      (pl.verticalMultiShot.Value * 1).ToString(),
             pl.criticalDamage.Name,         (CRIT_DMG_DEF + (pl.criticalDamage.Value * 100) + "%").ToString(),
+            pl.laser.Name,                  (pl.laser.Value).ToString(),
         };
     }
 
@@ -144,6 +146,7 @@ public class PsvSkill<T> where T: struct {
         list.Add(new KeyValuePair<string, int>(pl.itemSpawn.Name, pl.itemSpawn.Level));
         list.Add(new KeyValuePair<string, int>(pl.verticalMultiShot.Name, pl.verticalMultiShot.Level));
         list.Add(new KeyValuePair<string, int>(pl.criticalDamage.Name, pl.criticalDamage.Level));
+        list.Add(new KeyValuePair<string, int>(pl.laser.Name, pl.laser.Level));
         return list;
     }
 }

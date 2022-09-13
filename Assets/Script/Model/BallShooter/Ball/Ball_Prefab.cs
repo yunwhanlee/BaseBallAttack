@@ -147,6 +147,21 @@ public class Ball_Prefab : MonoBehaviour
                     var scale = ins.GetComponent<Transform>().localScale;
                     ins.GetComponent<Transform>().localScale = new Vector3(scale.x * 0.8f, scale.y * 0.8f, scale.z * 0.8f);
                 }
+
+                //* Laser
+                if(pl.laser.Value > 0){
+                    Debug.DrawRay(pl.arrowAxisAnchor.transform.position, pl.arrowAxisAnchor.transform.forward * 100, Color.red, 1);
+                    RaycastHit[] hits = Physics.RaycastAll(pl.arrowAxisAnchor.transform.position, pl.arrowAxisAnchor.transform.forward, 100);
+                    Debug.Log("Lazer ON! " + "hits.Count= " + hits.Length + ", hits[0].name= " + hits[0].transform.name);
+                    Array.ForEach(hits, hit => {
+                        if(hit.transform.tag == BlockMaker.NORMAL_BLOCK){
+                            Debug.Log("LAZER!! Hit Obj-> " + hit.transform.name);
+                            var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
+                            block.decreaseHp(10);
+                            em.createCritTxtEF(hit.transform.position, 10);
+                        }
+                    });
+                }
             }
         }
         else if(col.gameObject.tag == "ActiveDownWall"){
@@ -433,7 +448,7 @@ public class Ball_Prefab : MonoBehaviour
         //* ThunderShot Skill Range Preview => ArrowAxisAnchorObjに付いているThunderGizmosスクリプト。
 
         //* FireBall Skill Range Preview
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(this.transform.position, pl.FireBallCastWidth);
+        // Gizmos.color = Color.red;
+        // Gizmos.DrawWireSphere(this.transform.position, pl.FireBallCastWidth);
     }
 }

@@ -68,6 +68,7 @@ public class Player : MonoBehaviour
     public PsvSkill<float> itemSpawn;
     public PsvSkill<int> verticalMultiShot;
     public PsvSkill<float> criticalDamage;
+    public PsvSkill<int> laser;
 
     //* Component
     private Animator anim;
@@ -131,6 +132,8 @@ public class Player : MonoBehaviour
             DM.PSV.VerticalMultiShot.ToString(), psvLvArr[(int)DM.PSV.VerticalMultiShot].lv, 0, 1);
         criticalDamage = new PsvSkill<float>(
             DM.PSV.CriticalDamage.ToString(), psvLvArr[(int)DM.PSV.CriticalDamage].lv, 0, 0.5f);
+        laser = new PsvSkill<int>(
+            DM.PSV.Laser.ToString(), psvLvArr[(int)DM.PSV.Laser].lv, 0, 1);
 
         //* Apply
         dmg.initSkillDt(dmg.Value + dmg.Unit);
@@ -143,6 +146,7 @@ public class Player : MonoBehaviour
         itemSpawn.initSkillDt(itemSpawn.Value + itemSpawn.Unit);
         verticalMultiShot.initSkillDt(verticalMultiShot.Value + verticalMultiShot.Unit * verticalMultiShot.Level);
         criticalDamage.initSkillDt(criticalDamage.Value + criticalDamage.Unit * criticalDamage.Level);
+        laser.initSkillDt(laser.Value + laser.Unit * laser.Level);
 #endregion
 
         //* Show Psv UI

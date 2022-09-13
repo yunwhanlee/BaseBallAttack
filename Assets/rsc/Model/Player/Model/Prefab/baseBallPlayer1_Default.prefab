@@ -1590,6 +1590,9 @@ MonoBehaviour:
     - name: CriticalDamage
       lv: 2
       imgPref: {fileID: 0}
+    - name: Laser
+      lv: 0
+      imgPref: {fileID: 0}
 --- !u!54 &8368906721333363493
 Rigidbody:
   m_ObjectHideFlags: 0

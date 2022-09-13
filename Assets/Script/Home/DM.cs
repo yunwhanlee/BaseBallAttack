@@ -11,7 +11,7 @@ public class DM : MonoBehaviour
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
     public enum ITEM {Chara, Bat, Skill, CashShop};
     public enum ATV{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave, NULL};
-    public enum PSV{Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, NULL};
+    public enum PSV{Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, Laser, NULL};
 
     [Header("--Personal Data--")]
     [SerializeField] Text coinTxt; public Text CoinTxt {get => coinTxt; set => coinTxt = value;}
@@ -140,6 +140,7 @@ public class DM : MonoBehaviour
             :(name == DM.PSV.ItemSpawn.ToString())? DM.PSV.ItemSpawn
             :(name == DM.PSV.VerticalMultiShot.ToString())? DM.PSV.VerticalMultiShot
             :(name == DM.PSV.CriticalDamage.ToString())? DM.PSV.CriticalDamage
+            :(name == DM.PSV.Laser.ToString())? DM.PSV.Laser
             : DM.PSV.NULL; //-> ダミーデータ
     }
 
