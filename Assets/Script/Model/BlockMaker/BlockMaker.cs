@@ -112,12 +112,12 @@ public class BlockMaker : MonoBehaviour
         }
     }
 
-    public void setGlowEF(Block_Prefab[] targetBlocks, bool isOn){
-        Array.ForEach(targetBlocks, bl => bl.GetComponent<Block_Prefab>().setEnabledSpriteGlowEF(isOn));
+    public void setGlowEF(Block_Prefab[] blocks, bool isOn){
+        Array.ForEach(blocks, bl => bl.GetComponent<Block_Prefab>().setEnabledSpriteGlowEF(isOn));
     }
 
     public void setGlowEFAllBlocks(bool isOn){ //* Block Grow EF 解除
-        var blocks = GetComponentsInChildren<Block_Prefab>();
+        var blocks = gm.blockGroup.GetComponentsInChildren<Block_Prefab>();
         setGlowEF(blocks, isOn);
     }
 

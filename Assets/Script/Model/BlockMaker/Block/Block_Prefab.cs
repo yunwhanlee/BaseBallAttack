@@ -209,8 +209,14 @@ public class Block_Prefab : MonoBehaviour
     }
 
     public void setEnabledSpriteGlowEF(bool isTrigger){
-        if(isTrigger){sprGlowEf.GlowBrightness = 8;   sprGlowEf.OutlineWidth = 8;}
-        else{sprGlowEf.GlowBrightness = 0;   sprGlowEf.OutlineWidth = 0;}
+        if(isTrigger){
+            sprGlowEf.GlowBrightness = 8;   
+            sprGlowEf.OutlineWidth = 8;
+        }
+        else{
+            sprGlowEf.GlowBrightness = 0;
+            sprGlowEf.OutlineWidth = 0;
+        }
     }
 
     private void OnTriggerEnter(Collider col) {
@@ -221,10 +227,16 @@ public class Block_Prefab : MonoBehaviour
     }
 
     public void increaseHp(int heal){
-        Hp += heal;
-        if(!this) return;
-        em.createHealTxtEF(this.transform.position, heal);
-        em.createHeartEF(new Vector3(transform.position.x, transform.position.y+2, transform.position.z));
+        
+        try{
+            Hp += heal;
+            em.createHealTxtEF(this.transform.position, heal);
+            em.createHeartEF(new Vector3(transform.position.x, transform.position.y+2, transform.position.z));
+        }
+        catch(Exception err){
+            Debug.LogError(err);
+        }
+        
     }
 
     public void decreaseHp(int dmg) {

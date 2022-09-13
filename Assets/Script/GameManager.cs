@@ -179,15 +179,19 @@ public class GameManager : MonoBehaviour
     public void onClickSkillButton() => levelUpPanel.SetActive(false);
     public void onClickSetGameButton(string type) => setGame(type);
     public void onClickActiveSkillButton(int i) {
-        Debug.LogFormat("onClickActiveSkillButton({0})", i);
-        SelectAtvSkillBtnIdx = i;
+        SelectAtvSkillBtnIdx = i; //* 最新化
+        bool isActive = activeSkillBtnList[i].SelectCircleEF.gameObject.activeSelf;
+        Debug.LogFormat("onClickActiveSkillButton({0}), isActive= {1}", i, isActive);
         //(BUG)再クリック。Cancel Selected Btn
-        if(activeSkillBtnList[i].SelectCircleEF.gameObject.activeSelf){
+        if(isActive){
             activeSkillBtnList[i].init(this, true);
             return;
         }
+        else{
+            bm.setGlowEFAllBlocks(false); //* Btn Offしたら、全てGlowもOFF。
+        }
         //(BUG)重複選択禁止。初期化
-        activeSkillBtnList.ForEach(btn=>{
+        activeSkillBtnList.ForEach(btn => {
             btn.init(this, true);
         });
 
