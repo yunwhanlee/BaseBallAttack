@@ -57,6 +57,8 @@ public class PsvSkill<T> where T: struct {
     //*value                     //*get set
     public const int MAX_LV = 5;
     public const int CRIT_DMG_DEF = 200;
+    public const float MULTI_SHOT_DEG = 25;
+    public const float LASER_DEG = 17.5f;
 
     [SerializeField] string name;    public string Name {get=> name;} 
     [SerializeField] int level; public int Level {get=>level;}
@@ -117,6 +119,26 @@ public class PsvSkill<T> where T: struct {
             result = pl.dmg.Value; //普通のダメージをそのまま代入。
         }
         return false;
+    }
+
+    public Vector3 calcMultiShotDeg2Dir(float arrowDeg, int i){
+        //* Arrow Direction + Extra Deg
+        List<float> extraDegList = new List<float>();
+        switch(DM.ins.convertPsvSkillStr2Enum(Name)){
+            case DM.PSV.MultiShot:
+                extraDegList.Add(-MULTI_SHOT_DEG + arrowDeg); //! BUG) Hit Ball Direction (Deg)が 設定されていなかったので対応。
+                extraDegList.Add(MULTI_SHOT_DEG + arrowDeg);
+                extraDegList.Add(-(MULTI_SHOT_DEG*2) + arrowDeg);
+                extraDegList.Add((MULTI_SHOT_DEG*2) + arrowDeg);
+                break;
+            case DM.PSV.Laser:
+                extraDegList.Add(arrowDeg);
+                extraDegList.Add(-LASER_DEG + arrowDeg);
+                extraDegList.Add(LASER_DEG + arrowDeg);
+                break;
+        }
+        Vector3 direction = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (extraDegList[i])), 0, Mathf.Cos(Mathf.Deg2Rad * (extraDegList[i]))).normalized;
+        return direction;
     }
 
     public static List<string> getPsvInfo2Str(Player pl){

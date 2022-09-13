@@ -125,7 +125,7 @@ public class EffectManager : MonoBehaviour
         rigid.angularVelocity = Vector3.zero;
         var speed = 60;
         var force = direction * speed;
-        Debug.DrawRay(parentPos, direction * 100, Color.red, 1);
+        Debug.DrawRay(parentPos, direction * 100, Color.red, 3);
         rigid.AddForce(force, ForceMode.Impulse);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
         return ins;

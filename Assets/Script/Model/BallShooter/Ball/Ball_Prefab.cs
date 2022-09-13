@@ -83,9 +83,9 @@ public class Ball_Prefab : MonoBehaviour
                 int offsetAxis = (sign < 0) ? (pl.MAX_HIT_DEG/2) * leftSide : (pl.MAX_HIT_DEG/2) * rightSide;
                 // Debug.Log("Ball_Prefab:: ■offsetAxis=" + offsetAxis);
 
-                float deg = pl.arrowAxisAnchor.transform.eulerAngles.y; //*🌟HIT BALL DIRECTION (DEG)🌟
-                Debug.Log("🌟HIT BALL DIRECTION (DEG)🌟:" + deg);
-                Vector3 dir = new Vector3(Mathf.Sin(Mathf.Deg2Rad * deg), 0, Mathf.Cos(Mathf.Deg2Rad * deg)).normalized;
+                float arrowDeg = pl.arrowAxisAnchor.transform.eulerAngles.y; //*🌟HIT ARROW DIRECTION (DEG)🌟
+                Debug.Log("🌟HIT ARROW DIRECTION (DEG)🌟:" + arrowDeg);
+                Vector3 arrowDir = new Vector3(Mathf.Sin(Mathf.Deg2Rad * arrowDeg), 0, Mathf.Cos(Mathf.Deg2Rad * arrowDeg)).normalized;
 
                 //* Set Power(distance range 1.5f ~ 0)
                 const int A=0, B=1, C=2, D=3, E=4, F=5;
@@ -100,7 +100,7 @@ public class Ball_Prefab : MonoBehaviour
                 bool isActiveSkillTrigger = false;
                 gm.activeSkillBtnList.ForEach(skillBtn=>{
                     if(skillBtn.Trigger){
-                        StartCoroutine(coPlayActiveSkillShotEF(skillBtn, 1f, dir));
+                        StartCoroutine(coPlayActiveSkillShotEF(skillBtn, 1f, arrowDir));
                         isActiveSkillTrigger = true;
                     }
                 });
@@ -119,7 +119,7 @@ public class Ball_Prefab : MonoBehaviour
 
                 rigid.velocity = Vector3.zero;
                 float force = speed * power * pl.speed.Value;
-                rigid.AddForce(dir * force, ForceMode.Impulse);
+                rigid.AddForce(arrowDir * force, ForceMode.Impulse);
                 Debug.Log(
                     "HIT Ball! <color=yellow>distance=" + distance.ToString("N2") + "</color>"
                     + ", <color=red>power=" + power + ", Rank: " + ((power==pl.hitRank[A].Power)? "A" : (power==pl.hitRank[B].Power)? "B" : (power==pl.hitRank[C].Power)? "C" : (power==pl.hitRank[D].Power)? "D" : (power==pl.hitRank[E].Power)? "E" : "F").ToString() + "</color>"
@@ -131,9 +131,13 @@ public class Ball_Prefab : MonoBehaviour
                 //* Multi Shot
                 for(int i=0; i<pl.multiShot.Value;i++){
                     Debug.Log("PSV MULTI SHOT");
-                    const int DEG = 15;
-                    float [] addDegList = {-DEG + deg, DEG + deg, -(DEG*2) + deg, (DEG*2) + deg}; //! BUG) Hit Ball Direction (Deg)が 設定されていなかったので対応。
-                    Vector3 direction = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (DEG + addDegList[i])), 0, Mathf.Cos(Mathf.Deg2Rad * (DEG + addDegList[i]))).normalized;
+
+                    //* Arrow Direction + Extra Deg
+                    // const int DEG = PsvSkill<int>.MULTI_SHOT_DEG;
+                    // float [] extraDegList = {-DEG + arrowDeg, DEG + arrowDeg, -(DEG*2) + arrowDeg, (DEG*2) + arrowDeg}; //! BUG) Hit Ball Direction (Deg)が 設定されていなかったので対応。
+                    // Vector3 direction = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (DEG + extraDegList[i])), 0, Mathf.Cos(Mathf.Deg2Rad * (DEG + extraDegList[i]))).normalized;
+                    Vector3 direction = pl.multiShot.calcMultiShotDeg2Dir(arrowDeg, i);
+
                     var ins = Instantiate(this.gameObject, this.transform.position, Quaternion.identity, gm.ballGroup) as GameObject;
                     ins.GetComponent<Rigidbody>().AddForce(direction * force * 0.75f, ForceMode.Impulse);
                     var scale = ins.GetComponent<Transform>().localScale;
@@ -142,8 +146,7 @@ public class Ball_Prefab : MonoBehaviour
 
                 //* Vertical Multi Shot
                 for(int i=0; i<pl.verticalMultiShot.Value;i++){
-                    Debug.Log("<color=white>Ball_Prefab.cs:: Vertical Multi Shot= " + pl.verticalMultiShot.Value);
-                    
+                    // Debug.Log("<color=white>Ball_Prefab.cs:: Vertical Multi Shot= " + pl.verticalMultiShot.Value);
                     var ins = Instantiate(this.gameObject, this.transform.position, Quaternion.identity, gm.ballGroup) as GameObject;
                     ins.GetComponent<Rigidbody>().AddForce(pl.arrowAxisAnchor.transform.forward * force * 0.85f, ForceMode.Impulse);
                     var scale = ins.GetComponent<Transform>().localScale;
@@ -153,19 +156,27 @@ public class Ball_Prefab : MonoBehaviour
                 //* Laser
                 if(pl.laser.Level > 0){
                     var start = pl.arrowAxisAnchor.transform.position;
-                    var direction = pl.arrowAxisAnchor.transform.forward;
-                    em.createLaserEF(start, direction);
-                    RaycastHit[] hits = Physics.RaycastAll(start, direction, 100);
-                    Array.ForEach(hits, hit => {
-                        if(hit.transform.tag == BlockMaker.NORMAL_BLOCK){
-                            Debug.Log("LAZER!! Hit Obj-> " + hit.transform.name);
-                            var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
-                            int dmg = 10;
-                            block.decreaseHp(dmg);
-                            
-                            em.createCritTxtEF(hit.transform.position, dmg);
-                        }
-                    });
+                    //* Level１以上 Multi Laser
+                    for(int i=0; i < pl.laser.Value; i++){
+                        //* Arrow Direction + Extra Deg
+                        // const int DEG = PsvSkill<int>.LASER_DEG;
+                        // float [] extraDegList = {arrowDeg , -DEG + arrowDeg, DEG + arrowDeg};
+                        // Vector3 direction = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (extraDegList[i])), 0, Mathf.Cos(Mathf.Deg2Rad * (extraDegList[i]))).normalized;
+                        Vector3 direction = pl.laser.calcMultiShotDeg2Dir(arrowDeg, i);
+
+                        em.createLaserEF(start, direction);
+                        RaycastHit[] hits = Physics.RaycastAll(start, direction, 100);
+                        Array.ForEach(hits, hit => {
+                            if(hit.transform.tag == BlockMaker.NORMAL_BLOCK){
+                                Debug.Log("LAZER!! Hit Obj-> " + hit.transform.name);
+                                var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
+                                int dmg = pl.dmg.Value;
+                                block.decreaseHp(dmg);
+                                em.createCritTxtEF(hit.transform.position, dmg);
+                            }
+                        });
+                    }
+
                 }
                 #endregion
             }
