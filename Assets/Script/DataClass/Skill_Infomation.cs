@@ -62,18 +62,21 @@ public class PsvSkill<T> where T: struct {
     [SerializeField] int level; public int Level {get=>level;}
     [SerializeField] T value;   public T Value {get=>value;}
     [SerializeField] T unit;    public T Unit {get=>unit;}
+    [SerializeField] int maxLevel;    public int MaxLevel {get=>maxLevel;}
+
 
     //*constructor
-    public PsvSkill(string name, int level, T value, T unit){
+    public PsvSkill(string name, int level, T value, T unit, int maxLevel = MAX_LV){
         this.name = name;
         this.level = level;
         this.value = value;
         this.unit = unit;
+        this.maxLevel = maxLevel;
     }
 
     //*method
-    public void setLvUp(T value, int maxLevel = MAX_LV){
-        if(level <= maxLevel){
+    public void setLvUp(T value){
+        if(level <= MaxLevel){
             level++;
             this.value = value;
         }
@@ -116,7 +119,7 @@ public class PsvSkill<T> where T: struct {
         return false;
     }
 
-    public static List<string> getAllSkillInfo2Str(Player pl){
+    public static List<string> getPsvInfo2Str(Player pl){
         return new List<string>(){
             pl.dmg.Name,                    (pl.dmg.Value.ToString()),
             pl.multiShot.Name,              (pl.multiShot.Value + 1).ToString(),
@@ -132,7 +135,7 @@ public class PsvSkill<T> where T: struct {
         };
     }
 
-    public static List<KeyValuePair<string, int>> getAllPsvSkillLVList(Player pl){
+    public static List<KeyValuePair<string, int>> getPsvLVList(Player pl){
         //* Key : Name, Value : Level
         List<KeyValuePair<string, int>> list = new List<KeyValuePair<string, int>>();
         //* set All Skills curLevel
@@ -147,6 +150,24 @@ public class PsvSkill<T> where T: struct {
         list.Add(new KeyValuePair<string, int>(pl.verticalMultiShot.Name, pl.verticalMultiShot.Level));
         list.Add(new KeyValuePair<string, int>(pl.criticalDamage.Name, pl.criticalDamage.Level));
         list.Add(new KeyValuePair<string, int>(pl.laser.Name, pl.laser.Level));
+        return list;
+    }
+
+    public static List<KeyValuePair<string, int>> getPsvMaxLVList(Player pl){
+        //* Key : Name, Value : Level
+        List<KeyValuePair<string, int>> list = new List<KeyValuePair<string, int>>();
+        //* set All Skills curLevel
+        list.Add(new KeyValuePair<string, int>(pl.dmg.Name, pl.dmg.MaxLevel));
+        list.Add(new KeyValuePair<string, int>(pl.multiShot.Name, pl.multiShot.MaxLevel));
+        list.Add(new KeyValuePair<string, int>(pl.speed.Name, pl.speed.MaxLevel));
+        list.Add(new KeyValuePair<string, int>(pl.instantKill.Name, pl.instantKill.MaxLevel));
+        list.Add(new KeyValuePair<string, int>(pl.critical.Name, pl.critical.MaxLevel));
+        list.Add(new KeyValuePair<string, int>(pl.explosion.Name, pl.explosion.MaxLevel));
+        list.Add(new KeyValuePair<string, int>(pl.expUp.Name, pl.expUp.MaxLevel));
+        list.Add(new KeyValuePair<string, int>(pl.itemSpawn.Name, pl.itemSpawn.MaxLevel));
+        list.Add(new KeyValuePair<string, int>(pl.verticalMultiShot.Name, pl.verticalMultiShot.MaxLevel));
+        list.Add(new KeyValuePair<string, int>(pl.criticalDamage.Name, pl.criticalDamage.MaxLevel));
+        list.Add(new KeyValuePair<string, int>(pl.laser.Name, pl.laser.MaxLevel));
         return list;
     }
 }

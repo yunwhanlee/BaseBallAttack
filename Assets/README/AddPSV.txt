@@ -10,8 +10,10 @@ A. Script
 
     3. Skill_Infomation.cs
         a. class ItemPsvListの //* valueへ追加。
-        b. class PsvSkillのgetAllSkillInfo2Str(Player pl)へ追加。
-        c. class PsvSkillのgetAllPsvSkillLVList(Player pl)へ追加。
+        b. class PsvSkillの getPsvInfo2Str(Player pl)へ追加。
+        c. class PsvSkillの getPsvLVList(Player pl)へ追加。
+        d. class PsvSkillの getPsvMaxLVList(Player pl)へ追加。
+        
 
     4. LevelUpPanelAnimate.cs  
         a. onClickSkillUpBtn()へ追加。

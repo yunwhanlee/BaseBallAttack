@@ -133,7 +133,7 @@ public class Player : MonoBehaviour
         criticalDamage = new PsvSkill<float>(
             DM.PSV.CriticalDamage.ToString(), psvLvArr[(int)DM.PSV.CriticalDamage].lv, 0, 0.5f);
         laser = new PsvSkill<int>(
-            DM.PSV.Laser.ToString(), psvLvArr[(int)DM.PSV.Laser].lv, 0, 1);
+            DM.PSV.Laser.ToString(), psvLvArr[(int)DM.PSV.Laser].lv, 0, 1, 3);
 
         //* Apply
         dmg.initSkillDt(dmg.Value + dmg.Unit);

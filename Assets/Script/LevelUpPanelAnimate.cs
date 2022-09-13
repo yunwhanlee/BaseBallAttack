@@ -65,11 +65,12 @@ public class LevelUpPanelAnimate : MonoBehaviour
         //* Set SelectList
         skillImgCnt = gm.PsvSkillImgPrefs.Length - 1; //* ★ 自然なスクロールのため、末端に1番目Imageを追加したので、この分は消す-1。
 
-        var skLvObjList = PsvSkill<int>.getAllPsvSkillLVList(pl);
+        var psvLvList = PsvSkill<int>.getPsvLVList(pl);
         
-        skLvObjList.ForEach(lvObj => {
-            if(lvObj.Value >= PsvSkill<int>.MAX_LV){
-                exceptSkNameList.Add(lvObj.Key);
+        psvLvList.ForEach(lv => {
+            var maxLv = PsvSkill<int>.getPsvMaxLVList(pl).Find(maxLv => (maxLv.Key == lv.Key));
+            if(lv.Value >= maxLv.Value){
+                exceptSkNameList.Add(lv.Key);
             }
         });
 
@@ -195,7 +196,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
                 pl.verticalMultiShot.setLvUp(pl.verticalMultiShot.Value + pl.verticalMultiShot.Unit);
                 break;
             case DM.PSV.Laser:
-                pl.laser.setLvUp(pl.laser.Value + pl.laser.Unit, 3);
+                pl.laser.setLvUp(pl.laser.Value + pl.laser.Unit);
                 break;
         }
         

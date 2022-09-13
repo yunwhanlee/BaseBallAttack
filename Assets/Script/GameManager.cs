@@ -212,7 +212,7 @@ public class GameManager : MonoBehaviour
             Destroy(statusInfoContents.GetChild(i).gameObject);
 
         // Set InfoTxt List
-        List<string> infoTxtList = PsvSkill<int>.getAllSkillInfo2Str(pl);
+        List<string> infoTxtList = PsvSkill<int>.getPsvInfo2Str(pl);
 
         // Apply InfoTxt List
         infoTxtList.ForEach(infoTxt => {
@@ -395,9 +395,9 @@ public class GameManager : MonoBehaviour
         if(type != STATE.PAUSE.ToString() && parentTf.childCount > 0)
             foreach(Transform childTf in parentTf){Destroy(childTf.gameObject);}
 
-        List<KeyValuePair<string, int>> lvObjList = PsvSkill<int>.getAllPsvSkillLVList(pl);
+        List<KeyValuePair<string, int>> psvlvList = PsvSkill<int>.getPsvLVList(pl);
         int i=0;
-        lvObjList.ForEach(lv => {
+        psvlvList.ForEach(lv => {
             if(lv.Value > 0){
                 String levelTxt = (type == STATE.PAUSE.ToString())? ("x " + lv.Value.ToString()) : lv.Value.ToString();
                 var rowTf = Instantiate(pref, Vector3.zero, Quaternion.identity, parentTf).transform;
@@ -410,8 +410,9 @@ public class GameManager : MonoBehaviour
                     int index = imgObj.transform.GetSiblingIndex();
                     imgObj.transform.SetSiblingIndex(index - 1);
                 }
-                
-                if(lv.Value < 5){
+                //* Max Level TXT 表示。
+                var maxLv = PsvSkill<int>.getPsvMaxLVList(pl).Find(maxLv => (maxLv.Key == lv.Key));
+                if(lv.Value < maxLv.Value){
                     rowTf.GetComponentInChildren<Text>().text = levelTxt;
                 }else{
                     rowTf.GetComponentInChildren<Text>().text = "MAX";
