@@ -208,16 +208,8 @@ public class Ball_Prefab : MonoBehaviour
                         }
                         case DM.ATV.ColorBall:{
                             if(col.gameObject.GetComponent<Block_Prefab>().kind != BlockMaker.BLOCK.TreasureChest){
-                                //* Hit Color
-                                var meshRd = col.gameObject.GetComponent<MeshRenderer>();
-                                Color hitColor = meshRd.material.GetColor("_ColorTint");
-                                Debug.Log("OnCollisionEnter:: ColorBall AtvSkill -> hitColor=" + hitColor);
-                                //* Find Same Color Blocks
-                                var blocks = gm.blockGroup.GetComponentsInChildren<Block_Prefab>();
-                                var sameColorBlocks = Array.FindAll(blocks, bl => 
-                                    (bl.kind == BlockMaker.BLOCK.Normal || bl.kind == BlockMaker.BLOCK.Long)//* (BUG) 宝箱はmeshRendererがないので場外。
-                                    && bl.GetComponent<MeshRenderer>().material.GetColor("_ColorTint") == hitColor
-                                );
+                                var sameColorBlocks = AtvSkill.findSameColorBlocks(gm, col.transform.gameObject);
+                                
                                 //* Destroy
                                 Array.ForEach(sameColorBlocks, bl => {
                                     em.createAtvSkExplosionEF(skillIdx, bl.transform);

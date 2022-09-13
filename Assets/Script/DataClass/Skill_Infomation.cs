@@ -228,36 +228,35 @@ public class AtvSkill{
         // Debug.Log("setColorBallSkillGlowEF():: hit= " + hit);
         if(isColorBallSkill && hit.transform.CompareTag(BlockMaker.NORMAL_BLOCK)){
             var hitBlock = hit.transform.GetComponent<Block_Prefab>();
-            Debug.Log("setColorBallSkillGlowEF():: hitBlock.kind= " + hitBlock.kind);
-            // if(hitBlock.kind == BlockMaker.BLOCK.TreasureChest || hitBlock.kind == BlockMaker.BLOCK.Heal){//* 場外
-            //     Debug.Log("場外：" + hitBlock.kind);
-            //     return;
-            // }
 
-            //* Hit Color
             if(hitBlock.kind == BlockMaker.BLOCK.TreasureChest || hitBlock.kind == BlockMaker.BLOCK.Heal){
                 return;
             }
 
-            var meshRd = hit.transform.GetComponent<MeshRenderer>();
-            Color hitColor = meshRd.material.GetColor("_ColorTint");
-
-            //* Find Same Color Blocks
-            var blocks = gm.blockGroup.GetComponentsInChildren<Block_Prefab>();
-            var sameColorBlocks = Array.FindAll(blocks, bl =>
-                (bl.kind == BlockMaker.BLOCK.Normal || bl.kind == BlockMaker.BLOCK.Long)
-                && (bl.GetComponent<MeshRenderer>().material.GetColor("_ColorTint") == hitColor)
-            );
+            var sameColorBlocks = findSameColorBlocks(gm, hit.transform.gameObject);
 
             //* Glow Effect On
             bm.setGlowEF(sameColorBlocks, true);
             
             //* Reset
             if(hitBlockByBallPreview != hit.transform.gameObject){
+                var blocks = gm.blockGroup.GetComponentsInChildren<Block_Prefab>();
                 bm.setGlowEF(blocks, false);
             }
             hitBlockByBallPreview = hit.transform.gameObject;
         }
+    }
+
+    public static Block_Prefab[] findSameColorBlocks(GameManager gm, GameObject hitObj){
+        //* Hit Color
+        var meshRd = hitObj.GetComponent<MeshRenderer>();
+        Color hitColor = meshRd.material.GetColor("_ColorTint");
+        //* Find Same Color Blocks
+        var blocks = gm.blockGroup.GetComponentsInChildren<Block_Prefab>();
+        return Array.FindAll(blocks, bl => 
+            (bl.kind == BlockMaker.BLOCK.Normal || bl.kind == BlockMaker.BLOCK.Long)//* (BUG) 宝箱はmeshRendererがないので場外。
+            && bl.GetComponent<MeshRenderer>().material.GetColor("_ColorTint") == hitColor
+        );
     }
 }
 //--------------------------------------------------------------------------------------------------
