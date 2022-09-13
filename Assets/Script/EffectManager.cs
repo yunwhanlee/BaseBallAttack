@@ -28,6 +28,7 @@ public class EffectManager : MonoBehaviour
     public GameObject explosionEF;
     public GameObject criticalTxtEF;
     public GameObject instantKillTxtEF;
+    public GameObject laserEF;
 
     //* Active Skill EF
     public GameObject[] activeSkillBatEFs;
@@ -117,6 +118,19 @@ public class EffectManager : MonoBehaviour
         ins.transform.localScale = new Vector3(scale, scale, scale);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
     }
+    public GameObject createLaserEF(Vector3 parentPos, Vector3 direction){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.LaserEF.ToString(), parentPos, QI, gm.effectGroup);
+        var rigid = ins.GetComponent<Rigidbody>();
+        rigid.velocity = Vector3.zero;
+        rigid.angularVelocity = Vector3.zero;
+        var speed = 60;
+        var force = direction * speed;
+        Debug.DrawRay(parentPos, direction * 100, Color.red, 1);
+        rigid.AddForce(force, ForceMode.Impulse);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
+        return ins;
+    }
+
 //* -------------------------------------------------------------
 //* ActiveSkill Effect
 //* -------------------------------------------------------------

@@ -150,15 +150,18 @@ public class Ball_Prefab : MonoBehaviour
 
                 //* Laser
                 if(pl.laser.Value > 0){
-                    Debug.DrawRay(pl.arrowAxisAnchor.transform.position, pl.arrowAxisAnchor.transform.forward * 100, Color.red, 1);
-                    RaycastHit[] hits = Physics.RaycastAll(pl.arrowAxisAnchor.transform.position, pl.arrowAxisAnchor.transform.forward, 100);
-                    Debug.Log("Lazer ON! " + "hits.Count= " + hits.Length + ", hits[0].name= " + hits[0].transform.name);
+                    var start = pl.arrowAxisAnchor.transform.position;
+                    var direction = pl.arrowAxisAnchor.transform.forward;
+                    em.createLaserEF(start, direction);
+                    RaycastHit[] hits = Physics.RaycastAll(start, direction, 100);
                     Array.ForEach(hits, hit => {
                         if(hit.transform.tag == BlockMaker.NORMAL_BLOCK){
                             Debug.Log("LAZER!! Hit Obj-> " + hit.transform.name);
                             var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
-                            block.decreaseHp(10);
-                            em.createCritTxtEF(hit.transform.position, 10);
+                            int dmg = 10;
+                            block.decreaseHp(dmg);
+                            
+                            em.createCritTxtEF(hit.transform.position, dmg);
                         }
                     });
                 }
