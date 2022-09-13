@@ -119,7 +119,7 @@ public class Block_Prefab : MonoBehaviour
 
         //* Heal Block
         if(kind == BlockMaker.BLOCK.Heal){
-            Debug.Log("Heal! around Blocks");
+            // Debug.Log("Heal! around Blocks");
             if(IsHeal){
                 IsHeal = false;
                 //Sphere Collider
@@ -128,7 +128,7 @@ public class Block_Prefab : MonoBehaviour
                     var hitBlock = hit.transform.GetComponent<Block_Prefab>();
                     if(hit.transform.tag == BlockMaker.NORMAL_BLOCK && hitBlock.kind != BlockMaker.BLOCK.TreasureChest){
                         int addHp = (int)(hitBlock.hp * healValPer);
-                        hit.transform.GetComponent<Block_Prefab>().increaseHp(addHp);
+                        hitBlock.increaseHp(addHp);
                     }
                 }
             }
@@ -222,6 +222,7 @@ public class Block_Prefab : MonoBehaviour
 
     public void increaseHp(int heal){
         Hp += heal;
+        if(!this) return;
         em.createHealTxtEF(this.transform.position, heal);
         em.createHeartEF(new Vector3(transform.position.x, transform.position.y+2, transform.position.z));
     }

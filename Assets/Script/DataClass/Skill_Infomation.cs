@@ -227,19 +227,25 @@ public class AtvSkill{
         bool isColorBallSkill = gm.activeSkillBtnList.Exists(btn => btn.Trigger && btn.Name == DM.ATV.ColorBall.ToString());
         // Debug.Log("setColorBallSkillGlowEF():: hit= " + hit);
         if(isColorBallSkill && hit.transform.CompareTag(BlockMaker.NORMAL_BLOCK)){
-            Debug.Log(hit.transform.GetComponent<Block_Prefab>().kind);
-            if(hit.transform.GetComponent<Block_Prefab>().kind == BlockMaker.BLOCK.TreasureChest
-                || hit.transform.GetComponent<Block_Prefab>().kind == BlockMaker.BLOCK.Heal){//* 宝箱は場外
+            var hitBlock = hit.transform.GetComponent<Block_Prefab>();
+            Debug.Log("setColorBallSkillGlowEF():: hitBlock.kind= " + hitBlock.kind);
+            // if(hitBlock.kind == BlockMaker.BLOCK.TreasureChest || hitBlock.kind == BlockMaker.BLOCK.Heal){//* 場外
+            //     Debug.Log("場外：" + hitBlock.kind);
+            //     return;
+            // }
+
+            //* Hit Color
+            if(hitBlock.kind == BlockMaker.BLOCK.TreasureChest || hitBlock.kind == BlockMaker.BLOCK.Heal){
                 return;
             }
-            //* Hit Color
-            var meshRd = hit.transform.gameObject.GetComponent<MeshRenderer>();
+
+            var meshRd = hit.transform.GetComponent<MeshRenderer>();
             Color hitColor = meshRd.material.GetColor("_ColorTint");
 
             //* Find Same Color Blocks
             var blocks = gm.blockGroup.GetComponentsInChildren<Block_Prefab>();
             var sameColorBlocks = Array.FindAll(blocks, bl =>
-                (bl.GetComponent<Block_Prefab>().kind != BlockMaker.BLOCK.TreasureChest) //* 宝箱は場外
+                (bl.kind == BlockMaker.BLOCK.Normal || bl.kind == BlockMaker.BLOCK.Long)
                 && (bl.GetComponent<MeshRenderer>().material.GetColor("_ColorTint") == hitColor)
             );
 

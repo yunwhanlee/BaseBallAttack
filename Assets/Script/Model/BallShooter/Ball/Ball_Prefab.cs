@@ -215,8 +215,8 @@ public class Ball_Prefab : MonoBehaviour
                                 //* Find Same Color Blocks
                                 var blocks = gm.blockGroup.GetComponentsInChildren<Block_Prefab>();
                                 var sameColorBlocks = Array.FindAll(blocks, bl => 
-                                    bl.kind != BlockMaker.BLOCK.TreasureChest && //* (BUG) 宝箱はmeshRendererがないので場外。
-                                    bl.GetComponent<MeshRenderer>().material.GetColor("_ColorTint") == hitColor
+                                    (bl.kind == BlockMaker.BLOCK.Normal || bl.kind == BlockMaker.BLOCK.Long)//* (BUG) 宝箱はmeshRendererがないので場外。
+                                    && bl.GetComponent<MeshRenderer>().material.GetColor("_ColorTint") == hitColor
                                 );
                                 //* Destroy
                                 Array.ForEach(sameColorBlocks, bl => {
