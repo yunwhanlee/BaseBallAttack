@@ -123,7 +123,7 @@ public class EffectManager : MonoBehaviour
         var rigid = ins.GetComponent<Rigidbody>();
         rigid.velocity = Vector3.zero;
         rigid.angularVelocity = Vector3.zero;
-        var speed = 60;
+        var speed = 6000 * Time.deltaTime;
         var force = direction * speed;
         Debug.DrawRay(parentPos, direction * 100, Color.red, 3);
         rigid.AddForce(force, ForceMode.Impulse);
