@@ -153,7 +153,7 @@ public class PsvSkill<T> where T: struct {
             pl.itemSpawn.Name,              (pl.itemSpawn.Value * 100 + "%").ToString(),
             pl.verticalMultiShot.Name,      (pl.verticalMultiShot.Value * 1).ToString(),
             pl.criticalDamage.Name,         (CRIT_DMG_DEF + (pl.criticalDamage.Value * 100) + "%").ToString(),
-            pl.laser.Name,                  (pl.laser.Value).ToString(),
+            // pl.laser.Name,                  (pl.laser.Value).ToString(),
         };
     }
 
