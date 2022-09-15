@@ -43,33 +43,92 @@ public static class LANG //* LANGUAGE
         new string[]{"22.Guitar", "ギター", "기타"}, 
     };
 
+    public static List<string[]> SkillNameList = new List<string[]>(){
+        new string[]{"ThunderShot", "サンダーショット", "썬더샷"},
+        new string[]{"FireBall", "ファイアボール", "파이어볼"},
+        new string[]{"ColorBall", "カラーボール", "칼라볼"},
+        new string[]{"PoisonSmoke", "毒煙", "독구름"},
+        new string[]{"IceWave", "アイスウェーブ", "아이스웨이브"},
+    };
+    public static List<string[]> SkillExplainList = new List<string[]>(){
+        new string[]{"Erase same color blocks.", 
+            "同じ色のブロックを消す。", 
+            "같은색 블록 제거."},
+        new string[]{"Damage within the explosion range.", 
+            "爆発範囲内にダメージを与える。", 
+            "폭발범위내 데미지를 준다."},
+        new string[]{"Damage within the Ice sector range.", 
+            "アイスセクター範囲内にダメージを与える。", 
+            "아이스섹터범위내에 데미지를 준다."},
+        new string[]{"Dot Damage within the round range. (3 turn) ", 
+            "該当範囲内にドットダメージを与える。(３ターン)", 
+            "해당범위내에 도트데미지를 준다."},
+        new string[]{"5 times x2 damage within line range.", 
+            "ライン範囲内に5回、2倍ダメージを与える。", 
+            "라인범위내에 5번, 2배 데미지를 준다."},
+    };
+
+    const string HR_TXT = "⊡ HomeRunBonus : ";
+    public static List<string[]> SkillHomeRunBonusList = new List<string[]>(){
+        new string[]{HR_TXT + "TODO",
+        HR_TXT + "TODO",
+        HR_TXT + "TODO"},
+        new string[]{HR_TXT + "Burn Dot Dmg 10%",
+        HR_TXT + "10%ダメージで燃やす。",
+        HR_TXT + "10퍼센트 데미지로 불태운다."},
+        new string[]{HR_TXT + "TODO",
+        HR_TXT + "TODO",
+        HR_TXT + "TODO"},
+        new string[]{HR_TXT + "+20% range, +2 turn",
+        HR_TXT + "+20% 範囲、+2ターン。",
+        HR_TXT + "+20% 범위, +2 턴."},
+        new string[]{HR_TXT + "x3 damage.",
+        HR_TXT + "３倍 ダメージ。",
+        HR_TXT + "3배 데미지."},
+    };
+
     //* PLAY SCENE
 
 
     //* 関数
-    public static string getLanguageTxt(string name){
-        List<string[]> tempList = null;
-        string itemType = name.Split('_')[0];
-        string itemName = name.Split('_')[1];
-        Debug.Log("getLanguageTxt:: itemType=" + itemType + ", itemName=" + itemName);
-        
-        //* Type
-        switch(itemType){
-            case "Chara":
-                tempList = CharaList;
-                break;
-            case "Bat":
-                tempList = BatList;
-                break;
-            case "Skill":
-                //TODO
-                break;
+    public static List<string> getLanguageTxt(string str){
+        Debug.Log("getLanguageTxt:: str=" + str);
+        List<string> resultList = new List<string>();
+        List<string[]> languageList = null;
+        string itemType = str.Split('_')[0]; //Type
+        if(itemType == "Chara" || itemType == "Bat"){
+            resultList.Add(str.Split('_')[1]); //itemName
         }
-
-        //* Apply
-        int idx = tempList.FindIndex(arr => itemName == arr[(int)TP.EN]);
-        Debug.Log("idx= " + idx);
-        return tempList[idx][(int)DM.ins.Language];
+        else if(itemType == "Skill"){
+            resultList.Add(str.Split('_')[1]); //Name
+            resultList.Add(str.Split('_')[2]); //Explain
+            resultList.Add(str.Split('_')[3]); //HomeRunBouse
+        }
+        
+        //* Type & Set Language
+        switch(itemType){
+            case "Chara":{
+                languageList = CharaList;
+                int idx = languageList.FindIndex(langArr => resultList[0] == langArr[(int)TP.EN]);
+                resultList[0] = languageList[idx][(int)DM.ins.Language];
+                break;
+            }
+            case "Bat":{
+                languageList = BatList;
+                int idx = languageList.FindIndex(langArr => resultList[0] == langArr[(int)TP.EN]);
+                resultList[0] = languageList[idx][(int)DM.ins.Language];
+                break;
+            }
+            case "Skill":{
+                int idx = SkillNameList.FindIndex(langArr => resultList[0] == langArr[(int)TP.EN]);
+                Debug.Log("<color=white><<Skill>> idx= " + idx + "</color>");
+                resultList[0] = SkillNameList[idx][(int)DM.ins.Language];
+                resultList[1] = SkillExplainList[idx][(int)DM.ins.Language];
+                resultList[2] = SkillHomeRunBonusList[idx][(int)DM.ins.Language];
+                break;
+            }
+        }
+        return resultList;
     }
 }
 

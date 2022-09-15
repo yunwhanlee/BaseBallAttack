@@ -33,6 +33,22 @@ public class ScrollView {
             switch(this.type){
                 case "Skill" :
                     model = GameObject.Instantiate(obj, Vector3.zero, Quaternion.identity, contentTf);
+                    Debug.Log("【"+ this.type + "】model.name= " + model.name);
+                    var childs = model.GetComponentsInChildren<Text>();
+
+                    var txtChilds = Array.FindAll(childs, chd => chd.name == "NameTxt" || chd.name == "ExplainTxt"  || chd.name == "HomeRunBonusTxt" );
+
+                    //* Join Strings
+                    List<string> strList = new List<string>(){
+                        "Skill", txtChilds[0].text, txtChilds[1].text, txtChilds[2].text};
+
+                    var tempStr = string.Join("_", strList);
+                    var languageList = LANG.getLanguageTxt(tempStr);
+                    
+                    for(int i=0; i<txtChilds.Length; i++){
+                        txtChilds[i].text = languageList[i];
+                    }
+                    
                     break;
                 case "Chara" : 
                 case "Bat" :
@@ -81,7 +97,7 @@ public class ScrollView {
     private void displayItemPassiveUI(string type, ItemPsvDt[] itemPassiveList, RectTransform itemSkillBoxPref, RectTransform psvPanel){
         Array.ForEach(itemPassiveList, list=>{
             if(list.lv > 0){
-                Debug.Log(list.imgPref.name + "= " + list.lv);
+                // Debug.Log(list.imgPref.name + "= " + list.lv);
                 var boxPref = GameObject.Instantiate(itemSkillBoxPref, itemSkillBoxPref.localPosition, itemSkillBoxPref.localRotation, psvPanel);
                 var imgPref = GameObject.Instantiate(list.imgPref, Vector3.zero, Quaternion.identity, boxPref).transform;
                 boxPref.GetComponent<RectTransform>().localPosition = new Vector3(0,0,0);
@@ -217,7 +233,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         // string name = curItem.name.Split('_')[1];
         // int idx = LANG.CharaList.FindIndex(list => name == list[(int)LANG.TP.EN]);
         // NameTxt.text = LANG.CharaList[idx][(int)DM.ins.Language]; //name;
-        NameTxt.text = LANG.getLanguageTxt(curItem.name);
+        NameTxt.text = LANG.getLanguageTxt(curItem.name)[0];
 
         //* Set Rank UI Box Color
         Color color = Color.white;
