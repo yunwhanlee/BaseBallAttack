@@ -231,7 +231,7 @@ public class HomeManager : MonoBehaviour
                     sv.ScrollRect.gameObject.SetActive(false));
                 break;
             default : 
-                int typeIdx = DM.ins.convertItemType2Idx();
+                int typeIdx = DM.ins.getCurItemType2Idx();
                 SelectPanelScrollBG.color = selectPanelColors[typeIdx];
                 DM.ins.scrollviews[typeIdx].ScrollRect.gameObject.SetActive(true);
 

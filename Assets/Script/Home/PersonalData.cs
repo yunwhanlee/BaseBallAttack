@@ -132,7 +132,7 @@ public class PersonalData {
     }
 
     public void setSelectIdx(int index){
-        var type = DM.ins.convertItemType2Idx();
+        var type = DM.ins.getCurItemType2Idx();
         switch(type){
             case (int)DM.ITEM.Chara :  SelectCharaIdx = index; break;
             case (int)DM.ITEM.Bat :    SelectBatIdx = index;   break;
@@ -147,7 +147,7 @@ public class PersonalData {
     }
 
     public void setUnLockCurList(int curIdx){
-        var type = DM.ins.convertItemType2Idx();
+        var type = DM.ins.getCurItemType2Idx();
         switch(type){
             case (int)DM.ITEM.Chara :  CharaLockList[curIdx] = false; break;
             case (int)DM.ITEM.Bat :    BatLockList[curIdx] = false;   break;

@@ -72,7 +72,7 @@ public class ObjectPool : MonoBehaviour
         poolDtList.Add(new PoolData(DIC.BatHitSparkEF.ToString(), em.batHitSparkEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.HomeRunHitSparkEF.ToString(), em.homeRunHitSparkEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.ExplosionEF.ToString(), em.explosionEF, 5, em.gm.effectGroup));
-        poolDtList.Add(new PoolData(DIC.LaserEF.ToString(), em.laserEF, 1, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.LaserEF.ToString(), em.laserEF, 3, em.gm.effectGroup));
 
         // OBJ 
         poolDtList.Add(new PoolData(DIC.DropItemExpOrbPf.ToString(), bm.dropItemExpOrbPf, 50, gm.dropItemGroup));

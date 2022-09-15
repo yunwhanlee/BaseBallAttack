@@ -196,7 +196,9 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         if(BoxSprRdr == null) return; // Error) Object Null
 
         string type = DM.ins.SelectItemType;
-        var contentTf = (type == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf : DM.ins.scrollviews[(int)DM.ITEM.Bat].ContentTf;
+        var contentTf = (type == DM.ITEM.Chara.ToString())?
+            DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf
+            : DM.ins.scrollviews[(int)DM.ITEM.Bat].ContentTf;
         //* Set PosX
         contentTf.anchoredPosition = new Vector2(CurIdxBasePosX, -500);
         
@@ -212,8 +214,10 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             setCheckIconColorAndOutline();
         
         //* Set Name
-        string name = curItem.name.Split('_')[1];
-        NameTxt.text = name;
+        // string name = curItem.name.Split('_')[1];
+        // int idx = LANG.CharaList.FindIndex(list => name == list[(int)LANG.TP.EN]);
+        // NameTxt.text = LANG.CharaList[idx][(int)DM.ins.Language]; //name;
+        NameTxt.text = LANG.getLanguageTxt(curItem.name);
 
         //* Set Rank UI Box Color
         Color color = Color.white;
@@ -424,7 +428,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     private void activeOutline(ItemInfo item, bool isActive){
         // if(item.Outline3D == null) return;
-        var type = DM.ins.convertItemType2Idx();
+        var type = DM.ins.getCurItemType2Idx();
         Debug.LogFormat("activeOutline():: type= {0}, isActive= {1}", type, isActive);
         switch(type){
             case (int)DM.ITEM.Chara:

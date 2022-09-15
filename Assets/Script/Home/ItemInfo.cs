@@ -21,7 +21,7 @@ public class ItemInfo : MonoBehaviour
 
 
     void Start(){
-        var type = DM.ins.convertItemType2Idx();
+        var type = DM.ins.getCurItemType2Idx();
 
         switch(type){
             //* 3D Model 形式
