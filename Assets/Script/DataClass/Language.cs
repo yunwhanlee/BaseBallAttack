@@ -91,40 +91,43 @@ public static class LANG //* LANGUAGE
 
 
     //* 関数
-    public static List<string> getLanguageTxt(string str){
+    public static List<string> getLanguageTxtList(string str){
         Debug.Log("getLanguageTxt:: str=" + str);
+        const int SPT_TYPE=0, SPT_NAME=1, SPT_EXPLAIN=2, SPT_HOMERUNBONUS=3;
+        const int NAME=0, EXPLAIN=1, HOMERUNBONUS=2;
         List<string> resultList = new List<string>();
-        List<string[]> languageList = null;
-        string itemType = str.Split('_')[0]; //Type
-        if(itemType == "Chara" || itemType == "Bat"){
-            resultList.Add(str.Split('_')[1]); //itemName
+
+        //* Split String
+        var split = str.Split('_');
+        string type = split[SPT_TYPE];
+
+        if(type == DM.ITEM.Chara.ToString() || type == DM.ITEM.Bat.ToString()){
+            resultList.Add(split[SPT_NAME]);
         }
-        else if(itemType == "Skill"){
-            resultList.Add(str.Split('_')[1]); //Name
-            resultList.Add(str.Split('_')[2]); //Explain
-            resultList.Add(str.Split('_')[3]); //HomeRunBouse
+        else if(type == DM.ITEM.Skill.ToString()){
+            resultList.Add(split[SPT_NAME]);
+            resultList.Add(split[SPT_EXPLAIN]);
+            resultList.Add(split[SPT_HOMERUNBONUS]);
         }
         
         //* Type & Set Language
-        switch(itemType){
+        switch(type){
             case "Chara":{
-                languageList = CharaList;
-                int idx = languageList.FindIndex(langArr => resultList[0] == langArr[(int)TP.EN]);
-                resultList[0] = languageList[idx][(int)DM.ins.Language];
+                int idx = CharaList.FindIndex(langArr => resultList[NAME] == langArr[(int)TP.EN]);
+                resultList[NAME] = CharaList[idx][(int)DM.ins.Language];
                 break;
             }
             case "Bat":{
-                languageList = BatList;
-                int idx = languageList.FindIndex(langArr => resultList[0] == langArr[(int)TP.EN]);
-                resultList[0] = languageList[idx][(int)DM.ins.Language];
+                int idx = BatList.FindIndex(langArr => resultList[NAME] == langArr[(int)TP.EN]);
+                resultList[NAME] = BatList[idx][(int)DM.ins.Language];
                 break;
             }
             case "Skill":{
-                int idx = SkillNameList.FindIndex(langArr => resultList[0] == langArr[(int)TP.EN]);
+                int idx = SkillNameList.FindIndex(langArr => resultList[NAME] == langArr[(int)TP.EN]);
                 Debug.Log("<color=white><<Skill>> idx= " + idx + "</color>");
-                resultList[0] = SkillNameList[idx][(int)DM.ins.Language];
-                resultList[1] = SkillExplainList[idx][(int)DM.ins.Language];
-                resultList[2] = SkillHomeRunBonusList[idx][(int)DM.ins.Language];
+                resultList[NAME] = SkillNameList[idx][(int)DM.ins.Language];
+                resultList[EXPLAIN] = SkillExplainList[idx][(int)DM.ins.Language];
+                resultList[HOMERUNBONUS] = SkillHomeRunBonusList[idx][(int)DM.ins.Language];
                 break;
             }
         }
