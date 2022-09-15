@@ -174,7 +174,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         float width = Mathf.Abs(DM.ins.ModelContentPref.rect.width);
         float offset = -(width + width/2);
         float curPosX = pos.anchoredPosition.x - offset;
-        var prefs = (DM.ins.SelectItemType == "Chara")? DM.ins.scrollviews[(int)DM.ITEM.Chara].ItemPrefs : DM.ins.scrollviews[(int)DM.ITEM.Bat].ItemPrefs;
+        var prefs = (DM.ins.SelectItemType == DM.ITEM.Chara.ToString())? DM.ins.scrollviews[(int)DM.ITEM.Chara].ItemPrefs : DM.ins.scrollviews[(int)DM.ITEM.Bat].ItemPrefs;
         float max = width * prefs.Length - width;
         CurIdx = Mathf.Abs(Mathf.FloorToInt((curPosX) / width));
         CurIdxBasePosX = -((CurIdx+1) * width);

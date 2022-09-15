@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5489195237a0cb498fb93984fbf39dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  language: 1
+  language: 2
   coinTxt: {fileID: 207406971}
   diamondTxt: {fileID: 944239660}
   grayItemLock: {fileID: 2100000, guid: 85881ae3c4cea344aa748905176006ae, type: 2}
@@ -2436,7 +2436,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1025130647}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.58858156
+  m_Size: 0.5885815
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9072,7 +9072,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1072798420
 RectTransform:
   m_ObjectHideFlags: 0
