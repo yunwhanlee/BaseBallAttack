@@ -150,9 +150,9 @@ public class GameManager : MonoBehaviour
         //* GUI
         expBar.value = Mathf.Lerp(expBar.value, pl.Exp / pl.MaxExp, Time.deltaTime * 10);
         stateTxt.text = State.ToString();
-        levelTxt.text = "LV : " + pl.Lv;
-        stageTxt.text = "STAGE : " + stage.ToString();
-        comboTxt.text = "COMBO\n" + comboCnt.ToString();
+        levelTxt.text = LANG.getTxtAtPlay("Level") + " : " + pl.Lv;
+        stageTxt.text = LANG.getTxtAtPlay("Stage") + " : " + stage.ToString();
+        comboTxt.text = LANG.getTxtAtPlay("Combo") + "\n" + comboCnt.ToString();
 
         //* (BUG) ボールが複数ある時、同時に消えたら、次に進まないこと対応
         // if(ballGroup.childCount == 0 && !downWall.isTrigger){
@@ -253,7 +253,7 @@ public class GameManager : MonoBehaviour
             cam2Canvas.SetActive(true);
             
             shootCntTxt.gameObject.SetActive(true);
-            readyBtn.gameObject.GetComponentInChildren<Text>().text = "BACK";
+            readyBtn.gameObject.GetComponentInChildren<Text>().text = LANG.getTxtAtPlay("Back");
 
             ballPreviewGoalImg.gameObject.SetActive(true);
             setBallPreviewGoalImgRGBA(new Color(0.8f,0.8f,0.8f, 0.2f));
@@ -281,7 +281,7 @@ public class GameManager : MonoBehaviour
             cam2Canvas.SetActive(false);
             
             shootCntTxt.gameObject.SetActive(false);
-            readyBtn.gameObject.GetComponentInChildren<Text>().text = "READY";
+            readyBtn.gameObject.GetComponentInChildren<Text>().text = LANG.getTxtAtPlay("Ready");
 
             ballPreviewGoalImg.gameObject.SetActive(false);
 
@@ -318,7 +318,7 @@ public class GameManager : MonoBehaviour
         strikeBallImgs[strikeCnt++].gameObject.SetActive(true);
         if(isOut){
             strikeCnt = 0;
-            ShootCntTxt.text = "OUT!";
+            ShootCntTxt.text = LANG.getTxtAtPlay("Out") + "!";
             yield return new WaitForSeconds(1.5f);
             bs.init();
             switchCamScene();
@@ -327,7 +327,7 @@ public class GameManager : MonoBehaviour
             readyBtn.gameObject.SetActive(true);
         }
         else{
-            ShootCntTxt.text = "STRIKE!";
+            ShootCntTxt.text = LANG.getTxtAtPlay("Strike") + "!";
             readyBtn.gameObject.SetActive(true);
             yield return new WaitForSeconds(1.5f);
             bs.init();
@@ -383,8 +383,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("--GAME OVER--");
         State = GameManager.STATE.GAMEOVER;
         gameoverPanel.SetActive(true);
-        gvStageTxt.text = "STAGE : " + stage;
-        gvBestScoreTxt.text = "BEST SCORE : " + bestScore;
+        gvStageTxt.text = LANG.getTxtAtPlay("Stage") + " : " + stage;
+        gvBestScoreTxt.text = LANG.getTxtAtPlay("BestScore") + " : " + bestScore;
     }
 
     public void displayCurPassiveSkillUI(string type){

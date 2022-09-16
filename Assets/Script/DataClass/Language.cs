@@ -108,62 +108,90 @@ public static class LANG //* LANGUAGE
     };
 
     //* PLAY SCENE
+    //* GameManager.cs
+    public static string[] Level = new string[]{"LV", "レベル", "레벨"};
+    public static string[] Stage = new string[]{"STAGE", "ステージ", "스테이지"};
+    public static string[] Combo = new string[]{"COMBO", "コンボー", "콤보"};
+    public static string[] Back = new string[]{"BACK", "戻す", "뒤로"};
+    public static string[] Ready = new string[]{"READY", "準備", "준비"};
+    public static string[] Out = new string[]{"OUT", "アウト", "아웃"};
+    public static string[] Strike = new string[]{"STRIKE", "ストライク", "스트라이크"};
+    public static string[] BestScore = new string[]{"BEST SCORE", "ベストスコア", "베스트 점수"};
 
+    //* LevelScrollPanel.cs
 
     //* Contructor
 
     //* 関数
-    public static List<string> getLanguageTxtList(string str){
+    public static List<string> getTxtListAtHome(string str){
         Debug.Log("getLanguageTxt:: str=" + str);
         const int SPT_TYPE=0, SPT_NAME=1, SPT_EXPLAIN=2, SPT_HOMERUNBONUS=3;
-        List<string> resultList = new List<string>();
+        List<string> resList = new List<string>();
 
         //* Split String
         var split = str.Split('_');
         string type = split[SPT_TYPE];
 
         if(type == DM.ITEM.Chara.ToString() || type == DM.ITEM.Bat.ToString()){
-            resultList.Add(split[SPT_NAME]);
+            resList.Add(split[SPT_NAME]);
         }
         else if(type == DM.ITEM.Skill.ToString()){
-            resultList.Add(split[SPT_NAME]);
-            resultList.Add(split[SPT_EXPLAIN]);
-            resultList.Add(split[SPT_HOMERUNBONUS]);
+            resList.Add(split[SPT_NAME]);
+            resList.Add(split[SPT_EXPLAIN]);
+            resList.Add(split[SPT_HOMERUNBONUS]);
         }
         else if(type == DM.ITEM.CashShop.ToString()){
-            resultList.Add(split[SPT_NAME]);
-            resultList.Add(split[SPT_EXPLAIN]);
+            resList.Add(split[SPT_NAME]);
+            resList.Add(split[SPT_EXPLAIN]);
         }
         
         //* Type & Set Language
         switch(type){
             case "Chara":{
-                int idx = CharaList.FindIndex(langArr => resultList[NAME] == langArr[(int)TP.EN]);
-                resultList[NAME] = CharaList[idx][(int)DM.ins.Language];
+                int idx = CharaList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
+                resList[NAME] = CharaList[idx][(int)DM.ins.Language];
                 break;
             }
             case "Bat":{
-                int idx = BatList.FindIndex(langArr => resultList[NAME] == langArr[(int)TP.EN]);
-                resultList[NAME] = BatList[idx][(int)DM.ins.Language];
+                int idx = BatList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
+                resList[NAME] = BatList[idx][(int)DM.ins.Language];
                 break;
             }
             case "Skill":{
-                int idx = SkillNameList.FindIndex(langArr => resultList[NAME] == langArr[(int)TP.EN]);
+                int idx = SkillNameList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
                 Debug.Log("<color=white><<Skill>> idx= " + idx + "</color>");
-                resultList[NAME] = SkillNameList[idx][(int)DM.ins.Language];
-                resultList[EXPLAIN] = SkillExplainList[idx][(int)DM.ins.Language];
-                resultList[HOMERUNBONUS] = SkillHomeRunBonusList[idx][(int)DM.ins.Language];
+                resList[NAME] = SkillNameList[idx][(int)DM.ins.Language];
+                resList[EXPLAIN] = SkillExplainList[idx][(int)DM.ins.Language];
+                resList[HOMERUNBONUS] = SkillHomeRunBonusList[idx][(int)DM.ins.Language];
                 break;
             }
             case "CashShop":{
-                int idx = CashShopNameList.FindIndex(langArr => resultList[NAME] == langArr[(int)TP.EN]);
+                int idx = CashShopNameList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
                 Debug.Log("<color=yellow><<CashShop>> idx= " + idx + "</color>");
-                resultList[NAME] = CashShopNameList[idx][(int)DM.ins.Language];
-                resultList[EXPLAIN] = CashShopExplainList[idx][(int)DM.ins.Language];
+                resList[NAME] = CashShopNameList[idx][(int)DM.ins.Language];
+                resList[EXPLAIN] = CashShopExplainList[idx][(int)DM.ins.Language];
                 break;
             }
         }
-        return resultList;
+        return resList;
+    }
+
+    public static string getTxtAtPlay(string name){
+        Debug.Log("getLanguageTxtListAtPlay:: name=" + name);
+        string res = null;
+        switch(name){
+            case "Level" : res = Level[(int)DM.ins.Language];  break;
+            case "Stage" : res = Stage[(int)DM.ins.Language];  break;
+            case "Combo" : res = Combo[(int)DM.ins.Language];  break;
+            case "Back" : res = Back[(int)DM.ins.Language];  break;
+            case "Ready" : res = Ready[(int)DM.ins.Language];  break;
+            case "Out" : res = Out[(int)DM.ins.Language];  break;
+            case "Strike" : res = Strike[(int)DM.ins.Language];  break;
+            case "BestScore" : res = BestScore[(int)DM.ins.Language];  break;
+        }
+
+        if(res == null) Debug.LogError("存在しないTEXTです。");
+        return res;
     }
 }
 
