@@ -818,7 +818,7 @@ GameObject:
   - component: {fileID: 149300365}
   - component: {fileID: 149300364}
   m_Layer: 5
-  m_Name: LvTxt
+  m_Name: LevelTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3749,11 +3749,13 @@ MonoBehaviour:
   exceptSkNameList: []
   scrollingSpeed: 2300
   isRollingStop: 0
+  titleTxt: {fileID: 1368341126}
+  levelTxt: {fileID: 149300364}
+  explainTxt: {fileID: 960649140}
   skillBtns:
   - {fileID: 955063943}
   - {fileID: 1832513078}
   - {fileID: 1648916399}
-  LvTxt: {fileID: 149300364}
 --- !u!95 &557986898
 Animator:
   serializedVersion: 3
@@ -6735,7 +6737,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 163.33333, y: -280}
+  m_AnchoredPosition: {x: 163.33333, y: -281.70886}
   m_SizeDelta: {x: 270, y: 270}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &955063943
@@ -6906,7 +6908,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 80
     m_FontStyle: 1
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 100
     m_Alignment: 4
@@ -14014,7 +14016,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 185
     m_FontStyle: 1
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 200
     m_Alignment: 4
@@ -15301,7 +15303,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 816.6666, y: -280}
+  m_AnchoredPosition: {x: 816.6666, y: -281.70886}
   m_SizeDelta: {x: 270, y: 270}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1648916398
@@ -16510,7 +16512,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 490, y: -280}
+  m_AnchoredPosition: {x: 490, y: -281.70886}
   m_SizeDelta: {x: 270, y: 270}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1832513077

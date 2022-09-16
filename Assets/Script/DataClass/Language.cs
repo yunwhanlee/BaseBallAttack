@@ -118,7 +118,8 @@ public static class LANG //* LANGUAGE
     public static string[] Out = new string[]{"OUT", "アウト", "아웃"};
     public static string[] Strike = new string[]{"STRIKE", "ストライク", "스트라이크"};
     public static string[] BestScore = new string[]{"BEST SCORE", "ベストスコア", "베스트 점수"};
-
+    public static string[] LevelUpPanel_Title = new string[]{"LEVEL UP!", "レベル UP!", "레벨 업!"};
+    public static string[] LevelUpPanel_Explain = new string[]{"Please, Select Skill", "スキルを選択してください", "스킬을 선택해주세요"};
     //* PSV
     public static string[] Dmg = new string[]{DM.PSV.Dmg.ToString(), "攻撃力", "공격력"};
     public static string[] MultiShot = new string[]{DM.PSV.MultiShot.ToString(), "マルチ弾", "멀티샷"};
@@ -204,6 +205,8 @@ public static class LANG //* LANGUAGE
             case "Out" : res = Out[(int)DM.ins.Language];  break;
             case "Strike" : res = Strike[(int)DM.ins.Language];  break;
             case "BestScore" : res = BestScore[(int)DM.ins.Language];  break;
+            case "LevelUpPanel_Title" : res = LevelUpPanel_Title[(int)DM.ins.Language]; break;
+            case "LevelUpPanel_Explain" : res = LevelUpPanel_Explain[(int)DM.ins.Language]; break;
             //* PSV
             case "Dmg" : res = Dmg[(int)DM.ins.Language];  break;
             case "MultiShot" : res = MultiShot[(int)DM.ins.Language];  break;

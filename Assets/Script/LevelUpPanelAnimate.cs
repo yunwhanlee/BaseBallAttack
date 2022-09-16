@@ -11,6 +11,8 @@ public class LevelUpPanelAnimate : MonoBehaviour
     public GameManager gm;
     public Player pl;
 
+
+
     private const int SPRITE_W = 270; //Heightも同一
     private int btnIdx;
     private float time;
@@ -21,6 +23,10 @@ public class LevelUpPanelAnimate : MonoBehaviour
     public int scrollingSpeed;
     public bool isRollingStop = false;
 
+    [Header("<---- GUI ---->")]
+    public Text titleTxt;
+    public Text levelTxt;
+    public Text explainTxt;
     public Button[] skillBtns;
     //[System.Serializable] -> Show Inspector View
     public struct SkillBtn{
@@ -32,7 +38,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
         }
     }
     public SkillBtn[] SkillBtns; //struct宣言
-    public Text LvTxt;
+
 
 
     public void Start(){
@@ -42,8 +48,14 @@ public class LevelUpPanelAnimate : MonoBehaviour
         time = 0;
         btnIdx = 0;
         isRollingStop = false;
-        LvTxt.text = "LV : " + (pl.BefLv + 1).ToString();
         exceptSkNameList = new List<string>();
+        
+        //* GUI
+        titleTxt.text = LANG.getTxtAtPlayScn("LevelUpPanel_Title");
+        levelTxt.text = LANG.getTxtAtPlayScn("Level") + " : " + (pl.BefLv + 1).ToString();
+        explainTxt.text = LANG.getTxtAtPlayScn("LevelUpPanel_Explain");
+
+
 
         //* Set SkillBtn
         SkillBtns = new SkillBtn[3]{
