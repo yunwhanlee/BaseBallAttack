@@ -6,8 +6,15 @@ using System;
 public static class LANG //* LANGUAGE
 {
     public enum TP {EN, JP, KR}; //* TYPE
+    public enum TXT {
+        //* UI
+        Level, Stage, Combo, Status, Back, Ready, Out, Strike, 
+        BestScore, LevelUpPanel_Title, LevelUpPanel_Explain,
+        //* PSV
+        Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, 
+        ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, Laser,
+    };
     public const int NAME=0, EXPLAIN=1, HOMERUNBONUS=2;
-    const int LEN = 3;
 
     //* HOME SCENE -----------------------------------
     public static List<string[]> CharaList = new List<string[]>(){
@@ -194,33 +201,32 @@ public static class LANG //* LANGUAGE
     public static string getTxtAtPlayScn(string name){
         Debug.Log("getLanguageTxtListAtPlay:: name=" + name);
         string res = null;
-        switch(name){
-            //* UI
-            case "Level" : res = Level[(int)DM.ins.Language];  break;
-            case "Stage" : res = Stage[(int)DM.ins.Language];  break;
-            case "Combo" : res = Combo[(int)DM.ins.Language];  break;
-            case "Status" : res = Status[(int)DM.ins.Language];  break;
-            case "Back" : res = Back[(int)DM.ins.Language];  break;
-            case "Ready" : res = Ready[(int)DM.ins.Language];  break;
-            case "Out" : res = Out[(int)DM.ins.Language];  break;
-            case "Strike" : res = Strike[(int)DM.ins.Language];  break;
-            case "BestScore" : res = BestScore[(int)DM.ins.Language];  break;
-            case "LevelUpPanel_Title" : res = LevelUpPanel_Title[(int)DM.ins.Language]; break;
-            case "LevelUpPanel_Explain" : res = LevelUpPanel_Explain[(int)DM.ins.Language]; break;
-            //* PSV
-            case "Dmg" : res = Dmg[(int)DM.ins.Language];  break;
-            case "MultiShot" : res = MultiShot[(int)DM.ins.Language];  break;
-            case "Speed" : res = Speed[(int)DM.ins.Language];  break;
-            case "InstantKill" : res = InstantKill[(int)DM.ins.Language];  break;
-            case "Critical" : res = Critical[(int)DM.ins.Language];  break;
-            case "Explosion" : res = Explosion[(int)DM.ins.Language];  break;
-            case "ExpUp" : res = ExpUp[(int)DM.ins.Language];  break;
-            case "ItemSpawn" : res = ItemSpawn[(int)DM.ins.Language];  break;
-            case "VerticalMultiShot" : res = VerticalMultiShot[(int)DM.ins.Language];  break;
-            case "CriticalDamage" : res = CriticalDamage[(int)DM.ins.Language];  break;
-            case "Laser" : res = Laser[(int)DM.ins.Language];  break;
-        }
+        //* UI
+        if(name == TXT.Level.ToString()) res = Level[(int)DM.ins.Language];
+        if(name == TXT.Stage.ToString()) res = Stage[(int)DM.ins.Language];
+        if(name == TXT.Combo.ToString()) res = Combo[(int)DM.ins.Language];
+        if(name == TXT.Status.ToString()) res = Status[(int)DM.ins.Language];
+        if(name == TXT.Back.ToString()) res = Back[(int)DM.ins.Language];
+        if(name == TXT.Ready.ToString()) res = Ready[(int)DM.ins.Language];
+        if(name == TXT.Out.ToString()) res = Out[(int)DM.ins.Language];
+        if(name == TXT.Strike.ToString()) res = Strike[(int)DM.ins.Language];
+        if(name == TXT.BestScore.ToString()) res = BestScore[(int)DM.ins.Language];
+        if(name == TXT.LevelUpPanel_Title.ToString()) res = LevelUpPanel_Title[(int)DM.ins.Language];
+        if(name == TXT.LevelUpPanel_Explain.ToString()) res = LevelUpPanel_Explain[(int)DM.ins.Language];
+        //* PSV
+        if(name == TXT.Dmg.ToString()) res = Dmg[(int)DM.ins.Language];
+        if(name == TXT.MultiShot.ToString()) res = MultiShot[(int)DM.ins.Language];
+        if(name == TXT.Speed.ToString()) res = Speed[(int)DM.ins.Language];
+        if(name == TXT.InstantKill.ToString()) res = InstantKill[(int)DM.ins.Language];
+        if(name == TXT.Critical.ToString()) res = Critical[(int)DM.ins.Language];
+        if(name == TXT.Explosion.ToString()) res = Explosion[(int)DM.ins.Language];
+        if(name == TXT.ExpUp.ToString()) res = ExpUp[(int)DM.ins.Language];
+        if(name == TXT.ItemSpawn.ToString()) res = ItemSpawn[(int)DM.ins.Language];
+        if(name == TXT.VerticalMultiShot.ToString()) res = VerticalMultiShot[(int)DM.ins.Language];
+        if(name == TXT.CriticalDamage.ToString()) res = CriticalDamage[(int)DM.ins.Language];
+        if(name == TXT.Laser.ToString()) res = Laser[(int)DM.ins.Language];
 
+        //* ERROR
         if(res == null) Debug.LogError("存在しないTEXTです。");
         return res;
     }
