@@ -6,6 +6,7 @@ using System;
 public static class LANG //* LANGUAGE
 {
     public enum TP {EN, JP, KR}; //* TYPE
+    public const int NAME=0, EXPLAIN=1, HOMERUNBONUS=2;
     const int LEN = 3;
 
     //* HOME SCENE
@@ -90,11 +91,12 @@ public static class LANG //* LANGUAGE
     //* PLAY SCENE
 
 
+    //* Contructor
+
     //* 関数
     public static List<string> getLanguageTxtList(string str){
         Debug.Log("getLanguageTxt:: str=" + str);
         const int SPT_TYPE=0, SPT_NAME=1, SPT_EXPLAIN=2, SPT_HOMERUNBONUS=3;
-        const int NAME=0, EXPLAIN=1, HOMERUNBONUS=2;
         List<string> resultList = new List<string>();
 
         //* Split String

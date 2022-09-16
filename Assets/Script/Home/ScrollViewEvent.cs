@@ -40,7 +40,7 @@ public class ScrollView {
 
                     //* Join Strings
                     List<string> strList = new List<string>(){
-                        "Skill", txtChilds[0].text, txtChilds[1].text, txtChilds[2].text};
+                        "Skill", txtChilds[LANG.NAME].text, txtChilds[LANG.EXPLAIN].text, txtChilds[LANG.HOMERUNBONUS].text};
 
                     var tempStr = string.Join("_", strList);
                     var languageList = LANG.getLanguageTxtList(tempStr);
@@ -233,7 +233,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         // string name = curItem.name.Split('_')[1];
         // int idx = LANG.CharaList.FindIndex(list => name == list[(int)LANG.TP.EN]);
         // NameTxt.text = LANG.CharaList[idx][(int)DM.ins.Language]; //name;
-        NameTxt.text = LANG.getLanguageTxtList(curItem.name)[0];
+        NameTxt.text = LANG.getLanguageTxtList(curItem.name)[LANG.NAME];
 
         //* Set Rank UI Box Color
         Color color = Color.white;
