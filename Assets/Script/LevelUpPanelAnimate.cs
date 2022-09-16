@@ -11,8 +11,6 @@ public class LevelUpPanelAnimate : MonoBehaviour
     public GameManager gm;
     public Player pl;
 
-
-
     private const int SPRITE_W = 270; //Heightも同一
     private int btnIdx;
     private float time;
@@ -29,9 +27,11 @@ public class LevelUpPanelAnimate : MonoBehaviour
     public Text explainTxt;
     public Button[] skillBtns;
     //[System.Serializable] -> Show Inspector View
+
     public struct SkillBtn{
         public RectTransform imgRectTf;
         public Text name;
+
         public SkillBtn(Button skillBtn){//Contructor
             imgRectTf = skillBtn.transform.GetChild(0).GetComponent<RectTransform>();
             name = skillBtn.transform.GetChild(1).GetComponent<Text>();
@@ -54,8 +54,6 @@ public class LevelUpPanelAnimate : MonoBehaviour
         titleTxt.text = LANG.getTxtAtPlayScn("LevelUpPanel_Title");
         levelTxt.text = LANG.getTxtAtPlayScn("Level") + " : " + (pl.BefLv + 1).ToString();
         explainTxt.text = LANG.getTxtAtPlayScn("LevelUpPanel_Explain");
-
-
 
         //* Set SkillBtn
         SkillBtns = new SkillBtn[3]{
@@ -126,7 +124,8 @@ public class LevelUpPanelAnimate : MonoBehaviour
                 else{
                     int randIdx = Random.Range(0, selectSkillList.Count);
                     btn.imgRectTf.localPosition = new Vector3(0, selectSkillList[randIdx].Key + SPRITE_W / 2, 0);// Scroll Down a Half of Height PosY for Animation
-                    btn.name.text = selectSkillList[randIdx].Value.name.Split(char.Parse("_"))[1];
+                    string skillName = selectSkillList[randIdx].Value.name.Split(char.Parse("_"))[1];
+                    btn.name.text = LANG.getTxtAtPlayScn(skillName);
 
                     //* MAXレベールだったら、できるまで他に切り替える。
                     bool isSkLvMax = exceptSkNameList.Exists(name => btn.name.text.Contains(name));
