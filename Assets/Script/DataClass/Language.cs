@@ -88,6 +88,25 @@ public static class LANG //* LANGUAGE
         HR_TXT + "3배 데미지."},
     };
 
+    public static List<string[]> CashShopNameList = new List<string[]>(){
+        new string[]{"AD Skip", "広告無し", "광고제거"},
+        new string[]{"Coin 10000", "コイン 10000", "코인 10000"},
+        new string[]{"Coin 50000", "コイン 50000", "코인 50000"},
+        new string[]{"Coin 100000", "コイン 100000", "코인 100000"},
+        new string[]{"Diamond 10000", "ダイア 10000", "다이아 10000"},
+        new string[]{"Diamond 50000", "ダイア 50000", "다이아 50000"},
+        new string[]{"Diamond 100000", "ダイア 100000", "다이아 100000"},
+    };
+    public static List<string[]> CashShopExplainList = new List<string[]>(){
+        new string[]{"Skip All Advertising.", "広告をスキップする。", "광고를 스킵한다."},
+        new string[]{"Get Coin 10000.", "10000コインを購入。", "10000코인 구입."},
+        new string[]{"Get Coin 50000.", "50000コインを購入。", "50000코인 구입."},
+        new string[]{"Get Coin 100000.", "100000コインを購入。", "100000코인 구입."},
+        new string[]{"Get Diamond 10000.", "10000ダイアを購入。", "10000다이아 구입."},
+        new string[]{"Get Diamond 50000.", "50000ダイアを購入。", "50000다이아 구입."},
+        new string[]{"Get Diamond 100000.", "100000ダイアを購入。", "100000다이아 구입."},
+    };
+
     //* PLAY SCENE
 
 
@@ -111,6 +130,10 @@ public static class LANG //* LANGUAGE
             resultList.Add(split[SPT_EXPLAIN]);
             resultList.Add(split[SPT_HOMERUNBONUS]);
         }
+        else if(type == DM.ITEM.CashShop.ToString()){
+            resultList.Add(split[SPT_NAME]);
+            resultList.Add(split[SPT_EXPLAIN]);
+        }
         
         //* Type & Set Language
         switch(type){
@@ -130,6 +153,13 @@ public static class LANG //* LANGUAGE
                 resultList[NAME] = SkillNameList[idx][(int)DM.ins.Language];
                 resultList[EXPLAIN] = SkillExplainList[idx][(int)DM.ins.Language];
                 resultList[HOMERUNBONUS] = SkillHomeRunBonusList[idx][(int)DM.ins.Language];
+                break;
+            }
+            case "CashShop":{
+                int idx = CashShopNameList.FindIndex(langArr => resultList[NAME] == langArr[(int)TP.EN]);
+                Debug.Log("<color=yellow><<CashShop>> idx= " + idx + "</color>");
+                resultList[NAME] = CashShopNameList[idx][(int)DM.ins.Language];
+                resultList[EXPLAIN] = CashShopExplainList[idx][(int)DM.ins.Language];
                 break;
             }
         }

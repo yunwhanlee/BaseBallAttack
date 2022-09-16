@@ -42,6 +42,7 @@ public class DM : MonoBehaviour
         scrollviews[(int)DM.ITEM.Chara].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
         scrollviews[(int)DM.ITEM.Bat].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
         scrollviews[(int)DM.ITEM.Skill].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.ITEM.CashShop].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
 
         //* Items of Content
         ItemInfo[] charas = scrollviews[(int)DM.ITEM.Chara].ContentTf.GetComponentsInChildren<ItemInfo>();

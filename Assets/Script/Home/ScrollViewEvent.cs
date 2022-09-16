@@ -23,19 +23,33 @@ public class ScrollView {
     }
 
     public void createItem(RectTransform modelParentPref, RectTransform itemPassivePanel, RectTransform itemSkillBoxPref){
-        Debug.LogFormat("createObject:: {0}, {1}, {2}",modelParentPref, itemPassivePanel, itemSkillBoxPref);
+        Debug.LogFormat("createObject:: {0}, {1}, {2}, type= {3}",modelParentPref, itemPassivePanel, itemSkillBoxPref, this.type);
         //* Prefabs 生成
-        Array.ForEach(itemPrefs, obj=>{
+        Array.ForEach(itemPrefs, itemPf=>{
             //* 生成
             RectTransform modelContentPf = null;
             RectTransform psvPanel = null;
             GameObject model = null;
             switch(this.type){
-                case "Skill" :
-                    model = GameObject.Instantiate(obj, Vector3.zero, Quaternion.identity, contentTf);
+                case "Chara" : 
+                case "Bat" :
+                    //* Rect Transform -> UI
+                    modelContentPf = GameObject.Instantiate(modelParentPref, modelParentPref.localPosition, modelParentPref.localRotation, contentTf);
+                    modelContentPf.anchoredPosition3D = Vector3.zero; //* 親(ModelContentPf)ずれること対応。
+
+                    //* Transform -> GameObject
+                    model = GameObject.Instantiate(itemPf, Vector3.zero, Quaternion.identity, modelContentPf);
+                    model.transform.localPosition = Vector3.zero;
+
+                    //* Item Passive UI Ready
+                    psvPanel = GameObject.Instantiate(itemPassivePanel, itemPassivePanel.localPosition, itemPassivePanel.localRotation, modelContentPf);
+                    psvPanel.anchoredPosition3D = new Vector3(0,-2,0);
+                    model.GetComponent<ItemInfo>().ItemPassive.setImgPrefs(DM.ins.personalData.ItemPassive);
+                    break;
+                case "Skill" :{
+                    model = GameObject.Instantiate(itemPf, Vector3.zero, Quaternion.identity, contentTf);
                     Debug.Log("【"+ this.type + "】model.name= " + model.name);
                     var childs = model.GetComponentsInChildren<Text>();
-
                     var txtChilds = Array.FindAll(childs, chd => chd.name == "NameTxt" || chd.name == "ExplainTxt"  || chd.name == "HomeRunBonusTxt" );
 
                     //* Join Strings
@@ -48,24 +62,31 @@ public class ScrollView {
                     for(int i=0; i<txtChilds.Length; i++){
                         txtChilds[i].text = languageList[i];
                     }
+                }
+                    break;
+                case "CashShop" :{
+                    model = GameObject.Instantiate(itemPf, Vector3.zero, Quaternion.identity, contentTf);
+                    model.transform.localPosition = Vector3.zero;
+                    Debug.Log("<color=yellow>【"+ this.type + "】</color> model.name= " + model.name);
+                    
+                    var childs = model.GetComponentsInChildren<Text>();
+                    var txtChilds = Array.FindAll(childs, chd => chd.name == "NameTxt" || chd.name == "ExplainTxt");
+                    Array.ForEach(txtChilds, txt => Debug.Log(txt.text));
+
+                    //* Join Strings
+                    List<string> strList = new List<string>(){
+                        "CashShop", txtChilds[LANG.NAME].text, txtChilds[LANG.EXPLAIN].text};
+
+                    var tempStr = string.Join("_", strList);
+                    var languageList = LANG.getLanguageTxtList(tempStr);
+
+                    for(int i=0; i<txtChilds.Length; i++){
+                        txtChilds[i].text = languageList[i];
+                    }
+                    
                     
                     break;
-                case "Chara" : 
-                case "Bat" :
-                    //* Rect Transform -> UI
-                    modelContentPf = GameObject.Instantiate(modelParentPref, modelParentPref.localPosition, modelParentPref.localRotation, contentTf);
-                    modelContentPf.anchoredPosition3D = Vector3.zero; //* 親(ModelContentPf)ずれること対応。
-
-                    //* Transform -> GameObject
-                    model = GameObject.Instantiate(obj, Vector3.zero, Quaternion.identity, modelContentPf);
-                    model.transform.localPosition = Vector3.zero;
-
-                    //* Item Passive UI Ready
-                    psvPanel = GameObject.Instantiate(itemPassivePanel, itemPassivePanel.localPosition, itemPassivePanel.localRotation, modelContentPf);
-                    psvPanel.anchoredPosition3D = new Vector3(0,-2,0);
-                    model.GetComponent<ItemInfo>().ItemPassive.setImgPrefs(DM.ins.personalData.ItemPassive);
-
-                    break;
+                }
             }
 
             if(!model) return;
@@ -90,7 +111,7 @@ public class ScrollView {
                     break;
         }
             Debug.Log("modelParentTf.pos=" + modelParentPref.position + ", modelParentTf.localPos=" + modelParentPref.localPosition);
-            model.name = obj.name;//名前上書き：しないと後ろに(clone)が残る。
+            model.name = itemPf.name;//名前上書き：しないと後ろに(clone)が残る。
         });
     }
 
