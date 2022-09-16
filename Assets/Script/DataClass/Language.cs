@@ -9,7 +9,7 @@ public static class LANG //* LANGUAGE
     public const int NAME=0, EXPLAIN=1, HOMERUNBONUS=2;
     const int LEN = 3;
 
-    //* HOME SCENE
+    //* HOME SCENE -----------------------------------
     public static List<string[]> CharaList = new List<string[]>(){
         new string[]{"Normal", "ノーマル", "노멀"}, 
         new string[]{"Penguin", "ペンギン", "펭귄"}, 
@@ -107,8 +107,8 @@ public static class LANG //* LANGUAGE
         new string[]{"Get Diamond 100000.", "100000ダイアを購入。", "100000다이아 구입."},
     };
 
-    //* PLAY SCENE
-    //* GameManager.cs
+    //* PLAY SCENE -----------------------------------
+    //* UI
     public static string[] Level = new string[]{"LV", "レベル", "레벨"};
     public static string[] Stage = new string[]{"STAGE", "ステージ", "스테이지"};
     public static string[] Combo = new string[]{"COMBO", "コンボー", "콤보"};
@@ -118,12 +118,25 @@ public static class LANG //* LANGUAGE
     public static string[] Strike = new string[]{"STRIKE", "ストライク", "스트라이크"};
     public static string[] BestScore = new string[]{"BEST SCORE", "ベストスコア", "베스트 점수"};
 
+    //* PSV
+    public static string[] Dmg = new string[]{DM.PSV.Dmg.ToString(), "攻撃力", "공격력"};
+    public static string[] MultiShot = new string[]{DM.PSV.MultiShot.ToString(), "マルチ弾", "멀티샷"};
+    public static string[] Speed = new string[]{DM.PSV.Speed.ToString(), "速度", "속도"};
+    public static string[] InstantKill = new string[]{DM.PSV.InstantKill.ToString(), "キル", "킬"};
+    public static string[] Critical = new string[]{DM.PSV.Critical.ToString(), "致命打", "치명타"};
+    public static string[] Explosion = new string[]{DM.PSV.Explosion.ToString(), "爆発", "폭발"};
+    public static string[] ExpUp = new string[]{DM.PSV.ExpUp.ToString(), "経験値％UP", "경험치%UP"};
+    public static string[] ItemSpawn = new string[]{DM.PSV.ItemSpawn.ToString(), "アイテム生成UP", "아이탬생성UP"};
+    public static string[] VerticalMultiShot = new string[]{DM.PSV.VerticalMultiShot.ToString(), "マルチ弾(縦)", "멀티샷(세로)"};
+    public static string[] CriticalDamage = new string[]{DM.PSV.CriticalDamage.ToString(), "致命打ダメージ", "치명타데미지"};
+    public static string[] Laser = new string[]{DM.PSV.Laser.ToString(), "レイザー", "레이저"};
+
     //* LevelScrollPanel.cs
 
     //* Contructor
 
     //* 関数
-    public static List<string> getTxtListAtHome(string str){
+    public static List<string> getTxtListAtHomeScn(string str){
         Debug.Log("getLanguageTxt:: str=" + str);
         const int SPT_TYPE=0, SPT_NAME=1, SPT_EXPLAIN=2, SPT_HOMERUNBONUS=3;
         List<string> resList = new List<string>();
@@ -176,10 +189,11 @@ public static class LANG //* LANGUAGE
         return resList;
     }
 
-    public static string getTxtAtPlay(string name){
+    public static string getTxtAtPlayScn(string name){
         Debug.Log("getLanguageTxtListAtPlay:: name=" + name);
         string res = null;
         switch(name){
+            //* UI
             case "Level" : res = Level[(int)DM.ins.Language];  break;
             case "Stage" : res = Stage[(int)DM.ins.Language];  break;
             case "Combo" : res = Combo[(int)DM.ins.Language];  break;
@@ -188,6 +202,18 @@ public static class LANG //* LANGUAGE
             case "Out" : res = Out[(int)DM.ins.Language];  break;
             case "Strike" : res = Strike[(int)DM.ins.Language];  break;
             case "BestScore" : res = BestScore[(int)DM.ins.Language];  break;
+            //* PSV
+            case "Dmg" : res = Dmg[(int)DM.ins.Language];  break;
+            case "MultiShot" : res = MultiShot[(int)DM.ins.Language];  break;
+            case "Speed" : res = Speed[(int)DM.ins.Language];  break;
+            case "InstantKill" : res = InstantKill[(int)DM.ins.Language];  break;
+            case "Critical" : res = Critical[(int)DM.ins.Language];  break;
+            case "Explosion" : res = Explosion[(int)DM.ins.Language];  break;
+            case "ExpUp" : res = ExpUp[(int)DM.ins.Language];  break;
+            case "ItemSpawn" : res = ItemSpawn[(int)DM.ins.Language];  break;
+            case "VerticalMultiShot" : res = VerticalMultiShot[(int)DM.ins.Language];  break;
+            case "CriticalDamage" : res = CriticalDamage[(int)DM.ins.Language];  break;
+            case "Laser" : res = Laser[(int)DM.ins.Language];  break;
         }
 
         if(res == null) Debug.LogError("存在しないTEXTです。");

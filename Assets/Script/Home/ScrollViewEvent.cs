@@ -57,7 +57,7 @@ public class ScrollView {
                         "Skill", txtChilds[LANG.NAME].text, txtChilds[LANG.EXPLAIN].text, txtChilds[LANG.HOMERUNBONUS].text};
 
                     var tempStr = string.Join("_", strList);
-                    var languageList = LANG.getTxtListAtHome(tempStr);
+                    var languageList = LANG.getTxtListAtHomeScn(tempStr);
                     
                     for(int i=0; i<txtChilds.Length; i++){
                         txtChilds[i].text = languageList[i];
@@ -78,7 +78,7 @@ public class ScrollView {
                         "CashShop", txtChilds[LANG.NAME].text, txtChilds[LANG.EXPLAIN].text};
 
                     var tempStr = string.Join("_", strList);
-                    var languageList = LANG.getTxtListAtHome(tempStr);
+                    var languageList = LANG.getTxtListAtHomeScn(tempStr);
 
                     for(int i=0; i<txtChilds.Length; i++){
                         txtChilds[i].text = languageList[i];
@@ -254,7 +254,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         // string name = curItem.name.Split('_')[1];
         // int idx = LANG.CharaList.FindIndex(list => name == list[(int)LANG.TP.EN]);
         // NameTxt.text = LANG.CharaList[idx][(int)DM.ins.Language]; //name;
-        NameTxt.text = LANG.getTxtListAtHome(curItem.name)[LANG.NAME];
+        NameTxt.text = LANG.getTxtListAtHomeScn(curItem.name)[LANG.NAME];
 
         //* Set Rank UI Box Color
         Color color = Color.white;

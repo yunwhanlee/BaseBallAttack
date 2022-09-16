@@ -113,27 +113,27 @@ public class Player : MonoBehaviour
         //* Init
         var psvLvArr = DM.ins.personalData.ItemPassive.Arr;
         dmg = new PsvSkill<int>(
-            DM.PSV.Dmg.ToString(), psvLvArr[(int)DM.PSV.Dmg].lv, 1, 1);
+            LANG.getTxtAtPlayScn(DM.PSV.Dmg.ToString()), psvLvArr[(int)DM.PSV.Dmg].lv, 1, 1);
         multiShot = new PsvSkill<int>(
-            DM.PSV.MultiShot.ToString(), psvLvArr[(int)DM.PSV.MultiShot].lv, 0, 1);
+            LANG.getTxtAtPlayScn(DM.PSV.MultiShot.ToString()), psvLvArr[(int)DM.PSV.MultiShot].lv, 0, 1);
         speed = new PsvSkill<float>(
-            DM.PSV.Speed.ToString(), psvLvArr[(int)DM.PSV.Speed].lv, 1f, 0.35f);
+            LANG.getTxtAtPlayScn(DM.PSV.Speed.ToString()), psvLvArr[(int)DM.PSV.Speed].lv, 1f, 0.35f);
         instantKill = new PsvSkill<float>(
-            DM.PSV.InstantKill.ToString(), psvLvArr[(int)DM.PSV.InstantKill].lv, 0f, 0.02f);
+            LANG.getTxtAtPlayScn(DM.PSV.InstantKill.ToString()), psvLvArr[(int)DM.PSV.InstantKill].lv, 0f, 0.02f);
         critical = new PsvSkill<float>(
-            DM.PSV.Critical.ToString(), psvLvArr[(int)DM.PSV.Critical].lv, 0f, 0.2f);
+            LANG.getTxtAtPlayScn(DM.PSV.Critical.ToString()), psvLvArr[(int)DM.PSV.Critical].lv, 0f, 0.2f);
         explosion = new PsvSkill<Explosion>(
-            DM.PSV.Explosion.ToString(), psvLvArr[(int)DM.PSV.Explosion].lv, new Explosion(0f, 0.75f), new Explosion(0.25f, 0.25f));
+            LANG.getTxtAtPlayScn(DM.PSV.Explosion.ToString()), psvLvArr[(int)DM.PSV.Explosion].lv, new Explosion(0f, 0.75f), new Explosion(0.25f, 0.25f));
         expUp = new PsvSkill<float>(
-            DM.PSV.ExpUp.ToString(), psvLvArr[(int)DM.PSV.ExpUp].lv, 1f, 0.2f);
+            LANG.getTxtAtPlayScn(DM.PSV.ExpUp.ToString()), psvLvArr[(int)DM.PSV.ExpUp].lv, 1f, 0.2f);
         itemSpawn = new PsvSkill<float>(
-            DM.PSV.ItemSpawn.ToString(), psvLvArr[(int)DM.PSV.ItemSpawn].lv, 0.1f, 0.05f);
+            LANG.getTxtAtPlayScn(DM.PSV.ItemSpawn.ToString()), psvLvArr[(int)DM.PSV.ItemSpawn].lv, 0.1f, 0.05f);
         verticalMultiShot = new PsvSkill<int>(
-            DM.PSV.VerticalMultiShot.ToString(), psvLvArr[(int)DM.PSV.VerticalMultiShot].lv, 0, 1);
+            LANG.getTxtAtPlayScn(DM.PSV.VerticalMultiShot.ToString()), psvLvArr[(int)DM.PSV.VerticalMultiShot].lv, 0, 1);
         criticalDamage = new PsvSkill<float>(
-            DM.PSV.CriticalDamage.ToString(), psvLvArr[(int)DM.PSV.CriticalDamage].lv, 0, 0.5f);
+            LANG.getTxtAtPlayScn(DM.PSV.CriticalDamage.ToString()), psvLvArr[(int)DM.PSV.CriticalDamage].lv, 0, 0.5f);
         laser = new PsvSkill<int>(
-            DM.PSV.Laser.ToString(), psvLvArr[(int)DM.PSV.Laser].lv, 0, 1, 3);
+            LANG.getTxtAtPlayScn(DM.PSV.Laser.ToString()), psvLvArr[(int)DM.PSV.Laser].lv, 0, 1, 3);
 
         //* Apply
         dmg.initSkillDt(dmg.Value + dmg.Unit);
