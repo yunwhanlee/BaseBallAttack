@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
     public Text stageTxt;
     public Text stateTxt;
     public Text levelTxt;
+    public Text[] statusTxts = new Text[2];
+
     [SerializeField] private Text shootCntTxt;      public Text ShootCntTxt { get => shootCntTxt; set => shootCntTxt = value;}
     public Text comboTxt;
     public Text perfectTxt;
@@ -122,6 +124,8 @@ public class GameManager : MonoBehaviour
         readyBtn = readyBtn.GetComponent<Button>();
         gvStageTxt = gameoverPanel.transform.GetChild(1).GetComponent<Text>();
         gvBestScoreTxt = gameoverPanel.transform.GetChild(2).GetComponent<Text>();
+
+        Array.ForEach(statusTxts, txt => txt.text = LANG.getTxtAtPlayScn("Status"));
 
         //* Ball Preview Dir Goal Set Z-Center
         setBallPreviewGoalRandomPos();

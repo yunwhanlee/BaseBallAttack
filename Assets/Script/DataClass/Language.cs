@@ -112,6 +112,7 @@ public static class LANG //* LANGUAGE
     public static string[] Level = new string[]{"LV", "レベル", "레벨"};
     public static string[] Stage = new string[]{"STAGE", "ステージ", "스테이지"};
     public static string[] Combo = new string[]{"COMBO", "コンボー", "콤보"};
+    public static string[] Status = new string[]{"STATUS", "状　態", "상　태"};
     public static string[] Back = new string[]{"BACK", "戻す", "뒤로"};
     public static string[] Ready = new string[]{"READY", "準備", "준비"};
     public static string[] Out = new string[]{"OUT", "アウト", "아웃"};
@@ -197,6 +198,7 @@ public static class LANG //* LANGUAGE
             case "Level" : res = Level[(int)DM.ins.Language];  break;
             case "Stage" : res = Stage[(int)DM.ins.Language];  break;
             case "Combo" : res = Combo[(int)DM.ins.Language];  break;
+            case "Status" : res = Status[(int)DM.ins.Language];  break;
             case "Back" : res = Back[(int)DM.ins.Language];  break;
             case "Ready" : res = Ready[(int)DM.ins.Language];  break;
             case "Out" : res = Out[(int)DM.ins.Language];  break;

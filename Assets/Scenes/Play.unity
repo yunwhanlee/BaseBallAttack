@@ -3784,8 +3784,9 @@ GameObject:
   - component: {fileID: 559128949}
   - component: {fileID: 559128951}
   - component: {fileID: 559128950}
+  - component: {fileID: 559128952}
   m_Layer: 5
-  m_Name: Text
+  m_Name: StatusTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3808,7 +3809,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 5, y: 0}
-  m_SizeDelta: {x: 73.20998, y: 400}
+  m_SizeDelta: {x: 50, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &559128950
 MonoBehaviour:
@@ -3843,17 +3844,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'S
-
-    T
-
-    A
-
-    T
-
-    U
-
-    S'
+  m_Text: STATUS
 --- !u!222 &559128951
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3862,6 +3853,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 559128948}
   m_CullTransparentMesh: 1
+--- !u!114 &559128952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559128948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b30dd83a12669d4f973ff5a79ca9842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &579425675
 GameObject:
   m_ObjectHideFlags: 0
@@ -4044,8 +4050,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 320, y: 250}
-  m_SizeDelta: {x: 350, y: 600}
+  m_AnchoredPosition: {x: 320, y: 375}
+  m_SizeDelta: {x: 350, y: 750}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &585957428
 MonoBehaviour:
@@ -4064,7 +4070,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 3
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 225, y: 50}
@@ -7190,7 +7196,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1008511332
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15131,6 +15137,9 @@ MonoBehaviour:
   stageTxt: {fileID: 1558296299}
   stateTxt: {fileID: 764482078}
   levelTxt: {fileID: 738043204}
+  statusTxts:
+  - {fileID: 559128950}
+  - {fileID: 1008511334}
   shootCntTxt: {fileID: 946186242}
   comboTxt: {fileID: 744198046}
   perfectTxt: {fileID: 687656593}
