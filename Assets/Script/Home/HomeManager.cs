@@ -32,13 +32,15 @@ public class HomeManager : MonoBehaviour
     public DialogUI homeDialog;
     public DialogUI selectDialog;
     public DialogUI unlock2ndSkillDialog;
+    public DialogUI settingDialog;
+    public Dropdown languageOptDropDown;
     public int selectedSkillBtnIdx;
     public Text selectedSkillBtnIdxTxt;
     public Button[] skillBtns;
-
     public Button startGameBtn;
     
     [SerializeField] Image selectSkillImg;  public Image SelectSkillImg {get => selectSkillImg; set => selectSkillImg = value;}
+
 
     [Header("<-- Model -->")]
     [SerializeField] Transform modelTf;   public Transform ModelTf {get => modelTf; set => modelTf = value;}
@@ -64,15 +66,15 @@ public class HomeManager : MonoBehaviour
         var curBat = DM.ins.scrollviews[(int)DM.ITEM.Bat].ItemPrefs[DM.ins.personalData.SelectBatIdx];
         
         switch(DM.ins.SelectItemType){
-            case "Home" : 
+            case "Home" :
                 createCurModel(curChara, curBat, modelTf);
                 setGUI();
                 setSelectSkillImg();
                 break;
-            case "Chara" : 
-            case "Bat" : 
-            case "Skill" : 
-            case "CashShop":
+            case "Chara" :
+            case "Bat" :
+            case "Skill" :
+            case "CashShop" :
                 setGUI();
                 break;
         }
@@ -93,7 +95,24 @@ public class HomeManager : MonoBehaviour
         selectedSkillBtnIdxTxt.text = (idx == 0)? "1st Skill" : "2nd Skill";
     }
 
-    public void onClickBtnDisplayUnlock2ndSkillDialog(bool isActive){
+    public void onClickSettingBtn(){
+        settingDialog.Panel.SetActive(true);
+    }
+    public void onClickSettingRequestBtn(bool isOk){
+        settingDialog.Panel.SetActive(false);
+        if(isOk) SceneManager.LoadScene("Home"); // Re-load
+    }
+
+
+    public void onDropDownLanguageOpt(){
+        string opt = languageOptDropDown.options[languageOptDropDown.value].text;
+        Debug.Log("onDropDownSettingOpt():: opt.txt= " + opt);
+        if(opt == "English")    DM.ins.Language = LANG.TP.EN;
+        if(opt == "日本語")    DM.ins.Language = LANG.TP.JP;
+        if(opt == "한글")    DM.ins.Language = LANG.TP.KR;
+    }
+
+    public void onClickBtnUnlock2ndSkillDialog(bool isActive){
         if(DM.ins.personalData.IsUnlock2ndSkill) return;
         unlock2ndSkillDialog.Panel.SetActive(isActive);
     }

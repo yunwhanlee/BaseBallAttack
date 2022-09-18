@@ -5,7 +5,7 @@ using System;
 
 [System.Serializable]
 public class PersonalData {
-    //* value
+    //* value    
     [SerializeField] int coin; public int Coin {get => coin; set => coin = value;}
     [SerializeField] int diamond; public int Diamond {get => diamond; set => diamond = value;}
     [Header("--Charactor--")]
@@ -48,6 +48,8 @@ public class PersonalData {
         var data = JsonUtility.FromJson<PersonalData>(json); //* Convert Json To Class Data
 
         //* Set Data
+
+
         this.Coin = data.Coin;
         this.Diamond = data.Diamond;
 
