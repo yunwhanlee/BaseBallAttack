@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
         gvStageTxt = gameoverPanel.transform.GetChild(1).GetComponent<Text>();
         gvBestScoreTxt = gameoverPanel.transform.GetChild(2).GetComponent<Text>();
 
-        Array.ForEach(statusTxts, txt => txt.text = LANG.getTxtAtPlayScn("Status"));
+        Array.ForEach(statusTxts, txt => txt.text = LANG.getTxt(LANG.TXT.Status.ToString()));
 
         //* Ball Preview Dir Goal Set Z-Center
         setBallPreviewGoalRandomPos();
@@ -154,9 +154,9 @@ public class GameManager : MonoBehaviour
         //* GUI
         expBar.value = Mathf.Lerp(expBar.value, pl.Exp / pl.MaxExp, Time.deltaTime * 10);
         stateTxt.text = State.ToString();
-        levelTxt.text = LANG.getTxtAtPlayScn("Level") + " : " + pl.Lv;
-        stageTxt.text = LANG.getTxtAtPlayScn("Stage") + " : " + stage.ToString();
-        comboTxt.text = LANG.getTxtAtPlayScn("Combo") + "\n" + comboCnt.ToString();
+        levelTxt.text = LANG.getTxt(LANG.TXT.Level.ToString()) + " : " + pl.Lv;
+        stageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage.ToString();
+        comboTxt.text = LANG.getTxt(LANG.TXT.Combo.ToString()) + "\n" + comboCnt.ToString();
 
         //* (BUG) ボールが複数ある時、同時に消えたら、次に進まないこと対応
         // if(ballGroup.childCount == 0 && !downWall.isTrigger){
@@ -257,7 +257,7 @@ public class GameManager : MonoBehaviour
             cam2Canvas.SetActive(true);
             
             shootCntTxt.gameObject.SetActive(true);
-            readyBtn.gameObject.GetComponentInChildren<Text>().text = LANG.getTxtAtPlayScn("Back");
+            readyBtn.gameObject.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Back.ToString());
 
             ballPreviewGoalImg.gameObject.SetActive(true);
             setBallPreviewGoalImgRGBA(new Color(0.8f,0.8f,0.8f, 0.2f));
@@ -285,7 +285,7 @@ public class GameManager : MonoBehaviour
             cam2Canvas.SetActive(false);
             
             shootCntTxt.gameObject.SetActive(false);
-            readyBtn.gameObject.GetComponentInChildren<Text>().text = LANG.getTxtAtPlayScn("Ready");
+            readyBtn.gameObject.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Ready.ToString());
 
             ballPreviewGoalImg.gameObject.SetActive(false);
 
@@ -322,7 +322,7 @@ public class GameManager : MonoBehaviour
         strikeBallImgs[strikeCnt++].gameObject.SetActive(true);
         if(isOut){
             strikeCnt = 0;
-            ShootCntTxt.text = LANG.getTxtAtPlayScn("Out") + "!";
+            ShootCntTxt.text = LANG.getTxt(LANG.TXT.Out.ToString()) + "!";
             yield return new WaitForSeconds(1.5f);
             bs.init();
             switchCamScene();
@@ -331,7 +331,7 @@ public class GameManager : MonoBehaviour
             readyBtn.gameObject.SetActive(true);
         }
         else{
-            ShootCntTxt.text = LANG.getTxtAtPlayScn("Strike") + "!";
+            ShootCntTxt.text = LANG.getTxt(LANG.TXT.Strike.ToString()) + "!";
             readyBtn.gameObject.SetActive(true);
             yield return new WaitForSeconds(1.5f);
             bs.init();
@@ -387,8 +387,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("--GAME OVER--");
         State = GameManager.STATE.GAMEOVER;
         gameoverPanel.SetActive(true);
-        gvStageTxt.text = LANG.getTxtAtPlayScn("Stage") + " : " + stage;
-        gvBestScoreTxt.text = LANG.getTxtAtPlayScn("BestScore") + " : " + bestScore;
+        gvStageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage;
+        gvBestScoreTxt.text = LANG.getTxt(LANG.TXT.BestScore.ToString()) + " : " + bestScore;
     }
 
     public void displayCurPassiveSkillUI(string type){

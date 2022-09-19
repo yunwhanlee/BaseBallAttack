@@ -10,6 +10,8 @@ public static class LANG //* LANGUAGE
         //* UI
         Level, Stage, Combo, Status, Back, Ready, Out, Strike, 
         BestScore, LevelUpPanel_Title, LevelUpPanel_Explain,
+        DialogNoMoney, DialogNoSkill, 
+        DialogUnlock2ndSkill_Title, DialogUnlock2ndSkill_Info,
         //* PSV
         Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, 
         ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, Laser,
@@ -114,6 +116,17 @@ public static class LANG //* LANGUAGE
         new string[]{"Get Diamond 100000.", "100000ダイアを購入。", "100000다이아 구입."},
     };
 
+    public static string[] DialogNoMoney = new string[]{"NO MONEY!", "お金足りない!", "코인 부족!"};
+    public static string[] DialogNoSkill = new string[]{"NO SKILL!", "スキルが足りない!", "스킬 부족!"};
+    public static string[] DialogUnlock2ndSkill_Title = new string[]{
+        "-Unlock-", "解錠", "해금"
+    };
+    public static string[] DialogUnlock2ndSkill_Info = new string[]{
+        "Active the second skill button in the game.",
+        "2番目スキルボタンをアクティブする。",
+        "두 번째 스킬 버튼을 액티브 한다."
+    };
+
     //* PLAY SCENE -----------------------------------
     //* UI
     public static string[] Level = new string[]{"LV", "レベル", "레벨"};
@@ -140,12 +153,8 @@ public static class LANG //* LANGUAGE
     public static string[] CriticalDamage = new string[]{DM.PSV.CriticalDamage.ToString(), "致命打ダメージ", "치명타데미지"};
     public static string[] Laser = new string[]{DM.PSV.Laser.ToString(), "レイザー", "레이저"};
 
-    //* LevelScrollPanel.cs
-
-    //* Contructor
-
     //* 関数
-    public static List<string> getTxtListAtHomeScn(string str){
+    public static List<string> getTxtList(string str){
         Debug.Log("getLanguageTxt:: str=" + str);
         const int SPT_TYPE=0, SPT_NAME=1, SPT_EXPLAIN=2, SPT_HOMERUNBONUS=3;
         List<string> resList = new List<string>();
@@ -198,7 +207,7 @@ public static class LANG //* LANGUAGE
         return resList;
     }
 
-    public static string getTxtAtPlayScn(string name){
+    public static string getTxt(string name){
         Debug.Log("getLanguageTxtListAtPlay:: name=" + name);
         string res = null;
         //* UI
@@ -213,6 +222,10 @@ public static class LANG //* LANGUAGE
         if(name == TXT.BestScore.ToString()) res = BestScore[(int)DM.ins.Language];
         if(name == TXT.LevelUpPanel_Title.ToString()) res = LevelUpPanel_Title[(int)DM.ins.Language];
         if(name == TXT.LevelUpPanel_Explain.ToString()) res = LevelUpPanel_Explain[(int)DM.ins.Language];
+        if(name == TXT.DialogNoMoney.ToString()) res = DialogNoMoney[(int)DM.ins.Language];
+        if(name == TXT.DialogNoSkill.ToString()) res = DialogNoSkill[(int)DM.ins.Language];
+        if(name == TXT.DialogUnlock2ndSkill_Title.ToString()) res = DialogUnlock2ndSkill_Title[(int)DM.ins.Language];
+        if(name == TXT.DialogUnlock2ndSkill_Info.ToString()) res = DialogUnlock2ndSkill_Info[(int)DM.ins.Language];
         //* PSV
         if(name == TXT.Dmg.ToString()) res = Dmg[(int)DM.ins.Language];
         if(name == TXT.MultiShot.ToString()) res = MultiShot[(int)DM.ins.Language];

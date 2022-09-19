@@ -10,13 +10,15 @@ using UnityEngine.UI.Extensions;
     //* Value
     [SerializeField] GameObject panel;   public GameObject Panel {get => panel; set => panel = value;}
     [SerializeField] Button goBtn;     public Button GoBtn {get => goBtn; set => goBtn = value;}
-
+    [SerializeField] Text titleTxt;     public Text TitleTxt {get => titleTxt; set => titleTxt = value;}
+    [SerializeField] Text infoTxt;     public Text InfoTxt {get => infoTxt; set => infoTxt = value;}
     //* Constructor
-    DialogUI(GameObject panel, Button goBtn){
+    DialogUI(GameObject panel, Button goBtn, Text titleTxt, Text infoTxt){
         this.panel = panel;
         this.goBtn = goBtn;
+        this.titleTxt = titleTxt;
+        this.infoTxt = infoTxt;
     }
-
     //* Method
 }
 
@@ -25,7 +27,7 @@ public class HomeManager : MonoBehaviour
     //* OutSide
     [Header("<--Select Panel Color-->")]
     [SerializeField] Image selectPanelScrollBG;  public Image SelectPanelScrollBG {get => selectPanelScrollBG; set => selectPanelScrollBG = value;}
-    public enum DlgBGColor {Chara, Bat, Skill, CashShop}
+    public enum DlgBGColor {Chara, Bat, Skill, CashShop};
     [SerializeField] Color[] selectPanelColors;
     
     [Header("<-- UI -->")]
@@ -105,16 +107,20 @@ public class HomeManager : MonoBehaviour
 
 
     public void onDropDownLanguageOpt(){
-        string opt = languageOptDropDown.options[languageOptDropDown.value].text;
-        Debug.Log("onDropDownSettingOpt():: opt.txt= " + opt);
-        if(opt == "English")    DM.ins.Language = LANG.TP.EN;
-        if(opt == "日本語")    DM.ins.Language = LANG.TP.JP;
-        if(opt == "한글")    DM.ins.Language = LANG.TP.KR;
+        int idx = languageOptDropDown.value;
+        Debug.Log("onDropDownSettingOpt():: idx= " + idx);
+        switch(idx){
+            case 0: DM.ins.Language = LANG.TP.EN;   break;
+            case 1: DM.ins.Language = LANG.TP.JP;   break;
+            case 2: DM.ins.Language = LANG.TP.KR;   break;
+        }
     }
 
     public void onClickBtnUnlock2ndSkillDialog(bool isActive){
         if(DM.ins.personalData.IsUnlock2ndSkill) return;
         unlock2ndSkillDialog.Panel.SetActive(isActive);
+        unlock2ndSkillDialog.TitleTxt.text = LANG.getTxt(LANG.TXT.DialogUnlock2ndSkill_Title.ToString());
+        unlock2ndSkillDialog.InfoTxt.text = LANG.getTxt(LANG.TXT.DialogUnlock2ndSkill_Info.ToString());
     }
 
     public void onclickBtnBuyUnlock2ndSkill(){
@@ -123,11 +129,11 @@ public class HomeManager : MonoBehaviour
         int unlockSkillListCnt = unlockSkillList.Count;
         Debug.Log("unlockSkillListCnt= " + unlockSkillListCnt);
         if(DM.ins.personalData.Coin < price) {
-            displayMessageDialog("NO MONEY!");
+            displayMessageDialog(LANG.getTxt(LANG.TXT.DialogNoMoney.ToString()));
             return;
         }
         else if(unlockSkillListCnt < 2){
-            displayMessageDialog("NO SKILL!");
+            displayMessageDialog(LANG.getTxt(LANG.TXT.DialogNoSkill.ToString()));
             return;
         }
         

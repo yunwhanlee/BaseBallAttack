@@ -10281,15 +10281,23 @@ MonoBehaviour:
   homeDialog:
     panel: {fileID: 1227366031}
     goBtn: {fileID: 935471164}
+    titleTxt: {fileID: 0}
+    infoTxt: {fileID: 0}
   selectDialog:
     panel: {fileID: 1072798419}
     goBtn: {fileID: 0}
+    titleTxt: {fileID: 0}
+    infoTxt: {fileID: 0}
   unlock2ndSkillDialog:
     panel: {fileID: 445535722}
     goBtn: {fileID: 1668992831}
+    titleTxt: {fileID: 500995122}
+    infoTxt: {fileID: 1260738443}
   settingDialog:
     panel: {fileID: 349844471}
     goBtn: {fileID: 246366071}
+    titleTxt: {fileID: 0}
+    infoTxt: {fileID: 0}
   languageOptDropDown: {fileID: 1205028892}
   selectedSkillBtnIdx: 0
   selectedSkillBtnIdxTxt: {fileID: 1317965407}
