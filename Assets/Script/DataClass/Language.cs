@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public static class LANG //* LANGUAGE
+public static class LANG //* LANG
 {
     public enum TP {EN, JP, KR}; //* TYPE
     public enum TXT {
@@ -155,7 +155,7 @@ public static class LANG //* LANGUAGE
 
     //* 関数
     public static List<string> getTxtList(string str){
-        Debug.Log("getLanguageTxt:: str=" + str);
+        Debug.Log("getLangTxt:: str=" + str);
         const int SPT_TYPE=0, SPT_NAME=1, SPT_EXPLAIN=2, SPT_HOMERUNBONUS=3;
         List<string> resList = new List<string>();
 
@@ -176,31 +176,31 @@ public static class LANG //* LANGUAGE
             resList.Add(split[SPT_EXPLAIN]);
         }
         
-        //* Type & Set Language
+        //* Type & Set Lang
         switch(type){
             case "Chara":{
                 int idx = CharaList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
-                resList[NAME] = CharaList[idx][(int)DM.ins.Language];
+                resList[NAME] = CharaList[idx][(int)DM.ins.personalData.Lang];
                 break;
             }
             case "Bat":{
                 int idx = BatList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
-                resList[NAME] = BatList[idx][(int)DM.ins.Language];
+                resList[NAME] = BatList[idx][(int)DM.ins.personalData.Lang];
                 break;
             }
             case "Skill":{
                 int idx = SkillNameList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
                 Debug.Log("<color=white><<Skill>> idx= " + idx + "</color>");
-                resList[NAME] = SkillNameList[idx][(int)DM.ins.Language];
-                resList[EXPLAIN] = SkillExplainList[idx][(int)DM.ins.Language];
-                resList[HOMERUNBONUS] = SkillHomeRunBonusList[idx][(int)DM.ins.Language];
+                resList[NAME] = SkillNameList[idx][(int)DM.ins.personalData.Lang];
+                resList[EXPLAIN] = SkillExplainList[idx][(int)DM.ins.personalData.Lang];
+                resList[HOMERUNBONUS] = SkillHomeRunBonusList[idx][(int)DM.ins.personalData.Lang];
                 break;
             }
             case "CashShop":{
                 int idx = CashShopNameList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
                 Debug.Log("<color=yellow><<CashShop>> idx= " + idx + "</color>");
-                resList[NAME] = CashShopNameList[idx][(int)DM.ins.Language];
-                resList[EXPLAIN] = CashShopExplainList[idx][(int)DM.ins.Language];
+                resList[NAME] = CashShopNameList[idx][(int)DM.ins.personalData.Lang];
+                resList[EXPLAIN] = CashShopExplainList[idx][(int)DM.ins.personalData.Lang];
                 break;
             }
         }
@@ -208,36 +208,36 @@ public static class LANG //* LANGUAGE
     }
 
     public static string getTxt(string name){
-        Debug.Log("getLanguageTxtListAtPlay:: name=" + name);
+        Debug.Log("getLangTxtListAtPlay:: name=" + name);
         string res = null;
         //* UI
-        if(name == TXT.Level.ToString()) res = Level[(int)DM.ins.Language];
-        if(name == TXT.Stage.ToString()) res = Stage[(int)DM.ins.Language];
-        if(name == TXT.Combo.ToString()) res = Combo[(int)DM.ins.Language];
-        if(name == TXT.Status.ToString()) res = Status[(int)DM.ins.Language];
-        if(name == TXT.Back.ToString()) res = Back[(int)DM.ins.Language];
-        if(name == TXT.Ready.ToString()) res = Ready[(int)DM.ins.Language];
-        if(name == TXT.Out.ToString()) res = Out[(int)DM.ins.Language];
-        if(name == TXT.Strike.ToString()) res = Strike[(int)DM.ins.Language];
-        if(name == TXT.BestScore.ToString()) res = BestScore[(int)DM.ins.Language];
-        if(name == TXT.LevelUpPanel_Title.ToString()) res = LevelUpPanel_Title[(int)DM.ins.Language];
-        if(name == TXT.LevelUpPanel_Explain.ToString()) res = LevelUpPanel_Explain[(int)DM.ins.Language];
-        if(name == TXT.DialogNoMoney.ToString()) res = DialogNoMoney[(int)DM.ins.Language];
-        if(name == TXT.DialogNoSkill.ToString()) res = DialogNoSkill[(int)DM.ins.Language];
-        if(name == TXT.DialogUnlock2ndSkill_Title.ToString()) res = DialogUnlock2ndSkill_Title[(int)DM.ins.Language];
-        if(name == TXT.DialogUnlock2ndSkill_Info.ToString()) res = DialogUnlock2ndSkill_Info[(int)DM.ins.Language];
+        if(name == TXT.Level.ToString()) res = Level[(int)DM.ins.personalData.Lang];
+        if(name == TXT.Stage.ToString()) res = Stage[(int)DM.ins.personalData.Lang];
+        if(name == TXT.Combo.ToString()) res = Combo[(int)DM.ins.personalData.Lang];
+        if(name == TXT.Status.ToString()) res = Status[(int)DM.ins.personalData.Lang];
+        if(name == TXT.Back.ToString()) res = Back[(int)DM.ins.personalData.Lang];
+        if(name == TXT.Ready.ToString()) res = Ready[(int)DM.ins.personalData.Lang];
+        if(name == TXT.Out.ToString()) res = Out[(int)DM.ins.personalData.Lang];
+        if(name == TXT.Strike.ToString()) res = Strike[(int)DM.ins.personalData.Lang];
+        if(name == TXT.BestScore.ToString()) res = BestScore[(int)DM.ins.personalData.Lang];
+        if(name == TXT.LevelUpPanel_Title.ToString()) res = LevelUpPanel_Title[(int)DM.ins.personalData.Lang];
+        if(name == TXT.LevelUpPanel_Explain.ToString()) res = LevelUpPanel_Explain[(int)DM.ins.personalData.Lang];
+        if(name == TXT.DialogNoMoney.ToString()) res = DialogNoMoney[(int)DM.ins.personalData.Lang];
+        if(name == TXT.DialogNoSkill.ToString()) res = DialogNoSkill[(int)DM.ins.personalData.Lang];
+        if(name == TXT.DialogUnlock2ndSkill_Title.ToString()) res = DialogUnlock2ndSkill_Title[(int)DM.ins.personalData.Lang];
+        if(name == TXT.DialogUnlock2ndSkill_Info.ToString()) res = DialogUnlock2ndSkill_Info[(int)DM.ins.personalData.Lang];
         //* PSV
-        if(name == TXT.Dmg.ToString()) res = Dmg[(int)DM.ins.Language];
-        if(name == TXT.MultiShot.ToString()) res = MultiShot[(int)DM.ins.Language];
-        if(name == TXT.Speed.ToString()) res = Speed[(int)DM.ins.Language];
-        if(name == TXT.InstantKill.ToString()) res = InstantKill[(int)DM.ins.Language];
-        if(name == TXT.Critical.ToString()) res = Critical[(int)DM.ins.Language];
-        if(name == TXT.Explosion.ToString()) res = Explosion[(int)DM.ins.Language];
-        if(name == TXT.ExpUp.ToString()) res = ExpUp[(int)DM.ins.Language];
-        if(name == TXT.ItemSpawn.ToString()) res = ItemSpawn[(int)DM.ins.Language];
-        if(name == TXT.VerticalMultiShot.ToString()) res = VerticalMultiShot[(int)DM.ins.Language];
-        if(name == TXT.CriticalDamage.ToString()) res = CriticalDamage[(int)DM.ins.Language];
-        if(name == TXT.Laser.ToString()) res = Laser[(int)DM.ins.Language];
+        if(name == TXT.Dmg.ToString()) res = Dmg[(int)DM.ins.personalData.Lang];
+        if(name == TXT.MultiShot.ToString()) res = MultiShot[(int)DM.ins.personalData.Lang];
+        if(name == TXT.Speed.ToString()) res = Speed[(int)DM.ins.personalData.Lang];
+        if(name == TXT.InstantKill.ToString()) res = InstantKill[(int)DM.ins.personalData.Lang];
+        if(name == TXT.Critical.ToString()) res = Critical[(int)DM.ins.personalData.Lang];
+        if(name == TXT.Explosion.ToString()) res = Explosion[(int)DM.ins.personalData.Lang];
+        if(name == TXT.ExpUp.ToString()) res = ExpUp[(int)DM.ins.personalData.Lang];
+        if(name == TXT.ItemSpawn.ToString()) res = ItemSpawn[(int)DM.ins.personalData.Lang];
+        if(name == TXT.VerticalMultiShot.ToString()) res = VerticalMultiShot[(int)DM.ins.personalData.Lang];
+        if(name == TXT.CriticalDamage.ToString()) res = CriticalDamage[(int)DM.ins.personalData.Lang];
+        if(name == TXT.Laser.ToString()) res = Laser[(int)DM.ins.personalData.Lang];
 
         //* ERROR
         if(res == null) Debug.LogError("存在しないTEXTです。");

@@ -13,10 +13,7 @@ public class DM : MonoBehaviour
     public enum ATV{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave, NULL};
     public enum PSV{Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, Laser, NULL};
 
-    [Header("--LANGUAGE--")]
-    [SerializeField] LANG.TP language;   public LANG.TP Language {get => language; set => language = value;}
-
-    [Header("--Personal Data--")]
+    [Header("--UI--")]
     [SerializeField] Text coinTxt; public Text CoinTxt {get => coinTxt; set => coinTxt = value;}
     [SerializeField] Text diamondTxt; public Text DiamondTxt {get => diamondTxt; set => diamondTxt = value;}
 

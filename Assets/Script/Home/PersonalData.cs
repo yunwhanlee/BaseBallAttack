@@ -5,7 +5,8 @@ using System;
 
 [System.Serializable]
 public class PersonalData {
-    //* value    
+    //* value
+    [SerializeField] LANG.TP lang; public LANG.TP Lang {get => lang; set => lang = value;}
     [SerializeField] int coin; public int Coin {get => coin; set => coin = value;}
     [SerializeField] int diamond; public int Diamond {get => diamond; set => diamond = value;}
     [Header("--Charactor--")]
@@ -49,7 +50,7 @@ public class PersonalData {
 
         //* Set Data
 
-
+        this.Lang = data.Lang;
         this.Coin = data.Coin;
         this.Diamond = data.Diamond;
 
@@ -87,13 +88,14 @@ public class PersonalData {
 
         //* Print
         string json = PlayerPrefs.GetString("Json");
-        Debug.Log("JSON:: SAVE Data =" + json);
+        Debug.Log("JSON:: <color=red>SAVE</color> Data =" + json);
     }
 
     public void reset(){
         Debug.Log("RESET");
         PlayerPrefs.DeleteAll();
 
+        this.Lang = LANG.TP.JP;
         this.Coin = 100000;
         this.Diamond = 0;
 

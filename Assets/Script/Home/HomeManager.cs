@@ -102,6 +102,7 @@ public class HomeManager : MonoBehaviour
     }
     public void onClickSettingRequestBtn(bool isOk){
         settingDialog.Panel.SetActive(false);
+        DM.ins.personalData.save();
         if(isOk) SceneManager.LoadScene("Home"); // Re-load
     }
 
@@ -110,9 +111,9 @@ public class HomeManager : MonoBehaviour
         int idx = languageOptDropDown.value;
         Debug.Log("onDropDownSettingOpt():: idx= " + idx);
         switch(idx){
-            case 0: DM.ins.Language = LANG.TP.EN;   break;
-            case 1: DM.ins.Language = LANG.TP.JP;   break;
-            case 2: DM.ins.Language = LANG.TP.KR;   break;
+            case 0: DM.ins.personalData.Lang = LANG.TP.EN;   break;
+            case 1: DM.ins.personalData.Lang = LANG.TP.JP;   break;
+            case 2: DM.ins.personalData.Lang = LANG.TP.KR;   break;
         }
     }
 
