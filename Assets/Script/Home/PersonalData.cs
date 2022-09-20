@@ -49,7 +49,6 @@ public class PersonalData {
         var data = JsonUtility.FromJson<PersonalData>(json); //* Convert Json To Class Data
 
         //* Set Data
-
         this.Lang = data.Lang;
         this.Coin = data.Coin;
         this.Diamond = data.Diamond;

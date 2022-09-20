@@ -78,6 +78,7 @@ public class ScrollView {
                         "CashShop", txtChilds[LANG.NAME].text, txtChilds[LANG.EXPLAIN].text};
 
                     var tempStr = string.Join("_", strList);
+                    Debug.Log(DM.ins.personalData.Lang + " " + tempStr);
                     var languageList = LANG.getTxtList(tempStr);
 
                     for(int i=0; i<txtChilds.Length; i++){

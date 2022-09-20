@@ -32,22 +32,24 @@ public class DM : MonoBehaviour
 
     void Awake() => singleton();
     void Start(){
-        foreach(DM.ATV list in Enum.GetValues(typeof(DM.ATV))){
-            Debug.LogFormat("Enums GetFindVal:: {0}", list.ToString());
-        }
-        //* contents Prefab 生成
-        scrollviews[(int)DM.ITEM.Chara].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
-        scrollviews[(int)DM.ITEM.Bat].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
-        scrollviews[(int)DM.ITEM.Skill].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
-        scrollviews[(int)DM.ITEM.CashShop].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
+        // foreach(DM.ATV list in Enum.GetValues(typeof(DM.ATV)))Debug.LogFormat("Enums GetFindVal:: {0}", list.ToString())
 
         //* Items of Content
         ItemInfo[] charas = scrollviews[(int)DM.ITEM.Chara].ContentTf.GetComponentsInChildren<ItemInfo>();
         ItemInfo[] bats = scrollviews[(int)DM.ITEM.Bat].ContentTf.GetComponentsInChildren<ItemInfo>();
         ItemInfo[] skills = scrollviews[(int)DM.ITEM.Skill].ContentTf.GetComponentsInChildren<ItemInfo>();
         
-        personalData = new PersonalData();
+        //* contents Prefab 生成
+        //* PersonalData前に処理必要なもの（LANGUAGEため）
+        scrollviews[(int)DM.ITEM.Chara].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.ITEM.Bat].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
+
+        personalData = new PersonalData(); //* DataBase
         personalData.load(ref charas, ref bats, ref skills); //TODO Add skills
+
+        //* PersonalData後に処理必要なもの（LANGUAGEため）
+        scrollviews[(int)DM.ITEM.Skill].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.ITEM.CashShop].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
     }
 
     void Update(){
