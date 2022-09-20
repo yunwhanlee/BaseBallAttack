@@ -6,6 +6,7 @@ using System;
 public static class LANG //* LANG
 {
     public enum TP {EN, JP, KR}; //* TYPE
+    public enum OBJNAME {NameTxt, ExplainTxt, HomeRunBonusTxt};
     public enum TXT {
         //* UI
         Level, Stage, Combo, Status, Back, Ready, Out, Strike, 
@@ -17,6 +18,7 @@ public static class LANG //* LANG
         ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, Laser,
     };
     public const int NAME=0, EXPLAIN=1, HOMERUNBONUS=2;
+    
 
     //* HOME SCENE -----------------------------------
     public static List<string[]> CharaList = new List<string[]>(){

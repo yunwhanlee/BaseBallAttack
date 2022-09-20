@@ -40,7 +40,7 @@ public class PersonalData {
 
     //* method
     public void load(ref ItemInfo[] charas, ref ItemInfo[] bats, ref ItemInfo[] skills){
-        Debug.Log("<color=green>LOAD</color>");
+        Debug.Log("<color=green>LOAD");
         //* Check Json
         string json = PlayerPrefs.GetString("Json");
         Debug.Log("JSON:: LOAD Data =" + json);

@@ -46,46 +46,11 @@ public class ScrollView {
                     psvPanel.anchoredPosition3D = new Vector3(0,-2,0);
                     model.GetComponent<ItemInfo>().ItemPassive.setImgPrefs(DM.ins.personalData.ItemPassive);
                     break;
-                case "Skill" :{
-                    model = GameObject.Instantiate(itemPf, Vector3.zero, Quaternion.identity, contentTf);
-                    Debug.Log("【"+ this.type + "】model.name= " + model.name);
-                    var childs = model.GetComponentsInChildren<Text>();
-                    var txtChilds = Array.FindAll(childs, chd => chd.name == "NameTxt" || chd.name == "ExplainTxt"  || chd.name == "HomeRunBonusTxt" );
-
-                    //* Join Strings
-                    List<string> strList = new List<string>(){
-                        "Skill", txtChilds[LANG.NAME].text, txtChilds[LANG.EXPLAIN].text, txtChilds[LANG.HOMERUNBONUS].text};
-
-                    var tempStr = string.Join("_", strList);
-                    var languageList = LANG.getTxtList(tempStr);
-                    
-                    for(int i=0; i<txtChilds.Length; i++){
-                        txtChilds[i].text = languageList[i];
-                    }
-                }
-                    break;
+                case "Skill" :
                 case "CashShop" :{
                     model = GameObject.Instantiate(itemPf, Vector3.zero, Quaternion.identity, contentTf);
                     model.transform.localPosition = Vector3.zero;
-                    Debug.Log("<color=yellow>【"+ this.type + "】</color> model.name= " + model.name);
-                    
-                    var childs = model.GetComponentsInChildren<Text>();
-                    var txtChilds = Array.FindAll(childs, chd => chd.name == "NameTxt" || chd.name == "ExplainTxt");
-                    Array.ForEach(txtChilds, txt => Debug.Log(txt.text));
-
-                    //* Join Strings
-                    List<string> strList = new List<string>(){
-                        "CashShop", txtChilds[LANG.NAME].text, txtChilds[LANG.EXPLAIN].text};
-
-                    var tempStr = string.Join("_", strList);
-                    Debug.Log(DM.ins.personalData.Lang + " " + tempStr);
-                    var languageList = LANG.getTxtList(tempStr);
-
-                    for(int i=0; i<txtChilds.Length; i++){
-                        txtChilds[i].text = languageList[i];
-                    }
-                    
-                    
+                    Debug.Log("<color=yellow>【"+ this.type + "】</color> model.name= " + model.name + ", personalData.Lang= " + DM.ins.personalData.Lang);
                     break;
                 }
             }
@@ -114,6 +79,36 @@ public class ScrollView {
             Debug.Log("modelParentTf.pos=" + modelParentPref.position + ", modelParentTf.localPos=" + modelParentPref.localPosition);
             model.name = itemPf.name;//名前上書き：しないと後ろに(clone)が残る。
         });
+    }
+
+    public void setLanguage(){ //* SkillとCashShopのみ。
+        for(int i = 0; i < ContentTf.childCount; i++){
+            Text[] txtObjs = null;
+            List<string> strList = new List<string>();
+            
+            var childs = ContentTf.GetChild(i).GetComponentsInChildren<Text>();
+            if(this.type == DM.ITEM.Skill.ToString()){
+                txtObjs = Array.FindAll(childs, chd => chd.name == LANG.OBJNAME.NameTxt.ToString() || chd.name == LANG.OBJNAME.ExplainTxt.ToString() || chd.name == LANG.OBJNAME.HomeRunBonusTxt.ToString());
+                strList.Add(DM.ITEM.Skill.ToString());
+                strList.Add(txtObjs[LANG.NAME].text);
+                strList.Add(txtObjs[LANG.EXPLAIN].text);
+                strList.Add(txtObjs[LANG.HOMERUNBONUS].text);
+            }
+            else if(this.type == DM.ITEM.CashShop.ToString()){
+                txtObjs = Array.FindAll(childs, chd => chd.name == LANG.OBJNAME.NameTxt.ToString() || chd.name == LANG.OBJNAME.ExplainTxt.ToString());
+                strList.Add(DM.ITEM.CashShop.ToString());
+                strList.Add(txtObjs[LANG.NAME].text);
+                strList.Add(txtObjs[LANG.EXPLAIN].text);
+            }
+
+            if(txtObjs == null && strList.Count == 0) return;
+
+            //* Join Strings
+            var tempStr = string.Join("_", strList);
+            var languageList = LANG.getTxtList(tempStr);
+            //* Set Language
+            for(int j = 0; j < txtObjs.Length; j++) txtObjs[j].text = languageList[j];
+        }
     }
 
     private void displayItemPassiveUI(string type, ItemPsvDt[] itemPassiveList, RectTransform itemSkillBoxPref, RectTransform psvPanel){
