@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     [SerializeField] bool isLevelUp = false;    public bool IsLevelUp {get=> isLevelUp; set=> isLevelUp=value;}
     [SerializeField] int befLv = 0;                public int BefLv {get=> befLv; set=> befLv=value;}
     [SerializeField] int lv = 1;                public int Lv {get=> lv; set=> lv=value;}
-    [SerializeField] float maxExp = 100;        public float MaxExp {get=> maxExp; set=> maxExp=value;}
+    [SerializeField] int maxExp = 100;        public int MaxExp {get=> maxExp; set=> maxExp=value;}
     [SerializeField] int exp = 0;               public int Exp {get=> exp; set=> exp=value;}
 
     [Header("<---- Active Skill ---->")]
@@ -220,7 +220,7 @@ public class Player : MonoBehaviour
         IsLevelUp = true;
         Lv = ++lv;
         Exp = 0;
-        MaxExp = maxExp * 1.75f;
+        MaxExp = (int)(maxExp * 1.75f);
     }
     public void destroyAllCastEF(){
         //* Arrow Tf

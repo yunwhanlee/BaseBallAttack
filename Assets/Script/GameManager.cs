@@ -50,10 +50,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text shootCntTxt;      public Text ShootCntTxt { get => shootCntTxt; set => shootCntTxt = value;}
     public Text comboTxt;
     public Text perfectTxt;
+    public Text expTxt;
+    public Slider expBar;
     public RectTransform homeRunTxtTf;
 
-    [Header("-- Exp Slider Bar --")]
-    public Slider expBar;
+    
 
     [Header("-- View Preview Ball Slider --")] //! あんまり要らないかも。
     public Slider hitRangeSlider;
@@ -153,6 +154,7 @@ public class GameManager : MonoBehaviour
     void Update(){
         //* GUI
         expBar.value = Mathf.Lerp(expBar.value, pl.Exp / pl.MaxExp, Time.deltaTime * 10);
+        expTxt.text = $"{pl.Exp} / {pl.MaxExp}";
         stateTxt.text = State.ToString();
         levelTxt.text = LANG.getTxt(LANG.TXT.Level.ToString()) + " : " + pl.Lv;
         stageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage.ToString();
