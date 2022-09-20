@@ -20,8 +20,11 @@ public class BlockMaker : MonoBehaviour
     const float SPWAN_POS_Y = -2;
     public float BLOCK2_SPAN = 5;
 
+    [Header("<---- Special Block Spawn Percent  ---->")]
     public int skipBlockPer = 20;
-    public int treasureChestBlockPer = 10, healBlockPer = 10;
+    public int treasureChestBlockPer = 10;
+    public int healBlockPer = 10;
+
     public GameObject[] blockPrefs;
     public bool isCreateBlock;  public bool IsCreateBlock {get => isCreateBlock; set => isCreateBlock = value;}
     public Color[] colors;   public Color[] Colors {get => colors;}

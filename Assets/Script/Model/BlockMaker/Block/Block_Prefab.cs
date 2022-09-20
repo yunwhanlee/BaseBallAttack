@@ -41,9 +41,10 @@ public class Block_Prefab : MonoBehaviour
     [SerializeField] int exp = 10;  public int Exp {get => exp; set => exp = value;}
     [SerializeField] bool isDotDmg;  public bool IsDotDmg {get => isDotDmg; set => isDotDmg = value;}
     [SerializeField] int itemTypePer;
+
     [SerializeField] bool isHeal;   public bool IsHeal {get => isHeal; set => isHeal = value;}
     [SerializeField] float healRadius = 1.5f;   public float HealRadius {get => healRadius; set => healRadius = value;}
-    [SerializeField] float healValPer = 0.5f;   public float HealValPer {get => healValPer; set => healValPer = value;}
+    [SerializeField] float healValPer = 0.15f;   public float HealValPer {get => healValPer; set => healValPer = value;}
 
     //* Spawn Animation
     [SerializeField] Vector3 defScale;
