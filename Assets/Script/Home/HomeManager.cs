@@ -35,7 +35,7 @@ public class HomeManager : MonoBehaviour
     public DialogUI selectDialog;
     public DialogUI unlock2ndSkillDialog;
     public DialogUI settingDialog;
-    public Dropdown languageOptDropDown;
+    public Dropdown languageOptDropDown;    public Dropdown LanguageOptDropDown {get => languageOptDropDown; set => languageOptDropDown = value;}
     public int selectedSkillBtnIdx;
     public Text selectedSkillBtnIdxTxt;
     public Button[] skillBtns;
@@ -56,6 +56,7 @@ public class HomeManager : MonoBehaviour
     void Start(){
         onClickBtnGoToPanel("Home");
         setSelectSkillImg(true);
+        LanguageOptDropDown.value = (int)DM.ins.personalData.Lang; //* Loadデータで初期化
     }
 
     //* ----------------------------------------------------------------
@@ -106,9 +107,8 @@ public class HomeManager : MonoBehaviour
         if(isOk) SceneManager.LoadScene("Home"); // Re-load
     }
 
-
     public void onDropDownLanguageOpt(){
-        int idx = languageOptDropDown.value;
+        int idx = LanguageOptDropDown.value;
         Debug.Log("onDropDownSettingOpt():: idx= " + idx);
         switch(idx){
             case 0: DM.ins.personalData.Lang = LANG.TP.EN;   break;
