@@ -134,17 +134,24 @@ public class DM : MonoBehaviour
     }
 
     public PSV convertPsvSkillStr2Enum(string name){
-        return (name == DM.PSV.Dmg.ToString())? DM.PSV.Dmg
-            :(name == DM.PSV.MultiShot.ToString())? DM.PSV.MultiShot
-            :(name == DM.PSV.Speed.ToString())? DM.PSV.Speed
-            :(name == DM.PSV.InstantKill.ToString())? DM.PSV.InstantKill
-            :(name == DM.PSV.Critical.ToString())? DM.PSV.Critical
-            :(name == DM.PSV.Explosion.ToString())? DM.PSV.Explosion
-            :(name == DM.PSV.ExpUp.ToString())? DM.PSV.ExpUp
-            :(name == DM.PSV.ItemSpawn.ToString())? DM.PSV.ItemSpawn
-            :(name == DM.PSV.VerticalMultiShot.ToString())? DM.PSV.VerticalMultiShot
-            :(name == DM.PSV.CriticalDamage.ToString())? DM.PSV.CriticalDamage
-            :(name == DM.PSV.Laser.ToString())? DM.PSV.Laser
+        //* (BUG) All Lang 対応。
+        string n = name;
+        string[] DMG = LANG.Dmg, MTS = LANG.MultiShot, SPD = LANG.Speed, ITK = LANG.InstantKill,
+            CRT = LANG.Critical, EPS = LANG.Explosion, EXP = LANG.ExpUp, ISP = LANG.ItemSpawn,
+            MTSV = LANG.VerticalMultiShot, CRTD = LANG.CriticalDamage, LSR = LANG.Laser;
+        const int EN = (int)LANG.TP.EN, JP = (int)LANG.TP.JP, KR = (int)LANG.TP.KR;
+
+        return (n == DMG[EN] || n == DMG[JP] || n == DMG[KR])? DM.PSV.Dmg
+            :(n == MTS[EN] || n == MTS[JP] || n == MTS[KR])? DM.PSV.MultiShot
+            :(n == SPD[EN] || n == SPD[JP] || n == SPD[KR])? DM.PSV.Speed
+            :(n == ITK[EN] || n == ITK[JP] || n == ITK[KR])? DM.PSV.InstantKill
+            :(n == CRT[EN] || n == CRT[JP] || n == CRT[KR])? DM.PSV.Critical
+            :(n == EPS[EN] || n == EPS[JP] || n == EPS[KR])? DM.PSV.Explosion
+            :(n == EXP[EN] || n == EXP[JP] || n == EXP[KR])? DM.PSV.ExpUp
+            :(n == ISP[EN] || n == ISP[JP] || n == ISP[KR])? DM.PSV.ItemSpawn
+            :(n == MTSV[EN] || n == MTSV[JP] || n == MTSV[KR])? DM.PSV.VerticalMultiShot
+            :(n == CRTD[EN] || n == CRTD[JP] || n == CRTD[KR])? DM.PSV.CriticalDamage
+            :(n == LSR[EN] || n == LSR[JP] || n == LSR[KR])? DM.PSV.Laser
             : DM.PSV.NULL; //-> ダミーデータ
     }
 

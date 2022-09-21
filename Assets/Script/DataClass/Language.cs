@@ -157,7 +157,7 @@ public static class LANG //* LANG
 
     //* 関数
     public static List<string> getTxtList(string str){
-        Debug.Log("getLangTxt:: str=" + str);
+        // Debug.Log("getLangTxt:: str=" + str);
         const int SPT_TYPE=0, SPT_NAME=1, SPT_EXPLAIN=2, SPT_HOMERUNBONUS=3;
         List<string> resList = new List<string>();
 
@@ -192,7 +192,7 @@ public static class LANG //* LANG
             }
             case "Skill":{
                 int idx = SkillNameList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
-                Debug.Log("<color=white><<Skill>> idx= " + idx + "</color>");
+                // Debug.Log("<color=white><<Skill>> idx= " + idx + "</color>");
                 resList[NAME] = SkillNameList[idx][(int)DM.ins.personalData.Lang];
                 resList[EXPLAIN] = SkillExplainList[idx][(int)DM.ins.personalData.Lang];
                 resList[HOMERUNBONUS] = SkillHomeRunBonusList[idx][(int)DM.ins.personalData.Lang];
@@ -200,7 +200,7 @@ public static class LANG //* LANG
             }
             case "CashShop":{
                 int idx = CashShopNameList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
-                Debug.Log("<color=yellow><<CashShop>> idx= " + idx + "</color>");
+                // Debug.Log("<color=yellow><<CashShop>> idx= " + idx + "</color>");
                 resList[NAME] = CashShopNameList[idx][(int)DM.ins.personalData.Lang];
                 resList[EXPLAIN] = CashShopExplainList[idx][(int)DM.ins.personalData.Lang];
                 break;
@@ -210,7 +210,7 @@ public static class LANG //* LANG
     }
 
     public static string getTxt(string name){
-        Debug.Log("getLangTxtListAtPlay:: name=" + name);
+        // Debug.Log("getLangTxtListAtPlay:: name=" + name);
         string res = null;
         //* UI
         if(name == TXT.Level.ToString()) res = Level[(int)DM.ins.personalData.Lang];

@@ -130,7 +130,7 @@ public class Ball_Prefab : MonoBehaviour
                 #region PSV Hit Type
                 //* Multi Shot
                 for(int i=0; i<pl.multiShot.Value;i++){
-                    Debug.Log("PSV MULTI SHOT");
+                    Debug.Log($"PSV MULTI SHOT: {pl.multiShot.Value}");
 
                     //* Arrow Direction + Extra Deg
                     // const int DEG = PsvSkill<int>.MULTI_SHOT_DEG;

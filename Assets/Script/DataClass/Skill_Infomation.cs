@@ -122,6 +122,7 @@ public class PsvSkill<T> where T: struct {
     }
 
     public Vector3 calcMultiShotDeg2Dir(float arrowDeg, int i){
+        Debug.Log($"calcMultiShotDeg2Dir():: Name = {Name}");
         //* Arrow Direction + Extra Deg
         List<float> extraDegList = new List<float>();
         switch(DM.ins.convertPsvSkillStr2Enum(Name)){
