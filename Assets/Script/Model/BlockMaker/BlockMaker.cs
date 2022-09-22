@@ -19,6 +19,8 @@ public class BlockMaker : MonoBehaviour
     // const float SPAWN_POS_X = -5;
     const float SPWAN_POS_Y = -2;
     public float BLOCK2_SPAN = 5;
+    public int BOSS_STAGE_SPAN = 10;
+    public bool isBossSpawn = false;    public bool IsBossSpawn {get => isBossSpawn; set => isBossSpawn = value;}
 
     [Header("<---- Special Block Spawn Percent  ---->")]
     public int skipBlockPer = 20;
@@ -26,6 +28,7 @@ public class BlockMaker : MonoBehaviour
     public int healBlockPer = 10;
 
     public GameObject[] blockPrefs;
+    public GameObject[] bossPrefs;
     public bool isCreateBlock;  public bool IsCreateBlock {get => isCreateBlock; set => isCreateBlock = value;}
     public Color[] colors;   public Color[] Colors {get => colors;}
     public Material[] mts;   public Material[] Mts {get => mts;}
@@ -46,6 +49,20 @@ public class BlockMaker : MonoBehaviour
             IsCreateBlock = false;
             moveDownBlock();
         }
+
+        //*Boss
+        if(gm.stage % BOSS_STAGE_SPAN == 0 && !IsBossSpawn){
+            IsBossSpawn = true;
+
+            if(IsBossSpawn && gm.bossGroup.childCount == 0){
+            IsBossSpawn = false;
+            Debug.Log("BOSS SPAWN!!");
+            var pos = new Vector3(0, 0, bossPrefs[0].transform.position.z + 2);
+            Instantiate(bossPrefs[0], pos, bossPrefs[0].transform.rotation, gm.bossGroup);
+        }
+        }
+
+
     }
 
     public void createBlockRow(BLOCK type, bool isFirst = false, int verticalCnt = 1){

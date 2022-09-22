@@ -128,7 +128,8 @@ public class Block_Prefab : MonoBehaviour
                 foreach(var hit in rayHits){
                     var hitBlock = hit.transform.GetComponent<Block_Prefab>();
                     if(hit.transform.tag == BlockMaker.NORMAL_BLOCK && hitBlock.kind != BlockMaker.BLOCK.TreasureChest){
-                        int addHp = (int)(hitBlock.hp * healValPer);
+                        int v = (int)(hitBlock.hp * healValPer);
+                        int addHp = (v==0)? 2 : v;
                         hitBlock.increaseHp(addHp);
                     }
                 }

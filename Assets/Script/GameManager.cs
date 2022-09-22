@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public Transform ballGroup;
     public Transform blockGroup;
     public Transform dropItemGroup;
+    public Transform bossGroup;
 
 
     //* CAMERA
@@ -52,7 +53,6 @@ public class GameManager : MonoBehaviour
     public Text perfectTxt;
     public Slider expBar, bossStageBar;
     public Text expTxt, bossStageTxt;
-    private const int bossStageSpan = 10;
     public RectTransform homeRunTxtTf;
 
     
@@ -155,19 +155,14 @@ public class GameManager : MonoBehaviour
     void Update(){
         //* GUI
         expBar.value = Mathf.Lerp(expBar.value, (float)pl.Exp / (float)pl.MaxExp, Time.deltaTime * 10);
+        bossStageBar.value = Mathf.Lerp(bossStageBar.value, (float)(stage % bm.BOSS_STAGE_SPAN) / (float)bm.BOSS_STAGE_SPAN, Time.deltaTime * 10);
         expTxt.text = $"{pl.Exp} / {pl.MaxExp}";
-        bossStageBar.value = Mathf.Lerp(bossStageBar.value, (float)(stage % bossStageSpan) / (float)bossStageSpan, Time.deltaTime * 10);
-        bossStageTxt.text = $"{stage % bossStageSpan} / {bossStageSpan}";
+        bossStageTxt.text = $"{stage % bm.BOSS_STAGE_SPAN} / {bm.BOSS_STAGE_SPAN}";
         stateTxt.text = State.ToString();
         levelTxt.text = LANG.getTxt(LANG.TXT.Level.ToString()) + " : " + pl.Lv;
         stageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage.ToString();
         comboTxt.text = LANG.getTxt(LANG.TXT.Combo.ToString()) + "\n" + comboCnt.ToString();
 
-        //* (BUG) ボールが複数ある時、同時に消えたら、次に進まないこと対応
-        // if(ballGroup.childCount == 0 && !downWall.isTrigger){
-        //     Debug.Log("GM:: Update:: setNextStage()");
-        //     setNextStage();
-        // }
 
         //* ActiveSkill Status
         activeSkillBtnList.ForEach(btn=>{
@@ -412,7 +407,7 @@ public class GameManager : MonoBehaviour
                 var rowTf = Instantiate(pref, Vector3.zero, Quaternion.identity, parentTf).transform;
 
                 var imgObj = Instantiate(PsvSkillImgPrefs[i], Vector3.zero, Quaternion.identity, rowTf);
-                Debug.Log("displayCurPassiveSkillUI:: imgObj.name= " + imgObj.name);
+                // Debug.Log("displayCurPassiveSkillUI:: imgObj.name= " + imgObj.name);
                 if(type != STATE.PAUSE.ToString()){
                     imgObj.transform.localScale = Vector3.one * 0.3f;
                     imgObj.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
