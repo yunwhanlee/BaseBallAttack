@@ -245,7 +245,7 @@ public class Block_Prefab : MonoBehaviour
         Hp -= dmg;
         
         gm.comboCnt++;
-        gm.comboTxt.GetComponent<Animator>().SetTrigger("isHit");
+        gm.comboTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.IsHit.ToString());
 
         Array.ForEach(meshRds, meshRd=> {
             StartCoroutine(coWhiteHitEffect(meshRd.material));

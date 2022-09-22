@@ -166,7 +166,7 @@ public class HomeManager : MonoBehaviour
     public void onClickStartGameBtn(){
         //* Model Copy
         var playerModel = modelTf.GetChild(0);
-        playerModel.GetComponent<Animator>().SetBool("IsIdle", false); //Ready Pose
+        playerModel.GetComponent<Animator>().SetBool(DM.ANIM.IsIdle.ToString(), false); //Ready Pose
         playerModel.SetParent(DM.ins.transform);
         // var copyModel = Instantiate(playerModel, Vector3.zero, Quaternion.identity, DM.ins.transform);
 
