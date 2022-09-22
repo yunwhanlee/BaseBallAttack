@@ -50,8 +50,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text shootCntTxt;      public Text ShootCntTxt { get => shootCntTxt; set => shootCntTxt = value;}
     public Text comboTxt;
     public Text perfectTxt;
-    public Text expTxt;
-    public Slider expBar;
+    public Slider expBar, bossStageBar;
+    public Text expTxt, bossStageTxt;
+    private const int bossStageSpan = 10;
     public RectTransform homeRunTxtTf;
 
     
@@ -153,8 +154,10 @@ public class GameManager : MonoBehaviour
 
     void Update(){
         //* GUI
-        expBar.value = Mathf.Lerp(expBar.value, pl.Exp / pl.MaxExp, Time.deltaTime * 10);
+        expBar.value = Mathf.Lerp(expBar.value, (float)pl.Exp / (float)pl.MaxExp, Time.deltaTime * 10);
         expTxt.text = $"{pl.Exp} / {pl.MaxExp}";
+        bossStageBar.value = Mathf.Lerp(bossStageBar.value, (float)(stage % bossStageSpan) / (float)bossStageSpan, Time.deltaTime * 10);
+        bossStageTxt.text = $"{stage % bossStageSpan} / {bossStageSpan}";
         stateTxt.text = State.ToString();
         levelTxt.text = LANG.getTxt(LANG.TXT.Level.ToString()) + " : " + pl.Lv;
         stageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage.ToString();
