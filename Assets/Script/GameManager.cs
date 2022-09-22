@@ -49,13 +49,13 @@ public class GameManager : MonoBehaviour
     public Text[] statusTxts = new Text[2];
 
     [SerializeField] private Text shootCntTxt;      public Text ShootCntTxt { get => shootCntTxt; set => shootCntTxt = value;}
-    public Text comboTxt;
-    public Text perfectTxt;
     public Slider expBar, bossStageBar;
     public Text expTxt, bossStageTxt;
     public RectTransform homeRunTxtTf;
-
-    
+    [Header("-- Txt EF Anim --")]
+    public Text comboTxt;
+    public Text perfectTxt;
+    public Text bossSpawnTxt;
 
     [Header("-- View Preview Ball Slider --")] //! あんまり要らないかも。
     public Slider hitRangeSlider;
