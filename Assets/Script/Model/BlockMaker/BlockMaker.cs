@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class BlockMaker : MonoBehaviour
 {
     public const string NORMAL_BLOCK = "NormalBlock";
-    public enum BLOCK {Normal, Long, TreasureChest, Heal, Null};
+    public enum BLOCK {Normal, Long, TreasureChest, Heal, Boss, Null};
 
     //* OutSide
     public GameManager gm;

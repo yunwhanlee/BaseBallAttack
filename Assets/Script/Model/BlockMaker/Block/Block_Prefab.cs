@@ -17,9 +17,11 @@ public class Block_Prefab : MonoBehaviour
     private Player pl;
     private BlockMaker bm;
 
-    //* Material Instancing
-    [SerializeField] private MeshRenderer[] meshRds;
-    [SerializeField] private Material[] originMts;
+    
+
+    // [SerializeField] private MeshRenderer[] meshRds;
+    [SerializeField] private MyMesh mesh; //* Material Instancing
+    [SerializeField] public Material[] originMts;
     private Color color;
     public Material[] mts;
     public Material whiteHitMt;
@@ -56,22 +58,19 @@ public class Block_Prefab : MonoBehaviour
     //* GUI
     public Text hpTxt;
 
+    
+
     void Start() {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         em = gm.em;
         pl = gm.pl;
         bm = gm.bm;
 
-        //* Material Instancing🌟
         sprGlowEf = GetComponentInChildren<SpriteGlowEffect>();
-        meshRds = this.GetComponentsInChildren<MeshRenderer>(); 
         
-        Array.ForEach(meshRds, meshRd=> meshRd.material = Instantiate(meshRd.material));
-        
-        originMts = new Material[meshRds.Length];
-        for(int i=0; i<meshRds.Length;i++){
-            originMts[i] = meshRds[i].material; //* オリジナルMt 保存。(材質X、色X ➡ TreasureChest用)
-        }
+        //* Material Instancing🌟
+        mesh = new MyMesh(this);
+        originMts = mesh.getOriginalMts();
 
         //* Type Apply
         bool isItemBlock = false;
@@ -159,25 +158,25 @@ public class Block_Prefab : MonoBehaviour
             Debug.LogFormat("Block_Prefab:: kind={0}", kind);
             //* Material
             if(0 < Hp && Hp <= 10){
-                Exp = 10;   meshRds[0].material = bm.Mts[(int)BlockMt.PLAIN]; 
+                Exp = 10;   mesh.block[0].material = bm.Mts[(int)BlockMt.PLAIN]; 
             }
             else if(11 < Hp && Hp <= 20){
-                Exp = 20;   meshRds[0].material = bm.Mts[(int)BlockMt.WOOD];
+                Exp = 20;   mesh.block[0].material = bm.Mts[(int)BlockMt.WOOD];
             }
             else if(21 < Hp && Hp <= 30){
-                Exp = 30;   meshRds[0].material = bm.Mts[(int)BlockMt.SAND];
+                Exp = 30;   mesh.block[0].material = bm.Mts[(int)BlockMt.SAND];
             }
             else if(31 < Hp && Hp <= 40){
-                Exp = 40;   meshRds[0].material = bm.Mts[(int)BlockMt.REDBRICK];
+                Exp = 40;   mesh.block[0].material = bm.Mts[(int)BlockMt.REDBRICK];
             }
             else if(41 < Hp){
-                Exp = 50;   meshRds[0].material = bm.Mts[(int)BlockMt.IRON];
+                Exp = 50;   mesh.block[0].material = bm.Mts[(int)BlockMt.IRON];
             }
 
             //* 色
             int randIdx = Random.Range(0, bm.Colors.Length);
             color = bm.Colors[randIdx];
-            meshRds[0].material.SetColor("_ColorTint", color);
+            mesh.block[0].material.SetColor("_ColorTint", color);
             switch(randIdx){
                 case (int)ColorIndex.RED:       color = Color.red; break;
                 case (int)ColorIndex.YELLOW:    color = Color.yellow; break;
@@ -187,7 +186,7 @@ public class Block_Prefab : MonoBehaviour
 
             //* Apply
             sprGlowEf.GlowColor = color;
-            originMts[0] = meshRds[0].material; //* オリジナルMt 保存。(材質O、色O ➡ Block用)
+            originMts[0] = mesh.block[0].material; //* オリジナルMt 保存。(材質O、色O ➡ Block用)
         }
     }
 
@@ -247,9 +246,8 @@ public class Block_Prefab : MonoBehaviour
         gm.comboCnt++;
         gm.comboTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.IsHit.ToString());
 
-        Array.ForEach(meshRds, meshRd=> {
-            StartCoroutine(coWhiteHitEffect(meshRd.material));
-        });
+        mesh.setWhiteHitEF();
+
         if(Hp <= 0) {
             //* アイテムブロック 処理
             switch (type){
@@ -292,25 +290,12 @@ public class Block_Prefab : MonoBehaviour
         Destroy(target);
     }
 
-    IEnumerator coWhiteHitEffect(Material curMt){ //* 体力が減ったら、一瞬間白くなって戻すEFFECT
-        Array.ForEach(meshRds, meshRd => {
-            meshRd.material = whiteHitMt;
-        });
-        yield return new WaitForSeconds(0.05f);
-
-        for(int i=0; i<meshRds.Length; i++){
-            meshRds[i].material = originMts[i];//* (BUG) WaitForSeconds間にまた衝突が発生したら、白くなる。
-        }
-    }
-
     public int getDotDmg(float per){
         int res = (Hp >= 1)? (int)(Hp * per) : 1;
         res = (res <= 0)? 1 : res;
         Debug.LogFormat("<color=green>getDotDmg(per):: {0} * {1} = {2}</color>", Hp, per, res);
         return res;
     }
-
-
 
     void OnDrawGizmos(){
         //* Type
@@ -324,5 +309,16 @@ public class Block_Prefab : MonoBehaviour
         if(kind == BlockMaker.BLOCK.Heal){
             Gizmos.DrawWireSphere(this.transform.position, HealRadius);
         }
+    }
+
+    //-------------------------------------------------------------
+    /*  StartCoroutineは、
+    /   MonoBehaviourを継承しないClassではできないから無理やりここで宣言。
+    */
+    public void callStartCoWhiteHitEF(SkinnedMeshRenderer[] msRds){
+        StartCoroutine(mesh.coWhiteHitEffect(msRds));
+    }
+    public void callStartCoWhiteHitEF(MeshRenderer[] msRds){
+        StartCoroutine(mesh.coWhiteHitEffect(msRds));
     }
 }

@@ -9,7 +9,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: doSpawn
+    m_ConditionEvent: DoSpawn
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7475744348261865812}
@@ -109,12 +109,12 @@ AnimatorController:
   m_Name: HomeRunTxt
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: doSpawn
+  - m_Name: DoSpawn
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
