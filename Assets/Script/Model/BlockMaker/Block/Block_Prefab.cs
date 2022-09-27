@@ -16,6 +16,8 @@ public class Block_Prefab : MonoBehaviour
     //* OutSide
     GameManager gm; EffectManager em; Player pl; BlockMaker bm;
     SpriteGlowEffect itemUISprGlowEf;
+    BoxCollider boxCollider;
+    Animator animator;
 
     //* Value
     private const int TREASURECHEST_ORB_CNT = 15;
@@ -63,6 +65,9 @@ public class Block_Prefab : MonoBehaviour
         bm = gm.bm;
 
         sprGlowEf = GetComponentInChildren<SpriteGlowEffect>();
+        boxCollider = GetComponent<BoxCollider>();
+        animator = GetComponent<Animator>();
+
         
         //* Material Instancing🌟
         mesh = new MyMesh(this);
@@ -293,6 +298,23 @@ public class Block_Prefab : MonoBehaviour
         return res;
     }
 
+    public void setBossComponent(bool trigger){
+        boxCollider.enabled = !trigger;
+        animator.SetBool(DM.ANIM.IsFly.ToString(), trigger);
+    }
+
+    //-------------------------------------------------------------
+    /*  StartCoroutineは、
+    /   MonoBehaviourを継承しないClassではできないから無理やりここで宣言。
+    */
+    public void callStartCoWhiteHitEF(SkinnedMeshRenderer[] msRds){
+        StartCoroutine(mesh.coWhiteHitEffect(msRds));
+    }
+    public void callStartCoWhiteHitEF(MeshRenderer[] msRds){
+        StartCoroutine(mesh.coWhiteHitEffect(msRds));
+    }
+
+    //-------------------------------------------------------------
     void OnDrawGizmos(){
         //* Type
         if(type == BlockType.BOMB){
@@ -305,16 +327,5 @@ public class Block_Prefab : MonoBehaviour
         if(kind == BlockMaker.BLOCK.Heal){
             Gizmos.DrawWireSphere(this.transform.position, HealRadius);
         }
-    }
-
-    //-------------------------------------------------------------
-    /*  StartCoroutineは、
-    /   MonoBehaviourを継承しないClassではできないから無理やりここで宣言。
-    */
-    public void callStartCoWhiteHitEF(SkinnedMeshRenderer[] msRds){
-        StartCoroutine(mesh.coWhiteHitEffect(msRds));
-    }
-    public void callStartCoWhiteHitEF(MeshRenderer[] msRds){
-        StartCoroutine(mesh.coWhiteHitEffect(msRds));
     }
 }

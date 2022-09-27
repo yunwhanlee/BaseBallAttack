@@ -247,6 +247,8 @@ public class GameManager : MonoBehaviour
 
     public void switchCamScene(){
         if(State == GameManager.STATE.GAMEOVER) return;
+        var boss = (bossGroup.childCount > 0)? bossGroup.GetChild(0).GetComponent<Block_Prefab>() : null;
+
         if(!cam2.activeSelf){//* CAM2 On
             State = GameManager.STATE.PLAY;
             cam1.SetActive(false);
@@ -274,6 +276,10 @@ public class GameManager : MonoBehaviour
             }
 
             setLightDarkness(false); //* Light -> Normal
+
+            //* Boss Collider OFF：Ball投げる時、ぶつかるから。
+            if(boss) boss.setBossComponent(true);
+                
         }
         else{//* CAM1 On
             State = GameManager.STATE.WAIT;
@@ -305,6 +311,9 @@ public class GameManager : MonoBehaviour
 
             //* ActiveSkill Status
             StopCoroutine("corSetStrike");
+
+            //* Boss Collider ON：PlayerがBallを打ったから、活性化。
+            if(boss) boss.setBossComponent(false);
         }
     }
 
