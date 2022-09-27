@@ -120,7 +120,6 @@ public class Block_Prefab : MonoBehaviour
 
         //* Heal Block
         if(kind == BlockMaker.BLOCK.Heal){
-            // Debug.Log("Heal! around Blocks");
             if(IsHeal){
                 IsHeal = false;
                 //Sphere Collider
