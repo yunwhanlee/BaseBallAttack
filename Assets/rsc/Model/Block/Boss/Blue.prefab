@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1177288949910752163
 RectTransform:
   m_ObjectHideFlags: 0
@@ -117,7 +117,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 1000
 --- !u!114 &700298705601633329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.88235295}
+  m_EffectColor: {r: 1, g: 0, b: 0, a: 0.88235295}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
 --- !u!1 &3347893191912072250
@@ -312,7 +312,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &755014311052451950
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2151,6 +2151,7 @@ GameObject:
   - component: {fileID: 7123070601206941140}
   - component: {fileID: 7123070601111801786}
   - component: {fileID: 8754524835884205089}
+  - component: {fileID: 9003238178632980560}
   m_Layer: 0
   m_Name: Blue
   m_TagString: NormalBlock
@@ -2219,30 +2220,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eff9542434690c4390141f8db6a8735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshRds: []
+  mesh:
+    boss: []
+    block: []
   originMts: []
-  mts:
-  - {fileID: 2100000, guid: cf3da56f55dc78845aa9ee532679ca9a, type: 2}
-  - {fileID: 2100000, guid: 74c7b8e3ed8d60740ad629198f468a2e, type: 2}
-  - {fileID: 2100000, guid: a7f4b3a80cce5544186fb7a62b8fabb2, type: 2}
-  - {fileID: 2100000, guid: ee19e7bdbd2923340aa8973e1d4230b1, type: 2}
-  - {fileID: 2100000, guid: a5f3265eb027f0e41af7b62f064343df, type: 2}
+  mts: []
   whiteHitMt: {fileID: 2100000, guid: ef01bc3ad6c4a204698706049449af64, type: 2}
   itemTypeImgGroup: {fileID: 0}
   sprGlowEf: {fileID: 0}
   kind: 4
   type: 0
+  isDotDmg: 0
+  isHeal: 0
   hp: 1000
   exp: 10
-  isDotDmg: 0
   itemTypePer: 10
-  isHeal: 0
   healRadius: 1.5
   healValPer: 0.15
   defScale: {x: 0, y: 0, z: 0}
   minLimitVal: 0
   spawnAnimSpeed: 0
   hpTxt: {fileID: 1326742590017898505}
+--- !u!54 &9003238178632980560
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7123070601197486832}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &7123070601197488124
 GameObject:
   m_ObjectHideFlags: 0

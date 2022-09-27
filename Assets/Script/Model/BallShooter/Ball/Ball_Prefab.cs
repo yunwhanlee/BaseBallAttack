@@ -7,19 +7,15 @@ using System;
 public class Ball_Prefab : MonoBehaviour
 {
     //* OutSide
-    public GameManager gm;
-    public EffectManager em;
-    public Player pl;
-    public BlockMaker bm;
-    public BallShooter bs;
+    GameManager gm; EffectManager em; Player pl; BlockMaker bm; BallShooter bs;
     public int aliveTime;
 
     //* Value
-    private bool isHitedByBlock = false;
-    private bool isHomeRun = false;
-    private float deleteLimitTime = 2.0f;
-    private float speed;
-    private float distance;
+    bool isHitedByBlock = false;
+    bool isHomeRun = false;
+    float deleteLimitTime = 2.0f;
+    float speed;
+    float distance;
 
     Rigidbody rigid;
     void Start()
@@ -65,7 +61,7 @@ public class Ball_Prefab : MonoBehaviour
     //** Control
     private void OnTriggerStay(Collider col) {
 #region Hit Ball
-        if(col.gameObject.tag == "HitRangeArea"){
+        if(col.gameObject.tag == DM.TAG.HitRangeArea.ToString()){
             pl.setSwingArcColor("red");
             if(pl.DoSwing && gm.State == GameManager.STATE.PLAY){
                 gm.switchCamScene();
@@ -83,7 +79,7 @@ public class Ball_Prefab : MonoBehaviour
                 int offsetAxis = (sign < 0) ? (pl.MAX_HIT_DEG/2) * leftSide : (pl.MAX_HIT_DEG/2) * rightSide;
                 // Debug.Log("Ball_Prefab:: ■offsetAxis=" + offsetAxis);
 
-                float arrowDeg = pl.arrowAxisAnchor.transform.eulerAngles.y; //*🌟HIT ARROW DIRECTION (DEG)🌟
+                float arrowDeg = pl.arrowAxisAnchor.transform.eulerAngles.y;
                 Debug.Log("🌟HIT ARROW DIRECTION (DEG)🌟:" + arrowDeg);
                 Vector3 arrowDir = new Vector3(Mathf.Sin(Mathf.Deg2Rad * arrowDeg), 0, Mathf.Cos(Mathf.Deg2Rad * arrowDeg)).normalized;
 
@@ -133,9 +129,6 @@ public class Ball_Prefab : MonoBehaviour
                     Debug.Log($"PSV MULTI SHOT: {pl.multiShot.Value}");
 
                     //* Arrow Direction + Extra Deg
-                    // const int DEG = PsvSkill<int>.MULTI_SHOT_DEG;
-                    // float [] extraDegList = {-DEG + arrowDeg, DEG + arrowDeg, -(DEG*2) + arrowDeg, (DEG*2) + arrowDeg}; //! BUG) Hit Ball Direction (Deg)が 設定されていなかったので対応。
-                    // Vector3 direction = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (DEG + extraDegList[i])), 0, Mathf.Cos(Mathf.Deg2Rad * (DEG + extraDegList[i]))).normalized;
                     Vector3 direction = pl.multiShot.calcMultiShotDeg2Dir(arrowDeg, i);
 
                     var ins = Instantiate(this.gameObject, this.transform.position, Quaternion.identity, gm.ballGroup) as GameObject;
@@ -159,9 +152,6 @@ public class Ball_Prefab : MonoBehaviour
                     //* Level１以上 Multi Laser
                     for(int i=0; i < pl.laser.Value; i++){
                         //* Arrow Direction + Extra Deg
-                        // const int DEG = PsvSkill<int>.LASER_DEG;
-                        // float [] extraDegList = {arrowDeg , -DEG + arrowDeg, DEG + arrowDeg};
-                        // Vector3 direction = new Vector3(Mathf.Sin(Mathf.Deg2Rad * (extraDegList[i])), 0, Mathf.Cos(Mathf.Deg2Rad * (extraDegList[i]))).normalized;
                         Vector3 direction = pl.laser.calcMultiShotDeg2Dir(arrowDeg, i);
 
                         em.createLaserEF(start, direction);
@@ -192,14 +182,14 @@ public class Ball_Prefab : MonoBehaviour
 
     private void OnTriggerExit(Collider col) {
         //* SWING Ball
-        if(col.gameObject.tag == "HitRangeArea"){ //* HIT BALL
+        if(col.gameObject.tag == DM.TAG.HitRangeArea.ToString()){ //* HIT BALL
             Debug.Log("OnTriggerExit:: BAT SWING BALL");
             pl.setSwingArcColor("yellow");
             //* 日程時間が過ぎたら、ボール削除。
             isHitedByBlock = true;
             InvokeRepeating("checkLimitTimeToDeleteBall", 0, deleteLimitTime);
         }
-        else if(col.gameObject.tag == "StrikeLine"){ //* ストライク
+        else if(col.gameObject.tag == DM.TAG.StrikeLine.ToString()){ //* ストライク
             onDestroyMe(true);
         }
     }
@@ -222,7 +212,7 @@ public class Ball_Prefab : MonoBehaviour
                 if(skillBtn.Trigger){
                     float delayTime = 2;
                     int skillIdx = gm.getCurSkillIdx();
-                    gm.cam1.GetComponent<CamResolution>().setAnimTrigger("doShake");
+                    gm.cam1.GetComponent<CamResolution>().setAnimTrigger(DM.ANIM.DoShake.ToString());
                     var atv = DM.ins.convertAtvSkillStr2Enum(skillBtn.Name);
                     switch(atv){
                         case DM.ATV.Thunder:
@@ -377,9 +367,9 @@ public class Ball_Prefab : MonoBehaviour
         Time.timeScale = 0;
         pl.setAnimTrigger("HomeRun");
         yield return new WaitForSecondsRealtime(2);
-        gm.cam1.GetComponent<CamResolution>().setAnimTrigger("doShake");
+        gm.cam1.GetComponent<CamResolution>().setAnimTrigger(DM.ANIM.DoShake.ToString());
 
-        gm.homeRunTxtTf.GetComponent<Animator>().SetTrigger("doSpawn");
+        gm.homeRunTxtTf.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
         em.enableUIStageTxtEF("HomeRun");
         Time.timeScale = 1;
     }

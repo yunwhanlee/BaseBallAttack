@@ -8,8 +8,8 @@ using System;
 public class DM : MonoBehaviour
 {
     public static DM ins;
-    
-    public enum ANIM {DoSpawn, IsHit, IsIdle}
+    public enum TAG {HitRangeArea, StrikeLine}
+    public enum ANIM {DoSpawn, DoShake, IsHit, IsIdle}
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
     public enum ITEM {Chara, Bat, Skill, CashShop};
     public enum ATV{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave, NULL};
