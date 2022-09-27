@@ -11,20 +11,21 @@ public class GameManager : MonoBehaviour
     public enum STATE {PLAY, WAIT, GAMEOVER, PAUSE, CONTINUE, HOME, NULL};
     [SerializeField] private STATE state;     public STATE State {get => state; set => state = value;}
 
-    //* Group
+    [Header("GROUP")]
     public Transform effectGroup;
     public Transform ballGroup;
     public Transform blockGroup;
     public Transform dropItemGroup;
     public Transform bossGroup;
+    public Transform activeSkillBtnGroup;
 
 
-    //* CAMERA
+    [Header("CAMERA")]
     public GameObject cam1, cam2;
     public GameObject cam1Canvas, cam2Canvas;
 
     //* OutSide
-    [Header("<---- OutSide ---->")]
+    [Header("OUTSIDE")]
     public Canvas canvasUI;
     public Player pl;
     public EffectManager em;
@@ -33,49 +34,50 @@ public class GameManager : MonoBehaviour
     public GameObject throwScreen;
     public Transform hitRangeStartTf;
     public Transform hitRangeEndTf;
-    
     public Transform deadLineTf;
     public BoxCollider downWall;
     public Light light;
 
-    [Header("<---- GUI ---->")]
+    [Header("STATUS")]
     public int stage = 1;
     public int bestScore;
     public int strikeCnt = 0;
     public int comboCnt = 0;
+
+    [Header("PANEL")]
+    public GameObject strikePanel;
+    public GameObject levelUpPanel;
+    public GameObject pausePanel;
+    public GameObject gameoverPanel;
+    public RectTransform statusFolderPanel;
+
+    [Header("◆GUI◆")]
     public Text stageTxt;
     public Text stateTxt;
     public Text levelTxt;
     public Text[] statusTxts = new Text[2];
-
-    [SerializeField] private Text shootCntTxt;      public Text ShootCntTxt { get => shootCntTxt; set => shootCntTxt = value;}
+    [SerializeField] Text shootCntTxt;      public Text ShootCntTxt { get => shootCntTxt; set => shootCntTxt = value;}
+    public RectTransform homeRunTxtTf;
     public Slider expBar, bossStageBar;
     public Text expTxt, bossStageTxt;
-    public RectTransform homeRunTxtTf;
-    [Header("-- Txt EF Anim --")]
+
+    [Header("TEXT EFFECT")]
     public Text comboTxt;
     public Text perfectTxt;
     public Text bossSpawnTxt;
 
-    [Header("-- View Preview Ball Slider --")] //! あんまり要らないかも。
+    [Header("PREVIEW BALL SILDER ➡ 現在使っていない")] //! あんまり要らないかも。
     public Slider hitRangeSlider;
     private RectTransform hitRangeSliderTf;
-    public RectTransform HomeRunRangeTf;
-    public float HomeRunRangePer = 0.2f;
-    public Image hitRangeHandleImg;
 
-    [Header("-- Ball Preview Dir Goal (CAM2) --")]
+    [Header("BALL PREVIEW DIR GOAL(CAM2)")]
     public GameObject ballPreviewDirGoal;
     public Image ballPreviewGoalImg;
 
-    [Header("-- Strike Ball Image --")]
-    public GameObject StrikePanel;
-    public Image[] strikeBallImgs;
+    [Header("STRIKE CNT IMAGE")]
+    public Image[] strikeCntImgs;
 
-    [Header("-- Level Up --")]
-    public GameObject levelUpPanel;
-
-    [Header("-- Active Btn --")]
+    [Header("ACTIVE SKILL BTN")]
     public RectTransform activeSkillBtnPf;
     public AtvSkill[] activeSkillDataBase; //* 全てActiveSkillsのデータベース
     public List<AtvSkillBtnUI> activeSkillBtnList; //* ActiveSkillボタン
@@ -84,29 +86,25 @@ public class GameManager : MonoBehaviour
     public bool isPointUp; //* SectorGizmos Colliderへ活用するため。
     public Material[] blockGlowColorMts;
 
-    [Header("-- Passive Table --")]
+    [Header("PASSIVE TABLE")]
     [SerializeField] private GameObject[] psvSkillImgPrefs;    public GameObject[] PsvSkillImgPrefs { get => psvSkillImgPrefs; set => psvSkillImgPrefs = value;}
     public RectTransform inGameSkillStatusTableTf;
     public GameObject inGameSkillImgBtnPref;
     
-    [Header("-- Pause --")]
-    public GameObject pausePanel;
+    [Header("PAUSE")]
     public RectTransform pauseSkillStatusTableTf;
     public GameObject skillInfoRowPref;
 
-    [Header("-- GameOver --")]
-    public GameObject gameoverPanel;
+    [Header("GAMEOVER")]
     private Text gvStageTxt;
     private Text gvBestScoreTxt;
 
-    [Header("-- StatusFolder --")]
-    public RectTransform statusFolderPanel;
+    [Header("STATUS FOLDER")]
     public Transform statusInfoContents;
     public Text statusInfoTxtPf;
 
-    [Header("-- Button --")]
+    [Header("BUTTON")]
     public Button readyBtn; //Normal
-    public Transform activeSkillBtnGroup; //Normal
     public Button reGameBtn; //gameoverPanel
     public Button pauseBtn; //pausePanel
     public Button continueBtn; //pausePanel
@@ -266,7 +264,7 @@ public class GameManager : MonoBehaviour
 
             pl.arrowAxisAnchor.SetActive(false);
             
-            StrikePanel.SetActive(true);
+            strikePanel.SetActive(true);
 
             statusFolderPanel.gameObject.SetActive(false);
 
@@ -292,7 +290,7 @@ public class GameManager : MonoBehaviour
             pl.arrowAxisAnchor.SetActive(true);
             if(0 < strikeCnt && ballGroup.childCount == 0) pl.previewBundle.SetActive(true); //(BUG)STRIKEになってから、BACKボタン押すと、PreviewLineが消えてしまう。
 
-            StrikePanel.SetActive(false);
+            strikePanel.SetActive(false);
 
             statusFolderPanel.gameObject.SetActive(true);
 
@@ -319,7 +317,7 @@ public class GameManager : MonoBehaviour
     }
 
     private IEnumerator corSetStrike(bool isOut = false){
-        strikeBallImgs[strikeCnt++].gameObject.SetActive(true);
+        strikeCntImgs[strikeCnt++].gameObject.SetActive(true);
         if(isOut){
             strikeCnt = 0;
             ShootCntTxt.text = LANG.getTxt(LANG.TXT.Out.ToString()) + "!";
@@ -327,7 +325,7 @@ public class GameManager : MonoBehaviour
             bs.init();
             switchCamScene();
             bm.IsCreateBlock = true; //ブロック生成
-            foreach(var img in strikeBallImgs) img.gameObject.SetActive(false); //GUI非表示 初期化
+            foreach(var img in strikeCntImgs) img.gameObject.SetActive(false); //GUI非表示 初期化
             readyBtn.gameObject.SetActive(true);
         }
         else{

@@ -19,7 +19,8 @@ public class ItemPsvDt {
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------
 [System.Serializable]
-public class ItemPsvList{
+public class ItemPsvList
+{
     //* value
     [SerializeField] ItemPsvDt[] arr = {
         new ItemPsvDt(DM.PSV.Dmg.ToString()),

@@ -25,29 +25,29 @@ using UnityEngine.UI.Extensions;
 public class HomeManager : MonoBehaviour
 {
     //* OutSide
-    [Header("<--Select Panel Color-->")]
-    [SerializeField] Image selectPanelScrollBG;  public Image SelectPanelScrollBG {get => selectPanelScrollBG; set => selectPanelScrollBG = value;}
     public enum DlgBGColor {Chara, Bat, Skill, CashShop};
+
+    [Header("SELECT PANEL COLOR")]
+    [SerializeField] Image selectPanelScrollBG;  public Image SelectPanelScrollBG {get => selectPanelScrollBG; set => selectPanelScrollBG = value;}
     [SerializeField] Color[] selectPanelColors;
     
-    [Header("<-- UI -->")]
+    [Header("GUI")]
     public DialogUI homeDialog;
     public DialogUI selectDialog;
     public DialogUI unlock2ndSkillDialog;
     public DialogUI settingDialog;
+    [Space(10)]
     public Dropdown languageOptDropDown;    public Dropdown LanguageOptDropDown {get => languageOptDropDown; set => languageOptDropDown = value;}
     public int selectedSkillBtnIdx;
     public Text selectedSkillBtnIdxTxt;
     public Button[] skillBtns;
     public Button startGameBtn;
-    
     [SerializeField] Image selectSkillImg;  public Image SelectSkillImg {get => selectSkillImg; set => selectSkillImg = value;}
 
-
-    [Header("<-- Model -->")]
+    [Header("MODEL")]
     [SerializeField] Transform modelTf;   public Transform ModelTf {get => modelTf; set => modelTf = value;}
 
-    [Header("<-- Notice Message Txt -->")]
+    [Header("NOTICE MESSAGE")]
     public Text noticeMessageTxtPref;
     public Transform mainPanelTf;
 

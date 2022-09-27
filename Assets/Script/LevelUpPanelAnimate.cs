@@ -5,44 +5,45 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using System;
 
+public struct SkillBtn
+{
+    public RectTransform imgRectTf;
+    public Text name;
+
+    public SkillBtn(Button skillBtn){//Contructor
+        imgRectTf = skillBtn.transform.GetChild(0).GetComponent<RectTransform>();
+        name = skillBtn.transform.GetChild(1).GetComponent<Text>();
+    }
+}
+
 public class LevelUpPanelAnimate : MonoBehaviour
 {
-    //* OutSide Component
-    public GameManager gm;
-    public Player pl;
+    //* OutSide
+    GameManager gm; Player pl;
 
-    private const int SPRITE_W = 270; //Heightも同一
-    private int btnIdx;
-    private float time;
+    //* Value
+    const int SPRITE_W = 270; //Heightも同一
+    int btnIdx;
+    float time;
+    int skillImgCnt;
 
-    private int skillImgCnt;
+    [Header("STATE")]
+    [SerializeField] int scrollingSpeed;
+    [SerializeField] bool isRollingStop = false;
+    [SerializeField] List<string> exceptSkNameList = new List<string>();
     public List<KeyValuePair<int, GameObject>> selectSkillList = new List<KeyValuePair<int, GameObject>>(); //* 同じnewタイプ型を代入しないと、使えない。
-    [SerializeField] private List<string> exceptSkNameList = new List<string>();
-    public int scrollingSpeed;
-    public bool isRollingStop = false;
 
-    [Header("<---- GUI ---->")]
+    [Header("GUI")]
     public Text titleTxt;
     public Text levelTxt;
     public Text explainTxt;
     public Button[] skillBtns;
-    //[System.Serializable] -> Show Inspector View
-
-    public struct SkillBtn{
-        public RectTransform imgRectTf;
-        public Text name;
-
-        public SkillBtn(Button skillBtn){//Contructor
-            imgRectTf = skillBtn.transform.GetChild(0).GetComponent<RectTransform>();
-            name = skillBtn.transform.GetChild(1).GetComponent<Text>();
-        }
-    }
     public SkillBtn[] SkillBtns; //struct宣言
-
 
 
     public void Start(){
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        pl = gm.pl;
 
         //Init Value
         time = 0;

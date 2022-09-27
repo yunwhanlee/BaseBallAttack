@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45015407, g: 0.500194, b: 0.5754274, a: 1}
+  m_IndirectSpecularColor: {r: 0.45015454, g: 0.5001945, b: 0.57542807, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -435,10 +435,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5489195237a0cb498fb93984fbf39dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  language: 0
   coinTxt: {fileID: 207406971}
   diamondTxt: {fileID: 944239660}
-  grayItemLock: {fileID: 2100000, guid: 85881ae3c4cea344aa748905176006ae, type: 2}
+  grayItemLockMt: {fileID: 2100000, guid: 85881ae3c4cea344aa748905176006ae, type: 2}
   selectItemType: 
   modelContentPref: {fileID: 17662701153362729, guid: 12ff8c72a9f74b44fa610bbd585e404b, type: 3}
   itemPassivePanel: {fileID: 8075552467672712851, guid: 260e4fe9ade9512468cb31d12861f67c, type: 3}
@@ -504,6 +503,7 @@ MonoBehaviour:
     - {fileID: 6252180515462008431, guid: f7f63fdae8c8afc4e8dbf4932b415d00, type: 3}
     - {fileID: 4092482586131365199, guid: 04c1dde3dcad4f54ba01f4aa47a75811, type: 3}
   personalData:
+    lang: 0
     coin: 0
     diamond: 0
     selectCharaIdx: 0

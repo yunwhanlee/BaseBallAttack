@@ -311,7 +311,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eff9542434690c4390141f8db6a8735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshRds: []
+  mesh:
+    boss: []
+    block: []
   originMts: []
   mts:
   - {fileID: 2100000, guid: cf3da56f55dc78845aa9ee532679ca9a, type: 2}
@@ -323,11 +325,14 @@ MonoBehaviour:
   itemTypeImgGroup: {fileID: 1806420861313604210}
   sprGlowEf: {fileID: 5918763535492987420}
   kind: 0
-  itemType: 0
+  type: 0
   hp: 1
   exp: 10
   isDotDmg: 0
   itemTypePer: 10
+  isHeal: 0
+  healRadius: 1.5
+  healValPer: 0.15
   defScale: {x: 0, y: 0, z: 0}
   minLimitVal: 0
   spawnAnimSpeed: 0

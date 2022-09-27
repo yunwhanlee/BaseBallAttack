@@ -5,22 +5,22 @@ using System;
 
 [System.Serializable]
 public class PersonalData {
-    //* value
+    //* Value
     [SerializeField] LANG.TP lang; public LANG.TP Lang {get => lang; set => lang = value;}
     [SerializeField] int coin; public int Coin {get => coin; set => coin = value;}
     [SerializeField] int diamond; public int Diamond {get => diamond; set => diamond = value;}
-    [Header("--Charactor--")]
+    [Header("CHARACTOR")]
     [SerializeField] int selectCharaIdx;  public int SelectCharaIdx {get => selectCharaIdx; set => selectCharaIdx = value;}
     [SerializeField] List<bool> charaLockList;  public List<bool> CharaLockList {get => charaLockList; set => charaLockList = value;}
-    [Header("--Bat--")]
+    [Header("BAT")]
     [SerializeField] int selectBatIdx;  public int SelectBatIdx {get => selectBatIdx; set => selectBatIdx = value;}
     [SerializeField] List<bool> batLockList;  public List<bool> BatLockList {get => batLockList; set => batLockList = value;}
-    [Header("--Skill--")]
+    [Header("SKILL")]
     [SerializeField] bool isUnlock2ndSkill;  public bool IsUnlock2ndSkill {get => isUnlock2ndSkill; set => isUnlock2ndSkill = value;}
     [SerializeField] int selectSkillIdx;  public int SelectSkillIdx {get => selectSkillIdx; set => selectSkillIdx = value;}
     [SerializeField] int selectSkill2Idx;  public int SelectSkill2Idx {get => selectSkill2Idx; set => selectSkill2Idx = value;}
     [SerializeField] List<bool> skillLockList;  public List<bool> SkillLockList {get => skillLockList; set => skillLockList = value;}
-    [Header("--Item Passive--")]
+    [Header("ITEM PASSIVE ABILITY")]
     [SerializeField] ItemPsvList itemPassive; public ItemPsvList ItemPassive {get => itemPassive; set => itemPassive = value;}
     
     //* PlayerPrefs キー リスト => privateは jsonには追加しない。

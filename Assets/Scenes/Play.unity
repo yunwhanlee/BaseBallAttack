@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44479504, g: 0.49434292, b: 0.57354003, a: 1}
+  m_IndirectSpecularColor: {r: 0.44479525, g: 0.49434352, b: 0.5735407, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15905,13 +15905,10 @@ MonoBehaviour:
   perfectTxt: {fileID: 687656593}
   bossSpawnTxt: {fileID: 1566489872}
   hitRangeSlider: {fileID: 1926558710}
-  HomeRunRangeTf: {fileID: 364375264}
-  HomeRunRangePer: 0.2
-  hitRangeHandleImg: {fileID: 1870590508}
   ballPreviewDirGoal: {fileID: 434918240}
   ballPreviewGoalImg: {fileID: 2000605884}
-  StrikePanel: {fileID: 481750531}
-  strikeBallImgs:
+  strikePanel: {fileID: 481750531}
+  strikeCntImgs:
   - {fileID: 1964554610}
   - {fileID: 677223623}
   - {fileID: 1138305771}

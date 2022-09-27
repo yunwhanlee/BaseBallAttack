@@ -6,37 +6,32 @@ using System;
 
 [System.Serializable]
 public class HitRank{
-    [SerializeField] float dist;
-    [SerializeField] int power;
+    [SerializeField] float dist;    public float Dist {get => dist;}
+    [SerializeField] int power;     public float Power {get => power;}
     public HitRank(float dist, int power){
         this.dist = dist;
         this.power = power;
     }
-    public float Dist {get => dist;}
-    public float Power {get => power;}
 }
 
 public class Player : MonoBehaviour
 {
+    public const int ONE_KILL = 999999;
     //* OutSide
-    public GameManager gm;
-    public EffectManager em;
+    GameManager gm;  EffectManager em;
+    Animator anim;
 
-    [Header("<---- HIT 角度範囲 ---->")]
-    // CAM1
+    [Header("ARROW")]
     public GameObject arrowAxisAnchor;
     public Image swingArcArea;
     private float swingArcRange;
     public int MAX_HIT_DEG; //左右ある方向の最大角度
     public float offsetHitDeg; // Startが０度(←方向)から、↑ →向きに回る。
     public GameObject previewBundle;
-    public GameObject[] ballPreviewSphere; // 2個
-
-    [Header("<---- HIT RANK ---->")]
+    public GameObject[] ballPreviewSphere = new GameObject[2]; // 2個
     public HitRank[] hitRank;
 
-
-    [Header("<---- Status ---->")]
+    [Header("STATUS")]
     [SerializeField] bool doSwing = false;      public bool DoSwing {get=> doSwing; set=> doSwing=value;}
     [SerializeField] bool isLevelUp = false;    public bool IsLevelUp {get=> isLevelUp; set=> isLevelUp=value;}
     [SerializeField] int befLv = 0;                public int BefLv {get=> befLv; set=> befLv=value;}
@@ -44,7 +39,7 @@ public class Player : MonoBehaviour
     [SerializeField] int maxExp = 100;        public int MaxExp {get=> maxExp; set=> maxExp=value;}
     [SerializeField] int exp = 0;               public int Exp {get=> exp; set=> exp=value;}
 
-    [Header("<---- Active Skill ---->")]
+    [Header("ACTIVE SKILL")]
     public float atvSkillCoolDownUnit = 0.05f;  public float AtvSkillCoolDownUnit {get=> atvSkillCoolDownUnit;}
     public string[] registAtvSkillNames;// = new string[3];
     public AtvSkill[] activeSkills;// = new ActiveSkill[3];
@@ -55,9 +50,7 @@ public class Player : MonoBehaviour
     [SerializeField] float fireBallCastWidth;    public float FireBallCastWidth {get=> fireBallCastWidth;   set => fireBallCastWidth = value;}
     [SerializeField] float poisonSmokeCastWidth;    public float PoisonSmokeCastWidth {get=> poisonSmokeCastWidth;   set => poisonSmokeCastWidth = value;}
     
-    
-    public const int ONE_KILL = 999999;
-    [Header("<---- Passive Skill ---->")]
+    [Header("PASSIVE SKILL")]
     public PsvSkill<int> dmg;
     public PsvSkill<int> multiShot;
     public PsvSkill<float> speed;
@@ -70,10 +63,10 @@ public class Player : MonoBehaviour
     public PsvSkill<float> criticalDamage;
     public PsvSkill<int> laser;
 
-    //* Component
-    private Animator anim;
-
     public void Start(){
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        em = gm.em;
+
         //* Player Model Set Parent
         var playerModel = DM.ins.transform.GetChild(0);
         playerModel.SetParent(this.gameObject.transform);// Parent TfをPlayerに移動。
@@ -89,8 +82,8 @@ public class Player : MonoBehaviour
         int childLastIdx = RightArm.childCount - 1;
         Transform bat = RightArm.GetChild(childLastIdx);
         BatEffectTf = bat.Find("BatEffectTf");
-        Debug.Log("Player:: Start:: RightArm.childCount= " + RightArm.childCount + ", RightArm= " + RightArm);
-        Debug.Log("Player:: charaTf= " + charaTf + ", BatEffectTf= " + BatEffectTf);
+        // Debug.Log("Player:: Start:: RightArm.childCount= " + RightArm.childCount + ", RightArm= " + RightArm);
+        // Debug.Log("Player:: charaTf= " + charaTf + ", BatEffectTf= " + BatEffectTf);
 
 #region Set ATV Skill DataBase
         //* A. Resource

@@ -74,7 +74,7 @@ public class ItemInfo : MonoBehaviour
         if(IsLock){//* gray Material 追加
             if(GrayPanel)   GrayPanel.gameObject.SetActive(true);
             else{
-                MeshRdrList.ForEach(mesh=> mesh.materials = new Material[] {DM.ins.grayItemLock});
+                MeshRdrList.ForEach(mesh=> mesh.materials = new Material[] {DM.ins.grayItemLockMt});
             }
         }
         else{

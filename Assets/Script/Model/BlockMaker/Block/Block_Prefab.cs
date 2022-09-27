@@ -6,59 +6,55 @@ using System;
 using Random = UnityEngine.Random;
 using SpriteGlow;
 
+[RequireComponent(typeof(Rigidbody), typeof(BoxCollider), typeof(Animator))]
 public class Block_Prefab : MonoBehaviour
 {
     public enum ColorIndex{RED, YELLOW, GREEN, BLUE};
     public enum BlockMt {PLAIN, WOOD, SAND, REDBRICK, IRON};
     public enum BlockType {NORMAL, BOMB, LR_ARROW, UPDOWN_ARROW};
-    const int TREASURECHEST_ORB_CNT = 15;
-    private GameManager gm;
-    private EffectManager em;
-    private Player pl;
-    private BlockMaker bm;
 
-    
+    //* OutSide
+    GameManager gm; EffectManager em; Player pl; BlockMaker bm;
+    SpriteGlowEffect itemUISprGlowEf;
 
-    // [SerializeField] private MeshRenderer[] meshRds;
-    [SerializeField] private MyMesh mesh; //* Material Instancing
-    [SerializeField] public Material[] originMts;
-    private Color color;
-    public Material[] mts;
-    public Material whiteHitMt;
-    public Transform itemTypeImgGroup;
-
-    private SpriteGlowEffect itemUISprGlowEf;
-    private const int iTEM_UI_SPR_GLOW_MIN = 1;
+    //* Value
+    private const int TREASURECHEST_ORB_CNT = 15;
+    private const int ITEMUI_SPRGLOW_MIN = 1;
     private float itemUISprGlowCnt = 0;
     private float itemUISprGlowSpan = 7.5f;
     private int itemUISprGlowSpd = 5;
     private bool itemUISprGlowTrigger = false;
+    Vector3 itemBlockBombBoxSize = new Vector3(3,2,2);
 
+    [Header("Mesh Material")]
+    [SerializeField] MyMesh mesh; //* Material Instancing
+    public Material[] originMts;
+    private Color color;
+    public Material[] mts;
+    public Material whiteHitMt;
+    public Transform itemTypeImgGroup;
     public SpriteGlowEffect sprGlowEf;
 
-    //* Value
+    [Header("TYPE")]
     public BlockMaker.BLOCK kind;
     [SerializeField] BlockType type = BlockType.NORMAL;
+
+    [Header("STATUS")]
+    [SerializeField] bool isDotDmg;  public bool IsDotDmg {get => isDotDmg; set => isDotDmg = value;}
+    [SerializeField] bool isHeal;   public bool IsHeal {get => isHeal; set => isHeal = value;}
     [SerializeField] int hp = 1;    public int Hp {get => hp; set => hp = value;}
     [SerializeField] int exp = 10;  public int Exp {get => exp; set => exp = value;}
-    [SerializeField] bool isDotDmg;  public bool IsDotDmg {get => isDotDmg; set => isDotDmg = value;}
-    [SerializeField] int itemTypePer;
-
-    [SerializeField] bool isHeal;   public bool IsHeal {get => isHeal; set => isHeal = value;}
+    [SerializeField][Range(1, 100)] int itemTypePer;
     [SerializeField] float healRadius = 1.5f;   public float HealRadius {get => healRadius; set => healRadius = value;}
-    [SerializeField] float healValPer = 0.15f;   public float HealValPer {get => healValPer; set => healValPer = value;}
+    [SerializeField][Range(0, 1)] float healValPer = 0.15f;   public float HealValPer {get => healValPer; set => healValPer = value;}
 
-    //* Spawn Animation
+    [Header("SPAWN ANIMATION")]
     [SerializeField] Vector3 defScale;
     [SerializeField] float minLimitVal;
     [SerializeField] float spawnAnimSpeed;
 
-    Vector3 itemBlockExplostionBoxSize = new Vector3(3,2,2);
-
-    //* GUI
+    [Header("GUI")]
     public Text hpTxt;
-
-    
 
     void Start() {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -192,7 +188,7 @@ public class Block_Prefab : MonoBehaviour
 
     private void animateItemTypeUISprGlowEF(ref float cnt){
         if(itemUISprGlowEf){
-            int min = iTEM_UI_SPR_GLOW_MIN;
+            int min = ITEMUI_SPRGLOW_MIN;
             float span = itemUISprGlowSpan;
             cnt = Mathf.Clamp(cnt, min, span);
             float val = (Time.deltaTime * itemUISprGlowSpd);
@@ -253,7 +249,7 @@ public class Block_Prefab : MonoBehaviour
             switch (type){
                 case BlockType.BOMB:
                     em.createItemBlockExplosionEF(this.transform.position);
-                    RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, itemBlockExplostionBoxSize / 2, Vector3.up);
+                    RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, itemBlockBombBoxSize / 2, Vector3.up);
                     Array.ForEach(hits, hit => {
                         if(hit.transform.tag == BlockMaker.NORMAL_BLOCK)  onDestroy(hit.transform.gameObject);
                     });

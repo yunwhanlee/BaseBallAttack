@@ -75,7 +75,7 @@ public class Ball_Prefab : MonoBehaviour
 
                 //* STRIKEデータ 初期化
                 gm.strikeCnt = 0;
-                foreach(var img in gm.strikeBallImgs) img.gameObject.SetActive(false); 
+                foreach(var img in gm.strikeCntImgs) img.gameObject.SetActive(false); 
 
                 //* offset Axis
                 const int leftSide = -1, rightSide = 1;
