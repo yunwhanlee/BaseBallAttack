@@ -50,7 +50,7 @@ public class BlockMaker : MonoBehaviour
             moveDownBlock();
         }
 
-        //*Boss
+        //* Boss
         if(gm.stage % BOSS_STAGE_SPAN == 0 && !IsBossSpawn){
             IsBossSpawn = true;
             if(IsBossSpawn && gm.bossGroup.childCount == 0){
@@ -59,11 +59,18 @@ public class BlockMaker : MonoBehaviour
                 var pos = new Vector3(0, 0, bossPrefs[0].transform.position.z + 2);
                 Instantiate(bossPrefs[0], pos, bossPrefs[0].transform.rotation, gm.bossGroup);
 
-                gm.bossSpawnTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
+                StartCoroutine(coPlayBossSpawnAnim());
             }
         }
+    }
 
-
+    IEnumerator coPlayBossSpawnAnim(){
+        Time.timeScale = 0.1f;
+        Debug.Log("coPlayBossSpawnAnim():: Time Stop");
+        gm.bossSpawnTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
+        yield return new WaitForSecondsRealtime(3);
+        Debug.Log("coPlayBossSpawnAnim():: Time Go");
+        Time.timeScale = 1;
     }
 
     public void createBlockRow(BLOCK type, bool isFirst = false, int verticalCnt = 1){

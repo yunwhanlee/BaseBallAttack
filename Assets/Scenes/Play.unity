@@ -3656,7 +3656,7 @@ GameObject:
   m_Component:
   - component: {fileID: 541951202}
   m_Layer: 5
-  m_Name: TextEFUI
+  m_Name: AnimationTxtEF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15426,10 +15426,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1566489868}
   - component: {fileID: 1566489873}
+  - component: {fileID: 1566489869}
   - component: {fileID: 1566489872}
   - component: {fileID: 1566489871}
   - component: {fileID: 1566489870}
-  - component: {fileID: 1566489869}
   m_Layer: 5
   m_Name: BossSpawnTxt
   m_TagString: Untagged
@@ -15469,7 +15469,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 7400b2d9293e1c1408d5aa60360476ac, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
