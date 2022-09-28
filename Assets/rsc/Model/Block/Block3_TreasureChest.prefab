@@ -406,6 +406,7 @@ GameObject:
   - component: {fileID: 448206033}
   - component: {fileID: 448206034}
   - component: {fileID: 6054201552203119240}
+  - component: {fileID: 5757835943736864466}
   m_Layer: 6
   m_Name: Block3_TreasureChest
   m_TagString: NormalBlock
@@ -471,7 +472,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eff9542434690c4390141f8db6a8735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshRds: []
+  gm: {fileID: 0}
+  mesh:
+    boss: []
+    block: []
   originMts: []
   mts:
   - {fileID: 2100000, guid: cf3da56f55dc78845aa9ee532679ca9a, type: 2}
@@ -483,15 +487,34 @@ MonoBehaviour:
   itemTypeImgGroup: {fileID: 146168757005873578}
   sprGlowEf: {fileID: 8204030625753644673}
   kind: 2
-  itemType: 3
+  type: 0
+  isDotDmg: 0
   hp: 1
   exp: 10
-  isDotDmg: 0
   itemTypePer: 10
   defScale: {x: 0, y: 0, z: 0}
   minLimitVal: 0
   spawnAnimSpeed: 0
   hpTxt: {fileID: 1047774097093635513}
+--- !u!95 &5757835943736864466
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7185378944005582944}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7185378944005582952
 GameObject:
   m_ObjectHideFlags: 0

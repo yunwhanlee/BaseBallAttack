@@ -14,7 +14,7 @@ public class Block_Prefab : MonoBehaviour
     public enum BlockType {NORMAL, BOMB, LR_ARROW, UPDOWN_ARROW};
 
     //* OutSide
-    GameManager gm; EffectManager em; Player pl; BlockMaker bm;
+    public GameManager gm; EffectManager em; Player pl; BlockMaker bm;
     SpriteGlowEffect itemUISprGlowEf;
     BoxCollider boxCollider;
     Animator animator;
@@ -43,12 +43,12 @@ public class Block_Prefab : MonoBehaviour
 
     [Header("STATUS")]
     [SerializeField] bool isDotDmg;  public bool IsDotDmg {get => isDotDmg; set => isDotDmg = value;}
-    [SerializeField] bool isHeal;   public bool IsHeal {get => isHeal; set => isHeal = value;}
     [SerializeField] int hp = 1;    public int Hp {get => hp; set => hp = value;}
     [SerializeField] int exp = 10;  public int Exp {get => exp; set => exp = value;}
     [SerializeField][Range(1, 100)] int itemTypePer;
-    [SerializeField] float healRadius = 1.5f;   public float HealRadius {get => healRadius; set => healRadius = value;}
-    [SerializeField][Range(0, 1)] float healValPer = 0.15f;   public float HealValPer {get => healValPer; set => healValPer = value;}
+    // [SerializeField] bool isHeal;   public bool IsHeal {get => isHeal; set => isHeal = value;}
+    // [SerializeField] float healRadius = 1.5f;   public float HealRadius {get => healRadius; set => healRadius = value;}
+    // [SerializeField][Range(0, 1)] float healValPer = 0.15f;   public float HealValPer {get => healValPer; set => healValPer = value;}
 
     [Header("SPAWN ANIMATION")]
     [SerializeField] Vector3 defScale;
@@ -74,7 +74,6 @@ public class Block_Prefab : MonoBehaviour
     }
 
     void Start() {
-
         //* Type Apply
         bool isItemBlock = false;
         int rand = Random.Range(0,100);
@@ -95,7 +94,7 @@ public class Block_Prefab : MonoBehaviour
         }
 
         setHp();
-        setStyle(); //* (TreasureChest除外)
+        setStyle(); //* (TreasureChestとhealBlockとBoss除外)
 
         //* Init Scale For Spawn Anim
         defScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
@@ -104,8 +103,8 @@ public class Block_Prefab : MonoBehaviour
         transform.localScale = Vector3.zero;
     }
 
-    void Update(){
-        hpTxt.text = hp.ToString();
+    protected void Update(){
+        hpTxt.text = Hp.ToString();
 
         //* Spawn Animation
         if(transform.localScale.x < defScale.x){
@@ -119,23 +118,6 @@ public class Block_Prefab : MonoBehaviour
 
         //* ItemType Glow Animation
         animateItemTypeUISprGlowEF(ref itemUISprGlowCnt);
-
-        //* Heal Block
-        if(kind == BlockMaker.BLOCK.Heal){
-            if(IsHeal){
-                IsHeal = false;
-                //Sphere Collider
-                RaycastHit[] rayHits = Physics.SphereCastAll(this.gameObject.transform.position, HealRadius, Vector3.up, 0);
-                foreach(var hit in rayHits){
-                    var hitBlock = hit.transform.GetComponent<Block_Prefab>();
-                    if(hit.transform.tag == BlockMaker.NORMAL_BLOCK && hitBlock.kind != BlockMaker.BLOCK.TreasureChest){
-                        int v = (int)(hitBlock.hp * healValPer);
-                        int addHp = (v==0)? 2 : v;
-                        hitBlock.increaseHp(addHp);
-                    }
-                }
-            }
-        }
     }
 
 //*-----------------------------------------
@@ -157,7 +139,7 @@ public class Block_Prefab : MonoBehaviour
 
     private void setStyle(){
         if(kind == BlockMaker.BLOCK.Normal || kind == BlockMaker.BLOCK.Long){
-            Debug.LogFormat("Block_Prefab:: kind={0}", kind);
+            // Debug.LogFormat("Block_Prefab:: kind={0}", kind);
             //* Material
             if(0 < Hp && Hp <= 10){
                 Exp = 10;   mesh.block[0].material = bm.Mts[(int)BlockMt.PLAIN]; 
@@ -224,7 +206,7 @@ public class Block_Prefab : MonoBehaviour
 
     private void OnTriggerEnter(Collider col) {
         //* GAMEOVER
-        if(col.gameObject.tag == "GameOverLine" && gm.State != GameManager.STATE.GAMEOVER){
+        if(col.gameObject.tag == DM.TAG.GameOverLine.ToString() && gm.State != GameManager.STATE.GAMEOVER){
             gm.setGameOver();
         }
     }
@@ -243,13 +225,10 @@ public class Block_Prefab : MonoBehaviour
     }
 
     public void decreaseHp(int dmg) {
-        Debug.Log($"decreaseHp(dmg= {dmg}):: gm= {gm}");
-
+        // Debug.Log($"decreaseHp(dmg= {dmg}):: gm= {gm}");
         Hp -= dmg;
-        
         gm.comboCnt++;
         gm.comboTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.IsHit.ToString());
-
         mesh.setWhiteHitEF();
 
         if(Hp <= 0) {

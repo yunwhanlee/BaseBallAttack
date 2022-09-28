@@ -147,7 +147,7 @@ public class BlockMaker : MonoBehaviour
         : BLOCK.Long;
     }
     public void checkIsHealBlock(){
-        var blocks = gm.blockGroup.GetComponentsInChildren<Block_Prefab>();
+        var blocks = gm.blockGroup.GetComponentsInChildren<HealBlock>();
         Array.ForEach(blocks, block => {
             if(block.kind == BLOCK.Heal){
                 block.IsHeal = true;
