@@ -58,7 +58,7 @@ public class Block_Prefab : MonoBehaviour
     [Header("GUI")]
     public Text hpTxt;
 
-    void Start() {
+    void Awake(){ //! 継承：親の場合、定義するソースはAwake()にしないと、Nullになる。
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         em = gm.em;
         pl = gm.pl;
@@ -68,10 +68,12 @@ public class Block_Prefab : MonoBehaviour
         boxCollider = GetComponent<BoxCollider>();
         animator = GetComponent<Animator>();
 
-        
         //* Material Instancing🌟
         mesh = new MyMesh(this);
         originMts = mesh.getOriginalMts();
+    }
+
+    void Start() {
 
         //* Type Apply
         bool isItemBlock = false;
@@ -241,6 +243,8 @@ public class Block_Prefab : MonoBehaviour
     }
 
     public void decreaseHp(int dmg) {
+        Debug.Log($"decreaseHp(dmg= {dmg}):: gm= {gm}");
+
         Hp -= dmg;
         
         gm.comboCnt++;
@@ -320,11 +324,6 @@ public class Block_Prefab : MonoBehaviour
             Gizmos.color = Color.black;
             // Gizmos.DrawWireSphere(this.transform.position, itemBlockExplostionRadius);
             // Gizmos.DrawWireCube(this.transform.position, new Vector3(3,2,2));
-        }
-
-        //* Kind
-        if(kind == BlockMaker.BLOCK.Heal){
-            Gizmos.DrawWireSphere(this.transform.position, HealRadius);
         }
     }
 }

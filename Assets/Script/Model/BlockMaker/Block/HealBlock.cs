@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HealBlock : Block_Prefab
 {
-    
     void OnDrawGizmos(){
         Gizmos.DrawWireSphere(this.transform.position, HealRadius);
     }

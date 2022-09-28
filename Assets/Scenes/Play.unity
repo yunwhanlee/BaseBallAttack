@@ -3173,7 +3173,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &477910093
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3991,11 +3991,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0893a29d1ed7167499d975e0eba67d71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 1623732227}
-  pl: {fileID: 702911506}
-  exceptSkNameList: []
   scrollingSpeed: 2300
   isRollingStop: 0
+  exceptSkNameList: []
   titleTxt: {fileID: 1368341126}
   levelTxt: {fileID: 149300364}
   explainTxt: {fileID: 960649140}
@@ -4874,7 +4872,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &687656591
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5100,8 +5098,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a66158f03c61604099ad030198f93e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 1623732227}
-  em: {fileID: 689221855}
   arrowAxisAnchor: {fileID: 1758083608}
   swingArcArea: {fileID: 1085245472}
   MAX_HIT_DEG: 90
@@ -15440,7 +15436,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1566489868
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15870,6 +15866,7 @@ MonoBehaviour:
   blockGroup: {fileID: 397967615}
   dropItemGroup: {fileID: 54044119}
   bossGroup: {fileID: 1746347279}
+  activeSkillBtnGroup: {fileID: 467978857}
   cam1: {fileID: 963194225}
   cam2: {fileID: 1343411146}
   cam1Canvas: {fileID: 1462164001}
@@ -15889,6 +15886,11 @@ MonoBehaviour:
   bestScore: 999
   strikeCnt: 0
   comboCnt: 0
+  strikePanel: {fileID: 481750531}
+  levelUpPanel: {fileID: 557986893}
+  pausePanel: {fileID: 1965303884}
+  gameoverPanel: {fileID: 1572075153}
+  statusFolderPanel: {fileID: 579425676}
   stageTxt: {fileID: 1558296299}
   stateTxt: {fileID: 764482078}
   levelTxt: {fileID: 738043204}
@@ -15896,23 +15898,21 @@ MonoBehaviour:
   - {fileID: 559128950}
   - {fileID: 1008511334}
   shootCntTxt: {fileID: 946186242}
+  homeRunTxtTf: {fileID: 477910093}
   expBar: {fileID: 1579494044}
   bossStageBar: {fileID: 205888219}
   expTxt: {fileID: 917257447}
   bossStageTxt: {fileID: 916758674}
-  homeRunTxtTf: {fileID: 477910093}
   comboTxt: {fileID: 744198046}
   perfectTxt: {fileID: 687656593}
   bossSpawnTxt: {fileID: 1566489872}
   hitRangeSlider: {fileID: 1926558710}
   ballPreviewDirGoal: {fileID: 434918240}
   ballPreviewGoalImg: {fileID: 2000605884}
-  strikePanel: {fileID: 481750531}
   strikeCntImgs:
   - {fileID: 1964554610}
   - {fileID: 677223623}
   - {fileID: 1138305771}
-  levelUpPanel: {fileID: 557986893}
   activeSkillBtnPf: {fileID: 4875220178185329753, guid: 8b8423f5606814d4dbbc29404dcc9045, type: 3}
   activeSkillDataBase:
   - name: Thunder
@@ -15969,15 +15969,11 @@ MonoBehaviour:
   - {fileID: 5646658460974134969, guid: 9c3959f2820441145a232b352b0eddc0, type: 3}
   inGameSkillStatusTableTf: {fileID: 790088329}
   inGameSkillImgBtnPref: {fileID: 2010402386914571623, guid: 0913717a214136445b6658417b86152b, type: 3}
-  pausePanel: {fileID: 1965303884}
   pauseSkillStatusTableTf: {fileID: 114093873}
   skillInfoRowPref: {fileID: 3622790578802042750, guid: ee31cff3369478142bf23697ccda1b04, type: 3}
-  gameoverPanel: {fileID: 1572075153}
-  statusFolderPanel: {fileID: 579425676}
   statusInfoContents: {fileID: 585957427}
   statusInfoTxtPf: {fileID: 1369939459836968500, guid: 6db33d0b3b6844c4d94c44afe4f9d09f, type: 3}
   readyBtn: {fileID: 543322737}
-  activeSkillBtnGroup: {fileID: 467978857}
   reGameBtn: {fileID: 1023542670}
   pauseBtn: {fileID: 1542116614}
   continueBtn: {fileID: 1150618591}
