@@ -65,10 +65,18 @@ public class BlockMaker : MonoBehaviour
     }
 
     IEnumerator coPlayBossSpawnAnim(){
+        //* 再生時間 習得
+        const int IDLE = 0, SPAWN = 1;
+        var anim = gm.bossSpawnTxt.GetComponent<Animator>();
+        AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
+        // Array.ForEach(clips, clip=> Debug.Log($"clip= {clip.name}, clip.length= {clip.length}"));
+        float playTimeSec = clips[SPAWN].length;
+
+
         Time.timeScale = 0.1f;
         Debug.Log("coPlayBossSpawnAnim():: Time Stop");
-        gm.bossSpawnTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
-        yield return new WaitForSecondsRealtime(3);
+        anim.SetTrigger(DM.ANIM.DoSpawn.ToString());
+        yield return new WaitForSecondsRealtime(playTimeSec);
         Debug.Log("coPlayBossSpawnAnim():: Time Go");
         Time.timeScale = 1;
     }

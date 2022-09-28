@@ -157,6 +157,8 @@ public class Block_Prefab : MonoBehaviour
         }
     }
     private void spawnAnim(string type){
+        if(kind == BlockMaker.BLOCK.Boss) return;
+        
         switch(type){
             case "Init":
                 defScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
