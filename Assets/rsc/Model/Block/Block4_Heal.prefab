@@ -405,7 +405,6 @@ GameObject:
   - component: {fileID: 7185378944005286976}
   - component: {fileID: 448206033}
   - component: {fileID: 448206034}
-  - component: {fileID: 6054201552203119240}
   - component: {fileID: 2674868728420350475}
   - component: {fileID: 2448452943055514428}
   m_Layer: 6
@@ -461,44 +460,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6054201552203119240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7185378944005582944}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eff9542434690c4390141f8db6a8735, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mesh:
-    boss: []
-    block: []
-  originMts: []
-  mts:
-  - {fileID: 2100000, guid: cf3da56f55dc78845aa9ee532679ca9a, type: 2}
-  - {fileID: 2100000, guid: 74c7b8e3ed8d60740ad629198f468a2e, type: 2}
-  - {fileID: 2100000, guid: a7f4b3a80cce5544186fb7a62b8fabb2, type: 2}
-  - {fileID: 2100000, guid: ee19e7bdbd2923340aa8973e1d4230b1, type: 2}
-  - {fileID: 2100000, guid: a5f3265eb027f0e41af7b62f064343df, type: 2}
-  whiteHitMt: {fileID: 2100000, guid: ef01bc3ad6c4a204698706049449af64, type: 2}
-  itemTypeImgGroup: {fileID: 146168757005873578}
-  sprGlowEf: {fileID: 8204030625753644673}
-  kind: 3
-  type: 0
-  isDotDmg: 0
-  isHeal: 0
-  hp: 1
-  exp: 10
-  itemTypePer: 10
-  healRadius: 1.5
-  healValPer: 0.15
-  defScale: {x: 0, y: 0, z: 0}
-  minLimitVal: 0
-  spawnAnimSpeed: 0
-  hpTxt: {fileID: 1047774097093635513}
 --- !u!95 &2674868728420350475
 Animator:
   serializedVersion: 3
@@ -530,6 +491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19788784a05583e4dab2f0900312c8c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gm: {fileID: 0}
   mesh:
     boss: []
     block: []
@@ -546,16 +508,16 @@ MonoBehaviour:
   kind: 3
   type: 0
   isDotDmg: 0
-  isHeal: 0
   hp: 1
   exp: 10
   itemTypePer: 0
-  healRadius: 1.5
-  healValPer: 0.15
   defScale: {x: 0, y: 0, z: 0}
   minLimitVal: 0
   spawnAnimSpeed: 0
   hpTxt: {fileID: 1047774097093635513}
+  isHeal: 0
+  healRadius: 1.5
+  healValPer: 0.15
 --- !u!1 &7185378944005582952
 GameObject:
   m_ObjectHideFlags: 0

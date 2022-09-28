@@ -46,9 +46,6 @@ public class Block_Prefab : MonoBehaviour
     [SerializeField] int hp = 1;    public int Hp {get => hp; set => hp = value;}
     [SerializeField] int exp = 10;  public int Exp {get => exp; set => exp = value;}
     [SerializeField][Range(1, 100)] int itemTypePer;
-    // [SerializeField] bool isHeal;   public bool IsHeal {get => isHeal; set => isHeal = value;}
-    // [SerializeField] float healRadius = 1.5f;   public float HealRadius {get => healRadius; set => healRadius = value;}
-    // [SerializeField][Range(0, 1)] float healValPer = 0.15f;   public float HealValPer {get => healValPer; set => healValPer = value;}
 
     [Header("SPAWN ANIMATION")]
     [SerializeField] Vector3 defScale;
@@ -74,11 +71,28 @@ public class Block_Prefab : MonoBehaviour
     }
 
     void Start() {
+        setType();　//* (NormalBlockのみ)
+        setHp();
+        setStyle(); //* (TreasureChest、healBlock、Boss 除外)
+        spawnAnim("Init");
+    }
+
+    protected void Update(){
+        hpTxt.text = Hp.ToString();
+        spawnAnim("Play");
+        animateItemTypeUISprGlowEF(ref itemUISprGlowCnt);//* ItemType Glow Animation
+    }
+
+//*-----------------------------------------
+//* 関数
+//*-----------------------------------------
+    private void setType(){
         //* Type Apply
         bool isItemBlock = false;
         int rand = Random.Range(0,100);
         itemTypePer = (int)(100 * pl.itemSpawn.Value); //百分率
         // Debug.Log("PassiveSkill:: Block_Prefab:: 「ItemSwpan Up」 rand("+rand+") <= per("+itemTypePer+") : " + ((rand <= itemTypePer)? "<color=green>true</color>" : "false"));
+
         if(kind == BlockMaker.BLOCK.Normal){
             isItemBlock = (rand < itemTypePer)? true : false;
         }
@@ -92,37 +106,7 @@ public class Block_Prefab : MonoBehaviour
             obj.SetActive(true);
             itemUISprGlowEf = obj.GetComponent<SpriteGlowEffect>();
         }
-
-        setHp();
-        setStyle(); //* (TreasureChestとhealBlockとBoss除外)
-
-        //* Init Scale For Spawn Anim
-        defScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
-        spawnAnimSpeed = 6f;
-        minLimitVal = defScale.x * 0.99f;
-        transform.localScale = Vector3.zero;
     }
-
-    protected void Update(){
-        hpTxt.text = Hp.ToString();
-
-        //* Spawn Animation
-        if(transform.localScale.x < defScale.x){
-            //* 99%まで大きくなったら、既存のサイズにする。(無駄な処理をしないため)
-            // Debug.Log("Block_Prefab:: Update():: transform.localScale= " + transform.localScale);
-            if(transform.localScale.x >= minLimitVal) {
-                transform.localScale = defScale;
-            }
-            transform.localScale = Vector3.Lerp(transform.localScale, defScale, Time.deltaTime * spawnAnimSpeed);
-        }
-
-        //* ItemType Glow Animation
-        animateItemTypeUISprGlowEF(ref itemUISprGlowCnt);
-    }
-
-//*-----------------------------------------
-//* 関数
-//*-----------------------------------------
     private void setHp(){
         switch(kind){
             case BlockMaker.BLOCK.TreasureChest:
@@ -136,7 +120,6 @@ public class Block_Prefab : MonoBehaviour
         }
         hpTxt.text = Hp.ToString();
     }
-
     private void setStyle(){
         if(kind == BlockMaker.BLOCK.Normal || kind == BlockMaker.BLOCK.Long){
             // Debug.LogFormat("Block_Prefab:: kind={0}", kind);
@@ -173,7 +156,27 @@ public class Block_Prefab : MonoBehaviour
             originMts[0] = mesh.block[0].material; //* オリジナルMt 保存。(材質O、色O ➡ Block用)
         }
     }
-
+    private void spawnAnim(string type){
+        switch(type){
+            case "Init":
+                defScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                spawnAnimSpeed = 6f;
+                minLimitVal = defScale.x * 0.99f;
+                transform.localScale = Vector3.zero;
+                break;
+            case "Play":
+                if(transform.localScale.x < defScale.x){
+                    // Debug.Log("Block_Prefab:: Update():: transform.localScale= " + transform.localScale);
+                    //* 99%まで大きくなったら、既存のサイズにする。(無駄な処理をしないため)
+                    if(transform.localScale.x >= minLimitVal) 
+                        transform.localScale = defScale;
+                    transform.localScale = Vector3.Lerp(
+                        transform.localScale, defScale, Time.deltaTime * spawnAnimSpeed
+                    );
+                }
+                break;
+        }
+    }
     private void animateItemTypeUISprGlowEF(ref float cnt){
         if(itemUISprGlowEf){
             int min = ITEMUI_SPRGLOW_MIN;
@@ -192,7 +195,6 @@ public class Block_Prefab : MonoBehaviour
             itemUISprGlowEf.GlowBrightness = cnt;
         }
     }
-
     public void setEnabledSpriteGlowEF(bool isTrigger){
         if(isTrigger){
             sprGlowEf.GlowBrightness = 8;   
@@ -212,16 +214,9 @@ public class Block_Prefab : MonoBehaviour
     }
 
     public void increaseHp(int heal){
-        
-        try{
-            Hp += heal;
-            em.createHealTxtEF(this.transform.position, heal);
-            em.createHeartEF(new Vector3(transform.position.x, transform.position.y+2, transform.position.z));
-        }
-        catch(Exception err){
-            Debug.LogError(err);
-        }
-        
+        Hp += heal;
+        em.createHealTxtEF(this.transform.position, heal);
+        em.createHeartEF(new Vector3(transform.position.x, transform.position.y+2, transform.position.z));
     }
 
     public void decreaseHp(int dmg) {
@@ -261,8 +256,8 @@ public class Block_Prefab : MonoBehaviour
     
 
     public void onDestroy(GameObject target, bool isInitialize = false) {
-        em.createBrokeBlockEF(target.transform.position, color);
         int resultExp = (!isInitialize)? (int)(exp * pl.expUp.Value) : 0; //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
+        em.createBrokeBlockEF(target.transform.position, color);
         bm.createDropItemExpOrbPf(this.transform, resultExp);
         
         if(kind == BlockMaker.BLOCK.TreasureChest){
