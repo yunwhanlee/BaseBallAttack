@@ -101,7 +101,6 @@ public class LevelUpPanelAnimate : MonoBehaviour
             foreach(var psvSkImg in gm.PsvSkillImgPrefs){
                 Instantiate(psvSkImg, Vector3.zero, Quaternion.identity, btn.imgRectTf);
             }
-                
             //Set Auto Scroll Start Pos
             btn.imgRectTf.localPosition = new Vector3(0, SPRITE_W * skillImgCnt, 0);
         }
