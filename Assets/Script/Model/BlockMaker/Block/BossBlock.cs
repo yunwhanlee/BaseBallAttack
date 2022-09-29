@@ -12,4 +12,8 @@ public class BossBlock : Block_Prefab
         boxCollider.enabled = !trigger;
         animator.SetBool(DM.ANIM.IsFly.ToString(), trigger);
     }
+
+    public void activeBossSkill(){
+        Debug.Log("<color=white>activeBossKill():: GO!!</color>");
+    }
 }

@@ -98,10 +98,10 @@ public class ObjectPool : MonoBehaviour
 
         var obj = childList.Find(ch => ch.name == key && !ch.gameObject.activeSelf);
         if(obj){
-            Debug.Log("getObject():: Active obj= " + obj);
+            // Debug.Log("getObject():: Active obj= " + obj);
         }
         else{
-            Debug.Log("getObject():: New Create!");
+            // Debug.Log("getObject():: New Create!");
             obj = Ins.createNewObject(key, groupTf);
         }
         

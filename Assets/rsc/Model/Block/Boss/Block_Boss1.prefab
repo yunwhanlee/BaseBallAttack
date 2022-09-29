@@ -2150,7 +2150,6 @@ GameObject:
   - component: {fileID: 7123070601197009834}
   - component: {fileID: 7123070601206941140}
   - component: {fileID: 7123070601111801786}
-  - component: {fileID: 8754524835884205089}
   - component: {fileID: 9003238178632980560}
   - component: {fileID: 4924410155617634794}
   m_Layer: 6
@@ -2209,37 +2208,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5, y: 3, z: 1}
   m_Center: {x: 0, y: 1.5, z: 1}
---- !u!114 &8754524835884205089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7123070601197486832}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eff9542434690c4390141f8db6a8735, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gm: {fileID: 0}
-  mesh:
-    boss: []
-    block: []
-  originMts: []
-  mts: []
-  whiteHitMt: {fileID: 2100000, guid: ef01bc3ad6c4a204698706049449af64, type: 2}
-  itemTypeImgGroup: {fileID: 0}
-  sprGlowEf: {fileID: 0}
-  kind: 4
-  type: 0
-  isDotDmg: 0
-  hp: 1000
-  exp: 10
-  itemTypePer: 10
-  defScale: {x: 0, y: 0, z: 0}
-  minLimitVal: 0
-  spawnAnimSpeed: 0
-  hpTxt: {fileID: 1326742590017898505}
 --- !u!54 &9003238178632980560
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2280,7 +2248,7 @@ MonoBehaviour:
   kind: 4
   type: 0
   isDotDmg: 0
-  hp: 1000
+  hp: 100
   exp: 10
   itemTypePer: 0
   defScale: {x: 0, y: 0, z: 0}

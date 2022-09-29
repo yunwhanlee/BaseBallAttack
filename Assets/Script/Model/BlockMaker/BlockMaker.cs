@@ -176,4 +176,9 @@ public class BlockMaker : MonoBehaviour
         else
             obj.GetComponent<Block_Prefab>().decreaseHp(dmg);
     }
+
+    public BossBlock getBossBlock(){
+        return (gm.bossGroup.childCount > 0)?
+            gm.bossGroup.GetChild(0).GetComponent<BossBlock>() : null;
+    }
 }

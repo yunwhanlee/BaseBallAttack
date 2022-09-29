@@ -7,8 +7,8 @@ public class ItemBlockDirLineTrailEFPref : MonoBehaviour
     private void OnTriggerEnter(Collider col) {
         if(col.transform.name.Contains(DM.NAME.Block.ToString())){
             if(col.transform.CompareTag(DM.TAG.BossBlock.ToString())) return;
-            if(col == this) return;
-            Debug.Log("OnTriggerEnter= " + col.name);
+            if(col.gameObject == this) return;
+            Debug.Log("OnTriggerEnter= " + col.gameObject.name);
             col.GetComponent<Block_Prefab>().decreaseHp(9999);
         }
     }

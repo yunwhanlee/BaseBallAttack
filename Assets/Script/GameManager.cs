@@ -247,8 +247,7 @@ public class GameManager : MonoBehaviour
 
     public void switchCamScene(){
         if(State == GameManager.STATE.GAMEOVER) return;
-        BossBlock boss = (bossGroup.childCount > 0)? bossGroup.GetChild(0).GetComponent<BossBlock>() : null;
-
+        BossBlock boss = bm.getBossBlock();
         if(!cam2.activeSelf){//* CAM2 On
             State = GameManager.STATE.PLAY;
             cam1.SetActive(false);
@@ -460,6 +459,10 @@ public class GameManager : MonoBehaviour
         var dropObjs = dropItemGroup.GetComponentsInChildren<DropItem>();
         Debug.Log("setNextStage:: dropObjs.Length= " + dropObjs.Length);
         Array.ForEach(dropObjs, dropObj => dropObj.IsMoveToPlayer = true);
+
+        //* BossSkill
+        BossBlock boss = bm.getBossBlock();
+        boss.activeBossSkill();
     }
 
     private void destroyEveryBalls(){
