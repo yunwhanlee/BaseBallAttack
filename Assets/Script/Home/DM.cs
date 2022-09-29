@@ -8,7 +8,9 @@ using System;
 public class DM : MonoBehaviour
 {
     public static DM ins;
-    public enum TAG {HitRangeArea, StrikeLine, GameOverLine, Wall, Block};
+    public enum NAME {DownWall, Block};
+    public enum TAG {HitRangeArea, StrikeLine, GameOverLine, Wall, ActiveDownWall, Player,
+        NormalBlock, LongBlock, TreasureChestBlock, HealBlock, BossBlock};
     public enum LAYER {BallPreview};
     public enum ANIM {DoSpawn, DoShake, IsHit, IsIdle, IsFly};
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};

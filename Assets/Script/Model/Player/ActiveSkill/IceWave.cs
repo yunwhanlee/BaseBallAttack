@@ -11,7 +11,7 @@ public class IceWave : MonoBehaviour
     }
     void OnTriggerEnter(Collider col)
     {
-        if(col.CompareTag(DM.TAG.Block.ToString())){
+        if(col.name.Contains(DM.NAME.Block.ToString())){
             col.GetComponent<Block_Prefab>().decreaseHp(AtvSkill.ICEWAVE_DMG);
             em.createCritTxtEF(col.transform.position, AtvSkill.ICEWAVE_DMG);
         }

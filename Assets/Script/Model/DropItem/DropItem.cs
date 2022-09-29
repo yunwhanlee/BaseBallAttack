@@ -52,7 +52,7 @@ public class DropItem : MonoBehaviour
         gm.bm.IsCreateBlock = true;
         if(gm.blockGroup.childCount == 0){//* Remove All Blocks Perfect Bonus!
             Debug.Log("PERFECT!");
-            gm.perfectTxt.GetComponent<Animator>().SetTrigger("doSpawn");
+            gm.perfectTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
             gm.em.enableUIStageTxtEF("Perfect");
             yield return new WaitForSeconds(1);
             //* STAGE % 5 == 0だったら、LONGブロックが続けて生成するBUG対応。
@@ -67,7 +67,7 @@ public class DropItem : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision col){
-        if(col.gameObject.tag == "Player"){
+        if(col.transform.CompareTag(DM.TAG.Player.ToString())){
             gm.pl.addExp(ExpVal); //* (BUG) GAMEOVER後、再スタート場合、EXPが増えないように。
             gm.em.createDropItemExpOrbEF(this.transform);
             // Destroy(this.gameObject);

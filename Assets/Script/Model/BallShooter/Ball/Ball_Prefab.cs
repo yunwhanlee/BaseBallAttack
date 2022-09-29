@@ -61,7 +61,7 @@ public class Ball_Prefab : MonoBehaviour
     //** Control
     private void OnTriggerStay(Collider col) {
 #region Hit Ball
-        if(col.gameObject.tag == DM.TAG.HitRangeArea.ToString()){
+        if(col.transform.CompareTag(DM.TAG.HitRangeArea.ToString())){
             pl.setSwingArcColor("red");
             if(pl.DoSwing && gm.State == GameManager.STATE.PLAY){
                 gm.switchCamScene();
@@ -157,7 +157,7 @@ public class Ball_Prefab : MonoBehaviour
                         em.createLaserEF(start, direction);
                         RaycastHit[] hits = Physics.RaycastAll(start, direction, 100);
                         Array.ForEach(hits, hit => {
-                            if(hit.transform.CompareTag(DM.TAG.Block.ToString())){
+                            if(hit.transform.name ==DM.NAME.Block.ToString()){
                                 Debug.Log("LAZER!! Hit Obj-> " + hit.transform.name);
                                 var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
                                 int dmg = pl.dmg.Value;
@@ -171,7 +171,7 @@ public class Ball_Prefab : MonoBehaviour
                 #endregion
             }
         }
-        else if(col.gameObject.tag == "ActiveDownWall"){
+        else if(col.transform.CompareTag(DM.TAG.ActiveDownWall.ToString())){
             pl.DoSwing = false;
             if(gm.State == GameManager.STATE.WAIT){
                 gm.downWall.isTrigger = false;//*下壁 物理O
@@ -182,14 +182,14 @@ public class Ball_Prefab : MonoBehaviour
 
     private void OnTriggerExit(Collider col) {
         //* SWING Ball
-        if(col.gameObject.tag == DM.TAG.HitRangeArea.ToString()){ //* HIT BALL
+        if(col.transform.CompareTag(DM.TAG.HitRangeArea.ToString())){ //* HIT BALL
             Debug.Log("OnTriggerExit:: BAT SWING BALL");
             pl.setSwingArcColor("yellow");
             //* 日程時間が過ぎたら、ボール削除。
             isHitedByBlock = true;
             InvokeRepeating("checkLimitTimeToDeleteBall", 0, deleteLimitTime);
         }
-        else if(col.gameObject.tag == DM.TAG.StrikeLine.ToString()){ //* ストライク
+        else if(col.transform.CompareTag(DM.TAG.StrikeLine.ToString())){ //* ストライク
             onDestroyMe(true);
         }
     }
@@ -205,7 +205,7 @@ public class Ball_Prefab : MonoBehaviour
     //* Hit Block (Explosion EF)
     //* ---------------------------------------------------------------------------------
     private void OnCollisionEnter(Collision col) {//* Give Damage
-        if(col.gameObject.tag == DM.TAG.Block.ToString()){
+        if(col.transform.name.Contains(DM.NAME.Block.ToString())){
 #region #2. Active Skill 「HIT BALL」
             isHitedByBlock = true;
             gm.activeSkillBtnList.ForEach(skillBtn => {
@@ -292,15 +292,17 @@ public class Ball_Prefab : MonoBehaviour
                 //Sphere Collider
                 RaycastHit[] rayHits = Physics.SphereCastAll(this.gameObject.transform.position, pl.explosion.Value.range, Vector3.up, 0);
                 foreach(var hit in rayHits){
-                    if(hit.transform.CompareTag(DM.TAG.Block.ToString()))
+                    if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
                         hit.transform.GetComponent<Block_Prefab>().decreaseHp(result);
+                    }
                 }
             }else{
+                Debug.Log($"decreaseHP!:: {col.transform.name}.Contains({DM.NAME.Block.ToString()}) = {col.transform.name.Contains(DM.NAME.Block.ToString())}");
                 col.gameObject.GetComponent<Block_Prefab>().decreaseHp(result);
             }
 #endregion            
         }
-        else if(col.gameObject.tag == "Wall" && col.gameObject.name == "DownWall"){
+        else if(col.transform.CompareTag(DM.TAG.Wall.ToString()) && col.gameObject.name == DM.NAME.DownWall.ToString()){
             Vector3 pos = new Vector3(this.transform.position.x, col.gameObject.transform.position.y, col.gameObject.transform.position.z);
             em.createDownWallHitEF(pos);
         }
@@ -311,7 +313,7 @@ public class Ball_Prefab : MonoBehaviour
     private void decreaseHpSphereCastAll(DM.ATV atv, int dmg, float dotDmgPer = 0){
         RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.FireBallCastWidth, Vector3.up, 0);
         Array.ForEach(hits, hit => {
-            if(hit.transform.CompareTag(DM.TAG.Block.ToString())){
+            if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
                 var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
                 //* Is DotDmg Type?
                 if(!(dotDmgPer == 0) && !block.IsDotDmg){
@@ -403,7 +405,7 @@ public class Ball_Prefab : MonoBehaviour
                 //* Collider 
                 RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, Vector3.one * width, dir, Quaternion.identity, maxDistance);
                 Array.ForEach(hits, hit => {
-                    if(hit.transform.CompareTag(DM.TAG.Block.ToString())){
+                    if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
                         StartCoroutine(coSetThunderSkill(hit)); //* With HomeRun Bonus
                     }
                 });

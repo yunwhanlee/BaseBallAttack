@@ -84,7 +84,7 @@ public class Block_Prefab : MonoBehaviour
     }
     private void OnTriggerEnter(Collider col) {
         //* GAMEOVER
-        if(col.gameObject.tag == DM.TAG.GameOverLine.ToString() && gm.State != GameManager.STATE.GAMEOVER){
+        if(col.transform.CompareTag(DM.TAG.GameOverLine.ToString()) && gm.State != GameManager.STATE.GAMEOVER){
             gm.setGameOver();
         }
     }
@@ -229,7 +229,7 @@ public class Block_Prefab : MonoBehaviour
                     em.createItemBlockExplosionEF(this.transform.position);
                     RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, itemBlockBombBoxSizeVec / 2, Vector3.up);
                     Array.ForEach(hits, hit => {
-                        if(hit.transform.CompareTag(DM.TAG.Block.ToString())){
+                        if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
                             if(hit.transform.name.Contains(BlockMaker.KIND.Boss.ToString())) return;
                             onDestroy(hit.transform.gameObject);
                         }

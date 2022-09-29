@@ -9,7 +9,6 @@ TagManager:
   - Wall
   - HitRangeArea
   - Ball
-  - NormalBlock
   - ActiveDownWall
   - StrikeLine
   - GameOverLine
@@ -17,6 +16,11 @@ TagManager:
   - FxTemporaire
   - AtvSkillCast
   - Block
+  - NormalBlock
+  - LongBlock
+  - TreasureChestBlock
+  - HealBlock
+  - BossBlock
   layers:
   - Default
   - TransparentFX

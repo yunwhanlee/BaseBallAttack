@@ -24,13 +24,13 @@ public class ActiveSkillGizmos : MonoBehaviour
 
 
     protected void OnTriggerEnter(Collider col){
-        if(col.gameObject.CompareTag(DM.TAG.Block.ToString())){
+        if(col.gameObject.name.Contains(DM.NAME.Block.ToString())){
             Debug.Log("ActiveSkillGizmos:: OnTriggerEnter:: col.name= " + col.name);
             col.GetComponent<Block_Prefab>().setEnabledSpriteGlowEF(true);
         }
     }
     protected void OnTriggerExit(Collider col){
-        if(col.gameObject.CompareTag(DM.TAG.Block.ToString())){
+        if(col.gameObject.name.Contains(DM.NAME.Block.ToString())){
             Debug.Log("ActiveSkillGizmos:: OnTriggerExit:: col.name= " + col.name);
             col.GetComponent<Block_Prefab>().setEnabledSpriteGlowEF(false);
         }
