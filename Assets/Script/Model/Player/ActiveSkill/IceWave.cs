@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class IceWave : MonoBehaviour
 {
+    GameManager gm;
+    BlockMaker bm;
     EffectManager em;
-    void Start()
-    {
-        em = GameObject.Find("EffectManager").GetComponent<EffectManager>();
+    void Start(){
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        bm = gm.bm;
+        em = gm.em;
     }
-    void OnTriggerEnter(Collider col)
-    {
+    
+    void OnTriggerEnter(Collider col){
         if(col.name.Contains(DM.NAME.Block.ToString())){
-            col.GetComponent<Block_Prefab>().decreaseHp(AtvSkill.ICEWAVE_DMG);
+            bm.setDecreaseHP(col.gameObject, AtvSkill.ICEWAVE_DMG);
             em.createCritTxtEF(col.transform.position, AtvSkill.ICEWAVE_DMG);
         }
     }

@@ -157,11 +157,10 @@ public class Ball_Prefab : MonoBehaviour
                         em.createLaserEF(start, direction);
                         RaycastHit[] hits = Physics.RaycastAll(start, direction, 100);
                         Array.ForEach(hits, hit => {
-                            if(hit.transform.name ==DM.NAME.Block.ToString()){
+                            if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
                                 Debug.Log("LAZER!! Hit Obj-> " + hit.transform.name);
-                                var block = hit.transform.GetComponent<Block_Prefab>();
                                 int dmg = pl.dmg.Value;
-                                block.decreaseHp(dmg);
+                                bm.setDecreaseHP(hit.transform.gameObject, dmg);
                                 em.createCritTxtEF(hit.transform.position, dmg);
                             }
                         });
@@ -285,15 +284,12 @@ public class Ball_Prefab : MonoBehaviour
                 isOnExplosion = pl.explosion.setHitTypeSkill(pl.explosion.Value.per, ref result, col, em, pl, this.gameObject);
             }
 
-            
             //* Set DAMAGE
             Debug.Log("result= " + result);
             if(isOnExplosion){//* Explosion (爆発)
                 RaycastHit[] rayHits = Physics.SphereCastAll(this.gameObject.transform.position, pl.explosion.Value.range, Vector3.up, 0);
                 foreach(var hit in rayHits){
-                    if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
-                        hit.transform.GetComponent<Block_Prefab>().decreaseHp(result);
-                    }
+                    bm.setDecreaseHP(hit.transform.gameObject, result);
                 }
             }
             else{//* Normal Damage Result
@@ -437,7 +433,7 @@ public class Ball_Prefab : MonoBehaviour
             AtvSkill.THUNDERSHOT_CRT + 1 : AtvSkill.THUNDERSHOT_CRT;
 
         //* Set Dmg & Multi CriticalTextEF
-        hit.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(((int)(pl.dmg.Value * critDmgRatio) * multiCnt));
+        bm.setDecreaseHP(hit.transform.gameObject, ((int)(pl.dmg.Value * critDmgRatio) * multiCnt));
         StartCoroutine(coMultiCriticalDmgEF(critDmgRatio, multiCnt, hit.transform.position));
     }
     IEnumerator coMultiCriticalDmgEF(float critDmgRatio, int cnt, Vector3 hitPos){
