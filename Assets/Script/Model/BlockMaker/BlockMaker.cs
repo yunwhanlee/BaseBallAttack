@@ -11,28 +11,31 @@ public class BlockMaker : MonoBehaviour
     //* OutSide
     public GameManager gm;
 
-    const float WIDTH = 1.9f;
-    const float HEIGHT = 1;
+    // const float WIDTH = 1.9f;
+    // const float HEIGHT = 1;
+    // const float SPAWN_POS_X = -5;
     const int MAX_HORIZONTAL_GRID = 6;
     const int FIRST_CREATE_VERTICAL_CNT = 4; //DEAD_MAX-> 13
-    // const float SPAWN_POS_X = -5;
-    const float SPWAN_POS_Y = -2;
-    public float BLOCK2_SPAN = 5;
-    public int BOSS_STAGE_SPAN = 10;
-    public bool isBossSpawn = false;    public bool IsBossSpawn {get => isBossSpawn; set => isBossSpawn = value;}
+    const float START_POS_Y = -2;
 
-    [Header("<---- Special Block Spawn Percent  ---->")]
+    [Header("STATUS")]
+    public bool isCreateBlock;  public bool IsCreateBlock {get => isCreateBlock; set => isCreateBlock = value;}
+    public bool isBossSpawn = false;    public bool IsBossSpawn {get => isBossSpawn; set => isBossSpawn = value;}
+    public float LONG_BLOCK_SPAN = 5;
+    public int BOSS_STAGE_SPAN = 10;
+
+    [Header("PERCENT")]
     public int skipBlockPer = 20;
     public int treasureChestBlockPer = 10;
     public int healBlockPer = 10;
 
+    [Header("RESOURCE")]
     public GameObject[] blockPrefs;
     public GameObject[] bossPrefs;
-    public bool isCreateBlock;  public bool IsCreateBlock {get => isCreateBlock; set => isCreateBlock = value;}
     public Color[] colors;   public Color[] Colors {get => colors;}
     public Material[] mts;   public Material[] Mts {get => mts;}
 
-    [Header("<---- DROP ITEMS ---->")]
+    [Header("DROP ITEM")]
     public GameObject dropItemExpOrbPf;
 
     public void Start() {
@@ -65,7 +68,7 @@ public class BlockMaker : MonoBehaviour
 
     IEnumerator coPlayBossSpawnAnim(){
         //* 再生時間 習得
-        const int IDLE = 0, SPAWN = 1;
+        const int SPAWN = 1; // IDLE = 0
         var anim = gm.bossSpawnTxt.GetComponent<Animator>();
         AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
         // Array.ForEach(clips, clip=> Debug.Log($"clip= {clip.name}, clip.length= {clip.length}"));
@@ -109,7 +112,7 @@ public class BlockMaker : MonoBehaviour
                         //* #3. Block Normal + Newゲーム開始なのか、次のステージなのか？
                         float x = h < 3 ? (spawnPosX + h * xs) : (spawnPosX + h * xs + middleGap * offsetCnt);
                         float y = (isFirst)? 0 : ins.transform.position.y + gm.blockGroup.position.y;
-                        float z = (isFirst)? -v : SPWAN_POS_Y;
+                        float z = (isFirst)? -v : START_POS_Y;
                         Vector3 pos = new Vector3(x, y, z);
                         Vector3 setPos = (isFirst)? pos + gm.blockGroup.position : pos;
                         Instantiate(ins, setPos, Quaternion.identity, gm.blockGroup);
@@ -122,7 +125,7 @@ public class BlockMaker : MonoBehaviour
                     var ins = blockPrefs[(int)type];
                     float x = h < 1 ? spawnPosX + h * xs : spawnPosX + h * xs + middleGap;
                     float y = ins.transform.position.y + gm.blockGroup.position.y;
-                    Vector3 pos = new Vector3(x, y, SPWAN_POS_Y);
+                    Vector3 pos = new Vector3(x, y, START_POS_Y);
                     Instantiate(ins, pos, Quaternion.identity, gm.blockGroup);
                 }
                 break;
@@ -140,7 +143,7 @@ public class BlockMaker : MonoBehaviour
         gm.blockGroup.position = new Vector3(gm.blockGroup.position.x, gm.blockGroup.position.y, gm.blockGroup.position.z - 1);
 
         //* Next Set Block Type
-        if(gm.stage % BLOCK2_SPAN == 0){
+        if(gm.stage % LONG_BLOCK_SPAN == 0){
             createBlockRow(KIND.Long);
         }else{
             createBlockRow(KIND.Normal);

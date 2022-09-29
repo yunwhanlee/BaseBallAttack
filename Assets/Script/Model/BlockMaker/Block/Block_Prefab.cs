@@ -115,7 +115,7 @@ public class Block_Prefab : MonoBehaviour
             case BlockMaker.KIND.Normal:
             case BlockMaker.KIND.Long:
             case BlockMaker.KIND.Heal:
-                Hp = (gm.stage % bm.BLOCK2_SPAN == 0)? gm.stage * 5 : gm.stage; //* Block2 : Block1
+                Hp = (gm.stage % bm.LONG_BLOCK_SPAN == 0)? gm.stage * 5 : gm.stage; //* Block2 : Block1
                 break;
         }
         hpTxt.text = Hp.ToString();
