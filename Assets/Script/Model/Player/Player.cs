@@ -120,7 +120,7 @@ public class Player : MonoBehaviour
         expUp = new PsvSkill<float>(
             LANG.getTxt(DM.PSV.ExpUp.ToString()), psvLvArr[(int)DM.PSV.ExpUp].lv, 1f, 0.2f);
         itemSpawn = new PsvSkill<float>(
-            LANG.getTxt(DM.PSV.ItemSpawn.ToString()), psvLvArr[(int)DM.PSV.ItemSpawn].lv, 0.1f, 0.05f);
+            LANG.getTxt(DM.PSV.ItemSpawn.ToString()), psvLvArr[(int)DM.PSV.ItemSpawn].lv, 0, 0.05f);
         verticalMultiShot = new PsvSkill<int>(
             LANG.getTxt(DM.PSV.VerticalMultiShot.ToString()), psvLvArr[(int)DM.PSV.VerticalMultiShot].lv, 0, 1);
         criticalDamage = new PsvSkill<float>(

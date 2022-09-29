@@ -26,6 +26,7 @@ public class BlockMaker : MonoBehaviour
 
     [Header("PERCENT")]
     public int skipBlockPer = 20;
+    public int itemTypePer = 10;
     public int treasureChestBlockPer = 10;
     public int healBlockPer = 10;
 
@@ -74,12 +75,9 @@ public class BlockMaker : MonoBehaviour
         // Array.ForEach(clips, clip=> Debug.Log($"clip= {clip.name}, clip.length= {clip.length}"));
         float playTimeSec = clips[SPAWN].length;
 
-
         Time.timeScale = 0.1f;
-        Debug.Log("coPlayBossSpawnAnim():: Time Stop");
         anim.SetTrigger(DM.ANIM.DoSpawn.ToString());
         yield return new WaitForSecondsRealtime(playTimeSec);
-        Debug.Log("coPlayBossSpawnAnim():: Time Go");
         Time.timeScale = 1;
     }
 

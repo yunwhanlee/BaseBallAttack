@@ -26,7 +26,7 @@ public class Block_Prefab : MonoBehaviour
     private float itemUISprGlowSpan = 7.5f;
     private int itemUISprGlowSpd = 5;
     private bool itemUISprGlowTrigger = false;
-    Vector3 itemBlockBombBoxSize = new Vector3(3,2,2);
+    Vector3 itemBlockBombBoxSizeVec = new Vector3(3,2,2);
 
     [Header("Mesh Material")]
     [SerializeField] MyMesh mesh; //* Material Instancing
@@ -82,27 +82,28 @@ public class Block_Prefab : MonoBehaviour
         spawnAnim("Play");
         animateItemTypeUISprGlowEF(ref itemUISprGlowCnt);//* ItemType Glow Animation
     }
-
+    private void OnTriggerEnter(Collider col) {
+        //* GAMEOVER
+        if(col.gameObject.tag == DM.TAG.GameOverLine.ToString() && gm.State != GameManager.STATE.GAMEOVER){
+            gm.setGameOver();
+        }
+    }
 //*-----------------------------------------
 //* 関数
 //*-----------------------------------------
     private void setType(){
-        //* Type Apply
-        bool isItemBlock = false;
         int rand = Random.Range(0,100);
-        itemTypePer = (int)(100 * pl.itemSpawn.Value); //百分率
-        // Debug.Log("PassiveSkill:: Block_Prefab:: 「ItemSwpan Up」 rand("+rand+") <= per("+itemTypePer+") : " + ((rand <= itemTypePer)? "<color=green>true</color>" : "false"));
+        itemTypePer = (int)(100 * ((bm.itemTypePer * 0.01f) + pl.itemSpawn.Value)); //百分率
 
-        if(kind == BlockMaker.KIND.Normal){
-            isItemBlock = (rand < itemTypePer)? true : false;
-        }
-        if(isItemBlock){
-            int typeCnt = System.Enum.GetValues(typeof(BlockType)).Length - 1; //enum Type Cnt Without Normal
-            type = (BlockType)Random.Range(0, typeCnt);
-            // Debug.Log("Block_Prefab:: typeCnt= " + typeCnt + ", itemType=" + itemType + " " + (int)itemType);
+        if(kind == BlockMaker.KIND.Normal && rand < itemTypePer){
+            int len = System.Enum.GetValues(typeof(BlockType)).Length; 
+            rand = Random.Range(0, len - 1); //* LastIndex
+            type = (BlockType)rand + 1; //* BlockType.NORMAL 除外
+            int tranformIdx = rand; 
+            // Debug.Log($"ItemBlockType:: len= {len}, rand= {rand}, type= {type}");
 
-            //既にあるイメージObj中の一つをランダムで活性化
-            var obj = itemTypeImgGroup.GetChild((int)type).gameObject;//.SetActive(true);
+            //* 該当なTransform活性化
+            var obj = itemTypeImgGroup.GetChild(tranformIdx).gameObject;//.SetActive(true);
             obj.SetActive(true);
             itemUISprGlowEf = obj.GetComponent<SpriteGlowEffect>();
         }
@@ -207,14 +208,6 @@ public class Block_Prefab : MonoBehaviour
             sprGlowEf.OutlineWidth = 0;
         }
     }
-
-    private void OnTriggerEnter(Collider col) {
-        //* GAMEOVER
-        if(col.gameObject.tag == DM.TAG.GameOverLine.ToString() && gm.State != GameManager.STATE.GAMEOVER){
-            gm.setGameOver();
-        }
-    }
-
     public void increaseHp(int heal){
         Hp += heal;
         em.createHealTxtEF(this.transform.position, heal);
@@ -228,14 +221,17 @@ public class Block_Prefab : MonoBehaviour
         gm.comboTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.IsHit.ToString());
         mesh.setWhiteHitEF();
 
+        //* 破壊
         if(Hp <= 0) {
             //* アイテムブロック 処理
             switch (type){
                 case BlockType.BOMB:
                     em.createItemBlockExplosionEF(this.transform.position);
-                    RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, itemBlockBombBoxSize / 2, Vector3.up);
+                    RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, itemBlockBombBoxSizeVec / 2, Vector3.up);
                     Array.ForEach(hits, hit => {
-                        if(hit.transform.CompareTag(DM.TAG.Block.ToString()))  onDestroy(hit.transform.gameObject);
+                        if(hit.transform.CompareTag(DM.TAG.Block.ToString())){
+                            onDestroy(hit.transform.gameObject);
+                        }
                     });
                     break;
                 case BlockType.LR_ARROW:
@@ -258,7 +254,7 @@ public class Block_Prefab : MonoBehaviour
     
 
     public void onDestroy(GameObject target, bool isInitialize = false) {
-        int resultExp = (!isInitialize)? (int)(exp * pl.expUp.Value) : 0; //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
+        int resultExp = (!isInitialize)? (int)(Exp * pl.expUp.Value) : 0; //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
         em.createBrokeBlockEF(target.transform.position, color);
         bm.createDropItemExpOrbPf(this.transform, resultExp);
         
@@ -299,7 +295,7 @@ public class Block_Prefab : MonoBehaviour
         if(type == BlockType.BOMB){
             Gizmos.color = Color.black;
             // Gizmos.DrawWireSphere(this.transform.position, itemBlockExplostionRadius);
-            // Gizmos.DrawWireCube(this.transform.position, new Vector3(3,2,2));
+            Gizmos.DrawWireCube(this.transform.position, itemBlockBombBoxSizeVec);
         }
     }
 }
