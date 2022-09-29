@@ -27,7 +27,7 @@ public class PoisonSmoke : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if(col.CompareTag(BlockMaker.NORMAL_BLOCK)){
+        if(col.CompareTag(DM.TAG.Block.ToString())){
             col.GetComponent<Block_Prefab>().IsDotDmg = true;
         }
     }

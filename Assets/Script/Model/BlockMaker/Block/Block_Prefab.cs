@@ -38,7 +38,7 @@ public class Block_Prefab : MonoBehaviour
     public SpriteGlowEffect sprGlowEf;
 
     [Header("TYPE")]
-    public BlockMaker.BLOCK kind;
+    public BlockMaker.KIND kind;
     [SerializeField] BlockType type = BlockType.NORMAL;
 
     [Header("STATUS")]
@@ -93,7 +93,7 @@ public class Block_Prefab : MonoBehaviour
         itemTypePer = (int)(100 * pl.itemSpawn.Value); //百分率
         // Debug.Log("PassiveSkill:: Block_Prefab:: 「ItemSwpan Up」 rand("+rand+") <= per("+itemTypePer+") : " + ((rand <= itemTypePer)? "<color=green>true</color>" : "false"));
 
-        if(kind == BlockMaker.BLOCK.Normal){
+        if(kind == BlockMaker.KIND.Normal){
             isItemBlock = (rand < itemTypePer)? true : false;
         }
         if(isItemBlock){
@@ -109,19 +109,19 @@ public class Block_Prefab : MonoBehaviour
     }
     private void setHp(){
         switch(kind){
-            case BlockMaker.BLOCK.TreasureChest:
+            case BlockMaker.KIND.TreasureChest:
                 Hp = 1;
                 break;    
-            case BlockMaker.BLOCK.Normal:
-            case BlockMaker.BLOCK.Long:
-            case BlockMaker.BLOCK.Heal:
+            case BlockMaker.KIND.Normal:
+            case BlockMaker.KIND.Long:
+            case BlockMaker.KIND.Heal:
                 Hp = (gm.stage % bm.BLOCK2_SPAN == 0)? gm.stage * 5 : gm.stage; //* Block2 : Block1
                 break;
         }
         hpTxt.text = Hp.ToString();
     }
     private void setStyle(){
-        if(kind == BlockMaker.BLOCK.Normal || kind == BlockMaker.BLOCK.Long){
+        if(kind == BlockMaker.KIND.Normal || kind == BlockMaker.KIND.Long){
             // Debug.LogFormat("Block_Prefab:: kind={0}", kind);
             //* Material
             if(0 < Hp && Hp <= 10){
@@ -157,7 +157,7 @@ public class Block_Prefab : MonoBehaviour
         }
     }
     private void spawnAnim(string type){
-        if(kind == BlockMaker.BLOCK.Boss) return;
+        if(kind == BlockMaker.KIND.Boss) return;
         
         switch(type){
             case "Init":
@@ -235,7 +235,7 @@ public class Block_Prefab : MonoBehaviour
                     em.createItemBlockExplosionEF(this.transform.position);
                     RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, itemBlockBombBoxSize / 2, Vector3.up);
                     Array.ForEach(hits, hit => {
-                        if(hit.transform.tag == BlockMaker.NORMAL_BLOCK)  onDestroy(hit.transform.gameObject);
+                        if(hit.transform.CompareTag(DM.TAG.Block.ToString()))  onDestroy(hit.transform.gameObject);
                     });
                     break;
                 case BlockType.LR_ARROW:
@@ -262,7 +262,7 @@ public class Block_Prefab : MonoBehaviour
         em.createBrokeBlockEF(target.transform.position, color);
         bm.createDropItemExpOrbPf(this.transform, resultExp);
         
-        if(kind == BlockMaker.BLOCK.TreasureChest){
+        if(kind == BlockMaker.KIND.TreasureChest){
             for(int i=0; i<TREASURECHEST_ORB_CNT; i++){
                 bm.createDropItemExpOrbPf(this.transform, resultExp);
             }

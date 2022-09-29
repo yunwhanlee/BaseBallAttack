@@ -157,7 +157,7 @@ public class Ball_Prefab : MonoBehaviour
                         em.createLaserEF(start, direction);
                         RaycastHit[] hits = Physics.RaycastAll(start, direction, 100);
                         Array.ForEach(hits, hit => {
-                            if(hit.transform.tag == BlockMaker.NORMAL_BLOCK){
+                            if(hit.transform.CompareTag(DM.TAG.Block.ToString())){
                                 Debug.Log("LAZER!! Hit Obj-> " + hit.transform.name);
                                 var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
                                 int dmg = pl.dmg.Value;
@@ -205,7 +205,7 @@ public class Ball_Prefab : MonoBehaviour
     //* Hit Block (Explosion EF)
     //* ---------------------------------------------------------------------------------
     private void OnCollisionEnter(Collision col) {//* Give Damage
-        if(col.gameObject.tag == BlockMaker.NORMAL_BLOCK){
+        if(col.gameObject.tag == DM.TAG.Block.ToString()){
 #region #2. Active Skill 「HIT BALL」
             isHitedByBlock = true;
             gm.activeSkillBtnList.ForEach(skillBtn => {
@@ -229,7 +229,7 @@ public class Ball_Prefab : MonoBehaviour
                             break;
                         }
                         case DM.ATV.ColorBall:{
-                            if(col.gameObject.GetComponent<Block_Prefab>().kind != BlockMaker.BLOCK.TreasureChest){
+                            if(col.gameObject.GetComponent<Block_Prefab>().kind != BlockMaker.KIND.TreasureChest){
                                 var sameColorBlocks = AtvSkill.findSameColorBlocks(gm, col.transform.gameObject);
                                 
                                 //* Destroy
@@ -292,7 +292,7 @@ public class Ball_Prefab : MonoBehaviour
                 //Sphere Collider
                 RaycastHit[] rayHits = Physics.SphereCastAll(this.gameObject.transform.position, pl.explosion.Value.range, Vector3.up, 0);
                 foreach(var hit in rayHits){
-                    if(hit.transform.tag == BlockMaker.NORMAL_BLOCK)
+                    if(hit.transform.CompareTag(DM.TAG.Block.ToString()))
                         hit.transform.GetComponent<Block_Prefab>().decreaseHp(result);
                 }
             }else{
@@ -311,7 +311,7 @@ public class Ball_Prefab : MonoBehaviour
     private void decreaseHpSphereCastAll(DM.ATV atv, int dmg, float dotDmgPer = 0){
         RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.FireBallCastWidth, Vector3.up, 0);
         Array.ForEach(hits, hit => {
-            if(hit.transform.tag == BlockMaker.NORMAL_BLOCK){
+            if(hit.transform.CompareTag(DM.TAG.Block.ToString())){
                 var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
                 //* Is DotDmg Type?
                 if(!(dotDmgPer == 0) && !block.IsDotDmg){
@@ -403,7 +403,7 @@ public class Ball_Prefab : MonoBehaviour
                 //* Collider 
                 RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, Vector3.one * width, dir, Quaternion.identity, maxDistance);
                 Array.ForEach(hits, hit => {
-                    if(hit.transform.tag == BlockMaker.NORMAL_BLOCK){
+                    if(hit.transform.CompareTag(DM.TAG.Block.ToString())){
                         StartCoroutine(coSetThunderSkill(hit)); //* With HomeRun Bonus
                     }
                 });

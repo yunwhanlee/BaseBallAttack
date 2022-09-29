@@ -6,8 +6,7 @@ using Random = UnityEngine.Random;
 
 public class BlockMaker : MonoBehaviour
 {
-    public const string NORMAL_BLOCK = "NormalBlock";
-    public enum BLOCK {Normal, Long, TreasureChest, Heal, Boss, Null};
+    public enum KIND {Normal, Long, TreasureChest, Heal, Boss, Null};
 
     //* OutSide
     public GameManager gm;
@@ -41,7 +40,7 @@ public class BlockMaker : MonoBehaviour
         var blocks = this.GetComponentsInChildren<Block_Prefab>();
         foreach(var block in blocks) block.onDestroy(block.gameObject, true);
         this.transform.position = new Vector3(0, 0.5f, -2);
-        createBlockRow(BLOCK.Normal, true, FIRST_CREATE_VERTICAL_CNT);
+        createBlockRow(KIND.Normal, true, FIRST_CREATE_VERTICAL_CNT);
     }
 
     void Update(){
@@ -81,14 +80,14 @@ public class BlockMaker : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public void createBlockRow(BLOCK type, bool isFirst = false, int verticalCnt = 1){
+    public void createBlockRow(KIND type, bool isFirst = false, int verticalCnt = 1){
         //* Value
         float xs = blockPrefs[(int)type].transform.localScale.x;
-        float spawnPosX = (type == BLOCK.Normal)? -5 : -3.1f;
+        float spawnPosX = (type == KIND.Normal)? -5 : -3.1f;
         float middleGap = 0.5f; // センターのボールが来る隙間
 
         switch(type){
-            case BLOCK.Normal : 
+            case KIND.Normal : 
                 for(int v=0; v<verticalCnt;v++){ //縦
                     int offsetCnt = 1;
                     Debug.Log("---------------------");
@@ -101,11 +100,11 @@ public class BlockMaker : MonoBehaviour
 
                         //* #2. Block TreasureChest?
                         rand = Random.Range(0,100);
-                        if(rand < treasureChestBlockPer)   ins = blockPrefs[(int)BLOCK.TreasureChest];
+                        if(rand < treasureChestBlockPer)   ins = blockPrefs[(int)KIND.TreasureChest];
 
                         //* #3. Block HealBlock?
                         rand = Random.Range(0,100);
-                        if(rand < healBlockPer)   ins = blockPrefs[(int)BLOCK.Heal];
+                        if(rand < healBlockPer)   ins = blockPrefs[(int)KIND.Heal];
 
                         //* #3. Block Normal + Newゲーム開始なのか、次のステージなのか？
                         float x = h < 3 ? (spawnPosX + h * xs) : (spawnPosX + h * xs + middleGap * offsetCnt);
@@ -118,7 +117,7 @@ public class BlockMaker : MonoBehaviour
                     }
                 }
                 break;
-            case BLOCK.Long : 
+            case KIND.Long : 
                 for(int h=0; h<2; h++){
                     var ins = blockPrefs[(int)type];
                     float x = h < 1 ? spawnPosX + h * xs : spawnPosX + h * xs + middleGap;
@@ -142,9 +141,9 @@ public class BlockMaker : MonoBehaviour
 
         //* Next Set Block Type
         if(gm.stage % BLOCK2_SPAN == 0){
-            createBlockRow(BLOCK.Long);
+            createBlockRow(KIND.Long);
         }else{
-            createBlockRow(BLOCK.Normal);
+            createBlockRow(KIND.Normal);
         }
     }
 
@@ -157,14 +156,14 @@ public class BlockMaker : MonoBehaviour
         setGlowEF(blocks, isOn);
     }
 
-    public BLOCK convertBlockStr2Enum(string name){
-        return (name == BLOCK.Normal.ToString())? BLOCK.Normal 
-        : BLOCK.Long;
+    public KIND convertBlockStr2Enum(string name){
+        return (name == KIND.Normal.ToString())? KIND.Normal 
+        : KIND.Long;
     }
     public void checkIsHealBlock(){
         var blocks = gm.blockGroup.GetComponentsInChildren<HealBlock>();
         Array.ForEach(blocks, block => {
-            if(block.kind == BLOCK.Heal){
+            if(block.kind == KIND.Heal){
                 block.IsHeal = true;
             }
         });

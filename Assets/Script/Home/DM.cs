@@ -8,8 +8,9 @@ using System;
 public class DM : MonoBehaviour
 {
     public static DM ins;
-    public enum TAG {HitRangeArea, StrikeLine, GameOverLine}
-    public enum ANIM {DoSpawn, DoShake, IsHit, IsIdle, IsFly}
+    public enum TAG {HitRangeArea, StrikeLine, GameOverLine, Wall, Block};
+    public enum LAYER {BallPreview};
+    public enum ANIM {DoSpawn, DoShake, IsHit, IsIdle, IsFly};
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
     public enum ITEM {Chara, Bat, Skill, CashShop};
     public enum ATV{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave, NULL};
@@ -165,13 +166,4 @@ public class DM : MonoBehaviour
             :(name == DM.ATV.PoisonSmoke.ToString())? DM.ATV.PoisonSmoke
             :DM.ATV.IceWave;
     }
-
-    // public BlockMaker.BLOCK convertBlockKind2Enum(string name){
-    //     var res = gameObject.name.Contains(BlockMaker.BLOCK.Normal.ToString())? kind = BlockMaker.BLOCK.Normal
-    //         : gameObject.name.Contains(BlockMaker.BLOCK.Long.ToString())? kind = BlockMaker.BLOCK.Long
-    //         : gameObject.name.Contains(BlockMaker.BLOCK.TreasureChest.ToString())? kind = BlockMaker.BLOCK.TreasureChest
-    //         : gameObject.name.Contains(BlockMaker.BLOCK.Heal.ToString())? kind = BlockMaker.BLOCK.Heal
-    //         : BlockMaker.BLOCK.Null;
-    //     return res;
-    // }
 }

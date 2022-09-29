@@ -277,10 +277,10 @@ public class AtvSkill{
     public void setColorBallSkillGlowEF(GameManager gm, ref BlockMaker bm, RaycastHit hit, ref GameObject hitBlockByBallPreview){
         bool isColorBallSkill = gm.activeSkillBtnList.Exists(btn => btn.Trigger && btn.Name == DM.ATV.ColorBall.ToString());
         // Debug.Log("setColorBallSkillGlowEF():: hit= " + hit);
-        if(isColorBallSkill && hit.transform.CompareTag(BlockMaker.NORMAL_BLOCK)){
+        if(isColorBallSkill && hit.transform.CompareTag(DM.TAG.Block.ToString())){
             var hitBlock = hit.transform.GetComponent<Block_Prefab>();
 
-            if(hitBlock.kind == BlockMaker.BLOCK.TreasureChest || hitBlock.kind == BlockMaker.BLOCK.Heal){
+            if(hitBlock.kind == BlockMaker.KIND.TreasureChest || hitBlock.kind == BlockMaker.KIND.Heal){
                 return;
             }
 
@@ -305,7 +305,7 @@ public class AtvSkill{
         //* Find Same Color Blocks
         var blocks = gm.blockGroup.GetComponentsInChildren<Block_Prefab>();
         return Array.FindAll(blocks, bl => 
-            (bl.kind == BlockMaker.BLOCK.Normal || bl.kind == BlockMaker.BLOCK.Long)//* (BUG) 宝箱はmeshRendererがないので場外。
+            (bl.kind == BlockMaker.KIND.Normal || bl.kind == BlockMaker.KIND.Long)//* (BUG) 宝箱はmeshRendererがないので場外。
             && bl.GetComponent<MeshRenderer>().material.GetColor("_ColorTint") == hitColor
         );
     }

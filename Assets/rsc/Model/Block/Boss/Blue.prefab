@@ -2154,7 +2154,7 @@ GameObject:
   - component: {fileID: 9003238178632980560}
   m_Layer: 0
   m_Name: Blue
-  m_TagString: NormalBlock
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2220,6 +2220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eff9542434690c4390141f8db6a8735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gm: {fileID: 0}
   mesh:
     boss: []
     block: []
@@ -2231,12 +2232,9 @@ MonoBehaviour:
   kind: 4
   type: 0
   isDotDmg: 0
-  isHeal: 0
   hp: 1000
   exp: 10
   itemTypePer: 10
-  healRadius: 1.5
-  healValPer: 0.15
   defScale: {x: 0, y: 0, z: 0}
   minLimitVal: 0
   spawnAnimSpeed: 0

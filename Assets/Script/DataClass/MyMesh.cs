@@ -14,7 +14,7 @@ public class MyMesh
     public MyMesh(Block_Prefab me){
         this.me = me;
         switch(me.kind){
-            case BlockMaker.BLOCK.Boss:
+            case BlockMaker.KIND.Boss:
                 boss = me.GetComponentsInChildren<SkinnedMeshRenderer>();
                 break;
             default:
@@ -26,7 +26,7 @@ public class MyMesh
     public Material[] getOriginalMts(){
         Material[] originMts;
         switch(me.kind){
-            case BlockMaker.BLOCK.Boss:
+            case BlockMaker.KIND.Boss:
                 Array.ForEach(boss, meshRd=> meshRd.material = UnityEngine.Object.Instantiate(meshRd.material));
                 originMts = new Material[boss.Length];
                 for(int i=0; i<boss.Length;i++)
@@ -45,7 +45,7 @@ public class MyMesh
     public void setWhiteHitEF(){
         // Debug.Log($"setWhiteHitEF():: me.kind= {me.kind}");
         switch(me.kind){
-            case BlockMaker.BLOCK.Boss:
+            case BlockMaker.KIND.Boss:
                 me.callStartCoWhiteHitEF(boss);
                 break;
             default:

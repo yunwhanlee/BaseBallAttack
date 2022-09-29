@@ -77,9 +77,9 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     private void drawBallPreviewSphereCast(Transform arrowAnchorTf){
         RaycastHit hit, hit2;
         float radius = pl.ballPreviewSphere[0].GetComponent<SphereCollider>().radius * pl.ballPreviewSphere[0].transform.localScale.x;
-        if(Physics.SphereCast(arrowAnchorTf.position, radius, arrowAnchorTf.forward, out hit, 1000, 1 << LayerMask.NameToLayer("BallPreview"))){
+        if(Physics.SphereCast(arrowAnchorTf.position, radius, arrowAnchorTf.forward, out hit, 1000, 1 << LayerMask.NameToLayer(DM.LAYER.BallPreview.ToString()))){
             setBallPreviewCenterPos(ref pl.ballPreviewSphere[0], hit, radius);
-            if(hit.transform.CompareTag("Wall")){
+            if(hit.transform.CompareTag(DM.TAG.Wall.ToString())){
                 //* Set 法線ベクトル
                 wallNormalVec = (hit.transform.position.x < 0)? Vector3.right : Vector3.left;
 
@@ -89,15 +89,17 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
                 var reflectVec = calcReflectVec(originPos, hitPos, wallNormalVec);
                 // Debug.DrawRay(hit.point, reflectVec, Color.red, 1);
 
-                // RaycastHit ;
-                if(Physics.SphereCast(hit.point, radius, reflectVec, out hit2, 1000, 1 << LayerMask.NameToLayer("BallPreview"))){
+                // RaycastHit
+                if(Physics.SphereCast(hit.point, radius, reflectVec, out hit2, 1000, 1 << LayerMask.NameToLayer(DM.LAYER.BallPreview.ToString()))){
                     setBallPreviewCenterPos(ref pl.ballPreviewSphere[1], hit2, radius);
                 }
+                
                 //* 🌟ColorBall ActiveSkill
                 if(hit2.transform)
                     gm.activeSkillDataBase[0].setColorBallSkillGlowEF(gm, ref bm, hit2, ref hitBlockByBallPreview);
                 return;
-            }else{
+            }
+            else{
                 wallNormalVec = Vector3.zero;
             }
             //* 🌟ColorBall ActiveSkill

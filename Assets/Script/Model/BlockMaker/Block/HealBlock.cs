@@ -13,14 +13,14 @@ public class HealBlock : Block_Prefab
     void Update(){
         base.Update();
         //* Heal Block
-        if(kind == BlockMaker.BLOCK.Heal){
+        if(kind == BlockMaker.KIND.Heal){
             if(IsHeal){
                 IsHeal = false;
                 //Sphere Collider
                 RaycastHit[] rayHits = Physics.SphereCastAll(this.gameObject.transform.position, HealRadius, Vector3.up, 0);
                 foreach(var hit in rayHits){
                     var hitBlock = hit.transform.GetComponent<Block_Prefab>();
-                    if(hit.transform.tag == BlockMaker.NORMAL_BLOCK && hitBlock.kind != BlockMaker.BLOCK.TreasureChest){
+                    if(hit.transform.CompareTag(DM.TAG.Block.ToString()) && hitBlock.kind != BlockMaker.KIND.TreasureChest){
                         int v = (int)(hitBlock.Hp * healValPer);
                         int addHp = (v==0)? 2 : v;
                         hitBlock.increaseHp(addHp);

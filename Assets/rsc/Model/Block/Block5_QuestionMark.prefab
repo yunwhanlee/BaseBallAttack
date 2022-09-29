@@ -844,7 +844,7 @@ GameObject:
   - component: {fileID: 3285170734465657688}
   m_Layer: 6
   m_Name: Block5_QuestionMark
-  m_TagString: NormalBlock
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -938,7 +938,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eff9542434690c4390141f8db6a8735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshRds: []
+  gm: {fileID: 0}
+  mesh:
+    boss: []
+    block: []
   originMts: []
   mts:
   - {fileID: 2100000, guid: cf3da56f55dc78845aa9ee532679ca9a, type: 2}
@@ -950,10 +953,10 @@ MonoBehaviour:
   itemTypeImgGroup: {fileID: 6114382140436383124}
   sprGlowEf: {fileID: 2299289958808020474}
   kind: 0
-  itemType: 0
+  type: 0
+  isDotDmg: 0
   hp: 1
   exp: 10
-  isDotDmg: 0
   itemTypePer: 10
   defScale: {x: 0, y: 0, z: 0}
   minLimitVal: 0
