@@ -247,7 +247,7 @@ public class GameManager : MonoBehaviour
 
     public void switchCamScene(){
         if(State == GameManager.STATE.GAMEOVER) return;
-        var boss = (bossGroup.childCount > 0)? bossGroup.GetChild(0).GetComponent<Block_Prefab>() : null;
+        BossBlock boss = (bossGroup.childCount > 0)? bossGroup.GetChild(0).GetComponent<BossBlock>() : null;
 
         if(!cam2.activeSelf){//* CAM2 On
             State = GameManager.STATE.PLAY;

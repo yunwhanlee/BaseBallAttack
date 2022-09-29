@@ -8,7 +8,7 @@ using System;
 public class DM : MonoBehaviour
 {
     public static DM ins;
-    public enum NAME {DownWall, Block};
+    public enum NAME {DownWall, Block, FireBallDotEffect};
     public enum TAG {HitRangeArea, StrikeLine, GameOverLine, Wall, ActiveDownWall, Player,
         NormalBlock, LongBlock, TreasureChestBlock, HealBlock, BossBlock};
     public enum LAYER {BallPreview};

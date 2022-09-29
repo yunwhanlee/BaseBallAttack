@@ -77,8 +77,7 @@ public class BallShooter : MonoBehaviour
             }
         }
     }
-
-    IEnumerator coShowExclamationMark(){
+    private IEnumerator coShowExclamationMark(){
         ExclamationMarkObj.SetActive(true);
         yield return new WaitForSeconds(0.2f);
         time = 0;

@@ -16,8 +16,8 @@ public class Block_Prefab : MonoBehaviour
     //* OutSide
     public GameManager gm; EffectManager em; Player pl; BlockMaker bm;
     SpriteGlowEffect itemUISprGlowEf;
-    BoxCollider boxCollider;
-    Animator animator;
+    protected BoxCollider boxCollider;
+    protected Animator animator;
 
     //* Value
     private const int TREASURECHEST_ORB_CNT = 15;
@@ -230,7 +230,7 @@ public class Block_Prefab : MonoBehaviour
                     RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, itemBlockBombBoxSizeVec / 2, Vector3.up);
                     Array.ForEach(hits, hit => {
                         if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
-                            if(hit.transform.name.Contains(BlockMaker.KIND.Boss.ToString())) return;
+                            if(hit.transform.CompareTag(DM.TAG.BossBlock.ToString())) return;
                             onDestroy(hit.transform.gameObject);
                         }
                     });
@@ -274,10 +274,7 @@ public class Block_Prefab : MonoBehaviour
         return res;
     }
 
-    public void setBossComponent(bool trigger){
-        boxCollider.enabled = !trigger;
-        animator.SetBool(DM.ANIM.IsFly.ToString(), trigger);
-    }
+
 
     //-------------------------------------------------------------
     /*  StartCoroutineは、

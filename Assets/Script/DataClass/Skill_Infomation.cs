@@ -263,7 +263,7 @@ public class AtvSkill{
             if(block.IsDotDmg) {
                 float dmg = AtvSkill.POISONSMOKE_DOT;
                 for(int i=0; i<block.transform.childCount; i++){
-                    if(block.transform.GetChild(i).name.Contains("FireBallDotEffect")){
+                    if(block.transform.GetChild(i).name.Contains(DM.NAME.FireBallDotEffect.ToString())){
                         dmg = AtvSkill.FIREBALL_DOT;
                         break;
                     }

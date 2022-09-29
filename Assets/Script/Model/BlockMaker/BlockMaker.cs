@@ -169,4 +169,11 @@ public class BlockMaker : MonoBehaviour
             }
         });
     }
+    public void setDecreaseHP(GameObject obj, int dmg){
+        //* TAGで親と子の正しいCLASSを判別してから、処理
+        if(obj.CompareTag(DM.TAG.BossBlock.ToString()))
+            obj.GetComponent<BossBlock>().decreaseHp(dmg);
+        else
+            obj.GetComponent<Block_Prefab>().decreaseHp(dmg);
+    }
 }

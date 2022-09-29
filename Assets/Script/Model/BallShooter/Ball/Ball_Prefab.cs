@@ -159,7 +159,7 @@ public class Ball_Prefab : MonoBehaviour
                         Array.ForEach(hits, hit => {
                             if(hit.transform.name ==DM.NAME.Block.ToString()){
                                 Debug.Log("LAZER!! Hit Obj-> " + hit.transform.name);
-                                var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
+                                var block = hit.transform.GetComponent<Block_Prefab>();
                                 int dmg = pl.dmg.Value;
                                 block.decreaseHp(dmg);
                                 em.createCritTxtEF(hit.transform.position, dmg);
@@ -286,19 +286,18 @@ public class Ball_Prefab : MonoBehaviour
             }
 
             
-            //* Apply Damage Result
+            //* Set DAMAGE
             Debug.Log("result= " + result);
-            if(isOnExplosion){
-                //Sphere Collider
+            if(isOnExplosion){//* Explosion (爆発)
                 RaycastHit[] rayHits = Physics.SphereCastAll(this.gameObject.transform.position, pl.explosion.Value.range, Vector3.up, 0);
                 foreach(var hit in rayHits){
                     if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
                         hit.transform.GetComponent<Block_Prefab>().decreaseHp(result);
                     }
                 }
-            }else{
-                Debug.Log($"decreaseHP!:: {col.transform.name}.Contains({DM.NAME.Block.ToString()}) = {col.transform.name.Contains(DM.NAME.Block.ToString())}");
-                col.gameObject.GetComponent<Block_Prefab>().decreaseHp(result);
+            }
+            else{//* Normal Damage Result
+                bm.setDecreaseHP(col.gameObject, result);
             }
 #endregion            
         }
