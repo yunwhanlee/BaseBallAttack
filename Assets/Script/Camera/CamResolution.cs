@@ -72,12 +72,4 @@ public class CamResolution : MonoBehaviour
 
         cam.rect = rect;//apply
     }
-    //---------------------------------------
-    public void setAnimTrigger(string type){
-        switch(type){
-            case "doShake":
-                anim.SetTrigger(type);
-                break;
-        }
-    }
 }

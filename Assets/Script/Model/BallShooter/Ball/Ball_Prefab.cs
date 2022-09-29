@@ -212,7 +212,7 @@ public class Ball_Prefab : MonoBehaviour
                 if(skillBtn.Trigger){
                     float delayTime = 2;
                     int skillIdx = gm.getCurSkillIdx();
-                    gm.cam1.GetComponent<CamResolution>().setAnimTrigger(DM.ANIM.DoShake.ToString());
+                    gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
                     var atv = DM.ins.convertAtvSkillStr2Enum(skillBtn.Name);
                     switch(atv){
                         case DM.ATV.Thunder:
@@ -367,7 +367,7 @@ public class Ball_Prefab : MonoBehaviour
         Time.timeScale = 0;
         pl.setAnimTrigger("HomeRun");
         yield return new WaitForSecondsRealtime(2);
-        gm.cam1.GetComponent<CamResolution>().setAnimTrigger(DM.ANIM.DoShake.ToString());
+        gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
 
         gm.homeRunTxtTf.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
         em.enableUIStageTxtEF("HomeRun");
@@ -397,7 +397,7 @@ public class Ball_Prefab : MonoBehaviour
                 const int maxDistance = 50;
                 const int width = 1;
                 Debug.DrawRay(this.transform.position, dir * maxDistance, Color.blue, 2f);
-                gm.cam1.GetComponent<CamResolution>().setAnimTrigger("doShake");
+                gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
 
                 em.createAtvSkShotEF(skillIdx, this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
                 //* Collider 
