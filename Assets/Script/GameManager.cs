@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     public Transform hitRangeEndTf;
     public Transform deadLineTf;
     public BoxCollider downWall;
+    BossBlock boss;
     public Light light;
 
     [Header("STATUS")]
@@ -247,7 +248,6 @@ public class GameManager : MonoBehaviour
 
     public void switchCamScene(){
         if(State == GameManager.STATE.GAMEOVER) return;
-        BossBlock boss = bm.getBossBlock();
         if(!cam2.activeSelf){//* CAM2 On
             State = GameManager.STATE.PLAY;
             cam1.SetActive(false);
@@ -461,8 +461,11 @@ public class GameManager : MonoBehaviour
         Array.ForEach(dropObjs, dropObj => dropObj.IsMoveToPlayer = true);
 
         //* BossSkill
-        BossBlock boss = bm.getBossBlock();
-        boss.activeBossSkill();
+        boss = bm.getBossBlock();
+        if(boss){ //* (BUG) NULL Error対応。
+            boss.activeBossSkill();
+        }
+        
     }
 
     private void destroyEveryBalls(){

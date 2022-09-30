@@ -53,32 +53,7 @@ public class BlockMaker : MonoBehaviour
             moveDownBlock();
         }
 
-        //* Boss
-        if(gm.stage % BOSS_STAGE_SPAN == 0 && !IsBossSpawn){
-            IsBossSpawn = true;
-            if(IsBossSpawn && gm.bossGroup.childCount == 0){
-                Debug.Log("BOSS SPAWN!!");
-                IsBossSpawn = false;
-                var pos = new Vector3(0, 0, bossPrefs[0].transform.position.z + 2);
-                Instantiate(bossPrefs[0], pos, bossPrefs[0].transform.rotation, gm.bossGroup);
-
-                StartCoroutine(coPlayBossSpawnAnim());
-            }
-        }
-    }
-
-    IEnumerator coPlayBossSpawnAnim(){
-        //* 再生時間 習得
-        const int SPAWN = 1; // IDLE = 0
-        var anim = gm.bossSpawnTxt.GetComponent<Animator>();
-        AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
-        // Array.ForEach(clips, clip=> Debug.Log($"clip= {clip.name}, clip.length= {clip.length}"));
-        float playTimeSec = clips[SPAWN].length;
-
-        Time.timeScale = 0.1f;
-        anim.SetTrigger(DM.ANIM.DoSpawn.ToString());
-        yield return new WaitForSecondsRealtime(playTimeSec);
-        Time.timeScale = 1;
+        bossSpawn();
     }
 
     public void createBlockRow(KIND type, bool isFirst = false, int verticalCnt = 1){
@@ -147,10 +122,42 @@ public class BlockMaker : MonoBehaviour
             createBlockRow(KIND.Normal);
         }
     }
+#region BOSS
+    public BossBlock getBossBlock(){
+        return (gm.bossGroup.childCount > 0)?
+            gm.bossGroup.GetChild(0).GetComponent<BossBlock>() : null;
+    }
+    public void bossSpawn(){
+        if(gm.stage % BOSS_STAGE_SPAN == 0 && !IsBossSpawn){
+            IsBossSpawn = true;
+            if(IsBossSpawn && gm.bossGroup.childCount == 0){
+                Debug.Log("BOSS SPAWN!!");
+                IsBossSpawn = false;
+                var pos = new Vector3(0, 0, bossPrefs[0].transform.position.z + 2);
+                Instantiate(bossPrefs[0], pos, bossPrefs[0].transform.rotation, gm.bossGroup);
+
+                StartCoroutine(coPlayBossSpawnAnim());
+            }
+        }
+    }
+    private IEnumerator coPlayBossSpawnAnim(){
+        //* 再生時間 習得
+        const int SPAWN = 1; // IDLE = 0
+        var anim = gm.bossSpawnTxt.GetComponent<Animator>();
+        AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
+        // Array.ForEach(clips, clip=> Debug.Log($"clip= {clip.name}, clip.length= {clip.length}"));
+        float playTimeSec = clips[SPAWN].length;
+
+        Time.timeScale = 0.1f;
+        anim.SetTrigger(DM.ANIM.DoSpawn.ToString());
+        yield return new WaitForSecondsRealtime(playTimeSec);
+        Time.timeScale = 1;
+    }
 
     public void setGlowEF(Block_Prefab[] blocks, bool isOn){
         Array.ForEach(blocks, bl => bl.GetComponent<Block_Prefab>().setEnabledSpriteGlowEF(isOn));
     }
+#endregion
 
     public void setGlowEFAllBlocks(bool isOn){ //* Block Grow EF 解除
         var blocks = gm.blockGroup.GetComponentsInChildren<Block_Prefab>();
@@ -175,10 +182,5 @@ public class BlockMaker : MonoBehaviour
             obj.GetComponent<BossBlock>().decreaseHp(dmg);
         else
             obj.GetComponent<Block_Prefab>().decreaseHp(dmg);
-    }
-
-    public BossBlock getBossBlock(){
-        return (gm.bossGroup.childCount > 0)?
-            gm.bossGroup.GetChild(0).GetComponent<BossBlock>() : null;
     }
 }
