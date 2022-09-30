@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour
     public Transform hitRangeEndTf;
     public Transform deadLineTf;
     public BoxCollider downWall;
-    BossBlock boss;
     public Light light;
 
     [Header("STATUS")]
@@ -277,7 +276,7 @@ public class GameManager : MonoBehaviour
             setLightDarkness(false); //* Light -> Normal
 
             //* Boss Collider OFF：Ball投げる時、ぶつかるから。
-            if(boss) boss.setBossComponent(true);
+            if(bm.getBoss()) bm.getBoss().setBossComponent(true);
                 
         }
         else{//* CAM1 On
@@ -312,7 +311,7 @@ public class GameManager : MonoBehaviour
             StopCoroutine("corSetStrike");
 
             //* Boss Collider ON：PlayerがBallを打ったから、活性化。
-            if(boss) boss.setBossComponent(false);
+            if(bm.getBoss()) bm.getBoss().setBossComponent(false);
         }
     }
 
@@ -461,9 +460,8 @@ public class GameManager : MonoBehaviour
         Array.ForEach(dropObjs, dropObj => dropObj.IsMoveToPlayer = true);
 
         //* BossSkill
-        boss = bm.getBossBlock();
-        if(boss){ //* (BUG) NULL Error対応。
-            boss.activeBossSkill();
+        if(bm.getBoss()){ //* (BUG) NULL Error対応。
+            bm.getBoss().activeBossSkill();
         }
         
     }

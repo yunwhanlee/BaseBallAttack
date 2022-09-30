@@ -11,12 +11,10 @@ public class BlockMaker : MonoBehaviour
     //* OutSide
     public GameManager gm;
 
-    // const float WIDTH = 1.9f;
-    // const float HEIGHT = 1;
-    // const float SPAWN_POS_X = -5;
+    public const float SCALE_X = 1.9f, SCALE_Y = 1, SPAWN_POS_X = -5;
     const int MAX_HORIZONTAL_GRID = 6;
-    const int FIRST_CREATE_VERTICAL_CNT = 4; //DEAD_MAX-> 13
-    const float START_POS_Y = -2;
+    public const int FIRST_CREATE_VERTICAL_CNT = 4; //DEAD_MAX-> 13
+    public const float START_POS_Z = -2;
 
     [Header("STATUS")]
     public bool isCreateBlock;  public bool IsCreateBlock {get => isCreateBlock; set => isCreateBlock = value;}
@@ -56,20 +54,19 @@ public class BlockMaker : MonoBehaviour
         bossSpawn();
     }
 
-    public void createBlockRow(KIND type, bool isFirst = false, int verticalCnt = 1){
+    public void createBlockRow(KIND type, bool isFirstStage = false, int verticalCnt = 1){
         //* Value
+        const float MIDDLE_GAP = 0.5f; // センターのボールが来る隙間
         float xs = blockPrefs[(int)type].transform.localScale.x;
-        float spawnPosX = (type == KIND.Normal)? -5 : -3.1f;
-        float middleGap = 0.5f; // センターのボールが来る隙間
+        float startPosX = (type == KIND.Normal)? -5 : -3.1f; //* Pivotが真ん中なので、OffsetPosX設定。
 
         switch(type){
             case KIND.Normal : 
-                for(int v=0; v<verticalCnt;v++){ //縦
-                    int offsetCnt = 1;
+                for(int v=0; v<verticalCnt;v++){ //* 縦↕
                     Debug.Log("---------------------");
-                    for(int h=0; h<MAX_HORIZONTAL_GRID;h++){ //横
+                    for(int h=0; h<MAX_HORIZONTAL_GRID;h++){ //* 横⇔
                         var ins = blockPrefs[(int)type];
-#region Block Kind or Skip
+                        #region Block Kind or Skip
                         //* #1. Block Skip?
                         int rand = Random.Range(0,100);
                         if(rand < skipBlockPer) continue; //Skip Block
@@ -82,28 +79,29 @@ public class BlockMaker : MonoBehaviour
                         rand = Random.Range(0,100);
                         if(rand < healBlockPer)   ins = blockPrefs[(int)KIND.Heal];
 
-                        //* #3. Block Normal + Newゲーム開始なのか、次のステージなのか？
-                        float x = h < 3 ? (spawnPosX + h * xs) : (spawnPosX + h * xs + middleGap * offsetCnt);
-                        float y = (isFirst)? 0 : ins.transform.position.y + gm.blockGroup.position.y;
-                        float z = (isFirst)? -v : START_POS_Y;
+                        //* #4. Block生成
+                        float x = (h < 3)? (startPosX + h * xs) : (startPosX + h * xs + MIDDLE_GAP); //* ボールが出る空間考えて調整。
+                        float y = (isFirstStage)? 0 : ins.transform.position.y + gm.blockGroup.position.y;
+                        float z = (isFirstStage)? -v : START_POS_Z;
                         Vector3 pos = new Vector3(x, y, z);
-                        Vector3 setPos = (isFirst)? pos + gm.blockGroup.position : pos;
+                        Vector3 setPos = (isFirstStage)? pos + gm.blockGroup.position : pos;
                         Instantiate(ins, setPos, Quaternion.identity, gm.blockGroup);
-#endregion
+                        #endregion
                     }
                 }
                 break;
             case KIND.Long : 
                 for(int h=0; h<2; h++){
                     var ins = blockPrefs[(int)type];
-                    float x = h < 1 ? spawnPosX + h * xs : spawnPosX + h * xs + middleGap;
+                    float x = (h < 1)? startPosX + h * xs : startPosX + h * xs + MIDDLE_GAP;
                     float y = ins.transform.position.y + gm.blockGroup.position.y;
-                    Vector3 pos = new Vector3(x, y, START_POS_Y);
+                    Vector3 pos = new Vector3(x, y, START_POS_Z);
                     Instantiate(ins, pos, Quaternion.identity, gm.blockGroup);
                 }
                 break;
         }
     }
+
     public void createDropItemExpOrbPf(Transform blockTf, int resultExp){
         Debug.Log("createDropItemExpOrbPf:: blockTf= " + blockTf + ", resultExp= " + resultExp);
         var ins = ObjectPool.getObject(ObjectPool.DIC.DropItemExpOrbPf.ToString(), blockTf.position, Quaternion.identity, gm.dropItemGroup);
@@ -123,7 +121,7 @@ public class BlockMaker : MonoBehaviour
         }
     }
 #region BOSS
-    public BossBlock getBossBlock(){
+    public BossBlock getBoss(){
         return (gm.bossGroup.childCount > 0)?
             gm.bossGroup.GetChild(0).GetComponent<BossBlock>() : null;
     }

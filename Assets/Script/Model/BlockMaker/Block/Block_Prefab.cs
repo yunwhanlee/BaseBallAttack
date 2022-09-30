@@ -14,7 +14,10 @@ public class Block_Prefab : MonoBehaviour
     public enum BlockType {NORMAL, BOMB, LR_ARROW, UPDOWN_ARROW};
 
     //* OutSide
-    public GameManager gm; EffectManager em; Player pl; BlockMaker bm;
+    public GameManager gm; 
+    EffectManager em; 
+    Player pl; 
+    public BlockMaker bm;
     SpriteGlowEffect itemUISprGlowEf;
     protected BoxCollider boxCollider;
     protected Animator animator;
@@ -216,6 +219,7 @@ public class Block_Prefab : MonoBehaviour
 
     public void decreaseHp(int dmg) {
         // Debug.Log($"decreaseHp(dmg= {dmg}):: gm= {gm}");
+
         Hp -= dmg;
         gm.comboCnt++;
         gm.comboTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.IsHit.ToString());
