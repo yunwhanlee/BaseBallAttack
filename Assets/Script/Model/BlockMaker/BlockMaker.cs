@@ -11,10 +11,11 @@ public class BlockMaker : MonoBehaviour
     //* OutSide
     public GameManager gm;
 
-    public const float SCALE_X = 1.9f, SCALE_Y = 1, SPAWN_POS_X = -5;
     const int MAX_HORIZONTAL_GRID = 6;
+    public const float SCALE_X = 1.9f, SCALE_Y = 1, SPAWN_POS_X = -5;
     public const int FIRST_CREATE_VERTICAL_CNT = 4; //DEAD_MAX-> 13
     public const float START_POS_Z = -2;
+    public const float CENTER_GAP = 0.5f; // センターのボールが来る隙間
 
     [Header("STATUS")]
     public bool isCreateBlock;  public bool IsCreateBlock {get => isCreateBlock; set => isCreateBlock = value;}
@@ -43,6 +44,7 @@ public class BlockMaker : MonoBehaviour
         foreach(var block in blocks) block.onDestroy(block.gameObject, true);
         this.transform.position = new Vector3(0, 0.5f, -2);
         createBlockRow(KIND.Normal, true, FIRST_CREATE_VERTICAL_CNT);
+
     }
 
     void Update(){
@@ -56,7 +58,6 @@ public class BlockMaker : MonoBehaviour
 
     public void createBlockRow(KIND type, bool isFirstStage = false, int verticalCnt = 1){
         //* Value
-        const float MIDDLE_GAP = 0.5f; // センターのボールが来る隙間
         float xs = blockPrefs[(int)type].transform.localScale.x;
         float startPosX = (type == KIND.Normal)? -5 : -3.1f; //* Pivotが真ん中なので、OffsetPosX設定。
 
@@ -80,7 +81,7 @@ public class BlockMaker : MonoBehaviour
                         if(rand < healBlockPer)   ins = blockPrefs[(int)KIND.Heal];
 
                         //* #4. Block生成
-                        float x = (h < 3)? (startPosX + h * xs) : (startPosX + h * xs + MIDDLE_GAP); //* ボールが出る空間考えて調整。
+                        float x = (h < 3)? (startPosX + h * xs) : (startPosX + h * xs + CENTER_GAP); //* ボールが出る空間考えて調整。
                         float y = (isFirstStage)? 0 : ins.transform.position.y + gm.blockGroup.position.y;
                         float z = (isFirstStage)? -v : START_POS_Z;
                         Vector3 pos = new Vector3(x, y, z);
@@ -93,7 +94,7 @@ public class BlockMaker : MonoBehaviour
             case KIND.Long : 
                 for(int h=0; h<2; h++){
                     var ins = blockPrefs[(int)type];
-                    float x = (h < 1)? startPosX + h * xs : startPosX + h * xs + MIDDLE_GAP;
+                    float x = (h < 1)? startPosX + h * xs : startPosX + h * xs + CENTER_GAP;
                     float y = ins.transform.position.y + gm.blockGroup.position.y;
                     Vector3 pos = new Vector3(x, y, START_POS_Z);
                     Instantiate(ins, pos, Quaternion.identity, gm.blockGroup);
