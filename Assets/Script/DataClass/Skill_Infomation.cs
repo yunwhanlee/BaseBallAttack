@@ -203,7 +203,8 @@ public class PsvSkill<T> where T: struct {
 //--------------------------------------------------------------------------------------------------
 [System.Serializable]
 public struct Explosion{
-    public float per, range;
+    public float per;
+    public float range;
     public Explosion(float per = 0, float range = 0.75f){
         this.per = per;
         this.range = range;

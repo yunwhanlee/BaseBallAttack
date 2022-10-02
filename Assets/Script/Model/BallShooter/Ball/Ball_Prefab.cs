@@ -285,14 +285,17 @@ public class Ball_Prefab : MonoBehaviour
             }
 
             //* Set DAMAGE
-            Debug.Log("result= " + result);
+            
             if(isOnExplosion){//* Explosion (爆発)
+                
                 RaycastHit[] rayHits = Physics.SphereCastAll(this.gameObject.transform.position, pl.explosion.Value.range, Vector3.up, 0);
                 foreach(var hit in rayHits){
+                    Debug.Log("Set DAMAGE:: Explostion:: result= " + result + ", hit.obj.name=" + hit.transform.gameObject.name);
                     bm.setDecreaseHP(hit.transform.gameObject, result);
                 }
             }
             else{//* Normal Damage Result
+                Debug.Log("Set DAMAGE:: result= " + result);
                 bm.setDecreaseHP(col.gameObject, result);
             }
 #endregion            
@@ -446,8 +449,8 @@ public class Ball_Prefab : MonoBehaviour
 
     void OnDrawGizmos(){
         //* Explosion Skill Range Preview
-        // Gizmos.color = Color.yellow;
-        // Gizmos.DrawWireSphere(this.transform.position, pl.explosion.getValue().range);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(this.transform.position, pl.explosion.Value.range);
 
         //* ThunderShot Skill Range Preview => ArrowAxisAnchorObjに付いているThunderGizmosスクリプト。
 
