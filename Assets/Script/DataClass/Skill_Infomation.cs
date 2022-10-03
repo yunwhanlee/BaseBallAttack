@@ -102,7 +102,7 @@ public class PsvSkill<T> where T: struct {
             switch(psv){
                 case DM.PSV.InstantKill: 
                     em.createInstantKillTextEF(col.transform.position);
-                    result = Player.ONE_KILL;
+                    result = Player.ONE_KILL_DMG;
                     break;
                 case DM.PSV.Critical: 
                     int dmg = (int)(pl.dmg.Value * (2 + pl.criticalDamage.Value));
@@ -250,7 +250,7 @@ public class AtvSkill{
         THUNDERSHOT_CRT = 2;
         FIREBALL_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.15f);
         FIREBALL_DOT = 0.15f;
-        COLORBALL_DMG = Player.ONE_KILL;
+        COLORBALL_DMG = Player.ONE_KILL_DMG;
         POISONSMOKE_DOT = 0.25f;
         ICEWAVE_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.3f);
     }

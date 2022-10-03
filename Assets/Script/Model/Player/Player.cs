@@ -16,7 +16,7 @@ public class HitRank{
 
 public class Player : MonoBehaviour
 {
-    public const int ONE_KILL = 999999;
+    public const int ONE_KILL_DMG = 999999;
     //* OutSide
     GameManager gm;  EffectManager em;
     Animator anim;

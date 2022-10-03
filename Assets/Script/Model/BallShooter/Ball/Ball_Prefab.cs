@@ -120,34 +120,28 @@ public class Ball_Prefab : MonoBehaviour
 
     #region PSV (HIT BALL)
                 //* 【 Multi Shot (横) 】
-                for(int i=0; i<pl.multiShot.Value;i++){
-                    // Debug.Log($"<color=blue>【 Multi Shot (横) 】: {pl.multiShot.Value}</color>");
+                for(int i=0; i<pl.multiShot.Value;i++){ // Debug.Log($"<color=blue>【 Multi Shot (横) 】: {pl.multiShot.Value}</color>");
                     Vector3 dir = pl.multiShot.calcMultiShotDeg2Dir(arrowDeg, i); //* Arrow Direction with Extra Deg
                     instantiateMultiShot(dir, force, ratio: 0.75f);
                 }
 
                 //* 【 Vertical Multi Shot (縦) 】
-                for(int i=0; i<pl.verticalMultiShot.Value;i++){
-                    // Debug.Log($"<color=blue>【 Vertical Multi Shot (縦) 】: {pl.verticalMultiShot.Value}</color>");
-                    // Debug.Log("<color=white>Ball_Prefab.cs:: Vertical Multi Shot= " + pl.verticalMultiShot.Value);
+                for(int i=0; i<pl.verticalMultiShot.Value;i++){ // Debug.Log($"<color=blue>【 Vertical Multi Shot (縦) 】: {pl.verticalMultiShot.Value}</color>");
                     Vector3 dir = pl.arrowAxisAnchor.transform.forward;
                     instantiateMultiShot(dir, force, ratio: 0.8f);
                 }
 
                 //* 【 Laser 】
-                for(int i=0; i < pl.laser.Value; i++){
-                    // Debug.Log($"<color=blue>【 Laser 】: {pl.laser.Value}</color>");
+                for(int i=0; i < pl.laser.Value; i++){  // Debug.Log($"<color=blue>【 Laser 】: {pl.laser.Value}</color>");
                     Vector3 start = pl.arrowAxisAnchor.transform.position;
                     Vector3 dir = pl.laser.calcMultiShotDeg2Dir(arrowDeg, i); //* Arrow Direction with Extra Deg
                     em.createLaserEF(start, dir);
 
                     RaycastHit[] hits = Physics.RaycastAll(start, dir, 100);
                     Array.ForEach(hits, hit => {
-                        if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
-                            // Debug.Log("LAZER Hit Obj -> " + hit.transform.name);
-                            int dmg = pl.dmg.Value;
-                            em.createCritTxtEF(hit.transform.position, dmg);
-                            bm.setDecreaseHP(hit.transform.gameObject, dmg);
+                        if(hit.transform.name.Contains(DM.NAME.Block.ToString())){  // Debug.Log("LAZER Hit Obj -> " + hit.transform.name);
+                            em.createCritTxtEF(hit.transform.position, pl.dmg.Value);
+                            bm.setDecreaseHP(hit.transform.gameObject, pl.dmg.Value);
                         }
                     });
                 }
@@ -166,10 +160,9 @@ public class Ball_Prefab : MonoBehaviour
     void OnTriggerExit(Collider col) {
 #region SWING BAT
         if(col.transform.CompareTag(DM.TAG.HitRangeArea.ToString())){ //* HIT BALL
-            pl.setSwingArcColor("yellow");
-            //* 日程時間が過ぎたら、ボール削除。
             isHitedByBlock = true;
-            InvokeRepeating("checkLimitTimeToDeleteBall", 0, deleteLimitTime);
+            pl.setSwingArcColor("yellow");
+            InvokeRepeating("checkLimitTimeToDeleteBall", 0, deleteLimitTime);//* 日程時間が過ぎたら、ボール削除。
         }
         else if(col.transform.CompareTag(DM.TAG.StrikeLine.ToString())){ //* ストライク
             onDestroyMe(true);
@@ -177,28 +170,25 @@ public class Ball_Prefab : MonoBehaviour
     }
 #endregion
     void OnCollisionEnter(Collision col) { //* Give Damage
-#region #2. ATV (BALL)
         if(col.transform.name.Contains(DM.NAME.Block.ToString())){
             isHitedByBlock = true;
+#region #2. ATV (BALL)
             gm.activeSkillBtnList.ForEach(skillBtn => {
                 if(skillBtn.Trigger){
-                    float delayTime = 2;
+                    const float delayTime = 2;
                     int skillIdx = gm.getCurSkillIdx();
-                    gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
                     var atv = DM.ins.convertAtvSkillStr2Enum(skillBtn.Name);
+
                     switch(atv){
                         case DM.ATV.Thunder: //なし
                             break;
                         case DM.ATV.FireBall:{
-                            skillBtn.init(gm);
                             em.createAtvSkExplosionEF(skillIdx, this.transform);
                             decreaseHpSphereCastAll(atv, AtvSkill.FIREBALL_DMG);
                             if(isHomeRun) decreaseHpSphereCastAll(atv, 0, AtvSkill.FIREBALL_DOT); //* + DOT DAMAGE
-                            this.gameObject.GetComponent<SphereCollider>().enabled = false; //* ボール動きなし
                             break;
                         }
                         case DM.ATV.ColorBall:{
-                            skillBtn.init(gm);
                             if(col.gameObject.GetComponent<Block_Prefab>().kind != BlockMaker.KIND.TreasureChest){
                                 var sameColorBlocks = AtvSkill.findSameColorBlocks(gm, col.transform.gameObject);
                                 //* Destroy
@@ -207,11 +197,9 @@ public class Ball_Prefab : MonoBehaviour
                                     bl.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(AtvSkill.COLORBALL_DMG);
                                 });
                             }
-                            this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
                         }
                         case DM.ATV.PoisonSmoke:{
-                            skillBtn.init(gm);
                             int destroyCnt = 999;
                             var ins = em.createAtvSkExplosionEF(skillIdx, this.transform, destroyCnt);
                             if(isHomeRun){
@@ -221,17 +209,17 @@ public class Ball_Prefab : MonoBehaviour
                             }
                             RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.PoisonSmokeCastWidth, Vector3.up, 0);
                             decreaseHpSphereCastAll(atv, 0, AtvSkill.POISONSMOKE_DOT);
-                            this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
                         }
                         case DM.ATV.IceWave:{
-                            skillBtn.init(gm);
-                            delayTime = 2f;
                             em.createAtvSkExplosionEF(skillIdx, this.transform);
-                            this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
                         }
                     }
+                    skillBtn.init(gm);
+                    gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
+                    this.gameObject.GetComponent<SphereCollider>().enabled = false; //* ボール動きなし
+
                     //* Delay Next Stage
                     Invoke("onDestroyMeInvoke", delayTime);
                 }
@@ -240,19 +228,17 @@ public class Ball_Prefab : MonoBehaviour
 #region BALL DAMAGE
             int result = 0;
             bool isOnExplosion = false;
-
+    #region CHECK PSV
             //* InstantKill
             pl.instantKill.setHitTypeSkill(pl.instantKill.Value, ref result, col, em, pl);
-
-            if(result != Player.ONE_KILL){
+            if(result != Player.ONE_KILL_DMG){
                 //* Critical
                 pl.critical.setHitTypeSkill(pl.critical.Value, ref result, col, em, pl);
-
                 //* Explosion（最後 ダメージ適用）
                 isOnExplosion = pl.explosion.setHitTypeSkill(pl.explosion.Value.per, ref result, col, em, pl, this.gameObject);
             }
-
-            //* Set DAMAGE
+    #endregion
+    #region SET DAMAGE
             if(isOnExplosion){//* Explosion (爆発)
                 RaycastHit[] hits = Physics.SphereCastAll(this.gameObject.transform.position, pl.explosion.Value.range, Vector3.up, 0);
                 Array.ForEach(hits, hit => {
@@ -266,6 +252,7 @@ public class Ball_Prefab : MonoBehaviour
                 Debug.Log("Set DAMAGE:: result= " + result);
                 bm.setDecreaseHP(col.gameObject, result);
             }
+    #endregion
 #endregion            
         }
         else if(col.transform.CompareTag(DM.TAG.Wall.ToString()) && col.gameObject.name == DM.NAME.DownWall.ToString()){
@@ -276,19 +263,19 @@ public class Ball_Prefab : MonoBehaviour
 
 #region ATV (BAT)
     IEnumerator coPlayActiveSkillShotEF(AtvSkillBtnUI btn, float waitTime, Vector3 dir){
-        Debug.LogFormat("coPlayActiveSkillShotEF:: btn={0}, waitTite={1}, dir={2}, isHomeRun={3}", btn.Name, waitTime, dir, isHomeRun);
-        float delayTime = 0;
+        // Debug.LogFormat("coPlayActiveSkillShotEF:: btn={0}, waitTite={1}, dir={2}, isHomeRun={3}", btn.Name, waitTime, dir, isHomeRun);
         int skillIdx = gm.getCurSkillIdx();
         var atv = DM.ins.convertAtvSkillStr2Enum(btn.Name);
         switch(atv){
             case DM.ATV.Thunder:
-                delayTime = 2;
+                const float delayTime = 2;
                 const int maxDistance = 50;
                 const int width = 1;
                 Debug.DrawRay(this.transform.position, dir * maxDistance, Color.blue, 2f);
-                gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
 
+                gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
                 em.createAtvSkShotEF(skillIdx, this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
+
                 //* Collider 
                 RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, Vector3.one * width, dir, Quaternion.identity, maxDistance);
                 Array.ForEach(hits, hit => {
@@ -401,8 +388,6 @@ public class Ball_Prefab : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.3f);
         Time.timeScale = 1;
     }
-
-
 
     IEnumerator coSetThunderSkill(RaycastHit hit){
         yield return new WaitForSeconds(0.1f);
