@@ -10,7 +10,7 @@ public class HealBlock : Block_Prefab
     [SerializeField][Range(0, 1)] float healValPer = 0.15f;   public float HealValPer {get => healValPer; set => healValPer = value;}
 
 
-    void Update(){
+    new void Update(){
         base.Update();
         //* Heal Block
         if(kind == BlockMaker.KIND.Heal){

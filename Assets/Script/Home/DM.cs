@@ -12,7 +12,7 @@ public class DM : MonoBehaviour
     public enum TAG {HitRangeArea, StrikeLine, GameOverLine, Wall, ActiveDownWall, Player,
         NormalBlock, LongBlock, TreasureChestBlock, HealBlock, BossBlock};
     public enum LAYER {BallPreview};
-    public enum ANIM {DoSpawn, DoShake, IsHit, IsIdle, IsFly};
+    public enum ANIM {DoSpawn, DoShake, DoBossSpawn,IsHit, IsIdle, IsFly};
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
     public enum ITEM {Chara, Bat, Skill, CashShop};
     public enum ATV{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave, NULL};
