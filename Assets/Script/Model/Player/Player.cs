@@ -22,11 +22,11 @@ public class Player : MonoBehaviour
     Animator anim;
 
     [Header("ARROW")]
+    public int MAX_SWING_HIT_DEG; //左右ある方向の最大角度
+    public float offsetHitDeg; // Startが０度(←方向)から、↑ →向きに回る。
     public GameObject arrowAxisAnchor;
     public Image swingArcArea;
     private float swingArcRange;
-    public int MAX_HIT_DEG; //左右ある方向の最大角度
-    public float offsetHitDeg; // Startが０度(←方向)から、↑ →向きに回る。
     public GameObject previewBundle;
     public GameObject[] ballPreviewSphere = new GameObject[2]; // 2個
     public HitRank[] hitRank;
@@ -158,7 +158,7 @@ public class Player : MonoBehaviour
         Debug.Log("swingArcArea.rectTransform.localRotation.eulerAngles.z=" + swingArcArea.rectTransform.localRotation.eulerAngles.z);//! (BUG) rotation.eulerAnglesしないと、角度の数値ではなく、小数点が出る。
         anim = GetComponentInChildren<Animator>();
         anim.SetBool("IsIdle", false);
-        swingArcRange = MAX_HIT_DEG * 2;//左右合わせるから * 2
+        swingArcRange = MAX_SWING_HIT_DEG * 2;//左右合わせるから * 2
         swingArcArea.fillAmount = swingArcRange / 360;
         swingArcArea.rectTransform.localRotation = Quaternion.Euler(0,0,offsetHitDeg + 90); 
         arrowAxisAnchor.transform.rotation = Quaternion.Euler(0,-offsetHitDeg,0);

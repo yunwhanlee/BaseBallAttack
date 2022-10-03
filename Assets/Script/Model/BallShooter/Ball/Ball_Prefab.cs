@@ -18,72 +18,66 @@ public class Ball_Prefab : MonoBehaviour
     float distance;
 
     Rigidbody rigid;
-    void Start()
-    {
+    void Start(){
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-        em = gm.em;
-        pl = gm.pl;
-        bm = gm.bm;
-        bs = gm.bs;
+        em = gm.em; pl = gm.pl; bm = gm.bm; bs = gm.bs;
 
         rigid = GetComponent<Rigidbody>();
         rigid.AddForce(this.transform.forward * speed, ForceMode.Impulse);
 
         //* B. Dmg
         new AtvSkill(gm, pl);
-        //Debug.Log("HitRange:: startPosZ=" + gm.hitRangeStartTf.position.z +  ", endPosZ="+ gm.hitRangeEndTf.position.z);
     }
     void Update(){
-            // Debug.Log("BALL:: Vector3.Normalize(rigid.velocity) =>"+ Vector3.Normalize(rigid.velocity));
+        //* Destroy by Checking Velocity
+        if(rigid.velocity.magnitude != 0 && rigid.velocity.magnitude < 0.9875f){
+            // Debug.Log($"BallGroup.childCount= {gm.ballGroup.childCount}, velocity.magnitude= {rigid.velocity.magnitude}");
+            checkDestroyBall();
+        }
 
-            //* Destroy by Checking Velocity
-            // Debug.Log("BallGroup.childCount=" + gm.ballGroup.childCount + ", Ball Velocity.magnitude="+rigid.velocity.magnitude);
-            if(rigid.velocity.magnitude != 0 && rigid.velocity.magnitude < 0.9875f){
-                checkDestroyBall();
-            }
+        //* Ball Preview Direction Goal Img
+        distance = Vector3.Distance(gm.ballPreviewDirGoal.transform.position, this.transform.position);
+        gm.setBallPreviewImgAlpha(distance);
 
-            //* Ball Comeing View Slider
-            // float startPosZ = gm.hitRangeStartTf.position.z;
-            // float endPosZ = gm.hitRangeEndTf.position.z;
-            // if(!isHited && endPosZ <= this.transform.position.z && this.transform.position.z <= startPosZ){
-            //     //HitRange Slider UI
-            //     float offset = Mathf.Abs(startPosZ);
-            //     float max = Mathf.Abs(endPosZ) - offset;
-            //     float v = Mathf.Abs(this.transform.position.z) - offset;
-            //     gm.hitRangeSlider.value = v / max;
-            // }
-
-            //* Ball Preview Dir Goal Img
-            distance = Vector3.Distance(gm.ballPreviewDirGoal.transform.position, this.transform.position);
-            gm.setBallPreviewImgAlpha(distance);
+        /* Ball Comeing View Slider
+        float startPosZ = gm.hitRangeStartTf.position.z;
+        float endPosZ = gm.hitRangeEndTf.position.z;
+        if(!isHited && endPosZ <= this.transform.position.z && this.transform.position.z <= startPosZ){
+        // HitRange Slider UI
+            float offset = Mathf.Abs(startPosZ);
+            float max = Mathf.Abs(endPosZ) - offset;
+            float v = Mathf.Abs(this.transform.position.z) - offset;
+            gm.hitRangeSlider.value = v / max;
+        }
+        */
     }
 
-    //** Control
-    private void OnTriggerStay(Collider col) {
-#region Hit Ball
+    void OnTriggerStay(Collider col) {
+#region HIT BALL
         if(col.transform.CompareTag(DM.TAG.HitRangeArea.ToString())){
             pl.setSwingArcColor("red");
-            if(pl.DoSwing && gm.State == GameManager.STATE.PLAY){
+            if(gm.State == GameManager.STATE.PLAY && pl.DoSwing){
                 gm.switchCamScene();
-                // isHited = true;
                 pl.DoSwing = false;
                 rigid.useGravity = true;
 
-                //* STRIKEデータ 初期化
+                //* Init STRIKEデータ
                 gm.strikeCnt = 0;
                 foreach(var img in gm.strikeCntImgs) img.gameObject.SetActive(false); 
 
-                //* offset Axis
-                const int leftSide = -1, rightSide = 1;
-                int sign = pl.transform.localScale.x < 0 ? leftSide : rightSide;
-                int offsetAxis = (sign < 0) ? (pl.MAX_HIT_DEG/2) * leftSide : (pl.MAX_HIT_DEG/2) * rightSide;
+                //* Set Offset Axis
+                const int left = -1, right = 1;
+                int sign = pl.transform.localScale.x < 0 ? left : right;
+                int swingDeg = pl.MAX_SWING_HIT_DEG / 2;
+                int offsetAxis = sign * swingDeg;
                 // Debug.Log("Ball_Prefab:: ■offsetAxis=" + offsetAxis);
 
+                //* Set Arrow Direction
                 float arrowDeg = pl.arrowAxisAnchor.transform.eulerAngles.y;
-                Debug.Log("🌟HIT ARROW DIRECTION (DEG)🌟:" + arrowDeg);
                 Vector3 arrowDir = new Vector3(Mathf.Sin(Mathf.Deg2Rad * arrowDeg), 0, Mathf.Cos(Mathf.Deg2Rad * arrowDeg)).normalized;
+                // Debug.Log($"Arrow Deg({arrowDeg}) -Atan2-> Dir({arrowDir})");
 
-                //* Set Power(distance range 1.5f ~ 0)
+                //* Set Hit Power (distance range 1.5f ~ 0)
                 const int A=0, B=1, C=2, D=3, E=4, F=5;
                 float power = (distance <= pl.hitRank[A].Dist) ? pl.hitRank[A].Power //-> BEST HIT (HOMERUH!)
                 : (distance <= pl.hitRank[B].Dist) ? pl.hitRank[B].Power
@@ -96,12 +90,12 @@ public class Ball_Prefab : MonoBehaviour
                 bool isActiveSkillTrigger = false;
                 gm.activeSkillBtnList.ForEach(skillBtn=>{
                     if(skillBtn.Trigger){
-                        StartCoroutine(coPlayActiveSkillShotEF(skillBtn, 1f, arrowDir));
                         isActiveSkillTrigger = true;
+                        StartCoroutine(coPlayActiveSkillShotEF(skillBtn, 1f, arrowDir));
                     }
                 });
 
-                //* Bat Hit Ball SparkEF
+                //* Effect
                 em.createBatHitSparkEF(this.transform.position);
 
                 //* HomeRun
@@ -123,51 +117,41 @@ public class Ball_Prefab : MonoBehaviour
 
                 //* Active Skillなら、下記は実行しない----------------------------------------
                 if(isActiveSkillTrigger) return;
-                #region PSV Hit Type
-                //* Multi Shot
+
+    #region PSV (HIT BALL)
+                //* 【 Multi Shot (横) 】
                 for(int i=0; i<pl.multiShot.Value;i++){
-                    Debug.Log($"PSV MULTI SHOT: {pl.multiShot.Value}");
-
-                    //* Arrow Direction + Extra Deg
-                    Vector3 direction = pl.multiShot.calcMultiShotDeg2Dir(arrowDeg, i);
-
-                    var ins = Instantiate(this.gameObject, this.transform.position, Quaternion.identity, gm.ballGroup) as GameObject;
-                    ins.GetComponent<Rigidbody>().AddForce(direction * force * 0.75f, ForceMode.Impulse);
-                    var scale = ins.GetComponent<Transform>().localScale;
-                    ins.GetComponent<Transform>().localScale = new Vector3(scale.x * 0.75f, scale.y * 0.75f, scale.z * 0.75f);
+                    // Debug.Log($"<color=blue>【 Multi Shot (横) 】: {pl.multiShot.Value}</color>");
+                    Vector3 dir = pl.multiShot.calcMultiShotDeg2Dir(arrowDeg, i); //* Arrow Direction with Extra Deg
+                    instantiateMultiShot(dir, force, ratio: 0.75f);
                 }
 
-                //* Vertical Multi Shot
+                //* 【 Vertical Multi Shot (縦) 】
                 for(int i=0; i<pl.verticalMultiShot.Value;i++){
+                    // Debug.Log($"<color=blue>【 Vertical Multi Shot (縦) 】: {pl.verticalMultiShot.Value}</color>");
                     // Debug.Log("<color=white>Ball_Prefab.cs:: Vertical Multi Shot= " + pl.verticalMultiShot.Value);
-                    var ins = Instantiate(this.gameObject, this.transform.position, Quaternion.identity, gm.ballGroup) as GameObject;
-                    ins.GetComponent<Rigidbody>().AddForce(pl.arrowAxisAnchor.transform.forward * force * 0.85f, ForceMode.Impulse);
-                    var scale = ins.GetComponent<Transform>().localScale;
-                    ins.GetComponent<Transform>().localScale = new Vector3(scale.x * 0.8f, scale.y * 0.8f, scale.z * 0.8f);
+                    Vector3 dir = pl.arrowAxisAnchor.transform.forward;
+                    instantiateMultiShot(dir, force, ratio: 0.8f);
                 }
 
-                //* Laser
-                if(pl.laser.Level > 0){
-                    var start = pl.arrowAxisAnchor.transform.position;
-                    //* Level１以上 Multi Laser
-                    for(int i=0; i < pl.laser.Value; i++){
-                        //* Arrow Direction + Extra Deg
-                        Vector3 direction = pl.laser.calcMultiShotDeg2Dir(arrowDeg, i);
+                //* 【 Laser 】
+                for(int i=0; i < pl.laser.Value; i++){
+                    // Debug.Log($"<color=blue>【 Laser 】: {pl.laser.Value}</color>");
+                    Vector3 start = pl.arrowAxisAnchor.transform.position;
+                    Vector3 dir = pl.laser.calcMultiShotDeg2Dir(arrowDeg, i); //* Arrow Direction with Extra Deg
+                    em.createLaserEF(start, dir);
 
-                        em.createLaserEF(start, direction);
-                        RaycastHit[] hits = Physics.RaycastAll(start, direction, 100);
-                        Array.ForEach(hits, hit => {
-                            if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
-                                Debug.Log("LAZER!! Hit Obj-> " + hit.transform.name);
-                                int dmg = pl.dmg.Value;
-                                bm.setDecreaseHP(hit.transform.gameObject, dmg);
-                                em.createCritTxtEF(hit.transform.position, dmg);
-                            }
-                        });
-                    }
-
+                    RaycastHit[] hits = Physics.RaycastAll(start, dir, 100);
+                    Array.ForEach(hits, hit => {
+                        if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
+                            // Debug.Log("LAZER Hit Obj -> " + hit.transform.name);
+                            int dmg = pl.dmg.Value;
+                            em.createCritTxtEF(hit.transform.position, dmg);
+                            bm.setDecreaseHP(hit.transform.gameObject, dmg);
+                        }
+                    });
                 }
-                #endregion
+    #endregion
             }
         }
         else if(col.transform.CompareTag(DM.TAG.ActiveDownWall.ToString())){
@@ -179,10 +163,9 @@ public class Ball_Prefab : MonoBehaviour
 #endregion
     }
 
-    private void OnTriggerExit(Collider col) {
-        //* SWING Ball
+    void OnTriggerExit(Collider col) {
+#region SWING BAT
         if(col.transform.CompareTag(DM.TAG.HitRangeArea.ToString())){ //* HIT BALL
-            Debug.Log("OnTriggerExit:: BAT SWING BALL");
             pl.setSwingArcColor("yellow");
             //* 日程時間が過ぎたら、ボール削除。
             isHitedByBlock = true;
@@ -192,20 +175,10 @@ public class Ball_Prefab : MonoBehaviour
             onDestroyMe(true);
         }
     }
-    private void checkLimitTimeToDeleteBall(){
-        if(isHitedByBlock)
-            isHitedByBlock = false;
-        else{
-            checkDestroyBall();
-        }
-    }
-
-    //* ---------------------------------------------------------------------------------
-    //* Hit Block (Explosion EF)
-    //* ---------------------------------------------------------------------------------
-    private void OnCollisionEnter(Collision col) {//* Give Damage
+#endregion
+    void OnCollisionEnter(Collision col) { //* Give Damage
+#region #2. ATV (BALL)
         if(col.transform.name.Contains(DM.NAME.Block.ToString())){
-#region #2. Active Skill 「HIT BALL」
             isHitedByBlock = true;
             gm.activeSkillBtnList.ForEach(skillBtn => {
                 if(skillBtn.Trigger){
@@ -214,52 +187,47 @@ public class Ball_Prefab : MonoBehaviour
                     gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
                     var atv = DM.ins.convertAtvSkillStr2Enum(skillBtn.Name);
                     switch(atv){
-                        case DM.ATV.Thunder:
-                            //なし
+                        case DM.ATV.Thunder: //なし
                             break;
                         case DM.ATV.FireBall:{
+                            skillBtn.init(gm);
                             em.createAtvSkExplosionEF(skillIdx, this.transform);
                             decreaseHpSphereCastAll(atv, AtvSkill.FIREBALL_DMG);
-                            if(isHomeRun){
-                                decreaseHpSphereCastAll(atv, 0, AtvSkill.FIREBALL_DOT);
-                            }
-                            skillBtn.init(gm);
-                            this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
+                            if(isHomeRun) decreaseHpSphereCastAll(atv, 0, AtvSkill.FIREBALL_DOT); //* + DOT DAMAGE
+                            this.gameObject.GetComponent<SphereCollider>().enabled = false; //* ボール動きなし
                             break;
                         }
                         case DM.ATV.ColorBall:{
+                            skillBtn.init(gm);
                             if(col.gameObject.GetComponent<Block_Prefab>().kind != BlockMaker.KIND.TreasureChest){
                                 var sameColorBlocks = AtvSkill.findSameColorBlocks(gm, col.transform.gameObject);
-                                
                                 //* Destroy
                                 Array.ForEach(sameColorBlocks, bl => {
                                     em.createAtvSkExplosionEF(skillIdx, bl.transform);
                                     bl.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(AtvSkill.COLORBALL_DMG);
                                 });
                             }
-
-                            skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
                         }
                         case DM.ATV.PoisonSmoke:{
+                            skillBtn.init(gm);
                             int destroyCnt = 999;
                             var ins = em.createAtvSkExplosionEF(skillIdx, this.transform, destroyCnt);
                             if(isHomeRun){
-                                ins.GetComponent<PoisonSmoke>().KeepStageSpan += 2;
                                 float sc = 1.3f;
+                                ins.GetComponent<PoisonSmoke>().KeepStageSpan += 2;
                                 ins.transform.localScale = new Vector3(sc, sc, sc);
                             }
                             RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.PoisonSmokeCastWidth, Vector3.up, 0);
                             decreaseHpSphereCastAll(atv, 0, AtvSkill.POISONSMOKE_DOT);
-                            skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
                         }
                         case DM.ATV.IceWave:{
+                            skillBtn.init(gm);
                             delayTime = 2f;
                             em.createAtvSkExplosionEF(skillIdx, this.transform);
-                            skillBtn.init(gm);
                             this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
                             break;
                         }
@@ -269,9 +237,9 @@ public class Ball_Prefab : MonoBehaviour
                 }
             });
 #endregion
-#region Passive Skill 「HIT BALL」
-            bool isOnExplosion = false;
+#region BALL DAMAGE
             int result = 0;
+            bool isOnExplosion = false;
 
             //* InstantKill
             pl.instantKill.setHitTypeSkill(pl.instantKill.Value, ref result, col, em, pl);
@@ -285,14 +253,14 @@ public class Ball_Prefab : MonoBehaviour
             }
 
             //* Set DAMAGE
-            
             if(isOnExplosion){//* Explosion (爆発)
-                
-                RaycastHit[] rayHits = Physics.SphereCastAll(this.gameObject.transform.position, pl.explosion.Value.range, Vector3.up, 0);
-                foreach(var hit in rayHits){
-                    Debug.Log("Set DAMAGE:: Explostion:: result= " + result + ", hit.obj.name=" + hit.transform.gameObject.name);
-                    bm.setDecreaseHP(hit.transform.gameObject, result);
-                }
+                RaycastHit[] hits = Physics.SphereCastAll(this.gameObject.transform.position, pl.explosion.Value.range, Vector3.up, 0);
+                Array.ForEach(hits, hit => {
+                    if(hit.transform.name.Contains(DM.NAME.Block.ToString())){ //! (BUG) 爆発ができないこと対応。(このIF文が無かったら、UnHitAreaのみ受け取りできない)
+                        Debug.Log("Set DAMAGE:: Explostion:: result= " + result + ", hit.obj.name=" + hit.transform.gameObject.name);
+                        bm.setDecreaseHP(hit.transform.gameObject, result);
+                    }
+                });
             }
             else{//* Normal Damage Result
                 Debug.Log("Set DAMAGE:: result= " + result);
@@ -306,86 +274,7 @@ public class Ball_Prefab : MonoBehaviour
         }
     }
 
-    private void onDestroyMeInvoke() => onDestroyMe();
-    
-    private void decreaseHpSphereCastAll(DM.ATV atv, int dmg, float dotDmgPer = 0){
-        RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.FireBallCastWidth, Vector3.up, 0);
-        Array.ForEach(hits, hit => {
-            if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
-                var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
-                //* Is DotDmg Type?
-                if(!(dotDmgPer == 0) && !block.IsDotDmg){
-                    block.IsDotDmg = true;
-                    switch(atv){
-                        case DM.ATV.FireBall:
-                            em.directlyCreateFireBallDotEF(block.transform);
-                            break;
-                    }
-                }
-                //* Check Dot Dmg or General Dmg
-                int val = (dotDmgPer == 0)? dmg : block.getDotDmg(dotDmgPer);
-                block.decreaseHp(val);
-                em.createCritTxtEF(hit.transform.position, val);
-            }
-        });
-    }
-
-    //*---------------------------------------
-    //*  関数
-    //*---------------------------------------
-    private void checkDestroyBall(){
-        if(this.name == "Ball(Clone)" && this.transform.localScale.x == 0.4f){
-            onDestroyMe();
-            // for(int i=0;i<gm.ballGroup.childCount;i++)
-            //     Destroy(gm.ballGroup.GetChild(i));
-        }
-        else
-            Destroy(this.gameObject);
-    }
-
-    private void onDestroyMe(bool isStrike = false){
-        if(!isStrike){
-            Debug.Log("✓Ball＿Prefab:: onDestroyMe:: gm.setNextStage()");
-            gm.setNextStage();//* ボールが消えたら次に進む。
-        }else{
-            gm.setStrike();
-            gm.setBallPreviewGoalRandomPos();
-        }
-        Destroy(this.gameObject);
-    }
-
-    public void setBallSpeed(float v){
-        speed = v;
-    }
-
-    IEnumerator coPlayHomeRunAnim(bool isActiveSkillTrigger){
-        // if(isActiveSkillTrigger){
-        //     yield return coPlayActiveSkillBefSpotLightAnim();
-        // }
-        isHomeRun = true;
-        Debug.Log("HOMERUH!!!!" + "isHomeRun= " + isHomeRun);
-        Time.timeScale = 0;
-        pl.setAnimTrigger("HomeRun");
-        yield return new WaitForSecondsRealtime(2);
-        gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
-
-        gm.homeRunTxtTf.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
-        em.enableUIStageTxtEF("HomeRun");
-        Time.timeScale = 1;
-    }
-
-    IEnumerator coPlayActiveSkillBefSpotLightAnim(){
-        Debug.Log("ActiveSkill Before Anim");
-        Time.timeScale = 0;
-        pl.setAnimTrigger("ActiveSkillBefSpotLight");
-        yield return new WaitForSecondsRealtime(0.3f);
-        Time.timeScale = 1;
-    }
-
-    //* ---------------------------------------------------------------------------------
-    //* Swing Ball (Shot EF)
-    //* ---------------------------------------------------------------------------------
-#region Passive Skill 「HIT BAT」
+#region ATV (BAT)
     IEnumerator coPlayActiveSkillShotEF(AtvSkillBtnUI btn, float waitTime, Vector3 dir){
         Debug.LogFormat("coPlayActiveSkillShotEF:: btn={0}, waitTite={1}, dir={2}, isHomeRun={3}", btn.Name, waitTime, dir, isHomeRun);
         float delayTime = 0;
@@ -423,6 +312,96 @@ public class Ball_Prefab : MonoBehaviour
         //Before go up NextStage Wait for Second
     }
 #endregion
+
+    private void onDestroyMeInvoke() => onDestroyMe();
+
+    //*------------------------------------------------------------------------------
+    //*  関数
+    //*------------------------------------------------------------------------------
+    void instantiateMultiShot(Vector3 dir, float force, float ratio){
+        var ins = Instantiate(this.gameObject, this.transform.position, Quaternion.identity, gm.ballGroup);
+        ins.GetComponent<Rigidbody>().AddForce(dir * force * ratio, ForceMode.Impulse);
+        Vector3 scale = ins.transform.localScale;
+        ins.transform.localScale = new Vector3(scale.x * ratio, scale.y * ratio, scale.z * ratio);
+    }
+
+    private void decreaseHpSphereCastAll(DM.ATV atv, int dmg, float dotDmgPer = 0){
+        RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.FireBallCastWidth, Vector3.up, 0);
+        Array.ForEach(hits, hit => {
+            if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
+                var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
+                //* Is DotDmg Type?
+                if(!(dotDmgPer == 0) && !block.IsDotDmg){
+                    block.IsDotDmg = true;
+                    switch(atv){
+                        case DM.ATV.FireBall:
+                            em.directlyCreateFireBallDotEF(block.transform);
+                            break;
+                    }
+                }
+                //* Check Dot Dmg or General Dmg
+                int val = (dotDmgPer == 0)? dmg : block.getDotDmg(dotDmgPer);
+                block.decreaseHp(val);
+                em.createCritTxtEF(hit.transform.position, val);
+            }
+        });
+    }
+    private void checkLimitTimeToDeleteBall(){
+        if(isHitedByBlock)
+            isHitedByBlock = false;
+        else{
+            checkDestroyBall();
+        }
+    }
+    private void checkDestroyBall(){
+        if(this.name == "Ball(Clone)" && this.transform.localScale.x == 0.4f){
+            onDestroyMe();
+            // for(int i=0;i<gm.ballGroup.childCount;i++)
+            //     Destroy(gm.ballGroup.GetChild(i));
+        }
+        else
+            Destroy(this.gameObject);
+    }
+
+    private void onDestroyMe(bool isStrike = false){
+        if(!isStrike){
+            Debug.Log("✓Ball_Prefab:: onDestroyMe:: gm.setNextStage()");
+            gm.setNextStage();//* ボールが消えたら次に進む。
+        }else{
+            gm.setStrike();
+            gm.setBallPreviewGoalRandomPos();
+        }
+        Destroy(this.gameObject);
+    }
+
+    public void setBallSpeed(float v){
+        speed = v;
+    }
+
+    IEnumerator coPlayHomeRunAnim(bool isActiveSkillTrigger){
+        // if(isActiveSkillTrigger){
+        //     yield return coPlayActiveSkillBefSpotLightAnim();
+        // }
+        isHomeRun = true;
+        Debug.Log("HOMERUH!!!!" + "isHomeRun= " + isHomeRun);
+        Time.timeScale = 0;
+        pl.setAnimTrigger("HomeRun");
+        yield return new WaitForSecondsRealtime(2);
+        gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
+
+        gm.homeRunTxtTf.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
+        em.enableUIStageTxtEF("HomeRun");
+        Time.timeScale = 1;
+    }
+
+    IEnumerator coPlayActiveSkillBefSpotLightAnim(){
+        Debug.Log("ActiveSkill Before Anim");
+        Time.timeScale = 0;
+        pl.setAnimTrigger("ActiveSkillBefSpotLight");
+        yield return new WaitForSecondsRealtime(0.3f);
+        Time.timeScale = 1;
+    }
+
 
 
     IEnumerator coSetThunderSkill(RaycastHit hit){
