@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class BossBlock : Block_Prefab{
 
     const float STONE_SCALE_X = 2.8f;
-    public int obstacleSpawnCnt = 2;
+    public int obstacleCnt = 2;
 
     [Header("【BOSS STATUS】")]
     [SerializeField] GameObject obstacleStonePf;
@@ -18,7 +18,13 @@ public class BossBlock : Block_Prefab{
     }
 
     public void activeBossSkill(){
-        Debug.Log("<color=white>activeBossKill()::</color>");
+        createObstacleStone(obstacleCnt);
+
+
+    }
+
+    private void createObstacleStone(int cnt){
+        Debug.Log("<color=red>activeBossKill():: createObstacleStone()</color>");
         const float UNIT_X = BlockMaker.SCALE_X;
         const float GAP_X = BlockMaker.CENTER_GAP;
         const float OFFSET_X = -5;
@@ -38,7 +44,7 @@ public class BossBlock : Block_Prefab{
         }
 
         //* OBSTACLE INS 生成
-        for(int i=0; i< obstacleSpawnCnt; i++){
+        for(int i=0; i< cnt; i++){
             int randIdx = Random.Range(0, obstaclePosList.Count);
             Instantiate(obstacleStonePf, obstaclePosList[randIdx], Quaternion.identity, gm.obstacleGroup);
             obstaclePosList.RemoveAt(randIdx);

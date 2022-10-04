@@ -158,7 +158,7 @@ public class BlockMaker : MonoBehaviour
         Array.ForEach(blocks, bl => bl.GetComponent<Block_Prefab>().setEnabledSpriteGlowEF(isOn));
     }
     public void eraseObstacle(){
-        if(gm.bossGroup.childCount <= 0) return; 
+        if(gm.obstacleGroup.childCount <= 0) return; 
         
         for(int i=0; i<gm.obstacleGroup.childCount; i++){
             // Debug.Log($"eraseObstacle():: obstacleGroup.GetChild({i})= {gm.obstacleGroup.GetChild(i)}");
