@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Random = UnityEngine.Random;
 
 public class BossBlock : Block_Prefab{
 
     const float STONE_SCALE_X = 2.8f;
+    public int obstacleSpawnCnt = 2;
 
     [Header("【BOSS STATUS】")]
     [SerializeField] GameObject obstacleStonePf;
@@ -17,23 +19,32 @@ public class BossBlock : Block_Prefab{
 
     public void activeBossSkill(){
         Debug.Log("<color=white>activeBossKill()::</color>");
-        const float unitX = BlockMaker.SCALE_X;
-        const float gap = BlockMaker.CENTER_GAP;
-        const float ofX = -5;
-        Vector3[] posList = {
-            new Vector3(ofX + (unitX * 0),0,-8), new Vector3(ofX + (unitX * 1),0,-8), new Vector3(ofX + (unitX * 2),0,-8), 
-            new Vector3(gap + ofX + (unitX * 3),0,-8), new Vector3(gap + ofX + (unitX * 4),0,-8), new Vector3(gap + ofX + (unitX * 5),0,-8), 
-            new Vector3(ofX + (unitX * 0),0,-9), new Vector3(ofX + (unitX * 1),0,-9), new Vector3(ofX + (unitX * 2),0,-9), 
-            new Vector3(gap + ofX + (unitX * 3),0,-9), new Vector3(gap + ofX + (unitX * 4),0,-9), new Vector3(gap + ofX + (unitX * 5),0,-9), 
-            new Vector3(ofX + (unitX * 0),0,-10), new Vector3(ofX + (unitX * 1),0,-10), new Vector3(ofX + (unitX * 2),0,-10), 
-            new Vector3(gap + ofX + (unitX * 3),0,-10), new Vector3(gap + ofX + (unitX * 4),0,-10), new Vector3(gap + ofX + (unitX * 5),0,-10)
-        };
+        const float UNIT_X = BlockMaker.SCALE_X;
+        const float GAP_X = BlockMaker.CENTER_GAP;
+        const float OFFSET_X = -5;
+        const float OFFSET_Y = -8;
 
-        // int rand = Random.Range(0, posList.Length);
-        // Instantiate(obstacleStonePf, posList[rand], Quaternion.identity, gm.blockGroup);
+        //* OBSTACLE LIST 準備
+        List<Vector3> obstaclePosList = new List<Vector3>(){};
+        for(int i=0; i<18;i++){
+            const int MASS_ROW_CNT = 6;
+            int rowIdx = i % MASS_ROW_CNT;
+            int lastIdx = MASS_ROW_CNT/2 - 1;
+            float gap = (i % MASS_ROW_CNT) > lastIdx ? GAP_X : 0;
 
-        Array.ForEach(posList, pos=> {
-            Instantiate(obstacleStonePf, pos, Quaternion.identity, gm.blockGroup);
-        });
+            float x = gap + OFFSET_X + (UNIT_X * rowIdx);
+            int z = (int)(OFFSET_Y - (i / MASS_ROW_CNT));
+            obstaclePosList.Add(new Vector3(x, 0, z));
+        }
+
+        //* OBSTACLE INS 生成
+        for(int i=0; i< obstacleSpawnCnt; i++){
+            int randIdx = Random.Range(0, obstaclePosList.Count);
+            Instantiate(obstacleStonePf, obstaclePosList[randIdx], Quaternion.identity, gm.obstacleGroup);
+            obstaclePosList.RemoveAt(randIdx);
+        }
+
+        //* DEBUG用。全体の位置確認。
+        // obstaclePosList.ForEach(pos=> Instantiate(obstacleStonePf, pos, Quaternion.identity, gm.obstacleGroup));
     }
 }

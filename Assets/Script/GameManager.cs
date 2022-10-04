@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public Transform blockGroup;
     public Transform dropItemGroup;
     public Transform bossGroup;
+    public Transform obstacleGroup;
     public Transform activeSkillBtnGroup;
 
 
@@ -460,6 +461,7 @@ public class GameManager : MonoBehaviour
         Array.ForEach(dropObjs, dropObj => dropObj.IsMoveToPlayer = true);
 
         //* BossSkill
+        bm.eraseObstacle();
         if(bm.getBoss()){ //* (BUG) NULL Error対応。
             bm.getBoss().activeBossSkill();
         }

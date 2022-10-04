@@ -10,7 +10,9 @@ public class DM : MonoBehaviour
     public static DM ins;
     public enum NAME {DownWall, Block, FireBallDotEffect};
     public enum TAG {HitRangeArea, StrikeLine, GameOverLine, Wall, ActiveDownWall, Player,
-        NormalBlock, LongBlock, TreasureChestBlock, HealBlock, BossBlock};
+        NormalBlock, LongBlock, TreasureChestBlock, HealBlock, BossBlock,
+        Obstacle,
+        };
     public enum LAYER {BallPreview};
     public enum ANIM {DoSpawn, DoShake, DoBossSpawn,IsHit, IsIdle, IsFly};
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
