@@ -14,7 +14,7 @@ public class DM : MonoBehaviour
         Obstacle,
         };
     public enum LAYER {BallPreview};
-    public enum ANIM {DoSpawn, DoShake, DoBossSpawn, DoDie, IsHit, IsIdle, IsFly, GetHit};
+    public enum ANIM {DoSpawn, DoShake, DoBossSpawn, DoDie, IsHit, IsIdle, IsFly, GetHit, DoHeal};
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
     public enum ITEM {Chara, Bat, Skill, CashShop};
     public enum ATV{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave, NULL};
