@@ -14,7 +14,12 @@ public class BossBlock : Block_Prefab{
 
     public void setBossComponent(bool trigger){
         boxCollider.enabled = !trigger;
-        animator.SetBool(DM.ANIM.IsFly.ToString(), trigger);
+        anim.SetBool(DM.ANIM.IsFly.ToString(), trigger);
+    }
+
+    public void decreaseHp(int dmg) {
+        base.decreaseHp(dmg);
+        anim.SetTrigger(DM.ANIM.GetHit.ToString());
     }
 
     public void activeBossSkill(){

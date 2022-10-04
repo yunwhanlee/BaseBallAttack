@@ -73,7 +73,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -7.1}
+  m_AnchoredPosition: {x: 0, y: -8.69}
   m_SizeDelta: {x: 70, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2838254175929334618
@@ -2256,7 +2256,7 @@ MonoBehaviour:
   minLimitVal: 0
   spawnAnimSpeed: 0
   hpTxt: {fileID: 1326742590017898505}
-  obstacleSpawnCnt: 2
+  obstacleCnt: 2
   obstacleStonePf: {fileID: 158965718468592612, guid: f9fdeefcb73f0bb47a6872de776f3132, type: 3}
 --- !u!1 &7123070601197488124
 GameObject:

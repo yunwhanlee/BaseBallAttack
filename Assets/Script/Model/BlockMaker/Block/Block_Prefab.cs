@@ -20,7 +20,7 @@ public class Block_Prefab : MonoBehaviour
     public BlockMaker bm;
     SpriteGlowEffect itemUISprGlowEf;
     protected BoxCollider boxCollider;
-    protected Animator animator;
+    protected Animator anim;
 
     //* Value
     private const int TREASURECHEST_ORB_CNT = 15;
@@ -66,7 +66,7 @@ public class Block_Prefab : MonoBehaviour
 
         sprGlowEf = GetComponentInChildren<SpriteGlowEffect>();
         boxCollider = GetComponent<BoxCollider>();
-        animator = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
 
         //* Material Instancing🌟
         mesh = new MyMesh(this);
@@ -219,7 +219,6 @@ public class Block_Prefab : MonoBehaviour
 
     public void decreaseHp(int dmg) {
         // Debug.Log($"decreaseHp(dmg= {dmg}):: gm= {gm}");
-
         Hp -= dmg;
         gm.comboCnt++;
         gm.comboTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.IsHit.ToString());
