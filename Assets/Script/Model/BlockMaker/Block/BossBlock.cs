@@ -8,6 +8,7 @@ public class BossBlock : Block_Prefab{
 
     const float STONE_SCALE_X = 2.8f;
     public int obstacleCnt = 2;
+    public int bossDieOrbCnt = 80;
 
     [Header("【BOSS STATUS】")]
     [SerializeField] GameObject obstacleStonePf;
@@ -17,9 +18,35 @@ public class BossBlock : Block_Prefab{
         anim.SetBool(DM.ANIM.IsFly.ToString(), trigger);
     }
 
-    public void decreaseHp(int dmg) {
+    public new void decreaseHp(int dmg) {
         base.decreaseHp(dmg);
         anim.SetTrigger(DM.ANIM.GetHit.ToString());
+    }
+
+    public override void onDestroy(GameObject target, bool isInitialize = false) {
+        Debug.Log("bossBlock:: onDestroy()::");
+        StartCoroutine(coPlayBossDieAnim(target));
+    }
+
+    IEnumerator coPlayBossDieAnim(GameObject target){
+        this.transform.rotation = Quaternion.Euler(0,250,0);
+        boxCollider.enabled = false;
+        const int DIE = 2;
+        AnimationClip[] clips = this.anim.runtimeAnimatorController.animationClips;
+        float playSec = clips[DIE].length;
+
+        int resultExp = gm.stage * 10;
+        var spotTf = GameObject.Find(DM.NAME.BossDieDropOrbSpot.ToString()).transform;
+        anim.SetTrigger(DM.ANIM.DoDie.ToString());
+
+        yield return new WaitForSecondsRealtime(playSec * 0.7f);
+        for(int i=0; i < bossDieOrbCnt; i++)
+            bm.createDropItemExpOrbPf(spotTf, resultExp, popPower: 3500);
+
+        yield return new WaitForSecondsRealtime(playSec * 0.3f);
+
+        yield return new WaitForSecondsRealtime(playSec); //* 消すのが早すぎ感じで、少し待機。
+        Destroy(target);
     }
 
     public void activeBossSkill(){
@@ -28,6 +55,7 @@ public class BossBlock : Block_Prefab{
 
     }
 
+    //* Skill #1
     private void createObstacleStone(int cnt){
         Debug.Log("<color=red>activeBossKill():: createObstacleStone()</color>");
         const float UNIT_X = BlockMaker.SCALE_X;

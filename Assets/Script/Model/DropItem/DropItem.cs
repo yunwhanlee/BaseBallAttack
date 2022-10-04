@@ -8,6 +8,7 @@ public class DropItem : MonoBehaviour
     GameManager gm;
 
     //* Value
+    int popPower = 350; public int PopPower{ get => popPower; set => popPower = value;}
     int expVal; public int ExpVal{ get => expVal; set => expVal = value;}
     [SerializeField] bool isMoveToPlayer; public bool IsMoveToPlayer{ get => isMoveToPlayer; set => isMoveToPlayer = value;}
     [SerializeField] float moveSpeed = 5f;
@@ -21,8 +22,7 @@ public class DropItem : MonoBehaviour
     }
 
     void OnEnable() {
-        Debug.Log("<color=yellow>DropItem OnEnable() </color>");
-        spawnPopUp();
+        spawnPopUp(PopPower);
     }
 
     void OnDisable() { //* (BUG) 再活性化するときに、動きOFF。
@@ -38,13 +38,14 @@ public class DropItem : MonoBehaviour
 
     public void moveToTarget(Transform target) => IsMoveToPlayer = true;
 
-    public void spawnPopUp(){
-        float v = 0.3f;
+    public void spawnPopUp(int power){
+        float v = 0.5f;
         float randX = Random.Range(-v, v);
         float randZ = Random.Range(-v, v);
         // Debug.LogFormat("DropItem:: shootPopUp():: randX= {0}, randZ= {1}", randX, randZ);
         Vector3 dir = new Vector3(randX, 1, randZ);
-        float force = 350 * Time.deltaTime;
+        float force = power * Time.deltaTime;
+        Debug.Log($"<color=yellow>DropItem spawnPopUp({power}):: force= {force}</color>");
         this.rigid.AddForce(dir * force, ForceMode.Impulse);
     }
 
