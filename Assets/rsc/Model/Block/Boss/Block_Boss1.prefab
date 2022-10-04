@@ -73,7 +73,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1.06}
+  m_AnchoredPosition: {x: 0, y: -7.1}
   m_SizeDelta: {x: 70, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2838254175929334618
@@ -2237,6 +2237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
+  bm: {fileID: 0}
   mesh:
     boss: []
     block: []
@@ -2255,6 +2256,7 @@ MonoBehaviour:
   minLimitVal: 0
   spawnAnimSpeed: 0
   hpTxt: {fileID: 1326742590017898505}
+  obstacleSpawnCnt: 2
   obstacleStonePf: {fileID: 158965718468592612, guid: f9fdeefcb73f0bb47a6872de776f3132, type: 3}
 --- !u!1 &7123070601197488124
 GameObject:
@@ -2899,7 +2901,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8861621529671249134}
   m_LocalRotation: {x: -0, y: -0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 2.82}
+  m_LocalPosition: {x: 0, y: 0, z: 0.13}
   m_LocalScale: {x: 0.47499987, y: 0.34999996, z: 0.75000006}
   m_Children:
   - {fileID: 1177288949910752163}
@@ -2910,7 +2912,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 4.04}
+  m_AnchoredPosition: {x: 0, y: 4}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8341056819072292145
