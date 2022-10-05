@@ -11,11 +11,9 @@ public class BlockMaker : MonoBehaviour
     //* OutSide
     public GameManager gm;
 
-    const int MAX_HORIZONTAL_GRID = 6;
+    public const int MAX_HORIZONTAL_GRID = 6, FIRST_CREATE_VERTICAL_CNT = 4; //DEAD_MAX-> 13
     public const float SCALE_X = 1.9f, SCALE_Y = 1, SPAWN_POS_X = -5;
-    public const int FIRST_CREATE_VERTICAL_CNT = 4; //DEAD_MAX-> 13
-    public const float START_POS_Z = -2;
-    public const float CENTER_GAP = 0.5f; // センターのボールが来る隙間
+    public const float START_POS_Z = -2, CENTER_GAP = 0.5f; // センターのボールが来る隙間
 
     [Header("STATUS")]
     public bool isCreateBlock;  public bool IsCreateBlock {get => isCreateBlock; set => isCreateBlock = value;}
