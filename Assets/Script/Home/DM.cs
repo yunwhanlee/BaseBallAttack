@@ -8,6 +8,7 @@ using System;
 public class DM : MonoBehaviour
 {
     public static DM ins;
+    public enum SCENE {Home, Play};
     public enum NAME {DownWall, Block, FireBallDotEffect, BossDieDropOrbSpot,};
     public enum TAG {HitRangeArea, StrikeLine, GameOverLine, Wall, ActiveDownWall, Player,
         NormalBlock, LongBlock, TreasureChestBlock, HealBlock, BossBlock,   
@@ -16,7 +17,7 @@ public class DM : MonoBehaviour
     public enum LAYER {BallPreview};
     public enum ANIM {DoSpawn, DoShake, DoBossSpawn, DoDie, IsHit, IsIdle, IsFly, GetHit, DoHeal};
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
-    public enum HOME {Chara, Bat, Skill, CashShop, PsvInfo};
+    public enum PANEL {Chara, Bat, Skill, CashShop, PsvInfo, NULL};
     public enum ATV{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave, NULL};
     public enum PSV{Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, Laser, NULL};
 
@@ -43,24 +44,24 @@ public class DM : MonoBehaviour
         // foreach(DM.ATV list in Enum.GetValues(typeof(DM.ATV)))Debug.LogFormat("Enums GetFindVal:: {0}", list.ToString())
 
         //* contents Prefab 生成
-        scrollviews[(int)DM.HOME.Chara].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
-        scrollviews[(int)DM.HOME.Bat].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
-        scrollviews[(int)DM.HOME.Skill].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
-        scrollviews[(int)DM.HOME.CashShop].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
-        scrollviews[(int)DM.HOME.PsvInfo].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.PANEL.Chara].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.PANEL.Bat].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.PANEL.Skill].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.PANEL.CashShop].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.PANEL.PsvInfo].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
 
         //* Items of Content (Set UnLockList)
-        ItemInfo[] charas = scrollviews[(int)DM.HOME.Chara].ContentTf.GetComponentsInChildren<ItemInfo>();
-        ItemInfo[] bats = scrollviews[(int)DM.HOME.Bat].ContentTf.GetComponentsInChildren<ItemInfo>();
-        ItemInfo[] skills = scrollviews[(int)DM.HOME.Skill].ContentTf.GetComponentsInChildren<ItemInfo>();
+        ItemInfo[] charas = scrollviews[(int)DM.PANEL.Chara].ContentTf.GetComponentsInChildren<ItemInfo>();
+        ItemInfo[] bats = scrollviews[(int)DM.PANEL.Bat].ContentTf.GetComponentsInChildren<ItemInfo>();
+        ItemInfo[] skills = scrollviews[(int)DM.PANEL.Skill].ContentTf.GetComponentsInChildren<ItemInfo>();
 
         personalData = new PersonalData(); //* DataBase
         personalData.load(ref charas, ref bats, ref skills); //TODO Add skills
 
         //* PersonalData後に処理必要なもの（LANGUAGEため）
-        scrollviews[(int)DM.HOME.Skill].setLanguage();
-        scrollviews[(int)DM.HOME.CashShop].setLanguage();
-        scrollviews[(int)DM.HOME.PsvInfo].setLanguage();
+        scrollviews[(int)DM.PANEL.Skill].setLanguage();
+        scrollviews[(int)DM.PANEL.CashShop].setLanguage();
+        scrollviews[(int)DM.PANEL.PsvInfo].setLanguage();
     }
 
     void Update(){
@@ -123,16 +124,15 @@ public class DM : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-
-
-    public int getCurItemType2Idx(){
-        return (SelectItemType == DM.HOME.Chara.ToString())? (int)DM.HOME.Chara
-            : (SelectItemType == DM.HOME.Bat.ToString())? (int)DM.HOME.Bat
-            : (SelectItemType == DM.HOME.Skill.ToString())? (int)DM.HOME.Skill
-            : (SelectItemType == DM.HOME.CashShop.ToString())? (int)DM.HOME.CashShop
-            : (SelectItemType == DM.HOME.PsvInfo.ToString())? (int)DM.HOME.PsvInfo
-            : -9999;
+    public DM.PANEL getCurItemType2Enum(string name){
+        return (name == DM.PANEL.Chara.ToString())? DM.PANEL.Chara
+            : (name == DM.PANEL.Bat.ToString())? DM.PANEL.Bat
+            : (name == DM.PANEL.Skill.ToString())? DM.PANEL.Skill
+            : (name == DM.PANEL.CashShop.ToString())? DM.PANEL.CashShop
+            : (name == DM.PANEL.PsvInfo.ToString())? DM.PANEL.PsvInfo
+            : DM.PANEL.NULL;
     }
+    
 
     public GameManager.STATE convertGameState2Enum(string name){
         return (name == GameManager.STATE.PLAY.ToString())? GameManager.STATE.PLAY

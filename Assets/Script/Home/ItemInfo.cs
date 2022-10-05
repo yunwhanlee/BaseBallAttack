@@ -21,12 +21,12 @@ public class ItemInfo : MonoBehaviour
 
 
     void Start(){
-        var type = DM.ins.getCurItemType2Idx();
+        var itemType = DM.ins.getCurItemType2Enum(DM.ins.SelectItemType);
 
-        switch(type){
+        switch(itemType){
             //* 3D Model 形式
-            case (int)DM.HOME.Chara :
-            case (int)DM.HOME.Bat :{
+            case DM.PANEL.Chara :
+            case DM.PANEL.Bat :{
                 Outline3D = this.GetComponent<Outline>();
 
                 var childs = this.GetComponentsInChildren<MeshRenderer>();
@@ -35,7 +35,7 @@ public class ItemInfo : MonoBehaviour
                 break;
             }
             //* 2D UI Sprite 形式
-            case (int)DM.HOME.Skill :{
+            case DM.PANEL.Skill :{
                 Outline2D = this.GetComponent<UnityEngine.UI.Extensions.NicerOutline>();
                 Debug.Log("Skill Outline2D=" + Outline2D);
 

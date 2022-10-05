@@ -205,15 +205,15 @@ public static class LANG //* LANG
         var split = str.Split('_');
         string type = split[SPT_TYPE];
 
-        if(type == DM.HOME.Chara.ToString() || type == DM.HOME.Bat.ToString()){
+        if(type == DM.PANEL.Chara.ToString() || type == DM.PANEL.Bat.ToString()){
             resList.Add(split[SPT_NAME]);
         }
-        else if(type == DM.HOME.Skill.ToString()){
+        else if(type == DM.PANEL.Skill.ToString()){
             resList.Add(split[SPT_NAME]);
             resList.Add(split[SPT_EXPLAIN]);
             resList.Add(split[SPT_HOMERUNBONUS]);
         }
-        else if(type == DM.HOME.CashShop.ToString() || type == DM.HOME.PsvInfo.ToString() ){
+        else if(type == DM.PANEL.CashShop.ToString() || type == DM.PANEL.PsvInfo.ToString() ){
             resList.Add(split[SPT_NAME]);
             resList.Add(split[SPT_EXPLAIN]);
         }

@@ -65,21 +65,22 @@ public class HomeManager : MonoBehaviour
     public void onClickBtnGoToPanel(string name){
         //* Current Model Data & ParentTf
         DM.ins.SelectItemType = name;
-        var curChara = DM.ins.scrollviews[(int)DM.HOME.Chara].ItemPrefs[DM.ins.personalData.SelectCharaIdx];
-        var curBat = DM.ins.scrollviews[(int)DM.HOME.Bat].ItemPrefs[DM.ins.personalData.SelectBatIdx];
+        var curChara = DM.ins.scrollviews[(int)DM.PANEL.Chara].ItemPrefs[DM.ins.personalData.SelectCharaIdx];
+        var curBat = DM.ins.scrollviews[(int)DM.PANEL.Bat].ItemPrefs[DM.ins.personalData.SelectBatIdx];
         
-        switch(DM.ins.SelectItemType){
-            case "Home" :
+        var itemType = DM.ins.getCurItemType2Enum(DM.ins.SelectItemType);
+        switch(itemType){
+            case DM.PANEL.Chara :
+            case DM.PANEL.Bat :
+            case DM.PANEL.Skill :
+            case DM.PANEL.CashShop :
+            case DM.PANEL.PsvInfo :
+                setGUI();
+                break;
+            default: //* Home
                 createCurModel(curChara, curBat, modelTf);
                 setGUI();
                 setSelectSkillImg();
-                break;
-            case "Chara" :
-            case "Bat" :
-            case "Skill" :
-            case "CashShop" :
-            case "PsvInfo" :
-                setGUI();
                 break;
         }
     }
@@ -105,7 +106,7 @@ public class HomeManager : MonoBehaviour
     public void onClickSettingRequestBtn(bool isOk){
         settingDialog.Panel.SetActive(false);
         DM.ins.personalData.save();
-        if(isOk) SceneManager.LoadScene("Home"); // Re-load
+        if(isOk) SceneManager.LoadScene(DM.SCENE.Home.ToString()); // Re-load
     }
 
     public void onDropDownLanguageOpt(){
@@ -145,7 +146,7 @@ public class HomeManager : MonoBehaviour
         drawGrayPanel(false);
 
         //* Set SkillImg without overlap
-        var prefs = DM.ins.scrollviews[(int)DM.HOME.Skill].ItemPrefs;
+        var prefs = DM.ins.scrollviews[(int)DM.PANEL.Skill].ItemPrefs;
         List<int> remainedSkillIdxList = new List<int>();
         for(int i = 0; i < prefs.Length; i++){
             if(DM.ins.personalData.SelectSkillIdx != i)
@@ -189,7 +190,7 @@ public class HomeManager : MonoBehaviour
 
     public void setSelectSkillImg(bool isInit = false){
         Debug.LogFormat("------setSelectSkillImg():: selectedSkillBtnIdx({0}) SelectSkillIdx({1}), SelectSkill2Idx({2})------", selectedSkillBtnIdx, DM.ins.personalData.SelectSkillIdx, DM.ins.personalData.SelectSkill2Idx);
-        var ctt = DM.ins.scrollviews[(int)DM.HOME.Skill].ContentTf;
+        var ctt = DM.ins.scrollviews[(int)DM.PANEL.Skill].ContentTf;
         if(isInit){
             setSelectSkillSprite(0, ctt, DM.ins.personalData.SelectSkillIdx);
             check2ndSkillSprite(ctt, DM.ins.personalData.SelectSkill2Idx);
@@ -258,7 +259,7 @@ public class HomeManager : MonoBehaviour
                     sv.ScrollRect.gameObject.SetActive(false));
                 break;
             default : 
-                int typeIdx = DM.ins.getCurItemType2Idx();
+                int typeIdx = (int)DM.ins.getCurItemType2Enum(DM.ins.SelectItemType);
                 SelectPanelScrollBG.color = selectPanelColors[typeIdx];
                 DM.ins.scrollviews[typeIdx].ScrollRect.gameObject.SetActive(true);
 
@@ -270,7 +271,7 @@ public class HomeManager : MonoBehaviour
         }
     }
     private void setActiveDialogGUI(string type){
-        bool isHome = (type == "Home")? true : false;
+        bool isHome = (type == DM.SCENE.Home.ToString())? true : false;
         homeDialog.Panel.gameObject.SetActive(isHome);
         homeDialog.GoBtn.gameObject.SetActive(!isHome);
         selectDialog.Panel.gameObject.SetActive(!isHome);
