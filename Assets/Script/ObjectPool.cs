@@ -13,6 +13,7 @@ public class ObjectPool : MonoBehaviour
         InstantKillTextEF, CritTxtEF, HealTxtEF, HeartEF,
         BatHitSparkEF, HomeRunHitSparkEF, 
         ExplosionEF, LaserEF,
+        BossHealSkillEF,
 
         //* OBJ
         DropItemExpOrbPf,
@@ -73,6 +74,7 @@ public class ObjectPool : MonoBehaviour
         poolDtList.Add(new PoolData(DIC.HomeRunHitSparkEF.ToString(), em.homeRunHitSparkEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.ExplosionEF.ToString(), em.explosionEF, 5, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.LaserEF.ToString(), em.laserEF, 3, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.BossHealSkillEF.ToString(), em.bossHealSkillEF, 1, em.gm.effectGroup));
 
         // OBJ 
         poolDtList.Add(new PoolData(DIC.DropItemExpOrbPf.ToString(), bm.dropItemExpOrbPf, 50, gm.dropItemGroup));

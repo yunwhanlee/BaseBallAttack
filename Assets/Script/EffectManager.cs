@@ -46,6 +46,9 @@ public class EffectManager : MonoBehaviour
     public GameObject perfectTxtEF;
     public GameObject homeRunTxtEF;
 
+    //* Boss Skill EF
+    public GameObject bossHealSkillEF;
+
     void Start()
     {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -60,6 +63,10 @@ public class EffectManager : MonoBehaviour
 //*---------------------------------------
 //* 関数
 //*---------------------------------------
+    public void createBossHealSkillEF(Vector3 parentPos){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.BossHealSkillEF.ToString(), parentPos, QI, gm.effectGroup);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 3));
+    }
     public void createBatHitSparkEF(Vector3 parentPos){
         var ins = ObjectPool.getObject(ObjectPool.DIC.BatHitSparkEF.ToString(), parentPos, QI, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1));

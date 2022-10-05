@@ -7,8 +7,11 @@ using Random = UnityEngine.Random;
 public class BossBlock : Block_Prefab{
 
     const float STONE_SCALE_X = 2.8f;
-    public int obstacleCnt = 2;
-    public int bossDieOrbCnt = 80;
+    const int OBSTACLE_STONE_CNT = 2;
+    const int BOSS_DIE_ORB_CNT = 80;
+    const float BOSS_HEAL_RATIO = 0.2f;
+
+
     [SerializeField] Transform bossDieOrbSpot;
 
     [Header("【BOSS STATUS】")]
@@ -20,10 +23,22 @@ public class BossBlock : Block_Prefab{
 
     public void activeBossSkill(){ //* at NextStage
         //* Skill #1
-        createObstacleStone(obstacleCnt); 
+        // createObstacleStone(OBSTACLE_STONE_CNT); 
 
         //* Skill #2
+        StartCoroutine(coBossHealSkill());
+        
+    }
+
+    IEnumerator coBossHealSkill(){
+        yield return new WaitForSeconds(1);
         this.anim.SetTrigger(DM.ANIM.DoHeal.ToString());
+        gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
+        gm.em.createBossHealSkillEF(bossDieOrbSpot.position);
+        yield return new WaitForSeconds(1);
+        Array.ForEach(gm.blockGroup.GetComponentsInChildren<Block_Prefab>(), block => {
+            block.increaseHp((int)(block.Hp * BOSS_HEAL_RATIO));
+        });
     }
 
     public void setBossComponent(bool trigger){
@@ -52,7 +67,7 @@ public class BossBlock : Block_Prefab{
         anim.SetTrigger(DM.ANIM.DoDie.ToString());
 
         yield return new WaitForSecondsRealtime(playSec * 0.7f);
-        for(int i=0; i < bossDieOrbCnt; i++)
+        for(int i=0; i < BOSS_DIE_ORB_CNT; i++)
             bm.createDropItemExpOrbPf(bossDieOrbSpot, resultExp, popPower: 3500);
 
         yield return new WaitForSecondsRealtime(playSec * 0.3f + playSec); //* 消すのが早すぎ感じで、少し待機。

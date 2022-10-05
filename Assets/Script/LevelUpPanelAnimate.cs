@@ -40,6 +40,8 @@ public class LevelUpPanelAnimate : MonoBehaviour
     public Button[] skillBtns;
     public SkillBtn[] SkillBtns; //struct宣言
 
+    private void OnEnable() => Time.timeScale = 0; //* このパンネルが出たら、政界の時間 停止
+    private void OnDisable() => Time.timeScale = 1; //* このパンネルが消えたら、政界の時間 戻す
 
     public void Start(){
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -109,12 +111,12 @@ public class LevelUpPanelAnimate : MonoBehaviour
     void Update(){
         //* Scroll Sprite Animation
         if(2 >= btnIdx && selectSkillList.Count > 0){
-            time += Time.deltaTime;
+            time += Time.unscaledDeltaTime;
             foreach(var btn in SkillBtns){
                 // #1.Scrolling
                 if(time < 2){
                     if(btn.imgRectTf.localPosition.y >= 0){
-                        btn.imgRectTf.Translate(0,-Time.deltaTime * scrollingSpeed, 0);
+                        btn.imgRectTf.Translate(0,-Time.unscaledDeltaTime * scrollingSpeed, 0);
                     }
                     else{
                         btn.imgRectTf.localPosition = new Vector3(0, SPRITE_W * skillImgCnt, 0);
@@ -156,7 +158,7 @@ public class LevelUpPanelAnimate : MonoBehaviour
                 float lastIdxPosY = SkillBtns[2].imgRectTf.localPosition.y % SPRITE_W;
                 if(SPRITE_W/2 <= posY && posY <= SPRITE_W){
                     //Scroll Up
-                    SkillBtns[i].imgRectTf.Translate(0, (speed / (i+1)) * Time.deltaTime, 0);
+                    SkillBtns[i].imgRectTf.Translate(0, (speed / (i+1)) * Time.unscaledDeltaTime, 0);
                     //最後Idxが終わるまで待つ
                     if(Mathf.RoundToInt(lastIdxPosY) == SPRITE_W) isRollingStop = false;
                 }

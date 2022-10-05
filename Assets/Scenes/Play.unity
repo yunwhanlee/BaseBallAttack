@@ -4249,7 +4249,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 189fdf97a6550b540adea03d35f14dea, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -5450,6 +5450,7 @@ MonoBehaviour:
   dropItemExpOrbEF: {fileID: 6169633472775575342, guid: a1349e9b2b124854db93b83447f69426, type: 3}
   perfectTxtEF: {fileID: 1250287897}
   homeRunTxtEF: {fileID: 2005072966}
+  bossHealSkillEF: {fileID: 2068829495866214061, guid: 25c4eb96708f49c40a8cd37b5270ec1c, type: 3}
 --- !u!1 &697366768
 GameObject:
   m_ObjectHideFlags: 0
@@ -8062,7 +8063,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 163.33333, y: -281.70886}
+  m_AnchoredPosition: {x: 163.33333, y: -310}
   m_SizeDelta: {x: 270, y: 270}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &955063943
@@ -17494,7 +17495,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 816.6666, y: -281.70886}
+  m_AnchoredPosition: {x: 816.6666, y: -310}
   m_SizeDelta: {x: 270, y: 270}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1648916398
@@ -18733,7 +18734,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 490, y: -281.70886}
+  m_AnchoredPosition: {x: 490, y: -310}
   m_SizeDelta: {x: 270, y: 270}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1832513077
