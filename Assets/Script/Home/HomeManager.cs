@@ -42,6 +42,7 @@ public class HomeManager : MonoBehaviour
     public Text selectedSkillBtnIdxTxt;
     public Button[] skillBtns;
     public Button startGameBtn;
+    public Button checkBtn;
     [SerializeField] Image selectSkillImg;  public Image SelectSkillImg {get => selectSkillImg; set => selectSkillImg = value;}
 
     [Header("MODEL")]
@@ -54,7 +55,7 @@ public class HomeManager : MonoBehaviour
     //TODO public DialogUI cashShop;
 
     void Start(){
-        onClickBtnGoToPanel("Home");
+        onClickBtnGoToPanel(DM.SCENE.Home.ToString());
         setSelectSkillImg(true);
         LanguageOptDropDown.value = (int)DM.ins.personalData.Lang; //* Loadデータで初期化
     }
@@ -74,7 +75,11 @@ public class HomeManager : MonoBehaviour
             case DM.PANEL.Bat :
             case DM.PANEL.Skill :
             case DM.PANEL.CashShop :
+                checkBtn.gameObject.SetActive(true);
+                setGUI();
+                break;
             case DM.PANEL.PsvInfo :
+                checkBtn.gameObject.SetActive(false);
                 setGUI();
                 break;
             default: //* Home
@@ -176,7 +181,7 @@ public class HomeManager : MonoBehaviour
         int[] lvArrTemp = getItemPsvLvArr(playerModel);
         DM.ins.personalData.ItemPassive.setLvArr(lvArrTemp);
 
-        SceneManager.LoadScene("Play");
+        SceneManager.LoadScene(DM.SCENE.Play.ToString());
     }
 
     public void onClickResetBtn(){
@@ -279,6 +284,6 @@ public class HomeManager : MonoBehaviour
     private void drawGrayPanel(bool isActive){
         var child = unlock2ndSkillDialog.GoBtn.transform.GetChild(1);
         Debug.Log("drawGrayPanel:: child.name= " + child.name);
-        if(child.name == "GrayPanel") child.gameObject.SetActive(isActive);
+        if(child.name == DM.NAME.GrayPanel.ToString()) child.gameObject.SetActive(isActive);
     }
 }
