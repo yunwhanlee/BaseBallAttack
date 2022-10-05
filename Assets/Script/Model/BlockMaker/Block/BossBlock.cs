@@ -22,12 +22,17 @@ public class BossBlock : Block_Prefab{
     }
 
     public void activeBossSkill(){ //* at NextStage
-        //* Skill #1
-        // createObstacleStone(OBSTACLE_STONE_CNT); 
+        var rand = Random.Range(0, 100);
 
-        //* Skill #2
-        StartCoroutine(coBossHealSkill());
-        
+        if(rand < 70){
+            //* Skill #1
+            createObstacleStoneSkill(OBSTACLE_STONE_CNT);
+        }
+        else{
+            //* Skill #2
+            StartCoroutine(coBossHealSkill());
+        }
+
     }
 
     IEnumerator coBossHealSkill(){
@@ -37,7 +42,8 @@ public class BossBlock : Block_Prefab{
         gm.em.createBossHealSkillEF(bossDieOrbSpot.position);
         yield return new WaitForSeconds(1);
         Array.ForEach(gm.blockGroup.GetComponentsInChildren<Block_Prefab>(), block => {
-            block.increaseHp((int)(block.Hp * BOSS_HEAL_RATIO));
+            var val = block.Hp * BOSS_HEAL_RATIO == 0? 2 : block.Hp * BOSS_HEAL_RATIO;
+            block.increaseHp((int)val);
         });
     }
 
@@ -76,7 +82,7 @@ public class BossBlock : Block_Prefab{
 
 
     //* Skill #1
-    private void createObstacleStone(int cnt){
+    private void createObstacleStoneSkill(int cnt){
         Debug.Log("<color=red>activeBossKill():: createObstacleStone()</color>");
         const float UNIT_X = BlockMaker.SCALE_X;
         const float GAP_X = BlockMaker.CENTER_GAP;
