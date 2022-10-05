@@ -65,8 +65,8 @@ public class HomeManager : MonoBehaviour
     public void onClickBtnGoToPanel(string name){
         //* Current Model Data & ParentTf
         DM.ins.SelectItemType = name;
-        var curChara = DM.ins.scrollviews[(int)DM.ITEM.Chara].ItemPrefs[DM.ins.personalData.SelectCharaIdx];
-        var curBat = DM.ins.scrollviews[(int)DM.ITEM.Bat].ItemPrefs[DM.ins.personalData.SelectBatIdx];
+        var curChara = DM.ins.scrollviews[(int)DM.HOME.Chara].ItemPrefs[DM.ins.personalData.SelectCharaIdx];
+        var curBat = DM.ins.scrollviews[(int)DM.HOME.Bat].ItemPrefs[DM.ins.personalData.SelectBatIdx];
         
         switch(DM.ins.SelectItemType){
             case "Home" :
@@ -78,6 +78,7 @@ public class HomeManager : MonoBehaviour
             case "Bat" :
             case "Skill" :
             case "CashShop" :
+            case "PsvInfo" :
                 setGUI();
                 break;
         }
@@ -144,7 +145,7 @@ public class HomeManager : MonoBehaviour
         drawGrayPanel(false);
 
         //* Set SkillImg without overlap
-        var prefs = DM.ins.scrollviews[(int)DM.ITEM.Skill].ItemPrefs;
+        var prefs = DM.ins.scrollviews[(int)DM.HOME.Skill].ItemPrefs;
         List<int> remainedSkillIdxList = new List<int>();
         for(int i = 0; i < prefs.Length; i++){
             if(DM.ins.personalData.SelectSkillIdx != i)
@@ -188,7 +189,7 @@ public class HomeManager : MonoBehaviour
 
     public void setSelectSkillImg(bool isInit = false){
         Debug.LogFormat("------setSelectSkillImg():: selectedSkillBtnIdx({0}) SelectSkillIdx({1}), SelectSkill2Idx({2})------", selectedSkillBtnIdx, DM.ins.personalData.SelectSkillIdx, DM.ins.personalData.SelectSkill2Idx);
-        var ctt = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf;
+        var ctt = DM.ins.scrollviews[(int)DM.HOME.Skill].ContentTf;
         if(isInit){
             setSelectSkillSprite(0, ctt, DM.ins.personalData.SelectSkillIdx);
             check2ndSkillSprite(ctt, DM.ins.personalData.SelectSkill2Idx);

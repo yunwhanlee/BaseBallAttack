@@ -25,8 +25,8 @@ public class ItemInfo : MonoBehaviour
 
         switch(type){
             //* 3D Model 形式
-            case (int)DM.ITEM.Chara :
-            case (int)DM.ITEM.Bat :{
+            case (int)DM.HOME.Chara :
+            case (int)DM.HOME.Bat :{
                 Outline3D = this.GetComponent<Outline>();
 
                 var childs = this.GetComponentsInChildren<MeshRenderer>();
@@ -35,7 +35,7 @@ public class ItemInfo : MonoBehaviour
                 break;
             }
             //* 2D UI Sprite 形式
-            case (int)DM.ITEM.Skill :{
+            case (int)DM.HOME.Skill :{
                 Outline2D = this.GetComponent<UnityEngine.UI.Extensions.NicerOutline>();
                 Debug.Log("Skill Outline2D=" + Outline2D);
 
@@ -47,6 +47,8 @@ public class ItemInfo : MonoBehaviour
                 if(cashShopPriceTxt){ //* CashShop
                     Debug.Log("CashShop:: this.name= " + this.name);
                     cashShopPriceTxt.text = price.ToString();
+                }else{
+                    Debug.Log("PsvInfo::");
                 }
 
                 break;

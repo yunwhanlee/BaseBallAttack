@@ -111,17 +111,17 @@ public class PersonalData {
 
         // this.ItemPassive = new ItemPassiveList();
 
-        for(int i=0; i<DM.ins.scrollviews[(int)DM.ITEM.Chara].ItemPrefs.Length; i++){
+        for(int i=0; i<DM.ins.scrollviews[(int)DM.HOME.Chara].ItemPrefs.Length; i++){
             if(i==0) this.CharaLockList.Add(false);//    items[0].IsLock = false;}
             else     this.CharaLockList.Add(true);//     items[i].IsLock = true;}
         }
 
-        for(int i=0; i<DM.ins.scrollviews[(int)DM.ITEM.Bat].ItemPrefs.Length; i++){
+        for(int i=0; i<DM.ins.scrollviews[(int)DM.HOME.Bat].ItemPrefs.Length; i++){
             if(i==0) this.BatLockList.Add(false);//    items[0].IsLock = false;}
             else     this.BatLockList.Add(true);//     items[i].IsLock = true;}
         }
 
-        for(int i=0; i<DM.ins.scrollviews[(int)DM.ITEM.Skill].ItemPrefs.Length; i++){
+        for(int i=0; i<DM.ins.scrollviews[(int)DM.HOME.Skill].ItemPrefs.Length; i++){
             if(i==0) this.SkillLockList.Add(false);//    items[0].IsLock = false;}
             else     this.SkillLockList.Add(true);//     items[i].IsLock = true;}
         }
@@ -129,17 +129,17 @@ public class PersonalData {
     }
 
     public int getSelectIdx(string type){
-        return (type == DM.ITEM.Chara.ToString())? SelectCharaIdx
-            :(type == DM.ITEM.Bat.ToString())? SelectBatIdx
-            :(type == DM.ITEM.Skill.ToString())? SelectSkillIdx :-1;
+        return (type == DM.HOME.Chara.ToString())? SelectCharaIdx
+            :(type == DM.HOME.Bat.ToString())? SelectBatIdx
+            :(type == DM.HOME.Skill.ToString())? SelectSkillIdx :-1;
     }
 
     public void setSelectIdx(int index){
         var type = DM.ins.getCurItemType2Idx();
         switch(type){
-            case (int)DM.ITEM.Chara :  SelectCharaIdx = index; break;
-            case (int)DM.ITEM.Bat :    SelectBatIdx = index;   break;
-            case (int)DM.ITEM.Skill :  
+            case (int)DM.HOME.Chara :  SelectCharaIdx = index; break;
+            case (int)DM.HOME.Bat :    SelectBatIdx = index;   break;
+            case (int)DM.HOME.Skill :  
                 var hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
                 if(hm.selectedSkillBtnIdx == 0)
                     SelectSkillIdx = index; 
@@ -152,9 +152,9 @@ public class PersonalData {
     public void setUnLockCurList(int curIdx){
         var type = DM.ins.getCurItemType2Idx();
         switch(type){
-            case (int)DM.ITEM.Chara :  CharaLockList[curIdx] = false; break;
-            case (int)DM.ITEM.Bat :    BatLockList[curIdx] = false;   break;
-            case (int)DM.ITEM.Skill :  SkillLockList[curIdx] = false; break;
+            case (int)DM.HOME.Chara :  CharaLockList[curIdx] = false; break;
+            case (int)DM.HOME.Bat :    BatLockList[curIdx] = false;   break;
+            case (int)DM.HOME.Skill :  SkillLockList[curIdx] = false; break;
         }
     }
 }

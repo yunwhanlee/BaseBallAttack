@@ -8,7 +8,7 @@ using System;
 public class DM : MonoBehaviour
 {
     public static DM ins;
-    public enum NAME {DownWall, Block, FireBallDotEffect, BossDieDropOrbSpot};
+    public enum NAME {DownWall, Block, FireBallDotEffect, BossDieDropOrbSpot,};
     public enum TAG {HitRangeArea, StrikeLine, GameOverLine, Wall, ActiveDownWall, Player,
         NormalBlock, LongBlock, TreasureChestBlock, HealBlock, BossBlock,   
         Obstacle,
@@ -16,7 +16,7 @@ public class DM : MonoBehaviour
     public enum LAYER {BallPreview};
     public enum ANIM {DoSpawn, DoShake, DoBossSpawn, DoDie, IsHit, IsIdle, IsFly, GetHit, DoHeal};
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
-    public enum ITEM {Chara, Bat, Skill, CashShop};
+    public enum HOME {Chara, Bat, Skill, CashShop, PsvInfo};
     public enum ATV{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave, NULL};
     public enum PSV{Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, Laser, NULL};
 
@@ -43,22 +43,24 @@ public class DM : MonoBehaviour
         // foreach(DM.ATV list in Enum.GetValues(typeof(DM.ATV)))Debug.LogFormat("Enums GetFindVal:: {0}", list.ToString())
 
         //* contents Prefab 生成
-        scrollviews[(int)DM.ITEM.Chara].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
-        scrollviews[(int)DM.ITEM.Bat].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
-        scrollviews[(int)DM.ITEM.Skill].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
-        scrollviews[(int)DM.ITEM.CashShop].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.HOME.Chara].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.HOME.Bat].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.HOME.Skill].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.HOME.CashShop].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.HOME.PsvInfo].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
 
         //* Items of Content (Set UnLockList)
-        ItemInfo[] charas = scrollviews[(int)DM.ITEM.Chara].ContentTf.GetComponentsInChildren<ItemInfo>();
-        ItemInfo[] bats = scrollviews[(int)DM.ITEM.Bat].ContentTf.GetComponentsInChildren<ItemInfo>();
-        ItemInfo[] skills = scrollviews[(int)DM.ITEM.Skill].ContentTf.GetComponentsInChildren<ItemInfo>();
+        ItemInfo[] charas = scrollviews[(int)DM.HOME.Chara].ContentTf.GetComponentsInChildren<ItemInfo>();
+        ItemInfo[] bats = scrollviews[(int)DM.HOME.Bat].ContentTf.GetComponentsInChildren<ItemInfo>();
+        ItemInfo[] skills = scrollviews[(int)DM.HOME.Skill].ContentTf.GetComponentsInChildren<ItemInfo>();
 
         personalData = new PersonalData(); //* DataBase
         personalData.load(ref charas, ref bats, ref skills); //TODO Add skills
 
         //* PersonalData後に処理必要なもの（LANGUAGEため）
-        scrollviews[(int)DM.ITEM.Skill].setLanguage();
-        scrollviews[(int)DM.ITEM.CashShop].setLanguage();
+        scrollviews[(int)DM.HOME.Skill].setLanguage();
+        scrollviews[(int)DM.HOME.CashShop].setLanguage();
+        scrollviews[(int)DM.HOME.PsvInfo].setLanguage();
     }
 
     void Update(){
@@ -124,10 +126,11 @@ public class DM : MonoBehaviour
 
 
     public int getCurItemType2Idx(){
-        return (SelectItemType == DM.ITEM.Chara.ToString())? (int)DM.ITEM.Chara
-            : (SelectItemType == DM.ITEM.Bat.ToString())? (int)DM.ITEM.Bat
-            : (SelectItemType == DM.ITEM.Skill.ToString())? (int)DM.ITEM.Skill
-            : (SelectItemType == DM.ITEM.CashShop.ToString())? (int)DM.ITEM.CashShop
+        return (SelectItemType == DM.HOME.Chara.ToString())? (int)DM.HOME.Chara
+            : (SelectItemType == DM.HOME.Bat.ToString())? (int)DM.HOME.Bat
+            : (SelectItemType == DM.HOME.Skill.ToString())? (int)DM.HOME.Skill
+            : (SelectItemType == DM.HOME.CashShop.ToString())? (int)DM.HOME.CashShop
+            : (SelectItemType == DM.HOME.PsvInfo.ToString())? (int)DM.HOME.PsvInfo
             : -9999;
     }
 

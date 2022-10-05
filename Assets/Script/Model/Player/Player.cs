@@ -116,7 +116,7 @@ public class Player : MonoBehaviour
         critical = new PsvSkill<float>(
             LANG.getTxt(DM.PSV.Critical.ToString()), psvLvArr[(int)DM.PSV.Critical].lv, 0f, 0.2f);
         explosion = new PsvSkill<Explosion>(
-            LANG.getTxt(DM.PSV.Explosion.ToString()), psvLvArr[(int)DM.PSV.Explosion].lv, new Explosion(0f, 0.75f), new Explosion(0.25f, 0.25f));
+            LANG.getTxt(DM.PSV.Explosion.ToString()), psvLvArr[(int)DM.PSV.Explosion].lv, new Explosion(0f, 0.75f), new Explosion(0.2f, 0.2f));
         expUp = new PsvSkill<float>(
             LANG.getTxt(DM.PSV.ExpUp.ToString()), psvLvArr[(int)DM.PSV.ExpUp].lv, 1f, 0.2f);
         itemSpawn = new PsvSkill<float>(

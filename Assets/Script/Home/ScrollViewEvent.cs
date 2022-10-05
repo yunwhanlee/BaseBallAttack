@@ -47,7 +47,9 @@ public class ScrollView {
                     model.GetComponent<ItemInfo>().ItemPassive.setImgPrefs(DM.ins.personalData.ItemPassive);
                     break;
                 case "Skill" :
-                case "CashShop" :{
+                case "CashShop" :
+                case "PsvInfo" :
+                {
                     model = GameObject.Instantiate(itemPf, Vector3.zero, Quaternion.identity, contentTf);
                     model.transform.localPosition = Vector3.zero;
                     Debug.Log("<color=yellow>【"+ this.type + "】</color> model.name= " + model.name + ", personalData.Lang= " + DM.ins.personalData.Lang);
@@ -87,17 +89,34 @@ public class ScrollView {
             List<string> strList = new List<string>();
             
             var childs = ContentTf.GetChild(i).GetComponentsInChildren<Text>();
-            if(this.type == DM.ITEM.Skill.ToString()){
+            Debug.Log("setLanguage()::----------------------------------------");
+            Array.ForEach(childs, chd=> {
+                Debug.Log(chd.name + "= " + chd.text);
+            });
+            Debug.Log("-----------------");
+            
+            if(this.type == DM.HOME.Skill.ToString()){
                 txtObjs = Array.FindAll(childs, chd => chd.name == LANG.OBJNAME.NameTxt.ToString() || chd.name == LANG.OBJNAME.ExplainTxt.ToString() || chd.name == LANG.OBJNAME.HomeRunBonusTxt.ToString());
-                strList.Add(DM.ITEM.Skill.ToString());
+                strList.Add(DM.HOME.Skill.ToString());
                 strList.Add(txtObjs[LANG.NAME].text);
                 strList.Add(txtObjs[LANG.EXPLAIN].text);
                 strList.Add(txtObjs[LANG.HOMERUNBONUS].text);
             }
-            else if(this.type == DM.ITEM.CashShop.ToString()){
+            else if(this.type == DM.HOME.CashShop.ToString()){
                 txtObjs = Array.FindAll(childs, chd => chd.name == LANG.OBJNAME.NameTxt.ToString() || chd.name == LANG.OBJNAME.ExplainTxt.ToString());
-                strList.Add(DM.ITEM.CashShop.ToString());
+                strList.Add(DM.HOME.CashShop.ToString());
                 strList.Add(txtObjs[LANG.NAME].text);
+                strList.Add(txtObjs[LANG.EXPLAIN].text);
+            }
+            else if(this.type == DM.HOME.PsvInfo.ToString()){
+                txtObjs = Array.FindAll(childs, chd => chd.name == LANG.OBJNAME.NameTxt.ToString() || chd.name == LANG.OBJNAME.ExplainTxt.ToString());
+                Array.ForEach(txtObjs, txtObj => 
+                    Debug.Log($"{txtObj.name}= {txtObj.text}")
+                );
+                strList.Add(DM.HOME.PsvInfo.ToString());
+                strList.Add(txtObjs[LANG.NAME].text);
+
+                
                 strList.Add(txtObjs[LANG.EXPLAIN].text);
             }
 
@@ -164,7 +183,9 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         scrollRect = GetComponent<ScrollRect>();
         hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
         
-        if(this.gameObject.name != "ScrollView_Skill" && this.gameObject.name != "ScrollView_CashShop"){
+        if(this.gameObject.name != $"ScrollView_{DM.HOME.Skill.ToString()}" 
+            && this.gameObject.name != $"ScrollView_{DM.HOME.CashShop.ToString()}"
+            && this.gameObject.name != $"ScrollView_{DM.HOME.PsvInfo.ToString()}"){
             BoxSprRdr = UIGroup.GetChild(0).GetComponent<SpriteRenderer>();
             RankTxt = UIGroup.GetChild(1).GetComponent<Text>();
             NameTxt = UIGroup.GetChild(2).GetComponent<Text>();
@@ -173,9 +194,9 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
         //* 初期化
         // Set Current Index
-        CurIdx = (this.gameObject.name.Contains(DM.ITEM.Chara.ToString()))? DM.ins.personalData.SelectCharaIdx
-            :(this.gameObject.name.Contains(DM.ITEM.Bat.ToString()))? DM.ins.personalData.SelectBatIdx
-            :(this.gameObject.name.Contains(DM.ITEM.Skill.ToString()))? DM.ins.personalData.SelectSkillIdx : 0;
+        CurIdx = (this.gameObject.name.Contains(DM.HOME.Chara.ToString()))? DM.ins.personalData.SelectCharaIdx
+            :(this.gameObject.name.Contains(DM.HOME.Bat.ToString()))? DM.ins.personalData.SelectBatIdx
+            :(this.gameObject.name.Contains(DM.HOME.Skill.ToString()))? DM.ins.personalData.SelectSkillIdx : 0;
 
         // Set Scroll PosX
         float width = Mathf.Abs(DM.ins.ModelContentPref.rect.width);
@@ -207,7 +228,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         float width = Mathf.Abs(DM.ins.ModelContentPref.rect.width);
         float offset = -(width + width/2);
         float curPosX = pos.anchoredPosition.x - offset;
-        var prefs = (DM.ins.SelectItemType == DM.ITEM.Chara.ToString())? DM.ins.scrollviews[(int)DM.ITEM.Chara].ItemPrefs : DM.ins.scrollviews[(int)DM.ITEM.Bat].ItemPrefs;
+        var prefs = (DM.ins.SelectItemType == DM.HOME.Chara.ToString())? DM.ins.scrollviews[(int)DM.HOME.Chara].ItemPrefs : DM.ins.scrollviews[(int)DM.HOME.Bat].ItemPrefs;
         float max = width * prefs.Length - width;
         CurIdx = Mathf.Abs(Mathf.FloorToInt((curPosX) / width));
         CurIdxBasePosX = -((CurIdx+1) * width);
@@ -229,9 +250,9 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         if(BoxSprRdr == null) return; // Error) Object Null
 
         string type = DM.ins.SelectItemType;
-        var contentTf = (type == DM.ITEM.Chara.ToString())?
-            DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf
-            : DM.ins.scrollviews[(int)DM.ITEM.Bat].ContentTf;
+        var contentTf = (type == DM.HOME.Chara.ToString())?
+            DM.ins.scrollviews[(int)DM.HOME.Chara].ContentTf
+            : DM.ins.scrollviews[(int)DM.HOME.Bat].ContentTf;
         //* Set PosX
         contentTf.anchoredPosition = new Vector2(CurIdxBasePosX, -500);
         
@@ -288,14 +309,14 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     public void setCurSelectedItem(int typeIdx){
         switch(typeIdx){
-            case (int)DM.ITEM.Chara: 
-            case (int)DM.ITEM.Bat: 
+            case (int)DM.HOME.Chara: 
+            case (int)DM.HOME.Bat: 
                 setScrollViewAnchoredPosX(typeIdx);
                 break;
-            case (int)DM.ITEM.Skill: 
+            case (int)DM.HOME.Skill: 
                 drawSkillPanelOutline();
                 break;
-            case (int)DM.ITEM.CashShop: 
+            case (int)DM.HOME.CashShop: 
                 checkMarkImg.gameObject.SetActive(true);
                 priceTxt.gameObject.SetActive(false);
                 break;
@@ -303,7 +324,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
 
     private void setScrollViewAnchoredPosX(int typeIdx){
-        int index = (typeIdx==(int)DM.ITEM.Chara)? DM.ins.personalData.SelectCharaIdx : DM.ins.personalData.SelectBatIdx;
+        int index = (typeIdx==(int)DM.HOME.Chara)? DM.ins.personalData.SelectCharaIdx : DM.ins.personalData.SelectBatIdx;
         float width = Mathf.Abs(DM.ins.ModelContentPref.rect.width);
         float saveModelPosX = -Mathf.Abs(Mathf.FloorToInt(width * (index+1)));
         DM.ins.scrollviews[typeIdx].ContentTf.anchoredPosition = new Vector2(saveModelPosX, -500);
@@ -311,7 +332,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     private void drawSkillPanelOutline(){
             //* 初期化
-            var content = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf;
+            var content = DM.ins.scrollviews[(int)DM.HOME.Skill].ContentTf;
             for(int i=0; i<content.childCount; i++){
                 content.GetChild(i).GetComponent<NicerOutline>().enabled = false;
             }
@@ -325,13 +346,13 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     public void exceptAlreadySelectedAnotherSkill(int selectedSkillBtnIdx, Button[] skillBtns){
         //* Skill2 Unlock?
-        if(DM.ins.personalData.IsUnlock2ndSkill && DM.ins.SelectItemType == DM.ITEM.Skill.ToString()){
+        if(DM.ins.personalData.IsUnlock2ndSkill && DM.ins.SelectItemType == DM.HOME.Skill.ToString()){
             //* 除外するスキル名
             int anotherIdx = (selectedSkillBtnIdx == 0)? 1 : 0;
             string exceptSkillName = skillBtns[anotherIdx].transform.GetChild(0).GetComponent<Image>().sprite.name;
 
             //* 初期化：スクロールにあるスキル目録
-            var contentTf = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf;
+            var contentTf = DM.ins.scrollviews[(int)DM.HOME.Skill].ContentTf;
             for(int i=0; i<contentTf.childCount; i++){
                 Debug.Log("exceptAlreadySelectedAnotherSkill():: 初期化 " + contentTf.GetChild(i).name);
                 contentTf.GetChild(i).GetComponent<ItemInfo>().IsChecked = false;//gameObject.SetActive(true);
@@ -362,7 +383,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         var curItem = getCurItem();
         Debug.LogFormat("onClickCheckBtn:: type= {0}, CurIdx= {1}, curItem= {2}, IsLock= {3}",type, CurIdx, curItem, curItem.IsLock);
 
-        if(type == DM.ITEM.Skill.ToString() && curItem.IsChecked){
+        if(type == DM.HOME.Skill.ToString() && curItem.IsChecked){
             hm.displayMessageDialog("This Skill is Already Registed");
             return;
         }
@@ -389,14 +410,14 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }
 
         //* Skill Panel UI Extra Update
-        if(DM.ins.SelectItemType == DM.ITEM.Skill.ToString()){
+        if(DM.ins.SelectItemType == DM.HOME.Skill.ToString()){
             onClickSkillPanel(curItem.gameObject);
         }
     }
 
     public void onClickSkillPanel(GameObject ins){
         //* Current Index
-        var btns = DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf.GetComponentsInChildren<Button>();
+        var btns = DM.ins.scrollviews[(int)DM.HOME.Skill].ContentTf.GetComponentsInChildren<Button>();
         CurIdx = Array.FindIndex(btns, btn => btn.name == ins.name);
 
         drawChoiceBtnUI();
@@ -407,7 +428,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
 
     public void onClickCashShopList(ItemInfo selectItemInfo){
-        var btns = DM.ins.scrollviews[(int)DM.ITEM.CashShop].ContentTf.GetComponentsInChildren<Button>();
+        var btns = DM.ins.scrollviews[(int)DM.HOME.CashShop].ContentTf.GetComponentsInChildren<Button>();
         CurIdx = Array.FindIndex(btns, btn => btn.name == selectItemInfo.name);
         Debug.Log("onClickCashShopList():: price= " + selectItemInfo.Price + ", CurIdx= " + CurIdx);
 
@@ -424,11 +445,11 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         return contents[Mathf.Clamp(CurIdx, 0, lastIdx)];
     }
     private ItemInfo[] getItemArr(){
-        var contentTf = (DM.ins.SelectItemType == DM.ITEM.Chara.ToString())? DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf
-        : (DM.ins.SelectItemType == DM.ITEM.Bat.ToString())? DM.ins.scrollviews[(int)DM.ITEM.Bat].ContentTf
-        : (DM.ins.SelectItemType == DM.ITEM.Skill.ToString())? DM.ins.scrollviews[(int)DM.ITEM.Skill].ContentTf
-        : (DM.ins.SelectItemType == DM.ITEM.CashShop.ToString())? DM.ins.scrollviews[(int)DM.ITEM.CashShop].ContentTf
-        : DM.ins.scrollviews[(int)DM.ITEM.Chara].ContentTf;
+        var contentTf = (DM.ins.SelectItemType == DM.HOME.Chara.ToString())? DM.ins.scrollviews[(int)DM.HOME.Chara].ContentTf
+        : (DM.ins.SelectItemType == DM.HOME.Bat.ToString())? DM.ins.scrollviews[(int)DM.HOME.Bat].ContentTf
+        : (DM.ins.SelectItemType == DM.HOME.Skill.ToString())? DM.ins.scrollviews[(int)DM.HOME.Skill].ContentTf
+        : (DM.ins.SelectItemType == DM.HOME.CashShop.ToString())? DM.ins.scrollviews[(int)DM.HOME.CashShop].ContentTf
+        : DM.ins.scrollviews[(int)DM.HOME.Chara].ContentTf;
         Debug.Log("getItemArr():: contentTf= " + contentTf);
         var items = contentTf.GetComponentsInChildren<ItemInfo>();
         return items;
@@ -438,9 +459,9 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         var items = getItemArr();
         var curItem = getCurItem();
 
-        int selectItemIdx = (type == DM.ITEM.Chara.ToString())? DM.ins.personalData.SelectCharaIdx
-            :(type == DM.ITEM.Bat.ToString())? DM.ins.personalData.SelectBatIdx
-            :(type == DM.ITEM.Skill.ToString())?
+        int selectItemIdx = (type == DM.HOME.Chara.ToString())? DM.ins.personalData.SelectCharaIdx
+            :(type == DM.HOME.Bat.ToString())? DM.ins.personalData.SelectBatIdx
+            :(type == DM.HOME.Skill.ToString())?
                 (hm.selectedSkillBtnIdx == 0)? DM.ins.personalData.SelectSkillIdx
                     :DM.ins.personalData.SelectSkill2Idx : -1;
 
@@ -464,11 +485,11 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         var type = DM.ins.getCurItemType2Idx();
         Debug.LogFormat("activeOutline():: type= {0}, isActive= {1}", type, isActive);
         switch(type){
-            case (int)DM.ITEM.Chara:
-            case (int)DM.ITEM.Bat:
+            case (int)DM.HOME.Chara:
+            case (int)DM.HOME.Bat:
                 if(item.Outline3D) item.Outline3D.enabled = isActive; 
                 break;
-            case (int)DM.ITEM.Skill:
+            case (int)DM.HOME.Skill:
                 if(item.Outline2D) item.Outline2D.enabled = isActive;
                 break;
         }
