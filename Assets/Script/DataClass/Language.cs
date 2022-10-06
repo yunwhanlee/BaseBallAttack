@@ -27,7 +27,13 @@ public static class LANG //* LANG
         new string[]{"Bear", "クマ", "곰"}, 
         new string[]{"Boy1", "男１", "남자1"}, 
         new string[]{"Cat", "猫", "고양이"}, 
-        new string[]{"Girl1", "女１", "여자1"}
+        new string[]{"Girl1", "女１", "여자1"},
+        new string[]{"MaidA", "メイドA", "메이드A"},
+        new string[]{"MaidB", "メイドB", "메이드B"},
+        new string[]{"MaidC", "メイドC", "메이드C"},
+        new string[]{"MaidD", "メイドD", "메이드D"},
+        new string[]{"PistolMan", "ピストルマン", "피스톨맨"},
+        new string[]{"Dinosaur", "恐竜", "공룡"},
     };
 
     public static List<string[]> BatList = new List<string[]>(){
@@ -195,7 +201,20 @@ public static class LANG //* LANG
         new string[]{LaserContent[(int)TP.EN], LaserContent[(int)TP.JP], LaserContent[(int)TP.KR]},
     };
 
+    //*-----------------------------------------------------------------------------------------------
     //* 関数
+    //*-----------------------------------------------------------------------------------------------
+    public static void checkErrorLangListCounting(){
+        int charaCttCnt = DM.ins.scrollviews[(int)DM.PANEL.Chara].ContentTf.childCount;
+        int batCttCnt = DM.ins.scrollviews[(int)DM.PANEL.Bat].ContentTf.childCount;
+        int skillCttCnt = DM.ins.scrollviews[(int)DM.PANEL.Skill].ContentTf.childCount;
+
+        Debug.LogFormat("「Chara」Lang: {0}, ContentTf: {1} => {2}", CharaList.Count, charaCttCnt, (CharaList.Count == charaCttCnt)? "OK" : "<color=red>ERROR! お互いに数字が合わない！</color>");
+        Debug.LogFormat("「Bat」Lang: {0}, ContentTf: {1} => {2}", BatList.Count, batCttCnt, (BatList.Count == batCttCnt)? "OK" : "<color=red>ERROR! お互いに数字が合わない！</color>");
+        Debug.LogFormat("「SkillName」Lang: {0}, ContentTf: {1} => {2}", SkillNameList.Count, skillCttCnt, (SkillNameList.Count == skillCttCnt)? "OK" : "<color=red>ERROR! お互いに数字が合わない！</color>");
+        Debug.LogFormat("「SkillExplain」Lang: {0}, ContentTf: {1} => {2}", SkillExplainList.Count, skillCttCnt, (SkillExplainList.Count == skillCttCnt)? "OK" : "<color=red>ERROR! お互いに数字が合わない！</color>");
+    }
+
     public static List<string> getTxtList(string str){
         // Debug.Log("getLangTxt:: str=" + str);
         const int SPT_TYPE=0, SPT_NAME=1, SPT_EXPLAIN=2, SPT_HOMERUNBONUS=3;

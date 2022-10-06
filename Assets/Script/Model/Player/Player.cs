@@ -78,9 +78,9 @@ public class Player : MonoBehaviour
 
         //* Player Charaは 必ず０番目のINDEXにすること！！
         var charaTf = this.transform.GetChild(0);
-        Transform RightArm = charaTf.Find("Bone").Find("Bone_R.001").Find("Bone_R.002").Find("RightArm");
-        int childLastIdx = RightArm.childCount - 1;
-        Transform bat = RightArm.GetChild(childLastIdx);
+        Transform tf = Util._.getCharaRightArmPath(charaTf);
+        int childLastIdx = tf.childCount - 1;
+        Transform bat = tf.GetChild(childLastIdx);
         BatEffectTf = bat.Find("BatEffectTf");
         // Debug.Log("Player:: Start:: RightArm.childCount= " + RightArm.childCount + ", RightArm= " + RightArm);
         // Debug.Log("Player:: charaTf= " + charaTf + ", BatEffectTf= " + BatEffectTf);

@@ -18,4 +18,8 @@ public class Util : MonoBehaviour
         float sec = clips[index].length;
         return sec;
     }
+
+    public Transform getCharaRightArmPath(Transform charaTf){
+        return  charaTf.Find("Bone").transform.Find("Bone_R.001").transform.Find("Bone_R.002").transform.Find(DM.NAME.RightArm.ToString());
+    }
 }

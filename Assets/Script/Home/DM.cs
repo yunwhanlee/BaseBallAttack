@@ -62,6 +62,9 @@ public class DM : MonoBehaviour
         scrollviews[(int)DM.PANEL.Skill].setLanguage();
         scrollviews[(int)DM.PANEL.CashShop].setLanguage();
         scrollviews[(int)DM.PANEL.PsvInfo].setLanguage();
+
+        //* ERROR CHECK
+        LANG.checkErrorLangListCounting();
     }
 
     void Update(){

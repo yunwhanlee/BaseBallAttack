@@ -245,8 +245,8 @@ public class HomeManager : MonoBehaviour
         // Chara
         var charaIns = Instantiate(chara, Vector3.zero, Quaternion.identity, modelTf) as GameObject;
         // Bat
-        Transform rightArmTf = charaIns.transform.Find("Bone").transform.Find("Bone_R.001").transform.Find("Bone_R.002").transform.Find("RightArm");
-        Instantiate(bat, bat.transform.position, bat.transform.rotation, rightArmTf);
+        Transform tf = Util._.getCharaRightArmPath(charaIns.transform);
+        Instantiate(bat, bat.transform.position, bat.transform.rotation, tf);
         
         //* Home Model Delete
         if(0 < modelTf.childCount){
