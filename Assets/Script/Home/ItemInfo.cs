@@ -14,8 +14,15 @@ public class NamedArrayAttribute : PropertyAttribute
 public class ItemInfo : MonoBehaviour
 {
     [Header("言語 [0]:EN, [1]:JP, [2]:KR")]
-     [FormerlySerializedAs("langs")]
-    [SerializeField] string[] langs = new string[System.Enum.GetValues(typeof(LANG.TP)).Length];
+    
+    [FormerlySerializedAs("nameTxts")]
+    [SerializeField] string[] nameTxts = new string[System.Enum.GetValues(typeof(LANG.TP)).Length];
+
+    [FormerlySerializedAs("explainTxts")]
+    [SerializeField] string[] explainTxts = new string[System.Enum.GetValues(typeof(LANG.TP)).Length];
+
+    [FormerlySerializedAs("homeRunBonusTxts")] 
+    [SerializeField] string[] homeRunBonusTxts = new string[System.Enum.GetValues(typeof(LANG.TP)).Length];
 
     [Header("STATUS")]
     [SerializeField] bool isLock = true;    public bool IsLock {get => isLock; set => isLock = value;}
@@ -34,10 +41,15 @@ public class ItemInfo : MonoBehaviour
     void Awake(){
         //* Push Language Data
         if(this.name.Contains(DM.PANEL.Chara.ToString())){
-            LANG.CharaList.Add(langs);
+            LANG.CharaList.Add(nameTxts);
         }
         else if(this.name.Contains(DM.PANEL.Bat.ToString())){
-            LANG.BatList.Add(langs);
+            LANG.BatList.Add(nameTxts);
+        }
+        else if(this.name.Contains(DM.PANEL.Skill.ToString())){
+            LANG.SkillNameList.Add(nameTxts);
+            LANG.SkillExplainList.Add(explainTxts);
+            LANG.SkillHomeRunBonusList.Add(homeRunBonusTxts);
         }
     }
 

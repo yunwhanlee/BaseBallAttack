@@ -71,7 +71,7 @@ MonoBehaviour:
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 46
+    m_MaxSize: 35
     m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -580,6 +580,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameTxts:
+  - ColorBall
+  - "\u30AB\u30E9\u30FC\u30DC\u30FC\u30EB"
+  - "\uCE7C\uB77C\uBCFC"
+  explainTxts:
+  - Erase same color blocks.
+  - "\u540C\u3058\u8272\u306E\u30D6\u30ED\u30C3\u30AF\u3092\u6D88\u3059\u3002"
+  - "\uAC19\uC740\uC0C9 \uBE14\uB85D \uC81C\uAC70."
+  homeRunBonusTxts:
+  - TODO
+  - TODO
+  - TODO
   isLock: 1
   isChecked: 0
   isCheckedImgObj: {fileID: 2745942477195005068}

@@ -429,6 +429,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameTxts:
+  - PoisonSmoke
+  - "\u6BD2\u7159"
+  - "\uB3C5\uAD6C\uB984"
+  explainTxts:
+  - Dot Damage within the round range. (3 turn)
+  - "\u8A72\u5F53\u7BC4\u56F2\u5185\u306B\u30C9\u30C3\u30C8\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u308B\u3002(\uFF13\u30BF\u30FC\u30F3)"
+  - "\uD574\uB2F9\uBC94\uC704\uB0B4\uC5D0 \uB3C4\uD2B8\uB370\uBBF8\uC9C0\uB97C \uC900\uB2E4."
+  homeRunBonusTxts:
+  - +20% range, +2 turn
+  - "+20% \u7BC4\u56F2\u3001+2\u30BF\u30FC\u30F3\u3002"
+  - "+20% \uBC94\uC704, +2 \uD134."
   isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 8690499083931063915}
