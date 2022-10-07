@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class BossBlock : Block_Prefab{
 
     const float STONE_SCALE_X = 2.8f;
-    const int OBSTACLE_STONE_CNT = 2;
+    const int OBSTACLE_STONE_CNT = 1;
     const int BOSS_DIE_ORB_CNT = 80;
     const float BOSS_HEAL_RATIO = 0.2f;
 
