@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5944033443368322379}
   - component: {fileID: -4953633340158557156}
   m_Layer: 0
-  m_Name: Bat_33
+  m_Name: Bat_23.Pepero
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,6 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  langs:
+  - 23.Pepero
+  - "\u30DA\u30DA\u30ED"
+  - "\uBE7C\uBE7C\uB85C"
   isLock: 0
   isChecked: 1
   isCheckedImgObj: {fileID: 0}

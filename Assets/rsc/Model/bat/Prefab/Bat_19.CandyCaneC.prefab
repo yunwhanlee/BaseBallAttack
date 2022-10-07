@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8828611328073047844}
   - component: {fileID: 137157554703518854}
   m_Layer: 0
-  m_Name: Bat_19
+  m_Name: Bat_19.CandyCaneC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,6 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  langs:
+  - 19.CandyCaneC
+  - "\u30AD\u30E3\u30F3\u30C7\u30A3\u30B1\u30A4\u30F3C"
+  - "\uCF00\uC778C"
   isLock: 0
   isChecked: 1
   isCheckedImgObj: {fileID: 0}

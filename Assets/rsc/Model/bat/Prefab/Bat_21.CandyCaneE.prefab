@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5687438631906306784, guid: 0d0ca3d258e805b46b45c19b58c31afc, type: 3}
       propertyPath: m_Name
-      value: Bat_CandyCane5
+      value: Bat_21.CandyCaneE
       objectReference: {fileID: 0}
     - target: {fileID: 5951869222913566478, guid: 0d0ca3d258e805b46b45c19b58c31afc, type: 3}
       propertyPath: m_IsActive
@@ -66,6 +66,18 @@ PrefabInstance:
     - target: {fileID: 8791987145042347936, guid: 0d0ca3d258e805b46b45c19b58c31afc, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828611328073047844, guid: 0d0ca3d258e805b46b45c19b58c31afc, type: 3}
+      propertyPath: langs.Array.data[0]
+      value: 21.CandyCaneE
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828611328073047844, guid: 0d0ca3d258e805b46b45c19b58c31afc, type: 3}
+      propertyPath: langs.Array.data[1]
+      value: "\u30AD\u30E3\u30F3\u30C7\u30A3\u30B1\u30A4\u30F3E"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828611328073047844, guid: 0d0ca3d258e805b46b45c19b58c31afc, type: 3}
+      propertyPath: langs.Array.data[2]
+      value: "\uCF00\uC778E"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d0ca3d258e805b46b45c19b58c31afc, type: 3}

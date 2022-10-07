@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 856168345491618691}
   - component: {fileID: 6802404800736002789}
   m_Layer: 0
-  m_Name: Bat_16
+  m_Name: Bat_16.CandyBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,6 +97,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  langs:
+  - 16.CandyBar
+  - "\u30AD\u30E3\u30F3\u30C7\u30A3\u30D0\u30FC"
+  - "\uCE94\uB514\uBC14"
   isLock: 0
   isChecked: 1
   isCheckedImgObj: {fileID: 0}

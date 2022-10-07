@@ -34,11 +34,10 @@ public class ItemInfo : MonoBehaviour
     void Awake(){
         //* Push Language Data
         if(this.name.Contains(DM.PANEL.Chara.ToString())){
-            Debug.Log("ItemInfo.cs:: name= " + this.name + ", CharaList.Count= " + LANG.CharaList.Count);
             LANG.CharaList.Add(langs);
         }
         else if(this.name.Contains(DM.PANEL.Bat.ToString())){
-
+            LANG.BatList.Add(langs);
         }
     }
 
@@ -109,5 +108,5 @@ public class ItemInfo : MonoBehaviour
         }
     }
 
-    
+
 }

@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 5581793248763419323}
   - component: {fileID: 5130299894609554677}
   m_Layer: 0
-  m_Name: Bat_35
+  m_Name: Bat_25.Wrench
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,6 +126,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  langs:
+  - 25.Wrench
+  - "\u30B9\u30D1\u30CA"
+  - "\uC2A4\uD328\uB108"
   isLock: 0
   isChecked: 1
   isCheckedImgObj: {fileID: 0}

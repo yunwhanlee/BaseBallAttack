@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: -6632196679499712935}
   - component: {fileID: -3144448983280020008}
   m_Layer: 3
-  m_Name: Bat_7
+  m_Name: Bat_7.StripeA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -157,6 +157,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  langs:
+  - 7.StripeA
+  - "\u30B9\u30C8\u30E9\u30A4\u30D7A"
+  - "\uC904\uBB34\uB2ACA"
   isLock: 0
   isChecked: 1
   isCheckedImgObj: {fileID: 0}
