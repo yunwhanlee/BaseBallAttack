@@ -39,7 +39,7 @@ public class ItemInfo : MonoBehaviour
     [SerializeField] ItemPsvList itemPassive;  public ItemPsvList ItemPassive {get => itemPassive; set=> itemPassive = value;}
 
     void Awake(){
-        //* Push Language Data
+        //* Push Language Txt Data
         if(this.name.Contains(DM.PANEL.Chara.ToString())){
             LANG.CharaList.Add(nameTxts);
         }
@@ -54,6 +54,10 @@ public class ItemInfo : MonoBehaviour
         else if(this.name.Contains(DM.PANEL.CashShop.ToString())){
             LANG.CashShopNameList.Add(nameTxts);
             LANG.CashShopExplainList.Add(explainTxts);
+        }
+        else if(this.name.Contains(DM.PANEL.PsvInfo.ToString())){
+            LANG.PsvInfoNameList.Add(nameTxts);
+            LANG.PsvInfoExplainList.Add(explainTxts);
         }
     }
 

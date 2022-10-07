@@ -485,6 +485,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameTxts:
+  - Speed
+  - "\u901F\u5EA6"
+  - "\uC18D\uB3C4"
+  explainTxts:
+  - Speed Up +35%
+  - "\u901F\u5EA6\u30A2\u30C3\u30D7 +35%"
+  - "\uC18D\uB3C4 \uC5C5 +35%"
+  homeRunBonusTxts:
+  - 
+  - 
+  - 
   isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 3811945637865038421}

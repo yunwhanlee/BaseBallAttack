@@ -580,6 +580,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameTxts:
+  - Critical
+  - "\u81F4\u547D\u6253"
+  - "\uCE58\uBA85\uD0C0"
+  explainTxts:
+  - Critical Up +20%
+  - "\u81F4\u547D\u6253\u78BA\u7387\u30A2\u30C3\u30D7 +20%"
+  - "\uCE58\uBA85\uD0C0\uD655\uB960 \uC5C5 +20%"
+  homeRunBonusTxts:
+  - 
+  - 
+  - 
   isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 3811945637865038421}

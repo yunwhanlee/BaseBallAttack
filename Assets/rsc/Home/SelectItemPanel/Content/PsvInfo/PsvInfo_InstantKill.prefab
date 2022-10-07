@@ -484,6 +484,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameTxts:
+  - InstantKill
+  - "\u30AD\u30EB"
+  - "\uD0AC"
+  explainTxts:
+  - Immediate destroy +2%
+  - "\u30D6\u30ED\u30C3\u30AF\u3092\u5373\u523B\u7834\u58CA +2%"
+  - "\uBE14\uB85D \uC989\uC2DC\uD30C\uAD34 +2%"
+  homeRunBonusTxts:
+  - 
+  - 
+  - 
   isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 3811945637865038421}

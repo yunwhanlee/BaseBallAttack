@@ -18,7 +18,6 @@ public static class LANG //* LANG
         ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, Laser,
     };
     public const int NAME=0, EXPLAIN=1, HOMERUNBONUS=2;
-    
 
     //* HOME SCENE -----------------------------------
     public static List<string[]> CharaList = new List<string[]>(){
@@ -151,54 +150,55 @@ public static class LANG //* LANG
 
     //* PSV
     public static string[] Dmg = new string[]{DM.PSV.Dmg.ToString(), "攻撃力", "공격력"};
-    public static string[] DmgContent = new string[]{"Attack Damage +1","攻撃力 +1","공격력 +1"};
     public static string[] MultiShot = new string[]{DM.PSV.MultiShot.ToString(), "マルチ弾", "멀티샷"};
-    public static string[] MultiContent = new string[]{"Extra ball on one side +1","横側へボール追加 +1","옆측에 볼 추가"};
     public static string[] Speed = new string[]{DM.PSV.Speed.ToString(), "速度", "속도"};
-    public static string[] SpeedContent = new string[]{"Speed Up +35%","速度アップ +35%","속도 업 +35%"};
     public static string[] InstantKill = new string[]{DM.PSV.InstantKill.ToString(), "キル", "킬"};
-    public static string[] InstantKillContent = new string[]{"Immediate destroy +2%","ブロックを即刻破壊 +2%","블록 즉시파괴 +2%"};
     public static string[] Critical = new string[]{DM.PSV.Critical.ToString(), "致命打", "치명타"};
-    public static string[] CriticalContent = new string[]{"Critical Up +20%","致命打確率アップ +20%","치명타확률 업 +20%"};
     public static string[] Explosion = new string[]{DM.PSV.Explosion.ToString(), "爆発", "폭발"};
-    public static string[] ExplosionContent = new string[]{"Damage within the range +20% (+range75%)","範囲内にダメージを上げる +20% (+範囲75%)",""};
     public static string[] ExpUp = new string[]{DM.PSV.ExpUp.ToString(), "経験値％UP", "경험치%UP"};
-    public static string[] ExpUpContent = new string[]{"Experience +20%","経験値 +20%","경험치 +20%"};
     public static string[] ItemSpawn = new string[]{DM.PSV.ItemSpawn.ToString(), "アイテム生成UP", "아이탬생성UP"};
-    public static string[] ItemSpawnContent = new string[]{"Item block spawn +5%","アイテムブロックの確率アップ +5%","아이탬 블록 확률 증가 +5%"};
     public static string[] VerticalMultiShot = new string[]{DM.PSV.VerticalMultiShot.ToString(), "マルチ弾(縦)", "멀티샷(세로)"};
-    public static string[] VerticalMultiShotContent = new string[]{"extra ball on front side +1","前側へボール追加 +1","앞쪽에 볼 추가"};
     public static string[] CriticalDamage = new string[]{DM.PSV.CriticalDamage.ToString(), "致命打ダメージ", "치명타데미지"};
-    public static string[] CriticalDamageContent = new string[]{"Critical Damage Up +50%","致命打ダメージアップ +50%","치명타데미지 +50%"};
     public static string[] Laser = new string[]{DM.PSV.Laser.ToString(), "レイザー", "레이저"};
-    public static string[] LaserContent = new string[]{"Shot Laser on one side +1","レイザー攻撃追加 +1","레이저공격 추가 +1"};
+
+    // public static string[] DmgContent = new string[]{"Attack Damage +1","攻撃力 +1","공격력 +1"};
+    // public static string[] MultiContent = new string[]{"Extra ball on one side +1","横側へボール追加 +1","옆측에 볼 추가"};
+    // public static string[] SpeedContent = new string[]{"Speed Up +35%","速度アップ +35%","속도 업 +35%"};
+    // public static string[] InstantKillContent = new string[]{"Immediate destroy +2%","ブロックを即刻破壊 +2%","블록 즉시파괴 +2%"};
+    // public static string[] CriticalContent = new string[]{"Critical Up +20%","致命打確率アップ +20%","치명타확률 업 +20%"};
+    // public static string[] ExplosionContent = new string[]{"Damage within the range +20% (+range75%)","範囲内にダメージを上げる +20% (+範囲75%)","범위내 데미지 +20% (+ 범위 75%)"};
+    // public static string[] ExpUpContent = new string[]{"Experience +20%","経験値 +20%","경험치 +20%"};
+    // public static string[] ItemSpawnContent = new string[]{"Item block spawn +5%","アイテムブロックの確率アップ +5%","아이탬 블록 확률 증가 +5%"};
+    // public static string[] VerticalMultiShotContent = new string[]{"extra ball on front side +1","前側へボール追加 +1","앞쪽에 볼 추가 +1"};
+    // public static string[] CriticalDamageContent = new string[]{"Critical Damage Up +50%","致命打ダメージアップ +50%","치명타데미지 +50%"};
+    // public static string[] LaserContent = new string[]{"Shot Laser on one side +1","レイザー攻撃追加 +1","레이저공격 추가 +1"};
 
     public static List<string[]> PsvInfoNameList = new List<string[]>(){
-        new string[]{Dmg[(int)TP.EN], Dmg[(int)TP.JP], Dmg[(int)TP.KR]},
-        new string[]{MultiShot[(int)TP.EN], MultiShot[(int)TP.JP], MultiShot[(int)TP.KR]},
-        new string[]{Speed[(int)TP.EN], Speed[(int)TP.JP], Speed[(int)TP.KR]},
-        new string[]{InstantKill[(int)TP.EN], InstantKill[(int)TP.JP], InstantKill[(int)TP.KR]},
-        new string[]{Critical[(int)TP.EN], Critical[(int)TP.JP], Critical[(int)TP.KR]},
-        new string[]{Explosion[(int)TP.EN], Explosion[(int)TP.JP], Explosion[(int)TP.KR]},
-        new string[]{ExpUp[(int)TP.EN], ExpUp[(int)TP.JP], ExpUp[(int)TP.KR]},
-        new string[]{ItemSpawn[(int)TP.EN], ItemSpawn[(int)TP.JP], ItemSpawn[(int)TP.KR]},
-        new string[]{VerticalMultiShot[(int)TP.EN], VerticalMultiShot[(int)TP.JP], VerticalMultiShot[(int)TP.KR]},
-        new string[]{CriticalDamage[(int)TP.EN], CriticalDamage[(int)TP.JP], CriticalDamage[(int)TP.KR]},
-        new string[]{Laser[(int)TP.EN], Laser[(int)TP.JP], Laser[(int)TP.KR]}
+        // new string[]{Dmg[(int)TP.EN], Dmg[(int)TP.JP], Dmg[(int)TP.KR]},
+        // new string[]{MultiShot[(int)TP.EN], MultiShot[(int)TP.JP], MultiShot[(int)TP.KR]},
+        // new string[]{Speed[(int)TP.EN], Speed[(int)TP.JP], Speed[(int)TP.KR]},
+        // new string[]{InstantKill[(int)TP.EN], InstantKill[(int)TP.JP], InstantKill[(int)TP.KR]},
+        // new string[]{Critical[(int)TP.EN], Critical[(int)TP.JP], Critical[(int)TP.KR]},
+        // new string[]{Explosion[(int)TP.EN], Explosion[(int)TP.JP], Explosion[(int)TP.KR]},
+        // new string[]{ExpUp[(int)TP.EN], ExpUp[(int)TP.JP], ExpUp[(int)TP.KR]},
+        // new string[]{ItemSpawn[(int)TP.EN], ItemSpawn[(int)TP.JP], ItemSpawn[(int)TP.KR]},
+        // new string[]{VerticalMultiShot[(int)TP.EN], VerticalMultiShot[(int)TP.JP], VerticalMultiShot[(int)TP.KR]},
+        // new string[]{CriticalDamage[(int)TP.EN], CriticalDamage[(int)TP.JP], CriticalDamage[(int)TP.KR]},
+        // new string[]{Laser[(int)TP.EN], Laser[(int)TP.JP], Laser[(int)TP.KR]}
     };
 
     public static List<string[]> PsvInfoExplainList = new List<string[]>(){
-        new string[]{DmgContent[(int)TP.EN], DmgContent[(int)TP.JP], DmgContent[(int)TP.KR]},
-        new string[]{MultiShot[(int)TP.EN], MultiShot[(int)TP.JP], MultiShot[(int)TP.KR]},
-        new string[]{SpeedContent[(int)TP.EN], SpeedContent[(int)TP.JP], SpeedContent[(int)TP.KR]},
-        new string[]{InstantKillContent[(int)TP.EN], InstantKillContent[(int)TP.JP], InstantKillContent[(int)TP.KR]},
-        new string[]{CriticalContent[(int)TP.EN], CriticalContent[(int)TP.JP], CriticalContent[(int)TP.KR]},
-        new string[]{ExplosionContent[(int)TP.EN], ExplosionContent[(int)TP.JP], ExplosionContent[(int)TP.KR]},
-        new string[]{ExpUpContent[(int)TP.EN], ExpUpContent[(int)TP.JP], ExpUpContent[(int)TP.KR]},
-        new string[]{ItemSpawnContent[(int)TP.EN], ItemSpawnContent[(int)TP.JP], ItemSpawnContent[(int)TP.KR]},
-        new string[]{VerticalMultiShotContent[(int)TP.EN], VerticalMultiShotContent[(int)TP.JP], VerticalMultiShotContent[(int)TP.KR]},
-        new string[]{CriticalDamageContent[(int)TP.EN], CriticalDamageContent[(int)TP.JP], CriticalDamageContent[(int)TP.KR]},
-        new string[]{LaserContent[(int)TP.EN], LaserContent[(int)TP.JP], LaserContent[(int)TP.KR]},
+        // new string[]{DmgContent[(int)TP.EN], DmgContent[(int)TP.JP], DmgContent[(int)TP.KR]},
+        // new string[]{MultiShot[(int)TP.EN], MultiShot[(int)TP.JP], MultiShot[(int)TP.KR]},
+        // new string[]{SpeedContent[(int)TP.EN], SpeedContent[(int)TP.JP], SpeedContent[(int)TP.KR]},
+        // new string[]{InstantKillContent[(int)TP.EN], InstantKillContent[(int)TP.JP], InstantKillContent[(int)TP.KR]},
+        // new string[]{CriticalContent[(int)TP.EN], CriticalContent[(int)TP.JP], CriticalContent[(int)TP.KR]},
+        // new string[]{ExplosionContent[(int)TP.EN], ExplosionContent[(int)TP.JP], ExplosionContent[(int)TP.KR]},
+        // new string[]{ExpUpContent[(int)TP.EN], ExpUpContent[(int)TP.JP], ExpUpContent[(int)TP.KR]},
+        // new string[]{ItemSpawnContent[(int)TP.EN], ItemSpawnContent[(int)TP.JP], ItemSpawnContent[(int)TP.KR]},
+        // new string[]{VerticalMultiShotContent[(int)TP.EN], VerticalMultiShotContent[(int)TP.JP], VerticalMultiShotContent[(int)TP.KR]},
+        // new string[]{CriticalDamageContent[(int)TP.EN], CriticalDamageContent[(int)TP.JP], CriticalDamageContent[(int)TP.KR]},
+        // new string[]{LaserContent[(int)TP.EN], LaserContent[(int)TP.JP], LaserContent[(int)TP.KR]},
     };
 
     //*-----------------------------------------------------------------------------------------------

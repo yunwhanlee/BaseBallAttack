@@ -580,6 +580,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameTxts:
+  - ItemSpawn
+  - "\u30A2\u30A4\u30C6\u30E0\u751F\u6210UP"
+  - "\uC544\uC774\uD0EC\uC0DD\uC131UP"
+  explainTxts:
+  - Item block spawn +5%
+  - "\u30A2\u30A4\u30C6\u30E0\u30D6\u30ED\u30C3\u30AF\u306E\u78BA\u7387\u30A2\u30C3\u30D7
+    +5%"
+  - "\uC544\uC774\uD0EC \uBE14\uB85D \uD655\uB960 \uC99D\uAC00 +5%"
+  homeRunBonusTxts:
+  - 
+  - 
+  - 
   isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 3811945637865038421}

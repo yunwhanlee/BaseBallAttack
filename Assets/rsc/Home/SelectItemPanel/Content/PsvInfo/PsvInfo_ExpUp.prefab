@@ -387,6 +387,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameTxts:
+  - ExpUp
+  - "\u7D4C\u9A13\u5024\uFF05UP"
+  - "\uACBD\uD5D8\uCE58%UP"
+  explainTxts:
+  - Experience +20%
+  - "\u7D4C\u9A13\u5024 +20%"
+  - "\uACBD\uD5D8\uCE58 +20%"
+  homeRunBonusTxts:
+  - 
+  - 
+  - 
   isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 3811945637865038421}

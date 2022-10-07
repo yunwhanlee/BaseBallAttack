@@ -561,6 +561,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameTxts:
+  - VerticalMultiShot
+  - "\u30DE\u30EB\u30C1\u5F3E(\u7E26)"
+  - "\uBA40\uD2F0\uC0F7(\uC138\uB85C)"
+  explainTxts:
+  - extra ball on front side +1
+  - "\u524D\u5074\u3078\u30DC\u30FC\u30EB\u8FFD\u52A0 +1"
+  - "\uC55E\uCABD\uC5D0 \uBCFC \uCD94\uAC00 +1"
+  homeRunBonusTxts:
+  - 
+  - 
+  - 
   isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 3811945637865038421}

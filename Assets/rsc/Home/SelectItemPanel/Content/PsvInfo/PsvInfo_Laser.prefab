@@ -406,6 +406,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameTxts:
+  - Laser
+  - "\u30EC\u30A4\u30B6\u30FC"
+  - "\uB808\uC774\uC800"
+  explainTxts:
+  - Shot Laser on one side +1
+  - "\u30EC\u30A4\u30B6\u30FC\u653B\u6483\u8FFD\u52A0 +1"
+  - "\uB808\uC774\uC800\uACF5\uACA9 \uCD94\uAC00 +1"
+  homeRunBonusTxts:
+  - 
+  - 
+  - 
   isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 3811945637865038421}
