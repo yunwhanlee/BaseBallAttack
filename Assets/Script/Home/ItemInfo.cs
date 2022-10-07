@@ -2,10 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Serialization;
 using System;
+
+public class NamedArrayAttribute : PropertyAttribute
+{
+    public readonly string[] names;
+    public NamedArrayAttribute(string[] names) { this.names = names; }
+}
 
 public class ItemInfo : MonoBehaviour
 {
+    [Header("言語 [0]:EN, [1]:JP, [2]:KR")]
+     [FormerlySerializedAs("langs")]
+    [SerializeField] string[] langs = new string[System.Enum.GetValues(typeof(LANG.TP)).Length];
+
+    [Header("STATUS")]
     [SerializeField] bool isLock = true;    public bool IsLock {get => isLock; set => isLock = value;}
     [SerializeField] bool isChecked = true;    public bool IsChecked {get => isChecked; set => isChecked = value;}
     [SerializeField] GameObject isCheckedImgObj;    public GameObject IsCheckedImgObj {get => isCheckedImgObj; set => isCheckedImgObj = value;}
@@ -19,10 +31,21 @@ public class ItemInfo : MonoBehaviour
     [SerializeField] Text cashShopPriceTxt;     public Text CashShopPriceTxt {get => cashShopPriceTxt; set => cashShopPriceTxt = value;}
     [SerializeField] ItemPsvList itemPassive;  public ItemPsvList ItemPassive {get => itemPassive; set=> itemPassive = value;}
 
+    void Awake(){
+        //* Push Language Data
+        if(this.name.Contains(DM.PANEL.Chara.ToString())){
+            Debug.Log("ItemInfo.cs:: name= " + this.name + ", CharaList.Count= " + LANG.CharaList.Count);
+            LANG.CharaList.Add(langs);
+        }
+        else if(this.name.Contains(DM.PANEL.Bat.ToString())){
+
+        }
+    }
 
     void Start(){
-        var itemType = DM.ins.getCurItemType2Enum(DM.ins.SelectItemType);
 
+        //* Set Panel Outline & CashShop Price Txt UI
+        var itemType = DM.ins.getCurItemType2Enum(DM.ins.SelectItemType);
         switch(itemType){
             //* 3D Model 形式
             case DM.PANEL.Chara :
@@ -69,9 +92,6 @@ public class ItemInfo : MonoBehaviour
         }
     }
 
-    void Update(){
-    }
-
     public void setGrayMtIsLock(){
         if(IsLock){//* gray Material 追加
             if(GrayPanel)   GrayPanel.gameObject.SetActive(true);
@@ -88,4 +108,6 @@ public class ItemInfo : MonoBehaviour
             }
         }
     }
+
+    
 }

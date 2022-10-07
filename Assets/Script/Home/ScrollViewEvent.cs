@@ -25,13 +25,13 @@ public class ScrollView {
     public void createItem(RectTransform modelParentPref, RectTransform itemPassivePanel, RectTransform itemSkillBoxPref){
         Debug.LogFormat("createObject:: {0}, {1}, {2}, type= {3}",modelParentPref, itemPassivePanel, itemSkillBoxPref, this.type);
         //* Prefabs 生成
+        var itemType = DM.ins.getCurItemType2Enum(this.type);
         Array.ForEach(itemPrefs, itemPf=>{
             //* 生成
             RectTransform modelContentPf = null;
             RectTransform psvPanel = null;
             GameObject model = null;
 
-            var itemType = DM.ins.getCurItemType2Enum(this.type);
             switch(itemType){
                 case DM.PANEL.Chara : 
                 case DM.PANEL.Bat :
@@ -84,8 +84,15 @@ public class ScrollView {
             // Debug.Log("modelParentTf.pos=" + modelParentPref.position + ", modelParentTf.localPos=" + modelParentPref.localPosition);
             model.name = itemPf.name;//名前上書き：しないと後ろに(clone)が残る。
         });
+        
+        pushItemLanguageList(itemType.ToString());
     }
 
+    private void pushItemLanguageList(string itemType){
+        //* ItemCreateが終わったら、一回活性化して、ItemInfoに書いた言語情報をLanguageのInfoリストへ入れる。
+        var hm = GameObject.Find(DM.NAME.HomeManager.ToString()).GetComponent<HomeManager>();
+        hm.onClickBtnGoToPanel(itemType);
+    }
     public void setLanguage(){ //* SkillとCashShopのみ。
         for(int i = 0; i < ContentTf.childCount; i++){
             Text[] txtObjs = null;

@@ -22,18 +22,18 @@ public static class LANG //* LANG
 
     //* HOME SCENE -----------------------------------
     public static List<string[]> CharaList = new List<string[]>(){
-        new string[]{"Normal", "ノーマル", "노멀"}, 
-        new string[]{"Penguin", "ペンギン", "펭귄"}, 
-        new string[]{"Bear", "クマ", "곰"}, 
-        new string[]{"Boy1", "男１", "남자1"}, 
-        new string[]{"Cat", "猫", "고양이"}, 
-        new string[]{"Girl1", "女１", "여자1"},
-        new string[]{"MaidA", "メイドA", "메이드A"},
-        new string[]{"MaidB", "メイドB", "메이드B"},
-        new string[]{"MaidC", "メイドC", "메이드C"},
-        new string[]{"MaidD", "メイドD", "메이드D"},
-        new string[]{"PistolMan", "ピストルマン", "피스톨맨"},
-        new string[]{"Dinosaur", "恐竜", "공룡"},
+        // new string[]{"Normal", "ノーマル", "노멀"}, 
+        // new string[]{"Penguin", "ペンギン", "펭귄"}, 
+        // new string[]{"Bear", "クマ", "곰"}, 
+        // new string[]{"Boy1", "男１", "남자1"}, 
+        // new string[]{"Cat", "猫", "고양이"}, 
+        // new string[]{"Girl1", "女１", "여자1"},
+        // new string[]{"MaidA", "メイドA", "메이드A"},
+        // new string[]{"MaidB", "メイドB", "메이드B"},
+        // new string[]{"MaidC", "メイドC", "메이드C"},
+        // new string[]{"MaidD", "メイドD", "메이드D"},
+        // new string[]{"PistolMan", "ピストルマン", "피스톨맨"},
+        // new string[]{"Dinosaur", "恐竜", "공룡"}, 
     };
 
     public static List<string[]> BatList = new List<string[]>(){
@@ -205,6 +205,7 @@ public static class LANG //* LANG
     //* 関数
     //*-----------------------------------------------------------------------------------------------
     public static void checkErrorLangListCounting(){
+        Debug.Log("checkErrorLangListCounting()::");
         int charaCttCnt = DM.ins.scrollviews[(int)DM.PANEL.Chara].ContentTf.childCount;
         int batCttCnt = DM.ins.scrollviews[(int)DM.PANEL.Bat].ContentTf.childCount;
         int skillCttCnt = DM.ins.scrollviews[(int)DM.PANEL.Skill].ContentTf.childCount;
