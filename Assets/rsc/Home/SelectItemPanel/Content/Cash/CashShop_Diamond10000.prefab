@@ -138,6 +138,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameTxts:
+  - Diamond 10000
+  - "\u30C0\u30A4\u30A2 10000"
+  - "\uB2E4\uC774\uC544 10000"
+  explainTxts:
+  - Get Diamond 10000.
+  - "10000\u30C0\u30A4\u30A2\u3092\u8CFC\u5165\u3002"
+  - "10000\uB2E4\uC774\uC544 \uAD6C\uC785."
+  homeRunBonusTxts:
+  - 
+  - 
+  - 
   isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 6649917821494320766}

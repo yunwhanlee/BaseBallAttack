@@ -51,6 +51,10 @@ public class ItemInfo : MonoBehaviour
             LANG.SkillExplainList.Add(explainTxts);
             LANG.SkillHomeRunBonusList.Add(homeRunBonusTxts);
         }
+        else if(this.name.Contains(DM.PANEL.CashShop.ToString())){
+            LANG.CashShopNameList.Add(nameTxts);
+            LANG.CashShopExplainList.Add(explainTxts);
+        }
     }
 
     void Start(){

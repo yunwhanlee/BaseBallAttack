@@ -899,6 +899,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameTxts:
+  - Coin 100000
+  - "\u30B3\u30A4\u30F3 100000"
+  - "\uCF54\uC778 100000"
+  explainTxts:
+  - Get Coin 100000.
+  - "100000\u30B3\u30A4\u30F3\u3092\u8CFC\u5165\u3002"
+  - "100000\uCF54\uC778 \uAD6C\uC785."
+  homeRunBonusTxts:
+  - 
+  - 
+  - 
   isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 805223282232288288}
