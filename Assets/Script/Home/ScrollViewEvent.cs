@@ -84,7 +84,7 @@ public class ScrollView {
             // Debug.Log("modelParentTf.pos=" + modelParentPref.position + ", modelParentTf.localPos=" + modelParentPref.localPosition);
             model.name = itemPf.name;//名前上書き：しないと後ろに(clone)が残る。
         });
-        
+
         pushItemLanguageList(itemType.ToString());
     }
 
@@ -272,7 +272,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         // string name = curItem.name.Split('_')[1];
         // int idx = LANG.CharaList.FindIndex(list => name == list[(int)LANG.TP.EN]);
         // NameTxt.text = LANG.CharaList[idx][(int)DM.ins.Language]; //name;
-        NameTxt.text = LANG.getTxtList(curItem.name)[LANG.NAME];
+            NameTxt.text = LANG.getTxtList(curItem.name)[LANG.NAME];
 
         //* Set Rank UI Box Color
         Color color = Color.white;

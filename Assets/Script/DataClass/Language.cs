@@ -217,40 +217,44 @@ public static class LANG //* LANG
     }
 
     public static List<string> getTxtList(string str){
-        // Debug.Log("getLangTxt:: str=" + str);
-        const int SPT_TYPE=0, SPT_NAME=1, SPT_EXPLAIN=2, SPT_HOMERUNBONUS=3;
+        const int SPLIT_TYPE=0, SPLIT_NAME=1, SPLIT_EXPLAIN=2, SPLIT_HOMERUNBONUS=3;
         List<string> resList = new List<string>();
 
-        //* Split String
         var split = str.Split('_');
-        string type = split[SPT_TYPE];
+        string type = split[SPLIT_TYPE];
+        DM.PANEL itemType = DM.ins.getCurItemType2Enum(type);
 
-        if(type == DM.PANEL.Chara.ToString() || type == DM.PANEL.Bat.ToString()){
-            resList.Add(split[SPT_NAME]);
-        }
-        else if(type == DM.PANEL.Skill.ToString()){
-            resList.Add(split[SPT_NAME]);
-            resList.Add(split[SPT_EXPLAIN]);
-            resList.Add(split[SPT_HOMERUNBONUS]);
-        }
-        else if(type == DM.PANEL.CashShop.ToString() || type == DM.PANEL.PsvInfo.ToString() ){
-            resList.Add(split[SPT_NAME]);
-            resList.Add(split[SPT_EXPLAIN]);
+        //* Split Txt String
+        switch(itemType){
+            case DM.PANEL.Chara: 
+            case DM.PANEL.Bat: 
+                resList.Add(split[SPLIT_NAME]);
+                break;
+            case DM.PANEL.Skill: 
+                resList.Add(split[SPLIT_NAME]);
+                resList.Add(split[SPLIT_EXPLAIN]);
+                resList.Add(split[SPLIT_HOMERUNBONUS]);
+                break;
+            case DM.PANEL.CashShop: 
+            case DM.PANEL.PsvInfo: 
+                resList.Add(split[SPLIT_NAME]);
+                resList.Add(split[SPLIT_EXPLAIN]);
+                break;
         }
         
         //* Type & Set Lang
-        switch(type){
-            case "Chara":{
+        switch(itemType){
+            case DM.PANEL.Chara: {
                 int idx = CharaList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
                 resList[NAME] = CharaList[idx][(int)DM.ins.personalData.Lang];
                 break;
             }
-            case "Bat":{
+            case DM.PANEL.Bat: {
                 int idx = BatList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
                 resList[NAME] = BatList[idx][(int)DM.ins.personalData.Lang];
                 break;
             }
-            case "Skill":{
+            case DM.PANEL.Skill: {
                 int idx = SkillNameList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
                 // Debug.Log("<color=white><<Skill>> idx= " + idx + "</color>");
                 resList[NAME] = SkillNameList[idx][(int)DM.ins.personalData.Lang];
@@ -258,14 +262,14 @@ public static class LANG //* LANG
                 resList[HOMERUNBONUS] = SkillHomeRunBonusList[idx][(int)DM.ins.personalData.Lang];
                 break;
             }
-            case "CashShop":{
+            case DM.PANEL.CashShop:{
                 int idx = CashShopNameList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
                 // Debug.Log("<color=yellow><<CashShop>> idx= " + idx + "</color>");
                 resList[NAME] = CashShopNameList[idx][(int)DM.ins.personalData.Lang];
                 resList[EXPLAIN] = CashShopExplainList[idx][(int)DM.ins.personalData.Lang];
                 break;
             }
-            case "PsvInfo":{
+            case DM.PANEL.PsvInfo:{
                 int idx = PsvInfoNameList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
                 // Debug.Log("<color=yellow><<PsvInfo>> idx= " + idx + "</color>");
                 resList[NAME] = PsvInfoNameList[idx][(int)DM.ins.personalData.Lang];
@@ -273,10 +277,7 @@ public static class LANG //* LANG
                 break;
             }
         }
-        resList.ForEach(res=> {
-            Debug.Log("type->" + type + ", res=>" + res);
-        });
-
+        resList.ForEach(res=> Debug.Log("type->" + type + ", res=>" + res));
         return resList;
     }
 
