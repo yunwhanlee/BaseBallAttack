@@ -204,16 +204,27 @@ public static class LANG //* LANG
     //*-----------------------------------------------------------------------------------------------
     //* 関数
     //*-----------------------------------------------------------------------------------------------
+    public static void initlanguageList(){ //* (BUG) EX)言語とか変えた時に、リストが２倍になるため、初期化する。
+        CharaList = new List<string[]>();
+        BatList = new List<string[]>();
+        SkillNameList = new List<string[]>();
+        CashShopNameList = new List<string[]>();
+        PsvInfoNameList = new List<string[]>();
+    }
+    
     public static void checkErrorLangListCounting(){
         Debug.Log("checkErrorLangListCounting()::");
         int charaCttCnt = DM.ins.scrollviews[(int)DM.PANEL.Chara].ContentTf.childCount;
         int batCttCnt = DM.ins.scrollviews[(int)DM.PANEL.Bat].ContentTf.childCount;
         int skillCttCnt = DM.ins.scrollviews[(int)DM.PANEL.Skill].ContentTf.childCount;
+        int cashShopCttCnt = DM.ins.scrollviews[(int)DM.PANEL.CashShop].ContentTf.childCount;
+        int psvInfoCttCnt = DM.ins.scrollviews[(int)DM.PANEL.PsvInfo].ContentTf.childCount;
 
-        Debug.LogFormat("「Chara」Lang: {0}, ContentTf: {1} => {2}", CharaList.Count, charaCttCnt, (CharaList.Count == charaCttCnt)? "OK" : "<color=red>ERROR! お互いに数字が合わない！</color>");
-        Debug.LogFormat("「Bat」Lang: {0}, ContentTf: {1} => {2}", BatList.Count, batCttCnt, (BatList.Count == batCttCnt)? "OK" : "<color=red>ERROR! お互いに数字が合わない！</color>");
-        Debug.LogFormat("「SkillName」Lang: {0}, ContentTf: {1} => {2}", SkillNameList.Count, skillCttCnt, (SkillNameList.Count == skillCttCnt)? "OK" : "<color=red>ERROR! お互いに数字が合わない！</color>");
-        Debug.LogFormat("「SkillExplain」Lang: {0}, ContentTf: {1} => {2}", SkillExplainList.Count, skillCttCnt, (SkillExplainList.Count == skillCttCnt)? "OK" : "<color=red>ERROR! お互いに数字が合わない！</color>");
+        Debug.LogFormat("【Chara】Lang: {0}, ContentTf: {1} => {2}", CharaList.Count, charaCttCnt, (CharaList.Count == charaCttCnt)? "OK" : "<color=red>ERROR! お互いに数字が合わない！</color>");
+        Debug.LogFormat("【Bat」Lang: {0}, ContentTf: {1} => {2}", BatList.Count, batCttCnt, (BatList.Count == batCttCnt)? "OK" : "<color=red>ERROR! お互いに数字が合わない！</color>");
+        Debug.LogFormat("【SkillName】Lang: {0}, ContentTf: {1} => {2}", SkillNameList.Count, skillCttCnt, (SkillNameList.Count == skillCttCnt)? "OK" : "<color=red>ERROR! お互いに数字が合わない！</color>");
+        Debug.LogFormat("【CashShop】Lang: {0}, ContentTf: {1} => {2}", CashShopNameList.Count, cashShopCttCnt, (CashShopNameList.Count == cashShopCttCnt)? "OK" : "<color=red>ERROR! お互いに数字が合わない！</color>");
+        Debug.LogFormat("【PsvInfo】Lang: {0}, ContentTf: {1} => {2}", PsvInfoNameList.Count, psvInfoCttCnt, (PsvInfoNameList.Count == psvInfoCttCnt)? "OK" : "<color=red>ERROR! お互いに数字が合わない！</color>");
     }
 
     public static List<string> getTxtList(string str){

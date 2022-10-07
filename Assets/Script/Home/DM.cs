@@ -43,6 +43,7 @@ public class DM : MonoBehaviour
 
     void Awake() => singleton();
     void Start(){
+        LANG.initlanguageList();
         // foreach(DM.ATV list in Enum.GetValues(typeof(DM.ATV)))Debug.LogFormat("Enums GetFindVal:: {0}", list.ToString())
 
         //* contents Prefab 生成
