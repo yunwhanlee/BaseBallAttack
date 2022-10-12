@@ -74,11 +74,12 @@ public class ScrollView {
                     displayItemPassiveUI(type, itemPassiveList, itemSkillBoxPref, psvPanel);
                     break;
                 case DM.PANEL.Skill : 
+                case DM.PANEL.CashShop : 
                     model.transform.localPosition = new Vector3(0,0,0); //* posZがずれるから、調整
-                    //* Add "OnClick()" EventListner
+                    //! Add "OnClick()" EventListner
                     Button btn = model.GetComponent<Button>();
                     var svEvent = ScrollRect.GetComponent<ScrollViewEvent>();
-                    btn.onClick.AddListener(delegate{svEvent.onClickSkillPanel(model);});
+                    btn.onClick.AddListener(delegate{svEvent.onClickSkillOrCashShopItemPanel(model);});
                     break;
         }
             // Debug.Log("modelParentTf.pos=" + modelParentPref.position + ", modelParentTf.localPos=" + modelParentPref.localPosition);
@@ -197,7 +198,9 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         // Set Current Index
         CurIdx = (this.gameObject.name.Contains(DM.PANEL.Chara.ToString()))? DM.ins.personalData.SelectCharaIdx
             :(this.gameObject.name.Contains(DM.PANEL.Bat.ToString()))? DM.ins.personalData.SelectBatIdx
-            :(this.gameObject.name.Contains(DM.PANEL.Skill.ToString()))? DM.ins.personalData.SelectSkillIdx : 0;
+            :(this.gameObject.name.Contains(DM.PANEL.Skill.ToString()))? DM.ins.personalData.SelectSkillIdx
+            :(this.gameObject.name.Contains(DM.PANEL.CashShop.ToString()))? DM.ins.personalData.SelectSkillIdx
+            :0;
 
         // Set Scroll PosX
         float width = Mathf.Abs(DM.ins.ModelContentPref.rect.width);
@@ -382,7 +385,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public void onClickCheckBtn(string type){
         if(DM.ins.SelectItemType != type) return;
         var curItem = getCurItem();
-        Debug.LogFormat("onClickCheckBtn:: type= {0}, CurIdx= {1}, curItem= {2}, IsLock= {3}",type, CurIdx, curItem, curItem.IsLock);
+        Debug.LogFormat("onClickCheckB  tn:: type= {0}, CurIdx= {1}, curItem= {2}, IsLock= {3}",type, CurIdx, curItem, curItem.IsLock);
 
         if(type == DM.PANEL.Skill.ToString() && curItem.IsChecked){
             hm.displayMessageDialog("This Skill is Already Registed");
@@ -412,13 +415,23 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
         //* Skill Panel UI Extra Update
         if(DM.ins.SelectItemType == DM.PANEL.Skill.ToString()){
-            onClickSkillPanel(curItem.gameObject);
+            onClickSkillOrCashShopItemPanel(curItem.gameObject);
+        }
+        //* CashShop
+        else if(DM.ins.SelectItemType == DM.PANEL.CashShop.ToString()){
+            onClickSkillOrCashShopItemPanel(curItem.gameObject);
         }
     }
 
-    public void onClickSkillPanel(GameObject ins){
+    public void onClickSkillOrCashShopItemPanel(GameObject ins){
+        DM.PANEL type = ins.name.Contains(DM.PANEL.Skill.ToString())? DM.PANEL.Skill
+            : ins.name.Contains(DM.PANEL.CashShop.ToString())? DM.PANEL.CashShop
+            : DM.PANEL.NULL;
+
+        if(type == DM.PANEL.NULL) return;
+
         //* Current Index
-        var btns = DM.ins.scrollviews[(int)DM.PANEL.Skill].ContentTf.GetComponentsInChildren<Button>();
+        var btns = DM.ins.scrollviews[(int)type].ContentTf.GetComponentsInChildren<Button>();
         CurIdx = Array.FindIndex(btns, btn => btn.name == ins.name);
 
         drawChoiceBtnUI();

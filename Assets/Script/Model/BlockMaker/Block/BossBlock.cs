@@ -42,8 +42,9 @@ public class BossBlock : Block_Prefab{
         gm.em.createBossHealSkillEF(bossDieOrbSpot.position);
         yield return new WaitForSeconds(1);
         Array.ForEach(gm.blockGroup.GetComponentsInChildren<Block_Prefab>(), block => {
-            var val = block.Hp * BOSS_HEAL_RATIO == 0? 2 : block.Hp * BOSS_HEAL_RATIO;
-            block.increaseHp((int)val);
+            int val = (int)(block.Hp * BOSS_HEAL_RATIO);
+            var hp = (val == 0)? 1 : block.Hp * BOSS_HEAL_RATIO;
+            block.increaseHp((int)hp);
         });
     }
 
