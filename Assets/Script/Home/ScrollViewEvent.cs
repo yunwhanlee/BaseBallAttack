@@ -267,7 +267,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         RankTxt.text = curItem.Rank.ToString();
 
         //* Is Buy(UnLock)? Set Price or CheckMark
-        drawChoiceBtnUI();
+        drawCheckBtnUI();
         if(!curItem.IsLock)
             setCheckIconColorAndOutline();
         
@@ -298,7 +298,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         
     }
 
-    public void drawChoiceBtnUI(){
+    public void drawCheckBtnUI(){
         var curItem = getCurItem();
         Debug.Log("drawChoiceBtnUI():: curItem.IsLock= " + curItem.IsLock);
         if(curItem.IsLock){//* 💲表示
@@ -405,7 +405,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 curItem.setGrayMtIsLock();
                 DM.ins.personalData.setUnLockCurList(CurIdx);
                 DM.ins.personalData.Coin -= curItem.Price;
-                drawChoiceBtnUI();
+                drawCheckBtnUI();
             }
             else{
                 //TODO Audio
@@ -434,7 +434,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         var btns = DM.ins.scrollviews[(int)type].ContentTf.GetComponentsInChildren<Button>();
         CurIdx = Array.FindIndex(btns, btn => btn.name == ins.name);
 
-        drawChoiceBtnUI();
+        drawCheckBtnUI();
         setCheckIconColorAndOutline();
 
         var sprite = btns[CurIdx].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;

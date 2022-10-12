@@ -257,10 +257,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8406b077fda4a2f428e163f50d2fb278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  langs:
+  nameTxts:
   - MaidA
   - "\u30E1\u30A4\u30C9A"
   - "\uBA54\uC774\uB4DCA"
+  explainTxts:
+  - 
+  - 
+  - 
+  homeRunBonusTxts:
+  - 
+  - 
+  - 
   isLock: 0
   isChecked: 1
   isCheckedImgObj: {fileID: 0}
