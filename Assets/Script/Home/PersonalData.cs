@@ -135,7 +135,7 @@ public class PersonalData {
     }
 
     public void setSelectIdx(int index){
-        var itemType = DM.ins.getCurItemType2Enum(DM.ins.SelectItemType);
+        var itemType = DM.ins.getCurPanelType2Enum(DM.ins.SelectItemType);
         switch(itemType){
             case DM.PANEL.Chara :  SelectCharaIdx = index; break;
             case DM.PANEL.Bat :    SelectBatIdx = index;   break;
@@ -150,7 +150,7 @@ public class PersonalData {
     }
 
     public void setUnLockCurList(int curIdx){
-        var itemType = DM.ins.getCurItemType2Enum(DM.ins.SelectItemType);
+        var itemType = DM.ins.getCurPanelType2Enum(DM.ins.SelectItemType);
         switch(itemType){
             case DM.PANEL.Chara :  CharaLockList[curIdx] = false; break;
             case DM.PANEL.Bat :    BatLockList[curIdx] = false;   break;

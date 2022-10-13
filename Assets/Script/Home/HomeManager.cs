@@ -57,9 +57,9 @@ public class HomeManager : MonoBehaviour
     [Header("MODEL")]
     [SerializeField] Transform modelTf;   public Transform ModelTf {get => modelTf; set => modelTf = value;}
 
-    [Header("NOTICE MESSAGE")]
-    public Text noticeMessageTxtPref;
-    public Transform mainPanelTf;
+    // [Header("NOTICE MESSAGE")]
+    // public Text noticeMessageTxtPref;
+    // public Transform mainPanelTf;
 
     //TODO public DialogUI cashShop;
 
@@ -78,7 +78,7 @@ public class HomeManager : MonoBehaviour
         var curChara = DM.ins.scrollviews[(int)DM.PANEL.Chara].ItemPrefs[DM.ins.personalData.SelectCharaIdx];
         var curBat = DM.ins.scrollviews[(int)DM.PANEL.Bat].ItemPrefs[DM.ins.personalData.SelectBatIdx];
         
-        var itemType = DM.ins.getCurItemType2Enum(DM.ins.SelectItemType);
+        var itemType = DM.ins.getCurPanelType2Enum(DM.ins.SelectItemType);
 
         setGUI();
         
@@ -146,11 +146,11 @@ public class HomeManager : MonoBehaviour
         int unlockSkillListCnt = unlockSkillList.Count;
         Debug.Log("unlockSkillListCnt= " + unlockSkillListCnt);
         if(DM.ins.personalData.Coin < price) {
-            displayMessageDialog(LANG.getTxt(LANG.TXT.DialogNoMoney.ToString()));
+            Util._.displayNoticeMsgDialog(LANG.getTxt(LANG.TXT.DialogNoMoney.ToString()));
             return;
         }
         else if(unlockSkillListCnt < 2){
-            displayMessageDialog(LANG.getTxt(LANG.TXT.DialogNoSkill.ToString()));
+            Util._.displayNoticeMsgDialog(LANG.getTxt(LANG.TXT.DialogNoSkill.ToString()));
             return;
         }
         
@@ -171,12 +171,6 @@ public class HomeManager : MonoBehaviour
         var secondSkillImg = skillBtns[1].transform.GetChild(0).GetComponent<Image>();
 
         secondSkillImg.sprite = sprite;        
-    }
-    public void displayMessageDialog(string msg){
-        noticeMessageTxtPref.text = msg;
-        var ins = Instantiate(noticeMessageTxtPref, mainPanelTf.transform.position, Quaternion.identity, mainPanelTf);
-        ins.rectTransform.localPosition = new Vector3(0,-900,-400);
-        Destroy(ins.gameObject,2);
     }
 
     public void onClickStartGameBtn(){
@@ -278,7 +272,7 @@ public class HomeManager : MonoBehaviour
                     sv.ScrollRect.gameObject.SetActive(false));
                 break;
             default : 
-                int typeIdx = (int)DM.ins.getCurItemType2Enum(DM.ins.SelectItemType);
+                int typeIdx = (int)DM.ins.getCurPanelType2Enum(DM.ins.SelectItemType);
                 SelectPanelScrollBG.color = selectPanelColors[typeIdx];
                 DM.ins.scrollviews[typeIdx].ScrollRect.gameObject.SetActive(true);
 

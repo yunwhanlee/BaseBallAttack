@@ -57,7 +57,7 @@ public class ItemInfo : MonoBehaviour
 
     void Start(){
         //* Set Panel Outline & CashShop Price Txt UI
-        var itemType = DM.ins.getCurItemType2Enum(DM.ins.SelectItemType);
+        var itemType = DM.ins.getCurPanelType2Enum(DM.ins.SelectItemType);
         switch(itemType){
             //* 3D Model 形式
             case DM.PANEL.Chara :

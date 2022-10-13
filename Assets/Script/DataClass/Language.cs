@@ -234,7 +234,7 @@ public static class LANG //* LANG
 
         var split = str.Split('_');
         string type = split[SPLIT_TYPE];
-        DM.PANEL itemType = DM.ins.getCurItemType2Enum(type);
+        DM.PANEL itemType = DM.ins.getCurPanelType2Enum(type);
 
         //* Split Txt String
         switch(itemType){

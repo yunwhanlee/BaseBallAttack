@@ -25,7 +25,7 @@ public class ScrollView {
     public void createItem(RectTransform modelParentPref, RectTransform itemPassivePanel, RectTransform itemSkillBoxPref){
         Debug.LogFormat("createObject:: {0}, {1}, {2}, type= {3}",modelParentPref, itemPassivePanel, itemSkillBoxPref, this.type);
         //* Prefabs 生成
-        var itemType = DM.ins.getCurItemType2Enum(this.type);
+        var itemType = DM.ins.getCurPanelType2Enum(this.type);
         Array.ForEach(itemPrefs, itemPf=>{
             //* 生成
             RectTransform modelContentPf = null;
@@ -396,10 +396,10 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public void onClickCheckBtn(string type){
         if(DM.ins.SelectItemType != type) return;
         var curItem = getCurItem();
-        Debug.LogFormat("onClickCheckB  tn:: type= {0}, CurIdx= {1}, curItem= {2}, IsLock= {3}",type, CurIdx, curItem, curItem.IsLock);
+        Debug.LogFormat("onClickCheckBtn:: type= {0}, CurIdx= {1}, curItem= {2}, IsLock= {3}",type, CurIdx, curItem, curItem.IsLock);
 
         if(type == DM.PANEL.Skill.ToString() && curItem.IsChecked){
-            hm.displayMessageDialog("This Skill is Already Registed");
+            Util._.displayNoticeMsgDialog("This Skill is Already Registed");
             return;
         }
         
@@ -407,36 +407,28 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         int befIdx = DM.ins.personalData.getSelectIdx(type);
         DM.ins.personalData.setSelectIdx(CurIdx);
 
-        //* Check
-        if(curItem.IsLock){
-            if(curItem.price.Type == Price.TP.COIN){ //DM.ins.personalData.Coin : DM.ins.personalData.Diamond;
-                //* Buy
-                if(DM.ins.personalData.Coin >= curItem.price.getValue()){
-                    DM.ins.personalData.Coin -= curItem.price.getValue();
-                    em.createItemBuyEF();
-                    curItem.IsLock = false;
-                    curItem.setGrayMtIsLock();
-                    DM.ins.personalData.setUnLockCurList(CurIdx);
-                    drawCheckBtnUI();
+        //* Purchase
+        switch(DM.ins.getCurPanelType2Enum(type)){
+            case DM.PANEL.Chara :
+            case DM.PANEL.Bat :
+            case DM.PANEL.Skill :
+                if(curItem.IsLock){
+                    if(curItem.price.Type == Price.TP.COIN){
+                        DM.ins.personalData.Coin = purchaseItem(DM.ins.personalData.Coin, curItem, befIdx);
+                    }
+                    else if(curItem.price.Type == Price.TP.DIAMOND){
+                        DM.ins.personalData.Diamond = purchaseItem(DM.ins.personalData.Diamond, curItem, befIdx);
+                    }
                 }
-                else{//TODO Audio
-                    DM.ins.personalData.setSelectIdx(befIdx);
+                break;
+            case DM.PANEL.CashShop :
+                if(curItem.price.Type == Price.TP.COIN){
+                    DM.ins.personalData.Coin = purchaseItem(DM.ins.personalData.Coin, curItem, befIdx);
                 }
-            }
-            else if(curItem.price.Type == Price.TP.DIAMOND){
-                //* Buy
-                if(DM.ins.personalData.Diamond >= curItem.price.getValue()){
-                    DM.ins.personalData.Diamond -= curItem.price.getValue();
-                    em.createItemBuyEF();
-                    curItem.IsLock = false;
-                    curItem.setGrayMtIsLock();
-                    DM.ins.personalData.setUnLockCurList(CurIdx);
-                    drawCheckBtnUI();
+                else if(curItem.price.Type == Price.TP.DIAMOND){
+                    DM.ins.personalData.Diamond = purchaseItem(DM.ins.personalData.Diamond, curItem, befIdx);
                 }
-                else{//TODO Audio
-                    DM.ins.personalData.setSelectIdx(befIdx);
-                }
-            }
+                break;
         }
 
         //* Skill Panel UI Extra Update
@@ -467,17 +459,25 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         Debug.Log("onClickSkillPanel():: CurIdx= " + CurIdx + ", ins.name= " + ins.name + ", sprite= " + sprite);
     }
 
-    // public void onClickCashShopList(ItemInfo selectItemInfo){
-    //     var btns = DM.ins.scrollviews[(int)DM.PANEL.CashShop].ContentTf.GetComponentsInChildren<Button>();
-    //     CurIdx = Array.FindIndex(btns, btn => btn.name == selectItemInfo.name);
-    //     Debug.Log("onClickCashShopList():: price= " + selectItemInfo.Price + ", CurIdx= " + CurIdx);
-
-    //     //TODO PROCESS 
-    // }
-
     //* ----------------------------------------------------------------
     //* Private Function
     //* ----------------------------------------------------------------
+    private int purchaseItem(int myMoney, ItemInfo curItem, int befIdx){
+        //* Buy
+        if(myMoney >= curItem.price.getValue()){
+            myMoney -= curItem.price.getValue();
+            em.createItemBuyEF();
+            curItem.IsLock = false; //* 解禁
+            curItem.setGrayMtIsLock();
+            DM.ins.personalData.setUnLockCurList(CurIdx);
+            drawCheckBtnUI();
+        }
+        else{//TODO Audio
+            DM.ins.personalData.setSelectIdx(befIdx);
+            Util._.displayNoticeMsgDialog("No Money");
+        }
+        return myMoney;
+    }
     private ItemInfo getCurItem(){
         var contents = getItemArr();
         int lastIdx = contents.Length - 1;
@@ -523,7 +523,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     private void activeOutline(ItemInfo item, bool isActive){
         // if(item.Outline3D == null) return;
         // Debug.LogFormat("activeOutline():: itemType= {0}, isActive= {1}", itemType, isActive);
-        var itemType = DM.ins.getCurItemType2Enum(DM.ins.SelectItemType);
+        var itemType = DM.ins.getCurPanelType2Enum(DM.ins.SelectItemType);
         switch(itemType){
             case DM.PANEL.Chara:
             case DM.PANEL.Bat:

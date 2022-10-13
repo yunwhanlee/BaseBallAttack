@@ -130,7 +130,7 @@ public class DM : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public DM.PANEL getCurItemType2Enum(string name){
+    public DM.PANEL getCurPanelType2Enum(string name){
         return (name == DM.PANEL.Chara.ToString())? DM.PANEL.Chara
             : (name == DM.PANEL.Bat.ToString())? DM.PANEL.Bat
             : (name == DM.PANEL.Skill.ToString())? DM.PANEL.Skill

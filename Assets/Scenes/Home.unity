@@ -11301,8 +11301,6 @@ MonoBehaviour:
   priceTxt: {fileID: 1544578272}
   priceTypeIconImg: {fileID: 1483716002}
   modelTf: {fileID: 150785606}
-  noticeMessageTxtPref: {fileID: 357732499089971375, guid: c1a4e857d0aae0b4ba90ed2c60068da3, type: 3}
-  mainPanelTf: {fileID: 925401117}
 --- !u!1 &1931609519
 GameObject:
   m_ObjectHideFlags: 0
@@ -12290,6 +12288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 323493605651ccb48bbe9722bcee9473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  noticeMessageTxtPref: {fileID: 357732499089971375, guid: c1a4e857d0aae0b4ba90ed2c60068da3, type: 3}
+  mainPanelTf: {fileID: 925401117}
 --- !u!4 &2097801201
 Transform:
   m_ObjectHideFlags: 0
