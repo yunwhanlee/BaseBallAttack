@@ -5866,6 +5866,7 @@ MonoBehaviour:
   downArrowImg: {fileID: 0}
   checkMarkImg: {fileID: 1835355577}
   priceTxt: {fileID: 1544578272}
+  priceTypeIconImg: {fileID: 1483716002}
 --- !u!1 &935471162
 GameObject:
   m_ObjectHideFlags: 0
@@ -6718,6 +6719,7 @@ MonoBehaviour:
   downArrowImg: {fileID: 0}
   checkMarkImg: {fileID: 1835355577}
   priceTxt: {fileID: 1544578272}
+  priceTypeIconImg: {fileID: 0}
 --- !u!222 &995331212
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6865,6 +6867,7 @@ MonoBehaviour:
   downArrowImg: {fileID: 0}
   checkMarkImg: {fileID: 1835355577}
   priceTxt: {fileID: 1544578272}
+  priceTypeIconImg: {fileID: 1483716002}
 --- !u!222 &1002330458
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9080,6 +9083,7 @@ MonoBehaviour:
   downArrowImg: {fileID: 0}
   checkMarkImg: {fileID: 1835355577}
   priceTxt: {fileID: 1544578272}
+  priceTypeIconImg: {fileID: 1483716002}
 --- !u!1 &1411144674
 GameObject:
   m_ObjectHideFlags: 0
@@ -9243,7 +9247,7 @@ GameObject:
   - component: {fileID: 1483716003}
   - component: {fileID: 1483716002}
   m_Layer: 5
-  m_Name: CoinImage
+  m_Name: PriceTypeIconImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9366,7 +9370,7 @@ GameObject:
   - component: {fileID: 1544578273}
   - component: {fileID: 1544578272}
   m_Layer: 5
-  m_Name: PriceText
+  m_Name: PriceTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11274,6 +11278,8 @@ MonoBehaviour:
   - {r: 0.96470594, g: 0.9490197, b: 0.27450982, a: 1}
   - {r: 0.9568628, g: 0.27450982, b: 0.6745098, a: 1}
   - {r: 0.36320752, g: 0.8315838, b: 1, a: 1}
+  coinIconSprite: {fileID: 21300000, guid: 57b2580172333d144ac71b52b139d7f9, type: 3}
+  diamondIconSprite: {fileID: 21300000, guid: 67e41520382120944a06f9621515aec3, type: 3}
   homeDialog:
     panel: {fileID: 1227366031}
     goBtn: {fileID: 935471164}
@@ -11769,6 +11775,7 @@ MonoBehaviour:
   downArrowImg: {fileID: 0}
   checkMarkImg: {fileID: 1835355577}
   priceTxt: {fileID: 1544578272}
+  priceTypeIconImg: {fileID: 1483716002}
 --- !u!222 &1947457507
 CanvasRenderer:
   m_ObjectHideFlags: 0

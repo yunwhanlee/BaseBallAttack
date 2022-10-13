@@ -5,12 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.Serialization;
 using System;
 
-public class NamedArrayAttribute : PropertyAttribute
-{
-    public readonly string[] names;
-    public NamedArrayAttribute(string[] names) { this.names = names; }
-}
-
 public class ItemInfo : MonoBehaviour
 {
     [Header("言語 [0]:EN, [1]:JP, [2]:KR")]
@@ -25,6 +19,7 @@ public class ItemInfo : MonoBehaviour
     [SerializeField] string[] homeRunBonusTxts = new string[System.Enum.GetValues(typeof(LANG.TP)).Length];
 
     [Header("STATUS")]
+    public Price price;
     [SerializeField] bool isLock = true;    public bool IsLock {get => isLock; set => isLock = value;}
     [SerializeField] bool isChecked = true;    public bool IsChecked {get => isChecked; set => isChecked = value;}
     [SerializeField] GameObject isCheckedImgObj;    public GameObject IsCheckedImgObj {get => isCheckedImgObj; set => isCheckedImgObj = value;}
@@ -34,7 +29,6 @@ public class ItemInfo : MonoBehaviour
     [SerializeField] DM.RANK rank;     public DM.RANK Rank {get => rank; set => rank = value;}
     [SerializeField] Outline outline3D;    public Outline Outline3D{get => outline3D; set => outline3D = value;}
     [SerializeField] UnityEngine.UI.Extensions.NicerOutline outline2D;    public UnityEngine.UI.Extensions.NicerOutline Outline2D{get => outline2D; set => outline2D = value;}
-    [SerializeField] int price;     public int Price {get => price; set => price = value;}
     [SerializeField] Text cashShopPriceTxt;     public Text CashShopPriceTxt {get => cashShopPriceTxt; set => cashShopPriceTxt = value;}
     [SerializeField] ItemPsvList itemPassive;  public ItemPsvList ItemPassive {get => itemPassive; set=> itemPassive = value;}
 
@@ -62,7 +56,6 @@ public class ItemInfo : MonoBehaviour
     }
 
     void Start(){
-
         //* Set Panel Outline & CashShop Price Txt UI
         var itemType = DM.ins.getCurItemType2Enum(DM.ins.SelectItemType);
         switch(itemType){
@@ -86,9 +79,9 @@ public class ItemInfo : MonoBehaviour
                 break; 
             }
             default : { 
-                if(cashShopPriceTxt){ //* CashShop
+                if(CashShopPriceTxt){ //* CashShop
                     Debug.Log("CashShop:: this.name= " + this.name);
-                    cashShopPriceTxt.text = price.ToString();
+                    cashShopPriceTxt.text = price.getValue().ToString();
                 }else{
                     Debug.Log("PsvInfo::");
                 }
@@ -103,11 +96,11 @@ public class ItemInfo : MonoBehaviour
         
         //* Set Price By Rank
         switch(rank){
-            case DM.RANK.GENERAL : Price = 100; break;
-            case DM.RANK.RARE : Price = 300; break;
-            case DM.RANK.UNIQUE : Price = 700; break;
-            case DM.RANK.LEGEND : Price = 1500; break;
-            case DM.RANK.GOD : Price = 4000; break;
+            case DM.RANK.GENERAL : price.Coin = 100; break;
+            case DM.RANK.RARE : price.Coin = 300; break;
+            case DM.RANK.UNIQUE : price.Coin = 700; break;
+            case DM.RANK.LEGEND : price.Coin = 1500; break;
+            case DM.RANK.GOD : price.Coin = 4000; break;
         }
     }
 

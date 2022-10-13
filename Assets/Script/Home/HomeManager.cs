@@ -30,6 +30,10 @@ public class HomeManager : MonoBehaviour
     [Header("SELECT PANEL COLOR")]
     [SerializeField] Image selectPanelScrollBG;  public Image SelectPanelScrollBG {get => selectPanelScrollBG; set => selectPanelScrollBG = value;}
     [SerializeField] Color[] selectPanelColors;
+
+    [Header("PRICE TYPE ICON SPRITE")]
+    [SerializeField] Sprite coinIconSprite;  public Sprite CoinIconSprite {get => coinIconSprite;}
+    [SerializeField] Sprite diamondIconSprite;  public Sprite DiamondIconSprite {get => diamondIconSprite;}
     
     [Header("GUI")]
     public DialogUI homeDialog;

@@ -165,21 +165,22 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     [SerializeField] float curIdxBasePosX;    public float CurIdxBasePosX {get => curIdxBasePosX; set => curIdxBasePosX = value;}
     [SerializeField] int curIdx;     public int CurIdx {get => curIdx; set => curIdx = value;}
 
-    [Header("--Scroll Speed--")]
+    [Header("SCROLL SPEED")]
     [SerializeField] float scrollStopSpeed;
     float scrollSpeed;
     float scrollBefFramePosX;
 
-    [Header("<--UI-->")]
+    [Header("【 UI 】")]
     public RectTransform uiGroup;   public RectTransform UIGroup {get => uiGroup;}
     public SpriteRenderer boxSprRdr;    public SpriteRenderer BoxSprRdr {get => boxSprRdr; set => boxSprRdr = value;}
     public Text rankTxt;    public Text RankTxt {get => rankTxt; set => rankTxt = value;}
     public Text nameTxt;    public Text NameTxt {get => nameTxt; set => nameTxt = value;}
     public Image downArrowImg;  public Image DownArrowImg {get => downArrowImg; set => downArrowImg = value;}
 
-    [Header("--Select Btn Child--")]
+    [Header("BUY OR CHECK BTN")]
     public Image checkMarkImg;
     public Text priceTxt;
+    public Image priceTypeIconImg;
 
     void Start(){
         scrollRect = GetComponent<ScrollRect>();
@@ -301,10 +302,25 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public void drawCheckBtnUI(){
         var curItem = getCurItem();
         Debug.Log("drawChoiceBtnUI():: curItem.IsLock= " + curItem.IsLock);
+
+        //* Set PriceType Icon Img Sprite
+        if(curItem.price.Type == Price.TP.COIN){
+            priceTypeIconImg.sprite = hm.CoinIconSprite;
+        }else{
+            priceTypeIconImg.sprite = hm.DiamondIconSprite;
+        }
+
+        if(DM.ins.SelectItemType == DM.PANEL.CashShop.ToString()){
+            checkMarkImg.gameObject.SetActive(false);
+            priceTxt.gameObject.SetActive(true);
+            priceTxt.text = curItem.price.getValue().ToString();
+            return;
+        }
+
         if(curItem.IsLock){//* 💲表示
             checkMarkImg.gameObject.SetActive(false);
             priceTxt.gameObject.SetActive(true);
-            priceTxt.text = curItem.Price.ToString();
+            priceTxt.text = curItem.price.getValue().ToString();
         }else{//* ✅表示
             checkMarkImg.gameObject.SetActive(true);
             priceTxt.gameObject.SetActive(false);
@@ -398,18 +414,33 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
         //* Check
         if(curItem.IsLock){
-            if(DM.ins.personalData.Coin >= curItem.Price){
+            if(curItem.price.Type == Price.TP.COIN){ //DM.ins.personalData.Coin : DM.ins.personalData.Diamond;
                 //* Buy
-                em.createItemBuyEF();
-                curItem.IsLock = false;
-                curItem.setGrayMtIsLock();
-                DM.ins.personalData.setUnLockCurList(CurIdx);
-                DM.ins.personalData.Coin -= curItem.Price;
-                drawCheckBtnUI();
+                if(DM.ins.personalData.Coin >= curItem.price.getValue()){
+                    DM.ins.personalData.Coin -= curItem.price.getValue();
+                    em.createItemBuyEF();
+                    curItem.IsLock = false;
+                    curItem.setGrayMtIsLock();
+                    DM.ins.personalData.setUnLockCurList(CurIdx);
+                    drawCheckBtnUI();
+                }
+                else{//TODO Audio
+                    DM.ins.personalData.setSelectIdx(befIdx);
+                }
             }
-            else{
-                //TODO Audio
-                DM.ins.personalData.setSelectIdx(befIdx);
+            else if(curItem.price.Type == Price.TP.DIAMOND){
+                //* Buy
+                if(DM.ins.personalData.Diamond >= curItem.price.getValue()){
+                    DM.ins.personalData.Diamond -= curItem.price.getValue();
+                    em.createItemBuyEF();
+                    curItem.IsLock = false;
+                    curItem.setGrayMtIsLock();
+                    DM.ins.personalData.setUnLockCurList(CurIdx);
+                    drawCheckBtnUI();
+                }
+                else{//TODO Audio
+                    DM.ins.personalData.setSelectIdx(befIdx);
+                }
             }
         }
 
@@ -441,13 +472,13 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         Debug.Log("onClickSkillPanel():: CurIdx= " + CurIdx + ", ins.name= " + ins.name + ", sprite= " + sprite);
     }
 
-    public void onClickCashShopList(ItemInfo selectItemInfo){
-        var btns = DM.ins.scrollviews[(int)DM.PANEL.CashShop].ContentTf.GetComponentsInChildren<Button>();
-        CurIdx = Array.FindIndex(btns, btn => btn.name == selectItemInfo.name);
-        Debug.Log("onClickCashShopList():: price= " + selectItemInfo.Price + ", CurIdx= " + CurIdx);
+    // public void onClickCashShopList(ItemInfo selectItemInfo){
+    //     var btns = DM.ins.scrollviews[(int)DM.PANEL.CashShop].ContentTf.GetComponentsInChildren<Button>();
+    //     CurIdx = Array.FindIndex(btns, btn => btn.name == selectItemInfo.name);
+    //     Debug.Log("onClickCashShopList():: price= " + selectItemInfo.Price + ", CurIdx= " + CurIdx);
 
-        //TODO PROCESS 
-    }
+    //     //TODO PROCESS 
+    // }
 
     //* ----------------------------------------------------------------
     //* Private Function
