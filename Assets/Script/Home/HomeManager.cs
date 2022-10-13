@@ -79,20 +79,21 @@ public class HomeManager : MonoBehaviour
         var curBat = DM.ins.scrollviews[(int)DM.PANEL.Bat].ItemPrefs[DM.ins.personalData.SelectBatIdx];
         
         var itemType = DM.ins.getCurItemType2Enum(DM.ins.SelectItemType);
+
+        setGUI();
+        
         switch(itemType){
             case DM.PANEL.Chara :
             case DM.PANEL.Bat :
             case DM.PANEL.Skill :
             case DM.PANEL.CashShop :
-                setGUI();
+                // なし
                 break;
             case DM.PANEL.PsvInfo :
-                setGUI();
                 checkBtn.gameObject.SetActive(false);
                 break;
             default: //* Home
                 createCurModel(curChara, curBat, modelTf);
-                setGUI();
                 setSelectSkillImg();
                 break;
         }
