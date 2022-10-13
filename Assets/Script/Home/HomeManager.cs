@@ -84,12 +84,11 @@ public class HomeManager : MonoBehaviour
             case DM.PANEL.Bat :
             case DM.PANEL.Skill :
             case DM.PANEL.CashShop :
-                checkBtn.gameObject.SetActive(true);
                 setGUI();
                 break;
             case DM.PANEL.PsvInfo :
-                checkBtn.gameObject.SetActive(false);
                 setGUI();
+                checkBtn.gameObject.SetActive(false);
                 break;
             default: //* Home
                 createCurModel(curChara, curBat, modelTf);
@@ -266,6 +265,11 @@ public class HomeManager : MonoBehaviour
         }
     }
     private void setGUI(){
+        //* Set CheckBtn Image
+        checkBtn.gameObject.SetActive(true);
+        checkMarkImg.gameObject.SetActive(true);
+        priceTxt.gameObject.SetActive(false);
+
         setActiveDialogGUI(DM.ins.SelectItemType);
         switch(DM.ins.SelectItemType){
             case "Home":
