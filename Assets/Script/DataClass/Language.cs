@@ -34,7 +34,6 @@ public static class LANG //* LANG
         // new string[]{"PistolMan", "ピストルマン", "피스톨맨"},
         // new string[]{"Dinosaur", "恐竜", "공룡"}, 
     };
-
     public static List<string[]> BatList = new List<string[]>(){
         // new string[]{"1.Normal", "ノーマル", "노멀"},
         // new string[]{"2.Pink", "ピンク", "핑크"},
@@ -58,8 +57,10 @@ public static class LANG //* LANG
         // new string[]{"20.CandyCaneD", "キャンディケインD", "케인D"},
         // new string[]{"21.CandyCaneE", "キャンディケインE", "케인E"}, 
         // new string[]{"22.Guitar", "ギター", "기타"}, 
+        // new string[]{"23.Pepero", "ペペロ", "빼빼로"}, 
+        // new string[]{"24.ThornBat", "刺バット", "가시배트"}, 
+        // new string[]{"25.Wrench", "レンチ", "렌치"}, 
     };
-
     public static List<string[]> SkillNameList = new List<string[]>(){
         // new string[]{"ThunderShot", "サンダーショット", "썬더샷"},
         // new string[]{"FireBall", "ファイアボール", "파이어볼"},

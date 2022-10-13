@@ -5864,9 +5864,6 @@ MonoBehaviour:
   rankTxt: {fileID: 343015043}
   nameTxt: {fileID: 72889156}
   downArrowImg: {fileID: 0}
-  checkMarkImg: {fileID: 1835355577}
-  priceTxt: {fileID: 1544578272}
-  priceTypeIconImg: {fileID: 1483716002}
 --- !u!1 &935471162
 GameObject:
   m_ObjectHideFlags: 0
@@ -6717,9 +6714,6 @@ MonoBehaviour:
   rankTxt: {fileID: 0}
   nameTxt: {fileID: 0}
   downArrowImg: {fileID: 0}
-  checkMarkImg: {fileID: 1835355577}
-  priceTxt: {fileID: 1544578272}
-  priceTypeIconImg: {fileID: 0}
 --- !u!222 &995331212
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6865,9 +6859,6 @@ MonoBehaviour:
   rankTxt: {fileID: 1656664068}
   nameTxt: {fileID: 701541039}
   downArrowImg: {fileID: 0}
-  checkMarkImg: {fileID: 1835355577}
-  priceTxt: {fileID: 1544578272}
-  priceTypeIconImg: {fileID: 1483716002}
 --- !u!222 &1002330458
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9081,9 +9072,6 @@ MonoBehaviour:
   rankTxt: {fileID: 0}
   nameTxt: {fileID: 0}
   downArrowImg: {fileID: 0}
-  checkMarkImg: {fileID: 1835355577}
-  priceTxt: {fileID: 1544578272}
-  priceTypeIconImg: {fileID: 1483716002}
 --- !u!1 &1411144674
 GameObject:
   m_ObjectHideFlags: 0
@@ -10924,7 +10912,7 @@ GameObject:
   - component: {fileID: 1835355577}
   - component: {fileID: 1835355579}
   m_Layer: 5
-  m_Name: CheckMarkImage
+  m_Name: CheckMarkImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11307,8 +11295,11 @@ MonoBehaviour:
   - {fileID: 2142333602}
   - {fileID: 1668992831}
   startGameBtn: {fileID: 251569728}
-  checkBtn: {fileID: 473351091}
   selectSkillImg: {fileID: 1646267407}
+  checkBtn: {fileID: 473351091}
+  checkMarkImg: {fileID: 1835355577}
+  priceTxt: {fileID: 1544578272}
+  priceTypeIconImg: {fileID: 1483716002}
   modelTf: {fileID: 150785606}
   noticeMessageTxtPref: {fileID: 357732499089971375, guid: c1a4e857d0aae0b4ba90ed2c60068da3, type: 3}
   mainPanelTf: {fileID: 925401117}
@@ -11773,9 +11764,6 @@ MonoBehaviour:
   rankTxt: {fileID: 0}
   nameTxt: {fileID: 0}
   downArrowImg: {fileID: 0}
-  checkMarkImg: {fileID: 1835355577}
-  priceTxt: {fileID: 1544578272}
-  priceTypeIconImg: {fileID: 1483716002}
 --- !u!222 &1947457507
 CanvasRenderer:
   m_ObjectHideFlags: 0

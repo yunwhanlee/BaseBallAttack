@@ -35,7 +35,7 @@ public class HomeManager : MonoBehaviour
     [SerializeField] Sprite coinIconSprite;  public Sprite CoinIconSprite {get => coinIconSprite;}
     [SerializeField] Sprite diamondIconSprite;  public Sprite DiamondIconSprite {get => diamondIconSprite;}
     
-    [Header("GUI")]
+    [Header("【 GUI 】")]
     public DialogUI homeDialog;
     public DialogUI selectDialog;
     public DialogUI unlock2ndSkillDialog;
@@ -46,8 +46,13 @@ public class HomeManager : MonoBehaviour
     public Text selectedSkillBtnIdxTxt;
     public Button[] skillBtns;
     public Button startGameBtn;
-    public Button checkBtn;
     [SerializeField] Image selectSkillImg;  public Image SelectSkillImg {get => selectSkillImg; set => selectSkillImg = value;}
+
+    [Header("BUY OR CHECK BTN")]
+    public Button checkBtn;
+    public Image checkMarkImg;
+    public Text priceTxt;
+    public Image priceTypeIconImg;
 
     [Header("MODEL")]
     [SerializeField] Transform modelTf;   public Transform ModelTf {get => modelTf; set => modelTf = value;}

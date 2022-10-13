@@ -177,11 +177,6 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public Text nameTxt;    public Text NameTxt {get => nameTxt; set => nameTxt = value;}
     public Image downArrowImg;  public Image DownArrowImg {get => downArrowImg; set => downArrowImg = value;}
 
-    [Header("BUY OR CHECK BTN")]
-    public Image checkMarkImg;
-    public Text priceTxt;
-    public Image priceTypeIconImg;
-
     void Start(){
         scrollRect = GetComponent<ScrollRect>();
         hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
@@ -305,25 +300,25 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
         //* Set PriceType Icon Img Sprite
         if(curItem.price.Type == Price.TP.COIN){
-            priceTypeIconImg.sprite = hm.CoinIconSprite;
+            hm.priceTypeIconImg.sprite = hm.CoinIconSprite;
         }else{
-            priceTypeIconImg.sprite = hm.DiamondIconSprite;
+            hm.priceTypeIconImg.sprite = hm.DiamondIconSprite;
         }
 
         if(DM.ins.SelectItemType == DM.PANEL.CashShop.ToString()){
-            checkMarkImg.gameObject.SetActive(false);
-            priceTxt.gameObject.SetActive(true);
-            priceTxt.text = curItem.price.getValue().ToString();
+            hm.checkMarkImg.gameObject.SetActive(false);
+            hm.priceTxt.gameObject.SetActive(true);
+            hm.priceTxt.text = curItem.price.getValue().ToString();
             return;
         }
 
         if(curItem.IsLock){//* 💲表示
-            checkMarkImg.gameObject.SetActive(false);
-            priceTxt.gameObject.SetActive(true);
-            priceTxt.text = curItem.price.getValue().ToString();
+            hm.checkMarkImg.gameObject.SetActive(false);
+            hm.priceTxt.gameObject.SetActive(true);
+            hm.priceTxt.text = curItem.price.getValue().ToString();
         }else{//* ✅表示
-            checkMarkImg.gameObject.SetActive(true);
-            priceTxt.gameObject.SetActive(false);
+            hm.checkMarkImg.gameObject.SetActive(true);
+            hm.priceTxt.gameObject.SetActive(false);
         }
     }
 
@@ -337,8 +332,8 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 drawSkillPanelOutline();
                 break;
             case (int)DM.PANEL.CashShop: 
-                checkMarkImg.gameObject.SetActive(true);
-                priceTxt.gameObject.SetActive(false);
+                hm.checkMarkImg.gameObject.SetActive(true);
+                hm.priceTxt.gameObject.SetActive(false);
                 break;
         }
     }
@@ -514,13 +509,13 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         
         if(selectItemIdx == CurIdx){
             Debug.LogFormat("setCheckIconColorAndOutline():: selectItemIdx({0}) == CurIdx({1}) ? -> {2}, curItem= {3}", selectItemIdx, CurIdx, selectItemIdx == CurIdx, curItem);
-            checkMarkImg.color = Color.green;
+            hm.checkMarkImg.color = Color.green;
             Array.ForEach(items, item => activeOutline(item, false));
             activeOutline(curItem, true);
             // setSelectSkillImgAtHome();
         }
         else{
-            checkMarkImg.color = Color.gray;
+            hm.checkMarkImg.color = Color.gray;
             activeOutline(curItem, false);
         }
     }
