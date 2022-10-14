@@ -22,8 +22,10 @@ public class GameManager : MonoBehaviour
 
 
     [Header("CAMERA")]
-    public GameObject cam1, cam2;
-    public GameObject cam1Canvas, cam2Canvas;
+    public GameObject cam1;
+    public GameObject cam2;
+    public GameObject cam1Canvas;
+    public GameObject cam2Canvas;
 
     //* OutSide
     [Header("OUTSIDE")]
