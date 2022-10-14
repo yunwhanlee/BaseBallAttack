@@ -4259,16 +4259,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0893a29d1ed7167499d975e0eba67d71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollingSpeed: 2300
+  scrollingSpeed: 2000
   isRollingStop: 0
   exceptSkNameList: []
   titleTxt: {fileID: 1368341126}
   levelTxt: {fileID: 149300364}
   explainTxt: {fileID: 960649140}
-  skillBtns:
-  - {fileID: 955063943}
-  - {fileID: 1832513078}
-  - {fileID: 1648916399}
+  colSkillBtns:
+  - colImgRectTf: {fileID: 232130796}
+    name: {fileID: 2017232426}
+  - colImgRectTf: {fileID: 965013523}
+    name: {fileID: 167154701}
+  - colImgRectTf: {fileID: 160655841}
+    name: {fileID: 542304368}
 --- !u!95 &557986898
 Animator:
   serializedVersion: 3

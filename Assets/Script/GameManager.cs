@@ -176,9 +176,9 @@ public class GameManager : MonoBehaviour
         light.type = (isOn)? LightType.Spot : LightType.Directional;
     }
     
-    //* --------------------------------------------------------------------------------------
-    //* GUI Button
-    //* --------------------------------------------------------------------------------------
+//* --------------------------------------------------------------------------------------
+//* GUI Button
+//* --------------------------------------------------------------------------------------
     public void onClickReadyButton() => switchCamScene();
     public void onClickReGameButton() => init();
     public void onClickSkillButton() => levelUpPanel.SetActive(false);
@@ -230,9 +230,9 @@ public class GameManager : MonoBehaviour
         DM.ins.showAD(type);
     }
 
-    //*---------------------------------------
-    //*  関数
-    //*---------------------------------------
+//*---------------------------------------
+//*  関数
+//*---------------------------------------
     public void init(){
         State = GameManager.STATE.WAIT;
         stage = 1;
