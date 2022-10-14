@@ -41,6 +41,7 @@ public class HomeManager : MonoBehaviour
     public DialogUI unlock2ndSkillDialog;
     public DialogUI settingDialog;
     [Space(10)]
+    public Text startBtnTxt;
     public Dropdown languageOptDropDown;    public Dropdown LanguageOptDropDown {get => languageOptDropDown; set => languageOptDropDown = value;}
     public int selectedSkillBtnIdx;
     public Text selectedSkillBtnIdxTxt;
@@ -67,6 +68,7 @@ public class HomeManager : MonoBehaviour
         onClickBtnGoToPanel(DM.SCENE.Home.ToString());
         setSelectSkillImg(true);
         LanguageOptDropDown.value = (int)DM.ins.personalData.Lang; //* Loadデータで初期化
+        startBtnTxt.text = LANG.getTxt(LANG.TXT.Start.ToString());
     }
 
     //* ----------------------------------------------------------------
@@ -173,7 +175,7 @@ public class HomeManager : MonoBehaviour
         secondSkillImg.sprite = sprite;        
     }
 
-    public void onClickStartGameBtn(){
+    public void onClickStartBtn(){
         //* Model Copy
         var playerModel = modelTf.GetChild(0);
         playerModel.GetComponent<Animator>().SetBool(DM.ANIM.IsIdle.ToString(), false); //Ready Pose

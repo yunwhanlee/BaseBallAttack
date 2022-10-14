@@ -9,7 +9,7 @@ public static class LANG //* LANG
     public enum OBJNAME {NameTxt, ExplainTxt, HomeRunBonusTxt};
     public enum TXT {
         //* UI
-        Level, Stage, Combo, Status, Back, Ready, Out, Strike, 
+        Start, Level, Stage, Combo, Status, Back, Ready, Out, Strike, 
         BestScore, LevelUpPanel_Title, LevelUpPanel_Explain,
         MsgNoMoney, MsgNoSkill, MsgAlreadyRegistedSkill,
         DialogUnlock2ndSkill_Title, DialogUnlock2ndSkill_Info,
@@ -144,8 +144,8 @@ public static class LANG //* LANG
         "두 번째 스킬 버튼을 액티브 한다."
     };
 
-    //* PLAY SCENE -----------------------------------
     //* UI
+    public static string[] Start = new string[]{"START", "スタート", "시작"};
     public static string[] Level = new string[]{"LV", "レベル", "레벨"};
     public static string[] Stage = new string[]{"STAGE", "ステージ", "스테이지"};
     public static string[] Combo = new string[]{"COMBO", "コンボー", "콤보"};
@@ -240,18 +240,17 @@ public static class LANG //* LANG
         string res = null;
         int CUR_LANG = (int)DM.ins.personalData.Lang;
 
-        //* HOME SCENE -----------------------------------
         //* NOTICE MESSAGE
         if(name == TXT.MsgNoMoney.ToString()) res = MsgNoMoney[CUR_LANG];
         if(name == TXT.MsgNoSkill.ToString()) res = MsgNoSkill[CUR_LANG];
         if(name == TXT.MsgAlreadyRegistedSkill.ToString()) res = MsgAlreadyRegistedSkill[CUR_LANG];
-        
+
         //* DIALOG
         if(name == TXT.DialogUnlock2ndSkill_Title.ToString()) res = DialogUnlock2ndSkill_Title[CUR_LANG];
         if(name == TXT.DialogUnlock2ndSkill_Info.ToString()) res = DialogUnlock2ndSkill_Info[CUR_LANG];
 
-        //* PLAY SCENE -----------------------------------
         //* UI
+        if(name == TXT.Start.ToString()) res = Start[CUR_LANG];
         if(name == TXT.Level.ToString()) res = Level[CUR_LANG];
         if(name == TXT.Stage.ToString()) res = Stage[CUR_LANG];
         if(name == TXT.Combo.ToString()) res = Combo[CUR_LANG];
