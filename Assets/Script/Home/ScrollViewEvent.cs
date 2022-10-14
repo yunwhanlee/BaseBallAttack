@@ -399,7 +399,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         Debug.LogFormat("onClickCheckBtn:: type= {0}, CurIdx= {1}, curItem= {2}, IsLock= {3}",type, CurIdx, curItem, curItem.IsLock);
 
         if(type == DM.PANEL.Skill.ToString() && curItem.IsChecked){
-            Util._.displayNoticeMsgDialog("This Skill is Already Registed");
+            Util._.displayNoticeMsgDialog(LANG.getTxt(LANG.TXT.MsgAlreadyRegistedSkill.ToString()));
             return;
         }
         
@@ -474,7 +474,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }
         else{//TODO Audio
             DM.ins.personalData.setSelectIdx(befIdx);
-            Util._.displayNoticeMsgDialog("No Money");
+            Util._.displayNoticeMsgDialog(LANG.getTxt(LANG.TXT.MsgNoMoney.ToString()));
         }
         return myMoney;
     }

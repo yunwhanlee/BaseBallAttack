@@ -11,13 +11,14 @@ public static class LANG //* LANG
         //* UI
         Level, Stage, Combo, Status, Back, Ready, Out, Strike, 
         BestScore, LevelUpPanel_Title, LevelUpPanel_Explain,
-        DialogNoMoney, DialogNoSkill, 
+        MsgNoMoney, MsgNoSkill, MsgAlreadyRegistedSkill,
         DialogUnlock2ndSkill_Title, DialogUnlock2ndSkill_Info,
         //* PSV
         Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, 
         ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, Laser,
     };
     public const int NAME=0, EXPLAIN=1, HOMERUNBONUS=2;
+    const string HR_TXT = "⊡ HomeRunBonus : ";
 
     //* HOME SCENE -----------------------------------
     public static List<string[]> CharaList = new List<string[]>(){
@@ -85,8 +86,6 @@ public static class LANG //* LANG
         //     "ライン範囲内に5回、2倍ダメージを与える。", 
         //     "라인범위내에 5번, 2배 데미지를 준다."},
     };
-
-    const string HR_TXT = "⊡ HomeRunBonus : ";
     public static List<string[]> SkillHomeRunBonusList = new List<string[]>(){
         // new string[]{HR_TXT + "TODO",
         // HR_TXT + "TODO",
@@ -104,7 +103,6 @@ public static class LANG //* LANG
         // HR_TXT + "３倍 ダメージ。",
         // HR_TXT + "3배 데미지."},
     };
-
     public static List<string[]> CashShopNameList = new List<string[]>(){
         // new string[]{"AD Skip", "広告無し", "광고제거"},
         // new string[]{"Coin 10000", "コイン 10000", "코인 10000"},
@@ -124,8 +122,19 @@ public static class LANG //* LANG
         // new string[]{"Get Diamond 100000.", "100000ダイアを購入。", "100000다이아 구입."},
     };
 
-    public static string[] DialogNoMoney = new string[]{"NO MONEY!", "お金足りない!", "코인 부족!"};
-    public static string[] DialogNoSkill = new string[]{"NO SKILL!", "スキルが足りない!", "스킬 부족!"};
+    //* NOTICE MESSAGE
+    public static string[] MsgNoMoney = new string[]{
+        "NO MONEY!", "お金足りない!", "코인 부족!"
+    };
+    public static string[] MsgNoSkill = new string[]{
+        "NO SKILL!", "スキルが足りない!", "스킬 부족!"
+    };
+    public static string[] MsgAlreadyRegistedSkill = new string[]{
+        "This Skill is Already Registed",
+        "このスキルは既に登録されています。",
+        "해당 스킬은 이미 등록되어 있습니다."
+    };
+    //* DIALOG
     public static string[] DialogUnlock2ndSkill_Title = new string[]{
         "-Unlock-", "解錠", "해금"
     };
@@ -202,9 +211,9 @@ public static class LANG //* LANG
         // new string[]{LaserContent[(int)TP.EN], LaserContent[(int)TP.JP], LaserContent[(int)TP.KR]},
     };
 
-    //*-----------------------------------------------------------------------------------------------
-    //* 関数
-    //*-----------------------------------------------------------------------------------------------
+//*-----------------------------------------------------------------------------------------------
+//* 関数
+//*-----------------------------------------------------------------------------------------------
     public static void initlanguageList(){ //* (BUG) EX)言語とか変えた時に、リストが２倍になるため、初期化する。
         CharaList = new List<string[]>();
         BatList = new List<string[]>();
@@ -212,7 +221,6 @@ public static class LANG //* LANG
         CashShopNameList = new List<string[]>();
         PsvInfoNameList = new List<string[]>();
     }
-    
     public static void checkErrorLangListCounting(){
         Debug.Log("checkErrorLangListCounting()::");
         int charaCttCnt = DM.ins.scrollviews[(int)DM.PANEL.Chara].ContentTf.childCount;
@@ -227,7 +235,52 @@ public static class LANG //* LANG
         Debug.LogFormat("【CashShop】Lang: {0}, ContentTf: {1} => {2}", CashShopNameList.Count, cashShopCttCnt, (CashShopNameList.Count == cashShopCttCnt)? "OK" : "<color=red>ERROR! お互いに数字が合わない！</color>");
         Debug.LogFormat("【PsvInfo】Lang: {0}, ContentTf: {1} => {2}", PsvInfoNameList.Count, psvInfoCttCnt, (PsvInfoNameList.Count == psvInfoCttCnt)? "OK" : "<color=red>ERROR! お互いに数字が合わない！</color>");
     }
+    public static string getTxt(string name){
+        // Debug.Log("getLangTxtListAtPlay:: name=" + name);
+        string res = null;
+        int CUR_LANG = (int)DM.ins.personalData.Lang;
 
+        //* HOME SCENE -----------------------------------
+        //* NOTICE MESSAGE
+        if(name == TXT.MsgNoMoney.ToString()) res = MsgNoMoney[CUR_LANG];
+        if(name == TXT.MsgNoSkill.ToString()) res = MsgNoSkill[CUR_LANG];
+        if(name == TXT.MsgAlreadyRegistedSkill.ToString()) res = MsgAlreadyRegistedSkill[CUR_LANG];
+        
+        //* DIALOG
+        if(name == TXT.DialogUnlock2ndSkill_Title.ToString()) res = DialogUnlock2ndSkill_Title[CUR_LANG];
+        if(name == TXT.DialogUnlock2ndSkill_Info.ToString()) res = DialogUnlock2ndSkill_Info[CUR_LANG];
+
+        //* PLAY SCENE -----------------------------------
+        //* UI
+        if(name == TXT.Level.ToString()) res = Level[CUR_LANG];
+        if(name == TXT.Stage.ToString()) res = Stage[CUR_LANG];
+        if(name == TXT.Combo.ToString()) res = Combo[CUR_LANG];
+        if(name == TXT.Status.ToString()) res = Status[CUR_LANG];
+        if(name == TXT.Back.ToString()) res = Back[CUR_LANG];
+        if(name == TXT.Ready.ToString()) res = Ready[CUR_LANG];
+        if(name == TXT.Out.ToString()) res = Out[CUR_LANG];
+        if(name == TXT.Strike.ToString()) res = Strike[CUR_LANG];
+        if(name == TXT.BestScore.ToString()) res = BestScore[CUR_LANG];
+        if(name == TXT.LevelUpPanel_Title.ToString()) res = LevelUpPanel_Title[CUR_LANG];
+        if(name == TXT.LevelUpPanel_Explain.ToString()) res = LevelUpPanel_Explain[CUR_LANG];
+
+        //* PSV
+        if(name == TXT.Dmg.ToString()) res = Dmg[CUR_LANG];
+        if(name == TXT.MultiShot.ToString()) res = MultiShot[CUR_LANG];
+        if(name == TXT.Speed.ToString()) res = Speed[CUR_LANG];
+        if(name == TXT.InstantKill.ToString()) res = InstantKill[CUR_LANG];
+        if(name == TXT.Critical.ToString()) res = Critical[CUR_LANG];
+        if(name == TXT.Explosion.ToString()) res = Explosion[CUR_LANG];
+        if(name == TXT.ExpUp.ToString()) res = ExpUp[CUR_LANG];
+        if(name == TXT.ItemSpawn.ToString()) res = ItemSpawn[CUR_LANG];
+        if(name == TXT.VerticalMultiShot.ToString()) res = VerticalMultiShot[CUR_LANG];
+        if(name == TXT.CriticalDamage.ToString()) res = CriticalDamage[CUR_LANG];
+        if(name == TXT.Laser.ToString()) res = Laser[CUR_LANG];
+
+        //* ERROR
+        if(res == null) Debug.LogError("存在しないTEXTです。");
+        return res;
+    }
     public static List<string> getTxtList(string str){
         const int SPLIT_TYPE=0, SPLIT_NAME=1, SPLIT_EXPLAIN=2, SPLIT_HOMERUNBONUS=3;
         List<string> resList = new List<string>();
@@ -291,44 +344,6 @@ public static class LANG //* LANG
         }
         resList.ForEach(res=> Debug.Log("type->" + type + ", res=>" + res));
         return resList;
-    }
-
-    public static string getTxt(string name){
-        // Debug.Log("getLangTxtListAtPlay:: name=" + name);
-        string res = null;
-        //* UI
-        if(name == TXT.Level.ToString()) res = Level[(int)DM.ins.personalData.Lang];
-        if(name == TXT.Stage.ToString()) res = Stage[(int)DM.ins.personalData.Lang];
-        if(name == TXT.Combo.ToString()) res = Combo[(int)DM.ins.personalData.Lang];
-        if(name == TXT.Status.ToString()) res = Status[(int)DM.ins.personalData.Lang];
-        if(name == TXT.Back.ToString()) res = Back[(int)DM.ins.personalData.Lang];
-        if(name == TXT.Ready.ToString()) res = Ready[(int)DM.ins.personalData.Lang];
-        if(name == TXT.Out.ToString()) res = Out[(int)DM.ins.personalData.Lang];
-        if(name == TXT.Strike.ToString()) res = Strike[(int)DM.ins.personalData.Lang];
-        if(name == TXT.BestScore.ToString()) res = BestScore[(int)DM.ins.personalData.Lang];
-        if(name == TXT.LevelUpPanel_Title.ToString()) res = LevelUpPanel_Title[(int)DM.ins.personalData.Lang];
-        if(name == TXT.LevelUpPanel_Explain.ToString()) res = LevelUpPanel_Explain[(int)DM.ins.personalData.Lang];
-        if(name == TXT.DialogNoMoney.ToString()) res = DialogNoMoney[(int)DM.ins.personalData.Lang];
-        if(name == TXT.DialogNoSkill.ToString()) res = DialogNoSkill[(int)DM.ins.personalData.Lang];
-        if(name == TXT.DialogUnlock2ndSkill_Title.ToString()) res = DialogUnlock2ndSkill_Title[(int)DM.ins.personalData.Lang];
-        if(name == TXT.DialogUnlock2ndSkill_Info.ToString()) res = DialogUnlock2ndSkill_Info[(int)DM.ins.personalData.Lang];
-
-        //* PSV
-        if(name == TXT.Dmg.ToString()) res = Dmg[(int)DM.ins.personalData.Lang];
-        if(name == TXT.MultiShot.ToString()) res = MultiShot[(int)DM.ins.personalData.Lang];
-        if(name == TXT.Speed.ToString()) res = Speed[(int)DM.ins.personalData.Lang];
-        if(name == TXT.InstantKill.ToString()) res = InstantKill[(int)DM.ins.personalData.Lang];
-        if(name == TXT.Critical.ToString()) res = Critical[(int)DM.ins.personalData.Lang];
-        if(name == TXT.Explosion.ToString()) res = Explosion[(int)DM.ins.personalData.Lang];
-        if(name == TXT.ExpUp.ToString()) res = ExpUp[(int)DM.ins.personalData.Lang];
-        if(name == TXT.ItemSpawn.ToString()) res = ItemSpawn[(int)DM.ins.personalData.Lang];
-        if(name == TXT.VerticalMultiShot.ToString()) res = VerticalMultiShot[(int)DM.ins.personalData.Lang];
-        if(name == TXT.CriticalDamage.ToString()) res = CriticalDamage[(int)DM.ins.personalData.Lang];
-        if(name == TXT.Laser.ToString()) res = Laser[(int)DM.ins.personalData.Lang];
-
-        //* ERROR
-        if(res == null) Debug.LogError("存在しないTEXTです。");
-        return res;
     }
 }
 
