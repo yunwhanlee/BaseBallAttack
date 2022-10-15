@@ -18,14 +18,16 @@ public class BlockMaker : MonoBehaviour
     [Header("STATUS")]
     public bool isCreateBlock;  public bool IsCreateBlock {get => isCreateBlock; set => isCreateBlock = value;}
     public bool isBossSpawn = false;    public bool IsBossSpawn {get => isBossSpawn; set => isBossSpawn = value;}
-    public float LONG_BLOCK_SPAN = 5;
-    public int BOSS_STAGE_SPAN = 10;
 
-    [Header("PERCENT")]
-    public int skipBlockPer = 20;
-    public int itemTypePer = 10;
-    public int treasureChestBlockPer = 10;
-    public int healBlockPer = 10;
+    [Header("LEVELING (SPAN)")]
+    public float LONG_BLOCK_SPAN; // def 5
+    public int BOSS_STAGE_SPAN; // def 10
+
+    [Header("LEVELING (PERCENT)")]
+    public int skipBlockPer; // def 20
+    public int itemTypePer; // def 10
+    public int treasureChestBlockPer; // def 5
+    public int healBlockPer; // def 5
 
     [Header("RESOURCE")]
     public GameObject[] blockPrefs;
@@ -49,11 +51,13 @@ public class BlockMaker : MonoBehaviour
         if(IsCreateBlock){
             IsCreateBlock = false;
             moveDownBlock();
+            bossSpawn();
         }
-
-        bossSpawn();
+        
     }
-
+//*---------------------------------------
+//*  関数
+//*---------------------------------------
     public void createBlockRow(KIND type, bool isFirstStage = false, int verticalCnt = 1){
         //* Value
         float xs = blockPrefs[(int)type].transform.localScale.x;

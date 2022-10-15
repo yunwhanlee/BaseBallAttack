@@ -11,6 +11,9 @@ public class BossBlock : Block_Prefab{
     const int BOSS_DIE_ORB_CNT = 80;
     const float BOSS_HEAL_RATIO = 0.2f;
 
+    const int STONE_PER = 70;
+
+
 
     [SerializeField] Transform bossDieOrbSpot;
 
@@ -24,7 +27,7 @@ public class BossBlock : Block_Prefab{
     public void activeBossSkill(){ //* at NextStage
         var rand = Random.Range(0, 100);
 
-        if(rand < 70){
+        if(rand < STONE_PER){
             //* Skill #1
             createObstacleStoneSkill(OBSTACLE_STONE_CNT);
         }
