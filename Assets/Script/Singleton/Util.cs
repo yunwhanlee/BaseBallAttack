@@ -11,11 +11,13 @@ public class Util : MonoBehaviour
     public int noticeMsgDisplayCnt = 1;
     public Text noticeMessageTxtPref;
     public Transform mainPanelTf;
+
     void Awake() => singleton();
 
     void singleton(){
-        if(_ == null) _ = this;
-        else if(_ != null) DontDestroyOnLoad(this.gameObject);
+        if(_ == null)  _ = this;
+        else if(_ != null)  Destroy(this.gameObject);
+        DontDestroyOnLoad(this.gameObject);
     }
 
     public float getAnimPlayTime(int index, Animator anim){

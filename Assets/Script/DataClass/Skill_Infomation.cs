@@ -315,26 +315,25 @@ public class AtvSkill{
 [System.Serializable]
 public class AtvSkillBtnUI{
     //*value                        //*get set
-
     [SerializeField] int index;  public int Index {get=> index;}
-    [SerializeField] float unit;    public float Unit {get=> unit; set=> unit=value;}// Decrease Fill Amount Unit
+    [SerializeField] float coolDownUnit;    public float CoolDownUnit {get=> coolDownUnit; set=> coolDownUnit=value;}// Decrease Fill Amount Unit
     [SerializeField] string name;    public string Name {get=> name; set=> name=value;}
     [SerializeField] bool trigger;    public bool Trigger {get=> trigger; set=> trigger=value;}
     [SerializeField] Image panel;    public Image Panel {get=> panel; set=> panel=value;}
     [SerializeField] Image img;    public Image Img {get=> img; set=> img=value;}
-    [SerializeField] Image grayBG;    public Image GrayBG {get=> grayBG; set=> grayBG=value;}
+    [SerializeField] Image coolDownImg;    public Image CollDownImg {get=> coolDownImg; set=> coolDownImg=value;}
     [SerializeField] Image selectCircleEF;    public Image SelectCircleEF {get=> selectCircleEF; set=> selectCircleEF=value;}
     [SerializeField] Material activeEFMt;   public Material ActiveEFMt {get=> activeEFMt;}
 
     //*contructor
-    public AtvSkillBtnUI(int index, float unit, string name, Button skillBtn, Sprite sprite, Material activeSkillEffectMt){
+    public AtvSkillBtnUI(int index, float coolDownUnit, string name, Button skillBtn, Sprite sprite, Material activeSkillEffectMt){
         this.index = index;
-        this.unit = unit;
+        this.CoolDownUnit = coolDownUnit;
         this.name = name;
         panel = skillBtn.GetComponent<Image>();
         this.img = skillBtn.transform.GetChild(0).GetComponent<Image>();
         this.img.sprite = sprite;
-        grayBG = skillBtn.transform.GetChild(1).GetComponent<Image>();
+        coolDownImg = skillBtn.transform.GetChild(1).GetComponent<Image>();
         selectCircleEF = skillBtn.transform.GetChild(2).GetComponent<Image>();
         activeEFMt = activeSkillEffectMt;
     }
@@ -343,7 +342,7 @@ public class AtvSkillBtnUI{
     public void init(GameManager gm, bool isSelectBtnInit = false){
         Trigger = false;
         if(!isSelectBtnInit)   Panel.material = null;
-        if(!isSelectBtnInit)   GrayBG.fillAmount = 1;
+        if(!isSelectBtnInit)   CollDownImg.fillAmount = 1;
         selectCircleEF.gameObject.SetActive(false);
         gm.pl.BatEffectTf.gameObject.SetActive(false);
         gm.pl.destroyAllCastEF();
@@ -354,7 +353,7 @@ public class AtvSkillBtnUI{
         //TODO idxの処理しないと、現在はスキルボタン１個として対応。
         int skillIdx = gm.getCurSkillIdx();
 
-        if(GrayBG.fillAmount == 0){
+        if(CollDownImg.fillAmount == 0){
             Debug.LogFormat("ActiveSkillBtnUI:: onTriggerActive:: trigger= {0}, skillIdx= {1}, name= {2}",Trigger, skillIdx, name);
             Trigger = !Trigger;
             gm.setLightDarkness(true);
@@ -387,11 +386,11 @@ public class AtvSkillBtnUI{
             }
         }
     }
-    public void decreaseFillAmount(){
-        GrayBG.fillAmount -= unit;
+    public void coolDownFillAmount(){
+        CollDownImg.fillAmount -= CoolDownUnit;
     }
     public void setActiveSkillEF(){
-        Panel.material = (GrayBG.fillAmount == 0)? activeEFMt : null;
+        Panel.material = (CollDownImg.fillAmount == 0)? activeEFMt : null;
     }
 
 }

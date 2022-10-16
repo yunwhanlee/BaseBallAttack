@@ -96,7 +96,7 @@ public class Block_Prefab : MonoBehaviour
 //*-----------------------------------------
     private void setType(){
         int rand = Random.Range(0,100);
-        itemTypePer = (int)(100 * ((bm.itemTypePer * 0.01f) + pl.itemSpawn.Value)); //百分率
+        itemTypePer = (int)(100 * ((LM._.itemTypePer * 0.01f) + pl.itemSpawn.Value)); //百分率
 
         if(kind == BlockMaker.KIND.Normal && rand < itemTypePer){
             int len = System.Enum.GetValues(typeof(BlockType)).Length; 
@@ -253,8 +253,8 @@ public class Block_Prefab : MonoBehaviour
         }
 
         //* ActiveSkill CoolTime Amount Down
-        gm.activeSkillBtnList.ForEach(btn=>{
-            btn.decreaseFillAmount();
+        gm.activeSkillBtnList.ForEach(atvSkillBtn=>{
+            atvSkillBtn.coolDownFillAmount();
         });
     }
     

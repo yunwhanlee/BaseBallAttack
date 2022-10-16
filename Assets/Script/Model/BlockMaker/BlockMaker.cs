@@ -20,14 +20,14 @@ public class BlockMaker : MonoBehaviour
     public bool isBossSpawn = false;    public bool IsBossSpawn {get => isBossSpawn; set => isBossSpawn = value;}
 
     [Header("LEVELING (SPAN)")]
-    public float LONG_BLOCK_SPAN; // def 5
-    public int BOSS_STAGE_SPAN; // def 10
+    // public int LONG_BLOCK_SPAN; // def 5
+    // public int BOSS_STAGE_SPAN; // def 10
 
     [Header("LEVELING (PERCENT)")]
-    public int skipBlockPer; // def 20
-    public int itemTypePer; // def 10
-    public int treasureChestBlockPer; // def 5
-    public int healBlockPer; // def 5
+    // public int skipBlockPer; // def 20
+    // public int itemTypePer; // def 10
+    // public int treasureChestBlockPer; // def 5
+    // public int healBlockPer; // def 5
 
     [Header("RESOURCE")]
     public GameObject[] blockPrefs;
@@ -72,15 +72,15 @@ public class BlockMaker : MonoBehaviour
                         #region Block Kind or Skip
                         //* #1. Block Skip?
                         int rand = Random.Range(0,100);
-                        if(rand < skipBlockPer) continue; //Skip Block
+                        if(rand < LM._.skipBlockPer) continue; //Skip Block
 
                         //* #2. Block TreasureChest?
                         rand = Random.Range(0,100);
-                        if(rand < treasureChestBlockPer)   ins = blockPrefs[(int)KIND.TreasureChest];
+                        if(rand < LM._.treasureChestBlockPer)   ins = blockPrefs[(int)KIND.TreasureChest];
 
                         //* #3. Block HealBlock?
                         rand = Random.Range(0,100);
-                        if(rand < healBlockPer)   ins = blockPrefs[(int)KIND.Heal];
+                        if(rand < LM._.healBlockPer)   ins = blockPrefs[(int)KIND.Heal];
 
                         //* #4. Block生成
                         float x = (h < 3)? (startPosX + h * xs) : (startPosX + h * xs + CENTER_GAP); //* ボールが出る空間考えて調整。
@@ -118,7 +118,7 @@ public class BlockMaker : MonoBehaviour
         gm.blockGroup.position = new Vector3(gm.blockGroup.position.x, gm.blockGroup.position.y, gm.blockGroup.position.z - 1);
 
         //* Next Set Block Type
-        if(gm.stage % LONG_BLOCK_SPAN == 0){
+        if(gm.stage % LM._.LONG_BLOCK_SPAN == 0){
             createBlockRow(KIND.Long);
         }else{
             createBlockRow(KIND.Normal);
@@ -130,7 +130,7 @@ public class BlockMaker : MonoBehaviour
             gm.bossGroup.GetChild(0).GetComponent<BossBlock>() : null;
     }
     public void bossSpawn(){
-        if(gm.stage % BOSS_STAGE_SPAN == 0 && !IsBossSpawn){
+        if(gm.stage % LM._.BOSS_STAGE_SPAN == 0 && !IsBossSpawn){
             IsBossSpawn = true;
             if(IsBossSpawn && gm.bossGroup.childCount == 0){
                 Debug.Log("BOSS SPAWN!!");

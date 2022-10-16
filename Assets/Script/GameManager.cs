@@ -149,16 +149,16 @@ public class GameManager : MonoBehaviour
             int btnIdx = (idx==DM.ins.personalData.SelectSkillIdx)? 0 : 1;
             btn.GetComponent<Button>().onClick.AddListener(() => onClickActiveSkillButton(btnIdx));
             Debug.LogFormat("activeSkillBtn[{0}].onClick.AddListener => onClickActiveSkillButton({1})", i,btnIdx);
-            activeSkillBtnList.Add(new AtvSkillBtnUI(i, pl.AtvSkillCoolDownUnit, pl.activeSkills[idx].Name, btn.GetComponent<Button>(), pl.activeSkills[idx].UISprite, activeSkillBtnEfMt));
+            activeSkillBtnList.Add(new AtvSkillBtnUI(i, LM._.ATVSKILL_COOLDOWN_UNIT, pl.activeSkills[idx].Name, btn.GetComponent<Button>(), pl.activeSkills[idx].UISprite, activeSkillBtnEfMt));
         }
     }
 
     void Update(){
         //* GUI
         expBar.value = Mathf.Lerp(expBar.value, (float)pl.Exp / (float)pl.MaxExp, Time.deltaTime * 10);
-        bossStageBar.value = Mathf.Lerp(bossStageBar.value, (float)(stage % bm.BOSS_STAGE_SPAN) / (float)bm.BOSS_STAGE_SPAN, Time.deltaTime * 10);
+        bossStageBar.value = Mathf.Lerp(bossStageBar.value, (float)(stage % LM._.BOSS_STAGE_SPAN) / (float)LM._.BOSS_STAGE_SPAN, Time.deltaTime * 10);
         expTxt.text = $"{pl.Exp} / {pl.MaxExp}";
-        bossStageTxt.text = $"{stage % bm.BOSS_STAGE_SPAN} / {bm.BOSS_STAGE_SPAN}";
+        bossStageTxt.text = $"{stage % LM._.BOSS_STAGE_SPAN} / {LM._.BOSS_STAGE_SPAN}";
         stateTxt.text = State.ToString();
         levelTxt.text = LANG.getTxt(LANG.TXT.Level.ToString()) + " : " + pl.Lv;
         stageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage.ToString();
