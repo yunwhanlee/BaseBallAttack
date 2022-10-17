@@ -49,27 +49,6 @@ public class DropItem : MonoBehaviour
         this.rigid.AddForce(dir * force, ForceMode.Impulse);
     }
 
-    public static IEnumerator coWaitCollectOrb(GameManager gm){
-        float sec = 0.8f;
-        gm.bm.IsCreateBlock = true;
-
-        //* Remove All Blocks Perfect Bonus!
-        if(gm.blockGroup.childCount == 0){
-            Debug.Log("PERFECT!");
-            gm.perfectTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
-            gm.em.enableUIStageTxtEF("Perfect");
-
-            //* STAGE % 5 == 0だったら、LONGブロックが続けて生成するBUG対応。
-            yield return new WaitForSeconds(1);
-            ++gm.stage;
-            gm.bm.IsCreateBlock = true;
-        }
-        
-        yield return new WaitForSeconds(sec);
-        Debug.LogFormat("<color=white>coWaitCollectOrb:: checkLevelUp() wait: {0}sec</color>",sec);
-        gm.checkLevelUp();
-    }
-
     void OnCollisionEnter(Collision col){
         if(col.transform.CompareTag(DM.TAG.Player.ToString())){
             gm.pl.addExp(ExpVal); //* (BUG) GAMEOVER後、再スタート場合、EXPが増えないように。

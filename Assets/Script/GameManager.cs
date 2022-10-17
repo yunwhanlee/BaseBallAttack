@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     public Transform hitRangeStartTf;
     public Transform hitRangeEndTf;
     public Transform deadLineTf;
-    public BoxCollider downWall;
+    public BoxCollider downWallCollider;
     public Light light;
 
     [Header("STATUS")]
@@ -335,7 +335,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             bs.init();
             switchCamScene();
-            bm.IsCreateBlock = true; //ブロック生成
+            bm.DoCreateBlock = true; //ブロック生成
             foreach(var img in strikeCntImgs) img.gameObject.SetActive(false); //GUI非表示 初期化
             readyBtn.gameObject.SetActive(true);
         }
@@ -443,12 +443,15 @@ public class GameManager : MonoBehaviour
     }
 
     public void setNextStage() {
+        State = GameManager.STATE.WAIT;
+        BossBlock boss = bm.getBoss();
         int befStage = stage;
         Debug.Log($"<color=white>setNextStage:: beforeStage={befStage}, ballCnt={ballGroup.childCount}</color>");
-        State = GameManager.STATE.WAIT;
+
         ++stage;
         comboCnt = 0;
-        downWall.isTrigger = true; //*下壁 物理止め
+        bm.DoCreateBlock = true; //* Block 生成
+        downWallCollider.isTrigger = true; //* 下壁 物理 
         bs.IsBallExist = false;
         readyBtn.gameObject.SetActive(true);
         pl.previewBundle.SetActive(true);
@@ -458,16 +461,14 @@ public class GameManager : MonoBehaviour
         setBallPreviewGoalRandomPos();
         activeSkillDataBase[0].checkBlocksIsDotDmg(this);
 
-        //* 
-        StartCoroutine(DropItem.coWaitCollectOrb(this));
+        //* Check PrefectBonus & Check LevelUpPanel
+        StartCoroutine(coCheckEvent(boss));
 
-        //* Collect Drop Items Exp
-        var dropObjs = dropItemGroup.GetComponentsInChildren<DropItem>();
-        Debug.Log("setNextStage:: dropObjs.Length= " + dropObjs.Length);
-        Array.ForEach(dropObjs, dropObj => dropObj.IsMoveToPlayer = true);
+        //* オーブを集める
+        collectDropOrb();
 
         //* BossSkill
-        var boss = bm.getBoss();
+        
         bm.eraseObstacle();
         if(boss){ //* ボスが生きていると
             boss.activeBossSkill();
@@ -481,8 +482,32 @@ public class GameManager : MonoBehaviour
                 Destroy(ballGroup.GetChild(i).gameObject);
         }
     }
+
+    public void collectDropOrb(){
+        var orbs = dropItemGroup.GetComponentsInChildren<DropItem>();
+        Debug.Log("setNextStage:: orbs.Length= " + orbs.Length);
+        Array.ForEach(orbs, dropObj => dropObj.IsMoveToPlayer = true);
+    }
+    public IEnumerator coCheckEvent(BossBlock boss){
+        //*  Perfect Bonus
+        if(blockGroup.childCount == 0){
+            perfectTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
+            em.enableUITxtEF("Perfect");
+
+            //* One More Next Stage (ボスがいなければ)
+            yield return new WaitForSeconds(1);
+            if(!boss)
+                ++stage;
+            bm.DoCreateBlock = true;
+        }
+        
+        //* Check LevelUp Panel
+        yield return new WaitForSeconds(0.8f);
+        checkLevelUp();
+    }
+    
     public void checkLevelUp(){
-        Debug.LogFormat("<color=blue>checkLevelUp():: pl.BefLv= {0}, pl.Lv= {1}</color>", pl.BefLv, pl.Lv);
+        Debug.Log($"coCheckEvent()::checkLevelUp():: pl.BefLv= {pl.BefLv}, pl.Lv= {pl.Lv}");
         if(pl.IsLevelUp){
             pl.IsLevelUp = false;
             levelUpPanel.SetActive(true);

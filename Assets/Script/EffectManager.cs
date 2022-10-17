@@ -188,7 +188,7 @@ public class EffectManager : MonoBehaviour
 //* -------------------------------------------------------------
 //* UI EF
 //* -------------------------------------------------------------
-    public void enableUIStageTxtEF(string name){
+    public void enableUITxtEF(string name){
         switch(name){
             case "Perfect":
                 StartCoroutine(coUnActivePerfectTxtEF());

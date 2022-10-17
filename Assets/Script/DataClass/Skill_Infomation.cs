@@ -10,7 +10,6 @@ public class ItemPsvDt {
     public string name;
     public int lv;
     public GameObject imgPref;
-
     public ItemPsvDt(string name){
         this.name = name;
     }
@@ -19,22 +18,21 @@ public class ItemPsvDt {
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------
 [System.Serializable]
-public class ItemPsvList
-{
+public class ItemPsvList{
     //* value
     [SerializeField] ItemPsvDt[] arr = {
         new ItemPsvDt(DM.PSV.Dmg.ToString()),
         new ItemPsvDt(DM.PSV.MultiShot.ToString()),
-        new ItemPsvDt(DM.PSV.Speed.ToString()), 
-        new ItemPsvDt(DM.PSV.InstantKill.ToString()), 
-        new ItemPsvDt(DM.PSV.Critical.ToString()), 
-        new ItemPsvDt(DM.PSV.Explosion.ToString()), 
-        new ItemPsvDt(DM.PSV.ExpUp.ToString()), 
+        new ItemPsvDt(DM.PSV.Speed.ToString()),
+        new ItemPsvDt(DM.PSV.InstantKill.ToString()),
+        new ItemPsvDt(DM.PSV.Critical.ToString()),
+        new ItemPsvDt(DM.PSV.Explosion.ToString()),
+        new ItemPsvDt(DM.PSV.ExpUp.ToString()),
         new ItemPsvDt(DM.PSV.ItemSpawn.ToString()),
         new ItemPsvDt(DM.PSV.VerticalMultiShot.ToString()),
         new ItemPsvDt(DM.PSV.CriticalDamage.ToString()),
         new ItemPsvDt(DM.PSV.Laser.ToString()),
-    };  
+    };
     public ItemPsvDt[] Arr {get => arr; set => arr = value;}
 
     //* method

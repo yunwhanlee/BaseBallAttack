@@ -16,7 +16,7 @@ public class BlockMaker : MonoBehaviour
     public const float START_POS_Z = -2, CENTER_GAP = 0.5f; // センターのボールが来る隙間
 
     [Header("STATUS")]
-    public bool isCreateBlock;  public bool IsCreateBlock {get => isCreateBlock; set => isCreateBlock = value;}
+    public bool doCreateBlock;  public bool DoCreateBlock {get => doCreateBlock; set => doCreateBlock = value;}
     public bool isBossSpawn = false;    public bool IsBossSpawn {get => isBossSpawn; set => isBossSpawn = value;}
 
     [Header("LEVELING (SPAN)")]
@@ -48,8 +48,9 @@ public class BlockMaker : MonoBehaviour
     }
 
     void Update(){
-        if(IsCreateBlock){
-            IsCreateBlock = false;
+        if(DoCreateBlock){
+            Debug.Log($"BlockMaker::Update():: DoCreateBlock= {DoCreateBlock}");
+            DoCreateBlock = false;
             moveDownBlock();
             bossSpawn();
         }

@@ -4588,7 +4588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gm: {fileID: 1623732227}
-  isCreateBlock: 0
+  doCreateBlock: 0
   isBossSpawn: 0
   blockPrefs:
   - {fileID: 1376276108105304710, guid: 71f96bca88b0fd940a48a70f1bfe1885, type: 3}
@@ -17367,7 +17367,7 @@ MonoBehaviour:
   hitRangeStartTf: {fileID: 896793084}
   hitRangeEndTf: {fileID: 2033124274}
   deadLineTf: {fileID: 587487858}
-  downWall: {fileID: 779756}
+  downWallCollider: {fileID: 779756}
   light: {fileID: 705507994}
   stage: 1
   bestScore: 999

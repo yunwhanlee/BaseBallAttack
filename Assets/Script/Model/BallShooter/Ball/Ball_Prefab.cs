@@ -151,7 +151,7 @@ public class Ball_Prefab : MonoBehaviour
         else if(col.transform.CompareTag(DM.TAG.ActiveDownWall.ToString())){
             pl.DoSwing = false;
             if(gm.State == GameManager.STATE.WAIT){
-                gm.downWall.isTrigger = false;//*下壁 物理O
+                gm.downWallCollider.isTrigger = false;//*下壁 物理O
             }
         }
 #endregion
@@ -377,7 +377,7 @@ public class Ball_Prefab : MonoBehaviour
         gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
 
         gm.homeRunTxtTf.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
-        em.enableUIStageTxtEF("HomeRun");
+        em.enableUITxtEF("HomeRun");
         Time.timeScale = 1;
     }
 
