@@ -443,20 +443,23 @@ public class GameManager : MonoBehaviour
     }
 
     public void setNextStage() {
-        Debug.LogFormat("<color=white>setNextStage:: NEXT STAGE(ballCount = {0})</color>", ballGroup.childCount);
+        int befStage = stage;
+        Debug.Log($"<color=white>setNextStage:: beforeStage={befStage}, ballCnt={ballGroup.childCount}</color>");
         State = GameManager.STATE.WAIT;
         ++stage;
         comboCnt = 0;
-        downWall.isTrigger = true; //*下壁 物理X
+        downWall.isTrigger = true; //*下壁 物理止め
         bs.IsBallExist = false;
         readyBtn.gameObject.SetActive(true);
         pl.previewBundle.SetActive(true);
 
         destroyEveryBalls();
+        bm.checkIsHealBlock();
         setBallPreviewGoalRandomPos();
         activeSkillDataBase[0].checkBlocksIsDotDmg(this);
-        bm.checkIsHealBlock();
-        StartCoroutine(DropItem.coWaitPlayerCollectOrb(this));
+
+        //* 
+        StartCoroutine(DropItem.coWaitCollectOrb(this));
 
         //* Collect Drop Items Exp
         var dropObjs = dropItemGroup.GetComponentsInChildren<DropItem>();
@@ -470,7 +473,6 @@ public class GameManager : MonoBehaviour
             boss.activeBossSkill();
             stage--;
         }
-        
     }
 
     private void destroyEveryBalls(){

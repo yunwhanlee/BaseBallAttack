@@ -1601,7 +1601,7 @@ GameObject:
   - component: {fileID: 226840307}
   - component: {fileID: 226840306}
   m_Layer: 5
-  m_Name: HomeRunTxt(1)
+  m_Name: HomeRunTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5477,8 +5477,8 @@ MonoBehaviour:
   activeSkillCastEFs: []
   fireBallDotEF: {fileID: 7738115718635540765, guid: 8145bdfb5d04b7f4d97855979935e866, type: 3}
   dropItemExpOrbEF: {fileID: 6169633472775575342, guid: a1349e9b2b124854db93b83447f69426, type: 3}
-  perfectTxtEF: {fileID: 1250287897}
-  homeRunTxtEF: {fileID: 2005072966}
+  perfectTxtPopEF: {fileID: 1250287897}
+  homeRunTxtPopEF: {fileID: 2005072966}
   bossHealSkillEF: {fileID: 2068829495866214061, guid: 25c4eb96708f49c40a8cd37b5270ec1c, type: 3}
 --- !u!1 &697366768
 GameObject:
@@ -10179,7 +10179,7 @@ GameObject:
   - component: {fileID: 1250287900}
   - component: {fileID: 1250287899}
   m_Layer: 0
-  m_Name: PerfectTxtEF
+  m_Name: PerfectTxtPopEF
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -20234,7 +20234,7 @@ GameObject:
   - component: {fileID: 2005072969}
   - component: {fileID: 2005072968}
   m_Layer: 0
-  m_Name: HomeRunTxtEF
+  m_Name: HomeRunTxtPopEF
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0

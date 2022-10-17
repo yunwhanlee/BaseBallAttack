@@ -49,7 +49,7 @@ public class DropItem : MonoBehaviour
         this.rigid.AddForce(dir * force, ForceMode.Impulse);
     }
 
-    public static IEnumerator coWaitPlayerCollectOrb(GameManager gm){
+    public static IEnumerator coWaitCollectOrb(GameManager gm){
         float sec = 0.8f;
         gm.bm.IsCreateBlock = true;
 
@@ -58,7 +58,7 @@ public class DropItem : MonoBehaviour
             Debug.Log("PERFECT!");
             gm.perfectTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
             gm.em.enableUIStageTxtEF("Perfect");
-            
+
             //* STAGE % 5 == 0だったら、LONGブロックが続けて生成するBUG対応。
             yield return new WaitForSeconds(1);
             ++gm.stage;

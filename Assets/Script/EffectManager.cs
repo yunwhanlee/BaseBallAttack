@@ -43,8 +43,8 @@ public class EffectManager : MonoBehaviour
     public GameObject dropItemExpOrbEF;
 
     //* UI EF
-    public GameObject perfectTxtEF;
-    public GameObject homeRunTxtEF;
+    public GameObject perfectTxtPopEF;
+    public GameObject homeRunTxtPopEF;
 
     //* Boss Skill EF
     public GameObject bossHealSkillEF;
@@ -199,13 +199,13 @@ public class EffectManager : MonoBehaviour
         }
     }
     IEnumerator coUnActivePerfectTxtEF(){
-        perfectTxtEF.SetActive(true);
+        perfectTxtPopEF.SetActive(true);
         yield return new WaitForSeconds(3f);
-        perfectTxtEF.SetActive(false);
+        perfectTxtPopEF.SetActive(false);
     }
     IEnumerator coUnActiveHomeRunTxtEF(){
-        homeRunTxtEF.SetActive(true);
+        homeRunTxtPopEF.SetActive(true);
         yield return new WaitForSeconds(3f);
-        homeRunTxtEF.SetActive(false);
+        homeRunTxtPopEF.SetActive(false);
     }
 }
