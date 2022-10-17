@@ -445,9 +445,9 @@ public class GameManager : MonoBehaviour
     public void setNextStage() {
         State = GameManager.STATE.WAIT;
         BossBlock boss = bm.getBoss();
-        int befStage = stage;
-        Debug.Log($"<color=white>setNextStage:: beforeStage={befStage}, ballCnt={ballGroup.childCount}</color>");
+        Debug.Log($"<color=white>setNextStage:: ballCnt={ballGroup.childCount}</color>");
 
+        //* Set
         ++stage;
         comboCnt = 0;
         bm.DoCreateBlock = true; //* Block 生成
@@ -455,20 +455,19 @@ public class GameManager : MonoBehaviour
         bs.IsBallExist = false;
         readyBtn.gameObject.SetActive(true);
         pl.previewBundle.SetActive(true);
-
         destroyEveryBalls();
-        bm.checkIsHealBlock();
         setBallPreviewGoalRandomPos();
-        activeSkillDataBase[0].checkBlocksIsDotDmg(this);
 
-        //* Check PrefectBonus & Check LevelUpPanel
-        StartCoroutine(coCheckEvent(boss));
+        //* Check Event
+        bm.checkIsHealBlock();
+        activeSkillDataBase[0].checkBlocksIsDotDmg(this);
+        StartCoroutine(coCheckPerfectBonus(boss));
+        StartCoroutine(coCheckLevelUp());
 
         //* オーブを集める
         collectDropOrb();
-
-        //* BossSkill
         
+        //* BossSkill
         bm.eraseObstacle();
         if(boss){ //* ボスが生きていると
             boss.activeBossSkill();
@@ -483,31 +482,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void collectDropOrb(){
+    private void collectDropOrb(){
         var orbs = dropItemGroup.GetComponentsInChildren<DropItem>();
         Debug.Log("setNextStage:: orbs.Length= " + orbs.Length);
         Array.ForEach(orbs, dropObj => dropObj.IsMoveToPlayer = true);
     }
-    public IEnumerator coCheckEvent(BossBlock boss){
-        //*  Perfect Bonus
+
+    private IEnumerator coCheckPerfectBonus(BossBlock boss){
         if(blockGroup.childCount == 0){
             perfectTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
             em.enableUITxtEF("Perfect");
-
             //* One More Next Stage (ボスがいなければ)
             yield return new WaitForSeconds(1);
             if(!boss)
                 ++stage;
             bm.DoCreateBlock = true;
         }
-        
-        //* Check LevelUp Panel
-        yield return new WaitForSeconds(0.8f);
-        checkLevelUp();
     }
-    
-    public void checkLevelUp(){
-        Debug.Log($"coCheckEvent()::checkLevelUp():: pl.BefLv= {pl.BefLv}, pl.Lv= {pl.Lv}");
+    public IEnumerator coCheckLevelUp(){
+        Debug.Log($"coCheckLevelUp()::checkLevelUp():: pl.BefLv= {pl.BefLv}, pl.Lv= {pl.Lv}");
+        yield return new WaitForSeconds(0.8f);
         if(pl.IsLevelUp){
             pl.IsLevelUp = false;
             levelUpPanel.SetActive(true);

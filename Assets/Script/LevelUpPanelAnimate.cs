@@ -188,7 +188,7 @@ public class LevelUpPanelAnimate : MonoBehaviour{
         if(pl.BefLv != pl.Lv){
             pl.Lv--;
             pl.setLevelUp();
-            gm.checkLevelUp();
+            gm.coCheckLevelUp();
         }
     }
 
