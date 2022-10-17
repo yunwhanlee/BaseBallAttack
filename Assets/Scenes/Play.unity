@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44479504, g: 0.49434292, b: 0.57354003, a: 1}
+  m_IndirectSpecularColor: {r: 0.44479525, g: 0.49434352, b: 0.5735407, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4590,12 +4590,6 @@ MonoBehaviour:
   gm: {fileID: 1623732227}
   isCreateBlock: 0
   isBossSpawn: 0
-  LONG_BLOCK_SPAN: 5
-  BOSS_STAGE_SPAN: 15
-  skipBlockPer: 20
-  itemTypePer: 10
-  treasureChestBlockPer: 5
-  healBlockPer: 5
   blockPrefs:
   - {fileID: 1376276108105304710, guid: 71f96bca88b0fd940a48a70f1bfe1885, type: 3}
   - {fileID: 1376276108105304710, guid: dd9607447bace8c439bb5466658dbfbb, type: 3}
@@ -16848,7 +16842,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -519, y: 778}
-  m_SizeDelta: {x: 300, y: 100}
+  m_SizeDelta: {x: 320, y: 70}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1558296299
 MonoBehaviour:
@@ -16876,14 +16870,14 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 0
-    m_MaxSize: 70
+    m_MaxSize: 50
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'STAGE : 1'
+  m_Text: 'STAGE : 99'
 --- !u!222 &1558296300
 CanvasRenderer:
   m_ObjectHideFlags: 0

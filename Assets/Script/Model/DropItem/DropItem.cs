@@ -50,19 +50,22 @@ public class DropItem : MonoBehaviour
     }
 
     public static IEnumerator coWaitPlayerCollectOrb(GameManager gm){
+        float sec = 0.8f;
         gm.bm.IsCreateBlock = true;
-        if(gm.blockGroup.childCount == 0){//* Remove All Blocks Perfect Bonus!
+
+        //* Remove All Blocks Perfect Bonus!
+        if(gm.blockGroup.childCount == 0){
             Debug.Log("PERFECT!");
             gm.perfectTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
             gm.em.enableUIStageTxtEF("Perfect");
-            yield return new WaitForSeconds(1);
+            
             //* STAGE % 5 == 0だったら、LONGブロックが続けて生成するBUG対応。
+            yield return new WaitForSeconds(1);
             ++gm.stage;
             gm.bm.IsCreateBlock = true;
         }
-        float sec = 0.8f;
+        
         yield return new WaitForSeconds(sec);
-
         Debug.LogFormat("<color=white>coWaitCollectOrb:: checkLevelUp() wait: {0}sec</color>",sec);
         gm.checkLevelUp();
     }

@@ -250,6 +250,7 @@ public class GameManager : MonoBehaviour
 
     public void switchCamScene(){
         if(State == GameManager.STATE.GAMEOVER) return;
+        var boss = bm.getBoss();
         if(!cam2.activeSelf){//* CAM2 On
             State = GameManager.STATE.PLAY;
             cam1.SetActive(false);
@@ -279,7 +280,7 @@ public class GameManager : MonoBehaviour
             setLightDarkness(false); //* Light -> Normal
 
             //* Boss Collider OFF：Ball投げる時、ぶつかるから。
-            if(bm.getBoss()) bm.getBoss().setBossComponent(true);
+            if(boss) boss.setBossComponent(true);
                 
         }
         else{//* CAM1 On
@@ -314,7 +315,7 @@ public class GameManager : MonoBehaviour
             StopCoroutine("corSetStrike");
 
             //* Boss Collider ON：PlayerがBallを打ったから、活性化。
-            if(bm.getBoss()) bm.getBoss().setBossComponent(false);
+            if(boss) boss.setBossComponent(false);
         }
     }
 
@@ -328,7 +329,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator corSetStrike(bool isOut = false){
         strikeCntImgs[strikeCnt++].gameObject.SetActive(true);
-        if(isOut){
+        if(isOut){ //* アウト
             strikeCnt = 0;
             ShootCntTxt.text = LANG.getTxt(LANG.TXT.Out.ToString()) + "!";
             yield return new WaitForSeconds(1.5f);
@@ -338,7 +339,7 @@ public class GameManager : MonoBehaviour
             foreach(var img in strikeCntImgs) img.gameObject.SetActive(false); //GUI非表示 初期化
             readyBtn.gameObject.SetActive(true);
         }
-        else{
+        else{ //* ストライク
             ShootCntTxt.text = LANG.getTxt(LANG.TXT.Strike.ToString()) + "!";
             readyBtn.gameObject.SetActive(true);
             yield return new WaitForSeconds(1.5f);
@@ -443,19 +444,19 @@ public class GameManager : MonoBehaviour
 
     public void setNextStage() {
         Debug.LogFormat("<color=white>setNextStage:: NEXT STAGE(ballCount = {0})</color>", ballGroup.childCount);
-        ++stage;
         State = GameManager.STATE.WAIT;
-        downWall.isTrigger = true; //*下壁 物理X
-        readyBtn.gameObject.SetActive(true);
+        ++stage;
         comboCnt = 0;
-
+        downWall.isTrigger = true; //*下壁 物理X
         bs.IsBallExist = false;
+        readyBtn.gameObject.SetActive(true);
         pl.previewBundle.SetActive(true);
-        StartCoroutine(DropItem.coWaitPlayerCollectOrb(this));
+
         destroyEveryBalls();
         setBallPreviewGoalRandomPos();
         activeSkillDataBase[0].checkBlocksIsDotDmg(this);
         bm.checkIsHealBlock();
+        StartCoroutine(DropItem.coWaitPlayerCollectOrb(this));
 
         //* Collect Drop Items Exp
         var dropObjs = dropItemGroup.GetComponentsInChildren<DropItem>();
@@ -463,9 +464,11 @@ public class GameManager : MonoBehaviour
         Array.ForEach(dropObjs, dropObj => dropObj.IsMoveToPlayer = true);
 
         //* BossSkill
+        var boss = bm.getBoss();
         bm.eraseObstacle();
-        if(bm.getBoss()){ //* (BUG) NULL Error対応。
-            bm.getBoss().activeBossSkill();
+        if(boss){ //* ボスが生きていると
+            boss.activeBossSkill();
+            stage--;
         }
         
     }
