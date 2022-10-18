@@ -15,13 +15,16 @@ public class BossBlock : Block_Prefab{
 
 
 
-    [SerializeField] Transform bossDieOrbSpot;
+    [SerializeField] Transform bossDieOrbSpawnTf;
 
     [Header("【BOSS STATUS】")]
     [SerializeField] GameObject obstacleStonePf;
 
+
+
     void Start() {
-        bossDieOrbSpot = GameObject.Find(DM.NAME.BossDieDropOrbSpot.ToString()).transform;
+        GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        bossDieOrbSpawnTf = GameObject.Find(DM.NAME.BossDieDropOrbSpot.ToString()).transform;
     }
 
     public void activeBossSkill(){ //* at NextStage
@@ -35,14 +38,13 @@ public class BossBlock : Block_Prefab{
             //* Skill #2
             StartCoroutine(coBossHealSkill());
         }
-
     }
 
     IEnumerator coBossHealSkill(){
         yield return new WaitForSeconds(1);
         this.anim.SetTrigger(DM.ANIM.DoHeal.ToString());
         gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
-        gm.em.createBossHealSkillEF(bossDieOrbSpot.position);
+        gm.em.createBossHealSkillEF(bossDieOrbSpawnTf.position);
         yield return new WaitForSeconds(1);
         Array.ForEach(gm.blockGroup.GetComponentsInChildren<Block_Prefab>(), block => {
             int val = (int)(block.Hp * BOSS_HEAL_RATIO);
@@ -78,7 +80,7 @@ public class BossBlock : Block_Prefab{
 
         yield return new WaitForSecondsRealtime(playSec * 0.7f);
         for(int i=0; i < BOSS_DIE_ORB_CNT; i++)
-            bm.createDropItemExpOrbPf(bossDieOrbSpot, resultExp, popPower: 3500);
+            bm.createDropItemExpOrbPf(bossDieOrbSpawnTf, resultExp, popPower: 3500);
 
         yield return new WaitForSecondsRealtime(playSec * 0.3f + playSec); //* 消すのが早すぎ感じで、少し待機。
         Destroy(target);

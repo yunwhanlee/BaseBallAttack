@@ -17,17 +17,6 @@ public class BlockMaker : MonoBehaviour
 
     [Header("STATUS")]
     public bool doCreateBlock;  public bool DoCreateBlock {get => doCreateBlock; set => doCreateBlock = value;}
-    public bool isBossSpawn = false;    public bool IsBossSpawn {get => isBossSpawn; set => isBossSpawn = value;}
-
-    [Header("LEVELING (SPAN)")]
-    // public int LONG_BLOCK_SPAN; // def 5
-    // public int BOSS_STAGE_SPAN; // def 10
-
-    [Header("LEVELING (PERCENT)")]
-    // public int skipBlockPer; // def 20
-    // public int itemTypePer; // def 10
-    // public int treasureChestBlockPer; // def 5
-    // public int healBlockPer; // def 5
 
     [Header("RESOURCE")]
     public GameObject[] blockPrefs;
@@ -131,16 +120,12 @@ public class BlockMaker : MonoBehaviour
             gm.bossGroup.GetChild(0).GetComponent<BossBlock>() : null;
     }
     public void bossSpawn(){
-        if(gm.stage % LM._.BOSS_STAGE_SPAN == 0 && !IsBossSpawn){
-            IsBossSpawn = true;
-            if(IsBossSpawn && gm.bossGroup.childCount == 0){
+        if(gm.stage % LM._.BOSS_STAGE_SPAN == 0 && gm.bossGroup.childCount == 0){
                 Debug.Log("BOSS SPAWN!!");
-                IsBossSpawn = false;
                 var pos = new Vector3(0, 0, bossPrefs[0].transform.position.z + 2);
                 Instantiate(bossPrefs[0], pos, bossPrefs[0].transform.rotation, gm.bossGroup);
 
                 StartCoroutine(coPlayBossSpawnAnim());
-            }
         }
     }
     private IEnumerator coPlayBossSpawnAnim(){
