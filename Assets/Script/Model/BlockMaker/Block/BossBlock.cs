@@ -20,7 +20,9 @@ public class BossBlock : Block_Prefab{
     [Header("【BOSS STATUS】")]
     [SerializeField] GameObject obstacleStonePf;
 
-
+    private void OnDisable() {
+        bm.eraseObstacle();
+    }
 
     void Start() {
         GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();

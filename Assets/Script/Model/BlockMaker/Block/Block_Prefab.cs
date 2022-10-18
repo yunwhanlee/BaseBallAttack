@@ -121,7 +121,7 @@ public class Block_Prefab : MonoBehaviour
                 break;
             case BlockMaker.KIND.Normal:
             case BlockMaker.KIND.Heal:
-                Hp = Util._.calcEquivalentSequence(gm.stage, 2);
+                Hp = Util._.calcEquivalentSequence(gm.stage, 4);
                 break;
         }
         hpTxt.text = Hp.ToString();
