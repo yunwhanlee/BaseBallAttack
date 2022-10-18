@@ -9,16 +9,18 @@ public class DropItem : MonoBehaviour
 
     //* Value
     int popPower = 350; public int PopPower{ get => popPower; set => popPower = value;}
-    int expVal; public int ExpVal{ get => expVal; set => expVal = value;}
+    [SerializeField] int exp; public int Exp{ get => exp; set => exp = value;}
     [SerializeField] bool isMoveToPlayer; public bool IsMoveToPlayer{ get => isMoveToPlayer; set => isMoveToPlayer = value;}
     [SerializeField] float moveSpeed = 5f;
     public float cnt = 0;
     [SerializeField] Rigidbody rigid;
+    [SerializeField] MeshRenderer meshRdr;
 
     void Awake() {
         Debug.Log("<color=yellow>DropItem Awake() </color>");
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         rigid = GetComponent<Rigidbody>();
+        meshRdr = GetComponent<MeshRenderer>();
     }
 
     void OnEnable() {
@@ -27,6 +29,10 @@ public class DropItem : MonoBehaviour
 
     void OnDisable() { //* (BUG) 再活性化するときに、動きOFF。
         IsMoveToPlayer = false;
+    }
+
+    void Start(){
+        
     }
 
     void Update(){
@@ -51,7 +57,7 @@ public class DropItem : MonoBehaviour
 
     void OnCollisionEnter(Collision col){
         if(col.transform.CompareTag(DM.TAG.Player.ToString())){
-            gm.pl.addExp(ExpVal); //* (BUG) GAMEOVER後、再スタート場合、EXPが増えないように。
+            gm.pl.addExp(Exp); //* (BUG) GAMEOVER後、再スタート場合、EXPが増えないように。
             gm.em.createDropItemExpOrbEF(this.transform);
             // Destroy(this.gameObject);
             StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropItemGroup));

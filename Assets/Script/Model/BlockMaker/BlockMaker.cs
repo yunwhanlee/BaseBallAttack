@@ -99,7 +99,7 @@ public class BlockMaker : MonoBehaviour
         Debug.Log("createDropItemExpOrbPf:: blockTf= " + blockTf + ", resultExp= " + resultExp);
         var ins = ObjectPool.getObject(ObjectPool.DIC.DropItemExpOrbPf.ToString(), blockTf.position, Quaternion.identity, gm.dropItemGroup);
         var block = blockTf.GetComponent<Block_Prefab>();
-        ins.GetComponent<DropItem>().ExpVal = resultExp;
+        ins.GetComponent<DropItem>().Exp = resultExp;
         ins.GetComponent<DropItem>().spawnPopUp(popPower);
     }
 

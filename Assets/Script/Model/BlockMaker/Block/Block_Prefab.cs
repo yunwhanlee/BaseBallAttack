@@ -121,15 +121,27 @@ public class Block_Prefab : MonoBehaviour
                 break;
             case BlockMaker.KIND.Normal:
             case BlockMaker.KIND.Heal:
-                Hp = gm.stage;
+                Hp = calcNextHp();
                 break;
         }
         hpTxt.text = Hp.ToString();
     }
+    private int calcNextHp(){ //等比数列(Equivalent Sequence)
+        int res = 0;
+        int st = gm.stage;
+        if(gm.stage % 2 != 0){
+            res = st + (st + (st * ((st - 1) / 2)));
+        }
+        else{
+            res = st + (st + (st * (((st - 1) / 2)) + (st / 2)));
+        }
+        return res;
+    }
+
     private void setStyle(){
         if(kind == BlockMaker.KIND.Normal || kind == BlockMaker.KIND.Long){
             // Debug.LogFormat("Block_Prefab:: kind={0}", kind);
-            //* Material
+            //* Set Exp & Material
             if(0 < Hp && Hp <= 10){
                 Exp = 10;   mesh.block[0].material = bm.Mts[(int)BlockMt.PLAIN]; 
             }
