@@ -140,8 +140,9 @@ public class Ball_Prefab : MonoBehaviour
                     RaycastHit[] hits = Physics.RaycastAll(start, dir, 100);
                     Array.ForEach(hits, hit => {
                         if(hit.transform.name.Contains(DM.NAME.Block.ToString())){  // Debug.Log("LAZER Hit Obj -> " + hit.transform.name);
-                            em.createCritTxtEF(hit.transform.position, pl.dmg.Value);
-                            bm.setDecreaseHP(hit.transform.gameObject, pl.dmg.Value);
+                            int laserDmg = pl.dmg.Value * (pl.laser.Level + 1);
+                            em.createCritTxtEF(hit.transform.position, laserDmg);
+                            bm.setDecreaseHP(hit.transform.gameObject, laserDmg);
                         }
                     });
                 }

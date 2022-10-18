@@ -8,7 +8,11 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
 
     //* Value
     [Header("PLAYER")]
-    [Range(0, 1.0f)] public float ATVSKILL_COOLDOWN_UNIT = 0.05f;
+    [Range(0, 1.0f)] public float ATVSKILL_COOLDOWN_UNIT = 0.02f;
+
+    [Header("BALL")]
+    [Range(20, 100)] public float THROW_BALL_SPEED = 25;
+    [Range(0, 100)] public int SUDDENLY_THORW_PER = 50;
 
     [Header("BLOCK SPAN")]
     public int LONG_BLOCK_SPAN = 5;
@@ -19,6 +23,8 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Range(0, 100)] public int itemTypePer = 10;
     [Range(0, 100)] public int treasureChestBlockPer = 5;
     [Range(0, 100)] public int healBlockPer = 5;
+
+
 
     void Awake() => singleton();
 
