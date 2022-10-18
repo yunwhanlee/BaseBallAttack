@@ -121,21 +121,10 @@ public class Block_Prefab : MonoBehaviour
                 break;
             case BlockMaker.KIND.Normal:
             case BlockMaker.KIND.Heal:
-                Hp = calcNextHp();
+                Hp = Util._.calcEquivalentSequence(gm.stage, 2);
                 break;
         }
         hpTxt.text = Hp.ToString();
-    }
-    private int calcNextHp(){ //等比数列(Equivalent Sequence)
-        int res = 0;
-        int st = gm.stage;
-        if(gm.stage % 2 != 0){
-            res = st + (st + (st * ((st - 1) / 2)));
-        }
-        else{
-            res = st + (st + (st * (((st - 1) / 2)) + (st / 2)));
-        }
-        return res;
     }
 
     private void setStyle(){

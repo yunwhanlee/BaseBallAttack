@@ -37,4 +37,17 @@ public class Util : MonoBehaviour
         ins.rectTransform.localPosition = new Vector3(0,-900,-400);
         Destroy(ins.gameObject, noticeMsgDisplayCnt);
     }
+
+    public int calcEquivalentSequence(int n, int device){ //* 等比数列
+        int res;
+        bool isOdd = n % 2 != 0;
+        if(isOdd){ // 奇数
+            res = n + (n + (n * ((n - 1) / device)));
+        }
+        else{// 偶数
+            res = n + (n + (n * ((n - 1) / device) + (n / device)));
+        }
+        int extraVal = Random.Range(-1, 1); // Extra
+        return res + extraVal;
+    }
 }
