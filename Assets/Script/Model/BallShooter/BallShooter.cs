@@ -46,10 +46,9 @@ public class BallShooter : MonoBehaviour
                 gm.ShootCntTxt.text = "SHOOT";
                 Debug.Log("ballPreviewDirGoalPos="+gm.ballPreviewDirGoal.transform.position+", entranceTfPos="+entranceTf.position);
                 Vector3 goalDir = (gm.ballPreviewDirGoal.transform.position - entranceTf.position).normalized;
-                GameObject instance = Instantiate(ballPref, entranceTf.position, Quaternion.LookRotation(goalDir), gm.ballGroup);
+                GameObject ins = Instantiate(ballPref, entranceTf.position, Quaternion.LookRotation(goalDir), gm.ballGroup);
 
-                int extraRandVal = Random.Range(0, 4);
-                instance.GetComponent<Ball_Prefab>().setBallSpeed(throwBallSpeed + extraRandVal);
+                throwBall(ins);
             }
         }
         else{//* ボールが存在し、飛んでいる。★
@@ -61,6 +60,13 @@ public class BallShooter : MonoBehaviour
         time = shootSpan;
         IsExclamationMarkOn = false;
         throwBallSpeed = LM._.THROW_BALL_SPEED;
+    }
+
+    public void throwBall(GameObject ins){
+        var ball = ins.GetComponent<Ball_Prefab>();
+        int extra = Random.Range(0, 5);
+        ball.Speed = (throwBallSpeed + extra);
+        ball.rigid.AddForce(this.transform.forward * ball.Speed, ForceMode.Impulse);
     }
 
     private void setSuddenlyThrowBall(int per){

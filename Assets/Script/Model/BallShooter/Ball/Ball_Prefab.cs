@@ -14,16 +14,20 @@ public class Ball_Prefab : MonoBehaviour
     bool isHitedByBlock = false;
     bool isHomeRun = false;
     float deleteLimitTime = 2.0f;
-    float speed;
+    [SerializeField]    float speed;    public float Speed {get => speed; set => speed = value;}
     float distance;
 
-    Rigidbody rigid;
+    public Rigidbody rigid;
+
+    void Awake() {
+        rigid = GetComponent<Rigidbody>();
+    }
     void Start(){
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         em = gm.em; pl = gm.pl; bm = gm.bm; bs = gm.bs;
 
-        rigid = GetComponent<Rigidbody>();
-        rigid.AddForce(this.transform.forward * speed, ForceMode.Impulse);
+        
+        // rigid.AddForce(this.transform.forward * Speed, ForceMode.Impulse);
 
         //* B. Dmg
         new AtvSkill(gm, pl);
@@ -79,12 +83,13 @@ public class Ball_Prefab : MonoBehaviour
 
                 //* Set Hit Power (distance range 1.5f ~ 0)
                 const int A=0, B=1, C=2, D=3, E=4, F=5;
-                float power = (distance <= pl.hitRank[A].Dist) ? pl.hitRank[A].Power //-> BEST HIT (HOMERUH!)
-                : (distance <= pl.hitRank[B].Dist) ? pl.hitRank[B].Power
-                : (distance <= pl.hitRank[C].Dist) ? pl.hitRank[C].Power
-                : (distance <= pl.hitRank[D].Dist)? pl.hitRank[D].Power
-                : (distance <= pl.hitRank[E].Dist)? pl.hitRank[E].Power
-                : pl.hitRank[F].Power; //-> WORST HIT (distance <= 1.5f)
+                var hitRank = LM._.HIT_BALL_RANK;
+                float power = (distance <= hitRank[A].Dist) ? hitRank[A].Power //-> BEST HIT (HOMERUH!)
+                : (distance <= hitRank[B].Dist)? hitRank[B].Power
+                : (distance <= hitRank[C].Dist)? hitRank[C].Power
+                : (distance <= hitRank[D].Dist)? hitRank[D].Power
+                : (distance <= hitRank[E].Dist)? hitRank[E].Power
+                : hitRank[F].Power; //-> WORST HIT (distance <= 1.5f)
                 
                 //* #1. Active SHOT Skill
                 bool isActiveSkillTrigger = false;
@@ -99,21 +104,25 @@ public class Ball_Prefab : MonoBehaviour
                 em.createBatHitSparkEF(this.transform.position);
 
                 //* HomeRun
-                if(power >= pl.hitRank[C].Power){
+                if(power >= hitRank[B].Power){
                     em.createHomeRunHitSparkEF(this.transform.position);
                     StartCoroutine(coPlayHomeRunAnim(isActiveSkillTrigger));
                 }
-                else if(isActiveSkillTrigger){ //* ActiveSkill Before
+                // else if(isActiveSkillTrigger){ //* ActiveSkill Before
                     // StartCoroutine(coPlayActiveSkillBefSpotLightAnim());
-                }
+                // }
 
-                rigid.velocity = Vector3.zero;
-                float force = speed * power * pl.speed.Value;
-                rigid.AddForce(arrowDir * force, ForceMode.Impulse);
-                Debug.Log(
-                    "HIT Ball! <color=yellow>distance=" + distance.ToString("N2") + "</color>"
-                    + ", <color=red>power=" + power + ", Rank: " + ((power==pl.hitRank[A].Power)? "A" : (power==pl.hitRank[B].Power)? "B" : (power==pl.hitRank[C].Power)? "C" : (power==pl.hitRank[D].Power)? "D" : (power==pl.hitRank[E].Power)? "E" : "F").ToString() + "</color>"
-                    + ", Force=" + force);
+                var force = setgetHitBallSpeed(power, arrowDir);
+
+                Debug.Log("HIT Ball:: distance= " + distance.ToString("N2")
+                    + ", power= " + power
+                    + ", Rank= " + ((power == hitRank[A].Power)? "A" 
+                        : (power == hitRank[B].Power)? "B"
+                        : (power == hitRank[C].Power)? "C"
+                        : (power == hitRank[D].Power)? "D"
+                        : (power == hitRank[E].Power)? "E" : "F").ToString()
+                    + ", Force= " + force
+                );
 
                 //* Active Skillなら、下記は実行しない----------------------------------------
                 if(isActiveSkillTrigger) return;
@@ -306,6 +315,13 @@ public class Ball_Prefab : MonoBehaviour
     //*------------------------------------------------------------------------------
     //*  関数
     //*------------------------------------------------------------------------------
+    private float setgetHitBallSpeed(float power, Vector3 arrowDir){
+        rigid.velocity = Vector3.zero;
+        float force = Speed * power * pl.speed.Value;
+        rigid.AddForce(arrowDir * force, ForceMode.Impulse);
+        return force;
+    }
+
     void instantiateMultiShot(Vector3 dir, float force, float ratio){
         var ins = Instantiate(this.gameObject, this.transform.position, Quaternion.identity, gm.ballGroup);
         ins.GetComponent<Rigidbody>().AddForce(dir * force * ratio, ForceMode.Impulse);
@@ -360,10 +376,6 @@ public class Ball_Prefab : MonoBehaviour
             gm.setBallPreviewGoalRandomPos();
         }
         Destroy(this.gameObject);
-    }
-
-    public void setBallSpeed(float v){
-        speed = v;
     }
 
     IEnumerator coPlayHomeRunAnim(bool isActiveSkillTrigger){

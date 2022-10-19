@@ -6,14 +6,14 @@ using System;
 using UnityEngine.Serialization;
 
 [System.Serializable]
-public class HitRank{
-    [SerializeField] float dist;    public float Dist {get => dist;}
-    [SerializeField] int power;     public float Power {get => power;}
-    public HitRank(float dist, int power){
-        this.dist = dist;
-        this.power = power;
-    }
-}
+// public class HitRank{
+//     [SerializeField] float dist;    public float Dist {get => dist;}
+//     [SerializeField] int power;     public float Power {get => power;}
+//     public HitRank(float dist, int power){
+//         this.dist = dist;
+//         this.power = power;
+//     }
+// }
 
 public class Player : MonoBehaviour
 {
@@ -147,14 +147,14 @@ public class Player : MonoBehaviour
         gm.displayCurPassiveSkillUI("INGAME");
 
         //* Set HitRank Data : @params { char rate, float distance, int power }
-        hitRank = new HitRank[6];
-        const int A=0, B=1, C=2, D=3, E=4, F=5;
-        hitRank[A] = new HitRank(0.125f, 10);
-        hitRank[B] = new HitRank(0.25f, 7);
-        hitRank[C] = new HitRank(0.5f, 5);
-        hitRank[D] = new HitRank(0.85f, 4);
-        hitRank[E] = new HitRank(1.125f, 3);
-        hitRank[F] = new HitRank(1.5f, 2);
+        // hitRank = new HitRank[6];
+        // const int A=0, B=1, C=2, D=3, E=4, F=5;
+        // hitRank[A] = new HitRank(0.125f, 10);
+        // hitRank[B] = new HitRank(0.25f, 7);
+        // hitRank[C] = new HitRank(0.5f, 5);
+        // hitRank[D] = new HitRank(0.85f, 4);
+        // hitRank[E] = new HitRank(1.125f, 3);
+        // hitRank[F] = new HitRank(1.5f, 2);
         
         Debug.Log("swingArcArea.rectTransform.localRotation.eulerAngles.z=" + swingArcArea.rectTransform.localRotation.eulerAngles.z);//! (BUG) rotation.eulerAnglesしないと、角度の数値ではなく、小数点が出る。
         anim = GetComponentInChildren<Animator>();
