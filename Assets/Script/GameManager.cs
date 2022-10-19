@@ -114,7 +114,12 @@ public class GameManager : MonoBehaviour
     public Button homeBtn; //pausePanel
     public Button statusFolderBtn;
 
+    int val = 1;
+
     void Start() {
+        Util._.calcFibonicciSequence(100, 1.5f);
+        
+
         Debug.Log("<color=red>----------------------------------------------P L A Y   S C E N E----------------------------------------------</color>");
         //! init()宣言したら、キャラクターモデルを読み込むことができないBUG
         pl = GameObject.Find("Player").GetComponent<Player>();

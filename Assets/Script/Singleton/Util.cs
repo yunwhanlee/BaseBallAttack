@@ -50,4 +50,21 @@ public class Util : MonoBehaviour
         int extraVal = Random.Range(-1, 1); // Extra
         return res + extraVal;
     }
+
+    public void calcFibonicciSequence(float unit, float fibRatio){
+        Debug.Log($"calcFibonicciSequence(unit={unit}, fibRatio={fibRatio})::");
+        float res;
+        float v1 = 1 * unit;
+        float v2 = fibRatio * unit;
+        for(int i=0; i<10; i++){
+            if(i == 0) {
+                res = v1;
+            }else{
+                res = v1 + v2;
+                v1 = v2;
+                v2 = res;
+            }
+            Debug.Log($"fibo [{i}]: " + res);
+        }
+    }
 }
