@@ -151,7 +151,7 @@ public class Ball_Prefab : MonoBehaviour
                         if(hit.transform.name.Contains(DM.NAME.Block.ToString())){  // Debug.Log("LAZER Hit Obj -> " + hit.transform.name);
                             int laserDmg = pl.dmg.Value * (pl.laser.Level + 1);
                             em.createCritTxtEF(hit.transform.position, laserDmg);
-                            bm.setDecreaseHP(hit.transform.gameObject, laserDmg);
+                            bm.decreaseBlockHP(hit.transform.gameObject, laserDmg);
                         }
                     });
                 }
@@ -194,8 +194,8 @@ public class Ball_Prefab : MonoBehaviour
                             break;
                         case DM.ATV.FireBall:{
                             em.createAtvSkExplosionEF(skillIdx, this.transform);
-                            decreaseHpSphereCastAll(atv, AtvSkill.FIREBALL_DMG);
-                            if(isHomeRun) decreaseHpSphereCastAll(atv, 0, AtvSkill.FIREBALL_DOT); //* + DOT DAMAGE
+                            decreaseAllBlocksHp(atv, AtvSkill.FIREBALL_DMG);
+                            if(isHomeRun) decreaseAllBlocksHp(atv, 0, AtvSkill.FIREBALL_DOT); //* + DOT DAMAGE
                             break;
                         }
                         case DM.ATV.ColorBall:{
@@ -218,7 +218,7 @@ public class Ball_Prefab : MonoBehaviour
                                 ins.transform.localScale = new Vector3(sc, sc, sc);
                             }
                             RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.PoisonSmokeCastWidth, Vector3.up, 0);
-                            decreaseHpSphereCastAll(atv, 0, AtvSkill.POISONSMOKE_DOT);
+                            decreaseAllBlocksHp(atv, 0, AtvSkill.POISONSMOKE_DOT);
                             break;
                         }
                         case DM.ATV.IceWave:{
@@ -254,13 +254,13 @@ public class Ball_Prefab : MonoBehaviour
                 Array.ForEach(hits, hit => {
                     if(hit.transform.name.Contains(DM.NAME.Block.ToString())){ //! (BUG) 爆発ができないこと対応。(このIF文が無かったら、UnHitAreaのみ受け取りできない)
                         Debug.Log("Set DAMAGE:: Explostion:: result= " + result + ", hit.obj.name=" + hit.transform.gameObject.name);
-                        bm.setDecreaseHP(hit.transform.gameObject, result);
+                        bm.decreaseBlockHP(hit.transform.gameObject, result);
                     }
                 });
             }
             else{//* Normal Damage Result
                 Debug.Log("Set DAMAGE:: result= " + result);
-                bm.setDecreaseHP(col.gameObject, result);
+                bm.decreaseBlockHP(col.gameObject, result);
             }
     #endregion
 #endregion            
@@ -329,7 +329,7 @@ public class Ball_Prefab : MonoBehaviour
         ins.transform.localScale = new Vector3(scale.x * ratio, scale.y * ratio, scale.z * ratio);
     }
 
-    private void decreaseHpSphereCastAll(DM.ATV atv, int dmg, float dotDmgPer = 0){
+    private void decreaseAllBlocksHp(DM.ATV atv, int dmg, float dotDmgPer = 0){
         RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.FireBallCastWidth, Vector3.up, 0);
         Array.ForEach(hits, hit => {
             if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
@@ -401,20 +401,20 @@ public class Ball_Prefab : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.3f);
         Time.timeScale = 1;
     }
-
     IEnumerator coSetThunderSkill(RaycastHit hit){
         yield return new WaitForSeconds(0.1f);
         Debug.Log("<color=red>coSetThunderSkill():: isHomeRun= " + isHomeRun + "</color>");
-        const int multiCnt = 5;
         List<GameObject> effectList = new List<GameObject>(); //* HPが０になったら、発生するERROR対応。
 
         //* HomeRun Bonus
         float critDmgRatio = (isHomeRun)? 
             AtvSkill.THUNDERSHOT_CRT + 1 : AtvSkill.THUNDERSHOT_CRT;
 
-        //* Set Dmg & Multi CriticalTextEF
-        bm.setDecreaseHP(hit.transform.gameObject, ((int)(pl.dmg.Value * critDmgRatio) * multiCnt));
-        StartCoroutine(coMultiCriticalDmgEF(critDmgRatio, multiCnt, hit.transform.position));
+        //* Set Dmg & CriticalTextEF
+        const int attackCnt = 5;
+        int dmg = (int)(pl.dmg.Value * critDmgRatio);
+        bm.decreaseBlockHP(hit.transform.gameObject, dmg * attackCnt);
+        StartCoroutine(coMultiCriticalDmgEF(critDmgRatio, attackCnt, hit.transform.position));
     }
     IEnumerator coMultiCriticalDmgEF(float critDmgRatio, int cnt, Vector3 hitPos){
         float span = 0.0875f;

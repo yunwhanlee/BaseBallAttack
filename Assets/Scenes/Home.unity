@@ -3175,27 +3175,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b6b0bab0720b041bea9c6ac7d252dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ATVSKILL_COOLDOWN_UNIT: 0.02
   THROW_BALL_SPEED: 25
   SUDDENLY_THORW_PER: 50
   HIT_BALL_RANK:
-  - rank: A
-    dist: 0.125
+  - dist: 0.125
     power: 10
-  - rank: B
-    dist: 0.25
+  - dist: 0.25
     power: 7
-  - rank: C
-    dist: 0.5
+  - dist: 0.5
     power: 5
-  - rank: D
-    dist: 0.85
+  - dist: 0.85
     power: 4
-  - rank: E
-    dist: 1.125
+  - dist: 1.125
     power: 3
-  - rank: F
-    dist: 1.5
+  - dist: 1.5
     power: 2
   LONG_BLOCK_SPAN: 5
   BOSS_STAGE_SPAN: 6
@@ -3203,6 +3196,8 @@ MonoBehaviour:
   itemTypePer: 10
   treasureChestBlockPer: 5
   healBlockPer: 5
+  ATVSKILL_COOLDOWN_UNIT: 1
+  MAX_EXP_LIST: []
 --- !u!1 &445535722
 GameObject:
   m_ObjectHideFlags: 0
