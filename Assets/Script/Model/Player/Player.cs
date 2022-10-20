@@ -5,16 +5,6 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.Serialization;
 
-[System.Serializable]
-// public class HitRank{
-//     [SerializeField] float dist;    public float Dist {get => dist;}
-//     [SerializeField] int power;     public float Power {get => power;}
-//     public HitRank(float dist, int power){
-//         this.dist = dist;
-//         this.power = power;
-//     }
-// }
-
 public class Player : MonoBehaviour
 {
     public const int ONE_KILL_DMG = 999999;
@@ -210,11 +200,11 @@ public class Player : MonoBehaviour
         }
     }
     public void setLevelUp(){
-        Debug.Log("setLevelUp:: LEVEL UP!");
         IsLevelUp = true;
         Lv = ++lv;
         Exp = 0;
-        MaxExp = (int)(maxExp * 1.75f);
+        MaxExp = (int)LM._.MAX_EXP_LIST[Lv];
+        Debug.Log($"setLevelUp():: Lv={Lv}, MaxExp={MaxExp}");
     }
     public void destroyAllCastEF(){
         //* Arrow Tf

@@ -38,7 +38,7 @@ public class Util : MonoBehaviour
         Destroy(ins.gameObject, noticeMsgDisplayCnt);
     }
 
-    public int calcEquivalentSequence(int n, int device){ //* 等比数列
+    public int getCalcEquivalentSequence(int n, int device){ //* 等比数列
         int res;
         bool isOdd = n % 2 != 0;
         if(isOdd){ // 奇数
@@ -51,20 +51,22 @@ public class Util : MonoBehaviour
         return res + extraVal;
     }
 
-    public void calcFibonicciSequence(float unit, float fibRatio){
-        Debug.Log($"calcFibonicciSequence(unit={unit}, fibRatio={fibRatio})::");
-        float res;
+    public List<float> getCalcFibonicciSequence(float unit, float fibRatio){ //* フィボナッチ数列
+        List<float> res = new List<float>();
         float v1 = 1 * unit;
         float v2 = fibRatio * unit;
         for(int i=0; i<10; i++){
             if(i == 0) {
-                res = v1;
+                res.Add(v1);
+                res[i] = v1;
             }else{
-                res = v1 + v2;
+                res.Add(v1 + v2);
                 v1 = v2;
-                v2 = res;
+                v2 = res[i];
             }
-            Debug.Log($"fibo [{i}]: " + res);
+            Debug.Log($"fibo [{i}]: " + res[i]);
         }
+        return res;
     }
+
 }

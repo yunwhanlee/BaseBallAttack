@@ -147,7 +147,6 @@ public class ScrollView {
                 boxPref.GetComponentInChildren<Text>().transform.SetAsLastSibling();
             }
         });
-        Debug.Log("--------------------------------------------");
     }
 }
 

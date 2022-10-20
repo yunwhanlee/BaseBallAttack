@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
     int val = 1;
 
     void Start() {
-        Util._.calcFibonicciSequence(100, 1.5f);
+        // Util._.setCalcFibonicciSequence(100, 1.5f);
         
 
         Debug.Log("<color=red>----------------------------------------------P L A Y   S C E N E----------------------------------------------</color>");
