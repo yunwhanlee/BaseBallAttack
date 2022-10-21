@@ -246,11 +246,11 @@ public class AtvSkill{
     public AtvSkill(GameManager gm, Player pl){ //@ Overload
         // Debug.Log("ActiveSkill(gm, pl):: gm=" + gm.stage + ", pl=" + pl.dmg.Value);
         THUNDERSHOT_CRT = 2;
-        FIREBALL_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.15f);
+        FIREBALL_DMG = pl.dmg.Value + pl.dmg.Value * (Util._.getCalcEquivalentSequence(gm.stage, 4) / 4);// FIREBALL_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.15f);
         FIREBALL_DOT = 0.15f;
         COLORBALL_DMG = Player.ONE_KILL_DMG;
         POISONSMOKE_DOT = 0.25f;
-        ICEWAVE_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.3f);
+        ICEWAVE_DMG = pl.dmg.Value + pl.dmg.Value * (Util._.getCalcEquivalentSequence(gm.stage, 4) / 2);// ICEWAVE_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.3f);
     }
 
     //* method
