@@ -23,9 +23,9 @@ public class ItemInfo : MonoBehaviour
     [SerializeField] bool isLock = true;    public bool IsLock {get => isLock; set => isLock = value;}
     [SerializeField] bool isChecked = true;    public bool IsChecked {get => isChecked; set => isChecked = value;}
     [SerializeField] GameObject isCheckedImgObj;    public GameObject IsCheckedImgObj {get => isCheckedImgObj; set => isCheckedImgObj = value;}
-    [SerializeField] List<MeshRenderer> meshRdrList;   public List<MeshRenderer> MeshRdrList {get => meshRdrList; set => meshRdrList = value;}
+    [SerializeField] List<MeshRenderer> modelMeshRdrList;   public List<MeshRenderer> ModelMeshRdrList {get => modelMeshRdrList; set => modelMeshRdrList = value;}
     [SerializeField] List<Material> originMtList;    public List<Material> OriginMtList {get => originMtList; set => originMtList = value;} //* MatalicとGrayが有った場合、黒くならないBUG対応。
-    [SerializeField] Image grayPanel;   public Image GrayPanel {get => grayPanel; set => grayPanel = value;}
+    [SerializeField] Image grayPanel2D;   public Image GrayPanel2D {get => grayPanel2D; set => grayPanel2D = value;}
     [SerializeField] DM.RANK rank;     public DM.RANK Rank {get => rank; set => rank = value;}
     [SerializeField] Outline outline3D;    public Outline Outline3D{get => outline3D; set => outline3D = value;}
     [SerializeField] UnityEngine.UI.Extensions.NicerOutline outline2D;    public UnityEngine.UI.Extensions.NicerOutline Outline2D{get => outline2D; set => outline2D = value;}
@@ -64,9 +64,9 @@ public class ItemInfo : MonoBehaviour
             case DM.PANEL.Bat :{
                 Outline3D = this.GetComponent<Outline>();
 
-                var childs = this.GetComponentsInChildren<MeshRenderer>();
-                Array.ForEach(childs, chd => MeshRdrList.Add(chd));
-                Array.ForEach(childs, chd => OriginMtList.Add(chd.material));
+                var meshs = this.GetComponentsInChildren<MeshRenderer>();
+                Array.ForEach(meshs, mesh => ModelMeshRdrList.Add(mesh));
+                Array.ForEach(meshs, mesh => OriginMtList.Add(mesh.material));
                 break;
             }
             //* 2D UI Sprite 形式
@@ -75,7 +75,7 @@ public class ItemInfo : MonoBehaviour
                 Debug.Log("Skill Outline2D=" + Outline2D);
 
                 var imgs = this.GetComponentsInChildren<Image>();
-                grayPanel = Array.FindLast(imgs, img => img.gameObject.name == "GrayPanel");
+                grayPanel2D = Array.FindLast(imgs, img => img.gameObject.name == "GrayPanel");
                 break; 
             }
             default : { 
@@ -90,9 +90,8 @@ public class ItemInfo : MonoBehaviour
             }
         }
 
-
         //* Is Buy(UnLock)?
-        setGrayMtIsLock();
+        setModelMesh();
         
         //* Set Price By Rank
         switch(rank){
@@ -104,22 +103,18 @@ public class ItemInfo : MonoBehaviour
         }
     }
 
-    public void setGrayMtIsLock(){
-        if(IsLock){//* gray Material 追加
-            if(GrayPanel)   GrayPanel.gameObject.SetActive(true);
-            else{
-                MeshRdrList.ForEach(mesh=> mesh.materials = new Material[] {DM.ins.grayItemLockMt});
-            }
-        }
-        else{
-            if(GrayPanel)   GrayPanel.gameObject.SetActive(false);
-            else{
-                int i = 0;
-                //* MatalicとGrayが有った場合、黒くならないBUG対応。
-                MeshRdrList.ForEach(mesh=> mesh.materials = new Material[] {originMtList[i++]});
-            }
-        }
+    public void setModelMesh(){
+        //TODO ゲームスタートして戻ったら、GRAY MATERAILが適用されていないBUG。
+
+        int i = 0;
+        //* ATVやPSVがLockの場合、2D黒パンネルを適用。
+        if(GrayPanel2D) // CharaやBatはNone.
+            GrayPanel2D.gameObject.SetActive(IsLock);
+
+        //* Set Material
+        if(IsLock)
+            ModelMeshRdrList.ForEach((mesh) => mesh.materials = new Material[2] {DM.ins.grayItemLockMt, originMtList[i++]});
+        else
+            ModelMeshRdrList.ForEach(mesh => mesh.materials = new Material[] {originMtList[i++]});
     }
-
-
 }

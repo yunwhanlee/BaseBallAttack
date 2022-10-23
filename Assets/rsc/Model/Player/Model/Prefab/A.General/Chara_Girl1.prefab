@@ -302,6 +302,10 @@ MonoBehaviour:
   - 
   - 
   - 
+  price:
+    type: 0
+    coin: 0
+    diamond: 0
   isLock: 0
   isChecked: 1
   isCheckedImgObj: {fileID: 0}
@@ -311,7 +315,6 @@ MonoBehaviour:
   rank: 0
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
-  price: 0
   cashShopPriceTxt: {fileID: 0}
   itemPassive:
     arr:
@@ -322,22 +325,22 @@ MonoBehaviour:
       lv: 0
       imgPref: {fileID: 0}
     - name: Speed
-      lv: 0
+      lv: 1
       imgPref: {fileID: 0}
     - name: InstantKill
-      lv: 15
+      lv: 0
       imgPref: {fileID: 0}
     - name: Critical
-      lv: 3
+      lv: 0
       imgPref: {fileID: 0}
     - name: Explosion
       lv: 0
       imgPref: {fileID: 0}
     - name: ExpUp
-      lv: 2
+      lv: 0
       imgPref: {fileID: 0}
     - name: ItemSpawn
-      lv: 2
+      lv: 0
       imgPref: {fileID: 0}
     - name: VerticalMultiShot
       lv: 0

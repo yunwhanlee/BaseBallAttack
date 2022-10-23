@@ -270,7 +270,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         // string name = curItem.name.Split('_')[1];
         // int idx = LANG.CharaList.FindIndex(list => name == list[(int)LANG.TP.EN]);
         // NameTxt.text = LANG.CharaList[idx][(int)DM.ins.Language]; //name;
-            NameTxt.text = LANG.getTxtList(curItem.name)[LANG.NAME];
+        NameTxt.text = LANG.getTxtList(curItem.name)[LANG.NAME];
 
         //* Set Rank UI Box Color
         Color color = Color.white;
@@ -467,7 +467,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             myMoney -= curItem.price.getValue();
             em.createItemBuyEF();
             curItem.IsLock = false; //* 解禁
-            curItem.setGrayMtIsLock();
+            curItem.setModelMesh();
             DM.ins.personalData.setUnLockCurList(CurIdx);
             drawCheckBtnUI();
         }
