@@ -467,7 +467,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             myMoney -= curItem.price.getValue();
             em.createItemBuyEF();
             curItem.IsLock = false; //* 解禁
-            curItem.setModelMesh();
+            curItem.checkLockedModel();
             DM.ins.personalData.setUnLockCurList(CurIdx);
             drawCheckBtnUI();
         }

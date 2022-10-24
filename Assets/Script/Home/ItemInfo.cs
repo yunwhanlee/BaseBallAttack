@@ -32,6 +32,12 @@ public class ItemInfo : MonoBehaviour
     [SerializeField] Text cashShopPriceTxt;     public Text CashShopPriceTxt {get => cashShopPriceTxt; set => cashShopPriceTxt = value;}
     [SerializeField] ItemPsvList itemPassive;  public ItemPsvList ItemPassive {get => itemPassive; set=> itemPassive = value;}
 
+    void OnEnable(){
+        Debug.Log($"ItemInfo::OnEnable:: this.name= {this.name}");
+        DM.PANEL itemType = DM.ins.getCurPanelType2Enum(DM.ins.SelectItemType);
+        arrangeItem(itemType);
+    }
+
     void Awake(){
         //* Push Language Txt Data
         if(this.name.Contains(DM.PANEL.Chara.ToString())){
@@ -56,9 +62,20 @@ public class ItemInfo : MonoBehaviour
     }
 
     void Start(){
-        //* Set Panel Outline & CashShop Price Txt UI
-        var itemType = DM.ins.getCurPanelType2Enum(DM.ins.SelectItemType);
-        switch(itemType){
+        checkLockedModel();
+        
+        //* Set Price By Rank
+        switch(rank){
+            case DM.RANK.GENERAL : price.Coin = 100; break;
+            case DM.RANK.RARE : price.Coin = 300; break;
+            case DM.RANK.UNIQUE : price.Coin = 700; break;
+            case DM.RANK.LEGEND : price.Coin = 1500; break;
+            case DM.RANK.GOD : price.Coin = 4000; break;
+        }
+    }
+
+    private void arrangeItem(DM.PANEL type){
+        switch(type){
             //* 3D Model 形式
             case DM.PANEL.Chara :
             case DM.PANEL.Bat :{
@@ -72,7 +89,6 @@ public class ItemInfo : MonoBehaviour
             //* 2D UI Sprite 形式
             case DM.PANEL.Skill :{
                 Outline2D = this.GetComponent<UnityEngine.UI.Extensions.NicerOutline>();
-                Debug.Log("Skill Outline2D=" + Outline2D);
 
                 var imgs = this.GetComponentsInChildren<Image>();
                 grayPanel2D = Array.FindLast(imgs, img => img.gameObject.name == "GrayPanel");
@@ -85,36 +101,33 @@ public class ItemInfo : MonoBehaviour
                 }else{
                     Debug.Log("PsvInfo::");
                 }
-
                 break;
             }
         }
-
-        //* Is Buy(UnLock)?
-        setModelMesh();
-        
-        //* Set Price By Rank
-        switch(rank){
-            case DM.RANK.GENERAL : price.Coin = 100; break;
-            case DM.RANK.RARE : price.Coin = 300; break;
-            case DM.RANK.UNIQUE : price.Coin = 700; break;
-            case DM.RANK.LEGEND : price.Coin = 1500; break;
-            case DM.RANK.GOD : price.Coin = 4000; break;
-        }
     }
 
-    public void setModelMesh(){
+    public void checkLockedModel(){
+        Debug.Log($"ItemInfo::checkLockedModel:: this.name={this.name}, IsLock={IsLock}, ModelMeshRdrList.Count= {ModelMeshRdrList.Count}, OriginMtList.Count= {OriginMtList.Count}");
         //TODO ゲームスタートして戻ったら、GRAY MATERAILが適用されていないBUG。
 
         int i = 0;
-        //* ATVやPSVがLockの場合、2D黒パンネルを適用。
+        //* 2D
         if(GrayPanel2D) // CharaやBatはNone.
             GrayPanel2D.gameObject.SetActive(IsLock);
 
-        //* Set Material
+        //* 3D & 2D
         if(IsLock)
-            ModelMeshRdrList.ForEach((mesh) => mesh.materials = new Material[2] {DM.ins.grayItemLockMt, originMtList[i++]});
-        else
-            ModelMeshRdrList.ForEach(mesh => mesh.materials = new Material[] {originMtList[i++]});
+            ModelMeshRdrList.ForEach((mesh) => mesh.materials = new Material[2] {OriginMtList[i++], DM.ins.GrayItemLockMt});
+        else{
+            //* (BUG) GAMESTARTしてからHOMEに戻ったら、CharaとBatのロックしたモデルが購入しても、そのまま黒色。
+            // ModelMeshRdrList.ForEach(mesh => mesh.material = new Material[] {OriginMtList[i++]}); ➡ 原因はこうしても、マテリアル配列数は初期化されないから
+            ModelMeshRdrList.ForEach(mesh => {
+                Material[] tempArr = mesh.materials;
+                Array.Resize(ref tempArr, 1);
+                mesh.materials = tempArr;
+            });
+            
+        }
+            
     }
 }

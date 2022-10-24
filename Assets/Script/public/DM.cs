@@ -28,7 +28,7 @@ public class DM : MonoBehaviour
     [SerializeField] Text diamondTxt; public Text DiamondTxt {get => diamondTxt; set => diamondTxt = value;}
 
     [Header("SELECT ITEM")]
-    public Material grayItemLockMt;
+    [SerializeField] Material grayItemLockMt;   public Material GrayItemLockMt {get => grayItemLockMt; set => grayItemLockMt = value;}
     [SerializeField] string selectItemType = "";    public string SelectItemType {get => selectItemType; set => selectItemType = value;}
     [SerializeField] RectTransform modelContentPref;   public RectTransform ModelContentPref {get => modelContentPref; set => modelContentPref = value;}
     [SerializeField] RectTransform itemPassivePanel;   public RectTransform ItemPassivePanel {get => itemPassivePanel; set => itemPassivePanel = value;}
