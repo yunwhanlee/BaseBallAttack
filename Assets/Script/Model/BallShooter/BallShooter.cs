@@ -48,7 +48,7 @@ public class BallShooter : MonoBehaviour
                 Vector3 goalDir = (gm.ballPreviewDirGoal.transform.position - entranceTf.position).normalized;
                 GameObject ins = Instantiate(ballPref, entranceTf.position, Quaternion.LookRotation(goalDir), gm.ballGroup);
 
-                throwBall(ins);
+                throwBall(ins, goalDir);
             }
         }
         else{//* ボールが存在し、飛んでいる。★
@@ -62,11 +62,11 @@ public class BallShooter : MonoBehaviour
         throwBallSpeed = LM._.THROW_BALL_SPEED;
     }
 
-    public void throwBall(GameObject ins){
+    public void throwBall(GameObject ins, Vector3 goalDir){
         var ball = ins.GetComponent<Ball_Prefab>();
         int extra = Random.Range(0, 5);
         ball.Speed = (throwBallSpeed + extra);
-        ball.rigid.AddForce(this.transform.forward * ball.Speed, ForceMode.Impulse);
+        ball.rigid.AddForce(goalDir * ball.Speed, ForceMode.Impulse);
     }
 
     private void setSuddenlyThrowBall(int per){

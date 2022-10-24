@@ -28,6 +28,7 @@ public class Util : MonoBehaviour
     }
 
     public Transform getCharaRightArmPath(Transform charaTf){
+        Debug.Log($"getCharaRightArmPath:: charaTf= {charaTf}");
         return  charaTf.Find("Bone").transform.Find("Bone_R.001").transform.Find("Bone_R.002").transform.Find(DM.NAME.RightArm.ToString());
     }
 

@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     GameManager gm;  EffectManager em;
     Animator anim;
 
+    public Transform modelMovingTf;
+
     [Header("ARROW")]
     public int MAX_SWING_HIT_DEG; //左右ある方向の最大角度
     public float offsetHitDeg; // Startが０度(←方向)から、↑ →向きに回る。
@@ -60,7 +62,7 @@ public class Player : MonoBehaviour
 
         //* Player Model Set Parent
         var playerModel = DM.ins.transform.GetChild(0);
-        playerModel.SetParent(this.gameObject.transform);// Parent TfをPlayerに移動。
+        playerModel.SetParent(modelMovingTf);// Parent TfをPlayerに移動。
         playerModel.SetSiblingIndex(0); // Child INDEXを０番に移動。
 
         var atvSkillDb = gm.activeSkillDataBase;
@@ -68,7 +70,7 @@ public class Player : MonoBehaviour
         activeSkills = new AtvSkill[atvSkillDb.Length];
 
         //* Player Charaは 必ず０番目のINDEXにすること！！
-        var charaTf = this.transform.GetChild(0);
+        var charaTf = modelMovingTf.GetChild(0);
         Transform tf = Util._.getCharaRightArmPath(charaTf);
         int childLastIdx = tf.childCount - 1;
         Transform bat = tf.GetChild(childLastIdx);
@@ -157,7 +159,7 @@ public class Player : MonoBehaviour
     }
 
     void Update(){
-        setSwingArcPos();
+        // setSwingArcPos();
         calcLevelUpExp();
     }
 

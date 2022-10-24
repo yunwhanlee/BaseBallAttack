@@ -18,6 +18,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     public Vector3 wallNormalVec;
     public GameObject hitBlockByBallPreview;
 
+    //* Player BattingSpot Moving 
     private bool isClickBattingSpot = false;
     
     private const int MIN_ARROW_DEG_Y = 30;
@@ -26,8 +27,6 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     //*Event
     public void OnDrag(PointerEventData eventData){
         if(gm.State != GameManager.STATE.WAIT) return;
-
-
 
         stick.position = eventData.position;
 
@@ -39,31 +38,42 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         float deg = convertDir2DegWithRange(dir, MIN_ARROW_DEG_Y, MAX_ARROW_DEG_Y);
         //* Stick(Arrow)角度によって、Player位置が自動で左右移動。
         // Debug.Log("OnDrag:: Stick(Arrow) Deg=" + deg + ", dir=" + dir + ", " + ((dir.x < 0)? "left" : "right").ToString());
-
-        if(isClickBattingSpot){
-
+        Transform playerTf = pl.gameObject.transform;
+        float standardPosX = playerTf.position.x;
+        if(isClickBattingSpot){ //* Player BattingSpot Translate
+            float min = -4.3f;
+            float max = 1.7f;
+            // player.position = new Vector3(Mathf.Clamp(stick.localPosition.x, min, max), player.position.y, player.position.z);
+            // player.position = new Vector3(-Mathf.Abs(stick.localPosition.x), player.position.y, player.position.z);
+            playerTf.transform.position = new Vector3(Mathf.Clamp(stick.localPosition.x, min, max), playerTf.position.y, playerTf.position.z);
             return;
         }
-        Transform player = pl.gameObject.transform;
-        if(dir.x < 0){
-            //Right
-            player.position = new Vector3(+Mathf.Abs(player.position.x), player.position.y, player.position.z);
-            player.localScale = new Vector3(-Mathf.Abs(player.localScale.x),player.localScale.y,player.localScale.z);
+        else{ //* Arrow Axis Degree Rotate
+            if(dir.x < 0){
+                //Right
+                // player.position = new Vector3(+Mathf.Abs(player.position.x), player.position.y, player.position.z);
+                // player.localScale = new Vector3(-Mathf.Abs(player.localScale.x),player.localScale.y,player.localScale.z);
+                pl.modelMovingTf.localPosition = new Vector3(3, 0, 0);
+                pl.modelMovingTf.localScale = new Vector3(-Mathf.Abs(pl.modelMovingTf.localScale.x), pl.modelMovingTf.localScale.y, pl.modelMovingTf.localScale.z);
+            }
+            else{
+                //Left
+                // player.position = new Vector3(-Mathf.Abs(player.position.x), player.position.y, player.position.z);
+                // player.localScale = new Vector3(+Mathf.Abs(player.localScale.x),player.localScale.y,player.localScale.z);
+                pl.modelMovingTf.localPosition = new Vector3(0, 0, 0);
+                pl.modelMovingTf.localScale = new Vector3(+Mathf.Abs(pl.modelMovingTf.localScale.x), pl.modelMovingTf.localScale.y, pl.modelMovingTf.localScale.z);
+            }
+            
+            //Player矢印(Arrow)角度に適用
+            const int offsetDeg2DTo3D = 90;
+            pl.arrowAxisAnchor.transform.rotation = Quaternion.Euler(0,offsetDeg2DTo3D - deg, 0);
+            
+            //* Draw Preview
+            Transform arrowAnchorTf = pl.arrowAxisAnchor.transform;
+            drawBallPreviewSphereCast(arrowAnchorTf);
+            drawLinePreview(arrowAnchorTf);
         }
-        else{
-            //Left
-            player.position = new Vector3(-Mathf.Abs(player.position.x), player.position.y, player.position.z);
-            player.localScale = new Vector3(+Mathf.Abs(player.localScale.x),player.localScale.y,player.localScale.z);
-        }
-        
-        //Player矢印(Arrow)角度に適用
-        const int offsetDeg2DTo3D = 90;
-        pl.arrowAxisAnchor.transform.rotation = Quaternion.Euler(0,offsetDeg2DTo3D - deg, 0);
-        
-        //* Draw Preview
-        Transform arrowAnchorTf = pl.arrowAxisAnchor.transform;
-        drawBallPreviewSphereCast(arrowAnchorTf);
-        drawLinePreview(arrowAnchorTf);
+
     }
 
     public void OnPointerDown(PointerEventData eventData){
@@ -77,7 +87,6 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         Debug.DrawLine(ray.origin, touchScreenPos - ray.origin, Color.red, 1);
 
         Array.ForEach(hits, hit => {
-            
             if(hit.transform.name == "BattingSpot"){
                 Debug.Log("OnPointerDown::hit.tag= BattingSpot:: hit.transform.name=" + hit.transform.name);
                 isClickBattingSpot = true;
