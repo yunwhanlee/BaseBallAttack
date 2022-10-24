@@ -40,57 +40,68 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         float deg = convertDir2DegWithRange(dir, MIN_ARROW_DEG_Y, MAX_ARROW_DEG_Y);
         //* Stick(Arrow)角度によって、Player位置が自動で左右移動。
         // Debug.Log("OnDrag:: Stick(Arrow) Deg=" + deg + ", dir=" + dir + ", " + ((dir.x < 0)? "left" : "right").ToString());
+        Transform arrowAnchorTf = pl.arrowAxisAnchor.transform;
         Transform playerTf = pl.gameObject.transform;
         float standardPosX = playerTf.position.x;
         if(isClickBattingSpot){ //* Player BattingSpot Translate
-            // player.position = new Vector3(Mathf.Clamp(stick.localPosition.x, min, max), player.position.y, player.position.z);
-            // player.position = new Vector3(-Mathf.Abs(stick.localPosition.x), player.position.y, player.position.z);
             float posRatioX = (stick.localPosition.x / pad.rect.width * 0.4f) * 10;
             Debug.Log("stick.localPosition.x->" + stick.localPosition.x + ", pad.rect.width/4->" + pad.rect.width/4 + ", res=>" + (stick.localPosition.x / pad.rect.width * 0.4f) * 10);
             float playerTfPosX = 0;
-            if(-1.0f <= posRatioX && posRatioX < -0.34f){ //* Right
-                playerTfPosX = MIN_PLAYER_TF_POS_X - 1.3f;
+
+            //* Set PlayerTf Position X
+            const int SPLIT_CNT = 3;
+            const float BEGIN_POS_X = -1;
+            const float STICK_RANGE = 2;
+            const int LEFT = 0, CENTER = 1, RIGHT = 2;
+
+            float value = (STICK_RANGE / SPLIT_CNT);
+            float[] posXArr = new float[3];
+            float middlePosX = (STICK_RANGE - value);
+
+            for(int i = 0; i < SPLIT_CNT; i++){
+                posXArr[i] = BEGIN_POS_X + value * (i + 1);
+                Debug.Log("rangeArr=" + posXArr[i]);
+            }
+            
+            if(BEGIN_POS_X <= posRatioX && posRatioX < posXArr[LEFT]){ //* Right
+                playerTfPosX = MIN_PLAYER_TF_POS_X - middlePosX;
                 gm.cam2.transform.position = new Vector3(-3.0f, gm.cam2.transform.position.y, gm.cam2.transform.position.z);
             }
-            else if(-0.34f <= posRatioX && posRatioX < 0.34f){ //* Center
-                playerTfPosX = -0;
+            else if(posXArr[LEFT] <= posRatioX && posRatioX < posXArr[CENTER]){ //* Center
+                playerTfPosX = 0;
                 gm.cam2.transform.position = new Vector3(0, gm.cam2.transform.position.y, gm.cam2.transform.position.z);
             }
-            else if(0.34f <= posRatioX && posRatioX < 1.0f){ //* Left
-                playerTfPosX = MAX_PLAYER_TF_POS_X + 1.3f;
+            else if(posXArr[CENTER] <= posRatioX && posRatioX < posXArr[RIGHT]){ //* Left
+                playerTfPosX = MAX_PLAYER_TF_POS_X + middlePosX;
                 gm.cam2.transform.position = new Vector3(3.0f, gm.cam2.transform.position.y, gm.cam2.transform.position.z);
             }
             
-            float offsetX = -1.3f;
+            const float offsetX = -1.3f;
             playerTf.transform.position = new Vector3(Mathf.Clamp(playerTfPosX + offsetX, MIN_PLAYER_TF_POS_X, MAX_PLAYER_TF_POS_X), playerTf.position.y, playerTf.position.z);
+            drawBallPreviewSphereCast(arrowAnchorTf);
+            drawLinePreview(arrowAnchorTf);
             return;
         }
-        else{ //* Arrow Axis Degree Rotate
+        else{ //* Set Player Model Moving Transform
             if(dir.x < 0){
                 //Right
-                // player.position = new Vector3(+Mathf.Abs(player.position.x), player.position.y, player.position.z);
-                // player.localScale = new Vector3(-Mathf.Abs(player.localScale.x),player.localScale.y,player.localScale.z);
                 pl.modelMovingTf.localPosition = new Vector3(3, 0, 0);
                 pl.modelMovingTf.localScale = new Vector3(-Mathf.Abs(pl.modelMovingTf.localScale.x), pl.modelMovingTf.localScale.y, pl.modelMovingTf.localScale.z);
             }
             else{
                 //Left
-                // player.position = new Vector3(-Mathf.Abs(player.position.x), player.position.y, player.position.z);
-                // player.localScale = new Vector3(+Mathf.Abs(player.localScale.x),player.localScale.y,player.localScale.z);
                 pl.modelMovingTf.localPosition = new Vector3(0, 0, 0);
                 pl.modelMovingTf.localScale = new Vector3(+Mathf.Abs(pl.modelMovingTf.localScale.x), pl.modelMovingTf.localScale.y, pl.modelMovingTf.localScale.z);
             }
             
-            //Player矢印(Arrow)角度に適用
+            //* Player矢印(Arrow)角度に適用
             const int offsetDeg2DTo3D = 90;
             pl.arrowAxisAnchor.transform.rotation = Quaternion.Euler(0,offsetDeg2DTo3D - deg, 0);
             
             //* Draw Preview
-            Transform arrowAnchorTf = pl.arrowAxisAnchor.transform;
             drawBallPreviewSphereCast(arrowAnchorTf);
             drawLinePreview(arrowAnchorTf);
         }
-
     }
 
     public void OnPointerDown(PointerEventData eventData){
