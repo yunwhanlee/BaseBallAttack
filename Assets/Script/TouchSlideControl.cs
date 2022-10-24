@@ -23,6 +23,8 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     
     private const int MIN_ARROW_DEG_Y = 30;
     private const int MAX_ARROW_DEG_Y = 150;
+    private const float MIN_PLAYER_TF_POS_X = -4.3f;
+    private const float MAX_PLAYER_TF_POS_X = 1.7f;
 
     //*Event
     public void OnDrag(PointerEventData eventData){
@@ -41,11 +43,26 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         Transform playerTf = pl.gameObject.transform;
         float standardPosX = playerTf.position.x;
         if(isClickBattingSpot){ //* Player BattingSpot Translate
-            float min = -4.3f;
-            float max = 1.7f;
             // player.position = new Vector3(Mathf.Clamp(stick.localPosition.x, min, max), player.position.y, player.position.z);
             // player.position = new Vector3(-Mathf.Abs(stick.localPosition.x), player.position.y, player.position.z);
-            playerTf.transform.position = new Vector3(Mathf.Clamp(stick.localPosition.x, min, max), playerTf.position.y, playerTf.position.z);
+            float posRatioX = (stick.localPosition.x / pad.rect.width * 0.4f) * 10;
+            Debug.Log("stick.localPosition.x->" + stick.localPosition.x + ", pad.rect.width/4->" + pad.rect.width/4 + ", res=>" + (stick.localPosition.x / pad.rect.width * 0.4f) * 10);
+            float playerTfPosX = 0;
+            if(-1.0f <= posRatioX && posRatioX < -0.34f){ //* Right
+                playerTfPosX = MIN_PLAYER_TF_POS_X - 1.3f;
+                gm.cam2.transform.position = new Vector3(-3.0f, gm.cam2.transform.position.y, gm.cam2.transform.position.z);
+            }
+            else if(-0.34f <= posRatioX && posRatioX < 0.34f){ //* Center
+                playerTfPosX = -0;
+                gm.cam2.transform.position = new Vector3(0, gm.cam2.transform.position.y, gm.cam2.transform.position.z);
+            }
+            else if(0.34f <= posRatioX && posRatioX < 1.0f){ //* Left
+                playerTfPosX = MAX_PLAYER_TF_POS_X + 1.3f;
+                gm.cam2.transform.position = new Vector3(3.0f, gm.cam2.transform.position.y, gm.cam2.transform.position.z);
+            }
+            
+            float offsetX = -1.3f;
+            playerTf.transform.position = new Vector3(Mathf.Clamp(playerTfPosX + offsetX, MIN_PLAYER_TF_POS_X, MAX_PLAYER_TF_POS_X), playerTf.position.y, playerTf.position.z);
             return;
         }
         else{ //* Arrow Axis Degree Rotate

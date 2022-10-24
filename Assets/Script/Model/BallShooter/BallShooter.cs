@@ -44,7 +44,7 @@ public class BallShooter : MonoBehaviour
                 gm.throwScreenAnimSetTrigger("ThrowBall");
 
                 gm.ShootCntTxt.text = "SHOOT";
-                Debug.Log("ballPreviewDirGoalPos="+gm.ballPreviewDirGoal.transform.position+", entranceTfPos="+entranceTf.position);
+                Debug.Log("ballPreviewDirGoal="+gm.ballPreviewDirGoal.transform.position+", entranceTfPos="+entranceTf.position);
                 Vector3 goalDir = (gm.ballPreviewDirGoal.transform.position - entranceTf.position).normalized;
                 GameObject ins = Instantiate(ballPref, entranceTf.position, Quaternion.LookRotation(goalDir), gm.ballGroup);
 

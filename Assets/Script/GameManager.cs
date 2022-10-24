@@ -372,7 +372,7 @@ public class GameManager : MonoBehaviour
         float v = 0.05f;//0.175f; (BUG) BlockがGameOverまである時に、ボールとぶつかる。
         float rx = Random.Range(-v, v);
         float ry = Random.Range(-v, v);
-        ballPreviewDirGoal.transform.position = new Vector3(0 + rx, 0.6f + ry, zCenter);
+        ballPreviewDirGoal.transform.position = new Vector3(ballPreviewDirGoal.transform.position.x + rx, 0.6f + ry, zCenter);
     }
 
     public void setGame(string type){
