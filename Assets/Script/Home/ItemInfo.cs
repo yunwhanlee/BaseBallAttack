@@ -126,8 +126,6 @@ public class ItemInfo : MonoBehaviour
                 Array.Resize(ref tempArr, 1);
                 mesh.materials = tempArr;
             });
-            
         }
-            
     }
 }

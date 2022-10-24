@@ -17,6 +17,8 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     private Vector3 dir;
     public Vector3 wallNormalVec;
     public GameObject hitBlockByBallPreview;
+
+    private bool isClickBattingSpot = false;
     
     private const int MIN_ARROW_DEG_Y = 30;
     private const int MAX_ARROW_DEG_Y = 150;
@@ -24,6 +26,9 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     //*Event
     public void OnDrag(PointerEventData eventData){
         if(gm.State != GameManager.STATE.WAIT) return;
+
+
+
         stick.position = eventData.position;
 
         //Stick動き制限
@@ -34,6 +39,11 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         float deg = convertDir2DegWithRange(dir, MIN_ARROW_DEG_Y, MAX_ARROW_DEG_Y);
         //* Stick(Arrow)角度によって、Player位置が自動で左右移動。
         // Debug.Log("OnDrag:: Stick(Arrow) Deg=" + deg + ", dir=" + dir + ", " + ((dir.x < 0)? "left" : "right").ToString());
+
+        if(isClickBattingSpot){
+
+            return;
+        }
         Transform player = pl.gameObject.transform;
         if(dir.x < 0){
             //Right
@@ -54,17 +64,34 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         Transform arrowAnchorTf = pl.arrowAxisAnchor.transform;
         drawBallPreviewSphereCast(arrowAnchorTf);
         drawLinePreview(arrowAnchorTf);
-
-        
     }
 
     public void OnPointerDown(PointerEventData eventData){
+        Debug.Log("");
+
+        Vector3 touchPos = new Vector3(eventData.position.x, eventData.position.y, 100);
+        Vector3 touchScreenPos = Camera.main.ScreenToWorldPoint(touchPos);
+        Ray ray = Camera.main.ScreenPointToRay(touchPos);
+        float maxDistance = 100;
+        RaycastHit[] hits = Physics.RaycastAll(ray.origin, touchScreenPos - ray.origin, maxDistance);
+        Debug.DrawLine(ray.origin, touchScreenPos - ray.origin, Color.red, 1);
+
+        Array.ForEach(hits, hit => {
+            
+            if(hit.transform.name == "BattingSpot"){
+                Debug.Log("OnPointerDown::hit.tag= BattingSpot:: hit.transform.name=" + hit.transform.name);
+                isClickBattingSpot = true;
+                return;
+            }
+        });
+
         pad.position = eventData.position;
         pad.gameObject.SetActive(true);
     }
 
     public void OnPointerUp(PointerEventData eventData){
         gm.isPointUp = true;
+        isClickBattingSpot = false;
         pad.gameObject.SetActive(false);
         stick.localPosition = Vector2.zero;
         if(gm.State != GameManager.STATE.PLAY) return;

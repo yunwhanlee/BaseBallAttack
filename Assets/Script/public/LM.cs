@@ -22,12 +22,12 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
 
     [Header("HIT BALL")]
     public HitRank[] HIT_BALL_RANK = new HitRank[6]{
-        new HitRank(0.125f, 10),
-        new HitRank(0.25f, 7),
-        new HitRank(0.5f, 5),
-        new HitRank(0.85f, 4),
-        new HitRank(1.125f, 3),
-        new HitRank(1.5f, 2),
+        new HitRank(0.125f, 10), //A
+        new HitRank(0.25f, 7), //B
+        new HitRank(0.5f, 5), //C
+        new HitRank(0.85f, 4), //D
+        new HitRank(1.125f, 3), //E
+        new HitRank(1.5f, 2), //F
     };
 
     [Header("BLOCK SPAN")]
