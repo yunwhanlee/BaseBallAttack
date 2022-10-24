@@ -105,8 +105,6 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     }
 
     public void OnPointerDown(PointerEventData eventData){
-        Debug.Log("");
-
         Vector3 touchPos = new Vector3(eventData.position.x, eventData.position.y, 100);
         Vector3 touchScreenPos = Camera.main.ScreenToWorldPoint(touchPos);
         Ray ray = Camera.main.ScreenPointToRay(touchPos);
@@ -118,6 +116,9 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
             if(hit.transform.name == "BattingSpot"){
                 Debug.Log("OnPointerDown::hit.tag= BattingSpot:: hit.transform.name=" + hit.transform.name);
                 isClickBattingSpot = true;
+                Transform playerTf = pl.gameObject.transform;
+                Animator playerTfAnim = playerTf.GetComponent<Animator>();
+                playerTfAnim.SetTrigger("Touch");
                 return;
             }
         });
