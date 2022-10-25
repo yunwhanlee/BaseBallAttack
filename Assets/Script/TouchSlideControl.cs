@@ -54,7 +54,9 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         Transform playerTf = pl.gameObject.transform;
         Transform arrowAnchorTf = pl.arrowAxisAnchor.transform;
         float standardPosX = playerTf.position.x;
-        if(isClickBattingSpot){ //* Player BattingSpot Translate
+
+        //* Player BattingSpot Translate
+        if(isClickBattingSpot){ 
             float playerTfPosX = 0;
             float[] posXArr = new float[3];
             float posRatioX = (stick.localPosition.x / pad.rect.width * 0.4f) * 10;
@@ -90,7 +92,8 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
             return;
         }
-        else{ //* Set ModelMovingTf
+        //* Set ModelMovingTf
+        else{ 
             if(dir.x < 0){// Right
                 pl.modelMovingTf.localPosition = new Vector3(3, 0, 0);
                 pl.modelMovingTf.localScale = new Vector3(-Mathf.Abs(pl.modelMovingTf.localScale.x), pl.modelMovingTf.localScale.y, pl.modelMovingTf.localScale.z);
@@ -111,6 +114,11 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
     public void OnPointerDown(PointerEventData eventData){
         Debug.Log("OnPointerDown::");
+        pad.position = eventData.position;
+        pad.gameObject.SetActive(true);
+
+        if(gm.State != GameManager.STATE.WAIT) return;
+        
         Vector3 touchPos = new Vector3(eventData.position.x, eventData.position.y, 100);
         Vector3 touchScreenPos = Camera.main.ScreenToWorldPoint(touchPos);
         Ray ray = Camera.main.ScreenPointToRay(touchPos);
@@ -122,13 +130,12 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
             if(hit.transform.CompareTag(DM.TAG.PlayerBattingSpot.ToString())){
                 Debug.Log("OnPointerDown::hit.tag= BattingSpot:: hit.transform.name=" + hit.transform.name);
                 Transform playerTf = pl.gameObject.transform;
-                Animator plTfAnim = playerTf.GetComponent<Animator>();
                 List<MeshRenderer> filterList = new List<MeshRenderer>();
                 modelOriginMtList = new List<Material>();
                 plTfMeshRdrs = playerTf.GetComponentsInChildren<MeshRenderer>();
 
                 isClickBattingSpot = true;
-                plTfAnim.SetTrigger(DM.ANIM.Touch.ToString());
+                pl.setAnimTrigger(DM.ANIM.Touch.ToString());
 
                 string[] exceptStrArr = new string[] {
                     DM.NAME.BallPreview.ToString(), 
@@ -155,9 +162,6 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
                 return;
             }
         });
-
-        pad.position = eventData.position;
-        pad.gameObject.SetActive(true);
     }
 
     public void OnPointerUp(PointerEventData eventData){
@@ -174,11 +178,13 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         stick.localPosition = Vector2.zero;
         if(gm.State != GameManager.STATE.PLAY) return;
         pl.setAnimTrigger("Swing");
+        Debug.Log("SWIMG!");
     }
 
     //*---------------------------------------
     //*  関数
     //*---------------------------------------
+
     private void drawBallPreviewSphereCast(Transform arrowAnchorTf){
         RaycastHit hit, hit2;
         float radius = pl.ballPreviewSphere[0].GetComponent<SphereCollider>().radius * pl.ballPreviewSphere[0].transform.localScale.x;

@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public const int ONE_KILL_DMG = 999999;
     //* OutSide
     GameManager gm;  EffectManager em;
-    Animator anim;
+    public Animator anim;
 
     public Transform modelMovingTf;
 
@@ -183,11 +183,12 @@ public class Player : MonoBehaviour
         anim.updateMode = AnimatorUpdateMode.Normal;
         anim.SetTrigger(name);
         switch(name){
-            case "Swing":   
+            case "Swing":
                 DoSwing = true;
                 break;
             case "HomeRun": 
             case "ActiveSkillBefSpotLight":
+            case "Touch":
                 anim.updateMode  = AnimatorUpdateMode.UnscaledTime;
                 break;
         }

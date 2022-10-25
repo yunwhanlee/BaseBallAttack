@@ -812,7 +812,7 @@ MonoBehaviour:
   wallNormalVec: {x: 0, y: 0, z: 0}
   hitBlockByBallPreview: {fileID: 0}
   modelOriginMtList: []
-  meshRdrs: []
+  plTfMeshRdrs: []
   onClickedMt: {fileID: 2100000, guid: 1a0418b150dc1e1448c35ae9aa39157c, type: 2}
 --- !u!1 &149300362
 GameObject:
@@ -5573,7 +5573,6 @@ GameObject:
   - component: {fileID: 702911505}
   - component: {fileID: 702911507}
   - component: {fileID: 702911506}
-  - component: {fileID: 702911508}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -5614,6 +5613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a66158f03c61604099ad030198f93e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
   modelMovingTf: {fileID: 1591745657}
   MAX_SWING_HIT_DEG: 0
   offsetHitDeg: 0
@@ -5724,25 +5724,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 3, z: 2}
   m_Center: {x: 0, y: 0.59, z: 0}
---- !u!95 &702911508
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 702911504}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2fa49a518f4a9c343a1a737ffc3a2fef, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &702983719
 GameObject:
   m_ObjectHideFlags: 0
@@ -17400,8 +17381,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.27, y: 1.6, z: 1.9}
-  m_Center: {x: 0, y: 0.79, z: -3.42}
+  m_Size: {x: 3.27, y: 1.6, z: 0.98}
+  m_Center: {x: 0, y: 0.79, z: -3.78}
 --- !u!1 &1623732225
 GameObject:
   m_ObjectHideFlags: 0
