@@ -178,7 +178,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         // Debug.Log("OnDrag:: Stick(Arrow) Deg=" + deg + ", dir=" + dir + ", " + ((dir.x < 0)? "left" : "right").ToString());
 
         if(dir.x < 0){//* Right
-            pl.modelMovingTf.localPosition = new Vector3(3, 0, 0);
+            pl.modelMovingTf.localPosition = new Vector3(3.5f, 0, 0);
             pl.modelMovingTf.localScale = new Vector3(-Mathf.Abs(
                 pl.modelMovingTf.localScale.x), pl.modelMovingTf.localScale.y, pl.modelMovingTf.localScale.z);
         }
