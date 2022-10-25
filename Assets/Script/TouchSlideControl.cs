@@ -19,81 +19,86 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     public GameObject hitBlockByBallPreview;
 
     //* Player BattingSpot Moving 
-    private bool isClickBattingSpot = false;
-    
-    private const int MIN_ARROW_DEG_Y = 30;
-    private const int MAX_ARROW_DEG_Y = 150;
-    private const float MIN_PLAYER_TF_POS_X = -4.3f;
-    private const float MAX_PLAYER_TF_POS_X = 1.7f;
+    enum POS_X {LEFT, CENTER, RIGHT};
+    const float BEGIN_POS_X = -1;
+    const float STICK_RANGE = 2;
+    const float MIN_PL_TF_POS_X = -4.3f;
+    const float MAX_PL_TF_POS_X = 1.7f;
+    const int SPLIT_CNT = 3;
+    bool isClickBattingSpot = false;
+    float playerOffsetX;
+    public List<Material> modelOriginMtList;
+    public MeshRenderer[] plTfMeshRdrs;
+    public Material onClickedMt;
 
+    //* Arrow Axis
+    const int MIN_ARROW_DEG_Y = 30;
+    const int MAX_ARROW_DEG_Y = 150;
+
+    void Start(){
+        playerOffsetX = pl.transform.position.x;
+    }
+    
     //*Event
     public void OnDrag(PointerEventData eventData){
         if(gm.State != GameManager.STATE.WAIT) return;
-
+        //タッチした位置代入
         stick.position = eventData.position;
-
         //Stick動き制限
         stick.localPosition = Vector2.ClampMagnitude(eventData.position - (Vector2)pad.position, pad.rect.width * 0.25f);
-        
         //Stick角度  
         Vector2 dir = (stick.position - pad.gameObject.transform.position).normalized;
-        float deg = convertDir2DegWithRange(dir, MIN_ARROW_DEG_Y, MAX_ARROW_DEG_Y);
         //* Stick(Arrow)角度によって、Player位置が自動で左右移動。
+        float deg = convertDir2DegWithRange(dir, MIN_ARROW_DEG_Y, MAX_ARROW_DEG_Y);
         // Debug.Log("OnDrag:: Stick(Arrow) Deg=" + deg + ", dir=" + dir + ", " + ((dir.x < 0)? "left" : "right").ToString());
-        Transform arrowAnchorTf = pl.arrowAxisAnchor.transform;
         Transform playerTf = pl.gameObject.transform;
+        Transform arrowAnchorTf = pl.arrowAxisAnchor.transform;
         float standardPosX = playerTf.position.x;
         if(isClickBattingSpot){ //* Player BattingSpot Translate
-            float posRatioX = (stick.localPosition.x / pad.rect.width * 0.4f) * 10;
-            Debug.Log("stick.localPosition.x->" + stick.localPosition.x + ", pad.rect.width/4->" + pad.rect.width/4 + ", res=>" + (stick.localPosition.x / pad.rect.width * 0.4f) * 10);
             float playerTfPosX = 0;
-
-            //* Set PlayerTf Position X
-            const int SPLIT_CNT = 3;
-            const float BEGIN_POS_X = -1;
-            const float STICK_RANGE = 2;
-            const int LEFT = 0, CENTER = 1, RIGHT = 2;
-
-            float value = (STICK_RANGE / SPLIT_CNT);
             float[] posXArr = new float[3];
+            float posRatioX = (stick.localPosition.x / pad.rect.width * 0.4f) * 10;
+            float value = (STICK_RANGE / SPLIT_CNT);
             float middlePosX = (STICK_RANGE - value);
+            float posXMass = (Mathf.Abs(MIN_PL_TF_POS_X) + Mathf.Abs(MAX_PL_TF_POS_X)) / 2;
+            Debug.Log($"OnDrag:: stick.localPosition.x= {stick.localPosition.x}, pad.rect.width/4= {pad.rect.width/4}, posRatioX=> {posRatioX}");
 
+            //* Set posXArr
             for(int i = 0; i < SPLIT_CNT; i++){
                 posXArr[i] = BEGIN_POS_X + value * (i + 1);
-                Debug.Log("rangeArr=" + posXArr[i]);
+                Debug.Log("posXArr=" + posXArr[i]);
             }
-            
-            if(BEGIN_POS_X <= posRatioX && posRatioX < posXArr[LEFT]){ //* Right
-                playerTfPosX = MIN_PLAYER_TF_POS_X - middlePosX;
-                gm.cam2.transform.position = new Vector3(-3.0f, gm.cam2.transform.position.y, gm.cam2.transform.position.z);
+
+            //* Set playerTfPosX
+            if(BEGIN_POS_X <= posRatioX && posRatioX < posXArr[(int)POS_X.LEFT]){ //* Right
+                playerTfPosX = MIN_PL_TF_POS_X - middlePosX;
+                gm.cam2.transform.position = new Vector3(-posXMass, gm.cam2.transform.position.y, gm.cam2.transform.position.z);
             }
-            else if(posXArr[LEFT] <= posRatioX && posRatioX < posXArr[CENTER]){ //* Center
+            else if(posXArr[(int)POS_X.LEFT] <= posRatioX && posRatioX < posXArr[(int)POS_X.CENTER]){ //* Center
                 playerTfPosX = 0;
                 gm.cam2.transform.position = new Vector3(0, gm.cam2.transform.position.y, gm.cam2.transform.position.z);
             }
-            else if(posXArr[CENTER] <= posRatioX && posRatioX < posXArr[RIGHT]){ //* Left
-                playerTfPosX = MAX_PLAYER_TF_POS_X + middlePosX;
-                gm.cam2.transform.position = new Vector3(3.0f, gm.cam2.transform.position.y, gm.cam2.transform.position.z);
+            else if(posXArr[(int)POS_X.CENTER] <= posRatioX && posRatioX < posXArr[(int)POS_X.RIGHT]){ //* Left
+                playerTfPosX = MAX_PL_TF_POS_X + middlePosX;
+                gm.cam2.transform.position = new Vector3(posXMass, gm.cam2.transform.position.y, gm.cam2.transform.position.z);
             }
             
-            const float offsetX = -1.3f;
-            playerTf.transform.position = new Vector3(Mathf.Clamp(playerTfPosX + offsetX, MIN_PLAYER_TF_POS_X, MAX_PLAYER_TF_POS_X), playerTf.position.y, playerTf.position.z);
+            //* 適用
+            playerTf.transform.position = new Vector3(Mathf.Clamp(playerTfPosX + playerOffsetX, MIN_PL_TF_POS_X, MAX_PL_TF_POS_X), playerTf.position.y, playerTf.position.z);
             drawBallPreviewSphereCast(arrowAnchorTf);
             drawLinePreview(arrowAnchorTf);
+
             return;
         }
-        else{ //* Set Player Model Moving Transform
-            if(dir.x < 0){
-                //Right
+        else{ //* Set ModelMovingTf
+            if(dir.x < 0){// Right
                 pl.modelMovingTf.localPosition = new Vector3(3, 0, 0);
                 pl.modelMovingTf.localScale = new Vector3(-Mathf.Abs(pl.modelMovingTf.localScale.x), pl.modelMovingTf.localScale.y, pl.modelMovingTf.localScale.z);
             }
-            else{
-                //Left
+            else{// Left
                 pl.modelMovingTf.localPosition = new Vector3(0, 0, 0);
                 pl.modelMovingTf.localScale = new Vector3(+Mathf.Abs(pl.modelMovingTf.localScale.x), pl.modelMovingTf.localScale.y, pl.modelMovingTf.localScale.z);
             }
-            
             //* Player矢印(Arrow)角度に適用
             const int offsetDeg2DTo3D = 90;
             pl.arrowAxisAnchor.transform.rotation = Quaternion.Euler(0,offsetDeg2DTo3D - deg, 0);
@@ -105,6 +110,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     }
 
     public void OnPointerDown(PointerEventData eventData){
+        Debug.Log("OnPointerDown::");
         Vector3 touchPos = new Vector3(eventData.position.x, eventData.position.y, 100);
         Vector3 touchScreenPos = Camera.main.ScreenToWorldPoint(touchPos);
         Ray ray = Camera.main.ScreenPointToRay(touchPos);
@@ -113,12 +119,39 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         Debug.DrawLine(ray.origin, touchScreenPos - ray.origin, Color.red, 1);
 
         Array.ForEach(hits, hit => {
-            if(hit.transform.name == "BattingSpot"){
+            if(hit.transform.CompareTag(DM.TAG.PlayerBattingSpot.ToString())){
                 Debug.Log("OnPointerDown::hit.tag= BattingSpot:: hit.transform.name=" + hit.transform.name);
-                isClickBattingSpot = true;
                 Transform playerTf = pl.gameObject.transform;
-                Animator playerTfAnim = playerTf.GetComponent<Animator>();
-                playerTfAnim.SetTrigger("Touch");
+                Animator plTfAnim = playerTf.GetComponent<Animator>();
+                List<MeshRenderer> filterList = new List<MeshRenderer>();
+                modelOriginMtList = new List<Material>();
+                plTfMeshRdrs = playerTf.GetComponentsInChildren<MeshRenderer>();
+
+                isClickBattingSpot = true;
+                plTfAnim.SetTrigger(DM.ANIM.Touch.ToString());
+
+                string[] exceptStrArr = new string[] {
+                    DM.NAME.BallPreview.ToString(), 
+                    DM.NAME.Box001.ToString(), 
+                    DM.NAME.Area.ToString()
+                };
+
+                //* 例外Object フィルターリング
+                Array.ForEach(plTfMeshRdrs, meshRdr => {
+                    if(Array.TrueForAll(exceptStrArr, exceptStr => !meshRdr.name.Contains(exceptStr)))
+                        filterList.Add(meshRdr);
+                });
+                plTfMeshRdrs = filterList.ToArray(); 
+
+                //* Originマテリアル保存
+                Array.ForEach(plTfMeshRdrs, meshRdr => {
+                    modelOriginMtList.Add(meshRdr.material);
+                });
+
+                //* クリックONモードマテリアルに変更
+                Array.ForEach(plTfMeshRdrs, meshRdr => {
+                    meshRdr.material = onClickedMt;
+                });
                 return;
             }
         });
@@ -128,6 +161,13 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     }
 
     public void OnPointerUp(PointerEventData eventData){
+        //* 基のモデルマテリアルに戻す
+        int i = 0;
+        Array.ForEach(plTfMeshRdrs, meshRdr => {
+            // Debug.Log($"OnPointerUp:: {i}:「{meshRdr.transform.gameObject.name}」 ⇐ {modelOriginMtList[i].name} ");
+            meshRdr.material = modelOriginMtList[i++];
+        });
+
         gm.isPointUp = true;
         isClickBattingSpot = false;
         pad.gameObject.SetActive(false);

@@ -11,13 +11,14 @@ public class DM : MonoBehaviour
     public enum SCENE {Home, Play};
     public enum NAME {DownWall, Block, FireBallDotEffect, BossDieDropOrbSpot, GrayPanel,
         RightArm, HomeManager,
+        BallPreview, Box001, Area,
     };
     public enum TAG {HitRangeArea, StrikeLine, GameOverLine, Wall, ActiveDownWall, Player,
         NormalBlock, LongBlock, TreasureChestBlock, HealBlock, BossBlock,   
-        Obstacle,
+        Obstacle, PlayerBattingSpot,
     };
     public enum LAYER {BallPreview};
-    public enum ANIM {DoSpawn, DoShake, DoBossSpawn, DoDie, IsHit, IsIdle, IsFly, GetHit, DoHeal};
+    public enum ANIM {DoSpawn, DoShake, DoBossSpawn, DoDie, IsHit, IsIdle, IsFly, GetHit, DoHeal, Touch};
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
     public enum PANEL {Chara, Bat, Skill, CashShop, PsvInfo, NULL};
     public enum ATV{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave, NULL};
