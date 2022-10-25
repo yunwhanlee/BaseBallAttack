@@ -13,7 +13,7 @@ public class BlockMaker : MonoBehaviour
 
     public const int MAX_HORIZONTAL_GRID = 6, FIRST_CREATE_VERTICAL_CNT = 4; //DEAD_MAX-> 13
     public const float SCALE_X = 1.9f, SCALE_Y = 1, SPAWN_POS_X = -5;
-    public const float START_POS_Z = -2, CENTER_GAP = 0.5f; // センターのボールが来る隙間
+    public const float START_POS_Z = -2, BOTH_SIDE_SPACE = 0.5f; // センターのボールが来る隙間
 
     [Header("STATUS")]
     public bool doCreateBlock;  public bool DoCreateBlock {get => doCreateBlock; set => doCreateBlock = value;}
@@ -73,7 +73,7 @@ public class BlockMaker : MonoBehaviour
                         if(rand < LM._.healBlockPer)   ins = blockPrefs[(int)KIND.Heal];
 
                         //* #4. Block生成
-                        float x = (h < 3)? (startPosX + h * xs) : (startPosX + h * xs + CENTER_GAP); //* ボールが出る空間考えて調整。
+                        float x = ((h < 3)? (startPosX + h * xs) : (startPosX + h * xs)) + ((h == 0)? BOTH_SIDE_SPACE : 0); 
                         float y = (isFirstStage)? 0 : ins.transform.position.y + gm.blockGroup.position.y;
                         float z = (isFirstStage)? -v : START_POS_Z;
                         Vector3 pos = new Vector3(x, y, z);
@@ -86,7 +86,7 @@ public class BlockMaker : MonoBehaviour
             case KIND.Long : 
                 for(int h=0; h<2; h++){
                     var ins = blockPrefs[(int)type];
-                    float x = (h < 1)? startPosX + h * xs : startPosX + h * xs + CENTER_GAP;
+                    float x = (h < 1)? startPosX + h * xs : startPosX + h * xs;
                     float y = ins.transform.position.y + gm.blockGroup.position.y;
                     Vector3 pos = new Vector3(x, y, START_POS_Z);
                     Instantiate(ins, pos, Quaternion.identity, gm.blockGroup);

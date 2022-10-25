@@ -93,7 +93,7 @@ public class BossBlock : Block_Prefab{
     private void createObstacleStoneSkill(int cnt){
         Debug.Log("<color=red>activeBossKill():: createObstacleStone()</color>");
         const float UNIT_X = BlockMaker.SCALE_X;
-        const float GAP_X = BlockMaker.CENTER_GAP;
+        const float GAP_X = BlockMaker.BOTH_SIDE_SPACE;
         const float OFFSET_X = -5;
         const float OFFSET_Y = -8;
 
