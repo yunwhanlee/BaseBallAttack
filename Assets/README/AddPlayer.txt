@@ -7,10 +7,9 @@
 
 #2. Prefab登録
     DMのスクリプトInspectorビューで、ScrollViewsへ Prefabを登録。
-
-
+    
 #3. 言語登録
-    Language.csへ、言語登録。
+    Inspectorビュー、Name Txtsを作成。
 
 #4. Prefabへ入り、武器を持つ右手Objectの名を変更。
     Bone / Bone_R.001 / Bone_R.002 / ArmLを -> "RightArm"に名前変更！
