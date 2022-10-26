@@ -19,6 +19,7 @@ public class BossBlock : Block_Prefab{
 
     [Header("【BOSS STATUS】")]
     [SerializeField] GameObject obstacleStonePf;
+    [SerializeField] List<Vector3> obstaclePosList;
 
     private void OnDisable() {
         bm.eraseObstacle();
@@ -92,30 +93,38 @@ public class BossBlock : Block_Prefab{
     //* Skill #1
     private void createObstacleStoneSkill(int cnt){
         Debug.Log("<color=red>activeBossKill():: createObstacleStone()</color>");
-        const float UNIT_X = BlockMaker.SCALE_X;
-        const float GAP_X = BlockMaker.BOTH_SIDE_SPACE;
-        const float OFFSET_X = -5;
-        const float OFFSET_Y = -8;
+        const float WIDTH = BlockMaker.SCALE_X;
+        // const float GAP_X = BlockMaker.BOTH_SIDE_SPACE;
+        // const float OFFSET_X = -5;
+        const float OFFSET_Z = -8;
 
         //* OBSTACLE LIST 準備
-        List<Vector3> obstaclePosList = new List<Vector3>(){};
-        for(int i=0; i<18;i++){
-            const int MASS_ROW_CNT = 6;
-            int rowIdx = i % MASS_ROW_CNT;
-            int lastIdx = MASS_ROW_CNT/2 - 1;
-            float gap = (i % MASS_ROW_CNT) > lastIdx ? GAP_X : 0;
+        obstaclePosList = new List<Vector3>(){};
+        const int ROW_CNT = 6;
+        const int COL_CNT = 3;
+        int len = ROW_CNT * COL_CNT;
+        Debug.Log("len->" + len);
+        
+        //TODO) BOSS SUMON OBSTACLE MAKE SEVERAL PATTERN。
+        for(int i=0; i < len; i++){
+            int rowIdx = i % ROW_CNT;
+            Debug.Log($"[{i}] -> rowIdx= {rowIdx}");
+            // int lastIdx = MASS_ROW_CNT / 2 - 1;
+            // float gap = (i % MASS_ROW_CNT) > lastIdx ? GAP_X : 0;
 
-            float x = gap + OFFSET_X + (UNIT_X * rowIdx);
-            int z = (int)(OFFSET_Y - (i / MASS_ROW_CNT));
+            // float x = gap + OFFSET_X + (UNIT_X * rowIdx);
+            // float x = OFFSET_X + (WIDTH * rowIdx);
+            float x = (WIDTH * rowIdx);
+            int z = (int)(OFFSET_Z - (i / ROW_CNT));
             obstaclePosList.Add(new Vector3(x, 0, z));
         }
 
         //* OBSTACLE INS 生成
-        for(int i=0; i< cnt; i++){
+        for(int i=0; i< obstaclePosList.Count; i++){//cnt; i++){
             int randIdx = Random.Range(0, obstaclePosList.Count);
-            gm.em.createBossObstacleSpawnEF(obstaclePosList[randIdx]);
-            Instantiate(obstacleStonePf, obstaclePosList[randIdx], Quaternion.identity, gm.obstacleGroup);
-            obstaclePosList.RemoveAt(randIdx);
+            gm.em.createBossObstacleSpawnEF(obstaclePosList[i]);
+            Instantiate(obstacleStonePf, obstaclePosList[i], Quaternion.identity, gm.obstacleGroup);
+            obstaclePosList.RemoveAt(i);
         }
 
         //* DEBUG用。全体の位置確認。
