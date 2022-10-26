@@ -67,54 +67,58 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         pad.gameObject.SetActive(true);
 
         if(gm.State != GameManager.STATE.WAIT) return;
-        
+
         Vector3 touchPos = new Vector3(eventData.position.x, eventData.position.y, 100);
-        Vector3 touchScreenPos = Camera.main.ScreenToWorldPoint(touchPos);
-        Ray ray = Camera.main.ScreenPointToRay(touchPos);
-        float maxDistance = 100;
-        RaycastHit[] hits = Physics.RaycastAll(ray.origin, touchScreenPos - ray.origin, maxDistance);
-        Debug.DrawLine(ray.origin, touchScreenPos - ray.origin, Color.red, 1);
+        if(Util._.checkRayHitTagIsExist(touchPos, DM.TAG.PlayerBattingSpot.ToString())){
+            //* 邪魔するボタンUI非活性化
+            gm.readyBtn.gameObject.SetActive(false);
+            gm.activeSkillBtnGroup.gameObject.SetActive(false);
 
-        Array.ForEach(hits, hit => {
-            if(hit.transform.CompareTag(DM.TAG.PlayerBattingSpot.ToString())){
-                Debug.Log("OnPointerDown::hit.tag= BattingSpot:: hit.transform.name=" + hit.transform.name);
-                //* 邪魔するボタンUI非活性化
-                gm.readyBtn.gameObject.SetActive(false);
-                gm.activeSkillBtnGroup.gameObject.SetActive(false);
+            Transform playerTf = pl.gameObject.transform;
+            List<MeshRenderer> filterList = new List<MeshRenderer>();
+            modelOriginMtList = new List<Material>();
+            plTfMeshRdrs = playerTf.GetComponentsInChildren<MeshRenderer>();
 
-                Transform playerTf = pl.gameObject.transform;
-                List<MeshRenderer> filterList = new List<MeshRenderer>();
-                modelOriginMtList = new List<Material>();
-                plTfMeshRdrs = playerTf.GetComponentsInChildren<MeshRenderer>();
+            isClickBattingSpot = true;
+            pl.setAnimTrigger(DM.ANIM.Touch.ToString());
 
-                isClickBattingSpot = true;
-                pl.setAnimTrigger(DM.ANIM.Touch.ToString());
+            string[] exceptStrArr = new string[] {
+                DM.NAME.BallPreview.ToString(), 
+                DM.NAME.Box001.ToString(), 
+                DM.NAME.Area.ToString()
+            };
 
-                string[] exceptStrArr = new string[] {
-                    DM.NAME.BallPreview.ToString(), 
-                    DM.NAME.Box001.ToString(), 
-                    DM.NAME.Area.ToString()
-                };
+            //* 例外Object フィルターリング
+            Array.ForEach(plTfMeshRdrs, meshRdr => {
+                if(Array.TrueForAll(exceptStrArr, exceptStr => !meshRdr.name.Contains(exceptStr)))
+                    filterList.Add(meshRdr);
+            });
+            plTfMeshRdrs = filterList.ToArray(); 
 
-                //* 例外Object フィルターリング
-                Array.ForEach(plTfMeshRdrs, meshRdr => {
-                    if(Array.TrueForAll(exceptStrArr, exceptStr => !meshRdr.name.Contains(exceptStr)))
-                        filterList.Add(meshRdr);
-                });
-                plTfMeshRdrs = filterList.ToArray(); 
+            //* Originマテリアル保存
+            Array.ForEach(plTfMeshRdrs, meshRdr => {
+                modelOriginMtList.Add(meshRdr.material);
+            });
 
-                //* Originマテリアル保存
-                Array.ForEach(plTfMeshRdrs, meshRdr => {
-                    modelOriginMtList.Add(meshRdr.material);
-                });
+            //* クリックONモードマテリアルに変更
+            Array.ForEach(plTfMeshRdrs, meshRdr => {
+                meshRdr.material = onClickedMt;
+            });
+            return;
+        }
 
-                //* クリックONモードマテリアルに変更
-                Array.ForEach(plTfMeshRdrs, meshRdr => {
-                    meshRdr.material = onClickedMt;
-                });
-                return;
-            }
-        });
+        // Vector3 touchPos = new Vector3(eventData.position.x, eventData.position.y, 100);
+        // Vector3 touchScreenPos = Camera.main.ScreenToWorldPoint(touchPos);
+        // Ray ray = Camera.main.ScreenPointToRay(touchPos);
+        // float maxDistance = 100;
+        // RaycastHit[] hits = Physics.RaycastAll(ray.origin, touchScreenPos - ray.origin, maxDistance);
+        // Debug.DrawLine(ray.origin, touchScreenPos - ray.origin, Color.red, 1);
+
+        // Array.ForEach(hits, hit => {
+            // if(hit.transform.CompareTag(DM.TAG.PlayerBattingSpot.ToString())){
+
+            // }
+        // });
     }
     public void OnPointerUp(PointerEventData eventData){
         //* ボタンUI 活性化
@@ -139,6 +143,20 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     //*---------------------------------------
     //*  関数
     //*---------------------------------------
+    private bool checkRayHitTagIsExist(Vector3 touchPos, string findTagName){
+        float maxDistance = 100;
+        Debug.Log($"checkRayHitTagIsExist:: findTagName={findTagName}");
+        Vector3 touchScreenPos = Camera.main.ScreenToWorldPoint(touchPos);
+        Ray ray = Camera.main.ScreenPointToRay(touchPos);
+
+        //* Shoot Ray
+        RaycastHit[] hits = Physics.RaycastAll(ray.origin, touchScreenPos - ray.origin, maxDistance);
+        Debug.DrawLine(ray.origin, touchScreenPos - ray.origin, Color.red, 1);
+
+        //* check Is Exist
+        return Array.Exists(hits, hit => hit.transform.CompareTag(findTagName));
+    }
+
     private void movePlayerBattingSpot(Transform playerTf){
         float playerTfPosX = 0;
         float[] posXArr = new float[3];

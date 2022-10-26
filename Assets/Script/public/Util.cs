@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+using Random = UnityEngine.Random;
+
 
 public class Util : MonoBehaviour
 {
@@ -70,4 +73,17 @@ public class Util : MonoBehaviour
         return res;
     }
 
+    public bool checkRayHitTagIsExist(Vector3 touchPos, string findTagName){
+        float maxDistance = 100;
+        Debug.Log($"checkRayHitTagIsExist:: findTagName={findTagName}");
+        Vector3 touchScreenPos = Camera.main.ScreenToWorldPoint(touchPos);
+        Ray ray = Camera.main.ScreenPointToRay(touchPos);
+
+        //* Shoot Ray
+        RaycastHit[] hits = Physics.RaycastAll(ray.origin, touchScreenPos - ray.origin, maxDistance);
+        Debug.DrawLine(ray.origin, touchScreenPos - ray.origin, Color.red, 1);
+
+        //* check Is Exist
+        return Array.Exists(hits, hit => hit.transform.CompareTag(findTagName));
+    }
 }
