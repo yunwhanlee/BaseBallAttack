@@ -51,10 +51,15 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         stick.localPosition = Vector2.ClampMagnitude(eventData.position - (Vector2)pad.position, pad.rect.width * 0.25f);
 
         //* Move Object
-        if(isClickBattingSpot)
+        if(isClickBattingSpot){
             movePlayerBattingSpot(playerTf);
-        else
-            moveModelTf();
+        }
+        else{
+            //* Stick移動方向
+            Vector2 movingDir = (stick.position - pad.gameObject.transform.position).normalized;
+            moveModelTf(movingDir);
+            rotateArrowTf(movingDir);
+        }
 
         //* Draw Preview
         drawBallPreviewSphereCast(arrowAnchorTf);
@@ -175,13 +180,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         //* 適用
         playerTf.transform.position = new Vector3(Mathf.Clamp(playerTfPosX + playerOffsetX, MIN_PL_TF_POS_X, MAX_PL_TF_POS_X), playerTf.position.y, playerTf.position.z);
     }
-    private void moveModelTf(){
-        //Stick角度  
-        Vector2 dir = (stick.position - pad.gameObject.transform.position).normalized;
-        //* Stick(Arrow)角度によって、Player位置が自動で左右移動。
-        float deg = convertDir2DegWithRange(dir, MIN_ARROW_DEG_Y, MAX_ARROW_DEG_Y);
-        // Debug.Log("OnDrag:: Stick(Arrow) Deg=" + deg + ", dir=" + dir + ", " + ((dir.x < 0)? "left" : "right").ToString());
-
+    private void moveModelTf(Vector2 dir){
         if(dir.x < 0){//* Right
             pl.modelMovingTf.localPosition = new Vector3(3.5f, 0, 0);
             pl.modelMovingTf.localScale = new Vector3(-Mathf.Abs(
@@ -192,9 +191,15 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
             pl.modelMovingTf.localScale = new Vector3(+Mathf.Abs(
                 pl.modelMovingTf.localScale.x), pl.modelMovingTf.localScale.y, pl.modelMovingTf.localScale.z);
         }
+    }
+    private void rotateArrowTf(Vector2 dir){
+        //* Stick(Arrow)角度によって、Player位置が自動で左右移動。
+        float deg = convertDir2DegWithRange(dir, MIN_ARROW_DEG_Y, MAX_ARROW_DEG_Y);
+        Debug.Log("OnDrag::rotateArrowTf:: Stick(Arrow) Deg=" + deg + ", dir=" + dir + ", " + ((dir.x < 0)? "Left" : "Right").ToString());
+
         //* Player矢印(Arrow)角度に適用
         const int offsetDeg2DTo3D = 90;
-        pl.arrowAxisAnchor.transform.rotation = Quaternion.Euler(0,offsetDeg2DTo3D - deg, 0);
+        pl.arrowAxisAnchor.transform.rotation = Quaternion.Euler(0, offsetDeg2DTo3D - deg, 0);
     }
     private void drawBallPreviewSphereCast(Transform arrowAnchorTf){
         RaycastHit hit, hit2;
