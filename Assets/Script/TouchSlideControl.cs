@@ -67,6 +67,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         pad.gameObject.SetActive(true);
 
         if(gm.State != GameManager.STATE.WAIT) return;
+        if(gm.bs.IsBallExist) return;
 
         Vector3 touchPos = new Vector3(eventData.position.x, eventData.position.y, 100);
         if(Util._.checkRayHitTagIsExist(touchPos, DM.TAG.PlayerBattingSpot.ToString())){
@@ -104,21 +105,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
             Array.ForEach(plTfMeshRdrs, meshRdr => {
                 meshRdr.material = onClickedMt;
             });
-            return;
         }
-
-        // Vector3 touchPos = new Vector3(eventData.position.x, eventData.position.y, 100);
-        // Vector3 touchScreenPos = Camera.main.ScreenToWorldPoint(touchPos);
-        // Ray ray = Camera.main.ScreenPointToRay(touchPos);
-        // float maxDistance = 100;
-        // RaycastHit[] hits = Physics.RaycastAll(ray.origin, touchScreenPos - ray.origin, maxDistance);
-        // Debug.DrawLine(ray.origin, touchScreenPos - ray.origin, Color.red, 1);
-
-        // Array.ForEach(hits, hit => {
-            // if(hit.transform.CompareTag(DM.TAG.PlayerBattingSpot.ToString())){
-
-            // }
-        // });
     }
     public void OnPointerUp(PointerEventData eventData){
         //* ボタンUI 活性化
