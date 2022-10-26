@@ -11,7 +11,7 @@ public class BossBlock : Block_Prefab{
     const int BOSS_DIE_ORB_CNT = 80;
     const float BOSS_HEAL_RATIO = 0.2f;
 
-    const int STONE_PER = 70;
+    const int STONE_PER = 100;
 
 
 
@@ -31,7 +31,6 @@ public class BossBlock : Block_Prefab{
 
     public void activeBossSkill(){ //* at NextStage
         var rand = Random.Range(0, 100);
-
         if(rand < STONE_PER){
             //* Skill #1
             createObstacleStoneSkill(OBSTACLE_STONE_CNT);
@@ -113,6 +112,7 @@ public class BossBlock : Block_Prefab{
         //* OBSTACLE INS 生成
         for(int i=0; i< cnt; i++){
             int randIdx = Random.Range(0, obstaclePosList.Count);
+            gm.em.createBossObstacleSpawnEF(obstaclePosList[randIdx]);
             Instantiate(obstacleStonePf, obstaclePosList[randIdx], Quaternion.identity, gm.obstacleGroup);
             obstaclePosList.RemoveAt(randIdx);
         }

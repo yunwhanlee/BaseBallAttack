@@ -117,12 +117,14 @@ public class Block_Prefab : MonoBehaviour
                 Hp = 1;
                 break;    
             case BlockMaker.KIND.Long:
+            case BlockMaker.KIND.Obstacle:
                 Hp = gm.stage * 5;
                 break;
             case BlockMaker.KIND.Normal:
             case BlockMaker.KIND.Heal:
                 Hp = Util._.getCalcEquivalentSequence(gm.stage, 4);
                 break;
+            
         }
         hpTxt.text = Hp.ToString();
     }
@@ -165,6 +167,7 @@ public class Block_Prefab : MonoBehaviour
     }
     private void spawnAnim(string type){
         if(kind == BlockMaker.KIND.Boss) return;
+        if(kind == BlockMaker.KIND.Obstacle) return;
         
         switch(type){
             case "Init":
