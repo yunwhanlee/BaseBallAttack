@@ -27,10 +27,12 @@ public class BossBlock : Block_Prefab{
     void Start() {
         GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         bossDieOrbSpawnTf = GameObject.Find(DM.NAME.BossDieDropOrbSpot.ToString()).transform;
+        activeBossSkill();
     }
 
     public void activeBossSkill(){ //* at NextStage
         var rand = Random.Range(0, 100);
+        this.anim.SetTrigger(DM.ANIM.Scream.ToString());
         if(rand < STONE_PER){
             //* Skill #1
             createObstacleStoneSkill(OBSTACLE_STONE_CNT);
@@ -43,7 +45,6 @@ public class BossBlock : Block_Prefab{
 
     IEnumerator coBossHealSkill(){
         yield return new WaitForSeconds(1);
-        this.anim.SetTrigger(DM.ANIM.DoHeal.ToString());
         gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
         gm.em.createBossHealSkillEF(bossDieOrbSpawnTf.position);
         yield return new WaitForSeconds(1);

@@ -49,6 +49,7 @@ public class EffectManager : MonoBehaviour
     //* Boss Skill EF
     public GameObject bossHealSkillEF;
     public GameObject bossObstacleSpawnEF;
+    public GameObject rockObstacleBrokenEF;
 
     void Start()
     {
@@ -64,9 +65,13 @@ public class EffectManager : MonoBehaviour
 //*---------------------------------------
 //* 関数
 //*---------------------------------------
+    public void createRockObstacleBrokenEF(Vector3 parentPos){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.RockObstacleBrokenEF.ToString(), parentPos, QI, gm.effectGroup);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1));
+    }
     public void createBossObstacleSpawnEF(Vector3 parentPos){
         var ins = ObjectPool.getObject(ObjectPool.DIC.BossObstacleSpawnEF.ToString(), parentPos, QI, gm.effectGroup);
-        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 10));
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 4));
     }
     public void createBossHealSkillEF(Vector3 parentPos){
         var ins = ObjectPool.getObject(ObjectPool.DIC.BossHealSkillEF.ToString(), parentPos, QI, gm.effectGroup);

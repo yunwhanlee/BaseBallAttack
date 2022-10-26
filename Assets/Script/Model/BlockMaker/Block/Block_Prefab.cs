@@ -274,6 +274,9 @@ public class Block_Prefab : MonoBehaviour
                 bm.createDropItemExpOrbPf(this.transform, resultExp);
             }
         }
+        else if(kind == BlockMaker.KIND.Obstacle){
+            em.createRockObstacleBrokenEF(this.transform.position);
+        }
         Destroy(target);
     }
 

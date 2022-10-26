@@ -5482,6 +5482,7 @@ MonoBehaviour:
   homeRunTxtPopEF: {fileID: 2005072966}
   bossHealSkillEF: {fileID: 2068829495866214061, guid: 25c4eb96708f49c40a8cd37b5270ec1c, type: 3}
   bossObstacleSpawnEF: {fileID: 1462863494835050131, guid: 7fe96619cf2576542aea634b97a9f7f7, type: 3}
+  rockObstacleBrokenEF: {fileID: 4160636153587398475, guid: b2a8d920c2c43c542b7a0c5d471bb13e, type: 3}
 --- !u!1 &697366768
 GameObject:
   m_ObjectHideFlags: 0
@@ -8328,7 +8329,7 @@ Transform:
   - {fileID: 448206031}
   - {fileID: 40656014}
   - {fileID: 7123070601111801784}
-  - {fileID: 6832690497868736703}
+  - {fileID: 6694132127940619097}
   - {fileID: 524698720}
   - {fileID: 1421938148}
   m_Father: {fileID: 0}
@@ -26209,9 +26210,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9fdeefcb73f0bb47a6872de776f3132, type: 3}
---- !u!4 &6832690497868736703 stripped
+--- !u!4 &6694132127940619097 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 158965718468592615, guid: f9fdeefcb73f0bb47a6872de776f3132, type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 6694132127940619096}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7123070601111801783
