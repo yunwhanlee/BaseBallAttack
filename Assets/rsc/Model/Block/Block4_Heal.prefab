@@ -423,7 +423,7 @@ Transform:
   m_GameObject: {fileID: 7185378944005582944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.9, y: 1.5, z: 1}
+  m_LocalScale: {x: 1.8, y: 1.5, z: 1}
   m_Children:
   - {fileID: 7185378944005286984}
   - {fileID: 8764481485940314639}
@@ -492,6 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
+  bm: {fileID: 0}
   mesh:
     boss: []
     block: []
