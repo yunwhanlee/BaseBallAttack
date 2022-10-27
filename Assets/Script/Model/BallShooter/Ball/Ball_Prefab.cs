@@ -61,7 +61,7 @@ public class Ball_Prefab : MonoBehaviour
         if(col.transform.CompareTag(DM.TAG.HitRangeArea.ToString())){
             pl.setSwingArcColor("red");
             if(gm.State == GameManager.STATE.PLAY && pl.DoSwing){
-                gm.switchCamScene();
+                gm.switchCamera();
                 pl.DoSwing = false;
                 rigid.useGravity = true;
 

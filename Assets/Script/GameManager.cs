@@ -184,7 +184,7 @@ public class GameManager : MonoBehaviour
 //* --------------------------------------------------------------------------------------
 //* GUI Button
 //* --------------------------------------------------------------------------------------
-    public void onClickReadyButton() => switchCamScene();
+    public void onClickReadyButton() => switchCamera();
     public void onClickReGameButton() => init();
     public void onClickSkillButton() => levelUpPanel.SetActive(false);
     public void onClickSetGameButton(string type) => setGame(type);
@@ -253,79 +253,64 @@ public class GameManager : MonoBehaviour
         var dropObjs = dropItemGroup.GetComponentsInChildren<DropItem>();
     }
 
-    public void switchCamScene(){
+    public void switchCamera(){
         if(State == GameManager.STATE.GAMEOVER) return;
-        var boss = bm.getBoss();
-        if(!cam2.activeSelf){//* CAM2 On
+        bool isOnCam2 = !cam2.activeSelf;
+
+        if(isOnCam2){//* CAM2 On
             State = GameManager.STATE.PLAY;
-            cam1.SetActive(false);
-            cam1Canvas.SetActive(false);
-            cam2.SetActive(true);
-            cam2Canvas.SetActive(true);
-            
-            shootCntTxt.gameObject.SetActive(true);
-            readyBtn.gameObject.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Back.ToString());
-
-            ballPreviewGoalImg.gameObject.SetActive(true);
+            ManageActiveObjects(isOnCam2);
+            setTextReadyBtn(LANG.getTxt(LANG.TXT.Back.ToString()));
             setBallPreviewGoalImgRGBA(new Color(0.8f,0.8f,0.8f, 0.2f));
-
             bs.init();
-
-            pl.arrowAxisAnchor.SetActive(false);
-            
-            strikePanel.SetActive(true);
-
-            statusFolderPanel.gameObject.SetActive(false);
-
-            foreach(Transform child in activeSkillBtnGroup){
-                Button btn = child.GetComponent<Button>();
-                btn.gameObject.SetActive(false);
-            }
-
-            setLightDarkness(false); //* Light -> Normal
-
-            //* Boss Collider OFF：Ball投げる時、ぶつかるから。
-            if(boss) boss.setBossComponent(true);
-                
         }
         else{//* CAM1 On
             State = GameManager.STATE.WAIT;
-            cam1.SetActive(true);
-            cam1Canvas.SetActive(true);
-            cam2.SetActive(false);
-            cam2Canvas.SetActive(false);
-            
-            shootCntTxt.gameObject.SetActive(false);
-            readyBtn.gameObject.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Ready.ToString());
-
-            ballPreviewGoalImg.gameObject.SetActive(false);
-
-            pl.arrowAxisAnchor.SetActive(true);
-            if(0 < strikeCnt && ballGroup.childCount == 0) pl.previewBundle.SetActive(true); //(BUG)STRIKEになってから、BACKボタン押すと、PreviewLineが消えてしまう。
-
-            strikePanel.SetActive(false);
-
-            statusFolderPanel.gameObject.SetActive(true);
-
-            foreach(Transform child in activeSkillBtnGroup){
-                Button btn = child.GetComponent<Button>();
-                btn.gameObject.SetActive(true);
-            }
-        
-            //* Check Before Cam1 Light : Darkness or Normal
-            bool isBefLightDark = activeSkillBtnList.Exists(btn => btn.SelectCircleEF.gameObject.activeSelf);
-            if(isBefLightDark)  setLightDarkness(true);
-
+            ManageActiveObjects(isOnCam2);
+            setTextReadyBtn(LANG.getTxt(LANG.TXT.Ready.ToString()));
+            //* (BUG)STRIKEになってから、BACKボタン押すと、PreviewLineが消えてしまう。
+            setActivePreviewBendle(true);
             //* ActiveSkill Status
             StopCoroutine("corSetStrike");
-
-            //* Boss Collider ON：PlayerがBallを打ったから、活性化。
-            if(boss) boss.setBossComponent(false);
         }
     }
+    
+    private void setActiveCam(bool isOnCam2){
+        cam1.SetActive(!isOnCam2);
+        cam1Canvas.SetActive(!isOnCam2);
+        cam2.SetActive(isOnCam2);
+        cam2Canvas.SetActive(isOnCam2);
+    }
+    public void setActiveSkillBtns(bool trigger){
+        foreach(Transform child in activeSkillBtnGroup){
+            Button btn = child.GetComponent<Button>();
+            btn.gameObject.SetActive(trigger);
+        }
+    }
+    private void setTextReadyBtn(string str){
+        readyBtn.GetComponentInChildren<Text>().text = str;
+    }
+    private void setActivePreviewBendle(bool trigger){
+        if(0 < strikeCnt && ballGroup.childCount == 0)  
+            pl.previewBundle.SetActive(trigger); 
+    }
+    private void ManageActiveObjects(bool trigger){
+        bool isBefLightDark = activeSkillBtnList.Exists(btn => btn.SelectCircleEF.gameObject.activeSelf);
+        BossBlock boss = bm.getBoss();
+        // TOGGLE A
+        setActiveCam(trigger);
+        shootCntTxt.gameObject.SetActive(trigger);
+        ballPreviewGoalImg.gameObject.SetActive(trigger);
+        strikePanel.SetActive(trigger);
+        if(boss) boss.setBossComponent(trigger);//* Boss Collider OFF：Ball投げる時、ぶつかるから。
+        // TOGGLE B
+        setActiveSkillBtns(!trigger);
+        pl.arrowAxisAnchor.SetActive(!trigger);
+        statusFolderPanel.gameObject.SetActive(!trigger);
+        if(isBefLightDark)  setLightDarkness(!trigger); //* Light <-> Normal
+    }
 
-    //ストライク GUI表示
-    public void setStrike(){
+    public void setStrike(){//ストライク GUI表示
         if(strikeCnt < 2)
             StartCoroutine(corSetStrike());
         else
@@ -339,7 +324,7 @@ public class GameManager : MonoBehaviour
             ShootCntTxt.text = LANG.getTxt(LANG.TXT.Out.ToString()) + "!";
             yield return new WaitForSeconds(1.5f);
             bs.init();
-            switchCamScene();
+            switchCamera();
             bm.DoCreateBlock = true; //ブロック生成
             foreach(var img in strikeCntImgs) img.gameObject.SetActive(false); //GUI非表示 初期化
             readyBtn.gameObject.SetActive(true);

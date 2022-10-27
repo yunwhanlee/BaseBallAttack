@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using Random = UnityEngine.Random;
 
@@ -134,7 +135,15 @@ public class BlockMaker : MonoBehaviour
         //* 再生時間 習得
         var camAnim = gm.cam1.GetComponent<Animator>();
         var txtAnim = gm.bossSpawnTxt.GetComponent<Animator>();
-        
+
+        //* InActive
+        foreach(Transform child in gm.activeSkillBtnGroup){
+            Button btn = child.GetComponent<Button>();
+            btn.gameObject.SetActive(false);
+        }
+        gm.readyBtn.gameObject.SetActive(false);
+        gm.statusFolderPanel.gameObject.SetActive(false);
+
         const int SPAWN = 1; // IDLE = 0
         float playSec = Util._.getAnimPlayTime(SPAWN, txtAnim);
 
@@ -142,6 +151,11 @@ public class BlockMaker : MonoBehaviour
         camAnim.SetTrigger(DM.ANIM.DoBossSpawn.ToString());
         txtAnim.SetTrigger(DM.ANIM.DoSpawn.ToString());
         yield return new WaitForSecondsRealtime(playSec);
+
+        gm.setActiveSkillBtns(true);
+        gm.readyBtn.gameObject.SetActive(true);
+        gm.statusFolderPanel.gameObject.SetActive(true);
+
         Time.timeScale = 1;
     }
     public void setGlowEF(Block_Prefab[] blocks, bool isOn){
