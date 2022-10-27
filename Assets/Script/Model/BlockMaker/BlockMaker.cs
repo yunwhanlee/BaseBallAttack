@@ -13,9 +13,9 @@ public class BlockMaker : MonoBehaviour
 
     public const int MAX_HORIZONTAL_GRID = 6, FIRST_CREATE_VERTICAL_CNT = 4; //DEAD_MAX-> 13
     public const float SCALE_X = 1.8f, SCALE_Y = 1, SPAWN_POS_X = -5;
-    public const float START_POS_Z = -2; // センターのボールが来る隙間
-    public const float START_POS_X = -4.5f;
-    public const float LONG_START_POS_X = -2.7f;
+    public const float OFFSET_POS_Z = -2; // センターのボールが来る隙間
+    public const float OFFSET_POS_X = -4.5f;
+    public const float LONG_OFFSET_POS_X = -2.7f;
 
     [Header("STATUS")]
     public bool doCreateBlock;  public bool DoCreateBlock {get => doCreateBlock; set => doCreateBlock = value;}
@@ -53,7 +53,7 @@ public class BlockMaker : MonoBehaviour
     public void createBlockRow(KIND type, bool isFirstStage = false, int verticalCnt = 1){
         //* Value
         float xs = blockPrefs[(int)type].transform.localScale.x;
-        float offsetPosX = (type == KIND.Normal)? START_POS_X : LONG_START_POS_X; //* Pivotが真ん中なので、OffsetPosX設定。
+        float offsetPosX = (type == KIND.Normal)? OFFSET_POS_X : LONG_OFFSET_POS_X; //* Pivotが真ん中なので、OffsetPosX設定。
 
         switch(type){
             case KIND.Normal : 
@@ -77,7 +77,7 @@ public class BlockMaker : MonoBehaviour
                         //* #4. Block生成
                         float x = offsetPosX + h * xs;
                         float y = (isFirstStage)? 0 : ins.transform.position.y + gm.blockGroup.position.y;
-                        float z = (isFirstStage)? -v : START_POS_Z;
+                        float z = (isFirstStage)? -v : OFFSET_POS_Z;
                         Vector3 pos = new Vector3(x, y, z);
                         Vector3 setPos = (isFirstStage)? pos + gm.blockGroup.position : pos;
                         Instantiate(ins, setPos, Quaternion.identity, gm.blockGroup);
@@ -90,7 +90,7 @@ public class BlockMaker : MonoBehaviour
                     var ins = blockPrefs[(int)type];
                     float x = (h < 1)? offsetPosX + h * xs : offsetPosX + h * xs;
                     float y = ins.transform.position.y + gm.blockGroup.position.y;
-                    Vector3 pos = new Vector3(x, y, START_POS_Z);
+                    Vector3 pos = new Vector3(x, y, OFFSET_POS_Z);
                     Instantiate(ins, pos, Quaternion.identity, gm.blockGroup);
                 }
                 break;

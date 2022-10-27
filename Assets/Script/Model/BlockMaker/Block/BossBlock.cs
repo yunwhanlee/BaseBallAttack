@@ -108,23 +108,24 @@ public class BossBlock : Block_Prefab{
         //TODO) BOSS SUMON OBSTACLE MAKE SEVERAL PATTERN。
         for(int i=0; i < len; i++){
             int rowIdx = i % ROW_CNT;
-            Debug.Log($"[{i}] -> rowIdx= {rowIdx}");
             // int lastIdx = MASS_ROW_CNT / 2 - 1;
             // float gap = (i % MASS_ROW_CNT) > lastIdx ? GAP_X : 0;
 
             // float x = gap + OFFSET_X + (UNIT_X * rowIdx);
             // float x = OFFSET_X + (WIDTH * rowIdx);
-            float x = (WIDTH * rowIdx);
-            int z = (int)(OFFSET_Z - (i / ROW_CNT));
+            float x =  BlockMaker.OFFSET_POS_X + (WIDTH * rowIdx);
+            float z = OFFSET_Z - (i / ROW_CNT);
+            Debug.Log($"[{i}] -> rowIdx= {rowIdx} vector3({x}, 0, {z})");
             obstaclePosList.Add(new Vector3(x, 0, z));
         }
 
         //* OBSTACLE INS 生成
+        Debug.Log($"obstaclePosList.Count= {obstaclePosList.Count}");
         for(int i=0; i< obstaclePosList.Count; i++){//cnt; i++){
             int randIdx = Random.Range(0, obstaclePosList.Count);
             gm.em.createBossObstacleSpawnEF(obstaclePosList[i]);
             Instantiate(obstacleStonePf, obstaclePosList[i], Quaternion.identity, gm.obstacleGroup);
-            obstaclePosList.RemoveAt(i);
+            // obstaclePosList.RemoveAt(i);
         }
 
         //* DEBUG用。全体の位置確認。
