@@ -14,7 +14,7 @@ public class BlockMaker : MonoBehaviour
 
     public const int MAX_HORIZONTAL_GRID = 6, FIRST_CREATE_VERTICAL_CNT = 4; //DEAD_MAX-> 13
     public const float SCALE_X = 1.8f, SCALE_Y = 1, SPAWN_POS_X = -5;
-    public const float OFFSET_POS_Z = -2; // センターのボールが来る隙間
+    public const float OFFSET_POS_Z = -2;
     public const float OFFSET_POS_X = -4.5f;
     public const float LONG_OFFSET_POS_X = -2.7f;
 

@@ -92,43 +92,83 @@ public class BossBlock : Block_Prefab{
 
     //* Skill #1
     private void createObstacleStoneSkill(int cnt){
-        Debug.Log("<color=red>activeBossKill():: createObstacleStone()</color>");
-        const float WIDTH = BlockMaker.SCALE_X;
-        // const float GAP_X = BlockMaker.BOTH_SIDE_SPACE;
-        // const float OFFSET_X = -5;
-        const float OFFSET_Z = -8;
+        Debug.Log("BossBlock:: createObstacleStoneSkill");
+        const float OFFSET_Z = -9;
 
         //* OBSTACLE LIST 準備
         obstaclePosList = new List<Vector3>(){};
-        const int ROW_CNT = 6;
-        const int COL_CNT = 3;
-        int len = ROW_CNT * COL_CNT;
-        Debug.Log("len->" + len);
+        const int COL = 6;
+        const int ROW = 3;
+        int len = COL * ROW;
         
         //TODO) BOSS SUMON OBSTACLE MAKE SEVERAL PATTERN。
         for(int i=0; i < len; i++){
-            int rowIdx = i % ROW_CNT;
-            // int lastIdx = MASS_ROW_CNT / 2 - 1;
-            // float gap = (i % MASS_ROW_CNT) > lastIdx ? GAP_X : 0;
-
-            // float x = gap + OFFSET_X + (UNIT_X * rowIdx);
-            // float x = OFFSET_X + (WIDTH * rowIdx);
-            float x =  BlockMaker.OFFSET_POS_X + (WIDTH * rowIdx);
-            float z = OFFSET_Z - (i / ROW_CNT);
+            int rowIdx = i % COL;
+            float x = BlockMaker.OFFSET_POS_X + (BlockMaker.SCALE_X * rowIdx);
+            float z = OFFSET_Z - (i / COL);
             Debug.Log($"[{i}] -> rowIdx= {rowIdx} vector3({x}, 0, {z})");
             obstaclePosList.Add(new Vector3(x, 0, z));
         }
 
-        //* OBSTACLE INS 生成
-        Debug.Log($"obstaclePosList.Count= {obstaclePosList.Count}");
-        for(int i=0; i< obstaclePosList.Count; i++){//cnt; i++){
-            int randIdx = Random.Range(0, obstaclePosList.Count);
-            gm.em.createBossObstacleSpawnEF(obstaclePosList[i]);
-            Instantiate(obstacleStonePf, obstaclePosList[i], Quaternion.identity, gm.obstacleGroup);
-            // obstaclePosList.RemoveAt(i);
-        }
 
-        //* DEBUG用。全体の位置確認。
-        // obstaclePosList.ForEach(pos=> Instantiate(obstacleStonePf, pos, Quaternion.identity, gm.obstacleGroup));
+
+        //** OBSTACLE INS 生成
+        Debug.Log($"obstaclePosList.Count= {obstaclePosList.Count}");
+
+        //* RANDOM
+        // for(int i=0; i< cnt; i++){
+        //     int randIdx = Random.Range(0, obstaclePosList.Count);
+        //     gm.em.createBossObstacleSpawnEF(obstaclePosList[i]);
+        //     Instantiate(obstacleStonePf, obstaclePosList[i], Quaternion.identity, gm.obstacleGroup);
+        //     obstaclePosList.RemoveAt(i);
+        // }
+
+        //* PATTERN 1) EVEN
+        // for(int i=0; i < obstaclePosList.Count; i++){
+        //     if(i % 2 == 0){
+        //         gm.em.createBossObstacleSpawnEF(obstaclePosList[i]);
+        //         Instantiate(obstacleStonePf, obstaclePosList[i], Quaternion.identity, gm.obstacleGroup);
+        //     }
+        // }
+
+        //* PATTERN 2) ODD
+        // for(int i=0; i < obstaclePosList.Count; i++){
+        //     if(i % 2 == 1){
+        //         gm.em.createBossObstacleSpawnEF(obstaclePosList[i]);
+        //         Instantiate(obstacleStonePf, obstaclePosList[i], Quaternion.identity, gm.obstacleGroup);
+        //     }
+        // }
+
+        //* PATTERN 3) CUT COLUMN LINE
+        // const int COL_LINE_IDX = 1;
+        // for(int i=0; i < obstaclePosList.Count; i++){
+        //     if(i % COL != COL_LINE_IDX){
+        //         createObstacleStone(i);
+        //     }
+        // }
+
+        //* PATTERN 4) 三角形
+        for(int r = 0; r < ROW; r++){
+            //* 直角三角形(◥)
+            // for(int c = r; c < COL; c++){
+            //     int idx = c + COL * r;
+            //     createObstacleStone(idx);
+            // }
+            //* 直角三角形(REVERSE ◤)
+            // for(int c = 0; c < COL - r; c++){
+            //     int idx = c + COL * r;
+            //     createObstacleStone(idx);
+            // }
+            //* 三角形(▼)
+            for(int c = r; c < COL - r; c++){
+                int idx = c + COL * r;
+                createObstacleStone(idx);
+            }
+        }
+    }
+
+    private void createObstacleStone(int i){
+        gm.em.createBossObstacleSpawnEF(obstaclePosList[i]);
+        Instantiate(obstacleStonePf, obstaclePosList[i], Quaternion.identity, gm.obstacleGroup);
     }
 }

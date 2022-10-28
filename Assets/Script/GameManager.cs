@@ -180,7 +180,6 @@ public class GameManager : MonoBehaviour
     public void setLightDarkness(bool isOn){ //* During Skill Casting ...
         light.type = (isOn)? LightType.Spot : LightType.Directional;
     }
-    
 //* --------------------------------------------------------------------------------------
 //* GUI Button
 //* --------------------------------------------------------------------------------------
