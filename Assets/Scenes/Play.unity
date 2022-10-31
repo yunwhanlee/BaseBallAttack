@@ -5477,6 +5477,7 @@ MonoBehaviour:
   activeSkillExplosionEFs: []
   activeSkillCastEFs: []
   fireBallDotEF: {fileID: 7738115718635540765, guid: 8145bdfb5d04b7f4d97855979935e866, type: 3}
+  thunderStrikeEF: {fileID: 7683263205719570275, guid: 2922933d76c2c8840902971c5004048e, type: 3}
   dropItemExpOrbEF: {fileID: 6169633472775575342, guid: a1349e9b2b124854db93b83447f69426, type: 3}
   perfectTxtPopEF: {fileID: 1250287897}
   homeRunTxtPopEF: {fileID: 2005072966}
@@ -5601,7 +5602,7 @@ Transform:
   - {fileID: 434918241}
   - {fileID: 683396473}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &702911506
 MonoBehaviour:
@@ -25903,7 +25904,7 @@ Transform:
   - {fileID: 831947632}
   - {fileID: 54044119}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2121181893
 MonoBehaviour:

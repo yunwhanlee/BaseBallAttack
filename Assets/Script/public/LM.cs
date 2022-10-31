@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class HitRank{
     [SerializeField] [Range(0, 1.5f)] float dist;   public float Dist {get => dist;}
-    [SerializeField] int power;   public float Power {get => power;}
+    [SerializeField] int power;   public int Power {get => power;}
     public HitRank(float dist, int power){
         this.dist = dist;
         this.power = power;
@@ -21,14 +21,16 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Range(0, 100)] public int SUDDENLY_THORW_PER = 50;
 
     [Header("HIT BALL")]
-    public HitRank[] HIT_BALL_RANK = new HitRank[6]{
+    public HitRank[] HIT_RANK = new HitRank[6]{
         new HitRank(0.125f, 10), //A
-        new HitRank(0.25f, 7), //B
+        new HitRank(0.3f, 7), //B
         new HitRank(0.5f, 5), //C
         new HitRank(0.85f, 4), //D
         new HitRank(1.125f, 3), //E
         new HitRank(1.5f, 2), //F
     };
+    const int B = 1;
+    [HideInInspector] public int HOMERUN_MIN_POWER;
 
     [Header("BLOCK SPAN")]
     public int LONG_BLOCK_SPAN = 5;
@@ -49,6 +51,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     void Start(){
         Debug.Log("<FIBONACCI SEQUENCE> Player Max Exp");
         MAX_EXP_LIST = Util._.getCalcFibonicciSequence(unit: 100, fibRatio: 1);
+        HOMERUN_MIN_POWER = HIT_RANK[B].Power;
     }
 
     void singleton(){

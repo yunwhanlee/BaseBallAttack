@@ -38,6 +38,7 @@ public class EffectManager : MonoBehaviour
 
     //* Active HomeRun Bonus
     public GameObject fireBallDotEF;
+    public GameObject thunderStrikeEF;
 
     //* Drop Items EF
     public GameObject dropItemExpOrbEF;
@@ -50,6 +51,7 @@ public class EffectManager : MonoBehaviour
     public GameObject bossHealSkillEF;
     public GameObject bossObstacleSpawnEF;
     public GameObject rockObstacleBrokenEF;
+
 
     void Start()
     {
@@ -187,6 +189,9 @@ public class EffectManager : MonoBehaviour
     }
     public void directlyCreateFireBallDotEF(Transform parentTf){//* 直接生成し、Blockが消えたら一緒に消える。
         var ins = Instantiate(fireBallDotEF, parentTf.position, QI, parentTf) as GameObject;
+    }
+    public void createThunderStrikeEF(Vector3 parentTfPos){
+        var ins = Instantiate(thunderStrikeEF, parentTfPos, QI, gm.effectGroup) as GameObject;
     }
 //* -------------------------------------------------------------
 //* Drop Items EF

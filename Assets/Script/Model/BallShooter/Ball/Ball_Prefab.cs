@@ -83,7 +83,7 @@ public class Ball_Prefab : MonoBehaviour
 
                 //* Set Hit Power (distance range 1.5f ~ 0)
                 const int A=0, B=1, C=2, D=3, E=4, F=5;
-                var hitRank = LM._.HIT_BALL_RANK;
+                var hitRank = LM._.HIT_RANK;
                 float power = (distance <= hitRank[A].Dist) ? hitRank[A].Power //-> BEST HIT (HOMERUH!)
                 : (distance <= hitRank[B].Dist)? hitRank[B].Power
                 : (distance <= hitRank[C].Dist)? hitRank[C].Power
@@ -104,7 +104,7 @@ public class Ball_Prefab : MonoBehaviour
                 em.createBatHitSparkEF(this.transform.position);
 
                 //* HomeRun
-                if(power >= hitRank[B].Power){
+                if(power >= LM._.HOMERUN_MIN_POWER){
                     em.createHomeRunHitSparkEF(this.transform.position);
                     StartCoroutine(coPlayHomeRunAnim(isActiveSkillTrigger));
                 }
@@ -195,7 +195,8 @@ public class Ball_Prefab : MonoBehaviour
                         case DM.ATV.FireBall:{
                             em.createAtvSkExplosionEF(skillIdx, this.transform);
                             decreaseAllBlocksHp(atv, AtvSkill.FIREBALL_DMG);
-                            if(isHomeRun) decreaseAllBlocksHp(atv, 0, AtvSkill.FIREBALL_DOT); //* + DOT DAMAGE
+                            if(isHomeRun) 
+                                decreaseAllBlocksHp(atv, 0, AtvSkill.FIREBALL_DOT); //* + DOT DAMAGE
                             break;
                         }
                         case DM.ATV.ColorBall:{
@@ -420,6 +421,8 @@ public class Ball_Prefab : MonoBehaviour
         float span = 0.0875f;
         for(int i=0; i<cnt; i++){
             em.createCritTxtEF(hitPos, (int)(pl.dmg.Value * critDmgRatio));
+            if(isHomeRun) 
+                em.createThunderStrikeEF(hitPos);
             yield return new WaitForSeconds(i * span);
         }
     }
