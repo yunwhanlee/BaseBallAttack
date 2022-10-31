@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
     public Text comboTxt;
     public Text perfectTxt;
     public Text bossSpawnTxt;
+    public Text showHitBallInfoTf;
 
     [Header("PREVIEW BALL SILDER ➡ 現在使っていない")] //! あんまり要らないかも。
     public Slider hitRangeSlider;
@@ -497,8 +498,24 @@ public class GameManager : MonoBehaviour
             levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
         }
     }
-
     public int getCurSkillIdx(){
         return (SelectAtvSkillBtnIdx == 0)? DM.ins.personalData.SelectSkillIdx : DM.ins.personalData.SelectSkill2Idx;
+    }
+    public float setHitPower(float distance, HitRank[] hitRank){
+        float power = (distance <= hitRank[(int)DM.HITRANK.S].Dist) ? hitRank[(int)DM.HITRANK.S].Power //-> BEST HIT (HOMERUH!)
+            : (distance <= hitRank[(int)DM.HITRANK.A].Dist)? hitRank[(int)DM.HITRANK.A].Power
+            : (distance <= hitRank[(int)DM.HITRANK.B].Dist)? hitRank[(int)DM.HITRANK.B].Power
+            : (distance <= hitRank[(int)DM.HITRANK.C].Dist)? hitRank[(int)DM.HITRANK.C].Power
+            : (distance <= hitRank[(int)DM.HITRANK.D].Dist)? hitRank[(int)DM.HITRANK.D].Power
+            : hitRank[(int)DM.HITRANK.E].Power; //-> WORST HIT (distance <= 1.5f)
+        return power;
+    }
+    public string setHitRankTxt(float power, HitRank[] hitRank){
+        string rankTxt = ((power == hitRank[(int)DM.HITRANK.S].Power)? DM.HITRANK.S.ToString()
+            : (power == hitRank[(int)DM.HITRANK.A].Power)? DM.HITRANK.A.ToString()
+            : (power == hitRank[(int)DM.HITRANK.B].Power)? DM.HITRANK.B.ToString()
+            : (power == hitRank[(int)DM.HITRANK.C].Power)? DM.HITRANK.C.ToString()
+            : (power == hitRank[(int)DM.HITRANK.D].Power)? DM.HITRANK.D.ToString() : DM.HITRANK.E.ToString()).ToString();
+        return rankTxt;
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using System;
 
@@ -82,14 +83,9 @@ public class Ball_Prefab : MonoBehaviour
                 // Debug.Log($"Arrow Deg({arrowDeg}) -Atan2-> Dir({arrowDir})");
 
                 //* Set Hit Power (distance range 1.5f ~ 0)
-                const int A=0, B=1, C=2, D=3, E=4, F=5;
+                // const int S=0, A=1, B=2, C=3, D=4, E=5;
                 var hitRank = LM._.HIT_RANK;
-                float power = (distance <= hitRank[A].Dist) ? hitRank[A].Power //-> BEST HIT (HOMERUH!)
-                : (distance <= hitRank[B].Dist)? hitRank[B].Power
-                : (distance <= hitRank[C].Dist)? hitRank[C].Power
-                : (distance <= hitRank[D].Dist)? hitRank[D].Power
-                : (distance <= hitRank[E].Dist)? hitRank[E].Power
-                : hitRank[F].Power; //-> WORST HIT (distance <= 1.5f)
+                float power = gm.setHitPower(distance, hitRank);
                 
                 //* #1. Active SHOT Skill
                 bool isActiveSkillTrigger = false;
@@ -111,18 +107,23 @@ public class Ball_Prefab : MonoBehaviour
                 // else if(isActiveSkillTrigger){ //* ActiveSkill Before
                     // StartCoroutine(coPlayActiveSkillBefSpotLightAnim());
                 // }
-
                 var force = setgetHitBallSpeed(power, arrowDir);
 
-                Debug.Log("HIT Ball:: distance= " + distance.ToString("N2")
-                    + ", power= " + power
-                    + ", Rank= " + ((power == hitRank[A].Power)? "A" 
-                        : (power == hitRank[B].Power)? "B"
-                        : (power == hitRank[C].Power)? "C"
-                        : (power == hitRank[D].Power)? "D"
-                        : (power == hitRank[E].Power)? "E" : "F").ToString()
-                    + ", Force= " + force
-                );
+                //* Show HitBall Infomation
+                string rankTxt = gm.setHitRankTxt(power, hitRank);
+                float per = Util._.getCalcCurValPercentage(distance, LM._.MAX_DISTANCE);
+
+                gm.showHitBallInfoTf.GetComponent<Animator>().SetTrigger(DM.ANIM.IsHitBall.ToString());
+                var iconTxtList = gm.showHitBallInfoTf.transform.GetComponentsInChildren<Text>();
+                const int POWER_RANK = 0, BALL_SPEED = 1, ACCURACY = 2;
+
+                iconTxtList[POWER_RANK].text = rankTxt;
+                iconTxtList[BALL_SPEED].text = " : " + power.ToString();
+                iconTxtList[ACCURACY].text = " : " + ((100 - per) + "%").ToString();
+
+                //* RankTxt Color Style
+                iconTxtList[POWER_RANK].color =
+                    (rankTxt == DM.HITRANK.S.ToString() || rankTxt == DM.HITRANK.A.ToString())? Color.red : Color.white;
 
                 //* Active Skillなら、下記は実行しない----------------------------------------
                 if(isActiveSkillTrigger) return;

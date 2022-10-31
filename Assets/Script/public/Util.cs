@@ -86,4 +86,8 @@ public class Util : MonoBehaviour
         //* check Is Exist
         return Array.Exists(hits, hit => hit.transform.CompareTag(findTagName));
     }
+
+    public int getCalcCurValPercentage(float value, float max){
+        return (int)(value / max * 100);
+    }
 }

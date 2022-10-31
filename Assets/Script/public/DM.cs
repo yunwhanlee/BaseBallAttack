@@ -18,8 +18,9 @@ public class DM : MonoBehaviour
         Obstacle, PlayerBattingSpot,
     };
     public enum LAYER {BallPreview};
-    public enum ANIM {DoSpawn, DoShake, Swing, DoBossSpawn, DoDie, IsHit, IsIdle, IsFly, GetHit, Scream, Touch};
+    public enum ANIM {DoSpawn, DoShake, Swing, DoBossSpawn, DoDie, IsHit, IsHitBall, IsIdle, IsFly, GetHit, Scream, Touch};
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
+    public enum HITRANK{S, A, B, C, D, E};
     public enum PANEL {Chara, Bat, Skill, CashShop, PsvInfo, NULL};
     public enum ATV{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave, NULL};
     public enum PSV{Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, Laser, NULL};

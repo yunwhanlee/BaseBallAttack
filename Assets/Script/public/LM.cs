@@ -21,15 +21,17 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Range(0, 100)] public int SUDDENLY_THORW_PER = 50;
 
     [Header("HIT BALL")]
-    public HitRank[] HIT_RANK = new HitRank[6]{
-        new HitRank(0.125f, 10), //A
-        new HitRank(0.3f, 7), //B
-        new HitRank(0.5f, 5), //C
-        new HitRank(0.85f, 4), //D
-        new HitRank(1.125f, 3), //E
-        new HitRank(1.5f, 2), //F
-    };
+    [HideInInspector] public float MAX_DISTANCE = 1.5f;
     const int B = 1;
+    public HitRank[] HIT_RANK = new HitRank[6]{
+        new HitRank(0.125f, 10), //S
+        new HitRank(0.3f, 7), //A
+        new HitRank(0.5f, 5), //B
+        new HitRank(0.85f, 4), //C
+        new HitRank(1.125f, 3), //D
+        new HitRank(1.5f, 2), //E
+    };
+    
     [HideInInspector] public int HOMERUN_MIN_POWER;
 
     [Header("BLOCK SPAN")]
