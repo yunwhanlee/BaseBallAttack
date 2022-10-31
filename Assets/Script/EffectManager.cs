@@ -13,45 +13,46 @@ public class EffectManager : MonoBehaviour
     //* OutSide
     public GameManager gm;
 
-    //* Hit Spark EF
+    [Header("HIT SPARK EF")]
     public GameObject batHitSparkEF;
     public GameObject homeRunHitSparkEF;
 
-    //* Block EF
+    [Header("BLOCK EF")]
     public GameObject brokeBlockEF;
     public GameObject itemBlockExplosionEF;
     public GameObject itemBlockDirLineTrailEF;
     public GameObject downWallHitEF;
     public GameObject healTxtEF, heartEF;
     
-    //* Passive Skill EF
+    [Header("PSV SKILL EF")]
     public GameObject explosionEF;
     public GameObject criticalTxtEF;
     public GameObject instantKillTxtEF;
     public GameObject laserEF;
 
-    //* Active Skill EF
+    [Header("ATV SKILL EF")]
+    [Tooltip("GAME SCENEがロードしたら、自動で読み込む。")]
     public GameObject[] activeSkillBatEFs;
     public GameObject[] activeSkillShotEFs;
     public GameObject[] activeSkillExplosionEFs;
     public GameObject[] activeSkillCastEFs;
 
-    //* Active HomeRun Bonus
+    [Header("ATV HOMERUN BONUS EF")]
     public GameObject fireBallDotEF;
     public GameObject thunderStrikeEF;
+    public GameObject colorBallStarExplosionEF;
 
-    //* Drop Items EF
+    [Header("DROP ITEMS EF")]
     public GameObject dropItemExpOrbEF;
 
-    //* UI EF
+    [Header("UI EF")]
     public GameObject perfectTxtPopEF;
     public GameObject homeRunTxtPopEF;
 
-    //* Boss Skill EF
+    [Header("BOSS SKILL EF")]
     public GameObject bossHealSkillEF;
     public GameObject bossObstacleSpawnEF;
     public GameObject rockObstacleBrokenEF;
-
 
     void Start()
     {
@@ -187,11 +188,15 @@ public class EffectManager : MonoBehaviour
         var ins = Instantiate(activeSkillCastEFs[idx], parentTf.position, QI, parentTf) as GameObject;
         ins.transform.localRotation = Quaternion.Euler(0,0,0);
     }
+    //* ATV HomeRun Bonus EF
     public void directlyCreateFireBallDotEF(Transform parentTf){//* 直接生成し、Blockが消えたら一緒に消える。
         var ins = Instantiate(fireBallDotEF, parentTf.position, QI, parentTf) as GameObject;
     }
     public void createThunderStrikeEF(Vector3 parentTfPos){
         var ins = Instantiate(thunderStrikeEF, parentTfPos, QI, gm.effectGroup) as GameObject;
+    }
+    public void createColorBallStarExplosionEF(Vector3 parentTfPos){
+        var ins = Instantiate(colorBallStarExplosionEF, parentTfPos, QI, gm.effectGroup) as GameObject;
     }
 //* -------------------------------------------------------------
 //* Drop Items EF

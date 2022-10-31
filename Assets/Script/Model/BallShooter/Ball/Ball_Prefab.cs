@@ -202,12 +202,20 @@ public class Ball_Prefab : MonoBehaviour
                         }
                         case DM.ATV.ColorBall:{
                             if(col.gameObject.GetComponent<Block_Prefab>().kind != BlockMaker.KIND.TreasureChest){
-                                var sameColorBlocks = AtvSkill.findSameColorBlocks(gm, col.transform.gameObject);
+                                Block_Prefab[] sameColorBlocks = AtvSkill.findSameColorBlocks(gm, col.transform.gameObject);
                                 //* Destroy
-                                Array.ForEach(sameColorBlocks, bl => {
-                                    em.createAtvSkExplosionEF(skillIdx, bl.transform);
-                                    bl.transform.gameObject.GetComponent<Block_Prefab>().decreaseHp(AtvSkill.COLORBALL_DMG);
-                                });
+                                int max = AtvSkill.COLORBALL_POP_CNT;
+                                
+                                if(isHomeRun) 
+                                    max = sameColorBlocks.Length;
+
+                                for(int i=0; i<max; i++){
+                                    int dmg = sameColorBlocks[i].Hp;
+                                    em.createAtvSkExplosionEF(skillIdx, sameColorBlocks[i].transform);
+                                    if(isHomeRun)
+                                        em.createColorBallStarExplosionEF(sameColorBlocks[i].transform.position);
+                                    sameColorBlocks[i].transform.GetComponent<Block_Prefab>().decreaseHp(dmg);
+                                }
                             }
                             break;
                         }

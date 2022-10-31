@@ -222,8 +222,8 @@ public class AtvSkill{
     //* Damage value
     public static float THUNDERSHOT_CRT;
     public static int FIREBALL_DMG;
+    public static int COLORBALL_POP_CNT;
     public static float FIREBALL_DOT;
-    public static int COLORBALL_DMG;
     public static float POISONSMOKE_DOT;
     public static int ICEWAVE_DMG;
 
@@ -247,8 +247,8 @@ public class AtvSkill{
         // Debug.Log("ActiveSkill(gm, pl):: gm=" + gm.stage + ", pl=" + pl.dmg.Value);
         THUNDERSHOT_CRT = 2;
         FIREBALL_DMG = pl.dmg.Value + pl.dmg.Value * (Util._.getCalcEquivalentSequence(gm.stage, 4) / 4);// FIREBALL_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.15f);
+        COLORBALL_POP_CNT = 5;
         FIREBALL_DOT = 0.15f;
-        COLORBALL_DMG = Player.ONE_KILL_DMG;
         POISONSMOKE_DOT = 0.25f;
         ICEWAVE_DMG = pl.dmg.Value + pl.dmg.Value * (Util._.getCalcEquivalentSequence(gm.stage, 4) / 2);// ICEWAVE_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.3f);
     }

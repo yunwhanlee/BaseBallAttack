@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44479525, g: 0.49434352, b: 0.5735407, a: 1}
+  m_IndirectSpecularColor: {r: 0.44479504, g: 0.49434292, b: 0.57354003, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5820,6 +5820,7 @@ MonoBehaviour:
   activeSkillCastEFs: []
   fireBallDotEF: {fileID: 7738115718635540765, guid: 8145bdfb5d04b7f4d97855979935e866, type: 3}
   thunderStrikeEF: {fileID: 7683263205719570275, guid: 2922933d76c2c8840902971c5004048e, type: 3}
+  colorBallStarExplosionEF: {fileID: 7336898671654488252, guid: ebf3f13d74c56ee41b9b149caec89a7f, type: 3}
   dropItemExpOrbEF: {fileID: 6169633472775575342, guid: a1349e9b2b124854db93b83447f69426, type: 3}
   perfectTxtPopEF: {fileID: 1250287897}
   homeRunTxtPopEF: {fileID: 2005072966}
@@ -6930,7 +6931,7 @@ Transform:
   m_GameObject: {fileID: 747844802}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.3, z: -0.5}
-  m_LocalScale: {x: 0.5, y: 0.2, z: 0.3}
+  m_LocalScale: {x: 0.5, y: 0.175, z: 0.3}
   m_Children: []
   m_Father: {fileID: 1350307813}
   m_RootOrder: 0
@@ -7614,9 +7615,9 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 90
+    m_FontSize: 80
     m_FontStyle: 1
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 100
     m_Alignment: 3
@@ -16077,8 +16078,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350307809}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.18, z: -0.5}
-  m_LocalScale: {x: 1, y: 2.5, z: 1}
+  m_LocalPosition: {x: 0, y: 1.49, z: -0.5}
+  m_LocalScale: {x: 1, y: 3, z: 1}
   m_Children:
   - {fileID: 747844806}
   - {fileID: 2025654357}
@@ -26002,8 +26003,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2025654352}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.2645, z: -0.04527998}
-  m_LocalScale: {x: 5.2519135, y: 3.2696664, z: 0.39621}
+  m_LocalPosition: {x: 0, y: 2.19, z: -0.04527998}
+  m_LocalScale: {x: 5.2519135, y: 3, z: 0.39621}
   m_Children:
   - {fileID: 1322018823}
   - {fileID: 2118210800}
