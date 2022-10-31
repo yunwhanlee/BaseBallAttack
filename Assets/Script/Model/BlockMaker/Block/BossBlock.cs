@@ -6,6 +6,8 @@ using Random = UnityEngine.Random;
 
 public class BossBlock : Block_Prefab{
 
+    const int COL = 6;
+    const int ROW = 3;
     const float STONE_SCALE_X = 2.8f;
     const int OBSTACLE_STONE_CNT = 1;
     const int BOSS_DIE_ORB_CNT = 80;
@@ -97,8 +99,7 @@ public class BossBlock : Block_Prefab{
 
         //* OBSTACLE LIST 準備
         obstaclePosList = new List<Vector3>(){};
-        const int COL = 6;
-        const int ROW = 3;
+
         int len = COL * ROW;
         
         //TODO) BOSS SUMON OBSTACLE MAKE SEVERAL PATTERN。
@@ -113,50 +114,74 @@ public class BossBlock : Block_Prefab{
         //** OBSTACLE INS 生成
         Debug.Log($"obstaclePosList.Count= {obstaclePosList.Count}");
 
-        //* RANDOM
-        // for(int i=0; i< cnt; i++){
-        //     int randIdx = Random.Range(0, obstaclePosList.Count);
-        //     createObstacleStone(i);
-        //     obstaclePosList.RemoveAt(i);
-        // }
+        patternRandom(Random.Range(1, 3));
+        // patternEven();
+        // patternOdd();
+        // patternCutColumnLine();
+        // patternCntRowLine();
+        // patternGoBoard();
+        // patternGoBoardRandom();
+        // patternTriangle();
+    }
 
-        //* PATTERN 1) EVEN
-        // for(int i=0; i < obstaclePosList.Count; i++){
-        //     if(i % 2 == 0){
-        //             createObstacleStone(i);
-        //     }
-        // }
+    private void createObstacleStone(int i){
+        gm.em.createBossObstacleSpawnEF(obstaclePosList[i]);
+        Instantiate(obstacleStonePf, obstaclePosList[i], Quaternion.identity, gm.obstacleGroup);
+    }
 
-        //* PATTERN 2) ODD
-        // for(int i=0; i < obstaclePosList.Count; i++){
-        //     if(i % 2 == 1){
-        //         createObstacleStone(i);
-        //     }
-        // }
-
-        //* PATTERN 3) CUT COLUMN LINE
-        // const int COL_LINE_IDX = 1;
-        // for(int i=0; i < obstaclePosList.Count; i++){
-        //     if(i % COL != COL_LINE_IDX){
-        //         createObstacleStone(i);
-        //     }
-        // }
-
-        //* PATTERN 4)  碁盤(go board) EVEN or ODD
+//* OBSTACLE PATTERN
+    private void patternRandom(int createCnt){
+        for(int i=0; i< createCnt; i++){
+            int randIdx = Random.Range(0, obstaclePosList.Count);
+            createObstacleStone(i);
+            obstaclePosList.RemoveAt(i);
+        }
+    }
+    private void patternEven(){
+        for(int i=0; i < obstaclePosList.Count; i++){
+            if(i % 2 == 0){
+                    createObstacleStone(i);
+            }
+        }
+    }
+    private void patternOdd(){
+        for(int i=0; i < obstaclePosList.Count; i++){
+            if(i % 2 == 1){
+                createObstacleStone(i);
+            }
+        }
+    }
+    private void patternCutColumnLine(){
+        int randColIdx = Random.Range(0, COL + 1);
+        for(int i=0; i < obstaclePosList.Count; i++){
+            if(i % COL != randColIdx){
+                createObstacleStone(i);
+            }
+        }
+    }
+    private void patternCntRowLine(){
+        int randRowIdx = Random.Range(0, ROW + 1);
+        for(int i=0; i < obstaclePosList.Count; i++){
+            if(i / COL == randRowIdx)
+                createObstacleStone(i);
+        }
+    }
+    private void patternGoBoard(){
         int rand = Random.Range(0, 2);
         for(int i = 0; i < obstaclePosList.Count; i++){
             int rowIdx = i / COL;
             int colIdx = i % COL;
             int a = rand;
             int b = (a == 0)? 1 : 0;
-            if(rowIdx % 2 == 0){
+            if(rowIdx % 2 == 0){ //even
                 if(colIdx % 2 == a) createObstacleStone(i);
             }
-            else{
+            else{ //odd
                 if(colIdx % 2 == b) createObstacleStone(i);
             }
         }
-        //* PATTERN 5)  碁盤ランダム (go board random) 
+    }
+    private void patternGoBoardRandom(){
         for(int i = 0; i < obstaclePosList.Count; i++){
             int rowIdx = i / COL;
             int colIdx = i % COL;
@@ -169,35 +194,40 @@ public class BossBlock : Block_Prefab{
                 if(colIdx % 2 == b) createObstacleStone(i);
             }
         }
-
-        //* PATTERN 6) 三角形
-        // for(int r = 0; r < ROW; r++){
-            //* 直角三角形(◥)
-            // for(int c = r; c < COL; c++){
-            //     int idx = c + COL * r;
-            //     createObstacleStone(idx);
-            // }
-            //* 直角三角形REVERSE(◤)
-            // for(int c = 0; c < COL - r; c++){
-            //     int idx = c + COL * r;
-            //     createObstacleStone(idx);
-            // }
-            //* 三角形REVERSE(▼)
-            // for(int c = r; c < COL - r; c++){
-            //     int idx = c + COL * r;
-            //     createObstacleStone(idx);
-            // }
-            //* 三角形(▲)
-            // int reverseLen = (ROW - 1) - r;
-            // for(int c = reverseLen; c < COL - reverseLen; c++){
-            //     int idx = c + COL * r;
-            //     createObstacleStone(idx);
-            // }
-        // }
     }
+    private void patternTriangle(){
+        int rand = Random.Range(0, 4);
+        for(int r = 0; r < ROW; r++){
+            switch(rand){
+            case 0: //* 直角三角形(◥)
+                for(int c = r; c < COL; c++){
+                    int idx = c + COL * r;
+                    createObstacleStone(idx);
+                }
+                break;
+            case 1: //* 直角三角形REVERSE(◤)
+                for(int c = 0; c < COL - r; c++){
+                    int idx = c + COL * r;
+                    createObstacleStone(idx);
+                }
+                break;
+            case 2: //* 三角形REVERSE(▼)
+                for(int c = r; c < COL - r; c++){
+                    int idx = c + COL * r;
+                    createObstacleStone(idx);
+                }
+                break;
+            case 3: //* 三角形(▲)
+                int reverseLen = (ROW - 1) - r;
+                for(int c = reverseLen; c < COL - reverseLen; c++){
+                    int idx = c + COL * r;
+                    createObstacleStone(idx);
+                }
+                break;
+        }
+        
 
-    private void createObstacleStone(int i){
-        gm.em.createBossObstacleSpawnEF(obstaclePosList[i]);
-        Instantiate(obstacleStonePf, obstaclePosList[i], Quaternion.identity, gm.obstacleGroup);
+        }
+
     }
 }
