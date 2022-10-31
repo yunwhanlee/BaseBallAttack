@@ -110,32 +110,27 @@ public class BossBlock : Block_Prefab{
             obstaclePosList.Add(new Vector3(x, 0, z));
         }
 
-
-
         //** OBSTACLE INS 生成
         Debug.Log($"obstaclePosList.Count= {obstaclePosList.Count}");
 
         //* RANDOM
         // for(int i=0; i< cnt; i++){
         //     int randIdx = Random.Range(0, obstaclePosList.Count);
-        //     gm.em.createBossObstacleSpawnEF(obstaclePosList[i]);
-        //     Instantiate(obstacleStonePf, obstaclePosList[i], Quaternion.identity, gm.obstacleGroup);
+        //     createObstacleStone(i);
         //     obstaclePosList.RemoveAt(i);
         // }
 
         //* PATTERN 1) EVEN
         // for(int i=0; i < obstaclePosList.Count; i++){
         //     if(i % 2 == 0){
-        //         gm.em.createBossObstacleSpawnEF(obstaclePosList[i]);
-        //         Instantiate(obstacleStonePf, obstaclePosList[i], Quaternion.identity, gm.obstacleGroup);
+        //             createObstacleStone(i);
         //     }
         // }
 
         //* PATTERN 2) ODD
         // for(int i=0; i < obstaclePosList.Count; i++){
         //     if(i % 2 == 1){
-        //         gm.em.createBossObstacleSpawnEF(obstaclePosList[i]);
-        //         Instantiate(obstacleStonePf, obstaclePosList[i], Quaternion.identity, gm.obstacleGroup);
+        //         createObstacleStone(i);
         //     }
         // }
 
@@ -147,24 +142,58 @@ public class BossBlock : Block_Prefab{
         //     }
         // }
 
-        //* PATTERN 4) 三角形
-        for(int r = 0; r < ROW; r++){
+        //* PATTERN 4)  碁盤(go board) EVEN or ODD
+        int rand = Random.Range(0, 2);
+        for(int i = 0; i < obstaclePosList.Count; i++){
+            int rowIdx = i / COL;
+            int colIdx = i % COL;
+            int a = rand;
+            int b = (a == 0)? 1 : 0;
+            if(rowIdx % 2 == 0){
+                if(colIdx % 2 == a) createObstacleStone(i);
+            }
+            else{
+                if(colIdx % 2 == b) createObstacleStone(i);
+            }
+        }
+        //* PATTERN 5)  碁盤ランダム (go board random) 
+        for(int i = 0; i < obstaclePosList.Count; i++){
+            int rowIdx = i / COL;
+            int colIdx = i % COL;
+            int a = Random.Range(0, 2);
+            int b = (a == 0)? 1 : 0;
+            if(rowIdx % 2 == 0){
+                if(colIdx % 2 == a) createObstacleStone(i);
+            }
+            else{
+                if(colIdx % 2 == b) createObstacleStone(i);
+            }
+        }
+
+        //* PATTERN 6) 三角形
+        // for(int r = 0; r < ROW; r++){
             //* 直角三角形(◥)
             // for(int c = r; c < COL; c++){
             //     int idx = c + COL * r;
             //     createObstacleStone(idx);
             // }
-            //* 直角三角形(REVERSE ◤)
+            //* 直角三角形REVERSE(◤)
             // for(int c = 0; c < COL - r; c++){
             //     int idx = c + COL * r;
             //     createObstacleStone(idx);
             // }
-            //* 三角形(▼)
-            for(int c = r; c < COL - r; c++){
-                int idx = c + COL * r;
-                createObstacleStone(idx);
-            }
-        }
+            //* 三角形REVERSE(▼)
+            // for(int c = r; c < COL - r; c++){
+            //     int idx = c + COL * r;
+            //     createObstacleStone(idx);
+            // }
+            //* 三角形(▲)
+            // int reverseLen = (ROW - 1) - r;
+            // for(int c = reverseLen; c < COL - reverseLen; c++){
+            //     int idx = c + COL * r;
+            //     createObstacleStone(idx);
+            // }
+        // }
     }
 
     private void createObstacleStone(int i){
