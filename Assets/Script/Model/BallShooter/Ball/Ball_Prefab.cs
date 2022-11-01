@@ -195,27 +195,28 @@ public class Ball_Prefab : MonoBehaviour
                             break;
                         case DM.ATV.FireBall:{
                             em.createAtvSkExplosionEF(skillIdx, this.transform);
-                            decreaseAllBlocksHp(atv, AtvSkill.FIREBALL_DMG);
+                            decreaseBlocksHp(atv, AtvSkill.FIREBALL_DMG);
                             if(isHomeRun)
-                                decreaseAllBlocksHp(atv, 0, AtvSkill.FIREBALL_DOT); //* + DOT DAMAGE
+                                decreaseBlocksHp(atv, 0, AtvSkill.FIREBALL_DOT); //* + DOT DAMAGE
                             break;
                         }
                         case DM.ATV.ColorBall:{
                             if(col.gameObject.GetComponent<Block_Prefab>().kind != BlockMaker.KIND.TreasureChest){
                                 Block_Prefab[] sameColorBlocks = AtvSkill.findSameColorBlocks(gm, col.transform.gameObject);
-                                //* Destroy
+                                //* Set Max Cnt
                                 int max = AtvSkill.COLORBALL_POP_CNT;
-                                
                                 if(isHomeRun) 
                                     max = sameColorBlocks.Length;
 
+                                //* Erase Same Color Blocks
                                 for(int i=0; i<max; i++){
-                                    int dmg = sameColorBlocks[i].Hp;
                                     em.createAtvSkExplosionEF(skillIdx, sameColorBlocks[i].transform);
                                     if(isHomeRun)
                                         em.createColorBallStarExplosionEF(sameColorBlocks[i].transform.position);
-                                    sameColorBlocks[i].transform.GetComponent<Block_Prefab>().decreaseHp(dmg);
+                                    sameColorBlocks[i].transform.GetComponent<Block_Prefab>().decreaseHp(PsvSkill<int>.ONE_KILL_DMG);
                                 }
+
+                                
                             }
                             break;
                         }
@@ -228,7 +229,7 @@ public class Ball_Prefab : MonoBehaviour
                                 ins.transform.localScale = new Vector3(sc, sc, sc);
                             }
                             RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.PoisonSmokeCastWidth, Vector3.up, 0);
-                            decreaseAllBlocksHp(atv, 0, AtvSkill.POISONSMOKE_DOT);
+                            decreaseBlocksHp(atv, 0, AtvSkill.POISONSMOKE_DOT);
                             break;
                         }
                         case DM.ATV.IceWave:{
@@ -251,7 +252,7 @@ public class Ball_Prefab : MonoBehaviour
     #region CHECK PSV
             //* InstantKill
             pl.instantKill.setHitTypeSkill(pl.instantKill.Value, ref result, col, em, pl);
-            if(result != Player.ONE_KILL_DMG){
+            if(result != PsvSkill<int>.ONE_KILL_DMG){
                 //* Critical
                 pl.critical.setHitTypeSkill(pl.critical.Value, ref result, col, em, pl);
                 //* Explosion（最後 ダメージ適用）
@@ -339,7 +340,7 @@ public class Ball_Prefab : MonoBehaviour
         ins.transform.localScale = new Vector3(scale.x * ratio, scale.y * ratio, scale.z * ratio);
     }
 
-    private void decreaseAllBlocksHp(DM.ATV atv, int dmg, float dotDmgPer = 0){
+    private void decreaseBlocksHp(DM.ATV atv, int dmg, float dotDmgPer = 0){
         RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.FireBallCastWidth, Vector3.up, 0);
         Array.ForEach(hits, hit => {
             if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
@@ -370,8 +371,6 @@ public class Ball_Prefab : MonoBehaviour
     private void checkDestroyBall(){
         if(this.name == "Ball(Clone)" && this.transform.localScale.x == 0.4f){
             onDestroyMe();
-            // for(int i=0;i<gm.ballGroup.childCount;i++)
-            //     Destroy(gm.ballGroup.GetChild(i));
         }
         else
             Destroy(this.gameObject);

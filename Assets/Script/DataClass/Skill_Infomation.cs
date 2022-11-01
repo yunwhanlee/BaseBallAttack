@@ -55,7 +55,8 @@ public class ItemPsvList{
 public class PsvSkill<T> where T: struct {
     //*value                     //*get set
     public const int MAX_LV = 5;
-    public const int CRIT_DMG_DEF = 200;
+    public const int ONE_KILL_DMG = 999999;
+    public const int CRIT_DMG_DEFAULT = 200;
     public const float MULTI_SHOT_DEG = 25;
     public const float LASER_DEG = 17.5f;
 
@@ -100,7 +101,7 @@ public class PsvSkill<T> where T: struct {
             switch(psv){
                 case DM.PSV.InstantKill: 
                     em.createInstantKillTextEF(col.transform.position);
-                    result = Player.ONE_KILL_DMG;
+                    result = PsvSkill<int>.ONE_KILL_DMG;
                     break;
                 case DM.PSV.Critical: 
                     int dmg = (int)(pl.dmg.Value * (2 + pl.criticalDamage.Value));
@@ -153,7 +154,7 @@ public class PsvSkill<T> where T: struct {
             pl.expUp.Name,                  (pl.expUp.Value * 100 + "%").ToString(),
             pl.itemSpawn.Name,              (pl.itemSpawn.Value * 100 + "%").ToString(),
             pl.verticalMultiShot.Name,      (pl.verticalMultiShot.Value * 1).ToString(),
-            pl.criticalDamage.Name,         (CRIT_DMG_DEF + (pl.criticalDamage.Value * 100) + "%").ToString(),
+            pl.criticalDamage.Name,         (CRIT_DMG_DEFAULT + (pl.criticalDamage.Value * 100) + "%").ToString(),
             // pl.laser.Name,                  (pl.laser.Value).ToString(),
         };
     }

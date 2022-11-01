@@ -76,7 +76,7 @@ public class Block_Prefab : MonoBehaviour
         originMts = mesh.getOriginalMts();
     }
 
-    void Start() {
+    void Start(){
         setType(); //* (NormalBlockのみ)
         setHp();
         setStyle(); //* (TreasureChest、healBlock、Boss 除外)

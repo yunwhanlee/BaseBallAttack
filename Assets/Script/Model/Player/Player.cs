@@ -7,7 +7,6 @@ using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
-    public const int ONE_KILL_DMG = 999999;
     //* OutSide
     GameManager gm;  EffectManager em;
     public Animator anim;
