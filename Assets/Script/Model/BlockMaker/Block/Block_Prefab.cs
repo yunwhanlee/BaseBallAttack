@@ -46,6 +46,7 @@ public class Block_Prefab : MonoBehaviour
     [SerializeField] BlockType type = BlockType.NORMAL;
 
     [Header("STATUS")]
+    private int befStageCnt;
     [SerializeField] int propertyDuration;  public int PropertyDuration {get => propertyDuration; set => propertyDuration = value;}
     [SerializeField] bool isDotDmg;  public bool IsDotDmg {get => isDotDmg; set => isDotDmg = value;}
     [SerializeField] bool isFreeze;  public bool IsFreeze {get => isFreeze; set => isFreeze = value;}
@@ -97,10 +98,7 @@ public class Block_Prefab : MonoBehaviour
         if(col.transform.CompareTag(DM.TAG.GameOverLine.ToString()) && gm.State != GameManager.STATE.GAMEOVER){
             gm.setGameOver();
         }
-        //* ICE POS FIX PREVENT OVERLAP BLOCKS
-        else if(col.transform.CompareTag(DM.TAG.NormalBlock.ToString())){
-            Debug.Log("col.transform.tag= " + col.transform.name);
-        }
+
     }
 //*-----------------------------------------
 //* 関数
@@ -204,13 +202,42 @@ public class Block_Prefab : MonoBehaviour
         if(IsFreeze){
             //* Set Duration (Enter 1Time)
             if(PropertyDuration == 0){
+                befStageCnt = gm.stage;
                 PropertyDuration = LM._.ICE_FREEZE_DURATION + gm.stage;
                 FreezingPos = this.transform.position;
             }
 
-            //* Change Ice Mt
+            //* Change Ice Mt (毎プレーム)
             mesh.block[0].material = iceMt;
-            this.transform.position = FreezingPos;
+
+            //* 重なるBLOCK止め (NextStage毎に)
+            if(befStageCnt != gm.stage){
+                befStageCnt = gm.stage;
+
+                //* Fix Position
+                // this.transform.position = FreezingPos;
+
+                //* Ray
+                float maxDistance = 100;
+                Vector3 originPos = this.transform.position;
+                Vector3 dir = Vector3.forward;
+                RaycastHit hit;
+                Debug.DrawRay(originPos, dir * maxDistance, Color.blue, 1);
+                if(Physics.Raycast(originPos, dir, out hit, maxDistance)){
+                    bool isMySelf = hit.transform.gameObject == this.gameObject;//* 自分自身なら、処理を抜ける。
+                    if(!isMySelf && hit.transform.name.Contains(DM.NAME.Block.ToString())){
+                        Debug.Log($"Hit.name= {hit.transform.name}, hit.pos.z= {hit.transform.position.z}");
+                        hit.transform.localScale = new Vector3(hit.transform.localScale.x, hit.transform.localScale.y + 1f, hit.transform.localScale.z);
+                    }
+                    
+                }
+
+                // Array.Sort(hits, (a, b) => 
+                //     a.transform.position.z.CompareTo(b.transform.position.z)
+                // );
+                // Array.ForEach(hits, hit=> Debug.Log("SORT:: hit=" + hit.transform.name));
+            }
+
 
             //* Back Original Mt (End 1Time)
             if(gm.stage > PropertyDuration){
