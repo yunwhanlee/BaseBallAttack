@@ -1032,7 +1032,7 @@ GameObject:
   - component: {fileID: 5552249374014735836}
   - component: {fileID: 2524251635010537925}
   - component: {fileID: 9133811995639592125}
-  - component: {fileID: 2782221361267661700}
+  - component: {fileID: -3741973876949780780}
   m_Layer: 3
   m_Name: Chara_Bear
   m_TagString: Player
@@ -1089,9 +1089,9 @@ MonoBehaviour:
   isLock: 0
   isChecked: 1
   isCheckedImgObj: {fileID: 0}
-  meshRdrList: []
+  modelMeshRdrList: []
   originMtList: []
-  grayPanel: {fileID: 0}
+  grayPanel2D: {fileID: 0}
   rank: 1
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
@@ -1168,8 +1168,8 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!136 &2782221361267661700
-CapsuleCollider:
+--- !u!65 &-3741973876949780780
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1177,11 +1177,10 @@ CapsuleCollider:
   m_GameObject: {fileID: 3442606834111591561}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.95325816
-  m_Height: 4.2327
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.9540937, z: 0.45325816}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 3, z: 2}
+  m_Center: {x: 0, y: 0.59, z: 0}
 --- !u!1 &3879407351389472378
 GameObject:
   m_ObjectHideFlags: 0

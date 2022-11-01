@@ -903,7 +903,7 @@ GameObject:
   - component: {fileID: 7579087152772903485}
   - component: {fileID: 7579087152772903484}
   - component: {fileID: 7579087152772903486}
-  - component: {fileID: 8486851272640914698}
+  - component: {fileID: 4201843479794675198}
   m_Layer: 3
   m_Name: Chara_Cat
   m_TagString: Player
@@ -960,9 +960,9 @@ MonoBehaviour:
   isLock: 0
   isChecked: 1
   isCheckedImgObj: {fileID: 0}
-  meshRdrList: []
+  modelMeshRdrList: []
   originMtList: []
-  grayPanel: {fileID: 0}
+  grayPanel2D: {fileID: 0}
   rank: 2
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
@@ -1039,8 +1039,8 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!136 &8486851272640914698
-CapsuleCollider:
+--- !u!65 &4201843479794675198
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1048,11 +1048,10 @@ CapsuleCollider:
   m_GameObject: {fileID: 7345153623724933264}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 1.2207267
-  m_Height: 4.953246
-  m_Direction: 1
-  m_Center: {x: -0.0106601715, y: 1.1757646, z: 0}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 3, z: 2}
+  m_Center: {x: 0, y: 0.59, z: 0}
 --- !u!1 &7397575413439492729
 GameObject:
   m_ObjectHideFlags: 0

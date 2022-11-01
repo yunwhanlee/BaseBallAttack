@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44479525, g: 0.49434352, b: 0.5735407, a: 1}
+  m_IndirectSpecularColor: {r: 0.44479504, g: 0.49434292, b: 0.57354003, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4857,7 +4857,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: a7f4b3a80cce5544186fb7a62b8fabb2, type: 2}
   - {fileID: 2100000, guid: ee19e7bdbd2923340aa8973e1d4230b1, type: 2}
   - {fileID: 2100000, guid: a5f3265eb027f0e41af7b62f064343df, type: 2}
-  iceMt: {fileID: 2100000, guid: b61b5ebfb4aa3134987c9451aeb501f4, type: 2}
   dropItemExpOrbPf: {fileID: 8648117785770068642, guid: 9c5c87122054a5f42a6d0f065b398386, type: 3}
 --- !u!1 &585957426
 GameObject:
@@ -6067,7 +6066,7 @@ BoxCollider:
   m_GameObject: {fileID: 702911504}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 2, y: 3, z: 2}
   m_Center: {x: 0, y: 0.59, z: 0}

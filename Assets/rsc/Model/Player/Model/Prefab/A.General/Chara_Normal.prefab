@@ -1586,9 +1586,9 @@ GameObject:
   - component: {fileID: 8335860750283777225}
   - component: {fileID: 9128709339014469648}
   - component: {fileID: 8368906721333363493}
-  - component: {fileID: 8368906721333363494}
   - component: {fileID: 8368906721333363495}
   - component: {fileID: -3215597385249864041}
+  - component: {fileID: 4737587965720706790}
   m_Layer: 3
   m_Name: Chara_Normal
   m_TagString: Player
@@ -1703,20 +1703,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!136 &8368906721333363494
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8711436689206771315}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.9
-  m_Height: 4.5895205
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.1647594, z: 4.911148e-15}
 --- !u!95 &8368906721333363495
 Animator:
   serializedVersion: 3
@@ -1754,6 +1740,19 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!65 &4737587965720706790
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8711436689206771315}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 3, z: 2}
+  m_Center: {x: 0, y: 0.59, z: 0}
 --- !u!1 &9049669601358683726
 GameObject:
   m_ObjectHideFlags: 0

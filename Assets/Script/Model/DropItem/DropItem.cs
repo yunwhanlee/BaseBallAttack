@@ -38,7 +38,7 @@ public class DropItem : MonoBehaviour
     void Update(){
         if(IsMoveToPlayer){
             //* 放物線
-            transform.position = Vector3.Slerp(transform.position, gm.pl.transform.position, moveSpeed * Time.deltaTime); // transform.position = Vector3.Lerp(transform.position, gm.pl.transform.position, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.Slerp(transform.position, gm.pl.modelMovingTf.position, moveSpeed * Time.deltaTime); // transform.position = Vector3.Lerp(transform.position, gm.pl.transform.position, moveSpeed * Time.deltaTime);
         }
     }
 

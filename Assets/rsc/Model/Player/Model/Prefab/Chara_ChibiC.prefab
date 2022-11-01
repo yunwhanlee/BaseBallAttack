@@ -294,9 +294,9 @@ GameObject:
   - component: {fileID: 3378103883441064945}
   - component: {fileID: 2984715474218134534}
   - component: {fileID: 2984715474218134535}
-  - component: {fileID: 2984715474218134552}
   - component: {fileID: 2984715474218134533}
   - component: {fileID: 2984715474218134532}
+  - component: {fileID: 1637017687230295810}
   m_Layer: 3
   m_Name: Chara_ChibiC
   m_TagString: Player
@@ -411,20 +411,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!136 &2984715474218134552
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2714191977388118347}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 1.0947866
-  m_Height: 4.9076014
-  m_Direction: 1
-  m_Center: {x: -0.038014412, y: 1.262177, z: -2.6787586e-16}
 --- !u!95 &2984715474218134533
 Animator:
   serializedVersion: 3
@@ -462,6 +448,19 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!65 &1637017687230295810
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2714191977388118347}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 3, z: 2}
+  m_Center: {x: 0, y: 0.59, z: 0}
 --- !u!1 &2951182795005288209
 GameObject:
   m_ObjectHideFlags: 0

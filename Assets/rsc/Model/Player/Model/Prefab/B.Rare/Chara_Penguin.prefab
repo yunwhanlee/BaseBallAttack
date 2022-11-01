@@ -1330,7 +1330,7 @@ GameObject:
   - component: {fileID: 5320451663197592233}
   - component: {fileID: 7283450890079219490}
   - component: {fileID: -4515418818522498508}
-  - component: {fileID: 4019110793604850370}
+  - component: {fileID: -4563752489798400112}
   m_Layer: 3
   m_Name: Chara_Penguin
   m_TagString: Player
@@ -1387,9 +1387,9 @@ MonoBehaviour:
   isLock: 0
   isChecked: 1
   isCheckedImgObj: {fileID: 0}
-  meshRdrList: []
+  modelMeshRdrList: []
   originMtList: []
-  grayPanel: {fileID: 0}
+  grayPanel2D: {fileID: 0}
   rank: 1
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
@@ -1466,8 +1466,8 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!136 &4019110793604850370
-CapsuleCollider:
+--- !u!65 &-4563752489798400112
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1475,11 +1475,10 @@ CapsuleCollider:
   m_GameObject: {fileID: 7626118294757544462}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.79520524
-  m_Height: 4.0580015
-  m_Direction: 1
-  m_Center: {x: 0.020951271, y: -0.30165648, z: -0.0038952827}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 3, z: 2}
+  m_Center: {x: 0, y: 0.59, z: 0}
 --- !u!1 &7679525521655636199
 GameObject:
   m_ObjectHideFlags: 0
