@@ -332,6 +332,7 @@ public class GameManager : MonoBehaviour
             bm.DoCreateBlock = true; //ブロック生成
             foreach(var img in strikeCntImgs) img.gameObject.SetActive(false); //GUI非表示 初期化
             readyBtn.gameObject.SetActive(true);
+            pl.previewBundle.SetActive(true);
         }
         else{ //* ストライク
             ShootCntTxt.text = LANG.getTxt(LANG.TXT.Strike.ToString()) + "!";
