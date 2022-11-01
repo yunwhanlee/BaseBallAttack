@@ -198,7 +198,7 @@ public class Ball_Prefab : MonoBehaviour
                             decreaseBlocksHp(atv, AtvSkill.FIREBALL_DMG);
                             if(isHomeRun)
                                 decreaseBlocksHp(atv, 0, AtvSkill.FIREBALL_DOT); //* + DOT DAMAGE
-                            this.rigid.velocity = Vector3.zero;
+                            // this.rigid.velocity = Vector3.zero; //! ボール速度が０になると、待機されず次のステージに進むBUG。
                             break;
                         }
                         case DM.ATV.ColorBall:{
@@ -217,7 +217,7 @@ public class Ball_Prefab : MonoBehaviour
                                     sameColorBlocks[i].transform.GetComponent<Block_Prefab>().decreaseHp(PsvSkill<int>.ONE_KILL_DMG);
                                 }
                             }
-                            this.rigid.velocity = Vector3.zero;
+                            // this.rigid.velocity = Vector3.zero;
                             break;
                         }
                         case DM.ATV.PoisonSmoke:{
@@ -230,12 +230,12 @@ public class Ball_Prefab : MonoBehaviour
                             }
                             RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.PoisonSmokeCastWidth, Vector3.up, 0);
                             decreaseBlocksHp(atv, 0, AtvSkill.POISONSMOKE_DOT);
-                            this.rigid.velocity = Vector3.zero;
+                            // this.rigid.velocity = Vector3.zero;
                             break;
                         }
                         case DM.ATV.IceWave:{
                             em.createAtvSkExplosionEF(skillIdx, this.transform);
-                            this.rigid.velocity = Vector3.zero;
+                            // this.rigid.velocity = Vector3.zero;
                             break;
                         }
                     }

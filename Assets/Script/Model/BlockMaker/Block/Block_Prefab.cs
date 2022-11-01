@@ -49,6 +49,7 @@ public class Block_Prefab : MonoBehaviour
     [SerializeField] int propertyDuration;  public int PropertyDuration {get => propertyDuration; set => propertyDuration = value;}
     [SerializeField] bool isDotDmg;  public bool IsDotDmg {get => isDotDmg; set => isDotDmg = value;}
     [SerializeField] bool isFreeze;  public bool IsFreeze {get => isFreeze; set => isFreeze = value;}
+    [SerializeField] Vector3 freezingPos; public Vector3 FreezingPos {get => freezingPos; set => freezingPos = value;}
     [SerializeField] int hp = 1;    public int Hp {get => hp; set => hp = value;}
     [SerializeField] int exp = 10;  public int Exp {get => exp; set => exp = value;}
     [SerializeField][Range(1, 100)] int itemTypePer;
@@ -95,6 +96,10 @@ public class Block_Prefab : MonoBehaviour
         //* GAMEOVER
         if(col.transform.CompareTag(DM.TAG.GameOverLine.ToString()) && gm.State != GameManager.STATE.GAMEOVER){
             gm.setGameOver();
+        }
+        //* ICE POS FIX PREVENT OVERLAP BLOCKS
+        else if(col.transform.CompareTag(DM.TAG.NormalBlock.ToString())){
+            Debug.Log("col.transform.tag= " + col.transform.name);
         }
     }
 //*-----------------------------------------
@@ -197,15 +202,19 @@ public class Block_Prefab : MonoBehaviour
     }
     private void checkIceFreeze(){
         if(IsFreeze){
-            //* Set Duration
-            if(PropertyDuration == 0)
+            //* Set Duration (Enter 1Time)
+            if(PropertyDuration == 0){
                 PropertyDuration = LM._.ICE_FREEZE_DURATION + gm.stage;
-            
+                FreezingPos = this.transform.position;
+            }
+
             //* Change Ice Mt
             mesh.block[0].material = iceMt;
+            this.transform.position = FreezingPos;
 
-            //* Back Original Mt
+            //* Back Original Mt (End 1Time)
             if(gm.stage > PropertyDuration){
+                FreezingPos = Vector3.zero;
                 IsFreeze = false;
                 int i=0;
                 Array.ForEach(mesh.block, bl => bl.materials = new Material[]{originMts[i++]});

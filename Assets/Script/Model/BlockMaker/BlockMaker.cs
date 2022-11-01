@@ -108,7 +108,8 @@ public class BlockMaker : MonoBehaviour
 
     public void moveDownBlock(){
         Debug.Log("moveDownBlock:: MOVE DOWN BLOCK ↓, gm.stage= " + gm.stage);
-        gm.blockGroup.position = new Vector3(gm.blockGroup.position.x, gm.blockGroup.position.y, gm.blockGroup.position.z - 1);
+        var pos = gm.blockGroup.position;
+        gm.blockGroup.position = new Vector3(pos.x, pos.y, pos.z - 1);
 
         //* Next Set Block Type
         if(gm.stage % LM._.LONG_BLOCK_SPAN == 0){
