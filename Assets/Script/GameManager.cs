@@ -323,6 +323,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator corSetStrike(bool isOut = false){
         strikeCntImgs[strikeCnt++].gameObject.SetActive(true);
         if(isOut){ //* アウト
+            stage++;
             strikeCnt = 0;
             ShootCntTxt.text = LANG.getTxt(LANG.TXT.Out.ToString()) + "!";
             yield return new WaitForSeconds(1.5f);

@@ -15,8 +15,10 @@ public class IceWave : MonoBehaviour
     
     void OnTriggerEnter(Collider col){
         if(col.name.Contains(DM.NAME.Block.ToString())){
-            bm.decreaseBlockHP(col.gameObject, AtvSkill.ICEWAVE_DMG);
-            em.createCritTxtEF(col.transform.position, AtvSkill.ICEWAVE_DMG);
+            bm.decreaseBlockHP(col.gameObject, 1);//AtvSkill.ICEWAVE_DMG);
+            em.createCritTxtEF(col.transform.position, 1);//AtvSkill.ICEWAVE_DMG);
+            var block = col.GetComponent<Block_Prefab>();
+            block.IsFreeze = true;
         }
     }
 }

@@ -224,7 +224,7 @@ public class Ball_Prefab : MonoBehaviour
                             var ins = em.createAtvSkExplosionEF(skillIdx, this.transform, destroyCnt);
                             if(isHomeRun){
                                 float sc = 1.3f;
-                                ins.GetComponent<PoisonSmoke>().KeepStageSpan += 2;
+                                ins.GetComponent<PoisonSmoke>().KeepDuration += 2;
                                 ins.transform.localScale = new Vector3(sc, sc, sc);
                             }
                             RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.PoisonSmokeCastWidth, Vector3.up, 0);

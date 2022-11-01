@@ -32,11 +32,12 @@ public class Block_Prefab : MonoBehaviour
     Vector3 itemBlockBombBoxSizeVec = new Vector3(3,2,2);
 
     [Header("Mesh Material")]
-    [SerializeField] MyMesh mesh; //* Material Instancing
-    public Material[] originMts;
+    [SerializeField] public MyMesh mesh; //* Material Instancing
     private Color color;
+    public Material[] originMts;
     public Material[] mts;
     public Material whiteHitMt;
+    public Material iceMt;
     public Transform itemTypeImgGroup;
     public SpriteGlowEffect sprGlowEf;
 
@@ -45,7 +46,9 @@ public class Block_Prefab : MonoBehaviour
     [SerializeField] BlockType type = BlockType.NORMAL;
 
     [Header("STATUS")]
+    [SerializeField] int propertyDuration;  public int PropertyDuration {get => propertyDuration; set => propertyDuration = value;}
     [SerializeField] bool isDotDmg;  public bool IsDotDmg {get => isDotDmg; set => isDotDmg = value;}
+    [SerializeField] bool isFreeze;  public bool IsFreeze {get => isFreeze; set => isFreeze = value;}
     [SerializeField] int hp = 1;    public int Hp {get => hp; set => hp = value;}
     [SerializeField] int exp = 10;  public int Exp {get => exp; set => exp = value;}
     [SerializeField][Range(1, 100)] int itemTypePer;
@@ -74,7 +77,7 @@ public class Block_Prefab : MonoBehaviour
     }
 
     void Start() {
-        setType();　//* (NormalBlockのみ)
+        setType(); //* (NormalBlockのみ)
         setHp();
         setStyle(); //* (TreasureChest、healBlock、Boss 除外)
         spawnAnim("Init");
@@ -84,6 +87,9 @@ public class Block_Prefab : MonoBehaviour
         hpTxt.text = Hp.ToString();
         spawnAnim("Play");
         animateItemTypeUISprGlowEF(ref itemUISprGlowCnt);//* ItemType Glow Animation
+
+        //* Property
+        checkIceFreeze();
     }
     private void OnTriggerEnter(Collider col) {
         //* GAMEOVER
@@ -129,7 +135,7 @@ public class Block_Prefab : MonoBehaviour
         hpTxt.text = Hp.ToString();
     }
 
-    private void setStyle(){
+    public void setStyle(){
         if(kind == BlockMaker.KIND.Normal || kind == BlockMaker.KIND.Long){
             // Debug.LogFormat("Block_Prefab:: kind={0}", kind);
             //* Set Exp & Material
@@ -187,6 +193,23 @@ public class Block_Prefab : MonoBehaviour
                     );
                 }
                 break;
+        }
+    }
+    private void checkIceFreeze(){
+        if(IsFreeze){
+            //* Set Duration
+            if(PropertyDuration == 0)
+                PropertyDuration = LM._.ICE_FREEZE_DURATION + gm.stage;
+            
+            //* Change Ice Mt
+            mesh.block[0].material = iceMt;
+
+            //* Back Original Mt
+            if(gm.stage > PropertyDuration){
+                IsFreeze = false;
+                int i=0;
+                Array.ForEach(mesh.block, bl => bl.materials = new Material[]{originMts[i++]});
+            }
         }
     }
     private void animateItemTypeUISprGlowEF(ref float cnt){

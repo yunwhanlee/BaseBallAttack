@@ -6,21 +6,21 @@ using UnityEngine.UI;
 public class PoisonSmoke : MonoBehaviour
 {
     GameManager gm;
-    [SerializeField] int keepStageSpan = 2;     public int KeepStageSpan { get => keepStageSpan; set => keepStageSpan = value;}
+    [SerializeField] int keepDuration = 2;     public int KeepDuration { get => keepDuration; set => keepDuration = value;}
     [SerializeField] Text KeepCntTxt;
     void Start()
     {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-        KeepStageSpan += gm.stage;
+        KeepDuration += gm.stage;
         transform.rotation = Quaternion.Euler(0,0,0);
     }
 
     void Update()
     {
-        int cnt = KeepStageSpan - gm.stage + 1;
+        int cnt = KeepDuration - gm.stage + 1;
         KeepCntTxt.text = cnt.ToString();
 
-        if(gm.stage > KeepStageSpan){
+        if(gm.stage > KeepDuration){
             Destroy(this.gameObject);
         }
     }
