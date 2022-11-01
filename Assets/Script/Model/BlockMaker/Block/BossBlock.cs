@@ -114,12 +114,12 @@ public class BossBlock : Block_Prefab{
         //** OBSTACLE INS 生成
         Debug.Log($"obstaclePosList.Count= {obstaclePosList.Count}");
 
-        // patternRandom(Random.Range(1, 3));
+        patternRandom(Random.Range(1, 3));
         // patternEven();
         // patternOdd();
         // patternCutColumnLine();
         // patternCntRowLine();
-        patternGoBoard();
+        // patternGoBoard();
         // patternGoBoardRandom();
         // patternTriangle();
     }

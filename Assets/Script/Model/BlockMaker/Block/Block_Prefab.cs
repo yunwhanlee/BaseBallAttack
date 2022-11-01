@@ -50,7 +50,6 @@ public class Block_Prefab : MonoBehaviour
     [SerializeField] int propertyDuration;  public int PropertyDuration {get => propertyDuration; set => propertyDuration = value;}
     [SerializeField] bool isDotDmg;  public bool IsDotDmg {get => isDotDmg; set => isDotDmg = value;}
     [SerializeField] bool isFreeze;  public bool IsFreeze {get => isFreeze; set => isFreeze = value;}
-    [SerializeField] Vector3 freezingPos; public Vector3 FreezingPos {get => freezingPos; set => freezingPos = value;}
     [SerializeField] int hp = 1;    public int Hp {get => hp; set => hp = value;}
     [SerializeField] int exp = 10;  public int Exp {get => exp; set => exp = value;}
     [SerializeField][Range(1, 100)] int itemTypePer;
@@ -204,47 +203,71 @@ public class Block_Prefab : MonoBehaviour
             if(PropertyDuration == 0){
                 befStageCnt = gm.stage;
                 PropertyDuration = LM._.ICE_FREEZE_DURATION + gm.stage;
-                FreezingPos = this.transform.position;
+            }
+
+            //* Back Original Mt (End 1Time)
+            if(gm.stage > PropertyDuration){
+                IsFreeze = false;
+                int i=0;
+                Array.ForEach(mesh.block, mesh => mesh.materials = new Material[]{originMts[i++]});
+                return;
             }
 
             //* Change Ice Mt (毎プレーム)
-            mesh.block[0].material = iceMt;
+            Array.ForEach(mesh.block, mesh => mesh.material = iceMt);
 
             //* 重なるBLOCK止め (NextStage毎に)
             if(befStageCnt != gm.stage){
                 befStageCnt = gm.stage;
-
-                //* Fix Position
-                // this.transform.position = FreezingPos;
 
                 //* Ray
                 float maxDistance = 100;
                 Vector3 originPos = this.transform.position;
                 Vector3 dir = Vector3.forward;
                 RaycastHit hit;
-                Debug.DrawRay(originPos, dir * maxDistance, Color.blue, 1);
-                if(Physics.Raycast(originPos, dir, out hit, maxDistance)){
-                    bool isMySelf = hit.transform.gameObject == this.gameObject;//* 自分自身なら、処理を抜ける。
-                    if(!isMySelf && hit.transform.name.Contains(DM.NAME.Block.ToString())){
-                        Debug.Log($"Hit.name= {hit.transform.name}, hit.pos.z= {hit.transform.position.z}");
-                        hit.transform.localScale = new Vector3(hit.transform.localScale.x, hit.transform.localScale.y + 1f, hit.transform.localScale.z);
+                Debug.DrawRay(originPos, dir * maxDistance, Color.red, 3);
+                if(this.kind != BlockMaker.KIND.Long){
+                    if(Physics.Raycast(originPos, dir, out hit, maxDistance)){
+                        bool isMySelf = hit.transform.gameObject == this.gameObject;//* 自分自身なら、処理を抜ける。
+                        if(!isMySelf && hit.transform.name.Contains(DM.NAME.Block.ToString())){
+                            const int MAX_Y = 2;
+                            Debug.Log($"checkIceFreeze:: Hit.name= {hit.transform.name}, this.localPos.z= {this.transform.localPosition.z}, hit.localPos.z= {hit.transform.localPosition.z}");
+                            // hit.transform.localScale = new Vector3(hit.transform.localScale.x, hit.transform.localScale.y + 1f, hit.transform.localScale.z);
+
+                            //* Create Skip Block
+                            if(hit.transform.localPosition.z >= MAX_Y){
+                                Destroy(hit.transform.gameObject, 0.5f);
+                            }
+                            else if(hit.transform.localPosition.z == this.transform.localPosition.z){
+                                hit.transform.localPosition = new Vector3(hit.transform.localPosition.x, hit.transform.localPosition.y, hit.transform.localPosition.z + 1);
+                            }
+                        }
                     }
-                    
                 }
+                else{
+                    for(int i=-1; i<2; i++){
+                        originPos = new Vector3(originPos.x + (i * 1.8f), originPos.y, originPos.z);
+                        if(Physics.Raycast(originPos, dir, out hit, maxDistance)){
+                        bool isMySelf = hit.transform.gameObject == this.gameObject;//* 自分自身なら、処理を抜ける。
+                        if(!isMySelf && hit.transform.name.Contains(DM.NAME.Block.ToString())){
+                            const int MAX_Y = 2;
+                            Debug.Log($"checkIceFreeze:: Hit.name= {hit.transform.name}, this.localPos.z= {this.transform.localPosition.z}, hit.localPos.z= {hit.transform.localPosition.z}");
+                            // hit.transform.localScale = new Vector3(hit.transform.localScale.x, hit.transform.localScale.y + 1f, hit.transform.localScale.z);
 
-                // Array.Sort(hits, (a, b) => 
-                //     a.transform.position.z.CompareTo(b.transform.position.z)
-                // );
-                // Array.ForEach(hits, hit=> Debug.Log("SORT:: hit=" + hit.transform.name));
-            }
-
-
-            //* Back Original Mt (End 1Time)
-            if(gm.stage > PropertyDuration){
-                FreezingPos = Vector3.zero;
-                IsFreeze = false;
-                int i=0;
-                Array.ForEach(mesh.block, bl => bl.materials = new Material[]{originMts[i++]});
+                            //* Create Skip Block
+                            if(hit.transform.localPosition.z >= MAX_Y){
+                                Destroy(hit.transform.gameObject, 0.5f);
+                            }
+                            else if(hit.transform.localPosition.z == this.transform.localPosition.z){
+                                hit.transform.localPosition = new Vector3(hit.transform.localPosition.x, hit.transform.localPosition.y, hit.transform.localPosition.z + 1);
+                            }
+                        }
+                    }
+                    }
+                }
+                //* Fix Position 
+                Vector3 freezingPos = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y, this.transform.localPosition.z + 1);
+                this.transform.localPosition = freezingPos;
             }
         }
     }
