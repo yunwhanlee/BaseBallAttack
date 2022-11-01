@@ -161,11 +161,16 @@ public class EffectManager : MonoBehaviour
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1));
     }
     public GameObject createAtvSkExplosionEF(int idx, Transform parentTf, int time = 2){
+        //* Rotation
         var dir = Vector3.Normalize(parentTf.GetComponent<Rigidbody>().velocity);
+        Debug.Log("createAtvSkExplosionEF:: IceWave dir.z= " + dir.z);
         float dirZ = (dir.z < 0)? Mathf.Abs(dir.z) : -Mathf.Abs(dir.z);
+        
         Quaternion rotate = Quaternion.LookRotation(new Vector3(dir.x, dir.y, dirZ));
+        //* Skill Idx
         string key = ObjectPool.DIC.AtvSkExplosionEF.ToString() + (gm.SelectAtvSkillBtnIdx == 0 ? "" : "2");
         var ins = ObjectPool.getObject(key, parentTf.position, rotate, gm.effectGroup);
+
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, time));
         return ins;
     }

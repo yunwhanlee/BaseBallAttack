@@ -267,7 +267,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         line.SetPosition(1, hitPos);
         line.SetPosition(2, (wallNormalVec == Vector3.zero)? hitPos : hitPos2);
 
-        //* Second BallPreviewSphere 活性化
+        //* 二番目LINEが出たら、一番目 BallPreviewSphereを消して、二番目を活性化
         pl.ballPreviewSphere[1].SetActive((wallNormalVec == Vector3.zero)? false : true);
         bool is2ndBallPreviewOn = pl.ballPreviewSphere[1].activeSelf;
 

@@ -130,14 +130,14 @@ public class ObjectPool : MonoBehaviour
         return newObj;
     }
 
+    public static IEnumerator coDestroyObject(GameObject ins, Transform groupTf, float sec = 0){
+        yield return new WaitForSeconds(sec);
+        returnObject(ins, groupTf);
+    }
     static void returnObject(GameObject ins, Transform groupTf){
         // Debug.Log("<color=red>ObjectPool:: returnObject() ins= " + ins.name + "</color>");
         if(!ins) return;
         ins.SetActive(false);
         ins.transform.SetParent(groupTf);
-    }
-    public static IEnumerator coDestroyObject(GameObject ins, Transform groupTf, float sec = 0){
-        yield return new WaitForSeconds(sec);
-        returnObject(ins, groupTf);
     }
 }

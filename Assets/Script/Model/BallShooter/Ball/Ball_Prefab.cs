@@ -316,7 +316,7 @@ public class Ball_Prefab : MonoBehaviour
             case DM.ATV.ColorBall:
             case DM.ATV.PoisonSmoke:
             case DM.ATV.IceWave:
-                em.createAtvSkShotEF(skillIdx, this.gameObject.transform, Quaternion.identity, true); //Trail
+                em.createAtvSkShotEF(skillIdx, this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation, true); //Trail
                 break;
         }
         //Before go up NextStage Wait for Second
