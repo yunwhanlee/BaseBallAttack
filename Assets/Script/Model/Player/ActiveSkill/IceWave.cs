@@ -15,6 +15,9 @@ public class IceWave : MonoBehaviour
     
     void OnTriggerEnter(Collider col){
         if(col.name.Contains(DM.NAME.Block.ToString())){
+            Debug.Log($"IceWave::OnTriggerEnter:: col.name= {col.name}");
+            if(col.name == "ItemBlockDirLineTrailEF") return;
+
             bm.decreaseBlockHP(col.gameObject, 1);//AtvSkill.ICEWAVE_DMG);
             em.createCritTxtEF(col.transform.position, 1);//AtvSkill.ICEWAVE_DMG);
             var block = col.GetComponent<Block_Prefab>();

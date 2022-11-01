@@ -7,7 +7,8 @@
         ✓ カラーボール：MAX 5つに制限。HOMERUNだったら、全て消す。
         c. アイスエイジ：ブロックを凍らせて、次のターンに下がらない。
             ✓ iceMtとpropertyDurationが過ぎたら元のMTに戻す処理適用。
-            - 
+            ✓ LongTypeとNormalType両方対応できるように処理分ける。
+            - BOSS戦には、Stageが上げなくて、この処理できないので、対応。
 
 
     - ユニックPassiveスキル追加（ボース倒しとかガチャで出る）
