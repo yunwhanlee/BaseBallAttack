@@ -105,6 +105,10 @@ PrefabInstance:
       propertyPath: ShapeModule.radius.value
       value: 4.2
       objectReference: {fileID: 0}
+    - target: {fileID: 1163653631807142632, guid: 8cdab546a05dea0489cca5f56137f031, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1163653631807142633, guid: 8cdab546a05dea0489cca5f56137f031, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.125
@@ -322,7 +326,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf164ee474366c841b2367f65d2b560f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iceMt: {fileID: 2100000, guid: b61b5ebfb4aa3134987c9451aeb501f4, type: 2}
 --- !u!1001 &3983569656950193534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -373,6 +376,10 @@ PrefabInstance:
     - target: {fileID: 1163653631807142632, guid: 8cdab546a05dea0489cca5f56137f031, type: 3}
       propertyPath: ShapeModule.m_Scale.z
       value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1163653631807142632, guid: 8cdab546a05dea0489cca5f56137f031, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 1163653631807142638, guid: 8cdab546a05dea0489cca5f56137f031, type: 3}
       propertyPath: m_Name
@@ -535,7 +542,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf164ee474366c841b2367f65d2b560f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iceMt: {fileID: 2100000, guid: b61b5ebfb4aa3134987c9451aeb501f4, type: 2}
 --- !u!1001 &3983569657184180236
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -637,7 +643,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1163653631807142632, guid: 8cdab546a05dea0489cca5f56137f031, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1163653631807142633, guid: 8cdab546a05dea0489cca5f56137f031, type: 3}
       propertyPath: m_LocalScale.x
@@ -904,7 +910,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf164ee474366c841b2367f65d2b560f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iceMt: {fileID: 2100000, guid: b61b5ebfb4aa3134987c9451aeb501f4, type: 2}
 --- !u!1001 &3983569657422067594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -967,6 +972,10 @@ PrefabInstance:
     - target: {fileID: 1163653631807142632, guid: 8cdab546a05dea0489cca5f56137f031, type: 3}
       propertyPath: ShapeModule.m_Scale.z
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1163653631807142632, guid: 8cdab546a05dea0489cca5f56137f031, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1163653631807142633, guid: 8cdab546a05dea0489cca5f56137f031, type: 3}
       propertyPath: m_LocalScale.x
@@ -1165,4 +1174,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf164ee474366c841b2367f65d2b560f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iceMt: {fileID: 2100000, guid: b61b5ebfb4aa3134987c9451aeb501f4, type: 2}

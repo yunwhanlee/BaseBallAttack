@@ -162,11 +162,18 @@ public class EffectManager : MonoBehaviour
     }
     public GameObject createAtvSkExplosionEF(int idx, Transform parentTf, int time = 2){
         //* Rotation
-        var dir = Vector3.Normalize(parentTf.GetComponent<Rigidbody>().velocity);
-        Debug.Log("createAtvSkExplosionEF:: IceWave dir.z= " + dir.z);
-        float dirZ = (dir.z < 0)? Mathf.Abs(dir.z) : -Mathf.Abs(dir.z);
+        //* (BUG) ICEWAVE方向が逆になること対応 -> ArrowとBallPreviewsのベクトルマイナス関係に設定。
+        bool is2ndLineOff = (gm.pl.ballPreviewSphere[0].activeSelf)? true : false;
+        Debug.Log("createAtvSkExplosionEF:: is2ndLineOff= " + is2ndLineOff);
+        Vector3 arrowVec = gm.pl.arrowAxisAnchor.transform.position;
+        Vector3[] ballPrevVecs = new Vector3[2]{
+            gm.pl.ballPreviewSphere[0].transform.position,
+            gm.pl.ballPreviewSphere[1].transform.position
+        };
         
-        Quaternion rotate = Quaternion.LookRotation(new Vector3(dir.x, dir.y, dirZ));
+        Vector3 direction = (is2ndLineOff)? ballPrevVecs[0] - arrowVec : ballPrevVecs[1] - ballPrevVecs[0];
+        Quaternion rotate = Quaternion.LookRotation(direction);
+
         //* Skill Idx
         string key = ObjectPool.DIC.AtvSkExplosionEF.ToString() + (gm.SelectAtvSkillBtnIdx == 0 ? "" : "2");
         var ins = ObjectPool.getObject(key, parentTf.position, rotate, gm.effectGroup);
