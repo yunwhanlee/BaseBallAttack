@@ -132,6 +132,8 @@ public class BlockMaker : MonoBehaviour
         }
     }
     private IEnumerator coPlayBossSpawnAnim(){
+        gm.IsPlayingAnim = true;
+
         //* 再生時間 習得
         var camAnim = gm.cam1.GetComponent<Animator>();
         var txtAnim = gm.bossSpawnTxt.GetComponent<Animator>();
@@ -145,17 +147,18 @@ public class BlockMaker : MonoBehaviour
         gm.statusFolderPanel.gameObject.SetActive(false);
 
         const int SPAWN = 1; // IDLE = 0
-        float playSec = Util._.getAnimPlayTime(SPAWN, txtAnim);
+        float animPlayTime = Util._.getAnimPlayTime(SPAWN, txtAnim);
 
         Time.timeScale = 0.1f;
         camAnim.SetTrigger(DM.ANIM.DoBossSpawn.ToString());
         txtAnim.SetTrigger(DM.ANIM.DoSpawn.ToString());
-        yield return new WaitForSecondsRealtime(playSec);
 
+        yield return new WaitForSecondsRealtime(animPlayTime);
+        //* Animation Finish
+        gm.IsPlayingAnim = false;
         gm.setActiveSkillBtns(true);
         gm.readyBtn.gameObject.SetActive(true);
         gm.statusFolderPanel.gameObject.SetActive(true);
-
         Time.timeScale = 1;
     }
     public void setGlowEF(Block_Prefab[] blocks, bool isOn){

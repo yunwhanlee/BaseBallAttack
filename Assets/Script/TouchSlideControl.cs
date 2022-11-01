@@ -42,6 +42,8 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     //*Event
     public void OnDrag(PointerEventData eventData){
         if(gm.State != GameManager.STATE.WAIT) return;
+        if(gm.IsPlayingAnim) return;
+
         Transform playerTf = pl.gameObject.transform;
         Transform arrowAnchorTf = pl.arrowAxisAnchor.transform;
 
@@ -67,12 +69,14 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     }
 
     public void OnPointerDown(PointerEventData eventData){
-        Debug.Log("OnPointerDown::");
-        pad.position = eventData.position;
-        pad.gameObject.SetActive(true);
-
         if(gm.State != GameManager.STATE.WAIT) return;
         if(gm.bs.IsBallExist) return;
+        if(gm.IsPlayingAnim) return;
+
+        Debug.Log("OnPointerDown::");
+
+        pad.position = eventData.position;
+        pad.gameObject.SetActive(true);
 
         Vector3 touchPos = new Vector3(eventData.position.x, eventData.position.y, 100);
         if(Util._.checkRayHitTagIsExist(touchPos, DM.TAG.PlayerBattingSpot.ToString())){
@@ -113,6 +117,8 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         }
     }
     public void OnPointerUp(PointerEventData eventData){
+        if(gm.IsPlayingAnim) return;
+
         //* ボタンUI 活性化
         gm.readyBtn.gameObject.SetActive(true);
         gm.activeSkillBtnGroup.gameObject.SetActive(true);

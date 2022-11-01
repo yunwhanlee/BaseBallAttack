@@ -196,7 +196,7 @@ public class Ball_Prefab : MonoBehaviour
                         case DM.ATV.FireBall:{
                             em.createAtvSkExplosionEF(skillIdx, this.transform);
                             decreaseAllBlocksHp(atv, AtvSkill.FIREBALL_DMG);
-                            if(isHomeRun) 
+                            if(isHomeRun)
                                 decreaseAllBlocksHp(atv, 0, AtvSkill.FIREBALL_DOT); //* + DOT DAMAGE
                             break;
                         }
@@ -389,18 +389,18 @@ public class Ball_Prefab : MonoBehaviour
     }
 
     IEnumerator coPlayHomeRunAnim(bool isActiveSkillTrigger){
-        // if(isActiveSkillTrigger){
-        //     yield return coPlayActiveSkillBefSpotLightAnim();
-        // }
         isHomeRun = true;
+        gm.IsPlayingAnim = true;
         Debug.Log("HOMERUH!!!!" + "isHomeRun= " + isHomeRun);
         Time.timeScale = 0;
-        pl.setAnimTrigger("HomeRun");
-        yield return new WaitForSecondsRealtime(2);
-        gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
+        pl.setAnimTrigger(DM.ANIM.HomeRun.ToString());
 
+        yield return new WaitForSecondsRealtime(2);
+        //* Animation Finish
+        gm.IsPlayingAnim = false;
+        gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
         gm.homeRunTxtTf.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
-        em.enableUITxtEF("HomeRun");
+        em.enableUITxtEF(DM.ANIM.HomeRun.ToString());
         Time.timeScale = 1;
     }
 

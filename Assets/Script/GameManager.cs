@@ -47,6 +47,9 @@ public class GameManager : MonoBehaviour
     public int strikeCnt = 0;
     public int comboCnt = 0;
 
+    [Header("TRIGGER")]
+    public bool isPlayingAnim;  public bool IsPlayingAnim { get=> isPlayingAnim; set=> isPlayingAnim = value;}
+
     [Header("PANEL")]
     public GameObject strikePanel;
     public GameObject levelUpPanel;
