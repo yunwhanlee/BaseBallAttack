@@ -228,8 +228,9 @@ public class Block_Prefab : MonoBehaviour
                 Debug.DrawRay(originPos, dir * maxDistance, Color.red, 3);
                 if(this.kind != BlockMaker.KIND.Long){
                     if(Physics.Raycast(originPos, dir, out hit, maxDistance)){
-                        bool isMySelf = hit.transform.gameObject == this.gameObject;//* 自分自身なら、処理を抜ける。
-                        if(!isMySelf && hit.transform.name.Contains(DM.NAME.Block.ToString())){
+                        bool isIceMat = checkExistMaterial(hit.transform, DM.NAME.IceMat.ToString());
+                        
+                        if(!isIceMat && hit.transform.name.Contains(DM.NAME.Block.ToString())){
                             const int MAX_Y = 2;
                             Debug.Log($"checkIceFreeze:: Hit.name= {hit.transform.name}, this.localPos.z= {this.transform.localPosition.z}, hit.localPos.z= {hit.transform.localPosition.z}");
                             // hit.transform.localScale = new Vector3(hit.transform.localScale.x, hit.transform.localScale.y + 1f, hit.transform.localScale.z);
@@ -270,6 +271,14 @@ public class Block_Prefab : MonoBehaviour
                 this.transform.localPosition = freezingPos;
             }
         }
+    }
+    private bool checkExistMaterial(Transform tf, string mtName){
+        bool result = false;
+        Array.ForEach(tf.GetComponents<MeshRenderer>(), meshRdr => {
+            result = Array.Exists(meshRdr.materials, mt => mt.name == DM.NAME.IceMat.ToString());
+            if(result) return;
+        });
+        return result;
     }
     private void animateItemTypeUISprGlowEF(ref float cnt){
         if(itemUISprGlowEf){

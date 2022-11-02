@@ -8,6 +8,7 @@
         c. アイスエイジ：ブロックを凍らせて、次のターンに下がらない。
             ✓ iceMtとpropertyDurationが過ぎたら元のMTに戻す処理適用。
             ✓ LongTypeとNormalType両方対応できるように処理分ける。
+            ✓ isMySelfでは、TreasureとかHealブロックは一般ブロックにみない限定があり、IceMatがあるかで判断することで対応。
             - BOSS戦には、Stageが上げなくて、この処理できないので、対応。
 
 

@@ -12,6 +12,7 @@ public class DM : MonoBehaviour
     public enum NAME {DownWall, Block, FireBallDotEffect, BossDieDropOrbSpot, GrayPanel,
         RightArm, HomeManager,
         BallPreview, Box001, Area,
+        IceMat,
     };
     public enum TAG {HitRangeArea, StrikeLine, GameOverLine, Wall, ActiveDownWall, Player,
         NormalBlock, LongBlock, TreasureChestBlock, HealBlock, BossBlock,   
