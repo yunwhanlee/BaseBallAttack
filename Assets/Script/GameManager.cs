@@ -455,6 +455,12 @@ public class GameManager : MonoBehaviour
 
         //* Check Event
         bm.checkIsHealBlock();
+        for(int i=0; i<blockGroup.childCount; i++){
+            var block = blockGroup.GetChild(i).GetComponent<Block_Prefab>();
+            if(block.IsFreeze)
+                block.PropertyDuration++;
+        }
+
         activeSkillDataBase[0].checkBlocksIsDotDmg(this);
         StartCoroutine(coCheckPerfectBonus(boss));
         StartCoroutine(coCheckLevelUp());

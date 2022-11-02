@@ -46,7 +46,7 @@ public class Block_Prefab : MonoBehaviour
     [SerializeField] BlockType type = BlockType.NORMAL;
 
     [Header("STATUS")]
-    private int befStageCnt;
+    [SerializeField] int befPropertyCnt;    public int BefPropertyCnt {get => befPropertyCnt; set => befPropertyCnt = value;}
     [SerializeField] int propertyDuration;  public int PropertyDuration {get => propertyDuration; set => propertyDuration = value;}
     [SerializeField] bool isDotDmg;  public bool IsDotDmg {get => isDotDmg; set => isDotDmg = value;}
     [SerializeField] bool isFreeze;  public bool IsFreeze {get => isFreeze; set => isFreeze = value;}
@@ -75,6 +75,7 @@ public class Block_Prefab : MonoBehaviour
         //* Material Instancing🌟
         mesh = new MyMesh(this);
         originMts = mesh.getOriginalMts();
+        BefPropertyCnt = -1;
     }
 
     void Start(){
@@ -200,14 +201,15 @@ public class Block_Prefab : MonoBehaviour
     private void checkIceFreeze(){
         if(IsFreeze){
             //* Set Duration (Enter 1Time)
-            if(PropertyDuration == 0){
-                befStageCnt = gm.stage;
-                PropertyDuration = LM._.ICE_FREEZE_DURATION + gm.stage;
+            if(BefPropertyCnt == -1){
+                BefPropertyCnt = PropertyDuration;
             }
 
             //* Back Original Mt (End 1Time)
-            if(gm.stage > PropertyDuration){
+            if(PropertyDuration >= LM._.ICE_FREEZE_DURATION){
                 IsFreeze = false;
+                BefPropertyCnt = -1;
+                PropertyDuration = 0;
                 int i=0;
                 Array.ForEach(mesh.block, mesh => mesh.materials = new Material[]{originMts[i++]});
                 return;
@@ -217,8 +219,8 @@ public class Block_Prefab : MonoBehaviour
             Array.ForEach(mesh.block, mesh => mesh.material = iceMt);
 
             //* 重なるBLOCK止め (NextStage毎に)
-            if(befStageCnt != gm.stage){
-                befStageCnt = gm.stage;
+            if(BefPropertyCnt != PropertyDuration){
+                BefPropertyCnt = PropertyDuration;
 
                 //* Ray
                 float maxDistance = 100;
