@@ -98,8 +98,9 @@ public class Block_Prefab : MonoBehaviour
         if(col.transform.CompareTag(DM.TAG.GameOverLine.ToString()) && gm.State != GameManager.STATE.GAMEOVER){
             gm.setGameOver();
         }
-
     }
+
+    
 //*-----------------------------------------
 //* 関数
 //*-----------------------------------------
@@ -221,69 +222,14 @@ public class Block_Prefab : MonoBehaviour
             //* 重なるBLOCK止め (NextStage毎に)
             if(BefPropertyCnt != PropertyDuration){
                 BefPropertyCnt = PropertyDuration;
-                //* Ray
-                float maxDistance = 100;
-                
-                Vector3 dir = Vector3.forward;
-                RaycastHit hit;
-                if(this.kind != BlockMaker.KIND.Long){
-                    Vector3 originPos = this.transform.localPosition;
-                    Debug.DrawRay(originPos, dir * maxDistance, Color.red, 2);
-                    if(Physics.Raycast(originPos, dir, out hit, maxDistance)){
-                        bool isIceMat = checkExistMaterial(hit.transform, DM.NAME.IceMat.ToString());
-                        
-                        if(!isIceMat && hit.transform.name.Contains(DM.NAME.Block.ToString())){
-                            const int MAX_Y = 2;
-                            Debug.Log($"checkIceFreeze:: Hit.name= {hit.transform.name}, this.localPos.z= {this.transform.localPosition.z}, hit.localPos.z= {hit.transform.localPosition.z}");
-                            // hit.transform.localScale = new Vector3(hit.transform.localScale.x, hit.transform.localScale.y + 1f, hit.transform.localScale.z);
-
-                            //* Create Skip Block
-                            if(hit.transform.localPosition.z >= MAX_Y){
-                                Destroy(hit.transform.gameObject, 0.5f);
-                            }
-                            else if(hit.transform.localPosition.z == this.transform.localPosition.z){
-                                hit.transform.localPosition = new Vector3(hit.transform.localPosition.x, hit.transform.localPosition.y, hit.transform.localPosition.z + 1);
-                            }
-                        }
-                    }
-                }
-                else{
-                    for(int i=0; i<3; i++){
-                        float[] xArr = new float[3]{-1.8f, 0, 1.8f};
-                        Color[] clr  = new Color[3]{Color.blue, Color.yellow, Color.white};
-                        Vector3 originPos = new Vector3(this.transform.localPosition.x + xArr[i], this.transform.localPosition.y, this.transform.localPosition.z);
-                        Debug.DrawRay(originPos, dir * maxDistance, clr[i], 4);
-                        if(Physics.Raycast(originPos, dir, out hit, maxDistance)){
-                        bool isIceMat = checkExistMaterial(hit.transform, DM.NAME.IceMat.ToString());
-                        if(!isIceMat && hit.transform.name.Contains(DM.NAME.Block.ToString())){
-                            const int MAX_Y = 2;
-                            Debug.Log($"{i} checkIceFreeze:: Hit.name= {hit.transform.name}, this.localPos.z= {this.transform.localPosition.z}, hit.localPos.z= {hit.transform.localPosition.z}");
-                            // hit.transform.localScale = new Vector3(hit.transform.localScale.x, hit.transform.localScale.y + 1f, hit.transform.localScale.z);
-
-                            //* Create Skip Block
-                            if(hit.transform.localPosition.z >= MAX_Y){
-                                Destroy(hit.transform.gameObject, 0.5f);
-                            }
-                            else if(hit.transform.localPosition.z == this.transform.localPosition.z){
-                                hit.transform.localPosition = new Vector3(hit.transform.localPosition.x, hit.transform.localPosition.y, hit.transform.localPosition.z + 1);
-                            }
-                        }
-                    }
-                    }
-                }
                 //* Fix Position 
-                Vector3 freezingPos = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y, this.transform.localPosition.z + 1);
+                Vector3 freezingPos = new Vector3(
+                    this.transform.localPosition.x, 
+                    this.transform.localPosition.y, 
+                    this.transform.localPosition.z + 1);
                 this.transform.localPosition = freezingPos;
             }
         }
-    }
-    private bool checkExistMaterial(Transform tf, string mtName){
-        bool result = false;
-        Array.ForEach(tf.GetComponents<MeshRenderer>(), meshRdr => {
-            result = Array.Exists(meshRdr.materials, mt => mt.name == DM.NAME.IceMat.ToString());
-            if(result) return;
-        });
-        return result;
     }
     private void animateItemTypeUISprGlowEF(ref float cnt){
         if(itemUISprGlowEf){

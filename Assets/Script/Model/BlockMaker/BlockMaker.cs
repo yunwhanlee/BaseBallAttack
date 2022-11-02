@@ -58,9 +58,11 @@ public class BlockMaker : MonoBehaviour
 
         switch(type){
             case KIND.Normal : 
+                int i=0;
                 for(int v=0; v<verticalCnt;v++){ //* 縦↕
                     Debug.Log("---------------------");
                     for(int h=0; h<MAX_HORIZONTAL_GRID;h++){ //* 横⇔
+                        i++;
                         var ins = blockPrefs[(int)type];
                         #region Block Kind or Skip
                         //* #1. Block Skip?
@@ -78,10 +80,12 @@ public class BlockMaker : MonoBehaviour
                         //* #4. Block生成
                         float x = offsetPosX + h * xs;
                         float y = (isFirstStage)? 0 : ins.transform.position.y + gm.blockGroup.position.y;
-                        float z = (isFirstStage)? -v + OFFSET_POS_Z : OFFSET_POS_Z;
+                        float z = (isFirstStage)? -v : OFFSET_POS_Z;
                         Vector3 pos = new Vector3(x, y, z);
                         Vector3 setPos = (isFirstStage)? pos + gm.blockGroup.position : pos;
-                        Instantiate(ins, setPos, Quaternion.identity, gm.blockGroup);
+                        var block = Instantiate(ins, setPos, Quaternion.identity, gm.blockGroup);
+                        block.name = (i + block.name).ToString();
+                        // block.transform.localPosition = new Vector3(x, y, z);
                         #endregion
                     }
                 }
@@ -92,7 +96,8 @@ public class BlockMaker : MonoBehaviour
                     float x = (h < 1)? offsetPosX + h * xs : offsetPosX + h * xs;
                     float y = ins.transform.position.y + gm.blockGroup.position.y;
                     Vector3 pos = new Vector3(x, y, OFFSET_POS_Z);
-                    Instantiate(ins, pos, Quaternion.identity, gm.blockGroup);
+                    var block = Instantiate(ins, pos, Quaternion.identity, gm.blockGroup);
+                    // block.transform.localPosition = new Vector3(x, y, OFFSET_POS_Z);
                 }
                 break;
         }
@@ -110,10 +115,15 @@ public class BlockMaker : MonoBehaviour
         Debug.Log("moveDownBlock:: MOVE DOWN BLOCK ↓, gm.stage= " + gm.stage);
         // gm.blockGroup.position = new Vector3(gm.blockGroup.position.x, gm.blockGroup.position.y, gm.blockGroup.position.z - 1);
         for(int i=0; i < gm.blockGroup.childCount; i++){
+            //* Init
+            var childs = gm.blockGroup.GetComponents<OverLapCheckBoxCollider>();
+            Array.ForEach(childs, child => child.IsMoved = false);
+            
             var blockPos = gm.blockGroup.GetChild(i).transform.localPosition;
             gm.blockGroup.GetChild(i).transform.localPosition = new Vector3(
                 blockPos.x, blockPos.y, blockPos.z - 1
             );
+
         }
 
         //* Next Set Block Type
