@@ -78,7 +78,7 @@ public class BlockMaker : MonoBehaviour
                         //* #4. Block生成
                         float x = offsetPosX + h * xs;
                         float y = (isFirstStage)? 0 : ins.transform.position.y + gm.blockGroup.position.y;
-                        float z = (isFirstStage)? -v : OFFSET_POS_Z;
+                        float z = (isFirstStage)? -v + OFFSET_POS_Z : OFFSET_POS_Z;
                         Vector3 pos = new Vector3(x, y, z);
                         Vector3 setPos = (isFirstStage)? pos + gm.blockGroup.position : pos;
                         Instantiate(ins, setPos, Quaternion.identity, gm.blockGroup);
@@ -108,8 +108,13 @@ public class BlockMaker : MonoBehaviour
 
     public void moveDownBlock(){
         Debug.Log("moveDownBlock:: MOVE DOWN BLOCK ↓, gm.stage= " + gm.stage);
-        var pos = gm.blockGroup.position;
-        gm.blockGroup.position = new Vector3(pos.x, pos.y, pos.z - 1);
+        // gm.blockGroup.position = new Vector3(gm.blockGroup.position.x, gm.blockGroup.position.y, gm.blockGroup.position.z - 1);
+        for(int i=0; i < gm.blockGroup.childCount; i++){
+            var blockPos = gm.blockGroup.GetChild(i).transform.localPosition;
+            gm.blockGroup.GetChild(i).transform.localPosition = new Vector3(
+                blockPos.x, blockPos.y, blockPos.z - 1
+            );
+        }
 
         //* Next Set Block Type
         if(gm.stage % LM._.LONG_BLOCK_SPAN == 0){

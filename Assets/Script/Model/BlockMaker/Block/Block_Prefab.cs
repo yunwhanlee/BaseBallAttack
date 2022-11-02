@@ -227,8 +227,8 @@ public class Block_Prefab : MonoBehaviour
                 Vector3 dir = Vector3.forward;
                 RaycastHit hit;
                 if(this.kind != BlockMaker.KIND.Long){
-                    Vector3 originPos = this.transform.position;
-                    Debug.DrawRay(originPos, dir * maxDistance, Color.red, 3);
+                    Vector3 originPos = this.transform.localPosition;
+                    Debug.DrawRay(originPos, dir * maxDistance, Color.red, 2);
                     if(Physics.Raycast(originPos, dir, out hit, maxDistance)){
                         bool isIceMat = checkExistMaterial(hit.transform, DM.NAME.IceMat.ToString());
                         
@@ -251,7 +251,7 @@ public class Block_Prefab : MonoBehaviour
                     for(int i=0; i<3; i++){
                         float[] xArr = new float[3]{-1.8f, 0, 1.8f};
                         Color[] clr  = new Color[3]{Color.blue, Color.yellow, Color.white};
-                        Vector3 originPos = new Vector3(this.transform.position.x + xArr[i], this.transform.position.y, this.transform.position.z);
+                        Vector3 originPos = new Vector3(this.transform.localPosition.x + xArr[i], this.transform.localPosition.y, this.transform.localPosition.z);
                         Debug.DrawRay(originPos, dir * maxDistance, clr[i], 4);
                         if(Physics.Raycast(originPos, dir, out hit, maxDistance)){
                         bool isIceMat = checkExistMaterial(hit.transform, DM.NAME.IceMat.ToString());
