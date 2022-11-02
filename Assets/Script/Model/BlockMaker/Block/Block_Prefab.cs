@@ -221,14 +221,14 @@ public class Block_Prefab : MonoBehaviour
             //* 重なるBLOCK止め (NextStage毎に)
             if(BefPropertyCnt != PropertyDuration){
                 BefPropertyCnt = PropertyDuration;
-
                 //* Ray
                 float maxDistance = 100;
-                Vector3 originPos = this.transform.position;
+                
                 Vector3 dir = Vector3.forward;
                 RaycastHit hit;
-                Debug.DrawRay(originPos, dir * maxDistance, Color.red, 3);
                 if(this.kind != BlockMaker.KIND.Long){
+                    Vector3 originPos = this.transform.position;
+                    Debug.DrawRay(originPos, dir * maxDistance, Color.red, 3);
                     if(Physics.Raycast(originPos, dir, out hit, maxDistance)){
                         bool isIceMat = checkExistMaterial(hit.transform, DM.NAME.IceMat.ToString());
                         
@@ -248,13 +248,16 @@ public class Block_Prefab : MonoBehaviour
                     }
                 }
                 else{
-                    for(int i=-1; i<2; i++){
-                        originPos = new Vector3(originPos.x + (i * 1.8f), originPos.y, originPos.z);
+                    for(int i=0; i<3; i++){
+                        float[] xArr = new float[3]{-1.8f, 0, 1.8f};
+                        Color[] clr  = new Color[3]{Color.blue, Color.yellow, Color.white};
+                        Vector3 originPos = new Vector3(this.transform.position.x + xArr[i], this.transform.position.y, this.transform.position.z);
+                        Debug.DrawRay(originPos, dir * maxDistance, clr[i], 4);
                         if(Physics.Raycast(originPos, dir, out hit, maxDistance)){
-                        bool isMySelf = hit.transform.gameObject == this.gameObject;//* 自分自身なら、処理を抜ける。
-                        if(!isMySelf && hit.transform.name.Contains(DM.NAME.Block.ToString())){
+                        bool isIceMat = checkExistMaterial(hit.transform, DM.NAME.IceMat.ToString());
+                        if(!isIceMat && hit.transform.name.Contains(DM.NAME.Block.ToString())){
                             const int MAX_Y = 2;
-                            Debug.Log($"checkIceFreeze:: Hit.name= {hit.transform.name}, this.localPos.z= {this.transform.localPosition.z}, hit.localPos.z= {hit.transform.localPosition.z}");
+                            Debug.Log($"{i} checkIceFreeze:: Hit.name= {hit.transform.name}, this.localPos.z= {this.transform.localPosition.z}, hit.localPos.z= {hit.transform.localPosition.z}");
                             // hit.transform.localScale = new Vector3(hit.transform.localScale.x, hit.transform.localScale.y + 1f, hit.transform.localScale.z);
 
                             //* Create Skip Block
