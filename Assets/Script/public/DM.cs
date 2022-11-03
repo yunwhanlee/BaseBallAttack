@@ -24,7 +24,14 @@ public class DM : MonoBehaviour
     public enum HITRANK{S, A, B, C, D, E};
     public enum PANEL {Chara, Bat, Skill, CashShop, PsvInfo, NULL};
     public enum ATV{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave, NULL};
-    public enum PSV{Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, Laser, NULL};
+    public enum PSV{
+        //* Normal Passive
+        Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage,
+        Laser, FireProperty, IceProperty, ThunderProperty,
+        //* Unique Passive
+        DamageTwice, GiantBall, DarkOrb, GodBless, BirdFriend,
+        NULL
+    };
 
     [Header("GUI")]
     [SerializeField] Text coinTxt; public Text CoinTxt {get => coinTxt; set => coinTxt = value;}
@@ -172,6 +179,16 @@ public class DM : MonoBehaviour
             :(n == MTSV[EN] || n == MTSV[JP] || n == MTSV[KR])? DM.PSV.VerticalMultiShot
             :(n == CRTD[EN] || n == CRTD[JP] || n == CRTD[KR])? DM.PSV.CriticalDamage
             :(n == LSR[EN] || n == LSR[JP] || n == LSR[KR])? DM.PSV.Laser
+            :(n == LSR[EN] || n == LSR[JP] || n == LSR[KR])? DM.PSV.FireProperty
+            :(n == LSR[EN] || n == LSR[JP] || n == LSR[KR])? DM.PSV.IceProperty
+            :(n == LSR[EN] || n == LSR[JP] || n == LSR[KR])? DM.PSV.ThunderProperty
+            //* Unique Psv 
+            :(n == LSR[EN] || n == LSR[JP] || n == LSR[KR])? DM.PSV.DamageTwice
+            :(n == LSR[EN] || n == LSR[JP] || n == LSR[KR])? DM.PSV.GiantBall
+            :(n == LSR[EN] || n == LSR[JP] || n == LSR[KR])? DM.PSV.DarkOrb
+            :(n == LSR[EN] || n == LSR[JP] || n == LSR[KR])? DM.PSV.GodBless
+            :(n == LSR[EN] || n == LSR[JP] || n == LSR[KR])? DM.PSV.BirdFriend
+
             : DM.PSV.NULL; //-> ダミーデータ
     }
 
