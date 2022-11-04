@@ -130,11 +130,11 @@ public class Player : MonoBehaviour
         laser = new PsvSkill<int>(
             LANG.getTxt(DM.PSV.Laser.ToString()), psvLvArr[(int)DM.PSV.Laser].lv, 0, 1, 3);
         fireProperty = new PsvSkill<float>(
-            LANG.getTxt(DM.PSV.FireProperty.ToString()), psvLvArr[(int)DM.PSV.FireProperty].lv, 0, 1, 3);
+            LANG.getTxt(DM.PSV.FireProperty.ToString()), psvLvArr[(int)DM.PSV.FireProperty].lv, 0.5f, 0.15f, 3);
         iceProperty = new PsvSkill<float>(
-            LANG.getTxt(DM.PSV.IceProperty.ToString()), psvLvArr[(int)DM.PSV.IceProperty].lv, 0, 1, 3);
+            LANG.getTxt(DM.PSV.IceProperty.ToString()), psvLvArr[(int)DM.PSV.IceProperty].lv, 0.5f, 0.15f, 3);
         thunderProperty = new PsvSkill<float>(
-            LANG.getTxt(DM.PSV.ThunderProperty.ToString()), psvLvArr[(int)DM.PSV.ThunderProperty].lv, 0, 1, 3);
+            LANG.getTxt(DM.PSV.ThunderProperty.ToString()), psvLvArr[(int)DM.PSV.ThunderProperty].lv, 0.5f, 0.15f, 3);
         // Unique PSV
         damageTwice = new PsvSkill<int>(
             LANG.getTxt(DM.PSV.DamageTwice.ToString()), psvLvArr[(int)DM.PSV.DamageTwice].lv, 0, 1, 3);

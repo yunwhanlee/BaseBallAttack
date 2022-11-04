@@ -8,14 +8,16 @@ using SpriteGlow;
 
 [System.Serializable]
 public class SkillProperty{
-    bool isOn;  public bool IsOn {get => isOn; set => isOn = value;}
-    int befCnt; public int BefCnt {get => befCnt; set => befCnt = value;}
-    int duration;   public int Duration {get => duration; set => duration = value;}
+    [SerializeField] bool isOn;  public bool IsOn {get => isOn; set => isOn = value;}
+    [SerializeField] int befCnt; public int BefCnt {get => befCnt; set => befCnt = value;}
+    [SerializeField] int duration;   public int Duration {get => duration; set => duration = value;}
+    [SerializeField] GameObject dotDmgEF;   public GameObject DotDmgEF {get => dotDmgEF; set => dotDmgEF = value;}
 
-    public SkillProperty(bool isOn, int befCnt, int duration){
-        this.isOn = isOn;
-        this.befCnt = befCnt;
-        this.duration = duration;
+    public SkillProperty(){
+        this.isOn = false;
+        this.befCnt = -1;
+        this.duration = 0;
+        this.dotDmgEF = null;
     }
 }
 
@@ -60,12 +62,8 @@ public class Block_Prefab : MonoBehaviour
 
     [Header("STATUS")]
     [SerializeField] bool isDotDmg;  public bool IsDotDmg {get => isDotDmg; set => isDotDmg = value;}
-    [SerializeField] SkillProperty fireDotDmg;
-
+    [SerializeField] SkillProperty fireDotDmg;  public SkillProperty FireDotDmg {get => fireDotDmg; set => fireDotDmg = value;}
     [SerializeField] SkillProperty freeze;  public SkillProperty Freeze {get => freeze; set => freeze = value;}
-    // [SerializeField] bool isFreeze;  public bool IsFreeze {get => isFreeze; set => isFreeze = value;}
-    // [SerializeField] int befPropertyCnt;    public int BefPropertyCnt {get => befPropertyCnt; set => befPropertyCnt = value;}
-    // [SerializeField] int propertyDuration;  public int PropertyDuration {get => propertyDuration; set => propertyDuration = value;}
 
     [SerializeField] int hp = 1;    public int Hp {get => hp; set => hp = value;}
     [SerializeField] int exp = 10;  public int Exp {get => exp; set => exp = value;}
@@ -92,7 +90,10 @@ public class Block_Prefab : MonoBehaviour
         //* Material Instancing🌟
         mesh = new MyMesh(this);
         originMts = mesh.getOriginalMts();
-        Freeze.BefCnt = -1;
+
+        //* 値 初期化
+        fireDotDmg = new SkillProperty();
+        freeze = new SkillProperty();
     }
 
     void Start(){
@@ -108,6 +109,7 @@ public class Block_Prefab : MonoBehaviour
         animateItemTypeUISprGlowEF(ref itemUISprGlowCnt);//* ItemType Glow Animation
 
         //* Property
+        checkFireDotDmg();
         checkIceFreeze();
     }
     private void OnTriggerEnter(Collider col) {
@@ -151,7 +153,6 @@ public class Block_Prefab : MonoBehaviour
             case BlockMaker.KIND.Heal:
                 Hp = Util._.getCalcEquivalentSequence(gm.stage, 4);
                 break;
-            
         }
         hpTxt.text = Hp.ToString();
     }
@@ -217,7 +218,31 @@ public class Block_Prefab : MonoBehaviour
         }
     }
 
-    public void checkFireDotDmg(GameManager gm){
+    public void checkFireDotDmg(){
+        if(FireDotDmg.IsOn){
+            Debug.Log($"checkFireDotDmg:: {FireDotDmg.BefCnt} != {FireDotDmg.Duration} = {FireDotDmg.BefCnt != FireDotDmg.Duration}");
+            //* Set Duration (Enter 1Time)
+            if(FireDotDmg.BefCnt == -1){
+                FireDotDmg.BefCnt = FireDotDmg.Duration;
+                fireDotDmg.DotDmgEF = em.directlyCreateFireBallDotEF(this.transform);
+            }
+
+            //* Back Original Mt (End 1Time)
+            if(FireDotDmg.Duration >= LM._.FIRE_DOT_DMG_DURATION){
+                FireDotDmg = new SkillProperty();
+                Destroy(fireDotDmg.DotDmgEF);
+                return;
+            }
+
+            //* 毎タン一回 => ★Duration++は, BlockMakerスクリプトで行う。
+            if(FireDotDmg.BefCnt != FireDotDmg.Duration){
+                Debug.Log("FIRE DOT DMG !!!");
+                FireDotDmg.BefCnt = FireDotDmg.Duration;
+                int dmg = 1;
+                this.decreaseHp(dmg);
+                em.createCritTxtEF(this.transform.position, dmg);
+            }
+        }
     }
     private void checkIceFreeze(){
         if(Freeze.IsOn){
@@ -228,9 +253,7 @@ public class Block_Prefab : MonoBehaviour
 
             //* Back Original Mt (End 1Time)
             if(Freeze.Duration >= LM._.ICE_FREEZE_DURATION){
-                Freeze.IsOn = false;
-                Freeze.BefCnt = -1;
-                Freeze.Duration = 0;
+                Freeze = new SkillProperty();
                 int i=0;
                 Array.ForEach(mesh.block, mesh => mesh.materials = new Material[]{originMts[i++]});
                 return;
@@ -239,7 +262,7 @@ public class Block_Prefab : MonoBehaviour
             //* Change Ice Mt (毎プレーム)
             Array.ForEach(mesh.block, mesh => mesh.material = iceMt);
 
-            //* 重なるBLOCK止め (NextStage毎に)
+            //* 毎タン一回(重なるBLOCK止め) => ★Duration++は, BlockMakerスクリプトで行う。
             if(Freeze.BefCnt != Freeze.Duration){
                 Freeze.BefCnt = Freeze.Duration;
                 //* Fix Position 

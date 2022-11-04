@@ -255,12 +255,17 @@ public class Ball_Prefab : MonoBehaviour
     #region CHECK PSV
             //* InstantKill
             pl.instantKill.setHitTypeSkill(pl.instantKill.Value, ref result, col, em, pl);
-            
+
             if(result != PsvSkill<int>.ONE_KILL_DMG){
                 //* Critical
                 pl.critical.setHitTypeSkill(pl.critical.Value, ref result, col, em, pl);
                 //* Explosion（最後 ダメージ適用）
                 isOnExplosion = pl.explosion.setHitTypeSkill(pl.explosion.Value.per, ref result, col, em, pl, this.gameObject);
+                //TODO FireProperty
+                pl.fireProperty.setHitTypeSkill(pl.fireProperty.Value, ref result, col, em, pl);
+                //TODO IceProperty
+                //TODO ThunderProperty
+
             }
     #endregion
     #region SET DAMAGE

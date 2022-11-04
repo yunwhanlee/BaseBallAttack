@@ -38,6 +38,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     public int LONG_BLOCK_SPAN = 5;
     public int BOSS_STAGE_SPAN = 10;
     public int ICE_FREEZE_DURATION = 1;
+    public int FIRE_DOT_DMG_DURATION = 2;
 
     [Header("BLOCK ITEM PERCENT")]
     [Range(0, 100)] public int skipBlockPer = 20;

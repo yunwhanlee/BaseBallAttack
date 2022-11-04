@@ -101,11 +101,12 @@ public class PsvSkill<T> where T: struct {
     public bool setHitTypeSkill(float per, ref int result, Collision col, EffectManager em, Player pl, GameObject ballPref = null){
         int rand = Random.Range(0, 100);
         int percent = Mathf.RoundToInt(per * 100); //百分率
-        Debug.LogFormat("PassiveSkill:: setHitTypePsvSkill::「{0}」rand({1}) <= per({2}) : {3}",
-            Name.ToString(), rand, percent, ((rand <= percent)? "<color=blue>true</color>" : "false"));
 
         var psv = DM.ins.convertPsvSkillStr2Enum(Name);
         if(Level > 0 && rand <= percent){
+            if(psv == DM.PSV.NULL) Debug.LogError("convertPsvSkillStr2Enum()へ string[]変数を追加してください！");
+            Debug.LogFormat("PassiveSkill:: setHitTypeSkill:: Name= {0}, rand({1}) <= per({2}) : {3}",
+                Name.ToString(), rand, percent, ((rand <= percent)? "<color=blue>true</color>" : "false"));
             switch(psv){
                 case DM.PSV.InstantKill: 
                     em.createInstantKillTextEF(col.transform.position);
@@ -116,9 +117,19 @@ public class PsvSkill<T> where T: struct {
                     em.createCritTxtEF(col.transform.position, dmg);
                     result = dmg;
                     break;
+                case DM.PSV.FireProperty:
+                    col.transform.GetComponent<Block_Prefab>().FireDotDmg.IsOn = true;
+                    break;
+                case DM.PSV.IceProperty:
+                    //TODO
+                    break;
+                case DM.PSV.ThunderProperty:
+                    //TODO
+                    break;
                 case DM.PSV.Explosion:
                     em.createExplosionEF(ballPref.transform.position, pl.explosion.Value.range);
                     return true;
+                
             }
         }
 

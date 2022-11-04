@@ -165,9 +165,26 @@ public class DM : MonoBehaviour
     public PSV convertPsvSkillStr2Enum(string name){
         //* (BUG) All Lang 対応。
         string n = name;
-        string[] DMG = LANG.Dmg, MTS = LANG.MultiShot, SPD = LANG.Speed, ITK = LANG.InstantKill,
-            CRT = LANG.Critical, EPS = LANG.Explosion, EXP = LANG.ExpUp, ISP = LANG.ItemSpawn,
-            MTSV = LANG.VerticalMultiShot, CRTD = LANG.CriticalDamage, LSR = LANG.Laser;
+        string[] DMG = LANG.Dmg, 
+            MTS = LANG.MultiShot, 
+            SPD = LANG.Speed, 
+            ITK = LANG.InstantKill,
+            CRT = LANG.Critical, 
+            EPS = LANG.Explosion, 
+            EXP = LANG.ExpUp, 
+            ISP = LANG.ItemSpawn,
+            MTSV = LANG.VerticalMultiShot, 
+            CRTD = LANG.CriticalDamage, 
+            LSR = LANG.Laser,
+            FPT = LANG.FireProperty,
+            IPT = LANG.IceProperty,
+            TPT = LANG.ThunderProperty,
+            DTW = LANG.DamageTwice,
+            GTB = LANG.GiantBall,
+            DOB = LANG.DarkOrb,
+            GBS = LANG.GodBless,
+            BFR = LANG.BirdFriend;
+
         const int EN = (int)LANG.TP.EN, JP = (int)LANG.TP.JP, KR = (int)LANG.TP.KR;
 
         return (n == DMG[EN] || n == DMG[JP] || n == DMG[KR])? DM.PSV.Dmg
@@ -181,15 +198,15 @@ public class DM : MonoBehaviour
             :(n == MTSV[EN] || n == MTSV[JP] || n == MTSV[KR])? DM.PSV.VerticalMultiShot
             :(n == CRTD[EN] || n == CRTD[JP] || n == CRTD[KR])? DM.PSV.CriticalDamage
             :(n == LSR[EN] || n == LSR[JP] || n == LSR[KR])? DM.PSV.Laser
-            :(n == LSR[EN] || n == LSR[JP] || n == LSR[KR])? DM.PSV.FireProperty
-            :(n == LSR[EN] || n == LSR[JP] || n == LSR[KR])? DM.PSV.IceProperty
-            :(n == LSR[EN] || n == LSR[JP] || n == LSR[KR])? DM.PSV.ThunderProperty
+            :(n == FPT[EN] || n == FPT[JP] || n == FPT[KR])? DM.PSV.FireProperty
+            :(n == IPT[EN] || n == IPT[JP] || n == IPT[KR])? DM.PSV.IceProperty
+            :(n == TPT[EN] || n == TPT[JP] || n == TPT[KR])? DM.PSV.ThunderProperty
             //* Unique Psv 
-            :(n == LSR[EN] || n == LSR[JP] || n == LSR[KR])? DM.PSV.DamageTwice
-            :(n == LSR[EN] || n == LSR[JP] || n == LSR[KR])? DM.PSV.GiantBall
-            :(n == LSR[EN] || n == LSR[JP] || n == LSR[KR])? DM.PSV.DarkOrb
-            :(n == LSR[EN] || n == LSR[JP] || n == LSR[KR])? DM.PSV.GodBless
-            :(n == LSR[EN] || n == LSR[JP] || n == LSR[KR])? DM.PSV.BirdFriend
+            :(n == DTW[EN] || n == DTW[JP] || n == DTW[KR])? DM.PSV.DamageTwice
+            :(n == GTB[EN] || n == GTB[JP] || n == GTB[KR])? DM.PSV.GiantBall
+            :(n == DOB[EN] || n == DOB[JP] || n == DOB[KR])? DM.PSV.DarkOrb
+            :(n == GBS[EN] || n == GBS[JP] || n == GBS[KR])? DM.PSV.GodBless
+            :(n == BFR[EN] || n == BFR[JP] || n == BFR[KR])? DM.PSV.BirdFriend
 
             : DM.PSV.NULL; //-> ダミーデータ
     }

@@ -201,8 +201,10 @@ public class EffectManager : MonoBehaviour
         ins.transform.localRotation = Quaternion.Euler(0,0,0);
     }
     //* ATV HomeRun Bonus EF
-    public void directlyCreateFireBallDotEF(Transform parentTf){//* 直接生成し、Blockが消えたら一緒に消える。
-        var ins = Instantiate(fireBallDotEF, parentTf.position, QI, parentTf) as GameObject;
+    public GameObject directlyCreateFireBallDotEF(Transform parentTf){//* 直接生成し、Blockが消えたら一緒に消える。
+        Quaternion rot = fireBallDotEF.transform.rotation;
+        var ins = Instantiate(fireBallDotEF, parentTf.position, rot, parentTf) as GameObject;
+        return ins;
     }
     public void createThunderStrikeEF(Vector3 parentTfPos){
         var ins = Instantiate(thunderStrikeEF, parentTfPos, QI, gm.effectGroup) as GameObject;

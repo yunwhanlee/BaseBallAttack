@@ -216,4 +216,12 @@ public class BlockMaker : MonoBehaviour
         else
             obj.GetComponent<Block_Prefab>().decreaseHp(dmg);
     }
+    public void setBlockPropertyDuration(){
+        for(int i=0; i<gm.blockGroup.childCount; i++){
+            var block = gm.blockGroup.GetChild(i).GetComponent<Block_Prefab>();
+            if(block.Freeze.IsOn) block.Freeze.Duration++;
+            if(block.FireDotDmg.IsOn) block.FireDotDmg.Duration++;
+            //* 属性が増えたら、下へ追加。
+        }
+    }
 }

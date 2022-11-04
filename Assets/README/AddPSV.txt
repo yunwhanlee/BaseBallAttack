@@ -1,7 +1,8 @@
 A. Script
     1. DM.cs
         a. public enum PSVへ追加。
-        b. convertPsvSkillStr2Enum(string name)へ追加。
+        b. convertPsvSkillStr2Enum(string name)のreturn 部分へ追加。
+        c. convertPsvSkillStr2Enum(string name)の2番目、string[]部分へ追加。
 
     2. Player.cs
         a. [Header("<---- PASSIVE SKILL ---->")]へ変数を追加。
