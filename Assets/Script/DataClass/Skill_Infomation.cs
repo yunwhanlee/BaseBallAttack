@@ -121,7 +121,7 @@ public class PsvSkill<T> where T: struct {
                     col.transform.GetComponent<Block_Prefab>().FireDotDmg.IsOn = true;
                     break;
                 case DM.PSV.IceProperty:
-                    //TODO
+                    col.transform.GetComponent<Block_Prefab>().Freeze.IsOn = true;
                     break;
                 case DM.PSV.ThunderProperty:
                     //TODO

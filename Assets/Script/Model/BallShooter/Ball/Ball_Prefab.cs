@@ -264,6 +264,7 @@ public class Ball_Prefab : MonoBehaviour
                 //TODO FireProperty
                 pl.fireProperty.setHitTypeSkill(pl.fireProperty.Value, ref result, col, em, pl);
                 //TODO IceProperty
+                pl.iceProperty.setHitTypeSkill(pl.iceProperty.Value, ref result, col, em, pl);
                 //TODO ThunderProperty
 
             }

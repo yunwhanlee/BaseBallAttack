@@ -27,7 +27,6 @@ public class SkillProperty{
     public void startDuration(Block_Prefab bl){
         if(BefCnt == -1){
             BefCnt = Duration;
-
             //* EXTRA 処理
             if(Name == DM.PSV.FireProperty.ToString()){
                 DotDmgEF = bl.gm.em.directlyCreateFireBallDotEF(bl.transform);
@@ -41,7 +40,6 @@ public class SkillProperty{
     public void endDuration(int span, Block_Prefab bl){
         if(Duration >= LM._.FIRE_DOT_DMG_DURATION){
             init();
-
             //* EXTRA 処理
             if(Name == DM.PSV.FireProperty.ToString()){
                 GameObject.Destroy(DotDmgEF);
@@ -57,7 +55,6 @@ public class SkillProperty{
     public void setDataNextStage(Block_Prefab bl){
         if(BefCnt != Duration){
             BefCnt = Duration;
-
             //* EXTRA 処理
             if(Name == DM.PSV.FireProperty.ToString()){
                 int dmg = ((bl.Hp / 10) < 1)? 1 : (bl.Hp / 10); //* 10Percent Damage
@@ -289,6 +286,8 @@ public class Block_Prefab : MonoBehaviour
             Freeze.startDuration(this);
             //* End 1Time
             Freeze.endDuration(LM._.ICE_FREEZE_DURATION, this);
+            //* なぜか毎プレームICEマテリアルに変更しないと適用できない。
+            Array.ForEach(this.mesh.block, mesh => mesh.materials = new Material[]{iceMt});
             //* 毎タン一回 => ★Duration++は, BlockMakerスクリプトで行う。
             Freeze.setDataNextStage(this);
         }
