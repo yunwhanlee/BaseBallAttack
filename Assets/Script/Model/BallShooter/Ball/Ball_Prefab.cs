@@ -180,7 +180,8 @@ public class Ball_Prefab : MonoBehaviour
         }
     }
 #endregion
-    void OnCollisionEnter(Collision col) { //* Give Damage
+    void OnCollisionEnter(Collision col) { 
+        //* HIT BLOCK
         if(col.transform.name.Contains(DM.NAME.Block.ToString())){
             isHitedByBlock = true;
 #region #2. ATV (BALL)
@@ -254,6 +255,7 @@ public class Ball_Prefab : MonoBehaviour
     #region CHECK PSV
             //* InstantKill
             pl.instantKill.setHitTypeSkill(pl.instantKill.Value, ref result, col, em, pl);
+            
             if(result != PsvSkill<int>.ONE_KILL_DMG){
                 //* Critical
                 pl.critical.setHitTypeSkill(pl.critical.Value, ref result, col, em, pl);

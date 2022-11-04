@@ -562,13 +562,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameTxts:
-  - VerticalMultiShot
-  - "\u30DE\u30EB\u30C1\u5F3E(\u7E26)"
-  - "\uBA40\uD2F0\uC0F7(\uC138\uB85C)"
+  - BirdFriend
+  - "\u9CE5\u53CB\u9054"
+  - "\uC870\uB958\uCE5C\uAD6C"
   explainTxts:
-  - extra ball on front side +1
-  - "\u524D\u5074\u3078\u30DC\u30FC\u30EB\u8FFD\u52A0 +1"
-  - "\uC55E\uCABD\uC5D0 \uBCFC \uCD94\uAC00 +1"
+  - Call Bird Friend to Support with me.
+  - "\u30B5\u30DD\u30FC\u30C8\u3059\u308B\u9CE5\u53CB\u9054\u3092\u547C\u3073\u51FA\u3059\u3002"
+  - "\uC11C\uD3EC\uD2B8\uD558\uB294 \uC870\uB958\uCE5C\uAD6C\uB97C \uBD80\uB985\uB2C8\uB2E4."
   homeRunBonusTxts:
   - 
   - 
@@ -999,7 +999,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Call Bird Friend '
+  m_Text: Call Bird Friend to Support with me.
 --- !u!1 &8290566840369089817
 GameObject:
   m_ObjectHideFlags: 0

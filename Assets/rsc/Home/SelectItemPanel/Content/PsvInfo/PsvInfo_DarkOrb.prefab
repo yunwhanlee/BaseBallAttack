@@ -562,13 +562,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameTxts:
-  - VerticalMultiShot
-  - "\u30DE\u30EB\u30C1\u5F3E(\u7E26)"
-  - "\uBA40\uD2F0\uC0F7(\uC138\uB85C)"
+  - DarkOrb
+  - "\u95C7\u306E\u30AA\u30FC\u30D6"
+  - "\uB2E4\uD06C\uC624\uBE0C"
   explainTxts:
-  - extra ball on front side +1
-  - "\u524D\u5074\u3078\u30DC\u30FC\u30EB\u8FFD\u52A0 +1"
-  - "\uC55E\uCABD\uC5D0 \uBCFC \uCD94\uAC00 +1"
+  - Summon dark orb that circle around the ball.
+  - "\u30DC\u30FC\u30EB\u3092\u56DE\u308B\u95C7\u306E\u30AA\u30FC\u30D6\u53EC\u559A\u3002"
+  - "\uACF5 \uC8FC\uC704\uB97C \uB3C4\uB294 \uC5B4\uB460\uC758\uC624\uBE0C \uC18C\uD658."
   homeRunBonusTxts:
   - 
   - 
@@ -999,7 +999,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Dark Orb to circle around the ball.
+  m_Text: Summon dark orb that circle around the ball.
 --- !u!1 &8290566840369089817
 GameObject:
   m_ObjectHideFlags: 0

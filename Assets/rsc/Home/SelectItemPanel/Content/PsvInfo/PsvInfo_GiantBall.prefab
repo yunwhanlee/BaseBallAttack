@@ -562,13 +562,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameTxts:
-  - VerticalMultiShot
-  - "\u30DE\u30EB\u30C1\u5F3E(\u7E26)"
-  - "\uBA40\uD2F0\uC0F7(\uC138\uB85C)"
+  - GiantBall
+  - "\u30B8\u30E3\u30A4\u30A2\u30F3\u30C8\u30DC\u30FC\u30EB"
+  - "\uC790\uC774\uC5B8\uD2B8\uBCFC"
   explainTxts:
-  - extra ball on front side +1
-  - "\u524D\u5074\u3078\u30DC\u30FC\u30EB\u8FFD\u52A0 +1"
-  - "\uC55E\uCABD\uC5D0 \uBCFC \uCD94\uAC00 +1"
+  - Collect all the multi-ball and make a huge ball.
+  - "\u5168\u3066\u306E\u30DE\u30EB\u30C1\u30DC\u30FC\u30EB\u3092\u96C6\u3081\u3066\u3001\u5F37\u529B\u5927\u304D\u306A\u30DC\u30FC\u30EB\u306B\u3057\u307E\u3059\u3002"
+  - "\uBAA8\uB4E0 \uBA40\uD2F0\uBCFC\uC744 \uBAA8\uC544\uC11C \uAC70\uB300\uD55C
+    \uACF5\uC744 \uB9CC\uB4E0\uB2E4."
   homeRunBonusTxts:
   - 
   - 
@@ -999,7 +1000,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5168\u3066\u306E\u30DE\u30EB\u30C1\u30DC\u30FC\u30EB\u3092\u96C6\u3081\u3066\u3001\u5F37\u529B\u5927\u304D\u306A\u30DC\u30FC\u30EB\u306B\u3057\u307E\u3059\u3002"
+  m_Text: Collect all the multi-ball and make a huge ball.
 --- !u!1 &8290566840369089817
 GameObject:
   m_ObjectHideFlags: 0

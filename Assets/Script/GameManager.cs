@@ -457,8 +457,8 @@ public class GameManager : MonoBehaviour
         bm.checkIsHealBlock();
         for(int i=0; i<blockGroup.childCount; i++){
             var block = blockGroup.GetChild(i).GetComponent<Block_Prefab>();
-            if(block.IsFreeze)
-                block.PropertyDuration++;
+            if(block.Freeze.IsOn)
+                block.Freeze.Duration++;
         }
 
         activeSkillDataBase[0].checkBlocksIsDotDmg(this);

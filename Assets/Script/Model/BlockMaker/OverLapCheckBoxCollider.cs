@@ -13,7 +13,7 @@ public class OverLapCheckBoxCollider : MonoBehaviour
             || col.CompareTag(DM.TAG.HealBlock.ToString())){
 
                 //* 対象をFreezeブロックは除外。
-                if(col.GetComponent<Block_Prefab>().IsFreeze){
+                if(col.GetComponent<Block_Prefab>().Freeze.IsOn){
                     Debug.Log("<color=grey>OverLapCheckBoxCollider col.name= " + col.name + ", pos.z= " + (col.transform.position.z) + "</color>");
                     return;
                 }

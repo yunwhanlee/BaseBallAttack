@@ -6,6 +6,19 @@ using System;
 using Random = UnityEngine.Random;
 using SpriteGlow;
 
+[System.Serializable]
+public class SkillProperty{
+    bool isOn;  public bool IsOn {get => isOn; set => isOn = value;}
+    int befCnt; public int BefCnt {get => befCnt; set => befCnt = value;}
+    int duration;   public int Duration {get => duration; set => duration = value;}
+
+    public SkillProperty(bool isOn, int befCnt, int duration){
+        this.isOn = isOn;
+        this.befCnt = befCnt;
+        this.duration = duration;
+    }
+}
+
 [RequireComponent(typeof(Rigidbody), typeof(BoxCollider), typeof(Animator))]
 public class Block_Prefab : MonoBehaviour
 {
@@ -46,10 +59,14 @@ public class Block_Prefab : MonoBehaviour
     [SerializeField] BlockType type = BlockType.NORMAL;
 
     [Header("STATUS")]
-    [SerializeField] int befPropertyCnt;    public int BefPropertyCnt {get => befPropertyCnt; set => befPropertyCnt = value;}
-    [SerializeField] int propertyDuration;  public int PropertyDuration {get => propertyDuration; set => propertyDuration = value;}
     [SerializeField] bool isDotDmg;  public bool IsDotDmg {get => isDotDmg; set => isDotDmg = value;}
-    [SerializeField] bool isFreeze;  public bool IsFreeze {get => isFreeze; set => isFreeze = value;}
+    [SerializeField] SkillProperty fireDotDmg;
+
+    [SerializeField] SkillProperty freeze;  public SkillProperty Freeze {get => freeze; set => freeze = value;}
+    // [SerializeField] bool isFreeze;  public bool IsFreeze {get => isFreeze; set => isFreeze = value;}
+    // [SerializeField] int befPropertyCnt;    public int BefPropertyCnt {get => befPropertyCnt; set => befPropertyCnt = value;}
+    // [SerializeField] int propertyDuration;  public int PropertyDuration {get => propertyDuration; set => propertyDuration = value;}
+
     [SerializeField] int hp = 1;    public int Hp {get => hp; set => hp = value;}
     [SerializeField] int exp = 10;  public int Exp {get => exp; set => exp = value;}
     [SerializeField][Range(1, 100)] int itemTypePer;
@@ -75,7 +92,7 @@ public class Block_Prefab : MonoBehaviour
         //* Material Instancing🌟
         mesh = new MyMesh(this);
         originMts = mesh.getOriginalMts();
-        BefPropertyCnt = -1;
+        Freeze.BefCnt = -1;
     }
 
     void Start(){
@@ -199,18 +216,21 @@ public class Block_Prefab : MonoBehaviour
                 break;
         }
     }
+
+    public void checkFireDotDmg(GameManager gm){
+    }
     private void checkIceFreeze(){
-        if(IsFreeze){
+        if(Freeze.IsOn){
             //* Set Duration (Enter 1Time)
-            if(BefPropertyCnt == -1){
-                BefPropertyCnt = PropertyDuration;
+            if(Freeze.BefCnt == -1){
+                Freeze.BefCnt = Freeze.Duration;
             }
 
             //* Back Original Mt (End 1Time)
-            if(PropertyDuration >= LM._.ICE_FREEZE_DURATION){
-                IsFreeze = false;
-                BefPropertyCnt = -1;
-                PropertyDuration = 0;
+            if(Freeze.Duration >= LM._.ICE_FREEZE_DURATION){
+                Freeze.IsOn = false;
+                Freeze.BefCnt = -1;
+                Freeze.Duration = 0;
                 int i=0;
                 Array.ForEach(mesh.block, mesh => mesh.materials = new Material[]{originMts[i++]});
                 return;
@@ -220,8 +240,8 @@ public class Block_Prefab : MonoBehaviour
             Array.ForEach(mesh.block, mesh => mesh.material = iceMt);
 
             //* 重なるBLOCK止め (NextStage毎に)
-            if(BefPropertyCnt != PropertyDuration){
-                BefPropertyCnt = PropertyDuration;
+            if(Freeze.BefCnt != Freeze.Duration){
+                Freeze.BefCnt = Freeze.Duration;
                 //* Fix Position 
                 Vector3 freezingPos = new Vector3(
                     this.transform.localPosition.x, 

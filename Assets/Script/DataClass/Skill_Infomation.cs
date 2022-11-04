@@ -103,8 +103,8 @@ public class PsvSkill<T> where T: struct {
         int percent = Mathf.RoundToInt(per * 100); //百分率
         Debug.LogFormat("PassiveSkill:: setHitTypePsvSkill::「{0}」rand({1}) <= per({2}) : {3}",
             Name.ToString(), rand, percent, ((rand <= percent)? "<color=blue>true</color>" : "false"));
-        var psv = DM.ins.convertPsvSkillStr2Enum(Name);
 
+        var psv = DM.ins.convertPsvSkillStr2Enum(Name);
         if(Level > 0 && rand <= percent){
             switch(psv){
                 case DM.PSV.InstantKill: 

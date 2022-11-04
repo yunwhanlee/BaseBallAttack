@@ -21,8 +21,8 @@ public class IceWave : MonoBehaviour
             bm.decreaseBlockHP(col.gameObject, 1);//AtvSkill.ICEWAVE_DMG);
             em.createCritTxtEF(col.transform.position, 1);//AtvSkill.ICEWAVE_DMG);
             var block = col.GetComponent<Block_Prefab>();
-            block.IsFreeze = true;
-            block.BefPropertyCnt = -1;
+            block.Freeze.IsOn = true;
+            block.Freeze.BefCnt = -1;
         }
     }
 }
