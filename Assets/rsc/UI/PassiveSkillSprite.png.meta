@@ -1,40 +1,64 @@
 fileFormatVersion: 2
-guid: 75955ab80fe88e541b56177481e09cf6
+guid: cfe0b9f7bc9a699409860c061ffd9b55
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8519422279634855983
-    second: PassiveSkillSprite 2_0
+      213: 3022441733741400822
+    second: PassiveSkillSprite 1_0
   - first:
-      213: 3879482695236509949
-    second: PassiveSkillSprite 2_1
+      213: 7664128123278667581
+    second: PassiveSkillSprite 1_1
   - first:
-      213: -1265471054702758598
-    second: PassiveSkillSprite 2_2
+      213: 9127423197153601824
+    second: PassiveSkillSprite 1_2
   - first:
-      213: 1644383774780882866
-    second: PassiveSkillSprite 2_3
+      213: 819117497857225752
+    second: PassiveSkillSprite 1_3
   - first:
-      213: 5996155052713873635
-    second: PassiveSkillSprite 2_4
+      213: 6512346148945283836
+    second: PassiveSkillSprite 1_4
   - first:
-      213: 1372500709645473418
-    second: PassiveSkillSprite 2_5
+      213: -5447646577162066692
+    second: PassiveSkillSprite 1_5
   - first:
-      213: -2208400719020734999
-    second: PassiveSkillSprite 2_6
+      213: 5169688831908918579
+    second: PassiveSkillSprite 1_6
   - first:
-      213: -2901683522898716654
-    second: PassiveSkillSprite 2_7
+      213: -1183667871557456570
+    second: PassiveSkillSprite 1_7
   - first:
-      213: -4266315110137951455
-    second: PassiveSkillSprite 2_8
+      213: 6937638309715011675
+    second: PassiveSkillSprite 1_8
   - first:
-      213: 1517253074692357533
-    second: PassiveSkillSprite 2_9
+      213: 7113350106559060599
+    second: PassiveSkillSprite 1_9
   - first:
-      213: 8156955459147392103
-    second: PassiveSkillSprite 2_10
+      213: 7818926999902503129
+    second: PassiveSkillSprite 1_10
+  - first:
+      213: -6602433458210342831
+    second: PassiveSkillSprite 1_11
+  - first:
+      213: -6879826735880928176
+    second: PassiveSkillSprite 1_12
+  - first:
+      213: -2454095757011341444
+    second: PassiveSkillSprite 1_13
+  - first:
+      213: -6515452838685300054
+    second: PassiveSkillSprite 1_14
+  - first:
+      213: 6136885967172124349
+    second: PassiveSkillSprite 1_15
+  - first:
+      213: -7735911892687545204
+    second: PassiveSkillSprite 1_16
+  - first:
+      213: 7912658078843397918
+    second: PassiveSkillSprite 1_17
+  - first:
+      213: -7303129862257537525
+    second: PassiveSkillSprite 1_18
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -121,19 +145,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -148,7 +160,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PassiveSkillSprite 2_0
+      name: PassiveSkillSprite 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -162,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d7d0d2139ee4c980800000000000000
-      internalID: -8519422279634855983
+      spriteID: 6f2d8f54ebed1f920800000000000000
+      internalID: 3022441733741400822
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PassiveSkillSprite 2_1
+      name: PassiveSkillSprite 1_1
       rect:
         serializedVersion: 2
         x: 80
@@ -183,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df0e8d9f4f0b6d530800000000000000
-      internalID: 3879482695236509949
+      spriteID: d3f2b1dfbe37c5a60800000000000000
+      internalID: 7664128123278667581
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PassiveSkillSprite 2_2
+      name: PassiveSkillSprite 1_2
       rect:
         serializedVersion: 2
         x: 160
@@ -204,14 +216,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3537eec7c4207ee0800000000000000
-      internalID: -1265471054702758598
+      spriteID: 0292005e90f1bae70800000000000000
+      internalID: 9127423197153601824
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PassiveSkillSprite 2_3
+      name: PassiveSkillSprite 1_3
       rect:
         serializedVersion: 2
         x: 240
@@ -225,14 +237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2bffa32b45602d610800000000000000
-      internalID: 1644383774780882866
+      spriteID: 814361146071e5b00800000000000000
+      internalID: 819117497857225752
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PassiveSkillSprite 2_4
+      name: PassiveSkillSprite 1_4
       rect:
         serializedVersion: 2
         x: 320
@@ -246,14 +258,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e09c2f504f963350800000000000000
-      internalID: 5996155052713873635
+      spriteID: cfa444e8150806a50800000000000000
+      internalID: 6512346148945283836
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PassiveSkillSprite 2_5
+      name: PassiveSkillSprite 1_5
       rect:
         serializedVersion: 2
         x: 400
@@ -267,14 +279,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a86d364af1a1c0310800000000000000
-      internalID: 1372500709645473418
+      spriteID: cf4e16a0d421664b0800000000000000
+      internalID: -5447646577162066692
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PassiveSkillSprite 2_6
+      name: PassiveSkillSprite 1_6
       rect:
         serializedVersion: 2
         x: 480
@@ -288,14 +300,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e54d052f3f2a51e0800000000000000
-      internalID: -2208400719020734999
+      spriteID: 3353c393a9c6eb740800000000000000
+      internalID: 5169688831908918579
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PassiveSkillSprite 2_7
+      name: PassiveSkillSprite 1_7
       rect:
         serializedVersion: 2
         x: 560
@@ -309,14 +321,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 218940fa5362bb7d0800000000000000
-      internalID: -2901683522898716654
+      spriteID: 64d66c79754c29fe0800000000000000
+      internalID: -1183667871557456570
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PassiveSkillSprite 2_8
+      name: PassiveSkillSprite 1_8
       rect:
         serializedVersion: 2
         x: 640
@@ -330,14 +342,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12b8850e2010bc4c0800000000000000
-      internalID: -4266315110137951455
+      spriteID: b5864b61941774060800000000000000
+      internalID: 6937638309715011675
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PassiveSkillSprite 2_9
+      name: PassiveSkillSprite 1_9
       rect:
         serializedVersion: 2
         x: 720
@@ -351,14 +363,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9d3867f1ad5e0510800000000000000
-      internalID: 1517253074692357533
+      spriteID: 77a9078db32b7b260800000000000000
+      internalID: 7113350106559060599
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PassiveSkillSprite 2_10
+      name: PassiveSkillSprite 1_10
       rect:
         serializedVersion: 2
         x: 0
@@ -372,8 +384,176 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 764e92fc5c3533170800000000000000
-      internalID: 8156955459147392103
+      spriteID: 9d046e11ea8628c60800000000000000
+      internalID: 7818926999902503129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PassiveSkillSprite 1_11
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 158f73e30c17f54a0800000000000000
+      internalID: -6602433458210342831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PassiveSkillSprite 1_12
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 054059bd802f580a0800000000000000
+      internalID: -6879826735880928176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PassiveSkillSprite 1_13
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7fab8e49ec41fdd0800000000000000
+      internalID: -2454095757011341444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PassiveSkillSprite 1_14
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aaa2a5fd9267495a0800000000000000
+      internalID: -6515452838685300054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PassiveSkillSprite 1_15
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbebf54c5499a2550800000000000000
+      internalID: 6136885967172124349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PassiveSkillSprite 1_16
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8c93a6ce1584a490800000000000000
+      internalID: -7735911892687545204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PassiveSkillSprite 1_17
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 0
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e17e59289986fcd60800000000000000
+      internalID: 7912658078843397918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PassiveSkillSprite 1_18
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0e879b751216aa90800000000000000
+      internalID: -7303129862257537525
       vertices: []
       indices: 
       edges: []
@@ -381,7 +561,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5ea2f915595cd274784358c58bee8049
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 

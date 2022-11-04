@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45015407, g: 0.500194, b: 0.5754274, a: 1}
+  m_IndirectSpecularColor: {r: 0.45015454, g: 0.5001945, b: 0.57542807, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -541,6 +541,14 @@ MonoBehaviour:
     - {fileID: 3811945637619119269, guid: 56122ece8bdd7d347894cdd7ed398c33, type: 3}
     - {fileID: 3811945637619119269, guid: ae5c4cc0b4dede54b93bd1214026d7d4, type: 3}
     - {fileID: 3811945637619119269, guid: 059fd6be464126e43976e214d43f7b7d, type: 3}
+    - {fileID: 3811945637619119269, guid: b3af8ed035b0fda45be5a6e99b296f55, type: 3}
+    - {fileID: 3811945637619119269, guid: 8d627bd1a5eff4942b81c45f8663573f, type: 3}
+    - {fileID: 3811945637619119269, guid: 26b964a2635dfa94a9c800e66a9700e4, type: 3}
+    - {fileID: 3811945637619119269, guid: 74d3c4c77f35a274a9be100b5a3652f2, type: 3}
+    - {fileID: 3811945637619119269, guid: 17fb24583e45ad24ebf7850f043b21e5, type: 3}
+    - {fileID: 3811945637619119269, guid: fd8e11521a8d02e4788b038435ad084f, type: 3}
+    - {fileID: 3811945637619119269, guid: 00fbdbbd23bcdc4428aab7dfaa91280e, type: 3}
+    - {fileID: 3811945637619119269, guid: cff016c3c87ec31478ac52484ead96bb, type: 3}
   personalData:
     lang: 0
     coin: 0
@@ -588,6 +596,30 @@ MonoBehaviour:
       - name: Laser
         lv: 0
         imgPref: {fileID: 7576626188995224481, guid: 8a9466f9517b1e943b57ea5da4f33940, type: 3}
+      - name: FireProperty
+        lv: 0
+        imgPref: {fileID: 7576626188995224481, guid: d7fb995f68ee42540b7a1d1806b04512, type: 3}
+      - name: IceProperty
+        lv: 0
+        imgPref: {fileID: 7576626188995224481, guid: 7cf78d1f7c370184b9e6dbf0fe06d0bb, type: 3}
+      - name: ThunderProperty
+        lv: 0
+        imgPref: {fileID: 7576626188995224481, guid: 64d871b4123f12748b64398871ca5d19, type: 3}
+      - name: DamageTwice
+        lv: 0
+        imgPref: {fileID: 7576626188995224481, guid: 2074f2d520b64764ba6b5cd54a7f0e07, type: 3}
+      - name: GiantBall
+        lv: 0
+        imgPref: {fileID: 7576626188995224481, guid: 0867b08346044964bbf6c387ff1aefaf, type: 3}
+      - name: DarkOrb
+        lv: 0
+        imgPref: {fileID: 7576626188995224481, guid: 09fd480ba0d645d47b375fe3edd5bac1, type: 3}
+      - name: GodBless
+        lv: 0
+        imgPref: {fileID: 7576626188995224481, guid: 064bc34c065bbbe4e94e7bcbb228bbdc, type: 3}
+      - name: BirdFriend
+        lv: 0
+        imgPref: {fileID: 7576626188995224481, guid: 8e3affcbcd68a2b4b8f7400b931ab9b3, type: 3}
   isRemoveAD: 0
 --- !u!1 &109538491
 GameObject:

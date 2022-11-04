@@ -4,7 +4,7 @@ A. Script
         b. convertPsvSkillStr2Enum(string name)へ追加。
 
     2. Player.cs
-        a. [Header("<---- Passive Skill ---->")]へ変数を追加。
+        a. [Header("<---- PASSIVE SKILL ---->")]へ変数を追加。
         b. #region Set PSV Skill Dataの //* Initへ追加。
         c. #region Set PSV Skill Dataの //* Applyへ追加。
 
@@ -13,10 +13,15 @@ A. Script
         b. class PsvSkillの getPsvInfo2Str(Player pl)へ追加。
         c. class PsvSkillの getPsvLVList(Player pl)へ追加。
         d. class PsvSkillの getPsvMaxLVList(Player pl)へ追加。
-        
 
     4. LevelUpPanelAnimate.cs  
         a. onClickSkillUpBtn()へ追加。
+
+    5. Lgnguage.cs
+        a. public enum TXTへ追加。
+        b. //* PSVで、言語のstring[]配列宣言。
+        c. getTxt(string name)へ追加。
+
 
 B. Editor(hierarchy)
     1.Prefab
@@ -24,11 +29,16 @@ B. Editor(hierarchy)
         b. Model/Bat/Prefab/全てOBJECT：Item InfoスクリプトでItem Passiveの▼Arrへ追加。
 
     2. Home Scene
-        a. DataManagerのDMスクリプトでItem Passiveの▼Arrへ追加。
+        // Game全般に使うPsv Image
+        a. rsc / UI / Prefab / PassiveSkillImgListへオブジェクトPrefab生成。
+        b. DataManagerのDMスクリプトで、Item Passiveの▼Arrへ「a.で生成したPrefab」追加。
+
+        // Psv Info PANELに使う、情報テーブル
+        c. rsc / Home / SelectItemPanel / Content / PsvInfoへオブジェクトPrefab生成。 
+        d. DataManagerのDMスクリプトで、scrollviewsのPsvInfoのItemPrefsへ「c.で生成したPrefab」追加。
 
     3. Play Scene
-        b. GameManagerのDMスクリプトでPsv Skill Img Prefsへ追加。
-
+        a. GameManagerのスクリプトPASSIVE TABLEで、Psv Skill Img Prefsへ追加。
     
 
 

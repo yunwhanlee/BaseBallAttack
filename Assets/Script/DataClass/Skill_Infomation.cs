@@ -32,6 +32,14 @@ public class ItemPsvList{
         new ItemPsvDt(DM.PSV.VerticalMultiShot.ToString()),
         new ItemPsvDt(DM.PSV.CriticalDamage.ToString()),
         new ItemPsvDt(DM.PSV.Laser.ToString()),
+        new ItemPsvDt(DM.PSV.FireProperty.ToString()),
+        new ItemPsvDt(DM.PSV.IceProperty.ToString()),
+        new ItemPsvDt(DM.PSV.ThunderProperty.ToString()),
+        new ItemPsvDt(DM.PSV.DamageTwice.ToString()),
+        new ItemPsvDt(DM.PSV.GiantBall.ToString()),
+        new ItemPsvDt(DM.PSV.DarkOrb.ToString()),
+        new ItemPsvDt(DM.PSV.GodBless.ToString()),
+        new ItemPsvDt(DM.PSV.BirdFriend.ToString()),
     };
     public ItemPsvDt[] Arr {get => arr; set => arr = value;}
 
@@ -155,7 +163,16 @@ public class PsvSkill<T> where T: struct {
             pl.itemSpawn.Name,              (pl.itemSpawn.Value * 100 + "%").ToString(),
             pl.verticalMultiShot.Name,      (pl.verticalMultiShot.Value * 1).ToString(),
             pl.criticalDamage.Name,         (CRIT_DMG_DEFAULT + (pl.criticalDamage.Value * 100) + "%").ToString(),
-            // pl.laser.Name,                  (pl.laser.Value).ToString(),
+            pl.laser.Name,                  ("TODO").ToString(),
+            pl.fireProperty.Name,           ("TODO").ToString(),
+            pl.iceProperty.Name,            ("TODO").ToString(),
+            pl.thunderProperty.Name,        ("TODO").ToString(),
+            pl.damageTwice.Name,            ("TODO").ToString(),
+            pl.giantBall.Name,              ("TODO").ToString(),
+            pl.darkOrb.Name,                ("TODO").ToString(),
+            pl.godBless.Name,               ("TODO").ToString(),
+            pl.birdFriend.Name,             ("TODO").ToString(),
+
         };
     }
 
@@ -174,6 +191,14 @@ public class PsvSkill<T> where T: struct {
         list.Add(new KeyValuePair<string, int>(pl.verticalMultiShot.Name, pl.verticalMultiShot.Level));
         list.Add(new KeyValuePair<string, int>(pl.criticalDamage.Name, pl.criticalDamage.Level));
         list.Add(new KeyValuePair<string, int>(pl.laser.Name, pl.laser.Level));
+        list.Add(new KeyValuePair<string, int>(pl.fireProperty.Name, pl.fireProperty.Level));
+        list.Add(new KeyValuePair<string, int>(pl.iceProperty.Name, pl.iceProperty.Level));
+        list.Add(new KeyValuePair<string, int>(pl.thunderProperty.Name, pl.thunderProperty.Level));
+        list.Add(new KeyValuePair<string, int>(pl.damageTwice.Name, pl.damageTwice.Level));
+        list.Add(new KeyValuePair<string, int>(pl.giantBall.Name, pl.giantBall.Level));
+        list.Add(new KeyValuePair<string, int>(pl.darkOrb.Name, pl.darkOrb.Level));
+        list.Add(new KeyValuePair<string, int>(pl.godBless.Name, pl.godBless.Level));
+        list.Add(new KeyValuePair<string, int>(pl.birdFriend.Name, pl.birdFriend.Level));
         return list;
     }
 
@@ -192,6 +217,15 @@ public class PsvSkill<T> where T: struct {
         list.Add(new KeyValuePair<string, int>(pl.verticalMultiShot.Name, pl.verticalMultiShot.MaxLevel));
         list.Add(new KeyValuePair<string, int>(pl.criticalDamage.Name, pl.criticalDamage.MaxLevel));
         list.Add(new KeyValuePair<string, int>(pl.laser.Name, pl.laser.MaxLevel));
+        list.Add(new KeyValuePair<string, int>(pl.fireProperty.Name, pl.fireProperty.MaxLevel));
+        list.Add(new KeyValuePair<string, int>(pl.iceProperty.Name, pl.iceProperty.MaxLevel));
+        list.Add(new KeyValuePair<string, int>(pl.thunderProperty.Name, pl.thunderProperty.MaxLevel));
+        list.Add(new KeyValuePair<string, int>(pl.damageTwice.Name, pl.damageTwice.MaxLevel));
+        list.Add(new KeyValuePair<string, int>(pl.giantBall.Name, pl.giantBall.MaxLevel));
+        list.Add(new KeyValuePair<string, int>(pl.darkOrb.Name, pl.darkOrb.MaxLevel));
+        list.Add(new KeyValuePair<string, int>(pl.godBless.Name, pl.godBless.MaxLevel));
+        list.Add(new KeyValuePair<string, int>(pl.birdFriend.Name, pl.birdFriend.MaxLevel));
+
         return list;
     }
 }

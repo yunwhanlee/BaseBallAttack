@@ -176,9 +176,9 @@ MonoBehaviour:
   isLock: 0
   isChecked: 1
   isCheckedImgObj: {fileID: 0}
-  meshRdrList: []
+  modelMeshRdrList: []
   originMtList: []
-  grayPanel: {fileID: 0}
+  grayPanel2D: {fileID: 0}
   rank: 2
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
@@ -216,6 +216,30 @@ MonoBehaviour:
       lv: 0
       imgPref: {fileID: 0}
     - name: Laser
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: FireProperty
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: IceProperty
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: ThunderProperty
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: DamageTwice
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: GiantBall
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: DarkOrb
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: GodBless
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: BirdFriend
       lv: 0
       imgPref: {fileID: 0}
 --- !u!114 &1774409699401248251

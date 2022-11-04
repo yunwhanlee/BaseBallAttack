@@ -15,7 +15,10 @@ public static class LANG //* LANG
         DialogUnlock2ndSkill_Title, DialogUnlock2ndSkill_Info,
         //* PSV
         Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, 
-        ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, Laser,
+        ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, 
+        Laser, FireProperty, IceProperty, ThunderProperty,
+        // Unique PSV
+        DamageTwice, GiantBall, DarkOrb, GodBless, BirdFriend
     };
     public const int NAME=0, EXPLAIN=1, HOMERUNBONUS=2;
     const string HR_TXT = "⊡ HomeRunBonus : ";
@@ -170,6 +173,14 @@ public static class LANG //* LANG
     public static string[] VerticalMultiShot = new string[]{DM.PSV.VerticalMultiShot.ToString(), "マルチ弾(縦)", "멀티샷(세로)"};
     public static string[] CriticalDamage = new string[]{DM.PSV.CriticalDamage.ToString(), "致命打ダメージ", "치명타데미지"};
     public static string[] Laser = new string[]{DM.PSV.Laser.ToString(), "レイザー", "레이저"};
+    public static string[] FireProperty = new string[]{DM.PSV.FireProperty.ToString(), "火属性", "불속성"};
+    public static string[] IceProperty = new string[]{DM.PSV.IceProperty.ToString(), "氷属性", "빙속성"};
+    public static string[] ThunderProperty = new string[]{DM.PSV.ThunderProperty.ToString(), "雷属性", "뇌속성"};
+    public static string[] DamageTwice = new string[]{DM.PSV.DamageTwice.ToString(), "ダメージ200%", "데미지200%"};
+    public static string[] GiantBall = new string[]{DM.PSV.GiantBall.ToString(), "`ジャイアントボール", "자이언트볼"};
+    public static string[] DarkOrb = new string[]{DM.PSV.DarkOrb.ToString(), "闇のオーブ", "어둠의오브"};
+    public static string[] GodBless = new string[]{DM.PSV.GodBless.ToString(), "神の祝福", "신의축복"};
+    public static string[] BirdFriend = new string[]{DM.PSV.BirdFriend.ToString(), "鳥友達", "조류친구"};
 
     // public static string[] DmgContent = new string[]{"Attack Damage +1","攻撃力 +1","공격력 +1"};
     // public static string[] MultiContent = new string[]{"Extra ball on one side +1","横側へボール追加 +1","옆측에 볼 추가"};
@@ -275,6 +286,15 @@ public static class LANG //* LANG
         if(name == TXT.VerticalMultiShot.ToString()) res = VerticalMultiShot[CUR_LANG];
         if(name == TXT.CriticalDamage.ToString()) res = CriticalDamage[CUR_LANG];
         if(name == TXT.Laser.ToString()) res = Laser[CUR_LANG];
+        // Unique PSV
+        if(name == TXT.FireProperty.ToString()) res = FireProperty[CUR_LANG];
+        if(name == TXT.IceProperty.ToString()) res = IceProperty[CUR_LANG];
+        if(name == TXT.ThunderProperty.ToString()) res = ThunderProperty[CUR_LANG];
+        if(name == TXT.DamageTwice.ToString()) res = DamageTwice[CUR_LANG];
+        if(name == TXT.GiantBall.ToString()) res = GiantBall[CUR_LANG];
+        if(name == TXT.DarkOrb.ToString()) res = DarkOrb[CUR_LANG];
+        if(name == TXT.GodBless.ToString()) res = GodBless[CUR_LANG];
+        if(name == TXT.BirdFriend.ToString()) res = BirdFriend[CUR_LANG];
 
         //* ERROR
         if(res == null) Debug.LogError("存在しないTEXTです。");

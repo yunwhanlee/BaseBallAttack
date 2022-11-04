@@ -496,16 +496,19 @@ MonoBehaviour:
   - 
   - 
   - 
+  price:
+    type: 0
+    coin: 0
+    diamond: 0
   isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 3811945637865038421}
-  meshRdrList: []
+  modelMeshRdrList: []
   originMtList: []
-  grayPanel: {fileID: 0}
+  grayPanel2D: {fileID: 0}
   rank: 0
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
-  price: 100
   cashShopPriceTxt: {fileID: 0}
   itemPassive:
     arr: []
@@ -831,7 +834,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1372500709645473418, guid: 75955ab80fe88e541b56177481e09cf6, type: 3}
+  m_Sprite: {fileID: -5447646577162066692, guid: cfe0b9f7bc9a699409860c061ffd9b55, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

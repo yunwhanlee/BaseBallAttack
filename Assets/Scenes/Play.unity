@@ -6057,6 +6057,54 @@ MonoBehaviour:
     value: 0
     unit: 0
     maxLevel: 0
+  fireProperty:
+    name: 
+    level: 0
+    value: 0
+    unit: 0
+    maxLevel: 0
+  iceProperty:
+    name: 
+    level: 0
+    value: 0
+    unit: 0
+    maxLevel: 0
+  thunderProperty:
+    name: 
+    level: 0
+    value: 0
+    unit: 0
+    maxLevel: 0
+  damageTwice:
+    name: 
+    level: 0
+    value: 0
+    unit: 0
+    maxLevel: 0
+  giantBall:
+    name: 
+    level: 0
+    value: 0
+    unit: 0
+    maxLevel: 0
+  darkOrb:
+    name: 
+    level: 0
+    value: 0
+    unit: 0
+    maxLevel: 0
+  godBless:
+    name: 
+    level: 0
+    value: 0
+    unit: 0
+    maxLevel: 0
+  birdFriend:
+    name: 
+    level: 0
+    value: 0
+    unit: 0
+    maxLevel: 0
 --- !u!65 &702911507
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18163,6 +18211,14 @@ MonoBehaviour:
   - {fileID: 7576626188995224481, guid: e5a4a35706515fb43b875cf1e943057b, type: 3}
   - {fileID: 7576626188995224481, guid: 4349654243a452547b2c25e9e965d0b3, type: 3}
   - {fileID: 7576626188995224481, guid: 8a9466f9517b1e943b57ea5da4f33940, type: 3}
+  - {fileID: 7576626188995224481, guid: d7fb995f68ee42540b7a1d1806b04512, type: 3}
+  - {fileID: 7576626188995224481, guid: 7cf78d1f7c370184b9e6dbf0fe06d0bb, type: 3}
+  - {fileID: 7576626188995224481, guid: 64d871b4123f12748b64398871ca5d19, type: 3}
+  - {fileID: 7576626188995224481, guid: 2074f2d520b64764ba6b5cd54a7f0e07, type: 3}
+  - {fileID: 7576626188995224481, guid: 0867b08346044964bbf6c387ff1aefaf, type: 3}
+  - {fileID: 7576626188995224481, guid: 09fd480ba0d645d47b375fe3edd5bac1, type: 3}
+  - {fileID: 7576626188995224481, guid: 064bc34c065bbbe4e94e7bcbb228bbdc, type: 3}
+  - {fileID: 7576626188995224481, guid: 8e3affcbcd68a2b4b8f7400b931ab9b3, type: 3}
   - {fileID: 5646658460974134969, guid: 9c3959f2820441145a232b352b0eddc0, type: 3}
   inGameSkillStatusTableTf: {fileID: 790088329}
   inGameSkillImgBtnPref: {fileID: 2010402386914571623, guid: 0913717a214136445b6658417b86152b, type: 3}

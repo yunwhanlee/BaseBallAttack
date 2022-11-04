@@ -1686,7 +1686,7 @@ MonoBehaviour:
   itemPassive:
     arr:
     - name: Dmg
-      lv: 1
+      lv: 0
       imgPref: {fileID: 0}
     - name: MultiShot
       lv: 0
@@ -1716,6 +1716,30 @@ MonoBehaviour:
       lv: 0
       imgPref: {fileID: 0}
     - name: Laser
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: FireProperty
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: IceProperty
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: ThunderProperty
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: DamageTwice
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: GiantBall
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: DarkOrb
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: GodBless
+      lv: 0
+      imgPref: {fileID: 0}
+    - name: BirdFriend
       lv: 0
       imgPref: {fileID: 0}
 --- !u!95 &8246238493046802859

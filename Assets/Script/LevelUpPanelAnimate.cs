@@ -175,6 +175,30 @@ public class LevelUpPanelAnimate : MonoBehaviour{
             case DM.PSV.Laser:
                 pl.laser.setLvUp(pl.laser.Value + pl.laser.Unit);
                 break;
+            case DM.PSV.FireProperty:
+                pl.fireProperty.setLvUp(pl.fireProperty.Value + pl.fireProperty.Unit);
+                break;
+            case DM.PSV.IceProperty:
+                pl.iceProperty.setLvUp(pl.iceProperty.Value + pl.iceProperty.Unit);
+                break;
+            case DM.PSV.ThunderProperty:
+                pl.thunderProperty.setLvUp(pl.thunderProperty.Value + pl.thunderProperty.Unit);
+                break;
+            case DM.PSV.DamageTwice:
+                pl.damageTwice.setLvUp(pl.damageTwice.Value + pl.damageTwice.Unit);
+                break;
+            case DM.PSV.GiantBall:
+                pl.giantBall.setLvUp(pl.giantBall.Value + pl.giantBall.Unit);
+                break;
+            case DM.PSV.DarkOrb:
+                pl.darkOrb.setLvUp(pl.darkOrb.Value + pl.darkOrb.Unit);
+                break;
+            case DM.PSV.GodBless:
+                pl.godBless.setLvUp(pl.godBless.Value + pl.godBless.Unit);
+                break;
+            case DM.PSV.BirdFriend:
+                pl.birdFriend.setLvUp(pl.birdFriend.Value + pl.birdFriend.Unit);
+                break;
         }
         
         //* 終了
