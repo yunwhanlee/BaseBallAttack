@@ -383,7 +383,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log("FINISH GAME!");
                 resetSkillStatusTable();
                 DM.ins.personalData.save();
-                SceneManager.LoadScene("Home");
+                SceneManager.LoadScene(DM.SCENE.Home.ToString());
                 break;
         }
     }
@@ -405,6 +405,7 @@ public class GameManager : MonoBehaviour
 
         List<KeyValuePair<string, int>> psvlvList = PsvSkill<int>.getPsvLVList(pl);
         int i=0;
+        
         psvlvList.ForEach(lv => {
             if(lv.Value > 0){
                 String levelTxt = (type == STATE.PAUSE.ToString())? ("x " + lv.Value.ToString()) : lv.Value.ToString();
