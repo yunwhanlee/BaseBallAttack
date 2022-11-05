@@ -143,61 +143,61 @@ public class LevelUpPanelAnimate : MonoBehaviour{
         var psv = DM.ins.convertPsvSkillStr2Enum(colSkillBtns[index].name.text);
         switch(psv){
             case DM.PSV.Dmg:
-                pl.dmg.setLvUp(pl.dmg.Value + pl.dmg.Unit);
+                pl.dmg.setLvUp(pl.dmg.Val + pl.dmg.Unit);
                 break;
             case DM.PSV.MultiShot:
-                pl.multiShot.setLvUp(pl.multiShot.Value + pl.multiShot.Unit);
-                Debug.Log(pl.multiShot.Level + pl.multiShot.Value);
+                pl.multiShot.setLvUp(pl.multiShot.Val + pl.multiShot.Unit);
+                Debug.Log(pl.multiShot.Level + pl.multiShot.Val);
                 break;
             case DM.PSV.Speed:
-                pl.speed.setLvUp(pl.speed.Value + pl.speed.Unit); //20% Up
+                pl.speed.setLvUp(pl.speed.Val + pl.speed.Unit); //20% Up
                 break;
             case DM.PSV.InstantKill:
-                pl.instantKill.setLvUp(pl.instantKill.Value + pl.instantKill.Unit); //2% Up
+                pl.instantKill.setLvUp(pl.instantKill.Val + pl.instantKill.Unit); //2% Up
                 break;
             case DM.PSV.Critical:
-                pl.critical.setLvUp(pl.critical.Value + pl.critical.Unit); //10% Up
+                pl.critical.setLvUp(pl.critical.Val + pl.critical.Unit); //10% Up
                 break;
             case DM.PSV.Explosion:
-                var percent = pl.explosion.Value.per + pl.explosion.Unit.per;
-                var range = pl.explosion.Value.range + pl.explosion.Unit.range;
+                var percent = pl.explosion.Val.per + pl.explosion.Unit.per;
+                var range = pl.explosion.Val.range + pl.explosion.Unit.range;
                 pl.explosion.setLvUp(new Explosion(percent, range)); //Active:20% Up, Radius:+0.25
                 break;
             case DM.PSV.ExpUp:
-                pl.expUp.setLvUp(pl.expUp.Value + pl.expUp.Unit);
+                pl.expUp.setLvUp(pl.expUp.Val + pl.expUp.Unit);
                 break;
             case DM.PSV.ItemSpawn:
-                pl.itemSpawn.setLvUp(pl.itemSpawn.Value + pl.itemSpawn.Unit);
+                pl.itemSpawn.setLvUp(pl.itemSpawn.Val + pl.itemSpawn.Unit);
                 break;
             case DM.PSV.VerticalMultiShot:
-                pl.verticalMultiShot.setLvUp(pl.verticalMultiShot.Value + pl.verticalMultiShot.Unit);
+                pl.verticalMultiShot.setLvUp(pl.verticalMultiShot.Val + pl.verticalMultiShot.Unit);
                 break;
             case DM.PSV.Laser:
-                pl.laser.setLvUp(pl.laser.Value + pl.laser.Unit);
+                pl.laser.setLvUp(pl.laser.Val + pl.laser.Unit);
                 break;
             case DM.PSV.FireProperty:
-                pl.fireProperty.setLvUp(pl.fireProperty.Value + pl.fireProperty.Unit);
+                pl.fireProperty.setLvUp(pl.fireProperty.Val + pl.fireProperty.Unit);
                 break;
             case DM.PSV.IceProperty:
-                pl.iceProperty.setLvUp(pl.iceProperty.Value + pl.iceProperty.Unit);
+                pl.iceProperty.setLvUp(pl.iceProperty.Val + pl.iceProperty.Unit);
                 break;
             case DM.PSV.ThunderProperty:
-                pl.thunderProperty.setLvUp(pl.thunderProperty.Value + pl.thunderProperty.Unit);
+                pl.thunderProperty.setLvUp(pl.thunderProperty.Val + pl.thunderProperty.Unit);
                 break;
             case DM.PSV.DamageTwice:
-                pl.damageTwice.setLvUp(pl.damageTwice.Value + pl.damageTwice.Unit);
+                pl.damageTwice.setLvUp(pl.damageTwice.Val + pl.damageTwice.Unit);
                 break;
             case DM.PSV.GiantBall:
-                pl.giantBall.setLvUp(pl.giantBall.Value + pl.giantBall.Unit);
+                pl.giantBall.setLvUp(pl.giantBall.Val + pl.giantBall.Unit);
                 break;
             case DM.PSV.DarkOrb:
-                pl.darkOrb.setLvUp(pl.darkOrb.Value + pl.darkOrb.Unit);
+                pl.darkOrb.setLvUp(pl.darkOrb.Val + pl.darkOrb.Unit);
                 break;
             case DM.PSV.GodBless:
-                pl.godBless.setLvUp(pl.godBless.Value + pl.godBless.Unit);
+                pl.godBless.setLvUp(pl.godBless.Val + pl.godBless.Unit);
                 break;
             case DM.PSV.BirdFriend:
-                pl.birdFriend.setLvUp(pl.birdFriend.Value + pl.birdFriend.Unit);
+                pl.birdFriend.setLvUp(pl.birdFriend.Val + pl.birdFriend.Unit);
                 break;
         }
         

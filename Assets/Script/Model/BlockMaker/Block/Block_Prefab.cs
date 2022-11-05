@@ -177,7 +177,7 @@ public class Block_Prefab : MonoBehaviour
 //*-----------------------------------------
     private void setType(){
         int rand = Random.Range(0,100);
-        itemTypePer = (int)(100 * ((LM._.itemTypePer * 0.01f) + pl.itemSpawn.Value)); //百分率
+        itemTypePer = (int)(100 * ((LM._.itemTypePer * 0.01f) + pl.itemSpawn.Val)); //百分率
 
         if(kind == BlockMaker.KIND.Normal && rand < itemTypePer){
             int len = System.Enum.GetValues(typeof(BlockType)).Length; 
@@ -368,7 +368,7 @@ public class Block_Prefab : MonoBehaviour
 
     public virtual void onDestroy(GameObject target, bool isInitialize = false) {
         Debug.Log("virtual onDestroy()::");
-        int resultExp = (!isInitialize)? (int)(Exp * pl.expUp.Value) : 0; //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
+        int resultExp = (!isInitialize)? (int)(Exp * pl.expUp.Val) : 0; //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
         em.createBrokeBlockEF(target.transform.position, color);
         bm.createDropItemExpOrbPf(this.transform, resultExp);
         

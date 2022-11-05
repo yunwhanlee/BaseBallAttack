@@ -67,10 +67,11 @@ public class PsvSkill<T> where T: struct {
     public const int CRIT_DMG_DEFAULT = 200;
     public const float MULTI_SHOT_DEG = 25;
     public const float LASER_DEG = 17.5f;
+    public const float GIANTBALL_SCALE = 2.25f;
 
     [SerializeField] string name;    public string Name {get=> name;} 
     [SerializeField] int level; public int Level {get=>level;}
-    [SerializeField] T value;   public T Value {get=>value;}
+    [SerializeField] T val;   public T Val {get=>val; set=>val=value;}
     [SerializeField] T unit;    public T Unit {get=>unit;}
     [SerializeField] int maxLevel;    public int MaxLevel {get=>maxLevel;}
 
@@ -79,7 +80,7 @@ public class PsvSkill<T> where T: struct {
     public PsvSkill(string name, int level, T value, T unit, int maxLevel = MAX_LV){
         this.name = name;
         this.level = level;
-        this.value = value;
+        this.val = value;
         this.unit = unit;
         this.maxLevel = maxLevel;
     }
@@ -88,14 +89,14 @@ public class PsvSkill<T> where T: struct {
     public void setLvUp(T value){
         if(level <= MaxLevel){
             level++;
-            this.value = value;
+            this.val = value;
         }
     }
 
     public void initSkillDt(T value){
         // Debug.LogFormat("<color=yellow>initPsvSkillDt():: this.value({0}) = para({1})</color>", this.value, value);
         if(level > 0)
-            this.value = value;
+            this.val = value;
     }
 
     public bool setHitTypeSkill(float per, ref int result, Collision col, EffectManager em, Player pl, GameObject ballPref = null){
@@ -103,7 +104,8 @@ public class PsvSkill<T> where T: struct {
         int percent = Mathf.RoundToInt(per * 100); //百分率
 
         //* PSV Unique Skill
-        int dmgTwice = (pl.damageTwice.Level == 1)? 2 : 1;
+        int DMG_TWICE = (pl.damageTwice.Level == 1)? 2 : 1;
+        int GIANT_BALL_CALC = (pl.giantBall.Level == 1)? pl.giantBall.Val / 2 : 1;
 
         var psv = DM.ins.convertPsvSkillStr2Enum(Name);
         if(Level > 0 && rand <= percent){
@@ -116,7 +118,7 @@ public class PsvSkill<T> where T: struct {
                     result = PsvSkill<int>.ONE_KILL_DMG;
                     break;
                 case DM.PSV.Critical: 
-                    int dmg = (int)(pl.dmg.Value * (2 + pl.criticalDamage.Value) * dmgTwice);
+                    int dmg = (int)(pl.dmg.Val * (2 + pl.criticalDamage.Val) * DMG_TWICE);
                     em.createCritTxtEF(col.transform.position, dmg);
                     result = dmg;
                     break;
@@ -128,19 +130,19 @@ public class PsvSkill<T> where T: struct {
                     break;
                 case DM.PSV.ThunderProperty:
                     em.createThunderStrikeEF(col.transform.position);
-                    em.createCritTxtEF(col.transform.position, pl.dmg.Value);
+                    em.createCritTxtEF(col.transform.position, pl.dmg.Val);
                     result *= 2;
                     break;
 
                 case DM.PSV.Explosion:
-                    em.createExplosionEF(ballPref.transform.position, pl.explosion.Value.range);
+                    em.createExplosionEF(ballPref.transform.position, pl.explosion.Val.range);
                     return true;
             }
         }
 
         //*「InstantKill」とか「Critical」が発動しなかったら
         if(result == 0){
-            result = pl.dmg.Value * dmgTwice; //普通のダメージをそのまま代入。
+            result = pl.dmg.Val * DMG_TWICE * GIANT_BALL_CALC; //普通のダメージをそのまま代入。
         }
         return false;
     }
@@ -168,17 +170,21 @@ public class PsvSkill<T> where T: struct {
     }
 
     public static List<string> getPsvStatusInfo2Str(Player pl){
+        //* PSV Unique Skill
+        int DMG_TWICE = (pl.damageTwice.Level == 1)? 2 : 1;
+        int GIANT_BALL_CALC = (pl.giantBall.Level == 1)? pl.giantBall.Val / 2 : 1;
+
         return new List<string>(){
-            pl.dmg.Name,                    ((pl.dmg.Value * (pl.damageTwice.Level == 1? 2 : 1)).ToString()),
-            pl.multiShot.Name,              (pl.multiShot.Value + 1).ToString(),
-            pl.speed.Name,                  (pl.speed.Value * 100).ToString() + "%",
-            pl.instantKill.Name,            (pl.instantKill.Value * 100 + "%").ToString(),
-            pl.critical.Name,               (pl.critical.Value * 100 + "%").ToString(),
-            pl.explosion.Name,              (pl.explosion.Value.per * 100 + "%").ToString(),
-            pl.expUp.Name,                  (pl.expUp.Value * 100 + "%").ToString(),
-            pl.itemSpawn.Name,              (pl.itemSpawn.Value * 100 + "%").ToString(),
-            pl.verticalMultiShot.Name,      (pl.verticalMultiShot.Value * 1).ToString(),
-            pl.criticalDamage.Name,         (CRIT_DMG_DEFAULT + (pl.criticalDamage.Value * 100) + "%").ToString(),
+            pl.dmg.Name,                    ((pl.dmg.Val * DMG_TWICE * GIANT_BALL_CALC).ToString()),
+            pl.multiShot.Name,              (pl.multiShot.Val + 1).ToString(),
+            pl.speed.Name,                  (pl.speed.Val * 100).ToString() + "%",
+            pl.instantKill.Name,            (pl.instantKill.Val * 100 + "%").ToString(),
+            pl.critical.Name,               (pl.critical.Val * 100 + "%").ToString(),
+            pl.explosion.Name,              (pl.explosion.Val.per * 100 + "%").ToString(),
+            pl.expUp.Name,                  (pl.expUp.Val * 100 + "%").ToString(),
+            pl.itemSpawn.Name,              (pl.itemSpawn.Val * 100 + "%").ToString(),
+            pl.verticalMultiShot.Name,      (pl.verticalMultiShot.Val * 1).ToString(),
+            pl.criticalDamage.Name,         (CRIT_DMG_DEFAULT + (pl.criticalDamage.Val * 100) + "%").ToString(),
             pl.laser.Name,                  ("TODO").ToString(),
             pl.fireProperty.Name,           ("TODO").ToString(),
             pl.iceProperty.Name,            ("TODO").ToString(),
@@ -297,11 +303,11 @@ public class AtvSkill{
     public AtvSkill(GameManager gm, Player pl){ //@ Overload
         // Debug.Log("ActiveSkill(gm, pl):: gm=" + gm.stage + ", pl=" + pl.dmg.Value);
         THUNDERSHOT_CRT = 2;
-        FIREBALL_DMG = pl.dmg.Value + pl.dmg.Value * (Util._.getCalcEquivalentSequence(gm.stage, 4) / 4);// FIREBALL_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.15f);
+        FIREBALL_DMG = pl.dmg.Val + pl.dmg.Val * (Util._.getCalcEquivalentSequence(gm.stage, 4) / 4);// FIREBALL_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.15f);
         COLORBALL_POP_CNT = 5;
         FIREBALL_DOT = 0.15f;
         POISONSMOKE_DOT = 0.25f;
-        ICEWAVE_DMG = pl.dmg.Value + pl.dmg.Value * (Util._.getCalcEquivalentSequence(gm.stage, 4) / 2);// ICEWAVE_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.3f);
+        ICEWAVE_DMG = pl.dmg.Val + pl.dmg.Val * (Util._.getCalcEquivalentSequence(gm.stage, 4) / 2);// ICEWAVE_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.3f);
     }
 
     //* method

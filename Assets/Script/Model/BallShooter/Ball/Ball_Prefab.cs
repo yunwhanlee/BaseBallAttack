@@ -27,11 +27,17 @@ public class Ball_Prefab : MonoBehaviour
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         em = gm.em; pl = gm.pl; bm = gm.bm; bs = gm.bs;
 
-        
         // rigid.AddForce(this.transform.forward * Speed, ForceMode.Impulse);
 
         //* B. Dmg
         new AtvSkill(gm, pl);
+        var ball = this.transform.GetChild(0).GetChild(0);
+
+        //* PSV Unique:: GiantBall
+        if(pl.giantBall.Level == 1){
+            const float sc = PsvSkill<float>.GIANTBALL_SCALE;
+            ball.transform.localScale = new Vector3(sc, sc, sc);
+        }
     }
     void Update(){
         //* Destroy by Checking Velocity
@@ -131,23 +137,26 @@ public class Ball_Prefab : MonoBehaviour
                 #region PSV (SWING BALL)
                 //* 【 Giant Ball 】
                 if(pl.giantBall.Level == 1){
-
+                    int ballCnt = 1;
+                    ballCnt += pl.multiShot.Val;
+                    ballCnt += pl.verticalMultiShot.Val;
+                    pl.giantBall.Val = ballCnt;
                 }
+                else{
+                    //* 【 Multi Shot (横) 】
+                    for(int i=0; i<pl.multiShot.Val;i++){ // Debug.Log($"<color=blue>【 Multi Shot (横) 】: {pl.multiShot.Value}</color>");
+                        Vector3 dir = pl.multiShot.calcMultiShotDeg2Dir(arrowDeg, i); //* Arrow Direction with Extra Deg
+                        instantiateMultiShot(dir, force, ratio: 0.75f);
+                    }
 
-                //* 【 Multi Shot (横) 】
-                for(int i=0; i<pl.multiShot.Value;i++){ // Debug.Log($"<color=blue>【 Multi Shot (横) 】: {pl.multiShot.Value}</color>");
-                    Vector3 dir = pl.multiShot.calcMultiShotDeg2Dir(arrowDeg, i); //* Arrow Direction with Extra Deg
-                    instantiateMultiShot(dir, force, ratio: 0.75f);
+                    //* 【 Vertical Multi Shot (縦) 】
+                    for(int i=0; i<pl.verticalMultiShot.Val;i++){ // Debug.Log($"<color=blue>【 Vertical Multi Shot (縦) 】: {pl.verticalMultiShot.Value}</color>");
+                        Vector3 dir = pl.arrowAxisAnchor.transform.forward;
+                        instantiateMultiShot(dir, force, ratio: 0.8f);
+                    }
                 }
-
-                //* 【 Vertical Multi Shot (縦) 】
-                for(int i=0; i<pl.verticalMultiShot.Value;i++){ // Debug.Log($"<color=blue>【 Vertical Multi Shot (縦) 】: {pl.verticalMultiShot.Value}</color>");
-                    Vector3 dir = pl.arrowAxisAnchor.transform.forward;
-                    instantiateMultiShot(dir, force, ratio: 0.8f);
-                }
-
                 //* 【 Laser 】
-                for(int i=0; i < pl.laser.Value; i++){  // Debug.Log($"<color=blue>【 Laser 】: {pl.laser.Value}</color>");
+                for(int i=0; i < pl.laser.Val; i++){  // Debug.Log($"<color=blue>【 Laser 】: {pl.laser.Value}</color>");
                     Vector3 start = pl.arrowAxisAnchor.transform.position;
                     Vector3 dir = pl.laser.calcMultiShotDeg2Dir(arrowDeg, i); //* Arrow Direction with Extra Deg
                     em.createLaserEF(start, dir);
@@ -155,7 +164,7 @@ public class Ball_Prefab : MonoBehaviour
                     RaycastHit[] hits = Physics.RaycastAll(start, dir, 100);
                     Array.ForEach(hits, hit => {
                         if(hit.transform.name.Contains(DM.NAME.Block.ToString())){  // Debug.Log("LAZER Hit Obj -> " + hit.transform.name);
-                            int laserDmg = pl.dmg.Value * (pl.laser.Level + 1);
+                            int laserDmg = pl.dmg.Val * (pl.laser.Level + 1);
                             em.createCritTxtEF(hit.transform.position, laserDmg);
                             bm.decreaseBlockHP(hit.transform.gameObject, laserDmg);
                         }
@@ -260,26 +269,26 @@ public class Ball_Prefab : MonoBehaviour
                 }
             });
         #endregion
-        #region PSV (HIT BLOCK)
+        #region PSV (HIT BLOCK) + DAMAGE RESULT
             int result = 0;
             bool isOnExplosion = false;
             //* InstantKill
-            pl.instantKill.setHitTypeSkill(pl.instantKill.Value, ref result, col, em, pl);
+            pl.instantKill.setHitTypeSkill(pl.instantKill.Val, ref result, col, em, pl);
 
             if(result != PsvSkill<int>.ONE_KILL_DMG){
                 //* Critical
-                pl.critical.setHitTypeSkill(pl.critical.Value, ref result, col, em, pl);
+                pl.critical.setHitTypeSkill(pl.critical.Val, ref result, col, em, pl);
                 //* FireProperty
-                pl.fireProperty.setHitTypeSkill(pl.fireProperty.Value, ref result, col, em, pl);
+                pl.fireProperty.setHitTypeSkill(pl.fireProperty.Val, ref result, col, em, pl);
                 //* IceProperty
-                pl.iceProperty.setHitTypeSkill(pl.iceProperty.Value, ref result, col, em, pl);
+                pl.iceProperty.setHitTypeSkill(pl.iceProperty.Val, ref result, col, em, pl);
                 //* ThunderProperty
-                pl.thunderProperty.setHitTypeSkill(pl.thunderProperty.Value, ref result, col, em, pl);
+                pl.thunderProperty.setHitTypeSkill(pl.thunderProperty.Val, ref result, col, em, pl);
                 //* Explosion（最後 ダメージ適用）
-                isOnExplosion = pl.explosion.setHitTypeSkill(pl.explosion.Value.per, ref result, col, em, pl, this.gameObject);
+                isOnExplosion = pl.explosion.setHitTypeSkill(pl.explosion.Val.per, ref result, col, em, pl, this.gameObject);
             }
             if(isOnExplosion){//* Explosion (爆発)
-                RaycastHit[] hits = Physics.SphereCastAll(this.gameObject.transform.position, pl.explosion.Value.range, Vector3.up, 0);
+                RaycastHit[] hits = Physics.SphereCastAll(this.gameObject.transform.position, pl.explosion.Val.range, Vector3.up, 0);
                 Array.ForEach(hits, hit => {
                     if(hit.transform.name.Contains(DM.NAME.Block.ToString())){ //! (BUG) 爆発ができないこと対応。(このIF文が無かったら、UnHitAreaのみ受け取りできない)
                         Debug.Log("Set DAMAGE:: Explostion:: result= " + result + ", hit.obj.name=" + hit.transform.gameObject.name);
@@ -287,7 +296,7 @@ public class Ball_Prefab : MonoBehaviour
                     }
                 });
             }
-            else{//* Normal Damage Result
+            else{//* Damage Result
                 Debug.Log("Set DAMAGE:: result= " + result);
                 bm.decreaseBlockHP(col.gameObject, result);
             }
@@ -353,7 +362,7 @@ public class Ball_Prefab : MonoBehaviour
     //*------------------------------------------------------------------------------
     private float setgetHitBallSpeed(float power, Vector3 arrowDir){
         rigid.velocity = Vector3.zero;
-        float force = Speed * power * pl.speed.Value;
+        float force = Speed * power * pl.speed.Val;
         rigid.AddForce(arrowDir * force, ForceMode.Impulse);
         return force;
     }
@@ -446,14 +455,14 @@ public class Ball_Prefab : MonoBehaviour
 
         //* Set Dmg & CriticalTextEF
         const int attackCnt = 5;
-        int dmg = (int)(pl.dmg.Value * critDmgRatio);
+        int dmg = (int)(pl.dmg.Val * critDmgRatio);
         bm.decreaseBlockHP(hit.transform.gameObject, dmg * attackCnt);
         StartCoroutine(coMultiCriticalDmgEF(critDmgRatio, attackCnt, hit.transform.position));
     }
     IEnumerator coMultiCriticalDmgEF(float critDmgRatio, int cnt, Vector3 hitPos){
         float span = 0.0875f;
         for(int i=0; i<cnt; i++){
-            em.createCritTxtEF(hitPos, (int)(pl.dmg.Value * critDmgRatio));
+            em.createCritTxtEF(hitPos, (int)(pl.dmg.Val * critDmgRatio));
             if(isHomeRun) 
                 em.createThunderStrikeEF(hitPos);
             yield return new WaitForSeconds(i * span);
@@ -463,7 +472,7 @@ public class Ball_Prefab : MonoBehaviour
     void OnDrawGizmos(){
         //* Explosion Skill Range Preview
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(this.transform.position, pl.explosion.Value.range);
+        Gizmos.DrawWireSphere(this.transform.position, pl.explosion.Val.range);
 
         //* ThunderShot Skill Range Preview => ArrowAxisAnchorObjに付いているThunderGizmosスクリプト。
 

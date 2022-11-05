@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
     public PsvSkill<float> iceProperty;
     public PsvSkill<float> thunderProperty;
     public PsvSkill<int> damageTwice;
-    public PsvSkill<float> giantBall;
+    public PsvSkill<int> giantBall;
     public PsvSkill<float> darkOrb;
     public PsvSkill<float> godBless;
     public PsvSkill<float> birdFriend;
@@ -138,7 +138,7 @@ public class Player : MonoBehaviour
         // Unique PSV
         damageTwice = new PsvSkill<int>(
             LANG.getTxt(DM.PSV.DamageTwice.ToString()), psvLvArr[(int)DM.PSV.DamageTwice].lv, 0, 1, 1);
-        giantBall = new PsvSkill<float>(
+        giantBall = new PsvSkill<int>(
             LANG.getTxt(DM.PSV.GiantBall.ToString()), psvLvArr[(int)DM.PSV.GiantBall].lv, 0, 1, 1);
         darkOrb = new PsvSkill<float>(
             LANG.getTxt(DM.PSV.DarkOrb.ToString()), psvLvArr[(int)DM.PSV.DarkOrb].lv, 0, 1, 1);
@@ -149,26 +149,26 @@ public class Player : MonoBehaviour
         
 
         //* Apply
-        dmg.initSkillDt(dmg.Value + dmg.Unit);
-        multiShot.initSkillDt(multiShot.Value + multiShot.Unit * multiShot.Level);
-        speed.initSkillDt(speed.Value + speed.Unit);
-        instantKill.initSkillDt(instantKill.Value + instantKill.Unit * instantKill.Level);
-        critical.initSkillDt(critical.Value + critical.Unit * critical.Level);
-        explosion.initSkillDt(new Explosion(explosion.Value.per + explosion.Unit.per, explosion.Value.range + explosion.Unit.range));
-        expUp.initSkillDt(expUp.Value + expUp.Unit);
-        itemSpawn.initSkillDt(itemSpawn.Value + itemSpawn.Unit);
-        verticalMultiShot.initSkillDt(verticalMultiShot.Value + verticalMultiShot.Unit * verticalMultiShot.Level);
-        criticalDamage.initSkillDt(criticalDamage.Value + criticalDamage.Unit * criticalDamage.Level);
-        laser.initSkillDt(laser.Value + laser.Unit * laser.Level);
-        fireProperty.initSkillDt(fireProperty.Value + fireProperty.Unit * fireProperty.Level);
-        iceProperty.initSkillDt(iceProperty.Value + iceProperty.Unit * iceProperty.Level);
-        thunderProperty.initSkillDt(thunderProperty.Value + thunderProperty.Unit * thunderProperty.Level);
+        dmg.initSkillDt(dmg.Val + dmg.Unit);
+        multiShot.initSkillDt(multiShot.Val + multiShot.Unit * multiShot.Level);
+        speed.initSkillDt(speed.Val + speed.Unit);
+        instantKill.initSkillDt(instantKill.Val + instantKill.Unit * instantKill.Level);
+        critical.initSkillDt(critical.Val + critical.Unit * critical.Level);
+        explosion.initSkillDt(new Explosion(explosion.Val.per + explosion.Unit.per, explosion.Val.range + explosion.Unit.range));
+        expUp.initSkillDt(expUp.Val + expUp.Unit);
+        itemSpawn.initSkillDt(itemSpawn.Val + itemSpawn.Unit);
+        verticalMultiShot.initSkillDt(verticalMultiShot.Val + verticalMultiShot.Unit * verticalMultiShot.Level);
+        criticalDamage.initSkillDt(criticalDamage.Val + criticalDamage.Unit * criticalDamage.Level);
+        laser.initSkillDt(laser.Val + laser.Unit * laser.Level);
+        fireProperty.initSkillDt(fireProperty.Val + fireProperty.Unit * fireProperty.Level);
+        iceProperty.initSkillDt(iceProperty.Val + iceProperty.Unit * iceProperty.Level);
+        thunderProperty.initSkillDt(thunderProperty.Val + thunderProperty.Unit * thunderProperty.Level);
         // Unique PSV
-        damageTwice.initSkillDt(damageTwice.Value + damageTwice.Unit * damageTwice.Level);
-        giantBall.initSkillDt(giantBall.Value + giantBall.Unit * giantBall.Level);
-        darkOrb.initSkillDt(darkOrb.Value + darkOrb.Unit * darkOrb.Level);
-        godBless.initSkillDt(godBless.Value + godBless.Unit * godBless.Level);
-        birdFriend.initSkillDt(birdFriend.Value + birdFriend.Unit * birdFriend.Level);
+        damageTwice.initSkillDt(damageTwice.Val + damageTwice.Unit * damageTwice.Level);
+        giantBall.initSkillDt(giantBall.Val + giantBall.Unit * giantBall.Level);
+        darkOrb.initSkillDt(darkOrb.Val + darkOrb.Unit * darkOrb.Level);
+        godBless.initSkillDt(godBless.Val + godBless.Unit * godBless.Level);
+        birdFriend.initSkillDt(birdFriend.Val + birdFriend.Unit * birdFriend.Level);
 
         
 #endregion
