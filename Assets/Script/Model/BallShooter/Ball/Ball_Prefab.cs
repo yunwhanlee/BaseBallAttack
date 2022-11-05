@@ -58,7 +58,7 @@ public class Ball_Prefab : MonoBehaviour
     }
 
     void OnTriggerStay(Collider col) {
-#region HIT BALL
+        #region SWING BALL
         if(col.transform.CompareTag(DM.TAG.HitRangeArea.ToString())){
             pl.setSwingArcColor("red");
             if(gm.State == GameManager.STATE.PLAY && pl.DoSwing){
@@ -128,7 +128,12 @@ public class Ball_Prefab : MonoBehaviour
                 //* Active Skillなら、下記は実行しない----------------------------------------
                 if(isActiveSkillTrigger) return;
 
-    #region PSV (HIT BALL)
+                #region PSV (SWING BALL)
+                //* 【 Giant Ball 】
+                if(pl.giantBall.Level == 1){
+
+                }
+
                 //* 【 Multi Shot (横) 】
                 for(int i=0; i<pl.multiShot.Value;i++){ // Debug.Log($"<color=blue>【 Multi Shot (横) 】: {pl.multiShot.Value}</color>");
                     Vector3 dir = pl.multiShot.calcMultiShotDeg2Dir(arrowDeg, i); //* Arrow Direction with Extra Deg
@@ -156,7 +161,7 @@ public class Ball_Prefab : MonoBehaviour
                         }
                     });
                 }
-    #endregion
+                #endregion
             }
         }
         else if(col.transform.CompareTag(DM.TAG.ActiveDownWall.ToString())){
@@ -165,7 +170,7 @@ public class Ball_Prefab : MonoBehaviour
                 gm.downWallCollider.isTrigger = false;//*下壁 物理O
             }
         }
-#endregion
+        #endregion
     }
 
 //----------------------------------------------------------------
@@ -187,11 +192,11 @@ public class Ball_Prefab : MonoBehaviour
 //*
 //----------------------------------------------------------------
     void OnCollisionEnter(Collision col) { 
-        //* HIT BLOCK
+        #region ATV (HIT BLOCK)
         if(col.transform.name.Contains(DM.NAME.Block.ToString())){
             isHitedByBlock = true;
-#region #2. ATV (BALL)
             gm.activeSkillBtnList.ForEach(skillBtn => {
+
                 if(skillBtn.Trigger){
                     const float delayTime = 2;
                     int skillIdx = gm.getCurSkillIdx();
@@ -254,11 +259,10 @@ public class Ball_Prefab : MonoBehaviour
                     Invoke("onDestroyMeInvoke", delayTime);
                 }
             });
-#endregion
-#region BALL DAMAGE
+        #endregion
+        #region PSV (HIT BLOCK)
             int result = 0;
             bool isOnExplosion = false;
-    #region CHECK PSV
             //* InstantKill
             pl.instantKill.setHitTypeSkill(pl.instantKill.Value, ref result, col, em, pl);
 
@@ -274,8 +278,6 @@ public class Ball_Prefab : MonoBehaviour
                 //* Explosion（最後 ダメージ適用）
                 isOnExplosion = pl.explosion.setHitTypeSkill(pl.explosion.Value.per, ref result, col, em, pl, this.gameObject);
             }
-    #endregion
-    #region SET DAMAGE
             if(isOnExplosion){//* Explosion (爆発)
                 RaycastHit[] hits = Physics.SphereCastAll(this.gameObject.transform.position, pl.explosion.Value.range, Vector3.up, 0);
                 Array.ForEach(hits, hit => {
@@ -289,8 +291,7 @@ public class Ball_Prefab : MonoBehaviour
                 Debug.Log("Set DAMAGE:: result= " + result);
                 bm.decreaseBlockHP(col.gameObject, result);
             }
-    #endregion
-#endregion            
+        #endregion            
         }
         else if(col.transform.CompareTag(DM.TAG.Wall.ToString()) && col.gameObject.name == DM.NAME.DownWall.ToString()){
             Vector3 pos = new Vector3(this.transform.position.x, col.gameObject.transform.position.y, col.gameObject.transform.position.z);
@@ -305,7 +306,7 @@ public class Ball_Prefab : MonoBehaviour
 //----------------------------------------------------------------
 //*
 //----------------------------------------------------------------
-#region ATV (BAT)
+    #region ATV (BAT)
     IEnumerator coPlayActiveSkillShotEF(AtvSkillBtnUI btn, float waitTime, Vector3 dir){
         // Debug.LogFormat("coPlayActiveSkillShotEF:: btn={0}, waitTite={1}, dir={2}, isHomeRun={3}", btn.Name, waitTime, dir, isHomeRun);
         int skillIdx = gm.getCurSkillIdx();
@@ -343,7 +344,7 @@ public class Ball_Prefab : MonoBehaviour
         }
         //Before go up NextStage Wait for Second
     }
-#endregion
+    #endregion
 
     private void onDestroyMeInvoke() => onDestroyMe();
 
