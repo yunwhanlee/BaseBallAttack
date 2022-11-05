@@ -137,15 +137,15 @@ public class Player : MonoBehaviour
             LANG.getTxt(DM.PSV.ThunderProperty.ToString()), psvLvArr[(int)DM.PSV.ThunderProperty].lv, 0.5f, 0.15f, 3);
         // Unique PSV
         damageTwice = new PsvSkill<int>(
-            LANG.getTxt(DM.PSV.DamageTwice.ToString()), psvLvArr[(int)DM.PSV.DamageTwice].lv, 0, 1, 3);
+            LANG.getTxt(DM.PSV.DamageTwice.ToString()), psvLvArr[(int)DM.PSV.DamageTwice].lv, 0, 1, 1);
         giantBall = new PsvSkill<float>(
-            LANG.getTxt(DM.PSV.GiantBall.ToString()), psvLvArr[(int)DM.PSV.GiantBall].lv, 0, 1, 3);
+            LANG.getTxt(DM.PSV.GiantBall.ToString()), psvLvArr[(int)DM.PSV.GiantBall].lv, 0, 1, 1);
         darkOrb = new PsvSkill<float>(
-            LANG.getTxt(DM.PSV.DarkOrb.ToString()), psvLvArr[(int)DM.PSV.DarkOrb].lv, 0, 1, 3);
+            LANG.getTxt(DM.PSV.DarkOrb.ToString()), psvLvArr[(int)DM.PSV.DarkOrb].lv, 0, 1, 1);
         godBless= new PsvSkill<float>(
-            LANG.getTxt(DM.PSV.GodBless.ToString()), psvLvArr[(int)DM.PSV.GodBless].lv, 0, 1, 3);
+            LANG.getTxt(DM.PSV.GodBless.ToString()), psvLvArr[(int)DM.PSV.GodBless].lv, 0, 1, 1);
         birdFriend = new PsvSkill<float>(
-            LANG.getTxt(DM.PSV.BirdFriend.ToString()), psvLvArr[(int)DM.PSV.BirdFriend].lv, 0, 1, 3);
+            LANG.getTxt(DM.PSV.BirdFriend.ToString()), psvLvArr[(int)DM.PSV.BirdFriend].lv, 0, 1, 1);
         
 
         //* Apply

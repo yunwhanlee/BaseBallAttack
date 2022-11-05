@@ -131,7 +131,6 @@ public class PsvSkill<T> where T: struct {
                 case DM.PSV.Explosion:
                     em.createExplosionEF(ballPref.transform.position, pl.explosion.Value.range);
                     return true;
-                
             }
         }
 
