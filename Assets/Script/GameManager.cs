@@ -225,7 +225,7 @@ public class GameManager : MonoBehaviour
             Destroy(statusInfoContents.GetChild(i).gameObject);
 
         // Set InfoTxt List
-        List<string> infoTxtList = PsvSkill<int>.getPsvInfo2Str(pl);
+        List<string> infoTxtList = PsvSkill<int>.getPsvStatusInfo2Str(pl);
 
         // Apply InfoTxt List
         infoTxtList.ForEach(infoTxt => {

@@ -265,14 +265,14 @@ public class Ball_Prefab : MonoBehaviour
             if(result != PsvSkill<int>.ONE_KILL_DMG){
                 //* Critical
                 pl.critical.setHitTypeSkill(pl.critical.Value, ref result, col, em, pl);
-                //* Explosion（最後 ダメージ適用）
-                isOnExplosion = pl.explosion.setHitTypeSkill(pl.explosion.Value.per, ref result, col, em, pl, this.gameObject);
                 //* FireProperty
                 pl.fireProperty.setHitTypeSkill(pl.fireProperty.Value, ref result, col, em, pl);
                 //* IceProperty
                 pl.iceProperty.setHitTypeSkill(pl.iceProperty.Value, ref result, col, em, pl);
                 //* ThunderProperty
                 pl.thunderProperty.setHitTypeSkill(pl.thunderProperty.Value, ref result, col, em, pl);
+                //* Explosion（最後 ダメージ適用）
+                isOnExplosion = pl.explosion.setHitTypeSkill(pl.explosion.Value.per, ref result, col, em, pl, this.gameObject);
             }
     #endregion
     #region SET DAMAGE

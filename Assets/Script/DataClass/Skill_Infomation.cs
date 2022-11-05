@@ -102,6 +102,9 @@ public class PsvSkill<T> where T: struct {
         int rand = Random.Range(0, 100);
         int percent = Mathf.RoundToInt(per * 100); //百分率
 
+        //* PSV Unique Skill
+        int dmgTwice = (pl.damageTwice.Level == 1)? 2 : 1;
+
         var psv = DM.ins.convertPsvSkillStr2Enum(Name);
         if(Level > 0 && rand <= percent){
             if(psv == DM.PSV.NULL) Debug.LogError("convertPsvSkillStr2Enum()へ string[]変数を追加してください！");
@@ -113,7 +116,7 @@ public class PsvSkill<T> where T: struct {
                     result = PsvSkill<int>.ONE_KILL_DMG;
                     break;
                 case DM.PSV.Critical: 
-                    int dmg = (int)(pl.dmg.Value * (2 + pl.criticalDamage.Value));
+                    int dmg = (int)(pl.dmg.Value * (2 + pl.criticalDamage.Value) * dmgTwice);
                     em.createCritTxtEF(col.transform.position, dmg);
                     result = dmg;
                     break;
@@ -128,6 +131,7 @@ public class PsvSkill<T> where T: struct {
                     em.createCritTxtEF(col.transform.position, pl.dmg.Value);
                     result *= 2;
                     break;
+
                 case DM.PSV.Explosion:
                     em.createExplosionEF(ballPref.transform.position, pl.explosion.Value.range);
                     return true;
@@ -136,7 +140,7 @@ public class PsvSkill<T> where T: struct {
 
         //*「InstantKill」とか「Critical」が発動しなかったら
         if(result == 0){
-            result = pl.dmg.Value; //普通のダメージをそのまま代入。
+            result = pl.dmg.Value * dmgTwice; //普通のダメージをそのまま代入。
         }
         return false;
     }
@@ -163,9 +167,9 @@ public class PsvSkill<T> where T: struct {
         return direction;
     }
 
-    public static List<string> getPsvInfo2Str(Player pl){
+    public static List<string> getPsvStatusInfo2Str(Player pl){
         return new List<string>(){
-            pl.dmg.Name,                    (pl.dmg.Value.ToString()),
+            pl.dmg.Name,                    ((pl.dmg.Value * (pl.damageTwice.Level == 1? 2 : 1)).ToString()),
             pl.multiShot.Name,              (pl.multiShot.Value + 1).ToString(),
             pl.speed.Name,                  (pl.speed.Value * 100).ToString() + "%",
             pl.instantKill.Name,            (pl.instantKill.Value * 100 + "%").ToString(),
