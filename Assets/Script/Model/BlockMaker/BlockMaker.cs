@@ -208,14 +208,20 @@ public class BlockMaker : MonoBehaviour
             }
         });
     }
+
     public void decreaseBlockHP(GameObject obj, int dmg){
-        Debug.Log($"decreaseBlockHP:: obj.tag= {obj.transform.tag}");
+        Debug.Log($"decreaseBlockHP:: obj.tag= {obj.transform.tag}, obj.name= {obj.name}");
         //* TAGで親と子の正しいCLASSを判別してから、処理
         if(obj.CompareTag(DM.TAG.BossBlock.ToString()))
             obj.GetComponent<BossBlock>().decreaseHp(dmg);
-        else
+        else if(obj.CompareTag(DM.TAG.NormalBlock.ToString())
+            || obj.CompareTag(DM.TAG.LongBlock.ToString())
+            || obj.CompareTag(DM.TAG.TreasureChestBlock.ToString())
+            || obj.CompareTag(DM.TAG.HealBlock.ToString())
+            )
             obj.GetComponent<Block_Prefab>().decreaseHp(dmg);
     }
+
     public void setBlockPropertyDuration(){
         for(int i=0; i<gm.blockGroup.childCount; i++){
             var block = gm.blockGroup.GetChild(i).GetComponent<Block_Prefab>();

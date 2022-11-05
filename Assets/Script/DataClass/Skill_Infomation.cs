@@ -124,7 +124,9 @@ public class PsvSkill<T> where T: struct {
                     col.transform.GetComponent<Block_Prefab>().Freeze.IsOn = true;
                     break;
                 case DM.PSV.ThunderProperty:
-                    //TODO
+                    em.createThunderStrikeEF(col.transform.position);
+                    em.createCritTxtEF(col.transform.position, pl.dmg.Value);
+                    result *= 2;
                     break;
                 case DM.PSV.Explosion:
                     em.createExplosionEF(ballPref.transform.position, pl.explosion.Value.range);

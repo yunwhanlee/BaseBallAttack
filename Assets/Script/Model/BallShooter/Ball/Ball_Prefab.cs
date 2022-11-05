@@ -168,6 +168,9 @@ public class Ball_Prefab : MonoBehaviour
 #endregion
     }
 
+//----------------------------------------------------------------
+//*
+//----------------------------------------------------------------
     void OnTriggerExit(Collider col) {
 #region SWING BAT
         if(col.transform.CompareTag(DM.TAG.HitRangeArea.ToString())){ //* HIT BALL
@@ -180,6 +183,9 @@ public class Ball_Prefab : MonoBehaviour
         }
     }
 #endregion
+//----------------------------------------------------------------
+//*
+//----------------------------------------------------------------
     void OnCollisionEnter(Collision col) { 
         //* HIT BLOCK
         if(col.transform.name.Contains(DM.NAME.Block.ToString())){
@@ -261,12 +267,12 @@ public class Ball_Prefab : MonoBehaviour
                 pl.critical.setHitTypeSkill(pl.critical.Value, ref result, col, em, pl);
                 //* Explosion（最後 ダメージ適用）
                 isOnExplosion = pl.explosion.setHitTypeSkill(pl.explosion.Value.per, ref result, col, em, pl, this.gameObject);
-                //TODO FireProperty
+                //* FireProperty
                 pl.fireProperty.setHitTypeSkill(pl.fireProperty.Value, ref result, col, em, pl);
-                //TODO IceProperty
+                //* IceProperty
                 pl.iceProperty.setHitTypeSkill(pl.iceProperty.Value, ref result, col, em, pl);
-                //TODO ThunderProperty
-
+                //* ThunderProperty
+                pl.thunderProperty.setHitTypeSkill(pl.thunderProperty.Value, ref result, col, em, pl);
             }
     #endregion
     #region SET DAMAGE
@@ -291,7 +297,14 @@ public class Ball_Prefab : MonoBehaviour
             em.createDownWallHitEF(pos);
         }
     }
-
+    // private IEnumerator coDelayThunderPropertyHit(int result, Collision col){
+    //     em.createThunderStrikeEF(col.transform.position);
+    //     yield return new WaitForSeconds(0.0875f);
+    //     pl.thunderProperty.setHitTypeSkill(pl.thunderProperty.Value, ref result, col, em, pl);
+    // }
+//----------------------------------------------------------------
+//*
+//----------------------------------------------------------------
 #region ATV (BAT)
     IEnumerator coPlayActiveSkillShotEF(AtvSkillBtnUI btn, float waitTime, Vector3 dir){
         // Debug.LogFormat("coPlayActiveSkillShotEF:: btn={0}, waitTite={1}, dir={2}, isHomeRun={3}", btn.Name, waitTime, dir, isHomeRun);
