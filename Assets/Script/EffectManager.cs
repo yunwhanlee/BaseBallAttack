@@ -30,6 +30,9 @@ public class EffectManager : MonoBehaviour
     public GameObject instantKillTxtEF;
     public GameObject laserEF;
 
+    [Header("PSV SKILL PREFAB")]
+    public GameObject darkOrbPf;
+
     [Header("ATV SKILL EF")]
     [Tooltip("GAME SCENEがロードしたら、自動で読み込む。")]
     public GameObject[] activeSkillBatEFs;

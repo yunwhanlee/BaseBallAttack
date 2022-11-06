@@ -128,19 +128,22 @@ public class Ball_Prefab : MonoBehaviour
                 if(isActiveSkillTrigger) return;
 
                 #region PSV (SWING BALL)
+                //* 【 Dark Orb 】
+                // if(pl.darkOrb.Level == 1){
+                //     Debug.Log("DARKORB ON!");
+                //     Instantiate(em.darkOrbPf, this.transform.position, Quaternion.identity, this.transform);
+                // }
+
                 //* 【 Giant Ball 】
                 if(pl.giantBall.Level == 1){
                     int ballCnt = 1;
                     ballCnt += pl.multiShot.Val;
                     ballCnt += pl.verticalMultiShot.Val;
                     pl.giantBall.Val = ballCnt;
-
-                    //* 【 GiantBall 】(PSV Unique)
-                    if(pl.giantBall.Level == 1){
-                        var ballTexture = this.transform.GetChild(0).GetChild(0);
-                        const float sc = PsvSkill<float>.GIANTBALL_SCALE;
-                        ballTexture.transform.localScale = new Vector3(sc, sc, sc);
-                    }
+                    
+                    var ballTexture = this.transform.GetChild(0).GetChild(0);
+                    const float sc = PsvSkill<float>.GIANTBALL_SCALE;
+                    ballTexture.transform.localScale = new Vector3(sc, sc, sc);
                 }
                 else{
                     //* 【 Multi Shot (横) 】
