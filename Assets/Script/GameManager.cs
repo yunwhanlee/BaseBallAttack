@@ -118,7 +118,8 @@ public class GameManager : MonoBehaviour
     public Button homeBtn; //pausePanel
     public Button statusFolderBtn;
 
-    int val = 1;
+    [Header("PSV UNIQUE")]
+    public GameObject eggPf;
 
     void Start() {
         // Util._.setCalcFibonicciSequence(100, 1.5f);

@@ -22,9 +22,10 @@ public class DarkOrb : MonoBehaviour
     private void OnTriggerEnter(Collider col) {
         if(col.transform.name.Contains(DM.NAME.Block.ToString())){
             var block = col.GetComponent<Block_Prefab>();
+            int dmg = pl.dmg.Val;
             Debug.Log($"DarkOrb::OnTriggerEnter:: HIT->{block}");
             em.createDarkOrbHitEF(col.transform.position);
-            bm.decreaseBlockHP(col.gameObject, pl.dmg.Val);
+            bm.decreaseBlockHP(col.gameObject, dmg);
         }
     }
 }

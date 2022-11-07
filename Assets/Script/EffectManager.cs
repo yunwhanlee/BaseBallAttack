@@ -30,6 +30,7 @@ public class EffectManager : MonoBehaviour
     public GameObject instantKillTxtEF;
     public GameObject laserEF;
     public GameObject darkOrbHitEF;
+    public GameObject eggPopEF;
 
     [Header("ATV SKILL EF")]
     [Tooltip("GAME SCENEがロードしたら、自動で読み込む。")]
@@ -156,6 +157,12 @@ public class EffectManager : MonoBehaviour
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
         return ins;
     }
+    public GameObject createEggPopEF(Vector3 parentPos){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.EggPopEF.ToString(), parentPos, QI, gm.effectGroup);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
+        return ins;
+    }
+    
 
 //* -------------------------------------------------------------
 //* ActiveSkill Effect

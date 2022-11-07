@@ -175,7 +175,7 @@ public class Player : MonoBehaviour
         birdFriend.initSkillDt(birdFriend.Val + birdFriend.Unit * birdFriend.Level);
         #endregion
 
-        //* PSV Uqinue【 Bird Friend 】
+        //* PSV Uqinue【 Bird Friend 】活性化
         if(birdFriend.Level == 1){
             Debug.Log("BirdFriend召喚！");
             BirdFriendObj.SetActive(true);

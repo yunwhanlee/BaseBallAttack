@@ -133,12 +133,18 @@ public class Ball_Prefab : MonoBehaviour
                 if(isActiveSkillTrigger) return;
 
                 #region PSV (SWING BALL)
+                //*【 Bird Friend 】
+                if(pl.birdFriend.Level == 1){
+                    var ins = Instantiate(gm.eggPf, pl.BirdFriendObj.transform.position, Quaternion.identity, gm.ballGroup);
+                    Vector3 throwDir = new Vector3(arrowDir.x, 1, arrowDir.z);
+                    ins.GetComponent<Rigidbody>().AddForce((throwDir * 90), ForceMode.Impulse);
+                }
+
                 //* 【 Dark Orb 】
                 if(pl.darkOrb.Level == 1){
                     Debug.Log("DARKORB ON!");
                     IsOnDarkOrb = true;
                     DarkOrbPf.SetActive(IsOnDarkOrb);
-                    
                 }
 
                 //* 【 Giant Ball 】

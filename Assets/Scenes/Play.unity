@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 779758}
   - component: {fileID: 779757}
   - component: {fileID: 779756}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: DownWall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5783,7 +5783,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 689221853}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.3160639, y: 2.8656244, z: -10.747416}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5815,6 +5815,7 @@ MonoBehaviour:
   instantKillTxtEF: {fileID: 3436073781772722895, guid: 58b2160a5a2f7994bb5ff653a164e704, type: 3}
   laserEF: {fileID: 7621134256795612351, guid: b759b5ecdf3623c41949928529ddbf38, type: 3}
   darkOrbHitEF: {fileID: 628222463428871756, guid: 2c95bb7e5f126f1409bd2b554a163bf1, type: 3}
+  eggPopEF: {fileID: 4969193379346749756, guid: 376e12786391d4940855716e15923780, type: 3}
   activeSkillBatEFs: []
   activeSkillShotEFs: []
   activeSkillExplosionEFs: []
@@ -18235,6 +18236,7 @@ MonoBehaviour:
   continueBtn: {fileID: 1150618591}
   homeBtn: {fileID: 1658447947}
   statusFolderBtn: {fileID: 1780982165}
+  eggPf: {fileID: 7644099056603692642, guid: 278df5e8a6b15764bb9120c75792e3e9, type: 3}
 --- !u!1 &1634056559
 GameObject:
   m_ObjectHideFlags: 0
