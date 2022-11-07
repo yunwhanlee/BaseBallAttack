@@ -16,6 +16,8 @@ public class Ball_Prefab : MonoBehaviour
     bool isHomeRun = false;
     float deleteLimitTime = 2.0f;
     [SerializeField]    float speed;    public float Speed {get => speed; set => speed = value;}
+    [SerializeField]    bool isOnDarkOrb; public bool IsOnDarkOrb {get => isOnDarkOrb; set => isOnDarkOrb = value;}
+    [SerializeField]    GameObject darkOrbPf; public GameObject DarkOrbPf {get => darkOrbPf; set => darkOrbPf = value;}
     float distance;
 
     public Rigidbody rigid;
@@ -31,6 +33,8 @@ public class Ball_Prefab : MonoBehaviour
 
         //* B. Dmg
         new AtvSkill(gm, pl);
+
+        IsOnDarkOrb = false;
     }
     void Update(){
         //* Destroy by Checking Velocity
@@ -129,10 +133,12 @@ public class Ball_Prefab : MonoBehaviour
 
                 #region PSV (SWING BALL)
                 //* 【 Dark Orb 】
-                // if(pl.darkOrb.Level == 1){
-                //     Debug.Log("DARKORB ON!");
-                //     Instantiate(em.darkOrbPf, this.transform.position, Quaternion.identity, this.transform);
-                // }
+                if(pl.darkOrb.Level == 1){
+                    Debug.Log("DARKORB ON!");
+                    IsOnDarkOrb = true;
+                    DarkOrbPf.SetActive(IsOnDarkOrb);
+                    
+                }
 
                 //* 【 Giant Ball 】
                 if(pl.giantBall.Level == 1){

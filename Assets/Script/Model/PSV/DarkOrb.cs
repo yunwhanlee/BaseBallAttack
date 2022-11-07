@@ -5,11 +5,7 @@ using UnityEngine;
 public class DarkOrb : MonoBehaviour
 {
     //* OutSide
-    GameManager gm;
-    BlockMaker bm;
-    Player pl;
-
-    [SerializeField] int speed;
+    GameManager gm; BlockMaker bm; Player pl;
 
     void Start() {
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -19,7 +15,7 @@ public class DarkOrb : MonoBehaviour
 
     void Update(){
         var target = this.transform.parent.transform.position;
-        this.transform.RotateAround(target, Vector3.up, Time.deltaTime * speed);
+        this.transform.RotateAround(target, Vector3.up, Time.deltaTime * LM._.DARKORB_SPEED);
     }
 
     private void OnTriggerEnter(Collider col) {

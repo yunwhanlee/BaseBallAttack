@@ -50,6 +50,9 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Range(0, 1.0f)] public float ATVSKILL_COOLDOWN_UNIT = 0.02f;
     public List<float> MAX_EXP_LIST = new List<float>();
 
+    [Header("PSV SKILL")]
+    public int DARKORB_SPEED = 250;
+
     void Awake() => singleton();
 
     void Start(){
