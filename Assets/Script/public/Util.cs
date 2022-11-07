@@ -14,6 +14,7 @@ public class Util : MonoBehaviour
     public int noticeMsgDisplayCnt = 1;
     public Text noticeMessageTxtPref;
     public Transform mainPanelTf;
+    public GameObject debugSphere;
 
     void Awake() => singleton();
 
@@ -89,5 +90,11 @@ public class Util : MonoBehaviour
 
     public int getCalcCurValPercentage(float value, float max){
         return (int)(value / max * 100);
+    }
+
+    public void displayDebugSphere(Vector3 pos, float raidus, float destroyCnt){
+        var ins = Instantiate(debugSphere, pos, Quaternion.identity);
+        ins.transform.localScale = Vector3.one * (raidus * 2);
+        Destroy(ins, destroyCnt);
     }
 }

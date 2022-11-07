@@ -52,6 +52,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
 
     [Header("PSV SKILL")]
     public int DARKORB_SPEED = 250;
+    public int GODBLESS_SPAN = 10;
 
     void Awake() => singleton();
 
@@ -59,6 +60,8 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
         Debug.Log("<FIBONACCI SEQUENCE> Player Max Exp");
         MAX_EXP_LIST = Util._.getCalcFibonicciSequence(unit: 100, fibRatio: 1);
         HOMERUN_MIN_POWER = HIT_RANK[B].Power;
+        const int OFFSET_CNT = 1;
+        GODBLESS_SPAN -= OFFSET_CNT;
     }
 
     void singleton(){

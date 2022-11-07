@@ -288,6 +288,28 @@ public class Ball_Prefab : MonoBehaviour
         #region PSV (HIT BLOCK) + DAMAGE RESULT
             int result = 0;
             bool isOnExplosion = false;
+
+            //* GodBless
+            if(pl.godBless.Level == 1){
+                if(gm.comboCnt != 0 && gm.comboCnt % LM._.GODBLESS_SPAN == 0){
+                    Debug.Log("GOD BLESS YOU!");
+                    float radius = 4;
+                    Util._.displayDebugSphere(this.transform.position, radius, 2);
+
+                    //* Explosion
+                    em.createGodBlessEF(this.transform.position, this.transform.rotation);
+                    RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, radius, Vector3.up, 0);
+                    Array.ForEach(hits, hit => {
+                    if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
+                        var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
+                        int dmg = pl.dmg.Val * 3;
+                        block.decreaseHp(dmg);
+                        em.createCritTxtEF(hit.transform.position, dmg);
+                    }
+            });
+                }
+            }
+
             //* InstantKill
             pl.instantKill.setHitTypeSkill(pl.instantKill.Val, ref result, col, em, pl);
 

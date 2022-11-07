@@ -31,6 +31,7 @@ public class EffectManager : MonoBehaviour
     public GameObject laserEF;
     public GameObject darkOrbHitEF;
     public GameObject eggPopEF;
+    public GameObject godBlessEF;
 
     [Header("ATV SKILL EF")]
     [Tooltip("GAME SCENEがロードしたら、自動で読み込む。")]
@@ -160,6 +161,11 @@ public class EffectManager : MonoBehaviour
     public GameObject createEggPopEF(Vector3 parentPos){
         var ins = ObjectPool.getObject(ObjectPool.DIC.EggPopEF.ToString(), parentPos, QI, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
+        return ins;
+    }
+    public GameObject createGodBlessEF(Vector3 parentPos, Quaternion rot){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.GodBlessEF.ToString(), parentPos, rot, gm.effectGroup);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 3f));
         return ins;
     }
     
