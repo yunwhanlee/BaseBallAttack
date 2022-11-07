@@ -511,11 +511,13 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             hm.checkMarkImg.color = Color.green;
             Array.ForEach(items, item => activeOutline(item, false));
             activeOutline(curItem, true);
+
             // setSelectSkillImgAtHome();
         }
         else{
             hm.checkMarkImg.color = Color.gray;
             activeOutline(curItem, false);
+
         }
     }
 
@@ -526,7 +528,10 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         switch(itemType){
             case DM.PANEL.Chara:
             case DM.PANEL.Bat:
-                if(item.Outline3D) item.Outline3D.enabled = isActive; 
+                if(item.Outline3D) {
+                    item.Outline3D.enabled = isActive; 
+                    item.RankAuraEF.SetActive(!isActive);
+                }
                 break;
             case DM.PANEL.Skill:
                 if(item.Outline2D) item.Outline2D.enabled = isActive;
