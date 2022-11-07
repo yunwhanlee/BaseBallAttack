@@ -3245,12 +3245,14 @@ MonoBehaviour:
   LONG_BLOCK_SPAN: 7
   BOSS_STAGE_SPAN: 10
   ICE_FREEZE_DURATION: 3
+  FIRE_DOT_DMG_DURATION: 2
   skipBlockPer: 20
   itemTypePer: 10
   treasureChestBlockPer: 5
   healBlockPer: 5
   ATVSKILL_COOLDOWN_UNIT: 1
   MAX_EXP_LIST: []
+  DARKORB_SPEED: 250
 --- !u!1 &445535722
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,6 +29,7 @@ public class EffectManager : MonoBehaviour
     public GameObject criticalTxtEF;
     public GameObject instantKillTxtEF;
     public GameObject laserEF;
+    public GameObject darkOrbHitEF;
 
     [Header("ATV SKILL EF")]
     [Tooltip("GAME SCENEがロードしたら、自動で読み込む。")]
@@ -147,6 +148,11 @@ public class EffectManager : MonoBehaviour
         var force = direction * speed;
         Debug.DrawRay(parentPos, direction * 100, Color.red, 3);
         rigid.AddForce(force, ForceMode.Impulse);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
+        return ins;
+    }
+    public GameObject createDarkOrbHitEF(Vector3 parentPos){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.DarkOrbHitEF.ToString(), parentPos, QI, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
         return ins;
     }

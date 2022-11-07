@@ -12,7 +12,7 @@ public class ObjectPool : MonoBehaviour
         ItemBlockDirLineTrailEF, ItemBlockExplosionEF,
         InstantKillTextEF, CritTxtEF, HealTxtEF, HeartEF,
         BatHitSparkEF, HomeRunHitSparkEF, 
-        ExplosionEF, LaserEF,        
+        ExplosionEF, LaserEF, DarkOrbHitEF,
         BossHealSkillEF, BossObstacleSpawnEF, RockObstacleBrokenEF,
         ThunderStrikeEF, ColorBallStarExplosionEF, //* ATV HomeRun Bonus
 
@@ -75,6 +75,7 @@ public class ObjectPool : MonoBehaviour
         poolDtList.Add(new PoolData(DIC.HomeRunHitSparkEF.ToString(), em.homeRunHitSparkEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.ExplosionEF.ToString(), em.explosionEF, 5, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.LaserEF.ToString(), em.laserEF, 3, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.DarkOrbHitEF.ToString(), em.darkOrbHitEF, 3, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.BossHealSkillEF.ToString(), em.bossHealSkillEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.BossObstacleSpawnEF.ToString(), em.bossObstacleSpawnEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.RockObstacleBrokenEF.ToString(), em.rockObstacleBrokenEF, 1, em.gm.effectGroup));
