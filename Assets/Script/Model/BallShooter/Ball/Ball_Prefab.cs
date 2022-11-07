@@ -16,11 +16,12 @@ public class Ball_Prefab : MonoBehaviour
     bool isHomeRun = false;
     float deleteLimitTime = 2.0f;
     [SerializeField]    float speed;    public float Speed {get => speed; set => speed = value;}
+    float distance;
+    public Rigidbody rigid;
+
+    [Header("PSV UNIQUE")]
     [SerializeField]    bool isOnDarkOrb; public bool IsOnDarkOrb {get => isOnDarkOrb; set => isOnDarkOrb = value;}
     [SerializeField]    GameObject darkOrbPf; public GameObject DarkOrbPf {get => darkOrbPf; set => darkOrbPf = value;}
-    float distance;
-
-    public Rigidbody rigid;
 
     void Awake() {
         rigid = GetComponent<Rigidbody>();

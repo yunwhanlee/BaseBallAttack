@@ -62,6 +62,9 @@ public class Player : MonoBehaviour
     public PsvSkill<float> darkOrb;
     public PsvSkill<float> godBless;
     public PsvSkill<float> birdFriend;
+    
+    [Header("PASSIVE UNIQUE")]
+    [SerializeField] GameObject birdFriendObj;   public GameObject BirdFriendObj {get=>birdFriendObj; set=>birdFriendObj=value;}
 
 
 
@@ -80,6 +83,8 @@ public class Player : MonoBehaviour
 
         //* Player Charaは 必ず０番目のINDEXにすること！！
         var charaTf = modelMovingTf.GetChild(0);
+
+        //* Bat Effect Transform
         Transform tf = Util._.getCharaRightArmPath(charaTf);
         int childLastIdx = tf.childCount - 1;
         Transform bat = tf.GetChild(childLastIdx);
@@ -87,7 +92,7 @@ public class Player : MonoBehaviour
         // Debug.Log("Player:: Start:: RightArm.childCount= " + RightArm.childCount + ", RightArm= " + RightArm);
         // Debug.Log("Player:: charaTf= " + charaTf + ", BatEffectTf= " + BatEffectTf);
 
-#region Set ATV Skill DataBase
+        #region Set ATV Skill DataBase
         //* A. Resource
         int i=0;
         Array.ForEach(atvSkillDb, dt=>{
@@ -103,8 +108,8 @@ public class Player : MonoBehaviour
             em.directlyCreateActiveSkillBatEF(i, BatEffectTf);
             i++;
         });
-#endregion
-#region Set PSV Skill Data
+        #endregion
+        #region Set PSV Skill Data
         //* Init
         var psvLvArr = DM.ins.personalData.ItemPassive.Arr;
         dmg = new PsvSkill<int>(
@@ -147,7 +152,6 @@ public class Player : MonoBehaviour
         birdFriend = new PsvSkill<float>(
             LANG.getTxt(DM.PSV.BirdFriend.ToString()), psvLvArr[(int)DM.PSV.BirdFriend].lv, 0, 1, 1);
         
-
         //* Apply
         dmg.initSkillDt(dmg.Val + dmg.Unit);
         multiShot.initSkillDt(multiShot.Val + multiShot.Unit * multiShot.Level);
@@ -169,23 +173,17 @@ public class Player : MonoBehaviour
         darkOrb.initSkillDt(darkOrb.Val + darkOrb.Unit * darkOrb.Level);
         godBless.initSkillDt(godBless.Val + godBless.Unit * godBless.Level);
         birdFriend.initSkillDt(birdFriend.Val + birdFriend.Unit * birdFriend.Level);
+        #endregion
 
-        
-#endregion
+        //* PSV Uqinue【 Bird Friend 】
+        if(birdFriend.Level == 1){
+            Debug.Log("BirdFriend召喚！");
+            BirdFriendObj.SetActive(true);
+        }
 
         //* Show Psv UI
         gm.displayCurPassiveSkillUI("INGAME");
 
-        //* Set HitRank Data : @params { char rate, float distance, int power }
-        // hitRank = new HitRank[6];
-        // const int A=0, B=1, C=2, D=3, E=4, F=5;
-        // hitRank[A] = new HitRank(0.125f, 10);
-        // hitRank[B] = new HitRank(0.25f, 7);
-        // hitRank[C] = new HitRank(0.5f, 5);
-        // hitRank[D] = new HitRank(0.85f, 4);
-        // hitRank[E] = new HitRank(1.125f, 3);
-        // hitRank[F] = new HitRank(1.5f, 2);
-        
         Debug.Log("swingArcArea.rectTransform.localRotation.eulerAngles.z=" + swingArcArea.rectTransform.localRotation.eulerAngles.z);//! (BUG) rotation.eulerAnglesしないと、角度の数値ではなく、小数点が出る。
         anim = GetComponentInChildren<Animator>();
         anim.SetBool("IsIdle", false);
