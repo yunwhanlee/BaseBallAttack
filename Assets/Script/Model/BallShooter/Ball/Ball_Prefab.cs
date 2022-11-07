@@ -294,10 +294,10 @@ public class Ball_Prefab : MonoBehaviour
                 if(gm.comboCnt != 0 && gm.comboCnt % LM._.GODBLESS_SPAN == 0){
                     Debug.Log("GOD BLESS YOU!");
                     float radius = 4;
-                    Util._.displayDebugSphere(this.transform.position, radius, 2);
+                    Util._.displayDebugSphere(this.transform.position, radius, 1);
 
                     //* Explosion
-                    em.createGodBlessEF(this.transform.position, this.transform.rotation);
+                    em.createGodBlessEF(this.transform.position);
                     RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, radius, Vector3.up, 0);
                     Array.ForEach(hits, hit => {
                     if(hit.transform.name.Contains(DM.NAME.Block.ToString())){

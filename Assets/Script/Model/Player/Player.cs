@@ -175,12 +175,6 @@ public class Player : MonoBehaviour
         birdFriend.initSkillDt(birdFriend.Val + birdFriend.Unit * birdFriend.Level);
         #endregion
 
-        //* PSV Uqinue【 Bird Friend 】活性化
-        if(birdFriend.Level == 1){
-            Debug.Log("BirdFriend召喚！");
-            BirdFriendObj.SetActive(true);
-        }
-
         //* Show Psv UI
         gm.displayCurPassiveSkillUI("INGAME");
 
@@ -197,6 +191,12 @@ public class Player : MonoBehaviour
     void Update(){
         // setSwingArcPos();
         calcLevelUpExp();
+
+        //* PSV Uqinue【 Bird Friend 】活性化
+        if(birdFriend.Level == 1 && !BirdFriendObj.activeSelf){
+            Debug.Log("BirdFriend召喚！");
+            BirdFriendObj.SetActive(true);
+        }
     }
 
     public void addExp(int _exp) => Exp += _exp;

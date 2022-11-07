@@ -163,8 +163,8 @@ public class EffectManager : MonoBehaviour
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
         return ins;
     }
-    public GameObject createGodBlessEF(Vector3 parentPos, Quaternion rot){
-        var ins = ObjectPool.getObject(ObjectPool.DIC.GodBlessEF.ToString(), parentPos, rot, gm.effectGroup);
+    public GameObject createGodBlessEF(Vector3 parentPos){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.GodBlessEF.ToString(), parentPos, godBlessEF.transform.rotation, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 3f));
         return ins;
     }
