@@ -176,25 +176,20 @@ public class PsvSkill<T> where T: struct {
 
         return new List<string>(){
             pl.dmg.Name,                    ((pl.dmg.Val * DMG_TWICE * GIANT_BALL_CALC).ToString()),
+            pl.speed.Name,                  (pl.speed.Val * 100 + "m/s").ToString(),
             pl.multiShot.Name,              (pl.multiShot.Val + 1).ToString(),
-            pl.speed.Name,                  (pl.speed.Val * 100).ToString() + "%",
+            pl.verticalMultiShot.Name,      (pl.verticalMultiShot.Val * 1).ToString(),
+            pl.laser.Name,                  (pl.laser.val).ToString(),
             pl.instantKill.Name,            (pl.instantKill.Val * 100 + "%").ToString(),
             pl.critical.Name,               (pl.critical.Val * 100 + "%").ToString(),
+            pl.criticalDamage.Name,         (CRIT_DMG_DEFAULT + (pl.criticalDamage.Val * 100) + "%").ToString(),
             pl.explosion.Name,              (pl.explosion.Val.per * 100 + "%").ToString(),
             pl.expUp.Name,                  (pl.expUp.Val * 100 + "%").ToString(),
             pl.itemSpawn.Name,              (pl.itemSpawn.Val * 100 + "%").ToString(),
-            pl.verticalMultiShot.Name,      (pl.verticalMultiShot.Val * 1).ToString(),
-            pl.criticalDamage.Name,         (CRIT_DMG_DEFAULT + (pl.criticalDamage.Val * 100) + "%").ToString(),
-            pl.laser.Name,                  ("TODO").ToString(),
-            pl.fireProperty.Name,           ("TODO").ToString(),
-            pl.iceProperty.Name,            ("TODO").ToString(),
-            pl.thunderProperty.Name,        ("TODO").ToString(),
-            pl.damageTwice.Name,            ("TODO").ToString(),
-            pl.giantBall.Name,              ("TODO").ToString(),
-            pl.darkOrb.Name,                ("TODO").ToString(),
+            pl.fireProperty.Name,           (pl.fireProperty.Val * 100 + "%").ToString(),
+            pl.iceProperty.Name,            (pl.iceProperty.Val * 100 + "%").ToString(),
+            pl.thunderProperty.Name,        (pl.thunderProperty.Val * 100 + "%").ToString(),
             pl.godBless.Name,               ("TODO").ToString(),
-            pl.birdFriend.Name,             ("TODO").ToString(),
-
         };
     }
 
