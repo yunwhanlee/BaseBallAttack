@@ -105,7 +105,7 @@ public class PsvSkill<T> where T: struct {
 
         //* PSV Unique Skill
         int DMG_TWICE = (pl.damageTwice.Level == 1)? 2 : 1;
-        int GIANT_BALL_CALC = (pl.giantBall.Level == 1)? pl.giantBall.Val / 2 : 1;
+        int GIANT_BALL_CALC = (pl.giantBall.Level == 1)? pl.giantBall.Val * 2 : 1;
 
         var psv = DM.ins.convertPsvSkillStr2Enum(Name);
         if(Level > 0 && rand <= percent){

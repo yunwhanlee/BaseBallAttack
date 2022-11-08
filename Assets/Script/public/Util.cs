@@ -100,7 +100,6 @@ public class Util : MonoBehaviour
 
     public void sphereCastAllDecreaseBlocksHp(Transform my, float radius, int dmg){
         GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-        
         //* SphereCastAll
         RaycastHit[] hits = Physics.SphereCastAll(my.position, radius, Vector3.up, 0);
         Array.ForEach(hits, hit => {

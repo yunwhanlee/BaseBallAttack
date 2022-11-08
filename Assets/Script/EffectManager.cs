@@ -164,6 +164,7 @@ public class EffectManager : MonoBehaviour
         return ins;
     }
     public GameObject createGodBlessEF(Vector3 parentPos){
+        Debug.Log("GOD BLESS YOU! EF");
         var ins = ObjectPool.getObject(ObjectPool.DIC.GodBlessEF.ToString(), parentPos, godBlessEF.transform.rotation, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 3f));
         return ins;

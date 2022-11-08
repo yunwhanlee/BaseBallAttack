@@ -18,11 +18,12 @@ public class OverLapCheckBoxCollider : MonoBehaviour
                     return;
                 }
                 else{
-                    Debug.Log("<color=green>OverLapCheckBoxCollider col.name= " + col.name + ", pos.z= " + (col.transform.position.z) + "</color>");
+                    Debug.Log("<color=green>this="+ this.transform + "::OverLapCheckBoxCollider col.name= " + col.name + ", pos.z= " + (col.transform.position.z) + "</color>");
                 }
 
                 //* Up PosZ
-                if(!col.GetComponentInChildren<OverLapCheckBoxCollider>().IsMoved){
+                if(col.GetComponentInChildren<OverLapCheckBoxCollider>() != null
+                    && !col.GetComponentInChildren<OverLapCheckBoxCollider>().IsMoved){
                     col.GetComponentInChildren<OverLapCheckBoxCollider>().IsMoved = true;
                     StartCoroutine(coDelaySetPos(col));
                 }

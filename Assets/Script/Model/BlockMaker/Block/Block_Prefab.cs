@@ -281,7 +281,7 @@ public class Block_Prefab : MonoBehaviour
         }
     }
     private void checkIceFreeze(){
-        if(Freeze.IsOn){
+        if(Freeze.IsOn && !this.name.Contains("Boss")){
             //* Enter 1Time
             Freeze.startDuration(this);
             //* End 1Time
