@@ -64,13 +64,13 @@ public class ObjectPool : MonoBehaviour
         }
         poolDtList.Add(new PoolData(DIC.DropItemExpOrbEF.ToString(), em.dropItemExpOrbEF, 30, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.InstantKillTextEF.ToString(), em.instantKillTxtEF, 5, em.gm.effectGroup));
-        poolDtList.Add(new PoolData(DIC.CritTxtEF.ToString(), em.criticalTxtEF, 20, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.CritTxtEF.ToString(), em.criticalTxtEF, 3, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.HealTxtEF.ToString(), em.healTxtEF, 10, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.HeartEF.ToString(), em.heartEF, 10, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.DownWallHitEF.ToString(), em.downWallHitEF, 10, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.ItemBlockDirLineTrailEF.ToString(), em.itemBlockDirLineTrailEF, 3, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.ItemBlockExplosionEF.ToString(), em.itemBlockExplosionEF, 3, em.gm.effectGroup));
-        poolDtList.Add(new PoolData(DIC.BrokeBlockEF.ToString(), em.brokeBlockEF, 15, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.BrokeBlockEF.ToString(), em.brokeBlockEF, 30, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.BatHitSparkEF.ToString(), em.batHitSparkEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.HomeRunHitSparkEF.ToString(), em.homeRunHitSparkEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.ExplosionEF.ToString(), em.explosionEF, 5, em.gm.effectGroup));
@@ -85,7 +85,7 @@ public class ObjectPool : MonoBehaviour
         poolDtList.Add(new PoolData(DIC.ColorBallStarExplosionEF.ToString(), em.colorBallStarExplosionEF, 1, em.gm.effectGroup));
 
         // OBJ 
-        poolDtList.Add(new PoolData(DIC.DropItemExpOrbPf.ToString(), bm.dropItemExpOrbPf, 50, gm.dropItemGroup));
+        poolDtList.Add(new PoolData(DIC.DropItemExpOrbPf.ToString(), bm.dropItemExpOrbPf, 75, gm.dropItemGroup));
 
 
         //* Enroll Dic

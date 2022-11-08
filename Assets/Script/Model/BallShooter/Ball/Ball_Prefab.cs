@@ -301,6 +301,7 @@ public class Ball_Prefab : MonoBehaviour
                     RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, radius, Vector3.up, 0);
                     Array.ForEach(hits, hit => {
                     if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
+                        gm.comboCnt--; //* (BUG) 爆発のカウントもされ、スキルが続けて発動されること防止。
                         var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
                         int dmg = pl.dmg.Val * 3;
                         block.decreaseHp(dmg);
