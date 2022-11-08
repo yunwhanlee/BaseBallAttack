@@ -6,6 +6,8 @@
     - COMBOカウントに関して、利点考える。
 
     ✓ StatusFolder UI 整理。➡ 221108
+
+    - SphereCastAllを統一する関数制作::Util.csへ
     
     - Activeスキルのホームランボーナス。
         ✓ ThunderShotのエフェクト追加。上から撃ち落とす雷。
@@ -46,5 +48,5 @@
     ✓ Boss登場とHOMERUN ANIMが再生する場合、画面クリックしたらカメラ転換ボタンが出るBUG。
     ✓ ICEWAVE 壁にぶつかり、反射して衝突した場合、方向が逆になるBUG。
     ✓ BALLタイプATVスキルEX）ColorBallがブロックに当たっても、生きている⇒速度を０に設定して対応。
-    -  GodBlessが最初に発動した場合、フリーズが掛けてしまいますが、原因不明
+    -  GodBlessとEGGPOPが最初に発動した場合、フリーズが掛けてしまいますが、原因不明
     　　-> ParticleのEmittion個数下がり、ObjectPoolで関連したEFをもっと用意もしましたが、出来ませんでした。

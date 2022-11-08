@@ -140,9 +140,11 @@ public class BlockMaker : MonoBehaviour
     }
     public void bossSpawn(){
         if(gm.stage % LM._.BOSS_STAGE_SPAN == 0 && gm.bossGroup.childCount == 0){
-                Debug.Log("BOSS SPAWN!!");
-                var pos = new Vector3(0, 0, bossPrefs[0].transform.position.z + 2);
-                Instantiate(bossPrefs[0], pos, bossPrefs[0].transform.rotation, gm.bossGroup);
+                int index = gm.stage / LM._.BOSS_STAGE_SPAN - 1;
+                Debug.Log($"BOSS SPAWN!! index= {index}");
+
+                var pos = new Vector3(0, 0, bossPrefs[index].transform.position.z + 2);
+                Instantiate(bossPrefs[index], pos, bossPrefs[index].transform.rotation, gm.bossGroup);
 
                 StartCoroutine(coPlayBossSpawnAnim());
         }
