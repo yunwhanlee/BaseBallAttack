@@ -177,8 +177,8 @@ public class PsvSkill<T> where T: struct {
         return new List<string>(){
             pl.dmg.Name,                    ((pl.dmg.Val * DMG_TWICE * GIANT_BALL_CALC).ToString()),
             pl.speed.Name,                  (pl.speed.Val * 100 + "m/s").ToString(),
-            pl.multiShot.Name,              (pl.multiShot.Val + 1).ToString(),
-            pl.verticalMultiShot.Name,      (pl.verticalMultiShot.Val * 1).ToString(),
+            pl.multiShot.Name,              ("⇔: " + (pl.multiShot.Val) + ", ⇑: " + (pl.verticalMultiShot.Val)).ToString(),
+            // pl.verticalMultiShot.Name,      (pl.verticalMultiShot.Val * 1).ToString(),
             pl.laser.Name,                  (pl.laser.val).ToString(),
             pl.instantKill.Name,            (pl.instantKill.Val * 100 + "%").ToString(),
             pl.critical.Name,               (pl.critical.Val * 100 + "%").ToString(),
@@ -189,7 +189,6 @@ public class PsvSkill<T> where T: struct {
             pl.fireProperty.Name,           (pl.fireProperty.Val * 100 + "%").ToString(),
             pl.iceProperty.Name,            (pl.iceProperty.Val * 100 + "%").ToString(),
             pl.thunderProperty.Name,        (pl.thunderProperty.Val * 100 + "%").ToString(),
-            pl.godBless.Name,               ("TODO").ToString(),
         };
     }
 
