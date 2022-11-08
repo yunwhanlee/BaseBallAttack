@@ -20,16 +20,8 @@ public class Egg : MonoBehaviour
         if(col.transform.name.Contains(DM.NAME.Block.ToString())){
             Debug.Log("EGG POP!");
             //* Explosion
-            RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, explosionRange, Vector3.up, 0);
-            Array.ForEach(hits, hit => {
-                if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
-                    var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
-                    int dmg = pl.dmg.Val;
-                    block.decreaseHp(dmg);
-                    em.createCritTxtEF(hit.transform.position, dmg);
-                    em.createEggPopEF(hit.transform.position);
-                }
-            });
+            em.createEggPopEF(this.transform.position);
+            Util._.sphereCastAllDecreaseBlocksHp(this.transform, explosionRange, pl.dmg.Val * 3);
 
             Destroy(this.gameObject);
         }

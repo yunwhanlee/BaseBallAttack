@@ -14,7 +14,7 @@ public class Util : MonoBehaviour
     public int noticeMsgDisplayCnt = 1;
     public Text noticeMessageTxtPref;
     public Transform mainPanelTf;
-    public GameObject debugSphere;
+    public GameObject debugSphereObj;
 
     void Awake() => singleton();
 
@@ -92,9 +92,24 @@ public class Util : MonoBehaviour
         return (int)(value / max * 100);
     }
 
-    public void displayDebugSphere(Vector3 pos, float raidus, float destroyCnt){
-        var ins = Instantiate(debugSphere, pos, Quaternion.identity);
+    public void DebugSphere(Vector3 pos, float raidus, float destroyCnt){
+        var ins = Instantiate(debugSphereObj, pos, Quaternion.identity);
         ins.transform.localScale = Vector3.one * (raidus * 2);
         Destroy(ins, destroyCnt);
+    }
+
+    public void sphereCastAllDecreaseBlocksHp(Transform my, float radius, int dmg){
+        GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        
+        //* SphereCastAll
+        RaycastHit[] hits = Physics.SphereCastAll(my.position, radius, Vector3.up, 0);
+        Array.ForEach(hits, hit => {
+            if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
+                gm.comboCnt--; //* (BUG) 爆発のカウントもされ、スキルが続けて発動されること防止。
+                var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
+                block.decreaseHp(dmg);
+                gm.em.createCritTxtEF(hit.transform.position, dmg);
+            }
+        });
     }
 }

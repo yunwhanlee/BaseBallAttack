@@ -294,21 +294,12 @@ public class Ball_Prefab : MonoBehaviour
                 if(gm.comboCnt != 0 && gm.comboCnt % LM._.GODBLESS_SPAN == 0){
                     Debug.Log("GOD BLESS YOU!");
                     float radius = 4;
-                    Util._.displayDebugSphere(this.transform.position, radius, 1);
+                    Util._.DebugSphere(this.transform.position, radius, 1);
 
                     //* Explosion
                     em.createGodBlessEF(this.transform.position);
-                    RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, radius, Vector3.up, 0);
-                    Array.ForEach(hits, hit => {
-                    if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
-                        gm.comboCnt--; //* (BUG) 爆発のカウントもされ、スキルが続けて発動されること防止。
-                        var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
-                        int dmg = pl.dmg.Val * 3;
-                        block.decreaseHp(dmg);
-                        em.createCritTxtEF(hit.transform.position, dmg);
-                    }
-            });
-                }
+                    Util._.sphereCastAllDecreaseBlocksHp(this.transform, radius, pl.dmg.Val * 3);
+            }
             }
 
             //* InstantKill

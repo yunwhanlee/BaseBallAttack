@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45015407, g: 0.500194, b: 0.5754274, a: 1}
+  m_IndirectSpecularColor: {r: 0.45015454, g: 0.5001945, b: 0.57542807, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3242,7 +3242,7 @@ MonoBehaviour:
   - dist: 1.5
     power: 2
   HOMERUN_MIN_POWER: 0
-  LONG_BLOCK_SPAN: 7
+  LONG_BLOCK_SPAN: 5
   BOSS_STAGE_SPAN: 10
   ICE_FREEZE_DURATION: 3
   FIRE_DOT_DMG_DURATION: 2
@@ -17219,7 +17219,7 @@ MonoBehaviour:
   noticeMsgDisplayCnt: 1
   noticeMessageTxtPref: {fileID: 357732499089971375, guid: c1a4e857d0aae0b4ba90ed2c60068da3, type: 3}
   mainPanelTf: {fileID: 925401117}
-  debugSphere: {fileID: 6312669959380106236, guid: e22335ecb12e2a1469b7cc80f77f31f3, type: 3}
+  debugSphereObj: {fileID: 6312669959380106236, guid: e22335ecb12e2a1469b7cc80f77f31f3, type: 3}
 --- !u!4 &2097801201
 Transform:
   m_ObjectHideFlags: 0
