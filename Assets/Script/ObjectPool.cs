@@ -101,6 +101,9 @@ public class ObjectPool : MonoBehaviour
         }
 
         //* ★★★ 全て準備したOBJECTを活性化する ⇐ こうしないと、複数のEFが活性化したら、読込が重くなり、フリーズ掛ける。
+        activateEveryObjects(poolDtList);
+    }
+    private void activateEveryObjects(List<PoolData> poolDtList){
         Debug.Log("LOADING:: OBJECT-POOL EFFECTを読み込む。");
         foreach(var obj in poolDtList){
             Debug.Log($"key={obj.Key}, cnt={obj.Cnt}, groupTf={obj.GroupTf.name}");
@@ -110,6 +113,7 @@ public class ObjectPool : MonoBehaviour
             }
         }
     }
+
 
     public static GameObject getObject(string key, Vector3 pos, Quaternion rot, Transform groupTf = null){
         List<GameObject> childList = new List<GameObject>();
