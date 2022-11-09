@@ -184,15 +184,6 @@ public class BlockMaker : MonoBehaviour
     public void setGlowEF(Block_Prefab[] blocks, bool isOn){
         Array.ForEach(blocks, bl => bl.GetComponent<Block_Prefab>().setEnabledSpriteGlowEF(isOn));
     }
-    public void eraseObstacle(){
-        if(gm.obstacleGroup.childCount <= 0) return; 
-        
-        for(int i=0; i<gm.obstacleGroup.childCount; i++){
-            // Debug.Log($"eraseObstacle():: obstacleGroup.GetChild({i})= {gm.obstacleGroup.GetChild(i)}");
-            var childTf = gm.obstacleGroup.GetChild(i);
-            Destroy(childTf.gameObject);
-        }
-    }
 #endregion
     public void setGlowEFAllBlocks(bool isOn){ //* Block Grow EF 解除
         var blocks = gm.blockGroup.GetComponentsInChildren<Block_Prefab>();

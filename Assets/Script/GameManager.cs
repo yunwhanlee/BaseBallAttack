@@ -172,7 +172,7 @@ public class GameManager : MonoBehaviour
         expTxt.text = $"{pl.Exp} / {pl.MaxExp}";
 
         //* BOSS BAR & TEXT
-        bossStageBar.GetComponent<RectTransform>().anchorMin = new Vector2(boss? 0.1f : 0.5f, 0.5f);
+        bossStageBar.GetComponent<RectTransform>().anchorMin = new Vector2((boss? 0.15f : 0.5f), 0.5f);
         bossStageBar.value = Mathf.Lerp(bossStageBar.value, 
             boss? ((float)boss.Hp / boss.MaxHp >= 0)? (float)boss.Hp / boss.MaxHp : 0
                 : (float)(stage % LM._.BOSS_STAGE_SPAN) / (float)LM._.BOSS_STAGE_SPAN
@@ -189,9 +189,7 @@ public class GameManager : MonoBehaviour
         comboTxt.text = LANG.getTxt(LANG.TXT.Combo.ToString()) + "\n" + comboCnt.ToString();
 
         //* ActiveSkill Status
-        activeSkillBtnList.ForEach(btn=>{
-            btn.setActiveSkillEF();
-        });
+        activeSkillBtnList.ForEach(btn=> btn.setActiveSkillEF());
     }
     public void setBallPreviewGoalImgRGBA(Color color) => ballPreviewGoalImg.color = color;
     public void throwScreenAnimSetTrigger(string name) => throwScreen.GetComponent<Animator>().SetTrigger(name);
@@ -480,7 +478,7 @@ public class GameManager : MonoBehaviour
         collectDropOrb();
         
         //* BossSkill
-        bm.eraseObstacle();
+        
         if(boss){ //* ボスが生きていると
             boss.activeBossSkill();
             stage--; //ステージは同じく維持

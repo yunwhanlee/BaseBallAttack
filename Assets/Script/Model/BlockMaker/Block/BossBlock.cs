@@ -14,9 +14,8 @@ public class BossBlock : Block_Prefab{
     const float BOSS_HEAL_RATIO = 0.2f;
 
     const int STONE_PER = 100;
-
-
-
+    const int OBSTACLE_RESET_SPAN = 5;
+    int obstacleResetCnt = 0;
     [SerializeField] Transform bossDieOrbSpawnTf;
 
     [Header("【BOSS STATUS】")]
@@ -24,7 +23,7 @@ public class BossBlock : Block_Prefab{
     [SerializeField] List<Vector3> obstaclePosList;
 
     private void OnDisable() {
-        bm.eraseObstacle();
+        eraseObstacle();
     }
 
     void Start() {
@@ -36,14 +35,17 @@ public class BossBlock : Block_Prefab{
     public void activeBossSkill(){ //* at NextStage
         var rand = Random.Range(0, 100);
         this.anim.SetTrigger(DM.ANIM.Scream.ToString());
-        if(rand < STONE_PER){
+        if(rand < STONE_PER && obstacleResetCnt % OBSTACLE_RESET_SPAN == 0){
             //* Skill #1
+            eraseObstacle();
             createObstacleStoneSkill(OBSTACLE_STONE_CNT);
         }
         else{
             //* Skill #2
             StartCoroutine(coBossHealSkill());
         }
+
+        obstacleResetCnt++;
     }
 
     IEnumerator coBossHealSkill(){
@@ -77,7 +79,7 @@ public class BossBlock : Block_Prefab{
         this.transform.rotation = Quaternion.Euler(0,250,0);
         boxCollider.enabled = false;
         int resultExp = gm.stage * 10;
-        
+
         const int DIE = 2;
         float playSec = Util._.getAnimPlayTime(DIE, this.anim);
 
@@ -113,10 +115,16 @@ public class BossBlock : Block_Prefab{
         //** OBSTACLE INS 生成
         Debug.Log($"obstaclePosList.Count= {obstaclePosList.Count}");
 
-        patternRandom(Random.Range(1, 3));
+        // int bossLevel = gm.stage / LM._.BOSS_STAGE_SPAN - 1;
+        // switch(bossLevel){
+        //     case 0:
+        //         break;
+        // }
+        
+        // patternRandom(Random.Range(1, 3));
         // patternEven();
         // patternOdd();
-        // patternCutColumnLine();
+        patternCutColumnLine();
         // patternCntRowLine();
         // patternGoBoard();
         // patternGoBoardRandom();
@@ -126,6 +134,14 @@ public class BossBlock : Block_Prefab{
     private void createObstacleStone(int i){
         gm.em.createBossObstacleSpawnEF(obstaclePosList[i]);
         Instantiate(obstacleStonePf, obstaclePosList[i], Quaternion.identity, gm.obstacleGroup);
+    }
+    public void eraseObstacle(){
+        if(gm.obstacleGroup.childCount <= 0) return; 
+        for(int i=0; i<gm.obstacleGroup.childCount; i++){
+            // Debug.Log($"eraseObstacle():: obstacleGroup.GetChild({i})= {gm.obstacleGroup.GetChild(i)}");
+            var childTf = gm.obstacleGroup.GetChild(i);
+            Destroy(childTf.gameObject);
+        }
     }
 
 //* OBSTACLE PATTERN
