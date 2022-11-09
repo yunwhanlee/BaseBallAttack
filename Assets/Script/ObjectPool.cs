@@ -59,8 +59,12 @@ public class ObjectPool : MonoBehaviour
         poolDtList.Add(new PoolData(DIC.AtvSkShotEF.ToString(), em.activeSkillShotEFs[DM.ins.personalData.SelectSkillIdx], 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.AtvSkExplosionEF.ToString(), em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkillIdx], 1, em.gm.effectGroup));
         if(DM.ins.personalData.IsUnlock2ndSkill){
-            poolDtList.Add(new PoolData(DIC.AtvSkShotEF2.ToString(), em.activeSkillShotEFs[DM.ins.personalData.SelectSkill2Idx], 1, em.gm.effectGroup));
-            poolDtList.Add(new PoolData(DIC.AtvSkExplosionEF2.ToString(), em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkill2Idx], 1, em.gm.effectGroup));
+            //* (BUG) ATVスキルを登録する際に、em.EffectObjectが元々無いことがある。
+            //! これが ObjectPoolで既に活性化する処理で「NULL Refereceエラー」になるため、em.ObjがNullなら、Addしないように対応。
+            if(em.activeSkillShotEFs[DM.ins.personalData.SelectSkill2Idx])
+                poolDtList.Add(new PoolData(DIC.AtvSkShotEF2.ToString(), em.activeSkillShotEFs[DM.ins.personalData.SelectSkill2Idx], 1, em.gm.effectGroup));
+            if(em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkill2Idx])
+                poolDtList.Add(new PoolData(DIC.AtvSkExplosionEF2.ToString(), em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkill2Idx], 1, em.gm.effectGroup));
         }
         poolDtList.Add(new PoolData(DIC.DropItemExpOrbEF.ToString(), em.dropItemExpOrbEF, 30, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.InstantKillTextEF.ToString(), em.instantKillTxtEF, 5, em.gm.effectGroup));
@@ -86,7 +90,8 @@ public class ObjectPool : MonoBehaviour
 
         // OBJ 
         poolDtList.Add(new PoolData(DIC.DropItemExpOrbPf.ToString(), bm.dropItemExpOrbPf, 50, gm.dropItemGroup));
-
+        
+        // poolDtList.ForEach(list => Debug.Log("NULL LIST CHECK ⇒ list.Key= " + list.Key + "list.Obj= " + (list.Obj? list.Obj.ToString() :"<color=red>"+list.Obj.ToString()+"</color>")));
 
         //* Enroll Dic
         poolObjDtDict = new Dictionary<string, GameObject>();
