@@ -371,7 +371,8 @@ public class Block_Prefab : MonoBehaviour
     public virtual void onDestroy(GameObject target, bool isInitialize = false) {
         Debug.Log("virtual onDestroy()::");
         int resultExp = (!isInitialize)? (int)(Exp * pl.expUp.Val) : 0; //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
-        em.createBrokeBlockEF(target.transform.position, color);
+        em.createBrokeBlockEF(target.transform.position, color); //! (BUG) このEFFECTは可なり重いらしい、複数になったら、シーンのフリーズが掛かる。
+
         bm.createDropItemExpOrbPf(this.transform, resultExp);
         
         if(kind == BlockMaker.KIND.TreasureChest){

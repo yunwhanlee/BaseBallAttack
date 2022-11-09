@@ -70,7 +70,7 @@ public class ObjectPool : MonoBehaviour
         poolDtList.Add(new PoolData(DIC.DownWallHitEF.ToString(), em.downWallHitEF, 10, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.ItemBlockDirLineTrailEF.ToString(), em.itemBlockDirLineTrailEF, 3, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.ItemBlockExplosionEF.ToString(), em.itemBlockExplosionEF, 3, em.gm.effectGroup));
-        poolDtList.Add(new PoolData(DIC.BrokeBlockEF.ToString(), em.brokeBlockEF, 30, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.BrokeBlockEF.ToString(), em.brokeBlockEF, 60, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.BatHitSparkEF.ToString(), em.batHitSparkEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.HomeRunHitSparkEF.ToString(), em.homeRunHitSparkEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.ExplosionEF.ToString(), em.explosionEF, 5, em.gm.effectGroup));
@@ -85,19 +85,29 @@ public class ObjectPool : MonoBehaviour
         poolDtList.Add(new PoolData(DIC.ColorBallStarExplosionEF.ToString(), em.colorBallStarExplosionEF, 1, em.gm.effectGroup));
 
         // OBJ 
-        poolDtList.Add(new PoolData(DIC.DropItemExpOrbPf.ToString(), bm.dropItemExpOrbPf, 75, gm.dropItemGroup));
+        poolDtList.Add(new PoolData(DIC.DropItemExpOrbPf.ToString(), bm.dropItemExpOrbPf, 50, gm.dropItemGroup));
 
 
         //* Enroll Dic
         poolObjDtDict = new Dictionary<string, GameObject>();
         poolDtList.ForEach(dt => poolObjDtDict.Add(dt.Key, dt.Obj));
 
-        //* Create Obj
-        foreach(var dt in poolDtList){
+        //* Create Obj -> Inactive
+        foreach(var obj in poolDtList){
             // Debug.LogFormat("poolObjDtDict[{0}]= {1}", dt.Key, dt.Obj);
-            if(dt.Obj == null) continue; //* (BUG) nullなら、生成しなくて、次に飛ぶ。
-            for(int i=0; i<dt.Cnt; i++)
-                createNewObject(dt.Key, dt.GroupTf);
+            if(obj.Obj == null) continue; //* (BUG) nullなら、生成しなくて、次に飛ぶ。
+            for(int i=0; i<obj.Cnt; i++)
+                createNewObject(obj.Key, obj.GroupTf);
+        }
+
+        //* ★★★ 全て準備したOBJECTを活性化する ⇐ こうしないと、複数のEFが活性化したら、読込が重くなり、フリーズ掛ける。
+        Debug.Log("LOADING:: OBJECT-POOL EFFECTを読み込む。");
+        foreach(var obj in poolDtList){
+            Debug.Log($"key={obj.Key}, cnt={obj.Cnt}, groupTf={obj.GroupTf.name}");
+            for(int i=0; i< obj.Cnt; i++){
+                var ins = getObject(obj.Key, Vector3.one, Quaternion.identity, obj.GroupTf);
+                StartCoroutine(coDestroyObject(ins, obj.GroupTf, 1));
+            }
         }
     }
 

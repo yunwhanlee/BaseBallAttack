@@ -52,9 +52,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aliveTime: 5
   speed: 0
+  rigid: {fileID: 0}
   isOnDarkOrb: 0
   darkOrbPf: {fileID: 5990278791084361765}
-  rigid: {fileID: 0}
 --- !u!33 &2295754910549213895
 MeshFilter:
   m_ObjectHideFlags: 0
