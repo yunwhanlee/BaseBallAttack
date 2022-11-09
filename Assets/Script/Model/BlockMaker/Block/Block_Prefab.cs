@@ -196,7 +196,7 @@ public class Block_Prefab : MonoBehaviour
         switch(kind){
             case BlockMaker.KIND.TreasureChest:
                 Hp = 1;
-                break;    
+                break;
             case BlockMaker.KIND.Long:
             case BlockMaker.KIND.Obstacle:
                 Hp = gm.stage * 5;

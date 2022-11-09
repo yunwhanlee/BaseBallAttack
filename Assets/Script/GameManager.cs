@@ -470,7 +470,7 @@ public class GameManager : MonoBehaviour
         bm.eraseObstacle();
         if(boss){ //* ボスが生きていると
             boss.activeBossSkill();
-            stage--;
+            stage--; //ステージは同じく維持
         }
     }
 

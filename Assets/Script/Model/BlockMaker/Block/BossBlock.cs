@@ -99,7 +99,6 @@ public class BossBlock : Block_Prefab{
 
         //* OBSTACLE LIST 準備
         obstaclePosList = new List<Vector3>(){};
-
         int len = COL * ROW;
         
         //TODO) BOSS SUMON OBSTACLE MAKE SEVERAL PATTERN。
