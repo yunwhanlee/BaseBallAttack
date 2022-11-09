@@ -24,6 +24,7 @@ public class BlockMaker : MonoBehaviour
     [Header("RESOURCE")]
     public GameObject[] blockPrefs;
     public GameObject[] bossPrefs;
+    public RectTransform bossStgBarRectTf;
     public Color[] colors;   public Color[] Colors {get => colors;}
     public Material[] mts;   public Material[] Mts {get => mts;}
 
@@ -46,7 +47,6 @@ public class BlockMaker : MonoBehaviour
             moveDownBlock();
             bossSpawn();
         }
-        
     }
 //*---------------------------------------
 //*  関数
@@ -146,6 +146,8 @@ public class BlockMaker : MonoBehaviour
                 var pos = new Vector3(0, 0, bossPrefs[index].transform.position.z + 2);
                 Instantiate(bossPrefs[index], pos, bossPrefs[index].transform.rotation, gm.bossGroup);
 
+                // bossStgBarRectTf.anchorMin = new Vector2(0.1f, 0.5f);
+
                 StartCoroutine(coPlayBossSpawnAnim());
         }
     }
@@ -192,7 +194,6 @@ public class BlockMaker : MonoBehaviour
         }
     }
 #endregion
-
     public void setGlowEFAllBlocks(bool isOn){ //* Block Grow EF 解除
         var blocks = gm.blockGroup.GetComponentsInChildren<Block_Prefab>();
         setGlowEF(blocks, isOn);
@@ -210,7 +211,6 @@ public class BlockMaker : MonoBehaviour
             }
         });
     }
-
     public void decreaseBlockHP(GameObject obj, int dmg){
         Debug.Log($"decreaseBlockHP:: obj.tag= {obj.transform.tag}, obj.name= {obj.name}");
         //* TAGで親と子の正しいCLASSを判別してから、処理

@@ -117,6 +117,7 @@ public class Block_Prefab : MonoBehaviour
     [SerializeField] SkillProperty fireDotDmg;  public SkillProperty FireDotDmg {get => fireDotDmg; set => fireDotDmg = value;}
     [SerializeField] SkillProperty freeze;  public SkillProperty Freeze {get => freeze; set => freeze = value;}
 
+    [SerializeField] int maxHp = 1;    public int MaxHp {get => maxHp; set => maxHp = value;}
     [SerializeField] int hp = 1;    public int Hp {get => hp; set => hp = value;}
     [SerializeField] int exp = 10;  public int Exp {get => exp; set => exp = value;}
     [SerializeField][Range(1, 100)] int itemTypePer;
@@ -135,6 +136,7 @@ public class Block_Prefab : MonoBehaviour
         pl = gm.pl;
         bm = gm.bm;
 
+        MaxHp = Hp;
         sprGlowEf = GetComponentInChildren<SpriteGlowEffect>();
         boxCollider = GetComponent<BoxCollider>();
         anim = GetComponent<Animator>();

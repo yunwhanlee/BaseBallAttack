@@ -56,7 +56,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &893831375361815731
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2244,11 +2244,23 @@ MonoBehaviour:
   originMts: []
   mts: []
   whiteHitMt: {fileID: 2100000, guid: ef01bc3ad6c4a204698706049449af64, type: 2}
+  iceMt: {fileID: 0}
   itemTypeImgGroup: {fileID: 0}
   sprGlowEf: {fileID: 0}
   kind: 4
   type: 0
   isDotDmg: 0
+  fireDotDmg:
+    isOn: 0
+    befCnt: 0
+    duration: 0
+    dotDmgEF: {fileID: 0}
+  freeze:
+    isOn: 0
+    befCnt: 0
+    duration: 0
+    dotDmgEF: {fileID: 0}
+  maxHp: 1
   hp: 100
   exp: 10
   itemTypePer: 0
@@ -2258,6 +2270,7 @@ MonoBehaviour:
   hpTxt: {fileID: 1326742590017898505}
   bossDieOrbSpawnTf: {fileID: 0}
   obstacleStonePf: {fileID: 3271815229447742362, guid: 31c44a90588876146b9910ac404c7fb8, type: 3}
+  obstaclePosList: []
 --- !u!1 &7123070601197488124
 GameObject:
   m_ObjectHideFlags: 0

@@ -164,16 +164,29 @@ public class GameManager : MonoBehaviour
     }
 
     void Update(){
-        //* GUI
+        BossBlock boss = bm.getBoss();
+
+        //* GUI *//
+        //* EXP BAR & TEXT
         expBar.value = Mathf.Lerp(expBar.value, (float)pl.Exp / (float)pl.MaxExp, Time.deltaTime * 10);
-        bossStageBar.value = Mathf.Lerp(bossStageBar.value, (float)(stage % LM._.BOSS_STAGE_SPAN) / (float)LM._.BOSS_STAGE_SPAN, Time.deltaTime * 10);
         expTxt.text = $"{pl.Exp} / {pl.MaxExp}";
-        bossStageTxt.text = $"{stage % LM._.BOSS_STAGE_SPAN} / {LM._.BOSS_STAGE_SPAN}";
+
+        //* BOSS BAR & TEXT
+        bossStageBar.GetComponent<RectTransform>().anchorMin = new Vector2(boss? 0.1f : 0.5f, 0.5f);
+        bossStageBar.value = Mathf.Lerp(bossStageBar.value, 
+            boss? ((float)boss.Hp / boss.MaxHp >= 0)? (float)boss.Hp / boss.MaxHp : 0
+                : (float)(stage % LM._.BOSS_STAGE_SPAN) / (float)LM._.BOSS_STAGE_SPAN
+            , Time.deltaTime * 10);
+        bossStageTxt.text = boss? $"{boss.Hp} / {boss.MaxHp}"
+            : $"{stage % LM._.BOSS_STAGE_SPAN} / {LM._.BOSS_STAGE_SPAN}";
+        var fillImg = Array.Find(bossStageBar.GetComponentsInChildren<Image>(), img => img.transform.name == "Fill");
+        fillImg.color = boss? Color.green : Color.yellow;
+
+        //* ANOTHER TEXT
         stateTxt.text = State.ToString();
         levelTxt.text = LANG.getTxt(LANG.TXT.Level.ToString()) + " : " + pl.Lv;
         stageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage.ToString();
         comboTxt.text = LANG.getTxt(LANG.TXT.Combo.ToString()) + "\n" + comboCnt.ToString();
-
 
         //* ActiveSkill Status
         activeSkillBtnList.ForEach(btn=>{

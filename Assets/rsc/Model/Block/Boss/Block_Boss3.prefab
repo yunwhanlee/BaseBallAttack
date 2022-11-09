@@ -180,7 +180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8112258814164531943
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3135,6 +3135,7 @@ MonoBehaviour:
     befCnt: -1
     duration: 0
     dotDmgEF: {fileID: 0}
+  maxHp: 1
   hp: 500
   exp: 10
   itemTypePer: 0
