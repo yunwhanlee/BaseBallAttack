@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     public Transform deadLineTf;
     public BoxCollider downWallCollider;
     public Light light;
-
+    
     [Header("STATUS")]
     public int stage = 1;
     public int bestScore;

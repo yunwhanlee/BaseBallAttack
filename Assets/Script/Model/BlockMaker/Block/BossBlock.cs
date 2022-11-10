@@ -121,9 +121,9 @@ public class BossBlock : Block_Prefab{
         // }
         
         // patternRandom(Random.Range(1, 3));
-        // patternEven();
-        // patternOdd();
-        patternCutColumnLine();
+        // patternColEven();
+        // patternColOdd();
+        // patternCutColumnLine();
         // patternCntRowLine();
         // patternGoBoard();
         // patternGoBoardRandom();
@@ -151,14 +151,14 @@ public class BossBlock : Block_Prefab{
             obstaclePosList.RemoveAt(i);
         }
     }
-    private void patternEven(){
+    private void patternColEven(){
         for(int i=0; i < obstaclePosList.Count; i++){
             if(i % 2 == 0){
                     createObstacleStone(i);
             }
         }
     }
-    private void patternOdd(){
+    private void patternColOdd(){
         for(int i=0; i < obstaclePosList.Count; i++){
             if(i % 2 == 1){
                 createObstacleStone(i);
