@@ -110,10 +110,11 @@ public class ObjectPool : MonoBehaviour
     }
     private void activateEveryObjects(List<PoolData> poolDtList){
         Debug.Log("LOADING:: OBJECT-POOL EFFECTを読み込む。");
+        Vector3 activeEffectPos = new Vector3(0, 0, 15);
         foreach(var obj in poolDtList){
             Debug.Log($"key={obj.Key}, cnt={obj.Cnt}, groupTf={obj.GroupTf.name}");
             for(int i=0; i< obj.Cnt; i++){
-                var ins = getObject(obj.Key, Vector3.one, Quaternion.identity, obj.GroupTf);
+                var ins = getObject(obj.Key, activeEffectPos, Quaternion.identity, obj.GroupTf);
                 StartCoroutine(coDestroyObject(ins, obj.GroupTf, 1));
             }
         }

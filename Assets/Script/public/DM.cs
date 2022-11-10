@@ -8,7 +8,7 @@ using System;
 public class DM : MonoBehaviour
 {
     public static DM ins;
-    public enum SCENE {Home, Play};
+    public enum SCENE {Home, Play, Loading};
     public enum NAME {DownWall, Block, FireBallDotEffect, BossDieDropOrbSpot, GrayPanel,
         RightArm, HomeManager,
         BallPreview, Box001, Area,
@@ -83,8 +83,8 @@ public class DM : MonoBehaviour
     }
 
     void Update(){
-        CoinTxt.text = personalData.Coin.ToString();
-        DiamondTxt.text = personalData.Diamond.ToString();
+        if(CoinTxt) CoinTxt.text = personalData.Coin.ToString();
+        if(DiamondTxt) DiamondTxt.text = personalData.Diamond.ToString();
     }
 
 #if UNITY_EDITOR

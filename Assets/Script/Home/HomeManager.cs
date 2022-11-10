@@ -186,7 +186,7 @@ public class HomeManager : MonoBehaviour
         int[] lvArrTemp = getItemPsvLvArr(playerModel);
         DM.ins.personalData.ItemPassive.setLvArr(lvArrTemp);
 
-        SceneManager.LoadScene(DM.SCENE.Play.ToString());
+        SceneManager.LoadScene(DM.SCENE.Loading.ToString());
     }
 
     public void onClickResetBtn(){
