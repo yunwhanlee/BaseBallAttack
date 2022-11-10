@@ -44,7 +44,6 @@ public class BossBlock : Block_Prefab{
             //* Skill #2
             StartCoroutine(coBossHealSkill());
         }
-
         obstacleResetCnt++;
     }
 
@@ -167,17 +166,17 @@ public class BossBlock : Block_Prefab{
         }
     }
     private void patternCutColumnLine(){
-        int randColIdx = Random.Range(0, COL + 1);
+        int randIdx = Random.Range(0, COL-1);
         for(int i=0; i < obstaclePosList.Count; i++){
-            if(i % COL != randColIdx){
+            if(i % COL != randIdx){
                 createObstacleStone(i);
             }
         }
     }
     private void patternCntRowLine(){
-        int randRowIdx = Random.Range(0, ROW + 1);
+        int randIdx = Random.Range(0, ROW-1);
         for(int i=0; i < obstaclePosList.Count; i++){
-            if(i / COL == randRowIdx)
+            if(i / COL == randIdx)
                 createObstacleStone(i);
         }
     }
