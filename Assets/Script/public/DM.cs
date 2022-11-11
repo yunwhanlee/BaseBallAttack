@@ -9,7 +9,7 @@ public class DM : MonoBehaviour
 {
     public static DM ins;
     public enum SCENE {Home, Play, Loading};
-    public enum NAME {DownWall, Block, FireBallDotEffect, BossDieDropOrbSpot, GrayPanel,
+    public enum NAME {DownWall, Block, FireBallDotEffect, BossDieDropOrbSpot, GrayPanel, Obstacle,
         RightArm, HomeManager,
         BallPreview, Box001, Area,
         IceMat,

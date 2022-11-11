@@ -113,7 +113,6 @@ public class Block_Prefab : MonoBehaviour
     [SerializeField] BlockType type = BlockType.NORMAL;
 
     [Header("STATUS")]
-    [SerializeField] bool isObstacle;  public bool IsObstacle {get => isObstacle; set => isObstacle = value;}
     [SerializeField] bool isDotDmg;  public bool IsDotDmg {get => isDotDmg; set => isDotDmg = value;}
     [SerializeField] SkillProperty fireDotDmg;  public SkillProperty FireDotDmg {get => fireDotDmg; set => fireDotDmg = value;}
     [SerializeField] SkillProperty freeze;  public SkillProperty Freeze {get => freeze; set => freeze = value;}
@@ -168,18 +167,11 @@ public class Block_Prefab : MonoBehaviour
         checkIceFreeze();
     }
     private void OnTriggerEnter(Collider col) {
-        //* BLOCKとぶつかったら、自分を破壊
-        if(IsObstacle && col.name.Contains(DM.NAME.Block.ToString())){
-            decreaseHp(9999);
-        }
-
         //* GAMEOVER
         if(col.transform.CompareTag(DM.TAG.GameOverLine.ToString()) && gm.State != GameManager.STATE.GAMEOVER){
             gm.setGameOver();
         }
     }
-
-    
 //*-----------------------------------------
 //* 関数
 //*-----------------------------------------

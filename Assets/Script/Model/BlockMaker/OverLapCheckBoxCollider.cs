@@ -4,30 +4,40 @@ using UnityEngine;
 
 public class OverLapCheckBoxCollider : MonoBehaviour
 {
+
+    GameManager gm;
     [SerializeField] bool isMoved = false;   public bool IsMoved {get => isMoved; set => isMoved = value;}
 
-    private void OnTriggerEnter(Collider col) {
-        if(col.CompareTag(DM.TAG.NormalBlock.ToString())
-            || col.CompareTag(DM.TAG.LongBlock.ToString())
-            || col.CompareTag(DM.TAG.TreasureChestBlock.ToString())
-            || col.CompareTag(DM.TAG.HealBlock.ToString())){
+    void Start() {
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
 
-                //* 対象をFreezeブロックは除外。
-                if(col.GetComponent<Block_Prefab>().Freeze.IsOn){
-                    Debug.Log("<color=grey>OverLapCheckBoxCollider col.name= " + col.name + ", pos.z= " + (col.transform.position.z) + "</color>");
+    private void OnTriggerEnter(Collider col) {
+        // if(col.CompareTag(DM.TAG.NormalBlock.ToString()) || col.CompareTag(DM.TAG.LongBlock.ToString())|| col.CompareTag(DM.TAG.TreasureChestBlock.ToString())|| col.CompareTag(DM.TAG.HealBlock.ToString()))
+        if(Util._.isColBlock(col)){
+            //* 対象をFreezeブロックは除外。
+            if(col.GetComponent<Block_Prefab>().Freeze.IsOn){
+                Debug.Log("<color=grey>OverLapCheckBoxCollider col.name= " + col.name + ", pos.z= " + (col.transform.position.z) + "</color>");
+                return;
+            }
+            else{
+                Debug.Log("<color=green>this="+ this.transform + "::OverLapCheckBoxCollider col.name= " + col.name + ", pos.z= " + (col.transform.position.z) + "</color>");
+            }
+
+            //* Up PosZ
+            var overLapColliderObj = col.GetComponentInChildren<OverLapCheckBoxCollider>();
+            if(overLapColliderObj && !overLapColliderObj.IsMoved){
+                //* ぶつかったのが障害物なら、障害物を破壊して終了。
+                if(this.transform.parent.name.Contains(DM.NAME.Obstacle.ToString())){
+                    gm.em.createRockObstacleBrokenEF(this.transform.position);
+                    Destroy(this.transform.parent.gameObject);
                     return;
                 }
-                else{
-                    Debug.Log("<color=green>this="+ this.transform + "::OverLapCheckBoxCollider col.name= " + col.name + ", pos.z= " + (col.transform.position.z) + "</color>");
-                }
-
-                //* Up PosZ
-                if(col.GetComponentInChildren<OverLapCheckBoxCollider>() != null
-                    && !col.GetComponentInChildren<OverLapCheckBoxCollider>().IsMoved){
-                    col.GetComponentInChildren<OverLapCheckBoxCollider>().IsMoved = true;
-                    StartCoroutine(coDelaySetPos(col));
-                }
+                //* 上に移動して戻す。
+                col.GetComponentInChildren<OverLapCheckBoxCollider>().IsMoved = true;
+                StartCoroutine(coDelaySetPos(col));
             }
+        }
     }
 
     IEnumerator coDelaySetPos(Collider col){
