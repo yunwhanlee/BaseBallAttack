@@ -9,6 +9,7 @@ public class BossBlock : Block_Prefab{
     const int COL = 6;
     const int ROW = 3;
     const float STONE_SCALE_X = 2.8f;
+    const float OBSTACLE_OFFSET_Z = -9;
     const int OBSTACLE_STONE_CNT = 1;
     const int BOSS_DIE_ORB_CNT = 80;
     const float BOSS_HEAL_RATIO = 0.2f;
@@ -96,7 +97,7 @@ public class BossBlock : Block_Prefab{
     //* Skill #1
     private void createObstacleStoneSkill(int cnt){
         Debug.Log("BossBlock:: createObstacleStoneSkill");
-        const float OFFSET_Z = -9;
+        
 
         //* OBSTACLE LIST 準備
         obstaclePosList = new List<Vector3>(){};
@@ -106,7 +107,7 @@ public class BossBlock : Block_Prefab{
         for(int i=0; i < len; i++){
             int rowIdx = i % COL;
             float x = BlockMaker.OFFSET_POS_X + (BlockMaker.SCALE_X * rowIdx);
-            float z = OFFSET_Z - (i / COL);
+            float z = OBSTACLE_OFFSET_Z - (i / COL);
             Debug.Log($"[{i}] -> rowIdx= {rowIdx} vector3({x}, 0, {z})");
             obstaclePosList.Add(new Vector3(x, 0, z));
         }
@@ -121,12 +122,17 @@ public class BossBlock : Block_Prefab{
         // }
         
         // patternRandom(Random.Range(1, 3));
+
         // patternColEven();
         // patternColOdd();
-        // patternCutColumnLine();
+
+        patternCutColumnLine();
         // patternCntRowLine();
+
         // patternGoBoard();
+
         // patternGoBoardRandom();
+        
         // patternTriangle();
     }
 

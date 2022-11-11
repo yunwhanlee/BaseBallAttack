@@ -111,4 +111,8 @@ public class Util : MonoBehaviour
             }
         });
     }
+
+    public bool isColBlock(Collider col){
+        return col.name.Contains(DM.NAME.Block.ToString());
+    }
 }
