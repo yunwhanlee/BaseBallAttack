@@ -111,8 +111,12 @@ public class Util : MonoBehaviour
             }
         });
     }
-
     public bool isColBlock(Collider col){
         return col.name.Contains(DM.NAME.Block.ToString());
+    }
+    public float calcMathRoundDecimal(float value, int point){
+        float decimalPoint = Mathf.Pow(10, point);
+        Debug.Log($"calcMathRoundDecimal(value={value}, point={point}:: decimalPoint= {decimalPoint}, result= {Mathf.Round(value * decimalPoint) / decimalPoint}");
+        return Mathf.Round(value * decimalPoint) / decimalPoint;
     }
 }

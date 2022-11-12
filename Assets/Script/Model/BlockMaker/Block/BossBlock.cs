@@ -39,11 +39,11 @@ public class BossBlock : Block_Prefab{
         var rand = Random.Range(0, 100);
 
         if(skillType == ""){
-            skillType = rand < 40? "smallSpawn" : rand < 80? "patternSpawn" : "heal";
+            skillType = rand < 40? "singleSpawn" : rand < 80? "patternSpawn" : "heal";
         }
 
         switch(skillType){
-            case "smallSpawn":
+            case "singleSpawn":
                 rand = Random.Range(0, 100);
                 //* Spanまで石を維持。
                 if(gm.obstacleGroup.childCount == 0) rand = 0;
@@ -64,6 +64,8 @@ public class BossBlock : Block_Prefab{
                 break;
             case "heal":
                 StartCoroutine(coBossHealSkill());
+                skillType = "";
+                obstacleResetCnt = 0;
                 break;
         }
 
@@ -97,7 +99,7 @@ public class BossBlock : Block_Prefab{
     }
 
     IEnumerator coBossHealSkill(){
-        Debug.Log("BossSkill::coBossHealSkill:: ");
+        Debug.Log("BossBlock::coBossHealSkill:: ");
         yield return new WaitForSeconds(1);
         gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
         gm.em.createBossHealSkillEF(bossDieOrbSpawnTf.position);
@@ -120,7 +122,7 @@ public class BossBlock : Block_Prefab{
     }
 
     public override void onDestroy(GameObject target, bool isInitialize = false) {
-        Debug.Log("bossBlock:: onDestroy()::");
+        Debug.Log("BossBlock:: onDestroy()::");
         StartCoroutine(coPlayBossDieAnim(target));
     }
 
@@ -144,8 +146,8 @@ public class BossBlock : Block_Prefab{
 
 
     //* Skill #1
-    private void createObstacleStoneSkill(bool isSmallSpawn){
-        Debug.Log($"BossSkill::createObstacleStoneSkill({isSmallSpawn})");
+    private void createObstacleStoneSkill(bool isSingleSpawn){
+        Debug.Log($"BossBlock::createObstacleStoneSkill(issingleSpawn= {isSingleSpawn})");
 
         //* OBSTACLE LIST 準備
         var obstaclePosList = readyObstaclePosList();
@@ -155,20 +157,17 @@ public class BossBlock : Block_Prefab{
         //     case 0:
         //         break;
         // }
-        if(isSmallSpawn){
-            patternRandom(Random.Range(1, 4)); 
+        if(isSingleSpawn){
+            const int MAX_CNT = 4;
+            singleRandom(Random.Range(1, MAX_CNT));
         }
         else{
             // patternColEven();
             // patternColOdd();
-
             patternCutColumnLine();
             // patternCntRowLine();
-
             // patternGoBoard();
-
             // patternGoBoardRandom();
-            
             // patternTriangle();
 
         }
@@ -185,6 +184,9 @@ public class BossBlock : Block_Prefab{
             int rowIdx = i % COL;
             float x = BlockMaker.OFFSET_POS_X + (BlockMaker.SCALE_X * rowIdx);
             float z = OBSTACLE_OFFSET_Z - (i / COL);
+            //* Float 0.1などが 0.8999..になる問題のため、小数点２桁までに設定。
+            x = Util._.calcMathRoundDecimal(x,2);
+            z = Util._.calcMathRoundDecimal(z,2);
             Debug.Log($"[{i}] -> rowIdx= {rowIdx} vector3({x}, 0, {z})");
             obstaclePosList.Add(new Vector3(x, 0, z));
         }
@@ -209,9 +211,13 @@ public class BossBlock : Block_Prefab{
     }
 
 //* OBSTACLE PATTERN
-    private void patternRandom(int createCnt){
+    private void singleRandom(int createCnt){
         for(int i=0; i< createCnt; i++){
             int randIdx = Random.Range(0, obstaclePosList.Count);
+
+            //* 位置が重ならないように処理。
+            if(gm.obstacleGroup)
+
             createObstacleStone(randIdx);
             obstaclePosList.RemoveAt(i);
         }
