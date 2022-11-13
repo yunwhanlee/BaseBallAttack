@@ -93,6 +93,7 @@ public class BossBlock : Block_Prefab{
         if(obstacleResetCnt == OBSTACLE_RESET_SPAN){
             skillType = "";
             obstacleResetCnt = 0;
+            obstaclePosList = new List<Vector3>{};
             if(gm.obstacleGroup.childCount > 0) eraseObstacle();
         }
     }
@@ -174,6 +175,8 @@ public class BossBlock : Block_Prefab{
     }
 
     private List<Vector3> readyObstaclePosList(){
+        if(obstaclePosList.Count > 0) return obstaclePosList;
+        
         //* OBSTACLE LIST 準備
         obstaclePosList = new List<Vector3>(){};
         int len = COL * ROW;
@@ -215,10 +218,18 @@ public class BossBlock : Block_Prefab{
             int randIdx = Random.Range(0, obstaclePosList.Count);
 
             //* 位置が重ならないように処理。
-            if(gm.obstacleGroup)
+            Vector3 randPos = obstaclePosList[randIdx];
+            Debug.Log("randPos-->" + randPos);
+
+
+            // for(int j=0; j<gm.obstacleGroup.childCount;i++){
+            //     if(gm.obstacleGroup.GetChild(i).transform.position == randPos){
+            //         Debug.Log("FUCK SAME!!");
+            //     }
+            // }
 
             createObstacleStone(randIdx);
-            obstaclePosList.RemoveAt(i);
+            obstaclePosList.RemoveAt(randIdx);
         }
     }
     private void patternColEven(){
