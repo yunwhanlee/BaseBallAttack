@@ -16,8 +16,8 @@ public class BossBlock : Block_Prefab{
 
     const int STONE_PER = 100;
     const int OBSTACLE_RESET_SPAN = 8;
-    int obstacleResetCnt = 0;
-    public string skillType;
+    [SerializeField] int obstacleResetCnt = 0;
+    [SerializeField]  string skillType;
     [SerializeField] Transform bossDieOrbSpawnTf;
 
     [Header("【BOSS STATUS】")]
@@ -37,57 +37,56 @@ public class BossBlock : Block_Prefab{
     public void activeBossSkill(){ //* at NextStage
         this.anim.SetTrigger(DM.ANIM.Scream.ToString());
         var rand = Random.Range(0, 100);
+        Debug.Log($"BossBlock:: rand= {rand}, obstacleResetCnt= {obstacleResetCnt} / {OBSTACLE_RESET_SPAN}");
 
-        if(skillType == ""){
-            skillType = rand < 40? "singleSpawn" : rand < 80? "patternSpawn" : "heal";
+        if(rand < 70){
+            createObstacleStoneSkill(true);
+        }
+        else{
+            StartCoroutine(coBossHealSkill());
         }
 
-        switch(skillType){
-            case "singleSpawn":
-                rand = Random.Range(0, 100);
-                //* Spanまで石を維持。
-                if(gm.obstacleGroup.childCount == 0) rand = 0;
-                if(rand < 60){
-                    createObstacleStoneSkill(true);
-                }else{
-                    StartCoroutine(coBossHealSkill());
-                }
-                break;
-            case "patternSpawn":
-                createObstacleStoneSkill(false);
-                rand = Random.Range(0, 100);
-                if(rand < 60){
-                    Debug.Log("BossSkill:: 何もしない！！");
-                }else{
-                    StartCoroutine(coBossHealSkill());
-                }
-                break;
-            case "heal":
-                StartCoroutine(coBossHealSkill());
-                skillType = "";
-                obstacleResetCnt = 0;
-                break;
-        }
-
-
-        // if(rand < 40){
-        //     if(obstacleResetCnt % OBSTACLE_RESET_SPAN == 0){
-        //         //* Skill #1
-        //         eraseObstacle();
-        //         createObstacleStoneSkill(true);
-        //     }
+        // if(skillType == ""){
+        //     skillType = rand < 40? "singleSpawn" : rand < 80? "patternSpawn" : "heal";
         // }
-        // else if(rand < 80){
-        //     if(obstacleResetCnt % OBSTACLE_RESET_SPAN == 0){
-        //         eraseObstacle();
-        //     }
-        //     else{
 
-        //     }
-        // }
-        // else{
-        //     //* Skill #3
-        //     StartCoroutine(coBossHealSkill());
+        // switch(skillType){
+        //     case "singleSpawn":
+        //         rand = Random.Range(0, 100);
+        //         //* Spanまで石を維持。
+        //         if(gm.obstacleGroup.childCount == 0 && obstacleResetCnt == 0){
+        //             rand = 0;
+        //         }
+        //         if(rand < 60){
+        //             createObstacleStoneSkill(true);
+        //         }
+        //         else{
+        //             StartCoroutine(coBossHealSkill());
+        //         }
+        //         break;
+        //     case "patternSpawn":
+        //         rand = Random.Range(0, 100);
+        //         if(gm.obstacleGroup.childCount == 0 && obstacleResetCnt == 0) {
+        //             rand = 0;
+        //             createObstacleStoneSkill(false);
+        //         }
+        //         if(rand < 60){                    
+        //             if(obstacleResetCnt == 0){
+        //                 Debug.Log("BossBlock:: 初期化");
+        //                 skillType = "";
+        //                 obstacleResetCnt = 0;
+        //                 return;
+        //             }
+        //         }
+        //         else{
+        //             StartCoroutine(coBossHealSkill());
+        //         }
+        //         break;
+        //     case "heal":
+        //         StartCoroutine(coBossHealSkill());
+        //         skillType = "";
+        //         obstacleResetCnt = 0;
+        //         break;
         // }
         obstacleResetCnt++;
 

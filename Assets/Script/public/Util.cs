@@ -105,6 +105,7 @@ public class Util : MonoBehaviour
         Array.ForEach(hits, hit => {
             if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
                 gm.comboCnt--; //* (BUG) 爆発のカウントもされ、スキルが続けて発動されること防止。
+                Debug.Log($"sphereCastAllDecreaseBlocksHp:: hit.transform.name= {hit.transform.name}");
                 var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
                 block.decreaseHp(dmg);
                 gm.em.createCritTxtEF(hit.transform.position, dmg);
@@ -112,7 +113,9 @@ public class Util : MonoBehaviour
         });
     }
     public bool isColBlock(Collider col){
-        return col.name.Contains(DM.NAME.Block.ToString());
+        Debug.Log($"Util::isColBlock:: col.name= {col.name}");
+        return col.name.Contains(DM.NAME.Block.ToString())
+            && col.name != ObjectPool.DIC.ItemBlockDirLineTrailEF.ToString(); //! (BUG) BlockではないのにBlock文字が含まれ、Nullエラーになること防止。
     }
     public float calcMathRoundDecimal(float value, int point){
         float decimalPoint = Mathf.Pow(10, point);
