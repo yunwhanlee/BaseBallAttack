@@ -2206,7 +2206,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 3, z: 1}
+  m_Size: {x: 7, y: 3, z: 1}
   m_Center: {x: 0, y: 1.5, z: 1}
 --- !u!54 &9003238178632980560
 Rigidbody:
@@ -2268,7 +2268,9 @@ MonoBehaviour:
   minLimitVal: 0
   spawnAnimSpeed: 0
   hpTxt: {fileID: 1326742590017898505}
+  obstacleResetCnt: 0
   bossDieOrbSpawnTf: {fileID: 0}
+  level: 0
   obstacleStonePf: {fileID: 3271815229447742362, guid: 31c44a90588876146b9910ac404c7fb8, type: 3}
   obstaclePosList: []
 --- !u!1 &7123070601197488124
