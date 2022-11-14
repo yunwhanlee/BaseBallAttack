@@ -80,6 +80,7 @@ public class BossBlock : Block_Prefab{
 
     void bossAttack(){
         gm.readyBtn.gameObject.SetActive(false);
+        gm.activeSkillBtnGroup.gameObject.SetActive(false);
         float sec = 1.8f;
         const int SCREAM_INDEX = 12;
         float delayTime = Util._.getAnimPlayTime(SCREAM_INDEX, this.anim);
@@ -89,18 +90,26 @@ public class BossBlock : Block_Prefab{
     IEnumerator coFireBallAttack(float sec){
         this.anim.SetTrigger(DM.ANIM.Attack.ToString());
         yield return new WaitForSeconds(sec);
-        int rand = Random.Range(0, 3);
-        // float[] dirXArr = new float[]{-4f, 0, 4f}; //* LEFT, MIDDLE, RIGHT。
-        Debug.Log($"<color=red>Bossblock::coFireBallAttack(sec={sec}):: rand={rand}</color>");
+        Debug.Log($"<color=red>Bossblock::coFireBallAttack(sec={sec})</color>");
         const float offsetX = 1.3f;
         Vector3 target = new Vector3(gm.pl.transform.position.x + offsetX, gm.pl.transform.position.y, gm.pl.transform.position.z);
         Util._.DebugSphere(target, 1.2f, 2, "red");
         yield return new WaitForSeconds(1.85f);
-        GameObject ins = gm.em.createBossFireBallTrailEF(mouthTf.transform.position);
-        ins.GetComponent<BossFireBallTrailEF>().target = target;
+        GameObject fireBallIns = gm.em.createBossFireBallTrailEF(mouthTf.transform.position);
+        fireBallIns.GetComponent<BossFireBallTrailEF>().target = target;
         yield return new WaitForSeconds(0.5f);
-        gm.em.createBossFireBallExplosionEF(target);
+        GameObject explosionIns = gm.em.createBossFireBallExplosionEF(target);
+        RaycastHit[] hits = Physics.SphereCastAll(explosionIns.transform.position, 1, Vector3.up, 0);
+        Array.ForEach(hits, hit => {
+            if(hit.transform.CompareTag(DM.TAG.Player.ToString())){
+                //TODO PLAYER STUN
+                Debug.Log("EXPLOSION HIT PLAYER!! -> STUN");
+            }
+        });
+
+        yield return new WaitForSeconds(0.2f);
         gm.readyBtn.gameObject.SetActive(true);
+        gm.activeSkillBtnGroup.gameObject.SetActive(true);
     }
 
     IEnumerator coBossHeal(){

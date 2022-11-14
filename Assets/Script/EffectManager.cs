@@ -82,9 +82,10 @@ public class EffectManager : MonoBehaviour
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.75f));
         return ins;
     }
-    public void createBossFireBallExplosionEF(Vector3 parentPos){
+    public GameObject createBossFireBallExplosionEF(Vector3 parentPos){
         var ins = ObjectPool.getObject(ObjectPool.DIC.BossFireBallExplosionEF.ToString(), parentPos, QI, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 2));
+        return ins;
     }
     
     public void createBossObstacleSpawnEF(Vector3 parentPos){
