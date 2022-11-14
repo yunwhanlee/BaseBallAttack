@@ -53,6 +53,7 @@
         ✓  障害物(STONE)が、一般のフロックと重ならないように。
         ✓  OBSTACLE_RESET_SPANとCNTを宣言し、設定した周期まで障害物を維持。
         -  スキルランダム生成シート制作。
+        -  急にファイヤーボールを刺すことを回避する物追加。
         
 
 [BUG]
@@ -67,3 +68,4 @@
     ✓ BlockStone位置がお互いに重ならないように。
     ✓ LevelUpPanelAnimateで、直接止めたら、Y座標が少しずつズレて気持ち悪いこと対応。
     ✓ PSV MaxLevel以上に上がったら、Out of Index エラー。
+    -  GiantBall Folder Status 値が可笑しい。

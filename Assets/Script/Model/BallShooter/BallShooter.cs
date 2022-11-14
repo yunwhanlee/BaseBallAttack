@@ -76,13 +76,15 @@ public class BallShooter : MonoBehaviour
             Debug.LogFormat("「！」マーク登場： per({0}) < rand({1})? -> {2} </color>", per, rand, (rand > per)? "<color=blue>TRUE" : "<color=red>FALSE");
             if(rand > per){
                 throwBallSpeed *= 1.4f;
-                StartCoroutine(coShowExclamationMark());
+                StartCoroutine(coShowExclamationMark(0.2f));
             }
         }
     }
-    private IEnumerator coShowExclamationMark(){
+    public IEnumerator coShowExclamationMark(float sec, float delay = 0){
+        Debug.Log($"coShowExclamationMark(sec={sec}, delay={delay})");
+        yield return new WaitForSeconds(delay);
         ExclamationMarkObj.SetActive(true);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(sec);
         time = 0;
         ExclamationMarkObj.SetActive(false);
     }

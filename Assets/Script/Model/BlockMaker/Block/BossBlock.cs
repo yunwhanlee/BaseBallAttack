@@ -41,74 +41,34 @@ public class BossBlock : Block_Prefab{
         Debug.Log($"<color=yellow>BossBlock::activeBossSkill():: level= {level}, rand= {rand}, obstacleResetCnt= {obstacleResetCnt} / {OBSTACLE_RESET_SPAN}</color>");
         switch(level){
             case 1:
-                if(rand < 70){createObstacleSingleType(4);}
-                else{StartCoroutine(coBossHealSkill());}
+                if(obstacleResetCnt == 0) createObstacleSingleType(4);
+                else{
+                    // if(rand < 30){createObstacleSingleType(4);}
+                    // else if(rand < 60){StartCoroutine(coBossHeal());}
+                    // else 
+                    {bossAttack();}
+                }
+                obstacleResetCnt++;
                 break;
             case 2:
-                if(obstacleResetCnt == 0) createObstacleSkillPatternType(0, 2);
-                if(rand < 70){StartCoroutine(coBossHealSkill());}
-                else{StartCoroutine(coBossHealSkill());}
+                if(obstacleResetCnt == 0) createObstaclePatternType(0, 2);
+                if(rand < 70){StartCoroutine(coBossHeal());}
+                else{StartCoroutine(coBossHeal());}
                 obstacleResetCnt++;
                 break;
             case 3:
-                if(obstacleResetCnt == 0) createObstacleSkillPatternType(2, 4);
-                if(rand < 70){StartCoroutine(coBossHealSkill());}
-                else{StartCoroutine(coBossHealSkill());}
+                if(obstacleResetCnt == 0) createObstaclePatternType(2, 4);
+                if(rand < 70){StartCoroutine(coBossHeal());}
+                else{StartCoroutine(coBossHeal());}
                 obstacleResetCnt++;
                 break;
             case 4:
-                if(obstacleResetCnt == 0) createObstacleSkillPatternType(4, 7);
-                if(rand < 70){StartCoroutine(coBossHealSkill());}
-                else{StartCoroutine(coBossHealSkill());}
+                if(obstacleResetCnt == 0) createObstaclePatternType(4, 7);
+                if(rand < 70){StartCoroutine(coBossHeal());}
+                else{StartCoroutine(coBossHeal());}
                 obstacleResetCnt++;
                 break;
         }
-#region 
-        // if(skillType == ""){
-        //     skillType = rand < 40? "singleSpawn" : rand < 80? "patternSpawn" : "heal";
-        // }
-
-        // switch(skillType){
-        //     case "singleSpawn":
-        //         rand = Random.Range(0, 100);
-        //         //* Spanまで石を維持。
-        //         if(gm.obstacleGroup.childCount == 0 && obstacleResetCnt == 0){
-        //             rand = 0;
-        //         }
-        //         if(rand < 60){
-        //             createObstacleStoneSkill(true);
-        //         }
-        //         else{
-        //             StartCoroutine(coBossHealSkill());
-        //         }
-        //         break;
-        //     case "patternSpawn":
-        //         rand = Random.Range(0, 100);
-        //         if(gm.obstacleGroup.childCount == 0 && obstacleResetCnt == 0) {
-        //             rand = 0;
-        //             createObstacleStoneSkill(false);
-        //         }
-        //         if(rand < 60){                    
-        //             if(obstacleResetCnt == 0){
-        //                 Debug.Log("BossBlock:: 初期化");
-        //                 skillType = "";
-        //                 obstacleResetCnt = 0;
-        //                 return;
-        //             }
-        //         }
-        //         else{
-        //             StartCoroutine(coBossHealSkill());
-        //         }
-        //         break;
-        //     case "heal":
-        //         StartCoroutine(coBossHealSkill());
-        //         skillType = "";
-        //         obstacleResetCnt = 0;
-        //         break;
-        // }
-#endregion
-        
-
         if(obstacleResetCnt == OBSTACLE_RESET_SPAN){
             obstacleResetCnt = 0;
             obstaclePosList = new List<Vector3>{};
@@ -116,8 +76,23 @@ public class BossBlock : Block_Prefab{
         }
     }
 
-    IEnumerator coBossHealSkill(){
-        Debug.Log("BossBlock::coBossHealSkill:: ");
+    void bossAttack(){
+        float sec = 1.8f;
+        const int SCREAM_INDEX = 12;
+        float delayTime = Util._.getAnimPlayTime(SCREAM_INDEX, this.anim);
+        StartCoroutine(gm.bs.coShowExclamationMark(sec, delayTime));
+        StartCoroutine(coFireBallAttack(sec / 2));
+    }
+    IEnumerator coFireBallAttack(float sec){
+        this.anim.SetTrigger(DM.ANIM.Attack.ToString());
+        yield return new WaitForSeconds(sec);
+        int randDir = Random.Range(0, 3);
+        const int LEFT = 0, MIDDLE = 1, RIGHT = 2;
+        Debug.Log($"<color=red>Bossblock::coFireBallAttack(sec={sec}):: randDir={randDir}</color>");
+    }
+
+    IEnumerator coBossHeal(){
+        Debug.Log("BossBlock::coBossHeal()");
         yield return new WaitForSeconds(1);
         gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
         gm.em.createBossHealSkillEF(bossDieOrbSpawnTf.position);
@@ -173,7 +148,7 @@ public class BossBlock : Block_Prefab{
             maxCnt = obstaclePosList.Count;
         singleRandom(Random.Range(1, maxCnt));
     }
-    private void createObstacleSkillPatternType(int minIndex, int maxIndex){
+    private void createObstaclePatternType(int minIndex, int maxIndex){
         Debug.Log($"BossBlock::createObstacleStoneSkillPatternType()");
         //* OBSTACLE LIST 準備
         var obstaclePosList = getObstaclePosList();
