@@ -65,3 +65,4 @@
     ✓ ObjectPool getObjectで生成の時、NullになるATVスキルの種類のため、途中で処理が止まってしまう。-> if(obj != null)なら実行するようにして、対応。
     ✓ Block Direction Item エラー対応: ItemBlockTrailEF除外。
     ✓ BlockStone位置がお互いに重ならないように。
+    ✓ LevelUpPanelAnimateで、直接止めたら、Y座標が少しずつズレて気持ち悪いこと対応。

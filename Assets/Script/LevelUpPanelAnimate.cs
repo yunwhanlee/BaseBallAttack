@@ -23,7 +23,7 @@ public class LevelUpPanelAnimate : MonoBehaviour{
 
     //* Value
     const int SKILL_BTN_IDX_LEN = 2;
-    int spriteHeight;
+    int spriteH;
     int btnIdx;
     float time;
     float span;
@@ -49,7 +49,7 @@ public class LevelUpPanelAnimate : MonoBehaviour{
         pl = gm.pl;
 
         //* Init Value
-        spriteHeight = (int)gm.PsvSkillImgPrefs[0].GetComponent<RectTransform>().rect.width;
+        spriteH = (int)gm.PsvSkillImgPrefs[0].GetComponent<RectTransform>().rect.height; //270
         time = 0;
         span = 2;
         btnIdx = 0;
@@ -80,12 +80,12 @@ public class LevelUpPanelAnimate : MonoBehaviour{
                     if(btn.colImgRectTf.localPosition.y >= 0) //* ↓
                         btn.colImgRectTf.Translate(0,-speed, 0);
                     else //* 位置初期化
-                        btn.colImgRectTf.localPosition = new Vector3(0, spriteHeight * skillImgCnt, 0);
+                        btn.colImgRectTf.localPosition = new Vector3(0, spriteH * skillImgCnt, 0);
                 }
                 //* #2.Stop
                 else{
                     int randIdx = Random.Range(0, skillList.Count);
-                    int halfHeightMorePosY = skillList[randIdx].Key + spriteHeight / 2;
+                    int halfHeightMorePosY = skillList[randIdx].Key + spriteH / 2;
                     // Position (.Key -> PosY)
                     btn.colImgRectTf.localPosition = new Vector3(0, halfHeightMorePosY, 0);
                     // Skill Name
@@ -97,7 +97,7 @@ public class LevelUpPanelAnimate : MonoBehaviour{
                     while(isSkLvMax){
                         Debug.Log($"<color=yellow>BEFORE:: btn[{btnIdx}]\n, btn.skillName= {btn.name.text}, randIdx= {randIdx}");
                         randIdx = ++randIdx % skillList.Count;
-                        btn.colImgRectTf.localPosition = new Vector3(0, skillList[randIdx].Key + spriteHeight / 2, 0);// Scroll Down a Half of Height PosY for Animation
+                        btn.colImgRectTf.localPosition = new Vector3(0, skillList[randIdx].Key + spriteH / 2, 0);// Scroll Down a Half of Height PosY for Animation
                         btn.name.text = skillList[randIdx].Value.name.Split(char.Parse("_"))[1];
                         Debug.Log($"<color=yellow>AFTER:: btn.name.text= {btn.name.text}, randIdx= {randIdx}</color>");
                         isSkLvMax = exceptSkNameList.Exists(name => btn.name.text.Contains(name));
@@ -115,14 +115,28 @@ public class LevelUpPanelAnimate : MonoBehaviour{
         //* #3.Scroll Up To Right PosY
         else if(isRollingStop){
             for(int i=0; i<colSkillBtns.Length;i++){
-                float posY = colSkillBtns[i].colImgRectTf.localPosition.y % spriteHeight;
-                float lastIdxPosY = colSkillBtns[2].colImgRectTf.localPosition.y % spriteHeight;
-                if(spriteHeight / 2 <= posY && posY <= spriteHeight){
+                float posY = colSkillBtns[i].colImgRectTf.localPosition.y % spriteH;
+                const int offsetY = 1;
+                float lastIdxPosY = (colSkillBtns[2].colImgRectTf.localPosition.y % spriteH) + offsetY;
+                if(spriteH / 2 <= posY && posY <= spriteH){
                     //Scrolling Up
                     colSkillBtns[i].colImgRectTf.Translate(0, speed / (i+1), 0);
+                    Debug.Log($"lastIdxPosY:{lastIdxPosY}->MathRound:{Mathf.Round(lastIdxPosY)} == spriteHeight{spriteH - spriteH * 0.1f}");
                     //最後Idxが終わるまで待つ
-                    if(Mathf.RoundToInt(lastIdxPosY) == spriteHeight) 
+                    if(Mathf.Round(lastIdxPosY) >= spriteH - spriteH * 0.1f){ //* ピッタリ止まらないので、10％周りの範囲に来たら処理することで対応。
                         isRollingStop = false;
+                        // Debug.Log($"最後まで待ちました。btnImg[0].Y={colSkillBtns[0].colImgRectTf.localPosition.y}, btnImg[1].Y={colSkillBtns[1].colImgRectTf.localPosition.y}, btnImg[2].Y={colSkillBtns[2].colImgRectTf.localPosition.y}");
+                        //* 少しずれた位置をピッタリ直す。
+                        int btnIdx=0;
+                        Array.ForEach(colSkillBtns, btn => {
+                            int rest = Mathf.RoundToInt(btn.colImgRectTf.localPosition.y) % spriteH;
+                            btn.colImgRectTf.localPosition = new Vector3(
+                                btn.colImgRectTf.localPosition.x, 
+                                btn.colImgRectTf.localPosition.y - rest + (btnIdx==2? spriteH : 0), //* なぜか、３番目には高さを一回足さないと、ずれるBUGある。
+                                btn.colImgRectTf.localPosition.z);
+                            btnIdx++;
+                        });
+                    }
                 }
             }
         }
@@ -231,7 +245,7 @@ public class LevelUpPanelAnimate : MonoBehaviour{
     }
     private void setSkillList(List<KeyValuePair<int, GameObject>> selectSkillList){
         for(int i = 0; i < skillImgCnt ; i++){
-            int posY = spriteHeight * i;
+            int posY = spriteH * i;
             selectSkillList.Add( new KeyValuePair<int, GameObject>(posY, gm.PsvSkillImgPrefs[i+1]));
             // Debug.LogFormat("selectList[{0}].key= {1}, .value= {2}", i, selectSkillList[i].Key, selectSkillList[i].Value);
         }
@@ -252,7 +266,7 @@ public class LevelUpPanelAnimate : MonoBehaviour{
                 Instantiate(psvSkImg, Vector3.zero, Quaternion.identity, btn.colImgRectTf);
             }
             //Set Auto Scroll Start Pos
-            btn.colImgRectTf.localPosition = new Vector3(0, spriteHeight * skillImgCnt, 0);
+            btn.colImgRectTf.localPosition = new Vector3(0, spriteH * skillImgCnt, 0);
         }
     }
 #endregion
