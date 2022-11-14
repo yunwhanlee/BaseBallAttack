@@ -103,7 +103,7 @@ public class Util : MonoBehaviour
         //* SphereCastAll
         RaycastHit[] hits = Physics.SphereCastAll(my.position, radius, Vector3.up, 0);
         Array.ForEach(hits, hit => {
-            if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
+            if(isColBlock(hit.transform.GetComponent<Collider>())){
                 gm.comboCnt--; //* (BUG) 爆発のカウントもされ、スキルが続けて発動されること防止。
                 Debug.Log($"sphereCastAllDecreaseBlocksHp:: hit.transform.name= {hit.transform.name}");
                 var block = hit.transform.gameObject.GetComponent<Block_Prefab>();

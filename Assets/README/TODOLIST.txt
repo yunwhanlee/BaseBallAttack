@@ -63,4 +63,5 @@
     ✓ GodBlessとEGGPOPが最初に発動した場合、フリーズが掛けてしまいますが、原因不明 ➡ 221104
         原因-> ★★★ 全て準備したOBJECTを活性化する ⇐ こうしないと、複数のEFが活性化したら、読込が重くなり、フリーズ掛ける。
     ✓ ObjectPool getObjectで生成の時、NullになるATVスキルの種類のため、途中で処理が止まってしまう。-> if(obj != null)なら実行するようにして、対応。
-    -  Block Direction Item エラー対応。
+    ✓ Block Direction Item エラー対応: ItemBlockTrailEF除外。
+    ✓ BlockStone位置がお互いに重ならないように。

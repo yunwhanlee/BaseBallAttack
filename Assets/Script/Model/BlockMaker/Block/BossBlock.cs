@@ -13,11 +13,10 @@ public class BossBlock : Block_Prefab{
     const int OBSTACLE_STONE_CNT = 1;
     const int BOSS_DIE_ORB_CNT = 80;
     const float BOSS_HEAL_RATIO = 0.2f;
-
     const int STONE_PER = 100;
     const int OBSTACLE_RESET_SPAN = 8;
     [SerializeField] int obstacleResetCnt = 0;
-    [SerializeField]  string skillType;
+    // [SerializeField]  string skillType;
     [SerializeField] Transform bossDieOrbSpawnTf;
 
     [Header("【BOSS STATUS】")]
@@ -37,15 +36,33 @@ public class BossBlock : Block_Prefab{
     public void activeBossSkill(){ //* at NextStage
         this.anim.SetTrigger(DM.ANIM.Scream.ToString());
         var rand = Random.Range(0, 100);
-        Debug.Log($"BossBlock:: rand= {rand}, obstacleResetCnt= {obstacleResetCnt} / {OBSTACLE_RESET_SPAN}");
-
-        if(rand < 70){
-            createObstacleStoneSkill(true);
+        int bossLevel = gm.stage / LM._.BOSS_STAGE_SPAN;
+        Debug.Log($"<color=yellow>BossBlock::activeBossSkill():: bossLevel= {bossLevel}, rand= {rand}, obstacleResetCnt= {obstacleResetCnt} / {OBSTACLE_RESET_SPAN}</color>");
+        switch(bossLevel){
+            case 1:
+                if(rand < 70){createObstacleSingleType(4);}
+                else{StartCoroutine(coBossHealSkill());}
+                break;
+            case 2:
+                if(obstacleResetCnt == 0) createObstacleSkillPatternType(0, 2);
+                if(rand < 70){StartCoroutine(coBossHealSkill());}
+                else{StartCoroutine(coBossHealSkill());}
+                obstacleResetCnt++;
+                break;
+            case 3:
+                if(obstacleResetCnt == 0) createObstacleSkillPatternType(2, 4);
+                if(rand < 70){StartCoroutine(coBossHealSkill());}
+                else{StartCoroutine(coBossHealSkill());}
+                obstacleResetCnt++;
+                break;
+            case 4:
+                if(obstacleResetCnt == 0) createObstacleSkillPatternType(4, 7);
+                if(rand < 70){StartCoroutine(coBossHealSkill());}
+                else{StartCoroutine(coBossHealSkill());}
+                obstacleResetCnt++;
+                break;
         }
-        else{
-            StartCoroutine(coBossHealSkill());
-        }
-
+#region 
         // if(skillType == ""){
         //     skillType = rand < 40? "singleSpawn" : rand < 80? "patternSpawn" : "heal";
         // }
@@ -88,10 +105,10 @@ public class BossBlock : Block_Prefab{
         //         obstacleResetCnt = 0;
         //         break;
         // }
-        obstacleResetCnt++;
+#endregion
+        
 
         if(obstacleResetCnt == OBSTACLE_RESET_SPAN){
-            skillType = "";
             obstacleResetCnt = 0;
             obstaclePosList = new List<Vector3>{};
             if(gm.obstacleGroup.childCount > 0) eraseObstacle();
@@ -146,38 +163,37 @@ public class BossBlock : Block_Prefab{
 
 
     //* Skill #1
-    private void createObstacleStoneSkill(bool isSingleSpawn){
-        Debug.Log($"BossBlock::createObstacleStoneSkill(issingleSpawn= {isSingleSpawn})");
-
+    private void createObstacleSingleType(int maxCnt){
         //* OBSTACLE LIST 準備
-        var obstaclePosList = readyObstaclePosList();
+        var obstaclePosList = getObstaclePosList();
+        Debug.Log($"createObstacleSingleType:: maxCnt= {maxCnt}, obstaclePosList= {obstaclePosList.Count}");
+        if(maxCnt > obstaclePosList.Count)
+            maxCnt = obstaclePosList.Count;
+        singleRandom(Random.Range(1, maxCnt));
+    }
+    private void createObstacleSkillPatternType(int minIndex, int maxIndex){
+        Debug.Log($"BossBlock::createObstacleStoneSkillPatternType()");
+        //* OBSTACLE LIST 準備
+        var obstaclePosList = getObstaclePosList();
+        int rand = Random.Range(minIndex, maxIndex);
+        switch(rand){
+            case 0: patternColEven();       break;
+            case 1: patternColOdd();        break;
 
-        // int bossLevel = gm.stage / LM._.BOSS_STAGE_SPAN - 1;
-        // switch(bossLevel){
-        //     case 0:
-        //         break;
-        // }
-        if(isSingleSpawn){
-            const int MAX_CNT = 4;
-            singleRandom(Random.Range(1, MAX_CNT));
+            case 2: patternCutColumnLine(); break;
+            case 3: patternCntRowLine();    break;
+
+            case 4: patternGoBoard();       break;
+            case 5: patternGoBoardRandom(); break;
+            case 6: patternTriangle();      break;
         }
-        else{
-            // patternColEven();
-            // patternColOdd();
-            patternCutColumnLine();
-            // patternCntRowLine();
-            // patternGoBoard();
-            // patternGoBoardRandom();
-            // patternTriangle();
-
-        }
-
     }
 
-    private List<Vector3> readyObstaclePosList(){
-        if(obstaclePosList.Count > 0) return obstaclePosList;
+    private List<Vector3> getObstaclePosList(){
+        Debug.Log($"BossBlock::readyObstaclePosList:: obstaclePosList.Count= {obstaclePosList.Count}");
+        if(obstaclePosList.Count > 0) return obstaclePosList; //* 障害物が存在するなら、初期化しない。
         
-        //* OBSTACLE LIST 準備
+        //* OBSTACLE LIST 準備（初期化）
         obstaclePosList = new List<Vector3>(){};
         int len = COL * ROW;
         
@@ -192,11 +208,7 @@ public class BossBlock : Block_Prefab{
             Debug.Log($"[{i}] -> rowIdx= {rowIdx} vector3({x}, 0, {z})");
             obstaclePosList.Add(new Vector3(x, 0, z));
         }
-
-        Debug.Log($"obstaclePosList.Count= {obstaclePosList.Count}");
-        
         return obstaclePosList;
-
     }
 
     private void createObstacleStone(int i){
@@ -221,16 +233,13 @@ public class BossBlock : Block_Prefab{
             Vector3 randPos = obstaclePosList[randIdx];
             Debug.Log("randPos-->" + randPos);
 
-
-            // for(int j=0; j<gm.obstacleGroup.childCount;i++){
-            //     if(gm.obstacleGroup.GetChild(i).transform.position == randPos){
-            //         Debug.Log("FUCK SAME!!");
-            //     }
-            // }
-
             createObstacleStone(randIdx);
             obstaclePosList.RemoveAt(randIdx);
         }
+
+        //* RESET
+        if(obstaclePosList.Count <= 0)
+            obstacleResetCnt = 0;
     }
     private void patternColEven(){
         for(int i=0; i < obstaclePosList.Count; i++){

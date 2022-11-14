@@ -51,7 +51,7 @@ public class DropItem : MonoBehaviour
         // Debug.LogFormat("DropItem:: shootPopUp():: randX= {0}, randZ= {1}", randX, randZ);
         Vector3 dir = new Vector3(randX, 1, randZ);
         float force = power * Time.deltaTime;
-        Debug.Log($"<color=yellow>DropItem spawnPopUp({power}):: force= {force}</color>");
+        // Debug.Log($"<color=yellow>DropItem spawnPopUp({power}):: force= {force}</color>");
         this.rigid.AddForce(dir * force, ForceMode.Impulse);
     }
 
