@@ -294,7 +294,7 @@ public class Ball_Prefab : MonoBehaviour
                 if(gm.comboCnt != 0 && gm.comboCnt % LM._.GODBLESS_SPAN == 0){
                     Debug.Log("GOD BLESS YOU!");
                     float radius = 4;
-                    Util._.DebugSphere(this.transform.position, radius, 1);
+                    Util._.DebugSphere(this.transform.position, radius, 1, "blue");
 
                     //* Explosion
                     em.createGodBlessEF(this.transform.position);

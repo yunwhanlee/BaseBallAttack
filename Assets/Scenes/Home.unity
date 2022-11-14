@@ -4551,7 +4551,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.3563156e-19, y: 0, z: 0, w: 4.2e-44}
+  m_BoundingSphereOverride: {x: 0, y: 0.3220749, z: 0.32208058, w: 0.32208058}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -17219,7 +17219,8 @@ MonoBehaviour:
   noticeMsgDisplayCnt: 1
   noticeMessageTxtPref: {fileID: 357732499089971375, guid: c1a4e857d0aae0b4ba90ed2c60068da3, type: 3}
   mainPanelTf: {fileID: 925401117}
-  debugSphereObj: {fileID: 6312669959380106236, guid: e22335ecb12e2a1469b7cc80f77f31f3, type: 3}
+  debugSphereObjBlue: {fileID: 6312669959380106236, guid: e22335ecb12e2a1469b7cc80f77f31f3, type: 3}
+  debugSphereObjRed: {fileID: 6312669959380106236, guid: 436e79a14f810a94f8e6c2730670b7f9, type: 3}
 --- !u!4 &2097801201
 Transform:
   m_ObjectHideFlags: 0

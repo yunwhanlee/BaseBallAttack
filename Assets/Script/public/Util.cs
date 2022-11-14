@@ -14,7 +14,8 @@ public class Util : MonoBehaviour
     public int noticeMsgDisplayCnt = 1;
     public Text noticeMessageTxtPref;
     public Transform mainPanelTf;
-    public GameObject debugSphereObj;
+    public GameObject debugSphereObjBlue;
+    public GameObject debugSphereObjRed;
 
     void Awake() => singleton();
 
@@ -92,8 +93,9 @@ public class Util : MonoBehaviour
         return (int)(value / max * 100);
     }
 
-    public void DebugSphere(Vector3 pos, float raidus, float destroyCnt){
-        var ins = Instantiate(debugSphereObj, pos, Quaternion.identity);
+    public void DebugSphere(Vector3 pos, float raidus, float destroyCnt, string color){
+        GameObject obj = (color == "blue" || color == "Blue")? debugSphereObjBlue : debugSphereObjRed;
+        var ins = Instantiate(obj, pos, Quaternion.identity);
         ins.transform.localScale = Vector3.one * (raidus * 2);
         Destroy(ins, destroyCnt);
     }

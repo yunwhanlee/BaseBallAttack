@@ -6746,6 +6746,8 @@ MonoBehaviour:
   bossHealSkillEF: {fileID: 2068829495866214061, guid: 25c4eb96708f49c40a8cd37b5270ec1c, type: 3}
   bossObstacleSpawnEF: {fileID: 1462863494835050131, guid: 7fe96619cf2576542aea634b97a9f7f7, type: 3}
   rockObstacleBrokenEF: {fileID: 4160636153587398475, guid: b2a8d920c2c43c542b7a0c5d471bb13e, type: 3}
+  bossFireBallTrailEF: {fileID: 2418085363730522192, guid: f79e287652b9c3f4cbc5f78a4d25c398, type: 3}
+  bossFireBallExplosionEF: {fileID: 1669432660737919569, guid: d17b7ad0a6e690648aeb6eb9e5788a5d, type: 3}
 --- !u!1 &697366768
 GameObject:
   m_ObjectHideFlags: 0
@@ -7193,7 +7195,7 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 3e-45, z: 1.317e-41, w: 6e-44}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0

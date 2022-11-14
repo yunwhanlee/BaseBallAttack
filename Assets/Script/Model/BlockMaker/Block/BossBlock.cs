@@ -18,11 +18,13 @@ public class BossBlock : Block_Prefab{
     [SerializeField] int obstacleResetCnt = 0;
     // [SerializeField]  string skillType;
     [SerializeField] Transform bossDieOrbSpawnTf;
+    [SerializeField] Transform mouthTf;
 
     [Header("【BOSS STATUS】")]
     [SerializeField] int level;
     [SerializeField] GameObject obstacleStonePf;
     [SerializeField] List<Vector3> obstaclePosList;
+
 
     private void OnDisable() {
         eraseObstacle();
@@ -41,13 +43,13 @@ public class BossBlock : Block_Prefab{
         Debug.Log($"<color=yellow>BossBlock::activeBossSkill():: level= {level}, rand= {rand}, obstacleResetCnt= {obstacleResetCnt} / {OBSTACLE_RESET_SPAN}</color>");
         switch(level){
             case 1:
-                if(obstacleResetCnt == 0) createObstacleSingleType(4);
-                else{
+                // if(obstacleResetCnt == 0) createObstacleSingleType(4);
+                // else{
                     // if(rand < 30){createObstacleSingleType(4);}
                     // else if(rand < 60){StartCoroutine(coBossHeal());}
                     // else 
                     {bossAttack();}
-                }
+                // }
                 obstacleResetCnt++;
                 break;
             case 2:
@@ -77,6 +79,7 @@ public class BossBlock : Block_Prefab{
     }
 
     void bossAttack(){
+        gm.readyBtn.gameObject.SetActive(false);
         float sec = 1.8f;
         const int SCREAM_INDEX = 12;
         float delayTime = Util._.getAnimPlayTime(SCREAM_INDEX, this.anim);
@@ -86,9 +89,18 @@ public class BossBlock : Block_Prefab{
     IEnumerator coFireBallAttack(float sec){
         this.anim.SetTrigger(DM.ANIM.Attack.ToString());
         yield return new WaitForSeconds(sec);
-        int randDir = Random.Range(0, 3);
-        const int LEFT = 0, MIDDLE = 1, RIGHT = 2;
-        Debug.Log($"<color=red>Bossblock::coFireBallAttack(sec={sec}):: randDir={randDir}</color>");
+        int rand = Random.Range(0, 3);
+        // float[] dirXArr = new float[]{-4f, 0, 4f}; //* LEFT, MIDDLE, RIGHT。
+        Debug.Log($"<color=red>Bossblock::coFireBallAttack(sec={sec}):: rand={rand}</color>");
+        const float offsetX = 1.3f;
+        Vector3 target = new Vector3(gm.pl.transform.position.x + offsetX, gm.pl.transform.position.y, gm.pl.transform.position.z);
+        Util._.DebugSphere(target, 1.2f, 2, "red");
+        yield return new WaitForSeconds(1.85f);
+        GameObject ins = gm.em.createBossFireBallTrailEF(mouthTf.transform.position);
+        ins.GetComponent<BossFireBallTrailEF>().target = target;
+        yield return new WaitForSeconds(0.5f);
+        gm.em.createBossFireBallExplosionEF(target);
+        gm.readyBtn.gameObject.SetActive(true);
     }
 
     IEnumerator coBossHeal(){
