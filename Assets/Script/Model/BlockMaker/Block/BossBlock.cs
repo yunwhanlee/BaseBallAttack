@@ -135,6 +135,7 @@ public class BossBlock : Block_Prefab{
     }
 
     public new void decreaseHp(int dmg) {
+        Debug.Log($"BossBlock:: decreaseHp({dmg})");
         base.decreaseHp(dmg);
         anim.SetTrigger(DM.ANIM.GetHit.ToString());
     }

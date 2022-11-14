@@ -79,7 +79,7 @@ public class PsvSkill<T> where T: struct {
     //*constructor
     public PsvSkill(string name, int level, T value, T unit, int maxLevel = MAX_LV){
         this.name = name;
-        this.level = level;
+        this.level = level > maxLevel? maxLevel : level; //* (BUG)PSV MaxLevel以上に上がったら、Out of Index エラー防止。
         this.val = value;
         this.unit = unit;
         this.maxLevel = maxLevel;
@@ -94,7 +94,7 @@ public class PsvSkill<T> where T: struct {
     }
 
     public void initSkillDt(T value){
-        // Debug.LogFormat("<color=yellow>initPsvSkillDt():: this.value({0}) = para({1})</color>", this.value, value);
+        Debug.LogFormat($"<color=yellow>initSkillDt(value={value}):: name={name}, lv={level}, maxLv={maxLevel}, value={value}</color>");
         if(level > 0)
             this.val = value;
     }

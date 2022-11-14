@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
         dmg = new PsvSkill<int>(
             LANG.getTxt(DM.PSV.Dmg.ToString()), psvLvArr[(int)DM.PSV.Dmg].lv, 1, 1);
         multiShot = new PsvSkill<int>(
-            LANG.getTxt(DM.PSV.MultiShot.ToString()), psvLvArr[(int)DM.PSV.MultiShot].lv, 0, 1);
+            LANG.getTxt(DM.PSV.MultiShot.ToString()), psvLvArr[(int)DM.PSV.MultiShot].lv, 0, 1, 4);
         speed = new PsvSkill<float>(
             LANG.getTxt(DM.PSV.Speed.ToString()), psvLvArr[(int)DM.PSV.Speed].lv, 1f, 0.35f);
         instantKill = new PsvSkill<float>(
@@ -129,7 +129,7 @@ public class Player : MonoBehaviour
         itemSpawn = new PsvSkill<float>(
             LANG.getTxt(DM.PSV.ItemSpawn.ToString()), psvLvArr[(int)DM.PSV.ItemSpawn].lv, 0, 0.05f);
         verticalMultiShot = new PsvSkill<int>(
-            LANG.getTxt(DM.PSV.VerticalMultiShot.ToString()), psvLvArr[(int)DM.PSV.VerticalMultiShot].lv, 0, 1);
+            LANG.getTxt(DM.PSV.VerticalMultiShot.ToString()), psvLvArr[(int)DM.PSV.VerticalMultiShot].lv, 0, 1, 4);
         criticalDamage = new PsvSkill<float>(
             LANG.getTxt(DM.PSV.CriticalDamage.ToString()), psvLvArr[(int)DM.PSV.CriticalDamage].lv, 0, 0.5f);
         laser = new PsvSkill<int>(
