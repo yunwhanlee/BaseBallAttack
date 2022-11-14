@@ -57,7 +57,8 @@ public class ObjectPool : MonoBehaviour
         // EF
         List<PoolData> poolDtList = new List<PoolData>(){};
         poolDtList.Add(new PoolData(DIC.AtvSkShotEF.ToString(), em.activeSkillShotEFs[DM.ins.personalData.SelectSkillIdx], 1, em.gm.effectGroup));
-        poolDtList.Add(new PoolData(DIC.AtvSkExplosionEF.ToString(), em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkillIdx], 1, em.gm.effectGroup));
+        if(em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkillIdx]) //* ThunderShotスキルはこれがないので条件文で対応。
+            poolDtList.Add(new PoolData(DIC.AtvSkExplosionEF.ToString(), em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkillIdx], 1, em.gm.effectGroup));
         if(DM.ins.personalData.IsUnlock2ndSkill){
             //* (BUG) ATVスキルを登録する際に、em.EffectObjectが元々無いことがある。
             //! これが ObjectPoolで既に活性化する処理で「NULL Refereceエラー」になるため、em.ObjがNullなら、Addしないように対応。

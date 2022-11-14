@@ -17,7 +17,7 @@ public class DropItem : MonoBehaviour
     [SerializeField] MeshRenderer meshRdr;
 
     void Awake() {
-        Debug.Log("<color=yellow>DropItem Awake() </color>");
+        // Debug.Log("<color=yellow>DropItem Awake() </color>");
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         rigid = GetComponent<Rigidbody>();
         meshRdr = GetComponent<MeshRenderer>();

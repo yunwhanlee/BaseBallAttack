@@ -20,6 +20,7 @@ public class BossBlock : Block_Prefab{
     [SerializeField] Transform bossDieOrbSpawnTf;
 
     [Header("【BOSS STATUS】")]
+    [SerializeField] int level;
     [SerializeField] GameObject obstacleStonePf;
     [SerializeField] List<Vector3> obstaclePosList;
 
@@ -36,9 +37,9 @@ public class BossBlock : Block_Prefab{
     public void activeBossSkill(){ //* at NextStage
         this.anim.SetTrigger(DM.ANIM.Scream.ToString());
         var rand = Random.Range(0, 100);
-        int bossLevel = gm.stage / LM._.BOSS_STAGE_SPAN;
-        Debug.Log($"<color=yellow>BossBlock::activeBossSkill():: bossLevel= {bossLevel}, rand= {rand}, obstacleResetCnt= {obstacleResetCnt} / {OBSTACLE_RESET_SPAN}</color>");
-        switch(bossLevel){
+        level = gm.stage / LM._.BOSS_STAGE_SPAN;
+        Debug.Log($"<color=yellow>BossBlock::activeBossSkill():: level= {level}, rand= {rand}, obstacleResetCnt= {obstacleResetCnt} / {OBSTACLE_RESET_SPAN}</color>");
+        switch(level){
             case 1:
                 if(rand < 70){createObstacleSingleType(4);}
                 else{StartCoroutine(coBossHealSkill());}
