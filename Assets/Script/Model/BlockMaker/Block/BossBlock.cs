@@ -82,7 +82,7 @@ public class BossBlock : Block_Prefab{
         gm.readyBtn.gameObject.SetActive(false);
         gm.activeSkillBtnGroup.gameObject.SetActive(false);
         float sec = 1.8f;
-        const int SCREAM_INDEX = 12;
+        const int SCREAM_INDEX = 6;
         float delayTime = Util._.getAnimPlayTime(SCREAM_INDEX, this.anim);
         StartCoroutine(gm.bs.coShowExclamationMark(sec, delayTime));
         StartCoroutine(coFireBallAttack(sec / 2));

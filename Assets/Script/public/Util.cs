@@ -26,8 +26,17 @@ public class Util : MonoBehaviour
     }
 
     public float getAnimPlayTime(int index, Animator anim){
-        // Array.ForEach(clips, clip=> Debug.Log($"clip= {clip.name}, clip.length= {clip.length}"));
         AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
+
+        //* Anim Clip List
+        int i = 0;
+        Debug.Log("Anim Clip List-------------------------------------------------");
+        Array.ForEach(clips, clip=> {
+            Debug.Log($"getAnimPlayTime::{anim.name}:: i={i}, clip= {clip.name}, clip.length= {clip.length}");
+            i++;
+        });
+
+        Debug.Log($"Util::getAnimPlayTime(index={index}):: clip[{index}].name= {clips[index].name}, length「sec」= {clips[index].length}");
         float sec = clips[index].length;
         return sec;
     }
