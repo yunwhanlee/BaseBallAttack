@@ -120,18 +120,16 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     }
     public void OnPointerUp(PointerEventData eventData){
         if(gm.IsPlayingAnim) return;
-        if(pl.IsStun) return;
+        if(pl.IsStun) {
+            backOriginPlayerMeshRdr();
+            return;
+        }
 
         //* ボタンUI 活性化
         gm.readyBtn.gameObject.SetActive(true);
         gm.activeSkillBtnGroup.gameObject.SetActive(true);
-
-        //* 基のモデルマテリアルに戻す
-        int i = 0;
-        Array.ForEach(plTfMeshRdrs, meshRdr => {
-            // Debug.Log($"OnPointerUp:: {i}:「{meshRdr.transform.gameObject.name}」 ⇐ {modelOriginMtList[i].name} ");
-            meshRdr.material = modelOriginMtList[i++];
-        });
+        
+        backOriginPlayerMeshRdr();
 
         gm.isPointUp = true;
         isClickBattingSpot = false;
@@ -144,6 +142,14 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     //*---------------------------------------
     //*  関数
     //*---------------------------------------
+    private void backOriginPlayerMeshRdr(){
+        //* 基のモデルマテリアルに戻す
+        int i = 0;
+        Array.ForEach(plTfMeshRdrs, meshRdr => {
+            // Debug.Log($"OnPointerUp:: {i}:「{meshRdr.transform.gameObject.name}」 ⇐ {modelOriginMtList[i].name} ");
+            meshRdr.material = modelOriginMtList[i++];
+        });
+    }
     private bool checkRayHitTagIsExist(Vector3 touchPos, string findTagName){
         float maxDistance = 100;
         Debug.Log($"checkRayHitTagIsExist:: findTagName={findTagName}");
