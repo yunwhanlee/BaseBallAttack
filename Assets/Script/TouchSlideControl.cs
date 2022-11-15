@@ -43,6 +43,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     public void OnDrag(PointerEventData eventData){
         if(gm.State != GameManager.STATE.WAIT) return;
         if(gm.IsPlayingAnim) return;
+        if(pl.IsStun) return;
 
         Transform playerTf = pl.gameObject.transform;
         Transform arrowAnchorTf = pl.arrowAxisAnchor.transform;
@@ -72,6 +73,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         if(gm.State != GameManager.STATE.WAIT) return;
         if(gm.bs.IsBallExist) return;
         if(gm.IsPlayingAnim) return;
+        if(pl.IsStun) return;
 
         Debug.Log("OnPointerDown::");
 
@@ -118,6 +120,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     }
     public void OnPointerUp(PointerEventData eventData){
         if(gm.IsPlayingAnim) return;
+        if(pl.IsStun) return;
 
         //* ボタンUI 活性化
         gm.readyBtn.gameObject.SetActive(true);

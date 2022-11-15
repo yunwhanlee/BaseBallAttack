@@ -204,6 +204,7 @@ public class GameManager : MonoBehaviour
     public void onClickSkillButton() => levelUpPanel.SetActive(false);
     public void onClickSetGameButton(string type) => setGame(type);
     public void onClickActiveSkillButton(int i) {
+        if(pl.IsStun) return;
         SelectAtvSkillBtnIdx = i; //* 最新化
         bool isActive = activeSkillBtnList[i].SelectCircleEF.gameObject.activeSelf;
         Debug.LogFormat("onClickActiveSkillButton({0}), isActive= {1}", i, isActive);
@@ -270,6 +271,7 @@ public class GameManager : MonoBehaviour
 
     public void switchCamera(){
         if(State == GameManager.STATE.GAMEOVER) return;
+        if(pl.IsStun) return;
         bool isOnCam2 = !cam2.activeSelf;
 
         if(isOnCam2){//* CAM2 On
@@ -461,6 +463,7 @@ public class GameManager : MonoBehaviour
         bm.DoCreateBlock = true; //* Block 生成
         downWallCollider.isTrigger = true; //* 下壁 物理 
         bs.IsBallExist = false;
+        pl.IsStun = false;
         readyBtn.gameObject.SetActive(true);
         pl.previewBundle.SetActive(true);
         destroyEveryBalls();
@@ -478,7 +481,6 @@ public class GameManager : MonoBehaviour
         collectDropOrb();
         
         //* BossSkill
-        
         if(boss){ //* ボスが生きていると
             boss.activeBossSkill();
             stage--; //ステージは同じく維持

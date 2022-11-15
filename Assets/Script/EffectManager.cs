@@ -105,9 +105,9 @@ public class EffectManager : MonoBehaviour
         var ins = ObjectPool.getObject(ObjectPool.DIC.HomeRunHitSparkEF.ToString(), parentPos, QI, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1));
     }
-    public void createStunEF(Vector3 parentPos){
+    public void createStunEF(Vector3 parentPos, float sec){
         var ins = ObjectPool.getObject(ObjectPool.DIC.StunEF.ToString(), parentPos, QI, gm.effectGroup);
-        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 3));
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, sec));
     }
     public void createBrokeBlockEF(Vector3 parentPos, Color color){
         var ins = ObjectPool.getObject(ObjectPool.DIC.BrokeBlockEF.ToString(), parentPos, QI, gm.effectGroup);

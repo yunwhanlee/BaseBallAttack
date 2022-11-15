@@ -93,6 +93,7 @@ public class BossBlock : Block_Prefab{
         float blessShootTiming = attackAnimTime * 0.5f;
         float targetReachTime = 0.5f;
         float delayGUIActive = 0.2f;
+        float playerStunTime = 3;
 
         //* GUI OFF
         gm.readyBtn.gameObject.SetActive(false);
@@ -120,14 +121,21 @@ public class BossBlock : Block_Prefab{
         RaycastHit[] hits = Physics.SphereCastAll(explosionIns.transform.position, 1, Vector3.up, 0);
         Array.ForEach(hits, hit => {
             if(hit.transform.CompareTag(DM.TAG.Player.ToString())){
-                //TODO PLAYER STUN
-                Debug.Log("EXPLOSION HIT PLAYER!! -> STUN");
-                gm.em.createStunEF(gm.pl.modelMovingTf.position);
+                //* PLAYER STUN
+                Debug.Log($"EXPLOSION HIT PLAYER!! -> pl.IsStun= {gm.pl.IsStun}");
+                gm.pl.IsStun = true;
+                gm.em.createStunEF(gm.pl.modelMovingTf.position, playerStunTime);
+                gm.pl.anim.SetBool(DM.ANIM.IsIdle.ToString(), true);
             }
         });
         gm.bs.BossFireBallMarkObj.SetActive(false);
         yield return new WaitForSeconds(delayGUIActive);
-        
+
+        if(gm.pl.IsStun){
+            yield return new WaitForSeconds(playerStunTime);
+            gm.pl.anim.SetBool(DM.ANIM.IsIdle.ToString(), false);
+            gm.setNextStage();
+        }
         //* GUI ON
         gm.readyBtn.gameObject.SetActive(true);
         gm.activeSkillBtnGroup.gameObject.SetActive(true);
