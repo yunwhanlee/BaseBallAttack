@@ -16,11 +16,13 @@ public class BallShooter : MonoBehaviour
     [SerializeField]public GameObject ballPref;
     [SerializeField]public Transform entranceTf;
     [SerializeField]private GameObject exclamationMarkObj;   public GameObject ExclamationMarkObj { get => exclamationMarkObj; set => exclamationMarkObj = value;}
+    [SerializeField]private GameObject bossFireBallMarkObj;   public GameObject BossFireBallMarkObj { get => bossFireBallMarkObj; set => bossFireBallMarkObj = value;}
 
 
     void Start(){
         init();
         ExclamationMarkObj.SetActive(false);
+        BossFireBallMarkObj.SetActive(false);
     }
 
     void Update(){

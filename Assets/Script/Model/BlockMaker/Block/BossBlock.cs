@@ -100,7 +100,7 @@ public class BossBlock : Block_Prefab{
 
         //* Wait Scream Anim
         yield return new WaitForSeconds(screamAnimTime * 0.75f);
-        gm.bs.ExclamationMarkObj.SetActive(true);
+        gm.bs.BossFireBallMarkObj.SetActive(true);
         Util._.DebugSphere(target, 1.25f, 2, "red");
         yield return new WaitForSeconds(screamAnimTime * 0.25f);
         
@@ -124,7 +124,7 @@ public class BossBlock : Block_Prefab{
                 Debug.Log("EXPLOSION HIT PLAYER!! -> STUN");
             }
         });
-        gm.bs.ExclamationMarkObj.SetActive(false);
+        gm.bs.BossFireBallMarkObj.SetActive(false);
         yield return new WaitForSeconds(delayGUIActive);
         
         //* GUI ON
