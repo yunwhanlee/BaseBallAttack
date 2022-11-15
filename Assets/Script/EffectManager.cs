@@ -16,6 +16,7 @@ public class EffectManager : MonoBehaviour
     [Header("HIT SPARK EF")]
     public GameObject batHitSparkEF;
     public GameObject homeRunHitSparkEF;
+    public GameObject stunEF;
 
     [Header("BLOCK EF")]
     public GameObject brokeBlockEF;
@@ -100,12 +101,14 @@ public class EffectManager : MonoBehaviour
         var ins = ObjectPool.getObject(ObjectPool.DIC.BatHitSparkEF.ToString(), parentPos, QI, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1));
     }
-
     public void createHomeRunHitSparkEF(Vector3 parentPos){
         var ins = ObjectPool.getObject(ObjectPool.DIC.HomeRunHitSparkEF.ToString(), parentPos, QI, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1));
     }
-
+    public void createStunEF(Vector3 parentPos){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.StunEF.ToString(), parentPos, QI, gm.effectGroup);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 3));
+    }
     public void createBrokeBlockEF(Vector3 parentPos, Color color){
         var ins = ObjectPool.getObject(ObjectPool.DIC.BrokeBlockEF.ToString(), parentPos, QI, gm.effectGroup);
         ParticleSystem ps = ins.GetComponent<ParticleSystem>();

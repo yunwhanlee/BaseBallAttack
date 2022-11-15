@@ -122,6 +122,7 @@ public class BossBlock : Block_Prefab{
             if(hit.transform.CompareTag(DM.TAG.Player.ToString())){
                 //TODO PLAYER STUN
                 Debug.Log("EXPLOSION HIT PLAYER!! -> STUN");
+                gm.em.createStunEF(gm.pl.modelMovingTf.position);
             }
         });
         gm.bs.BossFireBallMarkObj.SetActive(false);
