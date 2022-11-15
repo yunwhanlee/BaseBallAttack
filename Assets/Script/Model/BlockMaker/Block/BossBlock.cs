@@ -38,6 +38,9 @@ public class BossBlock : Block_Prefab{
 
     public void activeBossSkill(){ //* at NextStage
         this.anim.SetTrigger(DM.ANIM.Scream.ToString());
+        const int SCREAM_INDEX = 6;
+        float screamAnimTime = Util._.getAnimPlayTime(SCREAM_INDEX, this.anim);
+
         var rand = Random.Range(0, 100);
         level = gm.stage / LM._.BOSS_STAGE_SPAN;
         Debug.Log($"<color=yellow>BossBlock::activeBossSkill():: level= {level}, rand= {rand}, obstacleResetCnt= {obstacleResetCnt} / {OBSTACLE_RESET_SPAN}</color>");
@@ -48,7 +51,7 @@ public class BossBlock : Block_Prefab{
                     // if(rand < 30){createObstacleSingleType(4);}
                     // else if(rand < 60){StartCoroutine(coBossHeal());}
                     // else 
-                    {bossAttack();}
+                    bossAttack(screamAnimTime);
                 // }
                 obstacleResetCnt++;
                 break;
@@ -78,27 +81,42 @@ public class BossBlock : Block_Prefab{
         }
     }
 
-    void bossAttack(){
-        gm.readyBtn.gameObject.SetActive(false);
-        gm.activeSkillBtnGroup.gameObject.SetActive(false);
-        float sec = 1.8f;
-        const int SCREAM_INDEX = 6;
-        float delayTime = Util._.getAnimPlayTime(SCREAM_INDEX, this.anim);
-        StartCoroutine(gm.bs.coShowExclamationMark(sec, delayTime));
-        StartCoroutine(coFireBallAttack(sec / 2));
+    void bossAttack(float screamAnimTime){
+        StartCoroutine(coFireBallAttack(screamAnimTime));
     }
-    IEnumerator coFireBallAttack(float sec){
-        this.anim.SetTrigger(DM.ANIM.Attack.ToString());
-        yield return new WaitForSeconds(sec);
-        Debug.Log($"<color=red>Bossblock::coFireBallAttack(sec={sec})</color>");
+    IEnumerator coFireBallAttack(float screamAnimTime){
+        Debug.Log($"coFireBallAttack(screamAnimTime= {screamAnimTime})"); //2.333333f
         const float offsetX = 1.3f;
         Vector3 target = new Vector3(gm.pl.transform.position.x + offsetX, gm.pl.transform.position.y, gm.pl.transform.position.z);
-        Util._.DebugSphere(target, 1.2f, 2, "red");
-        yield return new WaitForSeconds(1.85f);
+        const int FIREBALLSHOOT_INDEX = 3;
+        float attackAnimTime = Util._.getAnimPlayTime(FIREBALLSHOOT_INDEX, this.anim);
+        float blessShootTiming = attackAnimTime * 0.5f;
+        float targetReachTime = 0.5f;
+        float delayGUIActive = 0.2f;
+
+        //* GUI OFF
+        gm.readyBtn.gameObject.SetActive(false);
+        gm.activeSkillBtnGroup.gameObject.SetActive(false);
+
+        //* Wait Scream Anim
+        yield return new WaitForSeconds(screamAnimTime * 0.75f);
+        gm.bs.ExclamationMarkObj.SetActive(true);
+        Util._.DebugSphere(target, 1.25f, 2, "red");
+        yield return new WaitForSeconds(screamAnimTime * 0.25f);
+        
+        //* Begin Attack Anim
+        this.anim.SetTrigger(DM.ANIM.Attack.ToString());
+        Debug.Log($"coFireBallAttack:: attackAnimSec= {attackAnimTime}"); // 1.0f
+        yield return new WaitForSeconds(blessShootTiming);
+
+        //* FireBallEF 生成
         GameObject fireBallIns = gm.em.createBossFireBallTrailEF(mouthTf.transform.position);
-        fireBallIns.GetComponent<BossFireBallTrailEF>().target = target;
-        yield return new WaitForSeconds(0.5f);
+        fireBallIns.GetComponent<BossFireBallTrailEF>().Target = target;
+        yield return new WaitForSeconds(targetReachTime);
+
+        //* ExplosionEF 生成
         GameObject explosionIns = gm.em.createBossFireBallExplosionEF(target);
+        // 衝突処理
         RaycastHit[] hits = Physics.SphereCastAll(explosionIns.transform.position, 1, Vector3.up, 0);
         Array.ForEach(hits, hit => {
             if(hit.transform.CompareTag(DM.TAG.Player.ToString())){
@@ -106,8 +124,10 @@ public class BossBlock : Block_Prefab{
                 Debug.Log("EXPLOSION HIT PLAYER!! -> STUN");
             }
         });
-
-        yield return new WaitForSeconds(0.2f);
+        gm.bs.ExclamationMarkObj.SetActive(false);
+        yield return new WaitForSeconds(delayGUIActive);
+        
+        //* GUI ON
         gm.readyBtn.gameObject.SetActive(true);
         gm.activeSkillBtnGroup.gameObject.SetActive(true);
     }

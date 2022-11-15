@@ -36,7 +36,7 @@ public class Util : MonoBehaviour
             i++;
         });
 
-        Debug.Log($"Util::getAnimPlayTime(index={index}):: clip[{index}].name= {clips[index].name}, length「sec」= {clips[index].length}");
+        Debug.Log($"<color=yellow>Util::getAnimPlayTime(index={index}):: clip[{index}].name= {clips[index].name}, length「sec」= {clips[index].length}</color>");
         float sec = clips[index].length;
         return sec;
     }

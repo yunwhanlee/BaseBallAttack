@@ -80,9 +80,8 @@ public class BallShooter : MonoBehaviour
             }
         }
     }
-    public IEnumerator coShowExclamationMark(float sec, float delay = 0){
-        Debug.Log($"coShowExclamationMark(sec={sec}, delay={delay})");
-        yield return new WaitForSeconds(delay);
+    public IEnumerator coShowExclamationMark(float sec){
+        Debug.Log($"coShowExclamationMark(sec={sec})");
         ExclamationMarkObj.SetActive(true);
         yield return new WaitForSeconds(sec);
         time = 0;
