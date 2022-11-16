@@ -59,6 +59,7 @@ public class EffectManager : MonoBehaviour
     public GameObject rockObstacleBrokenEF;
     public GameObject bossFireBallTrailEF;
     public GameObject bossFireBallExplosionEF;
+    public GameObject aimingEF;
 
     void Start()
     {
@@ -83,12 +84,16 @@ public class EffectManager : MonoBehaviour
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 0.875f));
         return ins;
     }
+    public GameObject createAimingEF(Vector3 parentPos){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.AimingEF.ToString(), parentPos, QI, gm.effectGroup);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 0.75f));
+        return ins;
+    }
     public GameObject createBossFireBallExplosionEF(Vector3 parentPos){
         var ins = ObjectPool.getObject(ObjectPool.DIC.BossFireBallExplosionEF.ToString(), parentPos, QI, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 2));
         return ins;
     }
-    
     public void createBossObstacleSpawnEF(Vector3 parentPos){
         var ins = ObjectPool.getObject(ObjectPool.DIC.BossObstacleSpawnEF.ToString(), parentPos, QI, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 3));

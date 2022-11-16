@@ -101,6 +101,7 @@ public class BossBlock : Block_Prefab{
         //* FireBallEF 生成
         if(attackAnimName == "Fireball Shoot"){ //* LV 1
             Util._.DebugSphere(targetPos, 1.25f, 1.5f, "red");//* Preview Spot 生成
+            gm.em.createAimingEF(targetPos);
             yield return new WaitForSeconds(blessShootTiming);
 
             GameObject fireBallIns = gm.em.createBossFireBallTrailEF(mouthTf.transform.position);
@@ -127,6 +128,7 @@ public class BossBlock : Block_Prefab{
             for(int i=0; i<3; i++){
                 targetPos = new Vector3(X_POS_ARR[i], targetPos.y, targetPos.z);
                 Util._.DebugSphere(targetPos, 1.25f, 1.5f, "red");//* Preview Spot 生成
+                gm.em.createAimingEF(targetPos);
                 yield return new WaitForSeconds(0.5f);
 
                 GameObject fireBallIns = gm.em.createBossFireBallTrailEF(mouthTf.transform.position);
@@ -157,6 +159,7 @@ public class BossBlock : Block_Prefab{
                 targetPosArr[i] = new Vector3(targetPosList[rand], targetPos.y, targetPos.z);
                 targetPosList.RemoveAt(rand);
                 Util._.DebugSphere(targetPosArr[i], 1.25f, 1.5f, "red");//* Preview Spot 生成
+                gm.em.createAimingEF(targetPos);
             }
             yield return new WaitForSeconds(attackAnimTime * 0.6f);
 
@@ -189,6 +192,7 @@ public class BossBlock : Block_Prefab{
                     targetPosArr[i] = new Vector3(targetPosList[rand], targetPos.y, targetPos.z);
                     targetPosList.RemoveAt(rand);
                     Util._.DebugSphere(targetPosArr[i], 1.25f, 1, "red");//* Preview Spot 生成
+                    gm.em.createAimingEF(targetPos);
                 }
                 yield return new WaitForSeconds(attackAnimTime * 0.45f);
 
@@ -209,32 +213,6 @@ public class BossBlock : Block_Prefab{
                     }
                 });
             }
-            // float[] X_POS_ARR = {-3.0f, 0, 3.0f};
-            // for(int i=0; i<8; i++){
-            //     int rand = Random.Range(0, X_POS_ARR.Length);
-            //     targetPos = new Vector3(X_POS_ARR[rand], targetPos.y, targetPos.z);
-            //     Util._.DebugSphere(targetPos, 1.25f, 1.5f, "red");//* Preview Spot 生成
-            //     yield return new WaitForSeconds(0.5f);
-
-            //     GameObject fireBallIns = gm.em.createBossFireBallTrailEF(mouthTf.transform.position);
-            //     fireBallIns.GetComponent<BossFireBallTrailEF>().TargetPos = targetPos;
-            //     yield return new WaitForSeconds(targetReachTime * 0.5f);
-
-            //     //* Attackが終わるまで空に泊まるアニメーション繰り返す。
-            //     if(i % 3 == 0) this.anim.SetTrigger(DM.ANIM.Attack.ToString());
-
-            //     //* ExplosionEF 生成
-            //     GameObject explosionIns = gm.em.createBossFireBallExplosionEF(targetPos);
-            //     //* Playerか判別
-            //     Vector3 pos = explosionIns.transform.position;
-            //     var hitObj = Util._.getTagObjFromRaySphereCast(pos, 1, DM.TAG.Player.ToString());
-            //     if(hitObj){
-            //         gm.pl.IsStun = true;
-            //         //* Stun EF
-            //         gm.em.createStunEF(gm.pl.modelMovingTf.position, playerStunTime);
-            //         gm.pl.anim.SetBool(DM.ANIM.IsIdle.ToString(), true);
-            //     }
-            // }
         }
         #endregion
 
