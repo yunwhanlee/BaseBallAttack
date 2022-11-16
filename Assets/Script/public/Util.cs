@@ -123,6 +123,15 @@ public class Util : MonoBehaviour
             }
         });
     }
+    public GameObject getTagObjFromRaySphereCast(Vector3 pos, float radius, string tag){
+        GameObject obj = null;
+        RaycastHit[] hits = Physics.SphereCastAll(pos, radius, Vector3.up, 0);
+        Array.ForEach(hits, hit => {
+            if(hit.transform.CompareTag(tag)) //DM.TAG.Player.ToString()
+                obj = hit.transform.gameObject;
+        });
+        return obj;
+    }
     public bool isColBlock(Collider col){
         Debug.Log($"Util::isColBlock:: col.name= {col.name}");
         return col.name.Contains(DM.NAME.Block.ToString())

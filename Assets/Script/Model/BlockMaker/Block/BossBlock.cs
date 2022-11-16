@@ -117,17 +117,15 @@ public class BossBlock : Block_Prefab{
 
         //* ExplosionEF 生成
         GameObject explosionIns = gm.em.createBossFireBallExplosionEF(target);
-        // 衝突処理
-        RaycastHit[] hits = Physics.SphereCastAll(explosionIns.transform.position, 1, Vector3.up, 0);
-        Array.ForEach(hits, hit => {
-            if(hit.transform.CompareTag(DM.TAG.Player.ToString())){
-                //* PLAYER STUN
-                Debug.Log($"EXPLOSION HIT PLAYER!! -> pl.IsStun= {gm.pl.IsStun}");
-                gm.pl.IsStun = true;
-                gm.em.createStunEF(gm.pl.modelMovingTf.position, playerStunTime);
-                gm.pl.anim.SetBool(DM.ANIM.IsIdle.ToString(), true);
-            }
-        });
+        //* Playerか判別
+        Vector3 pos = explosionIns.transform.position;
+        var hitObj = Util._.getTagObjFromRaySphereCast(pos, 1, DM.TAG.Player.ToString());
+        if(hitObj){
+            gm.pl.IsStun = true;
+            //* Stun EF
+            gm.em.createStunEF(gm.pl.modelMovingTf.position, playerStunTime);
+            gm.pl.anim.SetBool(DM.ANIM.IsIdle.ToString(), true);
+        }
         gm.bs.BossFireBallMarkObj.SetActive(false);
         yield return new WaitForSeconds(delayGUIActive);
 
