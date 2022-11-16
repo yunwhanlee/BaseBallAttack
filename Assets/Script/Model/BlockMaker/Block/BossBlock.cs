@@ -109,16 +109,7 @@ public class BossBlock : Block_Prefab{
             yield return new WaitForSeconds(targetReachTime);
 
             //* ExplosionEF 生成
-            GameObject explosionIns = gm.em.createBossFireBallExplosionEF(targetPos);
-            //* Playerか判別
-            Vector3 pos = explosionIns.transform.position;
-            var hitObj = Util._.getTagObjFromRaySphereCast(pos, 1, DM.TAG.Player.ToString());
-            if(hitObj){
-                gm.pl.IsStun = true;
-                //* Stun EF
-                gm.em.createStunEF(gm.pl.modelMovingTf.position, playerStunTime);
-                gm.pl.anim.SetBool(DM.ANIM.IsIdle.ToString(), true);
-            }
+            setExplosionEFAndPlayerStun(targetPos, playerStunTime);
         }
         else if(attackAnimName == "Flame Attack"){ //* LV 2
             const int LEFT = 0;
@@ -137,16 +128,7 @@ public class BossBlock : Block_Prefab{
                 yield return new WaitForSeconds(targetReachTime * 0.3f);
 
                 //* ExplosionEF 生成
-                GameObject explosionIns = gm.em.createBossFireBallExplosionEF(targetPos);
-                //* Playerか判別
-                Vector3 pos = explosionIns.transform.position;
-                var hitObj = Util._.getTagObjFromRaySphereCast(pos, 1, DM.TAG.Player.ToString());
-                if(hitObj){
-                    gm.pl.IsStun = true;
-                    //* Stun EF
-                    gm.em.createStunEF(gm.pl.modelMovingTf.position, playerStunTime);
-                    gm.pl.anim.SetBool(DM.ANIM.IsIdle.ToString(), true);
-                }
+                setExplosionEFAndPlayerStun(targetPos, playerStunTime);
             }
         }
         else if(attackAnimName == "Horn Attack"){ //* LV 3
@@ -165,16 +147,7 @@ public class BossBlock : Block_Prefab{
 
             //* ExplosionEF 生成
             Array.ForEach(targetPosArr, targetPos => {
-                GameObject explosionIns = gm.em.createBossFireBallExplosionEF(targetPos);
-                //* Playerか判別
-                Vector3 pos = explosionIns.transform.position;
-                var hitObj = Util._.getTagObjFromRaySphereCast(pos, 1, DM.TAG.Player.ToString());
-                if(hitObj){
-                    gm.pl.IsStun = true;
-                    //* Stun EF
-                    gm.em.createStunEF(gm.pl.modelMovingTf.position, playerStunTime);
-                    gm.pl.anim.SetBool(DM.ANIM.IsIdle.ToString(), true);
-                }
+                setExplosionEFAndPlayerStun(targetPos, playerStunTime);
             });
         }
         else if(attackAnimName == "Fly Flame Attack"){ //* LV 4
@@ -201,16 +174,7 @@ public class BossBlock : Block_Prefab{
 
                 //* ExplosionEF 生成
                 Array.ForEach(targetPosArr, targetPos => {
-                    GameObject explosionIns = gm.em.createBossFireBallExplosionEF(targetPos);
-                    //* Playerか判別
-                    Vector3 pos = explosionIns.transform.position;
-                    var hitObj = Util._.getTagObjFromRaySphereCast(pos, 1, DM.TAG.Player.ToString());
-                    if(hitObj){
-                        gm.pl.IsStun = true;
-                        //* Stun EF
-                        gm.em.createStunEF(gm.pl.modelMovingTf.position, playerStunTime);
-                        gm.pl.anim.SetBool(DM.ANIM.IsIdle.ToString(), true);
-                    }
+                    setExplosionEFAndPlayerStun(targetPos, playerStunTime);
                 });
             }
         }
@@ -227,6 +191,19 @@ public class BossBlock : Block_Prefab{
         //* GUI ON
         gm.readyBtn.gameObject.SetActive(true);
         gm.activeSkillBtnGroup.gameObject.SetActive(true);
+    }
+
+    private void setExplosionEFAndPlayerStun(Vector3 targetPos, float playerStunTime){
+        GameObject explosionIns = gm.em.createBossFireBallExplosionEF(targetPos);
+        //* Playerか判別
+        Vector3 pos = explosionIns.transform.position;
+        var hitObj = Util._.getTagObjFromRaySphereCast(pos, 1, DM.TAG.Player.ToString());
+        if(hitObj){
+            gm.pl.IsStun = true;
+            //* Stun EF
+            gm.em.createStunEF(gm.pl.modelMovingTf.position, playerStunTime);
+            gm.pl.anim.SetBool(DM.ANIM.IsIdle.ToString(), true);
+        }
     }
 
     IEnumerator coBossHeal(){
