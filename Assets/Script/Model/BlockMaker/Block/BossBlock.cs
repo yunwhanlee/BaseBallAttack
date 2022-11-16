@@ -59,9 +59,9 @@ public class BossBlock : Block_Prefab{
                 else StartCoroutine(coBossAttack("Horn Attack"));
                 break;
             case 4:
-                // if(obstacleResetCnt == 0) createObstaclePatternType(4, 7);
-                // if(randPer < 70){StartCoroutine(coBossHeal());}
-                // else{StartCoroutine(coBossHeal());}
+                if(randPer <= 0){createObstaclePatternType(4, 7);}
+                if(randPer <= 1){StartCoroutine(coBossHeal());}
+                else StartCoroutine(coBossAttack("Fly Flame Attack"));
                 break;
         }
         obstacleResetCnt++;
@@ -97,6 +97,7 @@ public class BossBlock : Block_Prefab{
         Debug.Log($"coFireBallAttack:: attackAnimTime= {attackAnimTime}");
         this.anim.SetTrigger(DM.ANIM.Attack.ToString());
 
+        #region BOSS ATTACK LV TYPE
         //* FireBallEF 生成
         if(attackAnimName == "Fireball Shoot"){ //* LV 1
             Util._.DebugSphere(targetPos, 1.25f, 1.5f, "red");//* Preview Spot 生成
@@ -173,6 +174,70 @@ public class BossBlock : Block_Prefab{
                 }
             });
         }
+        else if(attackAnimName == "Fly Flame Attack"){ //* LV 4
+            for(int k=0; k<8; k++){
+                //* 途中でファイルボールを当たったら、すぐFor文を終了。
+                if(gm.pl.IsStun) break;
+
+                List<float> targetPosList = new List<float>(){-3.0f, 0, 3.0f};
+                //* Set ターゲットポジションランダム(N個)
+                int randSeed = Random.Range(0,10); //1 ~ 2;
+                int shootCnt = (randSeed < 6)? 1 : 2;
+                Vector3[] targetPosArr = new Vector3[shootCnt];
+                for(int i=0; i<targetPosArr.Length; i++){
+                    int rand  = Random.Range(0, targetPosList.Count);
+                    targetPosArr[i] = new Vector3(targetPosList[rand], targetPos.y, targetPos.z);
+                    targetPosList.RemoveAt(rand);
+                    Util._.DebugSphere(targetPosArr[i], 1.25f, 1, "red");//* Preview Spot 生成
+                }
+                yield return new WaitForSeconds(attackAnimTime * 0.45f);
+
+                //* Attackが終わるまで空に泊まるアニメーション繰り返す。
+                if(k % 3 == 0) this.anim.SetTrigger(DM.ANIM.Attack.ToString());
+
+                //* ExplosionEF 生成
+                Array.ForEach(targetPosArr, targetPos => {
+                    GameObject explosionIns = gm.em.createBossFireBallExplosionEF(targetPos);
+                    //* Playerか判別
+                    Vector3 pos = explosionIns.transform.position;
+                    var hitObj = Util._.getTagObjFromRaySphereCast(pos, 1, DM.TAG.Player.ToString());
+                    if(hitObj){
+                        gm.pl.IsStun = true;
+                        //* Stun EF
+                        gm.em.createStunEF(gm.pl.modelMovingTf.position, playerStunTime);
+                        gm.pl.anim.SetBool(DM.ANIM.IsIdle.ToString(), true);
+                    }
+                });
+            }
+            // float[] X_POS_ARR = {-3.0f, 0, 3.0f};
+            // for(int i=0; i<8; i++){
+            //     int rand = Random.Range(0, X_POS_ARR.Length);
+            //     targetPos = new Vector3(X_POS_ARR[rand], targetPos.y, targetPos.z);
+            //     Util._.DebugSphere(targetPos, 1.25f, 1.5f, "red");//* Preview Spot 生成
+            //     yield return new WaitForSeconds(0.5f);
+
+            //     GameObject fireBallIns = gm.em.createBossFireBallTrailEF(mouthTf.transform.position);
+            //     fireBallIns.GetComponent<BossFireBallTrailEF>().TargetPos = targetPos;
+            //     yield return new WaitForSeconds(targetReachTime * 0.5f);
+
+            //     //* Attackが終わるまで空に泊まるアニメーション繰り返す。
+            //     if(i % 3 == 0) this.anim.SetTrigger(DM.ANIM.Attack.ToString());
+
+            //     //* ExplosionEF 生成
+            //     GameObject explosionIns = gm.em.createBossFireBallExplosionEF(targetPos);
+            //     //* Playerか判別
+            //     Vector3 pos = explosionIns.transform.position;
+            //     var hitObj = Util._.getTagObjFromRaySphereCast(pos, 1, DM.TAG.Player.ToString());
+            //     if(hitObj){
+            //         gm.pl.IsStun = true;
+            //         //* Stun EF
+            //         gm.em.createStunEF(gm.pl.modelMovingTf.position, playerStunTime);
+            //         gm.pl.anim.SetBool(DM.ANIM.IsIdle.ToString(), true);
+            //     }
+            // }
+        }
+        #endregion
+
         gm.bs.BossFireBallMarkObj.SetActive(false);
         yield return new WaitForSeconds(delayGUIActive);
 
