@@ -32,7 +32,7 @@ public class Util : MonoBehaviour
         //* Anim Clip List
         int i = 0;
         Array.ForEach(clips, clip=> {
-            Debug.Log($"Util::getAnimPlayTime():: Obj:{anim.name} i={i}, clipName= <b>{clip.name}</b>, str={str} , clip.time= {clip.length} => {(clip.name == str? "<color=blue>TRUE</color>" : "false")}");
+            // Debug.Log($"Util::getAnimPlayTime():: Obj:{anim.name} i={i}, clipName= <b>{clip.name}</b>, str={str} , clip.time= {clip.length} => {(clip.name == str? "<color=blue>TRUE</color>" : "false")}");
             if(clip.name == str){
                 index = i;
                 return;
@@ -130,9 +130,10 @@ public class Util : MonoBehaviour
         GameObject obj = null;
         RaycastHit[] hits = Physics.SphereCastAll(pos, radius, Vector3.up, 0);
         Array.ForEach(hits, hit => {
-            if(hit.transform.CompareTag(tag))
+            if(hit.transform.CompareTag(tag)){
                 Debug.Log("getTagObjFromRaySphereCast:: HIT PLAYER!!");
                 obj = hit.transform.gameObject;
+            }
         });
         return obj;
     }

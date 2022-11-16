@@ -47,12 +47,12 @@ public class BossBlock : Block_Prefab{
             case 1:
                 if(randPer < 0){createObstacleSingleType(4);}
                 else if(randPer < 1){StartCoroutine(coBossHeal());}
-                else bossAttack(screamAnimTime);
+                else StartCoroutine(coBossAttack(screamAnimTime));
                 break;
             case 2:
                 if(randPer < 0){createObstaclePatternType(0, 2);}
                 else if(randPer < 1){StartCoroutine(coBossHeal());}
-                else bossAttack(screamAnimTime);
+                else StartCoroutine(coBossAttack(screamAnimTime));
                 break;
             case 3:
                 // if(obstacleResetCnt == 0) createObstaclePatternType(2, 4);
@@ -75,10 +75,7 @@ public class BossBlock : Block_Prefab{
         }
     }
 
-    void bossAttack(float screamAnimTime){
-        StartCoroutine(coFireBallAttack(screamAnimTime));
-    }
-    IEnumerator coFireBallAttack(float screamAnimTime){
+    IEnumerator coBossAttack(float screamAnimTime){
         Debug.Log($"coFireBallAttack(screamAnimTime= {screamAnimTime})"); //2.333333f
         const float offsetX = 1.3f;
         Vector3 target = new Vector3(gm.pl.transform.position.x + offsetX, gm.pl.transform.position.y, gm.pl.transform.position.z);
