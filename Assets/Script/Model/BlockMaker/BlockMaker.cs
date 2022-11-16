@@ -140,7 +140,7 @@ public class BlockMaker : MonoBehaviour
     }
     public void bossSpawn(){
         if(gm.stage % LM._.BOSS_STAGE_SPAN == 0 && gm.bossGroup.childCount == 0){
-                int index = gm.stage / LM._.BOSS_STAGE_SPAN- 1;
+                int index = gm.stage / LM._.BOSS_STAGE_SPAN - 1;
                 Debug.Log($"BOSS SPAWN!! index= {index}");
 
                 var pos = new Vector3(0, 0, bossPrefs[index].transform.position.z + 2);

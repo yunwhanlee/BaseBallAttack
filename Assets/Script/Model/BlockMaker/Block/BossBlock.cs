@@ -38,21 +38,20 @@ public class BossBlock : Block_Prefab{
 
     public void activeBossSkill(){ //* at NextStage
         this.anim.SetTrigger(DM.ANIM.Scream.ToString());
-        float screamAnimTime = Util._.getAnimPlayTime(DM.ANIM.Scream.ToString(), this.anim);
+        
         var randPer = Random.Range(0, 10);
-        bossLevel = gm.stage / LM._.BOSS_STAGE_SPAN;
         if(obstacleResetCnt == 0) randPer = 0;
         Debug.Log($"<color=yellow>BossBlock::activeBossSkill():: bossLevel= {bossLevel}, randPer= {randPer}, obstacleResetCnt= {obstacleResetCnt} / {OBSTACLE_RESET_SPAN}</color>");
         switch(bossLevel){
             case 1:
                 if(randPer < 0){createObstacleSingleType(4);}
                 else if(randPer < 1){StartCoroutine(coBossHeal());}
-                else StartCoroutine(coBossAttack(screamAnimTime));
+                else StartCoroutine(coBossAttack("Fireball Shoot"));
                 break;
             case 2:
                 if(randPer < 0){createObstaclePatternType(0, 2);}
                 else if(randPer < 1){StartCoroutine(coBossHeal());}
-                else StartCoroutine(coBossAttack(screamAnimTime));
+                else StartCoroutine(coBossAttack("Flame Attack"));
                 break;
             case 3:
                 // if(obstacleResetCnt == 0) createObstaclePatternType(2, 4);
@@ -75,11 +74,12 @@ public class BossBlock : Block_Prefab{
         }
     }
 
-    IEnumerator coBossAttack(float screamAnimTime){
-        Debug.Log($"coFireBallAttack(screamAnimTime= {screamAnimTime})"); //2.333333f
+    IEnumerator coBossAttack(string attackAnimName){
+        Debug.Log($"BossBlock::coBossAttack()::"); //2.333333f
         const float offsetX = 1.3f;
         Vector3 target = new Vector3(gm.pl.transform.position.x + offsetX, gm.pl.transform.position.y, gm.pl.transform.position.z);
-        float attackAnimTime = Util._.getAnimPlayTime("Fireball Shoot", this.anim);
+        float screamAnimTime = Util._.getAnimPlayTime(DM.ANIM.Scream.ToString(), this.anim);
+        float attackAnimTime = Util._.getAnimPlayTime(attackAnimName, this.anim);
         float blessShootTiming = attackAnimTime * 0.5f;
         float targetReachTime = 0.5f;
         float delayGUIActive = 0.2f;
