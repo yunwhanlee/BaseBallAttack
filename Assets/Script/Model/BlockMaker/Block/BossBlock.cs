@@ -44,23 +44,23 @@ public class BossBlock : Block_Prefab{
         Debug.Log($"<color=yellow>BossBlock::activeBossSkill():: bossLevel= {bossLevel}, randPer= {randPer}, obstacleResetCnt= {obstacleResetCnt} / {OBSTACLE_RESET_SPAN}</color>");
         switch(bossLevel){
             case 1:
-                if(randPer <= 0){createObstacleSingleType(4);}
-                else if(randPer <= 1){StartCoroutine(coBossHeal());}
+                if(randPer <= 3){createObstacleSingleType(4);}
+                else if(randPer <= 6){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack("Fireball Shoot"));
                 break;
             case 2:
-                if(randPer <= 0){createObstaclePatternType(0, 2);}
-                else if(randPer <= 1){StartCoroutine(coBossHeal());}
+                if(randPer <= 3 && obstacleResetCnt == 0){createObstaclePatternType(0, 2);}
+                else if(randPer <= 6){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack("Flame Attack"));
                 break;
             case 3:
-                if(randPer <= 0){createObstaclePatternType(2, 4);}
-                if(randPer <= 1){StartCoroutine(coBossHeal());}
+                if(randPer <= 3 && obstacleResetCnt == 0){createObstaclePatternType(2, 4);}
+                else if(randPer <= 6){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack("Horn Attack"));
                 break;
             case 4:
-                if(randPer <= 0){createObstaclePatternType(4, 7);}
-                if(randPer <= 1){StartCoroutine(coBossHeal());}
+                if(randPer <= 03 && obstacleResetCnt == 0){createObstaclePatternType(4, 7);}
+                else if(randPer <= 6){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack("Fly Flame Attack"));
                 break;
         }
@@ -159,7 +159,7 @@ public class BossBlock : Block_Prefab{
                 targetPosArr[i] = new Vector3(targetPosList[rand], targetPos.y, targetPos.z);
                 targetPosList.RemoveAt(rand);
                 Util._.DebugSphere(targetPosArr[i], 1.25f, 1.5f, "red");//* Preview Spot 生成
-                gm.em.createAimingEF(targetPos);
+                gm.em.createAimingEF(targetPosArr[i]);
             }
             yield return new WaitForSeconds(attackAnimTime * 0.6f);
 
@@ -192,7 +192,7 @@ public class BossBlock : Block_Prefab{
                     targetPosArr[i] = new Vector3(targetPosList[rand], targetPos.y, targetPos.z);
                     targetPosList.RemoveAt(rand);
                     Util._.DebugSphere(targetPosArr[i], 1.25f, 1, "red");//* Preview Spot 生成
-                    gm.em.createAimingEF(targetPos);
+                    gm.em.createAimingEF(targetPosArr[i]);
                 }
                 yield return new WaitForSeconds(attackAnimTime * 0.45f);
 
