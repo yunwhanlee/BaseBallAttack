@@ -63,6 +63,7 @@
             ✓ Boss Lv3 HORN ATTACKタイプ。三つの場所中で、一つ残り、二つ同時に爆発。
             ✓ Boss Lv4 LV1とLV3タイプを合わせた攻撃８回。
             ✓ Boss Preview DebugSphereに関して、狙うアイコンのEFEECT追加。
+            ✓ Boss Aiming IconEFが複数できない問題解決。
 
         -  スキルランダム生成シート制作。
         -  ボース登場した時、名前表示。
@@ -84,4 +85,6 @@
     -  GiantBall ダメージをもっとアップする：まるでボース特化スキールように
     -  インゲームで、Bottom PSV Table GUIで、９個が増えたら下に整列され、イメージが切れちゃうこと。
     ✓ Util:: AnimGetClipLength=>Secを探索方法変更(Index->名前)。
+    ✓ Strikeになったら、NextStage()を直接に読みだすことで、次に行かない問題解決。
+    
 

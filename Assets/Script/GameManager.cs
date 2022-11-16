@@ -337,16 +337,17 @@ public class GameManager : MonoBehaviour
     private IEnumerator corSetStrike(bool isOut = false){
         strikeCntImgs[strikeCnt++].gameObject.SetActive(true);
         if(isOut){ //* アウト
-            stage++;
             strikeCnt = 0;
             ShootCntTxt.text = LANG.getTxt(LANG.TXT.Out.ToString()) + "!";
             yield return new WaitForSeconds(1.5f);
             bs.init();
             switchCamera();
-            bm.DoCreateBlock = true; //ブロック生成
             foreach(var img in strikeCntImgs) img.gameObject.SetActive(false); //GUI非表示 初期化
-            readyBtn.gameObject.SetActive(true);
-            pl.previewBundle.SetActive(true);
+            // stage++;
+            // bm.DoCreateBlock = true; //ブロック生成
+            // readyBtn.gameObject.SetActive(true);
+            // pl.previewBundle.SetActive(true);
+            setNextStage();
         }
         else{ //* ストライク
             ShootCntTxt.text = LANG.getTxt(LANG.TXT.Strike.ToString()) + "!";
