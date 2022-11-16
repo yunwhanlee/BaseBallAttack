@@ -5,13 +5,13 @@ using UnityEngine;
 public class BossFireBallTrailEF : MonoBehaviour
 {
     GameManager gm;
-    [SerializeField] Vector3 target;    public Vector3 Target {get=>target; set=>target=value;}
+    [SerializeField] Vector3 targetPos;    public Vector3 TargetPos {get=>targetPos; set=>targetPos=value;}
 
     void Start(){
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void Update(){
-        transform.position = Vector3.MoveTowards(transform.position, target, 50 * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, 50 * Time.deltaTime);
     }
 }

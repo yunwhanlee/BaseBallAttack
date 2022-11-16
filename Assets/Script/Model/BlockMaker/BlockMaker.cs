@@ -140,11 +140,11 @@ public class BlockMaker : MonoBehaviour
     }
     public void bossSpawn(){
         if(gm.stage % LM._.BOSS_STAGE_SPAN == 0 && gm.bossGroup.childCount == 0){
-                int index = gm.stage / LM._.BOSS_STAGE_SPAN - 1;
-                Debug.Log($"BOSS SPAWN!! index= {index}");
+                int idx = gm.stage / LM._.BOSS_STAGE_SPAN - 1;
+                Debug.Log($"BOSS SPAWN!! index= {idx}");
 
-                var pos = new Vector3(0, 0, bossPrefs[index].transform.position.z + 2);
-                Instantiate(bossPrefs[index], pos, bossPrefs[index].transform.rotation, gm.bossGroup);
+                var pos = new Vector3(0, 0, bossPrefs[idx].transform.position.z + 2);
+                Instantiate(bossPrefs[idx], pos, bossPrefs[idx].transform.rotation, gm.bossGroup);
 
                 // bossStgBarRectTf.anchorMin = new Vector2(0.1f, 0.5f);
 

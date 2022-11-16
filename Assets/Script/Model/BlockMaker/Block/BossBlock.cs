@@ -44,13 +44,13 @@ public class BossBlock : Block_Prefab{
         Debug.Log($"<color=yellow>BossBlock::activeBossSkill():: bossLevel= {bossLevel}, randPer= {randPer}, obstacleResetCnt= {obstacleResetCnt} / {OBSTACLE_RESET_SPAN}</color>");
         switch(bossLevel){
             case 1:
-                if(randPer < 0){createObstacleSingleType(4);}
-                else if(randPer < 1){StartCoroutine(coBossHeal());}
+                if(randPer <= 0){createObstacleSingleType(4);}
+                else if(randPer <= 1){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack("Fireball Shoot"));
                 break;
             case 2:
-                if(randPer < 0){createObstaclePatternType(0, 2);}
-                else if(randPer < 1){StartCoroutine(coBossHeal());}
+                if(randPer <= 0){createObstaclePatternType(0, 2);}
+                else if(randPer <= 1){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack("Flame Attack"));
                 break;
             case 3:
@@ -77,11 +77,11 @@ public class BossBlock : Block_Prefab{
     IEnumerator coBossAttack(string attackAnimName){
         Debug.Log($"BossBlock::coBossAttack()::"); //2.333333f
         const float offsetX = 1.3f;
-        Vector3 target = new Vector3(gm.pl.transform.position.x + offsetX, gm.pl.transform.position.y, gm.pl.transform.position.z);
+        Vector3 targetPos = new Vector3(gm.pl.transform.position.x + offsetX, gm.pl.transform.position.y, gm.pl.transform.position.z);
         float screamAnimTime = Util._.getAnimPlayTime(DM.ANIM.Scream.ToString(), this.anim);
         float attackAnimTime = Util._.getAnimPlayTime(attackAnimName, this.anim);
         float blessShootTiming = attackAnimTime * 0.5f;
-        float targetReachTime = 0.5f;
+        float targetReachTime = blessShootTiming;
         float delayGUIActive = 0.2f;
         float playerStunTime = 3;
 
@@ -90,32 +90,61 @@ public class BossBlock : Block_Prefab{
         gm.activeSkillBtnGroup.gameObject.SetActive(false);
 
         //* Wait Scream Anim
-        yield return new WaitForSeconds(screamAnimTime * 0.75f);
+        yield return new WaitForSeconds(screamAnimTime);
         gm.bs.BossFireBallMarkObj.SetActive(true);
-        Util._.DebugSphere(target, 1.25f, 2, "red");
-        yield return new WaitForSeconds(screamAnimTime * 0.25f);
         
         //* Begin Attack Anim
+        Debug.Log($"coFireBallAttack:: attackAnimTime= {attackAnimTime}");
         this.anim.SetTrigger(DM.ANIM.Attack.ToString());
-        Debug.Log($"coFireBallAttack:: attackAnimTime= {attackAnimTime}"); // 1.0f
-        yield return new WaitForSeconds(blessShootTiming);
 
         //* FireBallEF 生成
-        GameObject fireBallIns = gm.em.createBossFireBallTrailEF(mouthTf.transform.position);
-        fireBallIns.GetComponent<BossFireBallTrailEF>().Target = target;
-        yield return new WaitForSeconds(targetReachTime);
+        if(attackAnimName == "Fireball Shoot"){ //* LV 1
+            Util._.DebugSphere(targetPos, 1.25f, 2, "red");
+            yield return new WaitForSeconds(blessShootTiming);
 
-        //* ExplosionEF 生成
-        GameObject explosionIns = gm.em.createBossFireBallExplosionEF(target);
-        //* Playerか判別
-        Vector3 pos = explosionIns.transform.position;
-        var hitObj = Util._.getTagObjFromRaySphereCast(pos, 1, DM.TAG.Player.ToString());
-        if(hitObj){
-            gm.pl.IsStun = true;
-            //* Stun EF
-            gm.em.createStunEF(gm.pl.modelMovingTf.position, playerStunTime);
-            gm.pl.anim.SetBool(DM.ANIM.IsIdle.ToString(), true);
+            GameObject fireBallIns = gm.em.createBossFireBallTrailEF(mouthTf.transform.position);
+            fireBallIns.GetComponent<BossFireBallTrailEF>().TargetPos = targetPos;
+            yield return new WaitForSeconds(targetReachTime);
+
+            //* ExplosionEF 生成
+            GameObject explosionIns = gm.em.createBossFireBallExplosionEF(targetPos);
+            //* Playerか判別
+            Vector3 pos = explosionIns.transform.position;
+            var hitObj = Util._.getTagObjFromRaySphereCast(pos, 1, DM.TAG.Player.ToString());
+            if(hitObj){
+                gm.pl.IsStun = true;
+                //* Stun EF
+                gm.em.createStunEF(gm.pl.modelMovingTf.position, playerStunTime);
+                gm.pl.anim.SetBool(DM.ANIM.IsIdle.ToString(), true);
+            }
         }
+        else if(attackAnimName == "Flame Attack"){ //* LV 2
+            int rand = Random.Range(0, 2);
+            float[] X_POS_ARR = (rand == 0)? new float[]{-3.0f, 0, 3.0f} : new float[]{3.0f, 0, -3.0f};
+            for(int i=0; i<3; i++){
+                targetPos = new Vector3(X_POS_ARR[i], targetPos.y, targetPos.z);
+                Util._.DebugSphere(targetPos, 1.25f, 2, "red");
+                yield return new WaitForSeconds(0.5f);
+
+                GameObject fireBallIns = gm.em.createBossFireBallTrailEF(mouthTf.transform.position);
+                fireBallIns.GetComponent<BossFireBallTrailEF>().TargetPos = targetPos;
+                Debug.Log($"LV2: Flame Attack:: targetPos.x= {fireBallIns.transform.position.x}");
+                yield return new WaitForSeconds(targetReachTime * 0.3f);
+
+                //* ExplosionEF 生成
+                GameObject explosionIns = gm.em.createBossFireBallExplosionEF(targetPos);
+                //* Playerか判別
+                Vector3 pos = explosionIns.transform.position;
+                var hitObj = Util._.getTagObjFromRaySphereCast(pos, 1, DM.TAG.Player.ToString());
+                if(hitObj){
+                    gm.pl.IsStun = true;
+                    //* Stun EF
+                    gm.em.createStunEF(gm.pl.modelMovingTf.position, playerStunTime);
+                    gm.pl.anim.SetBool(DM.ANIM.IsIdle.ToString(), true);
+                }
+            }
+        }
+
         gm.bs.BossFireBallMarkObj.SetActive(false);
         yield return new WaitForSeconds(delayGUIActive);
 
