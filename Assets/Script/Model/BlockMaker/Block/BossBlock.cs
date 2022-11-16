@@ -15,15 +15,15 @@ public class BossBlock : Block_Prefab{
     const float BOSS_HEAL_RATIO = 0.2f;
     const int STONE_PER = 100;
     const int OBSTACLE_RESET_SPAN = 8;
-    [SerializeField] int obstacleResetCnt = 0;
     // [SerializeField]  string skillType;
-    [SerializeField] Transform bossDieOrbSpawnTf;
-    [SerializeField] Transform mouthTf;
 
     [Header("【BOSS STATUS】")]
-    [SerializeField] int level;
+    [SerializeField] int bossLevel;
+    [SerializeField] int obstacleResetCnt = 0;
     [SerializeField] GameObject obstacleStonePf;
     [SerializeField] List<Vector3> obstaclePosList;
+    [SerializeField] Transform bossDieOrbSpawnTf;
+    [SerializeField] Transform mouthTf;
 
 
     private void OnDisable() {
@@ -38,42 +38,36 @@ public class BossBlock : Block_Prefab{
 
     public void activeBossSkill(){ //* at NextStage
         this.anim.SetTrigger(DM.ANIM.Scream.ToString());
-        const int SCREAM_INDEX = 6;
-        float screamAnimTime = Util._.getAnimPlayTime(SCREAM_INDEX, this.anim);
-
-        var rand = Random.Range(0, 100);
-        level = gm.stage / LM._.BOSS_STAGE_SPAN;
-        Debug.Log($"<color=yellow>BossBlock::activeBossSkill():: level= {level}, rand= {rand}, obstacleResetCnt= {obstacleResetCnt} / {OBSTACLE_RESET_SPAN}</color>");
-        switch(level){
+        float screamAnimTime = Util._.getAnimPlayTime(DM.ANIM.Scream.ToString(), this.anim);
+        var randPer = Random.Range(0, 10);
+        bossLevel = gm.stage / LM._.BOSS_STAGE_SPAN;
+        if(obstacleResetCnt == 0) randPer = 0;
+        Debug.Log($"<color=yellow>BossBlock::activeBossSkill():: bossLevel= {bossLevel}, randPer= {randPer}, obstacleResetCnt= {obstacleResetCnt} / {OBSTACLE_RESET_SPAN}</color>");
+        switch(bossLevel){
             case 1:
-                // if(obstacleResetCnt == 0) createObstacleSingleType(4);
-                // else{
-                    // if(rand < 30){createObstacleSingleType(4);}
-                    // else if(rand < 60){StartCoroutine(coBossHeal());}
-                    // else 
-                    bossAttack(screamAnimTime);
-                // }
-                obstacleResetCnt++;
+                if(randPer < 0){createObstacleSingleType(4);}
+                else if(randPer < 1){StartCoroutine(coBossHeal());}
+                else bossAttack(screamAnimTime);
                 break;
             case 2:
-                if(obstacleResetCnt == 0) createObstaclePatternType(0, 2);
-                if(rand < 70){StartCoroutine(coBossHeal());}
-                else{StartCoroutine(coBossHeal());}
-                obstacleResetCnt++;
+                if(randPer < 0){createObstaclePatternType(0, 2);}
+                else if(randPer < 1){StartCoroutine(coBossHeal());}
+                else bossAttack(screamAnimTime);
                 break;
             case 3:
-                if(obstacleResetCnt == 0) createObstaclePatternType(2, 4);
-                if(rand < 70){StartCoroutine(coBossHeal());}
-                else{StartCoroutine(coBossHeal());}
-                obstacleResetCnt++;
+                // if(obstacleResetCnt == 0) createObstaclePatternType(2, 4);
+                // if(randPer < 70){StartCoroutine(coBossHeal());}
+                // else{StartCoroutine(coBossHeal());}
                 break;
             case 4:
-                if(obstacleResetCnt == 0) createObstaclePatternType(4, 7);
-                if(rand < 70){StartCoroutine(coBossHeal());}
-                else{StartCoroutine(coBossHeal());}
-                obstacleResetCnt++;
+                // if(obstacleResetCnt == 0) createObstaclePatternType(4, 7);
+                // if(randPer < 70){StartCoroutine(coBossHeal());}
+                // else{StartCoroutine(coBossHeal());}
                 break;
         }
+        obstacleResetCnt++;
+
+        //* Reset
         if(obstacleResetCnt == OBSTACLE_RESET_SPAN){
             obstacleResetCnt = 0;
             obstaclePosList = new List<Vector3>{};
@@ -88,8 +82,7 @@ public class BossBlock : Block_Prefab{
         Debug.Log($"coFireBallAttack(screamAnimTime= {screamAnimTime})"); //2.333333f
         const float offsetX = 1.3f;
         Vector3 target = new Vector3(gm.pl.transform.position.x + offsetX, gm.pl.transform.position.y, gm.pl.transform.position.z);
-        const int FIREBALLSHOOT_INDEX = 3;
-        float attackAnimTime = Util._.getAnimPlayTime(FIREBALLSHOOT_INDEX, this.anim);
+        float attackAnimTime = Util._.getAnimPlayTime("Fireball Shoot", this.anim);
         float blessShootTiming = attackAnimTime * 0.5f;
         float targetReachTime = 0.5f;
         float delayGUIActive = 0.2f;
@@ -107,7 +100,7 @@ public class BossBlock : Block_Prefab{
         
         //* Begin Attack Anim
         this.anim.SetTrigger(DM.ANIM.Attack.ToString());
-        Debug.Log($"coFireBallAttack:: attackAnimSec= {attackAnimTime}"); // 1.0f
+        Debug.Log($"coFireBallAttack:: attackAnimTime= {attackAnimTime}"); // 1.0f
         yield return new WaitForSeconds(blessShootTiming);
 
         //* FireBallEF 生成
@@ -173,10 +166,9 @@ public class BossBlock : Block_Prefab{
         boxCollider.enabled = false;
         int resultExp = gm.stage * 10;
 
-        const int DIE = 2;
-        float playSec = Util._.getAnimPlayTime(DIE, this.anim);
+        float playSec = Util._.getAnimPlayTime(DM.ANIM.Die.ToString(), this.anim);
 
-        anim.SetTrigger(DM.ANIM.DoDie.ToString());
+        anim.SetTrigger(DM.ANIM.Die.ToString());
 
         yield return new WaitForSecondsRealtime(playSec * 0.7f);
         for(int i=0; i < BOSS_DIE_ORB_CNT; i++)
@@ -191,7 +183,7 @@ public class BossBlock : Block_Prefab{
     private void createObstacleSingleType(int maxCnt){
         //* OBSTACLE LIST 準備
         var obstaclePosList = getObstaclePosList();
-        Debug.Log($"createObstacleSingleType:: maxCnt= {maxCnt}, obstaclePosList= {obstaclePosList.Count}");
+        Debug.Log($"BossBlock::createObstacleSingleType:: maxCnt= {maxCnt}, obstaclePosList= {obstaclePosList.Count}");
         if(maxCnt > obstaclePosList.Count)
             maxCnt = obstaclePosList.Count;
         singleRandom(Random.Range(1, maxCnt));

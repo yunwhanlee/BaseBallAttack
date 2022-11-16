@@ -3143,11 +3143,12 @@ MonoBehaviour:
   minLimitVal: 0
   spawnAnimSpeed: 0
   hpTxt: {fileID: 6168444438982223391}
+  bossLevel: 0
   obstacleResetCnt: 0
-  bossDieOrbSpawnTf: {fileID: 0}
-  level: 0
   obstacleStonePf: {fileID: 3271815229447742362, guid: 31c44a90588876146b9910ac404c7fb8, type: 3}
   obstaclePosList: []
+  bossDieOrbSpawnTf: {fileID: 0}
+  mouthTf: {fileID: 8872277513978538793}
 --- !u!1 &8872277513978965753
 GameObject:
   m_ObjectHideFlags: 0

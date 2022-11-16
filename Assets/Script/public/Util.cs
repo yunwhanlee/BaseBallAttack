@@ -25,19 +25,22 @@ public class Util : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public float getAnimPlayTime(int index, Animator anim){
+    public float getAnimPlayTime(string str, Animator anim){
         AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
-
+        Debug.Log($"Util::getAnimPlayTime(<color=yellow>{str}</color>)::--------------------");
+        int index = -1;
         //* Anim Clip List
         int i = 0;
-        Debug.Log("Anim Clip List-------------------------------------------------");
         Array.ForEach(clips, clip=> {
-            Debug.Log($"getAnimPlayTime::{anim.name}:: i={i}, clip= {clip.name}, clip.length= {clip.length}");
+            Debug.Log($"Util::getAnimPlayTime():: Obj:{anim.name} i={i}, clipName= <b>{clip.name}</b>, str={str} , clip.time= {clip.length} => {(clip.name == str? "<color=blue>TRUE</color>" : "false")}");
+            if(clip.name == str){
+                index = i;
+                return;
+            }
             i++;
         });
-
-        Debug.Log($"<color=yellow>Util::getAnimPlayTime(index={index}):: clip[{index}].name= {clips[index].name}, length「sec」= {clips[index].length}</color>");
         float sec = clips[index].length;
+        Debug.Log($"<size=15>Util::getAnimPlayTime:: index= {index}, clip.name= {clips[index].name} => return {sec}sec</size>");
         return sec;
     }
 
@@ -127,7 +130,8 @@ public class Util : MonoBehaviour
         GameObject obj = null;
         RaycastHit[] hits = Physics.SphereCastAll(pos, radius, Vector3.up, 0);
         Array.ForEach(hits, hit => {
-            if(hit.transform.CompareTag(tag)) //DM.TAG.Player.ToString()
+            if(hit.transform.CompareTag(tag))
+                Debug.Log("getTagObjFromRaySphereCast:: HIT PLAYER!!");
                 obj = hit.transform.gameObject;
         });
         return obj;

@@ -140,7 +140,7 @@ public class BlockMaker : MonoBehaviour
     }
     public void bossSpawn(){
         if(gm.stage % LM._.BOSS_STAGE_SPAN == 0 && gm.bossGroup.childCount == 0){
-                int index = gm.stage / LM._.BOSS_STAGE_SPAN - 1;
+                int index = gm.stage / LM._.BOSS_STAGE_SPAN- 1;
                 Debug.Log($"BOSS SPAWN!! index= {index}");
 
                 var pos = new Vector3(0, 0, bossPrefs[index].transform.position.z + 2);
@@ -166,8 +166,7 @@ public class BlockMaker : MonoBehaviour
         gm.readyBtn.gameObject.SetActive(false);
         gm.statusFolderPanel.gameObject.SetActive(false);
 
-        const int SPAWN = 1; // IDLE = 0
-        float animPlayTime = Util._.getAnimPlayTime(SPAWN, txtAnim);
+        float animPlayTime = Util._.getAnimPlayTime(DM.ANIM.BossSpawnTxt_Spawn.ToString(), txtAnim);
 
         Time.timeScale = 0.1f;
         camAnim.SetTrigger(DM.ANIM.DoBossSpawn.ToString());

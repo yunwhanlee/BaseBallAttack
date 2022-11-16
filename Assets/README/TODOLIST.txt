@@ -52,13 +52,19 @@
         ✓  ステージバーを体力バーとしても用意及び変換。
         ✓  障害物(STONE)が、一般のフロックと重ならないように。
         ✓  OBSTACLE_RESET_SPANとCNTを宣言し、設定した周期まで障害物を維持。
-        -  スキルランダム生成シート制作。
         ✓ 急にファイヤーボールを刺すことを回避する物追加。
             ✓ FireBallWaringIcon追加
             ✓ PLAYER StunEF OK.
             ✓ STUNになったら、このターンは何もできないように処理。
             ✓ Player TOuchSlideConrolで、PointDownの場合、Stunになったら、MESH戻す。
             ✓ ソースコードREFACTORY。
+            ✓ Boss Lv1完了。
+            -  Boss Lv2 ブレスタイプ。
+            -  Boss Lv3 ???タイプ。
+            -  Boss Lv4 ???タイプ。
+
+        -  スキルランダム生成シート制作。
+        -  ボース登場した時、名前表示。
         
 
 [BUG]
@@ -74,3 +80,7 @@
     ✓ LevelUpPanelAnimateで、直接止めたら、Y座標が少しずつズレて気持ち悪いこと対応。
     ✓ PSV MaxLevel以上に上がったら、Out of Index エラー。
     -  GiantBall Folder Status 値が可笑しい。
+    -  GiantBall ダメージをもっとアップする：まるでボース特化スキールように
+    -  インゲームで、Bottom PSV Table GUIで、９個が増えたら下に整列され、イメージが切れちゃうこと。
+    ✓ Util:: AnimGetClipLength=>Secを探索方法変更(Index->名前)。
+
