@@ -54,9 +54,9 @@ public class BossBlock : Block_Prefab{
                 else StartCoroutine(coBossAttack("Flame Attack"));
                 break;
             case 3:
-                // if(obstacleResetCnt == 0) createObstaclePatternType(2, 4);
-                // if(randPer < 70){StartCoroutine(coBossHeal());}
-                // else{StartCoroutine(coBossHeal());}
+                if(randPer <= 0){createObstaclePatternType(2, 4);}
+                if(randPer <= 1){StartCoroutine(coBossHeal());}
+                else StartCoroutine(coBossAttack("Horn Attack"));
                 break;
             case 4:
                 // if(obstacleResetCnt == 0) createObstaclePatternType(4, 7);
@@ -99,7 +99,7 @@ public class BossBlock : Block_Prefab{
 
         //* FireBallEF 生成
         if(attackAnimName == "Fireball Shoot"){ //* LV 1
-            Util._.DebugSphere(targetPos, 1.25f, 2, "red");
+            Util._.DebugSphere(targetPos, 1.25f, 1.5f, "red");//* Preview Spot 生成
             yield return new WaitForSeconds(blessShootTiming);
 
             GameObject fireBallIns = gm.em.createBossFireBallTrailEF(mouthTf.transform.position);
@@ -119,11 +119,13 @@ public class BossBlock : Block_Prefab{
             }
         }
         else if(attackAnimName == "Flame Attack"){ //* LV 2
-            int rand = Random.Range(0, 2);
-            float[] X_POS_ARR = (rand == 0)? new float[]{-3.0f, 0, 3.0f} : new float[]{3.0f, 0, -3.0f};
+            const int LEFT = 0;
+            int rand = Random.Range(LEFT, 2);
+            float[] X_POS_ARR = (rand == LEFT)? new float[]{-3.0f, 0, 3.0f} : new float[]{3.0f, 0, -3.0f};
+            this.transform.localScale = new Vector3((rand == LEFT)? Mathf.Abs(this.transform.localScale.x) : -Mathf.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.z);
             for(int i=0; i<3; i++){
                 targetPos = new Vector3(X_POS_ARR[i], targetPos.y, targetPos.z);
-                Util._.DebugSphere(targetPos, 1.25f, 2, "red");
+                Util._.DebugSphere(targetPos, 1.25f, 1.5f, "red");//* Preview Spot 生成
                 yield return new WaitForSeconds(0.5f);
 
                 GameObject fireBallIns = gm.em.createBossFireBallTrailEF(mouthTf.transform.position);
@@ -144,7 +146,33 @@ public class BossBlock : Block_Prefab{
                 }
             }
         }
+        else if(attackAnimName == "Horn Attack"){ //* LV 3
+            List<float> targetPosList = new List<float>(){-3.0f, 0, 3.0f};
+            
+            //* Set ターゲットポジションランダム(２個)
+            Vector3[] targetPosArr = new Vector3[2];
+            for(int i=0; i<targetPosArr.Length; i++){
+                int rand  = Random.Range(0, targetPosList.Count);
+                targetPosArr[i] = new Vector3(targetPosList[rand], targetPos.y, targetPos.z);
+                targetPosList.RemoveAt(rand);
+                Util._.DebugSphere(targetPosArr[i], 1.25f, 1.5f, "red");//* Preview Spot 生成
+            }
+            yield return new WaitForSeconds(attackAnimTime * 0.6f);
 
+            //* ExplosionEF 生成
+            Array.ForEach(targetPosArr, targetPos => {
+                GameObject explosionIns = gm.em.createBossFireBallExplosionEF(targetPos);
+                //* Playerか判別
+                Vector3 pos = explosionIns.transform.position;
+                var hitObj = Util._.getTagObjFromRaySphereCast(pos, 1, DM.TAG.Player.ToString());
+                if(hitObj){
+                    gm.pl.IsStun = true;
+                    //* Stun EF
+                    gm.em.createStunEF(gm.pl.modelMovingTf.position, playerStunTime);
+                    gm.pl.anim.SetBool(DM.ANIM.IsIdle.ToString(), true);
+                }
+            });
+        }
         gm.bs.BossFireBallMarkObj.SetActive(false);
         yield return new WaitForSeconds(delayGUIActive);
 

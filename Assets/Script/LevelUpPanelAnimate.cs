@@ -121,7 +121,7 @@ public class LevelUpPanelAnimate : MonoBehaviour{
                 if(spriteH / 2 <= posY && posY <= spriteH){
                     //Scrolling Up
                     colSkillBtns[i].colImgRectTf.Translate(0, speed / (i+1), 0);
-                    Debug.Log($"lastIdxPosY:{lastIdxPosY}->MathRound:{Mathf.Round(lastIdxPosY)} == spriteHeight{spriteH - spriteH * 0.1f}");
+                    Debug.Log($"LevelUpPanelAnimate::Update():: lastIdxPosY:{lastIdxPosY}->MathRound:{Mathf.Round(lastIdxPosY)} == spriteHeight{spriteH - spriteH * 0.1f}");
                     //最後Idxが終わるまで待つ
                     if(Mathf.Round(lastIdxPosY) >= spriteH - spriteH * 0.1f){ //* ピッタリ止まらないので、10％周りの範囲に来たら処理することで対応。
                         isRollingStop = false;
