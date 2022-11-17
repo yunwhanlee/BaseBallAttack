@@ -76,11 +76,12 @@ public class ScrollView {
                     break;
                 case DM.PANEL.Skill : 
                 case DM.PANEL.CashShop : 
+                case DM.PANEL.Upgrade :
                     model.transform.localPosition = new Vector3(0,0,0); //* posZがずれるから、調整
-                    //! Add "OnClick()" EventListner
+                    //! Buy AddEventListener !//
                     Button btn = model.GetComponent<Button>();
                     var svEvent = ScrollRect.GetComponent<ScrollViewEvent>();
-                    btn.onClick.AddListener(delegate{svEvent.onClickSkillOrCashShopItemPanel(model);});
+                    btn.onClick.AddListener(delegate{svEvent.onClickBuyItemProcessPanel(model);});
                     break;
         }
             // Debug.Log("modelParentTf.pos=" + modelParentPref.position + ", modelParentTf.localPos=" + modelParentPref.localPosition);
@@ -304,16 +305,16 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     public void drawCheckBtnUI(){
         var curItem = getCurItem();
-        Debug.Log("drawChoiceBtnUI():: curItem.IsLock= " + curItem.IsLock);
+        Debug.Log($"drawChoiceBtnUI():: curItem.name= {curItem.name}, .IsLock= {curItem.IsLock}, .price= {curItem.price.getValue()}");
 
         //* Set PriceType Icon Img Sprite
-        if(curItem.price.Type == Price.TP.COIN){
+        if(curItem.price.Type == Price.TP.COIN)
             hm.priceTypeIconImg.sprite = hm.CoinIconSprite;
-        }else{
+        else
             hm.priceTypeIconImg.sprite = hm.DiamondIconSprite;
-        }
 
-        if(DM.ins.SelectItemType == DM.PANEL.CashShop.ToString()){
+        if(DM.ins.SelectItemType == DM.PANEL.CashShop.ToString()
+            || DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
             hm.checkMarkImg.gameObject.SetActive(false);
             hm.priceTxt.gameObject.SetActive(true);
             hm.priceTxt.text = curItem.price.getValue().ToString();
@@ -415,7 +416,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         int befIdx = DM.ins.personalData.getSelectIdx(type);
         DM.ins.personalData.setSelectIdx(CurIdx);
 
-        //* Purchase
+        #region PARCHASE
         switch(DM.ins.getCurPanelType2Enum(type)){
             case DM.PANEL.Chara :
             case DM.PANEL.Bat :
@@ -430,6 +431,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 }
                 break;
             case DM.PANEL.CashShop :
+            case DM.PANEL.Upgrade :
                 if(curItem.price.Type == Price.TP.COIN){
                     DM.ins.personalData.Coin = purchaseItem(DM.ins.personalData.Coin, curItem, befIdx);
                 }
@@ -439,19 +441,19 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 break;
         }
 
-        //* Skill Panel UI Extra Update
-        if(DM.ins.SelectItemType == DM.PANEL.Skill.ToString()){
-            onClickSkillOrCashShopItemPanel(curItem.gameObject);
+        //* 購入可能なPANELのUI処理。
+        if(DM.ins.SelectItemType == DM.PANEL.Skill.ToString()
+            || DM.ins.SelectItemType == DM.PANEL.CashShop.ToString()
+            || DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
+            onClickBuyItemProcessPanel(curItem.gameObject);
         }
-        //* CashShop
-        else if(DM.ins.SelectItemType == DM.PANEL.CashShop.ToString()){
-            onClickSkillOrCashShopItemPanel(curItem.gameObject);
-        }
+        #endregion
     }
 
-    public void onClickSkillOrCashShopItemPanel(GameObject ins){
+    public void onClickBuyItemProcessPanel(GameObject ins){
         DM.PANEL type = ins.name.Contains(DM.PANEL.Skill.ToString())? DM.PANEL.Skill
             : ins.name.Contains(DM.PANEL.CashShop.ToString())? DM.PANEL.CashShop
+            : ins.name.Contains(DM.PANEL.Upgrade.ToString())? DM.PANEL.Upgrade
             : DM.PANEL.NULL;
 
         if(type == DM.PANEL.NULL) return;
@@ -464,7 +466,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         setCheckIconColorAndOutline();
 
         var sprite = btns[CurIdx].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
-        Debug.Log("onClickSkillPanel():: CurIdx= " + CurIdx + ", ins.name= " + ins.name + ", sprite= " + sprite);
+        Debug.Log("onClickBuyItemProcessPanel():: CurIdx= " + CurIdx + ", ins.name= " + ins.name + ", sprite= " + sprite);
     }
 
     //* ----------------------------------------------------------------
@@ -497,7 +499,8 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         : (DM.ins.SelectItemType == DM.PANEL.Bat.ToString())? DM.ins.scrollviews[(int)DM.PANEL.Bat].ContentTf
         : (DM.ins.SelectItemType == DM.PANEL.Skill.ToString())? DM.ins.scrollviews[(int)DM.PANEL.Skill].ContentTf
         : (DM.ins.SelectItemType == DM.PANEL.CashShop.ToString())? DM.ins.scrollviews[(int)DM.PANEL.CashShop].ContentTf
-        : DM.ins.scrollviews[(int)DM.PANEL.Chara].ContentTf;
+        : (DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString())? DM.ins.scrollviews[(int)DM.PANEL.Upgrade].ContentTf
+        : null;
         Debug.Log("getItemArr():: contentTf= " + contentTf);
         var items = contentTf.GetComponentsInChildren<ItemInfo>();
         return items;

@@ -29,7 +29,8 @@ public class ItemInfo : MonoBehaviour
     [SerializeField] DM.RANK rank;     public DM.RANK Rank {get => rank; set => rank = value;}
     [SerializeField] Outline outline3D;    public Outline Outline3D{get => outline3D; set => outline3D = value;}
     [SerializeField] UnityEngine.UI.Extensions.NicerOutline outline2D;    public UnityEngine.UI.Extensions.NicerOutline Outline2D{get => outline2D; set => outline2D = value;}
-    [SerializeField] Text cashShopPriceTxt;     public Text CashShopPriceTxt {get => cashShopPriceTxt; set => cashShopPriceTxt = value;}
+    
+    [FormerlySerializedAs("cashShopPriceTxt")] [SerializeField] Text cashShopPriceTxt;     public Text CashShopPriceTxt {get => cashShopPriceTxt; set => cashShopPriceTxt = value;}
     [SerializeField] ItemPsvList itemPassive;  public ItemPsvList ItemPassive {get => itemPassive; set=> itemPassive = value;}
     [SerializeField] GameObject rankAuraEF;  public GameObject RankAuraEF {get => rankAuraEF; set=> rankAuraEF = value;}
 
@@ -68,7 +69,6 @@ public class ItemInfo : MonoBehaviour
 
     void Start(){
         checkLockedModel();
-        
         //* Set Price By Rank
         switch(rank){
             case DM.RANK.GENERAL : price.Coin = 100; break;
@@ -77,6 +77,7 @@ public class ItemInfo : MonoBehaviour
             case DM.RANK.LEGEND : price.Coin = 1500; break;
             case DM.RANK.GOD : price.Coin = 4000; break;
         }
+        Debug.Log("IteonInfo::Start:: Set Price By Rank= price.Coin= " + price.Coin);
     }
 
     private void arrangeItem(DM.PANEL type){
@@ -104,7 +105,7 @@ public class ItemInfo : MonoBehaviour
                     Debug.Log("CashShop:: this.name= " + this.name);
                     cashShopPriceTxt.text = price.getValue().ToString();
                 }else{
-                    Debug.Log("PsvInfo or Upgrade::");
+                    Debug.Log("PsvInfo or Upgrade:: this.name= " + this.name + ", price= " + price.getValue());
                 }
                 break;
             }
