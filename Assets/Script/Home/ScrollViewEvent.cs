@@ -51,6 +51,7 @@ public class ScrollView {
                 case DM.PANEL.Skill :
                 case DM.PANEL.CashShop :
                 case DM.PANEL.PsvInfo :
+                case DM.PANEL.Upgrade :
                 {
                     model = GameObject.Instantiate(itemPf, Vector3.zero, Quaternion.identity, contentTf);
                     model.transform.localPosition = Vector3.zero;
@@ -121,6 +122,13 @@ public class ScrollView {
                 strList.Add(txtObjs[LANG.NAME].text);
                 strList.Add(txtObjs[LANG.EXPLAIN].text);
             }
+            else if(this.type == DM.PANEL.Upgrade.ToString()){
+                txtObjs = Array.FindAll(childs, chd => chd.name == LANG.OBJNAME.NameTxt.ToString() || chd.name == LANG.OBJNAME.ExplainTxt.ToString());
+                // Array.ForEach(txtObjs, txtObj => Debug.Log($"{txtObj.name}= {txtObj.text}"));
+                strList.Add(DM.PANEL.Upgrade.ToString());
+                strList.Add(txtObjs[LANG.NAME].text);
+                strList.Add(txtObjs[LANG.EXPLAIN].text);
+            }
 
             if(txtObjs == null && strList.Count == 0) return;
 
@@ -182,7 +190,8 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         
         if(this.gameObject.name != $"ScrollView_{DM.PANEL.Skill.ToString()}" 
             && this.gameObject.name != $"ScrollView_{DM.PANEL.CashShop.ToString()}"
-            && this.gameObject.name != $"ScrollView_{DM.PANEL.PsvInfo.ToString()}"){
+            && this.gameObject.name != $"ScrollView_{DM.PANEL.PsvInfo.ToString()}"
+            && this.gameObject.name != $"ScrollView_{DM.PANEL.Upgrade.ToString()}"){
             BoxSprRdr = UIGroup.GetChild(0).GetComponent<SpriteRenderer>();
             RankTxt = UIGroup.GetChild(1).GetComponent<Text>();
             NameTxt = UIGroup.GetChild(2).GetComponent<Text>();

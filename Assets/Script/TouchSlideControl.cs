@@ -73,7 +73,10 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         if(gm.State != GameManager.STATE.WAIT) return;
         if(gm.bs.IsBallExist) return;
         if(gm.IsPlayingAnim) return;
-        if(pl.IsStun) return;
+        if(pl.IsStun) {
+            pad.gameObject.SetActive(false);
+            return;
+        }
 
         Debug.Log("OnPointerDown::");
 

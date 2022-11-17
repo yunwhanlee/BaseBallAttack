@@ -22,7 +22,7 @@ public class DM : MonoBehaviour
     public enum ANIM {BossSpawnTxt_Spawn, DoSpawn, DoShake, Swing, DoBossSpawn, Die, IsHit, IsHitBall, IsIdle, IsFly, GetHit, Scream, Attack, Touch, HomeRun};
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
     public enum HITRANK{S, A, B, C, D, E};
-    public enum PANEL {Chara, Bat, Skill, CashShop, PsvInfo, NULL};
+    public enum PANEL {Chara, Bat, Skill, CashShop, PsvInfo, Upgrade, NULL};
     public enum ATV{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave, NULL};
     public enum PSV{
         //* Normal Passive
@@ -64,6 +64,7 @@ public class DM : MonoBehaviour
         scrollviews[(int)DM.PANEL.Skill].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
         scrollviews[(int)DM.PANEL.CashShop].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
         scrollviews[(int)DM.PANEL.PsvInfo].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.PANEL.Upgrade].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
 
         //* Items of Content (Set UnLockList)
         ItemInfo[] charas = scrollviews[(int)DM.PANEL.Chara].ContentTf.GetComponentsInChildren<ItemInfo>();
@@ -77,6 +78,7 @@ public class DM : MonoBehaviour
         scrollviews[(int)DM.PANEL.Skill].setLanguage();
         scrollviews[(int)DM.PANEL.CashShop].setLanguage();
         scrollviews[(int)DM.PANEL.PsvInfo].setLanguage();
+        scrollviews[(int)DM.PANEL.Upgrade].setLanguage();
 
         //* ERROR CHECK
         LANG.checkErrorLangListCounting();
@@ -148,6 +150,7 @@ public class DM : MonoBehaviour
             : (name == DM.PANEL.Skill.ToString())? DM.PANEL.Skill
             : (name == DM.PANEL.CashShop.ToString())? DM.PANEL.CashShop
             : (name == DM.PANEL.PsvInfo.ToString())? DM.PANEL.PsvInfo
+            : (name == DM.PANEL.Upgrade.ToString())? DM.PANEL.Upgrade
             : DM.PANEL.NULL;
     }
     

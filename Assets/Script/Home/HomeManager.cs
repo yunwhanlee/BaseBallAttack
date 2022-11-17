@@ -92,6 +92,7 @@ public class HomeManager : MonoBehaviour
                 // なし
                 break;
             case DM.PANEL.PsvInfo :
+            case DM.PANEL.Upgrade :
                 checkBtn.gameObject.SetActive(false);
                 break;
             default: //* Home

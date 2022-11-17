@@ -45,22 +45,22 @@ public class BossBlock : Block_Prefab{
         switch(bossLevel){
             case 1:
                 if(randPer <= 3){createObstacleSingleType(4);}
-                else if(randPer <= 6){StartCoroutine(coBossHeal());}
+                else if(randPer <= 5){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack("Fireball Shoot"));
                 break;
             case 2:
-                if(randPer <= 1 && obstacleResetCnt == 0){createObstaclePatternType(0, 2);}
-                else if(randPer <= 2){StartCoroutine(coBossHeal());}
+                if(randPer <= 3 && obstacleResetCnt == 0){createObstaclePatternType(0, 2);}
+                else if(randPer <= 5){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack("Flame Attack"));
                 break;
             case 3:
                 if(randPer <= 3 && obstacleResetCnt == 0){createObstaclePatternType(2, 4);}
-                else if(randPer <= 6){StartCoroutine(coBossHeal());}
+                else if(randPer <= 5){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack("Horn Attack"));
                 break;
             case 4:
-                if(randPer <= 1 && obstacleResetCnt == 0){createObstaclePatternType(4, 7);}
-                else if(randPer <= 2){StartCoroutine(coBossHeal());}
+                if(randPer <= 3 && obstacleResetCnt == 0){createObstaclePatternType(4, 7);}
+                else if(randPer <= 5){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack("Fly Flame Attack"));
                 break;
         }
@@ -188,12 +188,10 @@ public class BossBlock : Block_Prefab{
         Util._.DebugSphere(targetPosArr[i], 1.25f, 1.5f, "red");//* Preview Spot 生成
         gm.em.createAimingEF(targetPosArr[i]);
     }
-
     private void setFireBallTrailEFToTargetPos(Vector3 tergetPos){
         GameObject fireBallIns = gm.em.createBossFireBallTrailEF(mouthTf.transform.position);
         fireBallIns.GetComponent<BossFireBallTrailEF>().TargetPos = tergetPos;
     }
-
     private void setExplosionEFAndPlayerStun(Vector3 targetPos, float playerStunTime){
         GameObject explosionIns = gm.em.createBossFireBallExplosionEF(targetPos);
         //* Playerか判別

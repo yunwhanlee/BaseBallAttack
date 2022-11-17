@@ -60,6 +60,10 @@ public class ItemInfo : MonoBehaviour
             LANG.PsvInfoNameList.Add(nameTxts);
             LANG.PsvInfoExplainList.Add(explainTxts);
         }
+        else if(this.name.Contains(DM.PANEL.Upgrade.ToString())){
+            LANG.UpgradeNameList.Add(nameTxts);
+            LANG.UpgradeExplainList.Add(explainTxts);
+        }
     }
 
     void Start(){
@@ -100,7 +104,7 @@ public class ItemInfo : MonoBehaviour
                     Debug.Log("CashShop:: this.name= " + this.name);
                     cashShopPriceTxt.text = price.getValue().ToString();
                 }else{
-                    Debug.Log("PsvInfo::");
+                    Debug.Log("PsvInfo or Upgrade::");
                 }
                 break;
             }

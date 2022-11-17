@@ -222,6 +222,10 @@ public static class LANG //* LANG
         // new string[]{LaserContent[(int)TP.EN], LaserContent[(int)TP.JP], LaserContent[(int)TP.KR]},
     };
 
+    public static List<string[]> UpgradeNameList = new List<string[]>(){};
+
+    public static List<string[]> UpgradeExplainList = new List<string[]>(){};
+
 //*-----------------------------------------------------------------------------------------------
 //* 関数
 //*-----------------------------------------------------------------------------------------------
@@ -231,6 +235,7 @@ public static class LANG //* LANG
         SkillNameList = new List<string[]>();
         CashShopNameList = new List<string[]>();
         PsvInfoNameList = new List<string[]>();
+        UpgradeNameList = new List<string[]>();
     }
     public static void checkErrorLangListCounting(){
         Debug.Log("checkErrorLangListCounting()::");
@@ -239,12 +244,14 @@ public static class LANG //* LANG
         int skillCttCnt = DM.ins.scrollviews[(int)DM.PANEL.Skill].ContentTf.childCount;
         int cashShopCttCnt = DM.ins.scrollviews[(int)DM.PANEL.CashShop].ContentTf.childCount;
         int psvInfoCttCnt = DM.ins.scrollviews[(int)DM.PANEL.PsvInfo].ContentTf.childCount;
+        int upgradeCttCnt = DM.ins.scrollviews[(int)DM.PANEL.Upgrade].ContentTf.childCount;
 
         Debug.LogFormat("【Chara】Lang: {0}, ContentTf: {1} => {2}", CharaList.Count, charaCttCnt, (CharaList.Count == charaCttCnt)? "OK" : "<color=red>ERROR! お互いに数字が合わない！</color>");
         Debug.LogFormat("【Bat」Lang: {0}, ContentTf: {1} => {2}", BatList.Count, batCttCnt, (BatList.Count == batCttCnt)? "OK" : "<color=red>ERROR! お互いに数字が合わない！</color>");
         Debug.LogFormat("【SkillName】Lang: {0}, ContentTf: {1} => {2}", SkillNameList.Count, skillCttCnt, (SkillNameList.Count == skillCttCnt)? "OK" : "<color=red>ERROR! お互いに数字が合わない！</color>");
         Debug.LogFormat("【CashShop】Lang: {0}, ContentTf: {1} => {2}", CashShopNameList.Count, cashShopCttCnt, (CashShopNameList.Count == cashShopCttCnt)? "OK" : "<color=red>ERROR! お互いに数字が合わない！</color>");
         Debug.LogFormat("【PsvInfo】Lang: {0}, ContentTf: {1} => {2}", PsvInfoNameList.Count, psvInfoCttCnt, (PsvInfoNameList.Count == psvInfoCttCnt)? "OK" : "<color=red>ERROR! お互いに数字が合わない！</color>");
+        Debug.LogFormat("【Upgrade】Lang: {0}, ContentTf: {1} => {2}", UpgradeNameList.Count, upgradeCttCnt, (UpgradeNameList.Count == upgradeCttCnt)? "OK" : "<color=red>ERROR! お互いに数字が合わない！</color>");
     }
     public static string getTxt(string name){
         // Debug.Log("getLangTxtListAtPlay:: name=" + name);
@@ -319,8 +326,9 @@ public static class LANG //* LANG
                 resList.Add(split[SPLIT_EXPLAIN]);
                 resList.Add(split[SPLIT_HOMERUNBONUS]);
                 break;
-            case DM.PANEL.CashShop: 
-            case DM.PANEL.PsvInfo: 
+            case DM.PANEL.CashShop:
+            case DM.PANEL.PsvInfo:
+            case DM.PANEL.Upgrade:
                 resList.Add(split[SPLIT_NAME]);
                 resList.Add(split[SPLIT_EXPLAIN]);
                 break;
@@ -358,6 +366,13 @@ public static class LANG //* LANG
                 // Debug.Log("<color=yellow><<PsvInfo>> idx= " + idx + "</color>");
                 resList[NAME] = PsvInfoNameList[idx][(int)DM.ins.personalData.Lang];
                 resList[EXPLAIN] = PsvInfoExplainList[idx][(int)DM.ins.personalData.Lang];
+                break;
+            }
+            case DM.PANEL.Upgrade:{
+                int idx = UpgradeNameList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
+                // Debug.Log("<color=yellow><<Upgrade>> idx= " + idx + "</color>");
+                resList[NAME] = UpgradeNameList[idx][(int)DM.ins.personalData.Lang];
+                resList[EXPLAIN] = UpgradeExplainList[idx][(int)DM.ins.personalData.Lang];
                 break;
             }
         }
