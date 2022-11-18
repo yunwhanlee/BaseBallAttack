@@ -23,7 +23,7 @@ public class ScrollView {
     }
 
     public void createItem(RectTransform modelParentPref, RectTransform itemPassivePanel, RectTransform itemSkillBoxPref){
-        Debug.LogFormat("createObject:: {0}, {1}, {2}, type= {3}",modelParentPref, itemPassivePanel, itemSkillBoxPref, this.type);
+        Debug.LogFormat("createItem:: {0}, {1}, {2}, type= {3}",modelParentPref, itemPassivePanel, itemSkillBoxPref, this.type);
         //* Prefabs 生成
         var itemType = DM.ins.getCurPanelType2Enum(this.type);
         Array.ForEach(itemPrefs, itemPf=>{
@@ -79,9 +79,10 @@ public class ScrollView {
                 case DM.PANEL.Upgrade :
                     model.transform.localPosition = new Vector3(0,0,0); //* posZがずれるから、調整
                     //! Buy AddEventListener !//
+                    Debug.Log($"createItem:: <color=red>AddEventLister</color>(()=><color=yellow>onClickItemPanel</color>({model.name}))");
                     Button btn = model.GetComponent<Button>();
                     var svEvent = ScrollRect.GetComponent<ScrollViewEvent>();
-                    btn.onClick.AddListener(delegate{svEvent.onClickBuyItemProcessPanel(model);});
+                    btn.onClick.AddListener(delegate{svEvent.onClickItemPanel(model);});
                     break;
         }
             // Debug.Log("modelParentTf.pos=" + modelParentPref.position + ", modelParentTf.localPos=" + modelParentPref.localPosition);
@@ -205,6 +206,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             :(this.gameObject.name.Contains(DM.PANEL.Bat.ToString()))? DM.ins.personalData.SelectBatIdx
             :(this.gameObject.name.Contains(DM.PANEL.Skill.ToString()))? DM.ins.personalData.SelectSkillIdx
             :(this.gameObject.name.Contains(DM.PANEL.CashShop.ToString()))? DM.ins.personalData.SelectSkillIdx
+            :(this.gameObject.name.Contains(DM.PANEL.Upgrade.ToString()))? DM.ins.personalData.SelectSkillIdx
             :0;
 
         // Set Scroll PosX
@@ -266,7 +268,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         contentTf.anchoredPosition = new Vector2(CurIdxBasePosX, -500);
         
         var curItem = getCurItem();
-        Debug.Log("<color>CurItem= " + curItem.name + "</color>");
+        Debug.Log("<color>curItem= " + curItem.name + "</color>");
 
         //* Show Rank Text
         RankTxt.text = curItem.Rank.ToString();
@@ -300,7 +302,6 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         boxGlowEf.GlowColor = color;
         boxGlowEf.GlowBrightness = brightness;
         boxGlowEf.OutlineWidth = outline;
-        
     }
 
     public void drawCheckBtnUI(){
@@ -338,7 +339,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 setScrollViewAnchoredPosX(typeIdx);
                 break;
             case (int)DM.PANEL.Skill: 
-                drawSkillPanelOutline();
+                drawSkillPanelOutline(typeIdx);
                 break;
             case (int)DM.PANEL.CashShop: 
                 hm.checkMarkImg.gameObject.SetActive(true);
@@ -354,9 +355,9 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         DM.ins.scrollviews[typeIdx].ContentTf.anchoredPosition = new Vector2(saveModelPosX, -500);
     }
 
-    private void drawSkillPanelOutline(){
+    private void drawSkillPanelOutline(int typeIdx){
             //* 初期化
-            var content = DM.ins.scrollviews[(int)DM.PANEL.Skill].ContentTf;
+            var content = DM.ins.scrollviews[typeIdx].ContentTf;
             for(int i=0; i<content.childCount; i++){
                 content.GetChild(i).GetComponent<NicerOutline>().enabled = false;
             }
@@ -399,13 +400,15 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }
     }
 
+
+
     //* ----------------------------------------------------------------
     //*   UI Button
     //* ----------------------------------------------------------------
     public void onClickCheckBtn(string type){
         if(DM.ins.SelectItemType != type) return;
+        Debug.Log($"<b>onClickCheckBtn(type={type}):: CurIdx= {CurIdx}</b>");
         var curItem = getCurItem();
-        Debug.LogFormat("onClickCheckBtn:: type= {0}, CurIdx= {1}, curItem= {2}, IsLock= {3}",type, CurIdx, curItem, curItem.IsLock);
 
         if(type == DM.PANEL.Skill.ToString() && curItem.IsChecked){
             Util._.displayNoticeMsgDialog(LANG.getTxt(LANG.TXT.MsgAlreadyRegistedSkill.ToString()));
@@ -445,12 +448,12 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         if(DM.ins.SelectItemType == DM.PANEL.Skill.ToString()
             || DM.ins.SelectItemType == DM.PANEL.CashShop.ToString()
             || DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
-            onClickBuyItemProcessPanel(curItem.gameObject);
+            onClickItemPanel(curItem.gameObject);
         }
         #endregion
     }
 
-    public void onClickBuyItemProcessPanel(GameObject ins){
+    public void onClickItemPanel(GameObject ins){
         DM.PANEL type = ins.name.Contains(DM.PANEL.Skill.ToString())? DM.PANEL.Skill
             : ins.name.Contains(DM.PANEL.CashShop.ToString())? DM.PANEL.CashShop
             : ins.name.Contains(DM.PANEL.Upgrade.ToString())? DM.PANEL.Upgrade
@@ -466,21 +469,29 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         setCheckIconColorAndOutline();
 
         var sprite = btns[CurIdx].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
-        Debug.Log("onClickBuyItemProcessPanel():: CurIdx= " + CurIdx + ", ins.name= " + ins.name + ", sprite= " + sprite);
+        Debug.Log($"<color=yellow>onClickItemPanel()</color>:: CurIdx= {CurIdx}, ins.name= {ins.name}, sprite= {sprite.name}");
     }
 
     //* ----------------------------------------------------------------
     //* Private Function
     //* ----------------------------------------------------------------
     private int purchaseItem(int myMoney, ItemInfo curItem, int befIdx){
-        //* Buy
-        if(myMoney >= curItem.price.getValue()){
-            myMoney -= curItem.price.getValue();
-            em.createItemBuyEF();
-            curItem.IsLock = false; //* 解禁
-            curItem.checkLockedModel();
-            DM.ins.personalData.setUnLockCurList(CurIdx);
-            drawCheckBtnUI();
+        Debug.Log($"<color=yellow>ScrollViewEvent::purchaseItem():: type= {DM.ins.SelectItemType}</color>");
+        int price = curItem.price.getValue();
+        if(myMoney >= price){
+            myMoney -= price;
+            
+            if(DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
+                Debug.Log("UPGRADE PANEL");
+            }
+            else
+            {
+                em.createItemBuyEF();
+                curItem.IsLock = false; //* 解禁
+                curItem.checkLockedModel();
+                DM.ins.personalData.setUnLockCurList(CurIdx);
+                drawCheckBtnUI();
+            }
         }
         else{//TODO Audio
             DM.ins.personalData.setSelectIdx(befIdx);

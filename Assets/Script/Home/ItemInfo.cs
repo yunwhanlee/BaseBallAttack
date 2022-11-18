@@ -31,6 +31,7 @@ public class ItemInfo : MonoBehaviour
     [SerializeField] UnityEngine.UI.Extensions.NicerOutline outline2D;    public UnityEngine.UI.Extensions.NicerOutline Outline2D{get => outline2D; set => outline2D = value;}
     
     [FormerlySerializedAs("cashShopPriceTxt")] [SerializeField] Text cashShopPriceTxt;     public Text CashShopPriceTxt {get => cashShopPriceTxt; set => cashShopPriceTxt = value;}
+    [FormerlySerializedAs("upgradeValueTxt")] [SerializeField] Text upgradeValueTxt;     public Text UpgradeValueTxt {get => upgradeValueTxt; set => upgradeValueTxt = value;}
     [SerializeField] ItemPsvList itemPassive;  public ItemPsvList ItemPassive {get => itemPassive; set=> itemPassive = value;}
     [SerializeField] GameObject rankAuraEF;  public GameObject RankAuraEF {get => rankAuraEF; set=> rankAuraEF = value;}
 
@@ -84,7 +85,7 @@ public class ItemInfo : MonoBehaviour
         switch(type){
             //* 3D Model 形式
             case DM.PANEL.Chara :
-            case DM.PANEL.Bat :{
+            case DM.PANEL.Bat : {
                 Outline3D = this.GetComponent<Outline>();
 
                 var meshs = this.GetComponentsInChildren<MeshRenderer>();
@@ -93,19 +94,28 @@ public class ItemInfo : MonoBehaviour
                 break;
             }
             //* 2D UI Sprite 形式
-            case DM.PANEL.Skill :{
+            case DM.PANEL.Skill : {
                 Outline2D = this.GetComponent<UnityEngine.UI.Extensions.NicerOutline>();
 
                 var imgs = this.GetComponentsInChildren<Image>();
                 grayPanel2D = Array.FindLast(imgs, img => img.gameObject.name == "GrayPanel");
                 break; 
             }
-            default : { 
-                if(CashShopPriceTxt){ //* CashShop
-                    Debug.Log("CashShop:: this.name= " + this.name);
-                    cashShopPriceTxt.text = price.getValue().ToString();
-                }else{
-                    Debug.Log("PsvInfo or Upgrade:: this.name= " + this.name + ", price= " + price.getValue());
+            case DM.PANEL.CashShop : { //* 追加的な特別変数へ代入。
+                try{
+                    CashShopPriceTxt.text = price.getValue().ToString();
+                }
+                catch(Exception err){
+                    Debug.LogError("ItemInfo:: rsc/home/selectItemPanel/Content/<b>CashShop</b>のPrefabのInspectorビューへ、CashShopPriceTxtがNullです。\n◆ERROR: " + err);
+                }
+                break;
+            }
+            case DM.PANEL.Upgrade : { //* 追加的な特別変数へ代入。
+                try{
+                    UpgradeValueTxt.text = "TODO";
+                }
+                catch(Exception err){
+                    Debug.LogError("ItemInfo:: rsc/home/selectItemPanel/Content/<b>Upgrade</b>のPrefabのInspectorビューへ、UpgradeValueTxtがNullです。\n◆ERROR: " + err);
                 }
                 break;
             }

@@ -13,7 +13,7 @@ public class Price
 
     //* function
     public int getValue(){
-        Debug.Log($"Price::getInfo():: type= {type}, coin= {coin}, diamond= {diamond}");
+        Debug.Log($"Price::getValue():: type= {type}, coin= {coin}, diamond= {diamond}");
         //* Check Type
         if(type == Price.TP.COIN)
             return Coin;
