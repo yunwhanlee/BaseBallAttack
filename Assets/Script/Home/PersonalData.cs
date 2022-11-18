@@ -48,7 +48,7 @@ public class PersonalData {
     public void load(ref ItemInfo[] charas, ref ItemInfo[] bats, ref ItemInfo[] skills){
         Debug.Log("<size=20><color=green>LOAD</color></size>");
         //* Check Json
-        string json = PlayerPrefs.GetString("Json");
+        string json = PlayerPrefs.GetString(DM.DATABASE_KEY.Json.ToString());
         Debug.Log("<size=15>JSON:: LOAD Data =" + json + "</size>");
 
         //* Load Data
@@ -89,10 +89,10 @@ public class PersonalData {
     
     public void save(){
         Debug.Log("<size=20><color=red>SAVE::" + this + "</color></size>");
-        PlayerPrefs.SetString("Json", JsonUtility.ToJson(this, true)); //* Serialize To Json
+        PlayerPrefs.SetString(DM.DATABASE_KEY.Json.ToString(), JsonUtility.ToJson(this, true)); //* Serialize To Json
 
         //* Print
-        string json = PlayerPrefs.GetString("Json");
+        string json = PlayerPrefs.GetString(DM.DATABASE_KEY.Json.ToString());
         Debug.Log("<size=15>JSON:: SAVE</color> Data =" + json + "</size>");
     }
 
