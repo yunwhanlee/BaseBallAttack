@@ -34,22 +34,25 @@ public class PersonalData {
     //TODO Item OnLock List
 
     //* constructor
-    public PersonalData(){  
+    public PersonalData(){
+        Debug.Log($"{this}::constructor");
         //* 初期化
-        KeyList = new List<string>();
-        charaLockList = new List<bool>();
-        batLockList = new List<bool>();
-        skillLockList = new List<bool>();
-        ItemPassive = new ItemPsvList();
-        upgrade = new UpgradeList();
+        this.KeyList = new List<string>();
+        this.charaLockList = new List<bool>();
+        this.batLockList = new List<bool>();
+        this.skillLockList = new List<bool>();
+        this.itemPassive = new ItemPsvList();
+        this.upgrade = new UpgradeList();
+
+        // Debug.Log("PersonalData::upgrade.Arr[0].lv-->" + upgrade.Arr[0].lv);
     }
 
     //* method
     public void load(ref ItemInfo[] charas, ref ItemInfo[] bats, ref ItemInfo[] skills){
-        Debug.Log("<size=20><color=green>LOAD</color></size>");
+        Debug.Log($"<size=20><color=green>{this}::LOAD</color></size>");
         //* Check Json
         string json = PlayerPrefs.GetString(DM.DATABASE_KEY.Json.ToString());
-        Debug.Log("<size=15>JSON:: LOAD Data =" + json + "</size>");
+        Debug.Log($"<size=15>{this}::JSON:: LOAD Data ={json}</size>");
 
         //* Load Data
         var data = JsonUtility.FromJson<PersonalData>(json); //* Convert Json To Class Data
@@ -71,6 +74,7 @@ public class PersonalData {
         this.SkillLockList = data.SkillLockList;
 
         // this.ItemPassive = data.ItemPassive;
+        this.Upgrade = data.Upgrade;
 
         //* Set Real Content Items IsLock
         for(int i=0; i<charas.Length; i++){
@@ -88,12 +92,12 @@ public class PersonalData {
     }
     
     public void save(){
-        Debug.Log("<size=20><color=red>SAVE::" + this + "</color></size>");
+        Debug.Log($"<size=20><color=red>{this}::SAVE</color></size>");
         PlayerPrefs.SetString(DM.DATABASE_KEY.Json.ToString(), JsonUtility.ToJson(this, true)); //* Serialize To Json
 
         //* Print
         string json = PlayerPrefs.GetString(DM.DATABASE_KEY.Json.ToString());
-        Debug.Log("<size=15>JSON:: SAVE</color> Data =" + json + "</size>");
+        Debug.Log($"<size=15>{this}::JSON:: SAVE Data ={json}</size>");
     }
 
     public void reset(){
@@ -116,6 +120,7 @@ public class PersonalData {
         this.SkillLockList = new List<bool>();
 
         // this.ItemPassive = new ItemPassiveList();
+        this.Upgrade = new UpgradeList();
 
         for(int i=0; i<DM.ins.scrollviews[(int)DM.PANEL.Chara].ItemPrefs.Length; i++){
             if(i==0) this.CharaLockList.Add(false);//    items[0].IsLock = false;}

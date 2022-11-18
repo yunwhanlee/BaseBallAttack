@@ -58,11 +58,11 @@ public class ScrollView {
                     // Debug.Log("<color=yellow>【"+ this.type + "】</color> model.name= " + model.name + ", personalData.Lang= " + DM.ins.personalData.Lang);
                     break;
                 }
-                case DM.PANEL.Upgrade :
-                {
+                case DM.PANEL.Upgrade :{
+                    Debug.Log("PersonalData::HAHAHAHA");
                     ins = GameObject.Instantiate(itemPf, Vector3.zero, Quaternion.identity, contentTf);
                     ins.transform.localPosition = Vector3.zero;
-                    //* 追加処理
+                    //TODO 追加処理 APPLY LOAD DATA
                     var upgrade = DM.ins.personalData.Upgrade;
                     var idx = Array.FindIndex(itemPrefs, (pref) => pref == itemPf);
                     ins.GetComponent<ItemInfo>().UpgradeValueTxt.text = upgrade.Arr[idx].lv.ToString();
@@ -486,13 +486,16 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //* Private Function
     //* ----------------------------------------------------------------
     private int purchaseItem(int myMoney, ItemInfo curItem, int befIdx){
-        Debug.Log($"<color=yellow>ScrollViewEvent::purchaseItem():: type= {DM.ins.SelectItemType}</color>");
+        Debug.Log($"<color=yellow>ScrollViewEvent::purchaseItem():: type= {DM.ins.SelectItemType}, CurIdx= {CurIdx}</color>");
         int price = curItem.price.getValue();
         if(myMoney >= price){
             myMoney -= price;
             
             if(DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
                 Debug.Log("UPGRADE PANEL");
+                //TODO
+                DM.ins.personalData.Upgrade.Arr[CurIdx].lv++;
+                curItem.UpgradeValueTxt.text = DM.ins.personalData.Upgrade.Arr[CurIdx].lv.ToString();
             }
             else
             {

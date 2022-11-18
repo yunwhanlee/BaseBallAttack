@@ -10,12 +10,8 @@ public class UpgradeDt {
     public string name;
     public int lv, maxLv;
     private float val, unit;
-    public UpgradeDt(string name, int lv=1, float val=1, float unit=1, int maxLv = 100){
+    public UpgradeDt(string name){
         this.name = name;
-        this.lv = lv;
-        this.val = val;
-        this.unit = unit;
-        this.maxLv = maxLv;
     }
 }
 //--------------------------------------------------------------------------------------------------

@@ -79,6 +79,11 @@ public class DM : MonoBehaviour
         personalData = new PersonalData(); //* DataBase
         personalData.load(ref charas, ref bats, ref skills); //TODO Add skills
 
+        //TODO コンテンツが生成されてから、追加LOADデータを適用する。
+        for(int i=0; i<upgrades.Length; i++){
+            upgrades[i].UpgradeValueTxt.text = personalData.Upgrade.Arr[i].lv.ToString();
+        }
+
         //* PersonalData後に処理必要なもの（LANGUAGEため）
         scrollviews[(int)DM.PANEL.Skill].setLanguage();
         scrollviews[(int)DM.PANEL.CashShop].setLanguage();
