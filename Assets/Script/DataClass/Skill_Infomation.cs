@@ -6,6 +6,38 @@ using System;
 using Random = UnityEngine.Random;
 
 [System.Serializable]
+public class UpgradeDt {
+    public string name;
+    public int lv, maxLv;
+    private float val, unit;
+    public UpgradeDt(string name, int lv=1, float val=1, float unit=1, int maxLv = 100){
+        this.name = name;
+        this.lv = lv;
+        this.val = val;
+        this.unit = unit;
+        this.maxLv = maxLv;
+    }
+}
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+[System.Serializable]
+public class UpgradeList {
+    [SerializeField] UpgradeDt[] arr = {
+        new UpgradeDt(DM.UPGRADE.Dmg.ToString()),
+        new UpgradeDt(DM.UPGRADE.BallSpeed.ToString()),
+        new UpgradeDt(DM.UPGRADE.CriticalDamage.ToString()),
+        new UpgradeDt(DM.UPGRADE.Critical.ToString()),
+        new UpgradeDt(DM.UPGRADE.BossDamage.ToString()),
+        new UpgradeDt(DM.UPGRADE.CoinBonus.ToString()),
+        new UpgradeDt(DM.UPGRADE.Defence.ToString()),
+    };
+    public UpgradeDt[] Arr {get => arr; set => arr = value;}
+}
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+[System.Serializable]
 public class ItemPsvDt {
     public string name;
     public int lv;
@@ -14,6 +46,7 @@ public class ItemPsvDt {
         this.name = name;
     }
 }
+
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------

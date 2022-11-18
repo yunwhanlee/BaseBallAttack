@@ -23,8 +23,8 @@ public class DM : MonoBehaviour
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
     public enum HITRANK{S, A, B, C, D, E};
     public enum PANEL {Chara, Bat, Skill, CashShop, PsvInfo, Upgrade, NULL};
-    public enum ATV{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave, NULL};
-    public enum PSV{
+    public enum ATV {FireBall, Thunder, ColorBall, PoisonSmoke, IceWave, NULL};
+    public enum PSV {
         //* Normal Passive
         Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage,
         Laser, FireProperty, IceProperty, ThunderProperty,
@@ -32,6 +32,9 @@ public class DM : MonoBehaviour
         DamageTwice, GiantBall, DarkOrb, GodBless, BirdFriend,
         NULL
     };
+    public enum UPGRADE {
+        Dmg, BallSpeed, CriticalDamage, Critical, BossDamage, CoinBonus, Defence, NULL
+    }
 
     [Header("GUI")]
     [SerializeField] Text coinTxt; public Text CoinTxt {get => coinTxt; set => coinTxt = value;}
@@ -70,6 +73,7 @@ public class DM : MonoBehaviour
         ItemInfo[] charas = scrollviews[(int)DM.PANEL.Chara].ContentTf.GetComponentsInChildren<ItemInfo>();
         ItemInfo[] bats = scrollviews[(int)DM.PANEL.Bat].ContentTf.GetComponentsInChildren<ItemInfo>();
         ItemInfo[] skills = scrollviews[(int)DM.PANEL.Skill].ContentTf.GetComponentsInChildren<ItemInfo>();
+        ItemInfo[] upgradeList = scrollviews[(int)DM.PANEL.Upgrade].ContentTf.GetComponentsInChildren<ItemInfo>();
 
         personalData = new PersonalData(); //* DataBase
         personalData.load(ref charas, ref bats, ref skills); //TODO Add skills

@@ -30,7 +30,7 @@ public class ScrollView {
             //* 生成
             RectTransform modelContentPf = null;
             RectTransform psvPanel = null;
-            GameObject model = null;
+            GameObject ins = null;
 
             switch(itemType){
                 case DM.PANEL.Chara : 
@@ -40,29 +40,39 @@ public class ScrollView {
                     modelContentPf.anchoredPosition3D = Vector3.zero; //* 親(ModelContentPf)ずれること対応。
 
                     //* Transform -> GameObject
-                    model = GameObject.Instantiate(itemPf, Vector3.zero, Quaternion.identity, modelContentPf);
-                    model.transform.localPosition = Vector3.zero;
+                    ins = GameObject.Instantiate(itemPf, Vector3.zero, Quaternion.identity, modelContentPf);
+                    ins.transform.localPosition = Vector3.zero;
 
                     //* Item Passive UI Ready
                     psvPanel = GameObject.Instantiate(itemPassivePanel, itemPassivePanel.localPosition, itemPassivePanel.localRotation, modelContentPf);
                     psvPanel.anchoredPosition3D = new Vector3(0,-2,0);
-                    model.GetComponent<ItemInfo>().ItemPassive.setImgPrefs(DM.ins.personalData.ItemPassive);
+                    //* 追加処理
+                    ins.GetComponent<ItemInfo>().ItemPassive.setImgPrefs(DM.ins.personalData.ItemPassive);
                     break;
                 case DM.PANEL.Skill :
                 case DM.PANEL.CashShop :
                 case DM.PANEL.PsvInfo :
+                {
+                    ins = GameObject.Instantiate(itemPf, Vector3.zero, Quaternion.identity, contentTf);
+                    ins.transform.localPosition = Vector3.zero;
+                    // Debug.Log("<color=yellow>【"+ this.type + "】</color> model.name= " + model.name + ", personalData.Lang= " + DM.ins.personalData.Lang);
+                    break;
+                }
                 case DM.PANEL.Upgrade :
                 {
-                    model = GameObject.Instantiate(itemPf, Vector3.zero, Quaternion.identity, contentTf);
-                    model.transform.localPosition = Vector3.zero;
-                    // Debug.Log("<color=yellow>【"+ this.type + "】</color> model.name= " + model.name + ", personalData.Lang= " + DM.ins.personalData.Lang);
+                    ins = GameObject.Instantiate(itemPf, Vector3.zero, Quaternion.identity, contentTf);
+                    ins.transform.localPosition = Vector3.zero;
+                    //* 追加処理
+                    var upgrade = DM.ins.personalData.Upgrade;
+                    var idx = Array.FindIndex(itemPrefs, (pref) => pref == itemPf);
+                    ins.GetComponent<ItemInfo>().UpgradeValueTxt.text = upgrade.Arr[idx].lv.ToString();
                     break;
                 }
             }
 
-            if(!model) return;
+            if(!ins) return;
             
-            var itemPassiveList = model.GetComponent<ItemInfo>().ItemPassive.Arr;
+            var itemPassiveList = ins.GetComponent<ItemInfo>().ItemPassive.Arr;
             //* 調整
             switch(itemType){
                 case DM.PANEL.Chara : 
@@ -70,23 +80,23 @@ public class ScrollView {
                     break;
                 case DM.PANEL.Bat :
                     Vector3 ZOOM_IN_POS = new Vector3(1.61f, 0.75f, 4.43f); //* ベットは小さいから少しズームイン。
-                    model.transform.localPosition = ZOOM_IN_POS;
-                    model.transform.localRotation = Quaternion.Euler(model.transform.localRotation.x, model.transform.localRotation.y, -45);
+                    ins.transform.localPosition = ZOOM_IN_POS;
+                    ins.transform.localRotation = Quaternion.Euler(ins.transform.localRotation.x, ins.transform.localRotation.y, -45);
                     displayItemPassiveUI(type, itemPassiveList, itemSkillBoxPref, psvPanel);
                     break;
                 case DM.PANEL.Skill : 
                 case DM.PANEL.CashShop : 
                 case DM.PANEL.Upgrade :
-                    model.transform.localPosition = new Vector3(0,0,0); //* posZがずれるから、調整
+                    ins.transform.localPosition = new Vector3(0,0,0); //* posZがずれるから、調整
                     //! Buy AddEventListener !//
-                    Debug.Log($"createItem:: <color=red>AddEventLister</color>(()=><color=yellow>onClickItemPanel</color>({model.name}))");
-                    Button btn = model.GetComponent<Button>();
+                    Debug.Log($"createItem:: <color=red>AddEventLister</color>(()=><color=yellow>onClickItemPanel</color>({ins.name}))");
+                    Button btn = ins.GetComponent<Button>();
                     var svEvent = ScrollRect.GetComponent<ScrollViewEvent>();
-                    btn.onClick.AddListener(delegate{svEvent.onClickItemPanel(model);});
+                    btn.onClick.AddListener(delegate{svEvent.onClickItemPanel(ins);});
                     break;
         }
             // Debug.Log("modelParentTf.pos=" + modelParentPref.position + ", modelParentTf.localPos=" + modelParentPref.localPosition);
-            model.name = itemPf.name;//名前上書き：しないと後ろに(clone)が残る。
+            ins.name = itemPf.name;//名前上書き：しないと後ろに(clone)が残る。
         });
 
         pushItemLanguageList(itemType.ToString());

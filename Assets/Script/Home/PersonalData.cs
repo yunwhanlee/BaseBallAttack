@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using System;
 
 [System.Serializable]
@@ -20,8 +21,12 @@ public class PersonalData {
     [SerializeField] int selectSkillIdx;  public int SelectSkillIdx {get => selectSkillIdx; set => selectSkillIdx = value;}
     [SerializeField] int selectSkill2Idx;  public int SelectSkill2Idx {get => selectSkill2Idx; set => selectSkill2Idx = value;}
     [SerializeField] List<bool> skillLockList;  public List<bool> SkillLockList {get => skillLockList; set => skillLockList = value;}
-    [Header("ITEM PASSIVE ABILITY")]
+    [Header("ITEM PASSIVE")]
+    [FormerlySerializedAs("itemPassive")]
     [SerializeField] ItemPsvList itemPassive; public ItemPsvList ItemPassive {get => itemPassive; set => itemPassive = value;}
+    [Header("UPGRADE ABILITY")]
+    [FormerlySerializedAs("upgrade")]
+    [SerializeField] UpgradeList upgrade; public UpgradeList Upgrade {get => upgrade; set => upgrade = value;}
     
     //* PlayerPrefs キー リスト => privateは jsonには追加しない。
     private List<string> keyList;  public List<string> KeyList {get => keyList; set => keyList = value;}
@@ -36,14 +41,15 @@ public class PersonalData {
         batLockList = new List<bool>();
         skillLockList = new List<bool>();
         ItemPassive = new ItemPsvList();
+        upgrade = new UpgradeList();
     }
 
     //* method
     public void load(ref ItemInfo[] charas, ref ItemInfo[] bats, ref ItemInfo[] skills){
-        Debug.Log("<color=green>LOAD");
+        Debug.Log("<size=20><color=green>LOAD</color></size>");
         //* Check Json
         string json = PlayerPrefs.GetString("Json");
-        Debug.Log("JSON:: LOAD Data =" + json);
+        Debug.Log("<size=15>JSON:: LOAD Data =" + json + "</size>");
 
         //* Load Data
         var data = JsonUtility.FromJson<PersonalData>(json); //* Convert Json To Class Data
@@ -82,12 +88,12 @@ public class PersonalData {
     }
     
     public void save(){
-        Debug.Log("SAVE");
+        Debug.Log("<size=20><color=red>SAVE::" + this + "</color></size>");
         PlayerPrefs.SetString("Json", JsonUtility.ToJson(this, true)); //* Serialize To Json
 
         //* Print
         string json = PlayerPrefs.GetString("Json");
-        Debug.Log("JSON:: <color=red>SAVE</color> Data =" + json);
+        Debug.Log("<size=15>JSON:: SAVE</color> Data =" + json + "</size>");
     }
 
     public void reset(){

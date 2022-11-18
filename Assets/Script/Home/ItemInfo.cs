@@ -111,12 +111,12 @@ public class ItemInfo : MonoBehaviour
                 break;
             }
             case DM.PANEL.Upgrade : { //* 追加的な特別変数へ代入。
-                try{
-                    UpgradeValueTxt.text = "TODO";
-                }
-                catch(Exception err){
-                    Debug.LogError("ItemInfo:: rsc/home/selectItemPanel/Content/<b>Upgrade</b>のPrefabのInspectorビューへ、UpgradeValueTxtがNullです。\n◆ERROR: " + err);
-                }
+                // try{
+                //     UpgradeValueTxt.text = "TODO";
+                // }
+                // catch(Exception err){
+                //     Debug.LogError("ItemInfo:: rsc/home/selectItemPanel/Content/<b>Upgrade</b>のPrefabのInspectorビューへ、UpgradeValueTxtがNullです。\n◆ERROR: " + err);
+                // }
                 break;
             }
         }
