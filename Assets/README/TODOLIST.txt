@@ -41,11 +41,28 @@
 
     ✓  LOADING非同期UI画面表示。
 
-    - 能力値アップグレード商店UI追加。
-        - BossDamage Up
-        - Damage UP
-        - Critical Damage Up
-        など
+
+    - UpGrade Table GUI
+        ✓  UI表示 
+            ・Damage Up。+1。
+            ・Critical Up。+2%。
+            ・Critical Damage Up。+25%。
+            ・Boss Damage Up。+25%。
+            ・Ball Speed。+25m/s。
+            ・CoinBonus % Up。+10%。
+            ・Defence % From Boss Attack。+5%。
+        ✓  UI変更。もっと見やすく。 
+        ✓  言語設定。   
+        ✓  購入ボタン ＋ 値段表示。
+        -  現在Value表示
+        ✓  MaxLevel
+        ✓  保存データ
+        -  RANKによって値段が決まるBUGを修正。
+
+    - PSV INFO GUIでも、コインで、購入してアップグレードできるように。
+
+    - Reward
+        - TODO
 
     - ボース
         ✓  何種類のモデル用意。(HARD-MODEは未)
@@ -65,7 +82,7 @@
             ✓ Boss Preview DebugSphereに関して、狙うアイコンのEFEECT追加。
             ✓ Boss Aiming IconEFが複数できない問題解決。
 
-        -  スキルランダム生成シート制作。
+        ✓スキルランダム生成シート制作。
         -  ボース登場した時、名前表示。
         
 

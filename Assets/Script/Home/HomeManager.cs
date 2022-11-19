@@ -89,6 +89,7 @@ public class HomeManager : MonoBehaviour
             case DM.PANEL.Bat :
             case DM.PANEL.Skill :
             case DM.PANEL.CashShop :
+            case DM.PANEL.Upgrade :
                 // なし
                 break;
             case DM.PANEL.PsvInfo :

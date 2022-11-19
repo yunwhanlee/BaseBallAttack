@@ -8,6 +8,7 @@ using System;
 public class DM : MonoBehaviour
 {
     public static DM ins;
+    public enum DATABASE_KEY {Json};
     public enum SCENE {Home, Play, Loading};
     public enum NAME {DownWall, Block, FireBallDotEffect, BossDieDropOrbSpot, GrayPanel, Obstacle,
         RightArm, HomeManager,
@@ -22,9 +23,9 @@ public class DM : MonoBehaviour
     public enum ANIM {BossSpawnTxt_Spawn, DoSpawn, DoShake, Swing, DoBossSpawn, Die, IsHit, IsHitBall, IsIdle, IsFly, GetHit, Scream, Attack, Touch, HomeRun};
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
     public enum HITRANK{S, A, B, C, D, E};
-    public enum PANEL {Chara, Bat, Skill, CashShop, PsvInfo, NULL};
-    public enum ATV{FireBall, Thunder, ColorBall, PoisonSmoke, IceWave, NULL};
-    public enum PSV{
+    public enum PANEL {Chara, Bat, Skill, CashShop, PsvInfo, Upgrade, NULL};
+    public enum ATV {FireBall, Thunder, ColorBall, PoisonSmoke, IceWave, NULL};
+    public enum PSV {
         //* Normal Passive
         Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage,
         Laser, FireProperty, IceProperty, ThunderProperty,
@@ -32,6 +33,9 @@ public class DM : MonoBehaviour
         DamageTwice, GiantBall, DarkOrb, GodBless, BirdFriend,
         NULL
     };
+    public enum UPGRADE {
+        Dmg, BallSpeed, CriticalDamage, Critical, BossDamage, CoinBonus, Defence, NULL
+    }
 
     [Header("GUI")]
     [SerializeField] Text coinTxt; public Text CoinTxt {get => coinTxt; set => coinTxt = value;}
@@ -64,19 +68,27 @@ public class DM : MonoBehaviour
         scrollviews[(int)DM.PANEL.Skill].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
         scrollviews[(int)DM.PANEL.CashShop].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
         scrollviews[(int)DM.PANEL.PsvInfo].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
+        scrollviews[(int)DM.PANEL.Upgrade].createItem(modelContentPref, itemPassivePanel, itemSkillBoxPref);
 
         //* Items of Content (Set UnLockList)
         ItemInfo[] charas = scrollviews[(int)DM.PANEL.Chara].ContentTf.GetComponentsInChildren<ItemInfo>();
         ItemInfo[] bats = scrollviews[(int)DM.PANEL.Bat].ContentTf.GetComponentsInChildren<ItemInfo>();
         ItemInfo[] skills = scrollviews[(int)DM.PANEL.Skill].ContentTf.GetComponentsInChildren<ItemInfo>();
+        ItemInfo[] upgrades = scrollviews[(int)DM.PANEL.Upgrade].ContentTf.GetComponentsInChildren<ItemInfo>();
 
         personalData = new PersonalData(); //* DataBase
         personalData.load(ref charas, ref bats, ref skills); //TODO Add skills
+
+        //TODO コンテンツが生成されてから、追加LOADデータを適用する。
+        for(int i=0; i<upgrades.Length; i++){
+            upgrades[i].UpgradeValueTxt.text = personalData.Upgrade.Arr[i].lv.ToString();
+        }
 
         //* PersonalData後に処理必要なもの（LANGUAGEため）
         scrollviews[(int)DM.PANEL.Skill].setLanguage();
         scrollviews[(int)DM.PANEL.CashShop].setLanguage();
         scrollviews[(int)DM.PANEL.PsvInfo].setLanguage();
+        scrollviews[(int)DM.PANEL.Upgrade].setLanguage();
 
         //* ERROR CHECK
         LANG.checkErrorLangListCounting();
@@ -148,6 +160,7 @@ public class DM : MonoBehaviour
             : (name == DM.PANEL.Skill.ToString())? DM.PANEL.Skill
             : (name == DM.PANEL.CashShop.ToString())? DM.PANEL.CashShop
             : (name == DM.PANEL.PsvInfo.ToString())? DM.PANEL.PsvInfo
+            : (name == DM.PANEL.Upgrade.ToString())? DM.PANEL.Upgrade
             : DM.PANEL.NULL;
     }
     
