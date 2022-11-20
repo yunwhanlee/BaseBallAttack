@@ -155,7 +155,7 @@ public class Player : MonoBehaviour
             LANG.getTxt(DM.PSV.BirdFriend.ToString()), psvLvArr[(int)DM.PSV.BirdFriend].lv, 0, 1, 1);
         
         //* Apply
-        dmg.initSkillDt(dmg.Val + dmg.Unit);
+        dmg.initSkillDt(dmg.Val + (dmg.Unit * dmg.Level) + (int)DM.ins.personalData.Upgrade.Arr[0].getValue());
         multiShot.initSkillDt(multiShot.Val + multiShot.Unit * multiShot.Level);
         speed.initSkillDt(speed.Val + speed.Unit);
         instantKill.initSkillDt(instantKill.Val + instantKill.Unit * instantKill.Level);

@@ -222,9 +222,13 @@ public static class LANG //* LANG
         // new string[]{LaserContent[(int)TP.EN], LaserContent[(int)TP.JP], LaserContent[(int)TP.KR]},
     };
 
-    public static List<string[]> UpgradeNameList = new List<string[]>(){};
+    public static List<string[]> UpgradeNameList = new List<string[]>(){
 
-    public static List<string[]> UpgradeExplainList = new List<string[]>(){};
+    };
+
+    public static List<string[]> UpgradeExplainList = new List<string[]>(){
+        
+    };
 
 //*-----------------------------------------------------------------------------------------------
 //* 関数
@@ -308,10 +312,11 @@ public static class LANG //* LANG
         return res;
     }
     public static List<string> getTxtList(string str){
+        Debug.Log($"Language::getTxtList(str= {str})");
         const int SPLIT_TYPE=0, SPLIT_NAME=1, SPLIT_EXPLAIN=2, SPLIT_HOMERUNBONUS=3;
         List<string> resList = new List<string>();
 
-        var split = str.Split('_');
+        string[] split = str.Split('_');
         string type = split[SPLIT_TYPE];
         DM.PANEL itemType = DM.ins.getCurPanelType2Enum(type);
 
@@ -370,7 +375,7 @@ public static class LANG //* LANG
             }
             case DM.PANEL.Upgrade:{
                 int idx = UpgradeNameList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
-                // Debug.Log("<color=yellow><<Upgrade>> idx= " + idx + "</color>");
+                Debug.Log("<color=yellow><<Upgrade>> idx= " + idx + "</color>");
                 resList[NAME] = UpgradeNameList[idx][(int)DM.ins.personalData.Lang];
                 resList[EXPLAIN] = UpgradeExplainList[idx][(int)DM.ins.personalData.Lang];
                 break;

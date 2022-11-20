@@ -107,6 +107,7 @@ public class ScrollView {
         hm.onClickBtnGoToPanel(itemType);
     }
     public void setLanguage(){ //* SkillとCashShopのみ。
+        // for(int i=0; i<ContentTf.childCount; i++) Debug.Log($"ScrollViewEvent::setLanguage():: ContentTf={ContentTf.GetChild(i)}")
         for(int i = 0; i < ContentTf.childCount; i++){
             Text[] txtObjs = null;
             List<string> strList = new List<string>();
@@ -223,7 +224,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         CurIdxBasePosX = -((CurIdx+1) * width);
 
         // Set Rank Color & Text & OutLine
-        updateItemInfo();
+        updateModelTypeItemInfo();
     }
 
     //* Drag Event
@@ -260,24 +261,24 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
         //* Stop Scrolling Near Index Chara
         if(scrollSpeed < 1)
-            updateItemInfo();
+            updateModelTypeItemInfo();
 
         //* update Before Frame PosX
         scrollBefFramePosX = pos.anchoredPosition.x;
     }
 
-    public void updateItemInfo(){
-        if(BoxSprRdr == null) return; // Error) Object Null
-
+    public void updateModelTypeItemInfo(){ //* CharaとBat専用。
         string type = DM.ins.SelectItemType;
-        var contentTf = (type == DM.PANEL.Chara.ToString())?
-            DM.ins.scrollviews[(int)DM.PANEL.Chara].ContentTf
+        if(BoxSprRdr == null) return; // Error) Object Null
+        if(type != DM.PANEL.Chara.ToString() && type != DM.PANEL.Bat.ToString()) return; //* (BUG-1) Upgrade-PANELも入ってきて、再ロードした場合 Out Of Indexバグの発生すること対応。
+
+        var contentTf = (type == DM.PANEL.Chara.ToString())? DM.ins.scrollviews[(int)DM.PANEL.Chara].ContentTf
             : DM.ins.scrollviews[(int)DM.PANEL.Bat].ContentTf;
         //* Set PosX
         contentTf.anchoredPosition = new Vector2(CurIdxBasePosX, -500);
         
-        var curItem = getCurItem();
-        Debug.Log("<color>curItem= " + curItem.name + "</color>");
+        ItemInfo curItem = getCurItem();
+        Debug.Log($"<color=yellow>updateItemInfo:: type={type}, curItem= {curItem.name}</color>");
 
         //* Show Rank Text
         RankTxt.text = curItem.Rank.ToString();
@@ -291,7 +292,9 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         // string name = curItem.name.Split('_')[1];
         // int idx = LANG.CharaList.FindIndex(list => name == list[(int)LANG.TP.EN]);
         // NameTxt.text = LANG.CharaList[idx][(int)DM.ins.Language]; //name;
-        NameTxt.text = LANG.getTxtList(curItem.name)[LANG.NAME];
+        Debug.Log("KOKOKO?!");
+        
+        NameTxt.text = LANG.getTxtList(curItem.name)[LANG.NAME]; //* (BUG-1) 対応
 
         //* Set Rank UI Box Color
         Color color = Color.white;

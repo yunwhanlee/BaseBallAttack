@@ -103,5 +103,6 @@
     -  インゲームで、Bottom PSV Table GUIで、９個が増えたら下に整列され、イメージが切れちゃうこと。
     ✓ Util:: AnimGetClipLength=>Secを探索方法変更(Index->名前)。
     ✓ Strikeになったら、NextStage()を直接に読みだすことで、次に行かない問題解決。
+    ✓ (BUG-1) Upgrade-PANELも入ってきて、再ロードした場合 Out Of Indexバグの発生すること対応。
     
 

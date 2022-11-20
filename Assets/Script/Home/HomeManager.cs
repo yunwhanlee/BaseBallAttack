@@ -281,7 +281,7 @@ public class HomeManager : MonoBehaviour
 
                 var scrollViewEvent = DM.ins.scrollviews[typeIdx].ScrollRect.GetComponent<ScrollViewEvent>();
                 scrollViewEvent.setCurSelectedItem(typeIdx);
-                scrollViewEvent.updateItemInfo();
+                scrollViewEvent.updateModelTypeItemInfo();
                 scrollViewEvent.exceptAlreadySelectedAnotherSkill(selectedSkillBtnIdx, skillBtns);
                 break;
         }

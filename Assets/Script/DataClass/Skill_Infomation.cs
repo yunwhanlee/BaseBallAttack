@@ -19,8 +19,11 @@ public class UpgradeDt {
         if(lv < maxLv)
             this.lv++;
     }
+
+    public float getValue() => lv * unit;
+
     public string getVal2Str(){
-        var value = lv * unit;
+        var value = getValue();
         if(name == DM.UPGRADE.Dmg.ToString())
             return $"{value}";
         if(name == DM.UPGRADE.BallSpeed.ToString())
@@ -149,9 +152,9 @@ public class PsvSkill<T> where T: struct {
 
     public void initSkillDt(T value){
         Debug.LogFormat($"<color=yellow>initSkillDt(value={value}):: name={name}, lv={level}, maxLv={maxLevel}, value={value}</color>");
-        if(level > 0){
+        // if(level > 0){
             this.val = value;
-        }
+        // }
     }
 
     public bool setHitTypeSkill(float per, ref int result, Collision col, EffectManager em, Player pl, GameObject ballPref = null){
