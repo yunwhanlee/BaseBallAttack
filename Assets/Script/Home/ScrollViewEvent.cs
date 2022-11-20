@@ -492,11 +492,10 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             
             if(DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
                 Debug.Log("UPGRADE PANEL");
-                UpgradeDt item = DM.ins.personalData.Upgrade.Arr[CurIdx];
+                UpgradeDt upgradeDt = DM.ins.personalData.Upgrade.Arr[CurIdx];
                 //TODO
-                item.setLvUp();
-                curItem.UpgradeValueTxt.text = item.getVal2Str();
-                curItem.LvTxt.text = $"{item.lv}/{item.maxLv}";
+                upgradeDt.setLvUp();
+                curItem.setUpgradeGUI(upgradeDt);
             }
             else
             {

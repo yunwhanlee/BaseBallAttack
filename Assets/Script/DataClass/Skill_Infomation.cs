@@ -15,7 +15,6 @@ public class UpgradeDt {
         this.unit = unit;
         this.maxLv = maxLv;
     }
-
     public void setLvUp(){
         if(lv < maxLv)
             this.lv++;

@@ -80,19 +80,9 @@ public class DM : MonoBehaviour
         personalData.load(ref charas, ref bats, ref skills); //TODO Add skills
 
         //* DMデータ ロード。
-        //* Init 最初の表示のみ。
-        // DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.Dmg].maxLv = 100;
-        // DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.BallSpeed].maxLv = 25;
-        // DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.CriticalDamage].maxLv = 50;
-        // DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.Critical].maxLv = 50;
-        // DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.BossDamage].maxLv = 50;
-        // DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.CoinBonus].maxLv = 20;
-        // DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.Defence].maxLv = 10;
-
         for(int i=0; i<upgrades.Length; i++){
-            var item = personalData.Upgrade.Arr[i];
-            upgrades[i].UpgradeValueTxt.text = item.getVal2Str();
-            upgrades[i].LvTxt.text = $"{item.lv.ToString()}/{item.maxLv.ToString()}";
+            UpgradeDt upgradeDt = personalData.Upgrade.Arr[i];
+            upgrades[i].setUpgradeGUI(upgradeDt);
         }
 
         //* PersonalData後に処理必要なもの（LANGUAGEため）
