@@ -9,9 +9,25 @@ using Random = UnityEngine.Random;
 public class UpgradeDt {
     public string name;
     public int lv, maxLv;
-    private float val, unit;
-    public UpgradeDt(string name){
+    public float unit;
+    public UpgradeDt(string name, float unit, int maxLv){
         this.name = name;
+        this.unit = unit;
+        this.maxLv = maxLv;
+    }
+
+    public void setLvUp(){
+        if(lv < maxLv)
+            this.lv++;
+    }
+    public string getVal2Str(){
+        var value = lv * unit;
+        if(name == DM.UPGRADE.Dmg.ToString())
+            return $"{value}";
+        if(name == DM.UPGRADE.BallSpeed.ToString())
+            return $"{value}m/s";
+        else
+            return $"{value * 100}%";
     }
 }
 //--------------------------------------------------------------------------------------------------
@@ -19,14 +35,24 @@ public class UpgradeDt {
 //--------------------------------------------------------------------------------------------------
 [System.Serializable]
 public class UpgradeList {
+    //* const
+    const int DMG_UNIT = 1;
+    const int BALL_SPEED_UNIT = 25;
+    const float CRITICAL_DMG_UNIT = 0.25f;
+    const float CRITICAL_UNIT = 0.02f;
+    const float BOSS_DMG_UNIT = 0.25f;
+    const float COIN_BONUS_UNIT = 0.1f;
+    const float DEFENCE_UNIT = 0.05f;
+
+
     [SerializeField] UpgradeDt[] arr = {
-        new UpgradeDt(DM.UPGRADE.Dmg.ToString()),
-        new UpgradeDt(DM.UPGRADE.BallSpeed.ToString()),
-        new UpgradeDt(DM.UPGRADE.CriticalDamage.ToString()),
-        new UpgradeDt(DM.UPGRADE.Critical.ToString()),
-        new UpgradeDt(DM.UPGRADE.BossDamage.ToString()),
-        new UpgradeDt(DM.UPGRADE.CoinBonus.ToString()),
-        new UpgradeDt(DM.UPGRADE.Defence.ToString()),
+        new UpgradeDt(DM.UPGRADE.Dmg.ToString(), DMG_UNIT, 100),
+        new UpgradeDt(DM.UPGRADE.BallSpeed.ToString(), BALL_SPEED_UNIT, 20),
+        new UpgradeDt(DM.UPGRADE.Critical.ToString(), CRITICAL_UNIT, 30),
+        new UpgradeDt(DM.UPGRADE.CriticalDamage.ToString(), CRITICAL_DMG_UNIT, 20),
+        new UpgradeDt(DM.UPGRADE.BossDamage.ToString(), BOSS_DMG_UNIT, 30),
+        new UpgradeDt(DM.UPGRADE.CoinBonus.ToString(), COIN_BONUS_UNIT, 20),
+        new UpgradeDt(DM.UPGRADE.Defence.ToString(), DEFENCE_UNIT, 10),
     };
     public UpgradeDt[] Arr {get => arr; set => arr = value;}
 }
@@ -124,8 +150,9 @@ public class PsvSkill<T> where T: struct {
 
     public void initSkillDt(T value){
         Debug.LogFormat($"<color=yellow>initSkillDt(value={value}):: name={name}, lv={level}, maxLv={maxLevel}, value={value}</color>");
-        if(level > 0)
+        if(level > 0){
             this.val = value;
+        }
     }
 
     public bool setHitTypeSkill(float per, ref int result, Collision col, EffectManager em, Player pl, GameObject ballPref = null){

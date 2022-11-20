@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45015454, g: 0.5001945, b: 0.57542807, a: 1}
+  m_IndirectSpecularColor: {r: 0.45015407, g: 0.500194, b: 0.5754274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -631,6 +631,29 @@ MonoBehaviour:
       - name: BirdFriend
         lv: 0
         imgPref: {fileID: 7576626188995224481, guid: 8e3affcbcd68a2b4b8f7400b931ab9b3, type: 3}
+    upgrade:
+      arr:
+      - name: Dmg
+        lv: 0
+        maxLv: 0
+      - name: BallSpeed
+        lv: 0
+        maxLv: 0
+      - name: CriticalDamage
+        lv: 0
+        maxLv: 0
+      - name: Critical
+        lv: 0
+        maxLv: 0
+      - name: BossDamage
+        lv: 0
+        maxLv: 0
+      - name: CoinBonus
+        lv: 0
+        maxLv: 0
+      - name: Defence
+        lv: 0
+        maxLv: 0
   isRemoveAD: 0
 --- !u!1 &109538491
 GameObject:

@@ -110,6 +110,7 @@ public class Player : MonoBehaviour
             i++;
         });
         #endregion
+
         #region Set PSV Skill Data
         //* Init
         var psvLvArr = DM.ins.personalData.ItemPassive.Arr;

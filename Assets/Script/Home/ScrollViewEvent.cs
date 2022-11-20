@@ -59,7 +59,6 @@ public class ScrollView {
                     break;
                 }
                 case DM.PANEL.Upgrade :{
-                    Debug.Log("PersonalData::HAHAHAHA");
                     ins = GameObject.Instantiate(itemPf, Vector3.zero, Quaternion.identity, contentTf);
                     ins.transform.localPosition = Vector3.zero;
                     //TODO 追加処理 APPLY LOAD DATA
@@ -493,9 +492,11 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             
             if(DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
                 Debug.Log("UPGRADE PANEL");
+                UpgradeDt item = DM.ins.personalData.Upgrade.Arr[CurIdx];
                 //TODO
-                DM.ins.personalData.Upgrade.Arr[CurIdx].lv++;
-                curItem.UpgradeValueTxt.text = DM.ins.personalData.Upgrade.Arr[CurIdx].lv.ToString();
+                item.setLvUp();
+                curItem.UpgradeValueTxt.text = item.getVal2Str();
+                curItem.LvTxt.text = $"{item.lv}/{item.maxLv}";
             }
             else
             {

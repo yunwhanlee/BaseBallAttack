@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 382031960200918581}
   - component: {fileID: 7141874091611279538}
   m_Layer: 5
-  m_Name: NumTxt
+  m_Name: LvTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,11 +68,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
+    m_FontSize: 50
     m_FontStyle: 1
     m_BestFit: 1
     m_MinSize: 0
-    m_MaxSize: 60
+    m_MaxSize: 50
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -227,8 +227,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 25, y: -99}
-  m_SizeDelta: {x: 110, y: 100}
+  m_AnchoredPosition: {x: 15, y: -99}
+  m_SizeDelta: {x: 130, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8487777429788094085
 CanvasRenderer:
@@ -271,7 +271,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 25
+  m_Text: 255%
 --- !u!114 &4498008912782204616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -969,8 +969,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -45, y: -45}
-  m_SizeDelta: {x: 550, y: 100}
+  m_AnchoredPosition: {x: -80, y: -45}
+  m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8833436972246303633
 CanvasRenderer:
@@ -1006,7 +1006,7 @@ MonoBehaviour:
     m_FontStyle: 1
     m_BestFit: 1
     m_MinSize: 40
-    m_MaxSize: 45
+    m_MaxSize: 40
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1104,6 +1104,7 @@ MonoBehaviour:
   outline2D: {fileID: 0}
   cashShopPriceTxt: {fileID: 0}
   upgradeValueTxt: {fileID: 7299811233801353836}
+  lvTxt: {fileID: 382031960200918581}
   itemPassive:
     arr: []
   rankAuraEF: {fileID: 0}

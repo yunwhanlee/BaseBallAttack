@@ -32,6 +32,8 @@ public class ItemInfo : MonoBehaviour
     
     [FormerlySerializedAs("cashShopPriceTxt")] [SerializeField] Text cashShopPriceTxt;     public Text CashShopPriceTxt {get => cashShopPriceTxt; set => cashShopPriceTxt = value;}
     [FormerlySerializedAs("upgradeValueTxt")] [SerializeField] Text upgradeValueTxt;     public Text UpgradeValueTxt {get => upgradeValueTxt; set => upgradeValueTxt = value;}
+    [FormerlySerializedAs("lvTxt")] [SerializeField] Text lvTxt;     public Text LvTxt {get => lvTxt; set => lvTxt = value;}
+
     [SerializeField] ItemPsvList itemPassive;  public ItemPsvList ItemPassive {get => itemPassive; set=> itemPassive = value;}
     [SerializeField] GameObject rankAuraEF;  public GameObject RankAuraEF {get => rankAuraEF; set=> rankAuraEF = value;}
 
