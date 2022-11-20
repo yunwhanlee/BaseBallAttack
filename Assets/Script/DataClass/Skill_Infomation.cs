@@ -27,7 +27,7 @@ public class UpgradeDt {
         if(name == DM.UPGRADE.Dmg.ToString())
             return $"{value}";
         if(name == DM.UPGRADE.BallSpeed.ToString())
-            return $"{value}m/s";
+            return $"{value * 100}m/s";
         else
             return $"{value * 100}%";
     }
@@ -37,16 +37,16 @@ public class UpgradeDt {
 //--------------------------------------------------------------------------------------------------
 [System.Serializable]
 public class UpgradeList {
-    //* const
+    //* Value
     const int DMG_UNIT = 1;
-    const int BALL_SPEED_UNIT = 25;
+    const float BALL_SPEED_UNIT = 0.25f;
     const float CRITICAL_DMG_UNIT = 0.25f;
     const float CRITICAL_UNIT = 0.02f;
     const float BOSS_DMG_UNIT = 0.25f;
     const float COIN_BONUS_UNIT = 0.1f;
     const float DEFENCE_UNIT = 0.05f;
 
-
+    //* Init
     [SerializeField] UpgradeDt[] arr = {
         new UpgradeDt(DM.UPGRADE.Dmg.ToString(), DMG_UNIT, 100),
         new UpgradeDt(DM.UPGRADE.BallSpeed.ToString(), BALL_SPEED_UNIT, 20),
