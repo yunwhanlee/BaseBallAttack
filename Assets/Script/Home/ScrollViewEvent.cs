@@ -6,6 +6,7 @@ using SpriteGlow;
 using UnityEngine.EventSystems;
 using System;
 using UnityEngine.UI.Extensions;
+using System.Text.RegularExpressions;
 
 [System.Serializable]
 public class ScrollView {
@@ -133,17 +134,16 @@ public class ScrollView {
                 strList.Add(DM.PANEL.PsvInfo.ToString());
                 strList.Add(txtObjs[LANG.NAME].text);
                 strList.Add(txtObjs[LANG.EXPLAIN].text);
+                // Debug.Log($"Replace Num:: DM.ins.personalData.Upgrade.Arr[{i}].unit->{DM.ins.personalData.Upgrade.Arr[i].unit}");
             }
             else if(this.type == DM.PANEL.Upgrade.ToString()){
                 txtObjs = Array.FindAll(childs, chd => chd.name == LANG.OBJNAME.NameTxt.ToString() || chd.name == LANG.OBJNAME.ExplainTxt.ToString());
-                // Array.ForEach(txtObjs, txtObj => Debug.Log($"{txtObj.name}= {txtObj.text}"));
+                Array.ForEach(txtObjs, txtObj => Debug.Log($"{this.type}::{txtObj.name}= {txtObj.text}"));
                 strList.Add(DM.PANEL.Upgrade.ToString());
                 strList.Add(txtObjs[LANG.NAME].text);
-                strList.Add(txtObjs[LANG.EXPLAIN].text);
+                strList.Add(Util._.replaceInitSettingNumber(txtObjs[LANG.EXPLAIN].text, i)); //* Replace InspectorView Setting Number (ExplainText)
             }
-
             if(txtObjs == null && strList.Count == 0) return;
-
             //* Join Strings
             var tempStr = string.Join("_", strList);
             var languageList = LANG.getTxtList(tempStr);

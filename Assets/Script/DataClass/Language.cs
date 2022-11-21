@@ -381,7 +381,7 @@ public static class LANG //* LANG
                 break;
             }
         }
-        resList.ForEach(res=> Debug.Log("type->" + type + ", res=>" + res));
+        // resList.ForEach(res=> Debug.Log("type->" + type + ", res=>" + res));
         return resList;
     }
 }

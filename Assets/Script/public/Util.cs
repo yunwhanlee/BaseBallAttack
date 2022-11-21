@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using Random = UnityEngine.Random;
+using System.Text.RegularExpressions;
 
 
 public class Util : MonoBehaviour
@@ -146,5 +147,21 @@ public class Util : MonoBehaviour
         float decimalPoint = Mathf.Pow(10, point);
         Debug.Log($"calcMathRoundDecimal(value={value}, point={point}:: decimalPoint= {decimalPoint}, result= {Mathf.Round(value * decimalPoint) / decimalPoint}");
         return Mathf.Round(value * decimalPoint) / decimalPoint;
+    }
+    public bool isIntegerNum(float num){
+        bool res = Mathf.Approximately(num, Mathf.RoundToInt(num));
+        Debug.Log($"isIntegerNum({num}):: isInt? -> {res}");
+        return res;
+    }
+    public string replaceInitSettingNumber(string txt, int i){ //* ただし、数字が二つあることはできない。
+        string res = txt;
+        string extractNum = Regex.Replace(txt, "[^0-9]", "");
+        if(extractNum != ""){
+            float realNum = DM.ins.personalData.Upgrade.Arr[i].unit;
+            string numStr = (Util._.isIntegerNum(realNum)? realNum : realNum * 100).ToString();
+            res = txt.Replace(extractNum, numStr);
+            // Debug.Log("Replace Num:: Result=> " + replacedTxt);
+        }
+        return res;
     }
 }
