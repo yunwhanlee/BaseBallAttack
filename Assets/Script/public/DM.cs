@@ -34,7 +34,7 @@ public class DM : MonoBehaviour
         NULL
     };
     public enum UPGRADE {
-        Dmg, BallSpeed, CriticalDamage, Critical, BossDamage, CoinBonus, Defence, NULL
+        Dmg, BallSpeed, Critical, CriticalDamage, BossDamage, CoinBonus, Defence, NULL
     }
 
     [Header("GUI")]

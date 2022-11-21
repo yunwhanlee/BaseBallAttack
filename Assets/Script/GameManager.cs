@@ -103,6 +103,7 @@ public class GameManager : MonoBehaviour
     public GameObject skillInfoRowPref;
 
     [Header("GAMEOVER")]
+    public Text CoinTxt;
     private Text gvStageTxt;
     private Text gvBestScoreTxt;
 
@@ -380,6 +381,17 @@ public class GameManager : MonoBehaviour
         ballPreviewDirGoal.transform.position = new Vector3(ballPreviewDirGoal.transform.position.x + rx, 0.6f + ry, zCenter);
     }
 
+    public void setGameOver(){
+        Debug.Log("<size=30> --- G A M E  O V E R --- </size>");
+        State = GameManager.STATE.GAMEOVER;
+        gameoverPanel.SetActive(true);
+        gvStageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage;
+        gvBestScoreTxt.text = LANG.getTxt(LANG.TXT.BestScore.ToString()) + " : " + bestScore;
+        int coin = stage * 100;
+        int extraUpgradeCoin = Mathf.RoundToInt(coin * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.CoinBonus].getValue());
+        CoinTxt.text = (coin + extraUpgradeCoin).ToString(); // => setGameでも使う。
+    }
+
     public void setGame(string type){
         STATE state = DM.ins.convertGameState2Enum(type);
         switch(state){
@@ -395,20 +407,19 @@ public class GameManager : MonoBehaviour
                 break;
             case STATE.HOME:
                 Time.timeScale = 1;
-                Debug.Log("FINISH GAME!");
+
+                //* Get Coin
+                int coin = stage * 100;
+                DM.ins.personalData.Coin += int.Parse(CoinTxt.text);
+                
+                
                 resetSkillStatusTable();
                 DM.ins.personalData.save();
                 SceneManager.LoadScene(DM.SCENE.Home.ToString());
                 break;
         }
     }
-    public void setGameOver(){
-        Debug.Log("--GAME OVER--");
-        State = GameManager.STATE.GAMEOVER;
-        gameoverPanel.SetActive(true);
-        gvStageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage;
-        gvBestScoreTxt.text = LANG.getTxt(LANG.TXT.BestScore.ToString()) + " : " + bestScore;
-    }
+
 
     public void displayCurPassiveSkillUI(string type){
         GameObject pref = (type == STATE.PAUSE.ToString())? skillInfoRowPref : inGameSkillImgBtnPref;

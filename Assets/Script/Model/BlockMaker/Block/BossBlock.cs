@@ -5,16 +5,19 @@ using System;
 using Random = UnityEngine.Random;
 
 public class BossBlock : Block_Prefab{
-
     const int COL = 6;
     const int ROW = 3;
     const float STONE_SCALE_X = 2.8f;
     const float OBSTACLE_OFFSET_Z = -9;
     const int OBSTACLE_STONE_CNT = 1;
-    const int BOSS_DIE_ORB_CNT = 80;
     const float BOSS_HEAL_RATIO = 0.2f;
+    const int BOSS_DIE_ORB_CNT = 80;
     const int STONE_PER = 100;
     const int OBSTACLE_RESET_SPAN = 8;
+    const string BOSSATK_ANIM_NAME_LV1 = "Fireball Shoot";
+    const string BOSSATK_ANIM_NAME_LV2 = "Flame Attack";
+    const string BOSSATK_ANIM_NAME_LV3 = "Horn Attack";
+    const string BOSSATK_ANIM_NAME_LV4 = "Fly Flame Attack";
     // [SerializeField]  string skillType;
 
     [Header("【BOSS STATUS】")]
@@ -44,24 +47,24 @@ public class BossBlock : Block_Prefab{
         Debug.Log($"<color=yellow>BossBlock::activeBossSkill():: bossLevel= {bossLevel}, randPer= {randPer}, obstacleResetCnt= {obstacleResetCnt} / {OBSTACLE_RESET_SPAN}</color>");
         switch(bossLevel){
             case 1:
-                if(randPer <= 3){createObstacleSingleType(4);}
-                else if(randPer <= 5){StartCoroutine(coBossHeal());}
-                else StartCoroutine(coBossAttack("Fireball Shoot"));
+                if(randPer <= 0){createObstacleSingleType(4);}
+                else if(randPer <= 1){StartCoroutine(coBossHeal());}
+                else StartCoroutine(coBossAttack(BOSSATK_ANIM_NAME_LV1));
                 break;
             case 2:
                 if(randPer <= 3 && obstacleResetCnt == 0){createObstaclePatternType(0, 2);}
                 else if(randPer <= 5){StartCoroutine(coBossHeal());}
-                else StartCoroutine(coBossAttack("Flame Attack"));
+                else StartCoroutine(coBossAttack(BOSSATK_ANIM_NAME_LV2));
                 break;
             case 3:
                 if(randPer <= 3 && obstacleResetCnt == 0){createObstaclePatternType(2, 4);}
                 else if(randPer <= 5){StartCoroutine(coBossHeal());}
-                else StartCoroutine(coBossAttack("Horn Attack"));
+                else StartCoroutine(coBossAttack(BOSSATK_ANIM_NAME_LV3));
                 break;
             case 4:
                 if(randPer <= 3 && obstacleResetCnt == 0){createObstaclePatternType(4, 7);}
                 else if(randPer <= 5){StartCoroutine(coBossHeal());}
-                else StartCoroutine(coBossAttack("Fly Flame Attack"));
+                else StartCoroutine(coBossAttack(BOSSATK_ANIM_NAME_LV4));
                 break;
         }
         obstacleResetCnt++;
@@ -199,6 +202,14 @@ public class BossBlock : Block_Prefab{
         Vector3 pos = explosionIns.transform.position;
         var hitObj = Util._.getTagObjFromRaySphereCast(pos, 1, DM.TAG.Player.ToString());
         if(hitObj){
+            //* Upgrade 内容 適用
+            float rand = Random.Range(0, 1.0f);
+            var defencePer = DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.Defence].getValue();
+            if(rand <= defencePer) {
+                Debug.Log($"<color=blue>DEFENCE! rand={rand} < defencePer={defencePer} </color>");
+                gm.em.createDefenceEF(gm.pl.modelMovingTf.position);
+                return;
+            }
             gm.pl.IsStun = true;
             //* Stun EF
             gm.em.createStunEF(gm.pl.modelMovingTf.position, playerStunTime);
@@ -225,8 +236,9 @@ public class BossBlock : Block_Prefab{
     }
 
     public new void decreaseHp(int dmg) {
-        Debug.Log($"BossBlock:: decreaseHp({dmg})");
-        base.decreaseHp(dmg);
+        int extraBossDmg = Mathf.RoundToInt(dmg * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.BossDamage].getValue());
+        Debug.Log($"BossBlock::decreaseHp(dmg={dmg} + extraBossDmg={extraBossDmg})::");
+        base.decreaseHp(dmg + extraBossDmg);
         anim.SetTrigger(DM.ANIM.GetHit.ToString());
     }
 

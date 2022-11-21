@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44479504, g: 0.49434292, b: 0.57354003, a: 1}
+  m_IndirectSpecularColor: {r: 0.44479525, g: 0.49434352, b: 0.5735407, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -374,7 +374,7 @@ GameObject:
   - component: {fileID: 28610882}
   - component: {fileID: 28610881}
   m_Layer: 5
-  m_Name: CoinText
+  m_Name: CoinTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -433,7 +433,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100
+  m_Text: 9999
 --- !u!222 &28610882
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6750,6 +6750,7 @@ MonoBehaviour:
   bossFireBallTrailEF: {fileID: 2418085363730522192, guid: f79e287652b9c3f4cbc5f78a4d25c398, type: 3}
   bossFireBallExplosionEF: {fileID: 1669432660737919569, guid: d17b7ad0a6e690648aeb6eb9e5788a5d, type: 3}
   aimingEF: {fileID: 9177125473392428702, guid: 34a7aa4747eb4144fb255335b19d56a3, type: 3}
+  defenceEF: {fileID: 1392617867905681304, guid: 1f49915cc2489a64393b5b119502b316, type: 3}
 --- !u!1 &697366768
 GameObject:
   m_ObjectHideFlags: 0
@@ -20127,6 +20128,7 @@ MonoBehaviour:
   inGameSkillImgBtnPref: {fileID: 2010402386914571623, guid: 0913717a214136445b6658417b86152b, type: 3}
   pauseSkillStatusTableTf: {fileID: 114093873}
   skillInfoRowPref: {fileID: 3622790578802042750, guid: ee31cff3369478142bf23697ccda1b04, type: 3}
+  CoinTxt: {fileID: 28610881}
   statusInfoContents: {fileID: 585957427}
   statusInfoTxtPf: {fileID: 1369939459836968500, guid: 6db33d0b3b6844c4d94c44afe4f9d09f, type: 3}
   readyBtn: {fileID: 543322737}
