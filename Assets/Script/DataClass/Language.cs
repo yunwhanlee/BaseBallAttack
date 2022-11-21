@@ -377,7 +377,7 @@ public static class LANG //* LANG
                 int idx = UpgradeNameList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
                 Debug.Log("<color=yellow><<Upgrade>> idx= " + idx + "</color>");
                 resList[NAME] = UpgradeNameList[idx][(int)DM.ins.personalData.Lang];
-                resList[EXPLAIN] = UpgradeExplainList[idx][(int)DM.ins.personalData.Lang];
+                resList[EXPLAIN] = Util._.replaceSettingNumber(UpgradeExplainList[idx][(int)DM.ins.personalData.Lang], idx);
                 break;
             }
         }

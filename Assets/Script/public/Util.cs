@@ -153,14 +153,14 @@ public class Util : MonoBehaviour
         Debug.Log($"isIntegerNum({num}):: isInt? -> {res}");
         return res;
     }
-    public string replaceInitSettingNumber(string txt, int i){ //* ただし、数字が二つあることはできない。
+    public string replaceSettingNumber(string txt, int i){ //* ただし、数字が二つあることはできない。
         string res = txt;
         string extractNum = Regex.Replace(txt, "[^0-9]", "");
         if(extractNum != ""){
             float realNum = DM.ins.personalData.Upgrade.Arr[i].unit;
             string numStr = (Util._.isIntegerNum(realNum)? realNum : realNum * 100).ToString();
             res = txt.Replace(extractNum, numStr);
-            // Debug.Log("Replace Num:: Result=> " + replacedTxt);
+            Debug.Log($"replaceSettingNumber({txt}, {i}):: Result=> " + res);
         }
         return res;
     }

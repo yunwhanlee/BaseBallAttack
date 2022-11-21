@@ -141,7 +141,7 @@ public class ScrollView {
                 Array.ForEach(txtObjs, txtObj => Debug.Log($"{this.type}::{txtObj.name}= {txtObj.text}"));
                 strList.Add(DM.PANEL.Upgrade.ToString());
                 strList.Add(txtObjs[LANG.NAME].text);
-                strList.Add(Util._.replaceInitSettingNumber(txtObjs[LANG.EXPLAIN].text, i)); //* Replace InspectorView Setting Number (ExplainText)
+                strList.Add(txtObjs[LANG.EXPLAIN].text); //* Replace InspectorView Setting Number (ExplainText)
             }
             if(txtObjs == null && strList.Count == 0) return;
             //* Join Strings

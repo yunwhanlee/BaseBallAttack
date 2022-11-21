@@ -39,10 +39,10 @@ public class UpgradeDt {
 public class UpgradeList {
     //* Value
     const int DMG_UNIT = 1;
-    const float BALL_SPEED_UNIT = 0.25f;
-    const float CRITICAL_UNIT = 0.02f;
-    const float CRITICAL_DMG_UNIT = 0.25f;
-    const float BOSS_DMG_UNIT = 0.25f;
+    const float BALL_SPEED_UNIT = 0.05f;
+    const float CRITICAL_UNIT = 0.01f;
+    const float CRITICAL_DMG_UNIT = 0.10f;
+    const float BOSS_DMG_UNIT = 0.10f;
     const float COIN_BONUS_UNIT = 0.1f;
     const float DEFENCE_UNIT = 0.05f;
 
