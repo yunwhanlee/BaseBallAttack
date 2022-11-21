@@ -56,8 +56,8 @@ public class Util : MonoBehaviour
         ins.rectTransform.localPosition = new Vector3(0,-900,-400);
         Destroy(ins.gameObject, noticeMsgDisplayCnt);
     }
-
-    public int getCalcEquivalentSequence(int n, int device){ //* 等比数列
+    //* 等比数列
+    public int getCalcEquivalentSequence(int n, int device){ 
         int res;
         bool isOdd = n % 2 != 0;
         if(isOdd){ // 奇数
@@ -69,12 +69,14 @@ public class Util : MonoBehaviour
         int extraVal = Random.Range(-1, 1); // Extra
         return res + extraVal;
     }
-
-    public List<float> getCalcFibonicciSequence(float unit, float fibRatio){ //* フィボナッチ数列
+    /*
+    * フィボナッチ数列 @param {unit: 増加単位}, {fibRatio: 比率}, {maxLv: 生成するリスト長さ}
+    */
+    public List<float> getCalcFibonicciSequenceList(float unit, float fibRatio, int maxLv){ 
         List<float> res = new List<float>();
         float v1 = 1 * unit;
         float v2 = fibRatio * unit;
-        for(int i=0; i<10; i++){
+        for(int i=0; i<maxLv; i++){
             if(i == 0) {
                 res.Add(v1);
                 res[i] = v1;
@@ -154,6 +156,7 @@ public class Util : MonoBehaviour
         return res;
     }
     public string replaceSettingNumber(string txt, int i){ //* ただし、数字が二つあることはできない。
+        //* 現在適用されたパンネル：Upgrade-Panel。
         string res = txt;
         string extractNum = Regex.Replace(txt, "[^0-9]", "");
         if(extractNum != ""){

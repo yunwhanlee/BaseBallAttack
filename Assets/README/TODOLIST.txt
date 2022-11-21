@@ -58,7 +58,8 @@
         ✓  MaxLevel
         ✓  保存データ
         ✓  UpgradeListから、初期化した値をUpgrade-PANELのUIにも同じく適用。⇒replaceSettingNumber()作成。
-        -  RANKによって値段が決まるBUGを修正。
+        ✓  RANK適用はしない。
+        -  Price適用。->調整必要。
 
     - PSV INFO GUIでも、コインで、購入してアップグレードできるように。
 

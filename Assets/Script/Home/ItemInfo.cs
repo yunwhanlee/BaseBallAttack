@@ -71,16 +71,20 @@ public class ItemInfo : MonoBehaviour
     }
 
     void Start(){
-        checkLockedModel();
-        //* Set Price By Rank
-        switch(rank){
-            case DM.RANK.GENERAL : price.Coin = 100; break;
-            case DM.RANK.RARE : price.Coin = 300; break;
-            case DM.RANK.UNIQUE : price.Coin = 700; break;
-            case DM.RANK.LEGEND : price.Coin = 1500; break;
-            case DM.RANK.GOD : price.Coin = 4000; break;
+        if(this.name.Contains(DM.PANEL.Chara.ToString())
+            || this.name.Contains(DM.PANEL.Bat.ToString())
+            || this.name.Contains(DM.PANEL.Skill.ToString())){
+            checkLockedModel();
+            //* Set Price By Rank
+            switch(rank){
+                case DM.RANK.GENERAL : price.Coin = 100; break;
+                case DM.RANK.RARE : price.Coin = 300; break;
+                case DM.RANK.UNIQUE : price.Coin = 700; break;
+                case DM.RANK.LEGEND : price.Coin = 1500; break;
+                case DM.RANK.GOD : price.Coin = 4000; break;
+            }
+            Debug.Log("IteonInfo::Start:: Set Price By Rank= price.Coin= " + price.Coin);
         }
-        Debug.Log("IteonInfo::Start:: Set Price By Rank= price.Coin= " + price.Coin);
     }
 
     private void arrangeItem(DM.PANEL type){
@@ -113,12 +117,6 @@ public class ItemInfo : MonoBehaviour
                 break;
             }
             case DM.PANEL.Upgrade : { //* 追加的な特別変数へ代入。
-                // try{
-                //     UpgradeValueTxt.text = "TODO";
-                // }
-                // catch(Exception err){
-                //     Debug.LogError("ItemInfo:: rsc/home/selectItemPanel/Content/<b>Upgrade</b>のPrefabのInspectorビューへ、UpgradeValueTxtがNullです。\n◆ERROR: " + err);
-                // }
                 break;
             }
         }

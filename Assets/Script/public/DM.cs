@@ -79,10 +79,11 @@ public class DM : MonoBehaviour
         personalData = new PersonalData(); //* DataBase
         personalData.load(ref charas, ref bats, ref skills); //TODO Add skills
 
-        //* DMデータ ロード。
+        //* Init DMデータ ロード。
         for(int i=0; i<upgrades.Length; i++){
             UpgradeDt upgradeDt = personalData.Upgrade.Arr[i];
             upgrades[i].setUpgradeGUI(upgradeDt);
+            upgrades[i].price.setValue(Util._.getCalcFibonicciSequenceList(unit: 50, fibRatio: 1, upgradeDt.maxLv)[upgradeDt.lv]);
         }
 
         //* PersonalData後に処理必要なもの（LANGUAGEため）

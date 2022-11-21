@@ -494,11 +494,11 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             myMoney -= price;
             
             if(DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
-                Debug.Log("UPGRADE PANEL");
                 UpgradeDt upgradeDt = DM.ins.personalData.Upgrade.Arr[CurIdx];
                 //TODO
                 upgradeDt.setLvUp();
                 curItem.setUpgradeGUI(upgradeDt);
+                curItem.price.setValue(Util._.getCalcFibonicciSequenceList(unit: 50, fibRatio: 1, upgradeDt.maxLv)[upgradeDt.lv]);
             }
             else
             {
@@ -550,13 +550,11 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             hm.checkMarkImg.color = Color.green;
             Array.ForEach(items, item => activeOutline(item, false));
             activeOutline(curItem, true);
-
             // setSelectSkillImgAtHome();
         }
         else{
             hm.checkMarkImg.color = Color.gray;
             activeOutline(curItem, false);
-
         }
     }
 

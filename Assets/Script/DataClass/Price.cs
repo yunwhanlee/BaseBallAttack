@@ -20,4 +20,10 @@ public class Price
         else
             return Diamond;
     }
+    public void setValue(float increaseValue){
+        if(type == Price.TP.COIN)
+            Coin = (int)increaseValue;
+        else
+            Diamond = (int)increaseValue;
+    }
 }

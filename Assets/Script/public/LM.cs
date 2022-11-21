@@ -48,6 +48,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
 
     [Header("PLAYER")]
     [Range(0, 1.0f)] public float ATVSKILL_COOLDOWN_UNIT = 0.02f;
+    public int MAX_LV = 50;
     public List<float> MAX_EXP_LIST = new List<float>();
 
     [Header("PSV SKILL")]
@@ -58,7 +59,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
 
     void Start(){
         Debug.Log("<FIBONACCI SEQUENCE> Player Max Exp");
-        MAX_EXP_LIST = Util._.getCalcFibonicciSequence(unit: 100, fibRatio: 1);
+        MAX_EXP_LIST = Util._.getCalcFibonicciSequenceList(unit: 100, fibRatio: 1, MAX_LV);
         HOMERUN_MIN_POWER = HIT_RANK[B].Power;
         const int OFFSET_CNT = 1;
         GODBLESS_SPAN -= OFFSET_CNT;
