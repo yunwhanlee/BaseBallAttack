@@ -123,6 +123,7 @@ public class GameManager : MonoBehaviour
     public GameObject eggPf;
 
     void Start() {
+        Util._.calcArithmeticProgressionList(firstVal: 2, max: 10, comminDifference: 5);
         // Util._.setCalcFibonicciSequence(100, 1.5f);
         
 

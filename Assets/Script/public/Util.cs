@@ -167,4 +167,17 @@ public class Util : MonoBehaviour
         }
         return res;
     }
+    /*
+    *   等差数列:: firstVal: 始め項, max: 最大値, commonDiffernce: 共差
+    */
+    public List<int> calcArithmeticProgressionList(int firstVal, int max, int comminDifference){
+        List<int> resList = new List<int>();
+        for(int n=1; n<=max; n++){
+            int v = firstVal + (n - 1) * comminDifference;
+            Debug.Log($"等差数列:: {firstVal} + ({n} - 1) * {comminDifference} = {v}");
+            resList.Add(v);
+        }
+
+        return resList;
+    }
 }
