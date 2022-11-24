@@ -167,17 +167,21 @@ public class Util : MonoBehaviour
         }
         return res;
     }
-    /*
-    *   等差数列:: firstVal: 始め項, max: 最大値, commonDiffernce: 共差
+    /**
+    * * 等差数列 公式 : Sn = S1 + (n - 1) * d;
+    *   @param 1. start (始め項)
+    *   @param 2. max (最大値)
+    *   @param 3. d (common Differnce:共差)
+    *   @param 4. gradualUpValue (増加量) 0.00 ～ 1.00f EX) 0.01fは dの1%ずつ増える++
     */
-    public List<int> calcArithmeticProgressionList(int firstVal, int max, int comminDifference){
+    public List<int> calcArithmeticProgressionList(int start, int max, int d, float gradualUpValue = 0.00f){
         List<int> resList = new List<int>();
         for(int n=1; n<=max; n++){
-            int v = firstVal + (n - 1) * comminDifference;
-            Debug.Log($"等差数列:: {firstVal} + ({n} - 1) * {comminDifference} = {v}");
+            int commonDifference = d + (int)(d * (n) * gradualUpValue);
+            int v = start + (n - 1) * commonDifference;
+            Debug.Log($"等差数列:: {n}回目 : {start} + ({n} - 1) * {commonDifference} = {v}");
             resList.Add(v);
         }
-
         return resList;
     }
 }
