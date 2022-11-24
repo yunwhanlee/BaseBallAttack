@@ -145,10 +145,12 @@ public class BlockMaker : MonoBehaviour
 
                 var pos = new Vector3(0, 0, bossPrefs[idx].transform.position.z + 2);
                 var boss = Instantiate(bossPrefs[idx], pos, bossPrefs[idx].transform.rotation, gm.bossGroup);
+                string NameStr = boss.name.Split('(')[0];
+                NameStr = NameStr.Split('_')[2];
 
                 // bossStgBarRectTf.anchorMin = new Vector2(0.1f, 0.5f);
 
-                StartCoroutine(coPlayBossSpawnAnim(boss.name));
+                StartCoroutine(coPlayBossSpawnAnim(NameStr));
         }
     }
     private IEnumerator coPlayBossSpawnAnim(string bossName){
