@@ -144,19 +144,20 @@ public class BlockMaker : MonoBehaviour
                 Debug.Log($"BOSS SPAWN!! index= {idx}");
 
                 var pos = new Vector3(0, 0, bossPrefs[idx].transform.position.z + 2);
-                Instantiate(bossPrefs[idx], pos, bossPrefs[idx].transform.rotation, gm.bossGroup);
+                var boss = Instantiate(bossPrefs[idx], pos, bossPrefs[idx].transform.rotation, gm.bossGroup);
 
                 // bossStgBarRectTf.anchorMin = new Vector2(0.1f, 0.5f);
 
-                StartCoroutine(coPlayBossSpawnAnim());
+                StartCoroutine(coPlayBossSpawnAnim(boss.name));
         }
     }
-    private IEnumerator coPlayBossSpawnAnim(){
+    private IEnumerator coPlayBossSpawnAnim(string bossName){
         gm.IsPlayingAnim = true;
 
         //* 再生時間 習得
         var camAnim = gm.cam1.GetComponent<Animator>();
         var txtAnim = gm.bossSpawnTxt.GetComponent<Animator>();
+        var bossNameTxt = gm.bossSpawnTxt.transform.GetChild(0).GetComponent<Text>();
 
         //* InActive
         foreach(Transform child in gm.activeSkillBtnGroup){
@@ -171,6 +172,7 @@ public class BlockMaker : MonoBehaviour
         Time.timeScale = 0.1f;
         camAnim.SetTrigger(DM.ANIM.DoBossSpawn.ToString());
         txtAnim.SetTrigger(DM.ANIM.DoSpawn.ToString());
+        bossNameTxt.text = bossName;
 
         yield return new WaitForSecondsRealtime(animPlayTime);
         //* Animation Finish

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44479525, g: 0.49434352, b: 0.5735407, a: 1}
+  m_IndirectSpecularColor: {r: 0.44479504, g: 0.49434292, b: 0.57354003, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11586,7 +11586,7 @@ GameObject:
   - component: {fileID: 1157252512}
   - component: {fileID: 1157252511}
   m_Layer: 5
-  m_Name: stageDoubleUpTxt
+  m_Name: BossNameTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11659,7 +11659,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '- BLUE DRAGON -'
+  m_Text: '- OOOO Dragon -'
 --- !u!222 &1157252513
 CanvasRenderer:
   m_ObjectHideFlags: 0
