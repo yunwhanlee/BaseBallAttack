@@ -498,7 +498,8 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 //TODO
                 upgradeDt.setLvUp();
                 curItem.setUpgradeGUI(upgradeDt);
-                curItem.price.setValue(Util._.getCalcFibonicciSequenceList(unit: 50, fibRatio: 1, upgradeDt.maxLv)[upgradeDt.lv]);
+                List<int> priceList = Util._.calcArithmeticProgressionList(start: 100, upgradeDt.maxLv, d: 100, gradualUpValue: 0.1f);
+                curItem.price.setValue(priceList[upgradeDt.lv]);
             }
             else
             {

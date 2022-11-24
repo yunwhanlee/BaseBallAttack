@@ -176,7 +176,7 @@ public class Util : MonoBehaviour
     */
     public List<int> calcArithmeticProgressionList(int start, int max, int d, float gradualUpValue = 0.00f){
         List<int> resList = new List<int>();
-        for(int n=1; n<=max; n++){
+        for(int n=1; n<=max+1; n++){ //! max + 1下利用は、maxまでアップグレードしたらOutOfIndexバグが出るからです。
             int commonDifference = d + (int)(d * (n) * gradualUpValue);
             int v = start + (n - 1) * commonDifference;
             Debug.Log($"等差数列:: {n}回目 : {start} + ({n} - 1) * {commonDifference} = {v}");

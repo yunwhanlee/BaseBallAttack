@@ -124,7 +124,6 @@ public class GameManager : MonoBehaviour
 
     void Start() {
         Util._.calcArithmeticProgressionList(start: 100, max: 50, d: 100, gradualUpValue: 0.1f);
-        // Util._.setCalcFibonicciSequence(100, 1.5f);
         
         Debug.Log("<color=red>----------------------------------------------P L A Y   S C E N E----------------------------------------------</color>");
         //! init()宣言したら、キャラクターモデルを読み込むことができないBUG

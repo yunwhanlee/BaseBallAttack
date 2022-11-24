@@ -83,7 +83,8 @@ public class DM : MonoBehaviour
         for(int i=0; i<upgrades.Length; i++){
             UpgradeDt upgradeDt = personalData.Upgrade.Arr[i];
             upgrades[i].setUpgradeGUI(upgradeDt);
-            upgrades[i].price.setValue(Util._.getCalcFibonicciSequenceList(unit: 50, fibRatio: 1, upgradeDt.maxLv)[upgradeDt.lv]);
+            List<int> priceList = Util._.calcArithmeticProgressionList(start: 100, upgradeDt.maxLv, d: 100, gradualUpValue: 0.1f);
+            upgrades[i].price.setValue(priceList[upgradeDt.lv]);
         }
 
         //* PersonalData後に処理必要なもの（LANGUAGEため）
