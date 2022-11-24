@@ -329,6 +329,7 @@ public class Block_Prefab : MonoBehaviour
     public void decreaseHp(int dmg) {
         // Debug.Log($"decreaseHp(dmg= {dmg}):: gm= {gm}");
         Hp -= dmg;
+        if(Hp < 0) Hp = 0;
         gm.comboCnt++;
         gm.comboTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.IsHit.ToString());
         mesh.setWhiteHitEF();
