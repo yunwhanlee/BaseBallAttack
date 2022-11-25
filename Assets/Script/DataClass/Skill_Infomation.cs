@@ -162,7 +162,9 @@ public class PsvSkill<T> where T: struct {
 
         //* PSV Unique Skill
         int DMG_TWICE = (pl.damageTwice.Level == 1)? 2 : 1;
-        int GIANT_BALL_CALC = (pl.giantBall.Level == 1)? pl.giantBall.Val * 2 : 1;
+        // float GIANT_BALL_CALC = (pl.giantBall.Level == 1)? 
+        //     (pl.multiShot.Val + pl.verticalMultiShot.Val + pl.giantBall.Val) * pl.giantBall.Unit
+        //     : 1;
 
         var psv = DM.ins.convertPsvSkillStr2Enum(Name);
         if(Level > 0 && rand <= percent){
@@ -175,7 +177,7 @@ public class PsvSkill<T> where T: struct {
                     result = PsvSkill<int>.ONE_KILL_DMG;
                     break;
                 case DM.PSV.Critical: 
-                    int dmg = (int)(pl.dmg.Val * (2 + pl.criticalDamage.Val) * DMG_TWICE);
+                    int dmg = (int)(pl.dmg.Val * (2 + pl.criticalDamage.Val) * DMG_TWICE * pl.giantBall.Val);
                     em.createCritTxtEF(col.transform.position, dmg);
                     result = dmg;
                     break;
@@ -187,7 +189,7 @@ public class PsvSkill<T> where T: struct {
                     break;
                 case DM.PSV.ThunderProperty:
                     em.createThunderStrikeEF(col.transform.position);
-                    em.createCritTxtEF(col.transform.position, pl.dmg.Val);
+                    em.createCritTxtEF(col.transform.position, Mathf.RoundToInt(pl.dmg.Val * DMG_TWICE * pl.giantBall.Val));
                     result *= 2;
                     break;
 
@@ -199,7 +201,7 @@ public class PsvSkill<T> where T: struct {
 
         //*「InstantKill」とか「Critical」が発動しなかったら
         if(result == 0){
-            result = pl.dmg.Val * DMG_TWICE * GIANT_BALL_CALC; //普通のダメージをそのまま代入。
+            result = Mathf.RoundToInt(pl.dmg.Val * DMG_TWICE * pl.giantBall.Val); //普通のダメージをそのまま代入。
         }
         return false;
     }
@@ -229,23 +231,29 @@ public class PsvSkill<T> where T: struct {
     public static List<string> getPsvStatusInfo2Str(Player pl){
         //* PSV Unique Skill
         int DMG_TWICE = (pl.damageTwice.Level == 1)? 2 : 1;
-        int GIANT_BALL_CALC = (pl.giantBall.Level == 1)? pl.giantBall.Val / 2 : 1;
+        // float GIANT_BALL_CALC = (pl.giantBall.Level == 1)? 
+        //     (pl.multiShot.Val + pl.verticalMultiShot.Val + pl.giantBall.Val) * pl.giantBall.Unit
+        //     : 1;
+        // Debug.Log("GIANT_BALL_CALC->" + GIANT_BALL_CALC);
 
         return new List<string>(){
-            pl.dmg.Name,                    ((pl.dmg.Val * DMG_TWICE * GIANT_BALL_CALC).ToString()),
+            pl.dmg.Name,                    Mathf.RoundToInt(pl.dmg.Val * DMG_TWICE * pl.giantBall.Val).ToString(),
             pl.speed.Name,                  (pl.speed.Val * 100 + "m/s").ToString(),
-            pl.multiShot.Name,              ("⇔: " + (pl.multiShot.Val) + ", ⇑: " + (pl.verticalMultiShot.Val)).ToString(),
-            // pl.verticalMultiShot.Name,      (pl.verticalMultiShot.Val * 1).ToString(),
-            pl.laser.Name,                  (pl.laser.val).ToString(),
-            pl.instantKill.Name,            (pl.instantKill.Val * 100 + "%").ToString(),
+            pl.multiShot.Name,              (pl.multiShot.Val).ToString(),
+            pl.verticalMultiShot.Name,      (pl.verticalMultiShot.Val).ToString(),
             pl.critical.Name,               (pl.critical.Val * 100 + "%").ToString(),
             pl.criticalDamage.Name,         (CRIT_DMG_DEFAULT + (pl.criticalDamage.Val * 100) + "%").ToString(),
+            pl.instantKill.Name,            (pl.instantKill.Val * 100 + "%").ToString(),
             pl.explosion.Name,              (pl.explosion.Val.per * 100 + "%").ToString(),
             pl.expUp.Name,                  (pl.expUp.Val * 100 + "%").ToString(),
             pl.itemSpawn.Name,              (pl.itemSpawn.Val * 100 + "%").ToString(),
+            pl.laser.Name,                  (pl.laser.val).ToString(),
             pl.fireProperty.Name,           (pl.fireProperty.Val * 100 + "%").ToString(),
             pl.iceProperty.Name,            (pl.iceProperty.Val * 100 + "%").ToString(),
             pl.thunderProperty.Name,        (pl.thunderProperty.Val * 100 + "%").ToString(),
+            LANG.getTxt(DM.UPGRADE.BossDamage.ToString()),  DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.BossDamage].getVal2Str(),
+            LANG.getTxt(DM.UPGRADE.CoinBonus.ToString()),  DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.CoinBonus].getVal2Str(),
+            LANG.getTxt(DM.UPGRADE.Defence.ToString()),  DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.Defence].getVal2Str(),
         };
     }
 

@@ -149,11 +149,6 @@ public class Ball_Prefab : MonoBehaviour
 
                 //* 【 Giant Ball 】
                 if(pl.giantBall.Level == 1){
-                    int ballCnt = 1;
-                    ballCnt += pl.multiShot.Val;
-                    ballCnt += pl.verticalMultiShot.Val;
-                    pl.giantBall.Val = ballCnt;
-                    
                     var ballTexture = this.transform.GetChild(0).GetChild(0);
                     const float sc = PsvSkill<float>.GIANTBALL_SCALE;
                     ballTexture.transform.localScale = new Vector3(sc, sc, sc);

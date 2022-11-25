@@ -17,8 +17,10 @@ public static class LANG //* LANG
         Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, 
         ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, 
         Laser, FireProperty, IceProperty, ThunderProperty,
-        // Unique PSV
-        DamageTwice, GiantBall, DarkOrb, GodBless, BirdFriend
+        //* Unique PSV
+        DamageTwice, GiantBall, DarkOrb, GodBless, BirdFriend,
+        //* Upgrade (Only Needed Language)
+        BossDamage, CoinBonus, Defence,
     };
     public const int NAME=0, EXPLAIN=1, HOMERUNBONUS=2;
     const string HR_TXT = "⊡ HomeRunBonus : ";
@@ -181,18 +183,10 @@ public static class LANG //* LANG
     public static string[] DarkOrb = new string[]{DM.PSV.DarkOrb.ToString(), "闇のオーブ", "어둠의오브"};
     public static string[] GodBless = new string[]{DM.PSV.GodBless.ToString(), "神の祝福", "신의축복"};
     public static string[] BirdFriend = new string[]{DM.PSV.BirdFriend.ToString(), "鳥友達", "조류친구"};
-
-    // public static string[] DmgContent = new string[]{"Attack Damage +1","攻撃力 +1","공격력 +1"};
-    // public static string[] MultiContent = new string[]{"Extra ball on one side +1","横側へボール追加 +1","옆측에 볼 추가"};
-    // public static string[] SpeedContent = new string[]{"Speed Up +35%","速度アップ +35%","속도 업 +35%"};
-    // public static string[] InstantKillContent = new string[]{"Immediate destroy +2%","ブロックを即刻破壊 +2%","블록 즉시파괴 +2%"};
-    // public static string[] CriticalContent = new string[]{"Critical Up +20%","致命打確率アップ +20%","치명타확률 업 +20%"};
-    // public static string[] ExplosionContent = new string[]{"Damage within the range +20% (+range75%)","範囲内にダメージを上げる +20% (+範囲75%)","범위내 데미지 +20% (+ 범위 75%)"};
-    // public static string[] ExpUpContent = new string[]{"Experience +20%","経験値 +20%","경험치 +20%"};
-    // public static string[] ItemSpawnContent = new string[]{"Item block spawn +5%","アイテムブロックの確率アップ +5%","아이탬 블록 확률 증가 +5%"};
-    // public static string[] VerticalMultiShotContent = new string[]{"extra ball on front side +1","前側へボール追加 +1","앞쪽에 볼 추가 +1"};
-    // public static string[] CriticalDamageContent = new string[]{"Critical Damage Up +50%","致命打ダメージアップ +50%","치명타데미지 +50%"};
-    // public static string[] LaserContent = new string[]{"Shot Laser on one side +1","レイザー攻撃追加 +1","레이저공격 추가 +1"};
+    //* Upgrade
+    public static string[] BossDamage = new string[]{DM.UPGRADE.BossDamage.ToString(), "ボースダメージ", "보스데미지"};
+    public static string[] CoinBonus = new string[]{DM.UPGRADE.CoinBonus.ToString(), "コインボーナス", "코인보너스"};
+    public static string[] Defence = new string[]{DM.UPGRADE.Defence.ToString(), "ディフェンス", "디팬스"};
 
     public static List<string[]> PsvInfoNameList = new List<string[]>(){
         // new string[]{Dmg[(int)TP.EN], Dmg[(int)TP.JP], Dmg[(int)TP.KR]},
@@ -297,7 +291,7 @@ public static class LANG //* LANG
         if(name == TXT.VerticalMultiShot.ToString()) res = VerticalMultiShot[CUR_LANG];
         if(name == TXT.CriticalDamage.ToString()) res = CriticalDamage[CUR_LANG];
         if(name == TXT.Laser.ToString()) res = Laser[CUR_LANG];
-        // Unique PSV
+        //* Unique PSV
         if(name == TXT.FireProperty.ToString()) res = FireProperty[CUR_LANG];
         if(name == TXT.IceProperty.ToString()) res = IceProperty[CUR_LANG];
         if(name == TXT.ThunderProperty.ToString()) res = ThunderProperty[CUR_LANG];
@@ -306,6 +300,11 @@ public static class LANG //* LANG
         if(name == TXT.DarkOrb.ToString()) res = DarkOrb[CUR_LANG];
         if(name == TXT.GodBless.ToString()) res = GodBless[CUR_LANG];
         if(name == TXT.BirdFriend.ToString()) res = BirdFriend[CUR_LANG];
+        //* Upgrade (Only Needed)
+        if(name == TXT.BossDamage.ToString()) res = BossDamage[CUR_LANG];
+        if(name == TXT.CoinBonus.ToString()) res = CoinBonus[CUR_LANG];
+        if(name == TXT.Defence.ToString()) res = Defence[CUR_LANG];
+
 
         //* ERROR
         if(res == null) Debug.LogError("存在しないTEXTです。");

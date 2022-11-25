@@ -3,13 +3,24 @@
 
     - ゲームやり方説明するための、UIチャラとテキストＢＯＸ用意。
 
+    ○ StatusFolder改善。
+        ✓ マルチ弾ポイント⇒Giantボールの場合、攻撃力に反映。
+        ✓ Upgrade::ボースダメージ表示。
+        ✓ Upgrade::COINボーナス表示。
+        ✓ Upgrade::DEFENCE表示。
+
+    - UI改善。
+
+    - LevelPanel 
+        - もう一度回すボタン。(ダイア OR 広告)
+        - レベールアップが重なった場合、連続でスロットアップグレードする。
+        - Unique PSVの確率設定＋登場したら光EFFECT追加。
+
     - COMBOカウントに関して、利点考える。
 
-    ✓ StatusFolder UI 整理。➡ 221108
-
     ✓ SphereCastAllを統一する関数制作::Util.csへ
-    
-    - Activeスキルのホームランボーナス。
+
+    ● Activeスキルのホームランボーナス。
         ✓ ThunderShotのエフェクト追加。上から撃ち落とす雷。
         ✓ カラーボール：MAX 5つに制限。HOMERUNだったら、全て消す。
         ✓ アイスエイジ：ブロックを凍らせて、次のターンに下がらない。
@@ -44,13 +55,13 @@
 
     - UpGrade Table GUI
         ✓  UI表示 
-            ・Damage Up。+1。
-            ・Critical Up。+2%。
-            ・Critical Damage Up。+25%。
-            ・Boss Damage Up。+25%。
-            ・Ball Speed。+25m/s。
-            ・CoinBonus % Up。+10%。
-            ・Defence % From Boss Attack。+5%。
+            ・Damage Up。
+            ・Critical Up。
+            ・Critical Damage Up。
+            ・Boss Damage Up。
+            ・Ball Speed。
+            ・CoinBonus % Up。
+            ・Defence % From Boss Attack。
         ✓  UI変更。もっと見やすく。 
         ✓  言語設定。   
         ✓  購入ボタン ＋ 値段表示。
@@ -59,9 +70,8 @@
         ✓  保存データ
         ✓  UpgradeListから、初期化した値をUpgrade-PANELのUIにも同じく適用。⇒replaceSettingNumber()作成。
         ✓  RANK適用はしない。
-        -  Price適用。->調整必要。
-
-    - PSV INFO GUIでも、コインで、購入してアップグレードできるように。
+        ✓  Price適用。->調整必要。
+        - PSV INFO GUIでも、コインで、購入してアップグレードできるように。
 
     - Reward
         - TODO
@@ -85,7 +95,8 @@
             ✓ Boss Aiming IconEFが複数できない問題解決。
 
         ✓スキルランダム生成シート制作。
-        -  ボース登場した時、名前表示。
+        - ボース登場した時、名前表示 -> 全ての言語で。
+        - ボースATTACKの場合、CAM2になっている時には急いでCAM1に切り替えて邪魔なGUIを非表示。
         
 
 [BUG]
@@ -100,11 +111,13 @@
     ✓ BlockStone位置がお互いに重ならないように。
     ✓ LevelUpPanelAnimateで、直接止めたら、Y座標が少しずつズレて気持ち悪いこと対応。
     ✓ PSV MaxLevel以上に上がったら、Out of Index エラー。
-    -  GiantBall Folder Status 値が可笑しい。
-    -  GiantBall ダメージをもっとアップする：まるでボース特化スキールように
-    -  インゲームで、Bottom PSV Table GUIで、９個が増えたら下に整列され、イメージが切れちゃうこと。
+    ✓ GiantBall Folder Status 反映。値設定BUG対応。
+    ✓ GiantBall マルチ当たり１．５倍。
     ✓ Util:: AnimGetClipLength=>Secを探索方法変更(Index->名前)。
     ✓ Strikeになったら、NextStage()を直接に読みだすことで、次に行かない問題解決。
     ✓ (BUG-1) Upgrade-PANELも入ってきて、再ロードした場合 Out Of Indexバグの発生すること対応。
+    -  インゲームで、Bottom PSV Table GUIで、９個が増えたら下に整列され、イメージが切れちゃうこと。
+    -  ボース２攻撃がPlayerを追いかけるBUG。
+    -  Uniqueスキルモデルが持っているのに、LEVELUPしたら、また出る。
     
 

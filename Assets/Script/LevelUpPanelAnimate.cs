@@ -161,7 +161,11 @@ public class LevelUpPanelAnimate : MonoBehaviour{
                 break;
             case DM.PSV.MultiShot:
                 pl.multiShot.setLvUp(pl.multiShot.Val + pl.multiShot.Unit);
-                Debug.Log(pl.multiShot.Level + pl.multiShot.Val);
+                if(pl.giantBall.Level > 0){
+                    float CALC_GIANTBALL_VAL = (pl.multiShot.Val + pl.verticalMultiShot.Val + pl.giantBall.Level) * pl.giantBall.Unit;
+                    Debug.Log($"CALC_GIANTBALL_VAL({CALC_GIANTBALL_VAL}) -> (multi= {pl.multiShot.Val} + vMulti= {pl.verticalMultiShot.Val} + giantBall.Lv= {pl.giantBall.Level}) * giantBall.Unit={pl.giantBall.Unit}" );
+                    pl.giantBall.Val = (CALC_GIANTBALL_VAL);
+                }
                 break;
             case DM.PSV.Speed:
                 pl.speed.setLvUp(pl.speed.Val + pl.speed.Unit); //20% Up
@@ -185,6 +189,11 @@ public class LevelUpPanelAnimate : MonoBehaviour{
                 break;
             case DM.PSV.VerticalMultiShot:
                 pl.verticalMultiShot.setLvUp(pl.verticalMultiShot.Val + pl.verticalMultiShot.Unit);
+                if(pl.giantBall.Level > 0){
+                    float CALC_GIANTBALL_VAL = (pl.multiShot.Val + pl.verticalMultiShot.Val + pl.giantBall.Level) * pl.giantBall.Unit;
+                    Debug.Log($"CALC_GIANTBALL_VAL({CALC_GIANTBALL_VAL}) -> (multi= {pl.multiShot.Val} + vMulti= {pl.verticalMultiShot.Val} + giantBall.Lv= {pl.giantBall.Level}) * giantBall.Unit={pl.giantBall.Unit}" );
+                    pl.giantBall.Val = (CALC_GIANTBALL_VAL);
+                }
                 break;
             case DM.PSV.Laser:
                 pl.laser.setLvUp(pl.laser.Val + pl.laser.Unit);
@@ -198,11 +207,15 @@ public class LevelUpPanelAnimate : MonoBehaviour{
             case DM.PSV.ThunderProperty:
                 pl.thunderProperty.setLvUp(pl.thunderProperty.Val + pl.thunderProperty.Unit);
                 break;
+            //* Unique-------------------------------------------------------------------------------------
             case DM.PSV.DamageTwice:
                 pl.damageTwice.setLvUp(pl.damageTwice.Val + pl.damageTwice.Unit);
                 break;
-            case DM.PSV.GiantBall:
-                pl.giantBall.setLvUp(pl.giantBall.Val + pl.giantBall.Unit);
+            case DM.PSV.GiantBall:{
+                float CALC_GIANTBALL_VAL = (pl.multiShot.Val + pl.verticalMultiShot.Val + pl.giantBall.Level) * pl.giantBall.Unit;
+                Debug.Log($"CALC_GIANTBALL_VAL({CALC_GIANTBALL_VAL}) -> (multi= {pl.multiShot.Val} + vMulti= {pl.verticalMultiShot.Val} + giantBall.Lv= {pl.giantBall.Level}) * giantBall.Unit={pl.giantBall.Unit}" );
+                pl.giantBall.setLvUp(CALC_GIANTBALL_VAL);
+            }
                 break;
             case DM.PSV.DarkOrb:
                 pl.darkOrb.setLvUp(pl.darkOrb.Val + pl.darkOrb.Unit);

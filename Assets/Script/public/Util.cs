@@ -34,7 +34,7 @@ public class Util : MonoBehaviour
         int i = 0;
         Array.ForEach(clips, clip=> {
             // Debug.Log($"Util::getAnimPlayTime():: Obj:{anim.name} i={i}, clipName= <b>{clip.name}</b>, str={str} , clip.time= {clip.length} => {(clip.name == str? "<color=blue>TRUE</color>" : "false")}");
-            if(clip.name == str){
+            if(clip.name == str || clip.name == str.ToLower()){
                 index = i;
                 return;
             }

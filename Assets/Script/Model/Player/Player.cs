@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
     public PsvSkill<float> iceProperty;
     public PsvSkill<float> thunderProperty;
     public PsvSkill<int> damageTwice;
-    public PsvSkill<int> giantBall;
+    public PsvSkill<float> giantBall;
     public PsvSkill<float> darkOrb;
     public PsvSkill<float> godBless;
     public PsvSkill<float> birdFriend;
@@ -146,8 +146,8 @@ public class Player : MonoBehaviour
         // Unique
         damageTwice = new PsvSkill<int>(
             LANG.getTxt(DM.PSV.DamageTwice.ToString()), psvLvArr[(int)DM.PSV.DamageTwice].lv, 0, 1, 1);
-        giantBall = new PsvSkill<int>(
-            LANG.getTxt(DM.PSV.GiantBall.ToString()), psvLvArr[(int)DM.PSV.GiantBall].lv, 0, 1, 1);
+        giantBall = new PsvSkill<float>(
+            LANG.getTxt(DM.PSV.GiantBall.ToString()), psvLvArr[(int)DM.PSV.GiantBall].lv, 1, 1.5f, 1);
         darkOrb = new PsvSkill<float>(
             LANG.getTxt(DM.PSV.DarkOrb.ToString()), psvLvArr[(int)DM.PSV.DarkOrb].lv, 0, 1, 1);
         godBless= new PsvSkill<float>(
@@ -179,9 +179,11 @@ public class Player : MonoBehaviour
         fireProperty.initSkillDt(fireProperty.Val + (fireProperty.Unit * fireProperty.Level));
         iceProperty.initSkillDt(iceProperty.Val + (iceProperty.Unit * iceProperty.Level));
         thunderProperty.initSkillDt(thunderProperty.Val + (thunderProperty.Unit * thunderProperty.Level));
+        
         // Unique
         damageTwice.initSkillDt(damageTwice.Val + (damageTwice.Unit * damageTwice.Level));
-        giantBall.initSkillDt(giantBall.Val + (giantBall.Unit * giantBall.Level));
+        float CALC_GIANTBALL_VAL = (giantBall.Level == 1)? (multiShot.Val + verticalMultiShot.Val + giantBall.Val) * giantBall.Unit : giantBall.Val;
+        giantBall.initSkillDt(CALC_GIANTBALL_VAL);
         darkOrb.initSkillDt(darkOrb.Val + (darkOrb.Unit * darkOrb.Level));
         godBless.initSkillDt(godBless.Val + (godBless.Unit * godBless.Level));
         birdFriend.initSkillDt(birdFriend.Val + (birdFriend.Unit * birdFriend.Level));

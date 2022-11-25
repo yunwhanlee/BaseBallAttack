@@ -243,7 +243,7 @@ public class BossBlock : Block_Prefab{
     }
 
     public override void onDestroy(GameObject target, bool isInitialize = false) {
-        Debug.Log("BossBlock:: onDestroy()::");
+        Debug.Log($"BossBlock:: onDestroy():: target= {target}");
         StartCoroutine(coPlayBossDieAnim(target));
     }
 
