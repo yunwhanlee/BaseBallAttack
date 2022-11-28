@@ -307,15 +307,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.45882353, b: 0.7529412, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4abc20c548d49a944a1450e2c25c4700, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: a78a26f1c21194ac0a932fb57a9141c9, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -508,6 +508,8 @@ MonoBehaviour:
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
   cashShopPriceTxt: {fileID: 0}
+  upgradeValueTxt: {fileID: 0}
+  lvTxt: {fileID: 0}
   itemPassive:
     arr: []
   rankAuraEF: {fileID: 0}

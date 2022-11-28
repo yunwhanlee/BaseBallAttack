@@ -593,17 +593,22 @@ MonoBehaviour:
   - x3 damage.
   - "\uFF13\u500D \u30C0\u30E1\u30FC\u30B8\u3002"
   - "3\uBC30 \uB370\uBBF8\uC9C0."
+  price:
+    type: 0
+    coin: 0
+    diamond: 0
   isLock: 1
   isChecked: 0
   isCheckedImgObj: {fileID: 2571885534918434013}
-  meshRdrList: []
+  modelMeshRdrList: []
   originMtList: []
-  grayPanel: {fileID: 0}
+  grayPanel2D: {fileID: 0}
   rank: 0
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
-  price: 0
   cashShopPriceTxt: {fileID: 0}
+  upgradeValueTxt: {fileID: 0}
+  lvTxt: {fileID: 0}
   itemPassive:
     arr:
     - name: Dmg
@@ -630,6 +635,7 @@ MonoBehaviour:
     - name: ItemSpawn
       lv: 0
       imgPref: {fileID: 0}
+  rankAuraEF: {fileID: 0}
 --- !u!114 &5168663472484879910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -730,6 +736,7 @@ GameObject:
   - component: {fileID: 5168663473030286793}
   - component: {fileID: 5168663473030286799}
   - component: {fileID: 5168663473030286792}
+  - component: {fileID: 7205569273005639500}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -785,7 +792,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4abc20c548d49a944a1450e2c25c4700, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 38e324f2965ad4660b4aefaba2575df8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -795,6 +802,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7205569273005639500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5168663473030286794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db125c7de00668f4e98849d0aaf366d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &5168663473121431994
 GameObject:
   m_ObjectHideFlags: 0
