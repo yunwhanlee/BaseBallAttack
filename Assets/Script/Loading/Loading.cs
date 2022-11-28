@@ -23,7 +23,8 @@ public class Loading : MonoBehaviour
         while(!operation.isDone){
             yield return null;
             if(loadingBar.value < 1f){
-                loadingBar.value = Mathf.MoveTowards(loadingBar.value, 1f, Time.deltaTime); //* MoveTowardsはLerpと同じだ。しかし、速度がmaxDeltaを超過しないことを保障する。
+                //* MoveTowardsはLerpと同じだ。しかし、速度がmaxDeltaを超過しないことを保障する。
+                loadingBar.value = Mathf.MoveTowards(loadingBar.value, 1f, Time.deltaTime); 
             }
             else{
                 loadTxt.text = "LOADING FINISH!";
