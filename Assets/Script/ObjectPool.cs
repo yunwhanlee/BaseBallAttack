@@ -54,8 +54,9 @@ public class ObjectPool : MonoBehaviour
 
     private void init(){
         //* Set Data 
-        // EF
+        // EFFECT
         List<PoolData> poolDtList = new List<PoolData>(){};
+        
         poolDtList.Add(new PoolData(DIC.AtvSkShotEF.ToString(), em.activeSkillShotEFs[DM.ins.personalData.SelectSkillIdx], 1, em.gm.effectGroup));
         if(em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkillIdx]) //* ThunderShotスキルはこれがないので条件文で対応。
             poolDtList.Add(new PoolData(DIC.AtvSkExplosionEF.ToString(), em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkillIdx], 1, em.gm.effectGroup));
@@ -96,10 +97,10 @@ public class ObjectPool : MonoBehaviour
 
         // OBJ 
         poolDtList.Add(new PoolData(DIC.DropItemExpOrbPf.ToString(), bm.dropItemExpOrbPf, 50, gm.dropItemGroup));
-        
+
         // poolDtList.ForEach(list => Debug.Log("NULL LIST CHECK ⇒ list.Key= " + list.Key + "list.Obj= " + (list.Obj? list.Obj.ToString() :"<color=red>"+list.Obj.ToString()+"</color>")));
 
-        //* Enroll Dic
+        //* Enroll poolObjDtDict
         poolObjDtDict = new Dictionary<string, GameObject>();
         poolDtList.ForEach(dt => poolObjDtDict.Add(dt.Key, dt.Obj));
 
