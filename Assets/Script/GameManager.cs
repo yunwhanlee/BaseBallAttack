@@ -57,6 +57,9 @@ public class GameManager : MonoBehaviour
     public GameObject gameoverPanel;
     public RectTransform statusFolderPanel;
 
+    [Header("DIALOG")]
+    public RectTransform ShowAdDialogRectTf;
+
     [Header("◆GUI◆")]
     public Text stageTxt;
     public Text stateTxt;
@@ -118,6 +121,7 @@ public class GameManager : MonoBehaviour
     public Button pauseBtn; //pausePanel
     public Button continueBtn; //pausePanel
     public Button homeBtn; //pausePanel
+    public Button rerotateSkillSlotsBtn; //LevelUpPanel
     public Button statusFolderBtn;
 
     [Header("PSV UNIQUE")]
@@ -203,6 +207,7 @@ public class GameManager : MonoBehaviour
     public void onClickReadyButton() => switchCamera();
     public void onClickReGameButton() => init();
     public void onClickSkillButton() => levelUpPanel.SetActive(false);
+    public void onClickBtnOpenShowAdDialog() => ShowAdDialogRectTf.gameObject.SetActive(true);
     public void onClickSetGameButton(string type) => setGame(type);
     public void onClickActiveSkillButton(int i) {
         if(pl.IsStun) return;
@@ -247,9 +252,16 @@ public class GameManager : MonoBehaviour
             Instantiate(statusInfoTxtPf, Vector3.zero, Quaternion.identity, statusInfoContents);
         });
     }
-
-    public void onClickBtnShowAD(string type){
-        DM.ins.showAD(type);
+    public void onClickBtnShowAD(string rewardType){
+        DM.ins.showAD(rewardType);
+    }
+    public void onClickBtnPayMoney(string rewardType){
+        Debug.Log($"PayMoney:: {rewardType}");
+        if(rewardType == DM.REWARD.RerotateSkillSlots.ToString()){
+            rerotateSkillSlotsBtn.gameObject.SetActive(false);
+            ShowAdDialogRectTf.gameObject.SetActive(false);
+            levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
+        }
     }
 
 //*---------------------------------------
@@ -529,6 +541,7 @@ public class GameManager : MonoBehaviour
         if(pl.IsLevelUp){
             pl.IsLevelUp = false;
             levelUpPanel.SetActive(true);
+            rerotateSkillSlotsBtn.gameObject.SetActive(true);
             levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
         }
     }

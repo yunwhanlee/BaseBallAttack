@@ -58,9 +58,9 @@ public class LevelUpPanelAnimate : MonoBehaviour{
         skillImgCnt = gm.PsvSkillImgPrefs.Length - 1; //* ★自然なスクロールのため、末端に1番目Imageを追加したので、この分は消す-1。
         skillList = new List<KeyValuePair<int, GameObject>>();
 
-        //* GUI
+        //* Set GUI Data
         titleTxt.text = LANG.getTxt(LANG.TXT.LevelUpPanel_Title.ToString());
-        levelTxt.text = (pl.BefLv + 1).ToString();//LANG.getTxt(LANG.TXT.Level.ToString()) + " : " + (pl.BefLv + 1).ToString();
+        levelTxt.text = (pl.BefLv + 2).ToString();//LANG.getTxt(LANG.TXT.Level.ToString()) + " : " + (pl.BefLv + 1).ToString();
         explainTxt.text = LANG.getTxt(LANG.TXT.LevelUpPanel_Explain.ToString());
 
         resetSkillImgChild(); //* Reset Before Child : これがないと、クリックでスクロール止まらなく選択されてしまう。

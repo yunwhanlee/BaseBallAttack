@@ -1,22 +1,23 @@
 [CONTENT]
     ✓ ボール打つランクUI表示(項目：BallSpeed、HitPower)。
 
-    - ゲームやり方説明するための、UIチャラとテキストＢＯＸ用意。
+    ● ゲームやり方説明するための、UIチャラとテキストＢＯＸ用意。
 
-    ○ StatusFolder改善。
+    ● StatusFolder改善。
         ✓ マルチ弾ポイント⇒Giantボールの場合、攻撃力に反映。
         ✓ Upgrade::ボースダメージ表示。
         ✓ Upgrade::COINボーナス表示。
         ✓ Upgrade::DEFENCE表示。
 
-    - UI改善。
+    ● UI改善。
 
-    - LevelPanel 
-        - もう一度回すボタン。(ダイア OR 広告)
-        - レベールアップが重なった場合、連続でスロットアップグレードする。
+    ● LevelPanel 
+        ✓ もう一度回すボタン。(ダイア OR 広告) -> ShowAD_Dialogも追加。
+        - (BUG)レベールアップが重なった場合、連続でスロットアップグレードする。
         - Unique PSVの確率設定＋登場したら光EFFECT追加。
+        - Uniqueスキルなら、光るEF追加したら、もっとかっこいい。
 
-    - COMBOカウントに関して、利点考える。
+    ● COMBOカウントに関して、利点考える。
 
     ✓ SphereCastAllを統一する関数制作::Util.csへ
 
@@ -31,7 +32,7 @@
             ✓ RAYではなく、新しくBlockの子としてTF生成し、OverLapCheckBoxColliderで計算式実装。
 
 
-    - ユニックPassiveスキル追加（ボース倒しとかガチャで出る）
+    ● ユニックPassiveスキル追加（ボース倒しとかガチャで出る）
         ✓ DamageTwice : ダメージ１００％アップ。➡ 221105
         ✓ GiantBall : マルチショットを一つに合わせ、下に車でスピードが下がらない。➡ 221106
         ✓ DarkOrb : ボール回るオーブ生成。(当たったら、爆発)➡ 221106
@@ -52,8 +53,7 @@
 
     ✓  LOADING非同期UI画面表示。
 
-
-    - UpGrade Table GUI
+    ● UpGrade Table GUI
         ✓  UI表示 
             ・Damage Up。
             ・Critical Up。
@@ -73,10 +73,15 @@
         ✓  Price適用。->調整必要。
         - PSV INFO GUIでも、コインで、購入してアップグレードできるように。
 
-    - Reward
+    ● Reward
         - TODO
 
-    - ボース
+    ● Simple-GUIアセットを利用して、デザイン改善。
+        ✓  ホーム。
+        ✓  インゲーム。
+        ✓  ダイアログ。
+
+    ● ボース
         ✓  何種類のモデル用意。(HARD-MODEは未)
         ✓  ステージバーを体力バーとしても用意及び変換。
         ✓  障害物(STONE)が、一般のフロックと重ならないように。
@@ -119,5 +124,8 @@
     -  インゲームで、Bottom PSV Table GUIで、９個が増えたら下に整列され、イメージが切れちゃうこと。
     -  ボース２攻撃がPlayerを追いかけるBUG。
     -  Uniqueスキルモデルが持っているのに、LEVELUPしたら、また出る。
+    -  LEVEL UPが重なった場合、Levelデータが遅くアップしてずれる問題。
+    -  毒曇りスキルなどのPreview-GLOW-EFにエラーが発生。
+
     
 

@@ -37,6 +37,9 @@ public class DM : MonoBehaviour
     public enum UPGRADE {
         Dmg, BallSpeed, Critical, CriticalDamage, BossDamage, CoinBonus, Defence, NULL
     }
+    public enum REWARD {
+        CoinX2, RerotateSkillSlots,
+    }
 
     [Header("GUI")]
     [SerializeField] Text coinTxt; public Text CoinTxt {get => coinTxt; set => coinTxt = value;}
@@ -125,9 +128,9 @@ public class DM : MonoBehaviour
         Debug.Log("<color=yellow> showAD(" + type.ToString() + ")</color>");
         //TODO
         switch(type){
-            case "CoinX2":
+            case "CoinX2" :
                 break;
-            default:
+            case "RerotateSkillSlots" :
                 break;
         }
     }
