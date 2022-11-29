@@ -51,6 +51,10 @@ public class Util : MonoBehaviour
     }
 
     public void displayNoticeMsgDialog(string msg){
+        //* (BUG) IN-GAMEへ行ってHOMEに戻ったたら、Missingになる。
+        if(!mainPanelTf)
+            mainPanelTf = GameObject.Find(DM.NAME.MainPanel.ToString()).GetComponent<RectTransform>();
+
         noticeMessageTxtPref.text = msg;
         var ins = Instantiate(noticeMessageTxtPref, mainPanelTf.transform.position, Quaternion.identity, mainPanelTf);
         ins.rectTransform.localPosition = new Vector3(0,-900,-400);
