@@ -60,7 +60,7 @@ public class LevelUpPanelAnimate : MonoBehaviour{
 
         //* GUI
         titleTxt.text = LANG.getTxt(LANG.TXT.LevelUpPanel_Title.ToString());
-        levelTxt.text = LANG.getTxt(LANG.TXT.Level.ToString()) + " : " + (pl.BefLv + 1).ToString();
+        levelTxt.text = (pl.BefLv + 1).ToString();//LANG.getTxt(LANG.TXT.Level.ToString()) + " : " + (pl.BefLv + 1).ToString();
         explainTxt.text = LANG.getTxt(LANG.TXT.LevelUpPanel_Explain.ToString());
 
         resetSkillImgChild(); //* Reset Before Child : これがないと、クリックでスクロール止まらなく選択されてしまう。
