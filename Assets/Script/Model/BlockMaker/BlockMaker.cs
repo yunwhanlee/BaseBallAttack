@@ -157,9 +157,9 @@ public class BlockMaker : MonoBehaviour
         gm.IsPlayingAnim = true;
 
         //* 再生時間 習得
-        var camAnim = gm.cam1.GetComponent<Animator>();
-        var txtAnim = gm.bossSpawnTxt.GetComponent<Animator>();
-        var bossNameTxt = gm.bossSpawnTxt.transform.GetChild(0).GetComponent<Text>();
+        Animator camAnim = gm.cam1.GetComponent<Animator>();
+        Animator uiAnim = gm.bossSapwnAnimObj.GetComponent<Animator>();
+        var bossNameTxt = gm.bossNameTxt.GetComponent<Text>();
 
         //* InActive
         foreach(Transform child in gm.activeSkillBtnGroup){
@@ -169,11 +169,11 @@ public class BlockMaker : MonoBehaviour
         gm.readyBtn.gameObject.SetActive(false);
         gm.statusFolderPanel.gameObject.SetActive(false);
 
-        float animPlayTime = Util._.getAnimPlayTime(DM.ANIM.BossSpawnTxt_Spawn.ToString(), txtAnim);
+        float animPlayTime = Util._.getAnimPlayTime(DM.ANIM.BossSpawnTxt_Spawn.ToString(), uiAnim);
 
         Time.timeScale = 0.1f;
         camAnim.SetTrigger(DM.ANIM.DoBossSpawn.ToString());
-        txtAnim.SetTrigger(DM.ANIM.DoSpawn.ToString());
+        uiAnim.SetTrigger(DM.ANIM.DoSpawn.ToString());
         bossNameTxt.text = bossName;
 
         yield return new WaitForSecondsRealtime(animPlayTime);

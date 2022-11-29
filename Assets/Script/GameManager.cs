@@ -70,7 +70,8 @@ public class GameManager : MonoBehaviour
     [Header("TEXT EFFECT")]
     public Text comboTxt;
     public Text perfectTxt;
-    public Text bossSpawnTxt;
+    public GameObject bossSapwnAnimObj;
+    public Text bossNameTxt;
     public Text showHitBallInfoTf;
 
     [Header("PREVIEW BALL SILDER ➡ 現在使っていない")] //! あんまり要らないかも。
