@@ -384,4 +384,3 @@ public static class LANG //* LANG
         return resList;
     }
 }
-
