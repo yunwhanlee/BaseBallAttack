@@ -124,7 +124,8 @@
     -  インゲームで、Bottom PSV Table GUIで、９個が増えたら下に整列され、イメージが切れちゃうこと。
     -  ボース２攻撃がPlayerを追いかけるBUG。
     -  Uniqueスキルモデルが持っているのに、LEVELUPしたら、また出る。
-    -  LEVEL UPが重なった場合、Levelデータが遅くアップしてずれる問題。
+    ✓ LEVEL UPが重なった場合、Levelデータが遅くアップしてずれる問題。
+        原因：BefLVが０だったのが問題だったので、Player::Start()でBefLv = Lvで初期化。
     -  毒曇りスキルなどのPreview-GLOW-EFにエラーが発生。
 
     

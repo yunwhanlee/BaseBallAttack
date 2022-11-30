@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     [SerializeField] bool doSwing = false;      public bool DoSwing {get=> doSwing; set=> doSwing=value;}
     [SerializeField] bool isLevelUp = false;    public bool IsLevelUp {get=> isLevelUp; set=> isLevelUp=value;}
     [SerializeField] bool isStun = false;    public bool IsStun {get=> isStun; set=> isStun=value;}
-    [SerializeField] int befLv = 1;                public int BefLv {get=> befLv; set=> befLv=value;}
+    [SerializeField] int befLv;                public int BefLv {get=> befLv; set=> befLv=value;}
     [SerializeField] int lv = 1;                public int Lv {get=> lv; set=> lv=value;}
     [SerializeField] int maxExp = 100;        public int MaxExp {get=> maxExp; set=> maxExp=value;}
     [SerializeField] int exp = 0;               public int Exp {get=> exp; set=> exp=value;}
@@ -67,13 +67,12 @@ public class Player : MonoBehaviour
     [Header("PASSIVE UNIQUE")]
     [SerializeField] GameObject birdFriendObj;   public GameObject BirdFriendObj {get=>birdFriendObj; set=>birdFriendObj=value;}
 
-
-
     public void Start(){
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         em = gm.em;
 
         //* Player Model Set Parent
+        BefLv = Lv;
         var playerModel = DM.ins.transform.GetChild(0);
         playerModel.SetParent(modelMovingTf);// Parent TfをPlayerに移動。
         playerModel.SetSiblingIndex(0); // Child INDEXを０番に移動。
@@ -248,13 +247,14 @@ public class Player : MonoBehaviour
         swingArcArea.color = color == "red" ? new Color(1,0,0,0.4f) : new Color(1,1,0,0.4f); //yellow
     }
     public void calcLevelUpExp(){
-        if(exp > maxExp){
+        if(exp >= maxExp){
+            Debug.Log($"Player:: calcLevelUpExp():: exp=({exp}) > maxExp({maxExp})");
             setLevelUp();
         }
     }
     public void setLevelUp(){
         IsLevelUp = true;
-        Lv = ++lv;
+        Lv++;
         Exp = 0;
         MaxExp = (int)LM._.MAX_EXP_LIST[Lv];
         Debug.Log($"setLevelUp():: Lv={Lv}, MaxExp={MaxExp}");

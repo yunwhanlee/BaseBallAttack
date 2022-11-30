@@ -505,7 +505,7 @@ public class GameManager : MonoBehaviour
         collectDropOrb();
         
         //* BossSkill
-        if(boss){ //* ボスが生きていると
+        if(boss){
             boss.activeBossSkill();
             stage--; //ステージは同じく維持
         }
@@ -538,7 +538,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator coCheckLevelUp(){
         Debug.Log($"coCheckLevelUp()::checkLevelUp():: pl.BefLv= {pl.BefLv}, pl.Lv= {pl.Lv}");
         yield return new WaitForSeconds(0.8f);
-        if(pl.IsLevelUp){
+        if(pl.IsLevelUp){ //* <- Player::setLevelUp()
             pl.IsLevelUp = false;
             levelUpPanel.SetActive(true);
             rerotateSkillSlotsBtn.gameObject.SetActive(true);

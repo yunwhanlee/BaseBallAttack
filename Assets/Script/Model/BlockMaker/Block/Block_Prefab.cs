@@ -90,7 +90,7 @@ public class Block_Prefab : MonoBehaviour
     protected Animator anim;
 
     //* Value
-    private const int TREASURECHEST_ORB_CNT = 15;
+    private const int TREASURECHEST_ORB_CNT = 10;
     private const int ITEMUI_SPRGLOW_MIN = 1;
     private float itemUISprGlowCnt = 0;
     private float itemUISprGlowSpan = 7.5f;
@@ -368,10 +368,9 @@ public class Block_Prefab : MonoBehaviour
     
 
     public virtual void onDestroy(GameObject target, bool isInitialize = false) {
-        Debug.Log("virtual onDestroy()::");
         int resultExp = (!isInitialize)? (int)(Exp * pl.expUp.Val) : 0; //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
+        Debug.Log("virtual onDestroy():: resultExp= " + resultExp);
         em.createBrokeBlockEF(target.transform.position, color); //! (BUG) このEFFECTは可なり重いらしい、複数になったら、シーンのフリーズが掛かる。
-
         bm.createDropItemExpOrbPf(this.transform, resultExp);
         
         if(kind == BlockMaker.KIND.TreasureChest){
