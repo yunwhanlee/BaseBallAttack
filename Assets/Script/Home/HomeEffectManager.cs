@@ -8,6 +8,6 @@ public class HomeEffectManager : MonoBehaviour
 
     public void createItemBuyEF(){
         var ins = Instantiate(itemBuyEF, itemBuyEF.transform.position, Quaternion.identity) as GameObject;
-        Destroy(ins, 3);
+        Destroy(ins, 2);
     }
 }
