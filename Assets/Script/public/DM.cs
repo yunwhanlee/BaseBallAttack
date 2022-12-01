@@ -18,7 +18,8 @@ public class DM : MonoBehaviour
     };
     public enum TAG {HitRangeArea, StrikeLine, GameOverLine, Wall, ActiveDownWall, Player,
         NormalBlock, LongBlock, TreasureChestBlock, HealBlock, BossBlock,   
-        Obstacle, PlayerBattingSpot,
+        Obstacle, PlayerBattingSpot, 
+        PsvSkillNormal, PsvSkillUnique,
     };
     public enum LAYER {BallPreview};
     public enum ANIM {BossSpawnTxt_Spawn, DoSpawn, DoShake, Swing, DoBossSpawn, Die, IsHit, IsHitBall, IsIdle, IsFly, GetHit, Scream, Attack, Touch, HomeRun};

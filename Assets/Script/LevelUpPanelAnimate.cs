@@ -74,33 +74,39 @@ public class LevelUpPanelAnimate : MonoBehaviour{
         //* SCROLL ANIMATION
         if(SKILL_BTN_IDX_LEN >= btnIdx && skillList.Count > 0){
             time += Time.unscaledDeltaTime;
-            foreach(var btn in colSkillBtns){
+            foreach(LevelUpSkillPanelBtn slotBtn in colSkillBtns){
                 //* #1.Scrolling Down
                 if(time < span){
-                    if(btn.colImgRectTf.localPosition.y >= 0) //* ↓
-                        btn.colImgRectTf.Translate(0,-speed, 0);
+                    if(slotBtn.colImgRectTf.localPosition.y >= 0) //* ↓
+                        slotBtn.colImgRectTf.Translate(0,-speed, 0);
                     else //* 位置初期化
-                        btn.colImgRectTf.localPosition = new Vector3(0, spriteH * skillImgCnt, 0);
+                        slotBtn.colImgRectTf.localPosition = new Vector3(0, spriteH * skillImgCnt, 0);
                 }
                 //* #2.Stop
                 else{
                     int randIdx = Random.Range(0, skillList.Count);
-                    int halfHeightMorePosY = skillList[randIdx].Key + spriteH / 2;
-                    // Position (.Key -> PosY)
-                    btn.colImgRectTf.localPosition = new Vector3(0, halfHeightMorePosY, 0);
-                    // Skill Name
-                    string skillName = skillList[randIdx].Value.name.Split(char.Parse("_"))[1];
-                    btn.name.text = LANG.getTxt(skillName);
+                    int randPer = Random.Range(0, 100);
+                    string tagName = skillList[randIdx].Value.transform.tag;
+                    setRandomPsvSkill(slotBtn, out randIdx, randPer, out tagName);
 
-                    // ExceptSkillListが存在したら、できるまで他に切り替える
-                    bool isSkLvMax = exceptSkNameList.Exists(name => btn.name.text.Contains(name));
+                    //* Set Unique or Normal
+                    if(randPer < LM._.LEVELUP_SLOTS_UNIQUE_PER){
+                        while(tagName == DM.TAG.PsvSkillNormal.ToString())
+                            setRandomPsvSkill(slotBtn, out randIdx, randPer, out tagName);
+                    }else{
+                        while(tagName == DM.TAG.PsvSkillUnique.ToString())
+                            setRandomPsvSkill(slotBtn, out randIdx, randPer, out tagName);
+                    }
+
+                    //* ExceptSkillListが存在したら、できるまで他に切り替える
+                    bool isSkLvMax = exceptSkNameList.Exists(name => slotBtn.name.text.Contains(name));
                     while(isSkLvMax){
-                        Debug.Log($"<color=yellow>BEFORE:: btn[{btnIdx}]\n, btn.skillName= {btn.name.text}, randIdx= {randIdx}");
+                        Debug.Log($"<color=yellow>BEFORE:: btn[{btnIdx}]\n, btn.skillName= {slotBtn.name.text}, randIdx= {randIdx}");
                         randIdx = ++randIdx % skillList.Count;
-                        btn.colImgRectTf.localPosition = new Vector3(0, skillList[randIdx].Key + spriteH / 2, 0);// Scroll Down a Half of Height PosY for Animation
-                        btn.name.text = skillList[randIdx].Value.name.Split(char.Parse("_"))[1];
-                        Debug.Log($"<color=yellow>AFTER:: btn.name.text= {btn.name.text}, randIdx= {randIdx}</color>");
-                        isSkLvMax = exceptSkNameList.Exists(name => btn.name.text.Contains(name));
+                        slotBtn.colImgRectTf.localPosition = new Vector3(0, skillList[randIdx].Key + spriteH / 2, 0);// Scroll Down a Half of Height PosY for Animation
+                        slotBtn.name.text = skillList[randIdx].Value.name.Split(char.Parse("_"))[1];
+                        Debug.Log($"<color=yellow>AFTER:: btn.name.text= {slotBtn.name.text}, randIdx= {randIdx}</color>");
+                        isSkLvMax = exceptSkNameList.Exists(name => slotBtn.name.text.Contains(name));
                     }
 
                     // 指定したIndexは重ならないように消す
@@ -112,7 +118,7 @@ public class LevelUpPanelAnimate : MonoBehaviour{
                 }
             }
         }
-        //* #3.Scroll Up To Right PosY
+        //* #3.Scroll Re-Back to Correct PosY
         else if(isRollingStop){
             for(int i=0; i<colSkillBtns.Length;i++){
                 float posY = colSkillBtns[i].colImgRectTf.localPosition.y % spriteH;
@@ -140,6 +146,27 @@ public class LevelUpPanelAnimate : MonoBehaviour{
                 }
             }
         }
+    }
+
+    private string setRandomPsvSkill(LevelUpSkillPanelBtn slotBtn, out int randIdx, int randPer, out string tagName){
+        randIdx = Random.Range(0, skillList.Count);
+
+        //* Set Position (.Key -> PosY)
+        int halfHeightMorePosY = skillList[randIdx].Key + spriteH / 2; 
+        slotBtn.colImgRectTf.localPosition = new Vector3(0, halfHeightMorePosY, 0);
+
+        //* Set Name 
+        string skillName = skillList[randIdx].Value.name.Split(char.Parse("_"))[1];
+        tagName = skillList[randIdx].Value.transform.tag;
+        slotBtn.name.text = LANG.getTxt(skillName);
+
+        Debug.Log("LevelUpPanelAnimate Skill Slots Stop:: " + slotBtn.colImgRectTf.parent.name
+            + ":: randPer(" + randPer + ") : " + (randPer < LM._.LEVELUP_SLOTS_UNIQUE_PER? "<color=red>UNIQUE!</color>" : "GENERAL")
+            + " ➡ <b>" + skillName + " </b>" 
+            + " ,Tag= " + (tagName == DM.TAG.PsvSkillUnique.ToString()? "<color=red>" + tagName + "</color>" : tagName)
+        );
+
+        return tagName;
     }
 
 //* --------------------------------------------------------------------------------------

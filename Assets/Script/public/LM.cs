@@ -52,6 +52,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     public List<float> MAX_EXP_LIST = new List<float>();
 
     [Header("PSV SKILL")][Header("__________________________")]
+    public int LEVELUP_SLOTS_UNIQUE_PER = 20;
     public int DARKORB_SPEED = 250;
     public int GODBLESS_SPAN = 10;
 
