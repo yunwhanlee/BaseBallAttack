@@ -15,7 +15,6 @@
         ✓ もう一度回すボタン。(ダイア OR 広告) -> ShowAD_Dialogも追加。
         ✓ Uniqueスキルの確率設定。処理
         ✓ (BUG)レベールアップが重なった場合、連続でスロットアップグレードする。
-        - Unique PSVの確率設定＋登場したら光EFFECT追加。
         ✓ (BUG)Uniqueスキルなら、光るEF追加したら、もっとかっこいい。
 
     ● COMBOカウントに関して、利点考える。
@@ -100,9 +99,14 @@
             ✓ Boss Preview DebugSphereに関して、狙うアイコンのEFEECT追加。
             ✓ Boss Aiming IconEFが複数できない問題解決。
 
-        ✓スキルランダム生成シート制作。
+        ✓ スキルランダム生成シート制作。
         - ボース登場した時、名前表示 -> 全ての言語で。
         - ボースATTACKの場合、CAM2になっている時には急いでCAM1に切り替えて邪魔なGUIを非表示。
+
+    ● Epic Toon FXで、Effect改善。
+        ✓ WarningBossAttackEF。
+        - DarkOrb.
+
         
 
 [BUG]
@@ -128,6 +132,7 @@
     ✓ LEVEL UPが重なった場合、Levelデータが遅くアップしてずれる問題。
         原因：BefLVが０だったのが問題だったので、Player::Start()でBefLv = Lvで初期化。
     -  毒曇りスキルなどのPreview-GLOW-EFにエラーが発生。
+    
 
     
 
