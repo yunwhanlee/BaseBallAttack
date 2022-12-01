@@ -20,7 +20,7 @@ public class BossBlock : Block_Prefab{
     const string BOSSATK_ANIM_NAME_LV4 = "Fly Flame Attack";
     // [SerializeField]  string skillType;
 
-    [Header("【BOSS STATUS】")]
+    [Header("【BOSS STATUS】")][Header("__________________________")]
     [SerializeField] int bossLevel;
     [SerializeField] int obstacleResetCnt = 0;
     [SerializeField] GameObject obstacleStonePf;

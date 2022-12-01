@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     public Transform modelMovingTf;
 
-    [Header("ARROW")]
+    [Header("ARROW")][Header("__________________________")]
     public int MAX_SWING_HIT_DEG; //左右ある方向の最大角度
     public float offsetHitDeg; // Startが０度(←方向)から、↑ →向きに回る。
     public GameObject arrowAxisAnchor;
@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     public GameObject[] ballPreviewSphere = new GameObject[2]; // 2個
     public HitRank[] hitRank;
 
-    [Header("STATUS")]
+    [Header("STATUS")][Header("__________________________")]
     [SerializeField] bool doSwing = false;      public bool DoSwing {get=> doSwing; set=> doSwing=value;}
     [SerializeField] bool isLevelUp = false;    public bool IsLevelUp {get=> isLevelUp; set=> isLevelUp=value;}
     [SerializeField] bool isStun = false;    public bool IsStun {get=> isStun; set=> isStun=value;}
@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     [SerializeField] int maxExp = 100;        public int MaxExp {get=> maxExp; set=> maxExp=value;}
     [SerializeField] int exp = 0;               public int Exp {get=> exp; set=> exp=value;}
 
-    [Header("ACTIVE SKILL")]
+    [Header("ACTIVE SKILL")][Header("__________________________")]
     public float atvSkillCoolDownUnit = 0.05f;  public float AtvSkillCoolDownUnit {get=> atvSkillCoolDownUnit;}
     public string[] registAtvSkillNames;// = new string[3];
     public AtvSkill[] activeSkills;// = new ActiveSkill[3];
@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
     [SerializeField] float fireBallCastWidth;    public float FireBallCastWidth {get=> fireBallCastWidth;   set => fireBallCastWidth = value;}
     [SerializeField] float poisonSmokeCastWidth;    public float PoisonSmokeCastWidth {get=> poisonSmokeCastWidth;   set => poisonSmokeCastWidth = value;}
     
-    [Header("PASSIVE SKILL")]
+    [Header("PASSIVE SKILL")][Header("__________________________")]
     public PsvSkill<int> dmg;
     public PsvSkill<int> multiShot;
     public PsvSkill<float> speed;
@@ -64,7 +64,7 @@ public class Player : MonoBehaviour
     public PsvSkill<float> godBless;
     public PsvSkill<float> birdFriend;
     
-    [Header("PASSIVE UNIQUE")]
+    [Header("PASSIVE UNIQUE")][Header("__________________________")]
     [SerializeField] GameObject birdFriendObj;   public GameObject BirdFriendObj {get=>birdFriendObj; set=>birdFriendObj=value;}
 
     public void Start(){

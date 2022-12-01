@@ -18,17 +18,17 @@ public class BlockMaker : MonoBehaviour
     public const float OFFSET_POS_X = -4.5f;
     public const float LONG_OFFSET_POS_X = -2.7f;
 
-    [Header("STATUS")]
+    [Header("STATUS")][Header("__________________________")]
     public bool doCreateBlock;  public bool DoCreateBlock {get => doCreateBlock; set => doCreateBlock = value;}
 
-    [Header("RESOURCE")]
+    [Header("RESOURCE")][Header("__________________________")]
     public GameObject[] blockPrefs;
     public GameObject[] bossPrefs;
     public RectTransform bossStgBarRectTf;
     public Color[] colors;   public Color[] Colors {get => colors;}
     public Material[] mts;   public Material[] Mts {get => mts;}
 
-    [Header("DROP ITEM")]
+    [Header("DROP ITEM")][Header("__________________________")]
     public GameObject dropItemExpOrbPf;
 
     public void Start() {

@@ -41,24 +41,24 @@ public class DM : MonoBehaviour
         CoinX2, RerotateSkillSlots,
     }
 
-    [Header("GUI")]
+    [Header("GUI")][Header("__________________________")]
     [SerializeField] Text coinTxt; public Text CoinTxt {get => coinTxt; set => coinTxt = value;}
     [SerializeField] Text diamondTxt; public Text DiamondTxt {get => diamondTxt; set => diamondTxt = value;}
 
-    [Header("SELECT ITEM")]
+    [Header("SELECT ITEM")][Header("__________________________")]
     [SerializeField] Material grayItemLockMt;   public Material GrayItemLockMt {get => grayItemLockMt; set => grayItemLockMt = value;}
     [SerializeField] string selectItemType = "";    public string SelectItemType {get => selectItemType; set => selectItemType = value;}
     [SerializeField] RectTransform modelContentPref;   public RectTransform ModelContentPref {get => modelContentPref; set => modelContentPref = value;}
     [SerializeField] RectTransform itemPassivePanel;   public RectTransform ItemPassivePanel {get => itemPassivePanel; set => itemPassivePanel = value;}
     [SerializeField] RectTransform itemSkillBoxPref;   public RectTransform ItemSkillBoxPref {get => itemSkillBoxPref; set => itemSkillBoxPref = value;}
 
-    [Header("SCROLL VIEWS")]
+    [Header("SCROLL VIEWS")][Header("__________________________")]
     public ScrollView[] scrollviews; //* [0] : Chara, [1] : Bat, [2] : Skill, [3] : CashShop
 
-    [Header("SAVE DATE")]
+    [Header("SAVE DATE")][Header("__________________________")]
     public PersonalData personalData;
 
-    [Header("AD : 未完")]
+    [Header("AD : 未完")][Header("__________________________")]
     [SerializeField] bool isRemoveAD;   public bool IsRemoveAD {get => isRemoveAD; set => isRemoveAD = value;}
 
     void Awake() => singleton();

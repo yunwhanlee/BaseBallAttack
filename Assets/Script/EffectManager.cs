@@ -13,19 +13,19 @@ public class EffectManager : MonoBehaviour
     //* OutSide
     public GameManager gm;
 
-    [Header("HIT SPARK EF")]
+    [Header("HIT SPARK EF")][Header("__________________________")]
     public GameObject batHitSparkEF;
     public GameObject homeRunHitSparkEF;
     public GameObject stunEF;
 
-    [Header("BLOCK EF")]
+    [Header("BLOCK EF")][Header("__________________________")]
     public GameObject brokeBlockEF;
     public GameObject itemBlockExplosionEF;
     public GameObject itemBlockDirLineTrailEF;
     public GameObject downWallHitEF;
     public GameObject healTxtEF, heartEF;
     
-    [Header("PSV SKILL EF")]
+    [Header("PSV SKILL EF")][Header("__________________________")]
     public GameObject explosionEF;
     public GameObject criticalTxtEF;
     public GameObject instantKillTxtEF;
@@ -34,26 +34,26 @@ public class EffectManager : MonoBehaviour
     public GameObject eggPopEF;
     public GameObject godBlessEF;
 
-    [Header("ATV SKILL EF")]
+    [Header("ATV SKILL EF")][Header("__________________________")]
     [Tooltip("GAME SCENEがロードしたら、自動で読み込む。")]
     public GameObject[] activeSkillBatEFs;
     public GameObject[] activeSkillShotEFs;
     public GameObject[] activeSkillExplosionEFs;
     public GameObject[] activeSkillCastEFs;
 
-    [Header("ATV HOMERUN BONUS EF")]
+    [Header("ATV HOMERUN BONUS EF")][Header("__________________________")]
     public GameObject fireBallDotEF;
     public GameObject thunderStrikeEF;
     public GameObject colorBallStarExplosionEF;
 
-    [Header("DROP ITEMS EF")]
+    [Header("DROP ITEMS EF")][Header("__________________________")]
     public GameObject dropItemExpOrbEF;
 
-    [Header("UI EF")]
+    [Header("UI EF")][Header("__________________________")]
     public GameObject perfectTxtPopEF;
     public GameObject homeRunTxtPopEF;
 
-    [Header("BOSS SKILL EF")]
+    [Header("BOSS SKILL EF")][Header("__________________________")]
     public GameObject bossHealSkillEF;
     public GameObject bossObstacleSpawnEF;
     public GameObject rockObstacleBrokenEF;

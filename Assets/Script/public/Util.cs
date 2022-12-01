@@ -11,7 +11,7 @@ public class Util : MonoBehaviour
 {
     public static Util _;
 
-    [Header("NOTICE MESSAGE")]
+    [Header("NOTICE MESSAGE")][Header("__________________________")]
     public int noticeMsgDisplayCnt = 1;
     public Text noticeMessageTxtPref;
     public Transform mainPanelTf;

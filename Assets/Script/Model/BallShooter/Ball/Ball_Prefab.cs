@@ -19,7 +19,7 @@ public class Ball_Prefab : MonoBehaviour
     float distance;
     public Rigidbody rigid;
 
-    [Header("PSV UNIQUE")]
+    [Header("PSV UNIQUE")][Header("__________________________")]
     [SerializeField]    bool isOnDarkOrb; public bool IsOnDarkOrb {get => isOnDarkOrb; set => isOnDarkOrb = value;}
     [SerializeField]    GameObject darkOrbPf; public GameObject DarkOrbPf {get => darkOrbPf; set => darkOrbPf = value;}
 

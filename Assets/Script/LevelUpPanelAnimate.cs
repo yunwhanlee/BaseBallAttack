@@ -29,13 +29,13 @@ public class LevelUpPanelAnimate : MonoBehaviour{
     float span;
     int skillImgCnt;
 
-    [Header("STATE")]
+    [Header("STATE")][Header("__________________________")]
     [SerializeField] int scrollingSpeed;
     [SerializeField] bool isRollingStop = false;
     [SerializeField] List<string> exceptSkNameList = new List<string>();
     public List<KeyValuePair<int, GameObject>> skillList = new List<KeyValuePair<int, GameObject>>(); //* 同じnewタイプ型を代入しないと、使えない。
 
-    [Header("GUI")]
+    [Header("GUI")][Header("__________________________")]
     [FormerlySerializedAs("titleTxt")] public Text titleTxt;
     [FormerlySerializedAs("levelTxt")] public Text levelTxt;
     [FormerlySerializedAs("explainTxt")] public Text explainTxt;

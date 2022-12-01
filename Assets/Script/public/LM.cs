@@ -16,11 +16,11 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
 {
     public static LM _;
     //* Value
-    [Header("THROW BALL")]
+    [Header("THROW BALL")][Header("__________________________")]
     public float THROW_BALL_SPEED = 25;
     [Range(0, 100)] public int SUDDENLY_THORW_PER = 50;
 
-    [Header("HIT BALL")]
+    [Header("HIT BALL")][Header("__________________________")]
     [HideInInspector] public float MAX_DISTANCE = 1.5f;
     const int B = 1;
     public HitRank[] HIT_RANK = new HitRank[6]{
@@ -34,24 +34,24 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     
     [HideInInspector] public int HOMERUN_MIN_POWER;
 
-    [Header("BLOCK SPAN")]
+    [Header("BLOCK SPAN")][Header("__________________________")]
     public int LONG_BLOCK_SPAN = 5;
     public int BOSS_STAGE_SPAN = 10;
     public int ICE_FREEZE_DURATION = 1;
     public int FIRE_DOT_DMG_DURATION = 2;
 
-    [Header("BLOCK ITEM PERCENT")]
+    [Header("BLOCK ITEM PERCENT")][Header("__________________________")]
     [Range(0, 100)] public int skipBlockPer = 20;
     [Range(0, 100)] public int itemTypePer = 10;
     [Range(0, 100)] public int treasureChestBlockPer = 5;
     [Range(0, 100)] public int healBlockPer = 5;
 
-    [Header("PLAYER")]
+    [Header("PLAYER")][Header("__________________________")]
     [Range(0, 1.0f)] public float ATVSKILL_COOLDOWN_UNIT = 0.02f;
     public int MAX_LV = 50;
     public List<float> MAX_EXP_LIST = new List<float>();
 
-    [Header("PSV SKILL")]
+    [Header("PSV SKILL")][Header("__________________________")]
     public int DARKORB_SPEED = 250;
     public int GODBLESS_SPAN = 10;
 

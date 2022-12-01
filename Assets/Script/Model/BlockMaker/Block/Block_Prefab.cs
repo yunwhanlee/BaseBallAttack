@@ -98,7 +98,7 @@ public class Block_Prefab : MonoBehaviour
     private bool itemUISprGlowTrigger = false;
     Vector3 itemBlockBombBoxSizeVec = new Vector3(3,2,2);
 
-    [Header("Mesh Material")]
+    [Header("Mesh Material")][Header("__________________________")]
     [SerializeField] public MyMesh mesh; //* Material Instancing
     private Color color;
     public Material[] originMts;
@@ -108,11 +108,11 @@ public class Block_Prefab : MonoBehaviour
     public Transform itemTypeImgGroup;
     public SpriteGlowEffect sprGlowEf;
 
-    [Header("TYPE")]
+    [Header("TYPE")][Header("__________________________")]
     public BlockMaker.KIND kind;
     [SerializeField] BlockType type = BlockType.NORMAL;
 
-    [Header("STATUS")]
+    [Header("STATUS")][Header("__________________________")]
     [SerializeField] bool isDotDmg;  public bool IsDotDmg {get => isDotDmg; set => isDotDmg = value;}
     [SerializeField] SkillProperty fireDotDmg;  public SkillProperty FireDotDmg {get => fireDotDmg; set => fireDotDmg = value;}
     [SerializeField] SkillProperty freeze;  public SkillProperty Freeze {get => freeze; set => freeze = value;}
@@ -122,12 +122,12 @@ public class Block_Prefab : MonoBehaviour
     [SerializeField] int exp = 10;  public int Exp {get => exp; set => exp = value;}
     [SerializeField][Range(1, 100)] int itemTypePer;
 
-    [Header("SPAWN ANIMATION")]
+    [Header("SPAWN ANIMATION")][Header("__________________________")]
     [SerializeField] Vector3 defScale;
     [SerializeField] float minLimitVal;
     [SerializeField] float spawnAnimSpeed;
 
-    [Header("GUI")]
+    [Header("GUI")][Header("__________________________")]
     public Text hpTxt;
 
     void Awake(){ //! 継承：親の場合、定義するソースはAwake()にしないと、Nullになる。

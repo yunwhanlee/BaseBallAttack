@@ -184,12 +184,12 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     [SerializeField] float curIdxBasePosX;    public float CurIdxBasePosX {get => curIdxBasePosX; set => curIdxBasePosX = value;}
     [SerializeField] int curIdx;     public int CurIdx {get => curIdx; set => curIdx = value;}
 
-    [Header("SCROLL SPEED")]
+    [Header("SCROLL SPEED")][Header("__________________________")]
     [SerializeField] float scrollStopSpeed;
     float scrollSpeed;
     float scrollBefFramePosX;
 
-    [Header("【 UI 】")]
+    [Header("【 UI 】")][Header("__________________________")]
     public RectTransform uiGroup;   public RectTransform UIGroup {get => uiGroup;}
     public SpriteRenderer boxSprRdr;    public SpriteRenderer BoxSprRdr {get => boxSprRdr; set => boxSprRdr = value;}
     public Text rankTxt;    public Text RankTxt {get => rankTxt; set => rankTxt = value;}

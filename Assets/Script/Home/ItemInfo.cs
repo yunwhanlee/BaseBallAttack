@@ -7,7 +7,7 @@ using System;
 
 public class ItemInfo : MonoBehaviour
 {
-    [Header("言語 [0]:EN, [1]:JP, [2]:KR")]
+    [Header("言語 [0]:EN, [1]:JP, [2]:KR")][Header("__________________________")]
     
     [FormerlySerializedAs("nameTxts")]
     [SerializeField] string[] nameTxts = new string[System.Enum.GetValues(typeof(LANG.TP)).Length];
@@ -18,7 +18,7 @@ public class ItemInfo : MonoBehaviour
     [FormerlySerializedAs("homeRunBonusTxts")] 
     [SerializeField] string[] homeRunBonusTxts = new string[System.Enum.GetValues(typeof(LANG.TP)).Length];
 
-    [Header("STATUS")]
+    [Header("STATUS")][Header("__________________________")]
     public Price price;
     [SerializeField] bool isLock = true;    public bool IsLock {get => isLock; set => isLock = value;}
     [SerializeField] bool isChecked = true;    public bool IsChecked {get => isChecked; set => isChecked = value;}

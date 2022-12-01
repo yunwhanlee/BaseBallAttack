@@ -27,15 +27,15 @@ public class HomeManager : MonoBehaviour
     //* OutSide
     public enum DlgBGColor {Chara, Bat, Skill, CashShop};
 
-    [Header("SELECT PANEL COLOR")]
+    [Header("SELECT PANEL COLOR")][Header("__________________________")]
     [SerializeField] Image selectPanelScrollBG;  public Image SelectPanelScrollBG {get => selectPanelScrollBG; set => selectPanelScrollBG = value;}
     [SerializeField] Color[] selectPanelColors;
 
-    [Header("PRICE TYPE ICON SPRITE")]
+    [Header("PRICE TYPE ICON SPRITE")][Header("__________________________")]
     [SerializeField] Sprite coinIconSprite;  public Sprite CoinIconSprite {get => coinIconSprite;}
     [SerializeField] Sprite diamondIconSprite;  public Sprite DiamondIconSprite {get => diamondIconSprite;}
     
-    [Header("【 GUI 】")]
+    [Header("【 GUI 】")][Header("__________________________")]
     public DialogUI homeDialog;
     public DialogUI selectDialog;
     public DialogUI unlock2ndSkillDialog;
@@ -49,13 +49,13 @@ public class HomeManager : MonoBehaviour
     public Button startGameBtn;
     [SerializeField] Image selectSkillImg;  public Image SelectSkillImg {get => selectSkillImg; set => selectSkillImg = value;}
 
-    [Header("BUY OR CHECK BTN")]
+    [Header("BUY OR CHECK BTN")][Header("__________________________")]
     public Button checkBtn;
     public Image checkMarkImg;
     public Text priceTxt;
     public Image priceTypeIconImg;
 
-    [Header("MODEL")]
+    [Header("MODEL")][Header("__________________________")]
     [SerializeField] Transform modelTf;   public Transform ModelTf {get => modelTf; set => modelTf = value;}
 
     // [Header("NOTICE MESSAGE")]

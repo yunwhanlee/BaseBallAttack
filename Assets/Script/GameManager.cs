@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour
 {
     public enum STATE {PLAY, WAIT, GAMEOVER, PAUSE, CONTINUE, HOME, NULL};
     [SerializeField] private STATE state;     public STATE State {get => state; set => state = value;}
-
-    [Header("GROUP")]
+    
+    [Header("GROUP")][Header("__________________________")]
     public Transform effectGroup;
     public Transform ballGroup;
     public Transform blockGroup;
@@ -19,16 +19,16 @@ public class GameManager : MonoBehaviour
     public Transform bossGroup;
     public Transform obstacleGroup;
     public Transform activeSkillBtnGroup;
-
-
-    [Header("CAMERA")]
+    
+    [Header("CAMERA")][Header("__________________________")]
     public GameObject cam1;
     public GameObject cam2;
     public GameObject cam1Canvas;
     public GameObject cam2Canvas;
 
     //* OutSide
-    [Header("OUTSIDE")]
+    [Space]
+    [Header("OUTSIDE")][Header("__________________________")]
     public Canvas canvasUI;
     public Player pl;
     public EffectManager em;
@@ -41,26 +41,26 @@ public class GameManager : MonoBehaviour
     public BoxCollider downWallCollider;
     public Light light;
     
-    [Header("STATUS")]
+    [Header("STATUS")][Header("__________________________")]
     public int stage = 1;
     public int bestScore;
     public int strikeCnt = 0;
     public int comboCnt = 0;
 
-    [Header("TRIGGER")]
+    [Header("TRIGGER")][Header("__________________________")]
     public bool isPlayingAnim;  public bool IsPlayingAnim { get=> isPlayingAnim; set=> isPlayingAnim = value;}
 
-    [Header("PANEL")]
+    [Header("PANEL")][Header("__________________________")]
     public GameObject strikePanel;
     public GameObject levelUpPanel;
     public GameObject pausePanel;
     public GameObject gameoverPanel;
     public RectTransform statusFolderPanel;
 
-    [Header("DIALOG")]
+    [Header("DIALOG")][Header("__________________________")]
     public RectTransform ShowAdDialogRectTf;
 
-    [Header("◆GUI◆")]
+    [Header("◆GUI◆")][Header("__________________________")]
     public Text stageTxt;
     public Text stateTxt;
     public Text levelTxt;
@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
     public Button rerotateSkillSlotsBtn; //LevelUpPanel
     public Button statusFolderBtn;
 
-    [Header("PSV UNIQUE")]
+    [Header("PSV UNIQUE")][Header("__________________________")]
     public GameObject eggPf;
 
     void Start() {
