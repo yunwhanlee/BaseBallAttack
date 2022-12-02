@@ -289,10 +289,10 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         //* NormalizeしたX軸の距離(CosΘ)であれば、Y軸の距離(SinΘ)を予想して反映。
         float normalX = dir.x / (pad.rect.width * 0.5f); // -1 ~ 1
         dir = dir.normalized;
-        Debug.LogFormat($"convertDir2DegWithRange:: dir.x= {dir.x}, y= {dir.y}"); // xとyの比率を合わせて、-1 ~ 1表示。(一つだけでは -1 or 1)
+        Debug.Log($"normalX= Atan2({Util._.setNumDP(0 <= normalX? 1-normalX : 1+normalX, 2)}, {Util._.setNumDP(normalX, 2)})");
 
         // (BUG) float deg = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        float deg = Mathf.Atan2(1-normalX, normalX) * Mathf.Rad2Deg;  
+        float deg = Mathf.Atan2(((0 <= normalX)? 1-normalX : 1+normalX), normalX) * Mathf.Rad2Deg;
 
         //*(BUG) Clamp Deg with cur Direction
         deg = Mathf.Clamp(deg, min, max); //! (BUG) 角度が－値になるとClampはminを返す。
