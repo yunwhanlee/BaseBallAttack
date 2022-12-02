@@ -32,8 +32,9 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     public Material onClickedMt;
 
     //* Arrow Axis
-    const int MIN_ARROW_DEG_Y = 30;
-    const int MAX_ARROW_DEG_Y = 150;
+    public int offsetDeg2DTo3D = 60;
+    public int MIN_ARROW_DEG_Y = 0;
+    public int MAX_ARROW_DEG_Y = 120;
 
     void Start(){
         playerOffsetX = pl.transform.position.x;
@@ -50,17 +51,19 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
         //*タッチした位置代入
         stick.position = eventData.position;
-        //Stick動き制限
-        stick.localPosition = Vector2.ClampMagnitude(eventData.position - (Vector2)pad.position, pad.rect.width * 0.25f);
 
-        //* Move Object
+        //* Stick動き制限
+        stick.localPosition = Vector2.ClampMagnitude(eventData.position - (Vector2)pad.position, pad.rect.width * 0.5f);// * 0.25f);
+
+        
         if(isClickBattingSpot){
+            //* Move Player Space
             movePlayerBattingSpot(playerTf);
         }
         else{
-            //* Stick移動方向
-            Vector2 movingDir = (stick.position - pad.gameObject.transform.position).normalized;
-            moveModelTf(movingDir);
+            //* Rotate Arrow
+            Vector2 movingDir = (stick.position - pad.gameObject.transform.position);
+            moveModelTf(movingDir.normalized);
             rotateArrowTf(movingDir);
         }
 
@@ -216,8 +219,8 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         Debug.Log("OnDrag::rotateArrowTf:: Stick(Arrow) Deg=" + deg + ", dir=" + dir + ", " + ((dir.x < 0)? "Left" : "Right").ToString());
 
         //* Player矢印(Arrow)角度に適用
-        const int offsetDeg2DTo3D = 90;
         pl.arrowAxisAnchor.transform.rotation = Quaternion.Euler(0, offsetDeg2DTo3D - deg, 0);
+        // pl.arrowAxisAnchor.transform.position = new Vector3(pl.arrowAxisAnchor.transform.position.x + Mathf.Cos(deg), pl.arrowAxisAnchor.transform.position.y, pl.arrowAxisAnchor.transform.position.z + Mathf.Sin(deg));
     }
     private void drawBallPreviewSphereCast(Transform arrowAnchorTf){
         RaycastHit hit, hit2;
@@ -288,11 +291,19 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     }
 
     private float convertDir2DegWithRange(Vector3 dir, int min, int max){
-        float deg = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        //! (BUG) タッチをドラッグする時に、Y軸を動かないと角度がちゃんと出来ない。
+        //* NormalizeしたX軸の距離(CosΘ)であれば、Y軸の距離(SinΘ)を予想して反映。
+        float normalX = dir.x / (pad.rect.width * 0.5f); // -1 ~ 1
+        dir = dir.normalized;
+        Debug.LogFormat($"convertDir2DegWithRange:: dir.x= {dir.x}, y= {dir.y}"); // xとyの比率を合わせて、-1 ~ 1表示。(一つだけでは -1 or 1)
+
+        // (BUG) float deg = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        float deg = Mathf.Atan2(1-normalX, normalX) * Mathf.Rad2Deg;  
+
         //*(BUG) Clamp Deg with cur Direction
-        deg = Mathf.Clamp(deg, MIN_ARROW_DEG_Y, MAX_ARROW_DEG_Y); //! (BUG-2) 角度が－値になるとClampはminを返す。
+        deg = Mathf.Clamp(deg, min, max); //! (BUG) 角度が－値になるとClampはminを返す。
         const int LEFT = -1; //const int RIGHT = +1;
         var dirSign = Mathf.Sign(dir.x);
-        return deg = deg == max || (deg == min && dirSign == LEFT) ? max : deg;
+        return deg = (deg == max || (deg == min && dirSign == LEFT)) ? max : deg;
     }
 }
