@@ -55,14 +55,14 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         //* Stick動き制限
         stick.localPosition = Vector2.ClampMagnitude(eventData.position - (Vector2)pad.position, pad.rect.width * 0.5f);// * 0.25f);
 
+        Vector2 movingDir = (stick.position - pad.gameObject.transform.position);
         
         if(isClickBattingSpot){
             //* Move Player Space
-            movePlayerBattingSpot(playerTf);
+            movePlayerSpace(playerTf, movingDir);
         }
         else{
             //* Rotate Arrow
-            Vector2 movingDir = (stick.position - pad.gameObject.transform.position);
             moveModelTf(movingDir.normalized);
             rotateArrowTf(movingDir);
         }
@@ -170,36 +170,30 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         return Array.Exists(hits, hit => hit.transform.CompareTag(findTagName));
     }
 
-    private void movePlayerBattingSpot(Transform playerTf){
-        float playerTfPosX = 0;
-        float[] posXArr = new float[3];
-        float posRatioX = (stick.localPosition.x / pad.rect.width * 0.4f) * 10;
-        float value = (STICK_RANGE / SPLIT_CNT);
-        float middlePosX = (STICK_RANGE - value);
-        float posXMass = (Mathf.Abs(MIN_PL_TF_POS_X) + Mathf.Abs(MAX_PL_TF_POS_X)) / 2;
-        Debug.Log($"OnDrag:: stick.localPosition.x= {stick.localPosition.x}, pad.rect.width/4= {pad.rect.width/4}, posRatioX=> {posRatioX}");
+    private void movePlayerSpace(Transform playerTf, Vector2 dir){
+        float normalX = dir.x / (pad.rect.width * 0.5f); // -1 ~ 1
 
-        //* Set posXArr
-        for(int i = 0; i < SPLIT_CNT; i++){
-            posXArr[i] = BEGIN_POS_X + value * (i + 1);
-            Debug.Log("posXArr=" + posXArr[i]);
-        }
+        const int SplitCnt = 3;
+        const float AmountDist = 2, MinPosX = -1;
+        float distUnit = AmountDist / SplitCnt;
 
-        //* Set playerTfPosX
-        if(BEGIN_POS_X <= posRatioX && posRatioX < posXArr[(int)POS_X.LEFT]){ //* Right
-            playerTfPosX = MIN_PL_TF_POS_X - middlePosX;
-            gm.cam2.transform.position = new Vector3(-posXMass, gm.cam2.transform.position.y, gm.cam2.transform.position.z);
+        float[] posArr = new float[3];
+        float[] plTfPosArr = {-4.3f, -1.3f, 1.8f};
+        for(int i=0; i<3; i++) posArr[i] = MinPosX + distUnit * (i+1);
+        Debug.Log($"movePlayerSpace:: normalX= {Util._.setNumDP(normalX,2)}, posArr=[{Util._.setNumDP(posArr[0],2)}, {Util._.setNumDP(posArr[1],2)}, {Util._.setNumDP(posArr[2],2)}]");
+
+        if(MinPosX < normalX && normalX <= posArr[0]){
+            Debug.Log("movePlayerSpace:: LEFT");
+            playerTf.transform.position = new Vector3(plTfPosArr[0], playerTf.transform.position.y, playerTf.transform.position.z);
         }
-        else if(posXArr[(int)POS_X.LEFT] <= posRatioX && posRatioX < posXArr[(int)POS_X.CENTER]){ //* Center
-            playerTfPosX = 0;
-            gm.cam2.transform.position = new Vector3(0, gm.cam2.transform.position.y, gm.cam2.transform.position.z);
+        else if(posArr[0] < normalX && normalX <= posArr[1]){
+            Debug.Log("movePlayerSpace:: CENTER");
+            playerTf.transform.position = new Vector3(plTfPosArr[1], playerTf.transform.position.y, playerTf.transform.position.z);
         }
-        else if(posXArr[(int)POS_X.CENTER] <= posRatioX && posRatioX < posXArr[(int)POS_X.RIGHT]){ //* Left
-            playerTfPosX = MAX_PL_TF_POS_X + middlePosX;
-            gm.cam2.transform.position = new Vector3(posXMass, gm.cam2.transform.position.y, gm.cam2.transform.position.z);
+        else if(posArr[1] < normalX && normalX <= posArr[2]){
+            Debug.Log("movePlayerSpace:: RIGHT");
+            playerTf.transform.position = new Vector3(plTfPosArr[2], playerTf.transform.position.y, playerTf.transform.position.z);
         }
-        //* 適用
-        playerTf.transform.position = new Vector3(Mathf.Clamp(playerTfPosX + playerOffsetX, MIN_PL_TF_POS_X, MAX_PL_TF_POS_X), playerTf.position.y, playerTf.position.z);
     }
     private void moveModelTf(Vector2 dir){
         if(dir.x < 0){//* Right
