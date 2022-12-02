@@ -13,7 +13,7 @@ public class Util : MonoBehaviour
 
     [Header("NOTICE MESSAGE")][Header("__________________________")]
     public int noticeMsgDisplayCnt = 1;
-    public Text noticeMessageTxtPref;
+    public GameObject noticeMessagePref;
     public Transform mainPanelTf;
     public GameObject debugSphereObjBlue;
     public GameObject debugSphereObjRed;
@@ -55,9 +55,9 @@ public class Util : MonoBehaviour
         if(!mainPanelTf)
             mainPanelTf = GameObject.Find(DM.NAME.MainPanel.ToString()).GetComponent<RectTransform>();
 
-        noticeMessageTxtPref.text = msg;
-        var ins = Instantiate(noticeMessageTxtPref, mainPanelTf.transform.position, Quaternion.identity, mainPanelTf);
-        ins.rectTransform.localPosition = new Vector3(0,-900,-400);
+        noticeMessagePref.GetComponentInChildren<Text>().text = msg;
+        var ins = Instantiate(noticeMessagePref, mainPanelTf.transform.position, Quaternion.identity, mainPanelTf);
+        ins.GetComponent<RectTransform>().localPosition = new Vector3(0,-900,-400);
         Destroy(ins.gameObject, noticeMsgDisplayCnt);
     }
     //* 等比数列
