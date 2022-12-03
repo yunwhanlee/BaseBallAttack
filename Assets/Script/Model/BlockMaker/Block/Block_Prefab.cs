@@ -311,6 +311,8 @@ public class Block_Prefab : MonoBehaviour
         }
     }
     public void setEnabledSpriteGlowEF(bool isTrigger){
+        if(this.name.Contains("Boss")) return;
+        
         if(isTrigger){
             sprGlowEf.GlowBrightness = 8;   
             sprGlowEf.OutlineWidth = 8;

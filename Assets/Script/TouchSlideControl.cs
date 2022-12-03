@@ -173,26 +173,28 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     private void movePlayerSpace(Transform playerTf, Vector2 dir){
         float normalX = dir.x / (pad.rect.width * 0.5f); // -1 ~ 1
 
+        const int LEFT = 0, MIDDLE = 1, RIGHT = 2;
         const int SplitCnt = 3;
         const float AmountDist = 2, MinPosX = -1;
         float distUnit = AmountDist / SplitCnt;
 
         float[] posArr = new float[3];
         float[] plTfPosArr = {-4.3f, -1.3f, 1.8f};
+        float[] cam2TfPosArr = {-3, 0, 3.1f};
         for(int i=0; i<3; i++) posArr[i] = MinPosX + distUnit * (i+1);
-        Debug.Log($"movePlayerSpace:: normalX= {Util._.setNumDP(normalX,2)}, posArr=[{Util._.setNumDP(posArr[0],2)}, {Util._.setNumDP(posArr[1],2)}, {Util._.setNumDP(posArr[2],2)}]");
+        // Debug.Log($"movePlayerSpace:: normalX= {Util._.setNumDP(normalX,2)}, posArr=[{Util._.setNumDP(posArr[0],2)}, {Util._.setNumDP(posArr[1],2)}, {Util._.setNumDP(posArr[2],2)}]");
 
-        if(MinPosX < normalX && normalX <= posArr[0]){
-            Debug.Log("movePlayerSpace:: LEFT");
-            playerTf.transform.position = new Vector3(plTfPosArr[0], playerTf.transform.position.y, playerTf.transform.position.z);
+        if(MinPosX < normalX && normalX <= posArr[LEFT]){
+            playerTf.transform.position = new Vector3(plTfPosArr[LEFT], playerTf.transform.position.y, playerTf.transform.position.z);
+            gm.cam2.transform.position = new Vector3(cam2TfPosArr[LEFT], gm.cam2.transform.position.y, gm.cam2.transform.position.z);
         }
-        else if(posArr[0] < normalX && normalX <= posArr[1]){
-            Debug.Log("movePlayerSpace:: CENTER");
-            playerTf.transform.position = new Vector3(plTfPosArr[1], playerTf.transform.position.y, playerTf.transform.position.z);
+        else if(posArr[LEFT] < normalX && normalX <= posArr[MIDDLE]){
+            playerTf.transform.position = new Vector3(plTfPosArr[MIDDLE], playerTf.transform.position.y, playerTf.transform.position.z);
+            gm.cam2.transform.position = new Vector3(cam2TfPosArr[MIDDLE], gm.cam2.transform.position.y, gm.cam2.transform.position.z);
         }
-        else if(posArr[1] < normalX && normalX <= posArr[2]){
-            Debug.Log("movePlayerSpace:: RIGHT");
-            playerTf.transform.position = new Vector3(plTfPosArr[2], playerTf.transform.position.y, playerTf.transform.position.z);
+        else if(posArr[MIDDLE] < normalX && normalX <= posArr[RIGHT]){
+            playerTf.transform.position = new Vector3(plTfPosArr[RIGHT], playerTf.transform.position.y, playerTf.transform.position.z);
+            gm.cam2.transform.position = new Vector3(cam2TfPosArr[RIGHT], gm.cam2.transform.position.y, gm.cam2.transform.position.z);
         }
     }
     private void moveModelTf(Vector2 dir){
