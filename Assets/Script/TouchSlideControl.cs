@@ -133,7 +133,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         }
 
         //* ボタンUI 活性化。
-        if(gm.ballGroup.childCount == 0){ //* (BUG)ただし、ボールが動いている場合はしない。
+        if(gm.ballGroup.childCount == 0){ //* (BUG)ただし、ボールが存在する場合はしない。
             gm.readyBtn.gameObject.SetActive(true);
             gm.activeSkillBtnGroup.gameObject.SetActive(true);
         }
