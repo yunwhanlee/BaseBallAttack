@@ -41,38 +41,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     }
     
     //*Event
-    public void OnDrag(PointerEventData eventData){
-        if(gm.State != GameManager.STATE.WAIT) return;
-        if(gm.IsPlayingAnim) return;
-        if(pl.IsStun) return;
-
-        Transform playerTf = pl.gameObject.transform;
-        Transform arrowAnchorTf = pl.arrowAxisAnchor.transform;
-
-        //*タッチした位置代入
-        stick.position = eventData.position;
-
-        //* Stick動き制限
-        stick.localPosition = Vector2.ClampMagnitude(eventData.position - (Vector2)pad.position, pad.rect.width * 0.5f);// * 0.25f);
-
-        Vector2 movingDir = (stick.position - pad.gameObject.transform.position);
-        
-        if(isClickBattingSpot){
-            //* Move Player Space
-            movePlayerSpace(playerTf, movingDir);
-        }
-        else{
-            //* Rotate Arrow
-            moveModelTf(movingDir.normalized);
-            rotateArrowTf(movingDir);
-        }
-
-        //* Draw Preview
-        drawBallPreviewSphereCast(arrowAnchorTf);
-        drawLinePreview(arrowAnchorTf);
-    }
-
-    public void OnPointerDown(PointerEventData eventData){
+        public void OnPointerDown(PointerEventData eventData){
         if(gm.State != GameManager.STATE.WAIT) return;
         if(gm.bs.IsBallExist) return;
         if(gm.IsPlayingAnim) return;
@@ -124,6 +93,38 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
             });
         }
     }
+
+    public void OnDrag(PointerEventData eventData){
+        if(gm.State != GameManager.STATE.WAIT) return;
+        if(gm.IsPlayingAnim) return;
+        if(pl.IsStun) return;
+
+        Transform playerTf = pl.gameObject.transform;
+        Transform arrowAnchorTf = pl.arrowAxisAnchor.transform;
+
+        //*タッチした位置代入
+        stick.position = eventData.position;
+
+        //* Stick動き制限
+        stick.localPosition = Vector2.ClampMagnitude(eventData.position - (Vector2)pad.position, pad.rect.width * 0.5f);// * 0.25f);
+
+        Vector2 movingDir = (stick.position - pad.gameObject.transform.position);
+        
+        if(isClickBattingSpot){
+            //* Move Player Space
+            movePlayerSpace(playerTf, movingDir);
+        }
+        else{
+            //* Rotate Arrow
+            moveModelTf(movingDir.normalized);
+            rotateArrowTf(movingDir);
+        }
+
+        //* Draw Preview
+        drawBallPreviewSphereCast(arrowAnchorTf);
+        drawLinePreview(arrowAnchorTf);
+    }
+
     public void OnPointerUp(PointerEventData eventData){
         if(gm.IsPlayingAnim) return;
         if(pl.IsStun) {
@@ -131,9 +132,11 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
             return;
         }
 
-        //* ボタンUI 活性化
-        gm.readyBtn.gameObject.SetActive(true);
-        gm.activeSkillBtnGroup.gameObject.SetActive(true);
+        //* ボタンUI 活性化。
+        if(gm.ballGroup.childCount == 0){ //* (BUG)ただし、ボールが動いている場合はしない。
+            gm.readyBtn.gameObject.SetActive(true);
+            gm.activeSkillBtnGroup.gameObject.SetActive(true);
+        }
         
         backOriginPlayerMeshRdr();
 
