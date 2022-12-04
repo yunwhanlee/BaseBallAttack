@@ -24,7 +24,7 @@ public class SkillProperty{
         this.duration = 0;
         this.dotDmgEF = null;
     }
-    public void startDuration(Block_Prefab bl){
+    public void setDuration(Block_Prefab bl){
         if(BefCnt == -1){
             BefCnt = Duration;
             //* EXTRA 処理
@@ -37,8 +37,8 @@ public class SkillProperty{
         }
     }
 
-    public void endDuration(int span, Block_Prefab bl){
-        if(Duration >= LM._.FIRE_DOT_DMG_DURATION){
+    public void setMeshToCheckDuration(int span, Block_Prefab bl){
+        if(Duration >= span){
             init();
             //* EXTRA 処理
             if(Name == DM.PSV.FireProperty.ToString()){
@@ -48,11 +48,13 @@ public class SkillProperty{
                 int i=0;
                 Array.ForEach(bl.mesh.block, mesh => mesh.materials = new Material[]{bl.originMts[i++]});
             }
-            return;
+        }
+        else{
+            Array.ForEach(bl.mesh.block, mesh => mesh.materials = new Material[]{bl.iceMt});
         }
     }
 
-    public void setDataNextStage(Block_Prefab bl){
+    public void setResult(Block_Prefab bl){
         if(BefCnt != Duration){
             BefCnt = Duration;
             //* EXTRA 処理
@@ -163,8 +165,10 @@ public class Block_Prefab : MonoBehaviour
         animateItemTypeUISprGlowEF(ref itemUISprGlowCnt);//* ItemType Glow Animation
 
         //* Property
-        checkFireDotDmg();
-        checkIceFreeze();
+        if(!this.name.Contains(DM.NAME.Obstacle.ToString()) || !this.name.Contains("Boss")){
+            checkFireDotDmg();
+            checkIceFreeze();
+        }
     }
     private void OnTriggerEnter(Collider col) {
         //* GAMEOVER
@@ -272,24 +276,16 @@ public class Block_Prefab : MonoBehaviour
 
     public void checkFireDotDmg(){
         if(FireDotDmg.IsOn){
-            //* Enter 1Time
-            FireDotDmg.startDuration(this);
-            //* End 1Time
-            FireDotDmg.endDuration(LM._.FIRE_DOT_DMG_DURATION, this);
-            //* 毎タン一回 => ★Duration++は, BlockMakerスクリプトで行う。
-            fireDotDmg.setDataNextStage(this);
+            FireDotDmg.setDuration(this);
+            FireDotDmg.setMeshToCheckDuration(LM._.FIRE_DOT_DMG_DURATION, this);
+            fireDotDmg.setResult(this);//* 毎タン一回 => ★Duration++は, BlockMakerスクリプトで行う。
         }
     }
     private void checkIceFreeze(){
         if(Freeze.IsOn && !this.name.Contains("Boss")){
-            //* Enter 1Time
-            Freeze.startDuration(this);
-            //* End 1Time
-            Freeze.endDuration(LM._.ICE_FREEZE_DURATION, this);
-            //* なぜか毎プレームICEマテリアルに変更しないと適用できない。
-            Array.ForEach(this.mesh.block, mesh => mesh.materials = new Material[]{iceMt});
-            //* 毎タン一回 => ★Duration++は, BlockMakerスクリプトで行う。
-            Freeze.setDataNextStage(this);
+            Freeze.setDuration(this);
+            Freeze.setMeshToCheckDuration(LM._.ICE_FREEZE_DURATION, this);            
+            Freeze.setResult(this);//* 毎タン一回 => ★Duration++は, BlockMakerスクリプトで行う。
         }
     }
     private void animateItemTypeUISprGlowEF(ref float cnt){
