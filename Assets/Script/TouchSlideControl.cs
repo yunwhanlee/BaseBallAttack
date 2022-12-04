@@ -137,6 +137,12 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
             gm.readyBtn.gameObject.SetActive(true);
             gm.activeSkillBtnGroup.gameObject.SetActive(true);
         }
+        //* ボタンUI 活性化。
+        BossBlock boss = bm.getBoss();
+        if(boss && boss.isAttack){ //* ボスが存在し、攻撃のモーション中なら、表示しない。
+            gm.readyBtn.gameObject.SetActive(false);
+            gm.activeSkillBtnGroup.gameObject.SetActive(false);
+        }
         
         backOriginPlayerMeshRdr();
 

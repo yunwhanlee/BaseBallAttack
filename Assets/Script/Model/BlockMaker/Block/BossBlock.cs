@@ -27,6 +27,7 @@ public class BossBlock : Block_Prefab{
     [SerializeField] List<Vector3> obstaclePosList;
     [SerializeField] Transform bossDieOrbSpawnTf;
     [SerializeField] Transform mouthTf;
+    public bool isAttack;
 
 
     private void OnDisable() {
@@ -78,6 +79,7 @@ public class BossBlock : Block_Prefab{
     }
 
     IEnumerator coBossAttack(string attackAnimName){
+        isAttack = true;
         Debug.Log($"BossBlock::coBossAttack()::"); //2.333333f
         const float offsetX = 1.3f;
         Vector3 playerPos = new Vector3(gm.pl.transform.position.x + offsetX, gm.pl.transform.position.y, gm.pl.transform.position.z);
@@ -181,6 +183,7 @@ public class BossBlock : Block_Prefab{
         //* GUI ON
         gm.readyBtn.gameObject.SetActive(true);
         gm.activeSkillBtnGroup.gameObject.SetActive(true);
+        isAttack = false;
     }
 
 
