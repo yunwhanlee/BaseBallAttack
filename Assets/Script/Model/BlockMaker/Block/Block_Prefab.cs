@@ -24,7 +24,7 @@ public class SkillProperty{
         this.duration = 0;
         this.dotDmgEF = null;
     }
-    public void setDuration(Block_Prefab bl){
+    public void setStart(Block_Prefab bl){
         if(BefCnt == -1){
             BefCnt = Duration;
             //* EXTRA 処理
@@ -37,7 +37,7 @@ public class SkillProperty{
         }
     }
 
-    public void setMeshToCheckDuration(int span, Block_Prefab bl){
+    public void setUpdate(int span, Block_Prefab bl){
         if(Duration >= span){
             init();
             //* EXTRA 処理
@@ -50,26 +50,28 @@ public class SkillProperty{
             }
         }
         else{
-            Array.ForEach(bl.mesh.block, mesh => mesh.materials = new Material[]{bl.iceMt});
+            if(Name == DM.PSV.FireProperty.ToString()){
+                //なし
+            }
+            else if(Name == DM.PSV.IceProperty.ToString()){
+                Array.ForEach(bl.mesh.block, mesh => mesh.materials = new Material[]{bl.iceMt});
+            }
         }
     }
 
-    public void setResult(Block_Prefab bl){
+    public void setDamage(Block_Prefab bl){
         if(BefCnt != Duration){
             BefCnt = Duration;
             //* EXTRA 処理
             if(Name == DM.PSV.FireProperty.ToString()){
-                int dmg = ((bl.Hp / 10) < 1)? 1 : (bl.Hp / 10); //* 10Percent Damage
+                int dmg = ((bl.Hp / 10) < 1)? 1 : (bl.Hp / 10); //* 10 Percent Damage
                 bl.decreaseHp(dmg);
                 bl.gm.em.createCritTxtEF(bl.transform.position, dmg);
             }
             else if(Name == DM.PSV.IceProperty.ToString()){
-                Transform blTf = bl.transform;
-                blTf.localPosition = new Vector3(
-                    blTf.localPosition.x, 
-                    blTf.localPosition.y, 
-                    blTf.localPosition.z + 1
-                );
+                int dmg = ((bl.Hp / 4) < 1)? 1 : (bl.Hp / 4); //* 25 Percent Damage
+                bl.decreaseHp(dmg);
+                bl.gm.em.createCritTxtEF(bl.transform.position, dmg);
             }
         }
     }
@@ -276,16 +278,16 @@ public class Block_Prefab : MonoBehaviour
 
     public void checkFireDotDmg(){
         if(FireDotDmg.IsOn){
-            FireDotDmg.setDuration(this);
-            FireDotDmg.setMeshToCheckDuration(LM._.FIRE_DOT_DMG_DURATION, this);
-            fireDotDmg.setResult(this);//* 毎タン一回 => ★Duration++は, BlockMakerスクリプトで行う。
+            FireDotDmg.setStart(this);
+            FireDotDmg.setUpdate(LM._.FIRE_DOT_DMG_DURATION, this);
+            fireDotDmg.setDamage(this);//* 毎タン一回 => ★Duration++は, BlockMakerスクリプトで行う。
         }
     }
     private void checkIceFreeze(){
         if(Freeze.IsOn && !this.name.Contains("Boss")){
-            Freeze.setDuration(this);
-            Freeze.setMeshToCheckDuration(LM._.ICE_FREEZE_DURATION, this);            
-            Freeze.setResult(this);//* 毎タン一回 => ★Duration++は, BlockMakerスクリプトで行う。
+            Freeze.setStart(this);
+            Freeze.setUpdate(LM._.ICE_FREEZE_DURATION, this);            
+            Freeze.setDamage(this);//* 毎タン一回 => ★Duration++は, BlockMakerスクリプトで行う。
         }
     }
     private void animateItemTypeUISprGlowEF(ref float cnt){

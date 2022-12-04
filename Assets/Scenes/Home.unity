@@ -4108,6 +4108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98b6b0bab0720b041bea9c6ac7d252dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  STAGE_NUM: 5
   THROW_BALL_SPEED: 25
   SUDDENLY_THORW_PER: 50
   MAX_DISTANCE: 1.5
@@ -4127,7 +4128,7 @@ MonoBehaviour:
   HOMERUN_MIN_POWER: 0
   LONG_BLOCK_SPAN: 7
   BOSS_STAGE_SPAN: 5
-  ICE_FREEZE_DURATION: 2
+  ICE_FREEZE_DURATION: 1
   FIRE_DOT_DMG_DURATION: 2
   skipBlockPer: 20
   itemTypePer: 10

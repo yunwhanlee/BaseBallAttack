@@ -16,6 +16,8 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
 {
     public static LM _;
     //* Value
+    [Header("GAMEMANAGER")][Header("__________________________")]
+    public int STAGE_NUM = 1;
     [Header("THROW BALL")][Header("__________________________")]
     public float THROW_BALL_SPEED = 25;
     [Range(0, 100)] public int SUDDENLY_THORW_PER = 50;

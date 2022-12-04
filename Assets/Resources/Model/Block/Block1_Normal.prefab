@@ -365,10 +365,18 @@ MonoBehaviour:
   sprGlowEf: {fileID: 5918763535492987420}
   kind: 0
   type: 0
-  befPropertyCnt: 0
-  propertyDuration: 0
   isDotDmg: 0
-  isFreeze: 0
+  fireDotDmg:
+    isOn: 0
+    befCnt: 0
+    duration: 0
+    dotDmgEF: {fileID: 0}
+  freeze:
+    isOn: 0
+    befCnt: 0
+    duration: 0
+    dotDmgEF: {fileID: 0}
+  maxHp: 1
   hp: 1
   exp: 10
   itemTypePer: 10
@@ -590,7 +598,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &724812589793151463
 Transform:
   m_ObjectHideFlags: 0
@@ -630,6 +638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23c3773ef80bc9419c65ecfc955964a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMoved: 0
 --- !u!1 &5945505357771449419
 GameObject:
   m_ObjectHideFlags: 0
