@@ -214,7 +214,7 @@ public class Ball_Prefab : MonoBehaviour
     void OnCollisionEnter(Collision col) { 
         #region ATV (HIT BLOCK)
         if(col.transform.name.Contains(DM.NAME.Block.ToString())
-        || col.transform.name.Contains(DM.NAME.Obstacle.ToString())){ //* (BUG) 障害物もFreezeからだめーず受けるように。
+        || col.transform.name.Contains(DM.NAME.Obstacle.ToString())){ //* (BUG-3) 障害物もFreezeからだめーず受けるように。
             isHitedByBlock = true;
             gm.activeSkillBtnList.ForEach(skillBtn => {
 
@@ -406,7 +406,8 @@ public class Ball_Prefab : MonoBehaviour
     private void decreaseBlocksHp(DM.ATV atv, int dmg, float dotDmgPer = 0){
         RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.FireBallCastWidth, Vector3.up, 0);
         Array.ForEach(hits, hit => {
-            if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
+            if(hit.transform.name.Contains(DM.NAME.Block.ToString())
+            || hit.transform.name.Contains(DM.NAME.Obstacle.ToString())){
                 var block = hit.transform.gameObject.GetComponent<Block_Prefab>();
                 //* Is DotDmg Type?
                 if(!(dotDmgPer == 0) && !block.IsDotDmg){

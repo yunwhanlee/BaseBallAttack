@@ -371,8 +371,10 @@ public class AtvSkill{
 
     //* method
     public void checkBlocksIsDotDmg(GameManager gm){
-        var blocks = gm.blockGroup.GetComponentsInChildren<Block_Prefab>();
-        Array.ForEach(blocks, block => {
+        List<Block_Prefab> blockList = new List<Block_Prefab>(gm.blockGroup.GetComponentsInChildren<Block_Prefab>());
+        blockList.AddRange(gm.obstacleGroup.GetComponentsInChildren<Block_Prefab>()); //* (BUG-4) 障害物もPoisonSmokeへダメージを受けるように。
+
+        blockList.ForEach(block => {
             if(block.IsDotDmg) {
                 float dmg = AtvSkill.POISONSMOKE_DOT;
                 for(int i=0; i<block.transform.childCount; i++){
@@ -382,7 +384,7 @@ public class AtvSkill{
                     }
                 }
                 block.decreaseHp(block.getDotDmg(dmg));
-                gm.em.createCritTxtEF(block.transform.position, block.getDotDmg(AtvSkill.POISONSMOKE_DOT));
+                gm.em.createCritTxtEF(block.transform.position, block.getDotDmg(dmg));
             }
         });
     }

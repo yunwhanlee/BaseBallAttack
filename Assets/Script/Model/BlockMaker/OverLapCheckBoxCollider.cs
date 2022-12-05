@@ -14,7 +14,7 @@ public class OverLapCheckBoxCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider col) {
         // if(col.CompareTag(DM.TAG.NormalBlock.ToString()) || col.CompareTag(DM.TAG.LongBlock.ToString())|| col.CompareTag(DM.TAG.TreasureChestBlock.ToString())|| col.CompareTag(DM.TAG.HealBlock.ToString()))
-        if(Util._.isColBlock(col)){
+        if(Util._.isColBlockOrObstacle(col)){
             //* 対象をFreezeブロックは除外。
             if(col.GetComponent<Block_Prefab>().Freeze.IsOn){
                 Debug.Log("<color=grey>OverLapCheckBoxCollider col.name= " + col.name + ", pos.z= " + (col.transform.position.z) + "</color>");

@@ -24,7 +24,8 @@ public class PoisonSmoke : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider col){
-        if(Util._.isColBlock(col)){
+        if(Util._.isColBlockOrObstacle(col)){
+            Debug.Log("PoisonSmoke:: OnTriggerEnter:: col.name= " + col.name);
             col.GetComponent<Block_Prefab>().IsDotDmg = true;
         }
     }
