@@ -260,8 +260,7 @@ public class EffectManager : MonoBehaviour
         return ins;
     }
     public void createThunderStrikeEF(Vector3 parentTfPos){
-        Quaternion rot = fireBallDotEF.transform.rotation;
-        var ins = Instantiate(thunderStrikeEF, parentTfPos, rot, gm.effectGroup) as GameObject;
+        var ins = Instantiate(thunderStrikeEF, parentTfPos, thunderStrikeEF.transform.rotation, gm.effectGroup) as GameObject;
     }
     public void createColorBallStarExplosionEF(Vector3 parentTfPos){
         var ins = Instantiate(colorBallStarExplosionEF, parentTfPos, QI, gm.effectGroup) as GameObject;
