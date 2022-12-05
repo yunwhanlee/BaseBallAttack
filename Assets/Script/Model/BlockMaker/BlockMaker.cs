@@ -116,8 +116,8 @@ public class BlockMaker : MonoBehaviour
         // gm.blockGroup.position = new Vector3(gm.blockGroup.position.x, gm.blockGroup.position.y, gm.blockGroup.position.z - 1);
         for(int i=0; i < gm.blockGroup.childCount; i++){
             //* Init
-            var childs = gm.blockGroup.GetComponents<OverLapCheckBoxCollider>();
-            Array.ForEach(childs, child => child.IsMoved = false);
+            // var childs = gm.blockGroup.GetComponents<OverLapCheckBoxCollider>();
+            // Array.ForEach(childs, child => child.IsMoved = false);
             
             var blockPos = gm.blockGroup.GetChild(i).transform.localPosition;
             gm.blockGroup.GetChild(i).transform.localPosition = new Vector3(
