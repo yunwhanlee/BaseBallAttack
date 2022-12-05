@@ -24,6 +24,7 @@ public class EffectManager : MonoBehaviour
     public GameObject itemBlockDirLineTrailEF;
     public GameObject downWallHitEF;
     public GameObject healTxtEF, heartEF;
+    public GameObject icePropertyNovaFrost;
     
     [Header("PSV SKILL EF")][Header("__________________________")]
     public GameObject explosionEF;
@@ -160,6 +161,11 @@ public class EffectManager : MonoBehaviour
     public GameObject createHeartEF(Vector3 parentPos){
         var ins = ObjectPool.getObject(ObjectPool.DIC.HeartEF.ToString(), parentPos, QI, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
+        return ins;
+    }
+    public GameObject createIcePropertyNovaFrostEF(Vector3 parentPos){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.IcePropertyNovaFrost.ToString(), parentPos, icePropertyNovaFrost.transform.rotation, gm.effectGroup);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 2));
         return ins;
     }
     public void createExplosionEF(Vector3 parentPos, float scale){

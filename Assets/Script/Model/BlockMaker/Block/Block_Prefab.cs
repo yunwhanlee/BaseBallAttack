@@ -20,8 +20,8 @@ public class SkillProperty{
     }
     public void init(){
         this.isOn = false;
-        this.befCnt = -1;
-        this.duration = 0;
+        this.befCnt = -1;       //直前前のカウント
+        this.duration = 0;      //CoolTime
         this.dotDmgEF = null;
     }
     public void setStart(Block_Prefab bl){
@@ -31,16 +31,13 @@ public class SkillProperty{
             if(Name == DM.PSV.FireProperty.ToString()){
                 DotDmgEF = bl.gm.em.directlyCreateFireBallDotEF(bl.transform);
             }
-            else if(Name == DM.PSV.IceProperty.ToString()){
-                //なし
-            }
+            else if(Name == DM.PSV.IceProperty.ToString()){}//なし
         }
     }
 
-    public void setUpdate(int span, Block_Prefab bl){
+    public void setUpdate(Block_Prefab bl, int span){
         if(Duration >= span){
             init();
-            //* EXTRA 処理
             if(Name == DM.PSV.FireProperty.ToString()){
                 GameObject.Destroy(DotDmgEF);
             }
@@ -50,28 +47,27 @@ public class SkillProperty{
             }
         }
         else{
-            if(Name == DM.PSV.FireProperty.ToString()){
-                //なし
-            }
-            else if(Name == DM.PSV.IceProperty.ToString()){
+            if(Name == DM.PSV.FireProperty.ToString()) {}//なし
+            else if(Name == DM.PSV.IceProperty.ToString())
                 Array.ForEach(bl.mesh.block, mesh => mesh.materials = new Material[]{bl.iceMt});
-            }
         }
     }
 
-    public void setDamage(Block_Prefab bl){
+    public void setDamage(Block_Prefab bl, float per){
         if(BefCnt != Duration){
             BefCnt = Duration;
             //* EXTRA 処理
             if(Name == DM.PSV.FireProperty.ToString()){
-                int dmg = ((bl.Hp / 10) < 1)? 1 : (bl.Hp / 10); //* 10 Percent Damage
+                int dmg = (int)((bl.Hp * per < 1)? 1 : bl.Hp * per); //* 10 Percent Damage
                 bl.decreaseHp(dmg);
                 bl.gm.em.createCritTxtEF(bl.transform.position, dmg);
             }
             else if(Name == DM.PSV.IceProperty.ToString()){
-                int dmg = ((bl.Hp / 4) < 1)? 1 : (bl.Hp / 4); //* 25 Percent Damage
-                bl.decreaseHp(dmg);
-                bl.gm.em.createCritTxtEF(bl.transform.position, dmg);
+                const float RADIUS = 1.2f;
+                int dmg = (int)((bl.Hp * per < 1)? 1 : bl.Hp * per); //* 5 Percent Damage
+                bl.gm.em.createIcePropertyNovaFrostEF(new Vector3(bl.transform.position.x, bl.transform.localPosition.y + 1.3f, bl.transform.position.z));
+                Util._.DebugSphere(bl.transform.position, radius: RADIUS);
+                Util._.sphereCastAllDecreaseBlocksHp(bl.transform, radius: RADIUS, dmg);
             }
         }
     }
@@ -279,15 +275,15 @@ public class Block_Prefab : MonoBehaviour
     public void checkFireDotDmg(){
         if(FireDotDmg.IsOn){
             FireDotDmg.setStart(this);
-            FireDotDmg.setUpdate(LM._.FIRE_DOT_DMG_DURATION, this);
-            fireDotDmg.setDamage(this);//* 毎タン一回 => ★Duration++は, BlockMakerスクリプトで行う。
+            FireDotDmg.setUpdate(this, LM._.FIRE_DOT_DMG_DURATION);
+            fireDotDmg.setDamage(this, LM._.FIRE_DOT_DMG_PER);//* Duration++は, BlockMakerスクリプトで行う。
         }
     }
     private void checkIceFreeze(){
         if(Freeze.IsOn && !this.name.Contains("Boss")){
             Freeze.setStart(this);
-            Freeze.setUpdate(LM._.ICE_FREEZE_DURATION, this);            
-            Freeze.setDamage(this);//* 毎タン一回 => ★Duration++は, BlockMakerスクリプトで行う。
+            Freeze.setUpdate(this, LM._.ICE_FREEZE_DURATION);
+            Freeze.setDamage(this, LM._.ICE_FREEZE_DMG_PER);//* Duration++は, BlockMakerスクリプトで行う。
         }
     }
     private void animateItemTypeUISprGlowEF(ref float cnt){

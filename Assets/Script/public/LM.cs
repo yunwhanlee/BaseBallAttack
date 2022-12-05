@@ -43,6 +43,10 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     public int FIRE_DOT_DMG_DURATION = 2;
 
     [Header("BLOCK ITEM PERCENT")][Header("__________________________")]
+    public float ICE_FREEZE_DMG_PER = 0.1f;
+    public float FIRE_DOT_DMG_PER = 0.2f;
+
+    [Header("BLOCK ITEM PERCENT")][Header("__________________________")]
     [Range(0, 100)] public int skipBlockPer = 20;
     [Range(0, 100)] public int itemTypePer = 10;
     [Range(0, 100)] public int treasureChestBlockPer = 5;

@@ -112,10 +112,10 @@ public class Util : MonoBehaviour
         return (int)(value / max * 100);
     }
 
-    public void DebugSphere(Vector3 pos, float raidus, float destroyCnt, string color){
-        GameObject obj = (color == "blue" || color == "Blue")? debugSphereObjBlue : debugSphereObjRed;
+    public void DebugSphere(Vector3 pos, float radius, float destroyCnt = 2, string color = "red"){
+        GameObject obj = (color == "red" || color == "Red")? debugSphereObjRed : debugSphereObjBlue;
         var ins = Instantiate(obj, pos, Quaternion.identity);
-        ins.transform.localScale = Vector3.one * (raidus * 2);
+        ins.transform.localScale = Vector3.one * (radius * 2); // 2: {radius * 2 = diameter}
         Destroy(ins, destroyCnt);
     }
 
