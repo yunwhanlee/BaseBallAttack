@@ -213,7 +213,8 @@ public class Ball_Prefab : MonoBehaviour
 //----------------------------------------------------------------
     void OnCollisionEnter(Collision col) { 
         #region ATV (HIT BLOCK)
-        if(col.transform.name.Contains(DM.NAME.Block.ToString())){
+        if(col.transform.name.Contains(DM.NAME.Block.ToString())
+        || col.transform.name.Contains(DM.NAME.Obstacle.ToString())){ //* (BUG) 障害物もFreezeからだめーず受けるように。
             isHitedByBlock = true;
             gm.activeSkillBtnList.ForEach(skillBtn => {
 
@@ -266,8 +267,11 @@ public class Ball_Prefab : MonoBehaviour
                             break;
                         }
                         case DM.ATV.IceWave:{
-                            em.createAtvSkExplosionEF(skillIdx, this.transform);
+                            var effect = em.createAtvSkExplosionEF(skillIdx, this.transform);
                             // this.rigid.velocity = Vector3.zero;
+                            if(isHomeRun) {
+                                effect.transform.GetChild(effect.transform.childCount-1).gameObject.SetActive(true);
+                            }
                             break;
                         }
                     }

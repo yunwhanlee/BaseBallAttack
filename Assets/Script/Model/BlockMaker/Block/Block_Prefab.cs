@@ -163,7 +163,7 @@ public class Block_Prefab : MonoBehaviour
         animateItemTypeUISprGlowEF(ref itemUISprGlowCnt);//* ItemType Glow Animation
 
         //* Property
-        if(!this.name.Contains(DM.NAME.Obstacle.ToString()) || !this.name.Contains("Boss")){
+        if(!this.name.Contains("Boss")){
             checkFireDotDmg();
             checkIceFreeze();
         }

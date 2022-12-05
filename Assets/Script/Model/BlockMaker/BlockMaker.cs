@@ -225,5 +225,14 @@ public class BlockMaker : MonoBehaviour
             if(block.FireDotDmg.IsOn) block.FireDotDmg.Duration++;
             //* 属性が増えたら、下へ追加。
         }
+
+        //* (BUG-3) 障害物もFreezeからだめーず受けるように。
+        for(int i=0; i<gm.obstacleGroup.childCount; i++){
+            var obstacle = gm.obstacleGroup.GetChild(i).GetComponentInChildren<Block_Prefab>();
+            if(obstacle.Freeze.IsOn) {obstacle.Freeze.Duration++;}
+            if(obstacle.FireDotDmg.IsOn) obstacle.FireDotDmg.Duration++;
+            //* 属性が増えたら、下へ追加。
+
+        }
     }
 }
