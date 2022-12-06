@@ -146,7 +146,7 @@ public class Player : MonoBehaviour
         damageTwice = new PsvSkill<int>(
             LANG.getTxt(DM.PSV.DamageTwice.ToString()), psvLvArr[(int)DM.PSV.DamageTwice].lv, 0, 1, 1);
         giantBall = new PsvSkill<float>(
-            LANG.getTxt(DM.PSV.GiantBall.ToString()), psvLvArr[(int)DM.PSV.GiantBall].lv, 1, 1.5f, 1);
+            LANG.getTxt(DM.PSV.GiantBall.ToString()), psvLvArr[(int)DM.PSV.GiantBall].lv, 1, 2f, 1);
         darkOrb = new PsvSkill<float>(
             LANG.getTxt(DM.PSV.DarkOrb.ToString()), psvLvArr[(int)DM.PSV.DarkOrb].lv, 0, 1, 1);
         godBless= new PsvSkill<float>(

@@ -185,8 +185,9 @@ public class GameManager : MonoBehaviour
             , Time.deltaTime * 10);
         bossStageTxt.text = boss? $"{boss.Hp} / {boss.MaxHp}"
             : $"{stage % LM._.BOSS_STAGE_SPAN} / {LM._.BOSS_STAGE_SPAN}";
-        // var fillImg = Array.Find(bossStageBar.GetComponentsInChildren<Image>(), img => img.transform.name == "Fill");
-        // fillImg.color = boss? Color.green : Color.yellow;
+        
+        Image fillImg = Array.Find(bossStageBar.GetComponentsInChildren<Image>(), img => img.transform.name == "Fill");
+        fillImg.color = boss? Color.white : Color.yellow;
 
         //* ANOTHER TEXT
         stateTxt.text = State.ToString();
