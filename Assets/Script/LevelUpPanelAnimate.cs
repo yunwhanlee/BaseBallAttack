@@ -238,9 +238,9 @@ public class LevelUpPanelAnimate : MonoBehaviour{
             case DM.PSV.DamageTwice:
                 pl.damageTwice.setLvUp(pl.damageTwice.Val + pl.damageTwice.Unit);
                 break;
-            case DM.PSV.GiantBall:{
-                float CALC_GIANTBALL_VAL = (pl.multiShot.Val + pl.verticalMultiShot.Val + pl.giantBall.Level) * pl.giantBall.Unit;
-                Debug.Log($"CALC_GIANTBALL_VAL({CALC_GIANTBALL_VAL}) -> (multi= {pl.multiShot.Val} + vMulti= {pl.verticalMultiShot.Val} + giantBall.Lv= {pl.giantBall.Level}) * giantBall.Unit={pl.giantBall.Unit}" );
+            case DM.PSV.GiantBall:{ //* (BUG-5) レベルアップする前に処理されるので、０になるバグ対応。
+                float CALC_GIANTBALL_VAL = (pl.multiShot.Val + pl.verticalMultiShot.Val + 1) * pl.giantBall.Unit;
+                Debug.Log($"CALC_GIANTBALL_VAL({CALC_GIANTBALL_VAL}) -> (multi= {pl.multiShot.Val} + vMulti= {pl.verticalMultiShot.Val} + {1}) * giantBall.Unit={pl.giantBall.Unit}" );
                 pl.giantBall.setLvUp(CALC_GIANTBALL_VAL);
             }
                 break;

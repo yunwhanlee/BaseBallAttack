@@ -259,7 +259,7 @@ public class GameManager : MonoBehaviour
     public void onClickBtnPayMoney(string rewardType){
         Debug.Log($"PayMoney:: {rewardType}");
         if(rewardType == DM.REWARD.RerotateSkillSlots.ToString()){
-            rerotateSkillSlotsBtn.gameObject.SetActive(false);
+            // rerotateSkillSlotsBtn.gameObject.SetActive(false);
             ShowAdDialogRectTf.gameObject.SetActive(false);
             levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
         }
