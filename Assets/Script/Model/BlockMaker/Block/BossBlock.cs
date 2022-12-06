@@ -53,8 +53,8 @@ public class BossBlock : Block_Prefab{
                 else StartCoroutine(coBossAttack(BOSSATK_ANIM_NAME_LV1));
                 break;
             case 2:
-                if(randPer <= 3 && obstacleResetCnt == 0){createObstaclePatternType(0, 2);}
-                else if(randPer <= 5){StartCoroutine(coBossHeal());}
+                if(randPer <= 0 && obstacleResetCnt == 0){createObstaclePatternType(0, 2);}
+                else if(randPer <= 1){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack(BOSSATK_ANIM_NAME_LV2));
                 break;
             case 3:
@@ -128,7 +128,7 @@ public class BossBlock : Block_Prefab{
                 yield return new WaitForSeconds(targetReachTime * 0.3f);
 
                 //* ExplosionEF 生成
-                setExplosionEFAndPlayerStun(playerPos, playerStunTime);
+                setExplosionEFAndPlayerStun(targetPosArr[i], playerStunTime);
             }
         }
         else if(attackAnimName == "Horn Attack"){ //* LV 3

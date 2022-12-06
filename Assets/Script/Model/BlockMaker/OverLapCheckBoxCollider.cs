@@ -19,6 +19,7 @@ public class OverLapCheckBoxCollider : MonoBehaviour
         bool isMySelf = col.name.Contains(DM.NAME.Obstacle.ToString());
         if(!isMySelf){
             if(col.name.Contains(DM.NAME.Block.ToString())){// if(col.CompareTag(DM.TAG.NormalBlock.ToString()) || col.CompareTag(DM.TAG.LongBlock.ToString()) || col.CompareTag(DM.TAG.TreasureChestBlock.ToString()) || col.CompareTag(DM.TAG.HealBlock.ToString()))
+                if(!this) return;
                 gm.em.createRockObstacleBrokenEF(this.transform.position);
                 Destroy(this.transform.parent.gameObject);
             }
