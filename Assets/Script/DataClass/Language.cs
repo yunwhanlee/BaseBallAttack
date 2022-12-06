@@ -9,7 +9,7 @@ public static class LANG //* LANG
     public enum OBJNAME {NameTxt, ExplainTxt, HomeRunBonusTxt};
     public enum TXT {
         //* UI
-        Start, Level, Stage, Combo, Status, Back, Ready, Out, Strike, 
+        Start, Level, Stage, BossLimitCnt, Combo, Status, Back, Ready, Out, Strike, 
         BestScore, LevelUpPanel_Title, LevelUpPanel_Explain,
         MsgNoMoney, MsgNoSkill, MsgAlreadyRegistedSkill,
         DialogUnlock2ndSkill_Title, DialogUnlock2ndSkill_Info,
@@ -153,6 +153,7 @@ public static class LANG //* LANG
     public static string[] Start = new string[]{"START", "スタート", "시작"};
     public static string[] Level = new string[]{"LV", "レベル", "레벨"};
     public static string[] Stage = new string[]{"STAGE", "ステージ", "스테이지"};
+    public static string[] BossLimitCnt = new string[]{"BossLimitCnt", "制限時間", "제한시간"};
     public static string[] Combo = new string[]{"COMBO", "コンボー", "콤보"};
     public static string[] Status = new string[]{"STATUS", "状　態", "상　태"};
     public static string[] Back = new string[]{"BACK", "戻す", "뒤로"};
@@ -269,6 +270,7 @@ public static class LANG //* LANG
         if(name == TXT.Start.ToString()) res = Start[CUR_LANG];
         if(name == TXT.Level.ToString()) res = Level[CUR_LANG];
         if(name == TXT.Stage.ToString()) res = Stage[CUR_LANG];
+        if(name == TXT.BossLimitCnt.ToString()) res = BossLimitCnt[CUR_LANG];
         if(name == TXT.Combo.ToString()) res = Combo[CUR_LANG];
         if(name == TXT.Status.ToString()) res = Status[CUR_LANG];
         if(name == TXT.Back.ToString()) res = Back[CUR_LANG];

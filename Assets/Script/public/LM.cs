@@ -37,8 +37,9 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [HideInInspector] public int HOMERUN_MIN_POWER;
 
     [Header("BLOCK SPAN")][Header("__________________________")]
-    public int LONG_BLOCK_SPAN = 5;
     public int BOSS_STAGE_SPAN = 10;
+    public int BOSS_LIMIT_SPAN = 20;
+    public int LONG_BLOCK_SPAN = 5;
     public int ICE_FREEZE_DURATION = 1;
     public int FIRE_DOT_DMG_DURATION = 2;
 

@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     public int bestScore;
     public int strikeCnt = 0;
     public int comboCnt = 0;
+    public int bossLimitCnt = 0;
 
     [Header("TRIGGER")][Header("__________________________")]
     public bool isPlayingAnim;  public bool IsPlayingAnim { get=> isPlayingAnim; set=> isPlayingAnim = value;}
@@ -61,9 +62,10 @@ public class GameManager : MonoBehaviour
     public RectTransform ShowAdDialogRectTf;
 
     [Header("◆GUI◆")][Header("__________________________")]
-    public Text stageTxt;
-    public Text stateTxt;
     public Text levelTxt;
+    public Text stageTxt;
+    public Text bossLimitCntTxt;
+    public Text stateTxt;
     public Text[] statusTxts = new Text[2];
     [SerializeField] Text shootCntTxt;      public Text ShootCntTxt { get => shootCntTxt; set => shootCntTxt = value;}
     public RectTransform homeRunTxtTf;
@@ -144,6 +146,7 @@ public class GameManager : MonoBehaviour
         gvStageTxt = gameoverPanel.transform.GetChild(1).GetComponent<Text>();
         gvBestScoreTxt = gameoverPanel.transform.GetChild(2).GetComponent<Text>();
 
+        bossLimitCntTxt.gameObject.SetActive(false);
         Array.ForEach(statusTxts, txt => txt.text = LANG.getTxt(LANG.TXT.Status.ToString()));
 
         //* Ball Preview Dir Goal Set Z-Center
@@ -194,6 +197,7 @@ public class GameManager : MonoBehaviour
         levelTxt.text = LANG.getTxt(LANG.TXT.Level.ToString()) + " : " + pl.Lv;
         stageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage.ToString();
         comboTxt.text = LANG.getTxt(LANG.TXT.Combo.ToString()) + "\n" + comboCnt.ToString();
+        bossLimitCntTxt.text = LANG.getTxt(LANG.TXT.BossLimitCnt.ToString()) + " : " + bossLimitCnt.ToString();
 
         //* ActiveSkill Status
         activeSkillBtnList.ForEach(btn=> btn.setActiveSkillEF());
@@ -508,6 +512,13 @@ public class GameManager : MonoBehaviour
         
         //* BossSkill
         if(boss){
+            bossLimitCnt--;
+
+            //* ボース制限時間が０になったら、GAMEOVER!!
+            if(bossLimitCnt <= 0){
+                setGameOver();
+                return;
+            }
             boss.activeBossSkill();
             stage--; //ステージは同じく維持
         }

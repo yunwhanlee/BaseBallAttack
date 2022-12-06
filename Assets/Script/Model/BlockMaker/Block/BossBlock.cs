@@ -36,6 +36,8 @@ public class BossBlock : Block_Prefab{
 
     void Start() {
         GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gm.bossLimitCnt = LM._.BOSS_LIMIT_SPAN;
+        gm.bossLimitCntTxt.gameObject.SetActive(true);
         bossDieOrbSpawnTf = GameObject.Find(DM.NAME.BossDieDropOrbSpot.ToString()).transform;
         activeBossSkill();
     }
@@ -251,6 +253,8 @@ public class BossBlock : Block_Prefab{
     }
 
     IEnumerator coPlayBossDieAnim(GameObject target){
+        gm.bossLimitCntTxt.gameObject.SetActive(false);
+
         this.transform.rotation = Quaternion.Euler(0,250,0);
         boxCollider.enabled = false;
         int resultExp = gm.stage * 10;
