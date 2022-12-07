@@ -331,6 +331,10 @@ public class Block_Prefab : MonoBehaviour
         gm.comboTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.IsHit.ToString());
         mesh.setWhiteHitEF();
 
+        //* ブロックが凍った場合、当たったらICE-HITエフェクト追加 実行。
+        if(this.freeze.IsOn)
+            em.createSnowExplosionEF(this.transform.position);
+
         //* 破壊
         if(Hp <= 0) {
             //* アイテムブロック 処理

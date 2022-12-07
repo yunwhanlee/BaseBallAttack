@@ -598,7 +598,7 @@ public class GameManager : MonoBehaviour
     }
 
     private void collectDropOrb(){
-        //* (BUG-6) ICE-Propertyなどの効果で後で破壊したブロックからでるOrbがPlayerに行かない。Invokeで0.5秒を待た後で収集。
+        //* (BUG-6) 後で破壊したブロックからでるOrbがPlayerに行かない。Invokeで0.5秒を待た後で収集。
         var orbs = dropItemGroup.GetComponentsInChildren<DropItem>();
         Debug.Log("setNextStage():: Invoke(collectDropOrb):: MoveToPlayer ON -> orbs.Length= " + orbs.Length);
         Array.ForEach(orbs, orb => orb.IsMoveToPlayer = true);
