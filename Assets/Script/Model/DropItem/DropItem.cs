@@ -28,7 +28,7 @@ public class DropItem : MonoBehaviour
     }
 
     void OnDisable() { //* (BUG) 再活性化するときに、動きOFF。
-        IsMoveToPlayer = false;
+        isMoveToPlayer = false;
     }
 
     void Start(){
@@ -36,13 +36,13 @@ public class DropItem : MonoBehaviour
     }
 
     void Update(){
-        if(IsMoveToPlayer){
+        if(isMoveToPlayer){
             //* 放物線
             transform.position = Vector3.Slerp(transform.position, gm.pl.modelMovingTf.position, moveSpeed * Time.deltaTime); // transform.position = Vector3.Lerp(transform.position, gm.pl.transform.position, moveSpeed * Time.deltaTime);
         }
     }
 
-    public void moveToTarget(Transform target) => IsMoveToPlayer = true;
+    public void moveToTarget(Transform target) => isMoveToPlayer = true;
 
     public void spawnPopUp(int power){
         float v = 0.5f;

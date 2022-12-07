@@ -326,11 +326,12 @@ public class GameManager : MonoBehaviour
     private void setRevive(){
         State = GameManager.STATE.WAIT;
         gameoverPanel.SetActive(false);
-        bm.Start();
         BossBlock boss = bm.getBoss();
         if(boss) bossLimitCnt = LM._.BOSS_LIMIT_SPAN;
         setActiveCam(false); // cam1 ON, cam2 OFF
         reviveBtn.gameObject.SetActive(false);
+        Invoke("collectDropOrb", 0.5f);
+        bm.Start();
     }
     private void setCoinX2(){
         coinTxt.text = (int.Parse(coinTxt.text) * 2).ToString();
@@ -573,7 +574,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(coCheckLevelUp());
 
         //* オーブを集める
-        collectDropOrb();
+        Invoke("collectDropOrb", 0.5f);
         
         //* BossSkill
         if(boss){
@@ -597,9 +598,10 @@ public class GameManager : MonoBehaviour
     }
 
     private void collectDropOrb(){
+        //* (BUG-6) ICE-Propertyなどの効果で後で破壊したブロックからでるOrbがPlayerに行かない。Invokeで0.5秒を待た後で収集。
         var orbs = dropItemGroup.GetComponentsInChildren<DropItem>();
-        Debug.Log("setNextStage:: orbs.Length= " + orbs.Length);
-        Array.ForEach(orbs, dropObj => dropObj.IsMoveToPlayer = true);
+        Debug.Log("setNextStage():: Invoke(collectDropOrb):: MoveToPlayer ON -> orbs.Length= " + orbs.Length);
+        Array.ForEach(orbs, orb => orb.IsMoveToPlayer = true);
     }
 
     private IEnumerator coCheckPerfectBonus(BossBlock boss){
