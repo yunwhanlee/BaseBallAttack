@@ -74,25 +74,25 @@ public class GameManager : MonoBehaviour
     public Slider expBar, bossStageBar;
     public Text expTxt, bossStageTxt;
 
-    [Header("TEXT EFFECT")]
+    [Header("TEXT EFFECT")][Header("__________________________")]
     public Text comboTxt;
     public Text perfectTxt;
     public GameObject bossSapwnAnimObj;
     public Text bossNameTxt;
     public Text showHitBallInfoTf;
 
-    [Header("PREVIEW BALL SILDER ➡ 現在使っていない")] //! あんまり要らないかも。
+    [Header("PREVIEW BALL SILDER ➡ 現在使っていない")][Header("__________________________")] //! あんまり要らないかも。
     public Slider hitRangeSlider;
     private RectTransform hitRangeSliderTf;
 
-    [Header("BALL PREVIEW DIR GOAL(CAM2)")]
+    [Header("BALL PREVIEW DIR GOAL(CAM2)")][Header("__________________________")]
     public GameObject ballPreviewDirGoal;
     public Image ballPreviewGoalImg;
 
-    [Header("STRIKE CNT IMAGE")]
+    [Header("STRIKE CNT IMAGE")][Header("__________________________")]
     public Image[] strikeCntImgs;
 
-    [Header("ACTIVE SKILL BTN")]
+    [Header("ACTIVE SKILL BTN")][Header("__________________________")]
     public RectTransform activeSkillBtnPf;
     public AtvSkill[] activeSkillDataBase; //* 全てActiveSkillsのデータベース
     public List<AtvSkillBtnUI> activeSkillBtnList; //* ActiveSkillボタン
@@ -101,25 +101,25 @@ public class GameManager : MonoBehaviour
     public bool isPointUp; //* SectorGizmos Colliderへ活用するため。
     public Material[] blockGlowColorMts;
 
-    [Header("PASSIVE TABLE")]
+    [Header("PASSIVE TABLE")][Header("__________________________")]
     [SerializeField] private GameObject[] psvSkillImgPrefs;    public GameObject[] PsvSkillImgPrefs { get => psvSkillImgPrefs; set => psvSkillImgPrefs = value;}
     public RectTransform inGameSkillStatusTableTf;
     public GameObject inGameSkillImgBtnPref;
     
-    [Header("PAUSE")]
+    [Header("PAUSE")][Header("__________________________")]
     public RectTransform pauseSkillStatusTableTf;
     public GameObject skillInfoRowPref;
 
-    [Header("GAMEOVER")]
-    public Text CoinTxt;
+    [Header("GAMEOVER")][Header("__________________________")]
+    public Text coinTxt;
     public Text gvBestScoreTxt;
     public Text gvStageTxt;
 
-    [Header("STATUS FOLDER")]
+    [Header("STATUS FOLDER")][Header("__________________________")]
     public Transform statusInfoContents;
     public Text statusInfoTxtPf;
 
-    [Header("BUTTON")]
+    [Header("BUTTON")][Header("__________________________")]
     public Button readyBtn; //normal
     public Button reGameBtn; //gameoverPanel
     public Button pauseBtn; //pausePanel
@@ -291,31 +291,62 @@ public class GameManager : MonoBehaviour
         }
     }
     public void onClickPayButton(string rewardType){
-        Debug.Log($"PayMoney:: {rewardType}");
+        Debug.Log($"onClickPayButton:: {rewardType}");
         if(rewardType == DM.REWARD.RerotateSkillSlots.ToString()){
-            // rerotateSkillSlotsBtn.gameObject.SetActive(false);
-            showAdDialog.gameObject.SetActive(false);
-            levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
+            setRerotateSkillSlots();
         }
+        else if(rewardType == DM.REWARD.Revive.ToString()){
+            setRevive();
+        }
+        showAdDialog.gameObject.SetActive(false); //* ダイアログ閉じる
     }
     public void onClickShowADButton(string rewardType){
-        bool response = DM.ins.reqShowAD(rewardType, this);
-
-        showAdDialog.gameObject.SetActive(false);
+        // bool response = DM.ins.reqShowAD(rewardType, this);
+        Debug.Log("<color=yellow> onClickShowADButton(" + rewardType.ToString() + ")</color>");
+        if(rewardType == DM.REWARD.RerotateSkillSlots.ToString()){
+            setRerotateSkillSlots();
+        }
+        else if(rewardType == DM.REWARD.Revive.ToString()){
+            setRevive();
+        }
+        else if(rewardType == DM.REWARD.CoinX2.ToString()){
+            setCoinX2();
+        }
+        showAdDialog.gameObject.SetActive(false); //* ダイアログ閉じる
     }
 
 //*---------------------------------------
 //*  関数
 //*---------------------------------------
+    #region AD REWARD
+    private void setRerotateSkillSlots(){
+        // rerotateSkillSlotsBtn.gameObject.SetActive(false);
+        levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
+    }
+    private void setRevive(){
+        State = GameManager.STATE.WAIT;
+        gameoverPanel.SetActive(false);
+        bm.Start();
+        BossBlock boss = bm.getBoss();
+        if(boss) bossLimitCnt = LM._.BOSS_LIMIT_SPAN;
+        setActiveCam(false); // cam1 ON, cam2 OFF
+        reviveBtn.gameObject.SetActive(false);
+    }
+    private void setCoinX2(){
+        coinTxt.text = (int.Parse(coinTxt.text) * 2).ToString();
+        coinX2Btn.gameObject.SetActive(false);
+    }
+    #endregion
+
     public void init(){
         State = GameManager.STATE.WAIT;
+        gameoverPanel.SetActive(false);
         stage = 1;
         strikeCnt = 0;
         comboCnt = 0;
         pl.Lv = 1;
         pl.Exp = 0;
         pl.MaxExp = 100;
-        gameoverPanel.SetActive(false);
         pl.Start();
         bm.Start();
         //* Collect Drop Items Exp
@@ -441,7 +472,7 @@ public class GameManager : MonoBehaviour
         gvStageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage;
         int coin = stage * 100;
         int extraUpgradeCoin = Mathf.RoundToInt(coin * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.CoinBonus].getValue());
-        CoinTxt.text = (coin + extraUpgradeCoin).ToString(); // => setGameでも使う。
+        coinTxt.text = (coin + extraUpgradeCoin).ToString(); // => setGameでも使う。
     }
 
     public void setGame(string type){
@@ -462,7 +493,7 @@ public class GameManager : MonoBehaviour
 
                 //* Get Coin
                 int coin = stage * 100;
-                DM.ins.personalData.Coin += int.Parse(CoinTxt.text);
+                DM.ins.personalData.Coin += int.Parse(coinTxt.text);
                 
                 
                 resetSkillStatusTable();
