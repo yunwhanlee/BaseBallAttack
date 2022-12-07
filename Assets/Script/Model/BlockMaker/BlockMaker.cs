@@ -32,12 +32,15 @@ public class BlockMaker : MonoBehaviour
     public GameObject dropItemExpOrbPf;
 
     public void Start() {
-        //* Init
-        var blocks = this.GetComponentsInChildren<Block_Prefab>();
+        //* Init Or AD-Revive
+        var blocks = gm.blockGroup.GetComponentsInChildren<Block_Prefab>(); //* Previous Blocks Erase
         foreach(var block in blocks) block.onDestroy(block.gameObject, true);
+
+        var obstacles = gm.obstacleGroup.GetComponentsInChildren<Block_Prefab>();//* Previous Obstacles Erase
+        foreach(var obstacle in obstacles) obstacle.onDestroy(obstacle.gameObject, true);
+
         this.transform.position = new Vector3(0, 0.5f, -2);
         createBlockRow(KIND.Normal, true, FIRST_CREATE_VERTICAL_CNT);
-
     }
 
     void Update(){

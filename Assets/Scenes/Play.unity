@@ -40172,7 +40172,7 @@ MonoBehaviour:
   pausePanel: {fileID: 1965303884}
   gameoverPanel: {fileID: 1572075153}
   statusFolderPanel: {fileID: 579425676}
-  ShowAdDialog: {fileID: 194144789}
+  showAdDialog: {fileID: 194144789}
   adDialogTitleTxt: {fileID: 1949728634}
   adDialogContentTxt: {fileID: 1274578847}
   levelTxt: {fileID: 738043204}
@@ -40276,8 +40276,10 @@ MonoBehaviour:
   pauseBtn: {fileID: 1542116614}
   continueBtn: {fileID: 1150618591}
   homeBtn: {fileID: 1658447947}
-  rerotateSkillSlotsBtn: {fileID: 1156301439}
   statusFolderBtn: {fileID: 1780982165}
+  rerotateSkillSlotsBtn: {fileID: 1156301439}
+  reviveBtn: {fileID: 1023542670}
+  coinX2Btn: {fileID: 165696105}
   adPricePayBtn: {fileID: 257475135}
   adFreeBtn: {fileID: 1076899882}
   eggPf: {fileID: 7644099056603692642, guid: 278df5e8a6b15764bb9120c75792e3e9, type: 3}

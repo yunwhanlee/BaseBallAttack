@@ -62,6 +62,10 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     public int LEVELUP_SLOTS_UNIQUE_PER = 20;
     public int DARKORB_SPEED = 250;
     public int GODBLESS_SPAN = 10;
+    [Header("REWARD")][Header("__________________________")]
+    public int REROTATE_SKILLSLOTS_PRICE_COIN = 200;
+    public int REVIVE_PRICE_DIAMOND = 50;
+
 
     void Awake() => singleton();
 

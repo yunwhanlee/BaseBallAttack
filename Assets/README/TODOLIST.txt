@@ -78,8 +78,8 @@
         ✓ 言語とAddEventListenerとして、Rewardタイプによって、自動で合わせてOnClickBtnメソッド生成。
         ✓ onClickPayBtn()のコインとダイTYPE決定、金額設定できるように。
         ✓ onClickPayBtn自体が要らない場合は、抜ける処理。EX) "CoinX2"。
-        -  お金を実際に決算する処理。
-        -  ADを見るクリックした場合、Try、Catchで予め実装。
+        ✓ お金を実際に決算する処理。
+        -  ADとPayMoneyの中身処理をREFECTORYすること。
 
     ● Simple-GUIアセットを利用して、デザイン改善。
         ✓  ホーム。
