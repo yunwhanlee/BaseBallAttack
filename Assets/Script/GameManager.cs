@@ -63,7 +63,6 @@ public class GameManager : MonoBehaviour
     public Text adDialogTitleTxt;
     public Text adDialogContentTxt;
 
-
     [Header("◆GUI◆")][Header("__________________________")]
     public Text levelTxt;
     public Text stageTxt;
@@ -262,6 +261,9 @@ public class GameManager : MonoBehaviour
     }
     public void onClickBtnOpenShowAdDialog(string type) {
         ShowAdDialog.gameObject.SetActive(true);
+        adPricePayBtn.gameObject.SetActive(true);
+        Text price = adPricePayBtn.GetComponentInChildren<Text>();
+        Image icon = Array.Find(adPricePayBtn.GetComponentsInChildren<Image>(), chd => chd.name.Contains("Icon"));
         
         //* AddEventListener('onClick')
         adPricePayBtn.onClick.AddListener(() => onClickPayButton(type));
@@ -271,14 +273,19 @@ public class GameManager : MonoBehaviour
         if(type == DM.REWARD.CoinX2.ToString()){
             adDialogTitleTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogCoinX2_Title.ToString());
             adDialogContentTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogCoinX2_Content.ToString());
+            adPricePayBtn.gameObject.SetActive(false);
         }
         else if(type == DM.REWARD.RerotateSkillSlots.ToString()){
             adDialogTitleTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRerotateSkillSlots_Title.ToString());
             adDialogContentTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRerotateSkillSlots_Content.ToString());
+            icon.sprite = DM.ins.CoinSpr;
+            price.text = "200";
         }
         else if(type == DM.REWARD.Revive.ToString()){
             adDialogTitleTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRevive_Title.ToString());
             adDialogContentTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRevive_Content.ToString());
+            icon.sprite = DM.ins.DiamondSpr;
+            price.text = "100";
         }
     }
     public void onClickPayButton(string rewardType){
