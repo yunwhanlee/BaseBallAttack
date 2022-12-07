@@ -74,12 +74,16 @@
         - PSV INFO GUIでも、コインで、購入してアップグレードできるように。
 
     ● Reward
-        - TODO
+        ✓ ShowADDialog表示 "CoinX2", "RerotateSkillSlots", "Revive"種類を分けて適用。
+        ✓ 言語とAddEventListenerとして、Rewardタイプによって、自動で合わせてOnClickBtnメソッド生成。
+        -  onClickPayBtn()のコインとダイTYPE決定、金額設定できるように。
+        -  onClickPayBtn自体が要らない場合は、抜ける処理。EX) "CoinX2"。
 
     ● Simple-GUIアセットを利用して、デザイン改善。
         ✓  ホーム。
         ✓  インゲーム。
         ✓  ダイアログ。
+        ✓  GameOverパンネル
 
     ● ボース
         ✓  何種類のモデル用意。(HARD-MODEは未)
@@ -139,6 +143,8 @@
     ✓ (BUG-3) 障害物もFreezeからだめーず受けるように。
     ✓ (BUG-4) 障害物もPoisonSmokeへダメージを受けるように。
     ✓ (BUG-5) GiantBallスキル レベルアップする前に処理されるので、０になるバグ対応。
+    -  (BUG-6) ICE-Propertyなどの効果で後で破壊したブロックからでるOrbがPlayerに行かない。
+
     
 
     

@@ -13,6 +13,9 @@ public static class LANG //* LANG
         BestScore, LevelUpPanel_Title, LevelUpPanel_Explain,
         MsgNoMoney, MsgNoSkill, MsgAlreadyRegistedSkill,
         DialogUnlock2ndSkill_Title, DialogUnlock2ndSkill_Info,
+        ShowAdDialogCoinX2_Title, ShowAdDialogCoinX2_Content,
+        ShowAdDialogRerotateSkillSlots_Title, ShowAdDialogRerotateSkillSlots_Content,
+        ShowAdDialogRevive_Title, ShowAdDialogRevive_Content,
         //* PSV
         Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, 
         ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, 
@@ -148,6 +151,30 @@ public static class LANG //* LANG
         "2番目スキルボタンをアクティブする。",
         "두 번째 스킬 버튼을 액티브 한다."
     };
+    public static string[] ShowAdDialogCoinX2_Title = new string[]{
+        "Coin X2", "コイン二倍", "코인 두배"
+    };
+    public static string[] ShowAdDialogCoinX2_Content = new string[]{
+        "Would you like to double the coin?",
+        "コインを二倍にもらいますか？",
+        "코인을 두배로 받으시겠습니까?"
+    };
+    public static string[] ShowAdDialogRerotateSkillSlots_Title = new string[]{
+        "Rerotate Slots", "スロット再回し", "슬롯 다시돌리기"
+    };
+    public static string[] ShowAdDialogRerotateSkillSlots_Content = new string[]{
+        "Would you like to Rerotate Skill Slots?",
+        "スロットを新しく回しますか？",
+        "슬롯을 다시 돌리시겠습니까?"
+    };
+    public static string[] ShowAdDialogRevive_Title = new string[]{
+        "Revive", "復活", "부활"
+    };
+    public static string[] ShowAdDialogRevive_Content = new string[]{
+        "Would you like to revive and continue to play the game? (blocks would be initialized.)",
+        "復活してゲームを続きますか? (ブロックは初期化されます。)",
+        "부활하여 게임을 계속 진행하시겠습니까? (블록은 초기화됩니다.)"
+    };
 
     //* UI
     public static string[] Start = new string[]{"START", "スタート", "시작"};
@@ -265,6 +292,12 @@ public static class LANG //* LANG
         //* DIALOG
         if(name == TXT.DialogUnlock2ndSkill_Title.ToString()) res = DialogUnlock2ndSkill_Title[CUR_LANG];
         if(name == TXT.DialogUnlock2ndSkill_Info.ToString()) res = DialogUnlock2ndSkill_Info[CUR_LANG];
+        if(name == TXT.ShowAdDialogCoinX2_Title.ToString()) res = ShowAdDialogCoinX2_Title[CUR_LANG];
+        if(name == TXT.ShowAdDialogCoinX2_Content.ToString()) res = ShowAdDialogCoinX2_Content[CUR_LANG];
+        if(name == TXT.ShowAdDialogRerotateSkillSlots_Title.ToString()) res = ShowAdDialogRerotateSkillSlots_Title[CUR_LANG];
+        if(name == TXT.ShowAdDialogRerotateSkillSlots_Content.ToString()) res = ShowAdDialogRerotateSkillSlots_Content[CUR_LANG];
+        if(name == TXT.ShowAdDialogRevive_Title.ToString()) res = ShowAdDialogRevive_Title[CUR_LANG];
+        if(name == TXT.ShowAdDialogRevive_Content.ToString()) res = ShowAdDialogRevive_Content[CUR_LANG];
 
         //* UI
         if(name == TXT.Start.ToString()) res = Start[CUR_LANG];

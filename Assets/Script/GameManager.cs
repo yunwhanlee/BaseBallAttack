@@ -59,7 +59,10 @@ public class GameManager : MonoBehaviour
     public RectTransform statusFolderPanel;
 
     [Header("DIALOG")][Header("__________________________")]
-    public RectTransform ShowAdDialogRectTf;
+    public RectTransform ShowAdDialog;
+    public Text adDialogTitleTxt;
+    public Text adDialogContentTxt;
+
 
     [Header("◆GUI◆")][Header("__________________________")]
     public Text levelTxt;
@@ -110,8 +113,8 @@ public class GameManager : MonoBehaviour
 
     [Header("GAMEOVER")]
     public Text CoinTxt;
-    private Text gvStageTxt;
-    private Text gvBestScoreTxt;
+    public Text gvBestScoreTxt;
+    public Text gvStageTxt;
 
     [Header("STATUS FOLDER")]
     public Transform statusInfoContents;
@@ -125,6 +128,8 @@ public class GameManager : MonoBehaviour
     public Button homeBtn; //pausePanel
     public Button rerotateSkillSlotsBtn; //LevelUpPanel
     public Button statusFolderBtn;
+    public Button adPricePayBtn;
+    public Button adFreeBtn;
 
     [Header("PSV UNIQUE")][Header("__________________________")]
     public GameObject eggPf;
@@ -143,8 +148,6 @@ public class GameManager : MonoBehaviour
         light = GameObject.Find("Directional Light").GetComponent<Light>();
         hitRangeSliderTf = hitRangeSlider.GetComponent<RectTransform>();
         readyBtn = readyBtn.GetComponent<Button>();
-        gvStageTxt = gameoverPanel.transform.GetChild(1).GetComponent<Text>();
-        gvBestScoreTxt = gameoverPanel.transform.GetChild(2).GetComponent<Text>();
 
         bossLimitCntTxt.gameObject.SetActive(false);
         Array.ForEach(statusTxts, txt => txt.text = LANG.getTxt(LANG.TXT.Status.ToString()));
@@ -211,9 +214,8 @@ public class GameManager : MonoBehaviour
 //* GUI Button
 //* --------------------------------------------------------------------------------------
     public void onClickReadyButton() => switchCamera();
-    public void onClickReGameButton() => init();
+    // public void onClickReGameButton() => init();
     public void onClickSkillButton() => levelUpPanel.SetActive(false);
-    public void onClickBtnOpenShowAdDialog() => ShowAdDialogRectTf.gameObject.SetActive(true);
     public void onClickSetGameButton(string type) => setGame(type);
     public void onClickActiveSkillButton(int i) {
         if(pl.IsStun) return;
@@ -258,16 +260,37 @@ public class GameManager : MonoBehaviour
             Instantiate(statusInfoTxtPf, Vector3.zero, Quaternion.identity, statusInfoContents);
         });
     }
-    public void onClickBtnShowAD(string rewardType){
-        DM.ins.showAD(rewardType);
+    public void onClickBtnOpenShowAdDialog(string type) {
+        ShowAdDialog.gameObject.SetActive(true);
+        
+        //* AddEventListener('onClick')
+        adPricePayBtn.onClick.AddListener(() => onClickPayButton(type));
+        adFreeBtn.onClick.AddListener(() => onClickShowADButton(type));
+
+        //* Set Language
+        if(type == DM.REWARD.CoinX2.ToString()){
+            adDialogTitleTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogCoinX2_Title.ToString());
+            adDialogContentTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogCoinX2_Content.ToString());
+        }
+        else if(type == DM.REWARD.RerotateSkillSlots.ToString()){
+            adDialogTitleTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRerotateSkillSlots_Title.ToString());
+            adDialogContentTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRerotateSkillSlots_Content.ToString());
+        }
+        else if(type == DM.REWARD.Revive.ToString()){
+            adDialogTitleTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRevive_Title.ToString());
+            adDialogContentTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRevive_Content.ToString());
+        }
     }
-    public void onClickBtnPayMoney(string rewardType){
+    public void onClickPayButton(string rewardType){
         Debug.Log($"PayMoney:: {rewardType}");
         if(rewardType == DM.REWARD.RerotateSkillSlots.ToString()){
             // rerotateSkillSlotsBtn.gameObject.SetActive(false);
-            ShowAdDialogRectTf.gameObject.SetActive(false);
+            ShowAdDialog.gameObject.SetActive(false);
             levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
         }
+    }
+    public void onClickShowADButton(string rewardType){
+        DM.ins.showAD(rewardType);
     }
 
 //*---------------------------------------
@@ -403,8 +426,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("<size=30> --- G A M E  O V E R --- </size>");
         State = GameManager.STATE.GAMEOVER;
         gameoverPanel.SetActive(true);
-        gvStageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage;
         gvBestScoreTxt.text = LANG.getTxt(LANG.TXT.BestScore.ToString()) + " : " + bestScore;
+        gvStageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage;
         int coin = stage * 100;
         int extraUpgradeCoin = Mathf.RoundToInt(coin * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.CoinBonus].getValue());
         CoinTxt.text = (coin + extraUpgradeCoin).ToString(); // => setGameでも使う。

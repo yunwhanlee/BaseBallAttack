@@ -39,7 +39,7 @@ public class DM : MonoBehaviour
         Dmg, BallSpeed, Critical, CriticalDamage, BossDamage, CoinBonus, Defence, NULL
     }
     public enum REWARD {
-        CoinX2, RerotateSkillSlots,
+        CoinX2, RerotateSkillSlots, Revive,
     }
 
     [Header("GUI")][Header("__________________________")]
