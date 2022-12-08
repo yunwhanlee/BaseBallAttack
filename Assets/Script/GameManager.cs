@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
     public GameObject pausePanel;
     public GameObject gameoverPanel;
     public RectTransform statusFolderPanel;
+    public GameObject getRewardChestPanel;
 
     [Header("DIALOG")][Header("__________________________")]
     public RectTransform showAdDialog;

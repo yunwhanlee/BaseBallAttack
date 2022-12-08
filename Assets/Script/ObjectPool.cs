@@ -17,8 +17,7 @@ public class ObjectPool : MonoBehaviour
         ThunderStrikeEF, ColorBallStarExplosionEF, //* ATV HomeRun Bonus
 
         //* OBJ
-        DropItemExpOrbPf,
-        // NormalBlock, LongNormal, TreasureChest,
+        DropItemExpOrbPf, DropItemRewardChest,
     }
 
     struct PoolData{

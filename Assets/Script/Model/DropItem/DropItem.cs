@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class DropItem : MonoBehaviour
 {
+    public enum TYPE {ExpOrb, RewardChest};
+
     //* OutSide
     GameManager gm;
 
     //* Value
     int popPower = 350; public int PopPower{ get => popPower; set => popPower = value;}
+    [SerializeField] DropItem.TYPE type; public DropItem.TYPE Type { get => type; set => type = value;}
     [SerializeField] int exp; public int Exp{ get => exp; set => exp = value;}
     [SerializeField] bool isMoveToPlayer; public bool IsMoveToPlayer{ get => isMoveToPlayer; set => isMoveToPlayer = value;}
     [SerializeField] float moveSpeed = 5f;
@@ -53,14 +56,25 @@ public class DropItem : MonoBehaviour
         float force = power * Time.deltaTime;
         // Debug.Log($"<color=yellow>DropItem spawnPopUp({power}):: force= {force}</color>");
         this.rigid.AddForce(dir * force, ForceMode.Impulse);
+        this.rigid.AddTorque(dir * force, ForceMode.Impulse);
     }
 
     void OnCollisionEnter(Collision col){
         if(col.transform.CompareTag(DM.TAG.Player.ToString())){
-            gm.pl.addExp(Exp); //* (BUG) GAMEOVER後、再スタート場合、EXPが増えないように。
-            gm.em.createDropItemExpOrbEF(this.transform);
-            // Destroy(this.gameObject);
-            StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropItemGroup));
+            switch(this.type){
+                case DropItem.TYPE.ExpOrb:
+                    gm.pl.addExp(Exp); //* (BUG) GAMEOVER後、再スタート場合、EXPが増えないように。
+                    gm.em.createDropItemExpOrbEF(this.transform);
+                    StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropItemGroup));
+                    break;
+                case DropItem.TYPE.RewardChest:
+                    gm.getRewardChestPanel.SetActive(true);
+
+                    //TODO REWARD
+                    
+                    break;
+            }
+            
         }
     }
 }

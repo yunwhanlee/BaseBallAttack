@@ -28,8 +28,9 @@ public class BlockMaker : MonoBehaviour
     public Color[] colors;   public Color[] Colors {get => colors;}
     public Material[] mts;   public Material[] Mts {get => mts;}
 
-    [Header("DROP ITEM")][Header("__________________________")]
+    [Header("DROP ITEM PREFAB")][Header("__________________________")]
     public GameObject dropItemExpOrbPf;
+    public GameObject dropItemRewardChestPf;
 
     public void Start() {
         //* Init Or AD-Revive
@@ -108,10 +109,18 @@ public class BlockMaker : MonoBehaviour
 
     public void createDropItemExpOrbPf(Transform blockTf, int resultExp, int popPower = 350){
         Debug.Log("createDropItemExpOrbPf:: blockTf= " + blockTf + ", resultExp= " + resultExp);
+
         var ins = ObjectPool.getObject(ObjectPool.DIC.DropItemExpOrbPf.ToString(), blockTf.position, Quaternion.identity, gm.dropItemGroup);
         var block = blockTf.GetComponent<Block_Prefab>();
         ins.GetComponent<DropItem>().Exp = resultExp;
         ins.GetComponent<DropItem>().spawnPopUp(popPower);
+
+        //TODO 後で、OBJECTPOOL化すること!
+        int rand = Random.Range(0, 100);
+        if(rand < 90){
+            var ins2 = Instantiate(dropItemRewardChestPf, blockTf.position, Quaternion.identity, gm.dropItemGroup);
+            ins2.GetComponent<DropItem>().spawnPopUp(popPower);
+        }
     }
 
     public void moveDownBlock(){

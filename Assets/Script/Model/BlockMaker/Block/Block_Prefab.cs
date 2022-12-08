@@ -375,9 +375,8 @@ public class Block_Prefab : MonoBehaviour
         bm.createDropItemExpOrbPf(this.transform, resultExp);
         
         if(kind == BlockMaker.KIND.TreasureChest){
-            for(int i=0; i<TREASURECHEST_ORB_CNT; i++){
+            for(int i=0; i<TREASURECHEST_ORB_CNT; i++)
                 bm.createDropItemExpOrbPf(this.transform, resultExp);
-            }
         }
         else if(kind == BlockMaker.KIND.Obstacle){
             em.createRockObstacleBrokenEF(this.transform.position);
