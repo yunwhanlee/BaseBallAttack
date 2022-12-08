@@ -331,6 +331,7 @@ public class GameManager : MonoBehaviour
         setActiveCam(false); // cam1 ON, cam2 OFF
         reviveBtn.gameObject.SetActive(false);
         Invoke("collectDropOrb", 0.5f);
+        em.activeUI_EF("Revive");
         bm.Start();
     }
     private void setCoinX2(){
@@ -607,7 +608,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator coCheckPerfectBonus(BossBlock boss){
         if(blockGroup.childCount == 0){
             perfectTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
-            em.enableUITxtEF("Perfect");
+            em.activeUI_EF("Perfect");
             //* One More Next Stage (ボスがいなければ)
             yield return new WaitForSeconds(1);
             if(!boss)

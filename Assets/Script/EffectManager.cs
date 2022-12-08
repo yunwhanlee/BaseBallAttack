@@ -54,6 +54,7 @@ public class EffectManager : MonoBehaviour
     [Header("UI EF")][Header("__________________________")]
     public GameObject perfectTxtPopEF;
     public GameObject homeRunTxtPopEF;
+    public GameObject reviveEF;
 
     [Header("BOSS SKILL EF")][Header("__________________________")]
     public GameObject bossHealSkillEF;
@@ -282,24 +283,29 @@ public class EffectManager : MonoBehaviour
 //* -------------------------------------------------------------
 //* UI EF
 //* -------------------------------------------------------------
-    public void enableUITxtEF(string name){
+    public void activeUI_EF(string name){
         switch(name){
             case "Perfect":
-                StartCoroutine(coUnActivePerfectTxtEF());
-                break;
+                StartCoroutine(coActivePerfectTxtEF());   break;
             case "HomeRun":
-                StartCoroutine(coUnActiveHomeRunTxtEF());
-                break;
+                StartCoroutine(coActiveHomeRunTxtEF());   break;
+            case "Revive":
+                StartCoroutine(coActiveReviveEF());   break;
         }
     }
-    IEnumerator coUnActivePerfectTxtEF(){
+    IEnumerator coActivePerfectTxtEF(){
         perfectTxtPopEF.SetActive(true);
         yield return new WaitForSeconds(3f);
         perfectTxtPopEF.SetActive(false);
     }
-    IEnumerator coUnActiveHomeRunTxtEF(){
+    IEnumerator coActiveHomeRunTxtEF(){
         homeRunTxtPopEF.SetActive(true);
         yield return new WaitForSeconds(3f);
         homeRunTxtPopEF.SetActive(false);
+    }
+    IEnumerator coActiveReviveEF(){
+        reviveEF.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        reviveEF.SetActive(false);
     }
 }
