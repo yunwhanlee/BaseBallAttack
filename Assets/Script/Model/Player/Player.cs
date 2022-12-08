@@ -113,47 +113,46 @@ public class Player : MonoBehaviour
         #region Set PSV Skill Data
         //* Init
         var psvLvArr = DM.ins.personalData.ItemPassive.Arr;
-        // General
-        dmg = new PsvSkill<int>(
-            LANG.getTxt(DM.PSV.Dmg.ToString()), psvLvArr[(int)DM.PSV.Dmg].lv, 1, 1);
-        multiShot = new PsvSkill<int>(
-            LANG.getTxt(DM.PSV.MultiShot.ToString()), psvLvArr[(int)DM.PSV.MultiShot].lv, 0, 1, 4);
-        speed = new PsvSkill<float>(
-            LANG.getTxt(DM.PSV.Speed.ToString()), psvLvArr[(int)DM.PSV.Speed].lv, 1f, 0.35f);
-        instantKill = new PsvSkill<float>(
-            LANG.getTxt(DM.PSV.InstantKill.ToString()), psvLvArr[(int)DM.PSV.InstantKill].lv, 0f, 0.02f);
-        critical = new PsvSkill<float>(
-            LANG.getTxt(DM.PSV.Critical.ToString()), psvLvArr[(int)DM.PSV.Critical].lv, 0f, 0.2f);
-        explosion = new PsvSkill<Explosion>(
-            LANG.getTxt(DM.PSV.Explosion.ToString()), psvLvArr[(int)DM.PSV.Explosion].lv, new Explosion(0f, 0.75f), new Explosion(0.2f, 0.2f));
-        expUp = new PsvSkill<float>(
-            LANG.getTxt(DM.PSV.ExpUp.ToString()), psvLvArr[(int)DM.PSV.ExpUp].lv, 1f, 0.2f);
-        itemSpawn = new PsvSkill<float>(
-            LANG.getTxt(DM.PSV.ItemSpawn.ToString()), psvLvArr[(int)DM.PSV.ItemSpawn].lv, 0, 0.05f);
-        verticalMultiShot = new PsvSkill<int>(
-            LANG.getTxt(DM.PSV.VerticalMultiShot.ToString()), psvLvArr[(int)DM.PSV.VerticalMultiShot].lv, 0, 1, 4);
-        criticalDamage = new PsvSkill<float>(
-            LANG.getTxt(DM.PSV.CriticalDamage.ToString()), psvLvArr[(int)DM.PSV.CriticalDamage].lv, 0, 0.5f);
-        laser = new PsvSkill<int>(
-            LANG.getTxt(DM.PSV.Laser.ToString()), psvLvArr[(int)DM.PSV.Laser].lv, 0, 1, 3);
-        fireProperty = new PsvSkill<float>(
-            LANG.getTxt(DM.PSV.FireProperty.ToString()), psvLvArr[(int)DM.PSV.FireProperty].lv, 0.5f, 0.15f, 3);
-        iceProperty = new PsvSkill<float>(
-            LANG.getTxt(DM.PSV.IceProperty.ToString()), psvLvArr[(int)DM.PSV.IceProperty].lv, 0.5f, 0.15f, 3);
-        thunderProperty = new PsvSkill<float>(
-            LANG.getTxt(DM.PSV.ThunderProperty.ToString()), psvLvArr[(int)DM.PSV.ThunderProperty].lv, 0.5f, 0.15f, 3);
-        // Unique
-        damageTwice = new PsvSkill<int>(
-            LANG.getTxt(DM.PSV.DamageTwice.ToString()), psvLvArr[(int)DM.PSV.DamageTwice].lv, 0, 1, 1);
-        giantBall = new PsvSkill<float>(
-            LANG.getTxt(DM.PSV.GiantBall.ToString()), psvLvArr[(int)DM.PSV.GiantBall].lv, 1, 2f, 1);
-        darkOrb = new PsvSkill<float>(
-            LANG.getTxt(DM.PSV.DarkOrb.ToString()), psvLvArr[(int)DM.PSV.DarkOrb].lv, 0, 1, 1);
-        godBless= new PsvSkill<float>(
-            LANG.getTxt(DM.PSV.GodBless.ToString()), psvLvArr[(int)DM.PSV.GodBless].lv, 0, 1, 1);
-        birdFriend = new PsvSkill<float>(
-            LANG.getTxt(DM.PSV.BirdFriend.ToString()), psvLvArr[(int)DM.PSV.BirdFriend].lv, 0, 1, 1);
-        
+        //* General
+        dmg = new PsvSkill<int>(LANG.getTxt(DM.PSV.Dmg.ToString()), psvLvArr[(int)DM.PSV.Dmg].lv, 
+            value: 1, unit: 1);
+        multiShot = new PsvSkill<int>(LANG.getTxt(DM.PSV.MultiShot.ToString()), psvLvArr[(int)DM.PSV.MultiShot].lv, 
+            value: 0, unit: 1, maxLv: 4);
+        speed = new PsvSkill<float>(LANG.getTxt(DM.PSV.Speed.ToString()), psvLvArr[(int)DM.PSV.Speed].lv, 
+            value: 1f, unit: 0.35f);
+        instantKill = new PsvSkill<float>(LANG.getTxt(DM.PSV.InstantKill.ToString()), psvLvArr[(int)DM.PSV.InstantKill].lv, 
+            value: 0f, unit: 0.02f);
+        critical = new PsvSkill<float>(LANG.getTxt(DM.PSV.Critical.ToString()), psvLvArr[(int)DM.PSV.Critical].lv, 
+            value: 0f, unit: 0.2f);
+        explosion = new PsvSkill<Explosion>(LANG.getTxt(DM.PSV.Explosion.ToString()), psvLvArr[(int)DM.PSV.Explosion].lv, 
+            value: new Explosion(0f, 0.75f), new Explosion(0.2f, 0.2f));
+        expUp = new PsvSkill<float>(LANG.getTxt(DM.PSV.ExpUp.ToString()), psvLvArr[(int)DM.PSV.ExpUp].lv, 
+            value: 1f, unit: 0.2f);
+        itemSpawn = new PsvSkill<float>(LANG.getTxt(DM.PSV.ItemSpawn.ToString()), psvLvArr[(int)DM.PSV.ItemSpawn].lv, 
+            value: 0, unit: 0.05f);
+        verticalMultiShot = new PsvSkill<int>(LANG.getTxt(DM.PSV.VerticalMultiShot.ToString()), psvLvArr[(int)DM.PSV.VerticalMultiShot].lv, 
+            value: 0, unit: 1, maxLv: 4);
+        criticalDamage = new PsvSkill<float>(LANG.getTxt(DM.PSV.CriticalDamage.ToString()), psvLvArr[(int)DM.PSV.CriticalDamage].lv, 
+            value: 0, unit: 0.5f);
+        laser = new PsvSkill<int>(LANG.getTxt(DM.PSV.Laser.ToString()), psvLvArr[(int)DM.PSV.Laser].lv, 
+            value: 0, unit: 1, maxLv: 3);
+        fireProperty = new PsvSkill<float>(LANG.getTxt(DM.PSV.FireProperty.ToString()), psvLvArr[(int)DM.PSV.FireProperty].lv, 
+            value: 0, unit: 0.15f, maxLv: 3);
+        iceProperty = new PsvSkill<float>(LANG.getTxt(DM.PSV.IceProperty.ToString()), psvLvArr[(int)DM.PSV.IceProperty].lv, 
+            value: 0, unit: 0.15f, maxLv: 3);
+        thunderProperty = new PsvSkill<float>(LANG.getTxt(DM.PSV.ThunderProperty.ToString()), psvLvArr[(int)DM.PSV.ThunderProperty].lv, 
+            value: 0, unit: 0.15f, maxLv: 3);
+        //* Unique
+        damageTwice = new PsvSkill<int>(LANG.getTxt(DM.PSV.DamageTwice.ToString()), psvLvArr[(int)DM.PSV.DamageTwice].lv,
+            value: 0, unit: 1, maxLv: 1);
+        giantBall = new PsvSkill<float>(LANG.getTxt(DM.PSV.GiantBall.ToString()), psvLvArr[(int)DM.PSV.GiantBall].lv,
+            value: 1, unit: 2f, maxLv: 1);
+        darkOrb = new PsvSkill<float>(LANG.getTxt(DM.PSV.DarkOrb.ToString()), psvLvArr[(int)DM.PSV.DarkOrb].lv, 
+            value: 0, unit: 1, maxLv: 1);
+        godBless= new PsvSkill<float>(LANG.getTxt(DM.PSV.GodBless.ToString()), psvLvArr[(int)DM.PSV.GodBless].lv, 
+            value: 0, unit: 1, maxLv: 1);
+        birdFriend = new PsvSkill<float>(LANG.getTxt(DM.PSV.BirdFriend.ToString()), psvLvArr[(int)DM.PSV.BirdFriend].lv, 
+            value: 0, unit: 1, maxLv: 1);
         
         //* Apply
         // Upgrade Data Option
@@ -163,7 +162,7 @@ public class Player : MonoBehaviour
         float upgradeCrit = upgradeArr[(int)DM.UPGRADE.Critical].getValue();
         float upgradeCritDmg = upgradeArr[(int)DM.UPGRADE.CriticalDamage].getValue();
 
-        // General
+        //* General
         dmg.initSkillDt(dmg.Val + (dmg.Unit * dmg.Level) + upgradeDmg);
         multiShot.initSkillDt(multiShot.Val + (multiShot.Unit * multiShot.Level));
         speed.initSkillDt(speed.Val + (speed.Unit * speed.Level) + upgradeBallSpd);
@@ -179,7 +178,7 @@ public class Player : MonoBehaviour
         iceProperty.initSkillDt(iceProperty.Val + (iceProperty.Unit * iceProperty.Level));
         thunderProperty.initSkillDt(thunderProperty.Val + (thunderProperty.Unit * thunderProperty.Level));
         
-        // Unique
+        //* Unique
         damageTwice.initSkillDt(damageTwice.Val + (damageTwice.Unit * damageTwice.Level));
         float CALC_GIANTBALL_VAL = (giantBall.Level == 1)? (multiShot.Val + verticalMultiShot.Val + giantBall.Val) * giantBall.Unit : giantBall.Val;
         giantBall.initSkillDt(CALC_GIANTBALL_VAL);

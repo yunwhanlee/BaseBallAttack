@@ -129,16 +129,16 @@ public class PsvSkill<T> where T: struct {
     [SerializeField] int level; public int Level {get=>level;}
     [SerializeField] T val;   public T Val {get=>val; set=>val=value;}
     [SerializeField] T unit;    public T Unit {get=>unit;}
-    [SerializeField] int maxLevel;    public int MaxLevel {get=>maxLevel;}
+    [SerializeField] int maxLv;    public int MaxLevel {get=>maxLv;}
 
 
     //*constructor
-    public PsvSkill(string name, int level, T value, T unit, int maxLevel = MAX_LV){
+    public PsvSkill(string name, int level, T value, T unit, int maxLv = MAX_LV){
         this.name = name;
-        this.level = level > maxLevel? maxLevel : level; //* (BUG)PSV MaxLevel以上に上がったら、Out of Index エラー防止。
+        this.level = level > maxLv? maxLv : level; //* (BUG)PSV MaxLevel以上に上がったら、Out of Index エラー防止。
         this.val = value;
         this.unit = unit;
-        this.maxLevel = maxLevel;
+        this.maxLv = maxLv;
     }
 
     //*method
@@ -150,7 +150,7 @@ public class PsvSkill<T> where T: struct {
     }
 
     public void initSkillDt(T value){
-        Debug.LogFormat($"<color=yellow>initSkillDt(value={value}):: name={name}, lv={level}, maxLv={maxLevel}, value={value}</color>");
+        Debug.LogFormat($"<color=yellow>initSkillDt(value={value}):: name={name}, lv={level}, maxLv={maxLv}, value={value}</color>");
         // if(level > 0){
             this.val = value;
         // }
