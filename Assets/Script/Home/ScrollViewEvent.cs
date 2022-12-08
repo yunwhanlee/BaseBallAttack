@@ -503,7 +503,9 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             }
             else
             {
-                em.createItemBuyEF();
+                Debug.Log("BUY!: " + curItem.transform.GetChild(0).GetChild(0).name);
+                GameObject SkillImgObj = curItem.transform.GetChild(0).GetChild(0).gameObject;
+                em.createItemBuyEF(SkillImgObj);
                 curItem.IsLock = false; //* 解禁
                 curItem.checkLockedModel();
                 DM.ins.personalData.setUnLockCurList(CurIdx);
