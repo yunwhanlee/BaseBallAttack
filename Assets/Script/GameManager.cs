@@ -219,6 +219,10 @@ public class GameManager : MonoBehaviour
     // public void onClickReGameButton() => init();
     public void onClickSkillButton() => levelUpPanel.SetActive(false);
     public void onClickSetGameButton(string type) => setGame(type);
+    public void onClickRewardChestOpenButton() {
+        getRewardChestPanel.SetActive(false);
+        levelUpPanel.SetActive(true);
+    }
     public void onClickActiveSkillButton(int i) {
         if(pl.IsStun) return;
         SelectAtvSkillBtnIdx = i; //* 最新化
