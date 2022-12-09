@@ -68,14 +68,7 @@ public class DropItem : MonoBehaviour
                     StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropItemGroup));
                     break;
                 case DropItem.TYPE.RewardChest:
-                    gm.getRewardChestPanel.SetActive(true);
-                    gm.rewardChestIconImg.sprite = gm.defChestSpr;
-                    gm.rewardChestOpenBtn.gameObject.SetActive(true);
-                    gm.rewardChestOkBtn.gameObject.SetActive(false);
-                    gm.rewardChestContentTxt.text = LANG.getTxt(LANG.TXT.GetRewardChestPanel_Content.ToString());
-                    StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropItemGroup));
-                    //TODO REWARD
-                    
+                    gm.initRewardChestPanel();
                     break;
             }
             

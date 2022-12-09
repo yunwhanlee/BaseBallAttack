@@ -241,19 +241,13 @@ public class GameManager : MonoBehaviour
     public void onClickRewardChestOpenButton() {
         StartCoroutine(coRewardChestOpen());
     }
-
     IEnumerator coRewardChestOpen(){
-        // init
-        rewardChestOpenBtn.gameObject.SetActive(false);
-        rewardChestIconImg.sprite = openChestSpr;
-        rewardChestContentTxt.text = "";
+        initRewardChestPanelUI(isOpen: true);
         getRewardChestPanel.GetComponentInChildren<Animator>().SetTrigger(DM.ANIM.DoOpen.ToString());
 
         yield return new WaitForSeconds(1);
 
-        
         rewardChestOkBtn.gameObject.SetActive(true);
-
         const int GOODS = 0, PSVSKILL_TICKET = 1, ROULETTE_TICKET = 2, EMPTY = 3;
         var goodsPriceDic = new Dictionary<string, int>();
         int rand = Random.Range(0, 100);
@@ -268,49 +262,48 @@ public class GameManager : MonoBehaviour
                     case COIN:{
                         int[] priceArr = {100, 250, 500, 1000, 2000, 5000};
                         rand = Random.Range(0, priceArr.Length);
-                        Debug.Log($"onClickRewardChestOpenButton():: reward= GOODS: kind={kind}: price={priceArr[rand]}");
-                        rewardChestIconImg.sprite = coinBundleSpr;
-                        rewardChestContentTxt.text = priceArr[rand].ToString();
-                        rewardChestOkBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Get.ToString());
-                        //* Reward
-                        goodsPriceDic.Add(DM.NAME.Coin.ToString(), priceArr[rand]);
+                        setRewardChestPanelUI(coinBundleSpr, priceArr[rand].ToString(), LANG.getTxt(LANG.TXT.Get.ToString()));
+                        goodsPriceDic.Add(DM.NAME.Coin.ToString(), priceArr[rand]); //* Reward
                         break;
                     }
                     case DIAMOND:{
                         int[] priceArr = {10, 50, 100, 150, 500};
                         rand = Random.Range(0, priceArr.Length);
-                        Debug.Log($"onClickRewardChestOpenButton():: reward= GOODS: kind={kind}: price={priceArr[rand]}");
-                        rewardChestIconImg.sprite = diamondBundleSpr;
-                        rewardChestContentTxt.text = priceArr[rand].ToString();
-                        rewardChestOkBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Get.ToString());
-                        //* Reward
-                        goodsPriceDic.Add(DM.NAME.diamond.ToString(), priceArr[rand]);
+                        setRewardChestPanelUI(diamondBundleSpr, priceArr[rand].ToString(), LANG.getTxt(LANG.TXT.Get.ToString()));
+                        goodsPriceDic.Add(DM.NAME.diamond.ToString(), priceArr[rand]); //* Reward
                         break;
                     }
                 }
                 break;
             case PSVSKILL_TICKET:
-                Debug.Log($"onClickRewardChestOpenButton():: reward= PSVSKILL_TICKET");
-                rewardChestIconImg.sprite = psvSkillTicketSpr;
-                rewardChestContentTxt.text = LANG.getTxt(LANG.TXT.PsvSkillTicket.ToString());
-                rewardChestOkBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Use.ToString());
+                setRewardChestPanelUI(psvSkillTicketSpr, LANG.getTxt(LANG.TXT.PsvSkillTicket.ToString()), LANG.getTxt(LANG.TXT.Use.ToString()));
                 break;
             case ROULETTE_TICKET:
-                Debug.Log($"onClickRewardChestOpenButton():: reward= ROULETTE_TICKET");
-                rewardChestIconImg.sprite = rouletteTicketSpr;
-                rewardChestContentTxt.text = LANG.getTxt(LANG.TXT.RouletteTicket.ToString());
-                rewardChestOkBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Get.ToString());
+                setRewardChestPanelUI(rouletteTicketSpr, LANG.getTxt(LANG.TXT.RouletteTicket.ToString()), LANG.getTxt(LANG.TXT.Get.ToString()));
                 break;
             case EMPTY:
-                Debug.Log($"onClickRewardChestOpenButton():: reward= EMPTY");
-                rewardChestIconImg.sprite = emptyPoopSpr;
-                rewardChestContentTxt.text = LANG.getTxt(LANG.TXT.Empty.ToString());
-                rewardChestOkBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Ok.ToString());
+                setRewardChestPanelUI(emptyPoopSpr, LANG.getTxt(LANG.TXT.Empty.ToString()), LANG.getTxt(LANG.TXT.Ok.ToString()));
                 break;
         }
-
+        
         //* AddEventListener('onClick')
         rewardChestOkBtn.onClick.AddListener(() => onClickRewardChestOkButton(reward, goodsPriceDic));
+    }
+    private void initRewardChestPanelUI(bool isOpen){
+        rewardChestOpenBtn.gameObject.SetActive(!isOpen? true : false);
+        rewardChestIconImg.sprite = !isOpen? defChestSpr : openChestSpr;
+        rewardChestContentTxt.text = !isOpen? LANG.getTxt(LANG.TXT.GetRewardChestPanel_Content.ToString()) : "";
+    }
+    public void initRewardChestPanel(){
+        getRewardChestPanel.SetActive(true);
+        initRewardChestPanelUI(isOpen: false);
+        rewardChestOkBtn.gameObject.SetActive(false);
+        StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, dropItemGroup));
+    }
+    private void setRewardChestPanelUI(Sprite iconSpr, string contentTxt, string okTxt){
+        rewardChestIconImg.sprite = iconSpr;
+        rewardChestContentTxt.text = contentTxt;
+        rewardChestOkBtn.GetComponentInChildren<Text>().text = okTxt;
     }
 
     public void onClickRewardChestOkButton(int reward, Dictionary<string, int> goodsPriceDic){
@@ -318,29 +311,22 @@ public class GameManager : MonoBehaviour
         const int GOODS = 0, PSVSKILL_TICKET = 1, ROULETTE_TICKET = 2, EMPTY = 3;
         switch(reward){
             case GOODS:
-                if(goodsPriceDic.TryGetValue(DM.NAME.Coin.ToString(), out int rewardCoin)){
-                    Debug.Log("onClickRewardChestOkButton:: GET COIN: goodsPrice.value= " + rewardCoin);
+                if(goodsPriceDic.TryGetValue(DM.NAME.Coin.ToString(), out int rewardCoin))
                     coin += rewardCoin;
-                }
-                else if(goodsPriceDic.TryGetValue(DM.NAME.diamond.ToString(), out int rewardDiamond)){
-                    Debug.Log("onClickRewardChestOkButton:: GET DIAMOND: goodsPrice.value= " + rewardDiamond);
+                else if(goodsPriceDic.TryGetValue(DM.NAME.diamond.ToString(), out int rewardDiamond))
                     diamond += rewardDiamond;
-                }
                 break;
             case PSVSKILL_TICKET:
                 levelUpPanel.SetActive(true);
                 break;
             case ROULETTE_TICKET:
-                Debug.Log("onClickRewardChestOkButton:: GET ROULETTE_TICKET++");
                 DM.ins.personalData.RouletteTicket++;
                 break;
             case EMPTY:
-                Debug.Log("onClickRewardChestOkButton:: EMPTY ");
                 //何もしない。
                 break;
         }
-
-        getRewardChestPanel.SetActive(false);
+        getRewardChestPanel.SetActive(false); //* パンネル閉じる。
     }
 
     public void onClickActiveSkillButton(int i) {
