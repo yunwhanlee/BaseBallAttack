@@ -399,54 +399,64 @@ public static class LANG //* LANG
                 resList.Add(splitList[EXPLAIN]);
                 break;
         }
-
-        int i=0;
-        resList.ForEach(list=> Debug.Log($"Language::getTxtList():: resList[{i}]= {list}"));
         
-        //* Set Lang
-        switch(itemType){
-            case DM.PANEL.Chara: {
-                int idx = CharaList.FindIndex(langArr => resList[LANG.NAME] == langArr[(int)TP.EN]);
-                resList[LANG.NAME] = CharaList[idx][(int)DM.ins.personalData.Lang];
-                break;
-            }
-            case DM.PANEL.Bat: {
-                int idx = BatList.FindIndex(langArr => resList[LANG.NAME] == langArr[(int)TP.EN]);
-                resList[LANG.NAME] = BatList[idx][(int)DM.ins.personalData.Lang];
-                break;
-            }
-            case DM.PANEL.Skill: {
-                int idx = SkillNameList.FindIndex(langArr => resList[LANG.NAME] == langArr[(int)TP.EN]);
-                // Debug.Log("<color=white><<Skill>> idx= " + idx + "</color>");
-                resList[LANG.NAME] = SkillNameList[idx][(int)DM.ins.personalData.Lang];
-                resList[LANG.EXPLAIN] = SkillExplainList[idx][(int)DM.ins.personalData.Lang];
-                resList[LANG.HOMERUNBONUS] = SkillHomeRunBonusList[idx][(int)DM.ins.personalData.Lang];
-                break;
-            }
-            case DM.PANEL.CashShop:{
-                int idx = CashShopNameList.FindIndex(langArr => resList[LANG.NAME] == langArr[(int)TP.EN]);
-                // Debug.Log("<color=yellow><<CashShop>> idx= " + idx + "</color>");
-                resList[LANG.NAME] = CashShopNameList[idx][(int)DM.ins.personalData.Lang];
-                resList[LANG.EXPLAIN] = CashShopExplainList[idx][(int)DM.ins.personalData.Lang];
-                break;
-            }
-            case DM.PANEL.PsvInfo:{
-                int idx = PsvInfoNameList.FindIndex(langArr => resList[LANG.NAME] == langArr[(int)TP.EN]);
-                // Debug.Log("<color=yellow><<PsvInfo>> idx= " + idx + "</color>");
-                resList[LANG.NAME] = PsvInfoNameList[idx][(int)DM.ins.personalData.Lang];
-                resList[LANG.EXPLAIN] = PsvInfoExplainList[idx][(int)DM.ins.personalData.Lang];
-                break;
-            }
-            case DM.PANEL.Upgrade:{
-                int idx = UpgradeNameList.FindIndex(langArr => resList[LANG.NAME] == langArr[(int)TP.EN]);
-                Debug.Log("<color=yellow><<Upgrade>> idx= " + idx + "</color>");
-                resList[LANG.NAME] = UpgradeNameList[idx][(int)DM.ins.personalData.Lang];
-                resList[LANG.EXPLAIN] = Util._.replaceSettingNumber(UpgradeExplainList[idx][(int)DM.ins.personalData.Lang], idx);
-                break;
+        /* (BUG-9) 
+        *  各々モデルPrefabのInspectorViewで、ItemInfoスクリプトのNameTxtsへ書いたのテキストが
+        *  自分のObject名と違うと、int idxが nullになるので、エラーが発生します。
+        *  EX)「Bat_2.Pink」PrefabオブジェクトのInspectorViewにあるNameTxtsへ「1.Pink」を書いたら、エラー。
+        */
+        int idx = -1;
+        try{
+            //* Set Lang
+            switch(itemType){
+                case DM.PANEL.Chara: {
+                    idx = CharaList.FindIndex(langArr => resList[LANG.NAME] == langArr[(int)TP.EN]);
+                    resList[LANG.NAME] = CharaList[idx][(int)DM.ins.personalData.Lang];
+                    break;
+                }
+                case DM.PANEL.Bat: {
+                    idx = BatList.FindIndex(langArr => resList[LANG.NAME] == langArr[(int)TP.EN]);
+                    resList[LANG.NAME] = BatList[idx][(int)DM.ins.personalData.Lang];
+                    break;
+                }
+                case DM.PANEL.Skill: {
+                    idx = SkillNameList.FindIndex(langArr => resList[LANG.NAME] == langArr[(int)TP.EN]);
+                    // Debug.Log("<color=white><<Skill>> idx= " + idx + "</color>");
+                    resList[LANG.NAME] = SkillNameList[idx][(int)DM.ins.personalData.Lang];
+                    resList[LANG.EXPLAIN] = SkillExplainList[idx][(int)DM.ins.personalData.Lang];
+                    resList[LANG.HOMERUNBONUS] = SkillHomeRunBonusList[idx][(int)DM.ins.personalData.Lang];
+                    break;
+                }
+                case DM.PANEL.CashShop:{
+                    idx = CashShopNameList.FindIndex(langArr => resList[LANG.NAME] == langArr[(int)TP.EN]);
+                    // Debug.Log("<color=yellow><<CashShop>> idx= " + idx + "</color>");
+                    resList[LANG.NAME] = CashShopNameList[idx][(int)DM.ins.personalData.Lang];
+                    resList[LANG.EXPLAIN] = CashShopExplainList[idx][(int)DM.ins.personalData.Lang];
+                    break;
+                }
+                case DM.PANEL.PsvInfo:{
+                    idx = PsvInfoNameList.FindIndex(langArr => resList[LANG.NAME] == langArr[(int)TP.EN]);
+                    // Debug.Log("<color=yellow><<PsvInfo>> idx= " + idx + "</color>");
+                    resList[LANG.NAME] = PsvInfoNameList[idx][(int)DM.ins.personalData.Lang];
+                    resList[LANG.EXPLAIN] = PsvInfoExplainList[idx][(int)DM.ins.personalData.Lang];
+                    break;
+                }
+                case DM.PANEL.Upgrade:{
+                    idx = UpgradeNameList.FindIndex(langArr => resList[LANG.NAME] == langArr[(int)TP.EN]);
+                    Debug.Log("<color=yellow><<Upgrade>> idx= " + idx + "</color>");
+                    resList[LANG.NAME] = UpgradeNameList[idx][(int)DM.ins.personalData.Lang];
+                    resList[LANG.EXPLAIN] = Util._.replaceSettingNumber(UpgradeExplainList[idx][(int)DM.ins.personalData.Lang], idx);
+                    break;
+                }
             }
         }
-        int j=0;
-        resList.ForEach(res=> Debug.Log("j= "+ (j++) +", type:" + type + ", res=" + res));
+        catch(Exception errMsg){
+            Debug.LogError(errMsg + "\n");
+            Debug.LogError("idx= "+idx+"："+itemType+"List.FindIndexメソッドでresListと同じテキストがないでした。\n"
+               + "<color=cyan>" + str + "</color>(Prefabオブジェクト名)がそのInspectorViewでItemInfoスクリプトの<color=cyan>NameTxts</color>変数に作成した文字が同じなのかを確認してください！");
+
+        }
+        
         return resList;
     }
 }

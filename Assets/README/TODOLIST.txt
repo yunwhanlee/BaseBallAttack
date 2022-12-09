@@ -163,6 +163,7 @@
     ✓ (BUG-6) ICE-Propertyなどの効果で後で破壊したブロックからでるOrbがPlayerに行かない。Invokeで0.5秒を待た後で収集。
     ✓ (BUG-7) ItemBuyEF-UIがスキルの場合は、似合わないこと対応：該当なスキルイメージ生成、メダルの真ん中に位置調整。
     ✓ (BUG-8) Home:: Bat.getChild(0).getChild(0)-> Null ---> getChild(0)が正しい。
+    ✓ (BUG-9) 各々モデルPrefabのInspectorViewで、ItemInfoスクリプトのNameTxtsへ書いたのテキストが自分のObject名と違うと、int idxが nullになるので、エラーが発生します。
 
     
 
