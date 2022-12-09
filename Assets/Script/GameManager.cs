@@ -132,9 +132,22 @@ public class GameManager : MonoBehaviour
     public Button coinX2Btn; //gameoverPanel
     public Button adPricePayBtn;
     public Button adFreeBtn;
+    public Button rewardChestOpenBtn;
 
     [Header("PSV UNIQUE")][Header("__________________________")]
     public GameObject eggPf;
+
+    [Header("REWARD CHEST")][Header("__________________________")]
+    public Text rewardChestContentTxt;
+    public Image rewardChestIconImg;
+    public Sprite defChestSpr;
+    public Sprite openChestSpr;
+    public Sprite coinBundleSpr;
+    public Sprite diamondBundleSpr;
+    public Sprite psvSkillTicketSpr;
+    public Sprite rouletteTicketSpr;
+    public Sprite emptyPoopSpr;
+
 
     void Start() {
         stage = LM._.STAGE_NUM;
@@ -220,9 +233,70 @@ public class GameManager : MonoBehaviour
     public void onClickSkillButton() => levelUpPanel.SetActive(false);
     public void onClickSetGameButton(string type) => setGame(type);
     public void onClickRewardChestOpenButton() {
-        getRewardChestPanel.SetActive(false);
-        levelUpPanel.SetActive(true);
+        StartCoroutine(coRewardChestOpen());
     }
+
+    IEnumerator coRewardChestOpen(){
+        rewardChestIconImg.sprite = openChestSpr;
+        getRewardChestPanel.GetComponentInChildren<Animator>().SetTrigger("DoOpen");
+        yield return new WaitForSeconds(1);
+
+        const int GOODS = 0, PSVSKILL_TICKET = 1, ROULETTE_TICKET = 2, EMPTY = 3;
+        int rand = Random.Range(0, 100);
+        int reward = (rand < 25)? GOODS
+            : (rand < 50)? PSVSKILL_TICKET 
+            : (rand < 75)? ROULETTE_TICKET : EMPTY;
+
+        switch(reward){
+            case GOODS:
+                const int COIN = 0, DIAMOND = 1;
+                rand = Random.Range(0, 100);
+                int kind = (rand < 50)? COIN : DIAMOND;
+                switch(kind){
+                    case COIN:{
+                        int[] priceArr = {100, 250, 500, 1000, 2000, 5000};
+                        rand = Random.Range(0, priceArr.Length);
+                        Debug.Log($"onClickRewardChestOpenButton():: reward= GOODS: kind={kind}: price={priceArr[rand]}");
+                        rewardChestIconImg.sprite = coinBundleSpr;
+                        rewardChestContentTxt.text = priceArr[rand].ToString();
+                        rewardChestOpenBtn.GetComponentInChildren<Text>().text = "Get";
+                        break;
+                    }
+                    case DIAMOND:{
+                        int[] priceArr = {10, 50, 100, 150, 500};
+                        rand = Random.Range(0, priceArr.Length);
+                        Debug.Log($"onClickRewardChestOpenButton():: reward= GOODS: kind={kind}: price={priceArr[rand]}");
+                        rewardChestIconImg.sprite = diamondBundleSpr;
+                        rewardChestContentTxt.text = priceArr[rand].ToString();
+                        rewardChestOpenBtn.GetComponentInChildren<Text>().text = "Get";
+                        break;
+                    }
+                }
+                break;
+            case PSVSKILL_TICKET:
+                Debug.Log($"onClickRewardChestOpenButton():: reward= PSVSKILL_TICKET");
+                rewardChestIconImg.sprite = psvSkillTicketSpr;
+                rewardChestContentTxt.text = "Passive Skill ticket!";
+                rewardChestOpenBtn.GetComponentInChildren<Text>().text = "Use";
+                // levelUpPanel.SetActive(true);
+                break;
+            case ROULETTE_TICKET:
+                Debug.Log($"onClickRewardChestOpenButton():: reward= ROULETTE_TICKET");
+                rewardChestIconImg.sprite = rouletteTicketSpr;
+                rewardChestContentTxt.text = "Roulette ticket!";
+                rewardChestOpenBtn.GetComponentInChildren<Text>().text = "Get";
+                break;
+            case EMPTY:
+                Debug.Log($"onClickRewardChestOpenButton():: reward= EMPTY");
+                rewardChestIconImg.sprite = emptyPoopSpr;
+                rewardChestContentTxt.text = "Empty";
+                rewardChestOpenBtn.GetComponentInChildren<Text>().text = "Ok";
+                break;
+        }
+        // getRewardChestPanel.SetActive(false);
+        // levelUpPanel.SetActive(true);
+    }
+
     public void onClickActiveSkillButton(int i) {
         if(pl.IsStun) return;
         SelectAtvSkillBtnIdx = i; //* 最新化

@@ -83,7 +83,12 @@
         ✓ お金を実際に決算する処理。
         ✓ ADとPayMoneyの中身処理をREFECTORYすること。
         ✓ getTreasureChestPanel + DropItemPrefebとして、RewardChest追加（処理は未）。
-        -  RewardChest開く時、スキルとお金がランダムで出す。←LevelUpPanel活用コピーして。
+
+    ● HOME:: ルーレット（１時間毎に、広告を見てお金やダイアを習得できるイベント）
+
+    ● GAME:: Reward Chest（ボースや宝箱で日程確率で出る物）
+        - A.スキル選択(LevelUpPanel活用)、B.財貨(コイン、ダイア)、C.スロットチケット。
+            ✓ イメージ登録及び、テキスト切り替え。
 
 
     ● Simple-GUIアセットを利用して、デザイン改善。
