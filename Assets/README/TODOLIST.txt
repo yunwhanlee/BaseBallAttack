@@ -85,10 +85,14 @@
         ✓ getTreasureChestPanel + DropItemPrefebとして、RewardChest追加（処理は未）。
 
     ● HOME:: ルーレット（１時間毎に、広告を見てお金やダイアを習得できるイベント）
+        - rouletteTicket変数は宣言。
 
     ● GAME:: Reward Chest（ボースや宝箱で日程確率で出る物）
         - A.スキル選択(LevelUpPanel活用)、B.財貨(コイン、ダイア)、C.スロットチケット。
             ✓ イメージ登録及び、テキスト切り替え。
+            ✓ 処理。全てOK。
+            -  Getした時のエフェクト。
+
 
 
     ● Simple-GUIアセットを利用して、デザイン改善。

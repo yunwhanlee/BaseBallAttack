@@ -10,11 +10,13 @@ public class DM : MonoBehaviour
     public static DM ins;
     public enum DATABASE_KEY {Json};
     public enum SCENE {Home, Play, Loading};
-    public enum NAME {DownWall, Block, FireBallDotEffect, BossDieDropOrbSpot, GrayPanel, Obstacle,
+    public enum NAME {
+        Coin, diamond,
+        DownWall, Block, FireBallDotEffect, BossDieDropOrbSpot, GrayPanel, Obstacle,
         RightArm, HomeManager,
         BallPreview, Box001, Area,
         IceMat,
-        MainPanel,
+        MainPanel, RewardChest,
     };
     public enum TAG {HitRangeArea, StrikeLine, GameOverLine, Wall, ActiveDownWall, Player,
         NormalBlock, LongBlock, TreasureChestBlock, HealBlock, BossBlock,   
@@ -58,7 +60,7 @@ public class DM : MonoBehaviour
     [Header("SCROLL VIEWS")][Header("__________________________")]
     public ScrollView[] scrollviews; //* [0] : Chara, [1] : Bat, [2] : Skill, [3] : CashShop
 
-    [Header("SAVE DATE")][Header("__________________________")]
+    [Header("★★【 MY DATE (SAVE & LOAD) 】★★")][Header("__________________________")]
     public PersonalData personalData;
 
     [Header("AD : 未完")][Header("__________________________")]

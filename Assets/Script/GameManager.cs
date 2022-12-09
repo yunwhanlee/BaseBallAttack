@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
     public Light light;
     
     [Header("STATUS")][Header("__________________________")]
+    public int coin = 0;
+    public int diamond = 0;
     public int stage = 1;
     public int bestScore;
     public int strikeCnt = 0;
@@ -133,6 +135,7 @@ public class GameManager : MonoBehaviour
     public Button adPricePayBtn;
     public Button adFreeBtn;
     public Button rewardChestOpenBtn;
+    public Button rewardChestOkBtn;
 
     [Header("PSV UNIQUE")][Header("__________________________")]
     public GameObject eggPf;
@@ -168,6 +171,7 @@ public class GameManager : MonoBehaviour
         bossLimitCntTxt.gameObject.SetActive(false);
         Array.ForEach(statusTxts, txt => txt.text = LANG.getTxt(LANG.TXT.Status.ToString()));
         rewardChestTitleTxt.text = LANG.getTxt(LANG.TXT.Reward.ToString());
+        rewardChestOpenBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Open.ToString());
 
         //* Ball Preview Dir Goal Set Z-Center
         setBallPreviewGoalRandomPos();
@@ -240,16 +244,20 @@ public class GameManager : MonoBehaviour
 
     IEnumerator coRewardChestOpen(){
         // init
+        rewardChestOpenBtn.gameObject.SetActive(false);
         rewardChestIconImg.sprite = openChestSpr;
         rewardChestContentTxt.text = "";
         getRewardChestPanel.GetComponentInChildren<Animator>().SetTrigger(DM.ANIM.DoOpen.ToString());
 
         yield return new WaitForSeconds(1);
+
+        
+        rewardChestOkBtn.gameObject.SetActive(true);
+
         const int GOODS = 0, PSVSKILL_TICKET = 1, ROULETTE_TICKET = 2, EMPTY = 3;
+        var goodsPriceDic = new Dictionary<string, int>();
         int rand = Random.Range(0, 100);
-        int reward = (rand < 25)? GOODS
-            : (rand < 50)? PSVSKILL_TICKET 
-            : (rand < 75)? ROULETTE_TICKET : EMPTY;
+        int reward = (rand < 25)? GOODS : (rand < 50)? PSVSKILL_TICKET : (rand < 75)? ROULETTE_TICKET : EMPTY;
 
         switch(reward){
             case GOODS:
@@ -263,7 +271,9 @@ public class GameManager : MonoBehaviour
                         Debug.Log($"onClickRewardChestOpenButton():: reward= GOODS: kind={kind}: price={priceArr[rand]}");
                         rewardChestIconImg.sprite = coinBundleSpr;
                         rewardChestContentTxt.text = priceArr[rand].ToString();
-                        rewardChestOpenBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Get.ToString());
+                        rewardChestOkBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Get.ToString());
+                        //* Reward
+                        goodsPriceDic.Add(DM.NAME.Coin.ToString(), priceArr[rand]);
                         break;
                     }
                     case DIAMOND:{
@@ -272,7 +282,9 @@ public class GameManager : MonoBehaviour
                         Debug.Log($"onClickRewardChestOpenButton():: reward= GOODS: kind={kind}: price={priceArr[rand]}");
                         rewardChestIconImg.sprite = diamondBundleSpr;
                         rewardChestContentTxt.text = priceArr[rand].ToString();
-                        rewardChestOpenBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Get.ToString());
+                        rewardChestOkBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Get.ToString());
+                        //* Reward
+                        goodsPriceDic.Add(DM.NAME.diamond.ToString(), priceArr[rand]);
                         break;
                     }
                 }
@@ -281,24 +293,54 @@ public class GameManager : MonoBehaviour
                 Debug.Log($"onClickRewardChestOpenButton():: reward= PSVSKILL_TICKET");
                 rewardChestIconImg.sprite = psvSkillTicketSpr;
                 rewardChestContentTxt.text = LANG.getTxt(LANG.TXT.PsvSkillTicket.ToString());
-                rewardChestOpenBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Use.ToString());
-                // levelUpPanel.SetActive(true);
+                rewardChestOkBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Use.ToString());
                 break;
             case ROULETTE_TICKET:
                 Debug.Log($"onClickRewardChestOpenButton():: reward= ROULETTE_TICKET");
                 rewardChestIconImg.sprite = rouletteTicketSpr;
                 rewardChestContentTxt.text = LANG.getTxt(LANG.TXT.RouletteTicket.ToString());
-                rewardChestOpenBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Get.ToString());
+                rewardChestOkBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Get.ToString());
                 break;
             case EMPTY:
                 Debug.Log($"onClickRewardChestOpenButton():: reward= EMPTY");
                 rewardChestIconImg.sprite = emptyPoopSpr;
                 rewardChestContentTxt.text = LANG.getTxt(LANG.TXT.Empty.ToString());
-                rewardChestOpenBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Ok.ToString());
+                rewardChestOkBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Ok.ToString());
                 break;
         }
-        // getRewardChestPanel.SetActive(false);
-        // levelUpPanel.SetActive(true);
+
+        //* AddEventListener('onClick')
+        rewardChestOkBtn.onClick.AddListener(() => onClickRewardChestOkButton(reward, goodsPriceDic));
+    }
+
+    public void onClickRewardChestOkButton(int reward, Dictionary<string, int> goodsPriceDic){
+        Debug.Log("onClickRewardChestOkButton:: reward= " + reward);
+        const int GOODS = 0, PSVSKILL_TICKET = 1, ROULETTE_TICKET = 2, EMPTY = 3;
+        switch(reward){
+            case GOODS:
+                if(goodsPriceDic.TryGetValue(DM.NAME.Coin.ToString(), out int rewardCoin)){
+                    Debug.Log("onClickRewardChestOkButton:: GET COIN: goodsPrice.value= " + rewardCoin);
+                    coin += rewardCoin;
+                }
+                else if(goodsPriceDic.TryGetValue(DM.NAME.diamond.ToString(), out int rewardDiamond)){
+                    Debug.Log("onClickRewardChestOkButton:: GET DIAMOND: goodsPrice.value= " + rewardDiamond);
+                    diamond += rewardDiamond;
+                }
+                break;
+            case PSVSKILL_TICKET:
+                levelUpPanel.SetActive(true);
+                break;
+            case ROULETTE_TICKET:
+                Debug.Log("onClickRewardChestOkButton:: GET ROULETTE_TICKET++");
+                DM.ins.personalData.RouletteTicket++;
+                break;
+            case EMPTY:
+                Debug.Log("onClickRewardChestOkButton:: EMPTY ");
+                //何もしない。
+                break;
+        }
+
+        getRewardChestPanel.SetActive(false);
     }
 
     public void onClickActiveSkillButton(int i) {
@@ -555,7 +597,7 @@ public class GameManager : MonoBehaviour
         gameoverPanel.SetActive(true);
         gvBestScoreTxt.text = LANG.getTxt(LANG.TXT.BestScore.ToString()) + " : " + bestScore;
         gvStageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage;
-        int coin = stage * 100;
+        coin += stage * 100;
         int extraUpgradeCoin = Mathf.RoundToInt(coin * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.CoinBonus].getValue());
         coinTxt.text = (coin + extraUpgradeCoin).ToString(); // => setGameでも使う。
     }

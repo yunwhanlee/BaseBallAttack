@@ -115,7 +115,11 @@ public class BlockMaker : MonoBehaviour
         ins.GetComponent<DropItem>().Exp = resultExp;
         ins.GetComponent<DropItem>().spawnPopUp(popPower);
 
-        //TODO 後で、OBJECTPOOL化すること!
+        //* RewardChest生成(Only単一)。
+        var dropItemObjs = gm.dropItemGroup.GetComponentsInChildren<Transform>();
+        bool isExistRewardChest = Array.Find(dropItemObjs, obj => obj.name.Contains(DM.NAME.RewardChest.ToString()));
+
+        if(isExistRewardChest) return; //存在するなら、下記の処理しない。
         int rand = Random.Range(0, 100);
         if(rand < 90){
             var ins2 = Instantiate(dropItemRewardChestPf, blockTf.position, Quaternion.identity, gm.dropItemGroup);

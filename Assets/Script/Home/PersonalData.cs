@@ -10,6 +10,7 @@ public class PersonalData {
     [SerializeField] LANG.TP lang; public LANG.TP Lang {get => lang; set => lang = value;}
     [SerializeField] int coin; public int Coin {get => coin; set => coin = value;}
     [SerializeField] int diamond; public int Diamond {get => diamond; set => diamond = value;}
+    [SerializeField] int rouletteTicket; public int RouletteTicket {get => rouletteTicket; set => rouletteTicket = value;}
     [Header("CHARACTOR")][Header("__________________________")]
     [SerializeField] int selectCharaIdx;  public int SelectCharaIdx {get => selectCharaIdx; set => selectCharaIdx = value;}
     [SerializeField] List<bool> charaLockList;  public List<bool> CharaLockList {get => charaLockList; set => charaLockList = value;}
@@ -54,13 +55,14 @@ public class PersonalData {
         string json = PlayerPrefs.GetString(DM.DATABASE_KEY.Json.ToString());
         Debug.Log($"<size=15>{this}::JSON:: LOAD Data ={json}</size>");
 
-        //* Load Data
+        //* PlayerPrefsへ保存したデータ ロード
         var data = JsonUtility.FromJson<PersonalData>(json); //* Convert Json To Class Data
 
         //* Set Data
         this.Lang = data.Lang;
         this.Coin = data.Coin;
         this.Diamond = data.Diamond;
+        this.rouletteTicket = data.RouletteTicket;
 
         this.SelectCharaIdx = data.SelectCharaIdx;
         this.CharaLockList = data.CharaLockList;
@@ -107,6 +109,7 @@ public class PersonalData {
         this.Lang = LANG.TP.JP;
         this.Coin = 100000;
         this.Diamond = 0;
+        this.rouletteTicket = 1; //* 1つ上げるのは、ボーナス感じ。
 
         this.SelectCharaIdx = 0;
         this.CharaLockList = new List<bool>();

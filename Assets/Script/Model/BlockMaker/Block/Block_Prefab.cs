@@ -366,7 +366,6 @@ public class Block_Prefab : MonoBehaviour
             atvSkillBtn.coolDownFillAmount();
         });
     }
-    
 
     public virtual void onDestroy(GameObject target, bool isInitialize = false) {
         int resultExp = (!isInitialize)? (int)(Exp * pl.expUp.Val) : 0; //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
