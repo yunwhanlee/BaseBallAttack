@@ -298,7 +298,6 @@ public class GameManager : MonoBehaviour
         getRewardChestPanel.SetActive(true);
         initRewardChestPanelUI(isOpen: false);
         rewardChestOkBtn.gameObject.SetActive(false);
-        StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, dropItemGroup));
     }
     private void setRewardChestPanelUI(Sprite iconSpr, string contentTxt, string okTxt){
         rewardChestIconImg.sprite = iconSpr;
