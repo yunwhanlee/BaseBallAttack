@@ -6,14 +6,14 @@ using UnityEngine.SceneManagement;
 using System;
 using UnityEngine.UI.Extensions;
 
-[System.Serializable]   public class DialogUI{
+[System.Serializable]   public class FrameUI{
     //* Value
     [SerializeField] GameObject panel;   public GameObject Panel {get => panel; set => panel = value;}
     [SerializeField] Button goBtn;     public Button GoBtn {get => goBtn; set => goBtn = value;}
     [SerializeField] Text titleTxt;     public Text TitleTxt {get => titleTxt; set => titleTxt = value;}
     [SerializeField] Text infoTxt;     public Text InfoTxt {get => infoTxt; set => infoTxt = value;}
     //* Constructor
-    DialogUI(GameObject panel, Button goBtn, Text titleTxt, Text infoTxt){
+    FrameUI(GameObject panel, Button goBtn, Text titleTxt, Text infoTxt){
         this.panel = panel;
         this.goBtn = goBtn;
         this.titleTxt = titleTxt;
@@ -36,10 +36,10 @@ public class HomeManager : MonoBehaviour
     [SerializeField] Sprite diamondIconSprite;  public Sprite DiamondIconSprite {get => diamondIconSprite;}
     
     [Header("【 GUI 】")][Header("__________________________")]
-    public DialogUI homeDialog;
-    public DialogUI selectDialog;
-    public DialogUI unlock2ndSkillDialog;
-    public DialogUI settingDialog;
+    public FrameUI homePanel;
+    public FrameUI selectPanel;
+    public FrameUI unlock2ndSkillDialog;
+    public FrameUI settingDialog;
     [Space(10)]
     public Text startBtnTxt;
     public Dropdown languageOptDropDown;    public Dropdown LanguageOptDropDown {get => languageOptDropDown; set => languageOptDropDown = value;}
@@ -51,6 +51,7 @@ public class HomeManager : MonoBehaviour
     [SerializeField] Image selectSkillImg;  public Image SelectSkillImg {get => selectSkillImg; set => selectSkillImg = value;}
 
     [Header("ROULETTE EVENT")][Header("__________________________")]
+    public GameObject roulettePanel;
     public Button rouletteIconBtn;
     public Text rouletteIconCoolTimeTxt;
 
@@ -122,11 +123,22 @@ public class HomeManager : MonoBehaviour
         skillBtns[idx].GetComponent<NicerOutline>().enabled = true;
         selectedSkillBtnIdxTxt.text = (idx == 0)? "1st Skill" : "2nd Skill";
     }
+    public void onClickRouletteIconBtn(){
+        roulettePanel.gameObject.SetActive(true);
+        homePanel.Panel.gameObject.SetActive(false);
+        homePanel.GoBtn.gameObject.SetActive(false);
+        // selectPanel.Panel.gameObject.SetActive(!isHome);
+    }
+    public void onClickRouletteExitBtn(){
+        roulettePanel.gameObject.SetActive(false);
+        homePanel.Panel.gameObject.SetActive(true);
+        // homePanel.GoBtn.gameObject.SetActive(false);
+    }
 
     public void onClickSettingBtn(){
         settingDialog.Panel.SetActive(true);
     }
-    public void onClickSettingRequestBtn(bool isOk){
+    public void onClickSettingOkBtn(bool isOk){
         settingDialog.Panel.SetActive(false);
         DM.ins.personalData.save();
         if(isOk) SceneManager.LoadScene(DM.SCENE.Home.ToString()); // Re-load
@@ -294,9 +306,9 @@ public class HomeManager : MonoBehaviour
     }
     private void setActiveDialogGUI(string type){
         bool isHome = (type == DM.SCENE.Home.ToString())? true : false;
-        homeDialog.Panel.gameObject.SetActive(isHome);
-        homeDialog.GoBtn.gameObject.SetActive(!isHome);
-        selectDialog.Panel.gameObject.SetActive(!isHome);
+        homePanel.Panel.gameObject.SetActive(isHome);
+        homePanel.GoBtn.gameObject.SetActive(!isHome);
+        selectPanel.Panel.gameObject.SetActive(!isHome);
     }
     private void drawGrayPanel(bool isActive){
         var child = unlock2ndSkillDialog.GoBtn.transform.GetChild(1);
