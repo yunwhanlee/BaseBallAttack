@@ -47,7 +47,13 @@ public class HomeManager : MonoBehaviour
     public Text selectedSkillBtnIdxTxt;
     public Button[] skillBtns;
     public Button startGameBtn;
+    
     [SerializeField] Image selectSkillImg;  public Image SelectSkillImg {get => selectSkillImg; set => selectSkillImg = value;}
+
+    [Header("ROULETTE EVENT")][Header("__________________________")]
+    public Button rouletteIconBtn;
+    public Text rouletteIconCoolTimeTxt;
+
 
     [Header("BUY OR CHECK BTN")][Header("__________________________")]
     public Button checkBtn;

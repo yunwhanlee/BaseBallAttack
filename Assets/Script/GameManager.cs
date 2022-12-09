@@ -285,7 +285,7 @@ public class GameManager : MonoBehaviour
                 setRewardChestPanelUI(emptyPoopSpr, LANG.getTxt(LANG.TXT.Empty.ToString()), LANG.getTxt(LANG.TXT.Ok.ToString()));
                 break;
         }
-        
+
         //* AddEventListener('onClick')
         rewardChestOkBtn.onClick.AddListener(() => onClickRewardChestOkButton(reward, goodsPriceDic));
     }
