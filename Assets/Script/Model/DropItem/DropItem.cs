@@ -69,6 +69,8 @@ public class DropItem : MonoBehaviour
                     break;
                 case DropItem.TYPE.RewardChest:
                     gm.getRewardChestPanel.SetActive(true);
+                    gm.rewardChestIconImg.sprite = gm.defChestSpr;
+                    gm.rewardChestContentTxt.text = LANG.getTxt(LANG.TXT.GetRewardChestPanel_Content.ToString());
 
                     //TODO REWARD
                     

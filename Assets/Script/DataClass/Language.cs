@@ -9,13 +9,15 @@ public static class LANG //* LANG
     public enum OBJNAME {NameTxt, ExplainTxt, HomeRunBonusTxt};
     public enum TXT {
         //* UI
-        Start, Level, Stage, BossLimitCnt, Combo, Status, Back, Ready, Out, Strike, 
+        Ok, Use, Get, Open,
+        Start, Level, Stage, BossLimitCnt, Combo, Status, Back, Ready, Out, Strike,
         BestScore, LevelUpPanel_Title, LevelUpPanel_Explain,
         MsgNoMoney, MsgNoSkill, MsgAlreadyRegistedSkill,
         DialogUnlock2ndSkill_Title, DialogUnlock2ndSkill_Info,
         ShowAdDialogCoinX2_Title, ShowAdDialogCoinX2_Content,
         ShowAdDialogRerotateSkillSlots_Title, ShowAdDialogRerotateSkillSlots_Content,
         ShowAdDialogRevive_Title, ShowAdDialogRevive_Content,
+        Reward, GetRewardChestPanel_Content, Empty, PsvSkillTicket, RouletteTicket,
         //* PSV
         Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, 
         ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, 
@@ -24,6 +26,8 @@ public static class LANG //* LANG
         DamageTwice, GiantBall, DarkOrb, GodBless, BirdFriend,
         //* Upgrade (Only Needed Language)
         BossDamage, CoinBonus, Defence,
+
+        
     };
     public const int NAME=0, EXPLAIN=1, HOMERUNBONUS=2;
     const string HR_TXT = "⊡ HomeRunBonus : ";
@@ -175,8 +179,16 @@ public static class LANG //* LANG
         "復活してゲームを続きますか? (ブロックは初期化されます。)",
         "부활하여 게임을 계속 진행하시겠습니까? (블록은 초기화됩니다.)"
     };
+    public static string[] GetRewardChestPanel_Content = new string[]{
+        "You get a mysterious treasure chest!",
+        "ミステリーな宝箱を得りました!",
+        "보물상자를 얻었습니다!"
+    };
 
     //* UI
+    public static string[] Ok = new string[]{"OK", "はい", "네"};
+    public static string[] Use = new string[]{"USE", "使用", "사용"};
+    public static string[] Get = new string[]{"GET", "取る", "얻기"};
     public static string[] Start = new string[]{"START", "スタート", "시작"};
     public static string[] Level = new string[]{"LV", "レベル", "레벨"};
     public static string[] Stage = new string[]{"STAGE", "ステージ", "스테이지"};
@@ -190,6 +202,12 @@ public static class LANG //* LANG
     public static string[] BestScore = new string[]{"BEST SCORE", "ベストスコア", "베스트 점수"};
     public static string[] LevelUpPanel_Title = new string[]{"LEVEL UP!", "レベル UP!", "레벨 업!"};
     public static string[] LevelUpPanel_Explain = new string[]{"Please, Select Skill", "スキルを選択してください", "스킬을 선택해주세요"};
+    public static string[] Reward = new string[]{"REWARD", "リワード", "보상"};
+    public static string[] Open = new string[]{"Open", "開く", "열기"};
+    public static string[] Empty = new string[]{"Empty", "空箱", "빈 상자"};
+    public static string[] PsvSkillTicket = new string[]{"Passive Skill ticket!", "パッシブスキル チケット!", "패시브 스킬 티켓!"};
+    public static string[] RouletteTicket = new string[]{"Roulette ticket!", "ルーレット チケット!", "룰렛 티켓!"};
+
 
     //* PSV
     public static string[] Dmg = new string[]{DM.PSV.Dmg.ToString(), "攻撃力", "공격력"};
@@ -300,6 +318,10 @@ public static class LANG //* LANG
         if(name == TXT.ShowAdDialogRevive_Content.ToString()) res = ShowAdDialogRevive_Content[CUR_LANG];
 
         //* UI
+        if(name == TXT.Ok.ToString()) res = Ok[CUR_LANG];
+        if(name == TXT.Use.ToString()) res = Use[CUR_LANG];
+        if(name == TXT.Get.ToString()) res = Get[CUR_LANG];
+        if(name == TXT.Open.ToString()) res = Open[CUR_LANG];
         if(name == TXT.Start.ToString()) res = Start[CUR_LANG];
         if(name == TXT.Level.ToString()) res = Level[CUR_LANG];
         if(name == TXT.Stage.ToString()) res = Stage[CUR_LANG];
@@ -313,6 +335,11 @@ public static class LANG //* LANG
         if(name == TXT.BestScore.ToString()) res = BestScore[CUR_LANG];
         if(name == TXT.LevelUpPanel_Title.ToString()) res = LevelUpPanel_Title[CUR_LANG];
         if(name == TXT.LevelUpPanel_Explain.ToString()) res = LevelUpPanel_Explain[CUR_LANG];
+        if(name == TXT.Reward.ToString()) res = Reward[CUR_LANG];
+        if(name == TXT.GetRewardChestPanel_Content.ToString()) res = GetRewardChestPanel_Content[CUR_LANG];
+        if(name == TXT.Empty.ToString()) res = Empty[CUR_LANG];
+        if(name == TXT.PsvSkillTicket.ToString()) res = PsvSkillTicket[CUR_LANG];
+        if(name == TXT.RouletteTicket.ToString()) res = RouletteTicket[CUR_LANG];
 
         //* PSV
         if(name == TXT.Dmg.ToString()) res = Dmg[CUR_LANG];

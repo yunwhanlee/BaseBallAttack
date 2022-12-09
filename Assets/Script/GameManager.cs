@@ -138,6 +138,7 @@ public class GameManager : MonoBehaviour
     public GameObject eggPf;
 
     [Header("REWARD CHEST")][Header("__________________________")]
+    public Text rewardChestTitleTxt;
     public Text rewardChestContentTxt;
     public Image rewardChestIconImg;
     public Sprite defChestSpr;
@@ -166,6 +167,7 @@ public class GameManager : MonoBehaviour
 
         bossLimitCntTxt.gameObject.SetActive(false);
         Array.ForEach(statusTxts, txt => txt.text = LANG.getTxt(LANG.TXT.Status.ToString()));
+        rewardChestTitleTxt.text = LANG.getTxt(LANG.TXT.Reward.ToString());
 
         //* Ball Preview Dir Goal Set Z-Center
         setBallPreviewGoalRandomPos();
@@ -237,10 +239,12 @@ public class GameManager : MonoBehaviour
     }
 
     IEnumerator coRewardChestOpen(){
+        // init
         rewardChestIconImg.sprite = openChestSpr;
-        getRewardChestPanel.GetComponentInChildren<Animator>().SetTrigger("DoOpen");
-        yield return new WaitForSeconds(1);
+        rewardChestContentTxt.text = "";
+        getRewardChestPanel.GetComponentInChildren<Animator>().SetTrigger(DM.ANIM.DoOpen.ToString());
 
+        yield return new WaitForSeconds(1);
         const int GOODS = 0, PSVSKILL_TICKET = 1, ROULETTE_TICKET = 2, EMPTY = 3;
         int rand = Random.Range(0, 100);
         int reward = (rand < 25)? GOODS
@@ -259,7 +263,7 @@ public class GameManager : MonoBehaviour
                         Debug.Log($"onClickRewardChestOpenButton():: reward= GOODS: kind={kind}: price={priceArr[rand]}");
                         rewardChestIconImg.sprite = coinBundleSpr;
                         rewardChestContentTxt.text = priceArr[rand].ToString();
-                        rewardChestOpenBtn.GetComponentInChildren<Text>().text = "Get";
+                        rewardChestOpenBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Get.ToString());
                         break;
                     }
                     case DIAMOND:{
@@ -268,7 +272,7 @@ public class GameManager : MonoBehaviour
                         Debug.Log($"onClickRewardChestOpenButton():: reward= GOODS: kind={kind}: price={priceArr[rand]}");
                         rewardChestIconImg.sprite = diamondBundleSpr;
                         rewardChestContentTxt.text = priceArr[rand].ToString();
-                        rewardChestOpenBtn.GetComponentInChildren<Text>().text = "Get";
+                        rewardChestOpenBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Get.ToString());
                         break;
                     }
                 }
@@ -276,21 +280,21 @@ public class GameManager : MonoBehaviour
             case PSVSKILL_TICKET:
                 Debug.Log($"onClickRewardChestOpenButton():: reward= PSVSKILL_TICKET");
                 rewardChestIconImg.sprite = psvSkillTicketSpr;
-                rewardChestContentTxt.text = "Passive Skill ticket!";
-                rewardChestOpenBtn.GetComponentInChildren<Text>().text = "Use";
+                rewardChestContentTxt.text = LANG.getTxt(LANG.TXT.PsvSkillTicket.ToString());
+                rewardChestOpenBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Use.ToString());
                 // levelUpPanel.SetActive(true);
                 break;
             case ROULETTE_TICKET:
                 Debug.Log($"onClickRewardChestOpenButton():: reward= ROULETTE_TICKET");
                 rewardChestIconImg.sprite = rouletteTicketSpr;
-                rewardChestContentTxt.text = "Roulette ticket!";
-                rewardChestOpenBtn.GetComponentInChildren<Text>().text = "Get";
+                rewardChestContentTxt.text = LANG.getTxt(LANG.TXT.RouletteTicket.ToString());
+                rewardChestOpenBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Get.ToString());
                 break;
             case EMPTY:
                 Debug.Log($"onClickRewardChestOpenButton():: reward= EMPTY");
                 rewardChestIconImg.sprite = emptyPoopSpr;
-                rewardChestContentTxt.text = "Empty";
-                rewardChestOpenBtn.GetComponentInChildren<Text>().text = "Ok";
+                rewardChestContentTxt.text = LANG.getTxt(LANG.TXT.Empty.ToString());
+                rewardChestOpenBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Ok.ToString());
                 break;
         }
         // getRewardChestPanel.SetActive(false);
