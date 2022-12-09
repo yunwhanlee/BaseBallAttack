@@ -432,6 +432,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         DM.ins.personalData.setSelectIdx(CurIdx);
 
         #region PARCHASE
+        Debug.Log("PARCHASE==> curItem= " + curItem.name);
         switch(DM.ins.getCurPanelType2Enum(type)){
             case DM.PANEL.Chara :
             case DM.PANEL.Bat :
@@ -495,16 +496,14 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             
             if(DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
                 UpgradeDt upgradeDt = DM.ins.personalData.Upgrade.Arr[CurIdx];
-                //TODO
                 upgradeDt.setLvUp();
                 curItem.setUpgradeGUI(upgradeDt);
                 List<int> priceList = Util._.calcArithmeticProgressionList(start: 100, upgradeDt.maxLv, d: 100, gradualUpValue: 0.1f);
                 curItem.price.setValue(priceList[upgradeDt.lv]);
             }
-            else
-            {
-                Debug.Log("BUY!: " + curItem.transform.GetChild(0).GetChild(0).name);
-                GameObject SkillImgObj = curItem.transform.GetChild(0).GetChild(0).gameObject;
+            else{
+                Debug.Log("purchaseItem:: curItem.transform.GetChild(0)=" + curItem.transform.GetChild(0).name);
+                GameObject SkillImgObj = curItem.transform.GetChild(0).gameObject; //* (BUG-8) Home:: Bat.getChild(0).getChild(0)-> Null ---> getChild(0)が正しい。
                 em.createItemBuyEF(SkillImgObj, DM.ins.SelectItemType);
                 curItem.IsLock = false; //* 解禁
                 curItem.checkLockedModel();

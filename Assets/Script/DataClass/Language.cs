@@ -373,76 +373,80 @@ public static class LANG //* LANG
         return res;
     }
     public static List<string> getTxtList(string str){
-        Debug.Log($"Language::getTxtList(str= {str})");
-        const int SPLIT_TYPE=0, SPLIT_NAME=1, SPLIT_EXPLAIN=2, SPLIT_HOMERUNBONUS=3;
         List<string> resList = new List<string>();
+        Debug.Log($"Language::getTxtList(str):: str= {str}"); // ex) Bat_7.StripeA
+        const int TYPE=0, NAME=1, EXPLAIN=2, HOMERUNBONUS=3;
 
-        string[] split = str.Split('_');
-        string type = split[SPLIT_TYPE];
+        string[] splitList = str.Split('_'); // ex) split = ["Bat", "7.StripeA"];
+        string type = splitList[TYPE];
         DM.PANEL itemType = DM.ins.getCurPanelType2Enum(type);
 
         //* Split Txt String
         switch(itemType){
             case DM.PANEL.Chara: 
             case DM.PANEL.Bat: 
-                resList.Add(split[SPLIT_NAME]);
+                resList.Add(splitList[NAME]);
                 break;
             case DM.PANEL.Skill: 
-                resList.Add(split[SPLIT_NAME]);
-                resList.Add(split[SPLIT_EXPLAIN]);
-                resList.Add(split[SPLIT_HOMERUNBONUS]);
+                resList.Add(splitList[NAME]);
+                resList.Add(splitList[EXPLAIN]);
+                resList.Add(splitList[HOMERUNBONUS]);
                 break;
             case DM.PANEL.CashShop:
             case DM.PANEL.PsvInfo:
             case DM.PANEL.Upgrade:
-                resList.Add(split[SPLIT_NAME]);
-                resList.Add(split[SPLIT_EXPLAIN]);
+                resList.Add(splitList[NAME]);
+                resList.Add(splitList[EXPLAIN]);
                 break;
         }
+
+        int i=0;
+        resList.ForEach(list=> Debug.Log($"Language::getTxtList():: resList[{i}]= {list}"));
         
-        //* Type & Set Lang
+        //* Set Lang
         switch(itemType){
             case DM.PANEL.Chara: {
-                int idx = CharaList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
-                resList[NAME] = CharaList[idx][(int)DM.ins.personalData.Lang];
+                int idx = CharaList.FindIndex(langArr => resList[LANG.NAME] == langArr[(int)TP.EN]);
+                resList[LANG.NAME] = CharaList[idx][(int)DM.ins.personalData.Lang];
                 break;
             }
             case DM.PANEL.Bat: {
-                int idx = BatList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
-                resList[NAME] = BatList[idx][(int)DM.ins.personalData.Lang];
+                int idx = BatList.FindIndex(langArr => resList[LANG.NAME] == langArr[(int)TP.EN]);
+                resList[LANG.NAME] = BatList[idx][(int)DM.ins.personalData.Lang];
                 break;
             }
             case DM.PANEL.Skill: {
-                int idx = SkillNameList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
+                int idx = SkillNameList.FindIndex(langArr => resList[LANG.NAME] == langArr[(int)TP.EN]);
                 // Debug.Log("<color=white><<Skill>> idx= " + idx + "</color>");
-                resList[NAME] = SkillNameList[idx][(int)DM.ins.personalData.Lang];
-                resList[EXPLAIN] = SkillExplainList[idx][(int)DM.ins.personalData.Lang];
-                resList[HOMERUNBONUS] = SkillHomeRunBonusList[idx][(int)DM.ins.personalData.Lang];
+                resList[LANG.NAME] = SkillNameList[idx][(int)DM.ins.personalData.Lang];
+                resList[LANG.EXPLAIN] = SkillExplainList[idx][(int)DM.ins.personalData.Lang];
+                resList[LANG.HOMERUNBONUS] = SkillHomeRunBonusList[idx][(int)DM.ins.personalData.Lang];
                 break;
             }
             case DM.PANEL.CashShop:{
-                int idx = CashShopNameList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
+                int idx = CashShopNameList.FindIndex(langArr => resList[LANG.NAME] == langArr[(int)TP.EN]);
                 // Debug.Log("<color=yellow><<CashShop>> idx= " + idx + "</color>");
-                resList[NAME] = CashShopNameList[idx][(int)DM.ins.personalData.Lang];
-                resList[EXPLAIN] = CashShopExplainList[idx][(int)DM.ins.personalData.Lang];
+                resList[LANG.NAME] = CashShopNameList[idx][(int)DM.ins.personalData.Lang];
+                resList[LANG.EXPLAIN] = CashShopExplainList[idx][(int)DM.ins.personalData.Lang];
                 break;
             }
             case DM.PANEL.PsvInfo:{
-                int idx = PsvInfoNameList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
+                int idx = PsvInfoNameList.FindIndex(langArr => resList[LANG.NAME] == langArr[(int)TP.EN]);
                 // Debug.Log("<color=yellow><<PsvInfo>> idx= " + idx + "</color>");
-                resList[NAME] = PsvInfoNameList[idx][(int)DM.ins.personalData.Lang];
-                resList[EXPLAIN] = PsvInfoExplainList[idx][(int)DM.ins.personalData.Lang];
+                resList[LANG.NAME] = PsvInfoNameList[idx][(int)DM.ins.personalData.Lang];
+                resList[LANG.EXPLAIN] = PsvInfoExplainList[idx][(int)DM.ins.personalData.Lang];
                 break;
             }
             case DM.PANEL.Upgrade:{
-                int idx = UpgradeNameList.FindIndex(langArr => resList[NAME] == langArr[(int)TP.EN]);
+                int idx = UpgradeNameList.FindIndex(langArr => resList[LANG.NAME] == langArr[(int)TP.EN]);
                 Debug.Log("<color=yellow><<Upgrade>> idx= " + idx + "</color>");
-                resList[NAME] = UpgradeNameList[idx][(int)DM.ins.personalData.Lang];
-                resList[EXPLAIN] = Util._.replaceSettingNumber(UpgradeExplainList[idx][(int)DM.ins.personalData.Lang], idx);
+                resList[LANG.NAME] = UpgradeNameList[idx][(int)DM.ins.personalData.Lang];
+                resList[LANG.EXPLAIN] = Util._.replaceSettingNumber(UpgradeExplainList[idx][(int)DM.ins.personalData.Lang], idx);
                 break;
             }
         }
-        // resList.ForEach(res=> Debug.Log("type->" + type + ", res=>" + res));
+        int j=0;
+        resList.ForEach(res=> Debug.Log("j= "+ (j++) +", type:" + type + ", res=" + res));
         return resList;
     }
 }
