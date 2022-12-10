@@ -51,6 +51,7 @@ public class HomeManager : MonoBehaviour
     [SerializeField] Image selectSkillImg;  public Image SelectSkillImg {get => selectSkillImg; set => selectSkillImg = value;}
 
     [Header("ROULETTE EVENT")][Header("__________________________")]
+    public Roulette roulette;
     public GameObject roulettePanel;
     public Button rouletteIconBtn;
     public Text rouletteIconCoolTimeTxt;
@@ -127,12 +128,19 @@ public class HomeManager : MonoBehaviour
         roulettePanel.gameObject.SetActive(true);
         homePanel.Panel.gameObject.SetActive(false);
         homePanel.GoBtn.gameObject.SetActive(false);
-        // selectPanel.Panel.gameObject.SetActive(!isHome);
+        
+        //TODO チケットがある時、GUI表示。
+
+        //TODO チケットがない時、GUI表示。
+    }
+    public void onClickRouletteSpinBtn(){
+        if(roulette.IsSpin) return;
+        Debug.Log("onClickRouletteSpinBtn:: Roulette Spin!!");
+        roulette.IsSpin = true;
     }
     public void onClickRouletteExitBtn(){
         roulettePanel.gameObject.SetActive(false);
         homePanel.Panel.gameObject.SetActive(true);
-        // homePanel.GoBtn.gameObject.SetActive(false);
     }
 
     public void onClickSettingBtn(){

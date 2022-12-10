@@ -18059,7 +18059,7 @@ GameObject:
   - component: {fileID: 1420698381}
   - component: {fileID: 1420698380}
   m_Layer: 0
-  m_Name: Spin_Roulette
+  m_Name: Spin_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18551,7 +18551,7 @@ GameObject:
   - component: {fileID: 1481442997}
   - component: {fileID: 1481442996}
   m_Layer: 0
-  m_Name: Button_Free
+  m_Name: SpinBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18636,7 +18636,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1481443001}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1887670884}
+        m_TargetAssemblyTypeName: HomeManager, Assembly-CSharp
+        m_MethodName: onClickRouletteSpinBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1481442998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19246,7 +19258,7 @@ GameObject:
   - component: {fileID: 1572601977}
   - component: {fileID: 1572601976}
   m_Layer: 0
-  m_Name: Item_Group
+  m_Name: Spin_Board
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20638,6 +20650,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1732122243}
+  - component: {fileID: 1732122244}
   m_Layer: 0
   m_Name: RoulettePanel
   m_TagString: Untagged
@@ -20671,6 +20684,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1080, y: 2200}
   m_Pivot: {x: 0.5, y: 1.025}
+--- !u!114 &1732122244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732122242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f5d2f6a3d798824cb3b26d9e76936eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSpin: 0
+  spinBoard: {fileID: 1572601975}
+  spinPower: 2000
 --- !u!1 &1752299217
 GameObject:
   m_ObjectHideFlags: 0
@@ -21555,6 +21583,7 @@ MonoBehaviour:
   - {fileID: 1668992831}
   startGameBtn: {fileID: 251569728}
   selectSkillImg: {fileID: 1646267407}
+  roulette: {fileID: 1732122244}
   roulettePanel: {fileID: 1732122242}
   rouletteIconBtn: {fileID: 807839746}
   rouletteIconCoolTimeTxt: {fileID: 705399369}
@@ -21912,7 +21941,7 @@ GameObject:
   - component: {fileID: 1941981531}
   - component: {fileID: 1941981530}
   m_Layer: 0
-  m_Name: Button_Close
+  m_Name: CloseBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
