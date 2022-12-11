@@ -11,16 +11,30 @@ public class Roulette : MonoBehaviour
 
     void Start()
     {
-        
     }
 
     void Update()
     {  
-        float speed = Time.deltaTime * (spinPower - reduceCnt++);
+        // float speed = Time.deltaTime * (spinPower - reduceCnt++);
+        float speed = Time.deltaTime * spinPower;
         if(isSpin){
             if(speed > 0){
-                Debug.Log("Roulette:: spinPower= " + speed);
-                spinBoard.transform.Rotate(0, 0, -speed);
+                /*
+                *   ⓵ transform.rotation : 0~1単位 -> eulerAnglesに変換する必要ある。
+                *   ⓶ eulerAnglesでは、範囲が0~360まで。
+                *      しかし、InspectorViewでは、範囲が-180~180まで。
+                *      ⇒ 合わせる必要がある！
+                */
+                float zRot = spinBoard.eulerAngles.z;
+                float angle = zRot % 360; // 
+                // Debug.Log("Roulette:: speed= " + speed + ", angle= " + angle);
+                if(angle < 180){
+                    Debug.Log("Roulette:: spinPower= " + speed + ", angle= " + angle + " A");
+                }
+                else{
+                    Debug.Log("Roulette:: spinPower= " + speed + ", angle= " + angle + " B");
+                }
+                spinBoard.transform.Rotate(0, 0, speed);
             }
             else{
                 init();

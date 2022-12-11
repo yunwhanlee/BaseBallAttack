@@ -56,6 +56,10 @@ public class HomeManager : MonoBehaviour
     public Button rouletteIconBtn;
     public Text rouletteIconCoolTimeTxt;
 
+    [Header("DIALOG")][Header("__________________________")]
+    public RectTransform showAdDialog;
+    public Text adDialogTitleTxt;
+    public Text adDialogContentTxt;
 
     [Header("BUY OR CHECK BTN")][Header("__________________________")]
     public Button checkBtn;
@@ -77,6 +81,18 @@ public class HomeManager : MonoBehaviour
         setSelectSkillImg(true);
         LanguageOptDropDown.value = (int)DM.ins.personalData.Lang; //* Loadデータで初期化
         startBtnTxt.text = LANG.getTxt(LANG.TXT.Start.ToString());
+    }
+
+    void Update(){
+        // Debug.Log(DateTime.Parse("2022/12/12 01:00:00"));
+        // var over = DateTime.Parse("2022/12/12 01:00:00");
+        // Debug.Log(DateTime.Now - );
+        if(DM.ins.personalData.RouletteTicket > 0){
+            rouletteIconBtn.GetComponent<Image>().color = Color.white; // def
+        }
+        else{
+            rouletteIconBtn.GetComponent<Image>().color = Color.grey;
+        }
     }
 
     //* ----------------------------------------------------------------
@@ -125,24 +141,32 @@ public class HomeManager : MonoBehaviour
         selectedSkillBtnIdxTxt.text = (idx == 0)? "1st Skill" : "2nd Skill";
     }
     public void onClickRouletteIconBtn(){
-        roulettePanel.gameObject.SetActive(true);
-        homePanel.Panel.gameObject.SetActive(false);
-        homePanel.GoBtn.gameObject.SetActive(false);
-        
-        //TODO チケットがある時、GUI表示。
-
-        //TODO チケットがない時、GUI表示。
+        Debug.Log("onClickRouletteIconBtn:: RouletteTicket= " + DM.ins.personalData.RouletteTicket);
+        if(DM.ins.personalData.RouletteTicket <= 0){
+            showAdDialog.gameObject.SetActive(true);
+        }
+        else{
+            roulettePanel.gameObject.SetActive(true);
+            homePanel.Panel.gameObject.SetActive(false);
+            homePanel.GoBtn.gameObject.SetActive(false);
+        }
     }
     public void onClickRouletteSpinBtn(){
         if(roulette.IsSpin) return;
         Debug.Log("onClickRouletteSpinBtn:: Roulette Spin!!");
         roulette.IsSpin = true;
+        DM.ins.personalData.RouletteTicket--;
     }
     public void onClickRouletteExitBtn(){
         roulettePanel.gameObject.SetActive(false);
         homePanel.Panel.gameObject.SetActive(true);
     }
-
+    public void onClickShowADButton(){
+        showAdDialog.gameObject.SetActive(false);
+        roulettePanel.gameObject.SetActive(true);
+        homePanel.Panel.gameObject.SetActive(false);
+        homePanel.GoBtn.gameObject.SetActive(false);
+    }
     public void onClickSettingBtn(){
         settingDialog.Panel.SetActive(true);
     }

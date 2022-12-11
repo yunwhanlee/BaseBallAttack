@@ -85,6 +85,9 @@
         ✓ getTreasureChestPanel + DropItemPrefebとして、RewardChest追加（処理は未）。
         ✓ RoulettePanel.SetActive On Off
         ✓ RouletteSpin & Rouletteスクリプト作成。
+        ✓ Roulette角度についてベース対応＋ShowAdパンネル追加。
+        - Roulette角度に合わせて、補償決める。
+        - 広告：DateTimeを使って、クールタイム実装。
 
     ● HOME:: ルーレット（１時間毎に、広告を見てお金やダイアを習得できるイベント）
         - rouletteTicket変数は宣言。
