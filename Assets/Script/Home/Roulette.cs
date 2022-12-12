@@ -19,6 +19,8 @@ public class Roulette : MonoBehaviour
     public Image spinBtnIconImg;
     public Text spinBtnTxt;
     public Slider SpinPowerSlider;
+    public GameObject ContgraturationBlastEF;
+    public Button exitBtn;
     
     private Sprite rewardIcon;
     private int rewardPrice;
@@ -109,6 +111,8 @@ public class Roulette : MonoBehaviour
     }
 
     private void setCenterTfUI(bool isInit){
+        exitBtn.gameObject.SetActive(isInit? true : false); //* 取得Btnがある場合は、Exitでそのまま出るBUG対応。
+        ContgraturationBlastEF.SetActive(isInit? false : true); //* Effect追加。
         centerTf.transform.localScale = Vector3.one * (isInit? 1 : 6.5f);
         centerTf.GetComponentsInChildren<Image>()[REWARD_IMG].enabled = (isInit? false : true);
         centerTf.GetComponentsInChildren<Image>()[REWARD_IMG].sprite = (isInit? null : rewardIcon);
