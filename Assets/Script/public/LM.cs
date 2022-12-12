@@ -65,6 +65,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Header("REWARD")][Header("__________________________")]
     public int REROTATE_SKILLSLOTS_PRICE_COIN = 200;
     public int REVIVE_PRICE_DIAMOND = 50;
+    public int ROULETTE_TICKET_COOLTIME_MINUTE = 30;
 
 
     void Awake() => singleton();

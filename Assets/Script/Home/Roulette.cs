@@ -18,13 +18,17 @@ public class Roulette : MonoBehaviour
     public Text ticketCntTxt;
     public Image spinBtnIconImg;
     public Text spinBtnTxt;
+    public Slider SpinPowerSlider;
     
-    [SerializeField]  Sprite rewardIcon;
-    [SerializeField]  int rewardPrice;
+    private Sprite rewardIcon;
+    private int rewardPrice;
 
-    public int spinPower = 2000;
+    const int SPIN_POWER_MAX = 1200;
+    [Range(500, 2000)]  public int power = 1500;
+    public float spinGauge = 0;
 
-    private int reduceCnt = 0;
+    [SerializeField] int reduceCnt = 0;
+    [SerializeField] bool isRight;
     const int REWARD_IMG = 1;
 
     void Start()
@@ -33,12 +37,11 @@ public class Roulette : MonoBehaviour
         setCenterTfUI(isInit: true);
     }
 
-    void Update()
-    { 
-        ticketCntTxt.text = "x " + DM.ins.personalData.RouletteTicket.ToString();
+    void Update(){
 
-        float speed = Time.deltaTime * (spinPower - reduceCnt++);
+        ticketCntTxt.text = "x " + DM.ins.personalData.RouletteTicket.ToString();
         if(isSpin){
+            float speed = Time.deltaTime * (spinGauge - reduceCnt++);
             if(speed > 0){
                 setCenterTfUI(isSpin);
                 spinBoard.transform.Rotate(0, 0, speed);
@@ -51,12 +54,21 @@ public class Roulette : MonoBehaviour
                 *      しかし、InspectorViewでは、範囲が-180~180まで。
                 */
                 float zRot = spinBoard.eulerAngles.z;
-                float angle = zRot % (360 + rotOffset);
+                float angle = zRot % (360 + rotOffset); //* one lap(１回り): 360°
                 int index = (int)(angle / ((360 + rotOffset) / itemCnt));
                 Debug.Log("Roulette::Update:: speed= " + speed + ", angle= " + angle + ", index=" + index);
 
                 setRewardData(index);
                 setCenterTfUI(isSpin);
+            }
+        }
+        else{
+            //* Power Gauge Slider
+            if(rewardIcon == null){
+                if(spinGauge <= 0)  isRight = true;
+                else if(spinGauge > SPIN_POWER_MAX)  isRight = false;
+                spinGauge += Time.deltaTime * power * (isRight? +1 : -1);
+                SpinPowerSlider.value = spinGauge / SPIN_POWER_MAX;
             }
         }
     }
@@ -83,7 +95,6 @@ public class Roulette : MonoBehaviour
 
     public void onClickRouletteExitBtn(){
         if(isSpin) return;
-        
         this.gameObject.SetActive(false);
         hm.homePanel.Panel.gameObject.SetActive(true);
     }

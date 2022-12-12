@@ -80,18 +80,27 @@ public class HomeManager : MonoBehaviour
         onClickBtnGoToPanel(DM.SCENE.Home.ToString());
         setSelectSkillImg(true);
         LanguageOptDropDown.value = (int)DM.ins.personalData.Lang; //* Loadデータで初期化
+
+        // if(DM.ins.personalData.RouletteTicketCoolTime == null){
+        //     DM.ins.personalData.RouletteTicketCoolTime = DateTime.Now.ToString();
+        // }
+
+        rouletteIconBtn.GetComponent<Image>().color = Color.grey;
         startBtnTxt.text = LANG.getTxt(LANG.TXT.Start.ToString());
     }
 
     void Update(){
-        // Debug.Log(DateTime.Parse("2022/12/12 01:00:00"));
-        // var over = DateTime.Parse("2022/12/12 01:00:00");
-        // Debug.Log(DateTime.Now - );
         if(DM.ins.personalData.RouletteTicket > 0){
             rouletteIconBtn.GetComponent<Image>().color = Color.white; // def
+            rouletteIconCoolTimeTxt.text = "";
         }
         else{
+            //* Reset CoolTime
+            if(rouletteIconBtn.GetComponent<Image>().color != Color.grey)
+                DM.ins.personalData.RouletteTicketCoolTime = DateTime.Now.ToString();
+
             rouletteIconBtn.GetComponent<Image>().color = Color.grey;
+            rouletteIconCoolTimeTxt.text = updateADCoolTime(); //* Coolタイム 表示!
         }
     }
 
@@ -338,5 +347,21 @@ public class HomeManager : MonoBehaviour
         var child = unlock2ndSkillDialog.GoBtn.transform.GetChild(1);
         Debug.Log("drawGrayPanel:: child.name= " + child.name);
         if(child.name == DM.NAME.GrayPanel.ToString()) child.gameObject.SetActive(isActive);
+    }
+
+    private string updateADCoolTime(){
+        DateTime finishTime = DateTime.Parse(DM.ins.personalData.RouletteTicketCoolTime).AddMinutes(LM._.ROULETTE_TICKET_COOLTIME_MINUTE);
+        TimeSpan coolTime = finishTime - DateTime.Now;
+
+        //* Coolタイムが終わったら
+        if(coolTime.Ticks < 0){ 
+            DM.ins.personalData.RouletteTicket++;
+            DM.ins.personalData.RouletteTicketCoolTime = null;
+        }
+
+        string coolTimeStr = coolTime.Minutes.ToString("00") + ":" + coolTime.Seconds.ToString("00");
+        Debug.Log("coolTime= " + coolTime.Ticks + ", coolTimeStr= " + coolTimeStr);
+
+        return coolTimeStr;
     }
 }
