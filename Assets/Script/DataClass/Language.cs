@@ -17,7 +17,8 @@ public static class LANG //* LANG
         ShowAdDialogCoinX2_Title, ShowAdDialogCoinX2_Content,
         ShowAdDialogRerotateSkillSlots_Title, ShowAdDialogRerotateSkillSlots_Content,
         ShowAdDialogRevive_Title, ShowAdDialogRevive_Content,
-        Reward, GetRewardChestPanel_Content, Empty, PsvSkillTicket, RouletteTicket,
+        ShowAdDialogRouletteTicket_Title, ShowAdDialogRouletteTicket_Content,
+        Reward, GetRewardChestPanel_Content, Empty, PsvSkillTicket, RouletteTicket, RouletteSpin,
         //* PSV
         Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, 
         ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, 
@@ -179,6 +180,16 @@ public static class LANG //* LANG
         "復活してゲームを続きますか? (ブロックは初期化されます。)",
         "부활하여 게임을 계속 진행하시겠습니까? (블록은 초기화됩니다.)"
     };
+    public static string[] ShowAdDialogRouletteTicket_Title = new string[]{
+        "Roulette Ticket",
+        "ルーレットチケット",
+        "룰렛티켓"
+    };
+    public static string[] ShowAdDialogRouletteTicket_Content = new string[]{
+        "Not enough Roulette Ticket.\nWould you like to get a entrance of ticket?",
+        "チケットが足りないです。チケットを習得しませんか？",
+        "티켓이 모자랍니다. 티켓을 획득하시겠습니까?"
+    };
     public static string[] GetRewardChestPanel_Content = new string[]{
         "You get a mysterious treasure chest!",
         "ミステリーな宝箱を得りました!",
@@ -207,6 +218,7 @@ public static class LANG //* LANG
     public static string[] Empty = new string[]{"Empty", "空箱", "빈 상자"};
     public static string[] PsvSkillTicket = new string[]{"Passive Skill ticket!", "パッシブスキル チケット!", "패시브 스킬 티켓!"};
     public static string[] RouletteTicket = new string[]{"Roulette ticket!", "ルーレット チケット!", "룰렛 티켓!"};
+    public static string[] RouletteSpin = new string[]{"Spin!", "回す!", "돌리기!"};
 
 
     //* PSV
@@ -316,6 +328,8 @@ public static class LANG //* LANG
         if(name == TXT.ShowAdDialogRerotateSkillSlots_Content.ToString()) res = ShowAdDialogRerotateSkillSlots_Content[CUR_LANG];
         if(name == TXT.ShowAdDialogRevive_Title.ToString()) res = ShowAdDialogRevive_Title[CUR_LANG];
         if(name == TXT.ShowAdDialogRevive_Content.ToString()) res = ShowAdDialogRevive_Content[CUR_LANG];
+        if(name == TXT.ShowAdDialogRouletteTicket_Title.ToString()) res = ShowAdDialogRouletteTicket_Title[CUR_LANG];
+        if(name == TXT.ShowAdDialogRouletteTicket_Content.ToString()) res = ShowAdDialogRouletteTicket_Content[CUR_LANG];
 
         //* UI
         if(name == TXT.Ok.ToString()) res = Ok[CUR_LANG];
@@ -340,6 +354,8 @@ public static class LANG //* LANG
         if(name == TXT.Empty.ToString()) res = Empty[CUR_LANG];
         if(name == TXT.PsvSkillTicket.ToString()) res = PsvSkillTicket[CUR_LANG];
         if(name == TXT.RouletteTicket.ToString()) res = RouletteTicket[CUR_LANG];
+        if(name == TXT.RouletteSpin.ToString()) res = RouletteSpin[CUR_LANG];
+        
 
         //* PSV
         if(name == TXT.Dmg.ToString()) res = Dmg[CUR_LANG];

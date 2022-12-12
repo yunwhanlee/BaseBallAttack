@@ -34,6 +34,10 @@ public class Roulette : MonoBehaviour
     void Start()
     {
         hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
+
+        //* Lang
+        spinBtnTxt.text = LANG.getTxt(LANG.TXT.RouletteSpin.ToString());
+
         setCenterTfUI(isInit: true);
     }
 
@@ -111,7 +115,8 @@ public class Roulette : MonoBehaviour
         centerTf.GetComponentInChildren<Text>().text = (isInit? "" : rewardPrice.ToString());
 
         spinBtnIconImg.gameObject.SetActive(isInit? true : false);
-        spinBtnTxt.text = (isInit? "Spin" : "Ok");
+        spinBtnTxt.text = (isInit? spinBtnTxt.text = LANG.getTxt(LANG.TXT.RouletteSpin.ToString())
+            : LANG.getTxt(LANG.TXT.Get.ToString()));
     }
 
     private void setRewardData(int index = -1){

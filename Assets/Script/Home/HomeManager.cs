@@ -87,6 +87,9 @@ public class HomeManager : MonoBehaviour
 
         rouletteIconBtn.GetComponent<Image>().color = Color.grey;
         startBtnTxt.text = LANG.getTxt(LANG.TXT.Start.ToString());
+
+        adDialogTitleTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRouletteTicket_Title.ToString());
+        adDialogContentTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRouletteTicket_Content.ToString());
     }
 
     void Update(){
