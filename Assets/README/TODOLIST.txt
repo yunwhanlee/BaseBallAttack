@@ -83,11 +83,13 @@
         ✓ お金を実際に決算する処理。
         ✓ ADとPayMoneyの中身処理をREFECTORYすること。
         ✓ getTreasureChestPanel + DropItemPrefebとして、RewardChest追加（処理は未）。
+        
         ✓ RoulettePanel.SetActive On Off
         ✓ RouletteSpin & Rouletteスクリプト作成。
         ✓ Roulette角度についてベース対応＋ShowAdパンネル追加。
-        - Roulette角度に合わせて、補償決める。
+        ✓ Roulette角度に合わせて、補償決める + 基本機能実装 + REFACTORY
         - 広告：DateTimeを使って、クールタイム実装。
+        - EFFECT追加。
 
     ● HOME:: ルーレット（１時間毎に、広告を見てお金やダイアを習得できるイベント）
         - rouletteTicket変数は宣言。

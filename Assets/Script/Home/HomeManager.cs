@@ -151,17 +151,9 @@ public class HomeManager : MonoBehaviour
             homePanel.GoBtn.gameObject.SetActive(false);
         }
     }
-    public void onClickRouletteSpinBtn(){
-        if(roulette.IsSpin) return;
-        Debug.Log("onClickRouletteSpinBtn:: Roulette Spin!!");
-        roulette.IsSpin = true;
-        DM.ins.personalData.RouletteTicket--;
-    }
-    public void onClickRouletteExitBtn(){
-        roulettePanel.gameObject.SetActive(false);
-        homePanel.Panel.gameObject.SetActive(true);
-    }
     public void onClickShowADButton(){
+        //TODO AD広告全部見たら、
+        DM.ins.personalData.RouletteTicket++;
         showAdDialog.gameObject.SetActive(false);
         roulettePanel.gameObject.SetActive(true);
         homePanel.Panel.gameObject.SetActive(false);
