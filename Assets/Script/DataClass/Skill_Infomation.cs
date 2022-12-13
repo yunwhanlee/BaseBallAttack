@@ -65,7 +65,7 @@ public class UpgradeList {
 public class ItemPsvDt {
     public string name;
     public int lv;
-    public GameObject imgPref;
+    [HideInInspector] public GameObject imgPref;
     public ItemPsvDt(string name){
         this.name = name;
     }

@@ -121,7 +121,7 @@ public class BlockMaker : MonoBehaviour
 
         if(isExistRewardChest) return; //存在するなら、下記の処理しない。
         int rand = Random.Range(0, 100);
-        if(rand < 90){
+        if(rand < LM._.REWARD_CHEST_PER){
             var ins2 = Instantiate(dropItemRewardChestPf, blockTf.position, Quaternion.identity, gm.dropItemGroup);
             ins2.GetComponent<DropItem>().spawnPopUp(popPower);
         }

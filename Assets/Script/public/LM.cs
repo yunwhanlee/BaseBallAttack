@@ -16,12 +16,12 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
 {
     public static LM _;
     //* Value
-    [Header("GAME MANAGER")][Header("__________________________")]
-    public int STAGE_NUM = 1;
+    [Header("GAME MANAGER")]
+    [Tooltip("ステージ")] public int STAGE_NUM = 1;
 
     [Header("THROW BALL")][Header("__________________________")]
-    public float THROW_BALL_SPEED = 25;
-    [Range(0, 100)] public int SUDDENLY_THORW_PER = 50;
+    [Tooltip("ボール投げる速度")] public float THROW_BALL_SPEED = 25; 
+    [Tooltip("ボールいきなり投げる％")] [Range(0, 100)] public int SUDDENLY_THORW_PER = 50;
 
     [Header("HIT BALL")][Header("__________________________")]
     [HideInInspector] public float MAX_DISTANCE = 1.5f;
@@ -38,36 +38,37 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [HideInInspector] public int HOMERUN_MIN_POWER;
 
     [Header("BLOCK SPAN")][Header("__________________________")]
-    public int BOSS_STAGE_SPAN = 10;
-    public int BOSS_LIMIT_SPAN = 20;
-    public int LONG_BLOCK_SPAN = 5;
-    public int ICE_FREEZE_DURATION = 1;
-    public int FIRE_DOT_DMG_DURATION = 2;
+    [Tooltip("ボース登場ステージ周期")] public int BOSS_STAGE_SPAN = 10;
+    [Tooltip("ボース制限ステージ時間")] public int BOSS_LIMIT_SPAN = 20;
+    [Tooltip("LONGブロック登場ステージ周期")] public int LONG_BLOCK_SPAN = 5;
+    [Tooltip("ブロック フリーズ 持続時間")] public int ICE_FREEZE_DURATION = 1;
+    [Tooltip("ブロック 火ドットダメージ 持続時間")] public int FIRE_DOT_DMG_DURATION = 2;
 
     [Header("BLOCK ITEM PERCENT")][Header("__________________________")]
-    [Range(0, 1)] public float ICE_FREEZE_DMG_PER = 0.1f;
-    [Range(0, 1)] public float FIRE_DOT_DMG_PER = 0.2f;
+    [Tooltip("フリーズ ダメージ")] [Range(0, 1)] public float ICE_FREEZE_DMG_PER = 0.1f;
+    [Tooltip("火ドット ダメージ")] [Range(0, 1)] public float FIRE_DOT_DMG_PER = 0.2f;
 
-    [Header("BLOCK ITEM PERCENT")][Header("__________________________")]
-    [Range(0, 100)] public int skipBlockPer = 20;
-    [Range(0, 100)] public int itemTypePer = 10;
-    [Range(0, 100)] public int treasureChestBlockPer = 5;
-    [Range(0, 100)] public int healBlockPer = 5;
+    [Header("BLOCK & DROP ITEM PERCENT")][Header("__________________________")]
+    [Tooltip("スキップ ブロック％")] [Range(0, 100)] public int skipBlockPer = 20;
+    [Tooltip("アイテムタイプ ブロック％")] [Range(0, 100)] public int itemTypePer = 10;
+    [Tooltip("宝箱 ブロック％")] [Range(0, 100)] public int treasureChestBlockPer = 5;
+    [Tooltip("ヒール ブロック％")] [Range(0, 100)] public int healBlockPer = 5;
+    [Tooltip("リワード箱 ドロップ％")] [Range(0, 100)] public int REWARD_CHEST_PER = 5;
 
     [Header("PLAYER")][Header("__________________________")]
-    [Range(0, 1.0f)] public float ATV_COOLDOWN_UNIT = 0.02f;
-    public int MAX_LV = 50;
+    [Tooltip("アクティブスキル 減少％")] [Range(0, 1.0f)] public float ATV_COOLDOWN_UNIT = 0.02f;
+    [Tooltip("プレイヤー最大レベル")] public int MAX_LV = 50;
     public List<float> MAX_EXP_LIST = new List<float>();
 
     [Header("PSV SKILL")][Header("__________________________")]
-    [Range(0, 100)] public int LEVELUP_SLOTS_UNIQUE_PER = 10;
-    public int DARKORB_SPEED = 250;
-    public int GODBLESS_COMBO_SPAN = 10;
+    [Tooltip("レベルアップスロット、ユニックスキルの出現％")] [Range(0, 100)] public int LEVELUP_SLOTS_UNIQUE_PER = 10;
+    [Tooltip("ダークオーブの速度")] public int DARKORB_SPEED = 250;
+    [Tooltip("GODBLESS発動のコンボ倍数")] public int GODBLESS_COMBO_SPAN = 10;
 
     [Header("REWARD")][Header("__________________________")]
-    public int REROTATE_SKILLSLOTS_PRICE_COIN = 200;
-    public int REVIVE_PRICE_DIAMOND = 50;
-    public int ROULETTE_TICKET_COOLTIME_MINUTE = 30;
+    [Tooltip("レベルアップスロット、再回転に要するコイン")] public int REROTATE_SKILLSLOTS_PRICE_COIN = 200;
+    [Tooltip("復活に要するダイアモンド")] public int REVIVE_PRICE_DIAMOND = 50;
+    [Tooltip("ルーレットチケットの待機時間")] public int ROULETTE_TICKET_COOLTIME_MINUTE = 30;
 
 
 
