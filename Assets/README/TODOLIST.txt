@@ -95,8 +95,12 @@
         ✓ EFFECT追加。
         ✓ 取得Btnがある場合は、Exitでそのまま出るBUG対応。
 
-    ● HOME:: ルーレット（１時間毎に、広告を見てお金やダイアを習得できるイベント）
-        - rouletteTicket変数は宣言。
+    ● HOME:: 
+        ✓ ルーレット（１時間毎に、広告を見てお金やダイアを習得できるイベント）rouletteTicket変数は宣言。
+        ✓ CharaとBatのItemPanelの場合、Infoボタン追加。(クリックしたら、PassiveSkill情報見やすく表示。)
+        -  CharaとBatのItemPanelの場合、Infoボタンクリックで、Passiveダイアログ表示。
+        
+
 
     ● GAME:: Reward Chest（ボースや宝箱で日程確率で出る物）
         - A.スキル選択(LevelUpPanel活用)、B.財貨(コイン、ダイア)、C.スロットチケット。

@@ -5,13 +5,14 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 using UnityEngine.UI.Extensions;
+using UnityEngine.Serialization;
 
 [System.Serializable]   public class FrameUI{
     //* Value
-    [SerializeField] GameObject panel;   public GameObject Panel {get => panel; set => panel = value;}
-    [SerializeField] Button goBtn;     public Button GoBtn {get => goBtn; set => goBtn = value;}
-    [SerializeField] Text titleTxt;     public Text TitleTxt {get => titleTxt; set => titleTxt = value;}
-    [SerializeField] Text infoTxt;     public Text InfoTxt {get => infoTxt; set => infoTxt = value;}
+    [FormerlySerializedAs("panel")] [SerializeField] GameObject panel;   public GameObject Panel {get => panel; set => panel = value;}
+    [FormerlySerializedAs("goBtn")] [SerializeField] Button goBtn;     public Button GoBtn {get => goBtn; set => goBtn = value;}
+    [FormerlySerializedAs("titleTxt")] [SerializeField] Text titleTxt;     public Text TitleTxt {get => titleTxt; set => titleTxt = value;}
+    [FormerlySerializedAs("infoTxt")] [SerializeField] Text infoTxt;     public Text InfoTxt {get => infoTxt; set => infoTxt = value;}
     //* Constructor
     FrameUI(GameObject panel, Button goBtn, Text titleTxt, Text infoTxt){
         this.panel = panel;
@@ -47,6 +48,7 @@ public class HomeManager : MonoBehaviour
     public Text selectedSkillBtnIdxTxt;
     public Button[] skillBtns;
     public Button startGameBtn;
+    public Button ItemPsvInfoBtn;
     
     [SerializeField] Image selectSkillImg;  public Image SelectSkillImg {get => selectSkillImg; set => selectSkillImg = value;}
 
@@ -161,6 +163,7 @@ public class HomeManager : MonoBehaviour
             roulettePanel.gameObject.SetActive(true);
             homePanel.Panel.gameObject.SetActive(false);
             homePanel.GoBtn.gameObject.SetActive(false);
+            ItemPsvInfoBtn.gameObject.SetActive(false);
         }
     }
     public void onClickShowADButton(){
@@ -170,6 +173,7 @@ public class HomeManager : MonoBehaviour
         roulettePanel.gameObject.SetActive(true);
         homePanel.Panel.gameObject.SetActive(false);
         homePanel.GoBtn.gameObject.SetActive(false);
+        ItemPsvInfoBtn.gameObject.SetActive(false);
     }
     public void onClickSettingBtn(){
         settingDialog.Panel.SetActive(true);
@@ -345,6 +349,8 @@ public class HomeManager : MonoBehaviour
         homePanel.Panel.gameObject.SetActive(isHome);
         homePanel.GoBtn.gameObject.SetActive(!isHome);
         selectPanel.Panel.gameObject.SetActive(!isHome);
+
+        ItemPsvInfoBtn.gameObject.SetActive((type == DM.PANEL.Chara.ToString() || type == DM.PANEL.Bat.ToString())? true : false);
     }
     private void drawGrayPanel(bool isActive){
         var child = unlock2ndSkillDialog.GoBtn.transform.GetChild(1);
