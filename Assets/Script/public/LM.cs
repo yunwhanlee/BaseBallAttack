@@ -70,8 +70,6 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("復活に要するダイアモンド")] public int REVIVE_PRICE_DIAMOND = 50;
     [Tooltip("ルーレットチケットの待機時間")] public int ROULETTE_TICKET_COOLTIME_MINUTE = 30;
 
-
-
     void Awake() => singleton();
 
     void Start(){
