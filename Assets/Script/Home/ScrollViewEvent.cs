@@ -571,6 +571,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                     item.Outline3D.enabled = isActive; 
                     item.RankAuraEF.SetActive(!isActive);
                     
+                    //* Rank AuraEF 色 設定。
                     var particle = item.RankAuraEF.GetComponent<ParticleSystem>().main;
                     switch(item.Rank){
                         case DM.RANK.GENERAL: particle.startColor = DM.ins.rankGeneralClr; break;

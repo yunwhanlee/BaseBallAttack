@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5944033443368322379}
   - component: {fileID: -4953633340158557156}
   m_Layer: 0
-  m_Name: Bat_23.Pepero
+  m_Name: Bat_22.Pepero
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameTxts:
-  - 23.Pepero
+  - 22.Pepero
   - "\u30DA\u30DA\u30ED"
   - "\uBE7C\uBE7C\uB85C"
   explainTxts:
@@ -74,6 +74,8 @@ MonoBehaviour:
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
   cashShopPriceTxt: {fileID: 0}
+  upgradeValueTxt: {fileID: 0}
+  lvTxt: {fileID: 0}
   itemPassive:
     arr:
     - name: Dmg
@@ -101,7 +103,7 @@ MonoBehaviour:
       lv: 0
       imgPref: {fileID: 0}
     - name: VerticalMultiShot
-      lv: 0
+      lv: 1
       imgPref: {fileID: 0}
     - name: CriticalDamage
       lv: 0
@@ -110,13 +112,13 @@ MonoBehaviour:
       lv: 0
       imgPref: {fileID: 0}
     - name: FireProperty
-      lv: 0
+      lv: 1
       imgPref: {fileID: 0}
     - name: IceProperty
-      lv: 0
+      lv: 1
       imgPref: {fileID: 0}
     - name: ThunderProperty
-      lv: 0
+      lv: 1
       imgPref: {fileID: 0}
     - name: DamageTwice
       lv: 0

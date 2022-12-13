@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1634073139681220358, guid: 0d0ca3d258e805b46b45c19b58c31afc, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 2984754063156357267, guid: 411c2c0fde0c7ce4f9bb7ca3ec1d8ee9, type: 3}
     - target: {fileID: 5018707501762981978, guid: 0d0ca3d258e805b46b45c19b58c31afc, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -53,12 +57,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5687438631906306784, guid: 0d0ca3d258e805b46b45c19b58c31afc, type: 3}
       propertyPath: m_Name
-      value: Bat_20.CandyCaneD
+      value: Bat_15.CandyCaneD
       objectReference: {fileID: 0}
     - target: {fileID: 5951869222913566478, guid: 0d0ca3d258e805b46b45c19b58c31afc, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6503664635431316415, guid: 0d0ca3d258e805b46b45c19b58c31afc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5e6332de85a6da748b4428e9c91ea4c1, type: 2}
     - target: {fileID: 6738597257723105561, guid: 0d0ca3d258e805b46b45c19b58c31afc, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -77,7 +85,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8828611328073047844, guid: 0d0ca3d258e805b46b45c19b58c31afc, type: 3}
       propertyPath: nameTxts.Array.data[0]
-      value: 20.CandyCaneD
+      value: 15.CandyCaneD
       objectReference: {fileID: 0}
     - target: {fileID: 8828611328073047844, guid: 0d0ca3d258e805b46b45c19b58c31afc, type: 3}
       propertyPath: nameTxts.Array.data[1]
@@ -86,6 +94,14 @@ PrefabInstance:
     - target: {fileID: 8828611328073047844, guid: 0d0ca3d258e805b46b45c19b58c31afc, type: 3}
       propertyPath: nameTxts.Array.data[2]
       value: "\uCF00\uC778D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828611328073047844, guid: 0d0ca3d258e805b46b45c19b58c31afc, type: 3}
+      propertyPath: itemPassive.arr.Array.data[10].lv
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828611328073047844, guid: 0d0ca3d258e805b46b45c19b58c31afc, type: 3}
+      propertyPath: itemPassive.arr.Array.data[13].lv
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d0ca3d258e805b46b45c19b58c31afc, type: 3}

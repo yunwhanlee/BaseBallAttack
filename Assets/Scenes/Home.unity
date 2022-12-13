@@ -1105,20 +1105,20 @@ MonoBehaviour:
     - {fileID: 4604932161339017364, guid: 7ff2aaf459a9176468d44ea8383629c0, type: 3}
     - {fileID: 4604932161339017364, guid: 7ac307d59af33664199c435106115260, type: 3}
     - {fileID: 4604932161339017364, guid: 785c597045c527749988d2e63cac15cc, type: 3}
-    - {fileID: 4604932161339017364, guid: c116e88c5a8241647abcffdb2bc2e7c0, type: 3}
-    - {fileID: 4604932161339017364, guid: 4c4026dc753b97b499545bed4446085c, type: 3}
-    - {fileID: 4604932161339017364, guid: 22b9b2bad4f15fc4e9ad0b9489b6dd52, type: 3}
-    - {fileID: 5298460928622142381, guid: aac363076cbbb6a48b22f91e3e34484a, type: 3}
-    - {fileID: 2222256120878265870, guid: 7ffabcdc9d32383439a5a0d2e57cba0c, type: 3}
     - {fileID: 7991760111659861724, guid: 0dc8e809c66398d478fccfaf26d38dc0, type: 3}
     - {fileID: 9066435181333296440, guid: 5121df8aa6eb2014db3f3d20b0f0051a, type: 3}
     - {fileID: 5687438631906306784, guid: 0d0ca3d258e805b46b45c19b58c31afc, type: 3}
     - {fileID: 8867993518495245652, guid: 6bb78e766d9109648a00cdb89a81c7ee, type: 3}
     - {fileID: 3194480649693662156, guid: b251d485c1113e9449e5681d46247a47, type: 3}
-    - {fileID: 130111081111786611, guid: df97e2fd4fc330b44bf01ea6caec6a36, type: 3}
-    - {fileID: 1156106783884835902, guid: 075f288b6612be84c86ef7a6fb79023a, type: 3}
     - {fileID: 439132220079943380, guid: 585ed3214e359524fb17fbb48e900326, type: 3}
+    - {fileID: 4604932161339017364, guid: c116e88c5a8241647abcffdb2bc2e7c0, type: 3}
+    - {fileID: 4604932161339017364, guid: 4c4026dc753b97b499545bed4446085c, type: 3}
+    - {fileID: 4604932161339017364, guid: 22b9b2bad4f15fc4e9ad0b9489b6dd52, type: 3}
+    - {fileID: 5298460928622142381, guid: aac363076cbbb6a48b22f91e3e34484a, type: 3}
+    - {fileID: 1156106783884835902, guid: 075f288b6612be84c86ef7a6fb79023a, type: 3}
     - {fileID: 8792708891350454873, guid: 940a190e29ae0f344b09be4dc580b1df, type: 3}
+    - {fileID: 2222256120878265870, guid: 7ffabcdc9d32383439a5a0d2e57cba0c, type: 3}
+    - {fileID: 130111081111786611, guid: df97e2fd4fc330b44bf01ea6caec6a36, type: 3}
   - type: Skill
     scrollRect: {fileID: 1338635736}
     contentTf: {fileID: 1931609520}
@@ -1276,11 +1276,11 @@ MonoBehaviour:
         lv: 0
         maxLv: 0
         unit: 0.05
-  rankGeneralColor: {r: 1, g: 1, b: 1, a: 0.5019608}
-  rankRareColor: {r: 0, g: 0.003921569, b: 1, a: 0.6509804}
-  rankUniqueColor: {r: 1, g: 0, b: 1, a: 0.5019608}
-  rankLegendColor: {r: 1, g: 0, b: 0, a: 0.5019608}
-  rankGodColor: {r: 1, g: 1, b: 0, a: 0.68235296}
+  rankGeneralClr: {r: 1, g: 1, b: 1, a: 0.5019608}
+  rankRareClr: {r: 0, g: 0.003921569, b: 1, a: 0.6509804}
+  rankUniqueClr: {r: 1, g: 0, b: 1, a: 0.5019608}
+  rankLegendClr: {r: 1, g: 0, b: 0, a: 0.5019608}
+  rankGodClr: {r: 1, g: 1, b: 0, a: 0.68235296}
   isRemoveAD: 0
 --- !u!1 &106605947
 GameObject:
@@ -23682,7 +23682,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1887670882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.47960973, y: -0.2538495, z: 11.9566}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
