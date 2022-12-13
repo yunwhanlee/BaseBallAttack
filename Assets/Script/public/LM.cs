@@ -16,8 +16,9 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
 {
     public static LM _;
     //* Value
-    [Header("GAMEMANAGER")][Header("__________________________")]
+    [Header("GAME MANAGER")][Header("__________________________")]
     public int STAGE_NUM = 1;
+
     [Header("THROW BALL")][Header("__________________________")]
     public float THROW_BALL_SPEED = 25;
     [Range(0, 100)] public int SUDDENLY_THORW_PER = 50;
@@ -44,8 +45,8 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     public int FIRE_DOT_DMG_DURATION = 2;
 
     [Header("BLOCK ITEM PERCENT")][Header("__________________________")]
-    public float ICE_FREEZE_DMG_PER = 0.1f;
-    public float FIRE_DOT_DMG_PER = 0.2f;
+    [Range(0, 1)] public float ICE_FREEZE_DMG_PER = 0.1f;
+    [Range(0, 1)] public float FIRE_DOT_DMG_PER = 0.2f;
 
     [Header("BLOCK ITEM PERCENT")][Header("__________________________")]
     [Range(0, 100)] public int skipBlockPer = 20;
@@ -54,18 +55,20 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Range(0, 100)] public int healBlockPer = 5;
 
     [Header("PLAYER")][Header("__________________________")]
-    [Range(0, 1.0f)] public float ATVSKILL_COOLDOWN_UNIT = 0.02f;
+    [Range(0, 1.0f)] public float ATV_COOLDOWN_UNIT = 0.02f;
     public int MAX_LV = 50;
     public List<float> MAX_EXP_LIST = new List<float>();
 
     [Header("PSV SKILL")][Header("__________________________")]
-    public int LEVELUP_SLOTS_UNIQUE_PER = 20;
+    [Range(0, 100)] public int LEVELUP_SLOTS_UNIQUE_PER = 10;
     public int DARKORB_SPEED = 250;
-    public int GODBLESS_SPAN = 10;
+    public int GODBLESS_COMBO_SPAN = 10;
+
     [Header("REWARD")][Header("__________________________")]
     public int REROTATE_SKILLSLOTS_PRICE_COIN = 200;
     public int REVIVE_PRICE_DIAMOND = 50;
     public int ROULETTE_TICKET_COOLTIME_MINUTE = 30;
+
 
 
     void Awake() => singleton();
@@ -75,7 +78,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
         MAX_EXP_LIST = Util._.getCalcFibonicciSequenceList(unit: 100, fibRatio: 1, MAX_LV);
         HOMERUN_MIN_POWER = HIT_RANK[B].Power;
         const int OFFSET_CNT = 1;
-        GODBLESS_SPAN -= OFFSET_CNT;
+        GODBLESS_COMBO_SPAN -= OFFSET_CNT;
     }
 
     void singleton(){

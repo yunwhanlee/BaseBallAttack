@@ -192,7 +192,7 @@ public class GameManager : MonoBehaviour
             int btnIdx = (idx==DM.ins.personalData.SelectSkillIdx)? 0 : 1;
             btn.GetComponent<Button>().onClick.AddListener(() => onClickActiveSkillButton(btnIdx));
             Debug.LogFormat("activeSkillBtn[{0}].onClick.AddListener => onClickActiveSkillButton({1})", i,btnIdx);
-            activeSkillBtnList.Add(new AtvSkillBtnUI(i, LM._.ATVSKILL_COOLDOWN_UNIT, pl.activeSkills[idx].Name, btn.GetComponent<Button>(), pl.activeSkills[idx].UISprite, activeSkillBtnEfMt));
+            activeSkillBtnList.Add(new AtvSkillBtnUI(i, LM._.ATV_COOLDOWN_UNIT, pl.activeSkills[idx].Name, btn.GetComponent<Button>(), pl.activeSkills[idx].UISprite, activeSkillBtnEfMt));
         }
     }
 

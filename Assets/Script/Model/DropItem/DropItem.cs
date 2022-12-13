@@ -69,6 +69,7 @@ public class DropItem : MonoBehaviour
                     break;
                 case DropItem.TYPE.RewardChest:
                     gm.initRewardChestPanel();
+                    StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropItemGroup));
                     break;
             }
             
