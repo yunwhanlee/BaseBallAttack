@@ -517,7 +517,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }
         return myMoney;
     }
-    private ItemInfo getCurItem(){
+    public ItemInfo getCurItem(){
         var contents = getItemArr();
         int lastIdx = contents.Length - 1;
         //* (BUG) スクロールアイテムを最後を超えると、Out of Indexエラー発生。Clampで最大値LastIndexに固定。

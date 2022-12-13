@@ -257,6 +257,53 @@ public class HomeManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void onClickItemPsvInfoBtn(){
+        //* Chara Or BatのPSV表示。
+        bool isOpen = !DM.ins.scrollviews[(int)DM.PANEL.PsvInfo].ScrollRect.gameObject.activeSelf;
+        int currentType = (int)DM.ins.getCurPanelType2Enum(DM.ins.SelectItemType);
+        
+        //* PsvInfo Panel表示。(全てのPSVが出る)
+        DM.ins.scrollviews[(int)DM.PANEL.PsvInfo].ScrollRect.gameObject.SetActive(isOpen);
+
+        //* Set UI
+        DM.ins.scrollviews[currentType].ScrollRect.gameObject.SetActive(!isOpen);
+        checkBtn.gameObject.SetActive(!isOpen);
+        homePanel.GoBtn.gameObject.SetActive(!isOpen);
+
+        var ctt = DM.ins.scrollviews[(int)DM.PANEL.PsvInfo].ContentTf;
+        //* 閉じる
+        if(!isOpen){
+            //* 初期化（全て表示）
+            for(int i=0; i< ctt.childCount; i++){
+                ctt.GetChild(i).gameObject.SetActive(true);
+            }
+        }
+        //* 開く
+        else{
+            //* 現在モデルにアクセス。
+            var scrollViewEvent = DM.ins.scrollviews[currentType].ScrollRect.GetComponent<ScrollViewEvent>();
+            ItemInfo curModel = scrollViewEvent.getCurItem();
+            ItemPsvDt[] psvDtArr = curModel.ItemPassive.Arr;
+            
+            //* Lv0以上スキル Filter。
+            var filterPsvArr = Array.FindAll(psvDtArr, psv => psv.lv > 0);
+            Debug.Log("onClickItemPsvInfoBtn:: curModel= " + curModel);
+            Array.ForEach(filterPsvArr, psv => Debug.Log("onClickItemPsvInfoBtn:: psv.name= " + psv.name));
+
+            //* 「PsvInfoPanel.ContentTf」と「filterPsvArr」と名前が同じ物だけ表示。
+            for(int i=0; i< ctt.childCount; i++){
+                Debug.Log($"onClickItemPsvInfoBtn:: ctt.GetChild({i}).name= {ctt.GetChild(i).name}");
+                string cttPsvName = ctt.GetChild(i).name.Split('_')[1];
+                if(Array.Exists(filterPsvArr, psv => cttPsvName == psv.name)){
+                    ctt.GetChild(i).gameObject.SetActive(true);
+                }
+                else{
+                    ctt.GetChild(i).gameObject.SetActive(false);
+                }
+            }
+        }
+    }
+
     public void setSelectSkillImg(bool isInit = false){
         Debug.LogFormat("------setSelectSkillImg():: selectedSkillBtnIdx({0}) SelectSkillIdx({1}), SelectSkill2Idx({2})------", selectedSkillBtnIdx, DM.ins.personalData.SelectSkillIdx, DM.ins.personalData.SelectSkill2Idx);
         var ctt = DM.ins.scrollviews[(int)DM.PANEL.Skill].ContentTf;
