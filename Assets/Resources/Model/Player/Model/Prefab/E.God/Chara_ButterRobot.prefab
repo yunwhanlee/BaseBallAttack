@@ -696,7 +696,7 @@ MonoBehaviour:
   modelMeshRdrList: []
   originMtList: []
   grayPanel2D: {fileID: 0}
-  rank: 1
+  rank: 4
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
   cashShopPriceTxt: {fileID: 0}
@@ -705,10 +705,10 @@ MonoBehaviour:
   itemPassive:
     arr:
     - name: Dmg
-      lv: 0
+      lv: 1
       imgPref: {fileID: 0}
     - name: MultiShot
-      lv: 0
+      lv: 2
       imgPref: {fileID: 0}
     - name: Speed
       lv: 0
@@ -738,19 +738,19 @@ MonoBehaviour:
       lv: 0
       imgPref: {fileID: 0}
     - name: FireProperty
-      lv: 1
+      lv: 0
       imgPref: {fileID: 0}
     - name: IceProperty
-      lv: 1
+      lv: 0
       imgPref: {fileID: 0}
     - name: ThunderProperty
-      lv: 1
+      lv: 0
       imgPref: {fileID: 0}
     - name: DamageTwice
       lv: 0
       imgPref: {fileID: 0}
     - name: GiantBall
-      lv: 0
+      lv: 1
       imgPref: {fileID: 0}
     - name: DarkOrb
       lv: 0

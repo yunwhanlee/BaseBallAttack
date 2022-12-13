@@ -403,10 +403,12 @@ MonoBehaviour:
   modelMeshRdrList: []
   originMtList: []
   grayPanel2D: {fileID: 0}
-  rank: 1
+  rank: 0
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
   cashShopPriceTxt: {fileID: 0}
+  upgradeValueTxt: {fileID: 0}
+  lvTxt: {fileID: 0}
   itemPassive:
     arr:
     - name: Dmg
@@ -416,7 +418,7 @@ MonoBehaviour:
       lv: 0
       imgPref: {fileID: 0}
     - name: Speed
-      lv: 0
+      lv: 1
       imgPref: {fileID: 0}
     - name: InstantKill
       lv: 0

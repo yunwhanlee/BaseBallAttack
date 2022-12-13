@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using System;
 
 public class DM : MonoBehaviour
@@ -62,6 +63,12 @@ public class DM : MonoBehaviour
 
     [Header("★★【 MY DATE (SAVE & LOAD) 】★★")][Header("__________________________")]
     public PersonalData personalData;
+    [Header("ITEM RANK COLOR")][Header("__________________________")]
+    [FormerlySerializedAs("rankGeneralColor")] public Color rankGeneralClr;
+    [FormerlySerializedAs("rankRareColor")] public Color rankRareClr;
+    [FormerlySerializedAs("rankUniqueColor")] public Color rankUniqueClr;
+    [FormerlySerializedAs("rankLegendColor")] public Color rankLegendClr;
+    [FormerlySerializedAs("rankGodColor")] public Color rankGodClr;
 
     [Header("AD : 未完")][Header("__________________________")]
     [SerializeField] bool isRemoveAD;   public bool IsRemoveAD {get => isRemoveAD; set => isRemoveAD = value;}

@@ -284,13 +284,15 @@ MonoBehaviour:
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
   cashShopPriceTxt: {fileID: 0}
+  upgradeValueTxt: {fileID: 0}
+  lvTxt: {fileID: 0}
   itemPassive:
     arr:
     - name: Dmg
       lv: 0
       imgPref: {fileID: 0}
     - name: MultiShot
-      lv: 3
+      lv: 0
       imgPref: {fileID: 0}
     - name: Speed
       lv: 0
@@ -299,19 +301,19 @@ MonoBehaviour:
       lv: 0
       imgPref: {fileID: 0}
     - name: Critical
-      lv: 0
+      lv: 1
       imgPref: {fileID: 0}
     - name: Explosion
       lv: 0
       imgPref: {fileID: 0}
     - name: ExpUp
-      lv: 0
+      lv: 1
       imgPref: {fileID: 0}
     - name: ItemSpawn
       lv: 0
       imgPref: {fileID: 0}
     - name: VerticalMultiShot
-      lv: 3
+      lv: 0
       imgPref: {fileID: 0}
     - name: CriticalDamage
       lv: 0
@@ -332,7 +334,7 @@ MonoBehaviour:
       lv: 0
       imgPref: {fileID: 0}
     - name: GiantBall
-      lv: 1
+      lv: 0
       imgPref: {fileID: 0}
     - name: DarkOrb
       lv: 0

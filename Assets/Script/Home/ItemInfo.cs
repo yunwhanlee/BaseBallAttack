@@ -77,11 +77,21 @@ public class ItemInfo : MonoBehaviour
             checkLockedModel();
             //* Set Price By Rank
             switch(rank){
-                case DM.RANK.GENERAL : price.Coin = 100; break;
-                case DM.RANK.RARE : price.Coin = 300; break;
-                case DM.RANK.UNIQUE : price.Coin = 700; break;
-                case DM.RANK.LEGEND : price.Coin = 1500; break;
-                case DM.RANK.GOD : price.Coin = 4000; break;
+                case DM.RANK.GENERAL : 
+                    price.Coin = 100;
+                    break;
+                case DM.RANK.RARE : 
+                    price.Coin = 300; 
+                    break;
+                case DM.RANK.UNIQUE : 
+                    price.Coin = 700; 
+                    break;
+                case DM.RANK.LEGEND : 
+                    price.Coin = 1500; 
+                    break;
+                case DM.RANK.GOD : 
+                    price.Coin = 4000; 
+                    break;
             }
             Debug.Log("IteonInfo::Start:: Set Price By Rank= price.Coin= " + price.Coin);
         }

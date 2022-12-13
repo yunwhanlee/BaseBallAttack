@@ -443,6 +443,8 @@ MonoBehaviour:
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
   cashShopPriceTxt: {fileID: 0}
+  upgradeValueTxt: {fileID: 0}
+  lvTxt: {fileID: 0}
   itemPassive:
     arr:
     - name: Dmg
@@ -458,7 +460,7 @@ MonoBehaviour:
       lv: 0
       imgPref: {fileID: 0}
     - name: Critical
-      lv: 0
+      lv: 1
       imgPref: {fileID: 0}
     - name: Explosion
       lv: 0
@@ -473,7 +475,7 @@ MonoBehaviour:
       lv: 0
       imgPref: {fileID: 0}
     - name: CriticalDamage
-      lv: 0
+      lv: 1
       imgPref: {fileID: 0}
     - name: Laser
       lv: 0

@@ -5951,13 +5951,13 @@ MonoBehaviour:
   itemPassive:
     arr:
     - name: Dmg
-      lv: 0
+      lv: 1
       imgPref: {fileID: 0}
     - name: MultiShot
       lv: 0
       imgPref: {fileID: 0}
     - name: Speed
-      lv: 0
+      lv: 1
       imgPref: {fileID: 0}
     - name: InstantKill
       lv: 0
@@ -5969,10 +5969,10 @@ MonoBehaviour:
       lv: 0
       imgPref: {fileID: 0}
     - name: ExpUp
-      lv: 1
+      lv: 0
       imgPref: {fileID: 0}
     - name: ItemSpawn
-      lv: 1
+      lv: 0
       imgPref: {fileID: 0}
     - name: VerticalMultiShot
       lv: 0
@@ -5993,7 +5993,7 @@ MonoBehaviour:
       lv: 0
       imgPref: {fileID: 0}
     - name: DamageTwice
-      lv: 1
+      lv: 0
       imgPref: {fileID: 0}
     - name: GiantBall
       lv: 0

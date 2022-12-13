@@ -707,13 +707,15 @@ MonoBehaviour:
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
   cashShopPriceTxt: {fileID: 0}
+  upgradeValueTxt: {fileID: 0}
+  lvTxt: {fileID: 0}
   itemPassive:
     arr:
     - name: Dmg
       lv: 0
       imgPref: {fileID: 0}
     - name: MultiShot
-      lv: 0
+      lv: 2
       imgPref: {fileID: 0}
     - name: Speed
       lv: 0
@@ -728,7 +730,7 @@ MonoBehaviour:
       lv: 0
       imgPref: {fileID: 0}
     - name: ExpUp
-      lv: 0
+      lv: 1
       imgPref: {fileID: 0}
     - name: ItemSpawn
       lv: 0
@@ -764,7 +766,7 @@ MonoBehaviour:
       lv: 0
       imgPref: {fileID: 0}
     - name: BirdFriend
-      lv: 0
+      lv: 1
       imgPref: {fileID: 0}
   rankAuraEF: {fileID: 4051769559931623484}
 --- !u!54 &2984715474218134535
@@ -1442,7 +1444,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.9914521, g: 1, b: 0, a: 0.5019608}
+      maxColor: {r: 1, g: 1, b: 0, a: 0.68235296}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

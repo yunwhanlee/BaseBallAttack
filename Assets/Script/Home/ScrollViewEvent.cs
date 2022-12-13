@@ -570,6 +570,15 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 if(item.Outline3D) {
                     item.Outline3D.enabled = isActive; 
                     item.RankAuraEF.SetActive(!isActive);
+                    
+                    var particle = item.RankAuraEF.GetComponent<ParticleSystem>().main;
+                    switch(item.Rank){
+                        case DM.RANK.GENERAL: particle.startColor = DM.ins.rankGeneralClr; break;
+                        case DM.RANK.RARE: particle.startColor = DM.ins.rankRareClr; break;
+                        case DM.RANK.UNIQUE: particle.startColor = DM.ins.rankUniqueClr; break;
+                        case DM.RANK.LEGEND: particle.startColor = DM.ins.rankLegendClr; break;
+                        case DM.RANK.GOD: particle.startColor = DM.ins.rankGodClr; break;
+                    }
                 }
                 break;
             case DM.PANEL.Skill:

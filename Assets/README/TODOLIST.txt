@@ -39,9 +39,10 @@
         ✓ GodBless : コンボカウントが１０番目毎に、光の爆発開始。➡ 221107
         ✓ BirdFriend : PINK鳥召喚：矢印方向に、バッティングしたとき一緒に卵を投げる。（爆発）➡ 221107
 
-    - キャラーの足元に等級を表すアウラEF追加。    
+    ● キャラーの足元に等級を表すアウラEF追加。    
+        ✓ Rank AuraEF 色 設定。
 
-    - ItemBlock 生成。
+    ● ItemBlock 生成。
         a. ケノンタワ：ケノンタワ建設。
         b. mine
         c. TODO。。。
@@ -137,7 +138,39 @@
         ✓ WarningBossAttackEF。
         - DarkOrb.
 
-    ● DropItemに宝箱追加。
+    ● DropItem
+        ✓RewardChest宝箱追加。
+
+    ● レベルリング
+        - Rankの値段設定。
+        - SkillのGUI文字間違えが有るか確認。
+        ✓ Playerモデル Rank＋スキル 設定。
+        - Batモデル Rank＋スキル 設定。
+        ✓ CharaとBatのPassiveスキルの種類分ける。
+            <Chara>
+                Dmg
+                MultiShot
+                Speed
+                InstantKill
+                Critical
+                ExpUp
+                ItemSpawn
+                ----
+                GiantBall
+                BirdFriend
+                DarkOrb
+            <Bat>
+                Explosion
+                CriticalDmg
+                VerticalMultiShot
+                Laser
+                FireProperty
+                IceProperty
+                ThunderProperty
+                -----
+                DamageTwice
+                GodBless
+
 
         
 

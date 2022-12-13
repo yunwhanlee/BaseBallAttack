@@ -459,6 +459,8 @@ MonoBehaviour:
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
   cashShopPriceTxt: {fileID: 0}
+  upgradeValueTxt: {fileID: 0}
+  lvTxt: {fileID: 0}
   itemPassive:
     arr:
     - name: Dmg
@@ -474,16 +476,16 @@ MonoBehaviour:
       lv: 0
       imgPref: {fileID: 0}
     - name: Critical
-      lv: 0
+      lv: 2
       imgPref: {fileID: 0}
     - name: Explosion
       lv: 0
       imgPref: {fileID: 0}
     - name: ExpUp
-      lv: 0
+      lv: 1
       imgPref: {fileID: 0}
     - name: ItemSpawn
-      lv: 0
+      lv: 1
       imgPref: {fileID: 0}
     - name: VerticalMultiShot
       lv: 0
@@ -513,7 +515,7 @@ MonoBehaviour:
       lv: 0
       imgPref: {fileID: 0}
     - name: GodBless
-      lv: 1
+      lv: 0
       imgPref: {fileID: 0}
     - name: BirdFriend
       lv: 0
@@ -1768,7 +1770,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.9183235, g: 0, b: 1, a: 0.5019608}
+      maxColor: {r: 1, g: 0, b: 1, a: 0.5019608}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
