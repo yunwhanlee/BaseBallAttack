@@ -29,7 +29,7 @@ public class UpgradeDt {
         if(name == DM.UPGRADE.BallSpeed.ToString())
             return $"{value * 100}m/s";
         else
-            return $"{value * 100}%";
+            return $"{Mathf.Round(value * 100)}%"; //* (BUG-11) 
     }
 }
 //--------------------------------------------------------------------------------------------------

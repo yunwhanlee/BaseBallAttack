@@ -211,6 +211,7 @@
     ✓ (BUG-8) Home:: Bat.getChild(0).getChild(0)-> Null ---> getChild(0)が正しい。
     ✓ (BUG-9) 各々モデルPrefabのInspectorViewで、ItemInfoスクリプトのNameTxtsへ書いたのテキストが自分のObject名と違うと、int idxが nullになるので、エラーが発生します。
     ✓ (BUG-10) RewardChestPanelが表示されるとき、ボース攻撃とかを無効にしないとだめなので、Timeを０にする。
+    ✓ (BUG-11) UpgradePanel:: UpgradeDt.getVal2Strで、致命打が10%になった場合、Floatなので、9.9999999になるエラー対応。
 
     
 

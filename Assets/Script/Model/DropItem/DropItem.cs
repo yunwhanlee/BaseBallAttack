@@ -72,7 +72,6 @@ public class DropItem : MonoBehaviour
                     StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropItemGroup));
                     break;
             }
-            
         }
     }
 }
