@@ -71,15 +71,15 @@ public class BlockMaker : MonoBehaviour
                         #region Block Kind or Skip
                         //* #1. Block Skip?
                         int rand = Random.Range(0,100);
-                        if(rand < LM._.skipBlockPer) continue; //Skip Block
+                        if(rand < LM._.SKIP_BLOCK_PER) continue; //Skip Block
 
                         //* #2. Block TreasureChest?
                         rand = Random.Range(0,100);
-                        if(rand < LM._.treasureChestBlockPer)   ins = blockPrefs[(int)KIND.TreasureChest];
+                        if(rand < LM._.TREASURECHEST_BLOCK_PER)   ins = blockPrefs[(int)KIND.TreasureChest];
 
                         //* #3. Block HealBlock?
                         rand = Random.Range(0,100);
-                        if(rand < LM._.healBlockPer)   ins = blockPrefs[(int)KIND.Heal];
+                        if(rand < LM._.HEAL_BLOCK_PER)   ins = blockPrefs[(int)KIND.Heal];
 
                         //* #4. Block生成
                         float x = offsetPosX + h * xs;
@@ -120,7 +120,7 @@ public class BlockMaker : MonoBehaviour
         bool isExistRewardChest = Array.Find(dropItemObjs, obj => obj.name.Contains(DM.NAME.RewardChest.ToString()));
 
         if(isExistRewardChest) return; //存在するなら、下記の処理しない。
-        int rand = Random.Range(0, 100);
+        int rand = Random.Range(0, 1000);
         if(rand < LM._.REWARD_CHEST_PER){
             var ins2 = Instantiate(dropItemRewardChestPf, blockTf.position, Quaternion.identity, gm.dropItemGroup);
             ins2.GetComponent<DropItem>().spawnPopUp(popPower);

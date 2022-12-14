@@ -176,11 +176,16 @@ public class Util : MonoBehaviour
     *   @param 1. start (始め項)
     *   @param 2. max (最大値)
     *   @param 3. d (common Differnce:共差)
-    *   @param 4. gradualUpValue (増加量) 0.00 ～ 1.00f EX) 0.01fは dの1%ずつ増える++
+    *   @param 4. gradualUpValue (増加量) 0 ～ 1f EX) 0.01fは dの1%ずつ増える++
+    *
+    *   !) 小数点までは対応できません。
+    *   ?  対応) Offsetとして100を加えて、計算結果に100を割る。 
+    *   ?        start: 100、d: 100を入れて、return値 / 100してください。
     */
     public List<int> calcArithmeticProgressionList(int start, int max, int d, float gradualUpValue = 0.00f){
         List<int> resList = new List<int>();
-        for(int n=1; n<=max+1; n++){ //! max + 1下利用は、maxまでアップグレードしたらOutOfIndexバグが出るからです。
+        //! max + 1下利用は、maxまでアップグレードしたらOutOfIndexバグが出るからです。
+        for(int n=1; n<=max+1; n++){ 
             int commonDifference = d + (int)(d * (n) * gradualUpValue);
             int v = start + (n - 1) * commonDifference;
             Debug.Log($"等差数列:: {n}回目 : {start} + ({n} - 1) * {commonDifference} = {v}");

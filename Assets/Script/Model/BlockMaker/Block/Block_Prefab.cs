@@ -179,7 +179,7 @@ public class Block_Prefab : MonoBehaviour
 //*-----------------------------------------
     private void setType(){
         int rand = Random.Range(0,100);
-        itemTypePer = (int)(100 * ((LM._.itemTypePer * 0.01f) + pl.itemSpawn.Val)); //百分率
+        itemTypePer = (int)(100 * ((LM._.ITEM_TYPE_PER * 0.01f) + pl.itemSpawn.Val)); //百分率
 
         if(kind == BlockMaker.KIND.Normal && rand < itemTypePer){
             int len = System.Enum.GetValues(typeof(BlockType)).Length; 
@@ -195,17 +195,25 @@ public class Block_Prefab : MonoBehaviour
         }
     }
     private void setHp(){
+        //* ブロック HPリスト 準備
+        const int OFFSET = 100;
+        List<int> hpList = Util._.calcArithmeticProgressionList(start: OFFSET, max: 99, d: OFFSET, gradualUpValue: 0.01f);
+
+        //* ランダム要素
+        int rand = Random.Range(0, 100);
+        int extraVal = (rand < 60)? -1 : (rand < 90)? 0 : 1;
+
         switch(kind){
             case BlockMaker.KIND.TreasureChest:
                 Hp = 1;
                 break;
             case BlockMaker.KIND.Long:
             case BlockMaker.KIND.Obstacle:
-                Hp = gm.stage * 5;
+                Hp = hpList[gm.stage] / OFFSET * 5;
                 break;
             case BlockMaker.KIND.Normal:
             case BlockMaker.KIND.Heal:
-                Hp = Util._.getCalcEquivalentSequence(gm.stage, 4);
+                Hp =  hpList[gm.stage + extraVal] / OFFSET;
                 break;
         }
         hpTxt.text = Hp.ToString();

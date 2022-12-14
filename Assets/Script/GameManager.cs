@@ -154,8 +154,10 @@ public class GameManager : MonoBehaviour
 
 
     void Start() {
-        stage = LM._.STAGE_NUM;
         // Util._.calcArithmeticProgressionList(start: 100, max: 50, d: 100, gradualUpValue: 0.1f);
+
+
+        stage = LM._.STAGE_NUM;
         
         Debug.Log("<color=red>----------------------------------------------P L A Y   S C E N E----------------------------------------------</color>");
         //! init()宣言したら、キャラクターモデルを読み込むことができないBUG

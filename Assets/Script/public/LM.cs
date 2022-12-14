@@ -48,12 +48,14 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("フリーズ ダメージ")] [Range(0, 1)] public float ICE_FREEZE_DMG_PER = 0.1f;
     [Tooltip("火ドット ダメージ")] [Range(0, 1)] public float FIRE_DOT_DMG_PER = 0.2f;
 
-    [Header("BLOCK & DROP ITEM PERCENT")][Header("__________________________")]
-    [Tooltip("スキップ ブロック％")] [Range(0, 100)] public int skipBlockPer = 20;
-    [Tooltip("アイテムタイプ ブロック％")] [Range(0, 100)] public int itemTypePer = 10;
-    [Tooltip("宝箱 ブロック％")] [Range(0, 100)] public int treasureChestBlockPer = 5;
-    [Tooltip("ヒール ブロック％")] [Range(0, 100)] public int healBlockPer = 5;
-    [Tooltip("リワード箱 ドロップ％")] [Range(0, 100)] public int REWARD_CHEST_PER = 5;
+    [Header("BLOCK ITEM PERCENT")][Header("__________________________")]
+    [Tooltip("スキップ ブロック％")] [Range(0, 100)] public int SKIP_BLOCK_PER = 20;
+    [Tooltip("アイテムタイプ ブロック％")] [Range(0, 100)] public int ITEM_TYPE_PER = 10;
+    [Tooltip("宝箱 ブロック％")] [Range(0, 100)] public int TREASURECHEST_BLOCK_PER = 5;
+    [Tooltip("ヒール ブロック％")] [Range(0, 100)] public int HEAL_BLOCK_PER = 5;
+
+    [Header("DROP ITEM PERCENT")][Header("__________________________")]
+    [Tooltip("リワード箱 ドロップ％(0～1000)")] [Range(0, 1000)] public int REWARD_CHEST_PER = 5;
 
     [Header("PLAYER")][Header("__________________________")]
     [Tooltip("アクティブスキル 減少％")] [Range(0, 1.0f)] public float ATV_COOLDOWN_UNIT = 0.02f;
