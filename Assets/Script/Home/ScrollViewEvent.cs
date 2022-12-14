@@ -6,6 +6,7 @@ using SpriteGlow;
 using UnityEngine.EventSystems;
 using System;
 using UnityEngine.UI.Extensions;
+using UnityEngine.Serialization;
 using System.Text.RegularExpressions;
 
 [System.Serializable]
@@ -107,8 +108,16 @@ public class ScrollView {
         var hm = GameObject.Find(DM.NAME.HomeManager.ToString()).GetComponent<HomeManager>();
         hm.onClickBtnGoToPanel(itemType);
     }
-    public void setLanguage(){ //* SkillとCashShopのみ。
+    public void setLanguage(){
         // for(int i=0; i<ContentTf.childCount; i++) Debug.Log($"ScrollViewEvent::setLanguage():: ContentTf={ContentTf.GetChild(i)}")
+
+        //* タイトル。
+        var title = scrollRect.GetComponent<ScrollViewEvent>().TitleTxt;
+        if(this.type == DM.PANEL.CashShop.ToString()) title.text = LANG.getTxt(LANG.TXT.CashShop.ToString());
+        else if(this.type == DM.PANEL.PsvInfo.ToString()) title.text = LANG.getTxt(LANG.TXT.PsvSkillInfo.ToString());
+        else if(this.type == DM.PANEL.Upgrade.ToString()) title.text = LANG.getTxt(LANG.TXT.Upgrade.ToString());
+
+        //* コンテンツ。
         for(int i = 0; i < ContentTf.childCount; i++){
             Text[] txtObjs = null;
             List<string> strList = new List<string>();
@@ -192,6 +201,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     [Header("【 UI 】")][Header("__________________________")]
     public RectTransform uiGroup;   public RectTransform UIGroup {get => uiGroup;}
     public SpriteRenderer boxSprRdr;    public SpriteRenderer BoxSprRdr {get => boxSprRdr; set => boxSprRdr = value;}
+    [FormerlySerializedAs("titleTxt")] public Text titleTxt;   public Text TitleTxt {get => titleTxt; set => titleTxt = value;}
     public Text rankTxt;    public Text RankTxt {get => rankTxt; set => rankTxt = value;}
     public Text nameTxt;    public Text NameTxt {get => nameTxt; set => nameTxt = value;}
     public Image downArrowImg;  public Image DownArrowImg {get => downArrowImg; set => downArrowImg = value;}

@@ -92,6 +92,8 @@ public class HomeManager : MonoBehaviour
 
         adDialogTitleTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRouletteTicket_Title.ToString());
         adDialogContentTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRouletteTicket_Content.ToString());
+
+        selectedSkillBtnIdxTxt.text = LANG.getTxt(LANG.TXT.FirstSkill.ToString());
     }
 
     void Update(){
@@ -141,6 +143,7 @@ public class HomeManager : MonoBehaviour
     }
 
     public void onClickBtnSelectSkillImg(int idx){
+        
         Array.ForEach(skillBtns, skillBtn => {
             var outline = skillBtn.GetComponent<NicerOutline>();
             outline.enabled = false;
@@ -151,8 +154,8 @@ public class HomeManager : MonoBehaviour
             return;
         }
         selectedSkillBtnIdx = idx;
+        selectedSkillBtnIdxTxt.text = LANG.getTxt((idx == 0)? LANG.TXT.FirstSkill.ToString() : LANG.TXT.SecondSkill.ToString());
         skillBtns[idx].GetComponent<NicerOutline>().enabled = true;
-        selectedSkillBtnIdxTxt.text = (idx == 0)? "1st Skill" : "2nd Skill";
     }
     public void onClickRouletteIconBtn(){
         Debug.Log("onClickRouletteIconBtn:: RouletteTicket= " + DM.ins.personalData.RouletteTicket);

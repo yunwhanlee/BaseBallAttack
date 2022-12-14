@@ -19,6 +19,7 @@ public static class LANG //* LANG
         ShowAdDialogRevive_Title, ShowAdDialogRevive_Content,
         ShowAdDialogRouletteTicket_Title, ShowAdDialogRouletteTicket_Content,
         Reward, GetRewardChestPanel_Content, Empty, PsvSkillTicket, RouletteTicket, RouletteSpin,
+        FirstSkill, SecondSkill, PsvSkillInfo, Upgrade, CashShop, 
         //* PSV
         Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, 
         ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, 
@@ -219,7 +220,11 @@ public static class LANG //* LANG
     public static string[] PsvSkillTicket = new string[]{"Passive Skill ticket!", "パッシブスキル チケット!", "패시브 스킬 티켓!"};
     public static string[] RouletteTicket = new string[]{"Roulette ticket!", "ルーレット チケット!", "룰렛 티켓!"};
     public static string[] RouletteSpin = new string[]{"Spin!", "回す!", "돌리기!"};
-
+    public static string[] FirstSkill = new string[]{"1st Skill", "一番目 スキル", "첫번째 스킬"};
+    public static string[] SecondSkill = new string[]{"2nd Skill", "二番目 スキル", "두번째 스킬"};
+    public static string[] PsvSkillInfo = new string[]{"Passive Skill info", "パッシブスキル情報", "패시브 스킬 정보"};
+    public static string[] Upgrade = new string[]{"Upgrade", "アップグレード", "업그레이드"};
+    public static string[] CashShop = new string[]{"Cash Shop", "課金ショップ", "캐시샾"};
 
     //* PSV
     public static string[] Dmg = new string[]{DM.PSV.Dmg.ToString(), "攻撃力", "공격력"};
@@ -355,7 +360,11 @@ public static class LANG //* LANG
         if(name == TXT.PsvSkillTicket.ToString()) res = PsvSkillTicket[CUR_LANG];
         if(name == TXT.RouletteTicket.ToString()) res = RouletteTicket[CUR_LANG];
         if(name == TXT.RouletteSpin.ToString()) res = RouletteSpin[CUR_LANG];
-        
+        if(name == TXT.FirstSkill.ToString()) res = FirstSkill[CUR_LANG];
+        if(name == TXT.SecondSkill.ToString()) res = SecondSkill[CUR_LANG];
+        if(name == TXT.PsvSkillInfo.ToString()) res = PsvSkillInfo[CUR_LANG];
+        if(name == TXT.Upgrade.ToString()) res = Upgrade[CUR_LANG];
+        if(name == TXT.CashShop.ToString()) res = CashShop[CUR_LANG];
 
         //* PSV
         if(name == TXT.Dmg.ToString()) res = Dmg[CUR_LANG];
