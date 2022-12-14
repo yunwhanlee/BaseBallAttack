@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 3227531065938156434}
   - component: {fileID: 3227531065938156439}
   - component: {fileID: 3227531065938156432}
-  - component: {fileID: 3227531065938156433}
+  - component: {fileID: 743966351883073309}
   m_Layer: 5
   m_Name: LvText
   m_TagString: Untagged
@@ -149,7 +149,7 @@ RectTransform:
   m_GameObject: {fileID: 3227531065938156435}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.41043332, y: 0.41043332, z: 0.41043332}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children: []
   m_Father: {fileID: 3227531064289134896}
   m_RootOrder: 0
@@ -157,7 +157,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 300}
+  m_SizeDelta: {x: 350, y: 350}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &3227531065938156439
 CanvasRenderer:
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.95213556, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.9780377, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -188,10 +188,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 300
-    m_FontStyle: 1
-    m_BestFit: 1
+    m_Font: {fileID: 12800000, guid: 6cfc80c7cfc224830ba9513ae06a46e9, type: 3}
+    m_FontSize: 285
+    m_FontStyle: 2
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 300
     m_Alignment: 4
@@ -201,7 +201,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 1
---- !u!114 &3227531065938156433
+--- !u!114 &743966351883073309
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -210,9 +210,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3227531065938156435}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Script: {fileID: 11500000, guid: db125c7de00668f4e98849d0aaf366d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 15, y: -15}
+  m_EffectDistance: {x: 20, y: -20}
   m_UseGraphicAlpha: 0
