@@ -210,6 +210,7 @@
     ✓ (BUG-7) ItemBuyEF-UIがスキルの場合は、似合わないこと対応：該当なスキルイメージ生成、メダルの真ん中に位置調整。
     ✓ (BUG-8) Home:: Bat.getChild(0).getChild(0)-> Null ---> getChild(0)が正しい。
     ✓ (BUG-9) 各々モデルPrefabのInspectorViewで、ItemInfoスクリプトのNameTxtsへ書いたのテキストが自分のObject名と違うと、int idxが nullになるので、エラーが発生します。
+    ✓ (BUG-10) RewardChestPanelが表示されるとき、ボース攻撃とかを無効にしないとだめなので、Timeを０にする。
 
     
 

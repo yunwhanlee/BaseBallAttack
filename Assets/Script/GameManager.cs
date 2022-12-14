@@ -244,10 +244,10 @@ public class GameManager : MonoBehaviour
         StartCoroutine(coRewardChestOpen());
     }
     IEnumerator coRewardChestOpen(){
+        Time.timeScale = 0; //* (BUG-10) RewardChestPanelが表示されるとき、ボース攻撃とかを無効にしないとだめなので、Timeを０にする。
         initRewardChestPanelUI(isOpen: true);
         getRewardChestPanel.GetComponentInChildren<Animator>().SetTrigger(DM.ANIM.DoOpen.ToString());
-
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSecondsRealtime(1); //* (BUG-10) RewardChestPanelが表示されるとき、Time.Scaleが０のため、RealTimeで動く。
 
         rewardChestOkBtn.gameObject.SetActive(true);
         const int GOODS = 0, PSVSKILL_TICKET = 1, ROULETTE_TICKET = 2, EMPTY = 3;
@@ -309,6 +309,7 @@ public class GameManager : MonoBehaviour
 
     public void onClickRewardChestOkButton(int reward, Dictionary<string, int> goodsPriceDic){
         Debug.Log("onClickRewardChestOkButton:: reward= " + reward);
+        Time.timeScale = 1;
         const int GOODS = 0, PSVSKILL_TICKET = 1, ROULETTE_TICKET = 2, EMPTY = 3;
         switch(reward){
             case GOODS:
