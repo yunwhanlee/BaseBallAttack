@@ -745,6 +745,7 @@ public class GameManager : MonoBehaviour
         //* Coroutineの中、while文でUpdate()ように活用：ExpOrbがPlayerに全て届くまで待つ。
         while(true){
             if(pl.IsLevelUp){ //* <- Player::setLevelUp()
+                yield return new WaitForSeconds(1);
                 pl.IsLevelUp = false;
                 levelUpPanel.SetActive(true);
                 rerotateSkillSlotsBtn.gameObject.SetActive(true);
@@ -758,6 +759,7 @@ public class GameManager : MonoBehaviour
         //* Coroutineの中、while文でUpdate()ように活用：RewardChestがPlayerに届くまで待つ。
         while(true){
             if(pl.IsGetRewardChest){
+                yield return new WaitForSeconds(1);
                 pl.IsGetRewardChest = false;
                 initRewardChestPanel();
                 break;

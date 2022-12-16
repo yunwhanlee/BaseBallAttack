@@ -257,6 +257,7 @@ public class Player : MonoBehaviour
         Lv++;
         Exp = 0;
         MaxExp = (int)LM._.MAX_EXP_LIST[Lv];
+        em.createLvUpNovaEF(this.modelMovingTf.transform.position);
         Debug.Log($"setLevelUp():: Lv={Lv}, MaxExp={MaxExp}");
     }
     public void destroyAllCastEF(){

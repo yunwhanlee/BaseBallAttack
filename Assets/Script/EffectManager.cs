@@ -48,6 +48,9 @@ public class EffectManager : MonoBehaviour
     public GameObject thunderStrikeEF;
     public GameObject colorBallStarExplosionEF;
 
+    [Header("PLAYER EF")][Header("__________________________")]
+    public GameObject lvUpNovaEF;
+
     [Header("DROP ITEMS EF")][Header("__________________________")]
     public GameObject dropItemExpOrbEF;
 
@@ -79,6 +82,10 @@ public class EffectManager : MonoBehaviour
 //*---------------------------------------
 //* 関数
 //*---------------------------------------
+    public void createLvUpNovaEF(Vector3 parentPos){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.LvUpNovaEF.ToString(), parentPos, lvUpNovaEF.transform.rotation, gm.effectGroup);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 2));
+    }
     public void createRockObstacleBrokenEF(Vector3 parentPos){
         var ins = ObjectPool.getObject(ObjectPool.DIC.RockObstacleBrokenEF.ToString(), parentPos, QI, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1));

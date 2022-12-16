@@ -8,6 +8,7 @@ public class ObjectPool : MonoBehaviour
     public enum DIC{
         //* EF
         AtvSkShotEF, AtvSkExplosionEF, AtvSkShotEF2, AtvSkExplosionEF2, 
+        LvUpNovaEF,
         DropItemExpOrbEF, DownWallHitEF, BrokeBlockEF,
         ItemBlockDirLineTrailEF, ItemBlockExplosionEF,
         InstantKillTextEF, CritTxtEF, HealTxtEF, HeartEF, SnowExplosionEF, IcePropertyNovaFrost,
@@ -55,7 +56,7 @@ public class ObjectPool : MonoBehaviour
         //* Set Data 
         // EFFECT
         List<PoolData> poolDtList = new List<PoolData>(){};
-        
+        // 複数(配列)
         poolDtList.Add(new PoolData(DIC.AtvSkShotEF.ToString(), em.activeSkillShotEFs[DM.ins.personalData.SelectSkillIdx], 1, em.gm.effectGroup));
         if(em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkillIdx]) //* ThunderShotスキルはこれがないので条件文で対応。
             poolDtList.Add(new PoolData(DIC.AtvSkExplosionEF.ToString(), em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkillIdx], 1, em.gm.effectGroup));
@@ -67,6 +68,8 @@ public class ObjectPool : MonoBehaviour
             if(em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkill2Idx])
                 poolDtList.Add(new PoolData(DIC.AtvSkExplosionEF2.ToString(), em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkill2Idx], 1, em.gm.effectGroup));
         }
+        // 単一
+        poolDtList.Add(new PoolData(DIC.LvUpNovaEF.ToString(), em.lvUpNovaEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.DropItemExpOrbEF.ToString(), em.dropItemExpOrbEF, 30, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.InstantKillTextEF.ToString(), em.instantKillTxtEF, 5, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.CritTxtEF.ToString(), em.criticalTxtEF, 3, em.gm.effectGroup));
