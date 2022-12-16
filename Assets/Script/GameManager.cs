@@ -253,7 +253,11 @@ public class GameManager : MonoBehaviour
         const int GOODS = 0, PSVSKILL_TICKET = 1, ROULETTE_TICKET = 2, EMPTY = 3;
         var goodsPriceDic = new Dictionary<string, int>();
         int rand = Random.Range(0, 100);
-        int reward = (rand < 25)? GOODS : (rand < 50)? PSVSKILL_TICKET : (rand < 75)? ROULETTE_TICKET : EMPTY;
+        int reward = (rand < 1)? GOODS : (rand < 90)? PSVSKILL_TICKET : (rand < 91)? ROULETTE_TICKET : EMPTY;
+
+        //* (BUG-12)LevelUpして、LevelUpPanelが出ている場合は、PSVSKILL_TICKETが当たらないようにして重なるBUG対応。
+        if(levelUpPanel.activeSelf && reward == PSVSKILL_TICKET)
+            reward = GOODS;
 
         switch(reward){
             case GOODS:
@@ -289,6 +293,7 @@ public class GameManager : MonoBehaviour
         }
 
         //* AddEventListener('onClick')
+        rewardChestOkBtn.onClick.RemoveAllListeners(); //* (BUG-13) リワート種類によって処理が変わるのでAddListenerをしましたが、繰り返したら重なるバグを初期化する形で対応。
         rewardChestOkBtn.onClick.AddListener(() => onClickRewardChestOkButton(reward, goodsPriceDic));
     }
     private void initRewardChestPanelUI(bool isOpen){
@@ -319,7 +324,12 @@ public class GameManager : MonoBehaviour
                     diamond += rewardDiamond;
                 break;
             case PSVSKILL_TICKET:
+                Debug.Log("onClickRewardChestOkButton:: PSVSKILL_TICKET!!!!");
+                levelUpPanel.GetComponent<LevelUpPanelAnimate>().IsPsvSkillTicket = true;
                 levelUpPanel.SetActive(true);
+                levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
+                // pl.setLevelUp();
+                // StartCoroutine(coCheckLevelUp());
                 break;
             case ROULETTE_TICKET:
                 DM.ins.personalData.RouletteTicket++;
@@ -686,6 +696,7 @@ public class GameManager : MonoBehaviour
         activeSkillDataBase[0].checkBlocksIsDotDmg(this);
         StartCoroutine(coCheckPerfectBonus(boss));
         StartCoroutine(coCheckLevelUp());
+        StartCoroutine(coCheckGetRewardChest());
 
         //* オーブを集める
         Invoke("collectDropOrb", 0.5f);
@@ -730,13 +741,29 @@ public class GameManager : MonoBehaviour
         }
     }
     public IEnumerator coCheckLevelUp(){
-        Debug.Log($"coCheckLevelUp()::checkLevelUp():: pl.BefLv= {pl.BefLv}, pl.Lv= {pl.Lv}");
-        yield return new WaitForSeconds(0.8f);
-        if(pl.IsLevelUp){ //* <- Player::setLevelUp()
-            pl.IsLevelUp = false;
-            levelUpPanel.SetActive(true);
-            rerotateSkillSlotsBtn.gameObject.SetActive(true);
-            levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
+        //* Coroutineの中、while文でUpdate()ように活用：ExpOrbがPlayerに全て届くまで待つ。
+        while(true){
+            if(pl.IsLevelUp){ //* <- Player::setLevelUp()
+                yield return new WaitForSeconds(1);
+                pl.IsLevelUp = false;
+                levelUpPanel.SetActive(true);
+                rerotateSkillSlotsBtn.gameObject.SetActive(true);
+                levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
+                break;
+            }
+            yield return null;
+        }
+    }
+    public IEnumerator coCheckGetRewardChest(){
+        //* Coroutineの中、while文でUpdate()ように活用：RewardChestがPlayerに届くまで待つ。
+        while(true){
+            if(pl.IsGetRewardChest){
+                yield return new WaitForSeconds(1);
+                pl.IsGetRewardChest = false;
+                initRewardChestPanel();
+                break;
+            }
+            yield return null;
         }
     }
     public int getCurSkillIdx(){

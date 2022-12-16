@@ -28,10 +28,11 @@ public class LevelUpPanelAnimate : MonoBehaviour{
     float time;
     float span;
     int skillImgCnt;
-
+    
     [Header("STATE")][Header("__________________________")]
     [SerializeField] int scrollingSpeed;
     [SerializeField] bool isRollingStop = false;
+    [SerializeField] bool isPsvSkillTicket; public bool IsPsvSkillTicket { get => isPsvSkillTicket; set => isPsvSkillTicket = value;}
     [SerializeField] List<string> exceptSkNameList = new List<string>();
     public List<KeyValuePair<int, GameObject>> skillList = new List<KeyValuePair<int, GameObject>>(); //* 同じnewタイプ型を代入しないと、使えない。
 
@@ -256,7 +257,10 @@ public class LevelUpPanelAnimate : MonoBehaviour{
         }
         
         //* 終了
-        pl.BefLv++;
+        if(!isPsvSkillTicket) //* (BUG-14) LevelUpPanelAnimate:: isPsvSkillTicket変数を生成、PSVチケットの場合は、befLv++しない。
+            pl.BefLv++;
+        else
+            isPsvSkillTicket = false;
         // Debug.LogFormat("onClickSkillUpBtn({0}):: <color=yellow> pl.Lv= {1}, pl.befLv= {2}</color>",index, pl.Lv, pl.BefLv);
 
         this.gameObject.SetActive(false);

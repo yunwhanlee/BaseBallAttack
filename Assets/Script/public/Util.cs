@@ -188,7 +188,7 @@ public class Util : MonoBehaviour
         for(int n=1; n<=max+1; n++){ 
             int commonDifference = d + (int)(d * (n) * gradualUpValue);
             int v = start + (n - 1) * commonDifference;
-            Debug.Log($"等差数列:: {n}回目 : {start} + ({n} - 1) * {commonDifference} = {v}");
+            // Debug.Log($"等差数列:: {n}回目 : {start} + ({n} - 1) * {commonDifference} = {v}");
             resList.Add(v);
         }
         return resList;
