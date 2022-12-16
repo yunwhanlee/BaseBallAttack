@@ -254,8 +254,9 @@ public class GameManager : MonoBehaviour
         int rand = Random.Range(0, 100);
         int reward = (rand < 1)? GOODS : (rand < 90)? PSVSKILL_TICKET : (rand < 91)? ROULETTE_TICKET : EMPTY;
 
-        //* (BUG-12)LevelUpして、LevelUpPanelが出ている場合は、PSVSKILL_TICKETが当たらないようにして重なるBUG対応。
-        if(levelUpPanel.activeSelf && reward == PSVSKILL_TICKET)
+        //* (BUG-16)LevelUpPanelが最初に表示するとき、Start()が実行されるので
+        //* UIスタイル変更が上書きされ、できない。-> Lv2まではPSV_TICKETができないように設定。
+        if(pl.Lv < 2 && reward == PSVSKILL_TICKET)
             reward = GOODS;
 
         switch(reward){
@@ -323,12 +324,11 @@ public class GameManager : MonoBehaviour
                     diamond += rewardDiamond;
                 break;
             case PSVSKILL_TICKET:
-                Debug.Log("onClickRewardChestOkButton:: PSVSKILL_TICKET!!!!");
+                Debug.Log("onClickRewardChestOkButton:: PSVSKILL_TICKET!");
                 levelUpPanel.GetComponent<LevelUpPanelAnimate>().IsPsvSkillTicket = true;
                 levelUpPanel.SetActive(true);
                 levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
-                // pl.setLevelUp();
-                // StartCoroutine(coCheckLevelUp());
+                levelUpPanel.GetComponent<LevelUpPanelAnimate>().setUI(DM.NAME.PsvSkillTicket.ToString());
                 break;
             case ROULETTE_TICKET:
                 DM.ins.personalData.RouletteTicket++;

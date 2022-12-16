@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44479504, g: 0.49434292, b: 0.57354003, a: 1}
+  m_IndirectSpecularColor: {r: 0.44479525, g: 0.49434352, b: 0.5735407, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1859,7 +1859,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 6cfc80c7cfc224830ba9513ae06a46e9, type: 3}
     m_FontSize: 200
     m_FontStyle: 1
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 200
     m_Alignment: 4
@@ -7582,6 +7582,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollingSpeed: 2000
   isRollingStop: 0
+  isPsvSkillTicket: 0
   exceptSkNameList: []
   titleTxt: {fileID: 1368341126}
   levelTxt: {fileID: 149300364}
@@ -7593,6 +7594,9 @@ MonoBehaviour:
     name: {fileID: 167154701}
   - colImgRectTf: {fileID: 160655841}
     name: {fileID: 542304368}
+  centerWingImg: {fileID: 670083920}
+  centerMarkImg: {fileID: 698328198}
+  rerotateBtn: {fileID: 1156301439}
 --- !u!95 &557986898
 Animator:
   serializedVersion: 3
@@ -9043,7 +9047,7 @@ GameObject:
   - component: {fileID: 670083921}
   - component: {fileID: 670083920}
   m_Layer: 0
-  m_Name: BackDeco2
+  m_Name: CenterWingImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9798,7 +9802,7 @@ GameObject:
   - component: {fileID: 698328199}
   - component: {fileID: 698328198}
   m_Layer: 0
-  m_Name: Image_LevelUP_Mark
+  m_Name: CenterMarkImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10002,6 +10006,7 @@ MonoBehaviour:
   hitRank: []
   doSwing: 0
   isLevelUp: 0
+  isGetRewardChest: 0
   isStun: 0
   befLv: 1
   lv: 1
@@ -23967,8 +23972,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -370}
-  m_SizeDelta: {x: 1000, y: 180}
+  m_AnchoredPosition: {x: -0, y: -370}
+  m_SizeDelta: {x: 850, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1368341126
 MonoBehaviour:
@@ -23992,9 +23997,9 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e110c919ea5e84fea8cbc2f0556ecfef, type: 3}
-    m_FontSize: 140
+    m_FontSize: 200
     m_FontStyle: 1
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 300
     m_Alignment: 4

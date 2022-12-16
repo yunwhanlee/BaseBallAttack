@@ -17,7 +17,8 @@ public class DM : MonoBehaviour
         RightArm, HomeManager,
         BallPreview, Box001, Area,
         IceMat,
-        MainPanel, RewardChest,
+        MainPanel, RewardChest, 
+        LevelUp, PsvSkillTicket,
     };
     public enum TAG {HitRangeArea, StrikeLine, GameOverLine, Wall, ActiveDownWall, Player,
         NormalBlock, LongBlock, TreasureChestBlock, HealBlock, BossBlock,   

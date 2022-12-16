@@ -41,11 +41,15 @@ public class LevelUpPanelAnimate : MonoBehaviour{
     [FormerlySerializedAs("levelTxt")] public Text levelTxt;
     [FormerlySerializedAs("explainTxt")] public Text explainTxt;
     [FormerlySerializedAs("colSkillBtns")] public LevelUpSkillPanelBtn[] colSkillBtns;
+    [FormerlySerializedAs("centerWingImg")] public Image centerWingImg;
+    [FormerlySerializedAs("centerMarkImg")] public Image centerMarkImg;
+    [FormerlySerializedAs("rerotateBtn")] public Button rerotateBtn;
 
     private void OnEnable() => Time.timeScale = 0; //* このパンネルが出たら、政界の時間 停止
     private void OnDisable() => Time.timeScale = 1; //* このパンネルが消えたら、政界の時間 戻す
 
     public void Start(){
+        Debug.Log("onClickRewardChestOkButton:: Start!");
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         pl = gm.pl;
 
@@ -60,9 +64,7 @@ public class LevelUpPanelAnimate : MonoBehaviour{
         skillList = new List<KeyValuePair<int, GameObject>>();
 
         //* Set GUI Data
-        titleTxt.text = LANG.getTxt(LANG.TXT.LevelUpPanel_Title.ToString());
-        levelTxt.text = (pl.BefLv + 1).ToString();//LANG.getTxt(LANG.TXT.Level.ToString()) + " : " + (pl.BefLv + 1).ToString();
-        explainTxt.text = LANG.getTxt(LANG.TXT.LevelUpPanel_Explain.ToString());
+        setUI(DM.NAME.LevelUp.ToString());
 
         resetSkillImgChild(); //* Reset Before Child : これがないと、クリックでスクロール止まらなく選択されてしまう。
         setSkillList(skillList);
@@ -147,27 +149,6 @@ public class LevelUpPanelAnimate : MonoBehaviour{
                 }
             }
         }
-    }
-
-    private string setRandomPsvSkill(LevelUpSkillPanelBtn slotBtn, out int randIdx, int randPer, out string tagName){
-        randIdx = Random.Range(0, skillList.Count);
-
-        //* Set Position (.Key -> PosY)
-        int halfHeightMorePosY = skillList[randIdx].Key + spriteH / 2; 
-        slotBtn.colImgRectTf.localPosition = new Vector3(0, halfHeightMorePosY, 0);
-
-        //* Set Name 
-        string skillName = skillList[randIdx].Value.name.Split(char.Parse("_"))[1];
-        tagName = skillList[randIdx].Value.transform.tag;
-        slotBtn.name.text = LANG.getTxt(skillName);
-
-        Debug.Log("LevelUpPanelAnimate Skill Slots Stop:: " + slotBtn.colImgRectTf.parent.name
-            + ":: randPer(" + randPer + ") : " + (randPer < LM._.LEVELUP_SLOTS_UNIQUE_PER? "<color=red>UNIQUE!</color>" : "GENERAL")
-            + " ➡ <b>" + skillName + " </b>" 
-            + " ,Tag= " + (tagName == DM.TAG.PsvSkillUnique.ToString()? "<color=red>" + tagName + "</color>" : tagName)
-        );
-
-        return tagName;
     }
 
 //* --------------------------------------------------------------------------------------
@@ -277,7 +258,41 @@ public class LevelUpPanelAnimate : MonoBehaviour{
 //* --------------------------------------------------------------------------------------
 //* 関数
 //* --------------------------------------------------------------------------------------
+    private string setRandomPsvSkill(LevelUpSkillPanelBtn slotBtn, out int randIdx, int randPer, out string tagName){
+        randIdx = Random.Range(0, skillList.Count);
+
+        //* Set Position (.Key -> PosY)
+        int halfHeightMorePosY = skillList[randIdx].Key + spriteH / 2; 
+        slotBtn.colImgRectTf.localPosition = new Vector3(0, halfHeightMorePosY, 0);
+
+        //* Set Name 
+        string skillName = skillList[randIdx].Value.name.Split(char.Parse("_"))[1];
+        tagName = skillList[randIdx].Value.transform.tag;
+        slotBtn.name.text = LANG.getTxt(skillName);
+
+        Debug.Log("LevelUpPanelAnimate Skill Slots Stop:: " + slotBtn.colImgRectTf.parent.name
+            + ":: randPer(" + randPer + ") : " + (randPer < LM._.LEVELUP_SLOTS_UNIQUE_PER? "<color=red>UNIQUE!</color>" : "GENERAL")
+            + " ➡ <b>" + skillName + " </b>" 
+            + " ,Tag= " + (tagName == DM.TAG.PsvSkillUnique.ToString()? "<color=red>" + tagName + "</color>" : tagName)
+        );
+        return tagName;
+    }
+
 #region Start()メソッド
+    public void setUI(string type){
+        explainTxt.text = LANG.getTxt(LANG.TXT.LevelUpPanel_Explain.ToString());
+
+        bool isLvUp = (type == DM.NAME.LevelUp.ToString());
+        rerotateBtn.gameObject.SetActive(isLvUp);
+        centerMarkImg.color = (isLvUp)? Color.white : new Color(0,1,1);
+        centerWingImg.color = (isLvUp)? Color.white : new Color(0,1,1);
+        levelTxt.text = (isLvUp)? (pl.BefLv + 1).ToString()
+            : LANG.getTxt(LANG.TXT.Reward.ToString());
+        titleTxt.text = (isLvUp)? LANG.getTxt(LANG.TXT.LevelUpPanel_Title.ToString())
+            : LANG.getTxt(LANG.TXT.PsvSkillTicket.ToString());
+        
+        
+    }
     private void resetSkillImgChild(){
         if(0 < colSkillBtns[0].colImgRectTf.childCount){
             foreach(var btn in colSkillBtns){

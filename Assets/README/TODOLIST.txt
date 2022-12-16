@@ -218,6 +218,8 @@
     ✓ (BUG-13) rewardChestOkBtn.onClick.RemoveAllListeners(); -> リワート種類によって処理が変わるのでAddListenerをしましたが、繰り返したら重なるバグを初期化する形で対応。
     ✓ (BUG-14) LevelUpPanelAnimate:: isPsvSkillTicket変数を生成、PSVチケットの場合は、befLv++しない。
     ✓ (BUG-15) Reward Or LevelUpPanel出た時、ボスが動くので、タイム停止する処理。
+    ✓ (BUG-12)は、TimeScaleを０にすることで、必要ではなくなった。
+    ✓ (BUG-16)LevelUpPanelが最初に表示するとき、Start()が実行されるので、UIスタイル変更が上書きされ、できない。-> Lv2まではPSV_TICKETができないように設定。
 
     
 
