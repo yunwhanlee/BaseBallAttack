@@ -3921,9 +3921,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1887670884}
-        m_TargetAssemblyTypeName: HomeManager, Assembly-CSharp
-        m_MethodName: onClickSettingRequestBtn
+      - m_Target: {fileID: 349844471}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5317,6 +5317,7 @@ MonoBehaviour:
   FIRE_DOT_DMG_DURATION: 2
   ICE_FREEZE_DMG_PER: 0.1
   FIRE_DOT_DMG_PER: 0.2
+  HEAL_BLOCK_INCREASE_PER: 0.1
   SKIP_BLOCK_PER: 20
   ITEM_TYPE_PER: 10
   TREASURECHEST_BLOCK_PER: 5
@@ -11267,7 +11268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9528302, g: 0.9303578, b: 0.9303578, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
