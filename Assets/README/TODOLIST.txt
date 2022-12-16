@@ -217,7 +217,7 @@
     ✓ (BUG-12) LevelUpして、LevelUpPanelが出ている場合は、PSVSKILL_TICKETが当たらないようにして重なるBUG対応。
     ✓ (BUG-13) rewardChestOkBtn.onClick.RemoveAllListeners(); -> リワート種類によって処理が変わるのでAddListenerをしましたが、繰り返したら重なるバグを初期化する形で対応。
     ✓ (BUG-14) LevelUpPanelAnimate:: isPsvSkillTicket変数を生成、PSVチケットの場合は、befLv++しない。
-    - (BUG-15) Reward Or LevelUpPanel出た時、ボスが動くので、タイム停止する処理。
+    ✓ (BUG-15) Reward Or LevelUpPanel出た時、ボスが動くので、タイム停止する処理。
 
     
 

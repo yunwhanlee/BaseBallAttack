@@ -68,7 +68,7 @@ public class DropItem : MonoBehaviour
                     StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropItemGroup));
                     break;
                 case DropItem.TYPE.RewardChest:
-                    // gm.initRewardChestPanel();
+                    Time.timeScale = 0; //* (BUG-10) RewardChestPanelが表示されるとき、ボース攻撃とかを無効にしないとだめなので、Timeを０にする。
                     gm.pl.IsGetRewardChest = true;
                     StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropItemGroup));
                     break;
