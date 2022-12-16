@@ -44,11 +44,12 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("ブロック フリーズ 持続時間")] public int ICE_FREEZE_DURATION = 1;
     [Tooltip("ブロック 火ドットダメージ 持続時間")] public int FIRE_DOT_DMG_DURATION = 2;
 
-    [Header("BLOCK ITEM PERCENT")][Header("__________________________")]
+    [Header("BLOCK ITEM DAMAGE PERCENT")][Header("__________________________")]
     [Tooltip("フリーズ ダメージ")] [Range(0, 1)] public float ICE_FREEZE_DMG_PER = 0.1f;
     [Tooltip("火ドット ダメージ")] [Range(0, 1)] public float FIRE_DOT_DMG_PER = 0.2f;
+    [Tooltip("ヒールブロック回復％")] [Range(0, 1)] public float HEAL_BLOCK_INCREASE_PER = 0.1f;
 
-    [Header("BLOCK ITEM PERCENT")][Header("__________________________")]
+    [Header("BLOCK ITEM CREATE PERCENT")][Header("__________________________")]
     [Tooltip("スキップ ブロック％")] [Range(0, 100)] public int SKIP_BLOCK_PER = 20;
     [Tooltip("アイテムタイプ ブロック％")] [Range(0, 100)] public int ITEM_TYPE_PER = 10;
     [Tooltip("宝箱 ブロック％")] [Range(0, 100)] public int TREASURECHEST_BLOCK_PER = 5;
@@ -76,7 +77,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
 
     void Start(){
         Debug.Log("<FIBONACCI SEQUENCE> Player Max Exp");
-        MAX_EXP_LIST = Util._.getCalcFibonicciSequenceList(unit: 100, fibRatio: 1, MAX_LV);
+        MAX_EXP_LIST = Util._.getCalcFibonicciSequenceList(unit: 100, fibRatio: 2, MAX_LV);
         HOMERUN_MIN_POWER = HIT_RANK[B].Power;
         const int OFFSET_CNT = 1;
         GODBLESS_COMBO_SPAN -= OFFSET_CNT;

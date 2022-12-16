@@ -198,6 +198,7 @@ public class Block_Prefab : MonoBehaviour
         //* ブロック HPリスト 準備
         const int OFFSET = 100;
         List<int> hpList = Util._.calcArithmeticProgressionList(start: OFFSET, max: 99, d: OFFSET, gradualUpValue: 0.01f);
+        int resHp = hpList[gm.stage] / OFFSET;
 
         //* ランダム要素
         int rand = Random.Range(0, 100);
@@ -209,11 +210,13 @@ public class Block_Prefab : MonoBehaviour
                 break;
             case BlockMaker.KIND.Long:
             case BlockMaker.KIND.Obstacle:
-                Hp = hpList[gm.stage] / OFFSET * 5;
+                Hp = resHp * 5;
+                break;
+            case BlockMaker.KIND.Heal:
+                Hp =  resHp / 2;
                 break;
             case BlockMaker.KIND.Normal:
-            case BlockMaker.KIND.Heal:
-                Hp =  hpList[gm.stage + extraVal] / OFFSET;
+                Hp =  resHp;
                 break;
         }
         hpTxt.text = Hp.ToString();

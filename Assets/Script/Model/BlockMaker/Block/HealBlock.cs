@@ -7,8 +7,6 @@ public class HealBlock : Block_Prefab
     [Header("【子】HEAL STATUS")][Header("__________________________")]
     [SerializeField] bool isHeal;   public bool IsHeal {get => isHeal; set => isHeal = value;}
     [SerializeField] float healRadius = 1.5f;   public float HealRadius {get => healRadius; set => healRadius = value;}
-    [SerializeField][Range(0, 1)] float healValPer = 0.15f;   public float HealValPer {get => healValPer; set => healValPer = value;}
-
 
     new void Update(){
         base.Update();
@@ -20,8 +18,10 @@ public class HealBlock : Block_Prefab
                 RaycastHit[] rayHits = Physics.SphereCastAll(this.gameObject.transform.position, HealRadius, Vector3.up, 0);
                 foreach(var hit in rayHits){
                     var hitBlock = hit.transform.GetComponent<Block_Prefab>();
-                    if(hit.transform.name.Contains(DM.NAME.Block.ToString()) && hitBlock.kind != BlockMaker.KIND.TreasureChest){
-                        int v = (int)(hitBlock.Hp * healValPer);
+                    if(hit.transform.name.Contains(DM.NAME.Block.ToString())
+                        && hitBlock.kind != BlockMaker.KIND.TreasureChest
+                        && hitBlock.kind != BlockMaker.KIND.Heal){
+                        int v = (int)(hitBlock.Hp * LM._.HEAL_BLOCK_INCREASE_PER);
                         int addHp = (v==0)? 2 : v;
                         hitBlock.increaseHp(addHp);
                     }

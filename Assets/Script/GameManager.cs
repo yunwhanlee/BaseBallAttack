@@ -254,10 +254,10 @@ public class GameManager : MonoBehaviour
         int rand = Random.Range(0, 100);
         int reward = (rand < 1)? GOODS : (rand < 90)? PSVSKILL_TICKET : (rand < 91)? ROULETTE_TICKET : EMPTY;
 
-        //* (BUG-12)UIスタイル変更が上書きされ、できない。-> Lv2まではPSV_TICKETができないように設定。
+        //* (BUG-12)LevelUpPanelが最初に表示するとき、Start()が実行される、PSVスキル選びがLevelに上書きされるバグ対応。
         if(levelUpPanel.activeSelf && reward == PSVSKILL_TICKET)
             reward = GOODS;
-        //* (BUG-16)LevelUpPanelが最初に表示するとき、Start()が実行されるので
+        //* (BUG-16)UIスタイル変更が上書きされ、できない。-> Lv2まではPSV_TICKETができないように設定。
         if(pl.Lv < 2 && reward == PSVSKILL_TICKET)
             reward = GOODS;
 

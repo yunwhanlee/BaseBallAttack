@@ -152,6 +152,12 @@
         - PSV表示少し大きくすること。良く見えない。
         ✓ Playerモデル Rank＋スキル 設定。
         ✓ Batモデル Rank＋スキル 設定。
+        ✓ HealBlock
+            ・回復量0.15 -> 0.1に修正。
+            ・回復量をLMスクリプトでStatic化。
+            ・自分(HEAL-BLOCK)は回復しない。
+            ・体力を一般の1/2。
+
         ✓ CharaとBatのPassiveスキルの種類分ける。
             <Chara>
                 Dmg
