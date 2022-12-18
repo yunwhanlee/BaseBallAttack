@@ -9,7 +9,7 @@ public class ObjectPool : MonoBehaviour
         //* EF
         AtvSkShotEF, AtvSkExplosionEF, AtvSkShotEF2, AtvSkExplosionEF2, 
         LvUpNovaEF,
-        DropItemExpOrbEF, DownWallHitEF, BrokeBlockEF,
+        DropItemExpOrbEF, ShowExpUITxtEF, DownWallHitEF, BrokeBlockEF,
         ItemBlockDirLineTrailEF, ItemBlockExplosionEF,
         InstantKillTextEF, CritTxtEF, HealTxtEF, HeartEF, SnowExplosionEF, IcePropertyNovaFrost,
         BatHitSparkEF, HomeRunHitSparkEF, StunEF, 
@@ -70,7 +70,8 @@ public class ObjectPool : MonoBehaviour
         }
         // 単一
         poolDtList.Add(new PoolData(DIC.LvUpNovaEF.ToString(), em.lvUpNovaEF, 1, em.gm.effectGroup));
-        poolDtList.Add(new PoolData(DIC.DropItemExpOrbEF.ToString(), em.dropItemExpOrbEF, 30, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.DropItemExpOrbEF.ToString(), em.dropItemExpOrbEF, 15, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.ShowExpUITxtEF.ToString(), em.showExpUITxtEF, 15, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.InstantKillTextEF.ToString(), em.instantKillTxtEF, 5, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.CritTxtEF.ToString(), em.criticalTxtEF, 3, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.HealTxtEF.ToString(), em.healTxtEF, 10, em.gm.effectGroup));

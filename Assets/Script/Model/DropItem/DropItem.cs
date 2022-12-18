@@ -65,6 +65,9 @@ public class DropItem : MonoBehaviour
                 case DropItem.TYPE.ExpOrb:
                     gm.pl.addExp(Exp); //* (BUG) GAMEOVER後、再スタート場合、EXPが増えないように。
                     gm.em.createDropItemExpOrbEF(this.transform);
+                    gm.em.createShowExpUITxtEF(gm.showExpUIGroup.transform);
+
+                    
                     StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropItemGroup));
                     break;
                 case DropItem.TYPE.RewardChest:

@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public Transform bossGroup;
     public Transform obstacleGroup;
     public Transform activeSkillBtnGroup;
+    public RectTransform showExpUIGroup;
     
     [Header("CAMERA")][Header("__________________________")]
     public GameObject cam1;
@@ -75,7 +76,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Text shootCntTxt;      public Text ShootCntTxt { get => shootCntTxt; set => shootCntTxt = value;}
     public RectTransform homeRunTxtTf;
     public Slider expBar, bossStageBar;
-    public Text expTxt, bossStageTxt;
+    public Text expBarTxt, bossStageTxt;
 
     [Header("TEXT EFFECT")][Header("__________________________")]
     public Text comboTxt;
@@ -204,7 +205,7 @@ public class GameManager : MonoBehaviour
         //* GUI *//
         //* EXP BAR & TEXT
         expBar.value = Mathf.Lerp(expBar.value, (float)pl.Exp / (float)pl.MaxExp, Time.deltaTime * 10);
-        expTxt.text = $"{pl.Exp} / {pl.MaxExp}";
+        expBarTxt.text = $"{pl.Exp} / {pl.MaxExp}";
 
         //* BOSS BAR & TEXT
         bossStageBar.GetComponent<RectTransform>().anchorMin = new Vector2((boss? 0.15f : 0.5f), 0.5f);

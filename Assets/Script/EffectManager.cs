@@ -53,11 +53,15 @@ public class EffectManager : MonoBehaviour
 
     [Header("DROP ITEMS EF")][Header("__________________________")]
     public GameObject dropItemExpOrbEF;
+    // public GameObject ;
 
     [Header("UI EF")][Header("__________________________")]
+    //ON OFF TYPE
     public GameObject perfectTxtPopEF;
     public GameObject homeRunTxtPopEF;
     public GameObject reviveEF;
+    //CREATE TYEP
+    public GameObject showExpUITxtEF;
 
     [Header("BOSS SKILL EF")][Header("__________________________")]
     public GameObject bossHealSkillEF;
@@ -285,6 +289,12 @@ public class EffectManager : MonoBehaviour
 //* -------------------------------------------------------------
     public void createDropItemExpOrbEF(Transform parentTf){
         var ins = ObjectPool.getObject(ObjectPool.DIC.DropItemExpOrbEF.ToString(), parentTf.position, QI, gm.effectGroup);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
+    }
+    public void createShowExpUITxtEF(Transform parentTf){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.ShowExpUITxtEF.ToString(), parentTf.position, QI, gm.effectGroup);
+        ins.transform.SetParent(gm.showExpUIGroup);
+        ins.transform.localScale = new Vector3(ins.transform.localScale.x, -ins.transform.localScale.y, ins.transform.localScale.z);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
     }
     
