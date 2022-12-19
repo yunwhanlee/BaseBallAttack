@@ -369,6 +369,9 @@ public class Block_Prefab : MonoBehaviour
                     em.createItemBlockDirLineTrailEF(this.transform.position, -transform.forward);
                     break;
             }
+
+            bm.createBossTargetMisslePf(this.transform);
+            
             onDestroy(this.gameObject);
         }
 

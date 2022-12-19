@@ -26,6 +26,7 @@ public class EffectManager : MonoBehaviour
     public GameObject healTxtEF, heartEF;
     public GameObject snowExplosionEF;
     public GameObject icePropertyNovaFrost;
+    public GameObject BossTargetMissileEF;
     
     [Header("PSV SKILL EF")][Header("__________________________")]
     public GameObject explosionEF;
@@ -187,6 +188,11 @@ public class EffectManager : MonoBehaviour
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 2));
         return ins;
     }
+    public GameObject createBossTargetMissileEF(Vector3 parentPos){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.BossTargetMissileEF.ToString(), parentPos, BossTargetMissileEF.transform.rotation, gm.effectGroup);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
+        return ins;
+    }
     public void createExplosionEF(Vector3 parentPos, float scale){
         // Debug.Log("EFFECT:: Explosion:: scale=" + scale);
         var ins = ObjectPool.getObject(ObjectPool.DIC.ExplosionEF.ToString(), parentPos, QI, gm.effectGroup);
@@ -291,10 +297,10 @@ public class EffectManager : MonoBehaviour
         var ins = ObjectPool.getObject(ObjectPool.DIC.DropItemExpOrbEF.ToString(), parentTf.position, QI, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
     }
-    public void createShowExpUITxtEF(Transform parentTf, int exp){
+    public void createShowExpUITxtEF(Transform parentTf, string expStr){
         var ins = ObjectPool.getObject(ObjectPool.DIC.ShowExpUITxtEF.ToString(), parentTf.position, QI, gm.effectGroup);
         ins.transform.SetParent(gm.showExpUIGroup);
-        ins.GetComponent<Text>().text = $"+Exp {exp}";
+        ins.GetComponent<Text>().text = expStr;//$"+Exp {exp}";
         ins.transform.localScale = new Vector3(ins.transform.localScale.x, -Mathf.Abs(ins.transform.localScale.y), ins.transform.localScale.z);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
     }

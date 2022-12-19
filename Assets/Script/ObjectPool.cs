@@ -11,7 +11,7 @@ public class ObjectPool : MonoBehaviour
         LvUpNovaEF,
         DropItemExpOrbEF, ShowExpUITxtEF, DownWallHitEF, BrokeBlockEF,
         ItemBlockDirLineTrailEF, ItemBlockExplosionEF,
-        InstantKillTextEF, CritTxtEF, HealTxtEF, HeartEF, SnowExplosionEF, IcePropertyNovaFrost,
+        InstantKillTextEF, CritTxtEF, HealTxtEF, HeartEF, SnowExplosionEF, IcePropertyNovaFrost, BossTargetMissileEF,
         BatHitSparkEF, HomeRunHitSparkEF, StunEF, 
         ExplosionEF, LaserEF, DarkOrbHitEF, EggPopEF, GodBlessEF, 
         BossHealSkillEF, BossObstacleSpawnEF, RockObstacleBrokenEF, BossFireBallExplosionEF, BossFireBallTrailEF, AimingEF, DefenceEF, 
@@ -79,6 +79,7 @@ public class ObjectPool : MonoBehaviour
         poolDtList.Add(new PoolData(DIC.HeartEF.ToString(), em.heartEF, 10, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.SnowExplosionEF.ToString(), em.snowExplosionEF, 10, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.IcePropertyNovaFrost.ToString(), em.icePropertyNovaFrost, 5, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.BossTargetMissileEF.ToString(), em.BossTargetMissileEF, 20, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.DownWallHitEF.ToString(), em.downWallHitEF, 10, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.ItemBlockDirLineTrailEF.ToString(), em.itemBlockDirLineTrailEF, 3, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.ItemBlockExplosionEF.ToString(), em.itemBlockExplosionEF, 3, em.gm.effectGroup));

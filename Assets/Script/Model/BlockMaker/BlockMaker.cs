@@ -128,14 +128,20 @@ public class BlockMaker : MonoBehaviour
         }
     }
 
+    public void createBossTargetMisslePf(Transform blockTf){
+        BossBlock boss = gm.bm.getBoss();
+        if(!boss) return;
+
+        Debug.Log("createBossTargetMisslePf:: blockTf.pos= " + blockTf.position);
+        var ins = ObjectPool.getObject(ObjectPool.DIC.BossTargetMisslePf.ToString(), blockTf.position, Quaternion.identity, gm.dropItemGroup);
+        ins.transform.rotation = Quaternion.Euler(-90,0,0);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.dropItemGroup, 3));
+    }
+
     public void moveDownBlock(){
         Debug.Log("moveDownBlock:: MOVE DOWN BLOCK ↓, gm.stage= " + gm.stage);
         // gm.blockGroup.position = new Vector3(gm.blockGroup.position.x, gm.blockGroup.position.y, gm.blockGroup.position.z - 1);
         for(int i=0; i < gm.blockGroup.childCount; i++){
-            //* Init
-            // var childs = gm.blockGroup.GetComponents<OverLapCheckBoxCollider>();
-            // Array.ForEach(childs, child => child.IsMoved = false);
-            
             var blockPos = gm.blockGroup.GetChild(i).transform.localPosition;
             gm.blockGroup.GetChild(i).transform.localPosition = new Vector3(
                 blockPos.x, blockPos.y, blockPos.z - 1
