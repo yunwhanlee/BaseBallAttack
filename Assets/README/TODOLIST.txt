@@ -42,8 +42,10 @@
         ✓ Rank AuraEF 色 設定。
 
     ● DropBox ランダムでフィールドに生成されるお得なボックス。
-        - PowerUP、SpeedUp、DefenceBarrier、QuestionMoney。
-        - ランダムで生成。BlockMakerで、createRandomDropBox()関数生成。
+        ✓ PowerUP、SpeedUp、DefenceBarrier、QuestionMoney。
+        ✓ ランダムで生成。BlockMakerで、createRandomDropBox()関数生成。
+        -  DropBox.csで、Ballを当たったら、ObjectPoolに戻す処理。しかし、物理演算があり、無くす必要ある。
+
 
     - Passiveスキル追加
         ✓ ファイヤーボール：ドットダメージ。➡ 221104
