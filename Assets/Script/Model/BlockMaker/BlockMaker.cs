@@ -29,9 +29,17 @@ public class BlockMaker : MonoBehaviour
     public Material[] mts;   public Material[] Mts {get => mts;}
 
     [Header("PREFAB")][Header("__________________________")]
+    //*Drop Items
     public GameObject dropItemExpOrbPf;
     public GameObject dropItemRewardChestPf;
     public GameObject bossTargetMisslePf;
+    //*Drop Box
+    public GameObject[] dropBoxPfArr;
+    // ObjectPoolで使う変数。
+    public GameObject dropBoxQuestionPf; // Coin or Diamond
+    public GameObject dropBoxShieldPf; // Barrier from Boss Attack
+    public GameObject dropBoxSpeedPf; // Speed Up x 2
+    public GameObject dropBoxStarPf; //Power Up x 2
 
     public void Start() {
         //* Init Or AD-Revive
@@ -51,6 +59,7 @@ public class BlockMaker : MonoBehaviour
             DoCreateBlock = false;
             moveDownBlock();
             bossSpawn();
+            createRandomDropBox();
         }
     }
 //*---------------------------------------
@@ -136,6 +145,19 @@ public class BlockMaker : MonoBehaviour
         var ins = ObjectPool.getObject(ObjectPool.DIC.BossTargetMisslePf.ToString(), blockTf.position, Quaternion.identity, gm.dropItemGroup);
         ins.transform.rotation = Quaternion.Euler(-90,0,0);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.dropItemGroup, 3));
+    }
+
+    public void createRandomDropBox(){
+        int rand = Random.Range(0, 1000);
+        if(rand < LM._.DROP_BOX_PER){
+            //! Prefab名でgetObject()を判断するので、形式を守ること！=> 「DropBox{名}Pf」
+            int randIdx = Random.Range(0, dropBoxPfArr.Length);
+            Debug.Log("createRandomDropBox:: name= " + dropBoxPfArr[randIdx].name);
+
+            Vector3 randPos = dropBoxPfArr[0].GetComponent<DropBox>().setRandPos();            
+            var ins = ObjectPool.getObject(dropBoxPfArr[randIdx].name, randPos, dropBoxPfArr[0].transform.rotation, gm.dropItemGroup);
+        }
+
     }
 
     public void moveDownBlock(){

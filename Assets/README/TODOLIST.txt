@@ -41,10 +41,9 @@
     ● キャラーの足元に等級を表すアウラEF追加。    
         ✓ Rank AuraEF 色 設定。
 
-    ● ItemBlock 生成。
-        a. ケノンタワ：ケノンタワ建設。
-        b. mine
-        c. TODO。。。
+    ● DropBox ランダムでフィールドに生成されるお得なボックス。
+        - PowerUP、SpeedUp、DefenceBarrier、QuestionMoney。
+        - ランダムで生成。BlockMakerで、createRandomDropBox()関数生成。
 
     - Passiveスキル追加
         ✓ ファイヤーボール：ドットダメージ。➡ 221104

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44479525, g: 0.49434352, b: 0.5735407, a: 1}
+  m_IndirectSpecularColor: {r: 0.44479504, g: 0.49434292, b: 0.57354003, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -993,7 +993,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 54044118}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.2668319, y: -10.859961, z: -0.33374214}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2121181892}
@@ -8086,6 +8086,15 @@ MonoBehaviour:
   dropItemExpOrbPf: {fileID: 8648117785770068642, guid: 9c5c87122054a5f42a6d0f065b398386, type: 3}
   dropItemRewardChestPf: {fileID: 8648117785770068642, guid: 6e10eaee0fee1d7448b0a79e48dc667c, type: 3}
   bossTargetMisslePf: {fileID: 2469953863340705633, guid: bb3731c7ef6d86d41b0ed180e0a21f44, type: 3}
+  dropBoxPfArr:
+  - {fileID: 8347731009233814356, guid: 91ae7d4a7a25ba244b487908e6b39136, type: 3}
+  - {fileID: 4775508127583837323, guid: 0928c10a0bdd0cf449ad6402cdd5206e, type: 3}
+  - {fileID: 4130510353200909505, guid: c7d93c5077b6bd342b1697f3c60c1f2c, type: 3}
+  - {fileID: 6569938365430424664, guid: b9c9effee6f05444dbbc8d5b14ea1089, type: 3}
+  dropBoxQuestionPf: {fileID: 8347731009233814356, guid: 91ae7d4a7a25ba244b487908e6b39136, type: 3}
+  dropBoxShieldPf: {fileID: 4775508127583837323, guid: 0928c10a0bdd0cf449ad6402cdd5206e, type: 3}
+  dropBoxSpeedPf: {fileID: 4130510353200909505, guid: c7d93c5077b6bd342b1697f3c60c1f2c, type: 3}
+  dropBoxStarPf: {fileID: 6569938365430424664, guid: b9c9effee6f05444dbbc8d5b14ea1089, type: 3}
 --- !u!1 &585957426
 GameObject:
   m_ObjectHideFlags: 0

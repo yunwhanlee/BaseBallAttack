@@ -58,6 +58,9 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Header("DROP ITEM PERCENT")][Header("__________________________")]
     [Tooltip("リワード箱 ドロップ％(0～1000)")] [Range(0, 1000)] public int REWARD_CHEST_PER = 5;
 
+    [Header("DROP BOX PERCENT")][Header("__________________________")]
+    [Tooltip("BUFFドロップボックス ドロップ％(0～1000)")] [Range(0, 1000)] public int DROP_BOX_PER = 5;
+
     [Header("PLAYER")][Header("__________________________")]
     [Tooltip("アクティブスキル 減少％")] [Range(0, 1.0f)] public float ATV_COOLDOWN_UNIT = 0.02f;
     [Tooltip("プレイヤー最大レベル")] public int MAX_LV = 50;

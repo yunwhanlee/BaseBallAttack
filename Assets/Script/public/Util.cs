@@ -196,5 +196,4 @@ public class Util : MonoBehaviour
     public float setNumDP(float num, int dp){ //dp : demical Point
         return (float)Math.Round(num, dp);
     }
-
 }
