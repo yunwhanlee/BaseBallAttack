@@ -19,6 +19,7 @@ public class ObjectPool : MonoBehaviour
 
         //* OBJ
         DropItemExpOrbPf, DropItemRewardChest,
+        BossTargetMisslePf,
     }
 
     struct PoolData{
@@ -102,6 +103,7 @@ public class ObjectPool : MonoBehaviour
 
         // OBJ 
         poolDtList.Add(new PoolData(DIC.DropItemExpOrbPf.ToString(), bm.dropItemExpOrbPf, 50, gm.dropItemGroup));
+        poolDtList.Add(new PoolData(DIC.BossTargetMisslePf.ToString(), bm.bossTargetMisslePf, 20, gm.dropItemGroup));
 
         // poolDtList.ForEach(list => Debug.Log("NULL LIST CHECK ⇒ list.Key= " + list.Key + "list.Obj= " + (list.Obj? list.Obj.ToString() :"<color=red>"+list.Obj.ToString()+"</color>")));
 

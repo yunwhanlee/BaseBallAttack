@@ -28,9 +28,10 @@ public class BlockMaker : MonoBehaviour
     public Color[] colors;   public Color[] Colors {get => colors;}
     public Material[] mts;   public Material[] Mts {get => mts;}
 
-    [Header("DROP ITEM PREFAB")][Header("__________________________")]
+    [Header("PREFAB")][Header("__________________________")]
     public GameObject dropItemExpOrbPf;
     public GameObject dropItemRewardChestPf;
+    public GameObject bossTargetMisslePf;
 
     public void Start() {
         //* Init Or AD-Revive

@@ -153,7 +153,7 @@ public class Block_Prefab : MonoBehaviour
     void Start(){
         setType(); //* (NormalBlockのみ)
         setHp();
-        setStyle(); //* (TreasureChest、healBlock、Boss 除外)
+        setExpAndStyle(); //* (TreasureChest、healBlock、Boss 除外)
         spawnAnim("Init");
     }
 
@@ -222,7 +222,7 @@ public class Block_Prefab : MonoBehaviour
         hpTxt.text = Hp.ToString();
     }
 
-    public void setStyle(){
+    public void setExpAndStyle(){
         if(kind == BlockMaker.KIND.Normal || kind == BlockMaker.KIND.Long){
             // Debug.LogFormat("Block_Prefab:: kind={0}", kind);
             //* Set Exp & Material

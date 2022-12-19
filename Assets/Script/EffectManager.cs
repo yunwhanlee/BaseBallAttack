@@ -291,9 +291,10 @@ public class EffectManager : MonoBehaviour
         var ins = ObjectPool.getObject(ObjectPool.DIC.DropItemExpOrbEF.ToString(), parentTf.position, QI, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
     }
-    public void createShowExpUITxtEF(Transform parentTf){
+    public void createShowExpUITxtEF(Transform parentTf, int exp){
         var ins = ObjectPool.getObject(ObjectPool.DIC.ShowExpUITxtEF.ToString(), parentTf.position, QI, gm.effectGroup);
         ins.transform.SetParent(gm.showExpUIGroup);
+        ins.GetComponent<Text>().text = $"+Exp {exp}";
         ins.transform.localScale = new Vector3(ins.transform.localScale.x, -Mathf.Abs(ins.transform.localScale.y), ins.transform.localScale.z);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
     }
