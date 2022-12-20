@@ -41,6 +41,9 @@ public class BlockMaker : MonoBehaviour
     public GameObject dropBoxSpeedPf; // Speed Up x 2
     public GameObject dropBoxStarPf; //Power Up x 2
 
+    //*
+    public GameObject coinIconPf;
+
     public void Start() {
         //* Init Or AD-Revive
         var blocks = gm.blockGroup.GetComponentsInChildren<Block_Prefab>(); //* Previous Blocks Erase
@@ -155,13 +158,24 @@ public class BlockMaker : MonoBehaviour
             //* DropBox Shieldが活性化していたら、重ならないようにIndexから除外(０番目 INDEX)
             const int DROPBOX_SHIELD = 0, DROPBOX_QUESTION = 1;
             int startIdx = gm.pl.IsBarrier? DROPBOX_QUESTION : DROPBOX_SHIELD;
-            
+
             int randIdx = Random.Range(startIdx, dropBoxPfArr.Length);
             Debug.Log($"createRandomDropBox:: idx= {randIdx}, name= " + dropBoxPfArr[randIdx].name);
 
             Vector3 randPos = dropBoxPfArr[0].GetComponent<DropBox>().setRandPos();            
-            var ins = ObjectPool.getObject(dropBoxPfArr[randIdx].name, randPos, dropBoxPfArr[0].transform.rotation, gm.dropItemGroup);
+            var ins = ObjectPool.getObject(dropBoxPfArr[1].name, randPos, dropBoxPfArr[0].transform.rotation, gm.dropItemGroup);
         }
+    }
+
+    public void createCoinIconPf(Transform parentTf, int i, int max){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.CoinIconPf.ToString(), parentTf.position, Quaternion.identity, gm.dropItemGroup);
+        var coinIcon = ins.GetComponent<CoinIcon>();
+
+        //* MAX値1より増加しないと、最後オブジェクトのSpeedが０になりTargetに動かないエラー。
+        const float INCREASE_MAX_RATIO = 1.3875f;
+        float decreaseUnit = coinIcon.Speed / (max * INCREASE_MAX_RATIO);
+        //* Set Speed
+        ins.GetComponent<CoinIcon>().Speed = ins.GetComponent<CoinIcon>().Speed - (decreaseUnit * i);
     }
 
     public void moveDownBlock(){

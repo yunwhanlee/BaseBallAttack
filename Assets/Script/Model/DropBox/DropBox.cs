@@ -22,17 +22,7 @@ public class DropBox : MonoBehaviour{ //* Create By BlockMaker.cs
         Vector3 randPos = new Vector3(rx, 1, rz);
         return randPos;
     }
-    public GameObject getBarrierObj(){
-        GameObject obj = null;
-        for(int i=0; i<gm.pl.modelMovingTf.childCount; i++){
-            if(gm.pl.modelMovingTf.GetChild(i).name == ObjectPool.DIC.DropBoxShieldBarrierEF.ToString()){
-                obj = gm.pl.modelMovingTf.GetChild(i).gameObject;
-                break;
-            }
-        }
-        Debug.Log("getBarrierObj obj= " + obj.name);
-        return obj;
-    }
+
     void OnTriggerEnter(Collider col){
         if(Util._.isColBlockOrObstacle(col.transform.GetComponent<Collider>())){
             Debug.Log("DropBox::OnCollisionEnter:: col= " + col);
@@ -43,7 +33,22 @@ public class DropBox : MonoBehaviour{ //* Create By BlockMaker.cs
             if(this.gameObject.name == ObjectPool.DIC.DropBoxQuestionPf.ToString()){
                 gm.em.createDropBoxQuestionEF(this.transform);
                 gm.em.createDropBoxQuestionMoneyEF(this.transform);
+
                 //* 処理
+                int max = 0;
+                int rand = Random.Range(0, 5);
+                switch(rand){
+                    case 0: max = 10;   break;
+                    case 1: max = 20;   break;
+                    case 2: max = 30;   break;
+                    case 3: max = 40;   break;
+                    case 4: max = 50;   break;
+                }
+                Debug.Log("DropBox::OnCollisionEnter:: DropBoxQuestionPf:: max= " + max);
+                for(int i=0; i<max; i++)
+                    gm.bm.createCoinIconPf(this.transform, i, max);
+                
+                gm.coin += max * 50;
             }
             else if(this.gameObject.name == ObjectPool.DIC.DropBoxShieldPf.ToString()){
                 gm.em.createDropBoxShieldEF(this.transform);

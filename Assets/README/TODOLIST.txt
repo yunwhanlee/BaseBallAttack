@@ -48,6 +48,7 @@
         ✓ 当たったら習得関したEffect適用＋効果EFFECTも追加＋テキスト。
         ✓ DropBox Shieldが活性化していたら、重ならないようにIndexから除外(０番目 INDEX)
         ✓ ボースの攻撃を防止したら、Barrierを消す。-> pl.getBarrierObj()生成。
+        ✓ CoinIconPf生成。QuestionBoxの場合、生成及びLerpで位置移動。
         -  Questionボックスを得たら、コインが習得するＵＩエフェクト追加。
 
 
@@ -246,6 +247,8 @@
     ✓ (BUG-15) Reward Or LevelUpPanel出た時、ボスが動くので、タイム停止する処理。
     ✓ (BUG-12)は、TimeScaleを０にすることで、必要ではなくなった。
     ✓ (BUG-16)LevelUpPanelが最初に表示するとき、Start()が実行されるので、UIスタイル変更が上書きされ、できない。-> Lv2まではPSV_TICKETができないように設定。
+    -  (BUG-17) BombBlockで、壊されたTreasureChestはExpオーブが一つしかでない。
+
 
     
 

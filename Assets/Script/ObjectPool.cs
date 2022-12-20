@@ -28,6 +28,7 @@ public class ObjectPool : MonoBehaviour
         DropItemExpOrbPf, DropItemRewardChest,
         BossTargetMisslePf,
         DropBoxQuestionPf, DropBoxShieldPf, DropBoxSpeedPf, DropBoxStarPf,
+        CoinIconPf,
     }
 
     struct PoolData{
@@ -127,6 +128,8 @@ public class ObjectPool : MonoBehaviour
         poolDtList.Add(new PoolData(DIC.DropBoxShieldPf.ToString(), bm.dropBoxShieldPf, 1, gm.dropItemGroup));
         poolDtList.Add(new PoolData(DIC.DropBoxSpeedPf.ToString(), bm.dropBoxSpeedPf, 1, gm.dropItemGroup));
         poolDtList.Add(new PoolData(DIC.DropBoxStarPf.ToString(), bm.dropBoxStarPf, 1, gm.dropItemGroup));
+        poolDtList.Add(new PoolData(DIC.CoinIconPf.ToString(), bm.coinIconPf, 20, gm.dropItemGroup));
+        
 
         // poolDtList.ForEach(list => Debug.Log("NULL LIST CHECK ⇒ list.Key= " + list.Key + "list.Obj= " + (list.Obj? list.Obj.ToString() :"<color=red>"+list.Obj.ToString()+"</color>")));
 
