@@ -8,21 +8,24 @@ public class CoinIcon : MonoBehaviour
     GameManager gm;
 
     //* Value
-    const float DELAY_TIME = 1.4f;
+    const float START_DELAY_SPAN_TIME = 0.06875f;
+    const float WAIT_COLLECTION_TIME = 0.7f;
     [SerializeField] Transform target;
-    [SerializeField] float speed = 10;  public float Speed { get => speed; set => speed = value;}
+    float startDelay = 0;
+    [SerializeField] float speed = 8;  public float Speed { get => speed; set => speed = value;}
     void Awake(){
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
     
     void OnEnable(){
         target = null;
+        startDelay = 0;
         StartCoroutine(coDelay());
     }
 
     void FixedUpdate(){
         if(target){
-            this.transform.position = Vector3.Lerp(this.transform.position, target.position, speed * Time.deltaTime);
+            this.transform.position = Vector3.Lerp(this.transform.position, target.position, speed * Time.fixedDeltaTime);
         }
     }
 
@@ -32,8 +35,11 @@ public class CoinIcon : MonoBehaviour
         }
     }
 
+    public void setStartDelay(int i) => startDelay = i * START_DELAY_SPAN_TIME;
+
     IEnumerator coDelay(){
-        yield return new WaitForSeconds(DELAY_TIME);
+        yield return new WaitForSeconds(WAIT_COLLECTION_TIME);
+        yield return new WaitForSeconds(startDelay);
         target = gm.pl.modelMovingTf;
     }
 

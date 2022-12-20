@@ -162,8 +162,8 @@ public class BlockMaker : MonoBehaviour
             int randIdx = Random.Range(startIdx, dropBoxPfArr.Length);
             Debug.Log($"createRandomDropBox:: idx= {randIdx}, name= " + dropBoxPfArr[randIdx].name);
 
-            Vector3 randPos = dropBoxPfArr[0].GetComponent<DropBox>().setRandPos();            
-            var ins = ObjectPool.getObject(dropBoxPfArr[1].name, randPos, dropBoxPfArr[0].transform.rotation, gm.dropItemGroup);
+            Vector3 randPos = dropBoxPfArr[0].GetComponent<DropBox>().setRandPos();
+            var ins = ObjectPool.getObject(dropBoxPfArr[randIdx].name, randPos, dropBoxPfArr[0].transform.rotation, gm.dropItemGroup);
         }
     }
 
@@ -172,10 +172,11 @@ public class BlockMaker : MonoBehaviour
         var coinIcon = ins.GetComponent<CoinIcon>();
 
         //* MAX値1より増加しないと、最後オブジェクトのSpeedが０になりTargetに動かないエラー。
-        const float INCREASE_MAX_RATIO = 1.3875f;
-        float decreaseUnit = coinIcon.Speed / (max * INCREASE_MAX_RATIO);
+        ins.GetComponent<CoinIcon>().setStartDelay(i);
+        // const float INCREASE_MAX_RATIO = 1.3875f;
+        // float decreaseUnit = coinIcon.Speed / (max * INCREASE_MAX_RATIO);
         //* Set Speed
-        ins.GetComponent<CoinIcon>().Speed = ins.GetComponent<CoinIcon>().Speed - (decreaseUnit * i);
+        // ins.GetComponent<CoinIcon>().Speed = ins.GetComponent<CoinIcon>().Speed - (decreaseUnit * i);
     }
 
     public void moveDownBlock(){

@@ -49,8 +49,9 @@
         ✓ DropBox Shieldが活性化していたら、重ならないようにIndexから除外(０番目 INDEX)
         ✓ ボースの攻撃を防止したら、Barrierを消す。-> pl.getBarrierObj()生成。
         ✓ CoinIconPf生成。QuestionBoxの場合、生成及びLerpで位置移動。
-        
-        -  Questionボックスを得たら、コインが習得するＵＩエフェクト追加。
+           -> Speed調整は可笑しい部分が有るので、startDelay変数追加。Coroutineで自然に対応。
+        - Questionボックスを得たら、コインが習得するＵＩエフェクト追加。
+
 
 
 
