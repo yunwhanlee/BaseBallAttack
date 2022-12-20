@@ -60,6 +60,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
 
     [Header("DROP BOX PERCENT")][Header("__________________________")]
     [Tooltip("BUFFドロップボックス ドロップ％(0～1000)")] [Range(0, 1000)] public int DROP_BOX_PER = 5;
+    [Tooltip("QuestionPfで得るコイン単位")] public int DROPBOX_COIN_VALUE = 10;
 
     [Header("PLAYER")][Header("__________________________")]
     [Tooltip("アクティブスキル 減少％")] [Range(0, 1.0f)] public float ATV_COOLDOWN_UNIT = 0.02f;

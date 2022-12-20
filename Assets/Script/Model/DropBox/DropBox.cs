@@ -36,7 +36,6 @@ public class DropBox : MonoBehaviour{ //* Create By BlockMaker.cs
             
             Debug.Log("DropBox::OnCollisionEnter:: col= Ball, this.name= " + this.name);
             if(this.gameObject.name == ObjectPool.DIC.DropBoxQuestionPf.ToString()){
-                const int COIN_VALUE = 10;
                 int max = 0;
                 int rand = Random.Range(0, 5);
                 switch(rand){
@@ -50,11 +49,11 @@ public class DropBox : MonoBehaviour{ //* Create By BlockMaker.cs
                 for(int i=0; i<max; i++)
                     gm.bm.createCoinIconPf(this.transform, i, max);
                 
-                gm.em.createDropBoxQuestionEF(this.transform, COIN_VALUE * max);
+                gm.em.createDropBoxQuestionEF(this.transform, LM._.DROPBOX_COIN_VALUE * max);
                 gm.em.createDropBoxQuestionMoneyEF(this.transform);
 
                 //* 処理
-                gm.coin += max * COIN_VALUE;
+                gm.coin += max * LM._.DROPBOX_COIN_VALUE;
             }
             else if(this.gameObject.name == ObjectPool.DIC.DropBoxShieldPf.ToString()){
                 gm.em.createDropBoxShieldEF(this.transform);

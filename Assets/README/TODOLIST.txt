@@ -50,7 +50,8 @@
         ✓ ボースの攻撃を防止したら、Barrierを消す。-> pl.getBarrierObj()生成。
         ✓ CoinIconPf生成。QuestionBoxの場合、生成及びLerpで位置移動。
            -> Speed調整は可笑しい部分が有るので、startDelay変数追加。Coroutineで自然に対応。
-        - Questionボックスを得たら、コインが習得するＵＩ表示。
+        ✓ Questionボックスを得たら、コインが習得するＵＩ表示。
+        ✓ ShieldBarrierEF中にGetSpawnEF 追加。
         - PSVスキルクールタイム無くすAtvSkillCoolDown追加。
 
 
