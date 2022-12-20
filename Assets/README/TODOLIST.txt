@@ -1,5 +1,5 @@
 [CONTENT]
-    ✓ ボール打つランクUI表示(項目：BallSpeed、HitPower)。
+    ● ボール打つランクUI表示(項目：BallSpeed、HitPower)。
 
     ● ゲームやり方説明するための、UIチャラとテキストＢＯＸ用意。
 
@@ -49,6 +49,7 @@
         ✓ DropBox Shieldが活性化していたら、重ならないようにIndexから除外(０番目 INDEX)
         ✓ ボースの攻撃を防止したら、Barrierを消す。-> pl.getBarrierObj()生成。
         ✓ CoinIconPf生成。QuestionBoxの場合、生成及びLerpで位置移動。
+        
         -  Questionボックスを得たら、コインが習得するＵＩエフェクト追加。
 
 
@@ -204,6 +205,13 @@
     ● 達成リワードUI追加。
     ● ステージ分ける。
     ● ゲームプレイ方説明UI追加。
+
+    ● Ballが早かったら、物理衝突が上手くできない。
+        原因：Ball_PrefabのSpeedに関した部分 * Time.DeltaTimeがないでした。
+        対応：
+            1. AddForceように、Updateではない部分：物理演算なのでTime.DeltaTimeではなく、Time.FixedDeltaTimeを適用しました。
+            2. Update中に物理演算が有る部分：FixedUpdateに伐り前ました。
+            3. Colliderをもっと大きく。
 
 
 [BUG]

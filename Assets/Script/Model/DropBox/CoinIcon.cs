@@ -20,8 +20,7 @@ public class CoinIcon : MonoBehaviour
         StartCoroutine(coDelay());
     }
 
-    void Update()
-    {
+    void FixedUpdate(){
         if(target){
             this.transform.position = Vector3.Lerp(this.transform.position, target.position, speed * Time.deltaTime);
         }

@@ -50,11 +50,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9fce8cd279c49b42a8358b545b4c2ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigid: {fileID: 0}
   aliveTime: 5
   speed: 0
-  rigid: {fileID: 0}
   isOnDarkOrb: 0
   darkOrbPf: {fileID: 5990278791084361765}
+  isDmgX2: 0
 --- !u!33 &2295754910549213895
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -115,7 +116,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.47
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2295754910549213890
 Rigidbody:

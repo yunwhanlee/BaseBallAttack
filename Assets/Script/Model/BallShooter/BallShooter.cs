@@ -25,7 +25,7 @@ public class BallShooter : MonoBehaviour
         BossFireBallMarkObj.SetActive(false);
     }
 
-    void Update(){
+    void FixedUpdate(){
         if(gm.State == GameManager.STATE.GAMEOVER) return;
         if(gm.State == GameManager.STATE.WAIT) return;
 
@@ -67,7 +67,7 @@ public class BallShooter : MonoBehaviour
     public void throwBall(GameObject ins, Vector3 goalDir){
         var ball = ins.GetComponent<Ball_Prefab>();
         int extra = Random.Range(0, 5);
-        ball.Speed = (throwBallSpeed + extra);
+        ball.Speed = (throwBallSpeed + extra) * Time.fixedDeltaTime;
         ball.rigid.AddForce(goalDir * ball.Speed, ForceMode.Impulse);
     }
 

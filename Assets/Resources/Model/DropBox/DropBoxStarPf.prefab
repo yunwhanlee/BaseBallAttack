@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6567874594231067510}
   - component: {fileID: 6479243886898678484}
   - component: {fileID: 6480045867568912484}
-  - component: {fileID: -9031956174263260630}
   - component: {fileID: -3690466703165709999}
+  - component: {fileID: 3644849864823915265}
   m_Layer: 0
   m_Name: DropBoxStarPf
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6569938365430424664}
   m_LocalRotation: {x: -0.38268343, y: 0, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_Children:
   - {fileID: 6567635240180295718}
   - {fileID: 6567909460467869358}
@@ -4914,19 +4914,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!65 &-9031956174263260630
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6569938365430424664}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.2, y: 1.2, z: 1.2}
-  m_Center: {x: 0, y: -0.25, z: -0.25}
 --- !u!114 &-3690466703165709999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4939,6 +4926,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e265dae741ca348bb35569111e1b7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &3644849864823915265
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6569938365430424664}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: -0.05, z: -0.05}
 --- !u!1 &6570317795783058512
 GameObject:
   m_ObjectHideFlags: 0

@@ -5293,22 +5293,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   STAGE_NUM: 1
-  THROW_BALL_SPEED: 25
+  THROW_BALL_SPEED: 1200
   SUDDENLY_THORW_PER: 50
   MAX_DISTANCE: 1.5
   HIT_RANK:
   - dist: 0.125
-    power: 10
+    power: 400
   - dist: 0.3
-    power: 7
+    power: 300
   - dist: 0.5
-    power: 5
+    power: 200
   - dist: 0.85
-    power: 4
+    power: 180
   - dist: 1.125
-    power: 3
+    power: 120
   - dist: 1.5
-    power: 2
+    power: 75
   HOMERUN_MIN_POWER: 0
   BOSS_STAGE_SPAN: 4
   BOSS_LIMIT_SPAN: 20

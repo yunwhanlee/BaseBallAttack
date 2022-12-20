@@ -49,18 +49,6 @@ public class Ball_Prefab : MonoBehaviour
         //* Ball Preview Direction Goal Img
         distance = Vector3.Distance(gm.ballPreviewDirGoal.transform.position, this.transform.position);
         gm.setBallPreviewImgAlpha(distance);
-
-        /* Ball Comeing View Slider
-        float startPosZ = gm.hitRangeStartTf.position.z;
-        float endPosZ = gm.hitRangeEndTf.position.z;
-        if(!isHited && endPosZ <= this.transform.position.z && this.transform.position.z <= startPosZ){
-        // HitRange Slider UI
-            float offset = Mathf.Abs(startPosZ);
-            float max = Mathf.Abs(endPosZ) - offset;
-            float v = Mathf.Abs(this.transform.position.z) - offset;
-            gm.hitRangeSlider.value = v / max;
-        }
-        */
     }
 
     void OnTriggerStay(Collider col) {
@@ -389,7 +377,7 @@ public class Ball_Prefab : MonoBehaviour
     //*------------------------------------------------------------------------------
     private float setgetHitBallSpeed(float power, Vector3 arrowDir){
         rigid.velocity = Vector3.zero;
-        float force = Speed * power * pl.speed.Val;
+        float force = Speed * power * pl.speed.Val * Time.fixedDeltaTime;
         rigid.AddForce(arrowDir * force, ForceMode.Impulse);
         return force;
     }
