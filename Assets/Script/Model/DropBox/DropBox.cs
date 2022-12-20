@@ -30,17 +30,13 @@ public class DropBox : MonoBehaviour{ //* Create By BlockMaker.cs
             this.transform.position = setRandPos();
         }
         else if(col.transform.CompareTag(DM.NAME.Ball.ToString())){
-
             //* (BUG-17) ボールがベットから打たれる前に(BallShooterから投げる)時にはDropBoxと当たり判定処理しない。
             var ballRigid = col.GetComponent<Rigidbody>();
             if(ballRigid.useGravity == false) return;
             
             Debug.Log("DropBox::OnCollisionEnter:: col= Ball, this.name= " + this.name);
             if(this.gameObject.name == ObjectPool.DIC.DropBoxQuestionPf.ToString()){
-                gm.em.createDropBoxQuestionEF(this.transform);
-                gm.em.createDropBoxQuestionMoneyEF(this.transform);
-
-                //* 処理
+                const int COIN_VALUE = 10;
                 int max = 0;
                 int rand = Random.Range(0, 5);
                 switch(rand){
@@ -54,7 +50,11 @@ public class DropBox : MonoBehaviour{ //* Create By BlockMaker.cs
                 for(int i=0; i<max; i++)
                     gm.bm.createCoinIconPf(this.transform, i, max);
                 
-                gm.coin += max * 50;
+                gm.em.createDropBoxQuestionEF(this.transform, COIN_VALUE * max);
+                gm.em.createDropBoxQuestionMoneyEF(this.transform);
+
+                //* 処理
+                gm.coin += max * COIN_VALUE;
             }
             else if(this.gameObject.name == ObjectPool.DIC.DropBoxShieldPf.ToString()){
                 gm.em.createDropBoxShieldEF(this.transform);

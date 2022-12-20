@@ -323,8 +323,9 @@ public class EffectManager : MonoBehaviour
         var ins = ObjectPool.getObject(ObjectPool.DIC.DropBoxShieldBarrierEF.ToString(), parentTf.position, QI, parentTf.transform);
         // StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
     }
-    public void createDropBoxQuestionEF(Transform parentTf){
+    public void createDropBoxQuestionEF(Transform parentTf, int coinValue){
         var ins = ObjectPool.getObject(ObjectPool.DIC.DropBoxQuestionEF.ToString(), parentTf.position, QI, gm.effectGroup);
+        ins.GetComponentInChildren<Text>().text = "Coin " + coinValue.ToString();
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
     }
     public void createDropBoxQuestionMoneyEF(Transform parentTf){
