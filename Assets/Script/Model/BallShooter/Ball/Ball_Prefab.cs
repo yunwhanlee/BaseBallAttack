@@ -13,8 +13,8 @@ public class Ball_Prefab : MonoBehaviour
     public int aliveTime;
 
     //* Value
-    bool isHitedByBlock = false;
-    bool isHomeRun = false;
+    [SerializeField] bool isHitedByBlock = false;
+    [SerializeField] bool isHomeRun = false;
     float deleteLimitTime = 2.0f;
     [SerializeField] float speed;    public float Speed {get => speed; set => speed = value;}
     float distance;

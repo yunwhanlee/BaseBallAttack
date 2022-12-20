@@ -256,7 +256,8 @@
     ✓ (BUG-15) Reward Or LevelUpPanel出た時、ボスが動くので、タイム停止する処理。
     ✓ (BUG-12)は、TimeScaleを０にすることで、必要ではなくなった。
     ✓ (BUG-16)LevelUpPanelが最初に表示するとき、Start()が実行されるので、UIスタイル変更が上書きされ、できない。-> Lv2まではPSV_TICKETができないように設定。
-    -  (BUG-17) BombBlockで、壊されたTreasureChestはExpオーブが一つしかでない。
+    ✓ (BUG-17) ボールがベットから打たれる前に(BallShooterから投げる)時にはDropBoxと当たり判定処理しない。
+    -  (BUG-18) BombBlockで、壊されたTreasureChestはExpオーブが一つしかでない。
 
 
     
