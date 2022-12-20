@@ -9,7 +9,14 @@ public class ObjectPool : MonoBehaviour
         //* EF
         AtvSkShotEF, AtvSkExplosionEF, AtvSkShotEF2, AtvSkExplosionEF2, 
         LvUpNovaEF,
-        DropItemExpOrbEF, ShowExpUITxtEF, DownWallHitEF, BrokeBlockEF,
+        DropItemExpOrbEF, 
+
+        DropBoxQuestionEF, DropBoxQuestionMoneyEF,
+        DropBoxShieldEF, DropBoxShieldBarrierEF,
+        DropBoxSpeedEF, DropBoxSpeedTrailEF,
+        DropBoxStarEF, DropBoxStarTrailEF,
+
+        ShowExpUITxtEF, DownWallHitEF, BrokeBlockEF,
         ItemBlockDirLineTrailEF, ItemBlockExplosionEF,
         InstantKillTextEF, CritTxtEF, HealTxtEF, HeartEF, SnowExplosionEF, IcePropertyNovaFrost, BossTargetMissileEF,
         BatHitSparkEF, HomeRunHitSparkEF, StunEF, 
@@ -73,6 +80,16 @@ public class ObjectPool : MonoBehaviour
         // 単一
         poolDtList.Add(new PoolData(DIC.LvUpNovaEF.ToString(), em.lvUpNovaEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.DropItemExpOrbEF.ToString(), em.dropItemExpOrbEF, 15, em.gm.effectGroup));
+
+        poolDtList.Add(new PoolData(DIC.DropBoxQuestionEF.ToString(), em.dropBoxQuestionEF, 1, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.DropBoxQuestionMoneyEF.ToString(), em.dropBoxQuestionMoneyEF, 1, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.DropBoxShieldEF.ToString(), em.dropBoxShieldEF, 1, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.DropBoxShieldBarrierEF.ToString(), em.dropBoxShieldBarrierEF, 1, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.DropBoxSpeedEF.ToString(), em.dropBoxSpeedEF, 1, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.DropBoxSpeedTrailEF.ToString(), em.dropBoxSpeedTrailEF, 1, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.DropBoxStarEF.ToString(), em.dropBoxStarEF, 1, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.DropBoxStarTrailEF.ToString(), em.dropBoxStarTrailEF, 1, em.gm.effectGroup));
+
         poolDtList.Add(new PoolData(DIC.ShowExpUITxtEF.ToString(), em.showExpUITxtEF, 15, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.InstantKillTextEF.ToString(), em.instantKillTxtEF, 5, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.CritTxtEF.ToString(), em.criticalTxtEF, 3, em.gm.effectGroup));

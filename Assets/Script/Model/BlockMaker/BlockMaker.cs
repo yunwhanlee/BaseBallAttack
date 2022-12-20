@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System;
 using Random = UnityEngine.Random;
 
-public class BlockMaker : MonoBehaviour
+public class BlockMaker : MonoBehaviour 
 {
     public enum KIND {Normal, Long, TreasureChest, Heal, Boss, Obstacle, Null};
 

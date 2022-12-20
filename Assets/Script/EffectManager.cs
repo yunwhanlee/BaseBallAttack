@@ -54,7 +54,15 @@ public class EffectManager : MonoBehaviour
 
     [Header("DROP ITEMS EF")][Header("__________________________")]
     public GameObject dropItemExpOrbEF;
-    // public GameObject ;
+    [Header("DROP BOX EF")][Header("__________________________")]
+    public GameObject dropBoxQuestionEF;
+    public GameObject dropBoxQuestionMoneyEF;
+    public GameObject dropBoxShieldEF;
+    public GameObject dropBoxShieldBarrierEF;
+    public GameObject dropBoxSpeedEF;
+    public GameObject dropBoxSpeedTrailEF;
+    public GameObject dropBoxStarEF;
+    public GameObject dropBoxStarTrailEF;
 
     [Header("UI EF")][Header("__________________________")]
     //ON OFF TYPE
@@ -304,7 +312,41 @@ public class EffectManager : MonoBehaviour
         ins.transform.localScale = new Vector3(ins.transform.localScale.x, -Mathf.Abs(ins.transform.localScale.y), ins.transform.localScale.z);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
     }
-    
+//* -------------------------------------------------------------
+//* Drop Items EF
+//* -------------------------------------------------------------    
+    public void createDropBoxQuestionEF(Transform parentTf){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.DropBoxQuestionEF.ToString(), parentTf.position, QI, gm.effectGroup);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
+    }
+    public void createDropBoxQuestionMoneyEF(Transform parentTf){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.DropBoxQuestionMoneyEF.ToString(), parentTf.position, dropBoxQuestionMoneyEF.transform.rotation, gm.effectGroup);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 3));
+    }
+    public void createDropBoxShieldEF(Transform parentTf){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.DropBoxShieldEF.ToString(), parentTf.position, QI, gm.effectGroup);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
+    }
+    public void createDropBoxShieldBarrierEF(Transform parentTf){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.DropBoxShieldBarrierEF.ToString(), parentTf.position, QI, parentTf.transform);
+        // StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
+    }
+    public void createDropBoxSpeedEF(Transform parentTf){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.DropBoxSpeedEF.ToString(), parentTf.position, QI, gm.effectGroup);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
+    }
+    public void createDropBoxSpeedTrailEF(Transform parentTf){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.DropBoxSpeedTrailEF.ToString(), parentTf.position, QI, parentTf.transform);
+        // StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
+    }
+    public void createDropBoxStarEF(Transform parentTf){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.DropBoxStarEF.ToString(), parentTf.position, QI, gm.effectGroup);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
+    }
+    public void createDropBoxStarTrailEF(Transform parentTf){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.DropBoxStarTrailEF.ToString(), parentTf.position, QI, parentTf.transform);
+        // StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
+    }
 //* -------------------------------------------------------------
 //* UI EF
 //* -------------------------------------------------------------
