@@ -9,19 +9,21 @@ public class Ball_Prefab : MonoBehaviour
 {
     //* OutSide
     GameManager gm; EffectManager em; Player pl; BlockMaker bm; BallShooter bs;
+    public Rigidbody rigid;
     public int aliveTime;
 
     //* Value
     bool isHitedByBlock = false;
     bool isHomeRun = false;
     float deleteLimitTime = 2.0f;
-    [SerializeField]    float speed;    public float Speed {get => speed; set => speed = value;}
+    [SerializeField] float speed;    public float Speed {get => speed; set => speed = value;}
     float distance;
-    public Rigidbody rigid;
-
     [Header("PSV UNIQUE")][Header("__________________________")]
-    [SerializeField]    bool isOnDarkOrb; public bool IsOnDarkOrb {get => isOnDarkOrb; set => isOnDarkOrb = value;}
-    [SerializeField]    GameObject darkOrbPf; public GameObject DarkOrbPf {get => darkOrbPf; set => darkOrbPf = value;}
+    [SerializeField] bool isOnDarkOrb; public bool IsOnDarkOrb {get => isOnDarkOrb; set => isOnDarkOrb = value;}
+    [SerializeField] GameObject darkOrbPf; public GameObject DarkOrbPf {get => darkOrbPf; set => darkOrbPf = value;}
+
+    [Header("DROP BOX")][Header("__________________________")]
+    [SerializeField] bool isDmgX2;     public bool IsDmgX2 {get => isDmgX2; set => isDmgX2 = value;}
 
     void Awake() {
         rigid = GetComponent<Rigidbody>();
@@ -326,6 +328,7 @@ public class Ball_Prefab : MonoBehaviour
                 });
             }
             else{//* Damage Result
+                if(isDmgX2) result *= 2;
                 Debug.Log("Set DAMAGE:: result= " + result);
                 bm.decreaseBlockHP(col.gameObject, result);
             }
@@ -336,11 +339,6 @@ public class Ball_Prefab : MonoBehaviour
             em.createDownWallHitEF(pos);
         }
     }
-    // private IEnumerator coDelayThunderPropertyHit(int result, Collision col){
-    //     em.createThunderStrikeEF(col.transform.position);
-    //     yield return new WaitForSeconds(0.0875f);
-    //     pl.thunderProperty.setHitTypeSkill(pl.thunderProperty.Value, ref result, col, em, pl);
-    // }
 //----------------------------------------------------------------
 //*
 //----------------------------------------------------------------

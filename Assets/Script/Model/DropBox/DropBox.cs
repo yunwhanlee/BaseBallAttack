@@ -28,23 +28,36 @@ public class DropBox : MonoBehaviour{ //* Create By BlockMaker.cs
             Debug.Log("DropBox::OnCollisionEnter:: col= " + col);
             this.transform.position = setRandPos();
         }
-        else if(col.transform.CompareTag("Ball")){
+        else if(col.transform.CompareTag(DM.NAME.Ball.ToString())){
             Debug.Log("DropBox::OnCollisionEnter:: col= Ball, this.name= " + this.name);
             if(this.gameObject.name == ObjectPool.DIC.DropBoxQuestionPf.ToString()){
                 gm.em.createDropBoxQuestionEF(this.transform);
                 gm.em.createDropBoxQuestionMoneyEF(this.transform);
+                //* 処理
             }
             else if(this.gameObject.name == ObjectPool.DIC.DropBoxShieldPf.ToString()){
                 gm.em.createDropBoxShieldEF(this.transform);
                 gm.em.createDropBoxShieldBarrierEF(gm.pl.modelMovingTf);
+                //* 処理
+                gm.pl.IsBarrier = true;
             }
             else if(this.gameObject.name == ObjectPool.DIC.DropBoxSpeedPf.ToString()){
                 gm.em.createDropBoxSpeedEF(this.transform);
-                gm.em.createDropBoxSpeedTrailEF(col.transform);
+                for(int i=0; i<gm.ballGroup.childCount; i++){
+                    gm.em.createDropBoxSpeedTrailEF(gm.ballGroup.GetChild(i));
+                    //* 処理
+                    gm.ballGroup.GetChild(i).GetComponent<Rigidbody>().velocity *= 2;
+                }
             }
             else if(this.gameObject.name == ObjectPool.DIC.DropBoxStarPf.ToString()){
                 gm.em.createDropBoxStarEF(this.transform);
-                gm.em.createDropBoxStarTrailEF(col.transform);
+                for(int i=0; i<gm.ballGroup.childCount; i++){
+                    if(gm.ballGroup.GetChild(i).CompareTag(DM.NAME.Ball.ToString())){
+                        gm.em.createDropBoxStarTrailEF(gm.ballGroup.GetChild(i));
+                        //* 処理
+                        gm.ballGroup.GetChild(i).GetComponent<Ball_Prefab>().IsDmgX2 = true;
+                    }
+                }
             }
 
             StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropItemGroup));

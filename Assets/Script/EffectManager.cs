@@ -315,14 +315,6 @@ public class EffectManager : MonoBehaviour
 //* -------------------------------------------------------------
 //* Drop Items EF
 //* -------------------------------------------------------------    
-    public void createDropBoxQuestionEF(Transform parentTf){
-        var ins = ObjectPool.getObject(ObjectPool.DIC.DropBoxQuestionEF.ToString(), parentTf.position, QI, gm.effectGroup);
-        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
-    }
-    public void createDropBoxQuestionMoneyEF(Transform parentTf){
-        var ins = ObjectPool.getObject(ObjectPool.DIC.DropBoxQuestionMoneyEF.ToString(), parentTf.position, dropBoxQuestionMoneyEF.transform.rotation, gm.effectGroup);
-        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 3));
-    }
     public void createDropBoxShieldEF(Transform parentTf){
         var ins = ObjectPool.getObject(ObjectPool.DIC.DropBoxShieldEF.ToString(), parentTf.position, QI, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
@@ -330,6 +322,14 @@ public class EffectManager : MonoBehaviour
     public void createDropBoxShieldBarrierEF(Transform parentTf){
         var ins = ObjectPool.getObject(ObjectPool.DIC.DropBoxShieldBarrierEF.ToString(), parentTf.position, QI, parentTf.transform);
         // StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
+    }
+    public void createDropBoxQuestionEF(Transform parentTf){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.DropBoxQuestionEF.ToString(), parentTf.position, QI, gm.effectGroup);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
+    }
+    public void createDropBoxQuestionMoneyEF(Transform parentTf){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.DropBoxQuestionMoneyEF.ToString(), parentTf.position, dropBoxQuestionMoneyEF.transform.rotation, gm.effectGroup);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 3));
     }
     public void createDropBoxSpeedEF(Transform parentTf){
         var ins = ObjectPool.getObject(ObjectPool.DIC.DropBoxSpeedEF.ToString(), parentTf.position, QI, gm.effectGroup);

@@ -210,8 +210,9 @@ public class BossBlock : Block_Prefab{
             //* Upgrade 内容 適用
             float rand = Random.Range(0, 1.0f);
             var defencePer = DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.Defence].getValue();
-            if(rand <= defencePer) {
-                Debug.Log($"<color=blue>DEFENCE! rand={rand} < defencePer={defencePer} </color>");
+            if(gm.pl.IsBarrier || rand <= defencePer) {
+                Debug.Log($"<color=blue>DEFENCE! gm.pl.IsBarrier= {gm.pl.IsBarrier} OR rand={rand} < defencePer={defencePer} </color>");
+                gm.pl.IsBarrier = false;
                 gm.em.createDefenceEF(gm.pl.modelMovingTf.position);
                 return;
             }

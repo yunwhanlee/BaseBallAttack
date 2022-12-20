@@ -36,8 +36,8 @@ public class BlockMaker : MonoBehaviour
     //*Drop Box
     public GameObject[] dropBoxPfArr;
     // ObjectPoolで使う変数。
-    public GameObject dropBoxQuestionPf; // Coin or Diamond
     public GameObject dropBoxShieldPf; // Barrier from Boss Attack
+    public GameObject dropBoxQuestionPf; // Coin or Diamond
     public GameObject dropBoxSpeedPf; // Speed Up x 2
     public GameObject dropBoxStarPf; //Power Up x 2
 
@@ -151,13 +151,17 @@ public class BlockMaker : MonoBehaviour
         int rand = Random.Range(0, 1000);
         if(rand < LM._.DROP_BOX_PER){
             //! Prefab名でgetObject()を判断するので、形式を守ること！=> 「DropBox{名}Pf」
-            int randIdx = Random.Range(0, dropBoxPfArr.Length);
-            Debug.Log("createRandomDropBox:: name= " + dropBoxPfArr[randIdx].name);
+
+            //* DropBox Shieldが活性化していたら、重ならないようにIndexから除外(０番目 INDEX)
+            const int DROPBOX_SHIELD = 0, DROPBOX_QUESTION = 1;
+            int startIdx = gm.pl.IsBarrier? DROPBOX_QUESTION : DROPBOX_SHIELD;
+            
+            int randIdx = Random.Range(startIdx, dropBoxPfArr.Length);
+            Debug.Log($"createRandomDropBox:: idx= {randIdx}, name= " + dropBoxPfArr[randIdx].name);
 
             Vector3 randPos = dropBoxPfArr[0].GetComponent<DropBox>().setRandPos();            
             var ins = ObjectPool.getObject(dropBoxPfArr[randIdx].name, randPos, dropBoxPfArr[0].transform.rotation, gm.dropItemGroup);
         }
-
     }
 
     public void moveDownBlock(){

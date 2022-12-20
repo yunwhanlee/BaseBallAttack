@@ -11,8 +11,8 @@ public class ObjectPool : MonoBehaviour
         LvUpNovaEF,
         DropItemExpOrbEF, 
 
-        DropBoxQuestionEF, DropBoxQuestionMoneyEF,
         DropBoxShieldEF, DropBoxShieldBarrierEF,
+        DropBoxQuestionEF, DropBoxQuestionMoneyEF,
         DropBoxSpeedEF, DropBoxSpeedTrailEF,
         DropBoxStarEF, DropBoxStarTrailEF,
 
@@ -81,10 +81,10 @@ public class ObjectPool : MonoBehaviour
         poolDtList.Add(new PoolData(DIC.LvUpNovaEF.ToString(), em.lvUpNovaEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.DropItemExpOrbEF.ToString(), em.dropItemExpOrbEF, 15, em.gm.effectGroup));
 
-        poolDtList.Add(new PoolData(DIC.DropBoxQuestionEF.ToString(), em.dropBoxQuestionEF, 1, em.gm.effectGroup));
-        poolDtList.Add(new PoolData(DIC.DropBoxQuestionMoneyEF.ToString(), em.dropBoxQuestionMoneyEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.DropBoxShieldEF.ToString(), em.dropBoxShieldEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.DropBoxShieldBarrierEF.ToString(), em.dropBoxShieldBarrierEF, 1, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.DropBoxQuestionEF.ToString(), em.dropBoxQuestionEF, 1, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.DropBoxQuestionMoneyEF.ToString(), em.dropBoxQuestionMoneyEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.DropBoxSpeedEF.ToString(), em.dropBoxSpeedEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.DropBoxSpeedTrailEF.ToString(), em.dropBoxSpeedTrailEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.DropBoxStarEF.ToString(), em.dropBoxStarEF, 1, em.gm.effectGroup));
