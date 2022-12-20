@@ -16,12 +16,22 @@ public class DropBox : MonoBehaviour{ //* Create By BlockMaker.cs
     {
         
     }
-
     public Vector3 setRandPos(){
         int rx = Random.Range(DropBox.MIN_X, DropBox.MAX_X+1);
         int rz = Random.Range(DropBox.MIN_Z, DropBox.MAX_Z+1);
         Vector3 randPos = new Vector3(rx, 1, rz);
         return randPos;
+    }
+    public GameObject getBarrierObj(){
+        GameObject obj = null;
+        for(int i=0; i<gm.pl.modelMovingTf.childCount; i++){
+            if(gm.pl.modelMovingTf.GetChild(i).name == ObjectPool.DIC.DropBoxShieldBarrierEF.ToString()){
+                obj = gm.pl.modelMovingTf.GetChild(i).gameObject;
+                break;
+            }
+        }
+        Debug.Log("getBarrierObj obj= " + obj.name);
+        return obj;
     }
     void OnTriggerEnter(Collider col){
         if(Util._.isColBlockOrObstacle(col.transform.GetComponent<Collider>())){

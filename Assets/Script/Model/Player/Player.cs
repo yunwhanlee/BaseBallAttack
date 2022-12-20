@@ -270,4 +270,15 @@ public class Player : MonoBehaviour
             foreach(Transform child in tf) GameObject.Destroy(child.gameObject);
         });
     }
+    public GameObject getBarrierObj(){
+        GameObject obj = null;
+        for(int i=0; i<modelMovingTf.childCount; i++){
+            if(modelMovingTf.GetChild(i).name == ObjectPool.DIC.DropBoxShieldBarrierEF.ToString()){
+                obj = modelMovingTf.GetChild(i).gameObject;
+                break;
+            }
+        }
+        Debug.Log("getBarrierObj obj= " + obj.name);
+        return obj;
+    }
 }

@@ -213,7 +213,12 @@ public class BossBlock : Block_Prefab{
             if(gm.pl.IsBarrier || rand <= defencePer) {
                 Debug.Log($"<color=blue>DEFENCE! gm.pl.IsBarrier= {gm.pl.IsBarrier} OR rand={rand} < defencePer={defencePer} </color>");
                 gm.pl.IsBarrier = false;
+
+                //* Get Barrier Object
+                GameObject barrierObj = gm.pl.getBarrierObj();
+                
                 gm.em.createDefenceEF(gm.pl.modelMovingTf.position);
+                StartCoroutine(ObjectPool.coDestroyObject(barrierObj, gm.dropItemGroup));
                 return;
             }
             gm.pl.IsStun = true;

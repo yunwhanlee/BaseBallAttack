@@ -46,6 +46,9 @@
         ✓ ランダムで生成。BlockMakerで、createRandomDropBox()関数生成。
         ✓ DropBox.csで、Ballを当たったら、ObjectPoolに戻す処理。しかし、物理演算があり、無くす必要ある -> triggerに変更。
         ✓ 当たったら習得関したEffect適用＋効果EFFECTも追加＋テキスト。
+        ✓ DropBox Shieldが活性化していたら、重ならないようにIndexから除外(０番目 INDEX)
+        ✓ ボースの攻撃を防止したら、Barrierを消す。-> pl.getBarrierObj()生成。
+        -  Questionボックスを得たら、コインが習得するＵＩエフェクト追加。
 
 
 
