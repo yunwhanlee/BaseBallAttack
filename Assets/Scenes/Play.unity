@@ -3552,14 +3552,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.9150943, g: 0.30647027, b: 0.3532877, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b093cbd3ae117429b8fbdf7462fd3363, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a3b8d632c93034908804b23ee2921260, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4497,7 +4497,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bc349d95688dc455784298ea3926d5a2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f95106900b6f2465d996ed569504f44f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9048,7 +9048,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -380, y: 50}
+  m_AnchoredPosition: {x: -350, y: 50}
   m_SizeDelta: {x: 200, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &654220756
@@ -31773,6 +31773,8 @@ MonoBehaviour:
   homeRunTxtTf: {fileID: 477910093}
   expBar: {fileID: 1579494044}
   bossStageBar: {fileID: 205888219}
+  bossStageBarColorGray: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  bossStageBarColorPink: {r: 0.8980393, g: 0.3254902, b: 0.36862746, a: 1}
   expBarTxt: {fileID: 917257447}
   bossStageTxt: {fileID: 916758674}
   comboTxt: {fileID: 744198046}

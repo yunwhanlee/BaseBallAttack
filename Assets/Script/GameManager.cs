@@ -77,6 +77,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] Text shootCntTxt;      public Text ShootCntTxt { get => shootCntTxt; set => shootCntTxt = value;}
     public RectTransform homeRunTxtTf;
     public Slider expBar, bossStageBar;
+    public Color bossStageBarColorGray;
+    public Color bossStageBarColorPink;
     public Text expBarTxt, bossStageTxt;
 
     [Header("TEXT EFFECT")][Header("__________________________")]
@@ -218,7 +220,11 @@ public class GameManager : MonoBehaviour
             : $"{stage % LM._.BOSS_STAGE_SPAN} / {LM._.BOSS_STAGE_SPAN}";
         
         Image fillImg = Array.Find(bossStageBar.GetComponentsInChildren<Image>(), img => img.transform.name == "Fill");
-        fillImg.color = boss? Color.white : Color.yellow;
+        fillImg.color = boss? bossStageBarColorPink : bossStageBarColorGray;
+        Image iconFrameImg = Array.Find(bossStageBar.GetComponentsInChildren<Image>(), img => img.transform.name == "IconFrame");
+        iconFrameImg.color = boss? Color.white : bossStageBarColorGray;
+        Image iconImgImg = Array.Find(bossStageBar.GetComponentsInChildren<Image>(), img => img.transform.name == "IconImg");
+        iconImgImg.color = boss? Color.white : bossStageBarColorGray;
 
         //* ANOTHER TEXT
         stateTxt.text = State.ToString();
