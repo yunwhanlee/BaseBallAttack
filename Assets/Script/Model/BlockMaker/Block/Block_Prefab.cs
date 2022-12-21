@@ -356,6 +356,7 @@ public class Block_Prefab : MonoBehaviour
                     Array.ForEach(hits, hit => {
                         if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
                             if(hit.transform.CompareTag(DM.TAG.BossBlock.ToString())) return;
+                            Debug.Log("decreaseHp::type=BOMB:: hit.name=" + hit.transform.name);
                             onDestroy(hit.transform.gameObject);
                         }
                     });
@@ -369,9 +370,6 @@ public class Block_Prefab : MonoBehaviour
                     em.createItemBlockDirLineTrailEF(this.transform.position, -transform.forward);
                     break;
             }
-
-            bm.createBossTargetMisslePf(this.transform);
-            
             onDestroy(this.gameObject);
         }
 
@@ -382,18 +380,25 @@ public class Block_Prefab : MonoBehaviour
     }
 
     public virtual void onDestroy(GameObject target, bool isInitialize = false) {
+        /* 
+        * (BUG-18) BombBlockの処理が可笑しい。(エフェクトとかか重なったり)
+        * 1.原因：OnDestroy()で処理を行っているので、この中にも同じ処理が必要。
+        * 2.原因：GameObject targetをパラメータで渡すのに、この後this.transformで処理をする誤り。
+        */
+        Transform targetTf = target.transform; 
         int resultExp = (!isInitialize)? (int)(Exp * pl.expUp.Val) : 0; //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
         Debug.Log("virtual onDestroy():: resultExp= " + resultExp);
-        em.createBrokeBlockEF(target.transform.position, color); //! (BUG) このEFFECTは可なり重いらしい、複数になったら、シーンのフリーズが掛かる。
-        bm.createDropItemExpOrbPf(this.transform, resultExp);
+        em.createBrokeBlockEF(targetTf.position, color);
         
-        if(kind == BlockMaker.KIND.TreasureChest){
+        bm.createDropItemExpOrbPf(targetTf, resultExp);
+        bm.createBossTargetMisslePf(targetTf);
+        
+        if(kind == BlockMaker.KIND.TreasureChest)
             for(int i=0; i<TREASURECHEST_ORB_CNT; i++)
-                bm.createDropItemExpOrbPf(this.transform, resultExp);
-        }
-        else if(kind == BlockMaker.KIND.Obstacle){
-            em.createRockObstacleBrokenEF(this.transform.position);
-        }
+                bm.createDropItemExpOrbPf(targetTf, resultExp);
+        else if(kind == BlockMaker.KIND.Obstacle)
+            em.createRockObstacleBrokenEF(targetTf.position);
+
         Destroy(target);
     }
 
