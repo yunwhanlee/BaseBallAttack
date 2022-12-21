@@ -78,11 +78,18 @@ public class DM : MonoBehaviour
     [FormerlySerializedAs("rankLegendColor")] public Color rankLegendClr;
     [FormerlySerializedAs("rankGodColor")] public Color rankGodClr;
 
+    [Header("TUTORIAL")][Header("__________________________")]
+    public RectTransform tutorialPanel;
+
     [Header("AD : 未完")][Header("__________________________")]
     [SerializeField] bool isRemoveAD;   public bool IsRemoveAD {get => isRemoveAD; set => isRemoveAD = value;}
 
     void Awake() => singleton();
     void Start(){
+        Transform canvas = GameObject.Find("Canvas").GetComponent<RectTransform>();
+        Instantiate(tutorialPanel, Vector3.zero, Quaternion.identity, canvas);
+
+
         LANG.initlanguageList();
         // foreach(DM.ATV list in Enum.GetValues(typeof(DM.ATV)))Debug.LogFormat("Enums GetFindVal:: {0}", list.ToString())
 
