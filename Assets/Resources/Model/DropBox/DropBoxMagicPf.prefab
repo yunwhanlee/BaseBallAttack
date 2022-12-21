@@ -4921,6 +4921,8 @@ GameObject:
   - component: {fileID: 2990328448088776588}
   - component: {fileID: 3147889448869127778}
   - component: {fileID: 3146515705902600268}
+  - component: {fileID: 8637819559928122440}
+  - component: {fileID: 6267747957770643100}
   m_Layer: 0
   m_Name: DropBoxMagicPf
   m_TagString: Untagged
@@ -9822,6 +9824,31 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &8637819559928122440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2984737634495618150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20e265dae741ca348bb35569111e1b7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &6267747957770643100
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2984737634495618150}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: -0.05, z: -0.05}
 --- !u!1 &2984912159339120214
 GameObject:
   m_ObjectHideFlags: 0

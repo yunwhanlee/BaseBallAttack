@@ -79,6 +79,12 @@ public class DropBox : MonoBehaviour{ //* Create By BlockMaker.cs
                     }
                 }
             }
+            else if(this.gameObject.name == ObjectPool.DIC.DropBoxMagicPf.ToString()){
+                gm.em.createDropBoxMagicEF(this.transform);
+                //*処理
+                gm.activeSkillBtnList.ForEach((atvSkillBtn) => atvSkillBtn.CollDownImg.fillAmount = 0);
+            }
+            
 
             StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropItemGroup));
         }

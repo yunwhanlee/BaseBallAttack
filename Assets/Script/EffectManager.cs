@@ -63,6 +63,7 @@ public class EffectManager : MonoBehaviour
     public GameObject dropBoxSpeedTrailEF;
     public GameObject dropBoxStarEF;
     public GameObject dropBoxStarTrailEF;
+    public GameObject dropBoxMagicEF;
 
     [Header("UI EF")][Header("__________________________")]
     //ON OFF TYPE
@@ -347,6 +348,10 @@ public class EffectManager : MonoBehaviour
     public void createDropBoxStarTrailEF(Transform parentTf){
         var ins = ObjectPool.getObject(ObjectPool.DIC.DropBoxStarTrailEF.ToString(), parentTf.position, QI, parentTf.transform);
         // StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
+    }
+    public void createDropBoxMagicEF(Transform parentTf){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.DropBoxMagicEF.ToString(), parentTf.position, QI, gm.effectGroup);
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
     }
 //* -------------------------------------------------------------
 //* UI EF

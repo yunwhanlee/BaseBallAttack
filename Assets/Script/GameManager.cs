@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using System;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -99,7 +100,7 @@ public class GameManager : MonoBehaviour
     [Header("ACTIVE SKILL BTN")][Header("__________________________")]
     public RectTransform activeSkillBtnPf;
     public AtvSkill[] activeSkillDataBase; //* 全てActiveSkillsのデータベース
-    public List<AtvSkillBtnUI> activeSkillBtnList; //* ActiveSkillボタン
+    [FormerlySerializedAs("activeSkillBtnList")] public List<AtvSkillBtnUI> activeSkillBtnList; //* ActiveSkillボタン
     public Material activeSkillBtnEfMt;
     [SerializeField] int selectAtvSkillBtnIdx;  public int SelectAtvSkillBtnIdx { get=> selectAtvSkillBtnIdx; set=> selectAtvSkillBtnIdx = value;}
     public bool isPointUp; //* SectorGizmos Colliderへ活用するため。

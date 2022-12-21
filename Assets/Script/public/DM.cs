@@ -42,6 +42,13 @@ public class DM : MonoBehaviour
     public enum UPGRADE {
         Dmg, BallSpeed, Critical, CriticalDamage, BossDamage, CoinBonus, Defence, NULL
     }
+    public enum DROPBOX {
+        DropBoxShieldPf,  // Barrier from Boss Attack
+        DropBoxQuestionPf, // Get Coin
+        DropBoxSpeedPf, // Speed Up x 2
+        DropBoxStarPf, //Power Up x 2
+        DropBoxMagicPf, //Atv Skill Cool Down
+    }
     public enum REWARD {
         CoinX2, RerotateSkillSlots, Revive,
     }

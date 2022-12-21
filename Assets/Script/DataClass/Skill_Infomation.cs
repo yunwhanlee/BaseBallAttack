@@ -444,7 +444,7 @@ public class AtvSkillBtnUI{
     //*contructor
     public AtvSkillBtnUI(int index, float coolDownUnit, string name, Button skillBtn, Sprite sprite, Material activeSkillEffectMt){
         this.index = index;
-        this.CoolDownUnit = coolDownUnit;
+        this.coolDownUnit = coolDownUnit;
         this.name = name;
         panel = skillBtn.GetComponent<Image>();
         this.img = skillBtn.transform.GetChild(0).GetComponent<Image>();
