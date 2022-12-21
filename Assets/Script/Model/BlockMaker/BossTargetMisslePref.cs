@@ -22,6 +22,12 @@ public class BossTargetMisslePref : MonoBehaviour
 
     void OnEnable() {
         init();
+        /*
+        * (BUG-19) BossTargetMissilePrefが再度登場したら、init()で初期化したのに、速度とかCoroutine待機時間などが可笑しい。
+        *  原因：init()関数内で、AddForce()とStartCoroutine(coDelay())を入れ、それが初期化より早く実行される。
+        */ 
+        rigid.AddForce(Vector3.up * popPower * Time.deltaTime, ForceMode.Impulse);
+        StartCoroutine(coDelay());
     }
 
     void Update(){
@@ -37,12 +43,10 @@ public class BossTargetMisslePref : MonoBehaviour
     }
 
     void init(){
-        rigid.AddForce(Vector3.up * popPower * Time.deltaTime, ForceMode.Impulse);
-        StopAllCoroutines();
-        StartCoroutine(coDelay());
-        collider.enabled = false;
         target = null;
         curSpeed = 0;
+        StopAllCoroutines();
+        collider.enabled = false;
         rigid.velocity = Vector3.zero;
         rigid.angularVelocity = Vector3.zero;
     }
