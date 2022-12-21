@@ -8092,11 +8092,6 @@ MonoBehaviour:
   - {fileID: 4130510353200909505, guid: c7d93c5077b6bd342b1697f3c60c1f2c, type: 3}
   - {fileID: 6569938365430424664, guid: b9c9effee6f05444dbbc8d5b14ea1089, type: 3}
   - {fileID: 2984737634495618150, guid: 140ca3637239082489fd6c7f00c7cd09, type: 3}
-  dropBoxShieldPf: {fileID: 4775508127583837323, guid: 0928c10a0bdd0cf449ad6402cdd5206e, type: 3}
-  dropBoxQuestionPf: {fileID: 8347731009233814356, guid: 91ae7d4a7a25ba244b487908e6b39136, type: 3}
-  dropBoxSpeedPf: {fileID: 4130510353200909505, guid: c7d93c5077b6bd342b1697f3c60c1f2c, type: 3}
-  dropBoxStarPf: {fileID: 6569938365430424664, guid: b9c9effee6f05444dbbc8d5b14ea1089, type: 3}
-  dropBoxMagicPf: {fileID: 2984737634495618150, guid: 140ca3637239082489fd6c7f00c7cd09, type: 3}
   coinIconPf: {fileID: 9209111245004018829, guid: e742bb2e1e22dcc43b9a2169931da53b, type: 3}
 --- !u!1 &585957426
 GameObject:
@@ -11158,7 +11153,7 @@ Transform:
   m_GameObject: {fileID: 747844802}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.35, z: -0.5}
-  m_LocalScale: {x: 0.5, y: 0.15, z: 0.3}
+  m_LocalScale: {x: 0.5, y: 0.125, z: 0.3}
   m_Children: []
   m_Father: {fileID: 1350307813}
   m_RootOrder: 0
@@ -23968,8 +23963,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350307809}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.57, z: -0.5}
-  m_LocalScale: {x: 1, y: 3.5, z: 1}
+  m_LocalPosition: {x: 0, y: 2, z: -0.5}
+  m_LocalScale: {x: 1, y: 4, z: 1}
   m_Children:
   - {fileID: 747844806}
   - {fileID: 2025654357}
@@ -51668,8 +51663,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2025654352}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.02, z: -0.04527998}
-  m_LocalScale: {x: 5.2519135, y: 2.75, z: 0.39621}
+  m_LocalPosition: {x: 0, y: 1.873, z: -0.04527998}
+  m_LocalScale: {x: 5.2519135, y: 2.5, z: 0.39621}
   m_Children:
   - {fileID: 1322018823}
   - {fileID: 2118210800}
