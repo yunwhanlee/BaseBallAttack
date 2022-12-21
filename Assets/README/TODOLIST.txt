@@ -58,15 +58,11 @@
                 2.DropBoxMagicEF
         
 
-
-
-
     - Passiveスキル追加
         ✓ ファイヤーボール：ドットダメージ。➡ 221104
         ✓ アイスボール：一定確率で、下にブロックが下がらない。➡ 221104
         ✓ サンターボール：一定確率で、雷EFでダブルヒット。➡ 221104
         ✓ 凍ったブロックにボールが当たったら、アイスが壊すようなSnowExplosionEF追加。
-
 
     ✓  LOADING非同期UI画面表示。
 
@@ -108,6 +104,7 @@
         ✓ Roulette UI 言語。
         ✓ EFFECT追加。
         ✓ 取得Btnがある場合は、Exitでそのまま出るBUG対応。
+        ✓ タイトルUI追加。
 
     ● HOME:: 
         ✓ ルーレット（１時間毎に、広告を見てお金やダイアを習得できるイベント）rouletteTicket変数は宣言。
@@ -219,6 +216,15 @@
             1. AddForceように、Updateではない部分：物理演算なのでTime.DeltaTimeではなく、Time.FixedDeltaTimeを適用しました。
             2. Update中に物理演算が有る部分：FixedUpdateに伐り前ました。
             3. Colliderをもっと大きく。
+
+
+
+    ● チュートリアル
+        Game Scene
+        - ボールが出る。
+        - 方向調節。
+        - スキル説明。
+        - 打席移動。
 
 
 [BUG]
