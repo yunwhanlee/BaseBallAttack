@@ -56,6 +56,7 @@
             : matに必要なイメージ作成及びPrefとEF用意OK。
                 1.DropBoxMagicPf
                 2.DropBoxMagicEF
+        - 日程ターンが過ぎたら、削除。
         
 
     - Passiveスキル追加
@@ -221,6 +222,9 @@
 
     ● チュートリアル
         ✓ イメージ生成。
+        ✓  Panel And Page 表示処理。
+        -  ゲーム最初に始めたら、Tutorialを見ますか？というダイアログ表示。
+        -  言語選定。
 
 
 [BUG]

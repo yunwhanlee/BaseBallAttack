@@ -86,8 +86,7 @@ public class DM : MonoBehaviour
 
     void Awake() => singleton();
     void Start(){
-        Transform canvas = GameObject.Find("Canvas").GetComponent<RectTransform>();
-        Instantiate(tutorialPanel, Vector3.zero, Quaternion.identity, canvas);
+
 
 
         LANG.initlanguageList();
@@ -150,6 +149,11 @@ public class DM : MonoBehaviour
         }
     }
 #endif
+
+    public void displayTutorialUI(){
+        Transform canvas = GameObject.Find("Canvas").GetComponent<RectTransform>();
+        Instantiate(tutorialPanel, canvas, false);
+    }
 
     public bool reqShowAD(string type, GameManager gm){
         // Debug.Log("<color=yellow> reqShowAD(" + type.ToString() + ")</color>");
