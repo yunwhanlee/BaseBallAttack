@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
 
     [Header("DIALOG")][Header("__________________________")]
     public RectTransform showAdDialog;
+    public RectTransform openTutorialDialog;
     public Text adDialogTitleTxt;
     public Text adDialogContentTxt;
 
@@ -80,6 +81,7 @@ public class GameManager : MonoBehaviour
     public Color bossStageBarColorGray;
     public Color bossStageBarColorPink;
     public Text expBarTxt, bossStageTxt;
+    public Toggle skipTutorialToggle;
 
     [Header("TEXT EFFECT")][Header("__________________________")]
     public Text comboTxt;
@@ -160,9 +162,12 @@ public class GameManager : MonoBehaviour
     void Start() {
         // Util._.calcArithmeticProgressionList(start: 100, max: 50, d: 100, gradualUpValue: 0.1f);
 
+        //* スキップに✓がされていない場合は、チュートリアルのダイアログ 表示。
+        if(!DM.ins.personalData.IsSkipTutorial){
+            displayTutorialDialog();
+        }
 
         stage = LM._.STAGE_NUM;
-        
         Debug.Log("<color=red>----------------------------------------------P L A Y   S C E N E----------------------------------------------</color>");
         //! init()宣言したら、キャラクターモデルを読み込むことができないBUG
         pl = GameObject.Find("Player").GetComponent<Player>();
@@ -248,6 +253,8 @@ public class GameManager : MonoBehaviour
     // public void onClickReGameButton() => init();
     public void onClickSkillButton() => levelUpPanel.SetActive(false);
     public void onClickSetGameButton(string type) => setGame(type);
+    public void onClickOpenTutorialButton() => DM.ins.displayTutorialUI();
+    public void onClickSkipTutorialNextTimeToggle() => DM.ins.personalData.IsSkipTutorial = skipTutorialToggle.isOn;
     public void onClickRewardChestOpenButton() {
         StartCoroutine(coRewardChestOpen());
     }
@@ -793,5 +800,19 @@ public class GameManager : MonoBehaviour
             : (power == hitRank[(int)DM.HITRANK.C].Power)? DM.HITRANK.C.ToString()
             : (power == hitRank[(int)DM.HITRANK.D].Power)? DM.HITRANK.D.ToString() : DM.HITRANK.E.ToString()).ToString();
         return rankTxt;
+    }
+
+    public void displayTutorialDialog(){
+        openTutorialDialog.gameObject.SetActive(true);
+
+        //* Language
+        Transform dialog = openTutorialDialog.Find("Dialog");
+        Text title = dialog.Find(DM.NAME.TitleTxt.ToString()).GetComponent<Text>();
+        Text content = dialog.Find(DM.NAME.ContentTxt.ToString()).GetComponent<Text>();
+        Text okBtn = dialog.Find("OkBtn").GetComponentInChildren<Text>();
+
+        title.text = LANG.getTxt(LANG.TXT.Tutorial.ToString());
+        content.text = LANG.getTxt(LANG.TXT.OpenTutorial_Content.ToString());
+        okBtn.text = LANG.getTxt(LANG.TXT.Ok.ToString());
     }
 }

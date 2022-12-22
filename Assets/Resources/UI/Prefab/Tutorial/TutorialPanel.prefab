@@ -436,7 +436,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 685cbd29cd0c74338bd3f2dae095ea2b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ec0f9319ae38b4f6796ec640a4b6a294, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -647,8 +647,8 @@ MonoBehaviour:
     m_FontSize: 55
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 45
-    m_MaxSize: 60
+    m_MinSize: 50
+    m_MaxSize: 90
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1026,7 +1026,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 28b66422e940449608c3b1842141190a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 09ab02593d5f14a3a9f4046eebb1e9b0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1481,7 +1481,7 @@ GameObject:
   - component: {fileID: 5009433143357227615}
   - component: {fileID: 5009433143357227612}
   m_Layer: 0
-  m_Name: InfoTxt
+  m_Name: ContentTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1504,7 +1504,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 150}
-  m_SizeDelta: {x: 900, y: 300}
+  m_SizeDelta: {x: 825, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5009433143357227615
 CanvasRenderer:
@@ -1539,8 +1539,8 @@ MonoBehaviour:
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 0
-    m_MaxSize: 50
+    m_MinSize: 50
+    m_MaxSize: 60
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1907,11 +1907,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: abc60a2946f48a34185d008594c7095b, type: 3}
-    m_FontSize: 55
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 45
-    m_MaxSize: 60
+    m_MinSize: 50
+    m_MaxSize: 90
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -2203,8 +2203,8 @@ MonoBehaviour:
     m_FontSize: 55
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 45
-    m_MaxSize: 60
+    m_MinSize: 50
+    m_MaxSize: 90
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -2282,8 +2282,8 @@ MonoBehaviour:
     m_FontSize: 55
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 45
-    m_MaxSize: 60
+    m_MinSize: 50
+    m_MaxSize: 90
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -2611,7 +2611,7 @@ GameObject:
   - component: {fileID: 5009433144055978261}
   - component: {fileID: 5009433144055978266}
   m_Layer: 0
-  m_Name: InfoTxt
+  m_Name: ContentTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2634,7 +2634,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 150}
-  m_SizeDelta: {x: 900, y: 300}
+  m_SizeDelta: {x: 825, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5009433144055978261
 CanvasRenderer:
@@ -2669,8 +2669,8 @@ MonoBehaviour:
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 0
-    m_MaxSize: 50
+    m_MinSize: 50
+    m_MaxSize: 60
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -2934,7 +2934,7 @@ GameObject:
   - component: {fileID: 5009433144121221750}
   - component: {fileID: 5009433144121221751}
   m_Layer: 0
-  m_Name: InfoTxt
+  m_Name: ContentTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2957,7 +2957,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 150}
-  m_SizeDelta: {x: 900, y: 300}
+  m_SizeDelta: {x: 825, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5009433144121221750
 CanvasRenderer:
@@ -2992,8 +2992,8 @@ MonoBehaviour:
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 0
-    m_MaxSize: 50
+    m_MinSize: 50
+    m_MaxSize: 60
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -3074,8 +3074,8 @@ MonoBehaviour:
     m_FontSize: 55
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 45
-    m_MaxSize: 60
+    m_MinSize: 50
+    m_MaxSize: 90
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -3649,8 +3649,8 @@ MonoBehaviour:
     m_FontSize: 55
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 45
-    m_MaxSize: 60
+    m_MinSize: 50
+    m_MaxSize: 90
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -3823,8 +3823,8 @@ MonoBehaviour:
     m_FontSize: 55
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 45
-    m_MaxSize: 60
+    m_MinSize: 50
+    m_MaxSize: 90
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -3936,7 +3936,7 @@ GameObject:
   - component: {fileID: 5009433144567152501}
   - component: {fileID: 5009433144567152506}
   m_Layer: 0
-  m_Name: InfoTxt
+  m_Name: ContentTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3959,7 +3959,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 150}
-  m_SizeDelta: {x: 900, y: 300}
+  m_SizeDelta: {x: 825, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5009433144567152501
 CanvasRenderer:
@@ -3994,8 +3994,8 @@ MonoBehaviour:
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 45
-    m_MaxSize: 50
+    m_MinSize: 50
+    m_MaxSize: 60
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -4015,7 +4015,7 @@ GameObject:
   - component: {fileID: 5009433144588941252}
   - component: {fileID: 5009433144588941253}
   m_Layer: 0
-  m_Name: InfoTxt
+  m_Name: ContentTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4038,7 +4038,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 150}
-  m_SizeDelta: {x: 900, y: 300}
+  m_SizeDelta: {x: 825, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5009433144588941252
 CanvasRenderer:
@@ -4073,8 +4073,8 @@ MonoBehaviour:
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 0
-    m_MaxSize: 50
+    m_MinSize: 50
+    m_MaxSize: 60
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -4181,6 +4181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8edb5f39d40dbf34f9079cfc6b13e095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  titleObjNameArr: []
+  contentObjNameArr: []
   contentArr:
   - {fileID: 5009433144333966894}
   - {fileID: 5009433143630317462}
@@ -4194,6 +4196,7 @@ MonoBehaviour:
   nextArrowBtn: {fileID: 5009433143072788681}
   pageNaviGroup: {fileID: 5009433144888160952}
   pageNaviIconPf: {fileID: 4490268972060729133, guid: 2d3626b7972a8094194e6f0dea169832, type: 3}
+  pageNaviFocusIconArr: []
 --- !u!1 &5009433144608944586
 GameObject:
   m_ObjectHideFlags: 0
@@ -4705,7 +4708,7 @@ GameObject:
   - component: {fileID: 5009433144860827133}
   - component: {fileID: 5009433144860827010}
   m_Layer: 0
-  m_Name: InfoTxt
+  m_Name: ContentTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4728,7 +4731,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 123}
-  m_SizeDelta: {x: 900, y: 350}
+  m_SizeDelta: {x: 825, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5009433144860827133
 CanvasRenderer:
@@ -4763,8 +4766,8 @@ MonoBehaviour:
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 0
-    m_MaxSize: 50
+    m_MinSize: 50
+    m_MaxSize: 60
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -5119,7 +5122,7 @@ GameObject:
   - component: {fileID: 5009433144985271099}
   - component: {fileID: 5009433144985271096}
   m_Layer: 0
-  m_Name: InfoTxt
+  m_Name: ContentTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5142,7 +5145,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 150}
-  m_SizeDelta: {x: 900, y: 300}
+  m_SizeDelta: {x: 825, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5009433144985271099
 CanvasRenderer:
@@ -5177,8 +5180,8 @@ MonoBehaviour:
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 0
-    m_MaxSize: 50
+    m_MinSize: 50
+    m_MaxSize: 60
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1

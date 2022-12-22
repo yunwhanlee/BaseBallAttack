@@ -191,12 +191,6 @@ public class HomeManager : MonoBehaviour
     public void onClickSettingBtn(){
         settingDialog.Panel.SetActive(true);
     }
-    public void onClickSettingOkBtn(bool isOk){
-        settingDialog.Panel.SetActive(false);
-        DM.ins.personalData.save();
-        if(isOk) SceneManager.LoadScene(DM.SCENE.Home.ToString()); // Re-load
-    }
-
     public void onDropDownLanguageOpt(){
         int idx = LanguageOptDropDown.value;
         Debug.Log("onDropDownSettingOpt():: idx= " + idx);
@@ -206,6 +200,12 @@ public class HomeManager : MonoBehaviour
             case 2: DM.ins.personalData.Lang = LANG.TP.KR;   break;
         }
     }
+    public void onClickSettingOkBtn(bool isOk){
+        settingDialog.Panel.SetActive(false);
+        DM.ins.personalData.save();
+        if(isOk) SceneManager.LoadScene(DM.SCENE.Home.ToString()); // Re-load
+    }
+
 
     public void onClickBtnUnlock2ndSkillDialog(bool isActive){
         if(DM.ins.personalData.IsUnlock2ndSkill) return;

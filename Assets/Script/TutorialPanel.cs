@@ -6,8 +6,10 @@ using System;
 
 public class TutorialPanel : MonoBehaviour
 {
+    [SerializeField]  string[] titleObjNameArr;    public string[] TitleObjNameArr { get => titleObjNameArr; set => titleObjNameArr = value;}
+    [SerializeField]  string[] contentObjNameArr;  public string[] ContentObjNameArr { get => contentObjNameArr; set => contentObjNameArr = value;}
     int lastIdx;
-    [SerializeField] GameObject[] contentArr;
+    [SerializeField] GameObject[] contentArr;   public GameObject[] ContentArr {get => contentArr; set => contentArr = value;}
     [SerializeField] int pageIdx = 0;
 
     [Header("PAGE ARROW BUTTON")][Header("__________________________")]
@@ -25,6 +27,7 @@ public class TutorialPanel : MonoBehaviour
         prevArrowBtn.interactable = false;
         nextArrowBtn.interactable = true;
         createFocusIconArr();
+        setLanguage();
     }
 
     void Update(){
@@ -53,6 +56,18 @@ public class TutorialPanel : MonoBehaviour
             pageNaviFocusIconArr[i] = ins.transform.GetChild(0).gameObject;
         }
         setActiveFocusIcon();
+    }
+    private void setLanguage(){
+        //* Set NameArr (チュートリアル追加さら、こちらへ追加。)
+        titleObjNameArr = new string[] { LANG.TXT.TutorialA_Title.ToString(), LANG.TXT.TutorialB_Title.ToString(), LANG.TXT.TutorialC_Title.ToString(), LANG.TXT.TutorialD_Title.ToString(), LANG.TXT.TutorialE_Title.ToString(), LANG.TXT.TutorialF_Title.ToString(), LANG.TXT.TutorialG_Title.ToString()};
+        contentObjNameArr = new string[] { LANG.TXT.TutorialA_Content.ToString(), LANG.TXT.TutorialB_Content.ToString(), LANG.TXT.TutorialC_Content.ToString(), LANG.TXT.TutorialD_Content.ToString(), LANG.TXT.TutorialE_Content.ToString(), LANG.TXT.TutorialF_Content.ToString(), LANG.TXT.TutorialG_Content.ToString()};
+        //* Process
+        for(int i = 0; i <= lastIdx; i++){
+            Text titleTxt = contentArr[i].transform.Find(DM.NAME.TitleTxt.ToString()).GetComponent<Text>();
+            Text contentTxt = contentArr[i].transform.Find(DM.NAME.ContentTxt.ToString()).GetComponent<Text>();
+            titleTxt.text = LANG.getTxt(titleObjNameArr[i]);
+            contentTxt.text = LANG.getTxt(contentObjNameArr[i]);
+        }
     }
 
     /* 

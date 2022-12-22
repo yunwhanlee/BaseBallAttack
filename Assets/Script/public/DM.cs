@@ -12,6 +12,8 @@ public class DM : MonoBehaviour
     public enum DATABASE_KEY {Json};
     public enum SCENE {Home, Play, Loading};
     public enum NAME {
+
+        MainCanvas,
         Coin, diamond,
         DownWall, Block, FireBallDotEffect, BossDieDropOrbSpot, GrayPanel, Obstacle,
         RightArm, HomeManager,
@@ -19,6 +21,7 @@ public class DM : MonoBehaviour
         IceMat,
         MainPanel, RewardChest, 
         LevelUp, PsvSkillTicket,
+        TitleTxt, ContentTxt,
     };
     public enum TAG {HitRangeArea, StrikeLine, GameOverLine, Wall, ActiveDownWall, Player,
         NormalBlock, LongBlock, TreasureChestBlock, HealBlock, BossBlock,   
@@ -79,16 +82,13 @@ public class DM : MonoBehaviour
     [FormerlySerializedAs("rankGodColor")] public Color rankGodClr;
 
     [Header("TUTORIAL")][Header("__________________________")]
-    public RectTransform tutorialPanel;
+    public TutorialPanel tutorialPanel;
 
     [Header("AD : 未完")][Header("__________________________")]
     [SerializeField] bool isRemoveAD;   public bool IsRemoveAD {get => isRemoveAD; set => isRemoveAD = value;}
 
     void Awake() => singleton();
     void Start(){
-
-
-
         LANG.initlanguageList();
         // foreach(DM.ATV list in Enum.GetValues(typeof(DM.ATV)))Debug.LogFormat("Enums GetFindVal:: {0}", list.ToString())
 
@@ -150,9 +150,11 @@ public class DM : MonoBehaviour
     }
 #endif
 
-    public void displayTutorialUI(){
-        Transform canvas = GameObject.Find("Canvas").GetComponent<RectTransform>();
-        Instantiate(tutorialPanel, canvas, false);
+    public TutorialPanel displayTutorialUI(){
+        Transform canvas = GameObject.Find(DM.NAME.MainCanvas.ToString()).GetComponent<RectTransform>();
+        TutorialPanel tuto = Instantiate(tutorialPanel, canvas, false);
+        return tuto;
+        
     }
 
     public bool reqShowAD(string type, GameManager gm){

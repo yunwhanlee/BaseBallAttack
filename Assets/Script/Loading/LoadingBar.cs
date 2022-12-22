@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
-public class Loading : MonoBehaviour
+public class LoadingBar : MonoBehaviour
 {
-    public Slider loadingBar;
-    public Text loadTxt;
+    [FormerlySerializedAs("loadingBar")] public Slider loadingBar;
+    [FormerlySerializedAs("loadTxt")] public Text loadTxt;
 
     void Start() {
         

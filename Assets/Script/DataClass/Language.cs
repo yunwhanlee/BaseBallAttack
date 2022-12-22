@@ -18,6 +18,14 @@ public static class LANG //* LANG
         ShowAdDialogRerotateSkillSlots_Title, ShowAdDialogRerotateSkillSlots_Content,
         ShowAdDialogRevive_Title, ShowAdDialogRevive_Content,
         ShowAdDialogRouletteTicket_Title, ShowAdDialogRouletteTicket_Content,
+        Tutorial , OpenTutorial_Content,
+        TutorialA_Title, TutorialA_Content,
+        TutorialB_Title, TutorialB_Content,
+        TutorialC_Title, TutorialC_Content,
+        TutorialD_Title, TutorialD_Content,
+        TutorialE_Title, TutorialE_Content,
+        TutorialF_Title, TutorialF_Content,
+        TutorialG_Title, TutorialG_Content,
         Reward, GetRewardChestPanel_Content, Empty, PsvSkillTicket, RouletteTicket, RouletteSpin,
         FirstSkill, SecondSkill, PsvSkillInfo, Upgrade, CashShop, 
         //* PSV
@@ -148,6 +156,7 @@ public static class LANG //* LANG
         "このスキルは既に登録されています。",
         "해당 스킬은 이미 등록되어 있습니다."
     };
+
     //* DIALOG
     public static string[] DialogUnlock2ndSkill_Title = new string[]{
         "-Unlock-", "解錠", "해금"
@@ -182,9 +191,7 @@ public static class LANG //* LANG
         "부활하여 게임을 계속 진행하시겠습니까? (블록은 초기화됩니다.)"
     };
     public static string[] ShowAdDialogRouletteTicket_Title = new string[]{
-        "Roulette Ticket",
-        "ルーレットチケット",
-        "룰렛티켓"
+        "Roulette Ticket", "ルーレットチケット", "룰렛티켓"
     };
     public static string[] ShowAdDialogRouletteTicket_Content = new string[]{
         "Not enough Roulette Ticket.\nWould you like to get a entrance of ticket?",
@@ -195,6 +202,69 @@ public static class LANG //* LANG
         "You get a mysterious treasure chest!",
         "ミステリーな宝箱を得りました!",
         "보물상자를 얻었습니다!"
+    };
+
+    //* Tutorial
+    public static string[] OpenTutorial_Content = new string[]{
+        "Would you like to watch Tutorial?",
+        "チュートリアルをみませんか？",
+        "튜토리얼을 보시겠습니까?"
+    };
+    public static string[] TutorialA_Title = new string[]{
+        "1. Block", "1. ブロック", "1. 블록"
+    };
+    public static string[] TutorialA_Content = new string[]{
+        "Every turn, blocks are created and approached down.",
+        "毎ターン、ブロックが作成され、下に近づきます。",
+        "매턴, 블록이 생성되며 아래로 내려옵니다."
+    };
+    public static string[] TutorialB_Title = new string[]{
+        "2. Gameover", "2. ゲームオーバー", "2. 게임오버"
+    };
+    public static string[] TutorialB_Content = new string[]{
+        "If a block reached to Red line, this is GameOver.",
+        "レッドラインにブロックが触れると、ゲームオーバ。",
+        "레드라인에 블록이 닿으면, 게임오버."
+    };
+    public static string[] TutorialC_Title = new string[]{
+        "3. Ready (1)", "3. 準備 (1)", "3. 준비 (1)"
+    };
+    public static string[] TutorialC_Content = new string[]{
+        "Drag the screen and control the direction of arrow.",
+        "画面をドラッグし、矢印の方向を制御します。",
+        "화면을 드래그하여 화살표 방향을 정합니다."
+    };
+    public static string[] TutorialD_Title = new string[]{
+        "4. Ready (2)", "4. 準備 (2)", "4. 준비 (2)"
+    };
+    public static string[] TutorialD_Content = new string[]{
+        "Click 'Ready' Button",
+        "Readyボタンをクリックします。",
+        "Ready버튼을 클릭합니다."
+    };
+    public static string[] TutorialE_Title = new string[]{
+        "5. Shoot", "5. シュート", "5. 슛"
+    };
+    public static string[] TutorialE_Content = new string[]{
+        "Hit the flying ball. (If it's the right timing, Home Run!)",
+        "飛んでくるボールを打つ。（タイミングが合えばホームラン！）",
+        "날아오는 공을 쳐라! (타이밍 잘 맞추면 홈런!)"
+    };
+    public static string[] TutorialF_Title = new string[]{
+        "6. Move Position", "6. 位置移動", "6. 위치이동"
+    };
+    public static string[] TutorialF_Content = new string[]{
+        "Touch your player and drag left or right. It would be helpful to avoid Boss Attack !",
+        "プレーヤーをタッチし、左右にドラッグします。 BossAttackを避けるとき、助かります！",
+        "플레이어를 터치하여, 좌우로 드래그합니다. 보스공격을 피할 때 도움이 됩니다!"
+    };
+    public static string[] TutorialG_Title = new string[]{
+        "7. More Strong", "7.より強く", "7. 강해질꼬야"
+    };
+    public static string[] TutorialG_Content = new string[]{
+        "Too weak?\nYou can get stronger with upgrades or characters, bats, and skills!",
+        "弱いですか？\nアップグレードやキャラクター、バット、スキルで強くなれる！",
+        "약하신가요?\n업그레이드 및 캐릭터, 베트, 스킬들로 더욱 강해지세요!"
     };
 
     //* UI
@@ -225,6 +295,7 @@ public static class LANG //* LANG
     public static string[] PsvSkillInfo = new string[]{"Passive Skill info", "パッシブスキル情報", "패시브 스킬 정보"};
     public static string[] Upgrade = new string[]{"Upgrade", "アップグレード", "업그레이드"};
     public static string[] CashShop = new string[]{"Cash Shop", "課金ショップ", "캐시샾"};
+    public static string[] Tutorial = new string[]{"Tutorial", "チュートリアル", "튜토리얼"};
 
     //* PSV
     public static string[] Dmg = new string[]{DM.PSV.Dmg.ToString(), "攻撃力", "공격력"};
@@ -335,6 +406,25 @@ public static class LANG //* LANG
         if(name == TXT.ShowAdDialogRevive_Content.ToString()) res = ShowAdDialogRevive_Content[CUR_LANG];
         if(name == TXT.ShowAdDialogRouletteTicket_Title.ToString()) res = ShowAdDialogRouletteTicket_Title[CUR_LANG];
         if(name == TXT.ShowAdDialogRouletteTicket_Content.ToString()) res = ShowAdDialogRouletteTicket_Content[CUR_LANG];
+
+        //* TUTORIAL
+        if(name == TXT.Tutorial.ToString()) res = Tutorial[CUR_LANG];
+        if(name == TXT.OpenTutorial_Content.ToString()) res = OpenTutorial_Content[CUR_LANG];
+        if(name == TXT.TutorialA_Title.ToString()) res = TutorialA_Title[CUR_LANG];
+        if(name == TXT.TutorialA_Content.ToString()) res = TutorialA_Content[CUR_LANG];
+        if(name == TXT.TutorialB_Title.ToString()) res = TutorialB_Title[CUR_LANG];
+        if(name == TXT.TutorialB_Content.ToString()) res = TutorialB_Content[CUR_LANG];
+        if(name == TXT.TutorialC_Title.ToString()) res = TutorialC_Title[CUR_LANG];
+        if(name == TXT.TutorialC_Content.ToString()) res = TutorialC_Content[CUR_LANG];
+        if(name == TXT.TutorialD_Title.ToString()) res = TutorialD_Title[CUR_LANG];
+        if(name == TXT.TutorialD_Content.ToString()) res = TutorialD_Content[CUR_LANG];
+        if(name == TXT.TutorialE_Title.ToString()) res = TutorialE_Title[CUR_LANG];
+        if(name == TXT.TutorialE_Content.ToString()) res = TutorialE_Content[CUR_LANG];
+        if(name == TXT.TutorialF_Title.ToString()) res = TutorialF_Title[CUR_LANG];
+        if(name == TXT.TutorialF_Content.ToString()) res = TutorialF_Content[CUR_LANG];
+        if(name == TXT.TutorialG_Title.ToString()) res = TutorialG_Title[CUR_LANG];
+        if(name == TXT.TutorialG_Content.ToString()) res = TutorialG_Content[CUR_LANG];
+        
 
         //* UI
         if(name == TXT.Ok.ToString()) res = Ok[CUR_LANG];

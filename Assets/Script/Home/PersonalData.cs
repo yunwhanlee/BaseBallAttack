@@ -12,6 +12,7 @@ public class PersonalData {
     [SerializeField] int diamond; public int Diamond {get => diamond; set => diamond = value;}
     [SerializeField] int rouletteTicket; public int RouletteTicket {get => rouletteTicket; set => rouletteTicket = value;}
     [SerializeField] string rouletteTicketCoolTime; public string RouletteTicketCoolTime {get => rouletteTicketCoolTime; set => rouletteTicketCoolTime = value;}
+    [SerializeField] bool isSkipTutorial; public bool IsSkipTutorial {get => isSkipTutorial; set => isSkipTutorial = value;}
     [Header("CHARACTOR")][Header("__________________________")]
     [SerializeField] int selectCharaIdx;  public int SelectCharaIdx {get => selectCharaIdx; set => selectCharaIdx = value;}
     [SerializeField] List<bool> charaLockList;  public List<bool> CharaLockList {get => charaLockList; set => charaLockList = value;}
@@ -65,6 +66,7 @@ public class PersonalData {
         this.Diamond = data.Diamond;
         this.rouletteTicket = data.RouletteTicket;
         this.rouletteTicketCoolTime = (data.RouletteTicketCoolTime != null)? data.RouletteTicketCoolTime : DateTime.Now.ToString();
+        this.isSkipTutorial = data.IsSkipTutorial;
 
         this.SelectCharaIdx = data.SelectCharaIdx;
         this.CharaLockList = data.CharaLockList;
@@ -113,6 +115,7 @@ public class PersonalData {
         this.Diamond = 0;
         this.rouletteTicket = 1; //* 1つ上げるのは、ボーナス感じ。
         this.RouletteTicketCoolTime = DateTime.Now.ToString();
+        this.isSkipTutorial = false;
 
         this.SelectCharaIdx = 0;
         this.CharaLockList = new List<bool>();
