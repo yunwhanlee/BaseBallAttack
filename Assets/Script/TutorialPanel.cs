@@ -10,7 +10,7 @@ public class TutorialPanel : MonoBehaviour
     [SerializeField]  string[] contentObjNameArr;  public string[] ContentObjNameArr { get => contentObjNameArr; set => contentObjNameArr = value;}
     int lastIdx;
     [SerializeField] GameObject[] contentArr;   public GameObject[] ContentArr {get => contentArr; set => contentArr = value;}
-    [SerializeField] int pageIdx = 0;
+    [SerializeField] int pageIdx;   public int PageIdx { get => pageIdx; set => pageIdx = value;}
 
     [Header("PAGE ARROW BUTTON")][Header("__________________________")]
     [SerializeField] Button prevArrowBtn;
@@ -23,7 +23,7 @@ public class TutorialPanel : MonoBehaviour
 
     void Start(){
         lastIdx = contentArr.Length - 1;
-        contentArr[0].SetActive(true);
+        // contentArr[0].SetActive(true);
         prevArrowBtn.interactable = false;
         nextArrowBtn.interactable = true;
         createFocusIconArr();
@@ -57,7 +57,7 @@ public class TutorialPanel : MonoBehaviour
         }
         setActiveFocusIcon();
     }
-    private void setLanguage(){
+    public void setLanguage(){
         //* Set NameArr (チュートリアル追加さら、こちらへ追加。)
         titleObjNameArr = new string[] { LANG.TXT.TutorialA_Title.ToString(), LANG.TXT.TutorialB_Title.ToString(), LANG.TXT.TutorialC_Title.ToString(), LANG.TXT.TutorialD_Title.ToString(), LANG.TXT.TutorialE_Title.ToString(), LANG.TXT.TutorialF_Title.ToString(), LANG.TXT.TutorialG_Title.ToString()};
         contentObjNameArr = new string[] { LANG.TXT.TutorialA_Content.ToString(), LANG.TXT.TutorialB_Content.ToString(), LANG.TXT.TutorialC_Content.ToString(), LANG.TXT.TutorialD_Content.ToString(), LANG.TXT.TutorialE_Content.ToString(), LANG.TXT.TutorialF_Content.ToString(), LANG.TXT.TutorialG_Content.ToString()};

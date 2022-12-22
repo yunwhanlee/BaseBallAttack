@@ -120,9 +120,7 @@ public class HomeManager : MonoBehaviour
     //* ----------------------------------------------------------------
     //*   UI Button
     //* ----------------------------------------------------------------
-    public void onClickBtnQuestionMarkIcon(){
-        DM.ins.displayTutorialUI();
-    }
+    public void onClickBtnQuestionMarkIcon() => DM.ins.displayTutorialUI();
 
     public void onClickBtnGoToPanel(string name){
         //* Current Model Data & ParentTf
