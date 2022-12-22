@@ -162,6 +162,8 @@ public class GameManager : MonoBehaviour
     void Start() {
         // Util._.calcArithmeticProgressionList(start: 100, max: 50, d: 100, gradualUpValue: 0.1f);
 
+        DM.ins.transform.position = Vector3.zero; //* LoadingSceneで、モデルが見えないようにずらした位置を戻す。
+
         //* スキップに✓がされていない場合は、チュートリアルのダイアログ 表示。
         if(!DM.ins.personalData.IsSkipTutorial){
             displayTutorialDialog();

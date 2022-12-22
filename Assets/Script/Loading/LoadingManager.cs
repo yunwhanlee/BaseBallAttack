@@ -45,6 +45,7 @@ public class LoadingManager : MonoBehaviour
                 //* MoveTowardsはLerpと同じだ。しかし、速度がmaxDeltaを超過しないことを保障する。
                 loadingBar.value = Mathf.MoveTowards(loadingBar.value, 1f, Time.deltaTime); 
                 loadingIcon.Rotate(0, 0, rotSpeed * Time.deltaTime);
+                
             }
             else{
                 loadTxt.text = "LOADING FINISH!";

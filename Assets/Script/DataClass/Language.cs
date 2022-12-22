@@ -28,6 +28,7 @@ public static class LANG //* LANG
         TutorialG_Title, TutorialG_Content,
         Reward, GetRewardChestPanel_Content, Empty, PsvSkillTicket, RouletteTicket, RouletteSpin,
         FirstSkill, SecondSkill, PsvSkillInfo, Upgrade, CashShop, 
+        PremiumPack, Coin, Diamond, RemoveAllADs,
         //* PSV
         Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, 
         ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, 
@@ -296,6 +297,10 @@ public static class LANG //* LANG
     public static string[] Upgrade = new string[]{"Upgrade", "アップグレード", "업그레이드"};
     public static string[] CashShop = new string[]{"Cash Shop", "課金ショップ", "캐시샾"};
     public static string[] Tutorial = new string[]{"Tutorial", "チュートリアル", "튜토리얼"};
+    public static string[] PremiumPack = new string[]{"Premium Package", "プレミアム パッケージ", "프리미엄 패키지"};
+    public static string[] Coin = new string[]{"Coin", "コイン", "코인"};
+    public static string[] Diamond = new string[]{"Diamond", "ダイア", "다이아"};
+    public static string[] RemoveAllADs = new string[]{"Remove All ADs", "全ての広告無し", "광고제거"};
 
     //* PSV
     public static string[] Dmg = new string[]{DM.PSV.Dmg.ToString(), "攻撃力", "공격력"};
@@ -455,6 +460,10 @@ public static class LANG //* LANG
         if(name == TXT.PsvSkillInfo.ToString()) res = PsvSkillInfo[CUR_LANG];
         if(name == TXT.Upgrade.ToString()) res = Upgrade[CUR_LANG];
         if(name == TXT.CashShop.ToString()) res = CashShop[CUR_LANG];
+        if(name == TXT.PremiumPack.ToString()) res = PremiumPack[CUR_LANG];
+        if(name == TXT.Coin.ToString()) res = Coin[CUR_LANG];
+        if(name == TXT.Diamond.ToString()) res = Diamond[CUR_LANG];
+        if(name == TXT.RemoveAllADs.ToString()) res = RemoveAllADs[CUR_LANG];
 
         //* PSV
         if(name == TXT.Dmg.ToString()) res = Dmg[CUR_LANG];

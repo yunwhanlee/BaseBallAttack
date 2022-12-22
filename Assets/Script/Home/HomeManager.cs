@@ -58,6 +58,13 @@ public class HomeManager : MonoBehaviour
     public Button rouletteIconBtn;
     public Text rouletteIconCoolTimeTxt;
 
+    [Header("PREMIUM PACKAGE")][Header("__________________________")]
+    public GameObject premiumPackPanel;
+    public GameObject redDotIcon;
+    public Button premiumPackIconBtn;
+    public Text premiumPackTitle;
+    public Text[] premiumPackInfoTxtArr;
+
     [Header("DIALOG")][Header("__________________________")]
     public RectTransform showAdDialog;
     public Text adDialogTitleTxt;
@@ -89,10 +96,6 @@ public class HomeManager : MonoBehaviour
         setSelectSkillImg(true);
         LanguageOptDropDown.value = (int)DM.ins.personalData.Lang; //* Loadデータで初期化
 
-        // if(DM.ins.personalData.RouletteTicketCoolTime == null){
-        //     DM.ins.personalData.RouletteTicketCoolTime = DateTime.Now.ToString();
-        // }
-
         rouletteIconBtn.GetComponent<Image>().color = Color.grey;
         startBtnTxt.text = LANG.getTxt(LANG.TXT.Start.ToString());
 
@@ -100,6 +103,14 @@ public class HomeManager : MonoBehaviour
         adDialogContentTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRouletteTicket_Content.ToString());
 
         selectedSkillBtnIdxTxt.text = LANG.getTxt(LANG.TXT.FirstSkill.ToString());
+
+        //* Set Language Premium Pack
+        const int ROULETTE_TICKET = 0, COIN = 1, DIAMOND = 2, REMOVE_AD = 3;
+        premiumPackTitle.text = LANG.getTxt(LANG.TXT.PremiumPack.ToString());
+        premiumPackInfoTxtArr[ROULETTE_TICKET].text = $"x {LM._.PREM_PACK_ROULETTE_TICKET}";
+        premiumPackInfoTxtArr[COIN].text = $"{LM._.PREM_PACK_COIN} {LANG.getTxt(LANG.TXT.Diamond.ToString())}";
+        premiumPackInfoTxtArr[DIAMOND].text = $"{LM._.PREM_PACK_DIAMOND} {LANG.getTxt(LANG.TXT.Coin.ToString())}";
+        premiumPackInfoTxtArr[REMOVE_AD].text = $"{LANG.getTxt(LANG.TXT.RemoveAllADs.ToString())}";
     }
 
     void Update(){
@@ -176,6 +187,10 @@ public class HomeManager : MonoBehaviour
             homePanel.GoBtn.gameObject.SetActive(false);
             ItemPsvInfoBtn.gameObject.SetActive(false);
         }
+    }
+    public void onClickPremiumPackIconBtn(){
+        Debug.Log("onClickPremiumPackIconBtn::");
+        premiumPackPanel.SetActive(true);
     }
     public void onClickShowADButton(){
         //TODO AD広告全部見たら、
