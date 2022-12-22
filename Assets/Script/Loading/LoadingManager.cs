@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 
 public class LoadingManager : MonoBehaviour
 {
+    [SerializeField] bool isAllowNextSceneActive;
     [SerializeField] Transform howToPlayPanel;
 
     [FormerlySerializedAs("loadingBar")]
@@ -25,6 +26,7 @@ public class LoadingManager : MonoBehaviour
         DM.ins.transform.position = new Vector3(-100, -100, -100);
         var tuto = DM.ins.displayTutorialUI();
         tuto.transform.Find("ScreenDim").gameObject.SetActive(false);
+        tuto.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
         Debug.Log($"LoadingManager:: Start:: tuto.gameObject.name= " + tuto.gameObject.name);
         tuto.PageIdx = Random.Range(0, tuto.ContentArr.Length);
         //* 非同期 処理
@@ -35,7 +37,7 @@ public class LoadingManager : MonoBehaviour
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
 
         //* 読込みが完了出来たら、自動で次のシーンに進む。
-        operation.allowSceneActivation = true;
+        operation.allowSceneActivation = isAllowNextSceneActive;
 
         while(!operation.isDone){
             yield return null;

@@ -253,7 +253,10 @@ public class GameManager : MonoBehaviour
     // public void onClickReGameButton() => init();
     public void onClickSkillButton() => levelUpPanel.SetActive(false);
     public void onClickSetGameButton(string type) => setGame(type);
-    public void onClickOpenTutorialButton() => DM.ins.displayTutorialUI();
+    public void onClickOpenTutorialButton() {
+        DM.ins.displayTutorialUI();
+        openTutorialDialog.gameObject.SetActive(false);
+    }
     public void onClickSkipTutorialNextTimeToggle() => DM.ins.personalData.IsSkipTutorial = skipTutorialToggle.isOn;
     public void onClickRewardChestOpenButton() {
         StartCoroutine(coRewardChestOpen());

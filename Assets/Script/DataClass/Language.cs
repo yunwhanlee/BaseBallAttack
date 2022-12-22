@@ -207,7 +207,7 @@ public static class LANG //* LANG
     //* Tutorial
     public static string[] OpenTutorial_Content = new string[]{
         "Would you like to watch Tutorial?",
-        "チュートリアルをみませんか？",
+        "チュートリアルを見ますか？",
         "튜토리얼을 보시겠습니까?"
     };
     public static string[] TutorialA_Title = new string[]{
