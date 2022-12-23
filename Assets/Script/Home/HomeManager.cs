@@ -67,6 +67,11 @@ public class HomeManager : MonoBehaviour
     public Text[] premiumPackInfoTxtArr;
     public Text premiumPackPriceTxt;
 
+    [Header("SHOW REWARD PANEL")][Header("__________________________")]
+    public GameObject showRewardPanel;
+    public Transform showRewardItemListGroup;
+    public GameObject showRewardItemPf;
+
     [Header("DIALOG")][Header("__________________________")]
     public RectTransform showAdDialog;
     public Text adDialogTitleTxt;
@@ -339,10 +344,20 @@ public class HomeManager : MonoBehaviour
             DM.ins.personalData.IsRemoveAD = true;
 
             // UI
-            StartCoroutine(coCheckPremiumPackPurchaseStatus(closeDelaySec: 2));
+            StartCoroutine(coCheckPremiumPackPurchaseStatus(closeDelaySec: 2.5f));
 
+            //* Open Show Reward Panel
+            showRewardPanel.SetActive(true);
+
+            //* Set Showreward ItemPfs
+            const int ROULETTE_TICKET = 0, COIN = 1, DIAMOND = 2, REMOVE_AD = 3;
+            createShowRewardItemPf(ROULETTE_TICKET, $"{LM._.PREM_PACK_ROULETTE_TICKET}");
+            createShowRewardItemPf(COIN, $"{LM._.PREM_PACK_COIN}");
+            createShowRewardItemPf(DIAMOND, $"{LM._.PREM_PACK_DIAMOND}");
+            createShowRewardItemPf(REMOVE_AD, "SKIP");
+            
         }else{
-            Debug.LogWarning($"<size=20><color=yellow> HM::onClickPremiumPackPurchaseBtn:: IN-APP-PURCHASE FAIL! :( </color></size>");
+            Debug.LogError($"<size=20><color=yellow> HM::onClickPremiumPackPurchaseBtn:: IN-APP-PURCHASE FAIL! :( </color></size>");
         }
         
     }
@@ -463,22 +478,31 @@ public class HomeManager : MonoBehaviour
         return coolTimeStr;
     }
     IEnumerator coCheckPremiumPackPurchaseStatus(float closeDelaySec = 0.0001f){
+        const int ROULETTE_TICKET = 0, COIN = 1, DIAMOND = 2, REMOVE_AD = 3;
         if(!DM.ins.personalData.IsPurchasePremiumPack){
             //* Set Language Premium Pack
-            const int ROULETTE_TICKET = 0, COIN = 1, DIAMOND = 2, REMOVE_AD = 3;
             premiumPackTitle.text = LANG.getTxt(LANG.TXT.PremiumPack.ToString());
             premiumPackInfoTxtArr[ROULETTE_TICKET].text = $"x {LM._.PREM_PACK_ROULETTE_TICKET}";
             premiumPackInfoTxtArr[COIN].text = $"{LM._.PREM_PACK_COIN} {LANG.getTxt(LANG.TXT.Diamond.ToString())}";
             premiumPackInfoTxtArr[DIAMOND].text = $"{LM._.PREM_PACK_DIAMOND} {LANG.getTxt(LANG.TXT.Coin.ToString())}";
             premiumPackInfoTxtArr[REMOVE_AD].text = $"{LANG.getTxt(LANG.TXT.RemoveAllADs.ToString())}";
-            premiumPackPriceTxt.text = $"${ LM._.PREM_PACK_PRICE.ToString()}";
+            premiumPackPriceTxt.text = $"${ LM._.PREM_PACK_PRICE}";
         }
         else{
+            //* Close PremiumPackPanel 
             yield return new WaitForSeconds(closeDelaySec);
             premiumPackPanel.SetActive(false);
             premiumPackFocusIcon.SetActive(false);
             premiumPackIconBtn.interactable = false;
         }
+    }
+    private void createShowRewardItemPf(int idx, string valueStr){
+        const int ICON = 0, TEXT = 1;
+        var itemPf = Instantiate(showRewardItemPf, showRewardItemListGroup, false);
+        Sprite IconSpr = premiumPackInfoTxtArr[idx].transform.parent.GetChild(0).GetComponent<Image>().sprite;
+        string TextVal = valueStr;
+        itemPf.transform.GetChild(ICON).GetComponent<Image>().sprite = IconSpr;
+        itemPf.transform.GetChild(TEXT).GetComponent<Text>().text = TextVal;
     }
 #endregion
 }
