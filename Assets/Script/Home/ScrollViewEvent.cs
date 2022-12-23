@@ -340,21 +340,31 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 hm.priceTypeIconImg.sprite = hm.CashSpr; break;
         }
 
-        if(DM.ins.SelectItemType == DM.PANEL.CashShop.ToString() || DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
-            hm.checkMarkImg.gameObject.SetActive(false);
-            hm.priceTxt.gameObject.SetActive(true);
-            hm.priceTxt.text = curItem.price.getValue().ToString();
+        //* CashShop & Upgrade Panel
+        if(DM.ins.SelectItemType == DM.PANEL.CashShop.ToString()){
+            setPriceUI(curItem.price.getValue().ToString());
+            return;
+        }
+        else if(DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
+            UpgradeDt upgradeDt = DM.ins.personalData.Upgrade.Arr[CurIdx];
+            string priceTxt = (upgradeDt.Lv == upgradeDt.MaxLv)? "MAX" : curItem.price.getValue().ToString();
+            setPriceUI(priceTxt);
             return;
         }
 
+        //* Model Pattern Panel
         if(curItem.IsLock){//* 💲表示
-            hm.checkMarkImg.gameObject.SetActive(false);
-            hm.priceTxt.gameObject.SetActive(true);
-            hm.priceTxt.text = curItem.price.getValue().ToString();
+            setPriceUI(curItem.price.getValue().ToString());
         }else{//* ✅表示
             hm.checkMarkImg.gameObject.SetActive(true);
             hm.priceTxt.gameObject.SetActive(false);
         }
+    }
+
+    private void setPriceUI(string price){
+        hm.checkMarkImg.gameObject.SetActive(false);
+        hm.priceTxt.gameObject.SetActive(true);
+        hm.priceTxt.text = price; //curItem.price.getValue().ToString();
     }
 
     public void setCurSelectedItem(int typeIdx){
@@ -531,9 +541,10 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             //* (BUG-20)MAX-LVなら、「お金が足りない」ダイアログ表示しない。
             if(DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
                 UpgradeDt upgradeDt = DM.ins.personalData.Upgrade.Arr[CurIdx];
+
                 if(upgradeDt.Lv == upgradeDt.MaxLv) return myMoney;
             }
-
+            //* 「お金が足りない」ダイアログ表示。
             DM.ins.personalData.setSelectIdx(befIdx);
             Util._.displayNoticeMsgDialog(LANG.getTxt(LANG.TXT.MsgNoMoney.ToString()));
         }
