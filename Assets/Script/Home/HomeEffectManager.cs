@@ -6,6 +6,7 @@ using System;
 public class HomeEffectManager : MonoBehaviour
 {
     public GameObject itemBuyEF;
+    public GameObject congratuBlastRainbowEF;
 
     public void createItemBuyEF(GameObject SkillImgObj, string type){
         var ins = Instantiate(itemBuyEF, itemBuyEF.transform.position, Quaternion.identity) as GameObject;
@@ -18,7 +19,11 @@ public class HomeEffectManager : MonoBehaviour
             imgIns.GetComponent<RectTransform>().transform.localPosition = new Vector3(0, 100, 0);
             imgIns.GetComponent<RectTransform>().localScale = Vector3.one * 2;
         }
-
         Destroy(ins, 2);
+    }
+
+    public void createCongratuBlastRainbowEF(Transform parentTf){
+        var ins = Instantiate(congratuBlastRainbowEF, parentTf, instantiateInWorldSpace: false);
+        Destroy(ins, 3);
     }
 }

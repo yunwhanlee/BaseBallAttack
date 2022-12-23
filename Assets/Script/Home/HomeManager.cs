@@ -7,7 +7,7 @@ using System;
 using UnityEngine.UI.Extensions;
 using UnityEngine.Serialization;
 
-[System.Serializable]   public class FrameUI{
+[System.Serializable] public class FrameUI{
     //* Value
     [FormerlySerializedAs("panel")] [SerializeField] GameObject panel;   public GameObject Panel {get => panel; set => panel = value;}
     [FormerlySerializedAs("goBtn")] [SerializeField] Button goBtn;     public Button GoBtn {get => goBtn; set => goBtn = value;}
@@ -27,6 +27,7 @@ public class HomeManager : MonoBehaviour
 {
     //* OutSide
     public enum DlgBGColor {Chara, Bat, Skill, CashShop};
+    public HomeEffectManager em;
 
     [Header("SELECT PANEL COLOR")][Header("__________________________")]
     [SerializeField] Image selectPanelScrollBG;  public Image SelectPanelScrollBG {get => selectPanelScrollBG; set => selectPanelScrollBG = value;}
@@ -60,10 +61,11 @@ public class HomeManager : MonoBehaviour
 
     [Header("PREMIUM PACKAGE")][Header("__________________________")]
     public GameObject premiumPackPanel;
-    public GameObject redDotIcon;
+    public GameObject premiumPackFocusIcon;
     public Button premiumPackIconBtn;
     public Text premiumPackTitle;
     public Text[] premiumPackInfoTxtArr;
+    public Text premiumPackPriceTxt;
 
     [Header("DIALOG")][Header("__________________________")]
     public RectTransform showAdDialog;
@@ -104,13 +106,7 @@ public class HomeManager : MonoBehaviour
 
         selectedSkillBtnIdxTxt.text = LANG.getTxt(LANG.TXT.FirstSkill.ToString());
 
-        //* Set Language Premium Pack
-        const int ROULETTE_TICKET = 0, COIN = 1, DIAMOND = 2, REMOVE_AD = 3;
-        premiumPackTitle.text = LANG.getTxt(LANG.TXT.PremiumPack.ToString());
-        premiumPackInfoTxtArr[ROULETTE_TICKET].text = $"x {LM._.PREM_PACK_ROULETTE_TICKET}";
-        premiumPackInfoTxtArr[COIN].text = $"{LM._.PREM_PACK_COIN} {LANG.getTxt(LANG.TXT.Diamond.ToString())}";
-        premiumPackInfoTxtArr[DIAMOND].text = $"{LM._.PREM_PACK_DIAMOND} {LANG.getTxt(LANG.TXT.Coin.ToString())}";
-        premiumPackInfoTxtArr[REMOVE_AD].text = $"{LANG.getTxt(LANG.TXT.RemoveAllADs.ToString())}";
+        StartCoroutine(coCheckPremiumPackPurchaseStatus());
     }
 
     void Update(){
@@ -128,10 +124,12 @@ public class HomeManager : MonoBehaviour
         }
     }
 
-    //* ----------------------------------------------------------------
-    //*   UI Button
-    //* ----------------------------------------------------------------
+//* ----------------------------------------------------------------
+//*   Button
+//* ----------------------------------------------------------------
+#region Button
     public void onClickBtnQuestionMarkIcon() => DM.ins.displayTutorialUI();
+    public void onClickPremiumPackIconBtn() => premiumPackPanel.SetActive(true);
 
     public void onClickBtnGoToPanel(string name){
         //* Current Model Data & ParentTf
@@ -187,10 +185,6 @@ public class HomeManager : MonoBehaviour
             homePanel.GoBtn.gameObject.SetActive(false);
             ItemPsvInfoBtn.gameObject.SetActive(false);
         }
-    }
-    public void onClickPremiumPackIconBtn(){
-        Debug.Log("onClickPremiumPackIconBtn::");
-        premiumPackPanel.SetActive(true);
     }
     public void onClickShowADButton(){
         //TODO AD広告全部見たら、
@@ -329,8 +323,35 @@ public class HomeManager : MonoBehaviour
             }
         }
     }
+    public void onClickPremiumPackPurchaseBtn(){
+        //TODO in app purchase
+        bool inAppPurchaseSuccess = true;
 
-    public void setSelectSkillImg(bool isInit = false){
+        if(inAppPurchaseSuccess){
+            DM.ins.personalData.IsPurchasePremiumPack = true;
+            // Effect
+            em.createCongratuBlastRainbowEF(GameObject.Find("MainCanvas").transform);
+
+            // Set Data
+            DM.ins.personalData.RouletteTicket += LM._.PREM_PACK_ROULETTE_TICKET;
+            DM.ins.personalData.Coin += LM._.PREM_PACK_COIN;
+            DM.ins.personalData.Diamond += LM._.PREM_PACK_DIAMOND;
+            DM.ins.personalData.IsRemoveAD = true;
+
+            // UI
+            StartCoroutine(coCheckPremiumPackPurchaseStatus(closeDelaySec: 2));
+
+        }else{
+            Debug.LogWarning($"<size=20><color=yellow> HM::onClickPremiumPackPurchaseBtn:: IN-APP-PURCHASE FAIL! :( </color></size>");
+        }
+        
+    }
+#endregion
+//* ----------------------------------------------------------------
+//* Private Function
+//* ----------------------------------------------------------------
+#region Private Function
+    private void setSelectSkillImg(bool isInit = false){
         Debug.LogFormat("------setSelectSkillImg():: selectedSkillBtnIdx({0}) SelectSkillIdx({1}), SelectSkill2Idx({2})------", selectedSkillBtnIdx, DM.ins.personalData.SelectSkillIdx, DM.ins.personalData.SelectSkill2Idx);
         var ctt = DM.ins.scrollviews[(int)DM.PANEL.Skill].ContentTf;
         if(isInit){
@@ -358,10 +379,6 @@ public class HomeManager : MonoBehaviour
             setSelectSkillSprite(1, ctt, skillIdx);
         }
     }
-
-    //* ----------------------------------------------------------------
-    //* Private Function
-    //* ----------------------------------------------------------------
     private int[] getItemPsvLvArr(Transform playerModel){
         // Debug.Log("getItemPsvLvArr:: playerModel= " + playerModel);
         ItemInfo[] childs = playerModel.GetComponentsInChildren<ItemInfo>();
@@ -430,7 +447,6 @@ public class HomeManager : MonoBehaviour
         Debug.Log("drawGrayPanel:: child.name= " + child.name);
         if(child.name == DM.NAME.GrayPanel.ToString()) child.gameObject.SetActive(isActive);
     }
-
     private string updateADCoolTime(){
         DateTime finishTime = DateTime.Parse(DM.ins.personalData.RouletteTicketCoolTime).AddMinutes(LM._.ROULETTE_TICKET_COOLTIME_MINUTE);
         TimeSpan coolTime = finishTime - DateTime.Now;
@@ -446,4 +462,23 @@ public class HomeManager : MonoBehaviour
 
         return coolTimeStr;
     }
+    IEnumerator coCheckPremiumPackPurchaseStatus(float closeDelaySec = 0.0001f){
+        if(!DM.ins.personalData.IsPurchasePremiumPack){
+            //* Set Language Premium Pack
+            const int ROULETTE_TICKET = 0, COIN = 1, DIAMOND = 2, REMOVE_AD = 3;
+            premiumPackTitle.text = LANG.getTxt(LANG.TXT.PremiumPack.ToString());
+            premiumPackInfoTxtArr[ROULETTE_TICKET].text = $"x {LM._.PREM_PACK_ROULETTE_TICKET}";
+            premiumPackInfoTxtArr[COIN].text = $"{LM._.PREM_PACK_COIN} {LANG.getTxt(LANG.TXT.Diamond.ToString())}";
+            premiumPackInfoTxtArr[DIAMOND].text = $"{LM._.PREM_PACK_DIAMOND} {LANG.getTxt(LANG.TXT.Coin.ToString())}";
+            premiumPackInfoTxtArr[REMOVE_AD].text = $"{LANG.getTxt(LANG.TXT.RemoveAllADs.ToString())}";
+            premiumPackPriceTxt.text = $"${ LM._.PREM_PACK_PRICE.ToString()}";
+        }
+        else{
+            yield return new WaitForSeconds(closeDelaySec);
+            premiumPackPanel.SetActive(false);
+            premiumPackFocusIcon.SetActive(false);
+            premiumPackIconBtn.interactable = false;
+        }
+    }
+#endregion
 }

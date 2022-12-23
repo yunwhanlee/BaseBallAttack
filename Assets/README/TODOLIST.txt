@@ -232,7 +232,10 @@
 
     ● PREMIUM PACKAGE
         ✓  HOME SCENE:: UIと基本の処理済み。
-        -  DM.personalDataで、１回購入したら見えないように処理すること。
+        ✓  DM.personalDataで、１回購入したら見えないように処理すること。-> checkPremiumPackPurchaseStatus
+        ✓  onClickPremiumPackPurchaseBtn - IN-APP-PURCHASE
+
+        
 
     ★TODO★
         - HOME:UPGRADEアイテム購入したら、揺れるEF追加。

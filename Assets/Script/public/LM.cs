@@ -82,6 +82,9 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("プレミアムパック購入：コイン")] public int PREM_PACK_COIN = 50000;
     [Tooltip("プレミアムパック購入：ダイア")] public int PREM_PACK_DIAMOND = 5000;
 
+    [Header("IN-APP PURCHASE PRICE ($ DOLLER)")][Header("__________________________")]
+    [Tooltip("プレミアムパック値段")] public int PREM_PACK_PRICE = 10;
+
     void Awake() => singleton();
 
     void Start(){

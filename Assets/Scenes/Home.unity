@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45015407, g: 0.500194, b: 0.5754274, a: 1}
+  m_IndirectSpecularColor: {r: 0.45015454, g: 0.5001945, b: 0.57542807, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1454,7 +1454,9 @@ MonoBehaviour:
     diamond: 0
     rouletteTicket: 0
     rouletteTicketCoolTime: 
+    isRemoveAD: 0
     isSkipTutorial: 0
+    isPurchasePremiumPack: 0
     selectCharaIdx: 0
     charaLockList: 
     selectBatIdx: 0
@@ -5615,6 +5617,7 @@ MonoBehaviour:
   PREM_PACK_ROULETTE_TICKET: 7
   PREM_PACK_COIN: 50000
   PREM_PACK_DIAMOND: 10000
+  PREM_PACK_PRICE: 10
 --- !u!1 &445535722
 GameObject:
   m_ObjectHideFlags: 0
@@ -21655,7 +21658,7 @@ GameObject:
   - component: {fileID: 1469798267}
   - component: {fileID: 1469798266}
   m_Layer: 5
-  m_Name: redDotIcon
+  m_Name: FocusIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22748,6 +22751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemBuyEF: {fileID: 5931878228975176379, guid: 106f17735b15078438fb67f740899f1f, type: 3}
+  congratuBlastRainbowEF: {fileID: 1271770798657670540, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
 --- !u!1 &1586847338
 GameObject:
   m_ObjectHideFlags: 0
@@ -24939,6 +24943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77cb010ad95db524d8ccf492a6a68e4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  em: {fileID: 1584740706}
   selectPanelScrollBG: {fileID: 327609488}
   selectPanelColors:
   - {r: 0.15686275, g: 0.96470594, b: 0.52156866, a: 1}
@@ -24984,7 +24989,7 @@ MonoBehaviour:
   rouletteIconBtn: {fileID: 807839746}
   rouletteIconCoolTimeTxt: {fileID: 705399369}
   premiumPackPanel: {fileID: 4041380315914218744}
-  redDotIcon: {fileID: 1469798264}
+  premiumPackFocusIcon: {fileID: 1469798264}
   premiumPackIconBtn: {fileID: 76051938}
   premiumPackTitle: {fileID: 71545892}
   premiumPackInfoTxtArr:
@@ -24992,6 +24997,7 @@ MonoBehaviour:
   - {fileID: 4041380315509008056}
   - {fileID: 4041380316998784172}
   - {fileID: 4041380315200936511}
+  premiumPackPriceTxt: {fileID: 4041380316934732539}
   showAdDialog: {fileID: 1571631274}
   adDialogTitleTxt: {fileID: 1250039935}
   adDialogContentTxt: {fileID: 891417927}
@@ -28447,7 +28453,7 @@ GameObject:
   - component: {fileID: 4041380315551043583}
   - component: {fileID: 4041380315551043578}
   m_Layer: 0
-  m_Name: Button_Subscribe now
+  m_Name: PurchaseBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28516,7 +28522,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4041380315551043576}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1887670884}
+        m_TargetAssemblyTypeName: HomeManager, Assembly-CSharp
+        m_MethodName: onClickPremiumPackPurchaseBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &4041380315556236693
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -30089,7 +30107,7 @@ GameObject:
   - component: {fileID: 4041380316934732539}
   - component: {fileID: 4041380316934732540}
   m_Layer: 0
-  m_Name: Text_Subscribe now
+  m_Name: PriceTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

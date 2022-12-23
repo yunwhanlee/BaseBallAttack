@@ -74,6 +74,7 @@ public class DM : MonoBehaviour
 
     [Header("★★【 MY DATE (SAVE & LOAD) 】★★")][Header("__________________________")]
     public PersonalData personalData;
+    
     [Header("ITEM RANK COLOR")][Header("__________________________")]
     [FormerlySerializedAs("rankGeneralColor")] public Color rankGeneralClr;
     [FormerlySerializedAs("rankRareColor")] public Color rankRareClr;
