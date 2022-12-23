@@ -5,8 +5,16 @@ using System;
 
 public class HomeEffectManager : MonoBehaviour
 {
+    //* Outside
+    public HomeManager hm;
+
+    void Start() {
+        hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
+    }
+
     public GameObject itemBuyEF;
     public GameObject congratuBlastRainbowEF;
+    public GameObject upgradeItemEF;
 
     public void createItemBuyEF(GameObject SkillImgObj, string type){
         var ins = Instantiate(itemBuyEF, itemBuyEF.transform.position, Quaternion.identity) as GameObject;
@@ -25,5 +33,11 @@ public class HomeEffectManager : MonoBehaviour
     public void createCongratuBlastRainbowEF(Transform parentTf){
         var ins = Instantiate(congratuBlastRainbowEF, parentTf, instantiateInWorldSpace: false);
         Destroy(ins, 3);
+    }
+
+    public void createUpgradeItemEF(Transform parentTf){
+        hm.mainCanvas.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
+        var ins = Instantiate(upgradeItemEF, parentTf, instantiateInWorldSpace: false);
+        Destroy(ins, 1);
     }
 }

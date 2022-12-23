@@ -74,7 +74,7 @@ public class DM : MonoBehaviour
 
     [Header("★★【 MY DATE (SAVE & LOAD) 】★★")][Header("__________________________")]
     public PersonalData personalData;
-    
+
     [Header("ITEM RANK COLOR")][Header("__________________________")]
     [FormerlySerializedAs("rankGeneralColor")] public Color rankGeneralClr;
     [FormerlySerializedAs("rankRareColor")] public Color rankRareClr;
@@ -114,8 +114,8 @@ public class DM : MonoBehaviour
         for(int i=0; i<upgrades.Length; i++){
             UpgradeDt upgradeDt = personalData.Upgrade.Arr[i];
             upgrades[i].setUpgradeGUI(upgradeDt);
-            List<int> priceList = Util._.calcArithmeticProgressionList(start: 100, upgradeDt.maxLv, d: 100, gradualUpValue: 0.1f);
-            upgrades[i].price.setValue(priceList[upgradeDt.lv]);
+            List<int> priceList = Util._.calcArithmeticProgressionList(start: 100, upgradeDt.MaxLv, d: 100, gradualUpValue: 0.1f);
+            upgrades[i].price.setValue(priceList[upgradeDt.Lv]);
         }
 
         //* PersonalData後に処理必要なもの（LANGUAGEため）

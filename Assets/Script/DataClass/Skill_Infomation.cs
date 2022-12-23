@@ -8,7 +8,8 @@ using Random = UnityEngine.Random;
 [System.Serializable]
 public class UpgradeDt {
     public string name;
-    public int lv, maxLv;
+    [SerializeField] int lv;    public int Lv { get => lv; set => lv = value;}
+    [SerializeField] int maxLv;    public int MaxLv { get => maxLv; set => maxLv = value;}
     public float unit;
     public UpgradeDt(string name, float unit, int maxLv){
         this.name = name;

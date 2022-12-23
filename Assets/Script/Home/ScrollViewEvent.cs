@@ -66,7 +66,7 @@ public class ScrollView {
                     //TODO 追加処理 APPLY LOAD DATA
                     var upgrade = DM.ins.personalData.Upgrade;
                     var idx = Array.FindIndex(itemPrefs, (pref) => pref == itemPf);
-                    ins.GetComponent<ItemInfo>().UpgradeValueTxt.text = upgrade.Arr[idx].lv.ToString();
+                    ins.GetComponent<ItemInfo>().UpgradeValueTxt.text = upgrade.Arr[idx].Lv.ToString();
                     break;
                 }
             }
@@ -505,17 +505,20 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         Debug.Log($"<color=yellow>ScrollViewEvent::purchaseItem():: type= {DM.ins.SelectItemType}, CurIdx= {CurIdx}</color>");
         int price = curItem.price.getValue();
         if(myMoney >= price){
-            myMoney -= price;
-            
             if(DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
                 UpgradeDt upgradeDt = DM.ins.personalData.Upgrade.Arr[CurIdx];
-                upgradeDt.setLvUp();
-                curItem.setUpgradeGUI(upgradeDt);
-                List<int> priceList = Util._.calcArithmeticProgressionList(start: 100, upgradeDt.maxLv, d: 100, gradualUpValue: 0.1f);
-                curItem.price.setValue(priceList[upgradeDt.lv]);
+                if(upgradeDt.Lv < upgradeDt.MaxLv){
+                    myMoney -= price;
+                    upgradeDt.setLvUp();
+                    curItem.setUpgradeGUI(upgradeDt);
+                    List<int> priceList = Util._.calcArithmeticProgressionList(start: 100, upgradeDt.MaxLv, d: 100, gradualUpValue: 0.1f);
+                    curItem.price.setValue(priceList[upgradeDt.Lv]);
+                    em.createUpgradeItemEF(curItem.UpgradeValueTxt.transform);
+                }
             }
             else{
-                Debug.Log("purchaseItem:: curItem.transform.GetChild(0)=" + curItem.transform.GetChild(0).name);
+                // Debug.Log("purchaseItem:: curItem.transform.GetChild(0)=" + curItem.transform.GetChild(0).name);
+                myMoney -= price;
                 GameObject SkillImgObj = curItem.transform.GetChild(0).gameObject; //* (BUG-8) Home:: Bat.getChild(0).getChild(0)-> Null ---> getChild(0)が正しい。
                 em.createItemBuyEF(SkillImgObj, DM.ins.SelectItemType);
                 curItem.IsLock = false; //* 解禁
@@ -524,7 +527,13 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 drawCheckBtnUI();
             }
         }
-        else{//TODO Audio
+        else { //TODO Audio
+            //* (BUG-20)MAX-LVなら、「お金が足りない」ダイアログ表示しない。
+            if(DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
+                UpgradeDt upgradeDt = DM.ins.personalData.Upgrade.Arr[CurIdx];
+                if(upgradeDt.Lv == upgradeDt.MaxLv) return myMoney;
+            }
+
             DM.ins.personalData.setSelectIdx(befIdx);
             Util._.displayNoticeMsgDialog(LANG.getTxt(LANG.TXT.MsgNoMoney.ToString()));
         }

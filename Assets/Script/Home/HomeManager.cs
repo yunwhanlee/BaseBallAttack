@@ -34,6 +34,7 @@ public class HomeManager : MonoBehaviour
     [SerializeField] Color[] selectPanelColors;
     
     [Header("【 GUI 】")][Header("__________________________")]
+    public Canvas mainCanvas;
     public FrameUI homePanel;
     public FrameUI selectPanel;
     public FrameUI unlock2ndSkillDialog;
@@ -78,7 +79,7 @@ public class HomeManager : MonoBehaviour
     public Image checkMarkImg;
     public Text priceTxt;
     public Image priceTypeIconImg;
-    
+
     [Header("PRICE TYPE ICON SPRITE")][Header("__________________________")]
     [FormerlySerializedAs("coinSprite")] [SerializeField] Sprite coinSpr;  public Sprite CoinSpr {get => coinSpr;}
     [FormerlySerializedAs("diamondSprite")] [SerializeField] Sprite diamondSpr;  public Sprite DiamondSpr {get => diamondSpr;}
