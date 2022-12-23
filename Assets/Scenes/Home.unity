@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45015454, g: 0.5001945, b: 0.57542807, a: 1}
+  m_IndirectSpecularColor: {r: 0.45015407, g: 0.500194, b: 0.5754274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5752,7 +5752,7 @@ MonoBehaviour:
   TREASURECHEST_BLOCK_PER: 5
   HEAL_BLOCK_PER: 5
   REWARD_CHEST_PER: 10
-  DROP_BOX_PER: 37
+  DROP_BOX_PER: 599
   DROPBOX_COIN_VALUE: 10
   ATV_COOLDOWN_UNIT: 0.01
   MAX_LV: 50
@@ -23426,6 +23426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ff2c6263a1fc54babbbf809be24ce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hm: {fileID: 0}
   itemBuyEF: {fileID: 5931878228975176379, guid: 106f17735b15078438fb67f740899f1f, type: 3}
   congratuBlastRainbowEF: {fileID: 1271770798657670540, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
   upgradeItemEF: {fileID: 1399508290868892338, guid: 8adcfd10c8f2a0e4a971579f5a05337c, type: 3}
