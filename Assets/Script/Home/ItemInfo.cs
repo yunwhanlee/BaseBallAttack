@@ -29,10 +29,9 @@ public class ItemInfo : MonoBehaviour
     [SerializeField] DM.RANK rank;     public DM.RANK Rank {get => rank; set => rank = value;}
     [SerializeField] Outline outline3D;    public Outline Outline3D{get => outline3D; set => outline3D = value;}
     [SerializeField] UnityEngine.UI.Extensions.NicerOutline outline2D;    public UnityEngine.UI.Extensions.NicerOutline Outline2D{get => outline2D; set => outline2D = value;}
-    
-    [FormerlySerializedAs("cashShopPriceTxt")] [SerializeField] Text cashShopPriceTxt;     public Text CashShopPriceTxt {get => cashShopPriceTxt; set => cashShopPriceTxt = value;}
     [FormerlySerializedAs("upgradeValueTxt")] [SerializeField] Text upgradeValueTxt;     public Text UpgradeValueTxt {get => upgradeValueTxt; set => upgradeValueTxt = value;}
     [FormerlySerializedAs("lvTxt")] [SerializeField] Text lvTxt;     public Text LvTxt {get => lvTxt; set => lvTxt = value;}
+    [FormerlySerializedAs("cashShopPriceTxt")] [SerializeField] Text cashShopPriceTxt;     public Text CashShopPriceTxt {get => cashShopPriceTxt; set => cashShopPriceTxt = value;}
 
     [SerializeField] ItemPsvList itemPassive;  public ItemPsvList ItemPassive {get => itemPassive; set=> itemPassive = value;}
     [SerializeField] GameObject rankAuraEF;  public GameObject RankAuraEF {get => rankAuraEF; set=> rankAuraEF = value;}
@@ -78,22 +77,22 @@ public class ItemInfo : MonoBehaviour
             //* Set Price By Rank
             switch(rank){
                 case DM.RANK.GENERAL : 
-                    price.Coin = 100;
+                    price.Val = 100;
                     break;
                 case DM.RANK.RARE : 
-                    price.Coin = 300; 
+                    price.Val = 300; 
                     break;
                 case DM.RANK.UNIQUE : 
-                    price.Coin = 700; 
+                    price.Val = 700; 
                     break;
                 case DM.RANK.LEGEND : 
-                    price.Coin = 1500; 
+                    price.Val = 1500; 
                     break;
                 case DM.RANK.GOD : 
-                    price.Coin = 4000; 
+                    price.Val = 4000; 
                     break;
             }
-            Debug.Log("IteonInfo::Start:: Set Price By Rank= price.Coin= " + price.Coin);
+            Debug.Log("IteonInfo::Start:: Set Price By Rank= price.Val= " + price.Val);
         }
     }
 

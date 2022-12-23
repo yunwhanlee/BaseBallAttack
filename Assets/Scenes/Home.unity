@@ -23200,7 +23200,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1544578271
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25312,7 +25312,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1835355576
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25786,8 +25786,6 @@ MonoBehaviour:
   - {r: 0.9568628, g: 0.27450982, b: 0.6745098, a: 1}
   - {r: 0.36320752, g: 0.8315838, b: 1, a: 1}
   - {r: 1, g: 0.67179114, b: 0.6650944, a: 1}
-  coinIconSprite: {fileID: 21300000, guid: 575678395c08d4dbe9f1cd800a0d55bb, type: 3}
-  diamondIconSprite: {fileID: 21300000, guid: d06a9ce0b696341a4a1844b63f11239c, type: 3}
   homePanel:
     panel: {fileID: 1227366031}
     goBtn: {fileID: 935471164}
@@ -25842,6 +25840,9 @@ MonoBehaviour:
   checkMarkImg: {fileID: 1835355577}
   priceTxt: {fileID: 1544578272}
   priceTypeIconImg: {fileID: 1483716002}
+  coinSpr: {fileID: 21300000, guid: 575678395c08d4dbe9f1cd800a0d55bb, type: 3}
+  diamondSpr: {fileID: 21300000, guid: d06a9ce0b696341a4a1844b63f11239c, type: 3}
+  cashSpr: {fileID: 21300000, guid: facf7c9b9a54444a1ad78a78150ea184, type: 3}
   modelTf: {fileID: 150785606}
 --- !u!1 &1931609519
 GameObject:
@@ -31057,7 +31058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.22857034, g: 0.764151, b: 0.082903184, a: 1}
+  m_Color: {r: 0.13709268, g: 0.4716981, b: 0.04672481, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -31090,7 +31091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.6313726}
+  m_EffectColor: {r: 1, g: 0.05054579, b: 0, a: 0.6313726}
   m_EffectDistance: {x: 5, y: -5}
   m_UseGraphicAlpha: 1
 --- !u!224 &4041380316998784164

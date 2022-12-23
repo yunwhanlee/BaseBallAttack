@@ -232,8 +232,7 @@ MonoBehaviour:
   - 
   price:
     type: 1
-    coin: 0
-    diamond: 1000
+    val: 20000
   isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 8526376200104239792}
@@ -243,9 +242,9 @@ MonoBehaviour:
   rank: 0
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
-  cashShopPriceTxt: {fileID: 8526376199582265686}
   upgradeValueTxt: {fileID: 0}
   lvTxt: {fileID: 0}
+  cashShopPriceTxt: {fileID: 8526376199582265686}
   itemPassive:
     arr: []
   rankAuraEF: {fileID: 0}
@@ -370,8 +369,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 150, y: 0}
-  m_SizeDelta: {x: 200, y: 60}
+  m_AnchoredPosition: {x: 120, y: 0}
+  m_SizeDelta: {x: 140, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8526376199582265685
 CanvasRenderer:

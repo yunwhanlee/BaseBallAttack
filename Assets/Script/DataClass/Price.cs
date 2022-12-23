@@ -6,24 +6,16 @@ using UnityEngine;
 public class Price
 {
     //* value
-    public enum TP {COIN, DIAMOND};
+    public enum TP {COIN, DIAMOND, CASH};
     [SerializeField] TP type;   public TP Type {get => type;}
-    [SerializeField] int coin;   public int Coin {get => coin;  set => coin = value;}
-    [SerializeField] int diamond;    public int Diamond {get => diamond;  set => diamond = value;}
+    [SerializeField] int val;   public int Val {get => val;  set => val = value;}
 
     //* function
     public int getValue(){
-        Debug.Log($"Price::getValue():: type= {type}, coin= {coin}, diamond= {diamond}");
-        //* Check Type
-        if(type == Price.TP.COIN)
-            return Coin;
-        else
-            return Diamond;
+        Debug.Log($"Price::getValue():: type= {type}");
+        return val;
     }
-    public void setValue(float increaseValue){
-        if(type == Price.TP.COIN)
-            Coin = (int)increaseValue;
-        else
-            Diamond = (int)increaseValue;
+    public void setValue(float value){
+        val = (int)value;
     }
 }

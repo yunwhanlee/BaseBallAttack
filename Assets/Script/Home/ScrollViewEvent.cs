@@ -330,14 +330,17 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         var curItem = getCurItem();
         Debug.Log($"drawChoiceBtnUI():: curItem.name= {curItem.name}, .IsLock= {curItem.IsLock}, .price= {curItem.price.getValue()}");
 
-        //* Set PriceType Icon Img Sprite
-        if(curItem.price.Type == Price.TP.COIN)
-            hm.priceTypeIconImg.sprite = hm.CoinIconSprite;
-        else
-            hm.priceTypeIconImg.sprite = hm.DiamondIconSprite;
+        //* Set PriceType Icon Sprite
+        switch(curItem.price.Type){
+            case Price.TP.COIN: 
+                hm.priceTypeIconImg.sprite = hm.CoinSpr; break;
+            case Price.TP.DIAMOND: 
+                hm.priceTypeIconImg.sprite = hm.DiamondSpr; break;
+            case Price.TP.CASH: 
+                hm.priceTypeIconImg.sprite = hm.CashSpr; break;
+        }
 
-        if(DM.ins.SelectItemType == DM.PANEL.CashShop.ToString()
-            || DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
+        if(DM.ins.SelectItemType == DM.PANEL.CashShop.ToString() || DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
             hm.checkMarkImg.gameObject.SetActive(false);
             hm.priceTxt.gameObject.SetActive(true);
             hm.priceTxt.text = curItem.price.getValue().ToString();

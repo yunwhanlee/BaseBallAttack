@@ -32,10 +32,6 @@ public class HomeManager : MonoBehaviour
     [Header("SELECT PANEL COLOR")][Header("__________________________")]
     [SerializeField] Image selectPanelScrollBG;  public Image SelectPanelScrollBG {get => selectPanelScrollBG; set => selectPanelScrollBG = value;}
     [SerializeField] Color[] selectPanelColors;
-
-    [Header("PRICE TYPE ICON SPRITE")][Header("__________________________")]
-    [SerializeField] Sprite coinIconSprite;  public Sprite CoinIconSprite {get => coinIconSprite;}
-    [SerializeField] Sprite diamondIconSprite;  public Sprite DiamondIconSprite {get => diamondIconSprite;}
     
     [Header("【 GUI 】")][Header("__________________________")]
     public FrameUI homePanel;
@@ -82,6 +78,11 @@ public class HomeManager : MonoBehaviour
     public Image checkMarkImg;
     public Text priceTxt;
     public Image priceTypeIconImg;
+    
+    [Header("PRICE TYPE ICON SPRITE")][Header("__________________________")]
+    [FormerlySerializedAs("coinSprite")] [SerializeField] Sprite coinSpr;  public Sprite CoinSpr {get => coinSpr;}
+    [FormerlySerializedAs("diamondSprite")] [SerializeField] Sprite diamondSpr;  public Sprite DiamondSpr {get => diamondSpr;}
+    [FormerlySerializedAs("cashSprite")] [SerializeField] Sprite cashSpr;  public Sprite CashSpr {get => cashSpr;}
 
     [Header("MODEL")][Header("__________________________")]
     [SerializeField] Transform modelTf;   public Transform ModelTf {get => modelTf; set => modelTf = value;}
@@ -357,6 +358,7 @@ public class HomeManager : MonoBehaviour
             createShowRewardItemPf(REMOVE_AD, "SKIP");
             
         }else{
+            //TODO 失敗した DIALOG表示。
             Debug.LogError($"<size=20><color=yellow> HM::onClickPremiumPackPurchaseBtn:: IN-APP-PURCHASE FAIL! :( </color></size>");
         }
         
@@ -486,7 +488,7 @@ public class HomeManager : MonoBehaviour
             premiumPackInfoTxtArr[COIN].text = $"{LM._.PREM_PACK_COIN} {LANG.getTxt(LANG.TXT.Diamond.ToString())}";
             premiumPackInfoTxtArr[DIAMOND].text = $"{LM._.PREM_PACK_DIAMOND} {LANG.getTxt(LANG.TXT.Coin.ToString())}";
             premiumPackInfoTxtArr[REMOVE_AD].text = $"{LANG.getTxt(LANG.TXT.RemoveAllADs.ToString())}";
-            premiumPackPriceTxt.text = $"${ LM._.PREM_PACK_PRICE}";
+            premiumPackPriceTxt.text = $"$ { LM._.PREM_PACK_PRICE}";
         }
         else{
             //* Close PremiumPackPanel 
@@ -499,7 +501,7 @@ public class HomeManager : MonoBehaviour
     private void createShowRewardItemPf(int idx, string valueStr){
         const int ICON = 0, TEXT = 1;
         var itemPf = Instantiate(showRewardItemPf, showRewardItemListGroup, false);
-        Sprite IconSpr = premiumPackInfoTxtArr[idx].transform.parent.GetChild(0).GetComponent<Image>().sprite;
+        Sprite IconSpr = premiumPackInfoTxtArr[idx].transform.parent.GetChild(ICON).GetComponent<Image>().sprite;
         string TextVal = valueStr;
         itemPf.transform.GetChild(ICON).GetComponent<Image>().sprite = IconSpr;
         itemPf.transform.GetChild(TEXT).GetComponent<Text>().text = TextVal;
