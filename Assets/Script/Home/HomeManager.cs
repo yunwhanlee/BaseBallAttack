@@ -113,7 +113,7 @@ public class HomeManager : MonoBehaviour
 
         selectedSkillBtnIdxTxt.text = LANG.getTxt(LANG.TXT.FirstSkill.ToString());
 
-        StartCoroutine(coCheckPremiumPackPurchaseStatus());
+        coCheckPremiumPackPurchaseStatus();
     }
 
     void Update(){
@@ -346,7 +346,7 @@ public class HomeManager : MonoBehaviour
             DM.ins.personalData.IsRemoveAD = true;
 
             // UI
-            StartCoroutine(coCheckPremiumPackPurchaseStatus(closeDelaySec: 2.5f));
+            coCheckPremiumPackPurchaseStatus();
 
             //* Open Show Reward Panel
             showRewardPanel.SetActive(true);
@@ -480,7 +480,7 @@ public class HomeManager : MonoBehaviour
 
         return coolTimeStr;
     }
-    IEnumerator coCheckPremiumPackPurchaseStatus(float closeDelaySec = 0.0001f){
+    private void coCheckPremiumPackPurchaseStatus(){
         const int ROULETTE_TICKET = 0, COIN = 1, DIAMOND = 2, REMOVE_AD = 3;
         if(!DM.ins.personalData.IsPurchasePremiumPack){
             //* Set Language Premium Pack
@@ -493,7 +493,6 @@ public class HomeManager : MonoBehaviour
         }
         else{
             //* Close PremiumPackPanel 
-            yield return new WaitForSeconds(closeDelaySec);
             premiumPackPanel.SetActive(false);
             premiumPackFocusIcon.SetActive(false);
             premiumPackIconBtn.interactable = false;
