@@ -278,7 +278,6 @@ public class Player : MonoBehaviour
                 break;
             }
         }
-        Debug.Log("getBarrierObj obj= " + obj.name);
         return obj;
     }
 }

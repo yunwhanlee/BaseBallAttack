@@ -295,8 +295,9 @@
         2.原因：GameObject targetをパラメータで渡すのに、この後this.transformで処理をする誤り。
     ✓ (BUG-19) BossTargetMissilePrefが再度登場したら、init()で初期化したのに、速度とかCoroutine待機時間などが可笑しい。
         原因：init()関数内で、AddForce()とStartCoroutine(coDelay())を入れ、それが初期化より早く実行され
-    - (BUG-20) MAX-LVなら、「お金が足りない」ダイアログ表示しない。
+    ✓ (BUG-20) MAX-LVなら、「お金が足りない」ダイアログ表示しない。
     - (BUG-21) ObstacleがBlockに当たっても、破壊されない。
+        原因：両方ObjectのColliderがisKinematicのtrueであれば、お互いに検出できない。
     
 
     

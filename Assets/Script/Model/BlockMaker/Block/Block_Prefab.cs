@@ -168,8 +168,8 @@ public class Block_Prefab : MonoBehaviour
             checkIceFreeze();
         }
     }
-    private void OnTriggerEnter(Collider col) {
-        //* GAMEOVER
+    void OnTriggerEnter(Collider col) {
+        //* GAMEOVER 
         if(col.transform.CompareTag(DM.TAG.GameOverLine.ToString()) && gm.State != GameManager.STATE.GAMEOVER){
             gm.setGameOver();
         }
