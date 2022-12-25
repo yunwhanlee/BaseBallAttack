@@ -64,6 +64,13 @@ public class HomeManager : MonoBehaviour
     public Text[] premiumPackInfoTxtArr;
     public Text premiumPackPriceTxt;
 
+    [Header("STAGE SELECT PANEL")][Header("__________________________")]
+    public Color navyGray;
+    public GameObject stageSelectPanel;
+    public RectTransform stageSelectContent;
+    public List<GameObject> stageList;
+
+
     [Header("SHOW REWARD PANEL")][Header("__________________________")]
     public GameObject showRewardPanel;
     public Transform showRewardItemListGroup;
@@ -113,7 +120,7 @@ public class HomeManager : MonoBehaviour
 
         selectedSkillBtnIdxTxt.text = LANG.getTxt(LANG.TXT.FirstSkill.ToString());
 
-        coCheckPremiumPackPurchaseStatus();
+        checkPremiumPackPurchaseStatus();
     }
 
     void Update(){
@@ -262,6 +269,10 @@ public class HomeManager : MonoBehaviour
     }
 
     public void onClickStartBtn(){
+        //* Open StageSelectPanel
+        stageSelectPanel.SetActive(true);
+
+        /*
         //* Model Copy
         var playerModel = modelTf.GetChild(0);
         playerModel.GetComponent<Animator>().SetBool(DM.ANIM.IsIdle.ToString(), false); //Ready Pose
@@ -273,6 +284,38 @@ public class HomeManager : MonoBehaviour
         DM.ins.personalData.ItemPassive.setLvArr(lvArrTemp);
 
         SceneManager.LoadScene(DM.SCENE.Loading.ToString());
+        */
+    }
+
+    public void onClickPlayBtn(){
+        var playerModel = modelTf.GetChild(0);
+        playerModel.GetComponent<Animator>().SetBool(DM.ANIM.IsIdle.ToString(), false); //Ready Pose
+        playerModel.SetParent(DM.ins.transform);
+        // var copyModel = Instantiate(playerModel, Vector3.zero, Quaternion.identity, DM.ins.transform);
+
+        //* Set Item Passive Data
+        int[] lvArrTemp = getItemPsvLvArr(playerModel);
+        DM.ins.personalData.ItemPassive.setLvArr(lvArrTemp);
+
+        //* シーン 読込み。
+        SceneManager.LoadScene(DM.SCENE.Loading.ToString());
+    }
+
+    public void onClickStagePictureBtn(int idxNum){
+        const int WIDTH = 800;
+        const int SPACE_OFFSET = 30;
+
+        int i=0;
+        stageList.ForEach( list => {
+            list.GetComponentInChildren<Image>().color = (i == idxNum)? Color.yellow : navyGray;
+            i++;
+        });
+
+        stageSelectContent.GetComponent<RectTransform>().anchoredPosition = new Vector2(-(WIDTH * idxNum + SPACE_OFFSET * idxNum), 0);
+
+        int curIndex = stageList.FindIndex(list => list.GetComponentInChildren<Image>().color == Color.yellow);
+        Text curStageTxt = stageList[curIndex].transform.GetChild(2).GetComponent<Text>();
+        Debug.Log($"curIndex= {curIndex}, curStage.Text= {curStageTxt.text}");
     }
 
     public void onClickResetBtn(){
@@ -346,7 +389,7 @@ public class HomeManager : MonoBehaviour
             DM.ins.personalData.IsRemoveAD = true;
 
             // UI
-            coCheckPremiumPackPurchaseStatus();
+            checkPremiumPackPurchaseStatus();
 
             //* Open Show Reward Panel
             showRewardPanel.SetActive(true);
@@ -480,7 +523,7 @@ public class HomeManager : MonoBehaviour
 
         return coolTimeStr;
     }
-    private void coCheckPremiumPackPurchaseStatus(){
+    private void checkPremiumPackPurchaseStatus(){
         const int ROULETTE_TICKET = 0, COIN = 1, DIAMOND = 2, REMOVE_AD = 3;
         if(!DM.ins.personalData.IsPurchasePremiumPack){
             //* Set Language Premium Pack
