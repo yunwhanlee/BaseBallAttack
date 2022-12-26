@@ -37,15 +37,18 @@ using UnityEngine.Serialization;
     Text title;     public Text Title { get => title; set => title = value; }
     Text range;     public Text Range { get => range; set => range = value; }
     Button imgBtn;     public Button ImgBtn { get => imgBtn; set => imgBtn = value; }
+    Image newLabel;     public Image NewLabal { get => newLabel; set => newLabel = value; }
 
     public void setUIMember(){
         //* Set Object
+        newLabel = Array.Find(rectTf.GetComponentsInChildren<Image>(), img => img.gameObject.name == "NewLabel");
         img = Array.Find(rectTf.GetComponentsInChildren<Image>(), img => img.gameObject.name == "StageImg");
         title = Array.Find(rectTf.GetComponentsInChildren<Text>(), txt => txt.gameObject.name == "TitleTxt");
         range = Array.Find(rectTf.GetComponentsInChildren<Text>(), txt => txt.gameObject.name == "RangeTxt");
         imgBtn = Array.Find(rectTf.GetComponentsInChildren<Button>(), btn => btn.gameObject.name == "ImgPanelBtn");
 
         //* Set UI
+        newLabel.gameObject.SetActive(false);
         img.sprite = Sprite;
         title.text = titleName;
         range.text = $"Stage {start} ~ {end}";
@@ -153,6 +156,7 @@ public class HomeManager : MonoBehaviour
             //* AddEventListener('onClick')
             int copy = i; //! (BUG-22) For分内にonClick.AddListener(int i)すると、Indexが全てLast+1になるバグ対応。
             stageSelects[i].ImgBtn.onClick.AddListener(() => onClickStageSelectImgBtn(copy));
+            
         }
 
         LanguageOptDropDown.value = (int)DM.ins.personalData.Lang; //* Loadデータで初期化
