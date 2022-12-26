@@ -98,11 +98,11 @@ public class HomeManager : MonoBehaviour
     public Text premiumPackPriceTxt;
 
     [Header("STAGE SELECT PANEL")][Header("__________________________")]
+    public int curStageSelectIndex;
     public Color navyGray;
     public GameObject stageSelectPanel;
     public RectTransform stageSelectContent;    
     public GameObject stageSelectObjPf;
-    // public Sprite[] stageSprArr;
     public stageSelect[] stageSelects;
 
     [Header("SHOW REWARD PANEL")][Header("__________________________")]
@@ -147,17 +147,7 @@ public class HomeManager : MonoBehaviour
         onClickBtnGoToPanel(DM.SCENE.Home.ToString());
         setSelectSkillImg(true);
 
-        //* Set StageSelectList
-        for(int i=0; i<stageSelects.Length; i++){
-            //* Set member Value
-            stageSelects[i].RectTf = Instantiate(stageSelectObjPf, stageSelectContent, false).GetComponent<RectTransform>();
-            stageSelects[i].setUIMember();
-
-            //* AddEventListener('onClick')
-            int copy = i; //! (BUG-22) For分内にonClick.AddListener(int i)すると、Indexが全てLast+1になるバグ対応。
-            stageSelects[i].ImgBtn.onClick.AddListener(() => onClickStageSelectImgBtn(copy));
-            
-        }
+        setStageSelectUIList();
 
         LanguageOptDropDown.value = (int)DM.ins.personalData.Lang; //* Loadデータで初期化
 
@@ -223,7 +213,6 @@ public class HomeManager : MonoBehaviour
     }
 
     public void onClickBtnSelectSkillImg(int idx){
-        
         Array.ForEach(skillBtns, skillBtn => {
             var outline = skillBtn.GetComponent<NicerOutline>();
             outline.enabled = false;
@@ -342,16 +331,17 @@ public class HomeManager : MonoBehaviour
 
         int i=0;
         Array.ForEach(stageSelects, stageSelect => {
+            if(i == idxNum) curStageSelectIndex = i;
             stageSelect.ImgBtn.GetComponent<Image>().color = (i == idxNum)? Color.yellow : navyGray;
             i++;
         });
-
         stageSelectContent.GetComponent<RectTransform>().anchoredPosition = new Vector2(-(WIDTH * idxNum + SPACING * idxNum), 0);
-
-        int curIndex = Array.FindIndex(stageSelects, stageSelect => stageSelect.Img.color == Color.yellow);
     }
 
     public void onClickPlayBtn(){
+        //* スタートするステージ数を設定。
+        LM._.STAGE_NUM = stageSelects[curStageSelectIndex].Start;
+
         var playerModel = modelTf.GetChild(0);
         playerModel.GetComponent<Animator>().SetBool(DM.ANIM.IsIdle.ToString(), false); //Ready Pose
         playerModel.SetParent(DM.ins.transform);
@@ -360,6 +350,8 @@ public class HomeManager : MonoBehaviour
         //* Set Item Passive Data
         int[] lvArrTemp = getItemPsvLvArr(playerModel);
         DM.ins.personalData.ItemPassive.setLvArr(lvArrTemp);
+
+
 
         //* シーン 読込み。
         SceneManager.LoadScene(DM.SCENE.Loading.ToString());
@@ -461,6 +453,21 @@ public class HomeManager : MonoBehaviour
 //* Private Function
 //* ----------------------------------------------------------------
 #region Private Function
+    private void setStageSelectUIList(){
+        //* Set StageSelectList
+        for(int i=0; i<stageSelects.Length; i++){
+            //* Set member Value
+            stageSelects[i].RectTf = Instantiate(stageSelectObjPf, stageSelectContent, false).GetComponent<RectTransform>();
+            stageSelects[i].setUIMember();
+
+            int copy = i; //! (BUG-22) For分内にonClick.AddListener(int i)すると、Indexが全てLast+1になるバグ対応。
+            //* AddEventListener('onClick')
+            stageSelects[i].ImgBtn.onClick.AddListener(() => onClickStageSelectImgBtn(copy));
+        }
+        //* init
+        stageSelects[0].ImgBtn.GetComponent<Image>().color = Color.yellow;
+    }
+
     private void setSelectSkillImg(bool isInit = false){
         Debug.LogFormat("------setSelectSkillImg():: selectedSkillBtnIdx({0}) SelectSkillIdx({1}), SelectSkill2Idx({2})------", selectedSkillBtnIdx, DM.ins.personalData.SelectSkillIdx, DM.ins.personalData.SelectSkill2Idx);
         var ctt = DM.ins.scrollviews[(int)DM.PANEL.Skill].ContentTf;

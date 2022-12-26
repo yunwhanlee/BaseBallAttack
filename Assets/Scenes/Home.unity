@@ -24940,7 +24940,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1727830786}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1887670884}
+        m_TargetAssemblyTypeName: HomeManager, Assembly-CSharp
+        m_MethodName: onClickPlayBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1727830786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26035,6 +26047,7 @@ MonoBehaviour:
   - {fileID: 4041380316998784172}
   - {fileID: 4041380315200936511}
   premiumPackPriceTxt: {fileID: 4041380316934732539}
+  curStageSelectIndex: 0
   navyGray: {r: 0.23137255, g: 0.29803923, b: 0.3882353, a: 1}
   stageSelectPanel: {fileID: 2383291514987288976}
   stageSelectContent: {fileID: 2383291514809371337}
