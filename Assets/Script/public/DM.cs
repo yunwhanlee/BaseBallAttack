@@ -81,6 +81,7 @@ public class DM : MonoBehaviour
     [FormerlySerializedAs("rankUniqueColor")] public Color rankUniqueClr;
     [FormerlySerializedAs("rankLegendColor")] public Color rankLegendClr;
     [FormerlySerializedAs("rankGodColor")] public Color rankGodClr;
+    [FormerlySerializedAs("darkGray")] public Color darkGray;
 
     [Header("TUTORIAL")][Header("__________________________")]
     public TutorialPanel tutorialPanel;

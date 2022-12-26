@@ -7,7 +7,7 @@ using System;
 using UnityEngine.UI.Extensions;
 using UnityEngine.Serialization;
 
-[System.Serializable] public class FrameUI{
+[System.Serializable] public class FrameUI {
     //* Value
     [FormerlySerializedAs("panel")] [SerializeField] GameObject panel;   public GameObject Panel {get => panel; set => panel = value;}
     [FormerlySerializedAs("goBtn")] [SerializeField] Button goBtn;     public Button GoBtn {get => goBtn; set => goBtn = value;}
@@ -21,6 +21,36 @@ using UnityEngine.Serialization;
         this.infoTxt = infoTxt;
     }
     //* Method
+}
+
+[System.Serializable] public class stageSelect {
+    [Header("お先に設定")]
+    [SerializeField] bool isLocked;     public bool IsLocked { get => isLocked; set => isLocked = value; }
+    [SerializeField] Sprite sprite;     public Sprite Sprite { get => sprite; }
+    [SerializeField] string titleName;     public string TitleName { get => titleName; }
+    [SerializeField] int start;     public int Start { get => start; }
+    [SerializeField] int end;     public int End { get => end; }
+
+    [Header("後で自動設定")]
+    RectTransform rectTf;     public RectTransform RectTf { get => rectTf; set => rectTf = value; }
+    Image img;     public Image Img { get => img; set => img = value; }
+    Text title;     public Text Title { get => title; set => title = value; }
+    Text range;     public Text Range { get => range; set => range = value; }
+    Button imgBtn;     public Button ImgBtn { get => imgBtn; set => imgBtn = value; }
+
+    public void setUIMember(){
+        //* Set Object
+        img = Array.Find(rectTf.GetComponentsInChildren<Image>(), img => img.gameObject.name == "StageImg");
+        title = Array.Find(rectTf.GetComponentsInChildren<Text>(), txt => txt.gameObject.name == "TitleTxt");
+        range = Array.Find(rectTf.GetComponentsInChildren<Text>(), txt => txt.gameObject.name == "RangeTxt");
+        imgBtn = Array.Find(rectTf.GetComponentsInChildren<Button>(), btn => btn.gameObject.name == "ImgPanelBtn");
+
+        //* Set UI
+        img.sprite = Sprite;
+        title.text = titleName;
+        range.text = $"Stage {start} ~ {end}";
+        img.color = IsLocked? DM.ins.darkGray : Color.white;
+    }
 }
 
 public class HomeManager : MonoBehaviour
@@ -67,9 +97,10 @@ public class HomeManager : MonoBehaviour
     [Header("STAGE SELECT PANEL")][Header("__________________________")]
     public Color navyGray;
     public GameObject stageSelectPanel;
-    public RectTransform stageSelectContent;
-    public List<GameObject> stageList;
-
+    public RectTransform stageSelectContent;    
+    public GameObject stageSelectObjPf;
+    // public Sprite[] stageSprArr;
+    public stageSelect[] stageSelects;
 
     [Header("SHOW REWARD PANEL")][Header("__________________________")]
     public GameObject showRewardPanel;
@@ -102,14 +133,28 @@ public class HomeManager : MonoBehaviour
     //TODO public DialogUI cashShop;
 
     void Start(){
-        Debug.Log("Math:: -------------------------------");        
-        int i=0;
-        const int OFFSET = 100;
-        List<int> hpList = Util._.calcArithmeticProgressionList(start: OFFSET, max: 99, d: OFFSET, gradualUpValue: 0.01f);
-        hpList.ForEach(hp => Debug.Log($"Math:: blockHpList[{i}]= " + hpList[i++] / OFFSET));
+        Debug.Log("Math:: -------------------------------");       
+        {
+            int i=0;
+            const int OFFSET = 100;
+            List<int> hpList = Util._.calcArithmeticProgressionList(start: OFFSET, max: 99, d: OFFSET, gradualUpValue: 0.01f);
+            hpList.ForEach(hp => Debug.Log($"Math:: blockHpList[{i}]= " + hpList[i++] / OFFSET));
+        } 
 
         onClickBtnGoToPanel(DM.SCENE.Home.ToString());
         setSelectSkillImg(true);
+
+        //* Set StageSelectList
+        for(int i=0; i<stageSelects.Length; i++){
+            //* Set member Value
+            stageSelects[i].RectTf = Instantiate(stageSelectObjPf, stageSelectContent, false).GetComponent<RectTransform>();
+            stageSelects[i].setUIMember();
+
+            //* AddEventListener('onClick')
+            int copy = i; //! (BUG-22) For分内にonClick.AddListener(int i)すると、Indexが全てLast+1になるバグ対応。
+            stageSelects[i].ImgBtn.onClick.AddListener(() => onClickStageSelectImgBtn(copy));
+        }
+
         LanguageOptDropDown.value = (int)DM.ins.personalData.Lang; //* Loadデータで初期化
 
         rouletteIconBtn.GetComponent<Image>().color = Color.grey;
@@ -227,7 +272,6 @@ public class HomeManager : MonoBehaviour
         if(isOk) SceneManager.LoadScene(DM.SCENE.Home.ToString()); // Re-load
     }
 
-
     public void onClickBtnUnlock2ndSkillDialog(bool isActive){
         if(DM.ins.personalData.IsUnlock2ndSkill) return;
         unlock2ndSkillDialog.Panel.SetActive(isActive);
@@ -287,6 +331,22 @@ public class HomeManager : MonoBehaviour
         */
     }
 
+    public void onClickStageSelectImgBtn(int idxNum){
+        Debug.Log($"onClickStagePictureBtn:: idxNum= {idxNum}, WIDTH= {stageSelects[idxNum].RectTf.rect.width}, SPACING= {stageSelectContent.GetComponent<HorizontalLayoutGroup>().spacing}");
+        float WIDTH = stageSelects[idxNum].RectTf.rect.width;
+        float SPACING = stageSelectContent.GetComponent<HorizontalLayoutGroup>().spacing;
+
+        int i=0;
+        Array.ForEach(stageSelects, stageSelect => {
+            stageSelect.ImgBtn.GetComponent<Image>().color = (i == idxNum)? Color.yellow : navyGray;
+            i++;
+        });
+
+        stageSelectContent.GetComponent<RectTransform>().anchoredPosition = new Vector2(-(WIDTH * idxNum + SPACING * idxNum), 0);
+
+        int curIndex = Array.FindIndex(stageSelects, stageSelect => stageSelect.Img.color == Color.yellow);
+    }
+
     public void onClickPlayBtn(){
         var playerModel = modelTf.GetChild(0);
         playerModel.GetComponent<Animator>().SetBool(DM.ANIM.IsIdle.ToString(), false); //Ready Pose
@@ -301,22 +361,7 @@ public class HomeManager : MonoBehaviour
         SceneManager.LoadScene(DM.SCENE.Loading.ToString());
     }
 
-    public void onClickStagePictureBtn(int idxNum){
-        const int WIDTH = 800;
-        const int SPACE_OFFSET = 30;
 
-        int i=0;
-        stageList.ForEach( list => {
-            list.GetComponentInChildren<Image>().color = (i == idxNum)? Color.yellow : navyGray;
-            i++;
-        });
-
-        stageSelectContent.GetComponent<RectTransform>().anchoredPosition = new Vector2(-(WIDTH * idxNum + SPACE_OFFSET * idxNum), 0);
-
-        int curIndex = stageList.FindIndex(list => list.GetComponentInChildren<Image>().color == Color.yellow);
-        Text curStageTxt = stageList[curIndex].transform.GetChild(2).GetComponent<Text>();
-        Debug.Log($"curIndex= {curIndex}, curStage.Text= {curStageTxt.text}");
-    }
 
     public void onClickResetBtn(){
         DM.ins.personalData.reset();

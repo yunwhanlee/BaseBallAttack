@@ -245,7 +245,9 @@
         - HOME:ATVスキルの枠のUIクォリティーを高める。
         - HOME:UPGRADEアイテムと全ての値段を決定。
         - 業績リワードUI追加。
-        - ステージ用意。
+        ✓ ステージGUI用意。
+        - ステージ NEW LABEL追加。
+        - ステージ Play ボタン。
         - Rateダイアログ追加。
         - GUI PRO KITにある、Charactor_Detailを通じて、SKILLとSTATS関したGUI修正。
 
@@ -298,8 +300,9 @@
     ✓ (BUG-19) BossTargetMissilePrefが再度登場したら、init()で初期化したのに、速度とかCoroutine待機時間などが可笑しい。
         原因：init()関数内で、AddForce()とStartCoroutine(coDelay())を入れ、それが初期化より早く実行され
     ✓ (BUG-20) MAX-LVなら、「お金が足りない」ダイアログ表示しない。
-    - (BUG-21) ObstacleがBlockに当たっても、破壊されない。
+    ✓ (BUG-21) ObstacleがBlockに当たっても、破壊されない。
         原因：両方ObjectのColliderがisKinematicのtrueであれば、お互いに検出できない。
+    ✓ (BUG-22) For分内にonClick.AddListener(int i)すると、Indexが全てLast+1になるバグ対応。
     
 
     
