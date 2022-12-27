@@ -149,7 +149,7 @@ public class BlockMaker : MonoBehaviour
         Debug.Log("createBossTargetMisslePf:: blockTf.pos= " + blockTf.position);
         var ins = ObjectPool.getObject(ObjectPool.DIC.BossTargetMisslePf.ToString(), blockTf.position, Quaternion.identity, gm.dropItemGroup);
         ins.transform.rotation = Quaternion.Euler(-90,0,0);
-        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.dropItemGroup, 3));
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.dropItemGroup, 4));
     }
 
     public void createRandomDropBox(){
