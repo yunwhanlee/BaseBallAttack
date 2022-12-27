@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44479504, g: 0.49434292, b: 0.57354003, a: 1}
+  m_IndirectSpecularColor: {r: 0.44479525, g: 0.49434352, b: 0.5735407, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -24732,6 +24732,36 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1325408697
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1325408698}
+  m_Layer: 0
+  m_Name: DropBoxGroup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1325408698
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325408697}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2121181892}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1327809961
 GameObject:
   m_ObjectHideFlags: 0
@@ -33597,6 +33627,7 @@ MonoBehaviour:
   ballGroup: {fileID: 1179223822}
   blockGroup: {fileID: 397967615}
   dropItemGroup: {fileID: 54044119}
+  dropBoxGroup: {fileID: 1325408698}
   bossGroup: {fileID: 1746347279}
   obstacleGroup: {fileID: 911378003}
   activeSkillBtnGroup: {fileID: 467978857}
@@ -33757,6 +33788,7 @@ MonoBehaviour:
   psvSkillTicketSpr: {fileID: 21300000, guid: a9500f31638e74e4b8fe868ce44b20aa, type: 3}
   rouletteTicketSpr: {fileID: 21300000, guid: 709236ba50c223d40bb39f5893ee1173, type: 3}
   emptyPoopSpr: {fileID: 21300000, guid: cfc29be371d079d4bb00c1280997f0c1, type: 3}
+  dropBoxList: []
 --- !u!1 &1629436954
 GameObject:
   m_ObjectHideFlags: 0
@@ -54865,6 +54897,7 @@ Transform:
   m_Children:
   - {fileID: 831947632}
   - {fileID: 54044119}
+  - {fileID: 1325408698}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

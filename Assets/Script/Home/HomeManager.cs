@@ -104,6 +104,7 @@ public class HomeManager : MonoBehaviour
     public RectTransform stageSelectContent;    
     public GameObject stageSelectObjPf;
     public stageSelect[] stageSelects;
+    public Button stageSelectPlayBtn;
 
     [Header("SHOW REWARD PANEL")][Header("__________________________")]
     public GameObject showRewardPanel;
@@ -325,7 +326,7 @@ public class HomeManager : MonoBehaviour
     }
 
     public void onClickStageSelectImgBtn(int idxNum){
-        Debug.Log($"onClickStagePictureBtn:: idxNum= {idxNum}, WIDTH= {stageSelects[idxNum].RectTf.rect.width}, SPACING= {stageSelectContent.GetComponent<HorizontalLayoutGroup>().spacing}");
+        Debug.Log($"onClickStagePictureBtn:: idxNum= {idxNum}, isLocked= {stageSelects[idxNum].IsLocked}, WIDTH= {stageSelects[idxNum].RectTf.rect.width}, SPACING= {stageSelectContent.GetComponent<HorizontalLayoutGroup>().spacing}");
         float WIDTH = stageSelects[idxNum].RectTf.rect.width;
         float SPACING = stageSelectContent.GetComponent<HorizontalLayoutGroup>().spacing;
 
@@ -335,10 +336,16 @@ public class HomeManager : MonoBehaviour
             stageSelect.ImgBtn.GetComponent<Image>().color = (i == idxNum)? Color.yellow : navyGray;
             i++;
         });
+        
         stageSelectContent.GetComponent<RectTransform>().anchoredPosition = new Vector2(-(WIDTH * idxNum + SPACING * idxNum), 0);
     }
 
     public void onClickPlayBtn(){
+        if(stageSelects[curStageSelectIndex].IsLocked){
+            Util._.displayNoticeMsgDialog("you have to clear previous stage!");
+            return;
+        }
+
         //* スタートするステージ数を設定。
         LM._.STAGE_NUM = stageSelects[curStageSelectIndex].Start;
 

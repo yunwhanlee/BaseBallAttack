@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class DropBox : MonoBehaviour{ //* Create By BlockMaker.cs
     GameManager gm;
-
+    [SerializeField] int aliveSpan;     public int AliveSpan { get => aliveSpan; set => aliveSpan = value;}
     public const int MIN_X = -5, MAX_X = 5;
     public const int MIN_Z = -12,  MAX_Z = -6;
+
+    void OnEnable(){
+        aliveSpan = LM._.DROPBOX_ALIVE_SPAN;
+    }
 
     void Awake(){
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
-    void Update()
-    {
-        
+    void Update(){
+        if(aliveSpan <= 0)
+            StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropBoxGroup));
     }
 
     public Vector3 setRandPos(){
@@ -86,7 +90,7 @@ public class DropBox : MonoBehaviour{ //* Create By BlockMaker.cs
             }
             
 
-            StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropItemGroup));
+            StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropBoxGroup));
         }
     }
 }

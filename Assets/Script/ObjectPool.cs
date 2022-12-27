@@ -127,11 +127,11 @@ public class ObjectPool : MonoBehaviour
         poolDtList.Add(new PoolData(DIC.DropItemExpOrbPf.ToString(), bm.dropItemExpOrbPf, 50, gm.dropItemGroup));
         poolDtList.Add(new PoolData(DIC.BossTargetMisslePf.ToString(), bm.bossTargetMisslePf, 20, gm.dropItemGroup));
 
-        poolDtList.Add(new PoolData(DIC.DropBoxShieldPf.ToString(), bm.dropBoxPfArr[(int)DM.DROPBOX.DropBoxShieldPf], 1, gm.dropItemGroup));
-        poolDtList.Add(new PoolData(DIC.DropBoxQuestionPf.ToString(), bm.dropBoxPfArr[(int)DM.DROPBOX.DropBoxQuestionPf], 1, gm.dropItemGroup));
-        poolDtList.Add(new PoolData(DIC.DropBoxSpeedPf.ToString(), bm.dropBoxPfArr[(int)DM.DROPBOX.DropBoxSpeedPf], 1, gm.dropItemGroup));
-        poolDtList.Add(new PoolData(DIC.DropBoxStarPf.ToString(), bm.dropBoxPfArr[(int)DM.DROPBOX.DropBoxStarPf], 1, gm.dropItemGroup));
-        poolDtList.Add(new PoolData(DIC.DropBoxMagicPf.ToString(), bm.dropBoxPfArr[(int)DM.DROPBOX.DropBoxMagicPf], 1, gm.dropItemGroup));
+        poolDtList.Add(new PoolData(DIC.DropBoxShieldPf.ToString(), bm.dropBoxPfArr[(int)DM.DROPBOX.DropBoxShieldPf], 1, gm.dropBoxGroup));
+        poolDtList.Add(new PoolData(DIC.DropBoxQuestionPf.ToString(), bm.dropBoxPfArr[(int)DM.DROPBOX.DropBoxQuestionPf], 1, gm.dropBoxGroup));
+        poolDtList.Add(new PoolData(DIC.DropBoxSpeedPf.ToString(), bm.dropBoxPfArr[(int)DM.DROPBOX.DropBoxSpeedPf], 1, gm.dropBoxGroup));
+        poolDtList.Add(new PoolData(DIC.DropBoxStarPf.ToString(), bm.dropBoxPfArr[(int)DM.DROPBOX.DropBoxStarPf], 1, gm.dropBoxGroup));
+        poolDtList.Add(new PoolData(DIC.DropBoxMagicPf.ToString(), bm.dropBoxPfArr[(int)DM.DROPBOX.DropBoxMagicPf], 1, gm.dropBoxGroup));
         
         poolDtList.Add(new PoolData(DIC.CoinIconPf.ToString(), bm.coinIconPf, 20, gm.dropItemGroup));
         

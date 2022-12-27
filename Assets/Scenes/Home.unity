@@ -5753,7 +5753,7 @@ MonoBehaviour:
   TREASURECHEST_BLOCK_PER: 5
   HEAL_BLOCK_PER: 5
   REWARD_CHEST_PER: 10
-  DROP_BOX_PER: 599
+  DROP_BOX_PER: 912
   DROPBOX_COIN_VALUE: 10
   ATV_COOLDOWN_UNIT: 0.01
   MAX_LV: 50
@@ -23069,7 +23069,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -26073,6 +26073,7 @@ MonoBehaviour:
     titleName: Fourth Stage
     start: 91
     end: 120
+  stageSelectPlayBtn: {fileID: 1727830785}
   showRewardPanel: {fileID: 1199048389}
   showRewardItemListGroup: {fileID: 1503350621}
   showRewardItemPf: {fileID: 4721498982054872567, guid: 20f367e8fea7d604c8d86f0b90b59feb, type: 3}
@@ -28885,9 +28886,9 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e110c919ea5e84fea8cbc2f0556ecfef, type: 3}
-    m_FontSize: 65
+    m_FontSize: 60
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 65
     m_Alignment: 3

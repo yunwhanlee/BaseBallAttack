@@ -56,6 +56,15 @@ public class BlockMaker : MonoBehaviour
             moveDownBlock();
             bossSpawn();
             createRandomDropBox();
+            
+            //* DropBox AliveSapn Down
+            for(int i=0; i<gm.dropBoxGroup.childCount; i++){
+                DropBox dropBox = gm.dropBoxGroup.GetChild(i).GetComponent<DropBox>();
+                Debug.Log(dropBox.gameObject.activeSelf + ", " + dropBox.name);
+                if(dropBox.gameObject.activeSelf){
+                    dropBox.AliveSpan--;
+                }
+            }
         }
     }
 //*---------------------------------------
@@ -155,7 +164,7 @@ public class BlockMaker : MonoBehaviour
             var randPos = dropBoxPfArr[0].GetComponent<DropBox>().setRandPos();
             Debug.Log($"createRandomDropBox:: idx= {randIdx}, name= {dropBoxPfArr[randIdx].name}, randPos= {randPos}");
 
-            var ins = ObjectPool.getObject(dropBoxPfArr[randIdx].name, randPos, dropBoxPfArr[randIdx].transform.rotation, gm.dropItemGroup);
+            var ins = ObjectPool.getObject(dropBoxPfArr[randIdx].name, randPos, dropBoxPfArr[randIdx].transform.rotation, gm.dropBoxGroup);
         }
     }
 

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public Transform ballGroup;
     public Transform blockGroup;
     public Transform dropItemGroup;
+    public Transform dropBoxGroup;
     public Transform bossGroup;
     public Transform obstacleGroup;
     public Transform activeSkillBtnGroup;
@@ -693,6 +694,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public List<DropBox> dropBoxList;
     public void setNextStage() {
         State = GameManager.STATE.WAIT;
         BossBlock boss = bm.getBoss();
