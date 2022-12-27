@@ -32,6 +32,13 @@ public class BossTargetMisslePref : MonoBehaviour
 
     void Update(){
         if(target){
+            //* ボースが死んだら、追いかけることやめて破壊。
+            if(target.GetComponent<BossBlock>().Hp <= 0){
+                StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropItemGroup));
+                return;
+            }
+                
+
             if(curSpeed <= maxSpeed)
                 curSpeed += maxSpeed * Time.deltaTime;
 

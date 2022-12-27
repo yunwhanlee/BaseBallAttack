@@ -73,6 +73,16 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("ダークオーブの速度")] public int DARKORB_SPEED = 250;
     [Tooltip("GODBLESS発動のコンボ倍数")] public int GODBLESS_COMBO_SPAN = 10;
 
+    [Header("MODEL ITEM PRICE")][Header("__________________________")]
+    [Tooltip("一般等級")] public int GENERAL_PRICE;
+    [Tooltip("RAER等級")] public int RARE_PRICE;
+    [Tooltip("UNIQUE般等級")] public int UNIQUE_PRICE;
+    [Tooltip("LEGEND等級")] public int LEGEND_PRICE;
+    [Tooltip("GOD等級")] public int GOD_PRICE;
+
+    [Header("GAMEOVER")][Header("__________________________")]
+    [Tooltip("ステージ当たりコイン手当")] public int GAMEOVER_STAGE_PER_COIN = 100;
+
     [Header("REWARD")][Header("__________________________")]
     [Tooltip("レベルアップスロット、再回転に要するコイン")] public int REROTATE_SKILLSLOTS_PRICE_COIN = 200;
     [Tooltip("復活に要するダイアモンド")] public int REVIVE_PRICE_DIAMOND = 50;

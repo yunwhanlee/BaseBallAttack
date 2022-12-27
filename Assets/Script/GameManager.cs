@@ -83,6 +83,7 @@ public class GameManager : MonoBehaviour
     public Color bossStageBarColorPink;
     public Text expBarTxt, bossStageTxt;
     public Toggle skipTutorialToggle;
+    public GameObject coinX2Label;
 
     [Header("TEXT EFFECT")][Header("__________________________")]
     public Text comboTxt;
@@ -119,6 +120,8 @@ public class GameManager : MonoBehaviour
     [Header("PAUSE")][Header("__________________________")]
     public RectTransform pauseSkillStatusTableTf;
     public GameObject skillInfoRowPref;
+    public Text pauseCoinTxt;
+    public Text pauseDiamondTxt;
 
     [Header("GAMEOVER")][Header("__________________________")]
     public Text coinTxt;
@@ -186,6 +189,10 @@ public class GameManager : MonoBehaviour
         Array.ForEach(statusTxts, txt => txt.text = LANG.getTxt(LANG.TXT.Status.ToString()));
         rewardChestTitleTxt.text = LANG.getTxt(LANG.TXT.Reward.ToString());
         rewardChestOpenBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Open.ToString());
+
+        //* Pause Panel UI
+        pauseCoinTxt.text = DM.ins.personalData.Coin.ToString();
+        pauseDiamondTxt.text = DM.ins.personalData.Diamond.ToString();
 
         //* Ball Preview Dir Goal Set Z-Center
         setBallPreviewGoalRandomPos();
@@ -482,6 +489,7 @@ public class GameManager : MonoBehaviour
     private void setCoinX2(){
         coinTxt.text = (int.Parse(coinTxt.text) * 2).ToString();
         coinX2Btn.gameObject.SetActive(false);
+        coinX2Label.gameObject.SetActive(true);
     }
     #endregion
 
@@ -617,7 +625,7 @@ public class GameManager : MonoBehaviour
         gameoverPanel.SetActive(true);
         gvBestScoreTxt.text = LANG.getTxt(LANG.TXT.BestScore.ToString()) + " : " + bestScore;
         gvStageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage;
-        coin += stage * 100;
+        coin += stage * LM._.GAMEOVER_STAGE_PER_COIN;
         int extraUpgradeCoin = Mathf.RoundToInt(coin * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.CoinBonus].getValue());
         coinTxt.text = (coin + extraUpgradeCoin).ToString(); // => setGameでも使う。
     }
@@ -726,15 +734,15 @@ public class GameManager : MonoBehaviour
         
         //* BossSkill
         if(boss){
+            stage--; //ステージは同じく維持
             bossLimitCnt--;
-
             //* ボース制限時間が０になったら、GAMEOVER!!
             if(bossLimitCnt <= 0){
                 setGameOver();
                 return;
             }
             boss.activeBossSkill();
-            stage--; //ステージは同じく維持
+            
         }
     }
 

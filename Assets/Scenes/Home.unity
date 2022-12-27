@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45015454, g: 0.5001945, b: 0.57542807, a: 1}
+  m_IndirectSpecularColor: {r: 0.45015407, g: 0.500194, b: 0.5754274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5741,7 +5741,7 @@ MonoBehaviour:
     power: 75
   HOMERUN_MIN_POWER: 0
   BOSS_STAGE_SPAN: 2
-  BOSS_LIMIT_SPAN: 20
+  BOSS_LIMIT_SPAN: 3
   LONG_BLOCK_SPAN: 7
   ICE_FREEZE_DURATION: 1
   FIRE_DOT_DMG_DURATION: 2
@@ -5753,14 +5753,21 @@ MonoBehaviour:
   TREASURECHEST_BLOCK_PER: 5
   HEAL_BLOCK_PER: 5
   REWARD_CHEST_PER: 10
-  DROP_BOX_PER: 912
+  DROP_BOX_PER: 50
   DROPBOX_COIN_VALUE: 10
+  DROPBOX_ALIVE_SPAN: 3
   ATV_COOLDOWN_UNIT: 0.01
   MAX_LV: 50
   MAX_EXP_LIST: []
   LEVELUP_SLOTS_UNIQUE_PER: 10
   DARKORB_SPEED: 250
   GODBLESS_COMBO_SPAN: 15
+  GENERAL_PRICE: 1000
+  RARE_PRICE: 5000
+  UNIQUE_PRICE: 12000
+  LEGEND_PRICE: 40000
+  GOD_PRICE: 95000
+  GAMEOVER_STAGE_PER_COIN: 100
   REROTATE_SKILLSLOTS_PRICE_COIN: 200
   REVIVE_PRICE_DIAMOND: 50
   ROULETTE_TICKET_COOLTIME_MINUTE: 30
@@ -12052,7 +12059,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &995331207
 GameObject:
