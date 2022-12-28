@@ -306,7 +306,7 @@ public class GameManager : MonoBehaviour
                         int[] priceArr = {10, 50, 100, 150, 500};
                         rand = Random.Range(0, priceArr.Length);
                         setRewardChestPanelUI(diamondBundleSpr, priceArr[rand].ToString(), LANG.getTxt(LANG.TXT.Get.ToString()));
-                        goodsPriceDic.Add(DM.NAME.diamond.ToString(), priceArr[rand]); //* Reward
+                        goodsPriceDic.Add(DM.NAME.Diamond.ToString(), priceArr[rand]); //* Reward
                         break;
                     }
                 }
@@ -350,7 +350,7 @@ public class GameManager : MonoBehaviour
             case GOODS:
                 if(goodsPriceDic.TryGetValue(DM.NAME.Coin.ToString(), out int rewardCoin))
                     coin += rewardCoin;
-                else if(goodsPriceDic.TryGetValue(DM.NAME.diamond.ToString(), out int rewardDiamond))
+                else if(goodsPriceDic.TryGetValue(DM.NAME.Diamond.ToString(), out int rewardDiamond))
                     diamond += rewardDiamond;
                 break;
             case PSVSKILL_TICKET:

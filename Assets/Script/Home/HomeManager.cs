@@ -191,6 +191,10 @@ public class HomeManager : MonoBehaviour
 #region Button
     public void onClickBtnQuestionMarkIcon() => DM.ins.displayTutorialUI();
     public void onClickPremiumPackIconBtn() => premiumPackPanel.SetActive(true);
+    public void onCLickRewardPanelOkBtn() {
+        showRewardItemListGroup.transform.DetachChildren();
+        showRewardPanel.SetActive(false);
+    }
 
     public void onClickBtnGoToPanel(string name){
         //* Current Model Data & ParentTf
@@ -375,8 +379,6 @@ public class HomeManager : MonoBehaviour
         SceneManager.LoadScene(DM.SCENE.Loading.ToString());
     }
 
-
-
     public void onClickResetBtn(){
         DM.ins.personalData.reset();
 
@@ -438,8 +440,6 @@ public class HomeManager : MonoBehaviour
 
         if(inAppPurchaseSuccess){
             DM.ins.personalData.IsPurchasePremiumPack = true;
-            // Effect
-            em.createCongratuBlastRainbowEF(GameObject.Find("MainCanvas").transform);
 
             // Set Data
             DM.ins.personalData.RouletteTicket += LM._.PREM_PACK_ROULETTE_TICKET;
@@ -450,21 +450,29 @@ public class HomeManager : MonoBehaviour
             // UI
             checkPremiumPackPurchaseStatus();
 
-            //* Open Show Reward Panel
-            showRewardPanel.SetActive(true);
-
-            //* Set Showreward ItemPfs
-            const int ROULETTE_TICKET = 0, COIN = 1, DIAMOND = 2, REMOVE_AD = 3;
-            createShowRewardItemPf(ROULETTE_TICKET, $"{LM._.PREM_PACK_ROULETTE_TICKET}");
-            createShowRewardItemPf(COIN, $"{LM._.PREM_PACK_COIN}");
-            createShowRewardItemPf(DIAMOND, $"{LM._.PREM_PACK_DIAMOND}");
-            createShowRewardItemPf(REMOVE_AD, "SKIP");
+            displayShowRewardPanel(
+                coin: LM._.PREM_PACK_COIN, 
+                diamond: LM._.PREM_PACK_DIAMOND, 
+                rouletteTicket: LM._.PREM_PACK_ROULETTE_TICKET,
+                removeAD: true
+            );
             
         }else{
             //TODO 失敗した DIALOG表示。
             Debug.LogError($"<size=20><color=yellow> HM::onClickPremiumPackPurchaseBtn:: IN-APP-PURCHASE FAIL! :( </color></size>");
         }
-        
+    }
+    public void displayShowRewardPanel(int coin = 0, int diamond = 0, int rouletteTicket = 0, bool removeAD = false){
+        //* Effect
+        em.createCongratuBlastRainbowEF(GameObject.Find("MainCanvas").transform);
+        //* Open Show Reward Panel
+        showRewardPanel.SetActive(true);
+        //* Set Showreward ItemPfs
+        const int COIN = 0, DIAMOND = 1, ROULETTE_TICKET = 2, REMOVE_AD = 3;
+        if(coin > 0)    createShowRewardItemPf(COIN, $"{coin}");
+        if(diamond > 0)    createShowRewardItemPf(DIAMOND, $"{diamond}");
+        if(rouletteTicket > 0)    createShowRewardItemPf(ROULETTE_TICKET, $"{rouletteTicket}");
+        if(removeAD)    createShowRewardItemPf(REMOVE_AD, "SKIP");
     }
 #endregion
 //* ----------------------------------------------------------------

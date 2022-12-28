@@ -14,7 +14,7 @@ public class DM : MonoBehaviour
     public enum NAME {
 
         MainCanvas,
-        Coin, diamond,
+        Coin, Diamond,
         DownWall, Block, FireBallDotEffect, BossDieDropOrbSpot, GrayPanel, Obstacle,
         RightArm, HomeManager,
         Ball, BallPreview, Box001, Area,
