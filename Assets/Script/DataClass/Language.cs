@@ -26,6 +26,7 @@ public static class LANG //* LANG
         TutorialE_Title, TutorialE_Content,
         TutorialF_Title, TutorialF_Content,
         TutorialG_Title, TutorialG_Content,
+        Rate, Later, RateDialog_Content1, RateDialog_Content2,
         Reward, GetRewardChestPanel_Content, Empty, PsvSkillTicket, RouletteTicket, RouletteSpin,
         FirstSkill, SecondSkill, PsvSkillInfo, Upgrade, CashShop, 
         PremiumPack, Coin, Diamond, RemoveAllADs,
@@ -37,8 +38,6 @@ public static class LANG //* LANG
         DamageTwice, GiantBall, DarkOrb, GodBless, BirdFriend,
         //* Upgrade (Only Needed Language)
         BossDamage, CoinBonus, Defence,
-
-        
     };
     public const int NAME=0, EXPLAIN=1, HOMERUNBONUS=2;
     const string HR_TXT = "⊡ HomeRunBonus : ";
@@ -267,6 +266,16 @@ public static class LANG //* LANG
         "弱いですか？\nアップグレードやキャラクター、バット、スキルで強くなれる！",
         "약하신가요?\n업그레이드 및 캐릭터, 베트, 스킬들로 더욱 강해지세요!"
     };
+    public static string[] RateDialog_Content1 = new string[]{
+        "Have you Enjoyed the game?",
+        "ゲームはどうでしょうか？",
+        "게임은 어떠신가요?"
+    };
+    public static string[] RateDialog_Content2 = new string[]{
+        "please give us your valuable evaluation! It gives me huge strength!",
+        "もしよろしければ、大切な評価をお願いします！ とても力になります！",
+        "혹시 괜찮으시다면, 소중한 평가 부탁드립니다! 많은 힘이 됩니다!"
+    };
 
     //* UI
     public static string[] Ok = new string[]{"OK", "はい", "네"};
@@ -301,6 +310,9 @@ public static class LANG //* LANG
     public static string[] Coin = new string[]{"Coin", "コイン", "코인"};
     public static string[] Diamond = new string[]{"Diamond", "ダイア", "다이아"};
     public static string[] RemoveAllADs = new string[]{"Remove All ADs", "全ての広告無し", "광고제거"};
+    public static string[] Rate = new string[]{"Rate", "評価", "평가"};
+    public static string[] Later = new string[]{"Later", "後で", "나중에"};
+
 
     //* PSV
     public static string[] Dmg = new string[]{DM.PSV.Dmg.ToString(), "攻撃力", "공격력"};
@@ -411,6 +423,10 @@ public static class LANG //* LANG
         if(name == TXT.ShowAdDialogRevive_Content.ToString()) res = ShowAdDialogRevive_Content[CUR_LANG];
         if(name == TXT.ShowAdDialogRouletteTicket_Title.ToString()) res = ShowAdDialogRouletteTicket_Title[CUR_LANG];
         if(name == TXT.ShowAdDialogRouletteTicket_Content.ToString()) res = ShowAdDialogRouletteTicket_Content[CUR_LANG];
+        if(name == TXT.RateDialog_Content1.ToString()) res = RateDialog_Content1[CUR_LANG];
+        if(name == TXT.RateDialog_Content2.ToString()) res = RateDialog_Content2[CUR_LANG];
+        
+
 
         //* TUTORIAL
         if(name == TXT.Tutorial.ToString()) res = Tutorial[CUR_LANG];
@@ -464,6 +480,8 @@ public static class LANG //* LANG
         if(name == TXT.Coin.ToString()) res = Coin[CUR_LANG];
         if(name == TXT.Diamond.ToString()) res = Diamond[CUR_LANG];
         if(name == TXT.RemoveAllADs.ToString()) res = RemoveAllADs[CUR_LANG];
+        if(name == TXT.Later.ToString()) res = Later[CUR_LANG];
+        if(name == TXT.Rate.ToString()) res = Rate[CUR_LANG];
 
         //* PSV
         if(name == TXT.Dmg.ToString()) res = Dmg[CUR_LANG];

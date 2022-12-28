@@ -115,6 +115,12 @@ public class HomeManager : MonoBehaviour
     public RectTransform showAdDialog;
     public Text adDialogTitleTxt;
     public Text adDialogContentTxt;
+    public RectTransform rateDialog;
+    public Text rateTitleTxt;
+    public Text rateContentTxt1;
+    public Text rateContentTxt2;
+    public Text rateLaterBtnTxt;
+    public Text rateOkBtnTxt;
 
     [Header("BUY OR CHECK BTN")][Header("__________________________")]
     public Button checkBtn;
@@ -134,8 +140,6 @@ public class HomeManager : MonoBehaviour
     // public Text noticeMessageTxtPref;
     // public Transform mainPanelTf;
 
-    //TODO public DialogUI cashShop;
-
     void Start(){
         Debug.Log("Math:: -------------------------------");       
         {
@@ -143,7 +147,7 @@ public class HomeManager : MonoBehaviour
             const int OFFSET = 100;
             List<int> hpList = Util._.calcArithmeticProgressionList(start: OFFSET, max: 99, d: OFFSET, gradualUpValue: 0.01f);
             hpList.ForEach(hp => Debug.Log($"Math:: blockHpList[{i}]= " + hpList[i++] / OFFSET));
-        } 
+        }
 
         onClickBtnGoToPanel(DM.SCENE.Home.ToString());
         setSelectSkillImg(true);
@@ -161,6 +165,14 @@ public class HomeManager : MonoBehaviour
         selectedSkillBtnIdxTxt.text = LANG.getTxt(LANG.TXT.FirstSkill.ToString());
 
         checkPremiumPackPurchaseStatus();
+
+        //TODO ゲームを３回以上プレイしたら、App-Reviewダイアログ表        
+        rateDialog.gameObject.SetActive(true);
+        rateTitleTxt.text = LANG.getTxt(LANG.TXT.Rate.ToString());
+        rateContentTxt1.text = LANG.getTxt(LANG.TXT.RateDialog_Content1.ToString());
+        rateContentTxt2.text = LANG.getTxt(LANG.TXT.RateDialog_Content2.ToString());
+        rateLaterBtnTxt.text = LANG.getTxt(LANG.TXT.Later.ToString());
+        rateOkBtnTxt.text = LANG.getTxt(LANG.TXT.Ok.ToString());
     }
 
     void Update(){
@@ -238,6 +250,10 @@ public class HomeManager : MonoBehaviour
             homePanel.GoBtn.gameObject.SetActive(false);
             ItemPsvInfoBtn.gameObject.SetActive(false);
         }
+    }
+    public void onClickRateBtn(){
+        //TODO Googleストアーへ移動。
+        Debug.Log("<color=yellow>TODO</color> onClickRateBtn():: Googleストアーへ移動!");
     }
     public void onClickShowADButton(){
         //TODO AD広告全部見たら、
