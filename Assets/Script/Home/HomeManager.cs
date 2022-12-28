@@ -167,12 +167,7 @@ public class HomeManager : MonoBehaviour
         checkPremiumPackPurchaseStatus();
 
         //TODO ゲームを３回以上プレイしたら、App-Reviewダイアログ表        
-        rateDialog.gameObject.SetActive(true);
-        rateTitleTxt.text = LANG.getTxt(LANG.TXT.Rate.ToString());
-        rateContentTxt1.text = LANG.getTxt(LANG.TXT.RateDialog_Content1.ToString());
-        rateContentTxt2.text = LANG.getTxt(LANG.TXT.RateDialog_Content2.ToString());
-        rateLaterBtnTxt.text = LANG.getTxt(LANG.TXT.Later.ToString());
-        rateOkBtnTxt.text = LANG.getTxt(LANG.TXT.Ok.ToString());
+        setRateDialog(false);
     }
 
     void Update(){
@@ -476,6 +471,15 @@ public class HomeManager : MonoBehaviour
 //* Private Function
 //* ----------------------------------------------------------------
 #region Private Function
+    private void setRateDialog(bool isActive){
+        rateDialog.gameObject.SetActive(isActive);
+        rateTitleTxt.text = LANG.getTxt(LANG.TXT.Rate.ToString());
+        rateContentTxt1.text = LANG.getTxt(LANG.TXT.RateDialog_Content1.ToString());
+        rateContentTxt2.text = LANG.getTxt(LANG.TXT.RateDialog_Content2.ToString());
+        rateLaterBtnTxt.text = LANG.getTxt(LANG.TXT.Later.ToString());
+        rateOkBtnTxt.text = LANG.getTxt(LANG.TXT.Ok.ToString());
+    }
+
     private void setStageSelectUIList(){
         //* Set StageSelectList
         for(int i=0; i<stageSelects.Length; i++){
