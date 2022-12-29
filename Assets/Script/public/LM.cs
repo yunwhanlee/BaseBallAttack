@@ -95,6 +95,8 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
 
     [Header("IN-APP PURCHASE PRICE ($ DOLLER)")][Header("__________________________")]
     [Tooltip("プレミアムパック値段")] public int PREM_PACK_PRICE = 10;
+    [Header("RATE DIALOG SHOW PLAYTIME CNT")][Header("__________________________")]
+    [Tooltip("評価ダイアログを表示するプレイタイム")] public int DISPLAY_RATE_DIALOG_PLAYTIME = 3;
 
     void Awake() => singleton();
 

@@ -72,6 +72,8 @@ public class HomeManager : MonoBehaviour
     public FrameUI selectPanel;
     public FrameUI unlock2ndSkillDialog;
     public FrameUI settingDialog;
+    public Image settingDialogCountryIconImg;
+    public Sprite[] CountryIconSprArr;
     [Space(10)]
     public Text startBtnTxt;
     public Dropdown languageOptDropDown;    public Dropdown LanguageOptDropDown {get => languageOptDropDown; set => languageOptDropDown = value;}
@@ -166,13 +168,23 @@ public class HomeManager : MonoBehaviour
 
         checkPremiumPackPurchaseStatus();
 
-        //TODO ゲームを３回以上プレイしたら、App-Reviewダイアログ表        
-        rateDialog.gameObject.SetActive(true);
-        rateTitleTxt.text = LANG.getTxt(LANG.TXT.Rate.ToString());
-        rateContentTxt1.text = LANG.getTxt(LANG.TXT.RateDialog_Content1.ToString());
-        rateContentTxt2.text = LANG.getTxt(LANG.TXT.RateDialog_Content2.ToString());
-        rateLaterBtnTxt.text = LANG.getTxt(LANG.TXT.Later.ToString());
-        rateOkBtnTxt.text = LANG.getTxt(LANG.TXT.Ok.ToString());
+        //* display Rate Dialog with playTime
+        if(DM.ins.personalData.PlayTime == LM._.DISPLAY_RATE_DIALOG_PLAYTIME){
+            DM.ins.personalData.PlayTime++; //* Only一回のみ
+            rateDialog.gameObject.SetActive(true);
+            rateTitleTxt.text = LANG.getTxt(LANG.TXT.Rate.ToString());
+            rateContentTxt1.text = LANG.getTxt(LANG.TXT.RateDialog_Content1.ToString());
+            rateContentTxt2.text = LANG.getTxt(LANG.TXT.RateDialog_Content2.ToString());
+            rateLaterBtnTxt.text = LANG.getTxt(LANG.TXT.Later.ToString());
+            rateOkBtnTxt.text = LANG.getTxt(LANG.TXT.Ok.ToString());
+        }
+        
+        //* Setting Panel Country Icon 
+        settingDialogCountryIconImg.sprite = 
+            DM.ins.personalData.Lang == LANG.TP.EN? CountryIconSprArr[(int)LANG.TP.EN]
+            : DM.ins.personalData.Lang == LANG.TP.JP? CountryIconSprArr[(int)LANG.TP.JP]
+            : CountryIconSprArr[(int)LANG.TP.KR];
+
     }
 
     void Update(){
@@ -271,9 +283,15 @@ public class HomeManager : MonoBehaviour
         int idx = LanguageOptDropDown.value;
         Debug.Log("onDropDownSettingOpt():: idx= " + idx);
         switch(idx){
-            case 0: DM.ins.personalData.Lang = LANG.TP.EN;   break;
-            case 1: DM.ins.personalData.Lang = LANG.TP.JP;   break;
-            case 2: DM.ins.personalData.Lang = LANG.TP.KR;   break;
+            case 0: DM.ins.personalData.Lang = LANG.TP.EN;
+                settingDialogCountryIconImg.sprite = CountryIconSprArr[0];
+                break;
+            case 1: DM.ins.personalData.Lang = LANG.TP.JP;
+                settingDialogCountryIconImg.sprite = CountryIconSprArr[1];
+                break;
+            case 2: DM.ins.personalData.Lang = LANG.TP.KR;
+                settingDialogCountryIconImg.sprite = CountryIconSprArr[2];
+                break;
         }
     }
     public void onClickSettingOkBtn(bool isOk){
