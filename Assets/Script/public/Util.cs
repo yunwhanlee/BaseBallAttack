@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System;
 using Random = UnityEngine.Random;
 using System.Text.RegularExpressions;
+using UnityEngine.SceneManagement;
 
 
 public class Util : MonoBehaviour
@@ -52,9 +53,14 @@ public class Util : MonoBehaviour
 
     public void displayNoticeMsgDialog(string msg){
         //* (BUG) IN-GAMEへ行ってHOMEに戻ったたら、Missingになる。
-        if(!mainPanelTf)
-            mainPanelTf = GameObject.Find(DM.NAME.MainPanel.ToString()).GetComponent<RectTransform>();
-
+        if(!mainPanelTf){
+            Scene scene = SceneManager.GetActiveScene();
+            //* (BUG-23) PlaySceneでも、広告を見てエラーになったら、エラーメッセージ表示。 
+            if(scene.name == DM.SCENE.Home.ToString())
+                mainPanelTf = GameObject.Find(DM.NAME.MainPanel.ToString()).GetComponent<RectTransform>();
+            else if(scene.name == DM.SCENE.Play.ToString())
+                mainPanelTf = GameObject.Find(DM.NAME.MainCanvas.ToString()).GetComponent<RectTransform>();
+        }            
         noticeMessagePref.GetComponentInChildren<Text>().text = msg;
         var ins = Instantiate(noticeMessagePref, mainPanelTf.transform.position, Quaternion.identity, mainPanelTf);
         ins.GetComponent<RectTransform>().localPosition = new Vector3(0,-900,-400);

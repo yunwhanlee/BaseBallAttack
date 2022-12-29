@@ -453,8 +453,28 @@ public class GameManager : MonoBehaviour
         showAdDialog.gameObject.SetActive(false); //* ダイアログ閉じる
     }
     public void onClickShowADButton(string rewardType){
-        // bool response = DM.ins.reqShowAD(rewardType, this);
         Debug.Log("<color=yellow> onClickShowADButton(" + rewardType.ToString() + ")</color>");
+        //* 広告なし
+        if(DM.ins.personalData.IsRemoveAD){
+            setShowADReward(rewardType);
+            return;
+        }
+
+        //* 広告要請
+        bool success = DM.ins.reqShowAD();
+        if(success){
+            setShowADReward(rewardType);
+        }
+        else{
+            Util._.displayNoticeMsgDialog("ERROR！");
+        }
+    }
+
+//*---------------------------------------
+//*  関数
+//*---------------------------------------
+#region AD REWARD
+    private void setShowADReward(string rewardType){
         if(rewardType == DM.REWARD.RerotateSkillSlots.ToString()){
             setRerotateSkillSlots();
         }
@@ -464,15 +484,11 @@ public class GameManager : MonoBehaviour
         else if(rewardType == DM.REWARD.CoinX2.ToString()){
             setCoinX2();
         }
-        showAdDialog.gameObject.SetActive(false); //* ダイアログ閉じる
+        //* ダイアログ閉じる
+        showAdDialog.gameObject.SetActive(false); 
     }
-
-//*---------------------------------------
-//*  関数
-//*---------------------------------------
-    #region AD REWARD
     private void setRerotateSkillSlots(){
-        // rerotateSkillSlotsBtn.gameObject.SetActive(false);
+        rerotateSkillSlotsBtn.gameObject.SetActive(false);
         levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
     }
     private void setRevive(){
@@ -491,7 +507,7 @@ public class GameManager : MonoBehaviour
         coinX2Btn.gameObject.SetActive(false);
         coinX2Label.gameObject.SetActive(true);
     }
-    #endregion
+#endregion
 
     public void init(){
         State = GameManager.STATE.WAIT;

@@ -701,7 +701,7 @@ GameObject:
   - component: {fileID: 3811945637619119264}
   - component: {fileID: 3811945637619119271}
   m_Layer: 5
-  m_Name: CashShop_ADSkip
+  m_Name: CashShop_RemoveAD
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -751,7 +751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameTxts:
-  - AD Skip
+  - RemoveAD
   - "\u5E83\u544A\u7121\u3057"
   - "\uAD11\uACE0\uC81C\uAC70"
   explainTxts:
@@ -1021,7 +1021,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: AD Skip
+  m_Text: RemoveAD
 --- !u!114 &3811945637915868280
 MonoBehaviour:
   m_ObjectHideFlags: 0

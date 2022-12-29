@@ -252,16 +252,9 @@
         -  NEW LABEL処理。
         ✓ ステージ Play ボタン。
         ✓ REVIEWダイアログ追加。
-        - ゲームを３回以上プレイしたら、App-Reviewダイアログ表      
+        ✓ ゲームを３回以上プレイしたら、App-Reviewダイアログ表 
         - GUI PRO KITにある、Charactor_Detailを通じて、SKILLとSTATS関したGUI修正。
-<<<<<<< HEAD
-        - Roullet reward -> setShowRewwardPanel.
-        ✓ CashShop:: Purchase Item Show Reward Panel and Set Coin or Diamond Data.
-        - CashShop:: Real Money purchase test coding & RemoveAD.
-
-=======
         ✓ SettingDialog Country Icon Image.
->>>>>>> 3df033026264af99cdd7753170e69103ae4f5ef5
 
 
 [BUG]
@@ -315,6 +308,7 @@
     ✓ (BUG-21) ObstacleがBlockに当たっても、破壊されない。
         原因：両方ObjectのColliderがisKinematicのtrueであれば、お互いに検出できない。
     ✓ (BUG-22) For分内にonClick.AddListener(int i)すると、Indexが全てLast+1になるバグ対応。
+    ✓ (BUG-23) PlaySceneでも、広告を見てエラーになったら、エラーメッセージ表示。 
     
 
     

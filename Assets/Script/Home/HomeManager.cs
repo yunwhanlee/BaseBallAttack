@@ -71,9 +71,7 @@ public class HomeManager : MonoBehaviour
     public FrameUI homePanel;
     public FrameUI selectPanel;
     public FrameUI unlock2ndSkillDialog;
-    public FrameUI settingDialog;
-    public Image settingDialogCountryIconImg;
-    public Sprite[] CountryIconSprArr;
+
     [Space(10)]
     public Text startBtnTxt;
     public Dropdown languageOptDropDown;    public Dropdown LanguageOptDropDown {get => languageOptDropDown; set => languageOptDropDown = value;}
@@ -114,15 +112,21 @@ public class HomeManager : MonoBehaviour
     public GameObject showRewardItemPf;
 
     [Header("DIALOG")][Header("__________________________")]
+    //* ShowAD
     public RectTransform showAdDialog;
     public Text adDialogTitleTxt;
     public Text adDialogContentTxt;
+    //* Rate
     public RectTransform rateDialog;
     public Text rateTitleTxt;
     public Text rateContentTxt1;
     public Text rateContentTxt2;
     public Text rateLaterBtnTxt;
     public Text rateOkBtnTxt;
+    //* Setting
+    public FrameUI settingDialog;
+    public Image settingDialogCountryIconImg;
+    public Sprite[] CountryIconSprArr;
 
     [Header("BUY OR CHECK BTN")][Header("__________________________")]
     public Button checkBtn;
@@ -155,8 +159,8 @@ public class HomeManager : MonoBehaviour
         setSelectSkillImg(true);
 
         setStageSelectUIList();
-
-        Debug.Log("DM.ins.personalData.Lang= " + DM.ins.personalData.Lang);
+        Debug.Log("LanguageOptDropDown.value= " + LanguageOptDropDown.value);
+        Debug.Log("DM.ins.personalData.Lang= " + (int)DM.ins.personalData.Lang);
         LanguageOptDropDown.value = (int)DM.ins.personalData.Lang; //* Loadデータで初期化
 
         rouletteIconBtn.GetComponent<Image>().color = Color.grey;
@@ -269,17 +273,28 @@ public class HomeManager : MonoBehaviour
         }
     }
     public void onClickRateBtn(){
-        //TODO Googleストアーへ移動。
         Debug.Log("<color=yellow>TODO</color> onClickRateBtn():: Googleストアーへ移動!");
+        DM.ins.openAppStore();
     }
     public void onClickShowADButton(){
-        //TODO AD広告全部見たら、
-        DM.ins.personalData.RouletteTicket++;
-        showAdDialog.gameObject.SetActive(false);
-        roulettePanel.gameObject.SetActive(true);
-        homePanel.Panel.gameObject.SetActive(false);
-        homePanel.GoBtn.gameObject.SetActive(false);
-        ItemPsvInfoBtn.gameObject.SetActive(false);
+        //* 広告なし
+        //TODO このままでは、ルーレットを無限に使えるので、一日制限数設定。
+        if(DM.ins.personalData.IsRemoveAD){
+            DM.ins.personalData.RouletteTicket++;
+            showRoulettePanel();
+            return;
+        }
+
+        //* 広告要請
+        bool success = DM.ins.reqShowAD();
+        if(success){
+            DM.ins.personalData.RouletteTicket++;
+            showRoulettePanel();
+        }
+        else {
+            Util._.displayNoticeMsgDialog("ERROR！");
+        };
+        
     }
     public void onClickSettingBtn(){
         settingDialog.Panel.SetActive(true);
@@ -459,10 +474,8 @@ public class HomeManager : MonoBehaviour
         }
     }
     public void onClickPremiumPackPurchaseBtn(){
-        //TODO in app purchase
-        bool inAppPurchaseSuccess = true;
-
-        if(inAppPurchaseSuccess){
+        bool success = DM.ins.reqAppPayment();
+        if(success){
             DM.ins.personalData.IsPurchasePremiumPack = true;
 
             // Set Data
@@ -503,6 +516,13 @@ public class HomeManager : MonoBehaviour
 //* Private Function
 //* ----------------------------------------------------------------
 #region Private Function
+    private void showRoulettePanel(){
+        roulettePanel.gameObject.SetActive(true);
+        showAdDialog.gameObject.SetActive(false);
+        homePanel.Panel.gameObject.SetActive(false);
+        homePanel.GoBtn.gameObject.SetActive(false);
+        ItemPsvInfoBtn.gameObject.SetActive(false);
+    }
     private void setRateDialog(bool isActive){
         rateDialog.gameObject.SetActive(isActive);
         rateTitleTxt.text = LANG.getTxt(LANG.TXT.Rate.ToString());

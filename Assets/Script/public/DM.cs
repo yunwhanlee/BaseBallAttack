@@ -86,9 +86,6 @@ public class DM : MonoBehaviour
     [Header("TUTORIAL")][Header("__________________________")]
     public TutorialPanel tutorialPanel;
 
-    [Header("AD : 未完")][Header("__________________________")]
-    [SerializeField] bool isRemoveAD;   public bool IsRemoveAD {get => isRemoveAD; set => isRemoveAD = value;}
-
     void Awake() => singleton();
     void Start(){
         LANG.initlanguageList();
@@ -159,7 +156,11 @@ public class DM : MonoBehaviour
         
     }
 
-    public bool reqShowAD(string type, GameManager gm){
+    public bool reqShowAD(){//string type, GameManager gm){
+        bool success = false; //Test True
+        Debug.Log($"<color=red>reqShowAD</color>:: success= " + success);
+        //TODO IN Show AD Process
+        return success;
         // Debug.Log("<color=yellow> reqShowAD(" + type.ToString() + ")</color>");
         // if(type == DM.REWARD.CoinX2.ToString()){
         //     gm.coinTxt.text = (int.Parse(gm.coinTxt.text) * 2).ToString();
@@ -182,7 +183,17 @@ public class DM : MonoBehaviour
         // else{
         //     return false;
         // }
-        return true;
+
+    }
+    public bool reqAppPayment(){
+        bool success = true; //Test True
+        Debug.Log($"<color=red>reqAppPayment</color>:: success= " + success);
+        //TODO IN App Payment Process 
+        return success;
+    }
+    public void openAppStore(){
+        Debug.Log("openAppStore::");
+        //TODO Open My Game App Store;
     }
 
     void singleton(){

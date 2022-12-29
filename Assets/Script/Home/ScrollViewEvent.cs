@@ -471,11 +471,15 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 break;
             case DM.PANEL.CashShop :
             case DM.PANEL.Upgrade :
-                if(curItem.price.Type == Price.TP.COIN){
+                if(curItem.price.Type == Price.TP.COIN){ //* 実はない。
                     DM.ins.personalData.Coin = purchaseItem(DM.ins.personalData.Coin, curItem, befIdx);
                 }
                 else if(curItem.price.Type == Price.TP.DIAMOND){
                     DM.ins.personalData.Diamond = purchaseItem(DM.ins.personalData.Diamond, curItem, befIdx);
+                }
+                else if(curItem.price.Type == Price.TP.CASH){
+                    const int justEnter = 9999999;
+                    purchaseItem(justEnter, curItem, befIdx);
                 }
                 break;
         }
@@ -529,20 +533,30 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             }
             else if(DM.ins.SelectItemType == DM.PANEL.CashShop.ToString()){
                 goods -= price;
-                string itemInfo = curItem.name.Split('_')[1];
-                if(itemInfo.Contains(DM.NAME.Coin.ToString())){
-                    int reward = int.Parse(itemInfo.Split('n')[1]);
+                string itemName = curItem.name.Split('_')[1];
+                Debug.Log($"ScrollViewEvent::purchaseItem():: itemName= {itemName}");
+                if(itemName.Contains(DM.NAME.Coin.ToString())){
+                    int reward = int.Parse(itemName.Split('n')[1]);
                     Debug.Log("ScrollViewEvent::purchaseItem():: Get Coin= " + reward);
                     hm.displayShowRewardPanel(coin: reward);
                     DM.ins.personalData.Coin += reward;
                 }
-                else if(itemInfo.Contains(DM.NAME.Diamond.ToString())){
-                    int reward = int.Parse(itemInfo.Split('d')[1]);
-                    Debug.Log("ScrollViewEvent::purchaseItem():: Get Diamond= " + reward);
-                    hm.displayShowRewardPanel(coin: 0, diamond: reward);
-                    DM.ins.personalData.Diamond += reward;
+                else if(itemName.Contains(DM.NAME.Diamond.ToString())){
+                    bool success = DM.ins.reqAppPayment();
+                    if(success){
+                        int reward = int.Parse(itemName.Split('d')[1]);
+                        Debug.Log("ScrollViewEvent::purchaseItem():: Get Diamond= " + reward);
+                        hm.displayShowRewardPanel(coin: 0, diamond: reward);
+                        DM.ins.personalData.Diamond += reward;
+                    }
                 }
-                //TODO else if(RemoveAD) {}
+                //TODO 
+                else if(itemName.Contains("RemoveAD")) {
+                    bool success = DM.ins.reqAppPayment();
+                    if(success){
+                        
+                    }
+                }
             }
             else{
                 // Debug.Log("purchaseItem:: curItem.transform.GetChild(0)=" + curItem.transform.GetChild(0).name);
