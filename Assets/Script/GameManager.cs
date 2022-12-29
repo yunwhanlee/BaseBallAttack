@@ -628,6 +628,7 @@ public class GameManager : MonoBehaviour
         coin += stage * LM._.GAMEOVER_STAGE_PER_COIN;
         int extraUpgradeCoin = Mathf.RoundToInt(coin * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.CoinBonus].getValue());
         coinTxt.text = (coin + extraUpgradeCoin).ToString(); // => setGameでも使う。
+        DM.ins.personalData.PlayTime++;//* Rate Dialogを表示するため
     }
 
     public void setGame(string type){
@@ -646,7 +647,7 @@ public class GameManager : MonoBehaviour
             case STATE.HOME:
                 Time.timeScale = 1;
 
-                //* Get Coin
+                //* Get Reward Goods
                 int coin = stage * 100;
                 DM.ins.personalData.Coin += int.Parse(coinTxt.text);
                 

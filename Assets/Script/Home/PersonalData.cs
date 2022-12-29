@@ -8,6 +8,10 @@ using System;
 public class PersonalData {
     //* Value
     [SerializeField] LANG.TP lang; public LANG.TP Lang {get => lang; set => lang = value;}
+    [Header("STATUS")][Header("__________________________")]
+    [SerializeField] int playTime; public int PlayTime {get => playTime; set => playTime = value;}
+
+    [Header("GOODS")][Header("__________________________")]
     [SerializeField] int coin; public int Coin {get => coin; set => coin = value;}
     [SerializeField] int diamond; public int Diamond {get => diamond; set => diamond = value;}
     [SerializeField] int rouletteTicket; public int RouletteTicket {get => rouletteTicket; set => rouletteTicket = value;}
@@ -29,9 +33,11 @@ public class PersonalData {
     [SerializeField] int selectSkillIdx;  public int SelectSkillIdx {get => selectSkillIdx; set => selectSkillIdx = value;}
     [SerializeField] int selectSkill2Idx;  public int SelectSkill2Idx {get => selectSkill2Idx; set => selectSkill2Idx = value;}
     [SerializeField] List<bool> skillLockList;  public List<bool> SkillLockList {get => skillLockList; set => skillLockList = value;}
+
     [Header("ITEM PASSIVE")][Header("__________________________")]
     [FormerlySerializedAs("itemPassive")]
     [SerializeField] ItemPsvList itemPassive; public ItemPsvList ItemPassive {get => itemPassive; set => itemPassive = value;}
+
     [Header("UPGRADE ABILITY")][Header("__________________________")]
     [FormerlySerializedAs("upgrade")]
     [SerializeField] UpgradeList upgrade; public UpgradeList Upgrade {get => upgrade; set => upgrade = value;}
@@ -67,6 +73,9 @@ public class PersonalData {
 
         //* Set Data
         this.Lang = data.Lang;
+
+        this.PlayTime = data.PlayTime;
+
         this.Coin = data.Coin;
         this.Diamond = data.Diamond;
         this.rouletteTicket = data.RouletteTicket;
@@ -119,6 +128,9 @@ public class PersonalData {
         PlayerPrefs.DeleteAll();
 
         this.Lang = LANG.TP.JP;
+
+        this.PlayTime = 0;
+
         this.Coin = 100000;
         this.Diamond = 0;
         this.rouletteTicket = 1; //* 1つ上げるのは、ボーナス感じ。
