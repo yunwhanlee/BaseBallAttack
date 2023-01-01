@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45015454, g: 0.5001945, b: 0.57542807, a: 1}
+  m_IndirectSpecularColor: {r: 0.45015407, g: 0.500194, b: 0.5754274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1562,7 +1562,6 @@ MonoBehaviour:
   rankGodClr: {r: 1, g: 1, b: 0, a: 0.68235296}
   darkGray: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   tutorialPanel: {fileID: 5631821220257666727, guid: 0eb691fb79fb47e49a65dea3633be40e, type: 3}
-  isRemoveAD: 0
 --- !u!1 &106605947
 GameObject:
   m_ObjectHideFlags: 0
@@ -25151,7 +25150,7 @@ MonoBehaviour:
   SpinPowerSlider: {fileID: 166279014}
   ContgraturationBlastEF: {fileID: 810808925}
   exitBtn: {fileID: 1941981530}
-  power: 1666
+  power: 5000
   spinGauge: 0
   reduceCnt: 0
   isRight: 0
@@ -26104,16 +26103,6 @@ MonoBehaviour:
     goBtn: {fileID: 1668992831}
     titleTxt: {fileID: 500995122}
     infoTxt: {fileID: 1260738443}
-  settingDialog:
-    panel: {fileID: 349844471}
-    goBtn: {fileID: 246366071}
-    titleTxt: {fileID: 0}
-    infoTxt: {fileID: 0}
-  settingDialogCountryIconImg: {fileID: 1427003785}
-  CountryIconSprArr:
-  - {fileID: 21300000, guid: fe47e233143e64610b8a069446bab0ec, type: 3}
-  - {fileID: 21300000, guid: 85f053b0eb0f446a4ad2a41b0c76173e, type: 3}
-  - {fileID: 21300000, guid: 9d399770c3e0542df9bce5ff6692725c, type: 3}
   startBtnTxt: {fileID: 533489542}
   languageOptDropDown: {fileID: 1205028892}
   selectedSkillBtnIdx: 0
@@ -26177,6 +26166,16 @@ MonoBehaviour:
   rateContentTxt2: {fileID: 3740557287408942177}
   rateLaterBtnTxt: {fileID: 3740557286135637104}
   rateOkBtnTxt: {fileID: 3740557286360108222}
+  settingDialog:
+    panel: {fileID: 349844471}
+    goBtn: {fileID: 246366071}
+    titleTxt: {fileID: 0}
+    infoTxt: {fileID: 0}
+  settingDialogCountryIconImg: {fileID: 1427003785}
+  CountryIconSprArr:
+  - {fileID: 21300000, guid: fe47e233143e64610b8a069446bab0ec, type: 3}
+  - {fileID: 21300000, guid: 85f053b0eb0f446a4ad2a41b0c76173e, type: 3}
+  - {fileID: 21300000, guid: 9d399770c3e0542df9bce5ff6692725c, type: 3}
   checkBtn: {fileID: 473351091}
   checkMarkImg: {fileID: 1835355577}
   priceTxt: {fileID: 1544578272}

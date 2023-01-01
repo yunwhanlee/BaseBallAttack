@@ -24,9 +24,9 @@ public class Roulette : MonoBehaviour
     
     private Sprite rewardIcon;
     private int rewardPrice;
-
+    const int SPIN_POWER_MIN = 200;
     const int SPIN_POWER_MAX = 1200;
-    [Range(500, 2000)]  public int power = 1500;
+    public int power = 1500;
     public float spinGauge = 0;
 
     [SerializeField] int reduceCnt = 0;
@@ -47,7 +47,7 @@ public class Roulette : MonoBehaviour
 
         ticketCntTxt.text = "x " + DM.ins.personalData.RouletteTicket.ToString();
         if(isSpin){
-            float speed = Time.deltaTime * (spinGauge - reduceCnt++);
+            float speed = Time.deltaTime * (SPIN_POWER_MIN + spinGauge - reduceCnt++);
             if(speed > 0){
                 setCenterTfUI(isSpin);
                 spinBoard.transform.Rotate(0, 0, speed);
@@ -74,7 +74,7 @@ public class Roulette : MonoBehaviour
                 if(spinGauge <= 0)  isRight = true;
                 else if(spinGauge > SPIN_POWER_MAX)  isRight = false;
                 spinGauge += Time.deltaTime * power * (isRight? +1 : -1);
-                SpinPowerSlider.value = spinGauge / SPIN_POWER_MAX;
+                SpinPowerSlider.value = (spinGauge / SPIN_POWER_MAX);
             }
         }
     }
