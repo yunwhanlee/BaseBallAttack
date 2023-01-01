@@ -209,13 +209,13 @@ public class Block_Prefab : MonoBehaviour
                 Hp = 1;
                 break;
             case BlockMaker.KIND.Long:
-            case BlockMaker.KIND.Obstacle:
                 Hp = resHp * 5;
                 break;
             case BlockMaker.KIND.Heal:
                 Hp =  resHp / 2;
                 break;
             case BlockMaker.KIND.Normal:
+            case BlockMaker.KIND.Obstacle:
                 Hp =  resHp;
                 break;
         }

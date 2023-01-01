@@ -76,23 +76,18 @@ public class ItemInfo : MonoBehaviour
             checkLockedModel();
             //* Set Price By Rank
             switch(rank){
-                case DM.RANK.GENERAL : 
-                    price.Val = LM._.GENERAL_PRICE;
-                    break;
-                case DM.RANK.RARE : 
-                    price.Val = LM._.RARE_PRICE;
-                    break;
-                case DM.RANK.UNIQUE : 
-                    price.Val = LM._.UNIQUE_PRICE;
-                    break;
-                case DM.RANK.LEGEND : 
-                    price.Val = LM._.LEGEND_PRICE;
-                    break;
-                case DM.RANK.GOD : 
-                    price.Val = LM._.GOD_PRICE;
-                    break;
+                case DM.RANK.GENERAL : price.Val = LM._.GENERAL_PRICE;  break;
+                case DM.RANK.RARE : price.Val = LM._.RARE_PRICE; break;
+                case DM.RANK.UNIQUE : price.Val = LM._.UNIQUE_PRICE; break;
+                case DM.RANK.LEGEND : price.Val = LM._.LEGEND_PRICE; break;
+                case DM.RANK.GOD : price.Val = LM._.GOD_PRICE; break;
             }
             Debug.Log("IteonInfo::Start:: Set Price By Rank= price.Val= " + price.Val);
+        }
+        else if(this.name.Contains(DM.PANEL.CashShop.ToString())){
+            if(isLock){
+                this.transform.Find("IsBuyedPanel").gameObject.SetActive(true);
+            }
         }
     }
 

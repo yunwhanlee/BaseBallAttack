@@ -12,7 +12,6 @@ public class DM : MonoBehaviour
     public enum DATABASE_KEY {Json};
     public enum SCENE {Home, Play, Loading};
     public enum NAME {
-
         MainCanvas,
         Coin, Diamond,
         DownWall, Block, FireBallDotEffect, BossDieDropOrbSpot, GrayPanel, Obstacle,
@@ -22,6 +21,8 @@ public class DM : MonoBehaviour
         MainPanel, RewardChest, 
         LevelUp, PsvSkillTicket,
         TitleTxt, ContentTxt,
+        //* 一回限り商品
+        RemoveAD, 
     };
     public enum TAG {HitRangeArea, StrikeLine, GameOverLine, Wall, ActiveDownWall, Player,
         NormalBlock, LongBlock, TreasureChestBlock, HealBlock, BossBlock,   

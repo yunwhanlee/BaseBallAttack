@@ -594,20 +594,19 @@ MonoBehaviour:
   - TODO
   price:
     type: 0
-    coin: 0
-    diamond: 0
+    val: 0
   isLock: 1
   isChecked: 0
   isCheckedImgObj: {fileID: 2745942477195005068}
   modelMeshRdrList: []
   originMtList: []
   grayPanel2D: {fileID: 0}
-  rank: 2
+  rank: 1
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
-  cashShopPriceTxt: {fileID: 0}
   upgradeValueTxt: {fileID: 0}
   lvTxt: {fileID: 0}
+  cashShopPriceTxt: {fileID: 0}
   itemPassive:
     arr:
     - name: Dmg

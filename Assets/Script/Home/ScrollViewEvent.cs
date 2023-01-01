@@ -343,6 +343,11 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         //* CashShop & Upgrade Panel
         if(DM.ins.SelectItemType == DM.PANEL.CashShop.ToString()){
             setPriceUI(curItem.price.getValue().ToString());
+            //* 一回限り商品
+            if(curItem.name.Contains(DM.NAME.RemoveAD.ToString()) && curItem.IsLock){
+                hm.checkBtn.interactable = false;
+                hm.priceTxt.text = "done";
+            }
             return;
         }
         else if(DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
@@ -360,8 +365,8 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             hm.priceTxt.gameObject.SetActive(false);
         }
     }
-
     private void setPriceUI(string price){
+        hm.checkBtn.interactable = true;
         hm.checkMarkImg.gameObject.SetActive(false);
         hm.priceTxt.gameObject.SetActive(true);
         hm.priceTxt.text = price; //curItem.price.getValue().ToString();
@@ -537,7 +542,6 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 Debug.Log($"ScrollViewEvent::purchaseItem():: itemName= {itemName}");
                 if(itemName.Contains(DM.NAME.Coin.ToString())){
                     int reward = int.Parse(itemName.Split('n')[1]);
-                    Debug.Log("ScrollViewEvent::purchaseItem():: Get Coin= " + reward);
                     hm.displayShowRewardPanel(coin: reward);
                     DM.ins.personalData.Coin += reward;
                 }
@@ -545,16 +549,19 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                     bool success = DM.ins.reqAppPayment();
                     if(success){
                         int reward = int.Parse(itemName.Split('d')[1]);
-                        Debug.Log("ScrollViewEvent::purchaseItem():: Get Diamond= " + reward);
                         hm.displayShowRewardPanel(coin: 0, diamond: reward);
                         DM.ins.personalData.Diamond += reward;
                     }
                 }
-                //TODO 
                 else if(itemName.Contains("RemoveAD")) {
+                    
                     bool success = DM.ins.reqAppPayment();
                     if(success){
+                        hm.displayShowRewardPanel(coin: 0, diamond: 0, rouletteTicket: 0, removeAD: true);
                         
+                        curItem.transform.Find("IsBuyedPanel").gameObject.SetActive(true);
+                        
+                        DM.ins.personalData.IsRemoveAD = true;
                     }
                 }
             }
