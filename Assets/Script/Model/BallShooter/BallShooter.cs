@@ -29,7 +29,7 @@ public class BallShooter : MonoBehaviour
         if(gm.State == GameManager.STATE.GAMEOVER) return;
         if(gm.State == GameManager.STATE.WAIT) return;
 
-        //* 発射 前) ボールが存在しない
+        //* 発射 前) ボールが存在しない (毎一回実行)
         if(!IsBallExist){
             //* COUNTING
             time -= Time.deltaTime;
@@ -46,6 +46,7 @@ public class BallShooter : MonoBehaviour
                 gm.throwScreenAnimSetTrigger("ThrowBall");
 
                 gm.ShootCntTxt.text = "SHOOT";
+                StartCoroutine(coClearShootCntTxt(delay: 0.3f));
                 Debug.Log("ballPreviewDirGoal="+gm.ballPreviewDirGoal.transform.position+", entranceTfPos="+entranceTf.position);
                 Vector3 goalDir = (gm.ballPreviewDirGoal.transform.position - entranceTf.position).normalized;
                 GameObject ins = Instantiate(ballPref, entranceTf.position, Quaternion.LookRotation(goalDir), gm.ballGroup);
@@ -56,6 +57,21 @@ public class BallShooter : MonoBehaviour
         else{//* ボールが存在し、飛んでいる。★
             gm.readyBtn.gameObject.SetActive(false);
             pl.previewBundle.SetActive(false);
+        }
+    }
+    IEnumerator coClearShootCntTxt(float delay){
+        yield return new WaitForSeconds(delay);
+        gm.ShootCntTxt.text = "";
+    }
+    private void setSuddenlyThrowBall(int per){
+        if(time <= 1f && !IsExclamationMarkOn){
+            IsExclamationMarkOn = true;
+            int rand = Random.Range(0, 100);
+            Debug.LogFormat("「！」マーク登場： per({0}) < rand({1})? -> {2} </color>", per, rand, (rand > per)? "<color=blue>TRUE" : "<color=red>FALSE");
+            if(rand > per){
+                throwBallSpeed *= 1.4f;
+                StartCoroutine(coShowExclamationMark(0.2f));
+            }
         }
     }
     public void init() {
@@ -69,18 +85,6 @@ public class BallShooter : MonoBehaviour
         int extra = Random.Range(0, 5);
         ball.Speed = (throwBallSpeed + extra) * Time.fixedDeltaTime;
         ball.rigid.AddForce(goalDir * ball.Speed, ForceMode.Impulse);
-    }
-
-    private void setSuddenlyThrowBall(int per){
-        if(time <= 1f && !IsExclamationMarkOn){
-            IsExclamationMarkOn = true;
-            int rand = Random.Range(0, 100);
-            Debug.LogFormat("「！」マーク登場： per({0}) < rand({1})? -> {2} </color>", per, rand, (rand > per)? "<color=blue>TRUE" : "<color=red>FALSE");
-            if(rand > per){
-                throwBallSpeed *= 1.4f;
-                StartCoroutine(coShowExclamationMark(0.2f));
-            }
-        }
     }
     public IEnumerator coShowExclamationMark(float sec){
         Debug.Log($"coShowExclamationMark(sec={sec})");
