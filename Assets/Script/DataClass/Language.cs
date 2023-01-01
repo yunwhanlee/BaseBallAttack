@@ -320,11 +320,11 @@ public static class LANG //* LANG
     public static string[] Speed = new string[]{DM.PSV.Speed.ToString(), "速度", "속도"};
     public static string[] InstantKill = new string[]{DM.PSV.InstantKill.ToString(), "キル", "킬"};
     public static string[] Critical = new string[]{DM.PSV.Critical.ToString(), "致命打", "치명타"};
+    public static string[] CriticalDamage = new string[]{DM.PSV.CriticalDamage.ToString(), "致命打ダメージ", "치명타데미지"};
     public static string[] Explosion = new string[]{DM.PSV.Explosion.ToString(), "爆発", "폭발"};
     public static string[] ExpUp = new string[]{DM.PSV.ExpUp.ToString(), "経験値％UP", "경험치%UP"};
     public static string[] ItemSpawn = new string[]{DM.PSV.ItemSpawn.ToString(), "アイテム生成UP", "아이탬생성UP"};
     public static string[] VerticalMultiShot = new string[]{DM.PSV.VerticalMultiShot.ToString(), "マルチ弾(縦)", "멀티샷(세로)"};
-    public static string[] CriticalDamage = new string[]{DM.PSV.CriticalDamage.ToString(), "致命打ダメージ", "치명타데미지"};
     public static string[] Laser = new string[]{DM.PSV.Laser.ToString(), "レイザー", "레이저"};
     public static string[] FireProperty = new string[]{DM.PSV.FireProperty.ToString(), "火属性", "불속성"};
     public static string[] IceProperty = new string[]{DM.PSV.IceProperty.ToString(), "氷属性", "빙속성"};

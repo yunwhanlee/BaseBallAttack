@@ -149,7 +149,7 @@ public class ItemInfo : MonoBehaviour
         }
     }
 
-    public void setUpgradeGUI(UpgradeDt item){
+    public void setLvUI(UpgradeDt item){
         Debug.Log($"ItenInfo::setUpgradeGUI(UpgradeDt item={item})::");
         this.UpgradeValueTxt.text = item.getVal2Str();
         this.LvTxt.text = (item.MaxLv == item.Lv)? "MAX" : $"{item.Lv}/{item.MaxLv}";

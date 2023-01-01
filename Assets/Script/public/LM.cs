@@ -3,12 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class HitRank{
+public class HitRank {
     [SerializeField] [Range(0, 1.5f)] float dist;   public float Dist {get => dist;}
     [SerializeField] int power;   public int Power {get => power;}
     public HitRank(float dist, int power){
         this.dist = dist;
         this.power = power;
+    }
+}
+
+[System.Serializable]
+public class UpgradePriceCalcSetting { //* calcArithmeticProgressionList
+    [Tooltip("始め項")] [SerializeField] int start; public int Start {get => start;}
+    [Tooltip("共差")]   [SerializeField] int commonDiffrence; public int CommonDiffrence {get => commonDiffrence;}
+    [Tooltip("増加量")] [SerializeField] float gradualUpValue; public float GradualUpValue {get => gradualUpValue;}
+    public UpgradePriceCalcSetting(int start, int commonDifference, float gradualUpValue){
+        this.start = start;
+        this.commonDiffrence = commonDifference;
+        this.gradualUpValue = gradualUpValue;
     }
 }
 
@@ -79,6 +91,15 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("UNIQUE般等級")] public int UNIQUE_PRICE;
     [Tooltip("LEGEND等級")] public int LEGEND_PRICE;
     [Tooltip("GOD等級")] public int GOD_PRICE;
+
+    [Header("UPGRADE PRICE")][Header("__________________________")]
+    [Tooltip("ダメージ")] public UpgradePriceCalcSetting UPGRADE_DMG;
+    [Tooltip("ボール速度")] public UpgradePriceCalcSetting UPGRADE_BALLSPD;
+    [Tooltip("ボースダメージ")] public UpgradePriceCalcSetting UPGRADE_BOSSDMG;
+    [Tooltip("コインぼなーす")] public UpgradePriceCalcSetting UPGRADE_COINBONUS;
+    [Tooltip("クリティカル")] public UpgradePriceCalcSetting UPGRADE_CRIT;
+    [Tooltip("クリティカルダメージ")] public UpgradePriceCalcSetting UPGRADE_CRITDMG;
+    [Tooltip("ディフェンス")] public UpgradePriceCalcSetting UPGRADE_DEFENCE;
 
     [Header("GAMEOVER")][Header("__________________________")]
     [Tooltip("ステージ当たりコイン手当")] public int GAMEOVER_STAGE_PER_COIN = 100;

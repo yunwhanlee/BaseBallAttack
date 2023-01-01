@@ -332,7 +332,9 @@ public class BossBlock : Block_Prefab{
         Instantiate(obstacleStonePf, obstaclePosList[i], Quaternion.identity, gm.obstacleGroup);
     }
     public void eraseObstacle(){
-        if(gm.obstacleGroup.childCount <= 0) return; 
+        if(gm == null) return; //* (BUG-24) BossBlock::eraseObstacle()がゲームオーバーになっても反応して、NULLになるBUG対応。
+        if(gm.obstacleGroup.childCount <= 0) return;
+
         for(int i=0; i<gm.obstacleGroup.childCount; i++){
             // Debug.Log($"eraseObstacle():: obstacleGroup.GetChild({i})= {gm.obstacleGroup.GetChild(i)}");
             var childTf = gm.obstacleGroup.GetChild(i);

@@ -516,23 +516,90 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         var sprite = btns[CurIdx].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
         Debug.Log($"<color=yellow>onClickItemPanel()</color>:: CurIdx= {CurIdx}, ins.name= {ins.name}, sprite= {sprite.name}");
     }
+        public ItemInfo getCurItem(){
+        var contents = getItemArr();
+        int lastIdx = contents.Length - 1;
+        //* (BUG) スクロールアイテムを最後を超えると、Out of Indexエラー発生。Clampで最大値LastIndexに固定。
+        return contents[Mathf.Clamp(CurIdx, 0, lastIdx)];
+    }
 
+    static public List<int> setUpgradePriceCalc(UpgradeDt upgradeDt){
+        List<int> priceList = null;
+            switch(DM.ins.convertUpgradeStr2Enum(upgradeDt.name)){
+                case DM.UPGRADE.Dmg:
+                    priceList = Util._.calcArithmeticProgressionList(
+                        start: LM._.UPGRADE_DMG.Start, 
+                        upgradeDt.MaxLv, 
+                        d: LM._.UPGRADE_DMG.CommonDiffrence, 
+                        gradualUpValue: LM._.UPGRADE_DMG.GradualUpValue);
+                    break;
+                case DM.UPGRADE.BallSpeed:
+                    priceList = Util._.calcArithmeticProgressionList(
+                        start: LM._.UPGRADE_BALLSPD.Start, 
+                        upgradeDt.MaxLv, 
+                        d: LM._.UPGRADE_BALLSPD.CommonDiffrence, 
+                        gradualUpValue: LM._.UPGRADE_BALLSPD.GradualUpValue);
+                    break;
+                case DM.UPGRADE.BossDamage:
+                    priceList = Util._.calcArithmeticProgressionList(
+                        start: LM._.UPGRADE_BOSSDMG.Start, 
+                        upgradeDt.MaxLv, 
+                        d: LM._.UPGRADE_BOSSDMG.CommonDiffrence, 
+                        gradualUpValue: LM._.UPGRADE_BOSSDMG.GradualUpValue);
+                    break;
+                case DM.UPGRADE.CoinBonus:
+                    priceList = Util._.calcArithmeticProgressionList(
+                        start: LM._.UPGRADE_COINBONUS.Start, 
+                        upgradeDt.MaxLv, 
+                        d: LM._.UPGRADE_COINBONUS.CommonDiffrence, 
+                        gradualUpValue: LM._.UPGRADE_COINBONUS.GradualUpValue);
+                    break;
+                case DM.UPGRADE.Critical:
+                    priceList = Util._.calcArithmeticProgressionList(
+                        start: LM._.UPGRADE_CRIT.Start, 
+                        upgradeDt.MaxLv, 
+                        d: LM._.UPGRADE_CRIT.CommonDiffrence, 
+                        gradualUpValue: LM._.UPGRADE_CRIT.GradualUpValue);
+                    break;
+                case DM.UPGRADE.CriticalDamage:
+                    priceList = Util._.calcArithmeticProgressionList(
+                        start: LM._.UPGRADE_CRITDMG.Start, 
+                        upgradeDt.MaxLv, 
+                        d: LM._.UPGRADE_CRITDMG.CommonDiffrence, 
+                        gradualUpValue: LM._.UPGRADE_CRITDMG.GradualUpValue);
+                    break;
+                case DM.UPGRADE.Defence:
+                    priceList = Util._.calcArithmeticProgressionList(
+                        start: LM._.UPGRADE_DEFENCE.Start, 
+                        upgradeDt.MaxLv, 
+                        d: LM._.UPGRADE_DEFENCE.CommonDiffrence, 
+                        gradualUpValue: LM._.UPGRADE_DEFENCE.GradualUpValue);
+                    break;
+            }
+            return priceList;
+    }
     //* ----------------------------------------------------------------
     //* Private Function
     //* ----------------------------------------------------------------
     private int purchaseItem(int goods, ItemInfo curItem, int befIdx){
-        Debug.Log($"<color=yellow>ScrollViewEvent::purchaseItem():: goodsType= {curItem.price.Type}, goods= {goods}, type= {DM.ins.SelectItemType}, CurIdx= {CurIdx}</color>");
+        Debug.Log($"<color=yellow>ScrollViewEvent::purchaseItem():: curItem= {curItem.name}, CurIdx= {CurIdx}</color>");
         Price.TP goodsType = curItem.price.Type;
         int price = curItem.price.getValue();
         if(goods >= price){
             if(DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
                 UpgradeDt upgradeDt = DM.ins.personalData.Upgrade.Arr[CurIdx];
+                Debug.Log("purchaseItem:: upgradeDt.name= " + upgradeDt.name);
                 if(upgradeDt.Lv < upgradeDt.MaxLv){
                     goods -= price;
+
+                    //* Set Lv
                     upgradeDt.setLvUp();
-                    curItem.setUpgradeGUI(upgradeDt);
-                    List<int> priceList = Util._.calcArithmeticProgressionList(start: 100, upgradeDt.MaxLv, d: 100, gradualUpValue: 0.1f);
+                    curItem.setLvUI(upgradeDt);
+
+                    //* Set Price
+                    List<int> priceList = setUpgradePriceCalc(upgradeDt);
                     curItem.price.setValue(priceList[upgradeDt.Lv]);
+
                     em.createUpgradeItemEF(curItem.UpgradeValueTxt.transform);
                 }
             }
@@ -588,12 +655,6 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             Util._.displayNoticeMsgDialog(LANG.getTxt(LANG.TXT.MsgNoMoney.ToString()));
         }
         return goods;
-    }
-    public ItemInfo getCurItem(){
-        var contents = getItemArr();
-        int lastIdx = contents.Length - 1;
-        //* (BUG) スクロールアイテムを最後を超えると、Out of Indexエラー発生。Clampで最大値LastIndexに固定。
-        return contents[Mathf.Clamp(CurIdx, 0, lastIdx)];
     }
     private ItemInfo[] getItemArr(){
         var contentTf = (DM.ins.SelectItemType == DM.PANEL.Chara.ToString())? DM.ins.scrollviews[(int)DM.PANEL.Chara].ContentTf

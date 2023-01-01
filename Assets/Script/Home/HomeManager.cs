@@ -152,7 +152,7 @@ public class HomeManager : MonoBehaviour
             int i=0;
             const int OFFSET = 100;
             List<int> hpList = Util._.calcArithmeticProgressionList(start: OFFSET, max: 99, d: OFFSET, gradualUpValue: 0.01f);
-            hpList.ForEach(hp => Debug.Log($"Math:: blockHpList[{i}]= " + hpList[i++] / OFFSET));
+            // hpList.ForEach(hp => Debug.Log($"Math:: blockHpList[{i}]= " + hpList[i++] / OFFSET));
         }
 
         onClickBtnGoToPanel(DM.SCENE.Home.ToString());
@@ -189,7 +189,6 @@ public class HomeManager : MonoBehaviour
             DM.ins.personalData.Lang == LANG.TP.EN? CountryIconSprArr[(int)LANG.TP.EN]
             : DM.ins.personalData.Lang == LANG.TP.JP? CountryIconSprArr[(int)LANG.TP.JP]
             : CountryIconSprArr[(int)LANG.TP.KR];
-
     }
 
     void Update(){
@@ -654,7 +653,7 @@ public class HomeManager : MonoBehaviour
         }
 
         string coolTimeStr = coolTime.Minutes.ToString("00") + ":" + coolTime.Seconds.ToString("00");
-        Debug.Log("coolTime= " + coolTime.Ticks + ", coolTimeStr= " + coolTimeStr);
+        // Debug.Log("coolTime= " + coolTime.Ticks + ", coolTimeStr= " + coolTimeStr);
 
         return coolTimeStr;
     }

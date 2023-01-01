@@ -107,13 +107,18 @@ public class DM : MonoBehaviour
         ItemInfo[] upgrades = scrollviews[(int)DM.PANEL.Upgrade].ContentTf.GetComponentsInChildren<ItemInfo>();
 
         personalData = new PersonalData(); //* DataBase
-        personalData.load(ref charas, ref bats, ref skills); //TODO Add skills
+        personalData.load(ref charas, ref bats, ref skills);
 
         //* Init DMデータ ロード。
         for(int i=0; i<upgrades.Length; i++){
             UpgradeDt upgradeDt = personalData.Upgrade.Arr[i];
-            upgrades[i].setUpgradeGUI(upgradeDt);
-            List<int> priceList = Util._.calcArithmeticProgressionList(start: 100, upgradeDt.MaxLv, d: 100, gradualUpValue: 0.1f);
+            upgrades[i].setLvUI(upgradeDt);
+            
+            // List<int> priceList = Util._.calcArithmeticProgressionList(start: 100, upgradeDt.MaxLv, d: 100, gradualUpValue: 0.1f);
+            // upgrades[i].price.setValue(priceList[upgradeDt.Lv]);
+
+            //* Set Price
+            List<int> priceList = ScrollViewEvent.setUpgradePriceCalc(upgradeDt);
             upgrades[i].price.setValue(priceList[upgradeDt.Lv]);
         }
 
@@ -299,5 +304,16 @@ public class DM : MonoBehaviour
             :(name == DM.ATV.ColorBall.ToString())? DM.ATV.ColorBall
             :(name == DM.ATV.PoisonSmoke.ToString())? DM.ATV.PoisonSmoke
             :DM.ATV.IceWave;
+    }
+
+    public UPGRADE convertUpgradeStr2Enum(string name){
+        return (name == UPGRADE.Dmg.ToString())? DM.UPGRADE.Dmg
+            :(name == UPGRADE.BallSpeed.ToString())? DM.UPGRADE.BallSpeed
+            :(name == UPGRADE.BossDamage.ToString())? DM.UPGRADE.BossDamage
+            :(name == UPGRADE.CoinBonus.ToString())? DM.UPGRADE.CoinBonus
+            :(name == UPGRADE.Critical.ToString())? DM.UPGRADE.Critical
+            :(name == UPGRADE.CriticalDamage.ToString())? DM.UPGRADE.CriticalDamage
+            :(name == UPGRADE.Defence.ToString())? DM.UPGRADE.Defence
+            : UPGRADE.NULL;
     }
 }

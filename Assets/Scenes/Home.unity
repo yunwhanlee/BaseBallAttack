@@ -1443,8 +1443,8 @@ MonoBehaviour:
     itemPrefs:
     - {fileID: 8833436972310910226, guid: a3355c9d5e3793048b22ef5c20ae8ea4, type: 3}
     - {fileID: 8833436972310910226, guid: 2335b29b55bf2184886bd7801774dafc, type: 3}
-    - {fileID: 8833436972310910226, guid: 835a2b0581985de4b9cd917c162476a8, type: 3}
     - {fileID: 8833436972310910226, guid: ace00466a895aff488d7c8ffb3c32896, type: 3}
+    - {fileID: 8833436972310910226, guid: 835a2b0581985de4b9cd917c162476a8, type: 3}
     - {fileID: 8833436972310910226, guid: be59d475f598c77469c8dc9d7c40f074, type: 3}
     - {fileID: 8833436972310910226, guid: c834882c8583d074e8b5a54034f67b1e, type: 3}
     - {fileID: 8833436972310910226, guid: 9f0a3baf7c09d9b4c80fd89848143d0f, type: 3}
@@ -1535,14 +1535,14 @@ MonoBehaviour:
         lv: 0
         maxLv: 0
         unit: 0.25
-      - name: CriticalDamage
-        lv: 0
-        maxLv: 0
-        unit: 0.02
       - name: Critical
         lv: 0
         maxLv: 0
         unit: 0.25
+      - name: CriticalDamage
+        lv: 0
+        maxLv: 0
+        unit: 0.02
       - name: BossDamage
         lv: 0
         maxLv: 0
@@ -5767,6 +5767,34 @@ MonoBehaviour:
   UNIQUE_PRICE: 12000
   LEGEND_PRICE: 40000
   GOD_PRICE: 95000
+  UPGRADE_DMG:
+    start: 100
+    commonDiffrence: 100
+    gradualUpValue: 0.1
+  UPGRADE_BALLSPD:
+    start: 100
+    commonDiffrence: 100
+    gradualUpValue: 0.1
+  UPGRADE_BOSSDMG:
+    start: 150
+    commonDiffrence: 150
+    gradualUpValue: 0.1
+  UPGRADE_COINBONUS:
+    start: 200
+    commonDiffrence: 200
+    gradualUpValue: 0.1
+  UPGRADE_CRIT:
+    start: 200
+    commonDiffrence: 200
+    gradualUpValue: 0.1
+  UPGRADE_CRITDMG:
+    start: 150
+    commonDiffrence: 150
+    gradualUpValue: 0.1
+  UPGRADE_DEFENCE:
+    start: 200
+    commonDiffrence: 200
+    gradualUpValue: 0.1
   GAMEOVER_STAGE_PER_COIN: 100
   REROTATE_SKILLSLOTS_PRICE_COIN: 200
   REVIVE_PRICE_DIAMOND: 50
