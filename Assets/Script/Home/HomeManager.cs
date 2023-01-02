@@ -614,6 +614,7 @@ public class HomeManager : MonoBehaviour
         checkBtn.gameObject.SetActive(true);
         checkMarkImg.gameObject.SetActive(true);
         priceTxt.gameObject.SetActive(false);
+        priceTypeIconImg.gameObject.SetActive(false);
 
         setActiveDialogGUI(DM.ins.SelectItemType);
         switch(DM.ins.SelectItemType){

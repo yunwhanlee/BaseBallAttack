@@ -345,7 +345,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         //* CashShop & Upgrade Panel
         if(DM.ins.SelectItemType == DM.PANEL.CashShop.ToString()){
             setPriceUI(curItem.price.getValue().ToString());
-            
+
             //* 一回限り商品
             if(curItem.name.Contains(DM.NAME.RemoveAD.ToString()) && curItem.IsLock){
                 hm.checkBtn.interactable = false;
@@ -366,12 +366,14 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         }else{//* ✅表示
             hm.checkMarkImg.gameObject.SetActive(true);
             hm.priceTxt.gameObject.SetActive(false);
+            hm.priceTypeIconImg.gameObject.SetActive(false);
         }
     }
     private void setPriceUI(string price){
         hm.checkBtn.interactable = true;
         hm.checkMarkImg.gameObject.SetActive(false);
         hm.priceTxt.gameObject.SetActive(true);
+        hm.priceTypeIconImg.gameObject.SetActive(true);
         hm.priceTxt.text = price; //curItem.price.getValue().ToString();
     }
 
@@ -387,6 +389,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             case (int)DM.PANEL.CashShop: 
                 hm.checkMarkImg.gameObject.SetActive(true);
                 hm.priceTxt.gameObject.SetActive(false);
+                hm.priceTypeIconImg.gameObject.SetActive(false);
                 break;
         }
     }
