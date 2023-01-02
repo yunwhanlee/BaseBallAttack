@@ -63,7 +63,7 @@ public class Util : MonoBehaviour
         }            
         noticeMessagePref.GetComponentInChildren<Text>().text = msg;
         var ins = Instantiate(noticeMessagePref, mainPanelTf.transform.position, Quaternion.identity, mainPanelTf);
-        ins.GetComponent<RectTransform>().localPosition = new Vector3(0,-900,-400);
+        ins.GetComponent<RectTransform>().localPosition = new Vector3(0,-900,-900); //* (BUG-25) Util::displayNoticeMsgDialog() z軸もっと前に調整。Sub-Canvas設定して、PlayerとBatモデルの場合も手前に対応。
         Destroy(ins.gameObject, noticeMsgDisplayCnt);
     }
     //* 等比数列

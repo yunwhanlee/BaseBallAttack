@@ -5740,8 +5740,8 @@ MonoBehaviour:
   - dist: 1.5
     power: 75
   HOMERUN_MIN_POWER: 0
-  BOSS_STAGE_SPAN: 2
-  BOSS_LIMIT_SPAN: 3
+  BOSS_STAGE_SPAN: 20
+  BOSS_LIMIT_SPAN: 15
   LONG_BLOCK_SPAN: 7
   ICE_FREEZE_DURATION: 1
   FIRE_DOT_DMG_DURATION: 2
@@ -13041,7 +13041,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 127.5, y: -69}
+  m_AnchoredPosition: {x: 128.6875, y: -69}
   m_SizeDelta: {x: 70, y: 69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1061087634
@@ -28280,7 +28280,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 249.5, y: -69}
-  m_SizeDelta: {x: 134, y: 70}
+  m_SizeDelta: {x: 131.625, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2116128884
 MonoBehaviour:
