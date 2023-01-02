@@ -156,13 +156,15 @@ public class DM : MonoBehaviour
         }
     }
 #endif
-    public void setUIRemoveAD(){
-        //* (BUG-27) DM::setUIRemoveAD:: IsRemoveを購入したら、CashShopにある目録も"購入完了"にする。
+    public void setUIRemoveAD(){ //* (BUG-27) DM::setUIRemoveAD:: IsRemoveを購入したら、CashShopにある目録も"購入完了"にする。
         if(personalData.IsRemoveAD){
             var cashCtt = scrollviews[(int)DM.PANEL.CashShop].ContentTf;
             for(int i=0; i<cashCtt.childCount; i++){
                 Debug.Log($"DM::Start()::cashCtt.Getchild({i})= " + cashCtt.GetChild(i).name);
                 if(cashCtt.GetChild(i).name.Contains(DM.NAME.RemoveAD.ToString())){
+                    //* IsLock
+                    cashCtt.GetChild(i).GetComponent<ItemInfo>().IsLock = true;
+                    //* PurchasedPanel
                     cashCtt.GetChild(i).Find(DM.NAME.PurchasedPanel.ToString()).gameObject.SetActive(true);
                 }
             }

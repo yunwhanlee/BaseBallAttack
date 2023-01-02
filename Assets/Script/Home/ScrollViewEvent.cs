@@ -345,6 +345,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         //* CashShop & Upgrade Panel
         if(DM.ins.SelectItemType == DM.PANEL.CashShop.ToString()){
             setPriceUI(curItem.price.getValue().ToString());
+            
             //* 一回限り商品
             if(curItem.name.Contains(DM.NAME.RemoveAD.ToString()) && curItem.IsLock){
                 hm.checkBtn.interactable = false;
