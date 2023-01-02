@@ -8,19 +8,26 @@ public class HomeEffectManager : MonoBehaviour
 {
     //* Outside
     public HomeManager hm;
+    public Transform mainCanvasTf; 
 
     void Start() {
         hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
+        mainCanvasTf = GameObject.Find("MainCanvas").transform;
     }
 
     public GameObject itemBuyEF;
     public GameObject congratuBlastRainbowEF;
     public GameObject upgradeItemEF;
 
-    public void createItemBuyEF(GameObject SkillImgObj, string type){
-        var ins = Instantiate(itemBuyEF, itemBuyEF.transform.position, Quaternion.identity) as GameObject;
+    public void createItemBuyEF(ScrollViewEvent scrollView, GameObject SkillImgObj, string type){
+        //* (BUG-26) HomeEFManager::createItemBuyEF:: parent -> MainCanvasにして、後ろのGUIボタンが押されるバグを対応。
+        var ins = Instantiate(itemBuyEF, mainCanvasTf);
+
+        //* Title Lang
         Text title = Array.Find(ins.GetComponentsInChildren<Text>(), (txtObj) => txtObj.name == "TitleTxt");
         title.text = LANG.getTxt(LANG.TXT.Purchase_Complete.ToString());
+
+        Debug.Log("!!!! scrollView.name -> " + scrollView.name);
         
         //* (BUG-7) ItemBuyEF-UIがスキルの場合は、似合わないこと対応：該当なスキルイメージ生成、メダルの真ん中に位置調整。
         if(type == DM.PANEL.Skill.ToString()){

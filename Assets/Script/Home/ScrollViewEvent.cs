@@ -188,6 +188,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public HomeEffectManager em;
     public ScrollRect scrollRect;
     public HomeManager hm;
+    public Transform mainCanvasTf;
 
     // float rectWidth;
     [SerializeField] float curIdxBasePosX;    public float CurIdxBasePosX {get => curIdxBasePosX; set => curIdxBasePosX = value;}
@@ -209,6 +210,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     void Start(){
         scrollRect = GetComponent<ScrollRect>();
         hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
+        mainCanvasTf = GameObject.Find("MainCanvas").transform;
         
         if(this.gameObject.name != $"ScrollView_{DM.PANEL.Skill.ToString()}" 
             && this.gameObject.name != $"ScrollView_{DM.PANEL.CashShop.ToString()}"
@@ -636,7 +638,8 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 // Debug.Log("purchaseItem:: curItem.transform.GetChild(0)=" + curItem.transform.GetChild(0).name);
                 goods -= price;
                 GameObject SkillImgObj = curItem.transform.GetChild(0).gameObject; //* (BUG-8) Home:: Bat.getChild(0).getChild(0)-> Null ---> getChild(0)が正しい。
-                em.createItemBuyEF(SkillImgObj, DM.ins.SelectItemType);
+                em.createItemBuyEF(this, SkillImgObj, DM.ins.SelectItemType);
+                em.createCongratuBlastRainbowEF(mainCanvasTf);
                 curItem.IsLock = false; //* 解禁
                 curItem.checkLockedModel();
                 DM.ins.personalData.setUnLockCurList(CurIdx);
