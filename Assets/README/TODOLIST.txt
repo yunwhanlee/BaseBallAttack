@@ -317,6 +317,7 @@
     ✓ (BUG-24) BossBlock::eraseObstacle()がゲームオーバーになっても反応して、NULLになるBUG対応。
     ✓ (BUG-25) Util::displayNoticeMsgDialog() z軸もっと前に調整。Sub-Canvas設定して、PlayerとBatモデルの場合も手前に対応。
     ✓ (BUG-26) HomeEFManager::createItemBuyEF:: parent -> MainCanvasにして、後ろのGUIボタンが押されるバグを対応。
+    ✓ (BUG-27) DM::setUIRemoveAD:: IsRemoveを購入したら、CashShopにある目録も"購入完了"にする。
     
 
     

@@ -86,7 +86,7 @@ public class ItemInfo : MonoBehaviour
         }
         else if(this.name.Contains(DM.PANEL.CashShop.ToString())){
             if(isLock){
-                this.transform.Find("IsBuyedPanel").gameObject.SetActive(true);
+                this.transform.Find(DM.NAME.PurchasedPanel.ToString()).gameObject.SetActive(true);
             }
         }
     }

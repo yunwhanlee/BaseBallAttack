@@ -622,15 +622,12 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                         DM.ins.personalData.Diamond += reward;
                     }
                 }
-                else if(itemName.Contains("RemoveAD")) {
-                    
+                else if(itemName.Contains(DM.NAME.RemoveAD.ToString())) {
                     bool success = DM.ins.reqAppPayment();
                     if(success){
                         hm.displayShowRewardPanel(coin: 0, diamond: 0, rouletteTicket: 0, removeAD: true);
-                        
-                        curItem.transform.Find("IsBuyedPanel").gameObject.SetActive(true);
-                        
                         DM.ins.personalData.IsRemoveAD = true;
+                        DM.ins.setUIRemoveAD();
                     }
                 }
             }

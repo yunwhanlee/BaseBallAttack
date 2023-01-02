@@ -559,7 +559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.5578034, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.38469362, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -567,7 +567,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: abc60a2946f48a34185d008594c7095b, type: 3}
+    m_Font: {fileID: 12800000, guid: 2f3703b68435c41aab3bb9d087ca0c59, type: 3}
     m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 1
@@ -579,7 +579,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: BUYED
+  m_Text: Purchased
 --- !u!114 &3811945637126061292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -627,7 +627,7 @@ RectTransform:
   m_Children:
   - {fileID: 3811945636499380024}
   m_Father: {fileID: 3811945637619119270}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -720,8 +720,8 @@ RectTransform:
   m_Children:
   - {fileID: 3811945636958808303}
   - {fileID: 3811945636327910744}
-  - {fileID: 3811945637865038422}
   - {fileID: 3811945637435844691}
+  - {fileID: 3811945637865038422}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -765,7 +765,7 @@ MonoBehaviour:
   price:
     type: 2
     val: 1
-  isLock: 1
+  isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 3811945637865038421}
   modelMeshRdrList: []
@@ -878,7 +878,7 @@ GameObject:
   - component: {fileID: 3811945637865038416}
   - component: {fileID: 3811945637865038423}
   m_Layer: 5
-  m_Name: IsBuyedPanel
+  m_Name: PurchasedPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -897,7 +897,7 @@ RectTransform:
   m_Children:
   - {fileID: 3811945637126061267}
   m_Father: {fileID: 3811945637619119270}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -925,7 +925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3254717, g: 1, b: 0.9437242, a: 0.5529412}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.5529412}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

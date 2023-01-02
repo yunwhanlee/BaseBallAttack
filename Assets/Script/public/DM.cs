@@ -22,7 +22,7 @@ public class DM : MonoBehaviour
         LevelUp, PsvSkillTicket,
         TitleTxt, ContentTxt,
         //* 一回限り商品
-        RemoveAD, 
+        RemoveAD, PurchasedPanel,
     };
     public enum TAG {HitRangeArea, StrikeLine, GameOverLine, Wall, ActiveDownWall, Player,
         NormalBlock, LongBlock, TreasureChestBlock, HealBlock, BossBlock,   
@@ -128,6 +128,8 @@ public class DM : MonoBehaviour
         scrollviews[(int)DM.PANEL.PsvInfo].setLanguage();
         scrollviews[(int)DM.PANEL.Upgrade].setLanguage();
 
+        setUIRemoveAD();
+
         //* ERROR CHECK
         LANG.checkErrorLangListCounting();
     }
@@ -154,12 +156,23 @@ public class DM : MonoBehaviour
         }
     }
 #endif
+    public void setUIRemoveAD(){
+        //* (BUG-27) DM::setUIRemoveAD:: IsRemoveを購入したら、CashShopにある目録も"購入完了"にする。
+        if(personalData.IsRemoveAD){
+            var cashCtt = scrollviews[(int)DM.PANEL.CashShop].ContentTf;
+            for(int i=0; i<cashCtt.childCount; i++){
+                Debug.Log($"DM::Start()::cashCtt.Getchild({i})= " + cashCtt.GetChild(i).name);
+                if(cashCtt.GetChild(i).name.Contains(DM.NAME.RemoveAD.ToString())){
+                    cashCtt.GetChild(i).Find(DM.NAME.PurchasedPanel.ToString()).gameObject.SetActive(true);
+                }
+            }
+        }
+    }
 
     public TutorialPanel displayTutorialUI(){
         Transform canvas = GameObject.Find(DM.NAME.MainCanvas.ToString()).GetComponent<RectTransform>();
         TutorialPanel tuto = Instantiate(tutorialPanel, canvas, false);
         return tuto;
-        
     }
 
     public bool reqShowAD(){//string type, GameManager gm){

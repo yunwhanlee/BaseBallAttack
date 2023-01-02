@@ -159,6 +159,7 @@ public class HomeManager : MonoBehaviour
         setSelectSkillImg(true);
 
         setStageSelectUIList();
+
         Debug.Log("LanguageOptDropDown.value= " + LanguageOptDropDown.value);
         Debug.Log("DM.ins.personalData.Lang= " + (int)DM.ins.personalData.Lang);
         LanguageOptDropDown.value = (int)DM.ins.personalData.Lang; //* Loadデータで初期化
@@ -484,6 +485,7 @@ public class HomeManager : MonoBehaviour
             DM.ins.personalData.IsRemoveAD = true;
 
             // UI
+            DM.ins.setUIRemoveAD();
             checkPremiumPackPurchaseStatus();
 
             displayShowRewardPanel(
@@ -492,6 +494,8 @@ public class HomeManager : MonoBehaviour
                 rouletteTicket: LM._.PREM_PACK_ROULETTE_TICKET,
                 removeAD: true
             );
+
+            
             
         }else{
             //TODO 失敗した DIALOG表示。
