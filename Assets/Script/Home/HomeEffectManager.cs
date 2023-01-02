@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 public class HomeEffectManager : MonoBehaviour
@@ -18,6 +19,8 @@ public class HomeEffectManager : MonoBehaviour
 
     public void createItemBuyEF(GameObject SkillImgObj, string type){
         var ins = Instantiate(itemBuyEF, itemBuyEF.transform.position, Quaternion.identity) as GameObject;
+        Text title = Array.Find(ins.GetComponentsInChildren<Text>(), (txtObj) => txtObj.name == "TitleTxt");
+        title.text = LANG.getTxt(LANG.TXT.Purchase_Complete.ToString());
         
         //* (BUG-7) ItemBuyEF-UIがスキルの場合は、似合わないこと対応：該当なスキルイメージ生成、メダルの真ん中に位置調整。
         if(type == DM.PANEL.Skill.ToString()){

@@ -537,7 +537,7 @@ GameObject:
   - component: {fileID: 1285594212651572995}
   - component: {fileID: 5739360342501711049}
   m_Layer: 0
-  m_Name: Text
+  m_Name: TitleTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -594,7 +594,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 80
     m_FontStyle: 1
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 5
     m_MaxSize: 80
     m_Alignment: 4
@@ -603,7 +603,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Success Buy
+  m_Text: Purchase_Complete
 --- !u!1 &5931878228975176379
 GameObject:
   m_ObjectHideFlags: 0

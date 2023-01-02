@@ -30,6 +30,7 @@ public static class LANG //* LANG
         Reward, GetRewardChestPanel_Content, Empty, PsvSkillTicket, RouletteTicket, RouletteSpin,
         FirstSkill, SecondSkill, PsvSkillInfo, Upgrade, CashShop, 
         PremiumPack, Coin, Diamond, RemoveAllADs,
+        Purchase_Complete,
         //* PSV
         Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, 
         ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, 
@@ -312,6 +313,8 @@ public static class LANG //* LANG
     public static string[] RemoveAllADs = new string[]{"Remove All ADs", "全ての広告無し", "광고제거"};
     public static string[] Rate = new string[]{"Rate", "評価", "평가"};
     public static string[] Later = new string[]{"Later", "後で", "나중에"};
+    public static string[] Purchase_Complete = new string[]{"Purchase_Complete", "購入成功", "구매성공"};
+    
 
 
     //* PSV
@@ -482,6 +485,7 @@ public static class LANG //* LANG
         if(name == TXT.RemoveAllADs.ToString()) res = RemoveAllADs[CUR_LANG];
         if(name == TXT.Later.ToString()) res = Later[CUR_LANG];
         if(name == TXT.Rate.ToString()) res = Rate[CUR_LANG];
+        if(name == TXT.Purchase_Complete.ToString()) res = Purchase_Complete[CUR_LANG];
 
         //* PSV
         if(name == TXT.Dmg.ToString()) res = Dmg[CUR_LANG];
