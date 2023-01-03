@@ -18,6 +18,8 @@ public class PersonalData {
     [SerializeField] string rouletteTicketCoolTime; public string RouletteTicketCoolTime {get => rouletteTicketCoolTime; set => rouletteTicketCoolTime = value;}
 
     [Header("ONE TIME TRIGGER")][Header("__________________________")]
+    [SerializeField] bool isHardmodeOn; public bool IsHardmodeOn {get => isHardmodeOn; set => isHardmodeOn = value;}
+    [SerializeField] bool isHardmodeEnableNotice; public bool IsHardmodeEnableNotice {get => isHardmodeEnableNotice; set => isHardmodeEnableNotice = value;}
     [SerializeField] bool isRemoveAD; public bool IsRemoveAD {get => isRemoveAD; set => isRemoveAD = value;}
     [SerializeField] bool isSkipTutorial; public bool IsSkipTutorial {get => isSkipTutorial; set => isSkipTutorial = value;}
     [SerializeField] bool isPurchasePremiumPack; public bool IsPurchasePremiumPack {get => isPurchasePremiumPack; set => isPurchasePremiumPack = value;}
@@ -81,6 +83,8 @@ public class PersonalData {
         this.rouletteTicket = data.RouletteTicket;
         this.rouletteTicketCoolTime = (data.RouletteTicketCoolTime != null)? data.RouletteTicketCoolTime : DateTime.Now.ToString();
 
+        this.isHardmodeOn = data.IsHardmodeOn;
+        this.isHardmodeEnableNotice = data.IsHardmodeEnableNotice;
         this.isRemoveAD = data.IsRemoveAD;
         this.isSkipTutorial = data.IsSkipTutorial;
         this.isPurchasePremiumPack = data.IsPurchasePremiumPack;
@@ -136,6 +140,8 @@ public class PersonalData {
         this.rouletteTicket = 1; //* 1つ上げるのは、ボーナス感じ。
         this.RouletteTicketCoolTime = DateTime.Now.ToString();
 
+        this.isHardmodeOn = false;
+        this.isHardmodeEnableNotice = false;
         this.isRemoveAD = false;
         this.isSkipTutorial = false;
         this.isPurchasePremiumPack = false;

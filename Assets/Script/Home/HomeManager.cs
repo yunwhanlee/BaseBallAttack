@@ -127,6 +127,8 @@ public class HomeManager : MonoBehaviour
     public FrameUI settingDialog;
     public Image settingDialogCountryIconImg;
     public Sprite[] CountryIconSprArr;
+    //*
+    public RectTransform HardModeEnableNoticeDialog;
 
     [Header("BUY OR CHECK BTN")][Header("__________________________")]
     public Button checkBtn;
@@ -154,8 +156,8 @@ public class HomeManager : MonoBehaviour
 
         onClickBtnGoToPanel(DM.SCENE.Home.ToString());
         setSelectSkillImg(true);
-
         setStageSelectUIList();
+        checkPremiumPackPurchaseStatus();
 
         Debug.Log("LanguageOptDropDown.value= " + LanguageOptDropDown.value);
         Debug.Log("DM.ins.personalData.Lang= " + (int)DM.ins.personalData.Lang);
@@ -168,8 +170,6 @@ public class HomeManager : MonoBehaviour
         adDialogContentTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRouletteTicket_Content.ToString());
 
         selectedSkillBtnIdxTxt.text = LANG.getTxt(LANG.TXT.FirstSkill.ToString());
-
-        checkPremiumPackPurchaseStatus();
 
         //* display Rate Dialog with playTime
         if(DM.ins.personalData.PlayTime == LM._.DISPLAY_RATE_DIALOG_PLAYTIME){
@@ -187,6 +187,12 @@ public class HomeManager : MonoBehaviour
             DM.ins.personalData.Lang == LANG.TP.EN? CountryIconSprArr[(int)LANG.TP.EN]
             : DM.ins.personalData.Lang == LANG.TP.JP? CountryIconSprArr[(int)LANG.TP.JP]
             : CountryIconSprArr[(int)LANG.TP.KR];
+
+        //* HardMode Enable Notice Dialog (Only OneTime)
+        if(DM.ins.personalData.IsHardmodeOn && !DM.ins.personalData.IsHardmodeEnableNotice){
+            DM.ins.personalData.IsHardmodeEnableNotice = true;
+            HardModeEnableNoticeDialog.gameObject.SetActive(true);
+        }
     }
 
     void Update(){
@@ -533,18 +539,25 @@ public class HomeManager : MonoBehaviour
     }
 
     private void setStageSelectUIList(){
+        const int HARD_MODE = 1; // NORMAL_MODE = 0
+        //* Check HardMode
+        if(DM.ins.personalData.IsHardmodeOn)
+            stageSelects[HARD_MODE].IsLocked = false;
+
         //* Set StageSelectList
         for(int i=0; i<stageSelects.Length; i++){
             //* Set member Value
             stageSelects[i].RectTf = Instantiate(stageSelectObjPf, stageSelectContent, false).GetComponent<RectTransform>();
             stageSelects[i].setUIMember();
 
-            int copy = i; //! (BUG-22) For分内にonClick.AddListener(int i)すると、Indexが全てLast+1になるバグ対応。
             //* AddEventListener('onClick')
+            int copy = i; //! (BUG-22) For分内にonClick.AddListener(int i)すると、Indexが全てLast+1になるバグ対応。
             stageSelects[i].ImgBtn.onClick.AddListener(() => onClickStageSelectImgBtn(copy));
         }
         //* init
         stageSelects[0].ImgBtn.GetComponent<Image>().color = Color.yellow;
+
+
     }
 
     private void setSelectSkillImg(bool isInit = false){

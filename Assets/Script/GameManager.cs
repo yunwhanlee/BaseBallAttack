@@ -738,7 +738,9 @@ public class GameManager : MonoBehaviour
             coin += stage * LM._.GAMEOVER_STAGE_PER_COIN;
             int extraUpgradeCoin = Mathf.RoundToInt(coin * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.CoinBonus].getValue());
             vtrCoinTxt.text = (coin + extraUpgradeCoin).ToString(); // => setGameでも使う。
+
             DM.ins.personalData.PlayTime++;//* Rate Dialogを表示するため
+            DM.ins.personalData.IsHardmodeOn = true;
             return;
         }
 
