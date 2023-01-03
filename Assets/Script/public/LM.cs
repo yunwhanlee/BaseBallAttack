@@ -104,6 +104,9 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Header("GAMEOVER")][Header("__________________________")]
     [Tooltip("ステージ当たりコイン手当")] public int GAMEOVER_STAGE_PER_COIN = 100;
 
+    [Header("VICTORY")][Header("__________________________")]
+    [Tooltip("勝利ボースカウンター")] public int VICTORY_BOSSKILL_CNT = 4;
+
     [Header("REWARD")][Header("__________________________")]
     [Tooltip("レベルアップスロット、再回転に要するコイン")] public int REROTATE_SKILLSLOTS_PRICE_COIN = 200;
     [Tooltip("復活に要するダイアモンド")] public int REVIVE_PRICE_DIAMOND = 50;

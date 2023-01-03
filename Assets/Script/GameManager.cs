@@ -53,7 +53,6 @@ public class GameManager : MonoBehaviour
     public int comboCnt = 0;
     public int bossLimitCnt = 0;
     public int bossKillCnt = 0; public int BossKillCnt { get => bossKillCnt; set => bossKillCnt = value;}
-    public const int stageClearBossKillCnt = 4;
 
     [Header("TRIGGER")][Header("__________________________")]
     public bool isPlayingAnim;  public bool IsPlayingAnim { get=> isPlayingAnim; set=> isPlayingAnim = value;}
@@ -63,6 +62,7 @@ public class GameManager : MonoBehaviour
     public GameObject levelUpPanel;
     public GameObject pausePanel;
     public GameObject gameoverPanel;
+    public GameObject victoryPanel;
     public RectTransform statusFolderPanel;
     public GameObject getRewardChestPanel;
 
@@ -126,9 +126,14 @@ public class GameManager : MonoBehaviour
     public Text pauseDiamondTxt;
 
     [Header("GAMEOVER")][Header("__________________________")]
-    public Text coinTxt;
-    public Text gvBestScoreTxt;
-    public Text gvStageTxt;
+    [FormerlySerializedAs("gvCoinTxt")]   public Text gvCoinTxt;
+    [FormerlySerializedAs("gvBestScoreTxt")]   public Text gvBestScoreTxt;
+    [FormerlySerializedAs("gvStageTxt")]   public Text gvStageTxt;
+
+    [Header("VICTORY")][Header("__________________________")]
+    [FormerlySerializedAs("vtrCoinTxt")]   public Text vtrCoinTxt;
+    [FormerlySerializedAs("vtrBestScoreTxt")]   public Text vtrBestScoreTxt;
+    [FormerlySerializedAs("vtrStageTxt")]   public Text vtrStageTxt;
 
     [Header("STATUS FOLDER")][Header("__________________________")]
     public Transform statusInfoContents;
@@ -506,7 +511,7 @@ public class GameManager : MonoBehaviour
         bm.Start();
     }
     private void setCoinX2(){
-        coinTxt.text = (int.Parse(coinTxt.text) * 2).ToString();
+        gvCoinTxt.text = (int.Parse(gvCoinTxt.text) * 2).ToString();
         coinX2Btn.gameObject.SetActive(false);
         coinX2Label.gameObject.SetActive(true);
     }
@@ -646,7 +651,7 @@ public class GameManager : MonoBehaviour
         gvStageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage;
         coin += stage * LM._.GAMEOVER_STAGE_PER_COIN;
         int extraUpgradeCoin = Mathf.RoundToInt(coin * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.CoinBonus].getValue());
-        coinTxt.text = (coin + extraUpgradeCoin).ToString(); // => setGameでも使う。
+        gvCoinTxt.text = (coin + extraUpgradeCoin).ToString(); // => setGameでも使う。
         DM.ins.personalData.PlayTime++;//* Rate Dialogを表示するため
     }
 
@@ -668,7 +673,7 @@ public class GameManager : MonoBehaviour
 
                 //* Get Reward Goods
                 int coin = stage * 100;
-                DM.ins.personalData.Coin += int.Parse(coinTxt.text);
+                DM.ins.personalData.Coin += int.Parse(gvCoinTxt.text);
                 
                 
                 resetSkillStatusTable();
@@ -725,8 +730,15 @@ public class GameManager : MonoBehaviour
     public List<DropBox> dropBoxList;
     public void setNextStage() {
         //* Victory
-        if(bossKillCnt == 1){
+        if(bossKillCnt == LM._.VICTORY_BOSSKILL_CNT){
             Debug.Log("<size=22> VICTORY! </size>");
+            victoryPanel.SetActive(true);
+            vtrBestScoreTxt.text = LANG.getTxt(LANG.TXT.BestScore.ToString()) + " : " + bestScore;
+            vtrStageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage;
+            coin += stage * LM._.GAMEOVER_STAGE_PER_COIN;
+            int extraUpgradeCoin = Mathf.RoundToInt(coin * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.CoinBonus].getValue());
+            vtrCoinTxt.text = (coin + extraUpgradeCoin).ToString(); // => setGameでも使う。
+            DM.ins.personalData.PlayTime++;//* Rate Dialogを表示するため
             return;
         }
 

@@ -603,7 +603,7 @@ GameObject:
   - component: {fileID: 21336228}
   - component: {fileID: 21336227}
   m_Layer: 0
-  m_Name: Trumpet
+  m_Name: Trumpet4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19960,7 +19960,7 @@ GameObject:
   - component: {fileID: 1017752962}
   - component: {fileID: 1017752961}
   m_Layer: 0
-  m_Name: Deco_Skull
+  m_Name: Deco_Crown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24143,7 +24143,7 @@ GameObject:
   - component: {fileID: 1197205776}
   - component: {fileID: 1197205775}
   m_Layer: 0
-  m_Name: Trumpet
+  m_Name: Trumpet2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38888,6 +38888,112 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: c2391e8a6bdf5424194b61e41952a40a, type: 3}
   m_PrefabInstance: {fileID: 1530536051}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1536082164
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2041321978}
+    m_Modifications:
+    - target: {fileID: 1271770798639167494, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1271770798657670540, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: m_Name
+      value: CongratuBlastRainbow
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375956190230769654, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375956190230769654, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375956190230769654, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375956190230769654, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375956190230769654, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375956190230769654, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375956190230769654, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375956190230769654, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375956190230769654, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375956190230769654, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375956190230769654, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375956190230769654, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375956190230769654, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375956190230769654, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375956190230769654, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375956190230769654, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375956190230769654, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375956190230769654, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375956190230769654, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375956190230769654, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4375956190230769654, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+--- !u!224 &1536082165 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4375956190230769654, guid: 428afefb1357444448360e0a972c3bfe, type: 3}
+  m_PrefabInstance: {fileID: 1536082164}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1542116612
 GameObject:
   m_ObjectHideFlags: 0
@@ -40363,7 +40469,7 @@ GameObject:
   - component: {fileID: 1593180385}
   - component: {fileID: 1593180384}
   m_Layer: 0
-  m_Name: Trumpet
+  m_Name: Trumpet3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45704,6 +45810,7 @@ MonoBehaviour:
   levelUpPanel: {fileID: 557986893}
   pausePanel: {fileID: 1965303884}
   gameoverPanel: {fileID: 1572075153}
+  victoryPanel: {fileID: 2041321977}
   statusFolderPanel: {fileID: 579425676}
   getRewardChestPanel: {fileID: 1195625194}
   showAdDialog: {fileID: 194144789}
@@ -45807,9 +45914,12 @@ MonoBehaviour:
   skillInfoRowPref: {fileID: 3622790578802042750, guid: ee31cff3369478142bf23697ccda1b04, type: 3}
   pauseCoinTxt: {fileID: 562248575}
   pauseDiamondTxt: {fileID: 1089692633}
-  coinTxt: {fileID: 28610881}
+  gvCoinTxt: {fileID: 28610881}
   gvBestScoreTxt: {fileID: 402402009}
   gvStageTxt: {fileID: 1609674717}
+  vtrCoinTxt: {fileID: 208226478}
+  vtrBestScoreTxt: {fileID: 1455191730}
+  vtrStageTxt: {fileID: 149286365}
   statusInfoContents: {fileID: 585957427}
   statusInfoTxtPf: {fileID: 1369939459836968500, guid: 6db33d0b3b6844c4d94c44afe4f9d09f, type: 3}
   readyBtn: {fileID: 543322737}
@@ -67366,13 +67476,14 @@ GameObject:
   - component: {fileID: 2041321978}
   - component: {fileID: 2041321981}
   - component: {fileID: 2041321980}
+  - component: {fileID: 2041321979}
   m_Layer: 5
   m_Name: VictoryPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2041321978
 RectTransform:
   m_ObjectHideFlags: 0
@@ -67389,6 +67500,7 @@ RectTransform:
   - {fileID: 1183880288}
   - {fileID: 1372344015}
   - {fileID: 1579553298}
+  - {fileID: 1536082165}
   m_Father: {fileID: 2001013461}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -67397,6 +67509,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &2041321979
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041321977}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9c64eaeb99c355b4195288e0aedde14b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &2041321980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68307,7 +68438,7 @@ GameObject:
   - component: {fileID: 2099746091}
   - component: {fileID: 2099746090}
   m_Layer: 0
-  m_Name: Trumpet
+  m_Name: Trumpet1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
