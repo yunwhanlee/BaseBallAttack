@@ -724,6 +724,12 @@ public class GameManager : MonoBehaviour
 
     public List<DropBox> dropBoxList;
     public void setNextStage() {
+        //* Victory
+        if(bossKillCnt == 1){
+            Debug.Log("<size=22> VICTORY! </size>");
+            return;
+        }
+
         State = GameManager.STATE.WAIT;
         BossBlock boss = bm.getBoss();
         Debug.Log($"<color=white>setNextStage:: ballCnt={ballGroup.childCount}</color>");
@@ -762,7 +768,6 @@ public class GameManager : MonoBehaviour
                 return;
             }
             boss.activeBossSkill();
-            
         }
     }
 
