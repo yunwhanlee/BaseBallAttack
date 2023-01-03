@@ -169,6 +169,9 @@ public class GameManager : MonoBehaviour
     public Sprite rouletteTicketSpr;
     public Sprite emptyPoopSpr;
 
+    // [Header("SKY")][Header("__________________________")]
+    // public Material simpleSkyMt;
+
 
     void Start() {
         // Util._.calcArithmeticProgressionList(start: 100, max: 50, d: 100, gradualUpValue: 0.1f);

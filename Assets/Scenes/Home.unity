@@ -6115,7 +6115,7 @@ MonoBehaviour:
     power: 75
   HOMERUN_MIN_POWER: 0
   MAX_STAGE: 300
-  BOSS_STAGE_SPAN: 3
+  BOSS_STAGE_SPAN: 5
   BOSS_LIMIT_SPAN: 15
   LONG_BLOCK_SPAN: 7
   ICE_FREEZE_DURATION: 1
@@ -8607,7 +8607,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 4.5043e-41, y: 1.02e-43, z: 4.5391e-41, w: 0}
+  m_BoundingSphereOverride: {x: 4.5905e-41, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -27585,6 +27585,7 @@ MonoBehaviour:
   diamondSpr: {fileID: 21300000, guid: d06a9ce0b696341a4a1844b63f11239c, type: 3}
   cashSpr: {fileID: 21300000, guid: facf7c9b9a54444a1ad78a78150ea184, type: 3}
   modelTf: {fileID: 150785606}
+  simpleSkyMt: {fileID: 2100000, guid: 9650ef21762a3a74a90fa6ad82762464, type: 2}
 --- !u!1 &1931609519
 GameObject:
   m_ObjectHideFlags: 0

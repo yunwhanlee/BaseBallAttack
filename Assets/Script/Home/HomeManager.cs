@@ -148,6 +148,8 @@ public class HomeManager : MonoBehaviour
     [Header("MODEL")][Header("__________________________")]
     [SerializeField] Transform modelTf;   public Transform ModelTf {get => modelTf; set => modelTf = value;}
 
+    [Header("SKY")][Header("__________________________")]
+    public Material simpleSkyMt;
     // [Header("NOTICE MESSAGE")]
     // public Text noticeMessageTxtPref;
     // public Transform mainPanelTf;
@@ -425,7 +427,11 @@ public class HomeManager : MonoBehaviour
         int[] lvArrTemp = getItemPsvLvArr(playerModel);
         DM.ins.personalData.ItemPassive.setLvArr(lvArrTemp);
 
-
+        //* Set Sky Style
+        Debug.Log("onClickPlayBtn:: curStageSelectIndex= " + curStageSelectIndex);
+        const int NORMAL_MODE = 0, HARD_MODE = 1;
+        float offsetX = (curStageSelectIndex == NORMAL_MODE)? 1 : 1.25f; // 1=> Morning, 1.25=> afternoon, 1.5=> night
+        simpleSkyMt.SetTextureOffset("_MainTex", new Vector2(offsetX, 0));
 
         //* シーン 読込み。
         SceneManager.LoadScene(DM.SCENE.Loading.ToString());
