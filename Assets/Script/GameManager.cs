@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour
     public int strikeCnt = 0;
     public int comboCnt = 0;
     public int bossLimitCnt = 0;
+    public int bossKillCnt = 0; public int BossKillCnt { get => bossKillCnt; set => bossKillCnt = value;}
+    public const int stageClearBossKillCnt = 4;
 
     [Header("TRIGGER")][Header("__________________________")]
     public bool isPlayingAnim;  public bool IsPlayingAnim { get=> isPlayingAnim; set=> isPlayingAnim = value;}
@@ -201,8 +203,8 @@ public class GameManager : MonoBehaviour
         int len =  (DM.ins.personalData.IsUnlock2ndSkill)? 2 : 1;
         Debug.Log("GM:: Active Skill Btns len= <color=yellow>" + len + "</color>");
         for(int i=0; i<len; i++){
-            Vector3 pos = new Vector3(activeSkillBtnPf.anchoredPosition3D.x, 
-                (i == 0)? activeSkillBtnPf.anchoredPosition3D.y : activeSkillBtnPf.anchoredPosition3D.y - 170, 
+            Vector3 pos = new Vector3(activeSkillBtnPf.anchoredPosition3D.x,
+                (i == 0)? activeSkillBtnPf.anchoredPosition3D.y : activeSkillBtnPf.anchoredPosition3D.y - 170,
                 activeSkillBtnPf.anchoredPosition3D.z);
             RectTransform btn = Instantiate(activeSkillBtnPf, Vector3.zero, Quaternion.identity, activeSkillBtnGroup);
             btn.anchoredPosition3D = pos;
@@ -251,6 +253,7 @@ public class GameManager : MonoBehaviour
         //* ActiveSkill Status
         activeSkillBtnList.ForEach(btn=> btn.setActiveSkillEF());
     }
+
     public void setBallPreviewGoalImgRGBA(Color color) => ballPreviewGoalImg.color = color;
     public void throwScreenAnimSetTrigger(string name) => throwScreen.GetComponent<Animator>().SetTrigger(name);
     public void setLightDarkness(bool isOn){ //* During Skill Casting ...

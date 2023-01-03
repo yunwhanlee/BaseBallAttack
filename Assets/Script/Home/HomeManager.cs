@@ -147,13 +147,10 @@ public class HomeManager : MonoBehaviour
     // public Transform mainPanelTf;
 
     void Start(){
-        Debug.Log("Math:: -------------------------------");       
-        {
-            int i=0;
-            const int OFFSET = 100;
-            List<int> hpList = Util._.calcArithmeticProgressionList(start: OFFSET, max: 99, d: OFFSET, gradualUpValue: 0.01f);
-            // hpList.ForEach(hp => Debug.Log($"Math:: blockHpList[{i}]= " + hpList[i++] / OFFSET));
-        }
+        Debug.Log("Math:: -------------------------------");
+        const int OFFSET = 100;
+        List<int> hpList = Util._.calcArithmeticProgressionList(start: OFFSET, max: 99, d: OFFSET, gradualUpValue: 0.01f);
+        // hpList.ForEach(hp => Debug.Log($"Math:: blockHpList[{i}]= " + hpList[i++] / OFFSET));
 
         onClickBtnGoToPanel(DM.SCENE.Home.ToString());
         setSelectSkillImg(true);

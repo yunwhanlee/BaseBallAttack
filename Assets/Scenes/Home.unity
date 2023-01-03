@@ -26240,25 +26240,15 @@ MonoBehaviour:
   stageSelectObjPf: {fileID: 2726834510781411333, guid: 7382e0faee80ab04ba811966407fac8f, type: 3}
   stageSelects:
   - isLocked: 0
-    sprite: {fileID: 21300000, guid: 29104cbbea7474defbe69bc21d61cabc, type: 3}
-    titleName: First Stage
+    sprite: {fileID: 21300000, guid: 318e9d88a541f462e8261aeedff3e152, type: 3}
+    titleName: Normal
     start: 1
     end: 30
   - isLocked: 1
-    sprite: {fileID: 21300000, guid: e04309cf1c0874245a45c619b88a1a4a, type: 3}
-    titleName: Second Stage
+    sprite: {fileID: 21300000, guid: ee52549c264554fdd89b41e79ea4600d, type: 3}
+    titleName: Hard
     start: 31
     end: 60
-  - isLocked: 1
-    sprite: {fileID: 21300000, guid: 0f21c15598e524bfcae8cb6bd65c3440, type: 3}
-    titleName: Thurd Stage
-    start: 61
-    end: 90
-  - isLocked: 1
-    sprite: {fileID: 21300000, guid: 4731cb65876bd4cf29ce60d7b789764b, type: 3}
-    titleName: Fourth Stage
-    start: 91
-    end: 120
   stageSelectPlayBtn: {fileID: 1727830785}
   showRewardPanel: {fileID: 1199048389}
   showRewardItemListGroup: {fileID: 1503350621}

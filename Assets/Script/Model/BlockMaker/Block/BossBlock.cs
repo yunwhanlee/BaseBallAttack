@@ -188,7 +188,6 @@ public class BossBlock : Block_Prefab{
         isAttack = false;
     }
 
-
     private void setAimingEFToTargetPos(int i, ref Vector3[] targetPosArr, ref List<float> targetPosList, Vector3 playerPos){
         bool isLv2_FlameAttack = (targetPosArr.Length == 3);
         int index  = (isLv2_FlameAttack)? 0 : Random.Range(0, targetPosList.Count);
@@ -275,6 +274,8 @@ public class BossBlock : Block_Prefab{
 
         yield return new WaitForSecondsRealtime(playSec * 0.3f + playSec); //* 消すのが早すぎ感じで、少し待機。
         Destroy(target);
+
+        gm.BossKillCnt++;
     }
 
 
