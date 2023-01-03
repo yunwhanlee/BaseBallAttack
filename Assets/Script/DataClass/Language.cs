@@ -164,7 +164,7 @@ public static class LANG //* LANG
     };
     public static string[] MsgHardmodeLocked = new string[]{
         "you have to clear previous step!",
-        "以前段階をクリアーしないとできません！",
+        "以前段階をクリアーしてください!",
         "이전 단계를 클리어 해야됩니다!"
     };
 
