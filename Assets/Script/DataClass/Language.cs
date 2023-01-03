@@ -12,12 +12,15 @@ public static class LANG //* LANG
         Ok, Use, Get, Open,
         Start, Level, Stage, BossLimitCnt, Combo, Status, Back, Ready, Out, Strike,
         BestScore, LevelUpPanel_Title, LevelUpPanel_Explain,
-        MsgNoMoney, MsgNoSkill, MsgAlreadyRegistedSkill,
+
+        MsgNoMoney, MsgNoSkill, MsgAlreadyRegistedSkill, MsgHardmodeLocked,
+
         DialogUnlock2ndSkill_Title, DialogUnlock2ndSkill_Info,
         ShowAdDialogCoinX2_Title, ShowAdDialogCoinX2_Content,
         ShowAdDialogRerotateSkillSlots_Title, ShowAdDialogRerotateSkillSlots_Content,
         ShowAdDialogRevive_Title, ShowAdDialogRevive_Content,
         ShowAdDialogRouletteTicket_Title, ShowAdDialogRouletteTicket_Content,
+
         Tutorial , OpenTutorial_Content,
         TutorialA_Title, TutorialA_Content,
         TutorialB_Title, TutorialB_Content,
@@ -26,6 +29,7 @@ public static class LANG //* LANG
         TutorialE_Title, TutorialE_Content,
         TutorialF_Title, TutorialF_Content,
         TutorialG_Title, TutorialG_Content,
+
         Rate, Later, RateDialog_Content1, RateDialog_Content2,
         Reward, GetRewardChestPanel_Content, Empty, PsvSkillTicket, RouletteTicket, RouletteSpin,
         FirstSkill, SecondSkill, PsvSkillInfo, Upgrade, CashShop, 
@@ -157,6 +161,11 @@ public static class LANG //* LANG
         "This Skill is Already Registed",
         "このスキルは既に登録されています。",
         "해당 스킬은 이미 등록되어 있습니다."
+    };
+    public static string[] MsgHardmodeLocked = new string[]{
+        "you have to clear previous step!",
+        "以前段階をクリアーしないとできません！",
+        "이전 단계를 클리어 해야됩니다!"
     };
 
     //* DIALOG
@@ -424,6 +433,7 @@ public static class LANG //* LANG
         if(name == TXT.MsgNoMoney.ToString()) res = MsgNoMoney[CUR_LANG];
         if(name == TXT.MsgNoSkill.ToString()) res = MsgNoSkill[CUR_LANG];
         if(name == TXT.MsgAlreadyRegistedSkill.ToString()) res = MsgAlreadyRegistedSkill[CUR_LANG];
+        if(name == TXT.MsgHardmodeLocked.ToString()) res = MsgHardmodeLocked[CUR_LANG];
 
         //* DIALOG
         if(name == TXT.DialogUnlock2ndSkill_Title.ToString()) res = DialogUnlock2ndSkill_Title[CUR_LANG];

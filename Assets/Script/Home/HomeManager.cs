@@ -409,7 +409,7 @@ public class HomeManager : MonoBehaviour
 
     public void onClickPlayBtn(){
         if(stageSelects[curStageSelectIndex].IsLocked){
-            Util._.displayNoticeMsgDialog("you have to clear previous stage!");
+            Util._.displayNoticeMsgDialog(LANG.getTxt(LANG.TXT.MsgHardmodeLocked.ToString()));
             return;
         }
 
