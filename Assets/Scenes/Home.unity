@@ -6114,6 +6114,7 @@ MonoBehaviour:
   - dist: 1.5
     power: 75
   HOMERUN_MIN_POWER: 0
+  MAX_STAGE: 300
   BOSS_STAGE_SPAN: 3
   BOSS_LIMIT_SPAN: 15
   LONG_BLOCK_SPAN: 7
@@ -14335,7 +14336,7 @@ GameObject:
   - component: {fileID: 1121051002}
   - component: {fileID: 1121051001}
   m_Layer: 0
-  m_Name: FreeBtn
+  m_Name: OkBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21101,7 +21102,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -311}
-  m_SizeDelta: {x: 750, y: 150}
+  m_SizeDelta: {x: 850, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1299406335
 MonoBehaviour:
@@ -21294,7 +21295,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: HardMode On
+  m_Text: HardMode
 --- !u!222 &1315055950
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -27542,12 +27543,12 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 318e9d88a541f462e8261aeedff3e152, type: 3}
     titleName: Normal
     start: 1
-    end: 30
+    end: 80
   - isLocked: 1
     sprite: {fileID: 21300000, guid: ee52549c264554fdd89b41e79ea4600d, type: 3}
     titleName: Hard
-    start: 31
-    end: 60
+    start: 81
+    end: 160
   stageSelectPlayBtn: {fileID: 1727830785}
   showRewardPanel: {fileID: 1199048389}
   showRewardItemListGroup: {fileID: 1503350621}
@@ -27571,7 +27572,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: fe47e233143e64610b8a069446bab0ec, type: 3}
   - {fileID: 21300000, guid: 85f053b0eb0f446a4ad2a41b0c76173e, type: 3}
   - {fileID: 21300000, guid: 9d399770c3e0542df9bce5ff6692725c, type: 3}
-  HardModeEnableNoticeDialog: {fileID: 58180673}
+  hardModeEnableNoticeDialog: {fileID: 58180673}
+  hardModeEnableNoticeTitleTxt: {fileID: 1315055949}
+  hardModeEnableNoticeContent1Txt: {fileID: 1015807922}
+  hardModeEnableNoticeContent2Txt: {fileID: 1299406335}
+  hardModeEnableNoticeOkBtnTxt: {fileID: 253629576}
   checkBtn: {fileID: 473351091}
   checkMarkImg: {fileID: 1835355577}
   priceTxt: {fileID: 1544578272}

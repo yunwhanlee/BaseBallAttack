@@ -48,6 +48,8 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     };
     
     [HideInInspector] public int HOMERUN_MIN_POWER;
+    [Header("STAGE")][Header("__________________________")]
+    [Tooltip("マックスステージ数")] public int MAX_STAGE = 300;
 
     [Header("BLOCK SPAN")][Header("__________________________")]
     [Tooltip("ボース登場ステージ周期")] public int BOSS_STAGE_SPAN = 10;

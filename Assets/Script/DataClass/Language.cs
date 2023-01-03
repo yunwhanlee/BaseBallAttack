@@ -31,6 +31,7 @@ public static class LANG //* LANG
         FirstSkill, SecondSkill, PsvSkillInfo, Upgrade, CashShop, 
         PremiumPack, Coin, Diamond, RemoveAllADs,
         Purchase_Complete,
+        HardMode, HardMode_Content1, HardMode_Content2,
         //* PSV
         Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, 
         ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, 
@@ -204,6 +205,16 @@ public static class LANG //* LANG
         "ミステリーな宝箱を得りました!",
         "보물상자를 얻었습니다!"
     };
+    public static string[] HardMode_Content1 = new string[]{
+        "Congreturation! You can play Hardmode.",
+        "おめでとうございます！ハードモードプレイができます。",
+        "축하합니다! 하드모드 플레이가 가능합니다."
+    };
+    public static string[] HardMode_Content2 = new string[]{
+        "Show people your power!",
+        "皆にあなたのパワーを見せてください！",
+        "모두에게 여러분의 힘을 보여주세요!"
+    };
 
     //* Tutorial
     public static string[] OpenTutorial_Content = new string[]{
@@ -314,8 +325,7 @@ public static class LANG //* LANG
     public static string[] Rate = new string[]{"Rate", "評価", "평가"};
     public static string[] Later = new string[]{"Later", "後で", "나중에"};
     public static string[] Purchase_Complete = new string[]{"Purchase_Complete", "購入成功", "구매성공"};
-    
-
+    public static string[] HardMode = new string[]{"HardMode", "ハードモード", "하드모드"};
 
     //* PSV
     public static string[] Dmg = new string[]{DM.PSV.Dmg.ToString(), "攻撃力", "공격력"};
@@ -428,7 +438,8 @@ public static class LANG //* LANG
         if(name == TXT.ShowAdDialogRouletteTicket_Content.ToString()) res = ShowAdDialogRouletteTicket_Content[CUR_LANG];
         if(name == TXT.RateDialog_Content1.ToString()) res = RateDialog_Content1[CUR_LANG];
         if(name == TXT.RateDialog_Content2.ToString()) res = RateDialog_Content2[CUR_LANG];
-        
+        if(name == TXT.HardMode_Content1.ToString()) res = HardMode_Content1[CUR_LANG];
+        if(name == TXT.HardMode_Content2.ToString()) res = HardMode_Content2[CUR_LANG];
 
 
         //* TUTORIAL
@@ -486,6 +497,7 @@ public static class LANG //* LANG
         if(name == TXT.Later.ToString()) res = Later[CUR_LANG];
         if(name == TXT.Rate.ToString()) res = Rate[CUR_LANG];
         if(name == TXT.Purchase_Complete.ToString()) res = Purchase_Complete[CUR_LANG];
+        if(name == TXT.HardMode.ToString()) res = HardMode[CUR_LANG];
 
         //* PSV
         if(name == TXT.Dmg.ToString()) res = Dmg[CUR_LANG];

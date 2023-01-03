@@ -197,7 +197,7 @@ public class Block_Prefab : MonoBehaviour
     private void setHp(){
         //* ブロック HPリスト 準備
         const int OFFSET = 100;
-        List<int> hpList = Util._.calcArithmeticProgressionList(start: OFFSET, max: 99, d: OFFSET, gradualUpValue: 0.01f);
+        List<int> hpList = Util._.calcArithmeticProgressionList(start: OFFSET, max: LM._.MAX_STAGE, d: OFFSET, gradualUpValue: 0.01f);
         int resHp = hpList[gm.stage] / OFFSET;
 
         //* ランダム要素

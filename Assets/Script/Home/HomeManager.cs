@@ -127,8 +127,12 @@ public class HomeManager : MonoBehaviour
     public FrameUI settingDialog;
     public Image settingDialogCountryIconImg;
     public Sprite[] CountryIconSprArr;
-    //*
-    public RectTransform HardModeEnableNoticeDialog;
+    //* HardMode Enable Notice Dialog
+    public RectTransform hardModeEnableNoticeDialog;
+    public Text hardModeEnableNoticeTitleTxt;
+    public Text hardModeEnableNoticeContent1Txt;
+    public Text hardModeEnableNoticeContent2Txt;
+    public Text hardModeEnableNoticeOkBtnTxt;
 
     [Header("BUY OR CHECK BTN")][Header("__________________________")]
     public Button checkBtn;
@@ -191,7 +195,13 @@ public class HomeManager : MonoBehaviour
         //* HardMode Enable Notice Dialog (Only OneTime)
         if(DM.ins.personalData.IsHardmodeOn && !DM.ins.personalData.IsHardmodeEnableNotice){
             DM.ins.personalData.IsHardmodeEnableNotice = true;
-            HardModeEnableNoticeDialog.gameObject.SetActive(true);
+            hardModeEnableNoticeDialog.gameObject.SetActive(true);
+
+            //* Lang
+            hardModeEnableNoticeTitleTxt.text = LANG.getTxt(LANG.TXT.HardMode.ToString());
+            hardModeEnableNoticeContent1Txt.text = LANG.getTxt(LANG.TXT.HardMode_Content1.ToString());
+            hardModeEnableNoticeContent2Txt.text = LANG.getTxt(LANG.TXT.HardMode_Content2.ToString());
+            hardModeEnableNoticeOkBtnTxt.text = LANG.getTxt(LANG.TXT.Ok.ToString());
         }
     }
 
