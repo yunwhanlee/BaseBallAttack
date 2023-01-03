@@ -20,6 +20,7 @@ public class BlockMaker : MonoBehaviour
 
     [Header("STATUS")][Header("__________________________")]
     public bool doCreateBlock;  public bool DoCreateBlock {get => doCreateBlock; set => doCreateBlock = value;}
+    [SerializeField] List<int>  hpCalcList;    public List<int> HpCalcList { get => hpCalcList; set => hpCalcList = value;}
 
     [Header("RESOURCE")][Header("__________________________")]
     public GameObject[] blockPrefs;
@@ -38,6 +39,10 @@ public class BlockMaker : MonoBehaviour
     public GameObject coinIconPf; //dropBoxQuestionPfで出るコインUIアイコン
 
     public void Start() {
+        //* ブロック HPリスト 準備
+        const int OFFSET = 100;
+        hpCalcList = Util._.calcArithmeticProgressionList(start: OFFSET, max: LM._.MAX_STAGE, d: OFFSET, gradualUpValue: 0.01f);
+
         //* Init Or AD-Revive
         var blocks = gm.blockGroup.GetComponentsInChildren<Block_Prefab>(); //* Previous Blocks Erase
         foreach(var block in blocks) block.onDestroy(block.gameObject, true);

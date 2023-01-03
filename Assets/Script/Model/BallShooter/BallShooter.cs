@@ -8,15 +8,15 @@ public class BallShooter : MonoBehaviour
     //* OutSide
     public GameManager gm;
     public Player pl;
-    [SerializeField]private bool isBallExist;   public bool IsBallExist { get => isBallExist; set => isBallExist = value;}
-    [SerializeField]private bool isExclamationMarkOn;   public bool IsExclamationMarkOn { get => isExclamationMarkOn; set => isExclamationMarkOn = value;}
-    [SerializeField]private float time;
-    [SerializeField]private float throwBallSpeed = LM._.THROW_BALL_SPEED;
-    [SerializeField]private float shootSpan = 2;
-    [SerializeField]public GameObject ballPref;
-    [SerializeField]public Transform entranceTf;
-    [SerializeField]private GameObject exclamationMarkObj;   public GameObject ExclamationMarkObj { get => exclamationMarkObj; set => exclamationMarkObj = value;}
-    [SerializeField]private GameObject bossFireBallMarkObj;   public GameObject BossFireBallMarkObj { get => bossFireBallMarkObj; set => bossFireBallMarkObj = value;}
+    [SerializeField] bool isBallExist;   public bool IsBallExist { get => isBallExist; set => isBallExist = value;}
+    [SerializeField] bool isExclamationMarkOn;   public bool IsExclamationMarkOn { get => isExclamationMarkOn; set => isExclamationMarkOn = value;}
+    [SerializeField] float time;
+    [SerializeField] float throwBallSpeed = LM._.THROW_BALL_SPEED;
+    [SerializeField] float shootSpan = 2;
+    [SerializeField] public GameObject ballPref;
+    [SerializeField] public Transform entranceTf;
+    [SerializeField] GameObject exclamationMarkObj;   public GameObject ExclamationMarkObj { get => exclamationMarkObj; set => exclamationMarkObj = value;}
+    [SerializeField] GameObject bossFireBallMarkObj;    public GameObject BossFireBallMarkObj { get => bossFireBallMarkObj; set => bossFireBallMarkObj = value;}
 
 
     void Start(){
