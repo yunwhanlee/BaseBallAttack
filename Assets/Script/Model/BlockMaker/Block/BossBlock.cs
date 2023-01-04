@@ -35,6 +35,7 @@ public class BossBlock : Block_Prefab{
     }
 
     void Start() {
+        Debug.Log("BossBlock:: this.name= " + this.name);
         GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         gm.bossLimitCnt = LM._.BOSS_LIMIT_SPAN;
         gm.bossLimitCntTxt.gameObject.SetActive(true);
@@ -106,8 +107,8 @@ public class BossBlock : Block_Prefab{
 
         #region BOSS ATTACK LV TYPE
         //* FireBallEF 生成
-        if(attackAnimName == "Fireball Shoot"){ //* LV 1
-            Util._.DebugSphere(playerPos, 1.25f, 1.5f, "red");//* Preview Spot 生成
+        if(attackAnimName == BOSSATK_ANIM_NAME_LV1){ //* LV 1
+            Util._.DebugSphere(playerPos, radius: 1.25f);//* Preview Spot 生成
             gm.em.createAimingEF(playerPos);
             yield return new WaitForSeconds(blessShootTiming);
 
@@ -117,7 +118,7 @@ public class BossBlock : Block_Prefab{
             //* ExplosionEF 生成
             setExplosionEFAndPlayerStun(playerPos, playerStunTime);
         }
-        else if(attackAnimName == "Flame Attack"){ //* LV 2
+        else if(attackAnimName == BOSSATK_ANIM_NAME_LV2){ //* LV 2
             List<float> targetPosList = new List<float>(){-3.0f, 0, 3.0f};
             int rand = Random.Range(0, 2); // 0 or 1
             if(rand == 1) targetPosList.Reverse();
@@ -133,7 +134,7 @@ public class BossBlock : Block_Prefab{
                 setExplosionEFAndPlayerStun(targetPosArr[i], playerStunTime);
             }
         }
-        else if(attackAnimName == "Horn Attack"){ //* LV 3
+        else if(attackAnimName == BOSSATK_ANIM_NAME_LV3){ //* LV 3
             List<float> targetPosList = new List<float>(){-3.0f, 0, 3.0f};
             
             //* Set ターゲットポジションランダム(２個)
@@ -148,7 +149,7 @@ public class BossBlock : Block_Prefab{
                 setExplosionEFAndPlayerStun(targetPos, playerStunTime);
             });
         }
-        else if(attackAnimName == "Fly Flame Attack"){ //* LV 4
+        else if(attackAnimName == BOSSATK_ANIM_NAME_LV4){ //* LV 4
             for(int k=0; k<8; k++){
                 //* 途中でファイルボールを当たったら、すぐFor文を終了。
                 if(gm.pl.IsStun) break;
@@ -193,7 +194,7 @@ public class BossBlock : Block_Prefab{
         int index  = (isLv2_FlameAttack)? 0 : Random.Range(0, targetPosList.Count);
         targetPosArr[i] = new Vector3(targetPosList[index], playerPos.y, playerPos.z);
         targetPosList.RemoveAt(index);
-        Util._.DebugSphere(targetPosArr[i], 1.25f, 1.5f, "red");//* Preview Spot 生成
+        Util._.DebugSphere(targetPosArr[i], radius: 1.25f);//* Preview Spot 生成
         gm.em.createAimingEF(targetPosArr[i]);
     }
     private void setFireBallTrailEFToTargetPos(Vector3 tergetPos){

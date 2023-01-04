@@ -23,13 +23,13 @@ using UnityEngine.Serialization;
     //* Method
 }
 
-[System.Serializable] public class stageSelect {
+[System.Serializable] public class StageSelect {
     [Header("お先に設定")]
     [SerializeField] bool isLocked;     public bool IsLocked { get => isLocked; set => isLocked = value; }
     [SerializeField] Sprite sprite;     public Sprite Sprite { get => sprite; }
     [SerializeField] string titleName;     public string TitleName { get => titleName; }
-    [SerializeField] int start;     public int Start { get => start; }
-    [SerializeField] int end;     public int End { get => end; }
+    [SerializeField] int begin;     public int Begin { get => begin; set => begin = value;}
+    [SerializeField] int end;     public int End { get => end; set => end = value;}
 
     [Header("後で自動設定")]
     RectTransform rectTf;     public RectTransform RectTf { get => rectTf; set => rectTf = value; }
@@ -38,7 +38,7 @@ using UnityEngine.Serialization;
     Text range;     public Text Range { get => range; set => range = value; }
     Button imgBtn;     public Button ImgBtn { get => imgBtn; set => imgBtn = value; }
     Image newLabel;     public Image NewLabal { get => newLabel; set => newLabel = value; }
-
+    
     public void setUIMember(){
         //* Set Object
         newLabel = Array.Find(rectTf.GetComponentsInChildren<Image>(), img => img.gameObject.name == "NewLabel");
@@ -51,7 +51,7 @@ using UnityEngine.Serialization;
         newLabel.gameObject.SetActive(false);
         img.sprite = Sprite;
         title.text = titleName;
-        range.text = $"Stage {start} ~ {end}";
+        range.text = $"Stage {begin} ~ {end}";
         img.color = IsLocked? DM.ins.darkGray : Color.white;
     }
 }
@@ -103,7 +103,7 @@ public class HomeManager : MonoBehaviour
     public GameObject stageSelectPanel;
     public RectTransform stageSelectContent;    
     public GameObject stageSelectObjPf;
-    public stageSelect[] stageSelects;
+    public StageSelect[] stageSelects;
     public Button stageSelectPlayBtn;
 
     [Header("SHOW REWARD PANEL")][Header("__________________________")]
@@ -155,8 +155,11 @@ public class HomeManager : MonoBehaviour
         // hpList.ForEach(hp => Debug.Log($"Math:: blockHpList[{i}]= " + hpList[i++] / OFFSET));
 
         onClickBtnGoToPanel(DM.SCENE.Home.ToString());
+
         setSelectSkillImg(true);
+
         setStageSelectUIList();
+
         checkPremiumPackPurchaseStatus();
 
         Debug.Log("LanguageOptDropDown.value= " + LanguageOptDropDown.value);
@@ -410,7 +413,7 @@ public class HomeManager : MonoBehaviour
         }
 
         //* スタートするステージ数を設定。
-        LM._.STAGE_NUM = stageSelects[curStageSelectIndex].Start;
+        LM._.STAGE_NUM = stageSelects[curStageSelectIndex].Begin;
 
         var playerModel = modelTf.GetChild(0);
         playerModel.GetComponent<Animator>().SetBool(DM.ANIM.IsIdle.ToString(), false); //Ready Pose
@@ -549,8 +552,16 @@ public class HomeManager : MonoBehaviour
     }
 
     private void setStageSelectUIList(){
-        const int HARD_MODE = 1; // NORMAL_MODE = 0
+        const int NORMAL_MODE = 0, HARD_MODE = 1;
+
+        //* Set Stage Range
+        stageSelects[NORMAL_MODE].Begin = 1;
+        stageSelects[NORMAL_MODE].End = LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN;
+        stageSelects[HARD_MODE].Begin = LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN + 1;
+        stageSelects[HARD_MODE].End = LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN * 2;
+
         //* Check HardMode
+        
         if(DM.ins.personalData.IsHardmodeOn)
             stageSelects[HARD_MODE].IsLocked = false;
 
@@ -566,8 +577,6 @@ public class HomeManager : MonoBehaviour
         }
         //* init
         stageSelects[0].ImgBtn.GetComponent<Image>().color = Color.yellow;
-
-
     }
 
     private void setSelectSkillImg(bool isInit = false){
