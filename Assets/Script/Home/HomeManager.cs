@@ -553,15 +553,16 @@ public class HomeManager : MonoBehaviour
 
     private void setStageSelectUIList(){
         const int NORMAL_MODE = 0, HARD_MODE = 1;
+        int value = LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN;
 
         //* Set Stage Range
         stageSelects[NORMAL_MODE].Begin = 1;
-        stageSelects[NORMAL_MODE].End = LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN;
-        stageSelects[HARD_MODE].Begin = LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN + 1;
-        stageSelects[HARD_MODE].End = LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN * 2;
+        stageSelects[NORMAL_MODE].End = value;
+
+        stageSelects[HARD_MODE].Begin = value + 1;
+        stageSelects[HARD_MODE].End = value * 2;
 
         //* Check HardMode
-        
         if(DM.ins.personalData.IsHardmodeOn)
             stageSelects[HARD_MODE].IsLocked = false;
 

@@ -53,6 +53,10 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [HideInInspector] public int HOMERUN_MIN_POWER;
     [Header("STAGE")][Header("__________________________")]
     [Tooltip("マックスステージ数")] public int MAX_STAGE = 300;
+    [Tooltip("ステージ当たりコイン手当")] public int STAGE_PER_COIN = 100;
+    [Tooltip("ステージ当たりダイア手当")] public int STAGE_PER_DIAMOND = 10;
+    [Tooltip("ハードモードコイン掛け算ボーナス")] public int HARDMODE_COIN_BONUS = 2;
+    [Tooltip("ハードモードダイア掛け算ボーナス")] public float HARDMODE_DIAMOND_BONUS = 1.5f;
 
     [Header("BLOCK SPAN")][Header("__________________________")]
     [Tooltip("ボース登場ステージ周期")] public int BOSS_STAGE_SPAN = 10;
@@ -106,9 +110,6 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("クリティカル")] public UpgradePriceCalcSetting UPGRADE_CRIT;
     [Tooltip("クリティカルダメージ")] public UpgradePriceCalcSetting UPGRADE_CRITDMG;
     [Tooltip("ディフェンス")] public UpgradePriceCalcSetting UPGRADE_DEFENCE;
-
-    [Header("GAMEOVER")][Header("__________________________")]
-    [Tooltip("ステージ当たりコイン手当")] public int GAMEOVER_STAGE_PER_COIN = 100;
 
     [Header("VICTORY")][Header("__________________________")]
     [Tooltip("勝利ボースカウンター")] public int VICTORY_BOSSKILL_CNT = 4;

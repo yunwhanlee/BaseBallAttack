@@ -2296,7 +2296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2df72ec125264584faa40cb1beef0481, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 161
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2df72ec125264584faa40cb1beef0481, type: 3}
       propertyPath: m_LocalPosition.y
@@ -45725,7 +45725,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2df72ec125264584faa40cb1beef0481, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 161
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2df72ec125264584faa40cb1beef0481, type: 3}
       propertyPath: m_LocalPosition.y
@@ -45950,6 +45950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 1
+  mode: 0
   effectGroup: {fileID: 831947632}
   ballGroup: {fileID: 1179223822}
   blockGroup: {fileID: 397967615}
@@ -46092,9 +46093,11 @@ MonoBehaviour:
   pauseCoinTxt: {fileID: 562248575}
   pauseDiamondTxt: {fileID: 1089692633}
   gvCoinTxt: {fileID: 28610881}
+  gvDiamondTxt: {fileID: 189422031}
   gvBestScoreTxt: {fileID: 402402009}
   gvStageTxt: {fileID: 1609674717}
   vtrCoinTxt: {fileID: 208226478}
+  vtrDiamondTxt: {fileID: 1996887161}
   vtrBestScoreTxt: {fileID: 1455191730}
   vtrStageTxt: {fileID: 149286365}
   statusInfoContents: {fileID: 585957427}

@@ -10,7 +10,9 @@ using UnityEngine.Serialization;
 public class GameManager : MonoBehaviour
 {
     public enum STATE {PLAY, WAIT, GAMEOVER, PAUSE, CONTINUE, HOME, NULL};
+    public enum MODE {NORMAL, HARD};
     [SerializeField] private STATE state;     public STATE State {get => state; set => state = value;}
+    [SerializeField] private MODE mode;       public MODE Mode {get => mode; set => mode = value;}
     
     [Header("GROUP")][Header("__________________________")]
     public Transform effectGroup;
@@ -127,11 +129,13 @@ public class GameManager : MonoBehaviour
 
     [Header("GAMEOVER")][Header("__________________________")]
     [FormerlySerializedAs("gvCoinTxt")]   public Text gvCoinTxt;
+    [FormerlySerializedAs("gvDiamondTxt")]   public Text gvDiamondTxt;
     [FormerlySerializedAs("gvBestScoreTxt")]   public Text gvBestScoreTxt;
     [FormerlySerializedAs("gvStageTxt")]   public Text gvStageTxt;
 
     [Header("VICTORY")][Header("__________________________")]
     [FormerlySerializedAs("vtrCoinTxt")]   public Text vtrCoinTxt;
+    [FormerlySerializedAs("vtrDiamondTxt")]   public Text vtrDiamondTxt;
     [FormerlySerializedAs("vtrBestScoreTxt")]   public Text vtrBestScoreTxt;
     [FormerlySerializedAs("vtrStageTxt")]   public Text vtrStageTxt;
 
@@ -232,6 +236,11 @@ public class GameManager : MonoBehaviour
             skySunObj.SetActive(true);
         else if(DM.ins.simpleSkyMt.GetTextureOffset("_MainTex").x == LM._.SKY_MT_DINNER_VALUE)
             skyMoonObj.SetActive(true);
+
+        //* Check Mode
+        if(stage > LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN){
+            mode = MODE.HARD;
+        }
     }
 
     void Update(){
@@ -655,33 +664,42 @@ public class GameManager : MonoBehaviour
 
     public void setGameOver(){
         Debug.Log("<size=30> --- G A M E O V E R --- </size>");
-        setFinishGame(gameoverPanel, gvBestScoreTxt, gvStageTxt, gvCoinTxt);
+        setFinishGame(gameoverPanel, gvBestScoreTxt, gvStageTxt, gvCoinTxt, gvDiamondTxt);
     }
 
     public void setVictory(){
         Debug.Log("<size=30> --- V I C T O R Y --- </size>");
-        setFinishGame(victoryPanel, vtrBestScoreTxt, vtrStageTxt, vtrCoinTxt);
+        setFinishGame(victoryPanel, vtrBestScoreTxt, vtrStageTxt, vtrCoinTxt, vtrDiamondTxt);
 
         //* HardMode unlocked
         if(!DM.ins.personalData.IsHardmodeOn)
             DM.ins.personalData.IsHardmodeOn = true;
     }
 
-    private void setFinishGame(GameObject panel, Text scoreTxt, Text stageTxt, Text coinTxt){
+    private void setFinishGame(GameObject panel, Text scoreTxt, Text stageTxt, Text coinTxt, Text diamondTxt){
         State = GameManager.STATE.GAMEOVER;
         panel.SetActive(true);
+
+        //* UI
         scoreTxt.text = LANG.getTxt(LANG.TXT.BestScore.ToString()) + " : " + bestScore;
         stageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage;
 
-        //* Coin
-        coin += stage * LM._.GAMEOVER_STAGE_PER_COIN;
+        //* Set Stage
+        if(mode == MODE.HARD)
+            stage -= LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN;
+
+        //* Coin & Diamond
+        coin += stage * LM._.STAGE_PER_COIN;
+        diamond += stage * LM._.STAGE_PER_DIAMOND;
         int extraUpgradeCoin = Mathf.RoundToInt(coin * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.CoinBonus].getValue());
 
-        //* Show Get Coin
-        coinTxt.text = (coin + extraUpgradeCoin).ToString(); // => setGameでも使う。
+        //* Show Reward Coin & Diamond => setGameでも使う。
+        coinTxt.text = (coin + extraUpgradeCoin * (mode == MODE.HARD? LM._.HARDMODE_COIN_BONUS : 1)).ToString();
+        diamondTxt.text = (diamond * (mode == MODE.HARD? LM._.HARDMODE_DIAMOND_BONUS : 1)).ToString();
 
-        //* Get Reward Goods
+        //* Add Reward Goods
         DM.ins.personalData.Coin += int.Parse(coinTxt.text);
+        DM.ins.personalData.Diamond += int.Parse(diamondTxt.text);
         
         //* Rate Dialogを表示するため
         DM.ins.personalData.PlayTime++;
@@ -702,9 +720,6 @@ public class GameManager : MonoBehaviour
                 break;
             case STATE.HOME:
                 Time.timeScale = 1;
-
-                //* Get Reward Goods
-                // DM.ins.personalData.Coin += int.Parse(gvCoinTxt.text); // int coin = stage * 100;
                 
                 resetSkillStatusTable();
                 DM.ins.personalData.save();
