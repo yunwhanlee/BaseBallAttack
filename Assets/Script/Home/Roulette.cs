@@ -136,7 +136,7 @@ public class Roulette : MonoBehaviour
             DM.ins.personalData.Diamond += rewardPrice;
         else if(rewardIcon.name.Contains(ITEM_OBJ_NAME.RouletteTicket.ToString()))
             DM.ins.personalData.RouletteTicket += rewardPrice;
-        else if(rewardIcon.name.Contains(ITEM_OBJ_NAME.poop.ToString()));
+        else if(rewardIcon.name.Contains(ITEM_OBJ_NAME.poop.ToString())){}
             //なし
     }
 }

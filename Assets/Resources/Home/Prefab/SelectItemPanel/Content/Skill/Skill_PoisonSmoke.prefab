@@ -442,9 +442,8 @@ MonoBehaviour:
   - "+20% \u7BC4\u56F2\u3001+2\u30BF\u30FC\u30F3\u3002"
   - "+20% \uBC94\uC704, +2 \uD134."
   price:
-    type: 0
-    coin: 0
-    diamond: 0
+    type: 1
+    val: 500
   isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 8690499083931063915}
@@ -454,9 +453,9 @@ MonoBehaviour:
   rank: 1
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
-  cashShopPriceTxt: {fileID: 0}
   upgradeValueTxt: {fileID: 0}
   lvTxt: {fileID: 0}
+  cashShopPriceTxt: {fileID: 0}
   itemPassive:
     arr:
     - name: Dmg

@@ -82,9 +82,11 @@ public class SectorGizmos : MonoBehaviour
 
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos(){
         Handles.color = isCollision ? _red : _blue;
         Handles.DrawSolidArc(new Vector3(pos.x, pos.y, pos.z - offsetZ), Vector3.up, transform.forward, angleRange/2, distance);
         Handles.DrawSolidArc(new Vector3(pos.x, pos.y, pos.z - offsetZ), Vector3.up, transform.forward, -angleRange/2, distance);
     }
+#endif
 }

@@ -326,6 +326,7 @@
     ✓ (BUG-26) HomeEFManager::createItemBuyEF:: parent -> MainCanvasにして、後ろのGUIボタンが押されるバグを対応。
     ✓ (BUG-27) DM::setUIRemoveAD:: IsRemoveを購入したら、CashShopにある目録も"購入完了"にする。
     ✓ (BUG-28) LM::MAX_STAGE変数追加。blockHpListを作るとき、MAX値を超えると、実行できないBUGを対応。
+    ✓ (BUG-29) HOME::ItemInfo:: SkillはRANK値段が適用しないように。
     
     
 

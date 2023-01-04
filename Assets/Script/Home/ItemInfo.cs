@@ -71,8 +71,7 @@ public class ItemInfo : MonoBehaviour
 
     void Start(){
         if(this.name.Contains(DM.PANEL.Chara.ToString())
-            || this.name.Contains(DM.PANEL.Bat.ToString())
-            || this.name.Contains(DM.PANEL.Skill.ToString())){
+            || this.name.Contains(DM.PANEL.Bat.ToString())){
             checkLockedModel();
             //* Set Price By Rank
             switch(rank){
@@ -84,10 +83,14 @@ public class ItemInfo : MonoBehaviour
             }
             Debug.Log("IteonInfo::Start:: Set Price By Rank= price.Val= " + price.Val);
         }
+        else if(this.name.Contains(DM.PANEL.Skill.ToString())){
+            //* (BUG-29) HOME::ItemInfo:: SkillはRANK値段が適用しないように。
+            checkLockedModel();
+        }
         else if(this.name.Contains(DM.PANEL.CashShop.ToString())){
-            if(isLock){
-                this.transform.Find(DM.NAME.PurchasedPanel.ToString()).gameObject.SetActive(true);
-            }
+            // if(isLock){
+            //     this.transform.Find(DM.NAME.PurchasedPanel.ToString()).gameObject.SetActive(true);
+            // }
         }
     }
 

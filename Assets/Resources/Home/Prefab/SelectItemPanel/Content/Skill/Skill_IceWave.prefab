@@ -364,9 +364,8 @@ MonoBehaviour:
   - TODO
   - TODO
   price:
-    type: 0
-    coin: 0
-    diamond: 0
+    type: 1
+    val: 500
   isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 5890911362661052290}
@@ -376,9 +375,9 @@ MonoBehaviour:
   rank: 1
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
-  cashShopPriceTxt: {fileID: 0}
   upgradeValueTxt: {fileID: 0}
   lvTxt: {fileID: 0}
+  cashShopPriceTxt: {fileID: 0}
   itemPassive:
     arr:
     - name: Dmg
