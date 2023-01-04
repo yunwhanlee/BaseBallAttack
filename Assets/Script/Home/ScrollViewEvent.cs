@@ -648,12 +648,12 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             }
         }
         else { //TODO Audio
-            //* (BUG-20)MAX-LVなら、「お金が足りない」ダイアログ表示しない。
+            //* (BUG-20)MAX-LVなら、「財貨 不足」ダイアログ表示しない。
             if(DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
                 UpgradeDt upgradeDt = DM.ins.personalData.Upgrade.Arr[CurIdx];
                 if(upgradeDt.Lv == upgradeDt.MaxLv) return goods;
             }
-            //* 「お金が足りない」ダイアログ表示。
+            //* 「財貨 不足」ダイアログ表示。
             DM.ins.personalData.setSelectIdx(befIdx);
             string goodsTypeStr = (goodsType == Price.TP.COIN)? LANG.getTxt(LANG.TXT.Coin.ToString()) : LANG.getTxt(LANG.TXT.Diamond.ToString());
             Util._.displayNoticeMsgDialog(goodsTypeStr + " " + LANG.getTxt(LANG.TXT.NotEnough.ToString()));
