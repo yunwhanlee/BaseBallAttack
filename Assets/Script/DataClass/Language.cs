@@ -13,7 +13,7 @@ public static class LANG //* LANG
         Start, Level, Stage, BossLimitCnt, Combo, Status, Back, Ready, Out, Strike,
         BestScore, LevelUpPanel_Title, LevelUpPanel_Explain,
 
-        MsgNoMoney, MsgNoSkill, MsgAlreadyRegistedSkill, MsgHardmodeLocked,
+        NotEnough, MsgNoSkill, MsgAlreadyRegistedSkill, MsgHardmodeLocked,
 
         DialogUnlock2ndSkill_Title, DialogUnlock2ndSkill_Info,
         ShowAdDialogCoinX2_Title, ShowAdDialogCoinX2_Content,
@@ -151,8 +151,8 @@ public static class LANG //* LANG
     };
 
     //* NOTICE MESSAGE
-    public static string[] MsgNoMoney = new string[]{
-        "NO MONEY!", "お金足りない!", "코인 부족!"
+    public static string[] NotEnough = new string[]{
+        "Not Enough", "不足", "부족"
     };
     public static string[] MsgNoSkill = new string[]{
         "NO SKILL!", "スキルが足りない!", "스킬 부족!"
@@ -430,7 +430,7 @@ public static class LANG //* LANG
         int CUR_LANG = (int)DM.ins.personalData.Lang;
 
         //* NOTICE MESSAGE
-        if(name == TXT.MsgNoMoney.ToString()) res = MsgNoMoney[CUR_LANG];
+        if(name == TXT.NotEnough.ToString()) res = NotEnough[CUR_LANG];
         if(name == TXT.MsgNoSkill.ToString()) res = MsgNoSkill[CUR_LANG];
         if(name == TXT.MsgAlreadyRegistedSkill.ToString()) res = MsgAlreadyRegistedSkill[CUR_LANG];
         if(name == TXT.MsgHardmodeLocked.ToString()) res = MsgHardmodeLocked[CUR_LANG];

@@ -348,7 +348,7 @@ public class HomeManager : MonoBehaviour
         int unlockSkillListCnt = unlockSkillList.Count;
         Debug.Log("unlockSkillListCnt= " + unlockSkillListCnt);
         if(DM.ins.personalData.Coin < price) {
-            Util._.displayNoticeMsgDialog(LANG.getTxt(LANG.TXT.MsgNoMoney.ToString()));
+            Util._.displayNoticeMsgDialog(LANG.getTxt(LANG.TXT.NotEnough.ToString()));
             return;
         }
         else if(unlockSkillListCnt < 2){
