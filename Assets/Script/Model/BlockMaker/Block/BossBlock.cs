@@ -259,6 +259,7 @@ public class BossBlock : Block_Prefab{
     }
 
     IEnumerator coPlayBossDieAnim(GameObject target){
+        gm.BossKillCnt++;
         gm.bossLimitCntTxt.gameObject.SetActive(false);
 
         this.transform.rotation = Quaternion.Euler(0,250,0);
@@ -275,8 +276,6 @@ public class BossBlock : Block_Prefab{
 
         yield return new WaitForSecondsRealtime(playSec * 0.3f + playSec); //* 消すのが早すぎ感じで、少し待機。
         Destroy(target);
-
-        gm.BossKillCnt++;
     }
 
 

@@ -654,15 +654,37 @@ public class GameManager : MonoBehaviour
     }
 
     public void setGameOver(){
-        Debug.Log("<size=30> --- G A M E  O V E R --- </size>");
+        Debug.Log("<size=30> --- G A M E O V E R --- </size>");
+        setFinishGame(gameoverPanel, gvBestScoreTxt, gvStageTxt, gvCoinTxt);
+    }
+
+    public void setVictory(){
+        Debug.Log("<size=30> --- V I C T O R Y --- </size>");
+        setFinishGame(victoryPanel, vtrBestScoreTxt, vtrStageTxt, vtrCoinTxt);
+
+        //* HardMode unlocked
+        if(!DM.ins.personalData.IsHardmodeOn)
+            DM.ins.personalData.IsHardmodeOn = true;
+    }
+
+    private void setFinishGame(GameObject panel, Text scoreTxt, Text stageTxt, Text coinTxt){
         State = GameManager.STATE.GAMEOVER;
-        gameoverPanel.SetActive(true);
-        gvBestScoreTxt.text = LANG.getTxt(LANG.TXT.BestScore.ToString()) + " : " + bestScore;
-        gvStageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage;
+        panel.SetActive(true);
+        scoreTxt.text = LANG.getTxt(LANG.TXT.BestScore.ToString()) + " : " + bestScore;
+        stageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage;
+
+        //* Coin
         coin += stage * LM._.GAMEOVER_STAGE_PER_COIN;
         int extraUpgradeCoin = Mathf.RoundToInt(coin * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.CoinBonus].getValue());
-        gvCoinTxt.text = (coin + extraUpgradeCoin).ToString(); // => setGameでも使う。
-        DM.ins.personalData.PlayTime++;//* Rate Dialogを表示するため
+
+        //* Show Get Coin
+        coinTxt.text = (coin + extraUpgradeCoin).ToString(); // => setGameでも使う。
+
+        //* Get Reward Goods
+        DM.ins.personalData.Coin += int.Parse(coinTxt.text);
+        
+        //* Rate Dialogを表示するため
+        DM.ins.personalData.PlayTime++;
     }
 
     public void setGame(string type){
@@ -682,9 +704,7 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1;
 
                 //* Get Reward Goods
-                int coin = stage * 100;
-                DM.ins.personalData.Coin += int.Parse(gvCoinTxt.text);
-                
+                // DM.ins.personalData.Coin += int.Parse(gvCoinTxt.text); // int coin = stage * 100;
                 
                 resetSkillStatusTable();
                 DM.ins.personalData.save();
@@ -740,17 +760,8 @@ public class GameManager : MonoBehaviour
     public List<DropBox> dropBoxList;
     public void setNextStage() {
         //* Victory
-        if(bossKillCnt == LM._.VICTORY_BOSSKILL_CNT){
-            Debug.Log("<size=22> VICTORY! </size>");
-            victoryPanel.SetActive(true);
-            vtrBestScoreTxt.text = LANG.getTxt(LANG.TXT.BestScore.ToString()) + " : " + bestScore;
-            vtrStageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage;
-            coin += stage * LM._.GAMEOVER_STAGE_PER_COIN;
-            int extraUpgradeCoin = Mathf.RoundToInt(coin * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.CoinBonus].getValue());
-            vtrCoinTxt.text = (coin + extraUpgradeCoin).ToString(); // => setGameでも使う。
-
-            DM.ins.personalData.PlayTime++;//* Rate Dialogを表示するため
-            DM.ins.personalData.IsHardmodeOn = true;
+        if(bossKillCnt >= LM._.VICTORY_BOSSKILL_CNT){
+            setVictory();
             return;
         }
 
