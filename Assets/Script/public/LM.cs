@@ -70,6 +70,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("スキップ ブロック％")] [Range(0, 100)] public int SKIP_BLOCK_PER = 20;
     [Tooltip("アイテムタイプ ブロック％")] [Range(0, 100)] public int ITEM_TYPE_PER = 10;
     [Tooltip("宝箱 ブロック％")] [Range(0, 100)] public int TREASURECHEST_BLOCK_PER = 5;
+    [Tooltip("宝箱から出るオーブ数")] public int TREASURECHEST_ORB_CNT = 7;
     [Tooltip("ヒール ブロック％")] [Range(0, 100)] public int HEAL_BLOCK_PER = 5;
 
     [Header("DROP ITEM PERCENT")][Header("__________________________")]

@@ -6130,8 +6130,8 @@ MonoBehaviour:
   ITEM_TYPE_PER: 10
   TREASURECHEST_BLOCK_PER: 5
   HEAL_BLOCK_PER: 5
-  REWARD_CHEST_PER: 10
-  DROP_BOX_PER: 50
+  REWARD_CHEST_PER: 75
+  DROP_BOX_PER: 100
   DROPBOX_COIN_VALUE: 10
   DROPBOX_ALIVE_SPAN: 3
   ATV_COOLDOWN_UNIT: 0.01
@@ -27568,12 +27568,12 @@ MonoBehaviour:
   - isLocked: 0
     sprite: {fileID: 21300000, guid: 318e9d88a541f462e8261aeedff3e152, type: 3}
     titleName: Normal
-    start: 1
+    begin: 0
     end: 80
   - isLocked: 1
     sprite: {fileID: 21300000, guid: ee52549c264554fdd89b41e79ea4600d, type: 3}
     titleName: Hard
-    start: 81
+    begin: 0
     end: 160
   stageSelectPlayBtn: {fileID: 1727830785}
   showRewardPanel: {fileID: 1199048389}

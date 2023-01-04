@@ -90,7 +90,6 @@ public class Block_Prefab : MonoBehaviour
     protected Animator anim;
 
     //* Value
-    private const int TREASURECHEST_ORB_CNT = 10;
     private const int ITEMUI_SPRGLOW_MIN = 1;
     private float itemUISprGlowCnt = 0;
     private float itemUISprGlowSpan = 7.5f;
@@ -393,7 +392,7 @@ public class Block_Prefab : MonoBehaviour
         bm.createBossTargetMisslePf(targetTf);
         
         if(kind == BlockMaker.KIND.TreasureChest)
-            for(int i=0; i<TREASURECHEST_ORB_CNT; i++)
+            for(int i=0; i<LM._.TREASURECHEST_ORB_CNT; i++)
                 bm.createDropItemExpOrbPf(targetTf, resultExp);
         else if(kind == BlockMaker.KIND.Obstacle)
             em.createRockObstacleBrokenEF(targetTf.position);
