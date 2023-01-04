@@ -37,22 +37,25 @@ using UnityEngine.Serialization;
     Text title;     public Text Title { get => title; set => title = value; }
     Text range;     public Text Range { get => range; set => range = value; }
     Button imgBtn;     public Button ImgBtn { get => imgBtn; set => imgBtn = value; }
-    Image newLabel;     public Image NewLabal { get => newLabel; set => newLabel = value; }
+    RectTransform bonusLabel;     RectTransform BonusLabal { get => bonusLabel; set => bonusLabel = value; }
     
-    public void setUIMember(){
+    public void setUIMember(int i){
         //* Set Object
-        newLabel = Array.Find(rectTf.GetComponentsInChildren<Image>(), img => img.gameObject.name == "NewLabel");
         img = Array.Find(rectTf.GetComponentsInChildren<Image>(), img => img.gameObject.name == "StageImg");
         title = Array.Find(rectTf.GetComponentsInChildren<Text>(), txt => txt.gameObject.name == "TitleTxt");
         range = Array.Find(rectTf.GetComponentsInChildren<Text>(), txt => txt.gameObject.name == "RangeTxt");
         imgBtn = Array.Find(rectTf.GetComponentsInChildren<Button>(), btn => btn.gameObject.name == "ImgPanelBtn");
+        bonusLabel = Array.Find(rectTf.GetComponentsInChildren<RectTransform>(), obj => obj.name == "BonusLabel");
 
         //* Set UI
-        newLabel.gameObject.SetActive(false);
         img.sprite = Sprite;
         title.text = titleName;
         range.text = $"Stage {begin} ~ {end}";
         img.color = IsLocked? DM.ins.darkGray : Color.white;
+
+        //* init
+        bonusLabel.gameObject.SetActive((i == (int)DM.MODE.NORMAL)? false : true);
+        imgBtn.GetComponent<Image>().color = (i == (int)DM.MODE.NORMAL)? Color.yellow : Color.white;
     }
 }
 
@@ -552,32 +555,30 @@ public class HomeManager : MonoBehaviour
     }
 
     private void setStageSelectUIList(){
-        const int NORMAL_MODE = 0, HARD_MODE = 1;
         int value = LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN;
 
         //* Set Stage Range
-        stageSelects[NORMAL_MODE].Begin = 1;
-        stageSelects[NORMAL_MODE].End = value;
+        stageSelects[(int)DM.MODE.NORMAL].Begin = 1;
+        stageSelects[(int)DM.MODE.NORMAL].End = value;
 
-        stageSelects[HARD_MODE].Begin = value + 1;
-        stageSelects[HARD_MODE].End = value * 2;
+        stageSelects[(int)DM.MODE.HARD].Begin = value + 1;
+        stageSelects[(int)DM.MODE.HARD].End = value * 2;
 
         //* Check HardMode
         if(DM.ins.personalData.IsHardmodeOn)
-            stageSelects[HARD_MODE].IsLocked = false;
+            stageSelects[(int)DM.MODE.HARD].IsLocked = false;
 
         //* Set StageSelectList
         for(int i=0; i<stageSelects.Length; i++){
             //* Set member Value
             stageSelects[i].RectTf = Instantiate(stageSelectObjPf, stageSelectContent, false).GetComponent<RectTransform>();
-            stageSelects[i].setUIMember();
+            stageSelects[i].setUIMember(i);
 
             //* AddEventListener('onClick')
             int copy = i; //! (BUG-22) For分内にonClick.AddListener(int i)すると、Indexが全てLast+1になるバグ対応。
             stageSelects[i].ImgBtn.onClick.AddListener(() => onClickStageSelectImgBtn(copy));
         }
-        //* init
-        stageSelects[0].ImgBtn.GetComponent<Image>().color = Color.yellow;
+       
     }
 
     private void setSelectSkillImg(bool isInit = false){

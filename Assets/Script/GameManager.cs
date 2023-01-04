@@ -10,9 +10,8 @@ using UnityEngine.Serialization;
 public class GameManager : MonoBehaviour
 {
     public enum STATE {PLAY, WAIT, GAMEOVER, PAUSE, CONTINUE, HOME, NULL};
-    public enum MODE {NORMAL, HARD};
     [SerializeField] private STATE state;     public STATE State {get => state; set => state = value;}
-    [SerializeField] private MODE mode;       public MODE Mode {get => mode; set => mode = value;}
+    [SerializeField] private DM.MODE mode;       public DM.MODE Mode {get => mode; set => mode = value;}
     
     [Header("GROUP")][Header("__________________________")]
     public Transform effectGroup;
@@ -239,7 +238,7 @@ public class GameManager : MonoBehaviour
 
         //* Check Mode
         if(stage > LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN){
-            mode = MODE.HARD;
+            mode = DM.MODE.HARD;
         }
     }
 
@@ -685,7 +684,7 @@ public class GameManager : MonoBehaviour
         stageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage;
 
         //* Set Stage
-        if(mode == MODE.HARD)
+        if(mode == DM.MODE.HARD)
             stage -= LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN;
 
         //* Coin & Diamond
@@ -694,8 +693,8 @@ public class GameManager : MonoBehaviour
         int extraUpgradeCoin = Mathf.RoundToInt(coin * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.CoinBonus].getValue());
 
         //* Show Reward Coin & Diamond => setGameでも使う。
-        coinTxt.text = (coin + extraUpgradeCoin * (mode == MODE.HARD? LM._.HARDMODE_COIN_BONUS : 1)).ToString();
-        diamondTxt.text = (diamond * (mode == MODE.HARD? LM._.HARDMODE_DIAMOND_BONUS : 1)).ToString();
+        coinTxt.text = (coin + extraUpgradeCoin * (mode == DM.MODE.HARD? LM._.HARDMODE_COIN_BONUS : 1)).ToString();
+        diamondTxt.text = (diamond * (mode == DM.MODE.HARD? LM._.HARDMODE_DIAMOND_BONUS : 1)).ToString();
 
         //* Add Reward Goods
         DM.ins.personalData.Coin += int.Parse(coinTxt.text);
