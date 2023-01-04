@@ -87,6 +87,9 @@ public class DM : MonoBehaviour
     [Header("TUTORIAL")][Header("__________________________")]
     public TutorialPanel tutorialPanel;
 
+    [Header("SKY")][Header("__________________________")]
+    public Material simpleSkyMt;
+
     void Awake() => singleton();
     void Start(){
         LANG.initlanguageList();

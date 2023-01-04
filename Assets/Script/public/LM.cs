@@ -28,6 +28,9 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
 {
     public static LM _;
     //* Value
+    [HideInInspector] public float  SKY_MT_MORNING_VALUE = 1.0f;
+    [HideInInspector] public float  SKY_MT_DINNER_VALUE = 1.25f;
+
     [Header("GAME MANAGER")]
     [Tooltip("ステージ")] public int STAGE_NUM = 1;
 

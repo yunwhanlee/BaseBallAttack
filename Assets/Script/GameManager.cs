@@ -169,9 +169,9 @@ public class GameManager : MonoBehaviour
     public Sprite rouletteTicketSpr;
     public Sprite emptyPoopSpr;
 
-    // [Header("SKY")][Header("__________________________")]
-    // public Material simpleSkyMt;
-
+    [Header("SKY")][Header("__________________________")]
+    public GameObject skySunObj;
+    public GameObject skyMoonObj;
 
     void Start() {
         // Util._.calcArithmeticProgressionList(start: 100, max: 50, d: 100, gradualUpValue: 0.1f);
@@ -225,6 +225,13 @@ public class GameManager : MonoBehaviour
             Debug.LogFormat("activeSkillBtn[{0}].onClick.AddListener => onClickActiveSkillButton({1})", i,btnIdx);
             activeSkillBtnList.Add(new AtvSkillBtnUI(i, LM._.ATV_COOLDOWN_UNIT, pl.activeSkills[idx].Name, btn.GetComponent<Button>(), pl.activeSkills[idx].UISprite, activeSkillBtnEfMt));
         }
+
+        //* Sky Style
+        Debug.Log("SkyMt.offsetX= " + DM.ins.simpleSkyMt.GetTextureOffset("_MainTex").x);
+        if(DM.ins.simpleSkyMt.GetTextureOffset("_MainTex").x == LM._.SKY_MT_MORNING_VALUE)
+            skySunObj.SetActive(true);
+        else if(DM.ins.simpleSkyMt.GetTextureOffset("_MainTex").x == LM._.SKY_MT_DINNER_VALUE)
+            skyMoonObj.SetActive(true);
     }
 
     void Update(){
