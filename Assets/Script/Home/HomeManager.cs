@@ -116,6 +116,9 @@ public class HomeManager : MonoBehaviour
 
     [Header("ACHIVEMENT PANEL")][Header("__________________________")]
     public GameObject achivementPanel;
+    public RectTransform achivementContent;
+    public GameObject[] achivementPfs;
+    public Sprite[] rewardIconSprs;
 
     [Header("DIALOG")][Header("__________________________")]
     //* ShowAD
@@ -167,6 +170,10 @@ public class HomeManager : MonoBehaviour
         setStageSelectUIList();
 
         checkPremiumPackPurchaseStatus();
+
+        Array.ForEach(achivementPfs, pref => {
+            Instantiate(pref, achivementContent.transform);
+        });
 
         Debug.Log("LanguageOptDropDown.value= " + LanguageOptDropDown.value);
         Debug.Log("DM.ins.personalData.Lang= " + (int)DM.ins.personalData.Lang);
