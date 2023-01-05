@@ -114,6 +114,9 @@ public class HomeManager : MonoBehaviour
     public Transform showRewardItemListGroup;
     public GameObject showRewardItemPf;
 
+    [Header("ACHIVEMENT PANEL")][Header("__________________________")]
+    public GameObject achivementPanel;
+
     [Header("DIALOG")][Header("__________________________")]
     //* ShowAD
     public RectTransform showAdDialog;
