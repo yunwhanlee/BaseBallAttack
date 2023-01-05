@@ -232,10 +232,6 @@ public class PsvSkill<T> where T: struct {
     public static List<string> getPsvStatusInfo2Str(Player pl){
         //* PSV Unique Skill
         int DMG_TWICE = (pl.damageTwice.Level == 1)? 2 : 1;
-        // float GIANT_BALL_CALC = (pl.giantBall.Level == 1)? 
-        //     (pl.multiShot.Val + pl.verticalMultiShot.Val + pl.giantBall.Val) * pl.giantBall.Unit
-        //     : 1;
-        // Debug.Log("GIANT_BALL_CALC->" + GIANT_BALL_CALC);
 
         return new List<string>(){
             pl.dmg.Name,                    Mathf.RoundToInt(pl.dmg.Val * DMG_TWICE * pl.giantBall.Val).ToString(),

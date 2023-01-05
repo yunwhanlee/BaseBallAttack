@@ -248,12 +248,10 @@
         ✓ ステージGUI用意。
         ✓ ステージ NEW LABEL追加。
         ✓ 選択したステージに合わせて、Playしたら、ステージ数が変わる。
-        -  ロックされているステージはPlayできないように。
-        -  NEW LABEL処理。
+        ✓ ロックされているステージはPlayできないように。
         ✓ ステージ Play ボタン。
         ✓ REVIEWダイアログ追加。
         ✓ ゲームを３回以上プレイしたら、App-Reviewダイアログ表 
-        - GUI PRO KITにある、Charactor_Detailを通じて、SKILLとSTATS関したGUI修正。
         ✓ SettingDialog Country Icon Image.
         ✓ RemoveADなど一回限り商品：再購入できないように。
         ✓ Upgrade Item Set LVデザイン化。
@@ -265,6 +263,14 @@
         ✓ REFACTORY:: Block_Prefab.csで、setHpするとき、毎回リストを作る無駄な部分をbm.HpCalcList変数生成して改善。
         ✓ Sky Design HOME:: onClickPlayBtn => Morning or Night.
         ✓ HARDMODE GET REWARD COIN & DIAMOND + DISPLAY PLAY BTN ICON COIN & DIAMOND BONUS UI.
+        - スキルもアップグレードできるように。
+        - ボース制限時間UI改善。
+        ✓ GUI PRO KITにある、Charactor_Detailを通じて、SKILLとSTATS関したICON追加及びGUI修正。
+        - 音声、音楽追加。
+        - ミッション追加。
+        - スマホ対応。
+        - 最適化。
+
 
 
 

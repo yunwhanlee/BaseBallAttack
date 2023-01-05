@@ -140,7 +140,9 @@ public class GameManager : MonoBehaviour
 
     [Header("STATUS FOLDER")][Header("__________________________")]
     public Transform statusInfoContents;
-    public Text statusInfoTxtPf;
+    public GameObject statusInfoPf;
+    public Sprite[] statusIconSprArr;
+    public Color[] statusIconColorArr;
 
     [Header("BUTTON")][Header("__________________________")]
     public Button readyBtn; //normal
@@ -426,18 +428,36 @@ public class GameManager : MonoBehaviour
         Debug.Log("onClickStatusFolderButton():: isTrigger= " + isTrigger + ", pivotX=" + pivotX);
         statusFolderPanel.pivot = new Vector2(isTrigger? -1 : 0, 0.5f);
 
-        // Init
+        //* Init
         for(int i=0;i<statusInfoContents.childCount; i++)
             Destroy(statusInfoContents.GetChild(i).gameObject);
 
-        // Set InfoTxt List
+        //* Set InfoTxt List
         List<string> infoTxtList = PsvSkill<int>.getPsvStatusInfo2Str(pl);
+        List<string> nameList = new List<string>();
+        List<string> valueList = new List<string>();
 
-        // Apply InfoTxt List
-        infoTxtList.ForEach(infoTxt => {
-            statusInfoTxtPf.text = infoTxt;
-            Instantiate(statusInfoTxtPf, Vector3.zero, Quaternion.identity, statusInfoContents);
-        });
+        for(int i=0; i<infoTxtList.Count; i++){
+            if(i % 2 == 0) nameList.Add(infoTxtList[i]);
+            else valueList.Add(infoTxtList[i]);
+        }
+
+        //* Set statusInfo UI Style
+        {
+            const int BLUE = 0, RED = 1, ORANGE = 2, GREEN = 3;
+            int i=0;
+            nameList.ForEach(list => {
+                if(i == 0 || i == 1) statusInfoPf.transform.Find("IconPanel").GetComponent<Image>().color = statusIconColorArr[BLUE];
+                else if(i == 2 || i == 3) statusInfoPf.transform.Find("IconPanel").GetComponent<Image>().color = statusIconColorArr[RED];
+                else if(i == 4 || i == 5 || i == 6 || i == 7) statusInfoPf.transform.Find("IconPanel").GetComponent<Image>().color = statusIconColorArr[ORANGE];
+                else statusInfoPf.transform.Find("IconPanel").GetComponent<Image>().color = statusIconColorArr[GREEN];
+                statusInfoPf.transform.Find("IconPanel").transform.Find("IconImg").GetComponentInChildren<Image>().sprite = statusIconSprArr[i];
+                statusInfoPf.transform.Find("NameTxt").GetComponent<Text>().text = nameList[i];
+                statusInfoPf.transform.Find("ValueTxt").GetComponent<Text>().text = valueList[i];
+                Instantiate(statusInfoPf, Vector3.zero, Quaternion.identity, statusInfoContents);
+                i++;
+            });
+        }
     }
     public void onClickBtnOpenShowAdDialog(string type) {
         showAdDialog.gameObject.SetActive(true);
