@@ -231,6 +231,7 @@ public class HomeManager : MonoBehaviour
 #region Button
     public void onClickBtnQuestionMarkIcon() => DM.ins.displayTutorialUI();
     public void onClickPremiumPackIconBtn() => premiumPackPanel.SetActive(true);
+    public void onClickAchivementIconBtn() => achivementPanel.SetActive(true);
     public void onCLickRewardPanelOkBtn() {
         showRewardItemListGroup.transform.DetachChildren();
         showRewardPanel.SetActive(false);
