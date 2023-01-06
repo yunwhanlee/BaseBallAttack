@@ -838,6 +838,19 @@ public class GameManager : MonoBehaviour
             }
             boss.activeBossSkill();
         }
+
+        //* Achivement Stage
+        if(DM.ins.personalData.LastStage <= stage){
+            DM.ins.personalData.LastStage = stage;
+        }
+        
+        switch(stage){
+            case 10 : DM.ins.personalData.Stage10Clear = true; break;
+            case 30 : DM.ins.personalData.Stage30Clear = true; break;
+            case 60 : DM.ins.personalData.Stage60Clear = true; break;
+            case 100 : DM.ins.personalData.Stage100Clear = true; break;
+            case 160 : DM.ins.personalData.Stage160Clear = true; break;
+        }
     }
 
     private void destroyEveryBalls(){

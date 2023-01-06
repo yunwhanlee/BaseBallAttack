@@ -172,7 +172,8 @@ public class HomeManager : MonoBehaviour
         checkPremiumPackPurchaseStatus();
 
         Array.ForEach(achivementPfs, pref => {
-            Instantiate(pref, achivementContent.transform);
+            var ins = Instantiate(pref, achivementContent.transform);
+            ins.name = ins.name.Split('(')[0]; //* 名前 + (Clone)削除。
         });
 
         Debug.Log("LanguageOptDropDown.value= " + LanguageOptDropDown.value);

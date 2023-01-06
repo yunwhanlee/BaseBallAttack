@@ -24,6 +24,14 @@ public class PersonalData {
     [SerializeField] bool isSkipTutorial; public bool IsSkipTutorial {get => isSkipTutorial; set => isSkipTutorial = value;}
     [SerializeField] bool isPurchasePremiumPack; public bool IsPurchasePremiumPack {get => isPurchasePremiumPack; set => isPurchasePremiumPack = value;}
 
+    [Header("ACHIVEMENT")][Header("__________________________")]
+    [SerializeField] int lastStage; public int LastStage {get => lastStage; set => lastStage = value;}
+    [SerializeField] bool stage10Clear; public bool Stage10Clear {get => stage10Clear; set => stage10Clear = value;}
+    [SerializeField] bool stage30Clear; public bool Stage30Clear {get => stage30Clear; set => stage30Clear = value;}
+    [SerializeField] bool stage60Clear; public bool Stage60Clear {get => stage60Clear; set => stage60Clear = value;}
+    [SerializeField] bool stage100Clear; public bool Stage100Clear {get => stage100Clear; set => stage100Clear = value;}
+    [SerializeField] bool stage160Clear; public bool Stage160Clear {get => stage160Clear; set => stage160Clear = value;}
+
     [Header("CHARACTOR")][Header("__________________________")]
     [SerializeField] int selectCharaIdx;  public int SelectCharaIdx {get => selectCharaIdx; set => selectCharaIdx = value;}
     [SerializeField] List<bool> charaLockList;  public List<bool> CharaLockList {get => charaLockList; set => charaLockList = value;}
@@ -43,7 +51,7 @@ public class PersonalData {
     [Header("UPGRADE ABILITY")][Header("__________________________")]
     [FormerlySerializedAs("upgrade")]
     [SerializeField] UpgradeList upgrade; public UpgradeList Upgrade {get => upgrade; set => upgrade = value;}
-    
+
     //* PlayerPrefs キー リスト => privateは jsonには追加しない。
     private List<string> keyList;  public List<string> KeyList {get => keyList; set => keyList = value;}
 
@@ -89,6 +97,14 @@ public class PersonalData {
         this.isSkipTutorial = data.IsSkipTutorial;
         this.isPurchasePremiumPack = data.IsPurchasePremiumPack;
 
+        this.lastStage = data.LastStage;
+        this.stage10Clear = data.Stage10Clear;
+        this.stage30Clear = data.stage30Clear;
+        this.stage60Clear = data.stage60Clear;
+        this.stage100Clear = data.stage100Clear;
+        this.stage160Clear = data.Stage160Clear;
+
+
         this.SelectCharaIdx = data.SelectCharaIdx;
         this.CharaLockList = data.CharaLockList;
 
@@ -102,6 +118,7 @@ public class PersonalData {
 
         // this.ItemPassive = data.ItemPassive;
         this.Upgrade = data.Upgrade;
+
 
         //* Set Real Content Items IsLock
         for(int i=0; i<charas.Length; i++){
@@ -146,6 +163,13 @@ public class PersonalData {
         this.isSkipTutorial = false;
         this.isPurchasePremiumPack = false;
 
+        this.lastStage = 1;
+        this.stage10Clear = false;
+        this.stage30Clear = false;
+        this.stage60Clear = false;
+        this.stage100Clear = false;
+        this.stage160Clear = false;
+
         this.SelectCharaIdx = 0;
         this.CharaLockList = new List<bool>();
 
@@ -174,7 +198,6 @@ public class PersonalData {
             if(i==0) this.SkillLockList.Add(false);//    items[0].IsLock = false;}
             else     this.SkillLockList.Add(true);//     items[i].IsLock = true;}
         }
-
     }
 
     public int getSelectIdx(string type){
