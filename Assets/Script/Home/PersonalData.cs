@@ -5,6 +5,19 @@ using UnityEngine.Serialization;
 using System;
 
 [System.Serializable]
+public class AchivementInfo {
+    [SerializeField] int val;        public int Val {get => val;}
+    [SerializeField] int reward;     public int Reward {get => reward;}
+    [SerializeField] bool isAccept;  public bool IsAccept {get => isAccept; set => isAccept = value;}
+    [SerializeField] bool isComplete;   public bool IsComplete {get => isComplete; set => isComplete = value;}
+
+    public AchivementInfo(int val, int reward) {
+        this.val = val;
+        this.reward = reward;
+    }
+}
+
+[System.Serializable]
 public class PersonalData {
     //* Value
     [SerializeField] LANG.TP lang; public LANG.TP Lang {get => lang; set => lang = value;}
@@ -25,12 +38,13 @@ public class PersonalData {
     [SerializeField] bool isPurchasePremiumPack; public bool IsPurchasePremiumPack {get => isPurchasePremiumPack; set => isPurchasePremiumPack = value;}
 
     [Header("ACHIVEMENT")][Header("__________________________")]
-    [SerializeField] int lastStage; public int LastStage {get => lastStage; set => lastStage = value;}
-    [SerializeField] bool stage10Clear; public bool Stage10Clear {get => stage10Clear; set => stage10Clear = value;}
-    [SerializeField] bool stage30Clear; public bool Stage30Clear {get => stage30Clear; set => stage30Clear = value;}
-    [SerializeField] bool stage60Clear; public bool Stage60Clear {get => stage60Clear; set => stage60Clear = value;}
-    [SerializeField] bool stage100Clear; public bool Stage100Clear {get => stage100Clear; set => stage100Clear = value;}
-    [SerializeField] bool stage160Clear; public bool Stage160Clear {get => stage160Clear; set => stage160Clear = value;}
+    [SerializeField] int clearStage; public int ClearStage {get => clearStage; set => clearStage = value;}
+    [SerializeField] AchivementInfo[] stageClearArr; public AchivementInfo[] StageClearArr {get => stageClearArr; set => stageClearArr = value;}
+    // [SerializeField] AchivementInfo stage10Clear; public AchivementInfo Stage10Clear {get => stage10Clear; set => stage10Clear = value;}
+    // [SerializeField] AchivementInfo stage30Clear; public AchivementInfo Stage30Clear {get => stage30Clear; set => stage30Clear = value;}
+    // [SerializeField] AchivementInfo stage60Clear; public AchivementInfo Stage60Clear {get => stage60Clear; set => stage60Clear = value;}
+    // [SerializeField] AchivementInfo stage100Clear; public AchivementInfo Stage100Clear {get => stage100Clear; set => stage100Clear = value;}
+    // [SerializeField] AchivementInfo stage160Clear; public AchivementInfo Stage160Clear {get => stage160Clear; set => stage160Clear = value;}
 
     [Header("CHARACTOR")][Header("__________________________")]
     [SerializeField] int selectCharaIdx;  public int SelectCharaIdx {get => selectCharaIdx; set => selectCharaIdx = value;}
@@ -60,6 +74,7 @@ public class PersonalData {
     //* constructor
     public PersonalData(){
         Debug.Log($"{this}::constructor");
+        
         //* 初期化
         this.KeyList = new List<string>();
         this.charaLockList = new List<bool>();
@@ -67,6 +82,14 @@ public class PersonalData {
         this.skillLockList = new List<bool>();
         this.itemPassive = new ItemPsvList();
         this.upgrade = new UpgradeList();
+
+        this.stageClearArr = new AchivementInfo[] {
+            new AchivementInfo(10, 10),
+            new AchivementInfo(30, 30),
+            new AchivementInfo(60, 60),
+            new AchivementInfo(100, 100),
+            new AchivementInfo(160, 160),
+        };
 
         // Debug.Log("PersonalData::upgrade.Arr[0].lv-->" + upgrade.Arr[0].lv);
     }
@@ -97,13 +120,8 @@ public class PersonalData {
         this.isSkipTutorial = data.IsSkipTutorial;
         this.isPurchasePremiumPack = data.IsPurchasePremiumPack;
 
-        this.lastStage = data.LastStage;
-        this.stage10Clear = data.Stage10Clear;
-        this.stage30Clear = data.stage30Clear;
-        this.stage60Clear = data.stage60Clear;
-        this.stage100Clear = data.stage100Clear;
-        this.stage160Clear = data.Stage160Clear;
-
+        this.clearStage = data.ClearStage;
+        this.stageClearArr = data.stageClearArr;
 
         this.SelectCharaIdx = data.SelectCharaIdx;
         this.CharaLockList = data.CharaLockList;
@@ -163,12 +181,14 @@ public class PersonalData {
         this.isSkipTutorial = false;
         this.isPurchasePremiumPack = false;
 
-        this.lastStage = 1;
-        this.stage10Clear = false;
-        this.stage30Clear = false;
-        this.stage60Clear = false;
-        this.stage100Clear = false;
-        this.stage160Clear = false;
+        this.clearStage = 1;
+        this.stageClearArr = new AchivementInfo[] {
+            new AchivementInfo(10, 10),
+            new AchivementInfo(30, 30),
+            new AchivementInfo(60, 60),
+            new AchivementInfo(100, 100),
+            new AchivementInfo(160, 160),
+        };
 
         this.SelectCharaIdx = 0;
         this.CharaLockList = new List<bool>();
