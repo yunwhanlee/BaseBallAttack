@@ -5,19 +5,6 @@ using UnityEngine.Serialization;
 using System;
 
 [System.Serializable]
-public class AchivementInfo {
-    [SerializeField] int val;        public int Val {get => val;}
-    [SerializeField] int reward;     public int Reward {get => reward;}
-    [SerializeField] bool isAccept;  public bool IsAccept {get => isAccept; set => isAccept = value;}
-    [SerializeField] bool isComplete;   public bool IsComplete {get => isComplete; set => isComplete = value;}
-
-    public AchivementInfo(int val, int reward) {
-        this.val = val;
-        this.reward = reward;
-    }
-}
-
-[System.Serializable]
 public class PersonalData {
     //* Value
     [SerializeField] LANG.TP lang; public LANG.TP Lang {get => lang; set => lang = value;}
@@ -43,6 +30,15 @@ public class PersonalData {
 
     [SerializeField] int destroyBlockCnt; public int DestroyBlockCnt {get => destroyBlockCnt; set => destroyBlockCnt = value;}
     [SerializeField] AchivementInfo[] destroyBlockArr; public AchivementInfo[] DestroyBlockArr {get => destroyBlockArr; set => destroyBlockArr = value;}
+
+    [SerializeField] int collectedCoin; public int CollectedCoin {get => collectedCoin; set => collectedCoin = value;}
+    [SerializeField] AchivementInfo[] collectedCoinArr; public AchivementInfo[] CollectedCoinArr {get => collectedCoinArr; set => collectedCoinArr = value;}
+
+    [SerializeField] int collectedDiamond; public int CollectedDiamond {get => collectedDiamond; set => collectedDiamond = value;}
+    [SerializeField] AchivementInfo[] collectedDiamondArr; public AchivementInfo[] CollectedDiamondArr {get => collectedDiamondArr; set => collectedDiamondArr = value;}
+
+    [SerializeField] int collectedRouletteTicket; public int CollectedRouletteTicket {get => collectedRouletteTicket; set => collectedRouletteTicket = value;}
+    [SerializeField] AchivementInfo[] collectedRouletteTicketArr; public AchivementInfo[] CollectedRouletteTicketArr {get => collectedRouletteTicketArr; set => collectedRouletteTicketArr = value;}
 
     [Header("CHARACTOR")][Header("__________________________")]
     [SerializeField] int selectCharaIdx;  public int SelectCharaIdx {get => selectCharaIdx; set => selectCharaIdx = value;}
@@ -95,6 +91,27 @@ public class PersonalData {
             new AchivementInfo(700, 70),
             new AchivementInfo(1000, 100),
         };
+        this.collectedCoinArr = new AchivementInfo[] {
+            new AchivementInfo(50000, 100),
+            new AchivementInfo(100000, 200),
+            new AchivementInfo(200000, 300),
+            new AchivementInfo(500000, 400),
+            new AchivementInfo(1000000, 500),
+        };
+        this.collectedDiamondArr = new AchivementInfo[] {
+            new AchivementInfo(500, 100),
+            new AchivementInfo(1000, 200),
+            new AchivementInfo(2000, 300),
+            new AchivementInfo(5000, 400),
+            new AchivementInfo(10000, 500),
+        };
+        this.collectedRouletteTicketArr = new AchivementInfo[] {
+            new AchivementInfo(10, 1),
+            new AchivementInfo(50, 2),
+            new AchivementInfo(100, 3),
+            new AchivementInfo(150, 4),
+            new AchivementInfo(300, 5),
+        };
 
         // Debug.Log("PersonalData::upgrade.Arr[0].lv-->" + upgrade.Arr[0].lv);
     }
@@ -125,11 +142,23 @@ public class PersonalData {
         this.isSkipTutorial = data.IsSkipTutorial;
         this.isPurchasePremiumPack = data.IsPurchasePremiumPack;
 
+        //* Achivement
         this.clearStage = data.ClearStage;
         this.stageClearArr = data.StageClearArr;
+
         this.destroyBlockCnt = data.DestroyBlockCnt;
         this.destroyBlockArr = data.DestroyBlockArr;
 
+        this.collectedCoin = data.CollectedCoin;
+        this.collectedCoinArr = data.collectedCoinArr;
+
+        this.collectedDiamond = data.CollectedDiamond;
+        this.collectedDiamondArr = data.collectedDiamondArr;
+
+        this.collectedRouletteTicket = data.CollectedRouletteTicket;
+        this.collectedRouletteTicketArr = data.collectedRouletteTicketArr;
+
+        //* Item
         this.SelectCharaIdx = data.SelectCharaIdx;
         this.CharaLockList = data.CharaLockList;
 
@@ -173,14 +202,15 @@ public class PersonalData {
         Debug.Log("<size=30>RESET</size>");
         PlayerPrefs.DeleteAll();
 
-        this.Lang = LANG.TP.JP;
+        this.lang = LANG.TP.JP;
 
-        this.PlayTime = 0;
+        this.playTime = 0;
 
-        this.Coin = 100000;
-        this.Diamond = 0;
+        this.coin = 0;
+        this.diamond = 0;
         this.rouletteTicket = 1; //* 1つ上げるのは、ボーナス感じ。
-        this.RouletteTicketCoolTime = DateTime.Now.ToString();
+
+        this.rouletteTicketCoolTime = DateTime.Now.ToString();
 
         this.isHardmodeOn = false;
         this.isHardmodeEnableNotice = false;
@@ -203,6 +233,30 @@ public class PersonalData {
             new AchivementInfo(400, 40),
             new AchivementInfo(700, 70),
             new AchivementInfo(1000, 100),
+        };
+        this.collectedCoin = this.coin;
+        this.collectedCoinArr = new AchivementInfo[] {
+            new AchivementInfo(50000, 100),
+            new AchivementInfo(100000, 200),
+            new AchivementInfo(200000, 300),
+            new AchivementInfo(500000, 400),
+            new AchivementInfo(1000000, 500),
+        };
+        this.collectedDiamond = this.diamond;
+        this.collectedDiamondArr = new AchivementInfo[] {
+            new AchivementInfo(500, 100),
+            new AchivementInfo(1000, 200),
+            new AchivementInfo(2000, 300),
+            new AchivementInfo(5000, 400),
+            new AchivementInfo(10000, 500),
+        };
+        this.collectedRouletteTicket = this.rouletteTicket;
+        this.collectedRouletteTicketArr = new AchivementInfo[] {
+            new AchivementInfo(10, 1),
+            new AchivementInfo(50, 2),
+            new AchivementInfo(100, 3),
+            new AchivementInfo(150, 4),
+            new AchivementInfo(300, 5),
         };
 
         this.SelectCharaIdx = 0;
@@ -263,5 +317,18 @@ public class PersonalData {
             case DM.PANEL.Bat :    BatLockList[curIdx] = false;   break;
             case DM.PANEL.Skill :  SkillLockList[curIdx] = false; break;
         }
+    }
+
+    public void addCoin(int amount){
+        coin += amount;
+        Achivement.collectCoin(amount);
+    }
+    public void addDiamond(int amount){
+        diamond += amount;
+        Achivement.collectDiamond(amount);
+    }
+    public void addRouletteTicket(int amount){
+        rouletteTicket += amount;
+        Achivement.collectRouletteTicket(amount);
     }
 }

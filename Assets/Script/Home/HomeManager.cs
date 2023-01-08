@@ -216,6 +216,9 @@ public class HomeManager : MonoBehaviour
             hardModeEnableNoticeContent2Txt.text = LANG.getTxt(LANG.TXT.HardMode_Content2.ToString());
             hardModeEnableNoticeOkBtnTxt.text = LANG.getTxt(LANG.TXT.Ok.ToString());
         }
+
+        //* Check Goods Achivement IsComplete (これしないと、業績達成しても、全てのIsCompleteがFalseのまま)。
+        Achivement.setGoodsCompletedList();
     }
 
     void Update(){
@@ -509,9 +512,9 @@ public class HomeManager : MonoBehaviour
             DM.ins.personalData.IsPurchasePremiumPack = true;
 
             // Set Data
-            DM.ins.personalData.RouletteTicket += LM._.PREM_PACK_ROULETTE_TICKET;
-            DM.ins.personalData.Coin += LM._.PREM_PACK_COIN;
-            DM.ins.personalData.Diamond += LM._.PREM_PACK_DIAMOND;
+            DM.ins.personalData.addRouletteTicket(LM._.PREM_PACK_ROULETTE_TICKET);
+            DM.ins.personalData.addCoin(LM._.PREM_PACK_COIN); // DM.ins.personalData.Coin += LM._.PREM_PACK_COIN;
+            DM.ins.personalData.addDiamond(LM._.PREM_PACK_DIAMOND);
             DM.ins.personalData.IsRemoveAD = true;
 
             // UI
@@ -525,8 +528,6 @@ public class HomeManager : MonoBehaviour
                 removeAD: true
             );
 
-            
-            
         }else{
             //TODO 失敗した DIALOG表示。
             Debug.LogError($"<size=20><color=yellow> HM::onClickPremiumPackPurchaseBtn:: IN-APP-PURCHASE FAIL! :( </color></size>");

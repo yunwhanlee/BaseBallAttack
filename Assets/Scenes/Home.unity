@@ -1618,6 +1618,72 @@ MonoBehaviour:
       reward: 100
       isAccept: 0
       isComplete: 0
+    collectedCoin: 0
+    collectedCoinArr:
+    - val: 50000
+      reward: 100
+      isAccept: 0
+      isComplete: 0
+    - val: 100000
+      reward: 200
+      isAccept: 0
+      isComplete: 0
+    - val: 200000
+      reward: 300
+      isAccept: 0
+      isComplete: 0
+    - val: 500000
+      reward: 400
+      isAccept: 0
+      isComplete: 0
+    - val: 1000000
+      reward: 500
+      isAccept: 0
+      isComplete: 0
+    collectedDiamond: 0
+    collectedDiamondArr:
+    - val: 500
+      reward: 100
+      isAccept: 0
+      isComplete: 0
+    - val: 1000
+      reward: 200
+      isAccept: 0
+      isComplete: 0
+    - val: 2000
+      reward: 300
+      isAccept: 0
+      isComplete: 0
+    - val: 5000
+      reward: 400
+      isAccept: 0
+      isComplete: 0
+    - val: 10000
+      reward: 500
+      isAccept: 0
+      isComplete: 0
+    collectedRouletteTicket: 0
+    collectedRouletteTicketArr:
+    - val: 10
+      reward: 1
+      isAccept: 0
+      isComplete: 0
+    - val: 50
+      reward: 2
+      isAccept: 0
+      isComplete: 0
+    - val: 100
+      reward: 3
+      isAccept: 0
+      isComplete: 0
+    - val: 150
+      reward: 4
+      isAccept: 0
+      isComplete: 0
+    - val: 300
+      reward: 5
+      isAccept: 0
+      isComplete: 0
     selectCharaIdx: 0
     charaLockList: 
     selectBatIdx: 0
@@ -28173,15 +28239,15 @@ MonoBehaviour:
   achivementPfs:
   - {fileID: 2682170137326998400, guid: 1595392a720bd324eb3971a6c5d8889e, type: 3}
   - {fileID: 2682170137326998400, guid: 4de0cf2ede8f7bc46b9ed955293838ff, type: 3}
+  - {fileID: 2682170137326998400, guid: 4d0ebccfe9c7b784ebaa874a0683f08c, type: 3}
+  - {fileID: 2682170137326998400, guid: cc4b8b7fdf239f04a811e9bd75a351fe, type: 3}
+  - {fileID: 2682170137326998400, guid: 0d80e452c4593ab41815526ea01f099d, type: 3}
   - {fileID: 2682170137326998400, guid: ac2f9a6a9fa32a441b4e54e9bf736aa8, type: 3}
   - {fileID: 2682170137326998400, guid: 3b1d42b3eb873d34d8e63cc8988684e6, type: 3}
   - {fileID: 2682170137326998400, guid: e664d83d0e773df47b184e3684cf02c5, type: 3}
-  - {fileID: 2682170137326998400, guid: 4d0ebccfe9c7b784ebaa874a0683f08c, type: 3}
-  - {fileID: 2682170137326998400, guid: cc4b8b7fdf239f04a811e9bd75a351fe, type: 3}
   - {fileID: 2682170137326998400, guid: bc794e0c48da8034cbf592fcdfa8c905, type: 3}
   - {fileID: 2682170137326998400, guid: 7aa8d9353d00aae4989f698c28a71941, type: 3}
   - {fileID: 2682170137326998400, guid: 00e0642e729a27342b116197ac704b85, type: 3}
-  - {fileID: 2682170137326998400, guid: 0d80e452c4593ab41815526ea01f099d, type: 3}
   - {fileID: 2682170137326998400, guid: 5923ad624801481478371d0468efde1f, type: 3}
   rewardIconSprs:
   - {fileID: 21300000, guid: 56d6624c6f0014a7c8870cbbf2c74cbe, type: 3}

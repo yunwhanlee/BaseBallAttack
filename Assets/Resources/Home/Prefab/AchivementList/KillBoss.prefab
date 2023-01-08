@@ -250,7 +250,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 130, y: 52.82605}
+  m_AnchoredPosition: {x: 170, y: 52.82605}
   m_SizeDelta: {x: 150, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2682170135403284275
@@ -330,7 +330,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 130, y: 25}
+  m_AnchoredPosition: {x: 170, y: 25}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2682170135962915811
@@ -726,12 +726,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99268be5e7c824447b8e5adb99a073aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelImg: {fileID: 0}
-  infoTxt: {fileID: 0}
-  valueTxt: {fileID: 0}
-  rewardIconImg: {fileID: 0}
-  rewardTxt: {fileID: 0}
-  claimBtn: {fileID: 0}
+  rewardType: 1
+  step: 1
+  maxStep: 0
+  cnt: 0
+  max: 0
+  rewardValue: 0
+  allClear: 0
+  targetArr: []
 --- !u!1 &4622852445226402249
 GameObject:
   m_ObjectHideFlags: 0

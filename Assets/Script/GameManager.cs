@@ -389,7 +389,7 @@ public class GameManager : MonoBehaviour
                 levelUpPanel.GetComponent<LevelUpPanelAnimate>().setUI(DM.NAME.PsvSkillTicket.ToString());
                 break;
             case ROULETTE_TICKET:
-                DM.ins.personalData.RouletteTicket++;
+                DM.ins.personalData.addRouletteTicket(1);
                 break;
             case EMPTY:
                 //何もしない。
@@ -717,8 +717,8 @@ public class GameManager : MonoBehaviour
         diamondTxt.text = (diamond * (mode == DM.MODE.HARD? LM._.HARDMODE_DIAMOND_BONUS : 1)).ToString();
 
         //* Add Reward Goods
-        DM.ins.personalData.Coin += int.Parse(coinTxt.text);
-        DM.ins.personalData.Diamond += int.Parse(diamondTxt.text);
+        DM.ins.personalData.addCoin(int.Parse(coinTxt.text)); // DM.ins.personalData.Coin += int.Parse(coinTxt.text);
+        DM.ins.personalData.addDiamond(int.Parse(diamondTxt.text));
         
         //* Rate Dialogを表示するため
         DM.ins.personalData.PlayTime++;

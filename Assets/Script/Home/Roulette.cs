@@ -131,11 +131,11 @@ public class Roulette : MonoBehaviour
     private void setRewardResult(){
         Debug.Log("onClickRouletteSpinBtn::setRewardResult:: rewardIcon= " + rewardIcon.name + ", rewardPrice= " + rewardPrice);
         if(rewardIcon.name.Contains(ITEM_OBJ_NAME.coin.ToString()))
-            DM.ins.personalData.Coin += rewardPrice;
+            DM.ins.personalData.addCoin(rewardPrice); // DM.ins.personalData.Coin += rewardPrice;
         else if(rewardIcon.name.Contains(ITEM_OBJ_NAME.gem.ToString()))
-            DM.ins.personalData.Diamond += rewardPrice;
+            DM.ins.personalData.addDiamond(rewardPrice);
         else if(rewardIcon.name.Contains(ITEM_OBJ_NAME.RouletteTicket.ToString()))
-            DM.ins.personalData.RouletteTicket += rewardPrice;
+            DM.ins.personalData.addRouletteTicket(rewardPrice);
         else if(rewardIcon.name.Contains(ITEM_OBJ_NAME.poop.ToString())){}
             //なし
     }

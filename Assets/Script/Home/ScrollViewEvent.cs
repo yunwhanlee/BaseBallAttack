@@ -616,14 +616,14 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 if(itemName.Contains(DM.NAME.Coin.ToString())){
                     int reward = int.Parse(itemName.Split('n')[1]);
                     hm.displayShowRewardPanel(coin: reward);
-                    DM.ins.personalData.Coin += reward;
+                    DM.ins.personalData.addCoin(reward); // DM.ins.personalData.Coin += reward;
                 }
                 else if(itemName.Contains(DM.NAME.Diamond.ToString())){
                     bool success = DM.ins.reqAppPayment();
                     if(success){
                         int reward = int.Parse(itemName.Split('d')[1]);
                         hm.displayShowRewardPanel(coin: 0, diamond: reward);
-                        DM.ins.personalData.Diamond += reward;
+                        DM.ins.personalData.addDiamond(reward);
                     }
                 }
                 else if(itemName.Contains(DM.NAME.RemoveAD.ToString())) {
