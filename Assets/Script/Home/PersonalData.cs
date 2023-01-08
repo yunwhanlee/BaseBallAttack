@@ -40,11 +40,9 @@ public class PersonalData {
     [Header("ACHIVEMENT")][Header("__________________________")]
     [SerializeField] int clearStage; public int ClearStage {get => clearStage; set => clearStage = value;}
     [SerializeField] AchivementInfo[] stageClearArr; public AchivementInfo[] StageClearArr {get => stageClearArr; set => stageClearArr = value;}
-    // [SerializeField] AchivementInfo stage10Clear; public AchivementInfo Stage10Clear {get => stage10Clear; set => stage10Clear = value;}
-    // [SerializeField] AchivementInfo stage30Clear; public AchivementInfo Stage30Clear {get => stage30Clear; set => stage30Clear = value;}
-    // [SerializeField] AchivementInfo stage60Clear; public AchivementInfo Stage60Clear {get => stage60Clear; set => stage60Clear = value;}
-    // [SerializeField] AchivementInfo stage100Clear; public AchivementInfo Stage100Clear {get => stage100Clear; set => stage100Clear = value;}
-    // [SerializeField] AchivementInfo stage160Clear; public AchivementInfo Stage160Clear {get => stage160Clear; set => stage160Clear = value;}
+
+    [SerializeField] int destroyBlockCnt; public int DestroyBlockCnt {get => destroyBlockCnt; set => destroyBlockCnt = value;}
+    [SerializeField] AchivementInfo[] destroyBlockArr; public AchivementInfo[] DestroyBlockArr {get => destroyBlockArr; set => destroyBlockArr = value;}
 
     [Header("CHARACTOR")][Header("__________________________")]
     [SerializeField] int selectCharaIdx;  public int SelectCharaIdx {get => selectCharaIdx; set => selectCharaIdx = value;}
@@ -90,6 +88,13 @@ public class PersonalData {
             new AchivementInfo(100, 100),
             new AchivementInfo(160, 160),
         };
+        this.destroyBlockArr = new AchivementInfo[] {
+            new AchivementInfo(100, 10),
+            new AchivementInfo(200, 20),
+            new AchivementInfo(400, 40),
+            new AchivementInfo(700, 70),
+            new AchivementInfo(1000, 100),
+        };
 
         // Debug.Log("PersonalData::upgrade.Arr[0].lv-->" + upgrade.Arr[0].lv);
     }
@@ -121,7 +126,9 @@ public class PersonalData {
         this.isPurchasePremiumPack = data.IsPurchasePremiumPack;
 
         this.clearStage = data.ClearStage;
-        this.stageClearArr = data.stageClearArr;
+        this.stageClearArr = data.StageClearArr;
+        this.destroyBlockCnt = data.DestroyBlockCnt;
+        this.destroyBlockArr = data.DestroyBlockArr;
 
         this.SelectCharaIdx = data.SelectCharaIdx;
         this.CharaLockList = data.CharaLockList;
@@ -188,6 +195,14 @@ public class PersonalData {
             new AchivementInfo(60, 60),
             new AchivementInfo(100, 100),
             new AchivementInfo(160, 160),
+        };
+        this.destroyBlockCnt = 0;
+        this.destroyBlockArr = new AchivementInfo[] {
+            new AchivementInfo(100, 10),
+            new AchivementInfo(200, 20),
+            new AchivementInfo(400, 40),
+            new AchivementInfo(700, 70),
+            new AchivementInfo(1000, 100),
         };
 
         this.SelectCharaIdx = 0;

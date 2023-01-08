@@ -397,6 +397,10 @@ public class Block_Prefab : MonoBehaviour
         else if(kind == BlockMaker.KIND.Obstacle)
             em.createRockObstacleBrokenEF(targetTf.position);
 
+        //* Add Destroy Blocks
+        if(!isInitialize) 
+            Achivement.addDestroyBlockCnt();
+
         Destroy(target);
     }
 

@@ -200,7 +200,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2572671872519699574}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -7032661146695496952}
+        m_TargetAssemblyTypeName: Achivement, Assembly-CSharp
+        m_MethodName: onClickCalimBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6826752870630252131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -726,8 +738,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99268be5e7c824447b8e5adb99a073aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rewardType: 0
+  rewardType: 1
+  step: 1
+  maxStep: 0
+  cnt: 0
+  max: 0
   rewardValue: 0
+  allClear: 0
 --- !u!1 &4622852445226402249
 GameObject:
   m_ObjectHideFlags: 0
