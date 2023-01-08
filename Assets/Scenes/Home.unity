@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45015454, g: 0.5001945, b: 0.57542807, a: 1}
+  m_IndirectSpecularColor: {r: 0.45015407, g: 0.500194, b: 0.5754274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1574,6 +1574,28 @@ MonoBehaviour:
     isRemoveAD: 0
     isSkipTutorial: 0
     isPurchasePremiumPack: 0
+    clearStage: 0
+    stageClearArr:
+    - val: 10
+      reward: 10
+      isAccept: 0
+      isComplete: 0
+    - val: 30
+      reward: 30
+      isAccept: 0
+      isComplete: 0
+    - val: 60
+      reward: 60
+      isAccept: 0
+      isComplete: 0
+    - val: 100
+      reward: 100
+      isAccept: 0
+      isComplete: 0
+    - val: 160
+      reward: 160
+      isAccept: 0
+      isComplete: 0
     selectCharaIdx: 0
     charaLockList: 
     selectBatIdx: 0
@@ -1671,11 +1693,6 @@ MonoBehaviour:
         lv: 0
         maxLv: 0
         unit: 0.05
-    stage10Clear: 0
-    stage30Clear: 0
-    stage60Clear: 0
-    stage100Clear: 0
-    stage160Clear: 0
   rankGeneralClr: {r: 1, g: 1, b: 1, a: 0.5019608}
   rankRareClr: {r: 0, g: 0.003921569, b: 1, a: 0.6509804}
   rankUniqueClr: {r: 1, g: 0, b: 1, a: 0.5019608}
@@ -11802,9 +11819,9 @@ RectTransform:
   - {fileID: 1939486118}
   - {fileID: 1732122243}
   - {fileID: 4041380315914218745}
-  - {fileID: 1199048390}
   - {fileID: 2383291514987288977}
   - {fileID: 7286630997084819608}
+  - {fileID: 1199048390}
   - {fileID: 349844472}
   - {fileID: 445535723}
   - {fileID: 3740557287594494759}
@@ -15973,7 +15990,7 @@ RectTransform:
   - {fileID: 499569021}
   - {fileID: 1448070834}
   m_Father: {fileID: 925401117}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -31718,7 +31735,7 @@ RectTransform:
   - {fileID: 2383291514485568500}
   - {fileID: 1727830784}
   m_Father: {fileID: 925401117}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -46607,7 +46624,7 @@ RectTransform:
   - {fileID: 7286630997525974014}
   - {fileID: 7286630996577789680}
   m_Father: {fileID: 925401117}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

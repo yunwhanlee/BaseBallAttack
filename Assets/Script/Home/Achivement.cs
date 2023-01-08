@@ -17,6 +17,7 @@ public class Achivement : MonoBehaviour
     [SerializeField] int step = 1, maxStep;
     [SerializeField] int cnt, max;
     [SerializeField] int rewardValue;
+    [SerializeField] bool allClear;
 
     //* Obj
     Image panelImg, rewardIconImg;
@@ -46,30 +47,37 @@ public class Achivement : MonoBehaviour
             case "StageClear" : {
                 cnt = pDt.ClearStage;
                 Debug.Log($"Achivement:: StageClear:: cnt= {cnt}");
-                if(pDt.StageClearArr[STG160].IsComplete && pDt.StageClearArr[STG160].IsAccept){
+
+                if(pDt.StageClearArr[STG160].IsAccept){
+                    max = pDt.StageClearArr[STG160].Val;
+                    infoTxt.text = $"Stage All Clear";
+                    rewardTxt.text = pDt.StageClearArr[STG160].Reward.ToString();
+                    allClear = true;
+                }
+                else if(pDt.StageClearArr[STG100].IsAccept){
                     max = pDt.StageClearArr[STG160].Val;
                     infoTxt.text = $"Stage {max} Clear";
+                    rewardTxt.text = pDt.StageClearArr[STG160].Reward.ToString();
                 }
-                else if(pDt.StageClearArr[STG100].IsComplete && pDt.StageClearArr[STG100].IsAccept){
-                    max = pDt.StageClearArr[STG160].Val;
-                    infoTxt.text = $"Stage {max} Clear";
-                }
-                else if(pDt.StageClearArr[STG60].IsComplete && pDt.StageClearArr[STG60].IsAccept){
+                else if(pDt.StageClearArr[STG60].IsAccept){
                     max = pDt.StageClearArr[STG100].Val;
                     infoTxt.text = $"Stage {max} Clear";
+                    rewardTxt.text = pDt.StageClearArr[STG100].Reward.ToString();
                 }
-                else if(pDt.StageClearArr[STG30].IsComplete && pDt.StageClearArr[STG30].IsAccept){
+                else if(pDt.StageClearArr[STG30].IsAccept){
                     max = pDt.StageClearArr[STG60].Val;
                     infoTxt.text = $"Stage {max} Clear";
+                    rewardTxt.text = pDt.StageClearArr[STG60].Reward.ToString();
                 }
-                else if(pDt.StageClearArr[STG10].IsComplete && pDt.StageClearArr[STG10].IsAccept){
+                else if(pDt.StageClearArr[STG10].IsAccept){
                     max = pDt.StageClearArr[STG30].Val;
                     infoTxt.text = $"Stage {max} Clear";
+                    rewardTxt.text = pDt.StageClearArr[STG30].Reward.ToString();
                 }
-                //else if(!pDt.Stage10Clear.IsAccept && !pDt.Stage30Clear.IsAccept && !pDt.Stage60Clear.IsAccept && !pDt.Stage100Clear.IsAccept && !pDt.Stage160Clear.IsAccept){
                 else if(!Array.Exists(pDt.StageClearArr, arr => arr.IsAccept)){
                     max = pDt.StageClearArr[STG10].Val;
                     infoTxt.text = $"Stage {max} Clear";
+                    rewardTxt.text = pDt.StageClearArr[STG10].Reward.ToString();
                 }
                 break;
             }
@@ -109,10 +117,6 @@ public class Achivement : MonoBehaviour
                 break;
         }
 
-        //* Set Color
-        panelImg.color = (cnt >= max)? Color.white : Color.gray;
-        claimBtn.GetComponent<Image>().color = (cnt >= max)? Color.white : Color.gray;
-
         //* Set Text
         valueTxt.text = cnt + "/" + max;
     }
@@ -121,8 +125,14 @@ public class Achivement : MonoBehaviour
         switch(this.name){
             case "StageClear" : {
                  //* Set Color
-                panelImg.color = (cnt >= max)? Color.white : Color.gray;
-                claimBtn.GetComponent<Image>().color = (cnt >= max)? Color.white : Color.gray;
+                if(allClear){
+                    panelImg.color = Color.gray;
+                    claimBtn.GetComponent<Image>().color = Color.gray;
+                }
+                else{
+                    panelImg.color = (cnt >= max)? Color.white : Color.gray;
+                    claimBtn.GetComponent<Image>().color = (cnt >= max)? Color.white : Color.gray;
+                }
                 break;
             }
         }
@@ -136,33 +146,59 @@ public class Achivement : MonoBehaviour
         switch(this.name){
             case "StageClear" : {
                 if(pDt.StageClearArr[STG10].IsComplete && !pDt.StageClearArr[STG10].IsAccept){
-                    Debug.Log("Stage10Clear");
                     pDt.StageClearArr[STG10].IsAccept = true;
+                    //* Reward Panel
+                    int reward = pDt.StageClearArr[STG10].Reward;
+                    hm.displayShowRewardPanel(coin: 0, diamond: reward);
+                    DM.ins.personalData.Diamond += reward;
+                    //* Next Mission
                     max = pDt.StageClearArr[STG30].Val;
                     infoTxt.text = $"Stage {max} Clear";
+                    rewardTxt.text = pDt.StageClearArr[STG30].Reward.ToString();
                 }
                 else if(pDt.StageClearArr[STG30].IsComplete && !pDt.StageClearArr[STG30].IsAccept){
-                    Debug.Log("Stage30Clear");
                     pDt.StageClearArr[STG30].IsAccept = true;
+                    //* Reward Panel
+                    int reward = pDt.StageClearArr[STG30].Reward;
+                    hm.displayShowRewardPanel(coin: 0, diamond: reward);
+                    DM.ins.personalData.Diamond += reward;
+                    //* Next Mission
                     max = pDt.StageClearArr[STG60].Val;
                     infoTxt.text = $"Stage {max} Clear";
+                    rewardTxt.text = pDt.StageClearArr[STG60].Reward.ToString();
                 }
                 else if(pDt.StageClearArr[STG60].IsComplete && !pDt.StageClearArr[STG60].IsAccept){
-                    Debug.Log("Stage60Clear");
                     pDt.StageClearArr[STG60].IsAccept = true;
+                    //* Reward Panel
+                    int reward = pDt.StageClearArr[STG60].Reward;
+                    hm.displayShowRewardPanel(coin: 0, diamond: reward);
+                    DM.ins.personalData.Diamond += reward;
+                    //* Next Mission
                     max = pDt.StageClearArr[STG100].Val;
                     infoTxt.text = $"Stage {max} Clear";
+                    rewardTxt.text = pDt.StageClearArr[STG100].Reward.ToString();
                 }
                 else if(pDt.StageClearArr[STG100].IsComplete && !pDt.StageClearArr[STG100].IsAccept){
-                    Debug.Log("Stage100Clear");
                     pDt.StageClearArr[STG100].IsAccept = true;
+                    //* Reward Panel
+                    int reward = pDt.StageClearArr[STG100].Reward;
+                    hm.displayShowRewardPanel(coin: 0, diamond: reward);
+                    DM.ins.personalData.Diamond += reward;
+                    //* Next Mission
                     max = pDt.StageClearArr[STG160].Val;
                     infoTxt.text = $"Stage {max} Clear";
+                    rewardTxt.text = pDt.StageClearArr[STG160].Reward.ToString();
                 }
                 else if(pDt.StageClearArr[STG160].IsComplete && !pDt.StageClearArr[STG160].IsAccept){
-                    Debug.Log("Stage160Clear");
                     pDt.StageClearArr[STG160].IsAccept = true;
-                    infoTxt.text = $"Stage {max} Clear";
+                    //* Reward Panel
+                    int reward = pDt.StageClearArr[STG160].Reward;
+                    hm.displayShowRewardPanel(coin: 0, diamond: reward);
+                    DM.ins.personalData.Diamond += reward;
+                    //* Next Mission
+                    infoTxt.text = $"Stage All Clear";
+                    rewardTxt.text = pDt.StageClearArr[STG160].Reward.ToString();
+                    allClear = true;
                 }
                 break;
             }
@@ -176,20 +212,27 @@ public class Achivement : MonoBehaviour
 //*---------------------------------------
     static public void setStageClear(int stage){
         //* Achivement (StageClear IsComplete)
-        if(stage >= 10){
+        for(int i=0; i<DM.ins.personalData.StageClearArr.Length; i++){
+            if(stage >= DM.ins.personalData.StageClearArr[i].Val){
+                DM.ins.personalData.StageClearArr[i].IsComplete = true;
+            }
+        }
+        /*
+        if(stage >= DM.ins.personalData.StageClearArr[STG10].Val){
             DM.ins.personalData.StageClearArr[STG10].IsComplete = true;
         }
-        if(stage >= 30){
+        if(stage >= DM.ins.personalData.StageClearArr[STG30].Val){
             DM.ins.personalData.StageClearArr[STG30].IsComplete = true;
         }
-        if(stage >= 60){
+        if(stage >= DM.ins.personalData.StageClearArr[STG60].Val){
             DM.ins.personalData.StageClearArr[STG60].IsComplete = true;
         }
-        if(stage >= 100){
+        if(stage >= DM.ins.personalData.StageClearArr[STG100].Val){
             DM.ins.personalData.StageClearArr[STG100].IsComplete = true;
         }
-        if(stage >= 160){
+        if(stage >= DM.ins.personalData.StageClearArr[STG160].Val){
             DM.ins.personalData.StageClearArr[STG160].IsComplete = true;
         }
+        */
     }
 }
