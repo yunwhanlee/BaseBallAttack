@@ -24,10 +24,10 @@ public class Achivement : MonoBehaviour
     Image panelImg, rewardIconImg;
     Text infoTxt, valueTxt, rewardTxt;
     Button claimBtn;
+    AchivementInfo[] targetArr; // From PersonalData.cs
 
     void Start()
     {
-
         //* Assign Object
         hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
 
@@ -43,8 +43,16 @@ public class Achivement : MonoBehaviour
             : (rewardType == REWARD_TYPE.DIAMOND)? hm.rewardIconSprs[(int)REWARD_TYPE.DIAMOND]
             : (rewardType == REWARD_TYPE.ROULETTE_TICKET)? hm.rewardIconSprs[(int)REWARD_TYPE.ROULETTE_TICKET] : null;
 
-        //* Set Value
         var pDt = DM.ins.personalData;
+        //* Set Target
+        try{
+            targetArr = (this.name == "StageClear")? pDt.StageClearArr
+                : (this.name == "DestroyBlocks")? pDt.DestroyBlockArr : null;
+        }catch(Exception err){
+            Debug.LogError("TYPEに合わせる nameがありません。\n" + err);
+        }
+
+        //* Set Value
         switch(this.name){
             case "StageClear" : {
                 cnt = pDt.ClearStage;
@@ -210,34 +218,16 @@ public class Achivement : MonoBehaviour
     }
 
     private void setNext(PersonalData pDt, int idx, bool _allClear = false){
-        //* ターゲット設定。
-        AchivementInfo target = null;
-        try{
-            target = (this.name == "StageClear")? pDt.StageClearArr[idx]
-                : (this.name == "DestroyBlocks")? pDt.DestroyBlockArr[idx] : null;
-        }catch(Exception err){
-            Debug.LogError("TYPEに合わせる nameがありません。\n" + err);
-        }
-
         //* 処理。
-        this.max = target.Val;
+        this.max = targetArr[idx].Val;
         this.infoTxt.text = "StageClear";
-        this.rewardTxt.text = target.Reward.ToString();
+        this.rewardTxt.text = targetArr[idx].Reward.ToString();
         if(_allClear) this.allClear = _allClear;
     }
     private int acceptReward(PersonalData pDt, int idx){
-        //* ターゲット設定。
-        AchivementInfo target = null;
-        try{
-            target = (this.name == "StageClear")? pDt.StageClearArr[idx]
-                : (this.name == "DestroyBlocks")? pDt.DestroyBlockArr[idx] : null;
-        }catch(Exception err){
-            Debug.LogError("TYPEに合わせる nameがありません。\n" + err);
-        }
-
         //* 処理。
-        target.IsAccept = true;
-        int reward = target.Reward;
+        targetArr[idx].IsAccept = true;
+        int reward = targetArr[idx].Reward;
         //* Reward Type
         switch(this.rewardType){
             case REWARD_TYPE.COIN :
