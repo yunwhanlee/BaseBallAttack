@@ -22,14 +22,28 @@ public class Achivement : MonoBehaviour
     //* Outside
     HomeManager hm;
 
-    //* Value
+    //* Name
+    const string InfoTxt = "InfoTxt", ValueTxt = "ValueTxt", RewardTxt = "RewardTxt", RewardIcon = "RewardIcon", ClaimBtn = "ClaimBtn";
+    const string StageClear = "StageClear";
+    const string DestroyBlocks = "DestroyBlocks";
+    const string CollectedCoin = "CollectedCoin";
+    const string CollectedDiamond = "CollectedDiamond";
+    const string CollectedRouletteTicket = "CollectedRouletteTicket";
+    const string AtvSkillCollector = "AtvSkillCollector";
+    const string BatCollector = "BatCollector";
+    const string CharactorCollector = "CharactorCollector";
+    const string NormalModeClear = "NormalModeClear";
+    const string HardModeClear = "HardModeClear";
+    const string KillBoss = "KillBoss";
+    const string UpgradeMaster = "UpgradeMaster";
+
     const int STG10 = 0, STG30 = 1, STG60 = 2, STG100 = 3, STG160 = 4; //* Stage Clear 
     const int DTR100 = 0, DTR200 = 1, DTR400 = 2, DTR700 = 3, DTR1000 = 4; //* Destroy Block Cnt
     const int CLTCOIN10000 = 0, CLTCOIN25000 = 1, CLTCOIN50000 = 2, CLTCOIN100000 = 3, CLTCOIN1000000 = 4;
     const int CLTDIA500 = 0, CLTDIA1000 = 1, CLTDIA2000 = 2, CLTDIA5000 = 3, CLTDIA10000 = 4;
     const int CLTTICKET10 = 0, CLTTICKET50 = 1, CLTTICKET100 = 2, CLTTICKET150 = 3, CLTTICKET300 = 4;
 
-
+    //* Value
     enum REWARD_TYPE { COIN, DIAMOND, ROULETTE_TICKET };
     [SerializeField] REWARD_TYPE rewardType = REWARD_TYPE.DIAMOND;
     [SerializeField] int step = 1, maxStep;
@@ -49,11 +63,11 @@ public class Achivement : MonoBehaviour
         hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
 
         panelImg = this.GetComponent<Image>();
-        infoTxt = this.transform.Find("InfoTxt").GetComponent<Text>();
-        valueTxt = this.transform.Find("ValueTxt").GetComponent<Text>();
-        rewardTxt = this.transform.Find("RewardTxt").GetComponent<Text>();
-        rewardIconImg = this.transform.Find("RewardIcon").GetComponent<Image>();
-        claimBtn = this.transform.Find("ClaimBtn").GetComponent<Button>();
+        infoTxt = this.transform.Find(InfoTxt).GetComponent<Text>();
+        valueTxt = this.transform.Find(ValueTxt).GetComponent<Text>();
+        rewardTxt = this.transform.Find(RewardTxt).GetComponent<Text>();
+        rewardIconImg = this.transform.Find(RewardIcon).GetComponent<Image>();
+        claimBtn = this.transform.Find(ClaimBtn).GetComponent<Button>();
 
         //* Set Icon
         rewardIconImg.sprite = (rewardType == REWARD_TYPE.COIN)? hm.rewardIconSprs[(int)REWARD_TYPE.COIN]
@@ -66,7 +80,7 @@ public class Achivement : MonoBehaviour
 
         //* Set Value
         switch(this.name){
-            case "StageClear" : {
+            case StageClear : {
                 cnt = pDt.ClearStage;
                 Debug.Log($"Achivement:: {this.name}:: cnt= {cnt}");
                 //* Init
@@ -84,7 +98,7 @@ public class Achivement : MonoBehaviour
                     setNext(pDt, STG10);
                 break;
             }
-            case "DestroyBlocks" :
+            case DestroyBlocks :
                 cnt = pDt.DestroyBlockCnt;
                 Debug.Log($"Achivement:: {this.name}:: cnt= {cnt}");
                 //* Init
@@ -101,7 +115,7 @@ public class Achivement : MonoBehaviour
                 else if(!Array.Exists(pDt.DestroyBlockArr, arr => arr.IsAccept))
                     setNext(pDt, DTR100);
                 break;
-            case "CollectedCoin" :
+            case CollectedCoin :
                 cnt = pDt.CollectedCoin;
                 Debug.Log($"Achivement:: {this.name}:: cnt= {cnt}");
                 //* Init
@@ -118,7 +132,7 @@ public class Achivement : MonoBehaviour
                 else if(!Array.Exists(pDt.CollectedCoinArr, arr => arr.IsAccept))
                     setNext(pDt, CLTCOIN10000);
                 break;
-            case "CollectedDiamond" :
+            case CollectedDiamond :
                 cnt = pDt.CollectedDiamond;
                 Debug.Log($"Achivement:: {this.name}:: cnt= {cnt}");
                 //* Init
@@ -135,7 +149,7 @@ public class Achivement : MonoBehaviour
                 else if(!Array.Exists(pDt.CollectedDiamondArr, arr => arr.IsAccept))
                     setNext(pDt, CLTDIA500);
                 break;
-            case "CollectedRouletteTicket" :
+            case CollectedRouletteTicket :
                 cnt = pDt.CollectedRouletteTicket;
                 Debug.Log($"Achivement:: {this.name}:: cnt= {cnt}");
                 //* Init
@@ -152,31 +166,31 @@ public class Achivement : MonoBehaviour
                 else if(!Array.Exists(pDt.CollectedRouletteTicketArr, arr => arr.IsAccept))
                     setNext(pDt, CLTTICKET10);
                 break;
-            case "AtvSkillCollector" : {
+            case AtvSkillCollector : {
                 List<bool> lockList = DM.ins.personalData.SkillLockList;
                 max = lockList.Count;
                 cnt = lockList.FindAll(list => list == false).Count;
                 }
                 break;
-            case "BatCollector" : {
+            case BatCollector : {
                 List<bool> lockList = DM.ins.personalData.BatLockList;
                 max = lockList.Count;
                 cnt = lockList.FindAll(list => list == false).Count;
                 }
                 break;
-            case "CharactorCollector" : {
+            case CharactorCollector : {
                 List<bool> lockList = DM.ins.personalData.CharaLockList;
                 max = lockList.Count;
                 cnt = lockList.FindAll(list => list == false).Count;
                 }
                 break;
-            case "NormalModeClear" :
+            case NormalModeClear :
                 break;
-            case "HardModeClear" :
+            case HardModeClear :
                 break;
-            case "KillBoss" :
+            case KillBoss :
                 break;
-            case "UpgradeMaster" :
+            case UpgradeMaster :
                 break;
         }
     }
@@ -190,14 +204,14 @@ public class Achivement : MonoBehaviour
         else{
             var pDt = DM.ins.personalData;
             switch(this.name){
-                // case "StageClear" : cnt = pDt.ClearStage; break;
-                // case "DestroyBlocks" : cnt = pDt.DestroyBlockCnt; break;
-                case "CollectedCoin" : cnt = pDt.CollectedCoin; break;
-                case "CollectedDiamond" : cnt = pDt.CollectedDiamond; break;
-                case "CollectedRouletteTicket" : cnt = pDt.CollectedRouletteTicket; break;
-                // case "AtvSkillCollector" : break;
-                // case "BatCollector" : break;
-                // case "CharactorCollector" : break;
+                // case StageClear : cnt = pDt.ClearStage; break;
+                // case DestroyBlocks : cnt = pDt.DestroyBlockCnt; break;
+                case CollectedCoin : cnt = pDt.CollectedCoin; break;
+                case CollectedDiamond : cnt = pDt.CollectedDiamond; break;
+                case CollectedRouletteTicket : cnt = pDt.CollectedRouletteTicket; break;
+                // case AtvSkillCollector : break;
+                // case BatCollector : break;
+                // case CharactorCollector : break;
             }
             panelImg.color = (cnt >= max)? Color.white : Color.gray;
             claimBtn.GetComponent<Image>().color = (cnt >= max)? Color.white : Color.gray;
@@ -215,7 +229,7 @@ public class Achivement : MonoBehaviour
         Debug.Log("Achivement::onClickCalimBtn:: " + this.name);
         var pDt = DM.ins.personalData;
         switch(this.name){
-            case "StageClear" : {
+            case StageClear : {
                 if(pDt.StageClearArr[STG10].IsComplete && !pDt.StageClearArr[STG10].IsAccept){
                     DM.ins.personalData.addDiamond(acceptReward(pDt, STG10));
                     setNext(pDt, STG30);
@@ -238,7 +252,7 @@ public class Achivement : MonoBehaviour
                 }
                 break;
             }
-            case "DestroyBlocks" : {
+            case DestroyBlocks : {
                 if(pDt.DestroyBlockArr[DTR100].IsComplete && !pDt.DestroyBlockArr[DTR100].IsAccept){
                     DM.ins.personalData.addDiamond(acceptReward(pDt, DTR100));
                     setNext(pDt, DTR200);
@@ -261,7 +275,7 @@ public class Achivement : MonoBehaviour
                 }
                 break;
             }
-            case "CollectedCoin" : {
+            case CollectedCoin : {
                 if(pDt.CollectedCoinArr[CLTCOIN10000].IsComplete && !pDt.CollectedCoinArr[CLTCOIN10000].IsAccept){
                     DM.ins.personalData.addDiamond(acceptReward(pDt, CLTCOIN10000));
                     setNext(pDt, CLTCOIN25000);
@@ -284,7 +298,7 @@ public class Achivement : MonoBehaviour
                 }
                 break;
             }
-            case "CollectedDiamond" : {
+            case CollectedDiamond : {
                 if(pDt.CollectedDiamondArr[CLTDIA500].IsComplete && !pDt.CollectedDiamondArr[CLTDIA500].IsAccept){
                     DM.ins.personalData.addDiamond(acceptReward(pDt, CLTDIA500));
                     setNext(pDt, CLTDIA1000);
@@ -307,7 +321,7 @@ public class Achivement : MonoBehaviour
                 }
                 break;
             }
-            case "CollectedRouletteTicket" : {
+            case CollectedRouletteTicket : {
                 if(pDt.CollectedRouletteTicketArr[CLTTICKET10].IsComplete && !pDt.CollectedRouletteTicketArr[CLTTICKET10].IsAccept){
                     DM.ins.personalData.addRouletteTicket(acceptReward(pDt, CLTTICKET10));
                     setNext(pDt, CLTTICKET50);
@@ -392,11 +406,11 @@ public class Achivement : MonoBehaviour
     private void setTarget(){
         var pDt = DM.ins.personalData;
         try{
-            targetArr = (this.name == "StageClear")? pDt.StageClearArr
-                : (this.name == "DestroyBlocks")? pDt.DestroyBlockArr
-                : (this.name == "CollectedCoin")? pDt.CollectedCoinArr
-                : (this.name == "CollectedDiamond")? pDt.CollectedDiamondArr
-                : (this.name == "CollectedRouletteTicket")? pDt.CollectedRouletteTicketArr
+            targetArr = (this.name == StageClear)? pDt.StageClearArr
+                : (this.name == DestroyBlocks)? pDt.DestroyBlockArr
+                : (this.name == CollectedCoin)? pDt.CollectedCoinArr
+                : (this.name == CollectedDiamond)? pDt.CollectedDiamondArr
+                : (this.name == CollectedRouletteTicket)? pDt.CollectedRouletteTicketArr
                 : null;
         }catch(Exception err){
             Debug.LogError("TYPEに合わせる nameがありません。\n" + err);
