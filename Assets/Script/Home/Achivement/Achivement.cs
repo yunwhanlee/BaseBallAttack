@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.Serialization;
 
 [System.Serializable]
 public class AchivementInfo { //* PersonalDataで宣言。
@@ -23,7 +24,7 @@ public class Achivement : MonoBehaviour{
 
     //* Name
     const string InfoTxt = "InfoTxt", ValueTxt = "ValueTxt", RewardTxt = "RewardTxt", RewardIcon = "RewardIcon", ClaimBtn = "ClaimBtn";
-    
+
     const string StageClear = "StageClear";
     const string DestroyBlocks = "DestroyBlocks";
     const string CollectedCoin = "CollectedCoin";
@@ -39,7 +40,10 @@ public class Achivement : MonoBehaviour{
 
     //* Value
     enum REWARD_TYPE { COIN, DIAMOND, ROULETTE_TICKET };
+
     [SerializeField] REWARD_TYPE rewardType = REWARD_TYPE.DIAMOND;
+    [Header("言語 [0]:EN, [1]:JP, [2]:KR")] 
+    [FormerlySerializedAs("infoTxts")] [SerializeField] protected string[] infoLangTxts = new string[3];
     [SerializeField] protected int cnt, max;
     [SerializeField] protected bool allClear;
 
@@ -147,7 +151,7 @@ public class Achivement : MonoBehaviour{
     protected void setNext(PersonalData pDt, int idx, bool _allClear = false){
         //* 処理。
         this.max = targetArr[idx].Val;
-        this.infoTxt.text = this.name;
+        this.infoTxt.text = infoLangTxts[(int)DM.ins.personalData.Lang];
         this.rewardTxt.text = targetArr[idx].Reward.ToString();
         if(_allClear) this.allClear = _allClear;
     }

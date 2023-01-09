@@ -618,7 +618,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 8a7ef750b018c41e78d4f8f786ae57e5, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 3
@@ -739,6 +739,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rewardType: 1
+  infoLangTxts:
+  - Boss kill collection
+  - "\u30DC\u30FC\u30B9\u30AD\u30FC\u30EB \u30B3\u30EC\u30AF\u30B7\u30E7\u30F3"
+  - "\uBCF4\uC2A4 \uD0AC \uCEEC\uB809\uC158"
   cnt: 0
   max: 0
   allClear: 0

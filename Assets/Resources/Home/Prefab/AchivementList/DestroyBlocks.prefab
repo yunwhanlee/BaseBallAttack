@@ -618,7 +618,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 8a7ef750b018c41e78d4f8f786ae57e5, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 3
@@ -739,6 +739,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rewardType: 1
+  infoLangTxts:
+  - Destroied Blocks
+  - "\u7834\u58CA\u3057\u305F\u30D6\u30ED\u30C3\u30AF"
+  - "\uD30C\uAD34\uD55C \uBE14\uB7ED"
   cnt: 0
   max: 0
   allClear: 0

@@ -618,7 +618,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 8a7ef750b018c41e78d4f8f786ae57e5, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 3
@@ -739,6 +739,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rewardType: 1
+  infoLangTxts:
+  - Stage Clear
+  - "\u30B9\u30C6\u30FC\u30B8\u30AF\u30EA\u30A2\u30FC"
+  - "\uC2A4\uD14C\uC774\uC9C0 \uD074\uB9AC\uC5B4"
   cnt: 0
   max: 0
   allClear: 0

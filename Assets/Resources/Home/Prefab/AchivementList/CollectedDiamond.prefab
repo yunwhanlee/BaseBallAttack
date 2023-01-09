@@ -618,7 +618,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 8a7ef750b018c41e78d4f8f786ae57e5, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 3
@@ -739,6 +739,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rewardType: 1
+  infoLangTxts:
+  - Collected diamonds
+  - "\u53CE\u96C6\u3057\u305F \u30C0\u30A4\u30A2\u30E2\u30F3\u30C9"
+  - "\uC218\uC9D1\uD55C \uB2E4\uC774\uC544"
   cnt: 0
   max: 0
   allClear: 0
