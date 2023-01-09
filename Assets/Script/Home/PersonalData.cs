@@ -52,6 +52,9 @@ public class PersonalData {
     [SerializeField] int upgradeCnt; public int UpgradeCnt {get => upgradeCnt; set => upgradeCnt = value;}
     [SerializeField] AchivementInfo[] upgradeCntArr; public AchivementInfo[] UpgradeCntArr {get => upgradeCntArr; set => upgradeCntArr = value;}
 
+    [SerializeField] int collectedBossKill; public int CollectedBossKill {get => collectedBossKill; set => collectedBossKill = value;}
+    [SerializeField] AchivementInfo[] bosskillCollectionArr; public AchivementInfo[] BosskillCollectionArr {get => bosskillCollectionArr; set => bosskillCollectionArr = value;}
+
     [SerializeField] AchivementInfo[] normalModeClear ; public AchivementInfo[] NormalModeClear {get => normalModeClear; set => normalModeClear = value;}
     [SerializeField] AchivementInfo[] hardModeClear ; public AchivementInfo[] HardModeClear {get => hardModeClear; set => hardModeClear = value;}
 
@@ -152,6 +155,10 @@ public class PersonalData {
             new AchivementInfo((int)(upgradeLen * 0.8f), 400),
             new AchivementInfo(upgradeLen, 500),
         };
+        this.bosskillCollectionArr = new AchivementInfo[] {
+            new AchivementInfo(1, 100), new AchivementInfo(2, 200), new AchivementInfo(3, 300), new AchivementInfo(4, 400),
+            new AchivementInfo(5, 500), new AchivementInfo(6, 600), new AchivementInfo(7, 700), new AchivementInfo(8, 800),
+        };
 
         this.normalModeClear = new AchivementInfo[] { new AchivementInfo(1, 1000)};
         this.hardModeClear = new AchivementInfo[] { new AchivementInfo(1, 2000)};
@@ -209,6 +216,8 @@ public class PersonalData {
         this.atvSkillCollectionArr = data.AtvSkillCollectionArr;
         this.upgradeCnt = data.UpgradeCnt;
         this.upgradeCntArr = data.UpgradeCntArr;
+        this.collectedBossKill = data.CollectedBossKill;
+        this.bosskillCollectionArr = data.BosskillCollectionArr;
 
         this.normalModeClear = data.NormalModeClear;
         this.hardModeClear = data.HardModeClear;
@@ -340,6 +349,11 @@ public class PersonalData {
             new AchivementInfo((int)(upgradeLen * 0.6f), 300),
             new AchivementInfo((int)(upgradeLen * 0.8f), 400),
             new AchivementInfo(upgradeLen, 500),
+        };
+        this.collectedBossKill = 0;
+        this.bosskillCollectionArr = new AchivementInfo[] {
+            new AchivementInfo(1, 100), new AchivementInfo(2, 200), new AchivementInfo(3, 300), new AchivementInfo(4, 400),
+            new AchivementInfo(5, 500), new AchivementInfo(6, 600), new AchivementInfo(7, 700), new AchivementInfo(8, 800),
         };
         this.normalModeClear = new AchivementInfo[] { new AchivementInfo(1, 1000)};
         this.hardModeClear = new AchivementInfo[] { new AchivementInfo(1, 2000)};

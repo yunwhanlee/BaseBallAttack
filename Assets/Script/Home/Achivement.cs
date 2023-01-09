@@ -34,7 +34,7 @@ public class Achivement : MonoBehaviour
     const string CharactorCollection = "CharactorCollection";
     const string NormalModeClear = "NormalModeClear";
     const string HardModeClear = "HardModeClear";
-    const string KillBoss = "KillBoss";
+    const string BosskillCollection = "BosskillCollection";
     const string UpgradeCnt = "UpgradeCnt";
 
     const int STG10 = 0, STG30 = 1, STG60 = 2, STG100 = 3, STG160 = 4; //* Stage Clear 
@@ -46,6 +46,8 @@ public class Achivement : MonoBehaviour
     const int CLTBATQUATER = 0, CLTBATHALF = 1, CLTBATALL = 2;
     const int CLTSKILLHALF = 0, CLTSKILLALL = 1;
     const int UPG20PER = 0, UPG40PER = 1, UPG60PER = 2, UPG80PER = 3, UPGALL = 4;
+    const int CLTBOSSKILL1 = 0, CLTBOSSKILL2 = 1, CLTBOSSKILL3 = 2, CLTBOSSKILL4 = 3
+        ,CLTBOSSKILL5 = 4, CLTBOSSKILL6 = 5, CLTBOSSKILL7 = 6, CLTBOSSKILL8 = 7;
 
     //* Value
     enum REWARD_TYPE { COIN, DIAMOND, ROULETTE_TICKET };
@@ -231,8 +233,30 @@ public class Achivement : MonoBehaviour
                     setNext(pDt, UPG20PER);
                 break;
                 }
-            case KillBoss :
+            case BosskillCollection : {
+                cnt = pDt.UpgradeCnt;
+                Debug.Log($"Achivement:: {this.name}:: cnt= {cnt}");
+                //* Init
+                if(pDt.BosskillCollectionArr[CLTBOSSKILL8].IsAccept)
+                    setNext(pDt, CLTBOSSKILL8, _allClear: true);
+                else if(pDt.BosskillCollectionArr[CLTBOSSKILL7].IsAccept)
+                    setNext(pDt, CLTBOSSKILL8);
+                else if(pDt.BosskillCollectionArr[CLTBOSSKILL6].IsAccept)
+                    setNext(pDt, CLTBOSSKILL7);
+                else if(pDt.BosskillCollectionArr[CLTBOSSKILL5].IsAccept)
+                    setNext(pDt, CLTBOSSKILL6);
+                else if(pDt.BosskillCollectionArr[CLTBOSSKILL4].IsAccept)
+                    setNext(pDt, CLTBOSSKILL5);
+                else if(pDt.BosskillCollectionArr[CLTBOSSKILL3].IsAccept)
+                    setNext(pDt, CLTBOSSKILL4);
+                else if(pDt.BosskillCollectionArr[CLTBOSSKILL2].IsAccept)
+                    setNext(pDt, CLTBOSSKILL3);
+                else if(pDt.BosskillCollectionArr[CLTBOSSKILL1].IsAccept)
+                    setNext(pDt, CLTBOSSKILL2);
+                else if(!Array.Exists(pDt.BosskillCollectionArr, arr => arr.IsAccept))
+                    setNext(pDt, CLTBOSSKILL1);
                 break;
+                }
             case NormalModeClear :
                 if(pDt.NormalModeClear[0].IsComplete) cnt = 1;
                 setNext(pDt, idx: 0, pDt.NormalModeClear[0].IsAccept);
@@ -262,6 +286,7 @@ public class Achivement : MonoBehaviour
                 case BatCollection : cnt = pDt.CollectedBat; break;
                 case AtvSkillCollection : cnt = pDt.CollectedAtvSkill; break;
                 case UpgradeCnt : cnt = pDt.UpgradeCnt; break;
+                case BosskillCollection : cnt = pDt.CollectedBossKill; break;
                 //* 追加
             }
             panelImg.color = (cnt >= max)? Color.white : Color.gray;
@@ -463,6 +488,41 @@ public class Achivement : MonoBehaviour
                 }
                 break;
             }
+            case BosskillCollection : {
+                if(pDt.BosskillCollectionArr[CLTBOSSKILL1].IsComplete && !pDt.BosskillCollectionArr[CLTBOSSKILL1].IsAccept){
+                    DM.ins.personalData.addDiamond(acceptReward(pDt, CLTBOSSKILL1));
+                    setNext(pDt, CLTBOSSKILL2);
+                }
+                else if(pDt.BosskillCollectionArr[CLTBOSSKILL2].IsComplete && !pDt.BosskillCollectionArr[CLTBOSSKILL2].IsAccept){
+                    DM.ins.personalData.addDiamond(acceptReward(pDt, CLTBOSSKILL2));
+                    setNext(pDt, CLTBOSSKILL3);
+                }
+                else if(pDt.BosskillCollectionArr[CLTBOSSKILL3].IsComplete && !pDt.BosskillCollectionArr[CLTBOSSKILL3].IsAccept){
+                    DM.ins.personalData.addDiamond(acceptReward(pDt, CLTBOSSKILL3));
+                    setNext(pDt, CLTBOSSKILL4);
+                }
+                else if(pDt.BosskillCollectionArr[CLTBOSSKILL4].IsComplete && !pDt.BosskillCollectionArr[CLTBOSSKILL4].IsAccept){
+                    DM.ins.personalData.addDiamond(acceptReward(pDt, CLTBOSSKILL4));
+                    setNext(pDt, CLTBOSSKILL5);
+                }
+                else if(pDt.BosskillCollectionArr[CLTBOSSKILL5].IsComplete && !pDt.BosskillCollectionArr[CLTBOSSKILL5].IsAccept){
+                    DM.ins.personalData.addDiamond(acceptReward(pDt, CLTBOSSKILL5));
+                    setNext(pDt, CLTBOSSKILL6);
+                }
+                else if(pDt.BosskillCollectionArr[CLTBOSSKILL6].IsComplete && !pDt.BosskillCollectionArr[CLTBOSSKILL6].IsAccept){
+                    DM.ins.personalData.addDiamond(acceptReward(pDt, CLTBOSSKILL6));
+                    setNext(pDt, CLTBOSSKILL7);
+                }
+                else if(pDt.BosskillCollectionArr[CLTBOSSKILL7].IsComplete && !pDt.BosskillCollectionArr[CLTBOSSKILL7].IsAccept){
+                    DM.ins.personalData.addDiamond(acceptReward(pDt, CLTBOSSKILL7));
+                    setNext(pDt, CLTBOSSKILL8);
+                }
+                else if(pDt.BosskillCollectionArr[CLTBOSSKILL8].IsComplete && !pDt.BosskillCollectionArr[CLTBOSSKILL8].IsAccept){
+                    DM.ins.personalData.addDiamond(acceptReward(pDt, CLTBOSSKILL8));
+                    setNext(pDt, CLTBOSSKILL8, _allClear: true);
+                }
+                break;
+            }
             case NormalModeClear : {
                 if(pDt.NormalModeClear[0].IsComplete && !pDt.NormalModeClear[0].IsAccept){
                     DM.ins.personalData.addDiamond(acceptReward(pDt, idx: 0));
@@ -567,6 +627,25 @@ public class Achivement : MonoBehaviour
                 pDt.UpgradeCntArr[i].IsComplete = true;
         }
     }
+    static public void collectBossKill(string name) {
+        //* Check Boss Name
+        int idx = -1;
+        for(int i=1; i<=8; i++){
+            if(name.Contains($"Boss{i}")) idx = i;
+        }
+        if(idx == -1) {
+            Debug.LogError("ボース名に会うテキストがないです。");
+            return;
+        }
+
+        DM.ins.personalData.CollectedBossKill = idx;
+
+        var pDt = DM.ins.personalData;
+        for(int i=0; i<pDt.BosskillCollectionArr.Length; i++){
+            if(pDt.CollectedBossKill >= pDt.BosskillCollectionArr[i].Val)
+                pDt.BosskillCollectionArr[i].IsComplete = true;
+        }
+    }
     static public void setNormalModeClear(){
         DM.ins.personalData.NormalModeClear[0].IsComplete = true;
     }
@@ -587,6 +666,7 @@ public class Achivement : MonoBehaviour
                 : (this.name == BatCollection)? pDt.BatCollectionArr
                 : (this.name == AtvSkillCollection)? pDt.AtvSkillCollectionArr
                 : (this.name == UpgradeCnt)? pDt.UpgradeCntArr
+                : (this.name == BosskillCollection)? pDt.BosskillCollectionArr
                 : (this.name == NormalModeClear)? pDt.NormalModeClear
                 : (this.name == HardModeClear)? pDt.HardModeClear
                 //* 追加

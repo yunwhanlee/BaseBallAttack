@@ -254,7 +254,11 @@ public class BossBlock : Block_Prefab{
     }
 
     public override void onDestroy(GameObject target, bool isInitialize = false) {
-        Debug.Log($"BossBlock:: onDestroy():: target= {target}");
+        Debug.Log($"BossBlock:: onDestroy():: target= {target}, Contains Boss1 = {name.Contains("Boss1")}");
+
+        //* Achivement
+        Achivement.collectBossKill(this.name);
+        
         StartCoroutine(coPlayBossDieAnim(target));
     }
 
