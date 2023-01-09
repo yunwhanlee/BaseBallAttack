@@ -629,8 +629,10 @@ public class Achivement : MonoBehaviour
     }
     static public void collectBossKill(string name) {
         //* Check Boss Name
+        int bossCnt = GameObject.Find("BlockMaker").GetComponent<BlockMaker>().bossPrefs.Length + 1;
+        Debug.Log($"Achivement::collectBossKill:: bossCnt= {bossCnt}");
         int idx = -1;
-        for(int i=1; i<=8; i++){
+        for(int i=1; i<=bossCnt; i++){
             if(name.Contains($"Boss{i}")) idx = i;
         }
         if(idx == -1) {
