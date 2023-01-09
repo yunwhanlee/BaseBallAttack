@@ -125,6 +125,7 @@ public class GameManager : MonoBehaviour
     public GameObject skillInfoRowPref;
     public Text pauseCoinTxt;
     public Text pauseDiamondTxt;
+    public Text pauseModeTxt;
 
     [Header("GAMEOVER")][Header("__________________________")]
     [FormerlySerializedAs("gvCoinTxt")]   public Text gvCoinTxt;
@@ -205,10 +206,6 @@ public class GameManager : MonoBehaviour
         rewardChestTitleTxt.text = LANG.getTxt(LANG.TXT.Reward.ToString());
         rewardChestOpenBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Open.ToString());
 
-        //* Pause Panel UI
-        pauseCoinTxt.text = DM.ins.personalData.Coin.ToString();
-        pauseDiamondTxt.text = DM.ins.personalData.Diamond.ToString();
-
         //* Ball Preview Dir Goal Set Z-Center
         setBallPreviewGoalRandomPos();
 
@@ -242,6 +239,12 @@ public class GameManager : MonoBehaviour
         if(stage > LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN){
             mode = DM.MODE.HARD;
         }
+
+        //* Pause Panel UI
+        pauseCoinTxt.text = DM.ins.personalData.Coin.ToString();
+        pauseDiamondTxt.text = DM.ins.personalData.Diamond.ToString();
+        pauseModeTxt.text = mode.ToString() + " MODE";
+        pauseModeTxt.color = (mode == DM.MODE.NORMAL)? Color.white : Color.red;
     }
 
     void Update(){
