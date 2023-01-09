@@ -7711,7 +7711,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &515324466
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28265,6 +28265,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 56d6624c6f0014a7c8870cbbf2c74cbe, type: 3}
   - {fileID: 21300000, guid: fba201cf2cb14452bae43a674add4f43, type: 3}
   - {fileID: 21300000, guid: 709236ba50c223d40bb39f5893ee1173, type: 3}
+  focusIconObj: {fileID: 515324465}
   showAdDialog: {fileID: 1571631274}
   adDialogTitleTxt: {fileID: 1250039935}
   adDialogContentTxt: {fileID: 891417927}

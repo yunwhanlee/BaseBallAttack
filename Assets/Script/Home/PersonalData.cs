@@ -427,6 +427,30 @@ public class PersonalData {
         }
     }
 
+    public bool checkAcceptableAchivement(){
+        var pDt = DM.ins.personalData;
+        bool res = false;
+        if( //* 完了は出来ましたが、まだ受け取らない項目が有るか確認。
+        Array.Exists(pDt.StageClearArr, arr => arr.IsComplete && !arr.IsAccept)
+            || Array.Exists(pDt.DestroyBlockArr, arr => arr.IsComplete && !arr.IsAccept)
+            || Array.Exists(pDt.CollectedCoinArr, arr => arr.IsComplete && !arr.IsAccept)
+            || Array.Exists(pDt.CollectedDiamondArr, arr => arr.IsComplete && !arr.IsAccept)
+            || Array.Exists(pDt.CollectedRouletteTicketArr, arr => arr.IsComplete && !arr.IsAccept)
+            || Array.Exists(pDt.CharaCollectionArr, arr => arr.IsComplete && !arr.IsAccept)
+            || Array.Exists(pDt.BatCollectionArr, arr => arr.IsComplete && !arr.IsAccept)
+            || Array.Exists(pDt.AtvSkillCollectionArr, arr => arr.IsComplete && !arr.IsAccept)
+            || Array.Exists(pDt.UpgradeCntArr, arr => arr.IsComplete && !arr.IsAccept)
+            || Array.Exists(pDt.BosskillCollectionArr, arr => arr.IsComplete && !arr.IsAccept)
+            || Array.Exists(pDt.NormalModeClear, arr => arr.IsComplete && !arr.IsAccept)
+            || Array.Exists(pDt.HardModeClear, arr => arr.IsComplete && !arr.IsAccept)
+        ){
+            res = true;
+        }
+
+        Debug.Log($"PersonalData:: checkAcceptableAchivement res= {res}");
+        return res;
+    }
+
     public void addCoin(int amount){
         coin += amount;
         AcvCollectedCoin.collectCoin(amount);

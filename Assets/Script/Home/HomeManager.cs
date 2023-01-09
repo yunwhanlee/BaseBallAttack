@@ -119,6 +119,7 @@ public class HomeManager : MonoBehaviour
     public RectTransform achivementContent;
     public GameObject[] achivementPfs;
     public Sprite[] rewardIconSprs;
+    public GameObject focusIconObj;
 
     [Header("DIALOG")][Header("__________________________")]
     //* ShowAD
@@ -218,9 +219,6 @@ public class HomeManager : MonoBehaviour
             hardModeEnableNoticeContent2Txt.text = LANG.getTxt(LANG.TXT.HardMode_Content2.ToString());
             hardModeEnableNoticeOkBtnTxt.text = LANG.getTxt(LANG.TXT.Ok.ToString());
         }
-
-        //* Check Goods Achivement IsComplete (これしないと、業績達成しても、全てのIsCompleteがFalseのまま)。
-        // Achivement.setGoodsCompletedList();
     }
 
     void Update(){
@@ -236,6 +234,9 @@ public class HomeManager : MonoBehaviour
             rouletteIconBtn.GetComponent<Image>().color = Color.grey;
             rouletteIconCoolTimeTxt.text = updateADCoolTime(); //* Coolタイム 表示!
         }
+
+        //* Achivement redDot表示。(受け取るものがあればお知らせ用。)
+        focusIconObj.SetActive(DM.ins.personalData.checkAcceptableAchivement());
     }
 
 //* ----------------------------------------------------------------
