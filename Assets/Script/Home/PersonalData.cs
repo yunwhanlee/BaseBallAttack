@@ -40,6 +40,23 @@ public class PersonalData {
     [SerializeField] int collectedRouletteTicket; public int CollectedRouletteTicket {get => collectedRouletteTicket; set => collectedRouletteTicket = value;}
     [SerializeField] AchivementInfo[] collectedRouletteTicketArr; public AchivementInfo[] CollectedRouletteTicketArr {get => collectedRouletteTicketArr; set => collectedRouletteTicketArr = value;}
 
+    [SerializeField] int collectedChara; public int CollectedChara {get => collectedChara; set => collectedChara = value;}
+    [SerializeField] AchivementInfo[] charaCollectionArr; public AchivementInfo[] CharaCollectionArr {get => charaCollectionArr; set => charaCollectionArr = value;}
+
+    [SerializeField] int collectedBat; public int CollectedBat {get => collectedBat; set => collectedBat = value;}
+    [SerializeField] AchivementInfo[] batCollectionArr; public AchivementInfo[] BatCollectionArr {get => batCollectionArr; set => batCollectionArr = value;}
+
+    [SerializeField] int collectedAtvSkill; public int CollectedAtvSkill {get => collectedAtvSkill; set => collectedAtvSkill = value;}
+    [SerializeField] AchivementInfo[] atvSkillCollectionArr; public AchivementInfo[] AtvSkillCollectionArr {get => atvSkillCollectionArr; set => atvSkillCollectionArr = value;}
+
+    [SerializeField] int upgradeCnt; public int UpgradeCnt {get => upgradeCnt; set => upgradeCnt = value;}
+    [SerializeField] AchivementInfo[] upgradeCntArr; public AchivementInfo[] UpgradeCntArr {get => upgradeCntArr; set => upgradeCntArr = value;}
+
+    [SerializeField] AchivementInfo[] normalModeClear ; public AchivementInfo[] NormalModeClear {get => normalModeClear; set => normalModeClear = value;}
+    [SerializeField] AchivementInfo[] hardModeClear ; public AchivementInfo[] HardModeClear {get => hardModeClear; set => hardModeClear = value;}
+
+
+
     [Header("CHARACTOR")][Header("__________________________")]
     [SerializeField] int selectCharaIdx;  public int SelectCharaIdx {get => selectCharaIdx; set => selectCharaIdx = value;}
     [SerializeField] List<bool> charaLockList;  public List<bool> CharaLockList {get => charaLockList; set => charaLockList = value;}
@@ -66,8 +83,10 @@ public class PersonalData {
     //TODO Item OnLock List
 
     //* constructor
-    public PersonalData(){
-        Debug.Log($"{this}::constructor");
+    public PersonalData(int charaLen, int batLen, int skillLen){
+        int upgradeLen = UpgradeList.DMG_MAXLV + UpgradeList.BALL_SPEED_MAXLV + UpgradeList.CRITICAL_MAXLV 
+            + UpgradeList.CRITICAL_DMG_MAXLV + UpgradeList.BOSS_DMG_MAXLV + UpgradeList.COIN_BONUS_MAXLV + UpgradeList.DEFENCE_MAXLV;
+        Debug.Log($"PersonalData::constructor:: charaLen={charaLen}, batLen={batLen}, upgradeLen={upgradeLen}");
         
         //* 初期化
         this.KeyList = new List<string>();
@@ -112,6 +131,30 @@ public class PersonalData {
             new AchivementInfo(150, 4),
             new AchivementInfo(300, 5),
         };
+        this.charaCollectionArr = new AchivementInfo[] {
+            new AchivementInfo(charaLen / 4, 100),
+            new AchivementInfo(charaLen / 2, 500),
+            new AchivementInfo(charaLen, 1000),
+        };
+        this.batCollectionArr = new AchivementInfo[] {
+            new AchivementInfo(batLen / 4, 100),
+            new AchivementInfo(batLen / 2, 500),
+            new AchivementInfo(batLen, 1000),
+        };
+        this.atvSkillCollectionArr = new AchivementInfo[] {
+            new AchivementInfo(skillLen / 2, 500),
+            new AchivementInfo(skillLen, 1000),
+        };
+        this.upgradeCntArr = new AchivementInfo[] {
+            new AchivementInfo((int)(upgradeLen * 0.2f), 100),
+            new AchivementInfo((int)(upgradeLen * 0.4f), 200),
+            new AchivementInfo((int)(upgradeLen * 0.6f), 300),
+            new AchivementInfo((int)(upgradeLen * 0.8f), 400),
+            new AchivementInfo(upgradeLen, 500),
+        };
+
+        this.normalModeClear = new AchivementInfo[] { new AchivementInfo(1, 1000)};
+        this.hardModeClear = new AchivementInfo[] { new AchivementInfo(1, 2000)};
 
         // Debug.Log("PersonalData::upgrade.Arr[0].lv-->" + upgrade.Arr[0].lv);
     }
@@ -158,6 +201,18 @@ public class PersonalData {
         this.collectedRouletteTicket = data.CollectedRouletteTicket;
         this.collectedRouletteTicketArr = data.collectedRouletteTicketArr;
 
+        this.collectedChara = data.CollectedChara;
+        this.charaCollectionArr = data.CharaCollectionArr;
+        this.collectedBat = data.CollectedBat;
+        this.batCollectionArr = data.BatCollectionArr;
+        this.collectedAtvSkill = data.CollectedAtvSkill;
+        this.atvSkillCollectionArr = data.AtvSkillCollectionArr;
+        this.upgradeCnt = data.UpgradeCnt;
+        this.upgradeCntArr = data.UpgradeCntArr;
+
+        this.normalModeClear = data.NormalModeClear;
+        this.hardModeClear = data.HardModeClear;
+
         //* Item
         this.SelectCharaIdx = data.SelectCharaIdx;
         this.CharaLockList = data.CharaLockList;
@@ -201,7 +256,10 @@ public class PersonalData {
     public void reset(){
         Debug.Log("<size=30>RESET</size>");
         PlayerPrefs.DeleteAll();
+        int upgradeLen = UpgradeList.DMG_MAXLV + UpgradeList.BALL_SPEED_MAXLV + UpgradeList.CRITICAL_MAXLV 
+            + UpgradeList.CRITICAL_DMG_MAXLV + UpgradeList.BOSS_DMG_MAXLV + UpgradeList.COIN_BONUS_MAXLV + UpgradeList.DEFENCE_MAXLV;
 
+        //* Reset
         this.lang = LANG.TP.JP;
 
         this.playTime = 0;
@@ -258,6 +316,33 @@ public class PersonalData {
             new AchivementInfo(150, 4),
             new AchivementInfo(300, 5),
         };
+        this.collectedChara = 1;
+        this.charaCollectionArr = new AchivementInfo[] {
+            new AchivementInfo(DM.ins.scrollviews[(int)DM.PANEL.Chara].ItemPrefs.Length / 4, 100),
+            new AchivementInfo(DM.ins.scrollviews[(int)DM.PANEL.Chara].ItemPrefs.Length / 2, 250),
+            new AchivementInfo(DM.ins.scrollviews[(int)DM.PANEL.Chara].ItemPrefs.Length, 500),
+        };
+        this.collectedBat = 1;
+        this.batCollectionArr = new AchivementInfo[] {
+            new AchivementInfo(DM.ins.scrollviews[(int)DM.PANEL.Bat].ItemPrefs.Length / 4, 100),
+            new AchivementInfo(DM.ins.scrollviews[(int)DM.PANEL.Bat].ItemPrefs.Length / 2, 250),
+            new AchivementInfo(DM.ins.scrollviews[(int)DM.PANEL.Bat].ItemPrefs.Length, 500),
+        };
+        this.collectedAtvSkill = 1;
+        this.atvSkillCollectionArr = new AchivementInfo[] {
+            new AchivementInfo(DM.ins.scrollviews[(int)DM.PANEL.Skill].ItemPrefs.Length / 2, 250),
+            new AchivementInfo(DM.ins.scrollviews[(int)DM.PANEL.Skill].ItemPrefs.Length, 500),
+        };
+        this.upgradeCnt = 0;
+        this.upgradeCntArr = new AchivementInfo[] {
+            new AchivementInfo((int)(upgradeLen * 0.2f), 100),
+            new AchivementInfo((int)(upgradeLen * 0.4f), 200),
+            new AchivementInfo((int)(upgradeLen * 0.6f), 300),
+            new AchivementInfo((int)(upgradeLen * 0.8f), 400),
+            new AchivementInfo(upgradeLen, 500),
+        };
+        this.normalModeClear = new AchivementInfo[] { new AchivementInfo(1, 1000)};
+        this.hardModeClear = new AchivementInfo[] { new AchivementInfo(1, 2000)};
 
         this.SelectCharaIdx = 0;
         this.CharaLockList = new List<bool>();
@@ -313,9 +398,18 @@ public class PersonalData {
     public void setUnLockCurList(int curIdx){
         var itemType = DM.ins.getCurPanelType2Enum(DM.ins.SelectItemType);
         switch(itemType){
-            case DM.PANEL.Chara :  CharaLockList[curIdx] = false; break;
-            case DM.PANEL.Bat :    BatLockList[curIdx] = false;   break;
-            case DM.PANEL.Skill :  SkillLockList[curIdx] = false; break;
+            case DM.PANEL.Chara :  
+                CharaLockList[curIdx] = false;
+                Achivement.collectChara();
+                break;
+            case DM.PANEL.Bat :    
+                BatLockList[curIdx] = false;   
+                Achivement.collectBat();
+                break;
+            case DM.PANEL.Skill :  
+                SkillLockList[curIdx] = false; 
+                Achivement.collectAtvSkill();
+                break;
         }
     }
 

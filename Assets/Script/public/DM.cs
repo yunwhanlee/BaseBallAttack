@@ -110,7 +110,7 @@ public class DM : MonoBehaviour
         ItemInfo[] skills = scrollviews[(int)DM.PANEL.Skill].ContentTf.GetComponentsInChildren<ItemInfo>();
         ItemInfo[] upgrades = scrollviews[(int)DM.PANEL.Upgrade].ContentTf.GetComponentsInChildren<ItemInfo>();
 
-        personalData = new PersonalData(); //* DataBase
+        personalData = new PersonalData(charas.Length, bats.Length, skills.Length); //* DataBase
         personalData.load(ref charas, ref bats, ref skills);
 
         //* Init DMデータ ロード。

@@ -1684,6 +1684,16 @@ MonoBehaviour:
       reward: 5
       isAccept: 0
       isComplete: 0
+    collectedChara: 0
+    charaCollectionArr: []
+    collectedBat: 0
+    batCollectionArr: []
+    collectedAtvSkill: 0
+    atvSkillCollectionArr: []
+    upgradeCnt: 0
+    upgradeCntArr: []
+    normalModeClear: []
+    hardModeClear: []
     selectCharaIdx: 0
     charaLockList: 
     selectBatIdx: 0
@@ -6471,7 +6481,8 @@ MonoBehaviour:
   STAGE_PER_DIAMOND: 10
   HARDMODE_COIN_BONUS: 2
   HARDMODE_DIAMOND_BONUS: 1.5
-  BOSS_STAGE_SPAN: 20
+  VICTORY_BOSSKILL_CNT: 1
+  BOSS_STAGE_SPAN: 2
   BOSS_LIMIT_SPAN: 15
   LONG_BLOCK_SPAN: 7
   ICE_FREEZE_DURATION: 1
@@ -6527,7 +6538,6 @@ MonoBehaviour:
     start: 200
     commonDiffrence: 200
     gradualUpValue: 0.1
-  VICTORY_BOSSKILL_CNT: 4
   REROTATE_SKILLSLOTS_PRICE_COIN: 500
   REVIVE_PRICE_DIAMOND: 200
   ROULETTE_TICKET_COOLTIME_MINUTE: 30
@@ -28214,7 +28224,7 @@ MonoBehaviour:
   - {fileID: 4041380316619062191}
   - {fileID: 4041380315200936511}
   premiumPackPriceTxt: {fileID: 4041380316934732539}
-  curStageSelectIndex: 0
+  stageIndex: 0
   navyGray: {r: 0.23137255, g: 0.29803923, b: 0.3882353, a: 1}
   stageSelectPanel: {fileID: 2383291514987288976}
   stageSelectContent: {fileID: 2383291514809371337}
@@ -28245,10 +28255,10 @@ MonoBehaviour:
   - {fileID: 2682170137326998400, guid: ac2f9a6a9fa32a441b4e54e9bf736aa8, type: 3}
   - {fileID: 2682170137326998400, guid: 3b1d42b3eb873d34d8e63cc8988684e6, type: 3}
   - {fileID: 2682170137326998400, guid: e664d83d0e773df47b184e3684cf02c5, type: 3}
-  - {fileID: 2682170137326998400, guid: bc794e0c48da8034cbf592fcdfa8c905, type: 3}
-  - {fileID: 2682170137326998400, guid: 7aa8d9353d00aae4989f698c28a71941, type: 3}
   - {fileID: 2682170137326998400, guid: 00e0642e729a27342b116197ac704b85, type: 3}
+  - {fileID: 2682170137326998400, guid: bc794e0c48da8034cbf592fcdfa8c905, type: 3}
   - {fileID: 2682170137326998400, guid: 5923ad624801481478371d0468efde1f, type: 3}
+  - {fileID: 2682170137326998400, guid: 7aa8d9353d00aae4989f698c28a71941, type: 3}
   rewardIconSprs:
   - {fileID: 21300000, guid: 56d6624c6f0014a7c8870cbbf2c74cbe, type: 3}
   - {fileID: 21300000, guid: fba201cf2cb14452bae43a674add4f43, type: 3}
@@ -34045,10 +34055,10 @@ RectTransform:
   m_Father: {fileID: 4041380315387306615}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 829, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 425.5, y: -371.67694}
+  m_SizeDelta: {x: 829, y: 100.479126}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4041380315379751044
 GameObject:
@@ -35346,10 +35356,10 @@ RectTransform:
   m_Father: {fileID: 4041380315387306615}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 829, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 425.5, y: -70.23956}
+  m_SizeDelta: {x: 829, y: 100.479126}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4041380315833339707
 GameObject:
@@ -35532,7 +35542,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4041380315914218745
 RectTransform:
   m_ObjectHideFlags: 0
@@ -35661,10 +35671,10 @@ RectTransform:
   m_Father: {fileID: 4041380315387306615}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 829, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 425.5, y: -170.71869}
+  m_SizeDelta: {x: 829, y: 100.479126}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4041380316218991480
 GameObject:
@@ -35698,10 +35708,10 @@ RectTransform:
   m_Father: {fileID: 4041380315387306615}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 829, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 425.5, y: -271.1978}
+  m_SizeDelta: {x: 829, y: 100.479126}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4041380316348557500
 GameObject:

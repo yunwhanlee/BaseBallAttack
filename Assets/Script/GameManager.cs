@@ -693,6 +693,12 @@ public class GameManager : MonoBehaviour
         //* HardMode unlocked
         if(!DM.ins.personalData.IsHardmodeOn)
             DM.ins.personalData.IsHardmodeOn = true;
+
+        //* Achivement
+        if(mode == DM.MODE.NORMAL)
+            Achivement.setNormalModeClear();
+        else if(mode == DM.MODE.HARD)
+            Achivement.setHardModeClear();
     }
 
     private void setFinishGame(GameObject panel, Text scoreTxt, Text stageTxt, Text coinTxt, Text diamondTxt){

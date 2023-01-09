@@ -607,6 +607,9 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                     curItem.price.setValue(priceList[upgradeDt.Lv]);
 
                     em.createUpgradeItemEF(curItem.UpgradeValueTxt.transform);
+
+                    //* Achivement
+                    Achivement.addUpgradeCnt();
                 }
             }
             else if(DM.ins.SelectItemType == DM.PANEL.CashShop.ToString()){

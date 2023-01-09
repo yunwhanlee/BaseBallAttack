@@ -101,7 +101,7 @@ public class HomeManager : MonoBehaviour
     public Text premiumPackPriceTxt;
 
     [Header("STAGE SELECT PANEL")][Header("__________________________")]
-    public int curStageSelectIndex;
+    public int stageIndex;
     public Color navyGray;
     public GameObject stageSelectPanel;
     public RectTransform stageSelectContent;    
@@ -158,6 +158,8 @@ public class HomeManager : MonoBehaviour
     [SerializeField] Transform modelTf;   public Transform ModelTf {get => modelTf; set => modelTf = value;}
 
     void Start(){
+        // onClickResetBtn();
+
         Debug.Log("Math:: -------------------------------");
         const int OFFSET = 100;
         List<int> hpList = Util._.calcArithmeticProgressionList(start: OFFSET, max: 99, d: OFFSET, gradualUpValue: 0.01f);
@@ -416,7 +418,7 @@ public class HomeManager : MonoBehaviour
 
         int i=0;
         Array.ForEach(stageSelects, stageSelect => {
-            if(i == idxNum) curStageSelectIndex = i;
+            if(i == idxNum) stageIndex = i;
             stageSelect.ImgBtn.GetComponent<Image>().color = (i == idxNum)? Color.yellow : navyGray;
             i++;
         });
@@ -425,13 +427,13 @@ public class HomeManager : MonoBehaviour
     }
 
     public void onClickPlayBtn(){
-        if(stageSelects[curStageSelectIndex].IsLocked){
+        if(stageSelects[stageIndex].IsLocked){
             Util._.displayNoticeMsgDialog(LANG.getTxt(LANG.TXT.MsgHardmodeLocked.ToString()));
             return;
         }
 
         //* スタートするステージ数を設定。
-        LM._.STAGE_NUM = stageSelects[curStageSelectIndex].Begin;
+        LM._.STAGE_NUM = stageSelects[stageIndex].Begin;
 
         var playerModel = modelTf.GetChild(0);
         playerModel.GetComponent<Animator>().SetBool(DM.ANIM.IsIdle.ToString(), false); //Ready Pose
@@ -443,8 +445,8 @@ public class HomeManager : MonoBehaviour
         DM.ins.personalData.ItemPassive.setLvArr(lvArrTemp);
 
         //* Set Sky Style
-        Debug.Log("onClickPlayBtn:: curStageSelectIndex= " + curStageSelectIndex);
-        float offsetX = (curStageSelectIndex == (int)DM.MODE.NORMAL)? LM._.SKY_MT_MORNING_VALUE : LM._.SKY_MT_DINNER_VALUE; // 1=> Morning, 1.25=> dinner, 1.5=> night
+        Debug.Log("onClickPlayBtn:: curStageSelectIndex= " + stageIndex);
+        float offsetX = (stageIndex == (int)DM.MODE.NORMAL)? LM._.SKY_MT_MORNING_VALUE : LM._.SKY_MT_DINNER_VALUE; // 1=> Morning, 1.25=> dinner, 1.5=> night
         DM.ins.simpleSkyMt.SetTextureOffset("_MainTex", new Vector2(offsetX, 0));
 
         //* シーン 読込み。
@@ -691,7 +693,7 @@ public class HomeManager : MonoBehaviour
         if(child.name == DM.NAME.GrayPanel.ToString()) child.gameObject.SetActive(isActive);
     }
     private string updateADCoolTime(){
-        DateTime finishTime = DateTime.Parse(DM.ins.personalData.RouletteTicketCoolTime).AddMinutes(LM._.ROULETTE_TICKET_COOLTIME_MINUTE);
+        DateTime finishTime = DateTime.ParseExact(DM.ins.personalData.RouletteTicketCoolTime, "dd/MM/yyyy", null).AddMinutes(LM._.ROULETTE_TICKET_COOLTIME_MINUTE);
         TimeSpan coolTime = finishTime - DateTime.Now;
 
         //* Coolタイムが終わったら

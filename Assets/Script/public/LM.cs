@@ -49,6 +49,15 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
         new HitRank(1.125f, 3), //D
         new HitRank(1.5f, 2), //E
     };
+
+    // [Header("UPGRADE MAXLV")][Header("__________________________")]
+    // public int UPGRADE_DMG_MAXLV = 100;
+    // public int UPGRADE_BALL_SPEED_MAXLV = 20;
+    // public int UPGRADE_CRITICAL_MAXLV = 30;
+    // public int UPGRADE_CRITICAL_DMG_MAXLV = 20;
+    // public int UPGRADE_BOSS_DMG_MAXLV = 30;
+    // public int UPGRADE_COIN_BONUS_MAXLV = 20;
+    // public int UPGRADE_DEFENCE_MAXLV = 10;
     
     [HideInInspector] public int HOMERUN_MIN_POWER;
     [Header("STAGE")][Header("__________________________")]
@@ -58,6 +67,9 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("ハードモードコイン掛け算ボーナス")] public int HARDMODE_COIN_BONUS = 2;
     [Tooltip("ハードモードダイア掛け算ボーナス")] public float HARDMODE_DIAMOND_BONUS = 1.5f;
 
+    [Header("VICTORY")][Header("__________________________")]
+    [Tooltip("勝利ボースカウンター")] public int VICTORY_BOSSKILL_CNT = 4;
+    
     [Header("BLOCK SPAN")][Header("__________________________")]
     [Tooltip("ボース登場ステージ周期")] public int BOSS_STAGE_SPAN = 10;
     [Tooltip("ボース制限ステージ時間")] public int BOSS_LIMIT_SPAN = 20;
@@ -110,9 +122,6 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("クリティカル")] public UpgradePriceCalcSetting UPGRADE_CRIT;
     [Tooltip("クリティカルダメージ")] public UpgradePriceCalcSetting UPGRADE_CRITDMG;
     [Tooltip("ディフェンス")] public UpgradePriceCalcSetting UPGRADE_DEFENCE;
-
-    [Header("VICTORY")][Header("__________________________")]
-    [Tooltip("勝利ボースカウンター")] public int VICTORY_BOSSKILL_CNT = 4;
 
     [Header("REWARD")][Header("__________________________")]
     [Tooltip("レベルアップスロット、再回転に要するコイン")] public int REROTATE_SKILLSLOTS_PRICE_COIN = 200;

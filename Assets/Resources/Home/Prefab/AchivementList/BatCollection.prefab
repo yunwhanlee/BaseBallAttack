@@ -200,7 +200,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2572671872519699574}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6507805478298718727}
+        m_TargetAssemblyTypeName: Achivement, Assembly-CSharp
+        m_MethodName: onClickCalimBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6826752870630252131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,7 +262,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 170, y: 53.38672}
+  m_AnchoredPosition: {x: 170, y: 52.82605}
   m_SizeDelta: {x: 150, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2682170135403284275
@@ -331,7 +343,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 170, y: 25}
-  m_SizeDelta: {x: 94.19812, y: 98.87875}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2682170135962915811
 CanvasRenderer:
@@ -527,7 +539,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d68278f62733c4560972ce42bb4002b4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4dc8ef579e43a4766ad3b7e6378da7bb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -615,7 +627,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: upgrade 99 times
+  m_Text: collect 10 bats
 --- !u!1 &2682170137326998400
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,9 +640,9 @@ GameObject:
   - component: {fileID: 2682170137326998412}
   - component: {fileID: 2682170137326998413}
   - component: {fileID: 2682170137326998414}
-  - component: {fileID: -4225411219411166322}
+  - component: {fileID: 6507805478298718727}
   m_Layer: 0
-  m_Name: UpgradeMaster
+  m_Name: BatCollection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -714,7 +726,7 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.050980393}
   m_EffectDistance: {x: 0, y: -6}
   m_UseGraphicAlpha: 1
---- !u!114 &-4225411219411166322
+--- !u!114 &6507805478298718727
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
