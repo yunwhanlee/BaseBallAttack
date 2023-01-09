@@ -414,29 +414,29 @@ public class PersonalData {
         switch(itemType){
             case DM.PANEL.Chara :  
                 CharaLockList[curIdx] = false;
-                Achivement.collectChara();
+                AcvCharactorCollection.collectChara();
                 break;
             case DM.PANEL.Bat :    
                 BatLockList[curIdx] = false;   
-                Achivement.collectBat();
+                AcvBatCollection.collectBat();
                 break;
             case DM.PANEL.Skill :  
                 SkillLockList[curIdx] = false; 
-                Achivement.collectAtvSkill();
+                AcvAtvSkillCollection.collectAtvSkill();
                 break;
         }
     }
 
     public void addCoin(int amount){
         coin += amount;
-        Achivement.collectCoin(amount);
+        AcvCollectedCoin.collectCoin(amount);
     }
     public void addDiamond(int amount){
         diamond += amount;
-        Achivement.collectDiamond(amount);
+        AcvCollectedDiamond.collectDiamond(amount);
     }
     public void addRouletteTicket(int amount){
         rouletteTicket += amount;
-        Achivement.collectRouletteTicket(amount);
+        AcvCollectedRouletteTicket.collectRouletteTicket(amount);
     }
 }

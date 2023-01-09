@@ -699,9 +699,9 @@ public class GameManager : MonoBehaviour
 
         //* Achivement
         if(mode == DM.MODE.NORMAL)
-            Achivement.setNormalModeClear();
+            AcvNormalModeClear.setNormalModeClear();
         else if(mode == DM.MODE.HARD)
-            Achivement.setHardModeClear();
+            AcvHardModeClear.setHardModeClear();
     }
 
     private void setFinishGame(GameObject panel, Text scoreTxt, Text stageTxt, Text coinTxt, Text diamondTxt){
@@ -854,7 +854,7 @@ public class GameManager : MonoBehaviour
         }
 
         //* Achivement (StageClear IsComplete)
-        Achivement.setStageClear(stage);
+        AcvStageClear.setStageClear(stage);
     }
 
     private void destroyEveryBalls(){

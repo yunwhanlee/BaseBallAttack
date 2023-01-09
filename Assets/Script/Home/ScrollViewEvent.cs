@@ -609,7 +609,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                     em.createUpgradeItemEF(curItem.UpgradeValueTxt.transform);
 
                     //* Achivement
-                    Achivement.addUpgradeCnt();
+                    AcvUpgradeCnt.addUpgradeCnt();
                 }
             }
             else if(DM.ins.SelectItemType == DM.PANEL.CashShop.ToString()){

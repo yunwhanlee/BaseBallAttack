@@ -399,7 +399,7 @@ public class Block_Prefab : MonoBehaviour
 
         //* Add Destroy Blocks
         if(!isInitialize) 
-            Achivement.addDestroyBlockCnt();
+            AcvDestroyBlocks.addDestroyBlockCnt();
 
         Destroy(target);
     }

@@ -220,7 +220,7 @@ public class HomeManager : MonoBehaviour
         }
 
         //* Check Goods Achivement IsComplete (これしないと、業績達成しても、全てのIsCompleteがFalseのまま)。
-        Achivement.setGoodsCompletedList();
+        // Achivement.setGoodsCompletedList();
     }
 
     void Update(){

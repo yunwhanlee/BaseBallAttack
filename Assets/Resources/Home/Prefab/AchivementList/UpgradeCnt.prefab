@@ -201,8 +201,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -4225411219411166322}
-        m_TargetAssemblyTypeName: Achivement, Assembly-CSharp
+      - m_Target: {fileID: 4582184855497294173}
+        m_TargetAssemblyTypeName: AcvUpgradeCnt, Assembly-CSharp
         m_MethodName: onClickCalimBtn
         m_Mode: 1
         m_Arguments:
@@ -640,7 +640,7 @@ GameObject:
   - component: {fileID: 2682170137326998412}
   - component: {fileID: 2682170137326998413}
   - component: {fileID: 2682170137326998414}
-  - component: {fileID: -4225411219411166322}
+  - component: {fileID: 4582184855497294173}
   m_Layer: 0
   m_Name: UpgradeCnt
   m_TagString: Untagged
@@ -726,7 +726,7 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.050980393}
   m_EffectDistance: {x: 0, y: -6}
   m_UseGraphicAlpha: 1
---- !u!114 &-4225411219411166322
+--- !u!114 &4582184855497294173
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -735,15 +735,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2682170137326998400}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99268be5e7c824447b8e5adb99a073aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 559846fe55702844683fba594826de8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rewardType: 1
-  step: 1
-  maxStep: 0
   cnt: 0
   max: 0
-  rewardValue: 0
   allClear: 0
   targetArr: []
 --- !u!1 &4622852445226402249

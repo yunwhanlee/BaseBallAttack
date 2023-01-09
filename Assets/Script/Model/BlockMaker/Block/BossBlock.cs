@@ -257,7 +257,7 @@ public class BossBlock : Block_Prefab{
         Debug.Log($"BossBlock:: onDestroy():: target= {target}, Contains Boss1 = {name.Contains("Boss1")}");
 
         //* Achivement
-        Achivement.collectBossKill(this.name);
+        AcvBosskillCollection.collectBossKill(this.name);
         
         StartCoroutine(coPlayBossDieAnim(target));
     }
