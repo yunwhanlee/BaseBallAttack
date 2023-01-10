@@ -6544,7 +6544,7 @@ MonoBehaviour:
   REVIVE_PRICE_DIAMOND: 200
   ROULETTE_TICKET_COOLTIME_MINUTE: 30
   PREM_PACK_ROULETTE_TICKET: 7
-  PREM_PACK_COIN: 50000
+  PREM_PACK_COIN: 100000
   PREM_PACK_DIAMOND: 10000
   PREM_PACK_PRICE: 10
   DISPLAY_RATE_DIALOG_PLAYTIME: 3
@@ -15969,6 +15969,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1192421461}
   m_CullTransparentMesh: 1
+--- !u!1001 &1195251339
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 150312, guid: da454a5cc69c9464aa8eae6b8492536e, type: 3}
+      propertyPath: m_Name
+      value: ShadowMuzzle
+      objectReference: {fileID: 0}
+    - target: {fileID: 455454, guid: da454a5cc69c9464aa8eae6b8492536e, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 455454, guid: da454a5cc69c9464aa8eae6b8492536e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 455454, guid: da454a5cc69c9464aa8eae6b8492536e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 455454, guid: da454a5cc69c9464aa8eae6b8492536e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 455454, guid: da454a5cc69c9464aa8eae6b8492536e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 455454, guid: da454a5cc69c9464aa8eae6b8492536e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 455454, guid: da454a5cc69c9464aa8eae6b8492536e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 455454, guid: da454a5cc69c9464aa8eae6b8492536e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 455454, guid: da454a5cc69c9464aa8eae6b8492536e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 455454, guid: da454a5cc69c9464aa8eae6b8492536e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 455454, guid: da454a5cc69c9464aa8eae6b8492536e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: da454a5cc69c9464aa8eae6b8492536e, type: 3}
 --- !u!1 &1196835646
 GameObject:
   m_ObjectHideFlags: 0
