@@ -352,6 +352,8 @@
     ✓ (BUG-28) LM::MAX_STAGE変数追加。blockHpListを作るとき、MAX値を超えると、実行できないBUGを対応。
     ✓ (BUG-29) HOME::ItemInfo:: SkillはRANK値段が適用しないように。
     ✓ (BUG-30) Ball_Prefab::CritとかOneKillテキストEFとダメージ普通EFが一緒に発動するバグ対応。
+    ✓ (BUG-31) 始めての場合、ダメージが０になるバグ対応。
+    ✓ (BUG-32) ボールが投げて来ているとき、途中でブロックとぶつかるバグ対応。
     
     
 

@@ -59,6 +59,9 @@ public class Ball_Prefab : MonoBehaviour
                 gm.switchCamera();
                 pl.DoSwing = false;
                 rigid.useGravity = true;
+                
+                //* (BUG-32) ボールが投げて来ているとき、途中でブロックとぶつかるバグ対応。
+                this.GetComponent<SphereCollider>().isTrigger = false;
 
                 //* Init STRIKEデータ
                 gm.strikeCnt = 0;
@@ -490,8 +493,8 @@ public class Ball_Prefab : MonoBehaviour
 
     void OnDrawGizmos(){
         //* Explosion Skill Range Preview
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(this.transform.position, pl.explosion.Val.range);
+        // Gizmos.color = Color.yellow;
+        // Gizmos.DrawWireSphere(this.transform.position, pl.explosion.Val.range);
 
         //* ThunderShot Skill Range Preview => ArrowAxisAnchorObjに付いているThunderGizmosスクリプト。
 

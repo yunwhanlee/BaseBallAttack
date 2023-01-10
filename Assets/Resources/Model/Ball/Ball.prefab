@@ -52,6 +52,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigid: {fileID: 0}
   aliveTime: 5
+  isHitedByBlock: 0
+  isHomeRun: 0
   speed: 0
   isOnDarkOrb: 0
   darkOrbPf: {fileID: 5990278791084361765}
@@ -113,7 +115,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2295754910549213891}
   m_Material: {fileID: 13400000, guid: 937902dbc2254fb429a0593fd3275c5b, type: 2}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5

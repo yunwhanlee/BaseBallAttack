@@ -166,6 +166,7 @@ public class Player : MonoBehaviour
 
         //* General
         int val = (dmg.Unit * dmg.Level) + upgradeDmg;
+        val = (val <= 0)? 1 : val; //* (BUG-31) 始めての場合、ダメージが０になるバグ対応。
         float plusPer = 1 + dmg.Level * 0.1f;
         Debug.Log($"dmg:: {val} * {plusPer} = {(int)(val * plusPer)}");
         dmg.initValue((int)(val * plusPer));
@@ -237,7 +238,8 @@ public class Player : MonoBehaviour
         anim.SetTrigger(name);
         switch(name){
             case "Swing":
-                DoSwing = true;
+                doSwing = true;
+                
                 break;
             case "HomeRun": 
             case "ActiveSkillBefSpotLight":
