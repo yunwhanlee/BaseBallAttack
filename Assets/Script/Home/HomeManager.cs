@@ -713,8 +713,8 @@ public class HomeManager : MonoBehaviour
         if(!DM.ins.personalData.IsPurchasePremiumPack){
             //* Set Language Premium Pack
             premiumPackTitle.text = LANG.getTxt(LANG.TXT.PremiumPack.ToString());
-            premiumPackInfoTxtArr[COIN].text = $"{LM._.PREM_PACK_DIAMOND} {LANG.getTxt(LANG.TXT.Coin.ToString())}";
-            premiumPackInfoTxtArr[DIAMOND].text = $"{LM._.PREM_PACK_COIN} {LANG.getTxt(LANG.TXT.Diamond.ToString())}";
+            premiumPackInfoTxtArr[COIN].text = $"{LM._.PREM_PACK_COIN} {LANG.getTxt(LANG.TXT.Diamond.ToString())}";
+            premiumPackInfoTxtArr[DIAMOND].text = $"{LM._.PREM_PACK_DIAMOND} {LANG.getTxt(LANG.TXT.Coin.ToString())}";
             premiumPackInfoTxtArr[ROULETTE_TICKET].text = $"x {LM._.PREM_PACK_ROULETTE_TICKET}";
             premiumPackInfoTxtArr[REMOVE_AD].text = $"{LANG.getTxt(LANG.TXT.RemoveAllADs.ToString())}";
             premiumPackPriceTxt.text = $"$ { LM._.PREM_PACK_PRICE}";
