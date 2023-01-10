@@ -72,6 +72,7 @@ public class EffectManager : MonoBehaviour
     public GameObject reviveEF;
     //CREATE TYEP
     public GameObject showExpUITxtEF;
+    public GameObject dmgTxtEF;
 
     [Header("BOSS SKILL EF")][Header("__________________________")]
     public GameObject bossHealSkillEF;
@@ -168,6 +169,12 @@ public class EffectManager : MonoBehaviour
     public void createInstantKillTextEF(Vector3 parentPos){
         var ins = ObjectPool.getObject(ObjectPool.DIC.InstantKillTextEF.ToString(), parentPos, QI, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
+    }
+    public GameObject createDmgTxtEF(Vector3 parentPos, int damage){
+        var ins = ObjectPool.getObject(ObjectPool.DIC.DmgTxtEF.ToString(), parentPos, QI, gm.effectGroup);
+        ins.GetComponentInChildren<Text>().text = damage.ToString();
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
+        return ins;
     }
     public GameObject createCritTxtEF(Vector3 parentPos, int damage){
         var ins = ObjectPool.getObject(ObjectPool.DIC.CritTxtEF.ToString(), parentPos, QI, gm.effectGroup);

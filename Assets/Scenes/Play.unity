@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44479504, g: 0.49434292, b: 0.57354003, a: 1}
+  m_IndirectSpecularColor: {r: 0.44479525, g: 0.49434352, b: 0.5735407, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12721,6 +12721,7 @@ MonoBehaviour:
   homeRunTxtPopEF: {fileID: 2005072966}
   reviveEF: {fileID: 1778961970}
   showExpUITxtEF: {fileID: 7143527984368164636, guid: 211532f984f12714d8968f0aef8b46f8, type: 3}
+  dmgTxtEF: {fileID: 3436073781772722895, guid: fb1d4dc9abb95b648a09530e83a95650, type: 3}
   bossHealSkillEF: {fileID: 2068829495866214061, guid: 25c4eb96708f49c40a8cd37b5270ec1c, type: 3}
   bossObstacleSpawnEF: {fileID: 1462863494835050131, guid: 7fe96619cf2576542aea634b97a9f7f7, type: 3}
   rockObstacleBrokenEF: {fileID: 4160636153587398475, guid: b2a8d920c2c43c542b7a0c5d471bb13e, type: 3}

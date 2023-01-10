@@ -288,11 +288,11 @@ public class Ball_Prefab : MonoBehaviour
                     //* Explosion
                     em.createGodBlessEF(this.transform.position);
                     Util._.sphereCastAllDecreaseBlocksHp(this.transform, radius, pl.dmg.Val * 3);
-            }
+                }
             }
 
             //* InstantKill
-            pl.instantKill.setHitTypeSkill(pl.instantKill.Val, ref result, col, em, pl);
+            pl.instantKill.setHitTypeSkill(pl.instantKill.Val, ref result, col, em, pl, this.gameObject);
 
             if(result != PsvSkill<int>.ONE_KILL_DMG){
                 //* Critical
@@ -319,6 +319,7 @@ public class Ball_Prefab : MonoBehaviour
                 if(isDmgX2) result *= 2;
                 Debug.Log("Set DAMAGE:: result= " + result);
                 bm.decreaseBlockHP(col.gameObject, result);
+                // em.createDmgTxtEF(this.transform.position, result);
             }
         #endregion            
         }

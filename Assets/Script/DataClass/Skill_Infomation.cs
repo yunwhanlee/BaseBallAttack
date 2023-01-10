@@ -176,6 +176,7 @@ public class PsvSkill<T> where T: struct {
         //     : 1;
 
         var psv = DM.ins.convertPsvSkillStr2Enum(Name);
+
         if(Level > 0 && rand <= percent){
             if(psv == DM.PSV.NULL) Debug.LogError("convertPsvSkillStr2Enum()へ string[]変数を追加してください！");
             Debug.LogFormat("PassiveSkill:: setHitTypeSkill:: Name= {0}, rand({1}) <= per({2}) : {3}",
@@ -201,7 +202,9 @@ public class PsvSkill<T> where T: struct {
                     em.createCritTxtEF(col.transform.position, Mathf.RoundToInt(pl.dmg.Val * DMG_TWICE * pl.giantBall.Val));
                     result *= 2;
                     break;
-
+                default : 
+                    em.createDmgTxtEF(ballPref.transform.position, result);
+                    break;
                 case DM.PSV.Explosion:
                     em.createExplosionEF(ballPref.transform.position, pl.explosion.Val.range);
                     return true;

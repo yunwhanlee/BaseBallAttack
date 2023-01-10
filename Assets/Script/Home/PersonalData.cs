@@ -431,7 +431,7 @@ public class PersonalData {
         var pDt = DM.ins.personalData;
         bool res = false;
         if( //* 完了は出来ましたが、まだ受け取らない項目が有るか確認。
-        Array.Exists(pDt.StageClearArr, arr => arr.IsComplete && !arr.IsAccept)
+            Array.Exists(pDt.StageClearArr, arr => arr.IsComplete && !arr.IsAccept)
             || Array.Exists(pDt.DestroyBlockArr, arr => arr.IsComplete && !arr.IsAccept)
             || Array.Exists(pDt.CollectedCoinArr, arr => arr.IsComplete && !arr.IsAccept)
             || Array.Exists(pDt.CollectedDiamondArr, arr => arr.IsComplete && !arr.IsAccept)
