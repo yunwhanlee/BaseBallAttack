@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
     public Text adDialogContentTxt;
 
     [Header("◆GUI◆")][Header("__________________________")]
-    public Text levelTxt;
+    
     public Text stageTxt;
     public Text bossLimitCntTxt;
     public Text stateTxt;
@@ -123,6 +123,7 @@ public class GameManager : MonoBehaviour
     [Header("PAUSE")][Header("__________________________")]
     public RectTransform pauseSkillStatusTableTf;
     public GameObject skillInfoRowPref;
+    public Text levelTxt;
     public Text pauseCoinTxt;
     public Text pauseDiamondTxt;
     public Text pauseModeTxt;
