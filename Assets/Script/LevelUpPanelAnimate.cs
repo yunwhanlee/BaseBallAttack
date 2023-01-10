@@ -166,7 +166,13 @@ public class LevelUpPanelAnimate : MonoBehaviour{
         var psv = DM.ins.convertPsvSkillStr2Enum(colSkillBtns[index].name.text);
         switch(psv){
             case DM.PSV.Dmg:
-                pl.dmg.setLvUp(pl.dmg.Val + pl.dmg.Unit);
+                UpgradeDt[] upgradeArr = DM.ins.personalData.Upgrade.Arr;
+                int upgradeDmg = (int)upgradeArr[(int)DM.UPGRADE.Dmg].getValue();
+                //* Calc
+                int val = (pl.dmg.Unit * (pl.dmg.Level+1)) + upgradeDmg;
+                float plusPer = 1 + (pl.dmg.Level+1) * 0.1f;
+                //* Set
+                pl.dmg.setLvUp((int)(val * plusPer));
                 break;
             case DM.PSV.MultiShot:
                 pl.multiShot.setLvUp(pl.multiShot.Val + pl.multiShot.Unit);

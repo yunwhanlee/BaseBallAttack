@@ -158,8 +158,8 @@ public class PsvSkill<T> where T: struct {
         }
     }
 
-    public void initSkillDt(T value){
-        Debug.LogFormat($"<color=yellow>initSkillDt(value={value}):: name={name}, lv={level}, maxLv={maxLv}, value={value}</color>");
+    public void initValue(T value){
+        Debug.LogFormat($"<color=yellow>setValue(value={value}):: name={name}, lv={level}, maxLv={maxLv}, value={value}</color>");
         // if(level > 0){
             this.val = value;
         // }
@@ -185,12 +185,12 @@ public class PsvSkill<T> where T: struct {
                 case DM.PSV.InstantKill: 
                     em.createInstantKillTextEF(col.transform.position);
                     result = PsvSkill<int>.ONE_KILL_DMG;
-                    break;
+                    return true;
                 case DM.PSV.Critical: 
                     int dmg = (int)(pl.dmg.Val * (2 + pl.criticalDamage.Val) * DMG_TWICE * pl.giantBall.Val);
                     em.createCritTxtEF(col.transform.position, dmg);
                     result = dmg;
-                    break;
+                    return true;
                 case DM.PSV.FireProperty:
                     col.transform.GetComponent<Block_Prefab>().FireDotDmg.IsOn = true;
                     break;
@@ -201,9 +201,6 @@ public class PsvSkill<T> where T: struct {
                     em.createThunderStrikeEF(col.transform.position);
                     em.createCritTxtEF(col.transform.position, Mathf.RoundToInt(pl.dmg.Val * DMG_TWICE * pl.giantBall.Val));
                     result *= 2;
-                    break;
-                default : 
-                    em.createDmgTxtEF(ballPref.transform.position, result);
                     break;
                 case DM.PSV.Explosion:
                     em.createExplosionEF(ballPref.transform.position, pl.explosion.Val.range);

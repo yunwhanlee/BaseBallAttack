@@ -276,7 +276,7 @@ public class Ball_Prefab : MonoBehaviour
         #endregion
         #region PSV (HIT BLOCK) + DAMAGE RESULT
             int result = 0;
-            bool isOnExplosion = false;
+            bool isInstantKill= false, isCritical= false, isOnExplosion = false;
 
             //* GodBless
             if(pl.godBless.Level == 1){
@@ -292,17 +292,17 @@ public class Ball_Prefab : MonoBehaviour
             }
 
             //* InstantKill
-            pl.instantKill.setHitTypeSkill(pl.instantKill.Val, ref result, col, em, pl, this.gameObject);
+            isInstantKill = pl.instantKill.setHitTypeSkill(pl.instantKill.Val, ref result, col, em, pl);
 
             if(result != PsvSkill<int>.ONE_KILL_DMG){
                 //* Critical
-                pl.critical.setHitTypeSkill(pl.critical.Val, ref result, col, em, pl);
+                isCritical = pl.critical.setHitTypeSkill(pl.critical.Val, ref result, col, em, pl, this.gameObject);
                 //* FireProperty
-                pl.fireProperty.setHitTypeSkill(pl.fireProperty.Val, ref result, col, em, pl);
+                pl.fireProperty.setHitTypeSkill(pl.fireProperty.Val, ref result, col, em, pl, this.gameObject);
                 //* IceProperty
-                pl.iceProperty.setHitTypeSkill(pl.iceProperty.Val, ref result, col, em, pl);
+                pl.iceProperty.setHitTypeSkill(pl.iceProperty.Val, ref result, col, em, pl, this.gameObject);
                 //* ThunderProperty
-                pl.thunderProperty.setHitTypeSkill(pl.thunderProperty.Val, ref result, col, em, pl);
+                pl.thunderProperty.setHitTypeSkill(pl.thunderProperty.Val, ref result, col, em, pl, this.gameObject);
                 //* Explosion（最後 ダメージ適用）
                 isOnExplosion = pl.explosion.setHitTypeSkill(pl.explosion.Val.per, ref result, col, em, pl, this.gameObject);
             }
@@ -319,7 +319,9 @@ public class Ball_Prefab : MonoBehaviour
                 if(isDmgX2) result *= 2;
                 Debug.Log("Set DAMAGE:: result= " + result);
                 bm.decreaseBlockHP(col.gameObject, result);
-                // em.createDmgTxtEF(this.transform.position, result);
+                //* (BUG-30) Ball_Prefab::CritとかOneKillテキストEFとダメージ普通EFが一緒に発動するバグ対応。
+                if(!isInstantKill && !isCritical)
+                    em.createDmgTxtEF(this.transform.position, result);
             }
         #endregion            
         }

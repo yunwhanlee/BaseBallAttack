@@ -487,17 +487,16 @@ MonoBehaviour:
   - "\u653B\u6483\u529B"
   - "\uACF5\uACA9\uB825"
   explainTxts:
-  - Attack Damage +1
-  - "\u653B\u6483\u529B +1"
-  - "\uACF5\uACA9\uB825 +1"
+  - Attack Damage +1 and +10%
+  - "\u653B\u6483\u529B +1 \u3068 +10%"
+  - "\uACF5\uACA9\uB825 +1 \uACFC +10%"
   homeRunBonusTxts:
   - 
   - 
   - 
   price:
     type: 0
-    coin: 0
-    diamond: 0
+    val: 0
   isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 3811945637865038421}
@@ -507,9 +506,9 @@ MonoBehaviour:
   rank: 0
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
-  cashShopPriceTxt: {fileID: 0}
   upgradeValueTxt: {fileID: 0}
   lvTxt: {fileID: 0}
+  cashShopPriceTxt: {fileID: 0}
   itemPassive:
     arr: []
   rankAuraEF: {fileID: 0}
@@ -923,7 +922,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Attack Damage +1
+  m_Text: Attack Damage +1 and +10%
 --- !u!1 &4287851742764182038
 GameObject:
   m_ObjectHideFlags: 0

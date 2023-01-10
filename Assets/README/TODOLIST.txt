@@ -263,6 +263,8 @@
         ✓ REFACTORY:: Block_Prefab.csで、setHpするとき、毎回リストを作る無駄な部分をbm.HpCalcList変数生成して改善。
         ✓ Sky Design HOME:: onClickPlayBtn => Morning or Night.
         ✓ HARDMODE GET REWARD COIN & DIAMOND + DISPLAY PLAY BTN ICON COIN & DIAMOND BONUS UI.
+        ✓ em.createDmgTxtEF：一般ダメージ表示EF追加。criticalEF改善。
+        ✓ Psv Damage LV当たり＋ & LV当たり * 0.1f 増加をパーセント追加。
         - スキルもアップグレードできるように。
         - ボース制限時間UI改善。
         ✓ GUI PRO KITにある、Charactor_Detailを通じて、SKILLとSTATS関したICON追加及びGUI修正。
@@ -283,7 +285,7 @@
             ✓ 継承。
             ✓ 言語
             ✓ FocusIcon表示。(受け取るものがあればお知らせ用。)
-        - PSV 攻撃力増加をパーセントに変更。
+        
         - スマホ対応。
         - 最適化。
 
@@ -349,6 +351,7 @@
     ✓ (BUG-27) DM::setUIRemoveAD:: IsRemoveを購入したら、CashShopにある目録も"購入完了"にする。
     ✓ (BUG-28) LM::MAX_STAGE変数追加。blockHpListを作るとき、MAX値を超えると、実行できないBUGを対応。
     ✓ (BUG-29) HOME::ItemInfo:: SkillはRANK値段が適用しないように。
+    ✓ (BUG-30) Ball_Prefab::CritとかOneKillテキストEFとダメージ普通EFが一緒に発動するバグ対応。
     
     
 

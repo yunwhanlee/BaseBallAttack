@@ -165,28 +165,31 @@ public class Player : MonoBehaviour
         float upgradeCritDmg = upgradeArr[(int)DM.UPGRADE.CriticalDamage].getValue();
 
         //* General
-        dmg.initSkillDt(dmg.Val + (dmg.Unit * dmg.Level) + upgradeDmg);
-        multiShot.initSkillDt(multiShot.Val + (multiShot.Unit * multiShot.Level));
-        speed.initSkillDt(speed.Val + (speed.Unit * speed.Level) + upgradeBallSpd);
-        instantKill.initSkillDt(instantKill.Val + instantKill.Unit * instantKill.Level);
-        critical.initSkillDt(critical.Val + (critical.Unit * critical.Level) + upgradeCrit);
-        explosion.initSkillDt(new Explosion(explosion.Val.per + explosion.Unit.per, explosion.Val.range + explosion.Unit.range));
-        expUp.initSkillDt(expUp.Val + (expUp.Unit * expUp.Level));
-        itemSpawn.initSkillDt(itemSpawn.Val + (itemSpawn.Unit * itemSpawn.Level));
-        verticalMultiShot.initSkillDt(verticalMultiShot.Val + (verticalMultiShot.Unit * verticalMultiShot.Level));
-        criticalDamage.initSkillDt(criticalDamage.Val + (criticalDamage.Unit * criticalDamage.Level) + upgradeCritDmg);
-        laser.initSkillDt(laser.Val + (laser.Unit * laser.Level));
-        fireProperty.initSkillDt(fireProperty.Val + (fireProperty.Unit * fireProperty.Level));
-        iceProperty.initSkillDt(iceProperty.Val + (iceProperty.Unit * iceProperty.Level));
-        thunderProperty.initSkillDt(thunderProperty.Val + (thunderProperty.Unit * thunderProperty.Level));
+        int val = (dmg.Unit * dmg.Level) + upgradeDmg;
+        float plusPer = 1 + dmg.Level * 0.1f;
+        Debug.Log($"dmg:: {val} * {plusPer} = {(int)(val * plusPer)}");
+        dmg.initValue((int)(val * plusPer));
+        multiShot.initValue(multiShot.Val + (multiShot.Unit * multiShot.Level));
+        speed.initValue(speed.Val + (speed.Unit * speed.Level) + upgradeBallSpd);
+        instantKill.initValue(instantKill.Val + instantKill.Unit * instantKill.Level);
+        critical.initValue(critical.Val + (critical.Unit * critical.Level) + upgradeCrit);
+        explosion.initValue(new Explosion(explosion.Val.per + explosion.Unit.per, explosion.Val.range + explosion.Unit.range));
+        expUp.initValue(expUp.Val + (expUp.Unit * expUp.Level));
+        itemSpawn.initValue(itemSpawn.Val + (itemSpawn.Unit * itemSpawn.Level));
+        verticalMultiShot.initValue(verticalMultiShot.Val + (verticalMultiShot.Unit * verticalMultiShot.Level));
+        criticalDamage.initValue(criticalDamage.Val + (criticalDamage.Unit * criticalDamage.Level) + upgradeCritDmg);
+        laser.initValue(laser.Val + (laser.Unit * laser.Level));
+        fireProperty.initValue(fireProperty.Val + (fireProperty.Unit * fireProperty.Level));
+        iceProperty.initValue(iceProperty.Val + (iceProperty.Unit * iceProperty.Level));
+        thunderProperty.initValue(thunderProperty.Val + (thunderProperty.Unit * thunderProperty.Level));
         
         //* Unique
-        damageTwice.initSkillDt(damageTwice.Val + (damageTwice.Unit * damageTwice.Level));
+        damageTwice.initValue(damageTwice.Val + (damageTwice.Unit * damageTwice.Level));
         float CALC_GIANTBALL_VAL = (giantBall.Level == 1)? (multiShot.Val + verticalMultiShot.Val + giantBall.Val) * giantBall.Unit : giantBall.Val;
-        giantBall.initSkillDt(CALC_GIANTBALL_VAL);
-        darkOrb.initSkillDt(darkOrb.Val + (darkOrb.Unit * darkOrb.Level));
-        godBless.initSkillDt(godBless.Val + (godBless.Unit * godBless.Level));
-        birdFriend.initSkillDt(birdFriend.Val + (birdFriend.Unit * birdFriend.Level));
+        giantBall.initValue(CALC_GIANTBALL_VAL);
+        darkOrb.initValue(darkOrb.Val + (darkOrb.Unit * darkOrb.Level));
+        godBless.initValue(godBless.Val + (godBless.Unit * godBless.Level));
+        birdFriend.initValue(birdFriend.Val + (birdFriend.Unit * birdFriend.Level));
         #endregion
 
         //* Show Psv UI
