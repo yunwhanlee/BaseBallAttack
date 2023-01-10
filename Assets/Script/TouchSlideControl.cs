@@ -88,9 +88,9 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
             });
 
             //* クリックONモードマテリアルに変更
-            Array.ForEach(plTfMeshRdrs, meshRdr => {
-                meshRdr.material = onClickedMt;
-            });
+            // Array.ForEach(plTfMeshRdrs, meshRdr => {
+            //     meshRdr.material = onClickedMt;
+            // });
         }
     }
 
