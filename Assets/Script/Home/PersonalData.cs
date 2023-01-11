@@ -58,8 +58,6 @@ public class PersonalData {
     [SerializeField] AchivementInfo[] normalModeClear ; public AchivementInfo[] NormalModeClear {get => normalModeClear; set => normalModeClear = value;}
     [SerializeField] AchivementInfo[] hardModeClear ; public AchivementInfo[] HardModeClear {get => hardModeClear; set => hardModeClear = value;}
 
-
-
     [Header("CHARACTOR")][Header("__________________________")]
     [SerializeField] int selectCharaIdx;  public int SelectCharaIdx {get => selectCharaIdx; set => selectCharaIdx = value;}
     [SerializeField] List<bool> charaLockList;  public List<bool> CharaLockList {get => charaLockList; set => charaLockList = value;}
@@ -447,7 +445,7 @@ public class PersonalData {
             res = true;
         }
 
-        Debug.Log($"PersonalData:: checkAcceptableAchivement res= {res}");
+        // Debug.Log($"PersonalData:: checkAcceptableAchivement res= {res}");
         return res;
     }
 

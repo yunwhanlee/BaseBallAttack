@@ -217,7 +217,7 @@ public class Ball_Prefab : MonoBehaviour
                     var atv = DM.ins.convertAtvSkillStr2Enum(skillBtn.Name);
 
                     switch(atv){
-                        case DM.ATV.Thunder: //なし
+                        case DM.ATV.ThunderShot: //なし
                             break;
                         case DM.ATV.FireBall:{
                             em.createAtvSkExplosionEF(skillIdx, this.transform);
@@ -342,7 +342,7 @@ public class Ball_Prefab : MonoBehaviour
         int skillIdx = gm.getCurSkillIdx();
         var atv = DM.ins.convertAtvSkillStr2Enum(btn.Name);
         switch(atv){
-            case DM.ATV.Thunder:
+            case DM.ATV.ThunderShot:
                 const float delayTime = 2;
                 const int maxDistance = 50;
                 const int width = 1;
@@ -476,10 +476,9 @@ public class Ball_Prefab : MonoBehaviour
             AtvSkill.ThunderShotCrit + 1 : AtvSkill.ThunderShotCrit;
 
         //* Set Dmg & CriticalTextEF
-        const int attackCnt = 5;
         int dmg = (int)(pl.dmg.Val * critDmgRatio);
-        bm.decreaseBlockHP(hit.transform.gameObject, dmg * attackCnt);
-        StartCoroutine(coMultiCriticalDmgEF(critDmgRatio, attackCnt, hit.transform.position));
+        bm.decreaseBlockHP(hit.transform.gameObject, dmg * LM._.THUNDERSHOT_HIT_CNT);
+        StartCoroutine(coMultiCriticalDmgEF(critDmgRatio, LM._.THUNDERSHOT_HIT_CNT, hit.transform.position));
     }
     IEnumerator coMultiCriticalDmgEF(float critDmgRatio, int cnt, Vector3 hitPos){
         float span = 0.0875f;

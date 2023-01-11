@@ -14,7 +14,7 @@ public class ActiveSkillGizmos : MonoBehaviour
         sprRdr = GetComponent<SpriteRenderer>();
 
         switch(type){
-            case DM.ATV.Thunder : pl.ThunderCastWidth = width; break;
+            case DM.ATV.ThunderShot : pl.ThunderCastWidth = width; break;
             case DM.ATV.FireBall : pl.FireBallCastWidth = width;   break;
             case DM.ATV.PoisonSmoke : pl.PoisonSmokeCastWidth = width;   break;
             case DM.ATV.ColorBall :    break;

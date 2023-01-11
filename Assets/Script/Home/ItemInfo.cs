@@ -18,6 +18,10 @@ public class ItemInfo : MonoBehaviour
     [FormerlySerializedAs("homeRunBonusTxts")] 
     [SerializeField] string[] homeRunBonusTxts = new string[System.Enum.GetValues(typeof(LANG.TP)).Length];
 
+    [Header("Active Skill Valueのみ")][Header("__________________________")]
+    [FormerlySerializedAs("skillValueTxt")] 
+    [SerializeField] Text atvSkillValueTxt;  public Text AtvSkillValueTxt {get => atvSkillValueTxt; set => atvSkillValueTxt = value;}
+
     [Header("STATUS")][Header("__________________________")]
     public Price price;
     [SerializeField] bool isLock = true;    public bool IsLock {get => isLock; set => isLock = value;}

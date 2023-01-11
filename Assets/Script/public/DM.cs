@@ -35,7 +35,7 @@ public class DM : MonoBehaviour
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
     public enum HITRANK{S, A, B, C, D, E};
     public enum PANEL {Chara, Bat, Skill, CashShop, PsvInfo, Upgrade, NULL};
-    public enum ATV {FireBall, Thunder, ColorBall, PoisonSmoke, IceWave, NULL};
+    public enum ATV {FireBall, ThunderShot, ColorBall, PoisonSmoke, IceWave, NULL};
     public enum PSV {
         //* Normal Passive
         Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage,
@@ -131,6 +131,22 @@ public class DM : MonoBehaviour
         scrollviews[(int)DM.PANEL.CashShop].setLanguage();
         scrollviews[(int)DM.PANEL.PsvInfo].setLanguage();
         scrollviews[(int)DM.PANEL.Upgrade].setLanguage();
+
+        //* Set Atv Skill Value Txt
+        Array.ForEach(skills, skill => {
+            name = skill.name.Split('_')[1];
+            Debug.Log("AtvSkill:: name" + name);
+            if(name == DM.ATV.ThunderShot.ToString())
+                skill.AtvSkillValueTxt.text = $"HIT {LM._.THUNDERSHOT_HIT_CNT}";
+            else if(name == DM.ATV.FireBall.ToString())
+                skill.AtvSkillValueTxt.text = $"DMG {LM._.FIREBALL_DMG_PER * 100}%";
+            else if(name == DM.ATV.ColorBall.ToString())
+                skill.AtvSkillValueTxt.text = $"CNT {LM._.COLORBALLPOP_CNT}";
+            else if(name == DM.ATV.PoisonSmoke.ToString())
+                skill.AtvSkillValueTxt.text = $"DMG {LM._.POISONSMOKE_DOT_DMG_PER * 100}%";
+            else if(name == DM.ATV.IceWave.ToString())
+                skill.AtvSkillValueTxt.text = $"DMG {LM._.ICEWAVE_DMG_PER * 100}%";
+        });
 
         setUIRemoveAD();
 
@@ -318,7 +334,7 @@ public class DM : MonoBehaviour
     }
 
     public ATV convertAtvSkillStr2Enum(string name){
-        return (name == DM.ATV.Thunder.ToString())? DM.ATV.Thunder
+        return (name == DM.ATV.ThunderShot.ToString())? DM.ATV.ThunderShot
             :(name == DM.ATV.FireBall.ToString())? DM.ATV.FireBall
             :(name == DM.ATV.ColorBall.ToString())? DM.ATV.ColorBall
             :(name == DM.ATV.PoisonSmoke.ToString())? DM.ATV.PoisonSmoke

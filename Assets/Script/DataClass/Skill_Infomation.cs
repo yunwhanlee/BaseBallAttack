@@ -496,7 +496,7 @@ public class AtvSkillBtnUI{
                 List<Transform> parentTfList = new List<Transform>();
                 var atv = DM.ins.convertAtvSkillStr2Enum(this.name);
                 switch(atv){
-                    case DM.ATV.Thunder:     
+                    case DM.ATV.ThunderShot:     
                     case DM.ATV.ColorBall:   
                         parentTfList.Add(gm.pl.CastEFArrowTf);
                         break;
