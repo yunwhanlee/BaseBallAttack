@@ -39,7 +39,7 @@ public class Ball_Prefab : MonoBehaviour
 
         IsOnDarkOrb = false;
     }
-    void Update(){
+    void FixedUpdate(){
         //* Destroy by Checking Velocity
         if(rigid.velocity.magnitude != 0 && rigid.velocity.magnitude < 0.9875f){
             // Debug.Log($"BallGroup.childCount= {gm.ballGroup.childCount}, velocity.magnitude= {rigid.velocity.magnitude}");
