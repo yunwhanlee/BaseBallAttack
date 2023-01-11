@@ -338,7 +338,7 @@ public class Ball_Prefab : MonoBehaviour
 //----------------------------------------------------------------
     #region ATV (BAT)
     IEnumerator coPlayActiveSkillShotEF(AtvSkillBtnUI btn, float waitTime, Vector3 dir){
-        // Debug.LogFormat("coPlayActiveSkillShotEF:: btn={0}, waitTite={1}, dir={2}, isHomeRun={3}", btn.Name, waitTime, dir, isHomeRun);
+        Debug.LogFormat("coPlayActiveSkillShotEF:: btn={0}, waitTite={1}, dir={2}, isHomeRun={3}", btn.Name, waitTime, dir, isHomeRun);
         int skillIdx = gm.getCurSkillIdx();
         var atv = DM.ins.convertAtvSkillStr2Enum(btn.Name);
         switch(atv){

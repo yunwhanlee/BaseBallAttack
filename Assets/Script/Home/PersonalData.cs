@@ -69,6 +69,7 @@ public class PersonalData {
     [SerializeField] int selectSkillIdx;  public int SelectSkillIdx {get => selectSkillIdx; set => selectSkillIdx = value;}
     [SerializeField] int selectSkill2Idx;  public int SelectSkill2Idx {get => selectSkill2Idx; set => selectSkill2Idx = value;}
     [SerializeField] List<bool> skillLockList;  public List<bool> SkillLockList {get => skillLockList; set => skillLockList = value;}
+    
 
     [Header("ITEM PASSIVE")][Header("__________________________")]
     [FormerlySerializedAs("itemPassive")]

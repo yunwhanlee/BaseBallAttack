@@ -109,7 +109,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
 
     [Header("ATV SKILL")][Header("__________________________")]
     [Tooltip("アクティブスキル 減少％")] [Range(0, 1.0f)] public float ATV_COOLDOWN_UNIT = 0.01f;
-    [Tooltip("サンダーショットクリティカル倍数")] public float THUNDERSHOT_CRIT = 2f;
+    [Tooltip("サンダーショットクリティカル倍数")] public float THUNDERSHOT_CRIT = 1f;
     [Tooltip("サンダーショットヒットカウント")] public int THUNDERSHOT_HIT_CNT = 5;
     [Tooltip("ファイヤーボールダーメジ％")] public float FIREBALL_DMG_PER = 2f;
     [Tooltip("ファイヤーボールドットダーメジ％")] public float FIREBALL_DOT_DMG_PER = 0.15f;
