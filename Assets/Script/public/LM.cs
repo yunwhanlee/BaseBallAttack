@@ -98,7 +98,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("生きているターン")] public int DROPBOX_ALIVE_SPAN = 3;
 
     [Header("PLAYER")][Header("__________________________")]
-    [Tooltip("アクティブスキル 減少％")] [Range(0, 1.0f)] public float ATV_COOLDOWN_UNIT = 0.02f;
+    
     [Tooltip("プレイヤー最大レベル")] public int MAX_LV = 50;
     public List<float> MAX_EXP_LIST = new List<float>();
 
@@ -106,6 +106,16 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("レベルアップスロット、ユニックスキルの出現％")] [Range(0, 100)] public int LEVELUP_SLOTS_UNIQUE_PER = 10;
     [Tooltip("ダークオーブの速度")] public int DARKORB_SPEED = 250;
     [Tooltip("GODBLESS発動のコンボ倍数")] public int GODBLESS_COMBO_SPAN = 10;
+
+    [Header("ATV SKILL")][Header("__________________________")]
+    [Tooltip("アクティブスキル 減少％")] [Range(0, 1.0f)] public float ATV_COOLDOWN_UNIT = 0.01f;
+    [Tooltip("サンダーショットクリティカル倍数")] public float THUNDERSHOT_CRIT = 2f;
+    [Tooltip("ファイヤーボールダーメジ％")] public float FIREBALL_DMG_PER = 2f;
+    [Tooltip("カラーボールポップ破壊するカウント")] public int COLORBALLPOP_CNT = 5;
+    [Tooltip("アイスウェイブダーメジ％")] public float ICEWAVE_DMG_PER = 2.5f;
+    [Tooltip("ファイヤーボールドットダーメジ％")] public float FIREBALL_DOT_DMG_PER = 0.15f;
+    [Tooltip("ポイズン毒ドットダーメジ％")] public float POISONSMOKE_DOT_DMG_PER = 0.2f;
+
 
     [Header("MODEL ITEM PRICE")][Header("__________________________")]
     [Tooltip("一般等級")] public int GENERAL_PRICE;

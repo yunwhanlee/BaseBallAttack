@@ -341,12 +341,8 @@ public class AtvSkill{
     [SerializeField] GameObject castEfPref;    public GameObject CastEfPref {get=> castEfPref;}
 
     //* Damage value
-    public static float THUNDERSHOT_CRT;
-    public static int FIREBALL_DMG;
-    public static int COLORBALL_POP_CNT;
-    public static float FIREBALL_DOT;
-    public static float POISONSMOKE_DOT;
-    public static int ICEWAVE_DMG;
+    public static int FireballDmg, ColorBallPopCnt, IcewaveDmg;
+    public static float ThunderShotCrit, FireballDot, PoisonSmokeDot;
 
     //* constructor
     //* A. Resource
@@ -366,12 +362,23 @@ public class AtvSkill{
     //* B. Set Dmg
     public AtvSkill(GameManager gm, Player pl){ //@ Overload
         // Debug.Log("ActiveSkill(gm, pl):: gm=" + gm.stage + ", pl=" + pl.dmg.Value);
-        THUNDERSHOT_CRT = 2;
-        FIREBALL_DMG = pl.dmg.Val + pl.dmg.Val * (Util._.getCalcEquivalentSequence(gm.stage, 4) / 4);// FIREBALL_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.15f);
-        COLORBALL_POP_CNT = 5;
-        FIREBALL_DOT = 0.15f;
-        POISONSMOKE_DOT = 0.25f;
-        ICEWAVE_DMG = pl.dmg.Val + pl.dmg.Val * (Util._.getCalcEquivalentSequence(gm.stage, 4) / 2);// ICEWAVE_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.3f);
+        int DMG_TWICE = (pl.damageTwice.Level == 1)? 2 : 1;
+        int ballDmg = Mathf.RoundToInt(pl.dmg.Val * DMG_TWICE * pl.giantBall.Val);
+
+        ThunderShotCrit = LM._.THUNDERSHOT_CRIT;
+        FireballDmg = (int)(ballDmg * LM._.FIREBALL_DMG_PER);//pl.dmg.Val + pl.dmg.Val * (Util._.getCalcEquivalentSequence(gm.stage, 4) / 4);// FIREBALL_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.15f);
+        ColorBallPopCnt = LM._.COLORBALLPOP_CNT;
+        IcewaveDmg = (int)(ballDmg * LM._.ICEWAVE_DMG_PER);//pl.dmg.Val + pl.dmg.Val * (Util._.getCalcEquivalentSequence(gm.stage, 4) / 2);// ICEWAVE_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.3f);
+        FireballDot = LM._.FIREBALL_DOT_DMG_PER;
+        PoisonSmokeDot = LM._.POISONSMOKE_DOT_DMG_PER;
+
+        Debug.Log("<color=white>AtvSkill:: ThunderShotCrit= " + ThunderShotCrit 
+            + ",    FireballDmg= " + FireballDmg
+            + ",    ColorBallPopCnt= " + ColorBallPopCnt
+            + ",    FireballDot= " + FireballDot
+            + ",    PoisonSmokeDot= " + PoisonSmokeDot
+            + ",    IcewaveDmg= " + IcewaveDmg + "</color>"
+        );
     }
 
     //* method
@@ -381,10 +388,10 @@ public class AtvSkill{
 
         blockList.ForEach(block => {
             if(block.IsDotDmg) {
-                float dmg = AtvSkill.POISONSMOKE_DOT;
+                float dmg = AtvSkill.PoisonSmokeDot;
                 for(int i=0; i<block.transform.childCount; i++){
                     if(block.transform.GetChild(i).name.Contains(DM.NAME.FireBallDotEffect.ToString())){
-                        dmg = AtvSkill.FIREBALL_DOT;
+                        dmg = AtvSkill.FireballDot;
                         break;
                     }
                 }

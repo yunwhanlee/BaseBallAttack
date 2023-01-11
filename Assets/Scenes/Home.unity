@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45015454, g: 0.5001945, b: 0.57542807, a: 1}
+  m_IndirectSpecularColor: {r: 0.45015407, g: 0.500194, b: 0.5754274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6501,12 +6501,13 @@ MonoBehaviour:
   DROP_BOX_PER: 150
   DROPBOX_COIN_VALUE: 10
   DROPBOX_ALIVE_SPAN: 3
-  ATV_COOLDOWN_UNIT: 0.01
   MAX_LV: 50
   MAX_EXP_LIST: []
   LEVELUP_SLOTS_UNIQUE_PER: 10
   DARKORB_SPEED: 250
   GODBLESS_COMBO_SPAN: 15
+  ATV_COOLDOWN_UNIT: 0.42
+  FIREBALL_DMG_PER: 2
   GENERAL_PRICE: 1000
   RARE_PRICE: 5000
   UNIQUE_PRICE: 12000

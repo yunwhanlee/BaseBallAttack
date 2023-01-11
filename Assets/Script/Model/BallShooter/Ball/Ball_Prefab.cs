@@ -221,9 +221,9 @@ public class Ball_Prefab : MonoBehaviour
                             break;
                         case DM.ATV.FireBall:{
                             em.createAtvSkExplosionEF(skillIdx, this.transform);
-                            decreaseBlocksHp(atv, AtvSkill.FIREBALL_DMG);
+                            decreaseBlocksHp(atv, AtvSkill.FireballDmg);
                             if(isHomeRun)
-                                decreaseBlocksHp(atv, 0, AtvSkill.FIREBALL_DOT); //* + DOT DAMAGE
+                                decreaseBlocksHp(atv, 0, AtvSkill.FireballDot); //* + DOT DAMAGE
                             // this.rigid.velocity = Vector3.zero; //! ボール速度が０になると、待機されず次のステージに進むBUG。
                             break;
                         }
@@ -231,7 +231,7 @@ public class Ball_Prefab : MonoBehaviour
                             if(col.gameObject.GetComponent<Block_Prefab>().kind != BlockMaker.KIND.TreasureChest){
                                 Block_Prefab[] sameColorBlocks = AtvSkill.findSameColorBlocks(gm, col.transform.gameObject);
                                 //* Set Max Cnt
-                                int max = AtvSkill.COLORBALL_POP_CNT;
+                                int max = AtvSkill.ColorBallPopCnt;
                                 if(isHomeRun) 
                                     max = sameColorBlocks.Length;
 
@@ -255,7 +255,7 @@ public class Ball_Prefab : MonoBehaviour
                                 ins.transform.localScale = new Vector3(sc, sc, sc);
                             }
                             RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.PoisonSmokeCastWidth, Vector3.up, 0);
-                            decreaseBlocksHp(atv, 0, AtvSkill.POISONSMOKE_DOT);
+                            decreaseBlocksHp(atv, 0, AtvSkill.PoisonSmokeDot);
                             // this.rigid.velocity = Vector3.zero;
                             break;
                         }
@@ -473,7 +473,7 @@ public class Ball_Prefab : MonoBehaviour
 
         //* HomeRun Bonus
         float critDmgRatio = (isHomeRun)? 
-            AtvSkill.THUNDERSHOT_CRT + 1 : AtvSkill.THUNDERSHOT_CRT;
+            AtvSkill.ThunderShotCrit + 1 : AtvSkill.ThunderShotCrit;
 
         //* Set Dmg & CriticalTextEF
         const int attackCnt = 5;
