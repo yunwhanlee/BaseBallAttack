@@ -68,8 +68,8 @@ public class PersonalData {
     [SerializeField] bool isUnlock2ndSkill;  public bool IsUnlock2ndSkill {get => isUnlock2ndSkill; set => isUnlock2ndSkill = value;}
     [SerializeField] int selectSkillIdx;  public int SelectSkillIdx {get => selectSkillIdx; set => selectSkillIdx = value;}
     [SerializeField] int selectSkill2Idx;  public int SelectSkill2Idx {get => selectSkill2Idx; set => selectSkill2Idx = value;}
-    [SerializeField] List<bool> skillLockList;  public List<bool> SkillLockList {get => skillLockList; set => skillLockList = value;}
-    
+    [SerializeField] List<bool> atvSkillLockList;  public List<bool> AtvSkillLockList {get => atvSkillLockList; set => atvSkillLockList = value;}
+    [SerializeField] AtvSkillUpgradeList atvSkillUpgradeList;   public AtvSkillUpgradeList AtvSkillUpgradeList {get => atvSkillUpgradeList; set => atvSkillUpgradeList = value;}
 
     [Header("ITEM PASSIVE")][Header("__________________________")]
     [FormerlySerializedAs("itemPassive")]
@@ -94,7 +94,8 @@ public class PersonalData {
         this.KeyList = new List<string>();
         this.charaLockList = new List<bool>();
         this.batLockList = new List<bool>();
-        this.skillLockList = new List<bool>();
+        this.atvSkillLockList = new List<bool>();
+        this.atvSkillUpgradeList = new AtvSkillUpgradeList();
         this.itemPassive = new ItemPsvList();
         this.upgrade = new UpgradeList();
 
@@ -231,8 +232,8 @@ public class PersonalData {
         this.SelectSkillIdx = data.SelectSkillIdx;
         this.IsUnlock2ndSkill = data.IsUnlock2ndSkill;
         if(this.IsUnlock2ndSkill) this.SelectSkill2Idx = data.SelectSkill2Idx;
-        this.SkillLockList = data.SkillLockList;
-
+        this.atvSkillLockList = data.AtvSkillLockList;
+        this.atvSkillUpgradeList = data.AtvSkillUpgradeList;
         // this.ItemPassive = data.ItemPassive;
         this.Upgrade = data.Upgrade;
 
@@ -247,8 +248,8 @@ public class PersonalData {
             bats[i].GetComponent<ItemInfo>().IsLock = this.BatLockList[i];
         }
         for(int i=0; i<skills.Length; i++){
-            if(i==0)    Debug.Log("<color=yellow>Skill</color>LockList["+i+"].IsLock=" + this.SkillLockList[i] + ", length= <color=yellow>" + skills.Length + "</color>");
-            skills[i].GetComponent<ItemInfo>().IsLock = this.SkillLockList[i];
+            if(i==0)    Debug.Log("<color=yellow>Skill</color>LockList["+i+"].IsLock=" + this.AtvSkillLockList[i] + ", length= <color=yellow>" + skills.Length + "</color>");
+            skills[i].GetComponent<ItemInfo>().IsLock = this.AtvSkillLockList[i];
         }
     }
     
@@ -366,7 +367,8 @@ public class PersonalData {
         this.SelectSkillIdx = 0;
         this.IsUnlock2ndSkill = false;
         this.SelectSkill2Idx = -1;
-        this.SkillLockList = new List<bool>();
+        this.atvSkillLockList = new List<bool>();
+        this.atvSkillUpgradeList = new AtvSkillUpgradeList();
 
         // this.ItemPassive = new ItemPassiveList();
         this.Upgrade = new UpgradeList();
@@ -382,8 +384,8 @@ public class PersonalData {
         }
 
         for(int i=0; i<DM.ins.scrollviews[(int)DM.PANEL.Skill].ItemPrefs.Length; i++){
-            if(i==0) this.SkillLockList.Add(false);//    items[0].IsLock = false;}
-            else     this.SkillLockList.Add(true);//     items[i].IsLock = true;}
+            if(i==0) this.AtvSkillLockList.Add(false);//    items[0].IsLock = false;}
+            else     this.AtvSkillLockList.Add(true);//     items[i].IsLock = true;}
         }
     }
 
@@ -420,7 +422,7 @@ public class PersonalData {
                 AcvBatCollection.collectBat();
                 break;
             case DM.PANEL.Skill :  
-                SkillLockList[curIdx] = false; 
+                AtvSkillLockList[curIdx] = false; 
                 AcvAtvSkillCollection.collectAtvSkill();
                 break;
         }

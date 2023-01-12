@@ -362,7 +362,7 @@ public class HomeManager : MonoBehaviour
 
     public void onclickBtnBuyUnlock2ndSkill(){
         int price = 1000;
-        var unlockSkillList = DM.ins.personalData.SkillLockList.FindAll(list => list == false);
+        var unlockSkillList = DM.ins.personalData.AtvSkillLockList.FindAll(list => list == false);
         int unlockSkillListCnt = unlockSkillList.Count;
         Debug.Log("unlockSkillListCnt= " + unlockSkillListCnt);
         if(DM.ins.personalData.Coin < price) {

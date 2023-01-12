@@ -10,7 +10,7 @@ public class AcvAtvSkillCollection : Achivement
     void Start(){
         var pDt = DM.ins.personalData;
 
-        List<bool> lockList = DM.ins.personalData.SkillLockList;
+        List<bool> lockList = DM.ins.personalData.AtvSkillLockList;
         cnt = lockList.FindAll(list => list == false).Count;
         Debug.Log($"Achivement:: {this.name}:: cnt= {cnt}");
         //* Init

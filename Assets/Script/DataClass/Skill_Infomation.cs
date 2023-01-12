@@ -71,6 +71,28 @@ public class UpgradeList {
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------
 [System.Serializable]
+public class AtvSkillUpgradeList {
+    //* Value
+    const int MAX_LV = 10;
+    const float FIREBALL_UPG_DMG_PER = 0.2f;
+    const int THUNDERSHOT_UPG_HIT_CNT = 1;
+    const int COLORBALLPOP_UPG_CNT = 1;
+    const float POISONSMOKE_UPG_DMG_PER = 0.05f;
+    const float ICEWAVE_UPG_DMG_PER = 0.2f;
+
+    //* Init
+    [SerializeField] UpgradeDt[] arr = {
+        new UpgradeDt(DM.ATV.FireBall.ToString(), FIREBALL_UPG_DMG_PER, MAX_LV),
+        new UpgradeDt(DM.ATV.ThunderShot.ToString(), THUNDERSHOT_UPG_HIT_CNT, MAX_LV),
+        new UpgradeDt(DM.ATV.ColorBall.ToString(), COLORBALLPOP_UPG_CNT, MAX_LV),
+        new UpgradeDt(DM.ATV.PoisonSmoke.ToString(), POISONSMOKE_UPG_DMG_PER, MAX_LV),
+        new UpgradeDt(DM.ATV.IceWave.ToString(), ICEWAVE_UPG_DMG_PER, MAX_LV),
+    };
+}
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+[System.Serializable]
 public class ItemPsvDt {
     public string name;
     public int lv;
