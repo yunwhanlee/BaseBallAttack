@@ -407,13 +407,13 @@ public class AtvSkill{
         int ballDmg = Mathf.RoundToInt(pl.dmg.Val * DMG_TWICE * pl.giantBall.Val);
         var upgradeArr = DM.ins.personalData.AtvSkillUpgrade.Arr;
 
-        ThunderShotHitCnt = LM._.THUNDERSHOT_HIT_CNT + (int)upgradeArr[(int)DM.ATV.ThunderShot].getValue();
+        ThunderShotHitCnt = (int)(LM._.THUNDERSHOT_HIT_CNT + upgradeArr[(int)DM.ATV.ThunderShot].getValue());
         ThunderShotCrit = LM._.THUNDERSHOT_CRIT;
         FireballDmg = (int)(ballDmg * (LM._.FIREBALL_DMG_PER + (int)upgradeArr[(int)DM.ATV.FireBall].getValue()));
         FireballDot = LM._.FIREBALL_DOT_DMG_PER;
-        ColorBallPopCnt = LM._.COLORBALLPOP_CNT + (int)upgradeArr[(int)DM.ATV.ColorBall].getValue();
-        PoisonSmokeDot = LM._.POISONSMOKE_DOT_DMG_PER + (int)upgradeArr[(int)DM.ATV.PoisonSmoke].getValue();
-        IcewaveDmg = (int)(ballDmg * (LM._.ICEWAVE_DMG_PER + (int)upgradeArr[(int)DM.ATV.IceWave].getValue()));
+        ColorBallPopCnt = (int)(LM._.COLORBALLPOP_CNT + upgradeArr[(int)DM.ATV.ColorBall].getValue());
+        PoisonSmokeDot = LM._.POISONSMOKE_DOT_DMG_PER + upgradeArr[(int)DM.ATV.PoisonSmoke].getValue();
+        IcewaveDmg = (int)(ballDmg * (LM._.ICEWAVE_DMG_PER + upgradeArr[(int)DM.ATV.IceWave].getValue()));
 
         Debug.Log("<color=white>ActiveSkill(gm, pl) Set Dmg:: "
             + "     ThunderShotHitCnt= " + ThunderShotHitCnt
