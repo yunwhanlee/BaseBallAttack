@@ -90,10 +90,10 @@ public class ScrollView {
                 case DM.PANEL.Upgrade :
                     ins.transform.localPosition = new Vector3(0,0,0); //* posZがずれるから、調整
                     //! Buy AddEventListener !//
-                    Debug.Log($"createItem:: <color=red>AddEventLister</color>(()=><color=yellow>onClickItemPanel</color>({ins.name}))");
+                    Debug.Log($"createItem:: <color=red>AddEventLister</color>(()=><color=yellow>onClickItem</color>({ins.name}))");
                     Button btn = ins.GetComponent<Button>();
                     var svEvent = ScrollRect.GetComponent<ScrollViewEvent>();
-                    btn.onClick.AddListener(delegate{svEvent.onClickItemPanel(ins);});
+                    btn.onClick.AddListener(delegate{svEvent.onClickItem(ins);});
                     break;
         }
             // Debug.Log("modelParentTf.pos=" + modelParentPref.position + ", modelParentTf.localPos=" + modelParentPref.localPosition);
@@ -158,6 +158,25 @@ public class ScrollView {
             var languageList = LANG.getTxtList(tempStr);
             //* Set Language
             for(int j = 0; j < txtObjs.Length; j++) txtObjs[j].text = languageList[j];
+        }
+    }
+
+    public void initUpgradeDt(ItemInfo[] upgrades){
+        for(int i=0; i<upgrades.Length; i++){
+            UpgradeDt upgradeDt = DM.ins.personalData.Upgrade.Arr[i];
+            upgrades[i].setUI(upgradeDt);
+            //* Set Price
+            List<int> priceList = ScrollViewEvent.setUpgradePriceCalc(upgradeDt);
+            upgrades[i].price.setValue(priceList[upgradeDt.Lv]);
+        }
+    }
+    public void initAtvSkillUpgradeDt(ItemInfo[] skills){
+        for(int i=0; i<skills.Length; i++){
+            UpgradeDt atvSkUpgDt = DM.ins.personalData.AtvSkillUpgrade.Arr[i];
+            skills[i].setUI(atvSkUpgDt);
+            //* Set Price
+            List<int> priceList = ScrollViewEvent.setAtvSkillUpgradePriceCalc(atvSkUpgDt);
+            skills[i].price.setValue(priceList[atvSkUpgDt.Lv]);
         }
     }
 
@@ -334,12 +353,9 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
         //* Set PriceType Icon Sprite
         switch(curItem.price.Type){
-            case Price.TP.COIN: 
-                hm.priceTypeIconImg.sprite = hm.CoinSpr; break;
-            case Price.TP.DIAMOND: 
-                hm.priceTypeIconImg.sprite = hm.DiamondSpr; break;
-            case Price.TP.CASH: 
-                hm.priceTypeIconImg.sprite = hm.CashSpr; break;
+            case Price.TP.COIN: hm.priceTypeIconImg.sprite = hm.CoinSpr; break;
+            case Price.TP.DIAMOND: hm.priceTypeIconImg.sprite = hm.DiamondSpr; break;
+            case Price.TP.CASH: hm.priceTypeIconImg.sprite = hm.CashSpr; break;
         }
 
         //* CashShop & Upgrade Panel
@@ -356,6 +372,12 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         else if(DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
             UpgradeDt upgradeDt = DM.ins.personalData.Upgrade.Arr[CurIdx];
             string priceTxt = (upgradeDt.Lv == upgradeDt.MaxLv)? "MAX" : curItem.price.getValue().ToString();
+            setPriceUI(priceTxt);
+            return;
+        }
+        else if(DM.ins.SelectItemType == DM.PANEL.Skill.ToString()){
+            UpgradeDt atvSkillUpgradeDt = DM.ins.personalData.AtvSkillUpgrade.Arr[CurIdx];
+            string priceTxt = (atvSkillUpgradeDt.Lv == atvSkillUpgradeDt.MaxLv)? "MAX" : (curItem.price.getValue()).ToString();
             setPriceUI(priceTxt);
             return;
         }
@@ -466,20 +488,11 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         DM.ins.personalData.setSelectIdx(CurIdx);
 
         #region PARCHASE
-        Debug.Log("PARCHASE==> curItem= " + curItem.name);
+        Debug.Log("PARCHASE==> curItem= " + curItem.name + ", IsLock=> " + curItem.IsLock);
         switch(DM.ins.getCurPanelType2Enum(type)){
             case DM.PANEL.Chara :
             case DM.PANEL.Bat :
             case DM.PANEL.Skill :
-                if(curItem.IsLock){
-                    if(curItem.price.Type == Price.TP.COIN){
-                        DM.ins.personalData.Coin = purchaseItem(DM.ins.personalData.Coin, curItem, befIdx);
-                    }
-                    else if(curItem.price.Type == Price.TP.DIAMOND){
-                        DM.ins.personalData.Diamond = purchaseItem(DM.ins.personalData.Diamond, curItem, befIdx);
-                    }
-                }
-                break;
             case DM.PANEL.CashShop :
             case DM.PANEL.Upgrade :
                 if(curItem.price.Type == Price.TP.COIN){ //* 実はない。
@@ -499,12 +512,12 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         if(DM.ins.SelectItemType == DM.PANEL.Skill.ToString()
             || DM.ins.SelectItemType == DM.PANEL.CashShop.ToString()
             || DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
-            onClickItemPanel(curItem.gameObject);
+            onClickItem(curItem.gameObject);
         }
         #endregion
     }
 
-    public void onClickItemPanel(GameObject ins){
+    public void onClickItem(GameObject ins){
         DM.PANEL type = ins.name.Contains(DM.PANEL.Skill.ToString())? DM.PANEL.Skill
             : ins.name.Contains(DM.PANEL.CashShop.ToString())? DM.PANEL.CashShop
             : ins.name.Contains(DM.PANEL.Upgrade.ToString())? DM.PANEL.Upgrade
@@ -520,7 +533,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         setCheckIconColorAndOutline();
 
         var sprite = btns[CurIdx].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
-        Debug.Log($"<color=yellow>onClickItemPanel()</color>:: CurIdx= {CurIdx}, ins.name= {ins.name}, sprite= {sprite.name}");
+        Debug.Log($"<color=yellow>onClickItem()</color>:: CurIdx= {CurIdx}, ins.name= {ins.name}, sprite= {sprite.name}");
     }
         public ItemInfo getCurItem(){
         var contents = getItemArr();
@@ -531,7 +544,8 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     static public List<int> setUpgradePriceCalc(UpgradeDt upgradeDt){
         List<int> priceList = null;
-            switch(DM.ins.convertUpgradeStr2Enum(upgradeDt.name)){
+        var name = DM.ins.convertUpgradeStr2Enum(upgradeDt.name);
+            switch(name){
                 case DM.UPGRADE.Dmg:
                     priceList = Util._.calcArithmeticProgressionList(
                         start: LM._.UPGRADE_DMG.Start, 
@@ -584,6 +598,26 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             }
             return priceList;
     }
+    static public List<int> setAtvSkillUpgradePriceCalc(UpgradeDt atvSkUpgDt){
+        List<int> priceList = null;
+            DM.ATV name = DM.ins.convertAtvSkillStr2Enum(atvSkUpgDt.name);
+            switch(name){
+                case DM.ATV.ThunderShot:
+                case DM.ATV.FireBall:
+                case DM.ATV.ColorBall:
+                case DM.ATV.PoisonSmoke:
+                case DM.ATV.IceWave:
+                    priceList = Util._.calcArithmeticProgressionList(
+                        start: LM._.UPGRADE_ATVSKILL.Start, 
+                        atvSkUpgDt.MaxLv, 
+                        d: LM._.UPGRADE_ATVSKILL.CommonDiffrence, 
+                        gradualUpValue: LM._.UPGRADE_ATVSKILL.GradualUpValue);
+                    break;
+            }
+            priceList.ForEach(price => Debug.Log("setAtvSkillUpgradePriceCalc:: priceList:: price= " + price));
+            
+            return priceList;
+    }
     //* ----------------------------------------------------------------
     //* Private Function
     //* ----------------------------------------------------------------
@@ -592,54 +626,8 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         Price.TP goodsType = curItem.price.Type;
         int price = curItem.price.getValue();
         if(goods >= price){
-            if(DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
-                UpgradeDt upgradeDt = DM.ins.personalData.Upgrade.Arr[CurIdx];
-                Debug.Log("purchaseItem:: upgradeDt.name= " + upgradeDt.name);
-                if(upgradeDt.Lv < upgradeDt.MaxLv){
-                    goods -= price;
-
-                    //* Set Lv
-                    upgradeDt.setLvUp();
-                    curItem.setLvUI(upgradeDt);
-
-                    //* Set Price
-                    List<int> priceList = setUpgradePriceCalc(upgradeDt);
-                    curItem.price.setValue(priceList[upgradeDt.Lv]);
-
-                    em.createUpgradeItemEF(curItem.UpgradeValueTxt.transform);
-
-                    //* Achivement
-                    AcvUpgradeCnt.addUpgradeCnt();
-                }
-            }
-            else if(DM.ins.SelectItemType == DM.PANEL.CashShop.ToString()){
-                goods -= price;
-                string itemName = curItem.name.Split('_')[1];
-                Debug.Log($"ScrollViewEvent::purchaseItem():: itemName= {itemName}");
-                if(itemName.Contains(DM.NAME.Coin.ToString())){
-                    int reward = int.Parse(itemName.Split('n')[1]);
-                    hm.displayShowRewardPanel(coin: reward);
-                    DM.ins.personalData.addCoin(reward); // DM.ins.personalData.Coin += reward;
-                }
-                else if(itemName.Contains(DM.NAME.Diamond.ToString())){
-                    bool success = DM.ins.reqAppPayment();
-                    if(success){
-                        int reward = int.Parse(itemName.Split('d')[1]);
-                        hm.displayShowRewardPanel(coin: 0, diamond: reward);
-                        DM.ins.personalData.addDiamond(reward);
-                    }
-                }
-                else if(itemName.Contains(DM.NAME.RemoveAD.ToString())) {
-                    bool success = DM.ins.reqAppPayment();
-                    if(success){
-                        hm.displayShowRewardPanel(coin: 0, diamond: 0, rouletteTicket: 0, removeAD: true);
-                        DM.ins.personalData.IsRemoveAD = true;
-                        DM.ins.setUIRemoveAD();
-                    }
-                }
-            }
-            else{
-                // Debug.Log("purchaseItem:: curItem.transform.GetChild(0)=" + curItem.transform.GetChild(0).name);
+            if(curItem.IsLock){
+                Debug.Log("purchaseItem:: curItem.transform.GetChild(0)=" + curItem.transform.GetChild(0).name);
                 goods -= price;
                 GameObject SkillImgObj = curItem.transform.GetChild(0).gameObject; //* (BUG-8) Home:: Bat.getChild(0).getChild(0)-> Null ---> getChild(0)が正しい。
                 em.createItemBuyEF(this, SkillImgObj, DM.ins.SelectItemType);
@@ -647,6 +635,72 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 curItem.IsLock = false; //* 解禁
                 curItem.checkLockedModel();
                 DM.ins.personalData.setUnLockCurList(CurIdx);
+                drawCheckBtnUI();
+            }
+            else{
+                if(DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
+                    UpgradeDt upgradeDt = DM.ins.personalData.Upgrade.Arr[CurIdx];
+                    Debug.Log("purchaseItem:: upgradeDt.name= " + upgradeDt.name);
+                    if(upgradeDt.Lv < upgradeDt.MaxLv){
+                        goods -= price;
+
+                        //* Set Lv
+                        upgradeDt.setLvUp();
+                        curItem.setUI(upgradeDt);
+
+                        //* Set Price
+                        List<int> priceList = setUpgradePriceCalc(upgradeDt);
+                        curItem.price.setValue(priceList[upgradeDt.Lv]);
+
+                        em.createUpgradeItemEF(curItem.UpgradeValueTxt.transform);
+
+                        //* Achivement
+                        AcvUpgradeCnt.addUpgradeCnt();
+                    }
+                }
+                else if(DM.ins.SelectItemType == DM.PANEL.Skill.ToString()){
+                    UpgradeDt atvSkUpgDt = DM.ins.personalData.AtvSkillUpgrade.Arr[CurIdx];
+                    Debug.Log("purchaseItem:: activeSkillUpgradeDt.name= " + atvSkUpgDt.name);
+                    if(atvSkUpgDt.Lv < atvSkUpgDt.MaxLv){
+                        goods -= price;
+
+                        //* Set Lv
+                        atvSkUpgDt.setLvUp();
+                        curItem.setUI(atvSkUpgDt);
+
+                        //* Set Price
+                        List<int> priceList = setAtvSkillUpgradePriceCalc(atvSkUpgDt);
+                        curItem.price.setValue(priceList[atvSkUpgDt.Lv]);
+
+                        em.createUpgradeItemEF(curItem.UpgradeValueTxt.transform);
+                    }
+                }
+                else if(DM.ins.SelectItemType == DM.PANEL.CashShop.ToString()){
+                    goods -= price;
+                    string itemName = curItem.name.Split('_')[1];
+                    Debug.Log($"ScrollViewEvent::purchaseItem():: itemName= {itemName}");
+                    if(itemName.Contains(DM.NAME.Coin.ToString())){
+                        int reward = int.Parse(itemName.Split('n')[1]);
+                        hm.displayShowRewardPanel(coin: reward);
+                        DM.ins.personalData.addCoin(reward); // DM.ins.personalData.Coin += reward;
+                    }
+                    else if(itemName.Contains(DM.NAME.Diamond.ToString())){
+                        bool success = DM.ins.reqAppPayment();
+                        if(success){
+                            int reward = int.Parse(itemName.Split('d')[1]);
+                            hm.displayShowRewardPanel(coin: 0, diamond: reward);
+                            DM.ins.personalData.addDiamond(reward);
+                        }
+                    }
+                    else if(itemName.Contains(DM.NAME.RemoveAD.ToString())) {
+                        bool success = DM.ins.reqAppPayment();
+                        if(success){
+                            hm.displayShowRewardPanel(coin: 0, diamond: 0, rouletteTicket: 0, removeAD: true);
+                            DM.ins.personalData.IsRemoveAD = true;
+                            DM.ins.setUIRemoveAD();
+                        }
+                    }
+                }
                 drawCheckBtnUI();
             }
         }

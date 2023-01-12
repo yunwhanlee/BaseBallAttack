@@ -69,7 +69,8 @@ public class PersonalData {
     [SerializeField] int selectSkillIdx;  public int SelectSkillIdx {get => selectSkillIdx; set => selectSkillIdx = value;}
     [SerializeField] int selectSkill2Idx;  public int SelectSkill2Idx {get => selectSkill2Idx; set => selectSkill2Idx = value;}
     [SerializeField] List<bool> atvSkillLockList;  public List<bool> AtvSkillLockList {get => atvSkillLockList; set => atvSkillLockList = value;}
-    [SerializeField] AtvSkillUpgradeList atvSkillUpgradeList;   public AtvSkillUpgradeList AtvSkillUpgradeList {get => atvSkillUpgradeList; set => atvSkillUpgradeList = value;}
+    [Tooltip("DM::Inspectorビューで、Scrollviews[Skill].ItemPrefs順番と同じくすること！")]
+    [SerializeField] AtvSkillUpgradeList atvSkillUpgrade;   public AtvSkillUpgradeList AtvSkillUpgrade {get => atvSkillUpgrade; set => atvSkillUpgrade = value;}
 
     [Header("ITEM PASSIVE")][Header("__________________________")]
     [FormerlySerializedAs("itemPassive")]
@@ -95,7 +96,7 @@ public class PersonalData {
         this.charaLockList = new List<bool>();
         this.batLockList = new List<bool>();
         this.atvSkillLockList = new List<bool>();
-        this.atvSkillUpgradeList = new AtvSkillUpgradeList();
+        this.atvSkillUpgrade = new AtvSkillUpgradeList();
         this.itemPassive = new ItemPsvList();
         this.upgrade = new UpgradeList();
 
@@ -233,7 +234,7 @@ public class PersonalData {
         this.IsUnlock2ndSkill = data.IsUnlock2ndSkill;
         if(this.IsUnlock2ndSkill) this.SelectSkill2Idx = data.SelectSkill2Idx;
         this.atvSkillLockList = data.AtvSkillLockList;
-        this.atvSkillUpgradeList = data.AtvSkillUpgradeList;
+        this.atvSkillUpgrade = data.AtvSkillUpgrade;
         // this.ItemPassive = data.ItemPassive;
         this.Upgrade = data.Upgrade;
 
@@ -368,7 +369,7 @@ public class PersonalData {
         this.IsUnlock2ndSkill = false;
         this.SelectSkill2Idx = -1;
         this.atvSkillLockList = new List<bool>();
-        this.atvSkillUpgradeList = new AtvSkillUpgradeList();
+        this.atvSkillUpgrade = new AtvSkillUpgradeList();
 
         // this.ItemPassive = new ItemPassiveList();
         this.Upgrade = new UpgradeList();

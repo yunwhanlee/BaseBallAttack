@@ -24,13 +24,32 @@ public class UpgradeDt {
     public float getValue() => lv * unit;
 
     public string getVal2Str(){
+        Debug.Log("getVal2Str:: name= " + name);
         var value = getValue();
+        //* Upgrade
         if(name == DM.UPGRADE.Dmg.ToString())
             return $"{value}";
-        if(name == DM.UPGRADE.BallSpeed.ToString())
+        else if(name == DM.UPGRADE.BallSpeed.ToString())
             return $"{value * 100}m/s";
-        else
-            return $"{Mathf.Round(value * 100)}%"; //* (BUG-11) 
+        else if(name == DM.UPGRADE.BossDamage.ToString()
+            || name == DM.UPGRADE.CoinBonus.ToString()
+            || name == DM.UPGRADE.Critical.ToString()
+            || name == DM.UPGRADE.CriticalDamage.ToString()
+            || name == DM.UPGRADE.Defence.ToString())
+            return $"{Mathf.Round(value * 100)}%"; //* (BUG-11)
+        //* ATV Skill
+        else if(name == DM.ATV.ThunderShot.ToString())
+            return $"HIT {LM._.THUNDERSHOT_HIT_CNT + value}";
+        else if(name == DM.ATV.ColorBall.ToString())
+            return $"CNT {LM._.COLORBALLPOP_CNT + value}";
+        else if(name == DM.ATV.FireBall.ToString())
+            return $"DMG {(LM._.FIREBALL_DMG_PER + value) * 100}%";
+        else if(name == DM.ATV.PoisonSmoke.ToString())
+            return $"DMG {(LM._.POISONSMOKE_DOT_DMG_PER + value) * 100}%";
+        else if(name == DM.ATV.IceWave.ToString())
+            return $"DMG {(LM._.ICEWAVE_DMG_PER + value) * 100}%";
+        else 
+            return null;
     }
 }
 //--------------------------------------------------------------------------------------------------
@@ -73,21 +92,22 @@ public class UpgradeList {
 [System.Serializable]
 public class AtvSkillUpgradeList {
     //* Value
-    const int MAX_LV = 10;
-    const float FIREBALL_UPG_DMG_PER = 0.2f;
     const int THUNDERSHOT_UPG_HIT_CNT = 1;
+    const float FIREBALL_UPG_DMG_PER = 0.2f;
     const int COLORBALLPOP_UPG_CNT = 1;
     const float POISONSMOKE_UPG_DMG_PER = 0.05f;
     const float ICEWAVE_UPG_DMG_PER = 0.2f;
+    const int MAX_LV = 10;
 
     //* Init
     [SerializeField] UpgradeDt[] arr = {
-        new UpgradeDt(DM.ATV.FireBall.ToString(), FIREBALL_UPG_DMG_PER, MAX_LV),
         new UpgradeDt(DM.ATV.ThunderShot.ToString(), THUNDERSHOT_UPG_HIT_CNT, MAX_LV),
+        new UpgradeDt(DM.ATV.FireBall.ToString(), FIREBALL_UPG_DMG_PER, MAX_LV),
         new UpgradeDt(DM.ATV.ColorBall.ToString(), COLORBALLPOP_UPG_CNT, MAX_LV),
         new UpgradeDt(DM.ATV.PoisonSmoke.ToString(), POISONSMOKE_UPG_DMG_PER, MAX_LV),
         new UpgradeDt(DM.ATV.IceWave.ToString(), ICEWAVE_UPG_DMG_PER, MAX_LV),
     };
+    public UpgradeDt[] Arr {get => arr; set => arr = value;}
 }
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------

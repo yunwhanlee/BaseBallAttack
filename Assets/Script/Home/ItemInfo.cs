@@ -135,7 +135,6 @@ public class ItemInfo : MonoBehaviour
 
     public void checkLockedModel(){
         Debug.Log($"ItemInfo::checkLockedModel:: this.name={this.name}, IsLock={IsLock}, ModelMeshRdrList.Count= {ModelMeshRdrList.Count}, OriginMtList.Count= {OriginMtList.Count}");
-        //TODO ゲームスタートして戻ったら、GRAY MATERAILが適用されていないBUG。
 
         int i = 0;
         //* 2D
@@ -156,9 +155,9 @@ public class ItemInfo : MonoBehaviour
         }
     }
 
-    public void setLvUI(UpgradeDt item){
-        Debug.Log($"ItenInfo::setUpgradeGUI(UpgradeDt item={item})::");
-        this.UpgradeValueTxt.text = item.getVal2Str();
+    public void setUI(UpgradeDt item){
+        Debug.Log($"ItenInfo::setUpgradeGUI(UpgradeDt item):: name= {item.name}, ValueTxt= {item.getVal2Str()}");
+        this.upgradeValueTxt.text = item.getVal2Str();
         this.LvTxt.text = (item.MaxLv == item.Lv)? "MAX" : $"{item.Lv}/{item.MaxLv}";
     }
 }

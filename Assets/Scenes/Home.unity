@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45015407, g: 0.500194, b: 0.5754274, a: 1}
+  m_IndirectSpecularColor: {r: 0.45015454, g: 0.5001945, b: 0.57542807, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1703,7 +1703,29 @@ MonoBehaviour:
     isUnlock2ndSkill: 0
     selectSkillIdx: 0
     selectSkill2Idx: 0
-    skillLockList: 
+    atvSkillLockList: 
+    atvSkillUpgrade:
+      arr:
+      - name: ThunderShot
+        lv: 0
+        maxLv: 10
+        unit: 1
+      - name: FireBall
+        lv: 0
+        maxLv: 10
+        unit: 0.2
+      - name: ColorBall
+        lv: 0
+        maxLv: 10
+        unit: 1
+      - name: PoisonSmoke
+        lv: 0
+        maxLv: 10
+        unit: 0.05
+      - name: IceWave
+        lv: 0
+        maxLv: 10
+        unit: 0.2
     itemPassive:
       arr:
       - name: Dmg
@@ -6507,7 +6529,13 @@ MonoBehaviour:
   DARKORB_SPEED: 250
   GODBLESS_COMBO_SPAN: 15
   ATV_COOLDOWN_UNIT: 0.42
+  THUNDERSHOT_CRIT: 1
+  THUNDERSHOT_HIT_CNT: 3
+  COLORBALLPOP_CNT: 5
   FIREBALL_DMG_PER: 2
+  FIREBALL_DOT_DMG_PER: 0.15
+  POISONSMOKE_DOT_DMG_PER: 0.2
+  ICEWAVE_DMG_PER: 2.5
   GENERAL_PRICE: 1000
   RARE_PRICE: 5000
   UNIQUE_PRICE: 12000
@@ -6541,12 +6569,16 @@ MonoBehaviour:
     start: 200
     commonDiffrence: 200
     gradualUpValue: 0.1
+  UPGRADE_ATVSKILL:
+    start: 200
+    commonDiffrence: 100
+    gradualUpValue: 0.5
   REROTATE_SKILLSLOTS_PRICE_COIN: 500
   REVIVE_PRICE_DIAMOND: 200
   ROULETTE_TICKET_COOLTIME_MINUTE: 30
   PREM_PACK_ROULETTE_TICKET: 7
   PREM_PACK_COIN: 100000
-  PREM_PACK_DIAMOND: 10000
+  PREM_PACK_DIAMOND: 100000
   PREM_PACK_PRICE: 10
   DISPLAY_RATE_DIALOG_PLAYTIME: 3
 --- !u!1 &445535722

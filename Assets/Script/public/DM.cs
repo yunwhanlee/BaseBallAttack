@@ -138,40 +138,15 @@ public class DM : MonoBehaviour
         personalData = new PersonalData(charas.Length, bats.Length, skills.Length); //* DataBase
         personalData.load(ref charas, ref bats, ref skills);
 
-        //* Init DMデータ ロード。
-        for(int i=0; i<upgrades.Length; i++){
-            UpgradeDt upgradeDt = personalData.Upgrade.Arr[i];
-            upgrades[i].setLvUI(upgradeDt);
-            
-            // List<int> priceList = Util._.calcArithmeticProgressionList(start: 100, upgradeDt.MaxLv, d: 100, gradualUpValue: 0.1f);
-            // upgrades[i].price.setValue(priceList[upgradeDt.Lv]);
-
-            //* Set Price
-            List<int> priceList = ScrollViewEvent.setUpgradePriceCalc(upgradeDt);
-            upgrades[i].price.setValue(priceList[upgradeDt.Lv]);
-        }
+        //* アップグレードデータ 初期化。
+        scrollviews[(int)DM.PANEL.Upgrade].initUpgradeDt(upgrades);
+        scrollviews[(int)DM.PANEL.Skill].initAtvSkillUpgradeDt(skills);
 
         //* PersonalData後に処理必要なもの（LANGUAGEため）
         scrollviews[(int)DM.PANEL.Skill].setLanguage();
         scrollviews[(int)DM.PANEL.CashShop].setLanguage();
         scrollviews[(int)DM.PANEL.PsvInfo].setLanguage();
         scrollviews[(int)DM.PANEL.Upgrade].setLanguage();
-
-        //* Set Atv Skill Value Txt
-        Array.ForEach(skills, skill => {
-            string name = skill.name.Split('_')[1];
-            Debug.Log($"AtvSkill:: name= " + name + ", skill.AtvSkillValueTxt= " + skill.AtvSkillValueTxt);
-            if(name == ATV.ThunderShot.ToString())
-                skill.AtvSkillValueTxt.text = $"HIT {LM._.THUNDERSHOT_HIT_CNT}";
-            else if(name == ATV.FireBall.ToString())
-                skill.AtvSkillValueTxt.text = $"DMG {LM._.FIREBALL_DMG_PER * 100}%";
-            else if(name == ATV.ColorBall.ToString())
-                skill.AtvSkillValueTxt.text = $"CNT {LM._.COLORBALLPOP_CNT}";
-            else if(name == ATV.PoisonSmoke.ToString())
-                skill.AtvSkillValueTxt.text = $"DMG {LM._.POISONSMOKE_DOT_DMG_PER * 100}%";
-            else if(name == ATV.IceWave.ToString())
-                skill.AtvSkillValueTxt.text = $"DMG {LM._.ICEWAVE_DMG_PER * 100}%";
-        });
 
         setUIRemoveAD();
 

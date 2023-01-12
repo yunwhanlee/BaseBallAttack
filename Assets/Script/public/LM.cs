@@ -110,12 +110,12 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Header("ATV SKILL")][Header("__________________________")]
     [Tooltip("アクティブスキル 減少％")] [Range(0, 1.0f)] public float ATV_COOLDOWN_UNIT = 0.01f;
     [Tooltip("サンダーショットクリティカル倍数")] public float THUNDERSHOT_CRIT = 1f;
-    [Tooltip("サンダーショットヒットカウント")] public int THUNDERSHOT_HIT_CNT = 5;
+    [Tooltip("サンダーショットヒットカウント")] public int THUNDERSHOT_HIT_CNT = 3;
+    [Tooltip("カラーボールポップ破壊するカウント")] public int COLORBALLPOP_CNT = 5;
     [Tooltip("ファイヤーボールダーメジ％")] public float FIREBALL_DMG_PER = 2f;
     [Tooltip("ファイヤーボールドットダーメジ％")] public float FIREBALL_DOT_DMG_PER = 0.15f;
-    [Tooltip("カラーボールポップ破壊するカウント")] public int COLORBALLPOP_CNT = 5;
-    [Tooltip("アイスウェイブダーメジ％")] public float ICEWAVE_DMG_PER = 2.5f;
     [Tooltip("ポイズン毒ドットダーメジ％")] public float POISONSMOKE_DOT_DMG_PER = 0.2f;
+    [Tooltip("アイスウェイブダーメジ％")] public float ICEWAVE_DMG_PER = 2.5f;
 
 
     [Header("MODEL ITEM PRICE")][Header("__________________________")]
@@ -133,6 +133,9 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("クリティカル")] public UpgradePriceCalcSetting UPGRADE_CRIT;
     [Tooltip("クリティカルダメージ")] public UpgradePriceCalcSetting UPGRADE_CRITDMG;
     [Tooltip("ディフェンス")] public UpgradePriceCalcSetting UPGRADE_DEFENCE;
+
+    [Header("ATV SKILL UPGRADE PRICE")][Header("__________________________")]
+    [Tooltip("アクティブスキルアップグレード値段クラス")] public UpgradePriceCalcSetting UPGRADE_ATVSKILL;
 
     [Header("REWARD")][Header("__________________________")]
     [Tooltip("レベルアップスロット、再回転に要するコイン")] public int REROTATE_SKILLSLOTS_PRICE_COIN = 200;
