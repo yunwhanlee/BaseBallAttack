@@ -92,6 +92,31 @@ public class DM : MonoBehaviour
     public Material simpleSkyMt;
 
     void Awake() => singleton();
+    void singleton(){
+        //* Singleton
+        if(ins == null) ins = this;
+        else if(ins != null) {
+            DM.ins.CoinTxt = this.CoinTxt;
+            DM.ins.DiamondTxt = this.DiamondTxt;
+            
+            int i=0;
+            Array.ForEach(DM.ins.scrollviews, sv => {
+                sv.ScrollRect = this.scrollviews[i].ScrollRect;
+                sv.ContentTf = this.scrollviews[i].ContentTf;
+                sv.ItemPrefs = this.scrollviews[i].ItemPrefs;
+                i++;
+            });
+
+            //! (BUG-防止) "Home"シーンに戻った場合、scrollViewsがnullなくても、ItemPassiveが宣言しないためエラー。
+            DM.ins.personalData.ItemPassive = this.personalData.ItemPassive;
+
+            DM.ins.Start();
+            
+            Destroy(this.gameObject);
+            return;
+        }
+        DontDestroyOnLoad(this.gameObject);
+    }
     void Start(){
         LANG.initlanguageList();
         // foreach(DM.ATV list in Enum.GetValues(typeof(DM.ATV)))Debug.LogFormat("Enums GetFindVal:: {0}", list.ToString())
@@ -134,17 +159,17 @@ public class DM : MonoBehaviour
 
         //* Set Atv Skill Value Txt
         Array.ForEach(skills, skill => {
-            name = skill.name.Split('_')[1];
-            Debug.Log("AtvSkill:: name" + name);
-            if(name == DM.ATV.ThunderShot.ToString())
+            string name = skill.name.Split('_')[1];
+            Debug.Log($"AtvSkill:: name= " + name + ", skill.AtvSkillValueTxt= " + skill.AtvSkillValueTxt);
+            if(name == ATV.ThunderShot.ToString())
                 skill.AtvSkillValueTxt.text = $"HIT {LM._.THUNDERSHOT_HIT_CNT}";
-            else if(name == DM.ATV.FireBall.ToString())
+            else if(name == ATV.FireBall.ToString())
                 skill.AtvSkillValueTxt.text = $"DMG {LM._.FIREBALL_DMG_PER * 100}%";
-            else if(name == DM.ATV.ColorBall.ToString())
+            else if(name == ATV.ColorBall.ToString())
                 skill.AtvSkillValueTxt.text = $"CNT {LM._.COLORBALLPOP_CNT}";
-            else if(name == DM.ATV.PoisonSmoke.ToString())
+            else if(name == ATV.PoisonSmoke.ToString())
                 skill.AtvSkillValueTxt.text = $"DMG {LM._.POISONSMOKE_DOT_DMG_PER * 100}%";
-            else if(name == DM.ATV.IceWave.ToString())
+            else if(name == ATV.IceWave.ToString())
                 skill.AtvSkillValueTxt.text = $"DMG {LM._.ICEWAVE_DMG_PER * 100}%";
         });
 
@@ -235,32 +260,6 @@ public class DM : MonoBehaviour
     public void openAppStore(){
         Debug.Log("openAppStore::");
         //TODO Open My Game App Store;
-    }
-
-    void singleton(){
-        //* Singleton
-        if(ins == null) ins = this;
-        else if(ins != null) {
-            DM.ins.CoinTxt = this.CoinTxt;
-            DM.ins.DiamondTxt = this.DiamondTxt;
-            
-            int i=0;
-            Array.ForEach(DM.ins.scrollviews, sv => {
-                sv.ScrollRect = this.scrollviews[i].ScrollRect;
-                sv.ContentTf = this.scrollviews[i].ContentTf;
-                sv.ItemPrefs = this.scrollviews[i].ItemPrefs;
-                i++;
-            });
-
-            //! (BUG-防止) "Home"シーンに戻った場合、scrollViewsがnullなくても、ItemPassiveが宣言しないためエラー。
-            DM.ins.personalData.ItemPassive = this.personalData.ItemPassive;
-
-            DM.ins.Start();
-            
-            Destroy(this.gameObject);
-            return;
-        }
-        DontDestroyOnLoad(this.gameObject);
     }
 
     public DM.PANEL getCurPanelType2Enum(string name){
