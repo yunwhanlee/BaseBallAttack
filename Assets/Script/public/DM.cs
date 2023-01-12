@@ -309,46 +309,47 @@ public class DM : MonoBehaviour
 
         const int EN = (int)LANG.TP.EN, JP = (int)LANG.TP.JP, KR = (int)LANG.TP.KR;
 
-        return (n == DMG[EN] || n == DMG[JP] || n == DMG[KR])? DM.PSV.Dmg
-            :(n == MTS[EN] || n == MTS[JP] || n == MTS[KR])? DM.PSV.MultiShot
-            :(n == SPD[EN] || n == SPD[JP] || n == SPD[KR])? DM.PSV.Speed
-            :(n == ITK[EN] || n == ITK[JP] || n == ITK[KR])? DM.PSV.InstantKill
-            :(n == CRT[EN] || n == CRT[JP] || n == CRT[KR])? DM.PSV.Critical
-            :(n == EPS[EN] || n == EPS[JP] || n == EPS[KR])? DM.PSV.Explosion
-            :(n == EXP[EN] || n == EXP[JP] || n == EXP[KR])? DM.PSV.ExpUp
-            :(n == ISP[EN] || n == ISP[JP] || n == ISP[KR])? DM.PSV.ItemSpawn
-            :(n == MTSV[EN] || n == MTSV[JP] || n == MTSV[KR])? DM.PSV.VerticalMultiShot
-            :(n == CRTD[EN] || n == CRTD[JP] || n == CRTD[KR])? DM.PSV.CriticalDamage
-            :(n == LSR[EN] || n == LSR[JP] || n == LSR[KR])? DM.PSV.Laser
-            :(n == FPT[EN] || n == FPT[JP] || n == FPT[KR])? DM.PSV.FireProperty
-            :(n == IPT[EN] || n == IPT[JP] || n == IPT[KR])? DM.PSV.IceProperty
-            :(n == TPT[EN] || n == TPT[JP] || n == TPT[KR])? DM.PSV.ThunderProperty
+        return (n == DMG[EN] || n == DMG[JP] || n == DMG[KR])? PSV.Dmg
+            :(n == MTS[EN] || n == MTS[JP] || n == MTS[KR])? PSV.MultiShot
+            :(n == SPD[EN] || n == SPD[JP] || n == SPD[KR])? PSV.Speed
+            :(n == ITK[EN] || n == ITK[JP] || n == ITK[KR])? PSV.InstantKill
+            :(n == CRT[EN] || n == CRT[JP] || n == CRT[KR])? PSV.Critical
+            :(n == EPS[EN] || n == EPS[JP] || n == EPS[KR])? PSV.Explosion
+            :(n == EXP[EN] || n == EXP[JP] || n == EXP[KR])? PSV.ExpUp
+            :(n == ISP[EN] || n == ISP[JP] || n == ISP[KR])? PSV.ItemSpawn
+            :(n == MTSV[EN] || n == MTSV[JP] || n == MTSV[KR])? PSV.VerticalMultiShot
+            :(n == CRTD[EN] || n == CRTD[JP] || n == CRTD[KR])? PSV.CriticalDamage
+            :(n == LSR[EN] || n == LSR[JP] || n == LSR[KR])? PSV.Laser
+            :(n == FPT[EN] || n == FPT[JP] || n == FPT[KR])? PSV.FireProperty
+            :(n == IPT[EN] || n == IPT[JP] || n == IPT[KR])? PSV.IceProperty
+            :(n == TPT[EN] || n == TPT[JP] || n == TPT[KR])? PSV.ThunderProperty
             //* Unique Psv 
-            :(n == DTW[EN] || n == DTW[JP] || n == DTW[KR])? DM.PSV.DamageTwice
-            :(n == GTB[EN] || n == GTB[JP] || n == GTB[KR])? DM.PSV.GiantBall
-            :(n == DOB[EN] || n == DOB[JP] || n == DOB[KR])? DM.PSV.DarkOrb
-            :(n == GBS[EN] || n == GBS[JP] || n == GBS[KR])? DM.PSV.GodBless
-            :(n == BFR[EN] || n == BFR[JP] || n == BFR[KR])? DM.PSV.BirdFriend
+            :(n == DTW[EN] || n == DTW[JP] || n == DTW[KR])? PSV.DamageTwice
+            :(n == GTB[EN] || n == GTB[JP] || n == GTB[KR])? PSV.GiantBall
+            :(n == DOB[EN] || n == DOB[JP] || n == DOB[KR])? PSV.DarkOrb
+            :(n == GBS[EN] || n == GBS[JP] || n == GBS[KR])? PSV.GodBless
+            :(n == BFR[EN] || n == BFR[JP] || n == BFR[KR])? PSV.BirdFriend
 
-            : DM.PSV.NULL; //-> ダミーデータ
+            : PSV.NULL; //-> ダミーデータ
     }
 
     public ATV convertAtvSkillStr2Enum(string name){
-        return (name == DM.ATV.ThunderShot.ToString())? DM.ATV.ThunderShot
-            :(name == DM.ATV.FireBall.ToString())? DM.ATV.FireBall
-            :(name == DM.ATV.ColorBall.ToString())? DM.ATV.ColorBall
-            :(name == DM.ATV.PoisonSmoke.ToString())? DM.ATV.PoisonSmoke
-            :DM.ATV.IceWave;
+        return (name == ATV.ThunderShot.ToString())? ATV.ThunderShot
+            :(name == ATV.FireBall.ToString())? ATV.FireBall
+            :(name == ATV.ColorBall.ToString())? ATV.ColorBall
+            :(name == ATV.PoisonSmoke.ToString())? ATV.PoisonSmoke
+            :(name == ATV.IceWave.ToString())? ATV.IceWave
+            : ATV.NULL;
     }
 
     public UPGRADE convertUpgradeStr2Enum(string name){
-        return (name == UPGRADE.Dmg.ToString())? DM.UPGRADE.Dmg
-            :(name == UPGRADE.BallSpeed.ToString())? DM.UPGRADE.BallSpeed
-            :(name == UPGRADE.BossDamage.ToString())? DM.UPGRADE.BossDamage
-            :(name == UPGRADE.CoinBonus.ToString())? DM.UPGRADE.CoinBonus
-            :(name == UPGRADE.Critical.ToString())? DM.UPGRADE.Critical
-            :(name == UPGRADE.CriticalDamage.ToString())? DM.UPGRADE.CriticalDamage
-            :(name == UPGRADE.Defence.ToString())? DM.UPGRADE.Defence
+        return (name == UPGRADE.Dmg.ToString())? UPGRADE.Dmg
+            :(name == UPGRADE.BallSpeed.ToString())? UPGRADE.BallSpeed
+            :(name == UPGRADE.BossDamage.ToString())? UPGRADE.BossDamage
+            :(name == UPGRADE.CoinBonus.ToString())? UPGRADE.CoinBonus
+            :(name == UPGRADE.Critical.ToString())? UPGRADE.Critical
+            :(name == UPGRADE.CriticalDamage.ToString())? UPGRADE.CriticalDamage
+            :(name == UPGRADE.Defence.ToString())? UPGRADE.Defence
             : UPGRADE.NULL;
     }
 }
