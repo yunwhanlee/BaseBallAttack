@@ -35,7 +35,7 @@ public class DM : MonoBehaviour
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
     public enum HITRANK{S, A, B, C, D, E};
     public enum PANEL {Chara, Bat, Skill, CashShop, PsvInfo, Upgrade, NULL};
-    public enum ATV {FireBall, ThunderShot, ColorBall, PoisonSmoke, IceWave, NULL};
+    public enum ATV {ThunderShot, FireBall, ColorBall, PoisonSmoke, IceWave, NULL};
     public enum PSV {
         //* Normal Passive
         Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage,

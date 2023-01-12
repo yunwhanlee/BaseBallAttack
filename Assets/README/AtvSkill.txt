@@ -1,0 +1,10 @@
+「AtvSkillは UnLockとUpgrade機能もあるので、両方処理になり、手間がかかります。」
+
+※ (初期化)ダメージ設定は、GameManager::Start()内、new AtvSkill(this, pl)で行う。
+
+※ Index順番を全て一致することが重要。
+    - DM Inspectorビュアー、PersonalDataのAtvSkillUpgrade.Arr部分
+    - DM スクリプト、enum ATV部分。
+
+※ HOMEのUpgradeについてUIテキスト表示は
+    Skill_Infomation.cs::UpgradeDt getVal2Str()で行う

@@ -34,9 +34,6 @@ public class Ball_Prefab : MonoBehaviour
 
         // rigid.AddForce(this.transform.forward * Speed, ForceMode.Impulse);
 
-        //* B. Dmg
-        new AtvSkill(gm, pl);
-
         IsOnDarkOrb = false;
     }
     void FixedUpdate(){
@@ -477,8 +474,11 @@ public class Ball_Prefab : MonoBehaviour
 
         //* Set Dmg & CriticalTextEF
         int dmg = (int)(pl.dmg.Val * critDmgRatio);
-        bm.decreaseBlockHP(hit.transform.gameObject, dmg * LM._.THUNDERSHOT_HIT_CNT);
-        StartCoroutine(coMultiCriticalDmgEF(critDmgRatio, LM._.THUNDERSHOT_HIT_CNT, hit.transform.position));
+        int hitCnt = AtvSkill.ThunderShotHitCnt;
+
+        //* Give Damage
+        bm.decreaseBlockHP(hit.transform.gameObject, dmg * hitCnt);
+        StartCoroutine(coMultiCriticalDmgEF(critDmgRatio, hitCnt, hit.transform.position));
     }
     IEnumerator coMultiCriticalDmgEF(float critDmgRatio, int cnt, Vector3 hitPos){
         float span = 0.0875f;

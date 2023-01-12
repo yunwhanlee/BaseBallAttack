@@ -229,6 +229,9 @@ public class GameManager : MonoBehaviour
             activeSkillBtnList.Add(new AtvSkillBtnUI(i, LM._.ATV_COOLDOWN_UNIT, pl.activeSkills[idx].Name, btn.GetComponent<Button>(), pl.activeSkills[idx].UISprite, activeSkillBtnEfMt));
         }
 
+        //* Set Active Skill Damage
+        new AtvSkill(this, pl);
+
         //* Sky Style
         Debug.Log("SkyMt.offsetX= " + DM.ins.simpleSkyMt.GetTextureOffset("_MainTex").x);
         if(DM.ins.simpleSkyMt.GetTextureOffset("_MainTex").x == LM._.SKY_MT_MORNING_VALUE)

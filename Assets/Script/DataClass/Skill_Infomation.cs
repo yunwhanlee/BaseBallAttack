@@ -40,10 +40,10 @@ public class UpgradeDt {
         //* ATV Skill
         else if(name == DM.ATV.ThunderShot.ToString())
             return $"HIT {LM._.THUNDERSHOT_HIT_CNT + value}";
-        else if(name == DM.ATV.ColorBall.ToString())
-            return $"CNT {LM._.COLORBALLPOP_CNT + value}";
         else if(name == DM.ATV.FireBall.ToString())
             return $"DMG {(LM._.FIREBALL_DMG_PER + value) * 100}%";
+        else if(name == DM.ATV.ColorBall.ToString())
+            return $"CNT {LM._.COLORBALLPOP_CNT + value}";
         else if(name == DM.ATV.PoisonSmoke.ToString())
             return $"DMG {(LM._.POISONSMOKE_DOT_DMG_PER + value) * 100}%";
         else if(name == DM.ATV.IceWave.ToString())
@@ -383,7 +383,7 @@ public class AtvSkill{
     [SerializeField] GameObject castEfPref;    public GameObject CastEfPref {get=> castEfPref;}
 
     //* Damage value
-    public static int FireballDmg, ColorBallPopCnt, IcewaveDmg;
+    public static int ThunderShotHitCnt, FireballDmg, ColorBallPopCnt, IcewaveDmg;
     public static float ThunderShotCrit, FireballDot, PoisonSmokeDot;
 
     //* constructor
@@ -403,23 +403,26 @@ public class AtvSkill{
 
     //* B. Set Dmg
     public AtvSkill(GameManager gm, Player pl){ //@ Overload
-        // Debug.Log("ActiveSkill(gm, pl):: gm=" + gm.stage + ", pl=" + pl.dmg.Value);
         int DMG_TWICE = (pl.damageTwice.Level == 1)? 2 : 1;
         int ballDmg = Mathf.RoundToInt(pl.dmg.Val * DMG_TWICE * pl.giantBall.Val);
+        var upgradeArr = DM.ins.personalData.AtvSkillUpgrade.Arr;
 
+        ThunderShotHitCnt = LM._.THUNDERSHOT_HIT_CNT + (int)upgradeArr[(int)DM.ATV.ThunderShot].getValue();
         ThunderShotCrit = LM._.THUNDERSHOT_CRIT;
-        FireballDmg = (int)(ballDmg * LM._.FIREBALL_DMG_PER);//pl.dmg.Val + pl.dmg.Val * (Util._.getCalcEquivalentSequence(gm.stage, 4) / 4);// FIREBALL_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.15f);
-        ColorBallPopCnt = LM._.COLORBALLPOP_CNT;
-        IcewaveDmg = (int)(ballDmg * LM._.ICEWAVE_DMG_PER);//pl.dmg.Val + pl.dmg.Val * (Util._.getCalcEquivalentSequence(gm.stage, 4) / 2);// ICEWAVE_DMG = pl.dmg.Value + pl.dmg.Value * (int)(gm.stage * 0.3f);
+        FireballDmg = (int)(ballDmg * (LM._.FIREBALL_DMG_PER + (int)upgradeArr[(int)DM.ATV.FireBall].getValue()));
         FireballDot = LM._.FIREBALL_DOT_DMG_PER;
-        PoisonSmokeDot = LM._.POISONSMOKE_DOT_DMG_PER;
+        ColorBallPopCnt = LM._.COLORBALLPOP_CNT + (int)upgradeArr[(int)DM.ATV.ColorBall].getValue();
+        PoisonSmokeDot = LM._.POISONSMOKE_DOT_DMG_PER + (int)upgradeArr[(int)DM.ATV.PoisonSmoke].getValue();
+        IcewaveDmg = (int)(ballDmg * (LM._.ICEWAVE_DMG_PER + (int)upgradeArr[(int)DM.ATV.IceWave].getValue()));
 
-        Debug.Log("<color=white>AtvSkill:: ThunderShotCrit= " + ThunderShotCrit 
+        Debug.Log("<color=white>ActiveSkill(gm, pl) Set Dmg:: "
+            + "     ThunderShotHitCnt= " + ThunderShotHitCnt
+            + "     ThunderShotCrit= " + ThunderShotCrit
             + ",    FireballDmg= " + FireballDmg
-            + ",    ColorBallPopCnt= " + ColorBallPopCnt
             + ",    FireballDot= " + FireballDot
+            + ",    ColorBallPopCnt= " + ColorBallPopCnt
             + ",    PoisonSmokeDot= " + PoisonSmokeDot
-            + ",    IcewaveDmg= " + IcewaveDmg + "</color>"
+            + ",    IcewaveDmg= " + IcewaveDmg +"</color>"
         );
     }
 
