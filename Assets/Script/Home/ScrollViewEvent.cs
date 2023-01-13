@@ -378,7 +378,22 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         else if(DM.ins.SelectItemType == DM.PANEL.Skill.ToString()){
             UpgradeDt atvSkillUpgradeDt = DM.ins.personalData.AtvSkillUpgrade.Arr[CurIdx];
             string priceTxt = (atvSkillUpgradeDt.Lv == atvSkillUpgradeDt.MaxLv)? "MAX" : (curItem.price.getValue()).ToString();
-            setPriceUI(priceTxt);
+
+            int skillIdx = (hm.selectedSkillBtnIdx == 0)? DM.ins.personalData.SelectSkillIdx : DM.ins.personalData.SelectSkill2Idx;
+            int curItemIdx = Array.IndexOf(DM.ins.scrollviews[(int)DM.PANEL.Skill].ContentTf.GetComponentsInChildren<ItemInfo>(), curItem);
+            if(skillIdx == curItemIdx){
+                setPriceUI(priceTxt);
+            }else{
+                //* Model Pattern Panel
+                if(curItem.IsLock){//* 💲表示
+                    setPriceUI(curItem.price.getValue().ToString());
+                }else{//* ✅表示
+                    hm.checkMarkImg.gameObject.SetActive(true);
+                    hm.priceTxt.gameObject.SetActive(false);
+                    hm.priceTypeIconImg.gameObject.SetActive(false);
+                }
+            }
+            
             return;
         }
 
@@ -395,8 +410,8 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         hm.checkBtn.interactable = true;
         hm.checkMarkImg.gameObject.SetActive(false);
         hm.priceTxt.gameObject.SetActive(true);
-        hm.priceTypeIconImg.gameObject.SetActive(true);
-        hm.priceTxt.text = price; //curItem.price.getValue().ToString();
+        hm.priceTypeIconImg.gameObject.SetActive((price == "MAX")? false : true);
+        hm.priceTxt.text = price; // -> curItem.price.getValue().ToString();
     }
 
     public void setCurSelectedItem(int typeIdx){
@@ -489,17 +504,20 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
         #region PARCHASE
         Debug.Log("PARCHASE==> curItem= " + curItem.name + ", IsLock=> " + curItem.IsLock);
-        switch(DM.ins.getCurPanelType2Enum(type)){
+        DM.PANEL enumType = DM.ins.getCurPanelType2Enum(type);
+        switch(enumType){
             case DM.PANEL.Chara :
             case DM.PANEL.Bat :
             case DM.PANEL.Skill :
             case DM.PANEL.CashShop :
             case DM.PANEL.Upgrade :
                 if(curItem.price.Type == Price.TP.COIN){ //* 実はない。
-                    DM.ins.personalData.Coin = purchaseItem(DM.ins.personalData.Coin, curItem, befIdx);
+                    if(checkAtvSkillItemSelectionIsFirstTime(enumType, curItem))
+                        DM.ins.personalData.Coin = purchaseItem(DM.ins.personalData.Coin, curItem, befIdx);
                 }
                 else if(curItem.price.Type == Price.TP.DIAMOND){
-                    DM.ins.personalData.Diamond = purchaseItem(DM.ins.personalData.Diamond, curItem, befIdx);
+                    if(checkAtvSkillItemSelectionIsFirstTime(enumType, curItem))
+                        DM.ins.personalData.Diamond = purchaseItem(DM.ins.personalData.Diamond, curItem, befIdx);
                 }
                 else if(curItem.price.Type == Price.TP.CASH){
                     const int justEnter = 9999999;
@@ -515,6 +533,12 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
             onClickItem(curItem.gameObject);
         }
         #endregion
+    }
+
+    private bool checkAtvSkillItemSelectionIsFirstTime(DM.PANEL enumType, ItemInfo curItem){
+        //* 始めてスキル選択が切り替えたら、購入処理はしない。
+        Debug.Log(" outline= " + curItem.GetComponent<NicerOutline>().enabled);
+        return (enumType == DM.PANEL.Skill && curItem.GetComponent<NicerOutline>().enabled);
     }
 
     public void onClickItem(GameObject ins){
@@ -733,16 +757,16 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         var items = getItemArr();
         var curItem = getCurItem();
 
-        int selectItemIdx = (type == DM.PANEL.Chara.ToString())? DM.ins.personalData.SelectCharaIdx
+        int skillIdx = (type == DM.PANEL.Chara.ToString())? DM.ins.personalData.SelectCharaIdx
             :(type == DM.PANEL.Bat.ToString())? DM.ins.personalData.SelectBatIdx
             :(type == DM.PANEL.Skill.ToString())?
                 (hm.selectedSkillBtnIdx == 0)? DM.ins.personalData.SelectSkillIdx
                     :DM.ins.personalData.SelectSkill2Idx : -1;
 
-        if(selectItemIdx==-1) return;
+        if(skillIdx==-1) return;
         
-        if(selectItemIdx == CurIdx){
-            Debug.LogFormat("setCheckIconColorAndOutline():: selectItemIdx({0}) == CurIdx({1}) ? -> {2}, curItem= {3}", selectItemIdx, CurIdx, selectItemIdx == CurIdx, curItem);
+        if(skillIdx == CurIdx){
+            Debug.LogFormat("setCheckIconColorAndOutline():: skillIdx({0}) == CurIdx({1}) ? -> {2}, curItem= {3}", skillIdx, CurIdx, skillIdx == CurIdx, curItem);
             hm.checkMarkImg.color = Color.green;
             Array.ForEach(items, item => activeOutline(item, false));
             activeOutline(curItem, true);
