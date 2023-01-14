@@ -508,20 +508,27 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         switch(enumType){
             case DM.PANEL.Chara :
             case DM.PANEL.Bat :
-            case DM.PANEL.Skill :
             case DM.PANEL.CashShop :
             case DM.PANEL.Upgrade :
-                if(curItem.price.Type == Price.TP.COIN){ //* 実はない。
-                    if(checkAtvSkillItemSelectionIsFirstTime(enumType, curItem))
-                        DM.ins.personalData.Coin = purchaseItem(DM.ins.personalData.Coin, curItem, befIdx);
+                if(curItem.price.Type == Price.TP.COIN){
+                    DM.ins.personalData.Coin = purchaseItem(DM.ins.personalData.Coin, curItem, befIdx);
                 }
                 else if(curItem.price.Type == Price.TP.DIAMOND){
-                    if(checkAtvSkillItemSelectionIsFirstTime(enumType, curItem))
-                        DM.ins.personalData.Diamond = purchaseItem(DM.ins.personalData.Diamond, curItem, befIdx);
+                    DM.ins.personalData.Diamond = purchaseItem(DM.ins.personalData.Diamond, curItem, befIdx);
                 }
                 else if(curItem.price.Type == Price.TP.CASH){
                     const int justEnter = 9999999;
                     purchaseItem(justEnter, curItem, befIdx);
+                }
+                break;
+            case DM.PANEL.Skill : //* (BUG-33) onClickCheckBtn::checkAtvSkillItemSelectionIsFirstTime CHARAとBATの場合購入したら出るバグがあるため、caseによって処理を分ける。
+                if(curItem.price.Type == Price.TP.COIN){
+                    if(checkAtvSkillItemSelectionIsFirstTime(curItem))
+                        DM.ins.personalData.Coin = purchaseItem(DM.ins.personalData.Coin, curItem, befIdx);
+                }
+                else if(curItem.price.Type == Price.TP.DIAMOND){
+                    if(checkAtvSkillItemSelectionIsFirstTime(curItem))
+                        DM.ins.personalData.Diamond = purchaseItem(DM.ins.personalData.Diamond, curItem, befIdx);
                 }
                 break;
         }
@@ -535,10 +542,10 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         #endregion
     }
 
-    private bool checkAtvSkillItemSelectionIsFirstTime(DM.PANEL enumType, ItemInfo curItem){
+    private bool checkAtvSkillItemSelectionIsFirstTime(ItemInfo curItem){
         //* 始めてスキル選択が切り替えたら、購入処理はしない。
         Debug.Log(" outline= " + curItem.GetComponent<NicerOutline>().enabled);
-        return (enumType == DM.PANEL.Skill && curItem.GetComponent<NicerOutline>().enabled);
+        return (curItem.GetComponent<NicerOutline>().enabled);
     }
 
     public void onClickItem(GameObject ins){

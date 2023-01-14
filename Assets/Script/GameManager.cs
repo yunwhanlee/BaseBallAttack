@@ -7,8 +7,7 @@ using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
-public class GameManager : MonoBehaviour
-{
+public class GameManager : MonoBehaviour {
     public enum STATE {PLAY, WAIT, GAMEOVER, PAUSE, CONTINUE, HOME, NULL};
     [SerializeField] private STATE state;     public STATE State {get => state; set => state = value;}
     [SerializeField] private DM.MODE mode;       public DM.MODE Mode {get => mode; set => mode = value;}

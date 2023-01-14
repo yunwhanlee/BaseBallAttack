@@ -243,10 +243,11 @@ public class HomeManager : MonoBehaviour
 //*   Button
 //* ----------------------------------------------------------------
 #region Button
-    public void onClickBtnQuestionMarkIcon() => DM.ins.displayTutorialUI();
-    public void onClickPremiumPackIconBtn() => premiumPackPanel.SetActive(true);
-    public void onClickAchivementIconBtn() => achivementPanel.SetActive(true);
+    public void onClickBtnQuestionMarkIcon() { DM.ins.displayTutorialUI(); SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());}
+    public void onClickPremiumPackIconBtn() { premiumPackPanel.SetActive(true); SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());}
+    public void onClickAchivementIconBtn() { achivementPanel.SetActive(true); SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());}
     public void onCLickRewardPanelOkBtn() {
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         showRewardItemListGroup.transform.DetachChildren();
         showRewardPanel.SetActive(false);
     }
