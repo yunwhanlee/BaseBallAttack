@@ -6519,7 +6519,7 @@ MonoBehaviour:
   TREASURECHEST_BLOCK_PER: 5
   TREASURECHEST_ORB_CNT: 7
   HEAL_BLOCK_PER: 5
-  REWARD_CHEST_PER: 10
+  REWARD_CHEST_PER: 646
   DROP_BOX_PER: 150
   DROPBOX_COIN_VALUE: 10
   DROPBOX_ALIVE_SPAN: 3
@@ -16497,7 +16497,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audio: {fileID: 1232432236}
-  btnClickSFX: {fileID: 8300000, guid: 7a2d223690fe6dc4ba6dca412f0f78ca, type: 3}
+  BtnClickSFX: {fileID: 8300000, guid: 7a2d223690fe6dc4ba6dca412f0f78ca, type: 3}
+  PurchaseSuccessSFX: {fileID: 8300000, guid: 1c7b4d20c93d09049ab33b3f8b71e7b5, type: 3}
+  PurchaseFailSFX: {fileID: 8300000, guid: 172b3de7a0c1d544c95eba9784076f5c, type: 3}
+  UpgradeSFX: {fileID: 8300000, guid: b8256401adc731745857072ad058dde6, type: 3}
+  PlayBtnSFX: {fileID: 8300000, guid: d4cd37b6b3d59f7498ecfb0827f77c2d, type: 3}
 --- !u!82 &1232432236
 AudioSource:
   m_ObjectHideFlags: 0

@@ -658,6 +658,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         int price = curItem.price.getValue();
         if(goods >= price){
             if(curItem.IsLock){
+                SM.ins.sfxPlay(SM.SFX.PurchaseSuccess.ToString());
                 Debug.Log("purchaseItem:: curItem.transform.GetChild(0)=" + curItem.transform.GetChild(0).name);
                 goods -= price;
                 GameObject SkillImgObj = curItem.transform.GetChild(0).gameObject; //* (BUG-8) Home:: Bat.getChild(0).getChild(0)-> Null ---> getChild(0)が正しい。
@@ -679,6 +680,10 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                         upgradeDt.setLvUp();
                         curItem.setUI(upgradeDt);
 
+                        //* Sound
+                        if(upgradeDt.Lv < upgradeDt.MaxLv)
+                            SM.ins.sfxPlay(SM.SFX.Upgrade.ToString());
+
                         //* Set Price
                         List<int> priceList = setUpgradePriceCalc(upgradeDt);
                         curItem.price.setValue(priceList[upgradeDt.Lv]);
@@ -698,6 +703,10 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                         //* Set Lv
                         atvSkUpgDt.setLvUp();
                         curItem.setUI(atvSkUpgDt);
+
+                        //* Sound
+                        if(atvSkUpgDt.Lv < atvSkUpgDt.MaxLv)
+                            SM.ins.sfxPlay(SM.SFX.Upgrade.ToString());
 
                         //* Set Price
                         List<int> priceList = setAtvSkillUpgradePriceCalc(atvSkUpgDt);
@@ -735,7 +744,8 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
                 drawCheckBtnUI();
             }
         }
-        else { //TODO Audio
+        else {
+            SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
             //* (BUG-20)MAX-LVなら、「財貨 不足」ダイアログ表示しない。
             if(DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
                 UpgradeDt upgradeDt = DM.ins.personalData.Upgrade.Arr[CurIdx];

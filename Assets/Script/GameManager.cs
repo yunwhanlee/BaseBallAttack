@@ -293,23 +293,28 @@ public class GameManager : MonoBehaviour {
 //* --------------------------------------------------------------------------------------
 //* GUI Button
 //* --------------------------------------------------------------------------------------
-    public void onClickReadyButton() => switchCamera();
     // public void onClickReGameButton() => init();
-    public void onClickSkillButton() => levelUpPanel.SetActive(false);
     public void onClickSetGameButton(string type) => setGame(type);
+    public void onClickReadyButton() { switchCamera(); SM.ins.sfxPlay(SM.SFX.BtnClick.ToString()); }
+    public void onClickSkillButton() { levelUpPanel.SetActive(false); SM.ins.sfxPlay(SM.SFX.BtnClick.ToString()); }
     public void onClickOpenTutorialButton() {
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         DM.ins.displayTutorialUI();
         openTutorialDialog.gameObject.SetActive(false);
     }
-    public void onClickSkipTutorialNextTimeToggle() => DM.ins.personalData.IsSkipTutorial = skipTutorialToggle.isOn;
+    public void onClickSkipTutorialNextTimeToggle() { DM.ins.personalData.IsSkipTutorial = skipTutorialToggle.isOn; SM.ins.sfxPlay(SM.SFX.BtnClick.ToString()); }
     public void onClickRewardChestOpenButton() {
+        Debug.Log("onClickRewardChestOpenButton()::");
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         StartCoroutine(coRewardChestOpen());
     }
     IEnumerator coRewardChestOpen(){
+        Debug.Log("coRewardChestOpen()::");
         initRewardChestPanelUI(isOpen: true);
         getRewardChestPanel.GetComponentInChildren<Animator>().SetTrigger(DM.ANIM.DoOpen.ToString());
         yield return new WaitForSecondsRealtime(1); //* (BUG-10) RewardChestPanelが表示されるとき、Time.Scaleが０のため、RealTimeで動く。
-
+        
+        SM.ins.sfxPlay(SM.SFX.Upgrade.ToString());
         rewardChestOkBtn.gameObject.SetActive(true);
         const int GOODS = 0, PSVSKILL_TICKET = 1, ROULETTE_TICKET = 2, EMPTY = 3;
         var goodsPriceDic = new Dictionary<string, int>();
@@ -737,6 +742,8 @@ public class GameManager : MonoBehaviour {
     }
 
     public void setGame(string type){
+        Debug.Log($"setGame(type= {type})::");
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         STATE state = DM.ins.convertGameState2Enum(type);
         switch(state){
             case STATE.PAUSE:

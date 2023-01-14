@@ -156,6 +156,7 @@ public class Achivement : MonoBehaviour{
         if(_allClear) this.allClear = _allClear;
     }
     protected int acceptReward(PersonalData pDt, int idx){
+        SM.ins.sfxPlay(SM.SFX.PurchaseSuccess.ToString());
         //* 処理。
         targetArr[idx].IsAccept = true;
         int reward = targetArr[idx].Reward;

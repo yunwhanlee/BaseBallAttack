@@ -253,6 +253,8 @@ public class HomeManager : MonoBehaviour
     }
 
     public void onClickBtnGoToPanel(string name){
+        Debug.Log($"onClickBtnGoToPanel(name= {name})");
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         //* Current Model Data & ParentTf
         DM.ins.SelectItemType = name;
         var curChara = DM.ins.scrollviews[(int)DM.PANEL.Chara].ItemPrefs[DM.ins.personalData.SelectCharaIdx];
@@ -281,6 +283,7 @@ public class HomeManager : MonoBehaviour
     }
 
     public void onClickBtnSelectSkillImg(int idx){
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         Array.ForEach(skillBtns, skillBtn => {
             var outline = skillBtn.GetComponent<NicerOutline>();
             outline.enabled = false;
@@ -296,6 +299,7 @@ public class HomeManager : MonoBehaviour
     }
     public void onClickRouletteIconBtn(){
         Debug.Log("onClickRouletteIconBtn:: RouletteTicket= " + DM.ins.personalData.RouletteTicket);
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         if(DM.ins.personalData.RouletteTicket <= 0){
             showAdDialog.gameObject.SetActive(true);
         }
@@ -308,9 +312,11 @@ public class HomeManager : MonoBehaviour
     }
     public void onClickRateBtn(){
         Debug.Log("<color=yellow>TODO</color> onClickRateBtn():: Googleストアーへ移動!");
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         DM.ins.openAppStore();
     }
     public void onClickShowADButton(){
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         //* 広告なし
         //TODO このままでは、ルーレットを無限に使えるので、一日制限数設定。
         if(DM.ins.personalData.IsRemoveAD){
@@ -331,6 +337,7 @@ public class HomeManager : MonoBehaviour
         
     }
     public void onClickSettingBtn(){
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         settingDialog.Panel.SetActive(true);
     }
     public void onDropDownLanguageOpt(){
@@ -349,12 +356,14 @@ public class HomeManager : MonoBehaviour
         }
     }
     public void onClickSettingOkBtn(bool isOk){
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         settingDialog.Panel.SetActive(false);
         DM.ins.personalData.save();
         if(isOk) SceneManager.LoadScene(DM.SCENE.Home.ToString()); // Re-load
     }
 
     public void onClickBtnUnlock2ndSkillDialog(bool isActive){
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         if(DM.ins.personalData.IsUnlock2ndSkill) return;
         unlock2ndSkillDialog.Panel.SetActive(isActive);
         unlock2ndSkillDialog.TitleTxt.text = LANG.getTxt(LANG.TXT.DialogUnlock2ndSkill_Title.ToString());
@@ -362,6 +371,7 @@ public class HomeManager : MonoBehaviour
     }
 
     public void onclickBtnBuyUnlock2ndSkill(){
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         int price = 1000;
         var unlockSkillList = DM.ins.personalData.AtvSkillLockList.FindAll(list => list == false);
         int unlockSkillListCnt = unlockSkillList.Count;
@@ -395,6 +405,7 @@ public class HomeManager : MonoBehaviour
     }
 
     public void onClickStartBtn(){
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         //* Open StageSelectPanel
         stageSelectPanel.SetActive(true);
 
@@ -415,6 +426,7 @@ public class HomeManager : MonoBehaviour
 
     public void onClickStageSelectImgBtn(int idxNum){
         Debug.Log($"onClickStagePictureBtn:: idxNum= {idxNum}, isLocked= {stageSelects[idxNum].IsLocked}, WIDTH= {stageSelects[idxNum].RectTf.rect.width}, SPACING= {stageSelectContent.GetComponent<HorizontalLayoutGroup>().spacing}");
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         float WIDTH = stageSelects[idxNum].RectTf.rect.width;
         float SPACING = stageSelectContent.GetComponent<HorizontalLayoutGroup>().spacing;
 
@@ -429,6 +441,7 @@ public class HomeManager : MonoBehaviour
     }
 
     public void onClickPlayBtn(){
+        SM.ins.sfxPlay(SM.SFX.PlayBtn.ToString());
         if(stageSelects[stageIndex].IsLocked){
             Util._.displayNoticeMsgDialog(LANG.getTxt(LANG.TXT.MsgHardmodeLocked.ToString()));
             return;
@@ -456,6 +469,7 @@ public class HomeManager : MonoBehaviour
     }
 
     public void onClickResetBtn(){
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         DM.ins.personalData.reset();
 
         #if UNITY_EDITOR
@@ -465,6 +479,7 @@ public class HomeManager : MonoBehaviour
     }
 
     public void onClickItemPsvInfoBtn(){
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         //* Chara Or BatのPSV表示。
         bool isOpen = !DM.ins.scrollviews[(int)DM.PANEL.PsvInfo].ScrollRect.gameObject.activeSelf;
         int currentType = (int)DM.ins.getCurPanelType2Enum(DM.ins.SelectItemType);
@@ -513,6 +528,7 @@ public class HomeManager : MonoBehaviour
     public void onClickPremiumPackPurchaseBtn(){
         bool success = DM.ins.reqAppPayment();
         if(success){
+            SM.ins.sfxPlay(SM.SFX.PurchaseSuccess.ToString());
             DM.ins.personalData.IsPurchasePremiumPack = true;
 
             // Set Data
@@ -534,10 +550,13 @@ public class HomeManager : MonoBehaviour
 
         }else{
             //TODO 失敗した DIALOG表示。
+            SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
             Debug.LogError($"<size=20><color=yellow> HM::onClickPremiumPackPurchaseBtn:: IN-APP-PURCHASE FAIL! :( </color></size>");
         }
     }
     public void displayShowRewardPanel(int coin = 0, int diamond = 0, int rouletteTicket = 0, bool removeAD = false){
+        //* Sound
+        SM.ins.sfxPlay(SM.SFX.PurchaseSuccess.ToString());
         //* Effect
         em.createCongratuBlastRainbowEF(GameObject.Find("MainCanvas").transform);
         //* Open Show Reward Panel

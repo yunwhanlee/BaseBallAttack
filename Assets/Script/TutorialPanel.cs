@@ -74,16 +74,19 @@ public class TutorialPanel : MonoBehaviour
     *   Button Event
     */
     public void onClickExitBtn(){
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         Destroy(this.gameObject);
     }
 
     public void onClickLeftArrow(){
         if(pageIdx < 0) return;
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         pageIdx--;
         setActiveFocusIcon();
     }
     public void onClickRightArrow(){
         if(pageIdx >= lastIdx) return;
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         pageIdx++;
         setActiveFocusIcon();
     }
