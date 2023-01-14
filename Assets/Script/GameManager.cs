@@ -383,6 +383,7 @@ public class GameManager : MonoBehaviour {
 
     public void onClickRewardChestOkButton(int reward, Dictionary<string, int> goodsPriceDic){
         Debug.Log("onClickRewardChestOkButton:: reward= " + reward);
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         Time.timeScale = 1;
         const int GOODS = 0, PSVSKILL_TICKET = 1, ROULETTE_TICKET = 2, EMPTY = 3;
         switch(reward){
@@ -411,6 +412,7 @@ public class GameManager : MonoBehaviour {
 
     public void onClickActiveSkillButton(int i) {
         if(pl.IsStun) return;
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         SelectAtvSkillBtnIdx = i; //* 最新化
         bool isActive = activeSkillBtnList[i].SelectCircleEF.gameObject.activeSelf;
         Debug.LogFormat("onClickActiveSkillButton({0}), isActive= {1}", i, isActive);
@@ -433,6 +435,7 @@ public class GameManager : MonoBehaviour {
     } //(BUG)途中でスキル活性化ダメ
 
     public void onClickStatusFolderButton(bool isTrigger){
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         float pivotX = statusFolderPanel.pivot.x;
         if(pivotX == -1) isTrigger = false;
         else isTrigger = true;
@@ -471,6 +474,7 @@ public class GameManager : MonoBehaviour {
         }
     }
     public void onClickBtnOpenShowAdDialog(string type) {
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         showAdDialog.gameObject.SetActive(true);
         adPricePayBtn.gameObject.SetActive(true);
         Text price = adPricePayBtn.GetComponentInChildren<Text>();
@@ -501,6 +505,7 @@ public class GameManager : MonoBehaviour {
     }
     public void onClickPayButton(string rewardType){
         Debug.Log($"onClickPayButton:: {rewardType}");
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         if(rewardType == DM.REWARD.RerotateSkillSlots.ToString()){
             setRerotateSkillSlots();
         }
@@ -511,6 +516,7 @@ public class GameManager : MonoBehaviour {
     }
     public void onClickShowADButton(string rewardType){
         Debug.Log("<color=yellow> onClickShowADButton(" + rewardType.ToString() + ")</color>");
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         //* 広告なし
         if(DM.ins.personalData.IsRemoveAD){
             setShowADReward(rewardType);
