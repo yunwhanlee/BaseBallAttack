@@ -15,7 +15,8 @@ public class SM : MonoBehaviour
         CountDown, CountDownShoot, CountDownStrike,
         //* PLAY
         ExpUp, PlayerLevelUp,
-        Swing, SwingHit, HitBlock, DestroyBlock
+        Swing, SwingHit, HitBlock, DestroyBlock,
+        GetRewardChest,
 
     }
 
@@ -45,6 +46,7 @@ public class SM : MonoBehaviour
     [SerializeField] AudioSource[] SwingHitSFXs;
     [SerializeField] AudioSource HitBlockSFX;
     [SerializeField] AudioSource DestroyBlockSFX;
+    [SerializeField] AudioSource GetRewardChestSFX;
 
     
 
@@ -104,6 +106,9 @@ public class SM : MonoBehaviour
             HitBlockSFX.Play();
         else if(name == SFX.DestroyBlock.ToString())
             DestroyBlockSFX.Play();
+        else if(name == SFX.GetRewardChest.ToString())
+            GetRewardChestSFX.Play();
+
     }
     private void singleton(){
         if(ins == null) {
