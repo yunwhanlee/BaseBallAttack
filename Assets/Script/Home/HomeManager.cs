@@ -442,12 +442,13 @@ public class HomeManager : MonoBehaviour
     }
 
     public void onClickPlayBtn(){
-        SM.ins.sfxPlay(SM.SFX.PlayBtn.ToString());
+        
         if(stageSelects[stageIndex].IsLocked){
+            SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
             Util._.displayNoticeMsgDialog(LANG.getTxt(LANG.TXT.MsgHardmodeLocked.ToString()));
             return;
         }
-
+    
         //* スタートするステージ数を設定。
         LM._.STAGE_NUM = stageSelects[stageIndex].Begin;
 
@@ -466,6 +467,7 @@ public class HomeManager : MonoBehaviour
         DM.ins.simpleSkyMt.SetTextureOffset("_MainTex", new Vector2(offsetX, 0));
 
         //* シーン 読込み。
+        SM.ins.sfxPlay(SM.SFX.PlayBtn.ToString());
         SceneManager.LoadScene(DM.SCENE.Loading.ToString());
     }
 
