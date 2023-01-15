@@ -15,7 +15,8 @@ public class SM : MonoBehaviour
         CountDown, CountDownShoot, CountDownStrike,
         //* PLAY
         ExpUp, PlayerLevelUp,
-        Swing, SwingHit, HitBlock, DestroyBlock,
+        Swing, SwingHit, 
+        BlockSpawn, HitBlock, DestroyBlock,
         GetRewardChest,
         DropBoxSpawn, DropBoxPick, DropBoxCoinPick,
 
@@ -45,6 +46,7 @@ public class SM : MonoBehaviour
     [SerializeField] AudioSource PlayerLevelUpSFX;
     [SerializeField] AudioSource SwingSFX;
     [SerializeField] AudioSource[] SwingHitSFXs;
+    [SerializeField] AudioSource BlockSpawnSFX;
     [SerializeField] AudioSource HitBlockSFX;
     [SerializeField] AudioSource DestroyBlockSFX;
     [SerializeField] AudioSource GetRewardChestSFX;
@@ -104,6 +106,8 @@ public class SM : MonoBehaviour
             int rand = Random.Range(0, SwingHitSFXs.Length);
             SwingHitSFXs[rand].Play();
         }
+        else if(name == SFX.BlockSpawn.ToString())
+            BlockSpawnSFX.Play();
         else if(name == SFX.HitBlock.ToString())
             HitBlockSFX.Play();
         else if(name == SFX.DestroyBlock.ToString())

@@ -76,6 +76,7 @@ public class BlockMaker : MonoBehaviour
 //*  関数
 //*---------------------------------------
     public void createBlockRow(KIND type, bool isFirstStage = false, int verticalCnt = 1){
+        SM.ins.sfxPlay(SM.SFX.BlockSpawn.ToString());
         //* Value
         float xs = blockPrefs[(int)type].transform.localScale.x;
         float offsetPosX = (type == KIND.Normal)? OFFSET_POS_X : LONG_OFFSET_POS_X; //* Pivotが真ん中なので、OffsetPosX設定。
