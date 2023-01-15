@@ -189,6 +189,7 @@ public class Ball_Prefab : MonoBehaviour
     void OnTriggerExit(Collider col) {
 #region SWING BAT
         if(col.transform.CompareTag(DM.TAG.HitRangeArea.ToString())){ //* HIT BALL
+            SM.ins.sfxPlay(SM.SFX.SwingHit.ToString());
             isHitedByBlock = true;
             pl.setSwingArcColor("yellow");
             InvokeRepeating("checkLimitTimeToDeleteBall", 0, deleteLimitTime);//* 日程時間が過ぎたら、ボール削除。

@@ -238,10 +238,14 @@ public class Player : MonoBehaviour
         anim.SetTrigger(name);
         switch(name){
             case "Swing":
+                SM.ins.sfxPlay(SM.SFX.Swing.ToString());
                 doSwing = true;
                 
                 break;
             case "HomeRun": 
+                SM.ins.sfxPlay(SM.SFX.HomeRunCameraAnim.ToString());
+                anim.updateMode  = AnimatorUpdateMode.UnscaledTime;
+                break;
             case "ActiveSkillBefSpotLight":
             case "Touch":
                 anim.updateMode  = AnimatorUpdateMode.UnscaledTime;

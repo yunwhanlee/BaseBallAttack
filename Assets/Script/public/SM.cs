@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using Random = UnityEngine.Random;
 
 public class SM : MonoBehaviour
 {
@@ -8,11 +10,12 @@ public class SM : MonoBehaviour
         //* UI
         BtnClick, PlayBtn,
         PurchaseSuccess, PurchaseFail, Upgrade, RouletteReward,
-        Warning, LevelUpPanel, Victory, Defeat, Revive, HomeRun, 
+        Warning, LevelUpPanel, Victory, Defeat, Revive, 
+        HomeRun, HomeRunCameraAnim,
         CountDown, CountDownShoot, CountDownStrike,
         //* PLAY
         PlayerLevelUp,
-        HitBlock, DestroyBlock
+        Swing, SwingHit, HitBlock, DestroyBlock
 
     }
 
@@ -30,14 +33,18 @@ public class SM : MonoBehaviour
     [SerializeField] AudioSource ReviveSFX;
     [SerializeField] AudioSource RouletteRewardSFX;
     [SerializeField] AudioSource HomeRunSFX;
+    [SerializeField] AudioSource HomeRunCameraAnimSFX;
     [SerializeField] AudioSource CountDownSFX;
     [SerializeField] AudioSource CountDownShootSFX;
     [SerializeField] AudioSource CountDownStrikeSFX;
     
     [Header("PLAY")][Header("__________________________")]
     [SerializeField] AudioSource PlayerLevelUpSFX;
+    [SerializeField] AudioSource SwingSFX;
+    [SerializeField] AudioSource[] SwingHitSFXs;
     [SerializeField] AudioSource HitBlockSFX;
     [SerializeField] AudioSource DestroyBlockSFX;
+
     
 
     void Awake() => singleton();
@@ -73,15 +80,23 @@ public class SM : MonoBehaviour
             RouletteRewardSFX.Play();
         else if(name == SFX.HomeRun.ToString())
             HomeRunSFX.Play();
+        else if(name == SFX.HomeRunCameraAnim.ToString())
+            HomeRunCameraAnimSFX.Play();
         else if(name == SFX.CountDown.ToString())
             CountDownSFX.Play();
         else if(name == SFX.CountDownShoot.ToString())
             CountDownShootSFX.Play();
         else if(name == SFX.CountDownStrike.ToString())
             CountDownStrikeSFX.Play();
-            //* PLAY
+        //* PLAY
         else if(name == SFX.PlayerLevelUp.ToString())
             PlayerLevelUpSFX.Play();
+        else if(name == SFX.Swing.ToString())
+            SwingSFX.Play();    
+        else if(name == SFX.SwingHit.ToString()){
+            int rand = Random.Range(0, SwingHitSFXs.Length);
+            SwingHitSFXs[rand].Play();
+        }
         else if(name == SFX.HitBlock.ToString())
             HitBlockSFX.Play();
         else if(name == SFX.DestroyBlock.ToString())
