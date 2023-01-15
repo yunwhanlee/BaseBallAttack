@@ -14,7 +14,7 @@ public class SM : MonoBehaviour
         HomeRun, HomeRunCameraAnim,
         CountDown, CountDownShoot, CountDownStrike,
         //* PLAY
-        PlayerLevelUp,
+        ExpUp, PlayerLevelUp,
         Swing, SwingHit, HitBlock, DestroyBlock
 
     }
@@ -39,6 +39,7 @@ public class SM : MonoBehaviour
     [SerializeField] AudioSource CountDownStrikeSFX;
     
     [Header("PLAY")][Header("__________________________")]
+    [SerializeField] AudioSource ExpUpSFX;
     [SerializeField] AudioSource PlayerLevelUpSFX;
     [SerializeField] AudioSource SwingSFX;
     [SerializeField] AudioSource[] SwingHitSFXs;
@@ -89,6 +90,8 @@ public class SM : MonoBehaviour
         else if(name == SFX.CountDownStrike.ToString())
             CountDownStrikeSFX.Play();
         //* PLAY
+        else if(name == SFX.ExpUp.ToString())
+            ExpUpSFX.Play();
         else if(name == SFX.PlayerLevelUp.ToString())
             PlayerLevelUpSFX.Play();
         else if(name == SFX.Swing.ToString())

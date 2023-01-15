@@ -63,10 +63,10 @@ public class DropItem : MonoBehaviour
         if(col.transform.CompareTag(DM.TAG.Player.ToString())){
             switch(this.type){
                 case DropItem.TYPE.ExpOrb:
+                    SM.ins.sfxPlay(SM.SFX.ExpUp.ToString());
                     gm.pl.addExp(Exp); //* (BUG) GAMEOVER後、再スタート場合、EXPが増えないように。
                     gm.em.createShowExpUITxtEF(gm.showExpUIGroup.transform, $"+Exp {exp}");
                     gm.em.createDropItemExpOrbEF(this.transform);
-
                     
                     StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropItemGroup));
                     break;
