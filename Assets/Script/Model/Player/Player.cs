@@ -259,6 +259,7 @@ public class Player : MonoBehaviour
         }
     }
     public void setLevelUp(){
+        SM.ins.sfxPlay(SM.SFX.PlayerLevelUp.ToString());
         IsLevelUp = true;
         Lv++;
         Exp = 0;

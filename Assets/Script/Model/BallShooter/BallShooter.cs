@@ -12,12 +12,15 @@ public class BallShooter : MonoBehaviour
     [SerializeField] bool isExclamationMarkOn;   public bool IsExclamationMarkOn { get => isExclamationMarkOn; set => isExclamationMarkOn = value;}
     [SerializeField] float time;
     [SerializeField] float throwBallSpeed = LM._.THROW_BALL_SPEED;
-    [SerializeField] float shootSpan = 2;
+    [SerializeField] float shootSpan = 3;
     [SerializeField] public GameObject ballPref;
     [SerializeField] public Transform entranceTf;
     [SerializeField] GameObject exclamationMarkObj;   public GameObject ExclamationMarkObj { get => exclamationMarkObj; set => exclamationMarkObj = value;}
     [SerializeField] GameObject bossFireBallMarkObj;    public GameObject BossFireBallMarkObj { get => bossFireBallMarkObj; set => bossFireBallMarkObj = value;}
 
+    [SerializeField] bool isTwoCount;
+    [SerializeField] bool isOneCount;
+    [SerializeField] bool isZeroCount;
 
     void Start(){
         init();
@@ -31,9 +34,29 @@ public class BallShooter : MonoBehaviour
 
         //* 発射 前) ボールが存在しない (毎一回実行)
         if(!IsBallExist){
+            Debug.Log("BallShooter:: FixedUpdate::");
             //* COUNTING
             time -= Time.deltaTime;
+
             gm.ShootCntTxt.text = time.ToString("N0");
+
+            if(gm.ShootCntTxt.text == "3")
+                gm.ShootCntTxt.text = "";
+
+            if(gm.ShootCntTxt.text == "2" && !isTwoCount){
+                isTwoCount = true;
+                SM.ins.sfxPlay(SM.SFX.CountDown.ToString());
+            }
+            else if(gm.ShootCntTxt.text == "1" && !isOneCount){
+                isOneCount = true;
+                SM.ins.sfxPlay(SM.SFX.CountDown.ToString());
+            }
+            else if(gm.ShootCntTxt.text == "0" && !isZeroCount){
+                isZeroCount = true;
+                SM.ins.sfxPlay(SM.SFX.CountDown.ToString());
+            }
+
+
             gm.readyBtn.gameObject.SetActive(true);
 
             //* 「！」マークいきなりボール投げる。
@@ -42,6 +65,7 @@ public class BallShooter : MonoBehaviour
             //* 発射
             if(time <= 0){
                 Debug.Log("〇 BALL 発射！");
+                SM.ins.sfxPlay(SM.SFX.CountDownShoot.ToString());
                 IsBallExist = true;
                 gm.throwScreenAnimSetTrigger("ThrowBall");
 
@@ -57,12 +81,26 @@ public class BallShooter : MonoBehaviour
         else{//* ボールが存在し、飛んでいる。★
             gm.readyBtn.gameObject.SetActive(false);
             pl.previewBundle.SetActive(false);
+            isTwoCount = false;
+            isOneCount = false;
+            isZeroCount = false;
         }
     }
+
+    public void init() {
+        time = shootSpan;
+        isTwoCount = false;
+        isOneCount = false;
+        isZeroCount = false;
+        IsExclamationMarkOn = false;
+        throwBallSpeed = LM._.THROW_BALL_SPEED;
+    }
+
     IEnumerator coClearShootCntTxt(float delay){
         yield return new WaitForSeconds(delay);
         gm.ShootCntTxt.text = "";
     }
+
     private void setSuddenlyThrowBall(int per){
         if(time <= 1f && !IsExclamationMarkOn){
             IsExclamationMarkOn = true;
@@ -73,11 +111,6 @@ public class BallShooter : MonoBehaviour
                 StartCoroutine(coShowExclamationMark(0.2f));
             }
         }
-    }
-    public void init() {
-        time = shootSpan;
-        IsExclamationMarkOn = false;
-        throwBallSpeed = LM._.THROW_BALL_SPEED;
     }
 
     public void throwBall(GameObject ins, Vector3 goalDir){

@@ -383,6 +383,7 @@ public class Block_Prefab : MonoBehaviour
         * 1.原因：OnDestroy()で処理を行っているので、この中にも同じ処理が必要。
         * 2.原因：GameObject targetをパラメータで渡すのに、この後this.transformで処理をする誤り。
         */
+        SM.ins.sfxPlay(SM.SFX.DestroyBlock.ToString());
         Transform targetTf = target.transform; 
         int resultExp = (!isInitialize)? (int)(Exp * pl.expUp.Val) : 0; //* (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
         Debug.Log("virtual onDestroy():: resultExp= " + resultExp);

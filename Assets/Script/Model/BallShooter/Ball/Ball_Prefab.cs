@@ -205,6 +205,7 @@ public class Ball_Prefab : MonoBehaviour
         #region ATV (HIT BLOCK)
         if(col.transform.name.Contains(DM.NAME.Block.ToString())
         || col.transform.name.Contains(DM.NAME.Obstacle.ToString())){ //* (BUG-3) 障害物もFreezeからだめーず受けるように。
+            SM.ins.sfxPlay(SM.SFX.HitBlock.ToString());
             isHitedByBlock = true;
             gm.activeSkillBtnList.ForEach(skillBtn => {
 
@@ -448,6 +449,7 @@ public class Ball_Prefab : MonoBehaviour
         pl.setAnimTrigger(DM.ANIM.HomeRun.ToString());
 
         yield return new WaitForSecondsRealtime(2);
+        SM.ins.sfxPlay(SM.SFX.HomeRun.ToString());
         //* Animation Finish
         gm.IsPlayingAnim = false;
         gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());

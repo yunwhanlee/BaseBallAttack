@@ -654,6 +654,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private IEnumerator corSetStrike(bool isOut = false){
+        SM.ins.sfxPlay(SM.SFX.CountDownStrike.ToString());
         strikeCntImgs[strikeCnt++].gameObject.SetActive(true);
         if(isOut){ //* アウト
             strikeCnt = 0;
