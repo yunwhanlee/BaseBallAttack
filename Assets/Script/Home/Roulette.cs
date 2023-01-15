@@ -29,7 +29,8 @@ public class Roulette : MonoBehaviour
     public int power = 1500;
     public float spinGauge = 0;
 
-    [SerializeField] int reduceCnt = 0;
+    [SerializeField] float reduceCnt = 0;
+    [SerializeField] float reduceSpeed;
     [SerializeField] bool isRight;
     const int REWARD_IMG = 1;
 
@@ -47,7 +48,9 @@ public class Roulette : MonoBehaviour
 
         ticketCntTxt.text = "x " + DM.ins.personalData.RouletteTicket.ToString();
         if(isSpin){
-            float speed = Time.deltaTime * (SPIN_POWER_MIN + spinGauge - reduceCnt++);
+            reduceCnt += Time.deltaTime * reduceSpeed;
+            float speed = Time.deltaTime * (SPIN_POWER_MIN + spinGauge);
+            speed -= reduceCnt;
             if(speed > 0){
                 setCenterTfUI(isSpin);
                 spinBoard.transform.Rotate(0, 0, speed);

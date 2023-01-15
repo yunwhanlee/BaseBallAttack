@@ -16507,6 +16507,7 @@ MonoBehaviour:
   VictorySFX: {fileID: 8300000, guid: 95f0064e751259941b4c7403a257ca63, type: 3}
   DefeatSFX: {fileID: 8300000, guid: 966d977e73a066448a7ec08423241bc6, type: 3}
   ReviveSFX: {fileID: 8300000, guid: 945aa3e5e126df5459195ced6df2d155, type: 3}
+  RouletteRewardSFX: {fileID: 8300000, guid: 3906f7ff4e37e07438ca40a16630fe23, type: 3}
 --- !u!82 &1232432236
 AudioSource:
   m_ObjectHideFlags: 0
@@ -27314,6 +27315,7 @@ MonoBehaviour:
   power: 5000
   spinGauge: 0
   reduceCnt: 0
+  reduceSpeed: 2
   isRight: 0
 --- !u!1 &1752299217
 GameObject:
