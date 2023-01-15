@@ -53,6 +53,7 @@ public class Ball_Prefab : MonoBehaviour
         if(col.transform.CompareTag(DM.TAG.HitRangeArea.ToString())){
             pl.setSwingArcColor("red");
             if(gm.State == GameManager.STATE.PLAY && pl.DoSwing){
+                SM.ins.sfxPlay(SM.SFX.SwingHit.ToString());
                 gm.switchCamera();
                 pl.DoSwing = false;
                 rigid.useGravity = true;
@@ -189,7 +190,6 @@ public class Ball_Prefab : MonoBehaviour
     void OnTriggerExit(Collider col) {
 #region SWING BAT
         if(col.transform.CompareTag(DM.TAG.HitRangeArea.ToString())){ //* HIT BALL
-            SM.ins.sfxPlay(SM.SFX.SwingHit.ToString());
             isHitedByBlock = true;
             pl.setSwingArcColor("yellow");
             InvokeRepeating("checkLimitTimeToDeleteBall", 0, deleteLimitTime);//* 日程時間が過ぎたら、ボール削除。
