@@ -17,6 +17,7 @@ public class SM : MonoBehaviour
         ExpUp, PlayerLevelUp,
         Swing, SwingHit, HitBlock, DestroyBlock,
         GetRewardChest,
+        DropBoxSpawn, DropBoxPick, DropBoxCoinPick,
 
     }
 
@@ -47,8 +48,9 @@ public class SM : MonoBehaviour
     [SerializeField] AudioSource HitBlockSFX;
     [SerializeField] AudioSource DestroyBlockSFX;
     [SerializeField] AudioSource GetRewardChestSFX;
-
-    
+    [SerializeField] AudioSource DropBoxSpawnSFX;
+    [SerializeField] AudioSource DropBoxPickSFX;
+    [SerializeField] AudioSource DropBoxCoinPickSFX;
 
     void Awake() => singleton();
 
@@ -108,6 +110,12 @@ public class SM : MonoBehaviour
             DestroyBlockSFX.Play();
         else if(name == SFX.GetRewardChest.ToString())
             GetRewardChestSFX.Play();
+        else if(name == SFX.DropBoxSpawn.ToString())
+            DropBoxSpawnSFX.Play();
+        else if(name == SFX.DropBoxPick.ToString())
+            DropBoxPickSFX.Play();
+        else if(name == SFX.DropBoxCoinPick.ToString())
+            DropBoxCoinPickSFX.Play();
 
     }
     private void singleton(){

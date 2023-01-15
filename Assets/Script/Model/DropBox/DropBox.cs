@@ -39,6 +39,7 @@ public class DropBox : MonoBehaviour{ //* Create By BlockMaker.cs
             if(ballRigid.useGravity == false) return;
             
             Debug.Log("DropBox::OnCollisionEnter:: col= Ball, this.name= " + this.name);
+            
             if(this.gameObject.name == ObjectPool.DIC.DropBoxQuestionPf.ToString()){
                 int max = 0;
                 int rand = Random.Range(0, 5);
@@ -52,7 +53,8 @@ public class DropBox : MonoBehaviour{ //* Create By BlockMaker.cs
                 Debug.Log("DropBox::OnCollisionEnter:: DropBoxQuestionPf:: max= " + max);
                 for(int i=0; i<max; i++)
                     gm.bm.createCoinIconPf(this.transform, i, max);
-                
+
+                SM.ins.sfxPlay(SM.SFX.DropBoxCoinPick.ToString());
                 gm.em.createDropBoxQuestionEF(this.transform, LM._.DROPBOX_COIN_VALUE * max);
                 gm.em.createDropBoxQuestionMoneyEF(this.transform);
 
@@ -60,12 +62,14 @@ public class DropBox : MonoBehaviour{ //* Create By BlockMaker.cs
                 gm.coin += max * LM._.DROPBOX_COIN_VALUE;
             }
             else if(this.gameObject.name == ObjectPool.DIC.DropBoxShieldPf.ToString()){
+                SM.ins.sfxPlay(SM.SFX.DropBoxPick.ToString());
                 gm.em.createDropBoxShieldEF(this.transform);
                 gm.em.createDropBoxShieldBarrierEF(gm.pl.modelMovingTf);
                 //* 処理
                 gm.pl.IsBarrier = true;
             }
             else if(this.gameObject.name == ObjectPool.DIC.DropBoxSpeedPf.ToString()){
+                SM.ins.sfxPlay(SM.SFX.DropBoxPick.ToString());
                 gm.em.createDropBoxSpeedEF(this.transform);
                 for(int i=0; i<gm.ballGroup.childCount; i++){
                     gm.em.createDropBoxSpeedTrailEF(gm.ballGroup.GetChild(i));
@@ -74,6 +78,7 @@ public class DropBox : MonoBehaviour{ //* Create By BlockMaker.cs
                 }
             }
             else if(this.gameObject.name == ObjectPool.DIC.DropBoxStarPf.ToString()){
+                SM.ins.sfxPlay(SM.SFX.DropBoxPick.ToString());
                 gm.em.createDropBoxStarEF(this.transform);
                 for(int i=0; i<gm.ballGroup.childCount; i++){
                     if(gm.ballGroup.GetChild(i).CompareTag(DM.NAME.Ball.ToString())){
@@ -84,6 +89,7 @@ public class DropBox : MonoBehaviour{ //* Create By BlockMaker.cs
                 }
             }
             else if(this.gameObject.name == ObjectPool.DIC.DropBoxMagicPf.ToString()){
+                SM.ins.sfxPlay(SM.SFX.DropBoxPick.ToString());
                 gm.em.createDropBoxMagicEF(this.transform);
                 //*処理
                 gm.activeSkillBtnList.ForEach((atvSkillBtn) => atvSkillBtn.CollDownImg.fillAmount = 0);

@@ -168,7 +168,7 @@ public class BlockMaker : MonoBehaviour
             int randIdx = Random.Range(startIdx, dropBoxPfArr.Length);
             var randPos = dropBoxPfArr[0].GetComponent<DropBox>().setRandPos();
             Debug.Log($"createRandomDropBox:: idx= {randIdx}, name= {dropBoxPfArr[randIdx].name}, randPos= {randPos}");
-
+            SM.ins.sfxPlay(SM.SFX.DropBoxSpawn.ToString());
             var ins = ObjectPool.getObject(dropBoxPfArr[randIdx].name, randPos, dropBoxPfArr[randIdx].transform.rotation, gm.dropBoxGroup);
         }
     }
