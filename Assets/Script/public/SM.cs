@@ -16,6 +16,7 @@ public class SM : MonoBehaviour
         Victory,
         Defeat,
         Revive,
+        RouletteReward,
     }
 
     static public SM ins;
@@ -31,6 +32,7 @@ public class SM : MonoBehaviour
     [SerializeField] AudioClip VictorySFX;
     [SerializeField] AudioClip DefeatSFX;
     [SerializeField] AudioClip ReviveSFX;
+    [SerializeField] AudioClip RouletteRewardSFX;
 
     void Awake() => singleton();
 
@@ -59,6 +61,8 @@ public class SM : MonoBehaviour
             audio.clip = DefeatSFX;
         else if(name == SFX.Revive.ToString())
             audio.clip = ReviveSFX;
+        else if(name == SFX.RouletteReward.ToString())
+            audio.clip = RouletteRewardSFX;
             
         audio.Play();
     }

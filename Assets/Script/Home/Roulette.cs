@@ -63,7 +63,7 @@ public class Roulette : MonoBehaviour
                 float angle = zRot % (360 + rotOffset); //* one lap(１回り): 360°
                 int index = (int)(angle / ((360 + rotOffset) / itemCnt));
                 Debug.Log("Roulette::Update:: speed= " + speed + ", angle= " + angle + ", index=" + index);
-
+                SM.ins.sfxPlay(SM.SFX.RouletteReward.ToString());
                 setRewardData(index);
                 setCenterTfUI(isSpin);
             }
@@ -83,6 +83,7 @@ public class Roulette : MonoBehaviour
         if(isSpin) return;
         else{
             if(rewardIcon != null){
+                SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
                 setRewardResult();
 
                 setCenterTfUI(isInit: true);

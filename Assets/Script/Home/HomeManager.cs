@@ -316,7 +316,6 @@ public class HomeManager : MonoBehaviour
         DM.ins.openAppStore();
     }
     public void onClickShowADButton(){
-        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         //* 広告なし
         //TODO このままでは、ルーレットを無限に使えるので、一日制限数設定。
         if(DM.ins.personalData.IsRemoveAD){
@@ -328,10 +327,12 @@ public class HomeManager : MonoBehaviour
         //* 広告要請
         bool success = DM.ins.reqShowAD();
         if(success){
+            SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
             DM.ins.personalData.RouletteTicket++;
             showRoulettePanel();
         }
         else {
+            SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
             Util._.displayNoticeMsgDialog("ERROR！");
         };
         
@@ -714,7 +715,8 @@ public class HomeManager : MonoBehaviour
         if(child.name == DM.NAME.GrayPanel.ToString()) child.gameObject.SetActive(isActive);
     }
     private string updateADCoolTime(){
-        DateTime finishTime = DateTime.ParseExact(DM.ins.personalData.RouletteTicketCoolTime, "dd/MM/yyyy", null).AddMinutes(LM._.ROULETTE_TICKET_COOLTIME_MINUTE);
+        // DateTime finishTime = DateTime.ParseExact(DM.ins.personalData.RouletteTicketCoolTime, "dd/MM/yyyy", null).AddMinutes(LM._.ROULETTE_TICKET_COOLTIME_MINUTE);
+        DateTime finishTime = DateTime.Parse(DM.ins.personalData.RouletteTicketCoolTime).AddMinutes(LM._.ROULETTE_TICKET_COOLTIME_MINUTE);
         TimeSpan coolTime = finishTime - DateTime.Now;
 
         //* Coolタイムが終わったら
