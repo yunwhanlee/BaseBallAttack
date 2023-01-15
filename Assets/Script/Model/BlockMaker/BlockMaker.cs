@@ -212,6 +212,7 @@ public class BlockMaker : MonoBehaviour
         if(gm.stage % LM._.BOSS_STAGE_SPAN == 0 && gm.bossGroup.childCount == 0){
                 int idx = gm.stage / LM._.BOSS_STAGE_SPAN - 1;
                 Debug.Log($"BOSS SPAWN!! index= {idx}");
+                SM.ins.sfxPlay(SM.SFX.Warning.ToString());
 
                 var pos = new Vector3(0, 0, bossPrefs[idx].transform.position.z + 2);
                 var boss = Instantiate(bossPrefs[idx], pos, bossPrefs[idx].transform.rotation, gm.bossGroup);

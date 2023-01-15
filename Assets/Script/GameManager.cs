@@ -562,6 +562,7 @@ public class GameManager : MonoBehaviour {
         setActiveCam(false); // cam1 ON, cam2 OFF
         reviveBtn.gameObject.SetActive(false);
         Invoke("collectDropOrb", 0.5f);
+        SM.ins.sfxPlay(SM.SFX.Revive.ToString());
         em.activeUI_EF("Revive");
         bm.Start();
     }
@@ -700,11 +701,13 @@ public class GameManager : MonoBehaviour {
 
     public void setGameOver(){
         Debug.Log("<size=30> --- G A M E O V E R --- </size>");
+        SM.ins.sfxPlay(SM.SFX.Defeat.ToString());
         setFinishGame(gameoverPanel, gvBestScoreTxt, gvStageTxt, gvCoinTxt, gvDiamondTxt);
     }
 
     public void setVictory(){
         Debug.Log("<size=30> --- V I C T O R Y --- </size>");
+        SM.ins.sfxPlay(SM.SFX.Victory.ToString());
         setFinishGame(victoryPanel, vtrBestScoreTxt, vtrStageTxt, vtrCoinTxt, vtrDiamondTxt);
 
         //* HardMode unlocked

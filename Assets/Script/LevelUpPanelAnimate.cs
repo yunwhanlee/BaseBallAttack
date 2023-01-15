@@ -286,6 +286,7 @@ public class LevelUpPanelAnimate : MonoBehaviour{
 
 #region Start()メソッド
     public void setUI(string type){
+        SM.ins.sfxPlay(SM.SFX.LevelUpPanel.ToString());
         explainTxt.text = LANG.getTxt(LANG.TXT.LevelUpPanel_Explain.ToString());
 
         bool isLvUp = (type == DM.NAME.LevelUp.ToString());
