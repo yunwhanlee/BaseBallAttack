@@ -19,6 +19,7 @@ public class SM : MonoBehaviour
         BlockSpawn, HitBlock, DestroyBlock, Heal,
         GetRewardChest,
         DropBoxSpawn, DropBoxPick, DropBoxCoinPick,
+        Lightning, FireBallExplosion, ColorBallPop, PoisonExplosion, IceExplosion,
 
     }
 
@@ -54,6 +55,12 @@ public class SM : MonoBehaviour
     [SerializeField] AudioSource DropBoxSpawnSFX;
     [SerializeField] AudioSource DropBoxPickSFX;
     [SerializeField] AudioSource DropBoxCoinPickSFX;
+    [SerializeField] AudioSource LightningSFX;
+    [SerializeField] AudioSource FireBallExplosionSFX;
+    [SerializeField] AudioSource ColorBallPopSFX;
+    [SerializeField] AudioSource PoisonExplosionSFX;
+    [SerializeField] AudioSource IceExplosionSFX;
+    
 
     void Awake() => singleton();
 
@@ -123,6 +130,16 @@ public class SM : MonoBehaviour
             DropBoxPickSFX.Play();
         else if(name == SFX.DropBoxCoinPick.ToString())
             DropBoxCoinPickSFX.Play();
+        else if(name == SFX.Lightning.ToString())
+            LightningSFX.Play();
+        else if(name == SFX.FireBallExplosion.ToString())
+            FireBallExplosionSFX.Play();
+        else if(name == SFX.ColorBallPop.ToString())
+            ColorBallPopSFX.Play();
+        else if(name == SFX.PoisonExplosion.ToString())
+            PoisonExplosionSFX.Play();
+        else if(name == SFX.IceExplosion.ToString())
+            IceExplosionSFX.Play();
 
     }
     private void singleton(){

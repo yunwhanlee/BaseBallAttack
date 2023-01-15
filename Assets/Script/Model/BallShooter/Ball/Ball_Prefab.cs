@@ -223,14 +223,17 @@ public class Ball_Prefab : MonoBehaviour
                             decreaseBlocksHp(atv, AtvSkill.FireballDmg);
                             if(isHomeRun)
                                 decreaseBlocksHp(atv, 0, AtvSkill.FireballDot); //* + DOT DAMAGE
+                            SM.ins.sfxPlay(SM.SFX.FireBallExplosion.ToString());
                             // this.rigid.velocity = Vector3.zero; //! ボール速度が０になると、待機されず次のステージに進むBUG。
                             break;
                         }
                         case DM.ATV.ColorBall:{
                             if(col.gameObject.GetComponent<Block_Prefab>().kind != BlockMaker.KIND.TreasureChest){
+                                SM.ins.sfxPlay(SM.SFX.ColorBallPop.ToString());
                                 Block_Prefab[] sameColorBlocks = AtvSkill.findSameColorBlocks(gm, col.transform.gameObject);
                                 //* Set Max Cnt
                                 int max = AtvSkill.ColorBallPopCnt;
+                                
                                 if(isHomeRun) 
                                     max = sameColorBlocks.Length;
 
@@ -246,6 +249,7 @@ public class Ball_Prefab : MonoBehaviour
                             break;
                         }
                         case DM.ATV.PoisonSmoke:{
+                            SM.ins.sfxPlay(SM.SFX.PoisonExplosion.ToString());
                             int destroyCnt = 999;
                             var ins = em.createAtvSkExplosionEF(skillIdx, this.transform, destroyCnt);
                             if(isHomeRun){
@@ -259,6 +263,7 @@ public class Ball_Prefab : MonoBehaviour
                             break;
                         }
                         case DM.ATV.IceWave:{
+                            SM.ins.sfxPlay(SM.SFX.IceExplosion.ToString());
                             var effect = em.createAtvSkExplosionEF(skillIdx, this.transform);
                             // this.rigid.velocity = Vector3.zero;
                             if(isHomeRun) {
@@ -478,6 +483,8 @@ public class Ball_Prefab : MonoBehaviour
         //* Set Dmg & CriticalTextEF
         int dmg = (int)(pl.dmg.Val * critDmgRatio);
         int hitCnt = AtvSkill.ThunderShotHitCnt;
+
+        SM.ins.sfxPlay(SM.SFX.Lightning.ToString());
 
         //* Give Damage
         bm.decreaseBlockHP(hit.transform.gameObject, dmg * hitCnt);
