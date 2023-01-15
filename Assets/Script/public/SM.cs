@@ -16,7 +16,7 @@ public class SM : MonoBehaviour
         //* PLAY
         ExpUp, PlayerLevelUp,
         Swing, SwingHit, 
-        BlockSpawn, HitBlock, DestroyBlock,
+        BlockSpawn, HitBlock, DestroyBlock, Heal,
         GetRewardChest,
         DropBoxSpawn, DropBoxPick, DropBoxCoinPick,
 
@@ -49,6 +49,7 @@ public class SM : MonoBehaviour
     [SerializeField] AudioSource BlockSpawnSFX;
     [SerializeField] AudioSource HitBlockSFX;
     [SerializeField] AudioSource DestroyBlockSFX;
+    [SerializeField] AudioSource HealSFX;
     [SerializeField] AudioSource GetRewardChestSFX;
     [SerializeField] AudioSource DropBoxSpawnSFX;
     [SerializeField] AudioSource DropBoxPickSFX;
@@ -112,6 +113,8 @@ public class SM : MonoBehaviour
             HitBlockSFX.Play();
         else if(name == SFX.DestroyBlock.ToString())
             DestroyBlockSFX.Play();
+        else if(name == SFX.Heal.ToString())
+            HealSFX.Play();
         else if(name == SFX.GetRewardChest.ToString())
             GetRewardChestSFX.Play();
         else if(name == SFX.DropBoxSpawn.ToString())

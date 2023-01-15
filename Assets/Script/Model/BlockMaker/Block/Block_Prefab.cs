@@ -327,6 +327,7 @@ public class Block_Prefab : MonoBehaviour
         }
     }
     public void increaseHp(int heal){
+        SM.ins.sfxPlay(SM.SFX.Heal.ToString());
         Hp += heal;
         em.createHealTxtEF(this.transform.position, heal);
         em.createHeartEF(new Vector3(transform.position.x, transform.position.y+2, transform.position.z));
