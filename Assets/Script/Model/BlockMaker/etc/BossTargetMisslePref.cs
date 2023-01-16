@@ -74,6 +74,7 @@ public class BossTargetMisslePref : MonoBehaviour
 
     void OnCollisionEnter(Collision col){
         if(col.transform.CompareTag(DM.TAG.BossBlock.ToString())){
+            SM.ins.sfxPlay(SM.SFX.BossTargetMissle.ToString());
             int dmg = gm.stage / 10 + 1;
             col.gameObject.GetComponent<BossBlock>().decreaseHp(dmg);
             gm.em.createBossTargetMissileEF(this.transform.position);

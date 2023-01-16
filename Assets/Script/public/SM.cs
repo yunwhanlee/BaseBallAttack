@@ -24,6 +24,7 @@ public class SM : MonoBehaviour
         LaserShoot, FireHit, IceHit, ThunderHit, Explosion, 
         DarkHit, FlashHit, EggPop,
         Stun, Defence,
+        BossTargetMissle, 
     }
 
     static public SM ins;
@@ -75,6 +76,7 @@ public class SM : MonoBehaviour
     [SerializeField] AudioSource EggPopSFX;
     [SerializeField] AudioSource[] StunSFXs;
     [SerializeField] AudioSource DefenceSFX;
+    [SerializeField] AudioSource BossTargetMissleSFX;
     
 
     void Awake() => singleton();
@@ -181,7 +183,8 @@ public class SM : MonoBehaviour
         }
         else if(name == SFX.Defence.ToString())
             DefenceSFX.Play();
-
+        else if(name == SFX.BossTargetMissle.ToString())
+            BossTargetMissleSFX.Play();
 
     }
     private void singleton(){
