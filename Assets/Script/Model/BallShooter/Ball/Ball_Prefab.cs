@@ -55,7 +55,7 @@ public class Ball_Prefab : MonoBehaviour
             if(gm.State == GameManager.STATE.PLAY && pl.DoSwing){
                 SM.ins.sfxPlay(SM.SFX.SwingHit.ToString());
                 gm.switchCamera();
-                pl.DoSwing = false;
+                // pl.DoSwing = false;
                 rigid.useGravity = true;
                 
                 //* (BUG-32) ボールが投げて来ているとき、途中でブロックとぶつかるバグ対応。
@@ -175,17 +175,21 @@ public class Ball_Prefab : MonoBehaviour
                 #endregion
             }
         }
-        else if(col.transform.CompareTag(DM.TAG.ActiveDownWall.ToString())){
-            
-            pl.DoSwing = false;
-            if(gm.State == GameManager.STATE.WAIT){
-                gm.downWallCollider.isTrigger = false;//*下壁 物理O
-                Debug.Log("OnTriggerStay:: DM.TAG.ActiveDownWall col= " + col.name + ", downWallTrigger= " + gm.downWallCollider.isTrigger);
-            }
-        }
         #endregion
     }
-
+//----------------------------------------------------------------
+//*
+//----------------------------------------------------------------
+    void OnTriggerEnter(Collider col) {
+        //* (BUG-33) nextStage()に行く時、時々downWallCollider.isTriggerがfalseのままになるBUG対応。
+        if(pl.DoSwing && col.transform.CompareTag(DM.TAG.ActiveDownWall.ToString())){
+            pl.DoSwing = false;
+            if(gm.State == GameManager.STATE.WAIT){
+                gm.downWallCollider.isTrigger = false;//*下壁 物理適用
+                Debug.Log("OnTriggerStay:: setNextStage:: DM.TAG.ActiveDownWall col= " + col.name + ", downWallTrigger= " + gm.downWallCollider.isTrigger);
+            }
+        }
+    }
 //----------------------------------------------------------------
 //*
 //----------------------------------------------------------------
@@ -440,7 +444,7 @@ public class Ball_Prefab : MonoBehaviour
 
     private void onDestroyMe(bool isStrike = false){
         if(!isStrike){
-            Debug.Log("✓Ball_Prefab:: onDestroyMe:: gm.setNextStage()");
+            Debug.Log("Ball_Prefab:: onDestroyMe:: gm.setNextStage()");
             gm.setNextStage();//* ボールが消えたら次に進む。
         }else{
             gm.setStrike();

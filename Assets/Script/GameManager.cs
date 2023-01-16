@@ -843,6 +843,7 @@ public class GameManager : MonoBehaviour {
         comboCnt = 0;
         bm.DoCreateBlock = true; //* Block 生成
         downWallCollider.isTrigger = true; //* 下壁 物理 無視。
+        Debug.Log($"<color=yellow>setNextStage:: downWallCollider.isTrigger={downWallCollider.isTrigger}</color>");
         bs.IsBallExist = false;
         pl.IsStun = false;
         readyBtn.gameObject.SetActive(true);

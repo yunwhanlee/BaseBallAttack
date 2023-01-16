@@ -372,8 +372,8 @@
     ✓ (BUG-30) Ball_Prefab::CritとかOneKillテキストEFとダメージ普通EFが一緒に発動するバグ対応。
     ✓ (BUG-31) 始めての場合、ダメージが０になるバグ対応。
     ✓ (BUG-32) ボールが投げて来ているとき、途中でブロックとぶつかるバグ対応。
-    -  (BUG-33) onClickCheckBtn::checkAtvSkillItemSelectionIsFirstTime CHARAとBATの場合購入したら出るバグがあるため、caseによって処理を分ける。
-    -  (BUG-34) nextStage()に行く前、ballCountが1になり、downWallCollider.isTriggerがfalseのままになるBUG。
+    ✓ (BUG-33) nextStage()に行く時、時々downWallCollider.isTriggerがfalseのままになるBUG対応。
+    -  (BUG-34) onClickCheckBtn::checkAtvSkillItemSelectionIsFirstTime CHARAとBATの場合購入したら出るバグがあるため、caseによって処理を分ける。
     -  (BUG-35) GAME->HOMEに戻った時、エラー発生。
     
     
