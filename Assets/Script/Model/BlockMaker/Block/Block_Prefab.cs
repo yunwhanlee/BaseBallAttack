@@ -58,11 +58,13 @@ public class SkillProperty{
             BefCnt = Duration;
             //* EXTRA 処理
             if(Name == DM.PSV.FireProperty.ToString()){
+                SM.ins.sfxPlay(SM.SFX.FireHit.ToString());
                 int dmg = (int)((bl.Hp * per < 1)? 1 : bl.Hp * per); //* 10 Percent Damage
                 bl.decreaseHp(dmg);
                 bl.gm.em.createCritTxtEF(bl.transform.position, dmg);
             }
             else if(Name == DM.PSV.IceProperty.ToString()){
+                SM.ins.sfxPlay(SM.SFX.IceHit.ToString());
                 const float RADIUS = 1.2f;
                 int dmg = (int)((bl.Hp * per < 1)? 1 : bl.Hp * per); //* 5 Percent Damage
                 bl.gm.em.createIcePropertyNovaFrostEF(new Vector3(bl.transform.position.x, bl.transform.localPosition.y + 1.3f, bl.transform.position.z));

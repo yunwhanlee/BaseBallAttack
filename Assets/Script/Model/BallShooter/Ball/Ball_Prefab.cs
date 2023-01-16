@@ -159,6 +159,7 @@ public class Ball_Prefab : MonoBehaviour
                 }
                 //* 【 Laser 】
                 for(int i=0; i < pl.laser.Val; i++){  // Debug.Log($"<color=blue>【 Laser 】: {pl.laser.Value}</color>");
+                    SM.ins.sfxPlay(SM.SFX.LaserShoot.ToString());
                     Vector3 start = pl.arrowAxisAnchor.transform.position;
                     Vector3 dir = pl.laser.calcMultiShotDeg2Dir(arrowDeg, i); //* Arrow Direction with Extra Deg
                     em.createLaserEF(start, dir);

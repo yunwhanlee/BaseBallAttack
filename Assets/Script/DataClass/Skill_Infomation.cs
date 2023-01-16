@@ -240,6 +240,7 @@ public class PsvSkill<T> where T: struct {
                     col.transform.GetComponent<Block_Prefab>().Freeze.IsOn = true;
                     break;
                 case DM.PSV.ThunderProperty:
+                    SM.ins.sfxPlay(SM.SFX.ThunderHit.ToString());
                     em.createThunderStrikeEF(col.transform.position);
                     em.createCritTxtEF(col.transform.position, Mathf.RoundToInt(pl.dmg.Val * DMG_TWICE * pl.giantBall.Val));
                     result *= 2;
