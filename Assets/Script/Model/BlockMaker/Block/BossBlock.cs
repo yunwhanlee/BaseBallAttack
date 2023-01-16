@@ -111,9 +111,11 @@ public class BossBlock : Block_Prefab{
             Util._.DebugSphere(playerPos, radius: 1.25f);//* Preview Spot 生成
             gm.em.createAimingEF(playerPos);
             yield return new WaitForSeconds(blessShootTiming);
+            SM.ins.sfxPlay(SM.SFX.BossFireBallShoot.ToString());
 
             setFireBallTrailEFToTargetPos(playerPos);
             yield return new WaitForSeconds(targetReachTime);
+            SM.ins.sfxPlay(SM.SFX.BossFireBallExplosion.ToString());
 
             //* ExplosionEF 生成
             setExplosionEFAndPlayerStun(playerPos, playerStunTime);
@@ -126,9 +128,11 @@ public class BossBlock : Block_Prefab{
             for(int i=0; i<targetPosArr.Length; i++){
                 setAimingEFToTargetPos(i, ref targetPosArr, ref targetPosList, playerPos);
                 yield return new WaitForSeconds(0.5f);
+                SM.ins.sfxPlay(SM.SFX.BossFireBallShoot.ToString());
 
                 setFireBallTrailEFToTargetPos(targetPosArr[i]);
                 yield return new WaitForSeconds(targetReachTime * 0.3f);
+                SM.ins.sfxPlay(SM.SFX.BossFireBallExplosion.ToString());
 
                 //* ExplosionEF 生成
                 setExplosionEFAndPlayerStun(targetPosArr[i], playerStunTime);
@@ -142,7 +146,9 @@ public class BossBlock : Block_Prefab{
             for(int i=0; i<targetPosArr.Length; i++){
                 setAimingEFToTargetPos(i, ref targetPosArr, ref targetPosList, playerPos);
             }
+            SM.ins.sfxPlay(SM.SFX.BossFireBallShoot.ToString());
             yield return new WaitForSeconds(attackAnimTime * 0.6f);
+            SM.ins.sfxPlay(SM.SFX.BossFireBallExplosion.ToString());
 
             //* ExplosionEF 生成
             Array.ForEach(targetPosArr, targetPos => {
@@ -161,8 +167,10 @@ public class BossBlock : Block_Prefab{
                 Vector3[] targetPosArr = new Vector3[shootCnt];
                 for(int i=0; i<targetPosArr.Length; i++){
                     setAimingEFToTargetPos(i, ref targetPosArr, ref targetPosList, playerPos);
+                    SM.ins.sfxPlay(SM.SFX.BossFireBallShoot.ToString());
                 }
                 yield return new WaitForSeconds(attackAnimTime * 0.45f);
+                SM.ins.sfxPlay(SM.SFX.BossFireBallExplosion.ToString());
 
                 //* Attackが終わるまで空に泊まるアニメーション繰り返す。
                 if(k % 3 == 0) this.anim.SetTrigger(DM.ANIM.Attack.ToString());

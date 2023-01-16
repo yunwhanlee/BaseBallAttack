@@ -25,6 +25,8 @@ public class SM : MonoBehaviour
         DarkHit, FlashHit, EggPop,
         Stun, Defence,
         BossTargetMissle, 
+        BossFireBallShoot, BossFireBallExplosion, BossFly, BossRoar,
+        // ObstacleSpawn, 
     }
 
     static public SM ins;
@@ -77,6 +79,10 @@ public class SM : MonoBehaviour
     [SerializeField] AudioSource[] StunSFXs;
     [SerializeField] AudioSource DefenceSFX;
     [SerializeField] AudioSource BossTargetMissleSFX;
+    [SerializeField] AudioSource BossFireBallShootSFX;
+    [SerializeField] AudioSource BossFireBallExplosionSFX;
+    [SerializeField] AudioSource BossFlySFX;
+    [SerializeField] AudioSource BossRoarSFX;
     
 
     void Awake() => singleton();
@@ -185,6 +191,14 @@ public class SM : MonoBehaviour
             DefenceSFX.Play();
         else if(name == SFX.BossTargetMissle.ToString())
             BossTargetMissleSFX.Play();
+        else if(name == SFX.BossFireBallShoot.ToString())
+            BossFireBallShootSFX.Play();
+        else if(name == SFX.BossFireBallExplosion.ToString())
+            BossFireBallExplosionSFX.Play();
+        else if(name == SFX.BossFly.ToString())
+            BossFlySFX.Play();
+        else if(name == SFX.BossRoar.ToString())
+            BossRoarSFX.Play();
 
     }
     private void singleton(){
