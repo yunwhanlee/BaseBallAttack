@@ -95,6 +95,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     }
 
     public void OnDrag(PointerEventData eventData){
+        Debug.Log($"OnDrag:: gm.IsPlayingAnim= {gm.IsPlayingAnim}, gm.IsStun= {pl.IsStun}");
         if(gm.State != GameManager.STATE.WAIT) return;
         if(gm.IsPlayingAnim) return;
         if(pl.IsStun) return;

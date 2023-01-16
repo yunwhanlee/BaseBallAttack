@@ -176,9 +176,11 @@ public class Ball_Prefab : MonoBehaviour
             }
         }
         else if(col.transform.CompareTag(DM.TAG.ActiveDownWall.ToString())){
+            
             pl.DoSwing = false;
             if(gm.State == GameManager.STATE.WAIT){
                 gm.downWallCollider.isTrigger = false;//*下壁 物理O
+                Debug.Log("OnTriggerStay:: DM.TAG.ActiveDownWall col= " + col.name + ", downWallTrigger= " + gm.downWallCollider.isTrigger);
             }
         }
         #endregion

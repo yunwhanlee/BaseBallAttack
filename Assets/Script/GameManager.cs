@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
     public enum STATE {PLAY, WAIT, GAMEOVER, PAUSE, CONTINUE, HOME, NULL};
     [SerializeField] private STATE state;     public STATE State {get => state; set => state = value;}
     [SerializeField] private DM.MODE mode;       public DM.MODE Mode {get => mode; set => mode = value;}
+    public float timelineNum;
     
     [Header("GROUP")][Header("__________________________")]
     public Transform effectGroup;
@@ -179,6 +180,7 @@ public class GameManager : MonoBehaviour {
     public GameObject skySunObj;
     public GameObject skyMoonObj;
 
+
     void Start() {
         // Util._.calcArithmeticProgressionList(start: 100, max: 50, d: 100, gradualUpValue: 0.1f);
 
@@ -251,6 +253,8 @@ public class GameManager : MonoBehaviour {
     }
 
     void Update(){
+        // Time.timeScale = timelineNum;
+
         BossBlock boss = bm.getBoss();
 
         //* GUI *//
@@ -830,13 +834,15 @@ public class GameManager : MonoBehaviour {
 
         State = GameManager.STATE.WAIT;
         BossBlock boss = bm.getBoss();
+
+        //* (BUG-34) nextStage()に行く前、ballCountが1になり、downWallCollider.isTriggerがfalseのままになるBUG。
         Debug.Log($"<color=white>setNextStage:: ballCnt={ballGroup.childCount}</color>");
 
         //* Set
         ++stage;
         comboCnt = 0;
         bm.DoCreateBlock = true; //* Block 生成
-        downWallCollider.isTrigger = true; //* 下壁 物理 
+        downWallCollider.isTrigger = true; //* 下壁 物理 無視。
         bs.IsBallExist = false;
         pl.IsStun = false;
         readyBtn.gameObject.SetActive(true);
