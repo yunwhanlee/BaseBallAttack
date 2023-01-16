@@ -225,10 +225,12 @@ public class PsvSkill<T> where T: struct {
                 Name.ToString(), rand, percent, ((rand <= percent)? "<color=blue>true</color>" : "false"));
             switch(psv){
                 case DM.PSV.InstantKill: 
+                    SM.ins.sfxPlay(SM.SFX.InstantKill.ToString());
                     em.createInstantKillTextEF(col.transform.position);
                     result = PsvSkill<int>.ONE_KILL_DMG;
                     return true;
-                case DM.PSV.Critical: 
+                case DM.PSV.Critical:
+                    SM.ins.sfxPlay(SM.SFX.Critical.ToString());
                     int dmg = (int)(pl.dmg.Val * (2 + pl.criticalDamage.Val) * DMG_TWICE * pl.giantBall.Val);
                     em.createCritTxtEF(col.transform.position, dmg);
                     result = dmg;

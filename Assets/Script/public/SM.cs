@@ -18,7 +18,8 @@ public class SM : MonoBehaviour
         Swing, SwingHit, 
         BlockSpawn, HitBlock, DestroyBlock, Heal,
         GetRewardChest,
-        DropBoxSpawn, DropBoxPick, DropBoxCoinPick,
+        DropBoxSpawn, DropBoxPick, DropBoxCoinPick, 
+        InstantKill, Critical,
         Lightning, FireBallExplosion, ColorBallPop, PoisonExplosion, IceExplosion,
         LaserShoot, FireHit, IceHit, ThunderHit, Explosion, 
         DarkHit, FlashHit, EggPop,
@@ -56,6 +57,8 @@ public class SM : MonoBehaviour
     [SerializeField] AudioSource DropBoxSpawnSFX;
     [SerializeField] AudioSource DropBoxPickSFX;
     [SerializeField] AudioSource DropBoxCoinPickSFX;
+    [SerializeField] AudioSource InstantKillSFX;
+    [SerializeField] AudioSource CriticalSFX;
     [SerializeField] AudioSource LightningSFX;
     [SerializeField] AudioSource FireBallExplosionSFX;
     [SerializeField] AudioSource ColorBallPopSFX;
@@ -139,6 +142,10 @@ public class SM : MonoBehaviour
             DropBoxPickSFX.Play();
         else if(name == SFX.DropBoxCoinPick.ToString())
             DropBoxCoinPickSFX.Play();
+        else if(name == SFX.InstantKill.ToString())
+            InstantKillSFX.Play();
+        else if(name == SFX.Critical.ToString())
+            CriticalSFX.Play();
         else if(name == SFX.Lightning.ToString())
             LightningSFX.Play();
         else if(name == SFX.FireBallExplosion.ToString())
