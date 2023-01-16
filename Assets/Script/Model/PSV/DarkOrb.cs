@@ -24,6 +24,7 @@ public class DarkOrb : MonoBehaviour
             var block = col.GetComponent<Block_Prefab>();
             int dmg = pl.dmg.Val;
             Debug.Log($"DarkOrb::OnTriggerEnter:: HIT->{block}");
+            SM.ins.sfxPlay(SM.SFX.DarkHit.ToString());
             em.createDarkOrbHitEF(col.transform.position);
             bm.decreaseBlockHP(col.gameObject, dmg);
         }

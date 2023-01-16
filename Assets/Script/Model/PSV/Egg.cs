@@ -20,6 +20,7 @@ public class Egg : MonoBehaviour
         if(col.transform.name.Contains(DM.NAME.Block.ToString())){
             Debug.Log("EGG POP!");
             //* Explosion
+            SM.ins.sfxPlay(SM.SFX.EggPop.ToString());
             em.createEggPopEF(this.transform.position);
             Util._.sphereCastAllDecreaseBlocksHp(this.transform, explosionRange, pl.dmg.Val * 3);
 

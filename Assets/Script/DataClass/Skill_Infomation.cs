@@ -246,6 +246,7 @@ public class PsvSkill<T> where T: struct {
                     result *= 2;
                     break;
                 case DM.PSV.Explosion:
+                    SM.ins.sfxPlay(SM.SFX.Explosion.ToString());
                     em.createExplosionEF(ballPref.transform.position, pl.explosion.Val.range);
                     return true;
             }

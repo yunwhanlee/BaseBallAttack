@@ -300,6 +300,7 @@ public class Ball_Prefab : MonoBehaviour
                     Util._.DebugSphere(this.transform.position, radius, 1, "blue");
 
                     //* Explosion
+                    SM.ins.sfxPlay(SM.SFX.FlashHit.ToString());
                     em.createGodBlessEF(this.transform.position);
                     Util._.sphereCastAllDecreaseBlocksHp(this.transform, radius, pl.dmg.Val * 3);
                 }
