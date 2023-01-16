@@ -212,6 +212,7 @@ public class BossBlock : Block_Prefab{
             var defencePer = DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.Defence].getValue();
             if(gm.pl.IsBarrier || rand <= defencePer) {
                 Debug.Log($"<color=blue>DEFENCE! gm.pl.IsBarrier= {gm.pl.IsBarrier} OR rand={rand} < defencePer={defencePer} </color>");
+                SM.ins.sfxPlay(SM.SFX.Defence.ToString());
                 gm.pl.IsBarrier = false;
 
                 //* Get Barrier Object
@@ -223,6 +224,7 @@ public class BossBlock : Block_Prefab{
             }
             gm.pl.IsStun = true;
             //* Stun EF
+            SM.ins.sfxPlay(SM.SFX.Stun.ToString());
             gm.em.createStunEF(gm.pl.modelMovingTf.position, playerStunTime);
             gm.pl.anim.SetBool(DM.ANIM.IsIdle.ToString(), true);
         }

@@ -23,6 +23,7 @@ public class SM : MonoBehaviour
         Lightning, FireBallExplosion, ColorBallPop, PoisonExplosion, IceExplosion,
         LaserShoot, FireHit, IceHit, ThunderHit, Explosion, 
         DarkHit, FlashHit, EggPop,
+        Stun, Defence,
     }
 
     static public SM ins;
@@ -72,6 +73,8 @@ public class SM : MonoBehaviour
     [SerializeField] AudioSource DarkHitSFX;
     [SerializeField] AudioSource FlashHitSFX;
     [SerializeField] AudioSource EggPopSFX;
+    [SerializeField] AudioSource[] StunSFXs;
+    [SerializeField] AudioSource DefenceSFX;
     
 
     void Awake() => singleton();
@@ -172,6 +175,13 @@ public class SM : MonoBehaviour
             FlashHitSFX.Play();
         else if(name == SFX.EggPop.ToString())
             EggPopSFX.Play();
+        else if(name == SFX.Stun.ToString()){
+            StunSFXs[0].Play();
+            StunSFXs[1].Play();
+        }
+        else if(name == SFX.Defence.ToString())
+            DefenceSFX.Play();
+
 
     }
     private void singleton(){
