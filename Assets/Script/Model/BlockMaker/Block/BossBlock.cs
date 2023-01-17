@@ -54,12 +54,12 @@ public class BossBlock : Block_Prefab{
         switch(bossLevel){
             case 1:
                 if(randPer <= 0){createObstacleSingleType(4);}
-                else if(randPer <= 8){StartCoroutine(coBossHeal());}
+                else if(randPer <= 5){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack(BOSSATK_ANIM_NAME_LV1));
                 break;
             case 2:
                 if(randPer <= 0 && obstacleResetCnt == 0){createObstaclePatternType(0, 2);}
-                else if(randPer <= 1){StartCoroutine(coBossHeal());}
+                else if(randPer <= 5){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack(BOSSATK_ANIM_NAME_LV2));
                 break;
             case 3:
