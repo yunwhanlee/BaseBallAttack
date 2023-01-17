@@ -25,8 +25,9 @@ public class SM : MonoBehaviour
         DarkHit, FlashHit, EggPop,
         Stun, Defence,
         BossTargetMissle, 
-        BossFireBallShoot, BossFireBallExplosion, BossFly, BossRoar,
-        // ObstacleSpawn, 
+        BossFireBallShoot, BossFireBallExplosion, BossFly, BossDie, BossHealSpell,
+        BossScream1, BossScream2, BossScream3, BossScream4, 
+        ObstacleSpawn, 
     }
 
     static public SM ins;
@@ -82,8 +83,13 @@ public class SM : MonoBehaviour
     [SerializeField] AudioSource BossFireBallShootSFX;
     [SerializeField] AudioSource BossFireBallExplosionSFX;
     [SerializeField] AudioSource BossFlySFX;
-    [SerializeField] AudioSource BossRoarSFX;
-    
+    [SerializeField] AudioSource BossDieSFX;
+    [SerializeField] AudioSource BossHealSpellSFX;
+    [SerializeField] AudioSource BossScream1SFX;
+    [SerializeField] AudioSource BossScream2SFX;
+    [SerializeField] AudioSource BossScream3SFX;
+    [SerializeField] AudioSource BossScream4SFX;
+    [SerializeField] AudioSource ObstacleSpawnSFX;
 
     void Awake() => singleton();
 
@@ -197,9 +203,25 @@ public class SM : MonoBehaviour
             BossFireBallExplosionSFX.Play();
         else if(name == SFX.BossFly.ToString())
             BossFlySFX.Play();
-        else if(name == SFX.BossRoar.ToString())
-            BossRoarSFX.Play();
-
+        else if(name == SFX.BossDie.ToString())
+            BossDieSFX.Play();
+        else if(name == SFX.BossHealSpell.ToString())
+            BossHealSpellSFX.Play();
+        else if(name == SFX.BossScream1.ToString())
+            BossScream1SFX.Play();
+        else if(name == SFX.BossScream2.ToString())
+            BossScream2SFX.Play();
+        else if(name == SFX.BossScream3.ToString())
+            BossScream3SFX.Play();
+        else if(name == SFX.BossScream4.ToString())
+            BossScream4SFX.Play();
+        else if(name == SFX.ObstacleSpawn.ToString())
+            ObstacleSpawnSFX.Play();
+    }
+    public void sfxStop(string name){
+        Debug.Log($"sfxStop:: name= {name}");
+        if(name == SFX.BossFly.ToString())
+            BossFlySFX.Stop();
     }
     private void singleton(){
         if(ins == null) {

@@ -294,12 +294,23 @@
                     ✓ AtvSkill
                     ✓ Block
                     ✓ Hit Ball
-                    - PsvSkill
+                    ✓ PsvSkill
+                    ✓ Boss
+                        ✓ Scream(4Type)
+                        ✓ Fly
+                        ✓ Die
+                        ✓ Heal Spell
+                        ✓ ObstacleSpawn
+                        ✓ FireBallAttack
+                    - ExpOrbが出る時、バーブルような音入れる。
 
         - スマホ対応。
         - 最適化。
+        - ボースファイヤーボールEF修正。
+        - ボースが攻撃を受ける時、SwitchCam１に戻す。
+        - 
 `
-        - スキルもアップグレードできるように。
+        ✓ スキルもアップグレードできるように。
             ✓ Set Atv Skill Value Txt
             ✓ AtvSkillUpgradeList クラス作成。(PersonalDataへ保存・登録)
             ✓ スキルアップグレードデータ 初期化。
@@ -373,8 +384,9 @@
     ✓ (BUG-31) 始めての場合、ダメージが０になるバグ対応。
     ✓ (BUG-32) ボールが投げて来ているとき、途中でブロックとぶつかるバグ対応。
     ✓ (BUG-33) nextStage()に行く時、時々downWallCollider.isTriggerがfalseのままになるBUG対応。
-    -  (BUG-34) onClickCheckBtn::checkAtvSkillItemSelectionIsFirstTime CHARAとBATの場合購入したら出るバグがあるため、caseによって処理を分ける。
-    -  (BUG-35) GAME->HOMEに戻った時、エラー発生。
+    -  (BUG-34) ステージが終わっても、Expオブや次に進まないＢＵＧ
+    -  (BUG-35) onClickCheckBtn::checkAtvSkillItemSelectionIsFirstTime CHARAとBATの場合購入したら出るバグがあるため、caseによって処理を分ける。
+    -  (BUG-36) GAME->HOMEに戻った時、エラー発生。
     
     
     

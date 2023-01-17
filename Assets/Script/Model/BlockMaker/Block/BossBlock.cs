@@ -40,19 +40,21 @@ public class BossBlock : Block_Prefab{
         gm.bossLimitCnt = LM._.BOSS_LIMIT_SPAN;
         gm.bossLimitCntTxt.gameObject.SetActive(true);
         bossDieOrbSpawnTf = GameObject.Find(DM.NAME.BossDieDropOrbSpot.ToString()).transform;
-        activeBossSkill();
+        activeBossSkill(isFirst: true);
     }
 
-    public void activeBossSkill(){ //* at NextStage
+    public void activeBossSkill(bool isFirst = false){ //* at NextStage
+        float delay = isFirst? 0.45f : 0.1f;
+        StartCoroutine(coBossScreamSFX(delay));
         this.anim.SetTrigger(DM.ANIM.Scream.ToString());
         
         var randPer = Random.Range(0, 10);
         if(obstacleResetCnt == 0) randPer = 0;
-        Debug.Log($"<color=yellow>BossBlock::activeBossSkill():: bossLevel= {bossLevel}, randPer= {randPer}, obstacleResetCnt= {obstacleResetCnt} / {OBSTACLE_RESET_SPAN}</color>");
+        Debug.Log($"<color=yellow>BossBlock::activeBossSkill():: isFirst= {isFirst}, bossLevel= {bossLevel}, randPer= {randPer}, obstacleResetCnt= {obstacleResetCnt} / {OBSTACLE_RESET_SPAN}</color>");
         switch(bossLevel){
             case 1:
                 if(randPer <= 0){createObstacleSingleType(4);}
-                else if(randPer <= 1){StartCoroutine(coBossHeal());}
+                else if(randPer <= 8){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack(BOSSATK_ANIM_NAME_LV1));
                 break;
             case 2:
@@ -79,6 +81,29 @@ public class BossBlock : Block_Prefab{
             obstaclePosList = new List<Vector3>{};
             if(gm.obstacleGroup.childCount > 0) eraseObstacle();
         }
+    }
+
+    IEnumerator coBossScreamSFX(float delay){
+        switch(bossLevel){
+            case 1:
+                yield return new WaitForSeconds(delay);
+                SM.ins.sfxPlay(SM.SFX.BossScream1.ToString());
+                break;
+            case 2:
+                yield return new WaitForSeconds(1 + delay);
+                SM.ins.sfxPlay(SM.SFX.BossScream2.ToString());
+                break;
+            case 3:
+                yield return new WaitForSeconds(0.5f + delay);
+                SM.ins.sfxPlay(SM.SFX.BossScream3.ToString());
+                break;
+            case 4:
+                yield return new WaitForSeconds(1 + delay);
+                SM.ins.sfxPlay(SM.SFX.BossScream4.ToString());
+                break;
+        }
+
+
     }
 
     IEnumerator coBossAttack(string attackAnimName){
@@ -241,6 +266,7 @@ public class BossBlock : Block_Prefab{
     IEnumerator coBossHeal(){
         Debug.Log("BossBlock::coBossHeal()");
         yield return new WaitForSeconds(1);
+        SM.ins.sfxPlay(SM.SFX.BossHealSpell.ToString());
         gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
         gm.em.createBossHealSkillEF(bossDieOrbSpawnTf.position);
         yield return new WaitForSeconds(1);
@@ -254,21 +280,26 @@ public class BossBlock : Block_Prefab{
     public void setBossComponent(bool trigger){
         boxCollider.enabled = !trigger;
         anim.SetBool(DM.ANIM.IsFly.ToString(), trigger);
+        if(trigger)
+            SM.ins.sfxPlay(SM.SFX.BossFly.ToString());
+        else
+            SM.ins.sfxStop(SM.SFX.BossFly.ToString());
     }
 
     public new void decreaseHp(int dmg) {
         int extraBossDmg = Mathf.RoundToInt(dmg * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.BossDamage].getValue());
         Debug.Log($"BossBlock::decreaseHp(dmg={dmg} + extraBossDmg={extraBossDmg})::");
         base.decreaseHp(dmg + extraBossDmg);
-        anim.SetTrigger(DM.ANIM.GetHit.ToString());
+        // anim.SetTrigger(DM.ANIM.GetHit.ToString());
     }
 
     public override void onDestroy(GameObject target, bool isInitialize = false) {
         Debug.Log($"BossBlock:: onDestroy():: target= {target}, Contains Boss1 = {name.Contains("Boss1")}");
-
         //* Achivement
         AcvBosskillCollection.collectBossKill(this.name);
-        
+        //* Boss Die        
+        SM.ins.sfxStop(SM.SFX.BossFly.ToString());
+        SM.ins.sfxPlay(SM.SFX.BossDie.ToString());
         StartCoroutine(coPlayBossDieAnim(target));
     }
 
@@ -294,18 +325,24 @@ public class BossBlock : Block_Prefab{
 
 
     //* Skill #1
+    IEnumerator coObstacleSpawnSFX(int cnt){
+        yield return new WaitForSeconds(0.75f);
+        SM.ins.sfxPlay(SM.SFX.ObstacleSpawn.ToString());
+    }
     private void createObstacleSingleType(int maxCnt){
         //* OBSTACLE LIST 準備
         var obstaclePosList = getObstaclePosList();
         Debug.Log($"BossBlock::createObstacleSingleType:: maxCnt= {maxCnt}, obstaclePosList= {obstaclePosList.Count}");
         if(maxCnt > obstaclePosList.Count)
             maxCnt = obstaclePosList.Count;
+        StartCoroutine(coObstacleSpawnSFX(obstaclePosList.Count));
         singleRandom(Random.Range(1, maxCnt));
     }
     private void createObstaclePatternType(int minIndex, int maxIndex){
         Debug.Log($"BossBlock::createObstacleStoneSkillPatternType()");
         //* OBSTACLE LIST 準備
         var obstaclePosList = getObstaclePosList();
+        StartCoroutine(coObstacleSpawnSFX(obstaclePosList.Count));
         int rand = Random.Range(minIndex, maxIndex);
         switch(rand){
             case 0: patternColEven();       break;
