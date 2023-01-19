@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ThunderGizmos : ActiveSkillGizmos
 {
+#if UNITY_EDITOR
     protected override void OnDrawGizmos(){//* ThunderShot Skill Range Preview
         if(!isGizmosOn) return;
         Gizmos.color = Color.yellow;
@@ -13,4 +14,5 @@ public class ThunderGizmos : ActiveSkillGizmos
             new Vector3(width * offset, width * offset, 20)
         );
     }
+#endif
 }

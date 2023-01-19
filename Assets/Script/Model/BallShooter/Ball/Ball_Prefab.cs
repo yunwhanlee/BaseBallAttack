@@ -298,7 +298,7 @@ public class Ball_Prefab : MonoBehaviour
                 if(gm.comboCnt != 0 && gm.comboCnt % LM._.GODBLESS_COMBO_SPAN == 0){
                     Debug.Log("GOD BLESS YOU!");
                     float radius = 4;
-                    Util._.DebugSphere(this.transform.position, radius, 1, "blue");
+                    Util._.DebugSphere(this.transform.position, radius, 0.5f, "blue");
 
                     //* Explosion
                     SM.ins.sfxPlay(SM.SFX.FlashHit.ToString());
@@ -509,6 +509,7 @@ public class Ball_Prefab : MonoBehaviour
         }
     }
 
+#if UNITY_EDITOR
     void OnDrawGizmos(){
         //* Explosion Skill Range Preview
         // Gizmos.color = Color.yellow;
@@ -520,4 +521,5 @@ public class Ball_Prefab : MonoBehaviour
         // Gizmos.color = Color.red;
         // Gizmos.DrawWireSphere(this.transform.position, pl.FireBallCastWidth);
     }
+#endif
 }

@@ -35,8 +35,9 @@ public class ActiveSkillGizmos : MonoBehaviour
             col.GetComponent<Block_Prefab>().setEnabledSpriteGlowEF(false);
         }
     }
-
+#if UNITY_EDITOR
     protected virtual void OnDrawGizmos(){
         //? 子クラスで、再定義。
     }
+#endif
 }

@@ -27,8 +27,10 @@ public class Egg : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+#if UNITY_EDITOR
     void OnDrawGizmos(){
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(this.transform.position, explosionRange);
     }
+#endif
 }

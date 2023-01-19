@@ -30,7 +30,9 @@ public class HealBlock : Block_Prefab
         }
     }
     //-----------------------------------------------------------------
+#if UNITY_EDITOR
     void OnDrawGizmos(){
         Gizmos.DrawWireSphere(this.transform.position, HealRadius);
     }
+#endif
 }

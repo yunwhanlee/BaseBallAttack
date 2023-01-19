@@ -429,6 +429,7 @@ public class Block_Prefab : MonoBehaviour
     }
 
     //-------------------------------------------------------------
+#if UNITY_EDITOR
     void OnDrawGizmos(){
         //* Type
         if(type == BlockType.BOMB){
@@ -437,4 +438,5 @@ public class Block_Prefab : MonoBehaviour
             Gizmos.DrawWireCube(this.transform.position, itemBlockBombBoxSizeVec);
         }
     }
+#endif
 }
