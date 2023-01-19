@@ -198,33 +198,14 @@ public class DM : MonoBehaviour
     }
 
     public bool reqShowAD(){//string type, GameManager gm){
+        //* 広告なしか確認。
+        if(personalData.IsRemoveAD) return true;
+        
         bool success = false; //Test True
         Debug.Log($"<color=red>reqShowAD</color>:: success= " + success);
+        //* 広告見る。
         //TODO IN Show AD Process
         return success;
-        // Debug.Log("<color=yellow> reqShowAD(" + type.ToString() + ")</color>");
-        // if(type == DM.REWARD.CoinX2.ToString()){
-        //     gm.coinTxt.text = (int.Parse(gm.coinTxt.text) * 2).ToString();
-        //     gm.coinX2Btn.gameObject.SetActive(false);
-        // }
-        // else if(type == DM.REWARD.RerotateSkillSlots.ToString()){
-        //     gm.levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
-        //     gm.showAdDialog.gameObject.SetActive(false);
-        // }
-        // else if(type == DM.REWARD.Revive.ToString()){
-        //     gm.State = GameManager.STATE.WAIT;
-        //     gm.gameoverPanel.SetActive(false);
-        //     gm.bm.Start();
-        //     BossBlock boss = gm.bm.getBoss();
-        //     if(boss) gm.bossLimitCnt = LM._.BOSS_LIMIT_SPAN;
-        //     gm.setActiveCam(false); // cam1 ON, cam2 OFF
-
-        //     gm.reviveBtn.gameObject.SetActive(false);
-        // }
-        // else{
-        //     return false;
-        // }
-
     }
     public bool reqAppPayment(){
         bool success = true; //Test True

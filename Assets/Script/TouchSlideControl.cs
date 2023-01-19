@@ -41,7 +41,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     }
     
     //*Event
-        public void OnPointerDown(PointerEventData eventData){
+    public void OnPointerDown(PointerEventData eventData){
         if(gm.State != GameManager.STATE.WAIT) return;
         if(gm.bs.IsBallExist) return;
         if(gm.IsPlayingAnim) return;
@@ -51,6 +51,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         }
 
         Debug.Log("OnPointerDown::");
+        
 
         pad.position = eventData.position;
         pad.gameObject.SetActive(true);
@@ -132,6 +133,8 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
             backOriginPlayerMeshRdr();
             return;
         }
+
+        // SM.ins.sfxPlay(SM.SFX.PlayerPointerUp.ToString());
 
         //* ボタンUI 活性化。
         if(gm.ballGroup.childCount == 0){ //* (BUG)ただし、ボールが存在する場合はしない。

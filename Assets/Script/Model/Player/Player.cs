@@ -248,6 +248,7 @@ public class Player : MonoBehaviour
                 break;
             case "ActiveSkillBefSpotLight":
             case "Touch":
+                SM.ins.sfxPlay(SM.SFX.PlayerPointerUp.ToString());
                 anim.updateMode  = AnimatorUpdateMode.UnscaledTime;
                 break;
         }

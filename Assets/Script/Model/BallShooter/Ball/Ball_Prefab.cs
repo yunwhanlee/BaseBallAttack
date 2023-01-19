@@ -183,6 +183,7 @@ public class Ball_Prefab : MonoBehaviour
 //----------------------------------------------------------------
     void OnTriggerEnter(Collider col) {
         //* (BUG-33) nextStage()に行く時、時々downWallCollider.isTriggerがfalseのままになるBUG対応。
+        Debug.Log("Ball::OnTriggerEnter:: pl.DoSwing= " + pl.DoSwing + ", col.transform.tag= " + col.transform.tag);
         if(pl.DoSwing && col.transform.CompareTag(DM.TAG.ActiveDownWall.ToString())){
             pl.DoSwing = false;
             if(gm.State == GameManager.STATE.WAIT){

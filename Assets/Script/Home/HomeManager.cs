@@ -316,14 +316,6 @@ public class HomeManager : MonoBehaviour
         DM.ins.openAppStore();
     }
     public void onClickShowADButton(){
-        //* 広告なし
-        //TODO このままでは、ルーレットを無限に使えるので、一日制限数設定。
-        if(DM.ins.personalData.IsRemoveAD){
-            DM.ins.personalData.RouletteTicket++;
-            showRoulettePanel();
-            return;
-        }
-
         //* 広告要請
         bool success = DM.ins.reqShowAD();
         if(success){

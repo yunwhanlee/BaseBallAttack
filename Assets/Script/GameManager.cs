@@ -522,18 +522,13 @@ public class GameManager : MonoBehaviour {
     public void onClickShowADButton(string rewardType){
         Debug.Log("<color=yellow> onClickShowADButton(" + rewardType.ToString() + ")</color>");
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
-        //* 広告なし
-        if(DM.ins.personalData.IsRemoveAD){
-            setShowADReward(rewardType);
-            return;
-        }
-
-        //* 広告要請
+        //* 広告
         bool success = DM.ins.reqShowAD();
         if(success){
             setShowADReward(rewardType);
         }
         else{
+            SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
             Util._.displayNoticeMsgDialog("ERROR！");
         }
     }
@@ -555,10 +550,13 @@ public class GameManager : MonoBehaviour {
         //* ダイアログ閉じる
         showAdDialog.gameObject.SetActive(false); 
     }
+
     private void setRerotateSkillSlots(){
-        rerotateSkillSlotsBtn.gameObject.SetActive(false);
+        Debug.Log("setRerotateSkillSlots::");
         levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
+        rerotateSkillSlotsBtn.gameObject.SetActive(false);
     }
+
     private void setRevive(){
         State = GameManager.STATE.WAIT;
         gameoverPanel.SetActive(false);
@@ -571,6 +569,7 @@ public class GameManager : MonoBehaviour {
         em.activeUI_EF("Revive");
         bm.Start();
     }
+
     private void setCoinX2(){
         gvCoinTxt.text = (int.Parse(gvCoinTxt.text) * 2).ToString();
         coinX2Btn.gameObject.SetActive(false);

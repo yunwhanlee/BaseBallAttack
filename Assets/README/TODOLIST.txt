@@ -310,8 +310,7 @@
         - 最適化。
         ✓ ボースファイヤーボール & Heal EF修正。
         - ボースが攻撃を受ける時、SwitchCam１に戻す。
-        - 
-`
+
         ✓ スキルもアップグレードできるように。
             ✓ Set Atv Skill Value Txt
             ✓ AtvSkillUpgradeList クラス作成。(PersonalDataへ保存・登録)
@@ -319,9 +318,6 @@
             ✓ LV表示
             ✓ ダメージ設定(初期化)。
             ✓ 他のスキルが選択されていないときは、✓表示する。選択されたら値段表示する。-> checkAtvSkillItemSelectionIsFirstTime
-
-
-
 
 [BUG]
     ✓ Ballが壁にぶつかってから、反射角が摩擦力で少しずつ減る。

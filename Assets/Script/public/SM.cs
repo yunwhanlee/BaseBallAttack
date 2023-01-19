@@ -31,10 +31,8 @@ public class SM : MonoBehaviour
         BossTargetMissle, 
         BossFireBallShoot, BossFireBallExplosion, BossFly, BossDie, BossHealSpell,
         BossScream1, BossScream2, BossScream3, BossScream4, 
-        ObstacleSpawn, 
+        ObstacleSpawn, PlayerPointerUp
     }
-
-
 
     [Header("UI")][Header("__________________________")]
     [SerializeField] AudioSource BtnClickSFX;
@@ -96,6 +94,7 @@ public class SM : MonoBehaviour
     [SerializeField] AudioSource BossScream3SFX;
     [SerializeField] AudioSource BossScream4SFX;
     [SerializeField] AudioSource ObstacleSpawnSFX;
+    [SerializeField] AudioSource PlayerPointerUpSFX;
 
     void Awake() => singleton();
 
@@ -228,6 +227,8 @@ public class SM : MonoBehaviour
             BossScream4SFX.Play();
         else if(name == SFX.ObstacleSpawn.ToString())
             ObstacleSpawnSFX.Play();
+        else if(name == SFX.PlayerPointerUp.ToString())
+            PlayerPointerUpSFX.Play();
     }
     public void sfxStop(string name){
         Debug.Log($"sfxStop:: name= {name}");
