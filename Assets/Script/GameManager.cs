@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private STATE state;     public STATE State {get => state; set => state = value;}
     [SerializeField] private DM.MODE mode;       public DM.MODE Mode {get => mode; set => mode = value;}
     public float timelineNum;
+    public Animator postProcessAnim;
     
     [Header("GROUP")][Header("__________________________")]
     public Transform effectGroup;
