@@ -2616,7 +2616,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 33698bd235bd60945b3787277873f1d6, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 169a3aac8cfa87f4c92562db23b243d7, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -21250,6 +21250,7 @@ MonoBehaviour:
   CountDownSFX: {fileID: 489959666}
   CountDownShootSFX: {fileID: 1234873444}
   CountDownStrikeSFX: {fileID: 126190170}
+  EquipItemSFX: {fileID: 0}
   ExpUpSFX: {fileID: 271642681}
   PlayerLevelUpSFX: {fileID: 53925448}
   SwingSFX: {fileID: 967986182}

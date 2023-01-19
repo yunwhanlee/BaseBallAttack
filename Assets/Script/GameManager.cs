@@ -307,7 +307,7 @@ public class GameManager : MonoBehaviour {
         DM.ins.displayTutorialUI();
         openTutorialDialog.gameObject.SetActive(false);
     }
-    public void onClickSkipTutorialNextTimeToggle() { DM.ins.personalData.IsSkipTutorial = skipTutorialToggle.isOn; SM.ins.sfxPlay(SM.SFX.BtnClick.ToString()); }
+    public void onClickSkipTutorialNextTimeToggle() {DM.ins.personalData.IsSkipTutorial = skipTutorialToggle.isOn; SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());}
     public void onClickRewardChestOpenButton() {
         Debug.Log("onClickRewardChestOpenButton()::");
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());

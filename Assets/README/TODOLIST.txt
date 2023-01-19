@@ -290,7 +290,7 @@
             ✓ HOME
             - GAME
                 ✓ UI-Sound
-                - PLAY-Sound
+                ✓ PLAY-Sound
                     ✓ AtvSkill
                     ✓ Block
                     ✓ Hit Ball
@@ -302,7 +302,9 @@
                         ✓ Heal Spell
                         ✓ ObstacleSpawn
                         ✓ FireBallAttack
-                    - ExpOrbが出る時、バーブルような音入れる。
+                ✓ LASERはHOMERUNした時には、DELAYする。
+                ✓ HOME::UI::CheckBtnクリック音登録。
+                ✓ バットを振る時、連続でタッチしても音が重ならないようにする。
 
         - スマホ対応。
         - 最適化。

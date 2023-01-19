@@ -6,6 +6,9 @@ using Random = UnityEngine.Random;
 
 public class SM : MonoBehaviour
 {
+    static public SM ins;
+    const float HOMERUN_ANIM_TIME = 2.0f;
+    bool isSwingSFXPlaying;
     public enum SFX {
         //* UI
         BtnClick, PlayBtn,
@@ -13,6 +16,7 @@ public class SM : MonoBehaviour
         Warning, LevelUpPanel, Victory, Defeat, Revive, 
         HomeRun, HomeRunCameraAnim,
         CountDown, CountDownShoot, CountDownStrike,
+
         //* PLAY
         ExpUp, PlayerLevelUp,
         Swing, SwingHit, 
@@ -30,7 +34,8 @@ public class SM : MonoBehaviour
         ObstacleSpawn, 
     }
 
-    static public SM ins;
+
+
     [Header("UI")][Header("__________________________")]
     [SerializeField] AudioSource BtnClickSFX;
     [SerializeField] AudioSource PurchaseSuccessSFX;
@@ -48,6 +53,7 @@ public class SM : MonoBehaviour
     [SerializeField] AudioSource CountDownSFX;
     [SerializeField] AudioSource CountDownShootSFX;
     [SerializeField] AudioSource CountDownStrikeSFX;
+    [SerializeField] AudioSource EquipItemSFX;
     
     [Header("PLAY")][Header("__________________________")]
     [SerializeField] AudioSource ExpUpSFX;
@@ -137,8 +143,10 @@ public class SM : MonoBehaviour
             ExpUpSFX.Play();
         else if(name == SFX.PlayerLevelUp.ToString())
             PlayerLevelUpSFX.Play();
-        else if(name == SFX.Swing.ToString())
-            SwingSFX.Play();    
+        else if(name == SFX.Swing.ToString()){
+            StartCoroutine(coPlayWaitingFinish(name));
+        }
+            // SwingSFX.Play();
         else if(name == SFX.SwingHit.ToString()){
             int rand = Random.Range(0, SwingHitSFXs.Length);
             SwingHitSFXs[rand].Play();
@@ -173,8 +181,11 @@ public class SM : MonoBehaviour
             PoisonExplosionSFX.Play();
         else if(name == SFX.IceExplosion.ToString())
             IceExplosionSFX.Play();
-        else if(name == SFX.LaserShoot.ToString())
-            LaserShootSFX.Play();
+        else if(name == SFX.LaserShoot.ToString()){
+            //* ホームランであれば、レイザー音をDelayする。
+            if(Time.timeScale == 0) LaserShootSFX.PlayDelayed(HOMERUN_ANIM_TIME);
+            else LaserShootSFX.Play();
+        }
         else if(name == SFX.FireHit.ToString())
             FireHitSFX.Play();
         else if(name == SFX.IceHit.ToString())
@@ -222,6 +233,19 @@ public class SM : MonoBehaviour
         Debug.Log($"sfxStop:: name= {name}");
         if(name == SFX.BossFly.ToString())
             BossFlySFX.Stop();
+    }
+    IEnumerator coPlayWaitingFinish(string name){
+        switch(name){
+            case "Swing":
+                if(!isSwingSFXPlaying){
+                    isSwingSFXPlaying = true;
+                    SwingSFX.Play();
+                    yield return new WaitForSeconds(SwingSFX.clip.length * 1.7f);
+                    isSwingSFXPlaying = false;
+                }
+                break;
+            //下へ追加
+        }
     }
     private void singleton(){
         if(ins == null) {

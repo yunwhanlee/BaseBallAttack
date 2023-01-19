@@ -489,7 +489,9 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //*   UI Button
     //* ----------------------------------------------------------------
     public void onClickCheckBtn(string type){
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         if(DM.ins.SelectItemType != type) return;
+        
         Debug.Log($"<b>onClickCheckBtn(type={type}):: CurIdx= {CurIdx}</b>");
         var curItem = getCurItem();
 

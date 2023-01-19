@@ -47,7 +47,7 @@ public class BossBlock : Block_Prefab{
         float delay = isFirst? 0.45f : 0.1f;
         StartCoroutine(coBossScreamSFX(delay));
         this.anim.SetTrigger(DM.ANIM.Scream.ToString());
-        gm.postProcessAnim.SetTrigger("doBlur");
+        gm.postProcessAnim.SetTrigger(DM.ANIM.DoBlur.ToString());
         
         var randPer = Random.Range(0, 10);
         if(obstacleResetCnt == 0) randPer = 0;
@@ -103,8 +103,6 @@ public class BossBlock : Block_Prefab{
                 SM.ins.sfxPlay(SM.SFX.BossScream4.ToString());
                 break;
         }
-
-
     }
 
     IEnumerator coBossAttack(string attackAnimName){
@@ -118,6 +116,10 @@ public class BossBlock : Block_Prefab{
         float targetReachTime = blessShootTiming;
         float delayGUIActive = 0.2f;
         float playerStunTime = 3;
+
+        if(gm.cam2.activeSelf){
+            gm.switchCamera();
+        }
 
         //* GUI OFF
         gm.readyBtn.gameObject.SetActive(false);
