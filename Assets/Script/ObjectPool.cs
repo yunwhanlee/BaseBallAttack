@@ -105,7 +105,7 @@ public class ObjectPool : MonoBehaviour
         poolDtList.Add(new PoolData(DIC.DownWallHitEF.ToString(), em.downWallHitEF, 10, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.ItemBlockDirLineTrailEF.ToString(), em.itemBlockDirLineTrailEF, 3, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.ItemBlockExplosionEF.ToString(), em.itemBlockExplosionEF, 3, em.gm.effectGroup));
-        poolDtList.Add(new PoolData(DIC.BrokeBlockEF.ToString(), em.brokeBlockEF, 60, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.BrokeBlockEF.ToString(), em.brokeBlockEF, 30, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.BatHitSparkEF.ToString(), em.batHitSparkEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.HomeRunHitSparkEF.ToString(), em.homeRunHitSparkEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.StunEF.ToString(), em.stunEF, 1, em.gm.effectGroup));
@@ -125,8 +125,8 @@ public class ObjectPool : MonoBehaviour
         poolDtList.Add(new PoolData(DIC.ColorBallStarExplosionEF.ToString(), em.colorBallStarExplosionEF, 1, em.gm.effectGroup));
 
         // OBJ 
-        poolDtList.Add(new PoolData(DIC.DropItemExpOrbPf.ToString(), bm.dropItemExpOrbPf, 50, gm.dropItemGroup));
-        poolDtList.Add(new PoolData(DIC.BossTargetMisslePf.ToString(), bm.bossTargetMisslePf, 20, gm.dropItemGroup));
+        poolDtList.Add(new PoolData(DIC.DropItemExpOrbPf.ToString(), bm.dropItemExpOrbPf, 30, gm.dropItemGroup));
+        poolDtList.Add(new PoolData(DIC.BossTargetMisslePf.ToString(), bm.bossTargetMisslePf, 15, gm.dropItemGroup));
 
         poolDtList.Add(new PoolData(DIC.DropBoxShieldPf.ToString(), bm.dropBoxPfArr[(int)DM.DROPBOX.DropBoxShieldPf], 1, gm.dropBoxGroup));
         poolDtList.Add(new PoolData(DIC.DropBoxQuestionPf.ToString(), bm.dropBoxPfArr[(int)DM.DROPBOX.DropBoxQuestionPf], 1, gm.dropBoxGroup));
@@ -152,7 +152,7 @@ public class ObjectPool : MonoBehaviour
         }
 
         //* ★★★ 全て準備したOBJECTを活性化する ⇐ こうしないと、複数のEFが活性化したら、読込が重くなり、フリーズ掛ける。
-        activateEveryObjects(poolDtList);
+        // activateEveryObjects(poolDtList);
     }
     private void activateEveryObjects(List<PoolData> poolDtList){
         Debug.Log("LOADING:: OBJECT-POOL EFFECTを読み込む。");
