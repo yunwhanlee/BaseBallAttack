@@ -159,23 +159,26 @@ public class DM : MonoBehaviour
         if(DiamondTxt) DiamondTxt.text = personalData.Diamond.ToString();
     }
 
+#region EXIT GAME
 #if UNITY_EDITOR
     void OnApplicationQuit(){
-        Debug.Log("PC -> OnApplicationQuit():: END GAME:: Scene= " + SceneManager.GetActiveScene().name);
+        Debug.Log("EXIT SAVE GAME(PC)::OnApplicationQuit():: Scene= " + SceneManager.GetActiveScene().name);
         //* (BUG) SceneがHomeのみセーブできる。
-        if(SceneManager.GetActiveScene().name == "Home"){
+        if(SceneManager.GetActiveScene().name == DM.SCENE.Home.ToString()){
             personalData.save();
         }
     }
 #elif UNITY_ANDROID
-#elif UNITY_IPHONE
+    //* (BUG-37) ゲームが開くときにも起動されるので注意が必要。
     void OnApplicationPause(bool paused){
-        Debug.Log("Mobile -> OnApplicationPause():: END GAME:: Scene= " + SceneManager.GetActiveScene().name);
-        if(paused && SceneManager.GetActiveScene().name == "Home"){
+        if(paused && SceneManager.GetActiveScene().name == DM.SCENE.Home.ToString()){
+            Debug.Log("END SAVE GAME(Mobile)::OnApplicationPause( "+paused+" ):: Scene= " + SceneManager.GetActiveScene().name);
             personalData.save();
         }
     }
 #endif
+#endregion
+
     public void setUIRemoveAD(){ //* (BUG-27) DM::setUIRemoveAD:: IsRemoveを購入したら、CashShopにある目録も"購入完了"にする。
         if(personalData.IsRemoveAD){
             var cashCtt = scrollviews[(int)DM.PANEL.CashShop].ContentTf;

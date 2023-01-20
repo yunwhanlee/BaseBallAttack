@@ -467,9 +467,9 @@ public class HomeManager : MonoBehaviour
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         DM.ins.personalData.reset();
 
-        #if UNITY_EDITOR
+    #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-        #endif
+    #endif
         Application.Quit();
     }
 
@@ -709,8 +709,8 @@ public class HomeManager : MonoBehaviour
         if(child.name == DM.NAME.GrayPanel.ToString()) child.gameObject.SetActive(isActive);
     }
     private string updateADCoolTime(){
-        // DateTime finishTime = DateTime.ParseExact(DM.ins.personalData.RouletteTicketCoolTime, "dd/MM/yyyy", null).AddMinutes(LM._.ROULETTE_TICKET_COOLTIME_MINUTE);
-        DateTime finishTime = DateTime.Parse(DM.ins.personalData.RouletteTicketCoolTime).AddMinutes(LM._.ROULETTE_TICKET_COOLTIME_MINUTE);
+        DateTime finishTime = DateTime.ParseExact(DM.ins.personalData.RouletteTicketCoolTime, "dd/MM/yyyy", null).AddMinutes(LM._.ROULETTE_TICKET_COOLTIME_MINUTE);
+        // DateTime finishTime = DateTime.Parse(DM.ins.personalData.RouletteTicketCoolTime).AddMinutes(LM._.ROULETTE_TICKET_COOLTIME_MINUTE);
         TimeSpan coolTime = finishTime - DateTime.Now;
 
         //* Coolタイムが終わったら

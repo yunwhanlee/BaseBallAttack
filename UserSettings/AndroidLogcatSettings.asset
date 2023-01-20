@@ -1,18 +1,24 @@
 {
     "m_SelectedDeviceId": "RF8NA0FXKJP",
     "m_SelectedPackage": {
-        "deviceId": "RF8NA0FXKJP",
-        "name": "jp.co.matsuyafoods.officialapp.dis",
-        "processId": 8153,
+        "deviceId": "",
+        "name": "",
+        "processId": 0,
         "exited": false
     },
-    "m_SelectedPriority": 0,
+    "m_SelectedPriority": 1,
     "m_KnownPackagesForSerialization": [
         {
             "deviceId": "RF8NA0FXKJP",
             "name": "jp.co.matsuyafoods.officialapp.dis",
             "processId": 8153,
-            "exited": false
+            "exited": true
+        },
+        {
+            "deviceId": "RF8NA0FXKJP",
+            "name": "com.nttdocomo.android.homezozo",
+            "processId": 10811,
+            "exited": true
         }
     ],
     "m_Tags": {
@@ -23,7 +29,7 @@
             },
             {
                 "m_Name": "No Filter",
-                "m_Selected": true
+                "m_Selected": false
             },
             {
                 "m_Name": "",
@@ -39,11 +45,11 @@
             },
             {
                 "m_Name": "Unity",
-                "m_Selected": false
+                "m_Selected": true
             },
             {
                 "m_Name": "CRASH",
-                "m_Selected": false
+                "m_Selected": true
             }
         ]
     },
@@ -65,7 +71,7 @@
         "MemoryGroup": 2,
         "Behavior": 0
     },
-    "m_Filter": "",
+    "m_Filter": "END",
     "m_FilterIsRegularExpression": false,
     "m_SymbolPaths": []
 }
