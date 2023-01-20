@@ -30,12 +30,17 @@ public class Roulette : MonoBehaviour
     public float spinGauge = 0;
 
     [SerializeField] float reduceCnt = 0;
-    [SerializeField] float reduceSpeed;
+    [SerializeField] float reduceSpeed = 3;
     [SerializeField] bool isRight;
+    [SerializeField] bool isMobile;
     const int REWARD_IMG = 1;
 
-    void Start()
-    {
+    void Start(){
+    //* (BUG-38) RouletteStopSpeedCntがモバイルでは遅いので、２倍にして対応。
+    #if UNITY_ANDROID
+        isMobile = true;
+    #endif
+
         hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
 
         //* Lang
@@ -45,15 +50,16 @@ public class Roulette : MonoBehaviour
     }
 
     void Update(){
-
         ticketCntTxt.text = "x " + DM.ins.personalData.RouletteTicket.ToString();
         if(isSpin){
-            reduceCnt += Time.deltaTime * reduceSpeed;
-            float speed = Time.deltaTime * (SPIN_POWER_MIN + spinGauge);
-            speed -= reduceCnt;
+            reduceCnt += reduceSpeed;
+            float speed = SPIN_POWER_MIN + spinGauge;
+
+            speed -= reduceCnt * (isMobile? 2 : 1);
             if(speed > 0){
                 setCenterTfUI(isSpin);
-                spinBoard.transform.Rotate(0, 0, speed);
+            
+                spinBoard.transform.Rotate(0, 0, speed * Time.deltaTime);
             }
             else{
                 init();

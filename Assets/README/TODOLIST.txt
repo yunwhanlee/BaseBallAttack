@@ -386,6 +386,7 @@
     -  (BUG-35) onClickCheckBtn::checkAtvSkillItemSelectionIsFirstTime CHARAとBATの場合購入したら出るバグがあるため、caseによって処理を分ける。
     -  (BUG-36) GAME->HOMEに戻った時、エラー発生。
     ✓ (BUG-37) モバイルで、保存ができないバグ対応。OnApplicationPause(paused)
+    - (BUG-38) RouletteStopSpeedCntがモバイルでは遅いので、２倍にして対応。
     
     
     
