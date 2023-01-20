@@ -1,141 +1,401 @@
 fileFormatVersion: 2
 guid: e02bdaca3b0c3284ab993c4eba862036
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: Chest
-    100002: DragonSoulEater
-    100004: //RootNode
-    100006: Eye_Left
-    100008: Eye_Right
-    100010: Feet_Left
-    100012: Feet_Right
-    100014: Hand_Left
-    100016: Hand_Right
-    100018: HandTip_Left
-    100020: HandTip_Right
-    100022: Head
-    100024: Jaw
-    100026: JawTip
-    100028: LowerArm_Left
-    100030: LowerArm_Right
-    100032: LowerLeg_Left
-    100034: LowerLeg_Right
-    100036: Neck
-    100038: NeckFat_Left
-    100040: NeckFat_Right
-    100042: ReverseLeg_Left
-    100044: ReverseLeg_Right
-    100046: Root_Pelvis
-    100048: Spine
-    100050: Tail01
-    100052: Tail02
-    100054: Tail03
-    100056: TailEnd
-    100058: Toe_Left
-    100060: Toe_Right
-    100062: UpperArm_Left
-    100064: UpperArm_Right
-    100066: UpperLeg_Left
-    100068: UpperLeg_Right
-    100070: UpperMouth
-    100072: ValleyFat
-    100074: Wing01_Left
-    100076: Wing01_Right
-    100078: Wing02_Left
-    100080: Wing02_Right
-    100082: Wing03_Left
-    100084: Wing03_Right
-    100086: WingHand_Left
-    100088: WingHand_Right
-    100090: WingIndex01_Left
-    100092: WingIndex01_Right
-    100094: WingIndex02_Left
-    100096: WingIndex02_Right
-    100098: WingIndex03_Left
-    100100: WingIndex03_Right
-    100102: WingMiddle01_Left
-    100104: WingMiddle01_Right
-    100106: WingMiddle02_Left
-    100108: WingMiddle02_Right
-    100110: WingMiddle03_Left
-    100112: WingMiddle03_Right
-    100114: WingPinky01_Left
-    100116: WingPinky01_Right
-    100118: WingPinky02_Left
-    100120: WingPinky02_Right
-    100122: WingPinky03_Left
-    100124: WingPinky03_Right
-    400000: Chest
-    400002: DragonSoulEater
-    400004: //RootNode
-    400006: Eye_Left
-    400008: Eye_Right
-    400010: Feet_Left
-    400012: Feet_Right
-    400014: Hand_Left
-    400016: Hand_Right
-    400018: HandTip_Left
-    400020: HandTip_Right
-    400022: Head
-    400024: Jaw
-    400026: JawTip
-    400028: LowerArm_Left
-    400030: LowerArm_Right
-    400032: LowerLeg_Left
-    400034: LowerLeg_Right
-    400036: Neck
-    400038: NeckFat_Left
-    400040: NeckFat_Right
-    400042: ReverseLeg_Left
-    400044: ReverseLeg_Right
-    400046: Root_Pelvis
-    400048: Spine
-    400050: Tail01
-    400052: Tail02
-    400054: Tail03
-    400056: TailEnd
-    400058: Toe_Left
-    400060: Toe_Right
-    400062: UpperArm_Left
-    400064: UpperArm_Right
-    400066: UpperLeg_Left
-    400068: UpperLeg_Right
-    400070: UpperMouth
-    400072: ValleyFat
-    400074: Wing01_Left
-    400076: Wing01_Right
-    400078: Wing02_Left
-    400080: Wing02_Right
-    400082: Wing03_Left
-    400084: Wing03_Right
-    400086: WingHand_Left
-    400088: WingHand_Right
-    400090: WingIndex01_Left
-    400092: WingIndex01_Right
-    400094: WingIndex02_Left
-    400096: WingIndex02_Right
-    400098: WingIndex03_Left
-    400100: WingIndex03_Right
-    400102: WingMiddle01_Left
-    400104: WingMiddle01_Right
-    400106: WingMiddle02_Left
-    400108: WingMiddle02_Right
-    400110: WingMiddle03_Left
-    400112: WingMiddle03_Right
-    400114: WingPinky01_Left
-    400116: WingPinky01_Right
-    400118: WingPinky02_Left
-    400120: WingPinky02_Right
-    400122: WingPinky03_Left
-    400124: WingPinky03_Right
-    4300000: DragonSoulEater
-    7400000: Fly Float
-    9500000: //RootNode
-    13700000: DragonSoulEater
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Chest
+  - first:
+      1: 100002
+    second: DragonSoulEater
+  - first:
+      1: 100004
+    second: //RootNode
+  - first:
+      1: 100006
+    second: Eye_Left
+  - first:
+      1: 100008
+    second: Eye_Right
+  - first:
+      1: 100010
+    second: Feet_Left
+  - first:
+      1: 100012
+    second: Feet_Right
+  - first:
+      1: 100014
+    second: Hand_Left
+  - first:
+      1: 100016
+    second: Hand_Right
+  - first:
+      1: 100018
+    second: HandTip_Left
+  - first:
+      1: 100020
+    second: HandTip_Right
+  - first:
+      1: 100022
+    second: Head
+  - first:
+      1: 100024
+    second: Jaw
+  - first:
+      1: 100026
+    second: JawTip
+  - first:
+      1: 100028
+    second: LowerArm_Left
+  - first:
+      1: 100030
+    second: LowerArm_Right
+  - first:
+      1: 100032
+    second: LowerLeg_Left
+  - first:
+      1: 100034
+    second: LowerLeg_Right
+  - first:
+      1: 100036
+    second: Neck
+  - first:
+      1: 100038
+    second: NeckFat_Left
+  - first:
+      1: 100040
+    second: NeckFat_Right
+  - first:
+      1: 100042
+    second: ReverseLeg_Left
+  - first:
+      1: 100044
+    second: ReverseLeg_Right
+  - first:
+      1: 100046
+    second: Root_Pelvis
+  - first:
+      1: 100048
+    second: Spine
+  - first:
+      1: 100050
+    second: Tail01
+  - first:
+      1: 100052
+    second: Tail02
+  - first:
+      1: 100054
+    second: Tail03
+  - first:
+      1: 100056
+    second: TailEnd
+  - first:
+      1: 100058
+    second: Toe_Left
+  - first:
+      1: 100060
+    second: Toe_Right
+  - first:
+      1: 100062
+    second: UpperArm_Left
+  - first:
+      1: 100064
+    second: UpperArm_Right
+  - first:
+      1: 100066
+    second: UpperLeg_Left
+  - first:
+      1: 100068
+    second: UpperLeg_Right
+  - first:
+      1: 100070
+    second: UpperMouth
+  - first:
+      1: 100072
+    second: ValleyFat
+  - first:
+      1: 100074
+    second: Wing01_Left
+  - first:
+      1: 100076
+    second: Wing01_Right
+  - first:
+      1: 100078
+    second: Wing02_Left
+  - first:
+      1: 100080
+    second: Wing02_Right
+  - first:
+      1: 100082
+    second: Wing03_Left
+  - first:
+      1: 100084
+    second: Wing03_Right
+  - first:
+      1: 100086
+    second: WingHand_Left
+  - first:
+      1: 100088
+    second: WingHand_Right
+  - first:
+      1: 100090
+    second: WingIndex01_Left
+  - first:
+      1: 100092
+    second: WingIndex01_Right
+  - first:
+      1: 100094
+    second: WingIndex02_Left
+  - first:
+      1: 100096
+    second: WingIndex02_Right
+  - first:
+      1: 100098
+    second: WingIndex03_Left
+  - first:
+      1: 100100
+    second: WingIndex03_Right
+  - first:
+      1: 100102
+    second: WingMiddle01_Left
+  - first:
+      1: 100104
+    second: WingMiddle01_Right
+  - first:
+      1: 100106
+    second: WingMiddle02_Left
+  - first:
+      1: 100108
+    second: WingMiddle02_Right
+  - first:
+      1: 100110
+    second: WingMiddle03_Left
+  - first:
+      1: 100112
+    second: WingMiddle03_Right
+  - first:
+      1: 100114
+    second: WingPinky01_Left
+  - first:
+      1: 100116
+    second: WingPinky01_Right
+  - first:
+      1: 100118
+    second: WingPinky02_Left
+  - first:
+      1: 100120
+    second: WingPinky02_Right
+  - first:
+      1: 100122
+    second: WingPinky03_Left
+  - first:
+      1: 100124
+    second: WingPinky03_Right
+  - first:
+      4: 400000
+    second: Chest
+  - first:
+      4: 400002
+    second: DragonSoulEater
+  - first:
+      4: 400004
+    second: //RootNode
+  - first:
+      4: 400006
+    second: Eye_Left
+  - first:
+      4: 400008
+    second: Eye_Right
+  - first:
+      4: 400010
+    second: Feet_Left
+  - first:
+      4: 400012
+    second: Feet_Right
+  - first:
+      4: 400014
+    second: Hand_Left
+  - first:
+      4: 400016
+    second: Hand_Right
+  - first:
+      4: 400018
+    second: HandTip_Left
+  - first:
+      4: 400020
+    second: HandTip_Right
+  - first:
+      4: 400022
+    second: Head
+  - first:
+      4: 400024
+    second: Jaw
+  - first:
+      4: 400026
+    second: JawTip
+  - first:
+      4: 400028
+    second: LowerArm_Left
+  - first:
+      4: 400030
+    second: LowerArm_Right
+  - first:
+      4: 400032
+    second: LowerLeg_Left
+  - first:
+      4: 400034
+    second: LowerLeg_Right
+  - first:
+      4: 400036
+    second: Neck
+  - first:
+      4: 400038
+    second: NeckFat_Left
+  - first:
+      4: 400040
+    second: NeckFat_Right
+  - first:
+      4: 400042
+    second: ReverseLeg_Left
+  - first:
+      4: 400044
+    second: ReverseLeg_Right
+  - first:
+      4: 400046
+    second: Root_Pelvis
+  - first:
+      4: 400048
+    second: Spine
+  - first:
+      4: 400050
+    second: Tail01
+  - first:
+      4: 400052
+    second: Tail02
+  - first:
+      4: 400054
+    second: Tail03
+  - first:
+      4: 400056
+    second: TailEnd
+  - first:
+      4: 400058
+    second: Toe_Left
+  - first:
+      4: 400060
+    second: Toe_Right
+  - first:
+      4: 400062
+    second: UpperArm_Left
+  - first:
+      4: 400064
+    second: UpperArm_Right
+  - first:
+      4: 400066
+    second: UpperLeg_Left
+  - first:
+      4: 400068
+    second: UpperLeg_Right
+  - first:
+      4: 400070
+    second: UpperMouth
+  - first:
+      4: 400072
+    second: ValleyFat
+  - first:
+      4: 400074
+    second: Wing01_Left
+  - first:
+      4: 400076
+    second: Wing01_Right
+  - first:
+      4: 400078
+    second: Wing02_Left
+  - first:
+      4: 400080
+    second: Wing02_Right
+  - first:
+      4: 400082
+    second: Wing03_Left
+  - first:
+      4: 400084
+    second: Wing03_Right
+  - first:
+      4: 400086
+    second: WingHand_Left
+  - first:
+      4: 400088
+    second: WingHand_Right
+  - first:
+      4: 400090
+    second: WingIndex01_Left
+  - first:
+      4: 400092
+    second: WingIndex01_Right
+  - first:
+      4: 400094
+    second: WingIndex02_Left
+  - first:
+      4: 400096
+    second: WingIndex02_Right
+  - first:
+      4: 400098
+    second: WingIndex03_Left
+  - first:
+      4: 400100
+    second: WingIndex03_Right
+  - first:
+      4: 400102
+    second: WingMiddle01_Left
+  - first:
+      4: 400104
+    second: WingMiddle01_Right
+  - first:
+      4: 400106
+    second: WingMiddle02_Left
+  - first:
+      4: 400108
+    second: WingMiddle02_Right
+  - first:
+      4: 400110
+    second: WingMiddle03_Left
+  - first:
+      4: 400112
+    second: WingMiddle03_Right
+  - first:
+      4: 400114
+    second: WingPinky01_Left
+  - first:
+      4: 400116
+    second: WingPinky01_Right
+  - first:
+      4: 400118
+    second: WingPinky02_Left
+  - first:
+      4: 400120
+    second: WingPinky02_Right
+  - first:
+      4: 400122
+    second: WingPinky03_Left
+  - first:
+      4: 400124
+    second: WingPinky03_Right
+  - first:
+      43: 4300000
+    second: DragonSoulEater
+  - first:
+      74: 7400000
+    second: Fly Float
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: DragonSoulEater
   externalObjects: {}
   materials:
-    importMaterials: 0
+    materialImportMode: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 0
@@ -164,6 +424,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Fly Float
       takeName: Take 001
+      internalID: 0
       firstFrame: 0
       lastFrame: 33
       wrapMode: 0
@@ -315,32 +576,39 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 0
     importBlendShapes: 1
     importCameras: 0
     importLights: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -349,10 +617,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -362,13 +630,17 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
