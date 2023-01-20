@@ -6,7 +6,7 @@
         "processId": 0,
         "exited": false
     },
-    "m_SelectedPriority": 1,
+    "m_SelectedPriority": 4,
     "m_KnownPackagesForSerialization": [
         {
             "deviceId": "RF8NA0FXKJP",
@@ -19,6 +19,12 @@
             "name": "com.nttdocomo.android.homezozo",
             "processId": 10811,
             "exited": true
+        },
+        {
+            "deviceId": "RF8NA0FXKJP",
+            "name": "com.sec.android.app.myfiles",
+            "processId": 2440,
+            "exited": false
         }
     ],
     "m_Tags": {
@@ -29,7 +35,7 @@
             },
             {
                 "m_Name": "No Filter",
-                "m_Selected": false
+                "m_Selected": true
             },
             {
                 "m_Name": "",
@@ -45,11 +51,11 @@
             },
             {
                 "m_Name": "Unity",
-                "m_Selected": true
+                "m_Selected": false
             },
             {
                 "m_Name": "CRASH",
-                "m_Selected": true
+                "m_Selected": false
             }
         ]
     },
