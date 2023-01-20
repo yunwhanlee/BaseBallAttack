@@ -709,9 +709,11 @@ public class HomeManager : MonoBehaviour
         if(child.name == DM.NAME.GrayPanel.ToString()) child.gameObject.SetActive(isActive);
     }
     private string updateADCoolTime(){
-        DateTime finishTime = DateTime.ParseExact(DM.ins.personalData.RouletteTicketCoolTime, "dd/MM/yyyy", null).AddMinutes(LM._.ROULETTE_TICKET_COOLTIME_MINUTE);
-        // DateTime finishTime = DateTime.Parse(DM.ins.personalData.RouletteTicketCoolTime).AddMinutes(LM._.ROULETTE_TICKET_COOLTIME_MINUTE);
-        TimeSpan coolTime = finishTime - DateTime.Now;
+        try{
+            DateTime finishTime = DateTime.ParseExact(DM.ins.personalData.RouletteTicketCoolTime, "yyyy/MM/dd HH:mm:ss", null).AddMinutes(LM._.ROULETTE_TICKET_COOLTIME_MINUTE);
+            // DateTime finishTime = DateTime.Parse(DM.ins.personalData.RouletteTicketCoolTime).AddMinutes(LM._.ROULETTE_TICKET_COOLTIME_MINUTE);
+            TimeSpan coolTime = finishTime - DateTime.Now;
+
 
         //* Coolタイムが終わったら
         if(coolTime.Ticks < 0){ 
@@ -723,6 +725,13 @@ public class HomeManager : MonoBehaviour
         // Debug.Log("coolTime= " + coolTime.Ticks + ", coolTimeStr= " + coolTimeStr);
 
         return coolTimeStr;
+        }
+        catch(Exception err){
+            Debug.LogError("ERROR::updateADCoolTime():: DM.ins.personalData.RouletteTicketCoolTime= " 
+                + DM.ins.personalData.RouletteTicketCoolTime + "/n msg= " + err);
+            
+            return "";
+        }
     }
     private void checkPremiumPackPurchaseStatus(){
         const int COIN = 0, DIAMOND = 1, ROULETTE_TICKET = 2, REMOVE_AD = 3;

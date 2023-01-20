@@ -372,7 +372,7 @@
         原因：両方ObjectのColliderがisKinematicのtrueであれば、お互いに検出できない。
     ✓ (BUG-22) For分内にonClick.AddListener(int i)すると、Indexが全てLast+1になるバグ対応。
     ✓ (BUG-23) PlaySceneでも、広告を見てエラーになったら、エラーメッセージ表示。
-    ✓ (BUG-24) BossBlock::eraseObstacle()がゲームオーバーになっても反応して、NULLになるBUG対応。
+    ✓ (BUG-24) BossBlock::eraseObsdtacle()がゲームオーバーになっても反応して、NULLになるBUG対応。
     ✓ (BUG-25) Util::displayNoticeMsgDialog() z軸もっと前に調整。Sub-Canvas設定して、PlayerとBatモデルの場合も手前に対応。
     ✓ (BUG-26) HomeEFManager::createItemBuyEF:: parent -> MainCanvasにして、後ろのGUIボタンが押されるバグを対応。
     ✓ (BUG-27) DM::setUIRemoveAD:: IsRemoveを購入したら、CashShopにある目録も"購入完了"にする。
@@ -386,7 +386,8 @@
     -  (BUG-35) onClickCheckBtn::checkAtvSkillItemSelectionIsFirstTime CHARAとBATの場合購入したら出るバグがあるため、caseによって処理を分ける。
     -  (BUG-36) GAME->HOMEに戻った時、エラー発生。
     ✓ (BUG-37) モバイルで、保存ができないバグ対応。OnApplicationPause(paused)
-    - (BUG-38) RouletteStopSpeedCntがモバイルでは遅いので、２倍にして対応。
+    ✓ (BUG-38) RouletteStopSpeedCntがモバイルでは遅いので、２倍にして対応。
+    ✓ (BUG-39) 最初の実行だったら、ロードデータが無くてjsonがnullなので、resetして初期値を設定する。
     
     
     
