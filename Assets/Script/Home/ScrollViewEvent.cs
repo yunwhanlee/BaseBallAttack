@@ -201,7 +201,7 @@ public class ScrollView {
 //* -----------------------------------------------------------------------------------
 //* スクロールビュー イベント
 //* -----------------------------------------------------------------------------------
-public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
+public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandler
 {
     //* OutSide
     public HomeEffectManager em;
@@ -229,7 +229,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     void Start(){
         scrollRect = GetComponent<ScrollRect>();
         hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
-        mainCanvasTf = GameObject.Find("MainCanvas").transform;
+        mainCanvasTf = hm.mainCanvas.transform;
         
         if(this.gameObject.name != $"ScrollView_{DM.PANEL.Skill.ToString()}" 
             && this.gameObject.name != $"ScrollView_{DM.PANEL.CashShop.ToString()}"
@@ -259,11 +259,11 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     }
 
     //* Drag Event
-    public void OnBeginDrag(PointerEventData eventData){
+    // public void OnBeginDrag(PointerEventData eventData){
         // Debug.Log("<color=white> ScrollViewEvent:: Drag Begin </color>");
-    }
+    // }
 
-    public void OnEndDrag(PointerEventData eventData){
+    // public void OnEndDrag(PointerEventData eventData){
         //* (BUG) スクロールが先端と末端だったら、イベント起動しない。
         // int posX = (int)dm.ScrollContentTf.anchoredPosition.x;
         // Debug.Log("<color=white> ScrollViewEvent:: Drag End:: PosX=" + posX + ", CurIdx=" + CurIdx + "Charas.Len=" + (dm.CharaPfs.Length - 1) + "</color>");
@@ -271,7 +271,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         // if(CurIdx == 0 || CurIdx == dm.CharaPfs.Length-1){
         //     setScrollStopCharaInfo();
         // }
-    }
+    // }
 
     //* Update()
     public void OnScrollViewPos(RectTransform pos){ //* －が右側

@@ -83,8 +83,7 @@ public class EffectManager : MonoBehaviour
     public GameObject aimingEF;
     public GameObject defenceEF;
 
-    void Start()
-    {
+    void Start(){
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         
         Debug.Log("EffectManager:: gm.activeSkillDataBase.Length=" + gm.activeSkillDataBase.Length);
@@ -94,9 +93,9 @@ public class EffectManager : MonoBehaviour
         activeSkillExplosionEFs = new GameObject[cnt];
         activeSkillCastEFs = new GameObject[cnt];
     }
-//*---------------------------------------
-//* 関数
-//*---------------------------------------
+///------------------------------------------------------------------------------
+/// 関数
+///------------------------------------------------------------------------------
     public void createLvUpNovaEF(Vector3 parentPos){
         var ins = ObjectPool.getObject(ObjectPool.DIC.LvUpNovaEF.ToString(), parentPos, lvUpNovaEF.transform.rotation, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 2));
@@ -245,9 +244,9 @@ public class EffectManager : MonoBehaviour
     }
     
 
-//* -------------------------------------------------------------
-//* ActiveSkill Effect
-//* -------------------------------------------------------------
+/// -------------------------------------------------------------
+/// ActiveSkill Effect
+/// -------------------------------------------------------------
     public void createAtvSkShotEF(int idx, Transform parentTf, Quaternion dir, bool isTrailEffect = false){
         Transform parent = (isTrailEffect)? parentTf : gm.effectGroup;
         string key = ObjectPool.DIC.AtvSkShotEF.ToString() + (gm.SelectAtvSkillBtnIdx == 0 ? "" : "2");
@@ -306,9 +305,9 @@ public class EffectManager : MonoBehaviour
     public void createColorBallStarExplosionEF(Vector3 parentTfPos){
         var ins = Instantiate(colorBallStarExplosionEF, parentTfPos, QI, gm.effectGroup) as GameObject;
     }
-//* -------------------------------------------------------------
-//* Drop Items EF
-//* -------------------------------------------------------------
+/// -------------------------------------------------------------
+/// Drop Items EF
+/// -------------------------------------------------------------
     public void createDropItemExpOrbEF(Transform parentTf){
         var ins = ObjectPool.getObject(ObjectPool.DIC.DropItemExpOrbEF.ToString(), parentTf.position, QI, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
@@ -320,9 +319,9 @@ public class EffectManager : MonoBehaviour
         ins.transform.localScale = new Vector3(ins.transform.localScale.x, -Mathf.Abs(ins.transform.localScale.y), ins.transform.localScale.z);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
     }
-//* -------------------------------------------------------------
-//* Drop Items EF
-//* -------------------------------------------------------------    
+/// -------------------------------------------------------------
+/// Drop Items EF
+/// -------------------------------------------------------------    
     public void createDropBoxShieldEF(Transform parentTf){
         var ins = ObjectPool.getObject(ObjectPool.DIC.DropBoxShieldEF.ToString(), parentTf.position, QI, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
@@ -360,9 +359,9 @@ public class EffectManager : MonoBehaviour
         var ins = ObjectPool.getObject(ObjectPool.DIC.DropBoxMagicEF.ToString(), parentTf.position, QI, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1.5f));
     }
-//* -------------------------------------------------------------
-//* UI EF
-//* -------------------------------------------------------------
+/// -------------------------------------------------------------
+/// UI EF
+/// -------------------------------------------------------------
     public void activeUI_EF(string name){
         switch(name){
             case "Perfect":

@@ -553,7 +553,7 @@ public class HomeManager : MonoBehaviour
         //* Sound
         SM.ins.sfxPlay(SM.SFX.PurchaseSuccess.ToString());
         //* Effect
-        em.createCongratuBlastRainbowEF(GameObject.Find("MainCanvas").transform);
+        em.createCongratuBlastRainbowEF(mainCanvas.transform);
         //* Open Show Reward Panel
         showRewardPanel.SetActive(true);
         //* Set Showreward ItemPfs

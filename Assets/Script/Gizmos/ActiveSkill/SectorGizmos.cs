@@ -24,18 +24,16 @@ public class SectorGizmos : MonoBehaviour
 
     Vector3 pos;
 
-    void Start()
-    {   
+    void Start(){   
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-        touchSlideCtr = GameObject.Find("TouchSlideControlPanel").GetComponent<TouchSlideControl>();
-        var childs = GameObject.Find("BlockMaker").GetComponentsInChildren<Transform>();
+        touchSlideCtr = gm.touchSlideControlPanel;
+        var childs = gm.bm.GetComponentsInChildren<Transform>();
         var blocks = Array.FindAll(childs, child => child.name.Contains("Block") && child.name != "BlockMaker");
         blockList = new List<Transform>(blocks);
         hitList = new List<Transform>();
     }
 
-    void Update()
-    {
+    void Update(){
         pos = new Vector3(transform.position.x, transform.position.y, transform.position.z - offsetZ);
 
         //* 🍧 IceWave BallPreviewSphere[0],[1]の角度　調整。
@@ -52,7 +50,7 @@ public class SectorGizmos : MonoBehaviour
         }
 
         if(gm.isPointUp){
-            var childs = GameObject.Find("BlockGroup").GetComponentsInChildren<Transform>();
+            var childs = gm.blockGroup.GetComponentsInChildren<Transform>();
             var blocks = Array.FindAll(childs, child => child.name.Contains("Block") && child.name != "BlockGroup");
             blockList = new List<Transform>(blocks);
             blockList.ForEach(block =>block.GetComponent<Block_Prefab>().setEnabledSpriteGlowEF(false));

@@ -12,7 +12,7 @@ public class HomeEffectManager : MonoBehaviour
 
     void Start() {
         hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
-        mainCanvasTf = GameObject.Find("MainCanvas").transform;
+        mainCanvasTf = hm.mainCanvas.transform;
     }
 
     public GameObject itemBuyEF;

@@ -22,36 +22,6 @@ public class CamResolution : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    void Update() {
-        //? TouchSlideControlスクリプトでPlayer位置を自動調整。
-        // if(Input.GetMouseButtonDown(0)){
-        //     //* RAY CAST
-        //     const int maxDistance = 50;
-        //     Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        //     RaycastHit[] hits = Physics.RaycastAll(this.transform.position, ray.direction, maxDistance);
-        //     System.Array.Reverse(hits);//(BUG) hitsが逆にIdx順番で帰ることを正しく直す。
-
-        //     //* 処理
-        //     Transform player = pl.gameObject.transform;
-        //     int idx=0;
-        //     foreach (RaycastHit hit in hits){
-        //         //Debug.Log("idx="+idx+", hit.collider.tag="+hit.collider.tag);
-        //         switch(hit.collider.tag){
-        //             case "LeftPosPad": //* 左パッドへプレイヤー配置
-        //                 player.position = new Vector3(-Mathf.Abs(player.position.x), player.position.y, player.position.z);
-        //                 player.localScale = new Vector3(+Mathf.Abs(player.localScale.x),player.localScale.y,player.localScale.z);
-        //                 return;
-        //             case "RightPosPad": //* 右パッドへプレイヤー配置
-        //                 player.position = new Vector3(+Mathf.Abs(player.position.x), player.position.y, player.position.z);
-        //                 player.localScale = new Vector3(-Mathf.Abs(player.localScale.x),player.localScale.y,player.localScale.z);
-        //                 return;
-        //         }
-        //         idx++;
-        //     };
-        //     Debug.DrawRay(ray.origin, ray.direction * maxDistance, Color.red, 0.5f);
-        // }
-    }
-
     //*---------------------------------------
     //*  関数
     //*---------------------------------------

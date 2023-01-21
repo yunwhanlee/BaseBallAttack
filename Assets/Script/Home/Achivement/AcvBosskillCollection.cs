@@ -34,11 +34,6 @@ public class AcvBosskillCollection : Achivement
             setNext(pDt, CLTBOSSKILL1);
     }
 
-    // Update is called once per frame
-    void Update(){
-        base.Update();
-    }
-
 //*---------------------------------------
 //*  Button Event Function
 //*---------------------------------------

@@ -27,10 +27,6 @@ public class AcvStageClear : Achivement
             setNext(pDt, STG10);
     }
 
-    // Update is called once per frame
-    void Update(){
-        base.Update();
-    }
 
 //*---------------------------------------
 //*  Button Event Function

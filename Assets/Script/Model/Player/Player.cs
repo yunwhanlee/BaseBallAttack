@@ -219,9 +219,9 @@ public class Player : MonoBehaviour
 
     public void addExp(int _exp) => Exp += _exp;
 
-    //*---------------------------------------
-    //*  関数
-    //*---------------------------------------
+///------------------------------------------------------------------------------
+///  関数
+///------------------------------------------------------------------------------
     private void setSwingArcPos(){
         RectTransform rect = swingArcArea.rectTransform;
         if(this.transform.position.x < 0){

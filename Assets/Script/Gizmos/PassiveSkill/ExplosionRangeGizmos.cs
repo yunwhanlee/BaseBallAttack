@@ -6,9 +6,9 @@ public class ExplosionRangeGizmos : MonoBehaviour
 {
     public Player pl;
 
-    void Start(){
-        pl = GameObject.Find("Player").GetComponent<Player>();
-    }
+    // void Start(){
+    //     pl = GameObject.Find("Player").GetComponent<Player>();
+    // }
     public float range;
 
     // void OnDrawGizmos(){

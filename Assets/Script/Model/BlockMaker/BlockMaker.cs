@@ -72,9 +72,10 @@ public class BlockMaker : MonoBehaviour
             }
         }
     }
-//*---------------------------------------
-//*  関数
-//*---------------------------------------
+    
+///------------------------------------------------------------------------------
+///  関数
+///------------------------------------------------------------------------------
     public void createBlockRow(KIND type, bool isFirstStage = false, int verticalCnt = 1){
         SM.ins.sfxPlay(SM.SFX.BlockSpawn.ToString());
         //* Value
@@ -134,7 +135,7 @@ public class BlockMaker : MonoBehaviour
         var ins = ObjectPool.getObject(ObjectPool.DIC.DropItemExpOrbPf.ToString(), blockTf.position, Quaternion.identity, gm.dropItemGroup);
         var block = blockTf.GetComponent<Block_Prefab>();
         ins.GetComponent<DropItem>().Exp = resultExp;
-        ins.GetComponent<DropItem>().spawnPopUp(popPower);
+        ins.GetComponent<DropItem>().spawnPopUp((int)(popPower * Time.deltaTime));
 
         //* RewardChest生成(Only単一)。
         var dropItemObjs = gm.dropItemGroup.GetComponentsInChildren<Transform>();
@@ -144,7 +145,7 @@ public class BlockMaker : MonoBehaviour
         int rand = Random.Range(0, 1000);
         if(rand < LM._.REWARD_CHEST_PER){
             var ins2 = Instantiate(dropItemRewardChestPf, blockTf.position, Quaternion.identity, gm.dropItemGroup);
-            ins2.GetComponent<DropItem>().spawnPopUp(popPower);
+            ins2.GetComponent<DropItem>().spawnPopUp((int)(popPower * Time.deltaTime));
         }
     }
 

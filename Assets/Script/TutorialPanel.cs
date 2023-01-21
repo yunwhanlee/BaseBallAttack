@@ -42,9 +42,9 @@ public class TutorialPanel : MonoBehaviour
         nextArrowBtn.interactable = (pageIdx >= lastIdx)? false : true;
     }
 
-    /* 
-    *   Function
-    */
+/// --------------------------------------------------------------------------
+/// Function
+/// --------------------------------------------------------------------------
     private void setActiveFocusIcon(){
         for(int i = 0; i <= lastIdx; i++)
             pageNaviFocusIconArr[i].SetActive((i == pageIdx)? true : false);
@@ -70,9 +70,9 @@ public class TutorialPanel : MonoBehaviour
         }
     }
 
-    /* 
-    *   Button Event
-    */
+/// --------------------------------------------------------------------------
+/// Btn Event
+/// --------------------------------------------------------------------------
     public void onClickExitBtn(){
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         Destroy(this.gameObject);

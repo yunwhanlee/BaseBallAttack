@@ -27,11 +27,6 @@ public class AcvUpgradeCnt : Achivement
             setNext(pDt, UPG20PER);
     }
 
-    // Update is called once per frame
-    void Update(){
-        base.Update();
-    }
-
 //*---------------------------------------
 //*  Button Event Function
 //*---------------------------------------

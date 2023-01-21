@@ -12,10 +12,6 @@ public class AcvHardModeClear : Achivement
         setNext(pDt, idx: 0, pDt.HardModeClear[0].IsAccept);
     }
 
-    // Update is called once per frame
-    void Update(){
-        base.Update();
-    }
 
 //*---------------------------------------
 //*  Button Event Function

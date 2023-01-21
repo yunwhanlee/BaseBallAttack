@@ -27,10 +27,6 @@ public class AcvCollectedDiamond : Achivement
             setNext(pDt, CLTDIA500);
     }
 
-    // Update is called once per frame
-    void Update(){
-        base.Update();
-    }
 
 //*---------------------------------------
 //*  Button Event Function

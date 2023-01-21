@@ -12,10 +12,6 @@ public class AcvNormalModeClear : Achivement
         setNext(pDt, idx: 0, pDt.NormalModeClear[0].IsAccept);
     }
 
-    // Update is called once per frame
-    void Update(){
-        base.Update();
-    }
 
 //*---------------------------------------
 //*  Button Event Function

@@ -27,15 +27,11 @@ public class Ball_Prefab : MonoBehaviour
 
     void Awake() {
         rigid = GetComponent<Rigidbody>();
-    }
-    void Start(){
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         em = gm.em; pl = gm.pl; bm = gm.bm; bs = gm.bs;
-
-        // rigid.AddForce(this.transform.forward * Speed, ForceMode.Impulse);
-
         IsOnDarkOrb = false;
     }
+
     void FixedUpdate(){
         //* Destroy by Checking Velocity
         if(rigid.velocity.magnitude != 0 && rigid.velocity.magnitude < 0.9875f){
@@ -510,7 +506,7 @@ public class Ball_Prefab : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    void OnDrawGizmos(){
+    // void OnDrawGizmos(){
         //* Explosion Skill Range Preview
         // Gizmos.color = Color.yellow;
         // Gizmos.DrawWireSphere(this.transform.position, pl.explosion.Val.range);
@@ -520,6 +516,6 @@ public class Ball_Prefab : MonoBehaviour
         //* FireBall Skill Range Preview
         // Gizmos.color = Color.red;
         // Gizmos.DrawWireSphere(this.transform.position, pl.FireBallCastWidth);
-    }
+    // }
 #endif
 }

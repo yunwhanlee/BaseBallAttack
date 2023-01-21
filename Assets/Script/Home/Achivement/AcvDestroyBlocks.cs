@@ -27,10 +27,6 @@ public class AcvDestroyBlocks : Achivement
             setNext(pDt, DTR100);
     }
 
-    // Update is called once per frame
-    void Update(){
-        base.Update();
-    }
 
 //*---------------------------------------
 //*  Button Event Function

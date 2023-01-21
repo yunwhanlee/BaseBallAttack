@@ -34,10 +34,6 @@ public class DropItem : MonoBehaviour
         isMoveToPlayer = false;
     }
 
-    void Start(){
-        
-    }
-
     void Update(){
         if(isMoveToPlayer){
             //* 放物線

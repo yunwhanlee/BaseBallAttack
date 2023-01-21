@@ -24,10 +24,6 @@ public class AcvCharactorCollection : Achivement
             setNext(pDt, CLTCHARAQUATER);
     }
 
-    // Update is called once per frame
-    void Update(){
-        base.Update();
-    }
 
 //*---------------------------------------
 //*  Button Event Function

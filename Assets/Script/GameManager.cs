@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour {
     public Transform hitRangeEndTf;
     public Transform deadLineTf;
     public BoxCollider downWallCollider;
+    public TouchSlideControl touchSlideControlPanel;
     public Light light;
     
     [Header("STATUS")][Header("__________________________")]

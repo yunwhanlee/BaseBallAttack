@@ -158,9 +158,9 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         pl.setAnimTrigger(DM.ANIM.Swing.ToString());
     }
 
-    //*---------------------------------------
-    //*  関数
-    //*---------------------------------------
+///------------------------------------------------------------------------------
+///  関数
+///------------------------------------------------------------------------------
     private void backOriginPlayerMeshRdr(){
         //* 基のモデルマテリアルに戻す
         int i = 0;

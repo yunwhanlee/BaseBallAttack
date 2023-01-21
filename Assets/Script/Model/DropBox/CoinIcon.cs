@@ -13,6 +13,7 @@ public class CoinIcon : MonoBehaviour
     [SerializeField] Transform target;
     float startDelay = 0;
     [SerializeField] float speed = 8;  public float Speed { get => speed; set => speed = value;}
+    
     void Awake(){
         gm = GameObject.Find("GameManager").GetComponent<GameManager>();
     }

@@ -27,10 +27,6 @@ public class AcvCollectedCoin : Achivement
             setNext(pDt, CLTCOIN10000);
     }
 
-    // Update is called once per frame
-    void Update(){
-        base.Update();
-    }
 
 //*---------------------------------------
 //*  Button Event Function

@@ -55,7 +55,7 @@ public class Roulette : MonoBehaviour
             reduceCnt += reduceSpeed;
             float speed = SPIN_POWER_MIN + spinGauge;
 
-            speed -= reduceCnt * (isMobile? 2 : 1);
+            speed -= reduceCnt * (isMobile? 1.5f : 1);
             if(speed > 0){
                 setCenterTfUI(isSpin);
             
