@@ -159,7 +159,7 @@ public class HomeManager : MonoBehaviour
     [SerializeField] Transform modelTf;   public Transform ModelTf {get => modelTf; set => modelTf = value;}
 
     void Start(){
-        // onClickResetBtn();
+        //onClickResetBtn();
 
         Debug.Log("Math:: -------------------------------");
         const int OFFSET = 100;

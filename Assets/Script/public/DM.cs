@@ -91,7 +91,10 @@ public class DM : MonoBehaviour
     [Header("SKY")][Header("__________________________")]
     public Material simpleSkyMt;
 
-    void Awake() => singleton();
+    void Awake() {
+        Application.targetFrameRate = 60;
+        singleton();
+    }
     void singleton(){
         //* Singleton
         if(ins == null) ins = this;
