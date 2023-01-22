@@ -9,6 +9,7 @@ public class PersonalData {
     //* Value
     [SerializeField] LANG.TP lang; public LANG.TP Lang {get => lang; set => lang = value;}
     [Header("STATUS")][Header("__________________________")]
+    [SerializeField] int quality; public int Quality {get => quality; set => quality = value;}
     [SerializeField] int playTime; public int PlayTime {get => playTime; set => playTime = value;}
 
     [Header("GOODS")][Header("__________________________")]
@@ -184,7 +185,8 @@ public class PersonalData {
         //* Set Data
         this.Lang = data.Lang;
 
-        this.PlayTime = data.PlayTime;
+        this.quality = data.Quality;
+        this.playTime = data.PlayTime;
 
         this.Coin = data.Coin;
         this.Diamond = data.Diamond;
@@ -276,6 +278,7 @@ public class PersonalData {
         //* Reset
         this.lang = LANG.TP.JP;
 
+        this.quality = 2; // 0: Low, 1: Medium, 2: High
         this.playTime = 0;
 
         this.coin = 0;

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using System;
 using UnityEngine.UI.Extensions;
 using UnityEngine.Serialization;
+using UnityEngine.Rendering;
 
 [System.Serializable] public class FrameUI {
     //* Value
@@ -137,6 +138,9 @@ public class HomeManager : MonoBehaviour
     public FrameUI settingDialog;
     public Image settingDialogCountryIconImg;
     public Sprite[] CountryIconSprArr;
+    public Dropdown settingQualityDropdown;
+    public RenderPipelineAsset[] qualityLevels;
+
     //* HardMode Enable Notice Dialog
     public RectTransform hardModeEnableNoticeDialog;
     public Text hardModeEnableNoticeTitleTxt;
@@ -160,6 +164,10 @@ public class HomeManager : MonoBehaviour
 
     void Start(){
         //onClickResetBtn();
+
+        //* Set Quality
+        QualitySettings.SetQualityLevel(DM.ins.personalData.Quality);
+        settingQualityDropdown.value = QualitySettings.GetQualityLevel();
 
         Debug.Log("Math:: -------------------------------");
         const int OFFSET = 100;
@@ -347,6 +355,11 @@ public class HomeManager : MonoBehaviour
                 settingDialogCountryIconImg.sprite = CountryIconSprArr[2];
                 break;
         }
+    }
+    public void onDropDownChangeQualityOpt(int value){
+        QualitySettings.SetQualityLevel(value);
+        QualitySettings.renderPipeline = qualityLevels[value];
+        DM.ins.personalData.Quality = value; // Save
     }
     public void onClickSettingOkBtn(bool isOk){
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
