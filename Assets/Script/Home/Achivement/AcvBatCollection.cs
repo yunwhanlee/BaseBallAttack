@@ -23,12 +23,6 @@ public class AcvBatCollection : Achivement
         else if(!Array.Exists(pDt.BatCollectionArr, arr => arr.IsAccept))
             setNext(pDt, CLTBATQUATER);
     }
-
-    // Update is called once per frame
-    void Update(){
-        base.Update();
-    }
-
 //*---------------------------------------
 //*  Button Event Function
 //*---------------------------------------

@@ -119,6 +119,7 @@ public class GameManager : MonoBehaviour {
 
     [Header("PASSIVE TABLE")][Header("__________________________")]
     [SerializeField] private GameObject[] psvSkillImgPrefs;    public GameObject[] PsvSkillImgPrefs { get => psvSkillImgPrefs; set => psvSkillImgPrefs = value;}
+    public RectTransform psvImgRectTfTemp;  public RectTransform PsvImgRectTfTemp {get => psvImgRectTfTemp; set => psvImgRectTfTemp = value;}
     public RectTransform inGameSkillStatusTableTf;
     public GameObject inGameSkillImgBtnPref;
     
@@ -212,6 +213,12 @@ public class GameManager : MonoBehaviour {
 
         //* Ball Preview Dir Goal Set Z-Center
         setBallPreviewGoalRandomPos();
+
+        //* Ready LevelUpPanel Psv All SkillImg Temp
+        Array.ForEach(psvSkillImgPrefs, psvSkillImg => {
+            var ins = Instantiate(psvSkillImg, Vector3.zero, Quaternion.identity, psvImgRectTfTemp);
+            ins.name = psvSkillImg.name;
+        });
 
         //* Active Skill Btns
         int len =  (DM.ins.personalData.IsUnlock2ndSkill)? 2 : 1;
@@ -471,6 +478,7 @@ public class GameManager : MonoBehaviour {
                 else if(i == 2 || i == 3) statusInfoPf.transform.Find("IconPanel").GetComponent<Image>().color = statusIconColorArr[RED];
                 else if(i == 4 || i == 5 || i == 6 || i == 7) statusInfoPf.transform.Find("IconPanel").GetComponent<Image>().color = statusIconColorArr[ORANGE];
                 else statusInfoPf.transform.Find("IconPanel").GetComponent<Image>().color = statusIconColorArr[GREEN];
+
                 statusInfoPf.transform.Find("IconPanel").transform.Find("IconImg").GetComponentInChildren<Image>().sprite = statusIconSprArr[i];
                 statusInfoPf.transform.Find("NameTxt").GetComponent<Text>().text = nameList[i];
                 statusInfoPf.transform.Find("ValueTxt").GetComponent<Text>().text = valueList[i];

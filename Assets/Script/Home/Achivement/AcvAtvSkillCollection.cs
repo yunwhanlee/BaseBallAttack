@@ -22,11 +22,6 @@ public class AcvAtvSkillCollection : Achivement
             setNext(pDt, CLTSKILLHALF);
     }
 
-    // Update is called once per frame
-    void Update(){
-        base.Update();
-    }
-
 //*---------------------------------------
 //*  Button Event Function
 //*---------------------------------------
