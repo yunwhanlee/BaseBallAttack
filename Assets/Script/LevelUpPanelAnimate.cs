@@ -74,6 +74,7 @@ public class LevelUpPanelAnimate : MonoBehaviour{
 
     void Update(){
         float speed = scrollingSpeed * Time.unscaledDeltaTime;
+        
         //* SCROLL ANIMATION
         if(SKILL_BTN_IDX_LEN >= btnIdx && skillList.Count > 0){
             time += Time.unscaledDeltaTime;
@@ -190,6 +191,9 @@ public class LevelUpPanelAnimate : MonoBehaviour{
                 break;
             case DM.PSV.Critical:
                 pl.critical.setLvUp(pl.critical.Val + pl.critical.Unit); //10% Up
+                break;
+            case DM.PSV.CriticalDamage:
+                pl.critical.setLvUp(pl.criticalDamage.Val + pl.criticalDamage.Unit);
                 break;
             case DM.PSV.Explosion:
                 var percent = pl.explosion.Val.per + pl.explosion.Unit.per;
