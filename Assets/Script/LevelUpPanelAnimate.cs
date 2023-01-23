@@ -74,6 +74,7 @@ public class LevelUpPanelAnimate : MonoBehaviour{
 
     void Update(){
         float speed = scrollingSpeed * Time.unscaledDeltaTime;
+        
         //* SCROLL ANIMATION
         if(SKILL_BTN_IDX_LEN >= btnIdx && skillList.Count > 0){
             time += Time.unscaledDeltaTime;
