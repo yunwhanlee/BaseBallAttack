@@ -192,6 +192,9 @@ public class LevelUpPanelAnimate : MonoBehaviour{
             case DM.PSV.Critical:
                 pl.critical.setLvUp(pl.critical.Val + pl.critical.Unit); //10% Up
                 break;
+            case DM.PSV.CriticalDamage:
+                pl.critical.setLvUp(pl.criticalDamage.Val + pl.criticalDamage.Unit);
+                break;
             case DM.PSV.Explosion:
                 var percent = pl.explosion.Val.per + pl.explosion.Unit.per;
                 var range = pl.explosion.Val.range + pl.explosion.Unit.range;
