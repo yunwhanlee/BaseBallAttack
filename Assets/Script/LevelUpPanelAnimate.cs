@@ -8,13 +8,8 @@ using UnityEngine.Serialization;
 
 [System.Serializable]
 public struct LevelUpSkillPanelBtn{
-    public RectTransform colImgRectTf;
+    public RectTransform contentRectTf;
     public Text name;
-
-    // public LevelUpSkillPanelBtn(Button skillBtn){//Contructor
-    //     colImgRectTf = skillBtn.transform.GetChild(0).GetComponent<RectTransform>();
-    //     name = skillBtn.transform.GetChild(1).GetComponent<Text>();
-    // }
 }
 
 public class LevelUpPanelAnimate : MonoBehaviour{
@@ -27,10 +22,10 @@ public class LevelUpPanelAnimate : MonoBehaviour{
     int btnIdx;
     float time;
     float span;
-    int skillImgCnt;
+    // int skillImgCnt;
     
     [Header("STATE")][Header("__________________________")]
-    [SerializeField] int scrollingSpeed;
+    [SerializeField] int scrollSpeed;
     [SerializeField] bool isRollingStop = false;
     [SerializeField] bool isPsvSkillTicket; public bool IsPsvSkillTicket { get => isPsvSkillTicket; set => isPsvSkillTicket = value;}
     [SerializeField] List<string> exceptSkNameList = new List<string>();
@@ -40,7 +35,7 @@ public class LevelUpPanelAnimate : MonoBehaviour{
     [FormerlySerializedAs("titleTxt")] public Text titleTxt;
     [FormerlySerializedAs("levelTxt")] public Text levelTxt;
     [FormerlySerializedAs("explainTxt")] public Text explainTxt;
-    [FormerlySerializedAs("colSkillBtns")] public LevelUpSkillPanelBtn[] colSkillBtns;
+    [FormerlySerializedAs("colSkillBtns")] public LevelUpSkillPanelBtn[] skillSlotBtns;
     [FormerlySerializedAs("centerWingImg")] public Image centerWingImg;
     [FormerlySerializedAs("centerMarkImg")] public Image centerMarkImg;
     [FormerlySerializedAs("rerotateBtn")] public Button rerotateBtn;
@@ -54,47 +49,50 @@ public class LevelUpPanelAnimate : MonoBehaviour{
         pl = gm.pl;
 
         for(int i=0; i<gm.PsvImgRectTfTemp.childCount; i++){
-            Debug.Log($"gm.ColPsvImgRectTfTemp.getChild({i}) -> " + gm.PsvImgRectTfTemp.GetChild(i));
+            Debug.Log($"gm.PsvImgRectTfTemp.getChild({i}) -> " + gm.PsvImgRectTfTemp.GetChild(i));
         };
 
         //* Init Value
+        scrollSpeed = 2500;
         spriteH = (int)gm.PsvSkillImgPrefs[0].GetComponent<RectTransform>().rect.height; //270
+        btnIdx = 0;
         time = 0;
         span = 2;
-        btnIdx = 0;
         isRollingStop = false;
         exceptSkNameList = new List<string>();
-        skillImgCnt = gm.PsvSkillImgPrefs.Length - 1; //* ★自然なスクロールのため、末端に1番目Imageを追加したので、この分は消す-1。
         skillList = new List<KeyValuePair<int, GameObject>>();
 
         //* Set GUI Data
         setUI(DM.NAME.LevelUp.ToString());
 
-        resetSkillImgChild(); //* Reset Before Child : これがないと、クリックでスクロール止まらなく選択されてしまう。
+        //* スロット
+        clearSlotSkillImgs(); //* Reset Before Child : これがないと、クリックでスクロール止まらなく選択されてしまう。
+        exceptMaxLvSkill();
+        createSlotSkillImgs();
+
+        //* スロットへ配置するSkillList作成
         setSkillList(skillList);
-        setExceptList(); //* Check Max Skill Level
-        createSkillListSprite();
     }
 
     void Update(){
-        float speed = scrollingSpeed * Time.unscaledDeltaTime;
+        float speed = scrollSpeed * Time.unscaledDeltaTime;
         
         //* SCROLL ANIMATION
         if(SKILL_BTN_IDX_LEN >= btnIdx && skillList.Count > 0){
             time += Time.unscaledDeltaTime;
-            foreach(LevelUpSkillPanelBtn slotBtn in colSkillBtns){
+            foreach(LevelUpSkillPanelBtn slotBtn in skillSlotBtns){
                 //* #1.Scrolling Down
                 if(time < span){
-                    if(slotBtn.colImgRectTf.localPosition.y >= 0) //* ↓
-                        slotBtn.colImgRectTf.Translate(0,-speed, 0);
+                    if(slotBtn.contentRectTf.localPosition.y >= 0) //* ↓
+                        slotBtn.contentRectTf.Translate(0,-speed, 0);
                     else //* 位置初期化
-                        slotBtn.colImgRectTf.localPosition = new Vector3(0, spriteH * skillImgCnt, 0);
+                        slotBtn.contentRectTf.localPosition = new Vector3(0, spriteH * gm.psvImgRectTfTemp.childCount, 0);
                 }
                 //* #2.Stop
                 else{
                     int randIdx = Random.Range(0, skillList.Count);
                     int randPer = Random.Range(0, 100);
-                    string tagName = skillList[randIdx].Value.transform.tag;
+                    string tagName = skillList[randIdx - 1].Value.transform.tag;
                     setRandomPsvSkill(slotBtn, out randIdx, randPer, out tagName);
 
                     //* Set Unique or Normal
@@ -106,35 +104,23 @@ public class LevelUpPanelAnimate : MonoBehaviour{
                             setRandomPsvSkill(slotBtn, out randIdx, randPer, out tagName);
                     }
 
-                    //* ExceptSkillListが存在したら、できるまで他に切り替える
-                    bool isSkLvMax = exceptSkNameList.Exists(name => slotBtn.name.text.Contains(name));
-                    while(isSkLvMax){
-                        Debug.Log($"<color=yellow>BEFORE:: btn[{btnIdx}]\n, btn.skillName= {slotBtn.name.text}, randIdx= {randIdx}");
-                        randIdx = ++randIdx % skillList.Count;
-                        slotBtn.colImgRectTf.localPosition = new Vector3(0, skillList[randIdx].Key + spriteH / 2, 0);// Scroll Down a Half of Height PosY for Animation
-                        slotBtn.name.text = skillList[randIdx].Value.name.Split(char.Parse("_"))[1];
-                        Debug.Log($"<color=yellow>AFTER:: btn.name.text= {slotBtn.name.text}, randIdx= {randIdx}</color>");
-                        isSkLvMax = exceptSkNameList.Exists(name => slotBtn.name.text.Contains(name));
-                    }
-
-                    // 指定したIndexは重ならないように消す
+                    //* 指定したIndexは他のスロットと重ならないように消す
                     skillList.RemoveAt(randIdx);
                     btnIdx++;
-                    if(btnIdx == SKILL_BTN_IDX_LEN){
-                        isRollingStop = true;// Scroll Stop Trigger On
-                    }
+                    if(btnIdx == SKILL_BTN_IDX_LEN)
+                        isRollingStop = true; //* Stop Trigger On
                 }
             }
         }
         //* #3.Scroll Re-Back to Correct PosY
         else if(isRollingStop){
-            for(int i=0; i<colSkillBtns.Length;i++){
-                float posY = colSkillBtns[i].colImgRectTf.localPosition.y % spriteH;
+            for(int i = 0; i<skillSlotBtns.Length;i++){
+                float posY = skillSlotBtns[i].contentRectTf.localPosition.y % spriteH;
                 const int offsetY = 1;
-                float lastIdxPosY = (colSkillBtns[2].colImgRectTf.localPosition.y % spriteH) + offsetY;
+                float lastIdxPosY = (skillSlotBtns[2].contentRectTf.localPosition.y % spriteH) + offsetY;
                 if(spriteH / 2 <= posY && posY <= spriteH){
                     //Scrolling Up
-                    colSkillBtns[i].colImgRectTf.Translate(0, speed / (i+1), 0);
+                    skillSlotBtns[i].contentRectTf.Translate(0, speed / (i+1), 0);
                     Debug.Log($"LevelUpPanelAnimate::Update():: lastIdxPosY:{lastIdxPosY}->MathRound:{Mathf.Round(lastIdxPosY)} == spriteHeight{spriteH - spriteH * 0.1f}");
                     //最後Idxが終わるまで待つ
                     if(Mathf.Round(lastIdxPosY) >= spriteH - spriteH * 0.1f){ //* ピッタリ止まらないので、10％周りの範囲に来たら処理することで対応。
@@ -142,12 +128,12 @@ public class LevelUpPanelAnimate : MonoBehaviour{
                         // Debug.Log($"最後まで待ちました。btnImg[0].Y={colSkillBtns[0].colImgRectTf.localPosition.y}, btnImg[1].Y={colSkillBtns[1].colImgRectTf.localPosition.y}, btnImg[2].Y={colSkillBtns[2].colImgRectTf.localPosition.y}");
                         //* 少しずれた位置をピッタリ直す。
                         int btnIdx=0;
-                        Array.ForEach(colSkillBtns, btn => {
-                            int rest = Mathf.RoundToInt(btn.colImgRectTf.localPosition.y) % spriteH;
-                            btn.colImgRectTf.localPosition = new Vector3(
-                                btn.colImgRectTf.localPosition.x, 
-                                btn.colImgRectTf.localPosition.y - rest + (btnIdx==2? spriteH : 0), //* なぜか、３番目には高さを一回足さないと、ずれるBUGある。
-                                btn.colImgRectTf.localPosition.z);
+                        Array.ForEach(skillSlotBtns, btn => {
+                            int rest = Mathf.RoundToInt(btn.contentRectTf.localPosition.y) % spriteH;
+                            btn.contentRectTf.localPosition = new Vector3(
+                                btn.contentRectTf.localPosition.x, 
+                                btn.contentRectTf.localPosition.y - rest + (btnIdx==2? spriteH : 0), //* なぜか、３番目には高さを一回足さないと、ずれるBUGある。
+                                btn.contentRectTf.localPosition.z);
                             btnIdx++;
                         });
                     }
@@ -159,16 +145,18 @@ public class LevelUpPanelAnimate : MonoBehaviour{
 //* --------------------------------------------------------------------------------------
 //* GUI Button
 //* --------------------------------------------------------------------------------------
-    public void onClickSkillUpBtn(int index){//* Skill Level Up
+    public void onClickPanelStopScrolling(){
         //* (BUG)曲がりが終わるまで、SkillBtnクリックできないように(スキル名が在るかを確認)。
-        if(Array.Exists(colSkillBtns, btn => btn.name.text == "")) {
+        if(Array.Exists(skillSlotBtns, btn => btn.name.text == "")) {
             time = span; // スロットが曲がるのを止める。
-            return;
         }
-        Debug.LogFormat("<color=green>onClickSkillUpBtn({0}):: pl.Lv= {1}, name= {2}</color>", index , pl.Lv, colSkillBtns[index].name.text);
+    }
+    public void onClickSkillUpBtn(int index){//* Skill Level Up
+        onClickPanelStopScrolling();
 
+        Debug.LogFormat("<color=green>onClickSkillUpBtn({0}):: pl.Lv= {1}, name= {2}</color>", index , pl.Lv, skillSlotBtns[index].name.text);
         //* Set Data
-        var psv = DM.ins.convertPsvSkillStr2Enum(colSkillBtns[index].name.text);
+        var psv = DM.ins.convertPsvSkillStr2Enum(skillSlotBtns[index].name.text);
         switch(psv){
             case DM.PSV.Dmg:
                 UpgradeDt[] upgradeArr = DM.ins.personalData.Upgrade.Arr;
@@ -274,17 +262,19 @@ public class LevelUpPanelAnimate : MonoBehaviour{
 /// --------------------------------------------------------------------------------------
     private string setRandomPsvSkill(LevelUpSkillPanelBtn slotBtn, out int randIdx, int randPer, out string tagName){
         randIdx = Random.Range(0, skillList.Count);
+        Debug.Log("setRandomPsvSkill:: randIdx= " + randIdx);
 
         //* Set Position (.Key -> PosY)
-        int halfHeightMorePosY = skillList[randIdx].Key + spriteH / 2; 
-        slotBtn.colImgRectTf.localPosition = new Vector3(0, halfHeightMorePosY, 0);
+        int spriteHalfHeight = spriteH / 2;
+        int posY = skillList[randIdx].Key + spriteHalfHeight; 
+        slotBtn.contentRectTf.localPosition = new Vector3(0, posY, 0);
 
         //* Set Name 
         string skillName = skillList[randIdx].Value.name.Split(char.Parse("_"))[1];
         tagName = skillList[randIdx].Value.transform.tag;
         slotBtn.name.text = LANG.getTxt(skillName);
 
-        Debug.Log("LevelUpPanelAnimate Skill Slots Stop:: " + slotBtn.colImgRectTf.parent.name
+        Debug.Log("LevelUpPanelAnimate Skill Slots Stop:: " + slotBtn.contentRectTf.parent.name
             + ":: randPer(" + randPer + ") : " + (randPer < LM._.LEVELUP_SLOTS_UNIQUE_PER? "<color=red>UNIQUE!</color>" : "GENERAL")
             + " ➡ <b>" + skillName + " </b>" 
             + " ,Tag= " + (tagName == DM.TAG.PsvSkillUnique.ToString()? "<color=red>" + tagName + "</color>" : tagName)
@@ -309,24 +299,18 @@ public class LevelUpPanelAnimate : MonoBehaviour{
         titleTxt.text = (isLvUp)? LANG.getTxt(LANG.TXT.LevelUpPanel_Title.ToString())
             : LANG.getTxt(LANG.TXT.PsvSkillTicket.ToString());
     }
-    private void resetSkillImgChild(){
-        if(0 < colSkillBtns[0].colImgRectTf.childCount){
-            foreach(var btn in colSkillBtns){
+    private void clearSlotSkillImgs(){
+        if(0 < skillSlotBtns[0].contentRectTf.childCount){
+            foreach(var btn in skillSlotBtns){
                 btn.name.text = "";
-                foreach(RectTransform befChild in btn.colImgRectTf)
-                    Destroy(befChild.gameObject);
+                foreach(RectTransform child in btn.contentRectTf)
+                    Destroy(child.gameObject);
             }
         }
     }
-    private void setSkillList(List<KeyValuePair<int, GameObject>> skillList){
-        for(int i = 0; i < skillImgCnt ; i++){
-            int posY = spriteH * i;
-            skillList.Add(new KeyValuePair<int, GameObject>(posY, gm.PsvSkillImgPrefs[i+1]));
-            Debug.LogFormat("setSkillList:: skillList[{0}].key= {1}, .value= <color=white>{2}</color>", i, skillList[i].Key, skillList[i].Value.name);
-        }
-    }
-    private void setExceptList(){
+    private void exceptMaxLvSkill(){
         var psvLvList = PsvSkill<int>.getPsvLVList(pl);
+        //* Except List 作成
         psvLvList.ForEach(lv => {
             var maxLv = PsvSkill<int>.getPsvMaxLVList(pl).Find(maxLv => (maxLv.Key == lv.Key));
             if(lv.Value >= maxLv.Value){
@@ -334,15 +318,14 @@ public class LevelUpPanelAnimate : MonoBehaviour{
                 exceptSkNameList.Add(curLangSkillName);
             }
         });
-        exceptSkNameList.ForEach(name => Debug.Log("setExceptList:: exceptSkNameList= <color=red>" + name + "</color>"));
 
         //* Except Max Level List
         exceptSkNameList.ForEach(exceptSkill => {
-            for(int i=0; i<gm.PsvImgRectTfTemp.childCount; i++){
-                // Debug.Log($"gm.ColPsvImgRectTfTemp.getChild({i}) -> " + psvImgRectTf.GetChild(i));
+            for(int i = 0; i<gm.PsvImgRectTfTemp.childCount; i++){
+                if(i == 0) continue;
+                
                 string psvSkillName = gm.PsvImgRectTfTemp.GetChild(i).name.Split('_')[1];
                 string psvSkill = LANG.getTxt(psvSkillName); // exceptSkillと言語合わせる。
-                // Debug.Log($"ExceptMaxLv:: {exceptSkill} == {psvSkill} : {exceptSkill == psvSkill}");
                 if(exceptSkill == psvSkill){
                     Debug.Log($"ExceptMaxLv:: {exceptSkill} == {psvSkill} : <color=red>{exceptSkill == psvSkill}</color>");
 
@@ -356,28 +339,22 @@ public class LevelUpPanelAnimate : MonoBehaviour{
         //* Result
         for(int i=0; i<gm.PsvImgRectTfTemp.childCount; i++)
             Debug.Log($"Result gm.PsvImgRectTfTemp -> " + gm.PsvImgRectTfTemp.GetChild(i).name);
-
     }
-    private void createSkillListSprite(){
+    private void createSlotSkillImgs(){
         for(int i=0; i<gm.PsvImgRectTfTemp.childCount; i++){
-            Instantiate(gm.PsvImgRectTfTemp.GetChild(i), colSkillBtns[0].colImgRectTf);
-            Instantiate(gm.PsvImgRectTfTemp.GetChild(i), colSkillBtns[1].colImgRectTf);
-            Instantiate(gm.PsvImgRectTfTemp.GetChild(i), colSkillBtns[2].colImgRectTf);
+            var psvSkill = gm.PsvImgRectTfTemp.GetChild(i);
+            Instantiate(psvSkill, skillSlotBtns[0].contentRectTf);
+            Instantiate(psvSkill, skillSlotBtns[1].contentRectTf);
+            Instantiate(psvSkill, skillSlotBtns[2].contentRectTf);
         }
-        // foreach(var btn in colSkillBtns){
-        //     //Insert SkillSprite into btnImgRectTf as Child
-        //     foreach(var psvSkImg in gm.PsvSkillImgPrefs){
-        //         string skillName = psvSkImg.name.Split('_')[1];
-        //         Debug.Log("createSkillListSprite:: psvSkImg= " + psvSkImg.name + "--Lang Convert--> " + LANG.getTxt(skillName));
-                
-        //         exceptSkNameList.ForEach(exceptSkill => {
-
-        //         });
-        //         Instantiate(psvSkImg, Vector3.zero, Quaternion.identity, btn.colImgRectTf);
-        //     }
-        //     //Set Auto Scroll Start Pos
-        //     btn.colImgRectTf.localPosition = new Vector3(0, spriteH * skillImgCnt, 0);
-        // }
+    }
+    private void setSkillList(List<KeyValuePair<int, GameObject>> skillList){
+        for(int i = 0; i < gm.psvImgRectTfTemp.childCount - 1; i++){
+            int posY = spriteH * i;
+            var child = gm.PsvImgRectTfTemp.GetChild(i+1).gameObject;
+            skillList.Add(new KeyValuePair<int, GameObject>(posY, child));
+            Debug.LogFormat("setSkillList:: skillList[{0}].key= {1}, .value= <color=white>{2}</color>", i, skillList[i].Key, skillList[i].Value.name);
+        }
     }
 #endregion
 }
