@@ -225,6 +225,7 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
     public Text rankTxt;    public Text RankTxt {get => rankTxt; set => rankTxt = value;}
     public Text nameTxt;    public Text NameTxt {get => nameTxt; set => nameTxt = value;}
     public Image downArrowImg;  public Image DownArrowImg {get => downArrowImg; set => downArrowImg = value;}
+    public bool isScrolling; 
 
     void Start(){
         scrollRect = GetComponent<ScrollRect>();
@@ -276,10 +277,13 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
     //* Update()
     public void OnScrollViewPos(RectTransform pos){ //* －が右側
         if(gameObject.name == "ItemPassivePanel(Clone)") return;
+        if(scrollSpeed > 4) isScrolling = true;
 
         float width = Mathf.Abs(DM.ins.ModelContentPref.rect.width);
         float offset = -(width + width/2);
+
         float curPosX = pos.anchoredPosition.x - offset;
+
         var prefs = (DM.ins.SelectItemType == DM.PANEL.Chara.ToString())? DM.ins.scrollviews[(int)DM.PANEL.Chara].ItemPrefs : DM.ins.scrollviews[(int)DM.PANEL.Bat].ItemPrefs;
         float max = width * prefs.Length - width;
         CurIdx = Mathf.Abs(Mathf.FloorToInt((curPosX) / width));
@@ -288,11 +292,15 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
         //* Scroll Speed
         scrollSpeed = Mathf.Abs(scrollBefFramePosX - pos.anchoredPosition.x);
         // Debug.Log(scrollBefFramePosX + " - " + pos.anchoredPosition.x + " = " + scrollSpeed);
-        // Debug.Log("getScrollViewPos:: Stop Scrolling:: curPosX=" + (curPosX) + " / " + max + ", CurIdx=" + CurIdx + " (CurIdxBasePos=" + CurIdxBasePos + "), scrollSpeed=" + scrollSpeed);
+        // Debug.Log("getScrollViewPos:: Stop Scrolling:: curPosX=" + (curPosX) + " / " + max + ", CurIdx=" + CurIdx + " (CurIdxBasePosX=" + CurIdxBasePosX + "), scrollSpeed=" + scrollSpeed);
 
         //* Stop Scrolling Near Index Chara
-        if(scrollSpeed < 1)
+        if(scrollSpeed < 2 && isScrolling){
+            scrollSpeed = 0;
+            isScrolling = false;
             updateModelTypeItemInfo();
+        }
+            
 
         //* update Before Frame PosX
         scrollBefFramePosX = pos.anchoredPosition.x;
@@ -311,6 +319,40 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
         ItemInfo curItem = getCurItem();
         Debug.Log($"<color=yellow>updateItemInfo:: type={type}, curItem= {curItem.name}</color>");
 
+        int curItemIdx = -1;
+        for(int i=0; i<contentTf.childCount; i++){
+            Transform modelParentTf = contentTf.GetChild(i);
+            Debug.Log("modelParentTf=>" + modelParentTf.GetChild(0).name + ", " + modelParentTf.GetChild(1).name);
+            modelParentTf.GetChild(0).gameObject.SetActive(false);
+            modelParentTf.GetChild(1).gameObject.SetActive(false);
+
+            if(curItem.name == modelParentTf.GetChild(0).name){
+                Debug.Log($"<color=green>INDEX= {i}</color>");
+                curItemIdx = i;
+            }
+        }
+
+        if(curItemIdx != -1){
+            for(int i=0; i<contentTf.childCount; i++){
+                Transform modelParentTf = contentTf.GetChild(i);
+                if(i == curItemIdx){
+                    Debug.Log("<color=green>" + modelParentTf.GetChild(0).name + "</color>");
+                    modelParentTf.GetChild(0).gameObject.SetActive(true);
+                    modelParentTf.GetChild(1).gameObject.SetActive(true);
+                }
+                else if(i == curItemIdx - 1){
+                    Debug.Log("<color=green>" + modelParentTf.GetChild(0).name + "</color>");
+                    modelParentTf.GetChild(0).gameObject.SetActive(true);
+                    modelParentTf.GetChild(1).gameObject.SetActive(true);
+                }
+                else if(i == curItemIdx + 1){
+                    Debug.Log("<color=green>" + modelParentTf.GetChild(0).name + "</color>");
+                    modelParentTf.GetChild(0).gameObject.SetActive(true);
+                    modelParentTf.GetChild(1).gameObject.SetActive(true);
+                }
+            }
+        }
+        
         //* Show Rank Text
         RankTxt.text = curItem.Rank.ToString();
 
@@ -568,7 +610,7 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
         var sprite = btns[CurIdx].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
         Debug.Log($"<color=yellow>onClickItem()</color>:: CurIdx= {CurIdx}, ins.name= {ins.name}, sprite= {sprite.name}");
     }
-        public ItemInfo getCurItem(){
+    public ItemInfo getCurItem(){
         var contents = getItemArr();
         int lastIdx = contents.Length - 1;
         //* (BUG) スクロールアイテムを最後を超えると、Out of Indexエラー発生。Clampで最大値LastIndexに固定。
