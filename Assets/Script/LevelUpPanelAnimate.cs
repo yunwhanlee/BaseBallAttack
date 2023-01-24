@@ -145,14 +145,19 @@ public class LevelUpPanelAnimate : MonoBehaviour{
 //* --------------------------------------------------------------------------------------
 //* GUI Button
 //* --------------------------------------------------------------------------------------
-    public void onClickPanelStopScrolling(){
+    private bool stopScrolling(){
         //* (BUG)曲がりが終わるまで、SkillBtnクリックできないように(スキル名が在るかを確認)。
         if(Array.Exists(skillSlotBtns, btn => btn.name.text == "")) {
             time = span; // スロットが曲がるのを止める。
+            return true;
         }
+        return false;
+    }
+    public void onClickPanelStopScrolling(){
+        stopScrolling();
     }
     public void onClickSkillUpBtn(int index){//* Skill Level Up
-        onClickPanelStopScrolling();
+        if(stopScrolling()) return; //* スロットを止めることなら、以下の処理をしない。
 
         Debug.LogFormat("<color=green>onClickSkillUpBtn({0}):: pl.Lv= {1}, name= {2}</color>", index , pl.Lv, skillSlotBtns[index].name.text);
         //* Set Data
