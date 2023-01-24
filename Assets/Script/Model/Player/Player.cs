@@ -125,7 +125,7 @@ public class Player : MonoBehaviour
         instantKill = new PsvSkill<float>(LANG.getTxt(DM.PSV.InstantKill.ToString()), psvLvArr[(int)DM.PSV.InstantKill].lv, 
             value: 0f, unit: 0.02f);
         critical = new PsvSkill<float>(LANG.getTxt(DM.PSV.Critical.ToString()), psvLvArr[(int)DM.PSV.Critical].lv, 
-            value: 0f, unit: 0.2f);
+            value: 0f, unit: 0.1f);
         explosion = new PsvSkill<Explosion>(LANG.getTxt(DM.PSV.Explosion.ToString()), psvLvArr[(int)DM.PSV.Explosion].lv, 
             value: new Explosion(0f, 0.75f), new Explosion(0.2f, 0.2f));
         expUp = new PsvSkill<float>(LANG.getTxt(DM.PSV.ExpUp.ToString()), psvLvArr[(int)DM.PSV.ExpUp].lv, 

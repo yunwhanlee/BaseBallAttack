@@ -44,6 +44,8 @@ public class BossBlock : Block_Prefab{
     }
 
     public void activeBossSkill(bool isFirst = false){ //* at NextStage
+        if(Hp <= 0) return; //* (BUG) ボースが死んだら、ボーススキル処理をしない。
+
         float delay = isFirst? 0.45f : 0.1f;
         StartCoroutine(coBossScreamSFX(delay));
         this.anim.SetTrigger(DM.ANIM.Scream.ToString());
@@ -55,22 +57,22 @@ public class BossBlock : Block_Prefab{
         switch(bossLevel){
             case 1:
                 if(randPer <= 0){createObstacleSingleType(4);}
-                else if(randPer <= 5){StartCoroutine(coBossHeal());}
+                else if(randPer <= 3){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack(BOSSATK_ANIM_NAME_LV1));
                 break;
             case 2:
                 if(randPer <= 0 && obstacleResetCnt == 0){createObstaclePatternType(0, 2);}
-                else if(randPer <= 5){StartCoroutine(coBossHeal());}
+                else if(randPer <= 3){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack(BOSSATK_ANIM_NAME_LV2));
                 break;
             case 3:
                 if(randPer <= 3 && obstacleResetCnt == 0){createObstaclePatternType(2, 4);}
-                else if(randPer <= 5){StartCoroutine(coBossHeal());}
+                else if(randPer <= 3){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack(BOSSATK_ANIM_NAME_LV3));
                 break;
             case 4:
                 if(randPer <= 3 && obstacleResetCnt == 0){createObstaclePatternType(4, 7);}
-                else if(randPer <= 5){StartCoroutine(coBossHeal());}
+                else if(randPer <= 3){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack(BOSSATK_ANIM_NAME_LV4));
                 break;
         }
@@ -305,7 +307,6 @@ public class BossBlock : Block_Prefab{
         SM.ins.sfxPlay(SM.SFX.BossDie.ToString());
         StartCoroutine(coPlayBossDieAnim(target));
     }
-
     IEnumerator coPlayBossDieAnim(GameObject target){
         gm.BossKillCnt++;
         gm.bossLimitCntTxt.gameObject.SetActive(false);
@@ -320,12 +321,11 @@ public class BossBlock : Block_Prefab{
 
         yield return new WaitForSecondsRealtime(playSec * 0.7f);
         for(int i=0; i < BOSS_DIE_ORB_CNT; i++)
-            bm.createDropItemExpOrbPf(bossDieOrbSpawnTf, resultExp, popPower: 3500);
+            bm.createDropItemExpOrbPf(bossDieOrbSpawnTf, resultExp, popPower: Mathf.RoundToInt(3000 * Time.deltaTime));
 
         yield return new WaitForSecondsRealtime(playSec * 0.3f + playSec); //* 消すのが早すぎ感じで、少し待機。
         Destroy(target);
     }
-
 
     //* Skill #1
     IEnumerator coObstacleSpawnSFX(int cnt){
