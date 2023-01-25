@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45015454, g: 0.5001945, b: 0.57542807, a: 1}
+  m_IndirectSpecularColor: {r: 0.45015407, g: 0.500194, b: 0.5754274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8892,7 +8892,7 @@ MonoBehaviour:
   TREASURECHEST_BLOCK_PER: 5
   TREASURECHEST_ORB_CNT: 7
   HEAL_BLOCK_PER: 5
-  REWARD_CHEST_PER: 305
+  REWARD_CHEST_PER: 10
   DROP_BOX_PER: 300
   DROPBOX_COIN_VALUE: 10
   DROPBOX_ALIVE_SPAN: 3
@@ -16478,6 +16478,7 @@ MonoBehaviour:
   hm: {fileID: 1887670884}
   mainCanvasTf: {fileID: 0}
   curIdxBasePosX: 0
+  befIdx: 0
   curIdx: 0
   scrollStopSpeed: 1
   uiGroup: {fileID: 144212381}
@@ -18002,6 +18003,7 @@ MonoBehaviour:
   hm: {fileID: 1887670884}
   mainCanvasTf: {fileID: 0}
   curIdxBasePosX: 0
+  befIdx: 0
   curIdx: 0
   scrollStopSpeed: 1
   uiGroup: {fileID: 0}
@@ -18150,6 +18152,7 @@ MonoBehaviour:
   hm: {fileID: 1887670884}
   mainCanvasTf: {fileID: 0}
   curIdxBasePosX: 0
+  befIdx: 0
   curIdx: 0
   scrollStopSpeed: 1
   uiGroup: {fileID: 841652357}
@@ -29032,6 +29035,7 @@ MonoBehaviour:
   hm: {fileID: 1887670884}
   mainCanvasTf: {fileID: 0}
   curIdxBasePosX: 0
+  befIdx: 0
   curIdx: 0
   scrollStopSpeed: 1
   uiGroup: {fileID: 0}
@@ -30210,6 +30214,7 @@ MonoBehaviour:
   hm: {fileID: 1887670884}
   mainCanvasTf: {fileID: 0}
   curIdxBasePosX: 0
+  befIdx: 0
   curIdx: 0
   scrollStopSpeed: 1
   uiGroup: {fileID: 0}
@@ -37681,6 +37686,7 @@ MonoBehaviour:
   hm: {fileID: 1887670884}
   mainCanvasTf: {fileID: 0}
   curIdxBasePosX: 0
+  befIdx: 0
   curIdx: 0
   scrollStopSpeed: 1
   uiGroup: {fileID: 0}

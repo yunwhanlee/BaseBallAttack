@@ -42,8 +42,6 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     
     //*Event
     public void OnPointerDown(PointerEventData eventData){
-        if(gm.State != GameManager.STATE.WAIT) return;
-        if(gm.bs.IsBallExist) return;
         if(gm.IsPlayingAnim) return;
         if(pl.IsStun) {
             pad.gameObject.SetActive(false);
@@ -51,48 +49,49 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         }
 
         Debug.Log("OnPointerDown::");
-        
+        if(gm.State == GameManager.STATE.WAIT){
+            if(gm.bs.IsBallExist) return;
+            pad.position = eventData.position;
+            pad.gameObject.SetActive(true);
 
-        pad.position = eventData.position;
-        pad.gameObject.SetActive(true);
+            Vector3 touchPos = new Vector3(eventData.position.x, eventData.position.y, 100);
+            if(Util._.checkRayHitTagIsExist(touchPos, DM.TAG.PlayerBattingSpot.ToString())){
+                //* 邪魔するボタンUI非活性化
+                gm.readyBtn.gameObject.SetActive(false);
+                gm.activeSkillBtnGroup.gameObject.SetActive(false);
 
-        Vector3 touchPos = new Vector3(eventData.position.x, eventData.position.y, 100);
-        if(Util._.checkRayHitTagIsExist(touchPos, DM.TAG.PlayerBattingSpot.ToString())){
-            //* 邪魔するボタンUI非活性化
-            gm.readyBtn.gameObject.SetActive(false);
-            gm.activeSkillBtnGroup.gameObject.SetActive(false);
+                Transform playerTf = pl.gameObject.transform;
+                List<MeshRenderer> filterList = new List<MeshRenderer>();
+                modelOriginMtList = new List<Material>();
+                plTfMeshRdrs = playerTf.GetComponentsInChildren<MeshRenderer>();
 
-            Transform playerTf = pl.gameObject.transform;
-            List<MeshRenderer> filterList = new List<MeshRenderer>();
-            modelOriginMtList = new List<Material>();
-            plTfMeshRdrs = playerTf.GetComponentsInChildren<MeshRenderer>();
+                isClickBattingSpot = true;
+                pl.setAnimTrigger(DM.ANIM.Touch.ToString());
 
-            isClickBattingSpot = true;
-            pl.setAnimTrigger(DM.ANIM.Touch.ToString());
+                string[] exceptStrArr = new string[] {
+                    DM.NAME.BallPreview.ToString(), 
+                    DM.NAME.Box001.ToString(), 
+                    DM.NAME.Area.ToString()
+                };
 
-            string[] exceptStrArr = new string[] {
-                DM.NAME.BallPreview.ToString(), 
-                DM.NAME.Box001.ToString(), 
-                DM.NAME.Area.ToString()
-            };
+                //* 例外Object フィルターリング
+                Array.ForEach(plTfMeshRdrs, meshRdr => {
+                    if(Array.TrueForAll(exceptStrArr, exceptStr => !meshRdr.name.Contains(exceptStr)))
+                        filterList.Add(meshRdr);
+                });
+                plTfMeshRdrs = filterList.ToArray(); 
 
-            //* 例外Object フィルターリング
-            Array.ForEach(plTfMeshRdrs, meshRdr => {
-                if(Array.TrueForAll(exceptStrArr, exceptStr => !meshRdr.name.Contains(exceptStr)))
-                    filterList.Add(meshRdr);
-            });
-            plTfMeshRdrs = filterList.ToArray(); 
-
-            //* Originマテリアル保存
-            Array.ForEach(plTfMeshRdrs, meshRdr => {
-                modelOriginMtList.Add(meshRdr.material);
-            });
-
-            //* クリックONモードマテリアルに変更
-            // Array.ForEach(plTfMeshRdrs, meshRdr => {
-            //     meshRdr.material = onClickedMt;
-            // });
+                //* Originマテリアル保存
+                Array.ForEach(plTfMeshRdrs, meshRdr => {
+                    modelOriginMtList.Add(meshRdr.material);
+                });
+            }
         }
+        else if(gm.State == GameManager.STATE.PLAY){
+            //* Swing !
+            pl.setAnimTrigger(DM.ANIM.Swing.ToString());
+        }
+
     }
 
     public void OnDrag(PointerEventData eventData){
@@ -154,8 +153,6 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         isClickBattingSpot = false;
         pad.gameObject.SetActive(false);
         stick.localPosition = Vector2.zero;
-        if(gm.State != GameManager.STATE.PLAY) return;
-        pl.setAnimTrigger(DM.ANIM.Swing.ToString());
     }
 
 ///------------------------------------------------------------------------------
