@@ -217,7 +217,7 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
     [Header("SCROLL SPEED")][Header("__________________________")]
     [SerializeField] float scrollStopSpeed;
     float scrollSpeed;
-    float scrollBefFramePosX;
+    [SerializeField] float scrollBefFramePosX;
 
     [Header("【 UI 】")][Header("__________________________")]
     public RectTransform uiGroup;   public RectTransform UIGroup {get => uiGroup;}
