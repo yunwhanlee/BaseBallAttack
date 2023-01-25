@@ -16486,6 +16486,7 @@ MonoBehaviour:
   rankTxt: {fileID: 343015043}
   nameTxt: {fileID: 72889156}
   downArrowImg: {fileID: 0}
+  isScrolling: 0
 --- !u!1 &935471162
 GameObject:
   m_ObjectHideFlags: 0
@@ -18009,6 +18010,7 @@ MonoBehaviour:
   rankTxt: {fileID: 0}
   nameTxt: {fileID: 0}
   downArrowImg: {fileID: 0}
+  isScrolling: 0
 --- !u!222 &995331212
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18114,7 +18116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.0141509175, b: 0.87981695, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -18156,6 +18158,7 @@ MonoBehaviour:
   rankTxt: {fileID: 1656664068}
   nameTxt: {fileID: 701541039}
   downArrowImg: {fileID: 0}
+  isScrolling: 0
 --- !u!222 &1002330458
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -29037,6 +29040,7 @@ MonoBehaviour:
   rankTxt: {fileID: 0}
   nameTxt: {fileID: 0}
   downArrowImg: {fileID: 0}
+  isScrolling: 0
 --- !u!1 &1340038404
 GameObject:
   m_ObjectHideFlags: 0
@@ -30214,6 +30218,7 @@ MonoBehaviour:
   rankTxt: {fileID: 0}
   nameTxt: {fileID: 0}
   downArrowImg: {fileID: 0}
+  isScrolling: 0
 --- !u!222 &1443353680
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -37684,6 +37689,7 @@ MonoBehaviour:
   rankTxt: {fileID: 0}
   nameTxt: {fileID: 0}
   downArrowImg: {fileID: 0}
+  isScrolling: 0
 --- !u!222 &1947457507
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -211,6 +211,7 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
 
     // float rectWidth;
     [SerializeField] float curIdxBasePosX;    public float CurIdxBasePosX {get => curIdxBasePosX; set => curIdxBasePosX = value;}
+    [SerializeField] int befIdx;
     [SerializeField] int curIdx;     public int CurIdx {get => curIdx; set => curIdx = value;}
 
     [Header("SCROLL SPEED")][Header("__________________________")]
@@ -259,24 +260,10 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
         updateModelTypeItemInfo();
     }
 
-    //* Drag Event
-    // public void OnBeginDrag(PointerEventData eventData){
-        // Debug.Log("<color=white> ScrollViewEvent:: Drag Begin </color>");
-    // }
-
-    // public void OnEndDrag(PointerEventData eventData){
-        //* (BUG) スクロールが先端と末端だったら、イベント起動しない。
-        // int posX = (int)dm.ScrollContentTf.anchoredPosition.x;
-        // Debug.Log("<color=white> ScrollViewEvent:: Drag End:: PosX=" + posX + ", CurIdx=" + CurIdx + "Charas.Len=" + (dm.CharaPfs.Length - 1) + "</color>");
-
-        // if(CurIdx == 0 || CurIdx == dm.CharaPfs.Length-1){
-        //     setScrollStopCharaInfo();
-        // }
-    // }
-
     //* Update()
     public void OnScrollViewPos(RectTransform pos){ //* －が右側
         if(gameObject.name == "ItemPassivePanel(Clone)") return;
+
         if(scrollSpeed > 4) isScrolling = true;
 
         float width = Mathf.Abs(DM.ins.ModelContentPref.rect.width);
@@ -291,8 +278,38 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
 
         //* Scroll Speed
         scrollSpeed = Mathf.Abs(scrollBefFramePosX - pos.anchoredPosition.x);
-        // Debug.Log(scrollBefFramePosX + " - " + pos.anchoredPosition.x + " = " + scrollSpeed);
-        // Debug.Log("getScrollViewPos:: Stop Scrolling:: curPosX=" + (curPosX) + " / " + max + ", CurIdx=" + CurIdx + " (CurIdxBasePosX=" + CurIdxBasePosX + "), scrollSpeed=" + scrollSpeed);
+        Debug.Log("getScrollViewPos:: Stop Scrolling:: curPosX=" + (curPosX) + " / " + max + ", CurIdx=" + CurIdx + " (CurIdxBasePosX=" + CurIdxBasePosX + "), scrollSpeed=" + scrollSpeed);
+
+        //* 目に見えるObjectのみ表示。(最適化)
+        if(befIdx !=curIdx){
+            Debug.Log($"befIdx({befIdx}) != curIdx({curIdx})");
+            befIdx = curIdx;
+
+            string type = DM.ins.SelectItemType;
+            var contentTf = (type == DM.PANEL.Chara.ToString())? DM.ins.scrollviews[(int)DM.PANEL.Chara].ContentTf
+                : DM.ins.scrollviews[(int)DM.PANEL.Bat].ContentTf;
+
+            //* 全て非表示
+            for(int i=0; i<contentTf.childCount; i++){
+                Transform modelParentTf = contentTf.GetChild(i);
+                Debug.Log("modelParentTf=>" + modelParentTf.GetChild(0).name + ", " + modelParentTf.GetChild(1).name);
+                modelParentTf.GetChild(0).gameObject.SetActive(false);
+                modelParentTf.GetChild(1).gameObject.SetActive(false);
+            }
+
+            //* 現在 アイテムと回りのみ表示
+            for(int i=0; i<contentTf.childCount; i++){
+                Transform modelParentTf = contentTf.GetChild(i);
+                const int range = 1;
+                for(int j = -range; j <= range; j++){
+                    if(i == curIdx + j){
+                        Debug.Log($"contentTf.GetChild({i}).name= {contentTf.GetChild(i).name}");
+                        modelParentTf.GetChild(0).gameObject.SetActive(true);
+                        modelParentTf.GetChild(1).gameObject.SetActive(true);
+                    }
+                }
+            }
+        }
 
         //* Stop Scrolling Near Index Chara
         if(scrollSpeed < 2 && isScrolling){
@@ -300,7 +317,6 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
             isScrolling = false;
             updateModelTypeItemInfo();
         }
-            
 
         //* update Before Frame PosX
         scrollBefFramePosX = pos.anchoredPosition.x;
@@ -318,40 +334,6 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
         
         ItemInfo curItem = getCurItem();
         Debug.Log($"<color=yellow>updateItemInfo:: type={type}, curItem= {curItem.name}</color>");
-
-        int curItemIdx = -1;
-        for(int i=0; i<contentTf.childCount; i++){
-            Transform modelParentTf = contentTf.GetChild(i);
-            Debug.Log("modelParentTf=>" + modelParentTf.GetChild(0).name + ", " + modelParentTf.GetChild(1).name);
-            modelParentTf.GetChild(0).gameObject.SetActive(false);
-            modelParentTf.GetChild(1).gameObject.SetActive(false);
-
-            if(curItem.name == modelParentTf.GetChild(0).name){
-                Debug.Log($"<color=green>INDEX= {i}</color>");
-                curItemIdx = i;
-            }
-        }
-
-        if(curItemIdx != -1){
-            for(int i=0; i<contentTf.childCount; i++){
-                Transform modelParentTf = contentTf.GetChild(i);
-                if(i == curItemIdx){
-                    Debug.Log("<color=green>" + modelParentTf.GetChild(0).name + "</color>");
-                    modelParentTf.GetChild(0).gameObject.SetActive(true);
-                    modelParentTf.GetChild(1).gameObject.SetActive(true);
-                }
-                else if(i == curItemIdx - 1){
-                    Debug.Log("<color=green>" + modelParentTf.GetChild(0).name + "</color>");
-                    modelParentTf.GetChild(0).gameObject.SetActive(true);
-                    modelParentTf.GetChild(1).gameObject.SetActive(true);
-                }
-                else if(i == curItemIdx + 1){
-                    Debug.Log("<color=green>" + modelParentTf.GetChild(0).name + "</color>");
-                    modelParentTf.GetChild(0).gameObject.SetActive(true);
-                    modelParentTf.GetChild(1).gameObject.SetActive(true);
-                }
-            }
-        }
         
         //* Show Rank Text
         RankTxt.text = curItem.Rank.ToString();
@@ -524,8 +506,6 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
             });
         }
     }
-
-
 
     //* ----------------------------------------------------------------
     //*   UI Button
