@@ -264,7 +264,7 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
     public void OnScrollViewPos(RectTransform pos){ //* －が右側
         if(gameObject.name == "ItemPassivePanel(Clone)") return;
 
-        if(scrollSpeed > 4) isScrolling = true;
+        // if(scrollSpeed > 4) isScrolling = true;
 
         float width = Mathf.Abs(DM.ins.ModelContentPref.rect.width);
         float offset = -(width + width/2);
@@ -285,34 +285,19 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
             Debug.Log($"befIdx({befIdx}) != curIdx({curIdx})");
             befIdx = curIdx;
 
+            //* Get ContentTf;
             string type = DM.ins.SelectItemType;
-            var contentTf = (type == DM.PANEL.Chara.ToString())? DM.ins.scrollviews[(int)DM.PANEL.Chara].ContentTf
-                : DM.ins.scrollviews[(int)DM.PANEL.Bat].ContentTf;
+            RectTransform contentTf = (type == DM.PANEL.Chara.ToString())? DM.ins.scrollviews[(int)DM.PANEL.Chara].ContentTf: DM.ins.scrollviews[(int)DM.PANEL.Bat].ContentTf;
 
-            //* 全て非表示
-            for(int i=0; i<contentTf.childCount; i++){
-                Transform modelParentTf = contentTf.GetChild(i);
-                Debug.Log("modelParentTf=>" + modelParentTf.GetChild(0).name + ", " + modelParentTf.GetChild(1).name);
-                modelParentTf.GetChild(0).gameObject.SetActive(false);
-                modelParentTf.GetChild(1).gameObject.SetActive(false);
-            }
+            //* 全てのアイテム 非表示
+            displayAll3DItems(contentTf, false);
 
             //* 現在 アイテムと回りのみ表示
-            for(int i=0; i<contentTf.childCount; i++){
-                Transform modelParentTf = contentTf.GetChild(i);
-                const int range = 1;
-                for(int j = -range; j <= range; j++){
-                    if(i == curIdx + j){
-                        Debug.Log($"contentTf.GetChild({i}).name= {contentTf.GetChild(i).name}");
-                        modelParentTf.GetChild(0).gameObject.SetActive(true);
-                        modelParentTf.GetChild(1).gameObject.SetActive(true);
-                    }
-                }
-            }
+            displayVisible3DItems(contentTf);
         }
 
         //* Stop Scrolling Near Index Chara
-        if(scrollSpeed < 2 && isScrolling){
+        if(scrollSpeed < 2){ //&& isScrolling){
             scrollSpeed = 0;
             isScrolling = false;
             updateModelTypeItemInfo();
@@ -323,14 +308,18 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
     }
 
     public void updateModelTypeItemInfo(){ //* CharaとBat専用。
+        //* Get ContentTf;
         string type = DM.ins.SelectItemType;
+        var contentTf = (type == DM.PANEL.Chara.ToString())? DM.ins.scrollviews[(int)DM.PANEL.Chara].ContentTf : DM.ins.scrollviews[(int)DM.PANEL.Bat].ContentTf;
+
         if(BoxSprRdr == null) return; // Error) Object Null
         if(type != DM.PANEL.Chara.ToString() && type != DM.PANEL.Bat.ToString()) return; //* (BUG-1) Upgrade-PANELも入ってきて、再ロードした場合 Out Of Indexバグの発生すること対応。
 
-        var contentTf = (type == DM.PANEL.Chara.ToString())? DM.ins.scrollviews[(int)DM.PANEL.Chara].ContentTf
-            : DM.ins.scrollviews[(int)DM.PANEL.Bat].ContentTf;
         //* Set PosX
         contentTf.anchoredPosition = new Vector2(CurIdxBasePosX, -500);
+
+        //* 全てのアイテム 表示
+        displayAll3DItems(contentTf, true);
         
         ItemInfo curItem = getCurItem();
         Debug.Log($"<color=yellow>updateItemInfo:: type={type}, curItem= {curItem.name}</color>");
@@ -369,6 +358,26 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
         boxGlowEf.GlowColor = color;
         boxGlowEf.GlowBrightness = brightness;
         boxGlowEf.OutlineWidth = outline;
+    }
+    private void displayAll3DItems(RectTransform contentTf, bool isActive){
+        for(int i=0; i<contentTf.childCount; i++){
+            Transform modelParentTf = contentTf.GetChild(i);
+            // Debug.Log("modelParentTf=>" + modelParentTf.GetChild(0).name + ", " + modelParentTf.GetChild(1).name);
+            modelParentTf.GetChild(0).gameObject.SetActive(isActive);
+            modelParentTf.GetChild(1).gameObject.SetActive(isActive);
+        }
+    }
+    private void displayVisible3DItems(RectTransform contentTf, int range = 1){
+        for(int i=0; i<contentTf.childCount; i++){
+            Transform modelParentTf = contentTf.GetChild(i);
+            for(int j = -range; j <= range; j++){
+                if(i == curIdx + j){
+                    // Debug.Log($"contentTf.GetChild({i}).name= {contentTf.GetChild(i).name}");
+                    modelParentTf.GetChild(0).gameObject.SetActive(true);
+                    modelParentTf.GetChild(1).gameObject.SetActive(true);
+                }
+            }
+        }
     }
 
     public void drawCheckBtnUI(){
