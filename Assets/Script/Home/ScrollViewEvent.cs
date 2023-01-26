@@ -264,7 +264,7 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
     public void OnScrollViewPos(RectTransform pos){ //* －が右側
         if(gameObject.name == "ItemPassivePanel(Clone)") return;
 
-        // if(scrollSpeed > 4) isScrolling = true;
+        if(scrollSpeed > 4) isScrolling = true;
 
         float width = Mathf.Abs(DM.ins.ModelContentPref.rect.width);
         float offset = -(width + width/2);
@@ -276,9 +276,14 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
         CurIdx = Mathf.Abs(Mathf.FloorToInt((curPosX) / width));
         CurIdxBasePosX = -((CurIdx+1) * width);
 
+        string type = DM.ins.SelectItemType;
+        RectTransform contentTf = (type == DM.PANEL.Chara.ToString())? DM.ins.scrollviews[(int)DM.PANEL.Chara].ContentTf: DM.ins.scrollviews[(int)DM.PANEL.Bat].ContentTf;
+
         //* Scroll Speed
-        scrollSpeed = Mathf.Abs(scrollBefFramePosX - pos.anchoredPosition.x);
-        Debug.Log("getScrollViewPos:: Stop Scrolling:: curPosX=" + (curPosX) + " / " + max + ", CurIdx=" + CurIdx + " (CurIdxBasePosX=" + CurIdxBasePosX + "), scrollSpeed=" + scrollSpeed);
+        scrollSpeed = (int)Mathf.Abs(scrollBefFramePosX - pos.anchoredPosition.x);
+        // Debug.Log("getScrollViewPos:: Stop Scrolling:: curPosX=" + (curPosX) + " / " + max + ", CurIdx=" + CurIdx + ", scrollSpeed=" + scrollSpeed);
+        Debug.Log($"getScrollViewPos:: CurIdxBasePosX={CurIdxBasePosX}, contentTf.anchoredPosition.x= {contentTf.anchoredPosition.x}");
+
 
         //* 目に見えるObjectのみ表示。(最適化)
         if(befIdx !=curIdx){
@@ -286,8 +291,6 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
             befIdx = curIdx;
 
             //* Get ContentTf;
-            string type = DM.ins.SelectItemType;
-            RectTransform contentTf = (type == DM.PANEL.Chara.ToString())? DM.ins.scrollviews[(int)DM.PANEL.Chara].ContentTf: DM.ins.scrollviews[(int)DM.PANEL.Bat].ContentTf;
 
             //* 全てのアイテム 非表示
             displayAll3DItems(contentTf, false);
@@ -297,12 +300,15 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
         }
 
         //* Stop Scrolling Near Index Chara
-        if(scrollSpeed < 2){ //&& isScrolling){
+        if(scrollSpeed < 2 && isScrolling){
             scrollSpeed = 0;
             isScrolling = false;
             updateModelTypeItemInfo();
+            //* Set PosX
+            contentTf.anchoredPosition = new Vector2(CurIdxBasePosX, -500);
         }
 
+        
         //* update Before Frame PosX
         scrollBefFramePosX = pos.anchoredPosition.x;
     }
@@ -316,7 +322,7 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
         if(type != DM.PANEL.Chara.ToString() && type != DM.PANEL.Bat.ToString()) return; //* (BUG-1) Upgrade-PANELも入ってきて、再ロードした場合 Out Of Indexバグの発生すること対応。
 
         //* Set PosX
-        contentTf.anchoredPosition = new Vector2(CurIdxBasePosX, -500);
+        // contentTf.anchoredPosition = new Vector2(CurIdxBasePosX, -500);
 
         //* 全てのアイテム 表示
         displayAll3DItems(contentTf, true);

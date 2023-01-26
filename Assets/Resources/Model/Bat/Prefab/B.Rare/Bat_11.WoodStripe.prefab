@@ -170,10 +170,10 @@ MonoBehaviour:
   - 
   - 
   - 
+  atvSkillValueTxt: {fileID: 0}
   price:
     type: 0
-    coin: 0
-    diamond: 0
+    val: 0
   isLock: 0
   isChecked: 1
   isCheckedImgObj: {fileID: 0}
@@ -183,9 +183,9 @@ MonoBehaviour:
   rank: 1
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
-  cashShopPriceTxt: {fileID: 0}
   upgradeValueTxt: {fileID: 0}
   lvTxt: {fileID: 0}
+  cashShopPriceTxt: {fileID: 0}
   itemPassive:
     arr:
     - name: Dmg

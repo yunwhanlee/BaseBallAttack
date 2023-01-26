@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: -1816379110471099787}
   - component: {fileID: 649507260772470759}
   m_Layer: 3
-  m_Name: Bat_8
+  m_Name: Bat_8.StripeB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,10 +170,10 @@ MonoBehaviour:
   - 
   - 
   - 
+  atvSkillValueTxt: {fileID: 0}
   price:
     type: 0
-    coin: 0
-    diamond: 0
+    val: 0
   isLock: 0
   isChecked: 1
   isCheckedImgObj: {fileID: 0}
@@ -183,9 +183,9 @@ MonoBehaviour:
   rank: 1
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
-  cashShopPriceTxt: {fileID: 0}
   upgradeValueTxt: {fileID: 0}
   lvTxt: {fileID: 0}
+  cashShopPriceTxt: {fileID: 0}
   itemPassive:
     arr:
     - name: Dmg
