@@ -668,12 +668,19 @@ public class HomeManager : MonoBehaviour
     }
 
     private void createCurModel(GameObject chara, GameObject bat, Transform modelTf){
+        Debug.Log("createCurModel:: ");
         var childs = modelTf.GetComponentsInChildren<Transform>();
         // Chara
         var charaIns = Instantiate(chara, Vector3.zero, Quaternion.identity, modelTf) as GameObject;
         // Bat
         Transform tf = Util._.getCharaRightArmPath(charaIns.transform);
-        Instantiate(bat, bat.transform.position, bat.transform.rotation, tf);
+        var batIns = Instantiate(bat, bat.transform.position, bat.transform.rotation, tf);
+        Debug.Log($"createCurModel:: batIns= {batIns.name}");
+        //* Bat Imageなど要らない部分を非表示して、3Dモデルのみ表示。
+        for(int i=0; i < batIns.transform.childCount; i++){
+            if(i==0) batIns.transform.GetChild(0).gameObject.SetActive(true);
+            else  batIns.transform.GetChild(i).gameObject.SetActive(false);
+        }
         
         //* Home Model Delete
         if(0 < modelTf.childCount){

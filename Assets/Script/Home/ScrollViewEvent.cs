@@ -705,8 +705,18 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler//, IEndDragHandl
                 SM.ins.sfxPlay(SM.SFX.PurchaseSuccess.ToString());
                 Debug.Log("purchaseItem:: curItem.transform.GetChild(0)=" + curItem.transform.GetChild(0).name);
                 goods -= price;
-                GameObject SkillImgObj = curItem.transform.GetChild(0).gameObject; //* (BUG-8) Home:: Bat.getChild(0).getChild(0)-> Null ---> getChild(0)が正しい。
-                em.createItemBuyEF(this, SkillImgObj, DM.ins.SelectItemType);
+
+                GameObject imgObj = null;
+                switch(DM.ins.SelectItemType){
+                    case "Skill":
+                        //* (BUG-8) Home:: Bat.getChild(0).getChild(0)-> Null ---> getChild(0)が正しい。
+                        imgObj = curItem.transform.GetChild(0).gameObject;
+                        break;
+                    case "Bat":
+                        imgObj = curItem.transform.GetChild(curItem.transform.childCount - 1).gameObject;
+                        break;
+                }
+                em.createItemBuyEF(this, imgObj, DM.ins.SelectItemType);
                 em.createCongratuBlastRainbowEF(mainCanvasTf);
                 curItem.IsLock = false; //* 解禁
                 curItem.checkLockedModel();

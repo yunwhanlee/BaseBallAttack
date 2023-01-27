@@ -30,12 +30,20 @@ public class HomeEffectManager : MonoBehaviour
         Debug.Log("!!!! scrollView.name -> " + scrollView.name);
         
         //* (BUG-7) ItemBuyEF-UIがスキルの場合は、似合わないこと対応：該当なスキルイメージ生成、メダルの真ん中に位置調整。
-        if(type == DM.PANEL.Skill.ToString()){
+        if(type == DM.PANEL.Skill.ToString() || type == DM.PANEL.Bat.ToString()){
             var canvasTf = ins.GetComponentInChildren<Canvas>().transform;
             var imgIns = Instantiate(SkillImgObj, Vector3.zero, Quaternion.identity, canvasTf);
             //* RectTransform 調整
             imgIns.GetComponent<RectTransform>().transform.localPosition = new Vector3(0, 100, 0);
-            imgIns.GetComponent<RectTransform>().localScale = Vector3.one * 2;
+            switch(type){
+                case "Skill":
+                    imgIns.GetComponent<RectTransform>().localScale = new Vector3(2,2,2);
+                    break;
+                case "Bat":
+                    imgIns.GetComponent<RectTransform>().localScale = new Vector3(5,6,6);
+                    break;
+            }
+            
         }
         Destroy(ins, 2);
     }
