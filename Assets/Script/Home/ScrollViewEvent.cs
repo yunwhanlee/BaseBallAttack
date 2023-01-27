@@ -80,9 +80,9 @@ public class ScrollView {
                     displayItemPassiveUI(type, itemPassiveList, itemSkillBoxPref, psvPanel);
                     break;
                 case DM.PANEL.Bat :
-                    Vector3 ZOOM_IN_POS = new Vector3(1.61f, 0.75f, 4.43f); //* ベットは小さいから少しズームイン。
-                    ins.transform.localPosition = ZOOM_IN_POS;
-                    ins.transform.localRotation = Quaternion.Euler(ins.transform.localRotation.x, ins.transform.localRotation.y, -45);
+                    // Vector3 ZOOM_IN_POS = new Vector3(1.61f, 0.75f, 4.43f); //* ベットは小さいから少しズームイン。
+                    // ins.transform.localPosition = ZOOM_IN_POS;
+                    // ins.transform.localRotation = Quaternion.Euler(ins.transform.localRotation.x, ins.transform.localRotation.y, -45);
                     displayItemPassiveUI(type, itemPassiveList, itemSkillBoxPref, psvPanel);
                     break;
                 case DM.PANEL.Skill : 
@@ -201,7 +201,7 @@ public class ScrollView {
 //* -----------------------------------------------------------------------------------
 //* スクロールビュー イベント
 //* -----------------------------------------------------------------------------------
-public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandler
+public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler//, IEndDragHandler
 {
     //* OutSide
     public HomeEffectManager em;
@@ -260,11 +260,16 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
         updateModelTypeItemInfo();
     }
 
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        isScrolling = true;
+    }
+
     //* Update()
     public void OnScrollViewPos(RectTransform pos){ //* －が右側
         if(gameObject.name == "ItemPassivePanel(Clone)") return;
-
-        if(scrollSpeed > 4) isScrolling = true;
+        // if(!isScrolling) return;
+        // if(scrollSpeed > 4) isScrolling = true;
 
         float width = Mathf.Abs(DM.ins.ModelContentPref.rect.width);
         float offset = -(width + width/2);
@@ -300,9 +305,9 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
         }
 
         //* Stop Scrolling Near Index Chara
-        if(scrollSpeed < 2 && isScrolling){
-            scrollSpeed = 0;
-            isScrolling = false;
+        if(scrollSpeed < 2){// && isScrolling){
+            // scrollSpeed = 0;
+            // isScrolling = false;
             updateModelTypeItemInfo();
             //* Set PosX
             contentTf.anchoredPosition = new Vector2(CurIdxBasePosX, -500);
