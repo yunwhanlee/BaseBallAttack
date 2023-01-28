@@ -8879,7 +8879,7 @@ MonoBehaviour:
   HARDMODE_COIN_BONUS: 4
   HARDMODE_DIAMOND_BONUS: 1.5
   VICTORY_BOSSKILL_CNT: 4
-  BOSS_STAGE_SPAN: 4
+  BOSS_STAGE_SPAN: 2
   BOSS_LIMIT_SPAN: 12
   LONG_BLOCK_SPAN: 7
   ICE_FREEZE_DURATION: 1
@@ -17177,11 +17177,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f5ce09746a3938e40938fb75cf1b5d11, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ded76cf56ada8ce418d3c5213defed2b, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
