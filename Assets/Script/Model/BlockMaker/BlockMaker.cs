@@ -129,13 +129,13 @@ public class BlockMaker : MonoBehaviour
         }
     }
 
-    public void createDropItemExpOrbPf(Transform blockTf, int resultExp, int popPower = 350){
+    public void createDropItemExpOrbPf(Transform blockTf, int resultExp, int popPower = 500){
         Debug.Log("createDropItemExpOrbPf:: blockTf= " + blockTf + ", resultExp= " + resultExp);
 
         var ins = ObjectPool.getObject(ObjectPool.DIC.DropItemExpOrbPf.ToString(), blockTf.position, Quaternion.identity, gm.dropItemGroup);
         var block = blockTf.GetComponent<Block_Prefab>();
         ins.GetComponent<DropItem>().Exp = resultExp;
-        ins.GetComponent<DropItem>().spawnPopUp((int)(popPower * Time.deltaTime));
+        ins.GetComponent<DropItem>().spawnPopUp((int)(popPower * Time.fixedDeltaTime));
 
         //* RewardChest生成(Only単一)。
         var dropItemObjs = gm.dropItemGroup.GetComponentsInChildren<Transform>();
@@ -145,7 +145,7 @@ public class BlockMaker : MonoBehaviour
         int rand = Random.Range(0, 1000);
         if(rand < LM._.REWARD_CHEST_PER){
             var ins2 = Instantiate(dropItemRewardChestPf, blockTf.position, Quaternion.identity, gm.dropItemGroup);
-            ins2.GetComponent<DropItem>().spawnPopUp((int)(popPower * Time.deltaTime));
+            ins2.GetComponent<DropItem>().spawnPopUp((int)(popPower * Time.fixedDeltaTime));
         }
     }
 

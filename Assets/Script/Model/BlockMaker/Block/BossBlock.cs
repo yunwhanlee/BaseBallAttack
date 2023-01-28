@@ -321,7 +321,7 @@ public class BossBlock : Block_Prefab{
 
         yield return new WaitForSecondsRealtime(playSec * 0.7f);
         for(int i=0; i < BOSS_DIE_ORB_CNT; i++)
-            bm.createDropItemExpOrbPf(bossDieOrbSpawnTf, resultExp, popPower: Mathf.RoundToInt(3000 * Time.deltaTime));
+            bm.createDropItemExpOrbPf(bossDieOrbSpawnTf, resultExp, popPower: 250000);
 
         yield return new WaitForSecondsRealtime(playSec * 0.3f + playSec); //* 消すのが早すぎ感じで、少し待機。
         Destroy(target);
