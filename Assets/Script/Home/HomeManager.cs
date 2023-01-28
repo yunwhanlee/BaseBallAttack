@@ -676,9 +676,13 @@ public class HomeManager : MonoBehaviour
         Transform tf = Util._.getCharaRightArmPath(charaIns.transform);
         var batIns = Instantiate(bat, bat.transform.position, bat.transform.rotation, tf);
         Debug.Log($"createCurModel:: batIns= {batIns.name}");
+        
         //* Bat Imageなど要らない部分を非表示して、3Dモデルのみ表示。
         for(int i=0; i < batIns.transform.childCount; i++){
-            if(i==0) batIns.transform.GetChild(0).gameObject.SetActive(true);
+            if(i==0) {
+                batIns.transform.GetChild(0).gameObject.SetActive(true);
+                batIns.GetComponentInParent<MeshRenderer>().enabled = true;
+            }
             else  batIns.transform.GetChild(i).gameObject.SetActive(false);
         }
         

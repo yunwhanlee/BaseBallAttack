@@ -298,10 +298,9 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler//, IEndDragHandl
             //* Get ContentTf;
 
             //* 全てのアイテム 非表示
-            displayAll3DItems(contentTf, false);
-
+            // displayAll3DItems(contentTf, false);
             //* 現在 アイテムと回りのみ表示
-            displayVisible3DItems(contentTf);
+            // displayVisible3DItems(contentTf);
         }
 
         //* Stop Scrolling Near Index Chara
@@ -330,7 +329,7 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler//, IEndDragHandl
         // contentTf.anchoredPosition = new Vector2(CurIdxBasePosX, -500);
 
         //* 全てのアイテム 表示
-        displayAll3DItems(contentTf, true);
+        // displayAll3DItems(contentTf, true);
         
         ItemInfo curItem = getCurItem();
         Debug.Log($"<color=yellow>updateItemInfo:: type={type}, curItem= {curItem.name}</color>");
