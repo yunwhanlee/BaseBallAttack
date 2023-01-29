@@ -163,7 +163,7 @@ public class HomeManager : MonoBehaviour
     [SerializeField] Transform modelTf;   public Transform ModelTf {get => modelTf; set => modelTf = value;}
 
     void Start(){
-        //onClickResetBtn();
+        // onClickResetBtn();
 
         //* Set Quality
         QualitySettings.SetQualityLevel(DM.ins.personalData.Quality);
@@ -236,8 +236,10 @@ public class HomeManager : MonoBehaviour
         }
         else{
             //* Reset CoolTime
-            if(rouletteIconBtn.GetComponent<Image>().color != Color.grey)
+            if(rouletteIconBtn.GetComponent<Image>().color != Color.grey){
                 DM.ins.personalData.RouletteTicketCoolTime = DateTime.Now.ToString();
+                Debug.Log($"Reset CoolTime:: DM.RouletteTicketCoolTime= {DM.ins.personalData.RouletteTicketCoolTime}");
+            }
 
             rouletteIconBtn.GetComponent<Image>().color = Color.grey;
             rouletteIconCoolTimeTxt.text = updateADCoolTime(); //* Coolタイム 表示!
@@ -733,28 +735,35 @@ public class HomeManager : MonoBehaviour
         if(child.name == DM.NAME.GrayPanel.ToString()) child.gameObject.SetActive(isActive);
     }
     private string updateADCoolTime(){
+        TimeSpan coolTime;
+        DateTime finishTime = DateTime.MinValue;
         try{
-            DateTime finishTime = DateTime.ParseExact(DM.ins.personalData.RouletteTicketCoolTime, "yyyy/MM/dd HH:mm:ss", null).AddMinutes(LM._.ROULETTE_TICKET_COOLTIME_MINUTE);
-            // DateTime finishTime = DateTime.Parse(DM.ins.personalData.RouletteTicketCoolTime).AddMinutes(LM._.ROULETTE_TICKET_COOLTIME_MINUTE);
-            TimeSpan coolTime = finishTime - DateTime.Now;
+            //! (BUG-40) ROULETTEチケットが０になったとき、string not valid エラー発生。
+            //? DateTime.ParseExactを使ったことが原因。しかし、不安定でDataTime.Parseで同じエラー出る可能性あるかも。
+            // finishTime = DateTime.ParseExact(DM.ins.personalData.RouletteTicketCoolTime, "yyyy/MM/dd HH:mm:ss", null).AddMinutes(LM._.ROULETTE_TICKET_COOLTIME_MINUTE);
+            finishTime = DateTime.Parse(DM.ins.personalData.RouletteTicketCoolTime).AddMinutes(LM._.ROULETTE_TICKET_COOLTIME_MINUTE);
+            coolTime = finishTime - DateTime.Now;
 
+            //* CoolTimeが終わったら、チケットを一つ得る。
+            if(coolTime.Ticks < 0){
+                Debug.Log("Coolタイムが終わったら");
+                DM.ins.personalData.RouletteTicket++;
+                DM.ins.personalData.RouletteTicketCoolTime = null;
+            }
 
-        //* Coolタイムが終わったら
-        if(coolTime.Ticks < 0){ 
-            DM.ins.personalData.RouletteTicket++;
-            DM.ins.personalData.RouletteTicketCoolTime = null;
-        }
-
-        string coolTimeStr = coolTime.Minutes.ToString("00") + ":" + coolTime.Seconds.ToString("00");
-        // Debug.Log("coolTime= " + coolTime.Ticks + ", coolTimeStr= " + coolTimeStr);
-
-        return coolTimeStr;
+            //* TEXT-UIへ表示するため、String化。
+            string coolTimeStr = coolTime.Minutes.ToString("00") + ":" + coolTime.Seconds.ToString("00");
+            return coolTimeStr;
         }
         catch(Exception err){
-            Debug.LogError("ERROR::updateADCoolTime():: DM.ins.personalData.RouletteTicketCoolTime= " 
-                + DM.ins.personalData.RouletteTicketCoolTime + "/n msg= " + err);
-            
-            return "";
+            Debug.LogError("ERROR::updateADCoolTime():: " 
+                + "\n coolTime= " + coolTime
+                + "\n finishTime= " + finishTime
+                + "\n DM.RouletteTicketCoolTime= "+ DM.ins.personalData.RouletteTicketCoolTime
+                + "\n DateTime.Now= " + DateTime.Now
+                + "\n msg= " + err
+            );
+            return "ERROR";
         }
     }
     private void checkPremiumPackPurchaseStatus(){

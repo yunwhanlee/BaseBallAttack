@@ -62,8 +62,6 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [HideInInspector] public int HOMERUN_MIN_POWER;
     [Header("STAGE")][Header("__________________________")]
     [Tooltip("マックスステージ数")] public int MAX_STAGE = 300;
-    [Tooltip("ステージ当たりコイン手当")] public int STAGE_PER_COIN = 100;
-    [Tooltip("ステージ当たりダイア手当")] public int STAGE_PER_DIAMOND = 10;
     [Tooltip("ハードモードコイン掛け算ボーナス")] public int HARDMODE_COIN_BONUS = 2;
     [Tooltip("ハードモードダイア掛け算ボーナス")] public float HARDMODE_DIAMOND_BONUS = 1.5f;
 
@@ -101,7 +99,6 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("生きているターン")] public int DROPBOX_ALIVE_SPAN = 3;
 
     [Header("PLAYER")][Header("__________________________")]
-    
     [Tooltip("プレイヤー最大レベル")] public int MAX_LV = 50;
     public List<float> MAX_EXP_LIST = new List<float>();
 
@@ -120,6 +117,9 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("ポイズン毒ドットダーメジ％")] public float POISONSMOKE_DOT_DMG_PER = 0.2f;
     [Tooltip("アイスウェイブダーメジ％")] public float ICEWAVE_DMG_PER = 2.5f;
 
+    [Header("STAGE FINISH PRICE")][Header("__________________________")]
+    [Tooltip("ステージ当たりコイン手当")] public int STAGE_PER_COIN_PRICE = 100;
+    [Tooltip("ステージ当たりダイア手当")] public int STAGE_PER_DIAMOND_PRICE = 10;
 
     [Header("MODEL ITEM PRICE")][Header("__________________________")]
     [Tooltip("一般等級")] public int GENERAL_PRICE;
@@ -140,7 +140,12 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Header("ATV SKILL UPGRADE PRICE")][Header("__________________________")]
     [Tooltip("アクティブスキルアップグレード値段クラス")] public UpgradePriceCalcSetting UPGRADE_ATVSKILL;
 
-    [Header("REWARD")][Header("__________________________")]
+    [Header("REWARD CHEST")][Header("__________________________")]
+    [Tooltip("REWARD CHEST GOODS COIN配列")] public int[] REWARD_CHEST_COINARR = {100, 250, 500, 1000, 2000, 5000};
+    [Tooltip("REWARD CHEST GOODS DIAMOND配列")] public int[] REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
+
+
+    [Header("AD REWARD")][Header("__________________________")]
     [Tooltip("レベルアップスロット、再回転に要するコイン")] public int REROTATE_SKILLSLOTS_PRICE_COIN = 200;
     [Tooltip("復活に要するダイアモンド")] public int REVIVE_PRICE_DIAMOND = 50;
     [Tooltip("ルーレットチケットの待機時間")] public int ROULETTE_TICKET_COOLTIME_MINUTE = 30;

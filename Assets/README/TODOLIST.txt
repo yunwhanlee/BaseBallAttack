@@ -1,3 +1,16 @@
+PRICE LEVELING
+
+1 Stage : 100 coin + 10 diamond.
+
+BossSpan : 15 Stage.
+
+NormalMode : 0-60 Stage (Max 6000 Coin + 600 Diamond)
+HardMode : 61-120 Stage (Max 12000 Coin + 1200 Diamond)
+
+REWARD_CHEST_COINARR = {100, 250, 500, 1000, 2000, 5000};
+REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
+
+
 [CONTENT]
     ● ボール打つランクUI表示(項目：BallSpeed、HitPower)。
 
@@ -389,19 +402,16 @@
     ✓ (BUG-31) 始めての場合、ダメージが０になるバグ対応。
     ✓ (BUG-32) ボールが投げて来ているとき、途中でブロックとぶつかるバグ対応。
     ✓ (BUG-33) nextStage()に行く時、時々downWallCollider.isTriggerがfalseのままになるBUG対応。
-    -  (BUG-34) ステージが終わっても、Expオブや次に進まないＢＵＧ
-    -  (BUG-35) onClickCheckBtn::checkAtvSkillItemSelectionIsFirstTime CHARAとBATの場合購入したら出るバグがあるため、caseによって処理を分ける。
-    -  (BUG-36) GAME->HOMEに戻った時、エラー発生。
     ✓ (BUG-37) モバイルで、保存ができないバグ対応。OnApplicationPause(paused)
     ✓ (BUG-38) RouletteStopSpeedCntがモバイルでは遅いので、２倍にして対応。
-    ✓ (BUG-39) 最初の実行だったら、ロードデータが無くてjsonがnullなので、resetして初期値を設定する。
-    
-    
-TEST結果。
     ✓ (BUG-40) ボースが死んでもボーススキールEFFFECTがする。
     ✓ (BUG-40) ボース死んだら出るオブPOWERがデバイスによって違うので、強すぎる。
-    - (BUG-41) アイテム購入が次のことになるバグ。
-    - (BUG-42) ScrollSnipが出来たら、止まるべきのに、少し動くバグ。
+    ✓ (BUG-39) 最初の実行だったら、ロードデータが無くてjsonがnullなので、resetして初期値を設定する。
+    ✓ (BUG-40) ROULETTEチケットが０になったとき、string not valid エラー発生対応。
+    - (BUG-41) ステージが終わっても、Expオブや次に進まないＢＵＧ
+    - (BUG-42) onClickCheckBtn::checkAtvSkillItemSelectionIsFirstTime CHARAとBATの場合購入したら出るバグがあるため、caseによって処理を分ける。
+    - (BUG-44) アイテム購入が次のことになるバグ。
+    - (BUG-45) ScrollSnipが出来たら、止まるべきのに、少し動くバグ。
     
     
     - 連続アップグレード可能に。

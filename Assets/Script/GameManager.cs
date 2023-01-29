@@ -321,6 +321,9 @@ public class GameManager : MonoBehaviour {
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         StartCoroutine(coRewardChestOpen());
     }
+/// --------------------------------------------------------------------------
+/// REWARD CHEST RANDOM OPEN
+/// --------------------------------------------------------------------------
     IEnumerator coRewardChestOpen(){
         Debug.Log("coRewardChestOpen()::");
         initRewardChestPanelUI(isOpen: true);
@@ -334,9 +337,9 @@ public class GameManager : MonoBehaviour {
         int rand = Random.Range(0, 100);
         int reward = 
             (rand < LM._.REWARD_GOODS_PER)? GOODS
-            :(rand < LM._.REWARD_PSVSKILL_TICKET_PER)? PSVSKILL_TICKET
-            :(rand < LM._.REWARD_ROULETTE_TICKET_PER)? ROULETTE_TICKET
-            :EMPTY;
+            : (rand < LM._.REWARD_PSVSKILL_TICKET_PER)? PSVSKILL_TICKET
+            : (rand < LM._.REWARD_ROULETTE_TICKET_PER)? ROULETTE_TICKET
+            : EMPTY;
 
         //* (BUG-12)LevelUpPanelが最初に表示するとき、Start()が実行される、PSVスキル選びがLevelに上書きされるバグ対応。
         if(levelUpPanel.activeSelf && reward == PSVSKILL_TICKET)
@@ -352,14 +355,14 @@ public class GameManager : MonoBehaviour {
                 int kind = (rand < 50)? COIN : DIAMOND;
                 switch(kind){
                     case COIN:{
-                        int[] priceArr = {100, 250, 500, 1000, 2000, 5000};
+                        int[] priceArr = LM._.REWARD_CHEST_COINARR;
                         rand = Random.Range(0, priceArr.Length);
                         setRewardChestPanelUI(coinBundleSpr, priceArr[rand].ToString(), LANG.getTxt(LANG.TXT.Get.ToString()));
                         goodsPriceDic.Add(DM.NAME.Coin.ToString(), priceArr[rand]); //* Reward
                         break;
                     }
                     case DIAMOND:{
-                        int[] priceArr = {10, 50, 100, 150, 500};
+                        int[] priceArr = LM._.REWARD_CHEST_DIAMONDARR;
                         rand = Random.Range(0, priceArr.Length);
                         setRewardChestPanelUI(diamondBundleSpr, priceArr[rand].ToString(), LANG.getTxt(LANG.TXT.Get.ToString()));
                         goodsPriceDic.Add(DM.NAME.Diamond.ToString(), priceArr[rand]); //* Reward
@@ -397,7 +400,6 @@ public class GameManager : MonoBehaviour {
         rewardChestContentTxt.text = contentTxt;
         rewardChestOkBtn.GetComponentInChildren<Text>().text = okTxt;
     }
-
     public void onClickRewardChestOkButton(int reward, Dictionary<string, int> goodsPriceDic){
         Debug.Log("onClickRewardChestOkButton:: reward= " + reward);
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
@@ -752,8 +754,8 @@ public class GameManager : MonoBehaviour {
             stage -= LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN;
 
         //* Coin & Diamond
-        coin += stage * LM._.STAGE_PER_COIN;
-        diamond += stage * LM._.STAGE_PER_DIAMOND;
+        coin += stage * LM._.STAGE_PER_COIN_PRICE;
+        diamond += stage * LM._.STAGE_PER_DIAMOND_PRICE;
         int extraUpgradeCoin = Mathf.RoundToInt(coin * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.CoinBonus].getValue());
 
         //* Show Reward Coin & Diamond => setGameでも使う。
