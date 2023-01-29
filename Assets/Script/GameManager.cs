@@ -332,7 +332,11 @@ public class GameManager : MonoBehaviour {
         const int GOODS = 0, PSVSKILL_TICKET = 1, ROULETTE_TICKET = 2, EMPTY = 3;
         var goodsPriceDic = new Dictionary<string, int>();
         int rand = Random.Range(0, 100);
-        int reward = (rand < 1)? GOODS : (rand < 90)? PSVSKILL_TICKET : (rand < 91)? ROULETTE_TICKET : EMPTY;
+        int reward = 
+            (rand < LM._.REWARD_GOODS_PER)? GOODS
+            :(rand < LM._.REWARD_PSVSKILL_TICKET_PER)? PSVSKILL_TICKET
+            :(rand < LM._.REWARD_ROULETTE_TICKET_PER)? ROULETTE_TICKET
+            :EMPTY;
 
         //* (BUG-12)LevelUpPanelが最初に表示するとき、Start()が実行される、PSVスキル選びがLevelに上書きされるバグ対応。
         if(levelUpPanel.activeSelf && reward == PSVSKILL_TICKET)
