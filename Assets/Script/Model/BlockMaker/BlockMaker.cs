@@ -258,7 +258,16 @@ public class BlockMaker : MonoBehaviour
         Time.timeScale = 1;
     }
     public void setGlowEF(Block_Prefab[] blocks, bool isOn){
-        Array.ForEach(blocks, bl => bl.GetComponent<Block_Prefab>().setEnabledSpriteGlowEF(isOn));
+        if(isOn){
+            int colorBallCnt = AtvSkill.ColorBallPopCnt;
+            int len = (colorBallCnt > blocks.Length)? blocks.Length : colorBallCnt;
+            for(int i=0; i<len; i++){
+                blocks[i].GetComponent<Block_Prefab>().setEnabledSpriteGlowEF(isOn);
+            }
+        }
+        else{
+            Array.ForEach(blocks, bl => bl.GetComponent<Block_Prefab>().setEnabledSpriteGlowEF(isOn));
+        }
     }
 #endregion
     public void setGlowEFAllBlocks(bool isOn){ //* Block Grow EF 解除
