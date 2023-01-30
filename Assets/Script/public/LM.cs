@@ -108,14 +108,25 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("GODBLESS発動のコンボ倍数")] public int GODBLESS_COMBO_SPAN = 10;
 
     [Header("ATV SKILL")][Header("__________________________")]
-    [Tooltip("アクティブスキル 減少％")] [Range(0, 1.0f)] public float ATV_COOLDOWN_UNIT = 0.01f;
-    [Tooltip("サンダーショットクリティカル倍数")] public float THUNDERSHOT_CRIT = 1f;
-    [Tooltip("サンダーショットヒットカウント")] public int THUNDERSHOT_HIT_CNT = 3;
-    [Tooltip("カラーボールポップ破壊するカウント")] public int COLORBALLPOP_CNT = 5;
-    [Tooltip("ファイヤーボールダーメジ％")] public float FIREBALL_DMG_PER = 2f;
-    [Tooltip("ファイヤーボールドットダーメジ％")] public float FIREBALL_DOT_DMG_PER = 0.15f;
-    [Tooltip("ポイズン毒ドットダーメジ％")] public float POISONSMOKE_DOT_DMG_PER = 0.2f;
-    [Tooltip("アイスウェイブダーメジ％")] public float ICEWAVE_DMG_PER = 2.5f;
+    [Tooltip("アクティブスキル 減少値％")] [Range(0, 1.0f)] public float ATV_COOLDOWN_UNIT = 0.01f;
+    [Tooltip("アクティブスキル MAXレベル値")] public int ATVSKILL_MAXLV = 20;
+    [Space(10)]
+    [Tooltip("サンダーショット クリティカル 倍数")] public float THUNDERSHOT_CRIT = 1f;
+    [Tooltip("サンダーショット デフォルト ヒットカウント")] public int THUNDERSHOT_DEF_HIT = 3;
+    [Tooltip("サンダーショット アップグレード ヒットカウント")] public int THUNDERSHOT_UPG_HIT = 1;
+    [Space(10)]
+    [Tooltip("カラーボール デフォルト カウント")] public int COLORBALLPOP_DEF_CNT = 5;
+    [Tooltip("カラーボール アップグレード カウント")] public int COLORBALLPOP_UPG_CNT = 1;
+    [Space(10)]
+    [Tooltip("ファイヤーボール デフォルト ダーメジ％")] public float FIREBALL_DEF_DMG_PER = 3f;
+    [Tooltip("ファイヤーボール アップグレード ダーメジ％")] public float FIREBALL_UPG_DMG_PER = 0.5f;
+    [Tooltip("ファイヤーボール ドット ダーメジ％")] public float FIREBALL_DOT_DMG_PER = 0.15f;
+    [Space(10)]
+    [Tooltip("ポイズン毒ドット デフォルト ダーメジ％")] public float POISONSMOKE_DEF_DMG_PER = 0.2f;
+    [Tooltip("ポイズン毒ドット アップグレード ダーメジ％")] public float POISONSMOKE_UPG_DMG_PER = 0.05f;
+    [Space(10)]
+    [Tooltip("アイスウェイブ デフォルト ダーメジ％")] public float ICEWAVE_DEF_DMG_PER = 2.5f;
+    [Tooltip("アイスウェイブ アップグレード％")] public float ICEWAVE_UPG_DMG_PER = 0.4f;
 
     [Header("STAGE FINISH PRICE")][Header("__________________________")]
     [Tooltip("ステージ当たりコイン手当")] public int STAGE_PER_COIN_PRICE = 100;

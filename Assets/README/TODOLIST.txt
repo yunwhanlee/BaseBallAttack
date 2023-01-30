@@ -332,6 +332,10 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
             ✓ ダメージ設定(初期化)。
             ✓ 他のスキルが選択されていないときは、✓表示する。選択されたら値段表示する。-> checkAtvSkillItemSelectionIsFirstTime
 
+        - ボースの攻撃をする時、最初であれば止めて案内するダイアログ表示。
+        - ルーレットをもっと面白く改善？
+        - ゲームスタートする際に、ハードモードかのマールモードか表示するAnimation？表示。
+
     ● 最適化。
         HOME
         ✓ Chara, Bat選択するとき、プレームドロップ。-> 目に見えるObjectのみ表示。(最適化)
@@ -363,7 +367,6 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
         原因：BefLVが０だったのが問題だったので、Player::Start()でBefLv = Lvで初期化。
     -  毒曇りスキルなどのPreview-GLOW-EFにエラーが発生。
     ✓ Map Design Terrian + BackGround Obstacle
-
     ✓ ジョイステックのコントロール改善：X軸左右調整だけで、Y軸の位置も合わせて切り替える処理。
     ✓ IcePropertyで、Meterialが戻らないBUG修正。
     ✓ (BUG-3) 障害物もFreezeからだめーず受けるように。
@@ -422,10 +425,6 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
 
     ✓ クリティカルダメージアップしても出来ない。
     ✓ TouchSlideControl.csで、ボール打つことをPointerUp -> Downに変更。
-
-    - マウスをTouchDownした時に。
-    - COIN２X。
-    - 
 
     
 

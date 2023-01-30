@@ -301,7 +301,8 @@ public class GameManager : MonoBehaviour {
     public void setBallPreviewGoalImgRGBA(Color color) => ballPreviewGoalImg.color = color;
     public void throwScreenAnimSetTrigger(string name) => throwScreen.GetComponent<Animator>().SetTrigger(name);
     public void setLightDarkness(bool isOn){ //* During Skill Casting ...
-        light.type = (isOn)? LightType.Spot : LightType.Directional;
+        light.color = (isOn)? Color.black : Color.white;
+        // light.type = (isOn)? LightType.Spot : LightType.Directional;
     }
 //* --------------------------------------------------------------------------------------
 //* GUI Button

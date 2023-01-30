@@ -39,15 +39,15 @@ public class UpgradeDt {
             return $"{Mathf.Round(value * 100)}%"; //* (BUG-11)
         //* ATV Skill
         else if(name == DM.ATV.ThunderShot.ToString())
-            return $"HIT {LM._.THUNDERSHOT_HIT_CNT + value}";
+            return $"HIT {LM._.THUNDERSHOT_DEF_HIT + value}";
         else if(name == DM.ATV.FireBall.ToString())
-            return $"DMG {(LM._.FIREBALL_DMG_PER + value) * 100}%";
+            return $"DMG {(LM._.FIREBALL_DEF_DMG_PER + value) * 100}%";
         else if(name == DM.ATV.ColorBall.ToString())
-            return $"CNT {LM._.COLORBALLPOP_CNT + value}";
+            return $"CNT {LM._.COLORBALLPOP_DEF_CNT + value}";
         else if(name == DM.ATV.PoisonSmoke.ToString())
-            return $"DMG {(LM._.POISONSMOKE_DOT_DMG_PER + value) * 100}%";
+            return $"DMG {(LM._.POISONSMOKE_DEF_DMG_PER + value) * 100}%";
         else if(name == DM.ATV.IceWave.ToString())
-            return $"DMG {(LM._.ICEWAVE_DMG_PER + value) * 100}%";
+            return $"DMG {(LM._.ICEWAVE_DEF_DMG_PER + value) * 100}%";
         else 
             return null;
     }
@@ -91,21 +91,13 @@ public class UpgradeList {
 //--------------------------------------------------------------------------------------------------
 [System.Serializable]
 public class AtvSkillUpgradeList {
-    //* Value
-    const int THUNDERSHOT_UPG_HIT_CNT = 1;
-    const float FIREBALL_UPG_DMG_PER = 0.2f;
-    const int COLORBALLPOP_UPG_CNT = 1;
-    const float POISONSMOKE_UPG_DMG_PER = 0.05f;
-    const float ICEWAVE_UPG_DMG_PER = 0.2f;
-    const int MAX_LV = 10;
-
     //* Init
     [SerializeField] UpgradeDt[] arr = {
-        new UpgradeDt(DM.ATV.ThunderShot.ToString(), THUNDERSHOT_UPG_HIT_CNT, MAX_LV),
-        new UpgradeDt(DM.ATV.FireBall.ToString(), FIREBALL_UPG_DMG_PER, MAX_LV),
-        new UpgradeDt(DM.ATV.ColorBall.ToString(), COLORBALLPOP_UPG_CNT, MAX_LV),
-        new UpgradeDt(DM.ATV.PoisonSmoke.ToString(), POISONSMOKE_UPG_DMG_PER, MAX_LV),
-        new UpgradeDt(DM.ATV.IceWave.ToString(), ICEWAVE_UPG_DMG_PER, MAX_LV),
+        new UpgradeDt(DM.ATV.ThunderShot.ToString(), LM._.THUNDERSHOT_UPG_HIT, LM._.ATVSKILL_MAXLV),
+        new UpgradeDt(DM.ATV.FireBall.ToString(), LM._.FIREBALL_UPG_DMG_PER, LM._.ATVSKILL_MAXLV),
+        new UpgradeDt(DM.ATV.ColorBall.ToString(), LM._.COLORBALLPOP_UPG_CNT, LM._.ATVSKILL_MAXLV),
+        new UpgradeDt(DM.ATV.PoisonSmoke.ToString(), LM._.POISONSMOKE_UPG_DMG_PER, LM._.ATVSKILL_MAXLV),
+        new UpgradeDt(DM.ATV.IceWave.ToString(), LM._.ICEWAVE_UPG_DMG_PER, LM._.ATVSKILL_MAXLV),
     };
     public UpgradeDt[] Arr {get => arr; set => arr = value;}
 }
@@ -411,13 +403,17 @@ public class AtvSkill{
         int ballDmg = Mathf.RoundToInt(pl.dmg.Val * DMG_TWICE * pl.giantBall.Val);
         var upgradeArr = DM.ins.personalData.AtvSkillUpgrade.Arr;
 
-        ThunderShotHitCnt = (int)(LM._.THUNDERSHOT_HIT_CNT + upgradeArr[(int)DM.ATV.ThunderShot].getValue());
+        ThunderShotHitCnt = (int)(LM._.THUNDERSHOT_DEF_HIT + upgradeArr[(int)DM.ATV.ThunderShot].getValue());
         ThunderShotCrit = LM._.THUNDERSHOT_CRIT;
-        FireballDmg = (int)(ballDmg * (LM._.FIREBALL_DMG_PER + (int)upgradeArr[(int)DM.ATV.FireBall].getValue()));
+
+        FireballDmg = (int)(ballDmg * (LM._.FIREBALL_DEF_DMG_PER + (int)upgradeArr[(int)DM.ATV.FireBall].getValue()));
         FireballDot = LM._.FIREBALL_DOT_DMG_PER;
-        ColorBallPopCnt = (int)(LM._.COLORBALLPOP_CNT + upgradeArr[(int)DM.ATV.ColorBall].getValue());
-        PoisonSmokeDot = LM._.POISONSMOKE_DOT_DMG_PER + upgradeArr[(int)DM.ATV.PoisonSmoke].getValue();
-        IcewaveDmg = (int)(ballDmg * (LM._.ICEWAVE_DMG_PER + upgradeArr[(int)DM.ATV.IceWave].getValue()));
+
+        ColorBallPopCnt = (int)(LM._.COLORBALLPOP_DEF_CNT + upgradeArr[(int)DM.ATV.ColorBall].getValue());
+
+        PoisonSmokeDot = LM._.POISONSMOKE_DEF_DMG_PER + upgradeArr[(int)DM.ATV.PoisonSmoke].getValue();
+
+        IcewaveDmg = (int)(ballDmg * (LM._.ICEWAVE_DEF_DMG_PER + upgradeArr[(int)DM.ATV.IceWave].getValue()));
 
         Debug.Log("<color=white>ActiveSkill(gm, pl) Set Dmg:: "
             + "     ThunderShotHitCnt= " + ThunderShotHitCnt
