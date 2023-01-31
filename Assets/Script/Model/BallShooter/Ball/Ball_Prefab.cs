@@ -249,7 +249,7 @@ public class Ball_Prefab : MonoBehaviour
                                     sameColorBlocks[i].transform.GetComponent<Block_Prefab>().decreaseHp(PsvSkill<int>.ONE_KILL_DMG);
                                 }
                             }
-                            // this.rigid.velocity = Vector3.zero;
+                            // this.rigid.velocity = Vector3.zero; //! ボール速度が０になると、待機されず次のステージに進むBUG。
                             break;
                         }
                         case DM.ATV.PoisonSmoke:{
@@ -496,7 +496,7 @@ public class Ball_Prefab : MonoBehaviour
         StartCoroutine(coMultiCriticalDmgEF(critDmgRatio, hitCnt, hit.transform.position));
     }
     IEnumerator coMultiCriticalDmgEF(float critDmgRatio, int cnt, Vector3 hitPos){
-        float span = 0.0875f;
+        float span = 0.03875f;
         for(int i=0; i<cnt; i++){
             em.createCritTxtEF(hitPos, (int)(pl.dmg.Val * critDmgRatio));
             if(isHomeRun) 

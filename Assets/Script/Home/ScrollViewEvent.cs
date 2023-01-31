@@ -201,7 +201,7 @@ public class ScrollView {
 //* -----------------------------------------------------------------------------------
 //* スクロールビュー イベント
 //* -----------------------------------------------------------------------------------
-public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler//, IEndDragHandler
+public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandler
 {
     //* OutSide
     public HomeEffectManager em;
@@ -259,11 +259,16 @@ public class ScrollViewEvent : MonoBehaviour, IBeginDragHandler//, IEndDragHandl
         // Set Rank Color & Text & OutLine
         updateModelTypeItemInfo();
     }
+/// ------------------------------------------------------------------------------------------------------------------------------------
+/// POINTER EVENT
+/// ------------------------------------------------------------------------------------------------------------------------------------
+    // public void OnBeginDrag(PointerEventData eventData){
+    //     // isScrolling = true;
+    // }
 
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        isScrolling = true;
-    }
+    // public void OnEndDrag(PointerEventData eventData){
+
+    // }
 
     //* Update()
     public void OnScrollViewPos(RectTransform pos){ //* －が右側

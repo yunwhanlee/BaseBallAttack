@@ -415,9 +415,11 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     - (BUG-42) onClickCheckBtn::checkAtvSkillItemSelectionIsFirstTime CHARAとBATの場合購入したら出るバグがあるため、caseによって処理を分ける。
     - (BUG-44) アイテム購入が次のことになるバグ。
     - (BUG-45) ScrollSnipが出来たら、止まるべきのに、少し動くバグ。
+    - (BUG-46) ColorBallPopブロックにぶつかってもボールが破壊されないBUG。
+
     
     
-    - 連続アップグレード可能に。
+    ✓ 連続アップグレード可能に : Skill & Upgrade。
     ✓ レベルアップスロットイメージが表示しない。（MAXになってもスロットが残っている。）
         ✓ Exceptリストを反映したTransformChild用意まではOK。
         ✓ MaxLevelが有ったら、空のボックスがあるBUG修正。 

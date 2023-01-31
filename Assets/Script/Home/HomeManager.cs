@@ -623,7 +623,6 @@ public class HomeManager : MonoBehaviour
             int copy = i; //! (BUG-22) For分内にonClick.AddListener(int i)すると、Indexが全てLast+1になるバグ対応。
             stageSelects[i].ImgBtn.onClick.AddListener(() => onClickStageSelectImgBtn(copy));
         }
-       
     }
 
     private void setSelectSkillImg(bool isInit = false){
