@@ -269,7 +269,6 @@ public class HomeManager : MonoBehaviour
         DM.ins.SelectItemType = name;
         var curChara = DM.ins.scrollviews[(int)DM.PANEL.Chara].ItemPrefs[DM.ins.personalData.SelectCharaIdx];
         var curBat = DM.ins.scrollviews[(int)DM.PANEL.Bat].ItemPrefs[DM.ins.personalData.SelectBatIdx];
-        
         var itemType = DM.ins.getCurPanelType2Enum(DM.ins.SelectItemType);
 
         setGUI();

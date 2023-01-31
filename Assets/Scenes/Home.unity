@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45015454, g: 0.5001945, b: 0.57542807, a: 1}
+  m_IndirectSpecularColor: {r: 0.45015407, g: 0.500194, b: 0.5754274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8796,30 +8796,30 @@ MonoBehaviour:
   UPGRADE_DMG:
     start: 200
     commonDiffrence: 200
-    gradualUpValue: 0.5
+    gradualUpValue: 0.1
   UPGRADE_BALLSPD:
+    start: 300
+    commonDiffrence: 300
+    gradualUpValue: 0.1
+  UPGRADE_BOSSDMG:
     start: 100
     commonDiffrence: 100
     gradualUpValue: 0.1
-  UPGRADE_BOSSDMG:
-    start: 150
-    commonDiffrence: 150
-    gradualUpValue: 0.1
   UPGRADE_COINBONUS:
-    start: 200
-    commonDiffrence: 200
+    start: 100
+    commonDiffrence: 100
     gradualUpValue: 0.1
   UPGRADE_CRIT:
-    start: 200
-    commonDiffrence: 200
+    start: 400
+    commonDiffrence: 400
     gradualUpValue: 0.1
   UPGRADE_CRITDMG:
-    start: 150
-    commonDiffrence: 150
+    start: 300
+    commonDiffrence: 300
     gradualUpValue: 0.1
   UPGRADE_DEFENCE:
-    start: 200
-    commonDiffrence: 200
+    start: 100
+    commonDiffrence: 100
     gradualUpValue: 0.1
   UPGRADE_ATVSKILL:
     start: 200
@@ -9509,6 +9509,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf963592a47a2a4b90de9759944d429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 0
+  span: 0
+  isTap: 0
+  isRepeatAutoPurchase: 0
 --- !u!1 &478305813
 GameObject:
   m_ObjectHideFlags: 0

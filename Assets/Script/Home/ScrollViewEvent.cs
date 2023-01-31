@@ -211,7 +211,7 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
 
     // float rectWidth;
     [SerializeField] float curIdxBasePosX;    public float CurIdxBasePosX {get => curIdxBasePosX; set => curIdxBasePosX = value;}
-    [SerializeField] int befIdx;
+    [SerializeField] int befIdx;     public int BefIdx {get => befIdx; set => befIdx = value;}
     [SerializeField] int curIdx;     public int CurIdx {get => curIdx; set => curIdx = value;}
 
     [Header("SCROLL SPEED")][Header("__________________________")]
@@ -337,6 +337,7 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
         // displayAll3DItems(contentTf, true);
         
         ItemInfo curItem = getCurItem();
+
         Debug.Log($"<color=yellow>updateItemInfo:: type={type}, curItem= {curItem.name}</color>");
         
         //* Show Rank Text

@@ -1105,10 +1105,10 @@ MonoBehaviour:
   - 
   - 
   - 
+  atvSkillValueTxt: {fileID: 0}
   price:
-    type: 0
-    coin: 10
-    diamond: 0
+    type: 1
+    val: 0
   isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 8833436972053447650}
@@ -1118,9 +1118,9 @@ MonoBehaviour:
   rank: 0
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
-  cashShopPriceTxt: {fileID: 0}
   upgradeValueTxt: {fileID: 4941447811254829552}
   lvTxt: {fileID: 4348625908620586683}
+  cashShopPriceTxt: {fileID: 0}
   itemPassive:
     arr: []
   rankAuraEF: {fileID: 0}
