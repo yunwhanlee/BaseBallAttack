@@ -18,11 +18,11 @@ public class Roulette : MonoBehaviour
     public Text ticketCntTxt;
     public Image spinBtnIconImg;
     public Text spinBtnTxt;
-    public Slider SpinPowerSlider;
+    // public Slider SpinPowerSlider;
     public GameObject ContgraturationBlastEF;
     public Button exitBtn;
     
-    private Sprite rewardIcon;
+    public Sprite rewardIcon;
     private int rewardPrice;
     const int SPIN_POWER_MIN = 200;
     const int SPIN_POWER_MAX = 1200;
@@ -31,6 +31,7 @@ public class Roulette : MonoBehaviour
 
     [SerializeField] float reduceCnt = 0;
     [SerializeField] float reduceSpeed = 3;
+    [SerializeField] float speed;
     [SerializeField] bool isRight;
     [SerializeField] bool isMobile;
     const int REWARD_IMG = 1;
@@ -40,7 +41,6 @@ public class Roulette : MonoBehaviour
     #if UNITY_ANDROID
         isMobile = true;
     #endif
-
         hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
 
         //* Lang
@@ -52,61 +52,51 @@ public class Roulette : MonoBehaviour
     void Update(){
         ticketCntTxt.text = "x " + DM.ins.personalData.RouletteTicket.ToString();
         if(isSpin){
-            reduceCnt += reduceSpeed;
-            float speed = SPIN_POWER_MIN + spinGauge;
-
-            speed -= reduceCnt * (isMobile? 1.5f : 1);
+            speed = 800;
             if(speed > 0){
                 setCenterTfUI(isSpin);
-            
                 spinBoard.transform.Rotate(0, 0, speed * Time.deltaTime);
-            }
-            else{
-                init();
-                /*
-                *   ⓵ transform.rotation : 0~1単位 -> eulerAnglesに変換する必要ある。
-                *   ⓶ eulerAnglesでは、範囲が0~360まで。
-                *      しかし、InspectorViewでは、範囲が-180~180まで。
-                */
-                float zRot = spinBoard.eulerAngles.z;
-                float angle = zRot % (360 + rotOffset); //* one lap(１回り): 360°
-                int index = (int)(angle / ((360 + rotOffset) / itemCnt));
-                Debug.Log("Roulette::Update:: speed= " + speed + ", angle= " + angle + ", index=" + index);
-                SM.ins.sfxPlay(SM.SFX.RouletteReward.ToString());
-                setRewardData(index);
-                setCenterTfUI(isSpin);
-            }
-        }
-        else{
-            //* Power Gauge Slider
-            if(rewardIcon == null){
-                if(spinGauge <= 0)  isRight = true;
-                else if(spinGauge > SPIN_POWER_MAX)  isRight = false;
-                spinGauge += Time.deltaTime * power * (isRight? +1 : -1);
-                SpinPowerSlider.value = (spinGauge / SPIN_POWER_MAX);
+                spinBtnTxt.text = "STOP";
             }
         }
     }
 
     public void onClickRouletteSpinBtn(){ //* -> OK Buttonにも使える！
-        if(isSpin) return;
-        else{
-            if(rewardIcon != null){
-                SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
-                setRewardResult();
-
-                setCenterTfUI(isInit: true);
-                setRewardData();
-
-                if(DM.ins.personalData.RouletteTicket <= 0)
-                    onClickRouletteExitBtn();
-                return;
-            }
-        }
         if(DM.ins.personalData.RouletteTicket <= 0) return;
-        Debug.Log("onClickRouletteSpinBtn:: Roulette Spin!!");
-        isSpin = true;
-        DM.ins.personalData.RouletteTicket--;
+
+        if(rewardIcon != null){
+            DM.ins.personalData.RouletteTicket--;
+            SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
+            setRewardResult();
+
+            setCenterTfUI(isInit: true);
+            setRewardData();
+
+            if(DM.ins.personalData.RouletteTicket <= 0)
+                onClickRouletteExitBtn();
+
+            return;
+        }
+    
+        if(!isSpin){
+            isSpin = true;
+        }
+        else{
+            isSpin = false;
+            init();
+            /*
+            *   ⓵ transform.rotation : 0~1単位 -> eulerAnglesに変換する必要ある。
+            *   ⓶ eulerAnglesでは、範囲が0~360まで。
+            *      しかし、InspectorViewでは、範囲が-180~180まで。
+            */
+            float zRot = spinBoard.eulerAngles.z;
+            float angle = zRot % (360 + rotOffset); //* one lap(１回り): 360°
+            int index = (int)(angle / ((360 + rotOffset) / itemCnt));
+            Debug.Log("Roulette::Update:: speed= " + speed + ", angle= " + angle + ", index=" + index);
+            SM.ins.sfxPlay(SM.SFX.RouletteReward.ToString());
+            setRewardData(index);
+            setCenterTfUI(isSpin);
+        }
     }
 
     public void onClickRouletteExitBtn(){
@@ -123,7 +113,7 @@ public class Roulette : MonoBehaviour
     private void setCenterTfUI(bool isInit){
         exitBtn.gameObject.SetActive(isInit? true : false); //* 取得Btnがある場合は、Exitでそのまま出るBUG対応。
         ContgraturationBlastEF.SetActive(isInit? false : true); //* Effect追加。
-        centerTf.transform.localScale = Vector3.one * (isInit? 1 : 6.5f);
+        centerTf.transform.localScale = Vector3.one * (isInit? 1 : 5.5f);
         centerTf.GetComponentsInChildren<Image>()[REWARD_IMG].enabled = (isInit? false : true);
         centerTf.GetComponentsInChildren<Image>()[REWARD_IMG].sprite = (isInit? null : rewardIcon);
         centerTf.GetComponentInChildren<Text>().text = (isInit? "" : rewardPrice.ToString());

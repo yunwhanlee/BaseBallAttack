@@ -3668,7 +3668,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &166279013
 RectTransform:
   m_ObjectHideFlags: 0
@@ -35262,7 +35262,6 @@ MonoBehaviour:
   ticketCntTxt: {fileID: 288450473}
   spinBtnIconImg: {fileID: 981580271}
   spinBtnTxt: {fileID: 1420199886}
-  SpinPowerSlider: {fileID: 166279014}
   ContgraturationBlastEF: {fileID: 810808925}
   exitBtn: {fileID: 1941981530}
   power: 5000
