@@ -92,14 +92,10 @@ public class UpgradeList {
 [System.Serializable]
 public class AtvSkillUpgradeList {
     //* Init
-    [SerializeField] UpgradeDt[] arr = {
-        new UpgradeDt(DM.ATV.ThunderShot.ToString(), LM._.THUNDERSHOT_UPG_HIT, LM._.ATVSKILL_MAXLV),
-        new UpgradeDt(DM.ATV.FireBall.ToString(), LM._.FIREBALL_UPG_DMG_PER, LM._.ATVSKILL_MAXLV),
-        new UpgradeDt(DM.ATV.ColorBall.ToString(), LM._.COLORBALLPOP_UPG_CNT, LM._.ATVSKILL_MAXLV),
-        new UpgradeDt(DM.ATV.PoisonSmoke.ToString(), LM._.POISONSMOKE_UPG_DMG_PER, LM._.ATVSKILL_MAXLV),
-        new UpgradeDt(DM.ATV.IceWave.ToString(), LM._.ICEWAVE_UPG_DMG_PER, LM._.ATVSKILL_MAXLV),
-    };
-    public UpgradeDt[] Arr {get => arr; set => arr = value;}
+    [SerializeField] UpgradeDt[] arr;   public UpgradeDt[] Arr {get => arr; set => arr = value;}
+    public AtvSkillUpgradeList(UpgradeDt[] data) {
+        arr = data;
+    }
 }
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------

@@ -97,71 +97,20 @@ public class PersonalData {
         this.charaLockList = new List<bool>();
         this.batLockList = new List<bool>();
         this.atvSkillLockList = new List<bool>();
-        this.atvSkillUpgrade = new AtvSkillUpgradeList();
         this.itemPassive = new ItemPsvList();
         this.upgrade = new UpgradeList();
-
-        this.stageClearArr = new AchivementInfo[] {
-            new AchivementInfo(10, 10),
-            new AchivementInfo(30, 30),
-            new AchivementInfo(60, 60),
-            new AchivementInfo(100, 100),
-            new AchivementInfo(160, 160),
-        };
-        this.destroyBlockArr = new AchivementInfo[] {
-            new AchivementInfo(100, 10),
-            new AchivementInfo(200, 20),
-            new AchivementInfo(400, 40),
-            new AchivementInfo(700, 70),
-            new AchivementInfo(1000, 100),
-        };
-        this.collectedCoinArr = new AchivementInfo[] {
-            new AchivementInfo(50000, 100),
-            new AchivementInfo(100000, 200),
-            new AchivementInfo(200000, 300),
-            new AchivementInfo(500000, 400),
-            new AchivementInfo(1000000, 500),
-        };
-        this.collectedDiamondArr = new AchivementInfo[] {
-            new AchivementInfo(500, 100),
-            new AchivementInfo(1000, 200),
-            new AchivementInfo(2000, 300),
-            new AchivementInfo(5000, 400),
-            new AchivementInfo(10000, 500),
-        };
-        this.collectedRouletteTicketArr = new AchivementInfo[] {
-            new AchivementInfo(10, 1),
-            new AchivementInfo(50, 2),
-            new AchivementInfo(100, 3),
-            new AchivementInfo(150, 4),
-            new AchivementInfo(300, 5),
-        };
-        this.charaCollectionArr = new AchivementInfo[] {
-            new AchivementInfo(charaLen / 4, 100),
-            new AchivementInfo(charaLen / 2, 500),
-            new AchivementInfo(charaLen, 1000),
-        };
-        this.batCollectionArr = new AchivementInfo[] {
-            new AchivementInfo(batLen / 4, 100),
-            new AchivementInfo(batLen / 2, 500),
-            new AchivementInfo(batLen, 1000),
-        };
-        this.atvSkillCollectionArr = new AchivementInfo[] {
-            new AchivementInfo(skillLen / 2, 500),
-            new AchivementInfo(skillLen, 1000),
-        };
-        this.upgradeCntArr = new AchivementInfo[] {
-            new AchivementInfo((int)(upgradeLen * 0.2f), 100),
-            new AchivementInfo((int)(upgradeLen * 0.4f), 200),
-            new AchivementInfo((int)(upgradeLen * 0.6f), 300),
-            new AchivementInfo((int)(upgradeLen * 0.8f), 400),
-            new AchivementInfo(upgradeLen, 500),
-        };
-        this.bosskillCollectionArr = new AchivementInfo[] {
-            new AchivementInfo(1, 100), new AchivementInfo(2, 200), new AchivementInfo(3, 300), new AchivementInfo(4, 400),
-            new AchivementInfo(5, 500), new AchivementInfo(6, 600), new AchivementInfo(7, 700), new AchivementInfo(8, 800),
-        };
-
+        this.atvSkillUpgrade = new AtvSkillUpgradeList(getAtvSkillUpgrade());
+        
+        this.stageClearArr = getStageClearArr();
+        this.destroyBlockArr = getDestroyBlockArr();
+        this.collectedCoinArr = getCollectedCoinArr();
+        this.collectedDiamondArr = getCollectedDiamondArr();
+        this.collectedRouletteTicketArr = getCollectedRouletteTicketArr();
+        this.charaCollectionArr = getCharaCollectionArr(charaLen);
+        this.batCollectionArr = getBatCollectionArr(batLen);
+        this.atvSkillCollectionArr = getAtvSkillCollectionArr(skillLen);
+        this.upgradeCntArr = getUpgradeCntArr(upgradeLen);
+        this.bosskillCollectionArr = getBosskillCollectionArr();
         this.normalModeClear = new AchivementInfo[] { new AchivementInfo(1, 1000)};
         this.hardModeClear = new AchivementInfo[] { new AchivementInfo(1, 2000)};
 
@@ -294,75 +243,25 @@ public class PersonalData {
         this.isPurchasePremiumPack = false;
 
         this.clearStage = 1;
-        this.stageClearArr = new AchivementInfo[] {
-            new AchivementInfo(10, 10),
-            new AchivementInfo(30, 30),
-            new AchivementInfo(60, 60),
-            new AchivementInfo(100, 100),
-            new AchivementInfo(160, 160),
-        };
+        this.stageClearArr = getStageClearArr();
         this.destroyBlockCnt = 0;
-        this.destroyBlockArr = new AchivementInfo[] {
-            new AchivementInfo(100, 10),
-            new AchivementInfo(200, 20),
-            new AchivementInfo(400, 40),
-            new AchivementInfo(700, 70),
-            new AchivementInfo(1000, 100),
-        };
+        this.destroyBlockArr = getDestroyBlockArr();
         this.collectedCoin = this.coin;
-        this.collectedCoinArr = new AchivementInfo[] {
-            new AchivementInfo(50000, 100),
-            new AchivementInfo(100000, 200),
-            new AchivementInfo(200000, 300),
-            new AchivementInfo(500000, 400),
-            new AchivementInfo(1000000, 500),
-        };
+        this.collectedCoinArr = getCollectedCoinArr();
         this.collectedDiamond = this.diamond;
-        this.collectedDiamondArr = new AchivementInfo[] {
-            new AchivementInfo(500, 100),
-            new AchivementInfo(1000, 200),
-            new AchivementInfo(2000, 300),
-            new AchivementInfo(5000, 400),
-            new AchivementInfo(10000, 500),
-        };
+        this.collectedDiamondArr = getCollectedDiamondArr();
         this.collectedRouletteTicket = this.rouletteTicket;
-        this.collectedRouletteTicketArr = new AchivementInfo[] {
-            new AchivementInfo(10, 1),
-            new AchivementInfo(50, 2),
-            new AchivementInfo(100, 3),
-            new AchivementInfo(150, 4),
-            new AchivementInfo(300, 5),
-        };
+        this.collectedRouletteTicketArr = getCollectedRouletteTicketArr();
         this.collectedChara = 1;
-        this.charaCollectionArr = new AchivementInfo[] {
-            new AchivementInfo(DM.ins.scrollviews[(int)DM.PANEL.Chara].ItemPrefs.Length / 4, 100),
-            new AchivementInfo(DM.ins.scrollviews[(int)DM.PANEL.Chara].ItemPrefs.Length / 2, 250),
-            new AchivementInfo(DM.ins.scrollviews[(int)DM.PANEL.Chara].ItemPrefs.Length, 500),
-        };
+        this.charaCollectionArr = getCharaCollectionArr(DM.ins.scrollviews[(int)DM.PANEL.Chara].ItemPrefs.Length);
         this.collectedBat = 1;
-        this.batCollectionArr = new AchivementInfo[] {
-            new AchivementInfo(DM.ins.scrollviews[(int)DM.PANEL.Bat].ItemPrefs.Length / 4, 100),
-            new AchivementInfo(DM.ins.scrollviews[(int)DM.PANEL.Bat].ItemPrefs.Length / 2, 250),
-            new AchivementInfo(DM.ins.scrollviews[(int)DM.PANEL.Bat].ItemPrefs.Length, 500),
-        };
+        this.batCollectionArr = getBatCollectionArr(DM.ins.scrollviews[(int)DM.PANEL.Bat].ItemPrefs.Length);
         this.collectedAtvSkill = 1;
-        this.atvSkillCollectionArr = new AchivementInfo[] {
-            new AchivementInfo(DM.ins.scrollviews[(int)DM.PANEL.Skill].ItemPrefs.Length / 2, 250),
-            new AchivementInfo(DM.ins.scrollviews[(int)DM.PANEL.Skill].ItemPrefs.Length, 500),
-        };
+        this.atvSkillCollectionArr = getAtvSkillCollectionArr(DM.ins.scrollviews[(int)DM.PANEL.Skill].ItemPrefs.Length);
         this.upgradeCnt = 0;
-        this.upgradeCntArr = new AchivementInfo[] {
-            new AchivementInfo((int)(upgradeLen * 0.2f), 100),
-            new AchivementInfo((int)(upgradeLen * 0.4f), 200),
-            new AchivementInfo((int)(upgradeLen * 0.6f), 300),
-            new AchivementInfo((int)(upgradeLen * 0.8f), 400),
-            new AchivementInfo(upgradeLen, 500),
-        };
+        this.upgradeCntArr = getUpgradeCntArr(upgradeLen);
         this.collectedBossKill = 0;
-        this.bosskillCollectionArr = new AchivementInfo[] {
-            new AchivementInfo(1, 100), new AchivementInfo(2, 200), new AchivementInfo(3, 300), new AchivementInfo(4, 400),
-            new AchivementInfo(5, 500), new AchivementInfo(6, 600), new AchivementInfo(7, 700), new AchivementInfo(8, 800),
-        };
+        this.bosskillCollectionArr = getBosskillCollectionArr();
         this.normalModeClear = new AchivementInfo[] { new AchivementInfo(1, 1000)};
         this.hardModeClear = new AchivementInfo[] { new AchivementInfo(1, 2000)};
 
@@ -376,7 +275,7 @@ public class PersonalData {
         this.IsUnlock2ndSkill = false;
         this.SelectSkill2Idx = -1;
         this.atvSkillLockList = new List<bool>();
-        this.atvSkillUpgrade = new AtvSkillUpgradeList();
+        this.atvSkillUpgrade = new AtvSkillUpgradeList(getAtvSkillUpgrade());
 
         // this.ItemPassive = new ItemPassiveList();
         this.Upgrade = new UpgradeList();
@@ -472,4 +371,98 @@ public class PersonalData {
         rouletteTicket += amount;
         AcvCollectedRouletteTicket.collectRouletteTicket(amount);
     }
+
+    private UpgradeDt[] getAtvSkillUpgrade(){
+        return new UpgradeDt[] {
+            new UpgradeDt(DM.ATV.ThunderShot.ToString(), LM._.THUNDERSHOT_UPG_HIT, LM._.ATVSKILL_MAXLV),
+            new UpgradeDt(DM.ATV.FireBall.ToString(), LM._.FIREBALL_UPG_DMG_PER, LM._.ATVSKILL_MAXLV),
+            new UpgradeDt(DM.ATV.ColorBall.ToString(), LM._.COLORBALLPOP_UPG_CNT, LM._.ATVSKILL_MAXLV),
+            new UpgradeDt(DM.ATV.PoisonSmoke.ToString(), LM._.POISONSMOKE_UPG_DMG_PER, LM._.ATVSKILL_MAXLV),
+            new UpgradeDt(DM.ATV.IceWave.ToString(), LM._.ICEWAVE_UPG_DMG_PER, LM._.ATVSKILL_MAXLV)
+        };
+    }
+
+    #region ACHIVEMENT INFO
+    private AchivementInfo[] getStageClearArr(){
+        return new AchivementInfo[] {
+            new AchivementInfo(10, 10),
+            new AchivementInfo(30, 30),
+            new AchivementInfo(60, 60),
+            new AchivementInfo(100, 100),
+            new AchivementInfo(160, 160),
+        };
+    }
+    private AchivementInfo[] getDestroyBlockArr(){
+        return new AchivementInfo[] {
+            new AchivementInfo(100, 10),
+            new AchivementInfo(200, 20),
+            new AchivementInfo(400, 40),
+            new AchivementInfo(700, 70),
+            new AchivementInfo(1000, 100),
+        };
+    }
+    private AchivementInfo[] getCollectedCoinArr(){
+        return new AchivementInfo[] {
+            new AchivementInfo(50000, 100),
+            new AchivementInfo(100000, 200),
+            new AchivementInfo(200000, 300),
+            new AchivementInfo(500000, 400),
+            new AchivementInfo(1000000, 500),
+        };
+    }
+    private AchivementInfo[] getCollectedDiamondArr(){
+        return new AchivementInfo[] {
+            new AchivementInfo(500, 100),
+            new AchivementInfo(1000, 200),
+            new AchivementInfo(2000, 300),
+            new AchivementInfo(5000, 400),
+            new AchivementInfo(10000, 500),
+        };
+    }
+    private AchivementInfo[] getCollectedRouletteTicketArr(){
+        return new AchivementInfo[] {
+            new AchivementInfo(10, 1),
+            new AchivementInfo(50, 2),
+            new AchivementInfo(100, 3),
+            new AchivementInfo(150, 4),
+            new AchivementInfo(300, 5),
+        };
+    }
+    private AchivementInfo[] getCharaCollectionArr(int charaLen){
+        return new AchivementInfo[] {
+            new AchivementInfo(charaLen / 4, 100),
+            new AchivementInfo(charaLen / 2, 500),
+            new AchivementInfo(charaLen, 1000),
+        };
+    }
+    private AchivementInfo[] getBatCollectionArr(int batLen){
+        return new AchivementInfo[] {
+            new AchivementInfo(batLen / 4, 100),
+            new AchivementInfo(batLen / 2, 500),
+            new AchivementInfo(batLen, 1000),
+        };
+    }
+    private AchivementInfo[] getAtvSkillCollectionArr(int skillLen){
+        return new AchivementInfo[] {
+            new AchivementInfo(skillLen / 2, 500),
+            new AchivementInfo(skillLen, 1000),
+        };
+    }
+    private AchivementInfo[] getUpgradeCntArr(int upgradeLen){
+        return new AchivementInfo[] {
+            new AchivementInfo((int)(upgradeLen * 0.2f), 100),
+            new AchivementInfo((int)(upgradeLen * 0.4f), 200),
+            new AchivementInfo((int)(upgradeLen * 0.6f), 300),
+            new AchivementInfo((int)(upgradeLen * 0.8f), 400),
+            new AchivementInfo(upgradeLen, 500),
+        };
+    }
+    private AchivementInfo[] getBosskillCollectionArr(){
+        return new AchivementInfo[] {
+            new AchivementInfo(1, 100), new AchivementInfo(2, 200), new AchivementInfo(3, 300), new AchivementInfo(4, 400),
+            new AchivementInfo(5, 500), new AchivementInfo(6, 600), new AchivementInfo(7, 700), new AchivementInfo(8, 800),
+        };
+    }
+    #endregion
+
 }
