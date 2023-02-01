@@ -182,8 +182,6 @@ public class GameManager : MonoBehaviour {
     [Header("SKY")][Header("__________________________")]
     public GameObject skySunObj;
     public GameObject skyMoonObj;
-
-
     void Start() {
         // Util._.calcArithmeticProgressionList(start: 100, max: 50, d: 100, gradualUpValue: 0.1f);
 

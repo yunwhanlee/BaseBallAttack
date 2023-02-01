@@ -314,10 +314,9 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
             // isScrolling = false;
             updateModelTypeItemInfo();
             //* Set PosX
-            contentTf.anchoredPosition = new Vector2(CurIdxBasePosX, -500);
+            // contentTf.anchoredPosition = new Vector2(CurIdxBasePosX, -500); //? 外で宣言すると、閉じて再度開いたら選択したモデルが読み込まれる。
         }
 
-        
         //* update Before Frame PosX
         scrollBefFramePosX = pos.anchoredPosition.x;
     }
@@ -331,7 +330,7 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
         if(type != DM.PANEL.Chara.ToString() && type != DM.PANEL.Bat.ToString()) return; //* (BUG-1) Upgrade-PANELも入ってきて、再ロードした場合 Out Of Indexバグの発生すること対応。
 
         //* Set PosX
-        // contentTf.anchoredPosition = new Vector2(CurIdxBasePosX, -500);
+        contentTf.anchoredPosition = new Vector2(CurIdxBasePosX, -500); //? 中で宣言すると、閉じて再度開いたら最後に選択したモデルが読み込まれる。
 
         //* 全てのアイテム 表示
         // displayAll3DItems(contentTf, true);

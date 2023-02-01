@@ -275,7 +275,16 @@ public class HomeManager : MonoBehaviour
         
         switch(itemType){
             case DM.PANEL.Chara :
+                // DM.ins.scrollviews[(int)DM.PANEL.Chara].ScrollRect.GetComponent<ScrollViewEvent>().BefIdx = DM.ins.personalData.SelectCharaIdx;
+                // DM.ins.scrollviews[(int)DM.PANEL.Chara].ScrollRect.GetComponent<ScrollViewEvent>().CurIdx = DM.ins.personalData.SelectCharaIdx;
+                // DM.ins.scrollviews[(int)DM.PANEL.Chara].ScrollRect.GetComponent<ScrollViewEvent>().updateModelTypeItemInfo();
+
+                break;
             case DM.PANEL.Bat :
+                // DM.ins.scrollviews[(int)DM.PANEL.Bat].ScrollRect.GetComponent<ScrollViewEvent>().BefIdx = DM.ins.personalData.SelectCharaIdx;
+                // DM.ins.scrollviews[(int)DM.PANEL.Bat].ScrollRect.GetComponent<ScrollViewEvent>().CurIdx = DM.ins.personalData.SelectCharaIdx;
+                // DM.ins.scrollviews[(int)DM.PANEL.Bat].ScrollRect.GetComponent<ScrollViewEvent>().updateModelTypeItemInfo();
+                break;
             case DM.PANEL.Skill :
             case DM.PANEL.CashShop :
             case DM.PANEL.Upgrade :
