@@ -166,18 +166,18 @@ public class DM : MonoBehaviour
 #if UNITY_EDITOR
     void OnApplicationQuit(){
         Debug.Log("EXIT SAVE GAME(PC)::OnApplicationQuit():: Scene= " + SceneManager.GetActiveScene().name);
-        //* (BUG) SceneがHomeのみセーブできる。
-        if(SceneManager.GetActiveScene().name == DM.SCENE.Home.ToString()){
-            personalData.save();
-        }
+        //* (BUG-42) PLAYシーンで終了しても、購入したデータがセーブできるように。
+        // if(SceneManager.GetActiveScene().name == DM.SCENE.Home.ToString())
+        personalData.save();
     }
 #elif UNITY_ANDROID
     //* (BUG-37) ゲームが開くときにも起動されるので注意が必要。
+    //* (BUG-42) PLAYシーンで終了しても、購入したデータがセーブできるように。
     void OnApplicationPause(bool paused){
-        if(paused && SceneManager.GetActiveScene().name == DM.SCENE.Home.ToString()){
-            Debug.Log("END SAVE GAME(Mobile)::OnApplicationPause( "+paused+" ):: Scene= " + SceneManager.GetActiveScene().name);
-            personalData.save();
-        }
+        // if(paused && SceneManager.GetActiveScene().name == DM.SCENE.Home.ToString()){
+        Debug.Log("END SAVE GAME(Mobile)::OnApplicationPause( "+paused+" ):: Scene= " + SceneManager.GetActiveScene().name);
+        personalData.save();
+        // }
     }
 #endif
 #endregion

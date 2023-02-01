@@ -413,11 +413,12 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-40) ボース死んだら出るオブPOWERがデバイスによって違うので、強すぎる。
     ✓ (BUG-39) 最初の実行だったら、ロードデータが無くてjsonがnullなので、resetして初期値を設定する。
     ✓ (BUG-40) ROULETTEチケットが０になったとき、string not valid エラー発生対応。
-    - (BUG-41) ステージが終わっても、Expオブや次に進まないＢＵＧ
-    - (BUG-42) onClickCheckBtn::checkAtvSkillItemSelectionIsFirstTime CHARAとBATの場合購入したら出るバグがあるため、caseによって処理を分ける。
-    - (BUG-44) アイテム購入が次のことになるバグ。
-    - (BUG-45) ScrollSnipが出来たら、止まるべきのに、少し動くバグ。
-    - (BUG-46) ColorBallPopブロックにぶつかってもボールが破壊されないBUG。
+    ✓ (BUG-42) PLAYシーンで終了しても、購入したデータがセーブできるように。
+    - (BUG-43) ステージが終わっても、Expオブや次に進まないＢＵＧ
+    - (BUG-44) onClickCheckBtn::checkAtvSkillItemSelectionIsFirstTime CHARAとBATの場合購入したら出るバグがあるため、caseによって処理を分ける。
+    - (BUG-45) アイテム購入が次のことになるバグ。
+    - (BUG-46) ScrollSnipが出来たら、止まるべきのに、少し動くバグ。
+    - (BUG-47) ColorBallPopブロックにぶつかってもボールが破壊されないBUG。
 
     
     

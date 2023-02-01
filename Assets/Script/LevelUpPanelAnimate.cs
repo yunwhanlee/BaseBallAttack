@@ -114,6 +114,7 @@ public class LevelUpPanelAnimate : MonoBehaviour{
         }
         //* #3.Scroll Re-Back to Correct PosY
         else if(isRollingStop){
+            Debug.Log("LevelUpPanelAnimate::isRollingStop");
             for(int i = 0; i<skillSlotBtns.Length;i++){
                 float posY = skillSlotBtns[i].contentRectTf.localPosition.y % spriteH;
                 const int offsetY = 1;
@@ -148,6 +149,7 @@ public class LevelUpPanelAnimate : MonoBehaviour{
     private bool stopScrolling(){
         //* (BUG)曲がりが終わるまで、SkillBtnクリックできないように(スキル名が在るかを確認)。
         if(Array.Exists(skillSlotBtns, btn => btn.name.text == "")) {
+            isRollingStop = true;
             time = span; // スロットが曲がるのを止める。
             return true;
         }
