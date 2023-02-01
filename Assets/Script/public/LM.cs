@@ -133,11 +133,11 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("ステージ当たりダイア手当")] public int STAGE_PER_DIAMOND_PRICE = 10;
 
     [Header("MODEL ITEM PRICE")][Header("__________________________")]
-    [Tooltip("一般等級")] public int GENERAL_PRICE;
-    [Tooltip("RAER等級")] public int RARE_PRICE;
-    [Tooltip("UNIQUE般等級")] public int UNIQUE_PRICE;
-    [Tooltip("LEGEND等級")] public int LEGEND_PRICE;
-    [Tooltip("GOD等級")] public int GOD_PRICE;
+    [Tooltip("一般等級")] public int GENERAL_PRICE; //COIN
+    [Tooltip("RAER等級")] public int RARE_PRICE; //COIN
+    [Tooltip("UNIQUE般等級")] public int UNIQUE_PRICE; //COIN
+    [Tooltip("LEGEND等級")] public int LEGEND_PRICE; //COIN
+    [Tooltip("GOD等級")] public int GOD_PRICE; //DIAMOND
 
     [Header("UPGRADE PRICE")][Header("__________________________")]
     [Tooltip("ダメージ")] public UpgradePriceCalcSetting UPGRADE_DMG;
@@ -154,7 +154,6 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Header("REWARD CHEST")][Header("__________________________")]
     [Tooltip("REWARD CHEST GOODS COIN配列")] public int[] REWARD_CHEST_COINARR = {100, 250, 500, 1000, 2000, 5000};
     [Tooltip("REWARD CHEST GOODS DIAMOND配列")] public int[] REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
-
 
     [Header("AD REWARD")][Header("__________________________")]
     [Tooltip("レベルアップスロット、再回転に要するコイン")] public int REROTATE_SKILLSLOTS_PRICE_COIN = 200;

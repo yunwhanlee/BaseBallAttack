@@ -1,7 +1,8 @@
 PRICE LEVELING
 
-1 Stage : 100 coin + 10 diamond.
+お金稼ぐ
 
+1 Stage : 100 coin + 10 diamond.
 BossSpan : 15 Stage.
 
 NormalMode : 0-60 Stage (Max 6000 Coin + 600 Diamond)
@@ -337,11 +338,11 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
         - ゲームスタートする際に、ハードモードかのマールモードか表示するAnimation？表示。
 
     ● 最適化。
-        HOME
         ✓ Chara, Bat選択するとき、プレームドロップ。-> 目に見えるObjectのみ表示。(最適化)
-        - 
-        PLAY
-        - LevelUpPanelAnim部分が重い。
+
+    - GAMEが終わった時、リワード財貨を別で表示するUI追加。（PUASEにも）
+    - 途中でホームに戻ると、セーブができないことを教えるダイアログ表示。
+    - PLAY:PassiveSkillPanelにスクロールを追加。
 
 [BUG]
     ✓ Ballが壁にぶつかってから、反射角が摩擦力で少しずつ減る。
