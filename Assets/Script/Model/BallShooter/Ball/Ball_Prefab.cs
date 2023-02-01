@@ -50,6 +50,9 @@ public class Ball_Prefab : MonoBehaviour
             pl.setSwingArcColor("red");
             if(gm.State == GameManager.STATE.PLAY && pl.DoSwing){
                 SM.ins.sfxPlay(SM.SFX.SwingHit.ToString());
+                
+                StartCoroutine(coDelayActiveFastPlayBtn(0.1f)); //* ホームランしたとき、見えないようにしてBUG防止。
+
                 gm.switchCamera();
                 // pl.DoSwing = false;
                 rigid.useGravity = true;
@@ -386,10 +389,9 @@ public class Ball_Prefab : MonoBehaviour
     #endregion
 
     private void onDestroyMeInvoke() => onDestroyMe();
-
-    //*------------------------------------------------------------------------------
-    //*  関数
-    //*------------------------------------------------------------------------------
+//*------------------------------------------------------------------------------
+//*  関数
+//*------------------------------------------------------------------------------
     private float setgetHitBallSpeed(float power, Vector3 arrowDir){
         rigid.velocity = Vector3.zero;
         float force = Speed * power * pl.speed.Val * Time.fixedDeltaTime;
@@ -503,6 +505,10 @@ public class Ball_Prefab : MonoBehaviour
                 em.createThunderStrikeEF(hitPos);
             yield return new WaitForSeconds(i * span);
         }
+    }
+    IEnumerator coDelayActiveFastPlayBtn(float delay){
+        yield return new WaitForSeconds(delay);
+        gm.fastPlayBtn.gameObject.SetActive(true);
     }
 
 #if UNITY_EDITOR

@@ -61,7 +61,8 @@ public class GameManager : MonoBehaviour {
     public int rewardItemRouletteTicket = 0;    public int RewardItemRouletteTicket { get => rewardItemRouletteTicket; set => rewardItemRouletteTicket = value;}
 
     [Header("TRIGGER")][Header("__________________________")]
-    public bool isPlayingAnim;  public bool IsPlayingAnim { get=> isPlayingAnim; set=> isPlayingAnim = value;}
+    public bool isPlayingAnim;  public bool IsPlayingAnim { get => isPlayingAnim; set=> isPlayingAnim = value;}
+    public bool isFastPlay;  public bool IsFastPlay { get => isFastPlay; set => isFastPlay = value;}
 
     [Header("PANEL")][Header("__________________________")]
     public GameObject strikePanel;
@@ -161,6 +162,7 @@ public class GameManager : MonoBehaviour {
 
     [Header("BUTTON")][Header("__________________________")]
     public Button readyBtn; //normal
+    public Button fastPlayBtn; //normal & hit ball
     public Button reGameBtn; //gameoverPanel
     public Button pauseBtn; //pausePanel
     public Button continueBtn; //pausePanel
@@ -215,6 +217,7 @@ public class GameManager : MonoBehaviour {
         readyBtn = readyBtn.GetComponent<Button>();
 
         bossLimitCntTxt.gameObject.SetActive(false);
+        fastPlayBtn.gameObject.SetActive(false);
         Array.ForEach(statusTxts, txt => txt.text = LANG.getTxt(LANG.TXT.Status.ToString()));
         rewardChestTitleTxt.text = LANG.getTxt(LANG.TXT.Reward.ToString());
         rewardChestOpenBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Open.ToString());
@@ -319,6 +322,7 @@ public class GameManager : MonoBehaviour {
     public void onClickSetGameButton(string type) => setGame(type);
     public void onClickReadyButton() { switchCamera(); SM.ins.sfxPlay(SM.SFX.BtnClick.ToString()); }
     public void onClickSkillButton() { levelUpPanel.SetActive(false); SM.ins.sfxPlay(SM.SFX.BtnClick.ToString()); }
+    public void onClickGiveUpButton() => displayAskGiveUpDialog();
     public void onClickOpenTutorialButton() {
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         DM.ins.displayTutorialUI();
@@ -330,7 +334,13 @@ public class GameManager : MonoBehaviour {
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         StartCoroutine(coRewardChestOpen());
     }
-    public void onClickGiveUpButton() => displayAskGiveUpDialog();
+    public void onClickFastPlayButton(){
+        Debug.Log("onClickFastPlayButton::");
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
+        fastPlayBtn.GetComponent<Image>().color = Color.red;
+        isFastPlay = true;
+        Time.timeScale = 2.5f;
+    }
 /// --------------------------------------------------------------------------
 /// REWARD CHEST RANDOM OPEN
 /// --------------------------------------------------------------------------
@@ -869,6 +879,11 @@ public class GameManager : MonoBehaviour {
 
     public List<DropBox> dropBoxList;
     public void setNextStage() {
+        if(IsFastPlay){
+            IsFastPlay = false;
+            Time.timeScale = 1;
+        }
+
         //* Victory
         if(bossKillCnt >= LM._.VICTORY_BOSSKILL_CNT){
             setVictory();
@@ -890,6 +905,8 @@ public class GameManager : MonoBehaviour {
         bs.IsBallExist = false;
         pl.IsStun = false;
         readyBtn.gameObject.SetActive(true);
+        fastPlayBtn.gameObject.SetActive(false);
+        fastPlayBtn.GetComponent<Image>().color = Color.white;
         pl.previewBundle.SetActive(true);
         destroyEveryBalls();
         setBallPreviewGoalRandomPos();
