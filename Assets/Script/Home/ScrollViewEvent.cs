@@ -303,9 +303,9 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
             //* Get ContentTf;
 
             //* 全てのアイテム 非表示
-            // displayAll3DItems(contentTf, false);
+            displayAll3DItems(contentTf, false);
             //* 現在 アイテムと回りのみ表示
-            // displayVisible3DItems(contentTf);
+            displayVisible3DItems(contentTf);
         }
 
         //* Stop Scrolling Near Index Chara
@@ -333,7 +333,7 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
         contentTf.anchoredPosition = new Vector2(CurIdxBasePosX, -500); //? 中で宣言すると、閉じて再度開いたら最後に選択したモデルが読み込まれる。
 
         //* 全てのアイテム 表示
-        // displayAll3DItems(contentTf, true);
+        displayAll3DItems(contentTf, true);
         
         ItemInfo curItem = getCurItem();
 
