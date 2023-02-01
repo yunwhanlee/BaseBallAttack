@@ -41,25 +41,26 @@ public class DropBox : MonoBehaviour{ //* Create By BlockMaker.cs
             Debug.Log("DropBox::OnCollisionEnter:: col= Ball, this.name= " + this.name);
             
             if(this.gameObject.name == ObjectPool.DIC.DropBoxQuestionPf.ToString()){
-                int max = 0;
+                int cnt = 0;
                 int rand = Random.Range(0, 5);
                 switch(rand){
-                    case 0: max = 10;   break;
-                    case 1: max = 20;   break;
-                    case 2: max = 30;   break;
-                    case 3: max = 40;   break;
-                    case 4: max = 50;   break;
+                    case 0: cnt = 10;   break;
+                    case 1: cnt = 20;   break;
+                    case 2: cnt = 30;   break;
+                    case 3: cnt = 40;   break;
+                    case 4: cnt = 50;   break;
                 }
-                Debug.Log("DropBox::OnCollisionEnter:: DropBoxQuestionPf:: max= " + max);
-                for(int i=0; i<max; i++)
-                    gm.bm.createCoinIconPf(this.transform, i, max);
+                Debug.Log("DropBox::OnCollisionEnter:: DropBoxQuestionPf:: max= " + cnt);
+                for(int i=0; i<cnt; i++)
+                    gm.bm.createCoinIconPf(this.transform, i, cnt);
 
                 SM.ins.sfxPlay(SM.SFX.DropBoxCoinPick.ToString());
-                gm.em.createDropBoxQuestionEF(this.transform, LM._.DROPBOX_COIN_VALUE * max);
+                gm.em.createDropBoxQuestionEF(this.transform, LM._.DROPBOX_COIN_VALUE * cnt);
                 gm.em.createDropBoxQuestionMoneyEF(this.transform);
 
                 //* 処理
-                gm.coin += max * LM._.DROPBOX_COIN_VALUE;
+                // gm.coin += cnt * LM._.DROPBOX_COIN_VALUE;
+                gm.rewardItemCoin += cnt * LM._.DROPBOX_COIN_VALUE;
             }
             else if(this.gameObject.name == ObjectPool.DIC.DropBoxShieldPf.ToString()){
                 SM.ins.sfxPlay(SM.SFX.DropBoxPick.ToString());

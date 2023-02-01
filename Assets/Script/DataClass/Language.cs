@@ -21,7 +21,8 @@ public static class LANG //* LANG
         ShowAdDialogRevive_Title, ShowAdDialogRevive_Content,
         ShowAdDialogRouletteTicket_Title, ShowAdDialogRouletteTicket_Content,
 
-        Tutorial , OpenTutorial_Content,
+
+        Tutorial, OpenTutorial_Content,
         TutorialA_Title, TutorialA_Content,
         TutorialB_Title, TutorialB_Content,
         TutorialC_Title, TutorialC_Content,
@@ -29,6 +30,8 @@ public static class LANG //* LANG
         TutorialE_Title, TutorialE_Content,
         TutorialF_Title, TutorialF_Content,
         TutorialG_Title, TutorialG_Content,
+
+        Caution, Caution_Content, Caution_Notice,
 
         Rate, Later, RateDialog_Content1, RateDialog_Content2,
         Reward, GetRewardChestPanel_Content, Empty, PsvSkillTicket, RouletteTicket, RouletteSpin,
@@ -223,6 +226,21 @@ public static class LANG //* LANG
         "Show people your power!",
         "皆にあなたのパワーを見せてください！",
         "모두에게 여러분의 힘을 보여주세요!"
+    };
+    public static string[] Caution = new string[]{
+        "Caution",
+        "警告",
+        "경고"
+    };
+    public static string[] Caution_Content = new string[]{
+        "Are you sure give up the game?",
+        "本当にゲームを諦めますか？",
+        "정말로 게임을 포기하시겠습니까?"
+    };
+    public static string[] Caution_Notice = new string[]{
+        "The played data will not be saved.",
+        "プレイしたデータが保存されません。",
+        "플레이한 데이터가 저장되지 않습니다."
     };
 
     //* Tutorial
@@ -450,6 +468,10 @@ public static class LANG //* LANG
         if(name == TXT.RateDialog_Content2.ToString()) res = RateDialog_Content2[CUR_LANG];
         if(name == TXT.HardMode_Content1.ToString()) res = HardMode_Content1[CUR_LANG];
         if(name == TXT.HardMode_Content2.ToString()) res = HardMode_Content2[CUR_LANG];
+
+        if(name == TXT.Caution.ToString()) res = Caution[CUR_LANG];
+        if(name == TXT.Caution_Content.ToString()) res = Caution_Content[CUR_LANG];
+        if(name == TXT.Caution_Notice.ToString()) res = Caution_Notice[CUR_LANG];
 
 
         //* TUTORIAL

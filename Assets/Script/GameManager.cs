@@ -56,6 +56,9 @@ public class GameManager : MonoBehaviour {
     public int comboCnt = 0;
     public int bossLimitCnt = 0;
     public int bossKillCnt = 0; public int BossKillCnt { get => bossKillCnt; set => bossKillCnt = value;}
+    public int rewardItemCoin = 0;  public int RewardItemCoin { get => rewardItemCoin; set => rewardItemCoin = value;}
+    public int rewardItemDiamond = 0;   public int RewardItemDiamond { get => rewardItemDiamond; set => rewardItemDiamond = value;}
+    public int rewardItemRouletteTicket = 0;    public int RewardItemRouletteTicket { get => rewardItemRouletteTicket; set => rewardItemRouletteTicket = value;}
 
     [Header("TRIGGER")][Header("__________________________")]
     public bool isPlayingAnim;  public bool IsPlayingAnim { get=> isPlayingAnim; set=> isPlayingAnim = value;}
@@ -75,8 +78,9 @@ public class GameManager : MonoBehaviour {
     public Text adDialogTitleTxt;
     public Text adDialogContentTxt;
 
+    public RectTransform AskGiveUpDialog;
+
     [Header("◆GUI◆")][Header("__________________________")]
-    
     public Text stageTxt;
     public Text bossLimitCntTxt;
     public Text stateTxt;
@@ -136,12 +140,18 @@ public class GameManager : MonoBehaviour {
     [FormerlySerializedAs("gvDiamondTxt")]   public Text gvDiamondTxt;
     [FormerlySerializedAs("gvBestScoreTxt")]   public Text gvBestScoreTxt;
     [FormerlySerializedAs("gvStageTxt")]   public Text gvStageTxt;
+    [FormerlySerializedAs("gvRewardItemCoinTxt")]   public Text gvRewardItemCoinTxt;
+    [FormerlySerializedAs("gvRewardItemDiamondTxt")]   public Text gvRewardItemDiamondTxt;
+    [FormerlySerializedAs("gvRewardItemRouletteTicketTxt")]   public Text gvRewardItemRouletteTicketTxt;
 
     [Header("VICTORY")][Header("__________________________")]
     [FormerlySerializedAs("vtrCoinTxt")]   public Text vtrCoinTxt;
     [FormerlySerializedAs("vtrDiamondTxt")]   public Text vtrDiamondTxt;
     [FormerlySerializedAs("vtrBestScoreTxt")]   public Text vtrBestScoreTxt;
     [FormerlySerializedAs("vtrStageTxt")]   public Text vtrStageTxt;
+    [FormerlySerializedAs("vtrRewardItemCoinTxt")]   public Text vtrRewardItemCoinTxt;
+    [FormerlySerializedAs("vtrRewardItemDiamondTxt")]   public Text vtrRewardItemDiamondTxt;
+    [FormerlySerializedAs("vtrRewardItemRouletteTicketTxt")]   public Text vtrRewardItemRouletteTicketTxt;
 
     [Header("STATUS FOLDER")][Header("__________________________")]
     public Transform statusInfoContents;
@@ -320,6 +330,7 @@ public class GameManager : MonoBehaviour {
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         StartCoroutine(coRewardChestOpen());
     }
+    public void onClickGiveUpButton() => displayAskGiveUpDialog();
 /// --------------------------------------------------------------------------
 /// REWARD CHEST RANDOM OPEN
 /// --------------------------------------------------------------------------
@@ -407,9 +418,12 @@ public class GameManager : MonoBehaviour {
         switch(reward){
             case GOODS:
                 if(goodsPriceDic.TryGetValue(DM.NAME.Coin.ToString(), out int rewardCoin))
-                    coin += rewardCoin;
+                    // coin += rewardCoin;
+                    rewardItemCoin += rewardCoin;
                 else if(goodsPriceDic.TryGetValue(DM.NAME.Diamond.ToString(), out int rewardDiamond))
-                    diamond += rewardDiamond;
+                    // diamond += rewardDiamond;
+                    rewardItemDiamond += rewardDiamond;
+
                 break;
             case PSVSKILL_TICKET:
                 Debug.Log("onClickRewardChestOkButton:: PSVSKILL_TICKET!");
@@ -419,7 +433,8 @@ public class GameManager : MonoBehaviour {
                 levelUpPanel.GetComponent<LevelUpPanelAnimate>().setUI(DM.NAME.PsvSkillTicket.ToString());
                 break;
             case ROULETTE_TICKET:
-                DM.ins.personalData.addRouletteTicket(1);
+                // DM.ins.personalData.addRouletteTicket(1);
+                rewardItemRouletteTicket++;
                 break;
             case EMPTY:
                 //何もしない。
@@ -562,7 +577,7 @@ public class GameManager : MonoBehaviour {
             setCoinX2();
         }
         //* ダイアログ閉じる
-        showAdDialog.gameObject.SetActive(false); 
+        showAdDialog.gameObject.SetActive(false);
     }
 
     private void setRerotateSkillSlots(){
@@ -721,13 +736,17 @@ public class GameManager : MonoBehaviour {
     public void setGameOver(){
         Debug.Log("<size=30> --- G A M E O V E R --- </size>");
         SM.ins.sfxPlay(SM.SFX.Defeat.ToString());
-        setFinishGame(gameoverPanel, gvBestScoreTxt, gvStageTxt, gvCoinTxt, gvDiamondTxt);
+        setFinishGame(
+            gameoverPanel, gvBestScoreTxt, gvStageTxt, gvCoinTxt, gvDiamondTxt
+            , gvRewardItemCoinTxt, gvRewardItemDiamondTxt, gvRewardItemRouletteTicketTxt);
     }
 
     public void setVictory(){
         Debug.Log("<size=30> --- V I C T O R Y --- </size>");
         SM.ins.sfxPlay(SM.SFX.Victory.ToString());
-        setFinishGame(victoryPanel, vtrBestScoreTxt, vtrStageTxt, vtrCoinTxt, vtrDiamondTxt);
+        setFinishGame(
+            victoryPanel, vtrBestScoreTxt, vtrStageTxt, vtrCoinTxt, vtrDiamondTxt
+            , vtrRewardItemCoinTxt, vtrRewardItemDiamondTxt, vtrRewardItemRouletteTicketTxt);
 
         //* HardMode unlocked
         if(!DM.ins.personalData.IsHardmodeOn)
@@ -740,7 +759,8 @@ public class GameManager : MonoBehaviour {
             AcvHardModeClear.setHardModeClear();
     }
 
-    private void setFinishGame(GameObject panel, Text scoreTxt, Text stageTxt, Text coinTxt, Text diamondTxt){
+    private void setFinishGame(GameObject panel, Text scoreTxt, Text stageTxt, Text coinTxt, Text diamondTxt,
+        Text rewardItemCoinTxt, Text rewardItemDiamondTxt, Text rewardItemRouletteTicketTxt){
         State = GameManager.STATE.GAMEOVER;
         panel.SetActive(true);
 
@@ -757,13 +777,23 @@ public class GameManager : MonoBehaviour {
         diamond += stage * LM._.STAGE_PER_DIAMOND_PRICE;
         int extraUpgradeCoin = Mathf.RoundToInt(coin * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.CoinBonus].getValue());
 
-        //* Show Reward Coin & Diamond => setGameでも使う。
+        //* Show Goods => setGameでも使う。
         coinTxt.text = (coin + extraUpgradeCoin * (mode == DM.MODE.HARD? LM._.HARDMODE_COIN_BONUS : 1)).ToString();
         diamondTxt.text = (diamond * (mode == DM.MODE.HARD? LM._.HARDMODE_DIAMOND_BONUS : 1)).ToString();
 
+        //* Show Reward Item Goods
+        rewardItemCoinTxt.text = rewardItemCoin.ToString();
+        rewardItemDiamondTxt.text = rewardItemDiamond.ToString();
+        rewardItemRouletteTicketTxt.text = rewardItemRouletteTicket.ToString();
+
         //* Add Reward Goods
-        DM.ins.personalData.addCoin(int.Parse(coinTxt.text)); // DM.ins.personalData.Coin += int.Parse(coinTxt.text);
-        DM.ins.personalData.addDiamond(int.Parse(diamondTxt.text));
+        int resultCoin = int.Parse(coinTxt.text) + rewardItemCoin;
+        int resultDiamond = int.Parse(diamondTxt.text) + rewardItemDiamond;
+        int resultRouletteTicket = rewardItemRouletteTicket;
+
+        DM.ins.personalData.addCoin(resultCoin); // DM.ins.personalData.Coin += int.Parse(coinTxt.text);
+        DM.ins.personalData.addDiamond(resultDiamond);
+        DM.ins.personalData.addRouletteTicket(resultRouletteTicket);
         
         //* Rate Dialogを表示するため
         DM.ins.personalData.PlayTime++;
@@ -793,7 +823,6 @@ public class GameManager : MonoBehaviour {
                 break;
         }
     }
-
 
     public void displayCurPassiveSkillUI(string type){
         GameObject pref = (type == STATE.PAUSE.ToString())? skillInfoRowPref : inGameSkillImgBtnPref;
@@ -980,6 +1009,22 @@ public class GameManager : MonoBehaviour {
 
         title.text = LANG.getTxt(LANG.TXT.Tutorial.ToString());
         content.text = LANG.getTxt(LANG.TXT.OpenTutorial_Content.ToString());
+        okBtn.text = LANG.getTxt(LANG.TXT.Ok.ToString());
+    }
+
+    public void displayAskGiveUpDialog(){
+        AskGiveUpDialog.gameObject.SetActive(true);
+
+        //* Language
+        Transform dialog = AskGiveUpDialog.Find("Dialog");
+        Text title = dialog.Find(DM.NAME.TitleTxt.ToString()).GetComponent<Text>();
+        Text content = dialog.Find(DM.NAME.ContentTxt.ToString()).GetComponent<Text>();
+        Text notice = dialog.Find("NoticeTxt").GetComponent<Text>();
+        Text okBtn = dialog.Find("OkBtn").GetComponentInChildren<Text>();
+
+        title.text = LANG.getTxt(LANG.TXT.Caution.ToString());
+        content.text = LANG.getTxt(LANG.TXT.Caution_Content.ToString());
+        notice.text = LANG.getTxt(LANG.TXT.Caution_Notice.ToString());
         okBtn.text = LANG.getTxt(LANG.TXT.Ok.ToString());
     }
 }
