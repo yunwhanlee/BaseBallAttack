@@ -135,12 +135,14 @@ public class HomeManager : MonoBehaviour
     public Text rateContentTxt2;
     public Text rateLaterBtnTxt;
     public Text rateOkBtnTxt;
+    
     //* Setting
     public FrameUI settingDialog;
     public Image settingDialogCountryIconImg;
     public Sprite[] CountryIconSprArr;
     public Dropdown settingQualityDropdown;
     public RenderPipelineAsset[] qualityLevels;
+    public Button settingDialogCancelBtn; // アプリ最初ダイアログでは、非表示。
 
     //* HardMode Enable Notice Dialog
     public RectTransform hardModeEnableNoticeDialog;
@@ -165,6 +167,13 @@ public class HomeManager : MonoBehaviour
 
     void Start(){
         // onClickResetBtn();
+
+        //* アプリ初期実行、Settingダイアログ 表示。
+        if(!DM.ins.personalData.IsChoiceLang){
+            DM.ins.personalData.IsChoiceLang = true;
+            settingDialog.Panel.SetActive(true);
+            settingDialogCancelBtn.gameObject.SetActive(false);
+        }
 
         //* Set Quality
         QualitySettings.SetQualityLevel(DM.ins.personalData.Quality);
@@ -380,7 +389,7 @@ public class HomeManager : MonoBehaviour
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         settingDialog.Panel.SetActive(false);
         DM.ins.personalData.save();
-        if(isOk) SceneManager.LoadScene(DM.SCENE.Home.ToString()); // Re-load
+        if(isOk) SceneManager.LoadScene(DM.SCENE.Home.ToString()); //* Re-load
     }
 
     public void onClickBtnUnlock2ndSkillDialog(bool isActive){

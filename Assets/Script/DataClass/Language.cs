@@ -13,7 +13,8 @@ public static class LANG //* LANG
         Start, Level, Stage, BossLimitCnt, Combo, Status, Back, Ready, Out, Strike,
         BestScore, LevelUpPanel_Title, LevelUpPanel_Explain, Play,
 
-        NotEnough, MsgNoSkill, MsgAlreadyRegistedSkill, MsgHardmodeLocked, StageSelectNotice,
+        NotEnough, MsgNoSkill, MsgAlreadyRegistedSkill, MsgHardmodeLocked, 
+        StageSelectNotice, ChoiceLangNotice,
 
         DialogUnlock2ndSkill_Title, DialogUnlock2ndSkill_Info,
         ShowAdDialogCoinX2_Title, ShowAdDialogCoinX2_Content,
@@ -174,6 +175,11 @@ public static class LANG //* LANG
         "After Select the image, press the Play button.",
         "画像を選択したら、プレイボタンを押してください。",
         "이미지를 선택한 후 플레이 버튼을 눌러주세요."
+    };
+    public static string[] ChoiceLangNotice = new string[]{
+        "If the gameplay is not smooth with frame drop, try lowering the Quality.",
+        "프레임 드롭으로 게임 플레이가 원활하지 않으면, 퀄리티를 낮춰보세요.",
+        "フレームドロップでゲームプレイがスムーズでない場合は、クオリティーを下げてください。"
     };
 
     //* DIALOG
@@ -459,6 +465,7 @@ public static class LANG //* LANG
         if(name == TXT.MsgAlreadyRegistedSkill.ToString()) res = MsgAlreadyRegistedSkill[CUR_LANG];
         if(name == TXT.MsgHardmodeLocked.ToString()) res = MsgHardmodeLocked[CUR_LANG];
         if(name == TXT.StageSelectNotice.ToString()) res = StageSelectNotice[CUR_LANG];
+        if(name == TXT.ChoiceLangNotice.ToString()) res = ChoiceLangNotice[CUR_LANG];
 
         //* DIALOG
         if(name == TXT.DialogUnlock2ndSkill_Title.ToString()) res = DialogUnlock2ndSkill_Title[CUR_LANG];

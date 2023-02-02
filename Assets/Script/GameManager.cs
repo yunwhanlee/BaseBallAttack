@@ -78,8 +78,7 @@ public class GameManager : MonoBehaviour {
     public RectTransform openTutorialDialog;
     public Text adDialogTitleTxt;
     public Text adDialogContentTxt;
-
-    public RectTransform AskGiveUpDialog;
+    public RectTransform askGiveUpDialog;
 
     [Header("◆GUI◆")][Header("__________________________")]
     public Text stageTxt;
@@ -1036,10 +1035,10 @@ public class GameManager : MonoBehaviour {
     }
 
     public void displayAskGiveUpDialog(){
-        AskGiveUpDialog.gameObject.SetActive(true);
+        askGiveUpDialog.gameObject.SetActive(true);
 
         //* Language
-        Transform dialog = AskGiveUpDialog.Find("Dialog");
+        Transform dialog = askGiveUpDialog.Find("Dialog");
         Text title = dialog.Find(DM.NAME.TitleTxt.ToString()).GetComponent<Text>();
         Text content = dialog.Find(DM.NAME.ContentTxt.ToString()).GetComponent<Text>();
         Text notice = dialog.Find("NoticeTxt").GetComponent<Text>();

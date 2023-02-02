@@ -24,6 +24,7 @@ public class PersonalData {
     [SerializeField] bool isRemoveAD; public bool IsRemoveAD {get => isRemoveAD; set => isRemoveAD = value;}
     [SerializeField] bool isSkipTutorial; public bool IsSkipTutorial {get => isSkipTutorial; set => isSkipTutorial = value;}
     [SerializeField] bool isPurchasePremiumPack; public bool IsPurchasePremiumPack {get => isPurchasePremiumPack; set => isPurchasePremiumPack = value;}
+    [SerializeField] bool isChoiceLang; public bool IsChoiceLang {get => isChoiceLang; set => isChoiceLang = value;}
 
     [Header("ACHIVEMENT")][Header("__________________________")]
     [SerializeField] int clearStage; public int ClearStage {get => clearStage; set => clearStage = value;}
@@ -147,6 +148,7 @@ public class PersonalData {
         this.isRemoveAD = data.IsRemoveAD;
         this.isSkipTutorial = data.IsSkipTutorial;
         this.isPurchasePremiumPack = data.IsPurchasePremiumPack;
+        this.isChoiceLang = data.IsChoiceLang;
 
         //* Achivement
         this.clearStage = data.ClearStage;
@@ -226,8 +228,7 @@ public class PersonalData {
 
         //* Reset
         this.lang = LANG.TP.JP;
-
-        this.quality = 2; // 0: Low, 1: Medium, 2: High
+        this.quality = 1; //* 0: Low, 1: Medium, 2: High
         this.playTime = 0;
 
         this.coin = 0;
@@ -241,6 +242,7 @@ public class PersonalData {
         this.isRemoveAD = false;
         this.isSkipTutorial = false;
         this.isPurchasePremiumPack = false;
+        this.isChoiceLang = false;
 
         this.clearStage = 1;
         this.stageClearArr = getStageClearArr();
