@@ -11,9 +11,9 @@ public static class LANG //* LANG
         //* UI
         Ok, Use, Get, Open,
         Start, Level, Stage, BossLimitCnt, Combo, Status, Back, Ready, Out, Strike,
-        BestScore, LevelUpPanel_Title, LevelUpPanel_Explain,
+        BestScore, LevelUpPanel_Title, LevelUpPanel_Explain, Play,
 
-        NotEnough, MsgNoSkill, MsgAlreadyRegistedSkill, MsgHardmodeLocked,
+        NotEnough, MsgNoSkill, MsgAlreadyRegistedSkill, MsgHardmodeLocked, StageSelectNotice,
 
         DialogUnlock2ndSkill_Title, DialogUnlock2ndSkill_Info,
         ShowAdDialogCoinX2_Title, ShowAdDialogCoinX2_Content,
@@ -169,6 +169,11 @@ public static class LANG //* LANG
         "you have to clear previous step!",
         "以前段階をクリアーしてください!",
         "이전 단계를 클리어 해야됩니다!"
+    };
+    public static string[] StageSelectNotice = new string[]{
+        "After Select the image, press the Play button.",
+        "画像を選択したら、プレイボタンを押してください。",
+        "이미지를 선택한 후 플레이 버튼을 눌러주세요."
     };
 
     //* DIALOG
@@ -353,6 +358,7 @@ public static class LANG //* LANG
     public static string[] Later = new string[]{"Later", "後で", "나중에"};
     public static string[] Purchase_Complete = new string[]{"Purchase_Complete", "購入成功", "구매성공"};
     public static string[] HardMode = new string[]{"HardMode", "ハードモード", "하드모드"};
+    public static string[] Play = new string[]{"Play", "プレイ", "플레이"};
 
     //* PSV
     public static string[] Dmg = new string[]{DM.PSV.Dmg.ToString(), "攻撃力", "공격력"};
@@ -452,6 +458,7 @@ public static class LANG //* LANG
         if(name == TXT.MsgNoSkill.ToString()) res = MsgNoSkill[CUR_LANG];
         if(name == TXT.MsgAlreadyRegistedSkill.ToString()) res = MsgAlreadyRegistedSkill[CUR_LANG];
         if(name == TXT.MsgHardmodeLocked.ToString()) res = MsgHardmodeLocked[CUR_LANG];
+        if(name == TXT.StageSelectNotice.ToString()) res = StageSelectNotice[CUR_LANG];
 
         //* DIALOG
         if(name == TXT.DialogUnlock2ndSkill_Title.ToString()) res = DialogUnlock2ndSkill_Title[CUR_LANG];
@@ -530,6 +537,7 @@ public static class LANG //* LANG
         if(name == TXT.Rate.ToString()) res = Rate[CUR_LANG];
         if(name == TXT.Purchase_Complete.ToString()) res = Purchase_Complete[CUR_LANG];
         if(name == TXT.HardMode.ToString()) res = HardMode[CUR_LANG];
+        if(name == TXT.Play.ToString()) res = Play[CUR_LANG];
 
         //* PSV
         if(name == TXT.Dmg.ToString()) res = Dmg[CUR_LANG];

@@ -108,7 +108,8 @@ public class HomeManager : MonoBehaviour
     public RectTransform stageSelectContent;    
     public GameObject stageSelectObjPf;
     public StageSelect[] stageSelects;
-    public Button stageSelectPlayBtn;
+    public Text stageSelectPlayBtnTxt;
+    public Text stageSelectNoticeTxt;
 
     [Header("SHOW REWARD PANEL")][Header("__________________________")]
     public GameObject showRewardPanel;
@@ -227,6 +228,10 @@ public class HomeManager : MonoBehaviour
             hardModeEnableNoticeContent2Txt.text = LANG.getTxt(LANG.TXT.HardMode_Content2.ToString());
             hardModeEnableNoticeOkBtnTxt.text = LANG.getTxt(LANG.TXT.Ok.ToString());
         }
+
+        //* StageSelect Panel
+        stageSelectPlayBtnTxt.text = LANG.getTxt(LANG.TXT.Play.ToString());
+        stageSelectNoticeTxt.text = LANG.getTxt(LANG.TXT.StageSelectNotice.ToString());
     }
 
     void Update(){
@@ -457,7 +462,7 @@ public class HomeManager : MonoBehaviour
     }
 
     public void onClickPlayBtn(){
-        
+        //* Fail
         if(stageSelects[stageIndex].IsLocked){
             SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
             Util._.displayNoticeMsgDialog(LANG.getTxt(LANG.TXT.MsgHardmodeLocked.ToString()));

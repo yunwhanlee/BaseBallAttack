@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45015407, g: 0.500194, b: 0.5754274, a: 1}
+  m_IndirectSpecularColor: {r: 0.45015454, g: 0.5001945, b: 0.57542807, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9513,6 +9513,85 @@ MonoBehaviour:
   span: 0
   isTap: 0
   isRepeatAutoPurchase: 0
+--- !u!1 &474810347
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 474810348}
+  - component: {fileID: 474810349}
+  - component: {fileID: 474810350}
+  m_Layer: 0
+  m_Name: StageSelectNoticeTxt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &474810348
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474810347}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2383291514987288977}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 200}
+  m_SizeDelta: {x: 850, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &474810349
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474810347}
+  m_CullTransparentMesh: 0
+--- !u!114 &474810350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474810347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.8396226, g: 0.5455567, b: 0.51882344, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: e110c919ea5e84fea8cbc2f0556ecfef, type: 3}
+    m_FontSize: 55
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 65
+    m_Alignment: 4
+    m_AlignByGeometry: 1
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: After Select the image, press the Play button.
 --- !u!1 &478305813
 GameObject:
   m_ObjectHideFlags: 0
@@ -22818,7 +22897,7 @@ GameObject:
   - component: {fileID: 1253733119}
   - component: {fileID: 1253733118}
   m_Layer: 0
-  m_Name: CFX3_Hit_SmokePuff
+  m_Name: SmokePuffEF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23738,7 +23817,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 20
+        scalar: 21
         minScalar: 15
         maxCurve:
           serializedVersion: 2
@@ -27507,8 +27586,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1253733117}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1042}
-  m_LocalScale: {x: 1870.615, y: 1870.615, z: 1870.615}
+  m_LocalPosition: {x: 0, y: 0, z: -1000}
+  m_LocalScale: {x: 1880, y: 1880, z: 1880}
   m_Children: []
   m_Father: {fileID: 2001013461}
   m_RootOrder: 3
@@ -31440,7 +31519,7 @@ GameObject:
   - component: {fileID: 1517290291}
   - component: {fileID: 1517290290}
   m_Layer: 0
-  m_Name: Txt
+  m_Name: PlayTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34972,11 +35051,11 @@ RectTransform:
   m_Children:
   - {fileID: 1517290289}
   m_Father: {fileID: 2383291514987288977}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -600}
+  m_AnchoredPosition: {x: 0, y: -550}
   m_SizeDelta: {x: 500, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1727830785
@@ -34998,7 +35077,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -36936,7 +37015,8 @@ MonoBehaviour:
     titleName: Hard
     begin: 0
     end: 160
-  stageSelectPlayBtn: {fileID: 1727830785}
+  stageSelectPlayBtnTxt: {fileID: 1517290290}
+  stageSelectNoticeTxt: {fileID: 474810350}
   showRewardPanel: {fileID: 1199048389}
   showRewardItemListGroup: {fileID: 1503350621}
   showRewardItemPf: {fileID: 4721498982054872567, guid: 20f367e8fea7d604c8d86f0b90b59feb, type: 3}
@@ -54966,7 +55046,7 @@ RectTransform:
   m_Children:
   - {fileID: 2383291514809371337}
   m_Father: {fileID: 2383291514987288977}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -55286,6 +55366,7 @@ RectTransform:
   m_Children:
   - {fileID: 2383291514919768146}
   - {fileID: 2383291513218865637}
+  - {fileID: 474810348}
   - {fileID: 2383291514485568500}
   - {fileID: 1727830784}
   m_Father: {fileID: 925401117}

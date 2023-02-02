@@ -94,6 +94,7 @@ public class GameManager : MonoBehaviour {
     public Text expBarTxt, bossStageTxt;
     public Toggle skipTutorialToggle;
     public GameObject coinX2Label;
+    public Text modeTxt;
 
     [Header("TEXT EFFECT")][Header("__________________________")]
     public Text comboTxt;
@@ -260,7 +261,8 @@ public class GameManager : MonoBehaviour {
         else if(DM.ins.simpleSkyMt.GetTextureOffset("_MainTex").x == LM._.SKY_MT_DINNER_VALUE)
             skyMoonObj.SetActive(true);
 
-        //* Check Mode
+        //* Set Mode
+        Debug.Log($"Set Mode:: {stage} > {LM._.VICTORY_BOSSKILL_CNT} * {LM._.BOSS_STAGE_SPAN} : {stage > LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN}");
         if(stage > LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN){
             mode = DM.MODE.HARD;
         }
@@ -269,7 +271,11 @@ public class GameManager : MonoBehaviour {
         pauseCoinTxt.text = DM.ins.personalData.Coin.ToString();
         pauseDiamondTxt.text = DM.ins.personalData.Diamond.ToString();
         pauseModeTxt.text = mode.ToString() + " MODE";
-        pauseModeTxt.color = (mode == DM.MODE.NORMAL)? Color.white : Color.red;
+        pauseModeTxt.color = (mode == DM.MODE.HARD)? Color.red : Color.white;
+
+        //* ModeTxt Anim
+        modeTxt.text = mode.ToString() + " MODE";
+        modeTxt.color = (mode == DM.MODE.HARD)? Color.red : Color.white;
     }
 
     void Update(){
