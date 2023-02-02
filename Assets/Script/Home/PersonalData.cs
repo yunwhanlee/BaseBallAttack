@@ -127,8 +127,9 @@ public class PersonalData {
         Debug.Log($"<size=15>{this}::JSON:: LOAD Data (json == “”) ? {json==""}, json= {json}</size>");
         
         //* (BUG-39) 最初の実行だったら、ロードデータが無くてjsonがnullなので、resetして初期値を設定する。
-        if(json == "")
+        if(json == ""){
             reset();
+        }
 
         //* PlayerPrefsへ保存したデータ ロード
         var data = JsonUtility.FromJson<PersonalData>(json); //* Convert Json To Class Data

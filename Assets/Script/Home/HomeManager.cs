@@ -359,8 +359,15 @@ public class HomeManager : MonoBehaviour
     }
     public void onClickShowADButton(){
         //* 広告要請
-        bool success = DM.ins.reqShowAD();
-        if(success){
+        StartCoroutine(coDelayResult());
+    }
+
+    IEnumerator coDelayResult(){
+        AdmobManager.ins.showRewardAd();
+        Debug.Log("<color=green>SHOW showRewardAd:: " + AdmobManager.ins.LogText.text + "</color>");
+
+        yield return new WaitUntil(() => AdmobManager.ins.LogText.text != "WATCHING...");
+        if(AdmobManager.ins.LogText.text == "SUCCESS" && !AdmobManager.ins.isAdClosed){
             SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
             DM.ins.personalData.RouletteTicket++;
             showRoulettePanel();
@@ -369,7 +376,6 @@ public class HomeManager : MonoBehaviour
             SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
             Util._.displayNoticeMsgDialog("ERROR！");
         };
-        
     }
 
     #region SETTING
@@ -802,7 +808,8 @@ public class HomeManager : MonoBehaviour
                 + "\n DateTime.Now= " + DateTime.Now
                 + "\n msg= " + err
             );
-            return "ERROR";
+            DM.ins.personalData.addRouletteTicket(1);
+            return "";
         }
     }
     private void checkPremiumPackPurchaseStatus(){
