@@ -8,7 +8,7 @@ using System;
 
 public class DM : MonoBehaviour
 {
-    public static DM ins;
+    public static DM ins;    
     public enum DATABASE_KEY {Json};
     public enum SCENE {Home, Play, Loading};
     public enum MODE {NORMAL, HARD};

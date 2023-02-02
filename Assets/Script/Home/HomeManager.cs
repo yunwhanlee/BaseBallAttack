@@ -71,6 +71,7 @@ public class HomeManager : MonoBehaviour
     [SerializeField] Color[] selectPanelColors;
     
     [Header("【 GUI 】")][Header("__________________________")]
+    public Text versionTxt;
     public Canvas mainCanvas;
     public FrameUI homePanel;
     public FrameUI selectPanel;
@@ -169,6 +170,8 @@ public class HomeManager : MonoBehaviour
 
     void Start(){
         // onClickResetBtn();
+
+        versionTxt.text = $"ver{Version.MAJOR}.{Version.MINOR}.{Version.REVISION}";
 
         //* Exp Log
         expLogToggle.isOn = DM.ins.personalData.IsActiveExpLog;
