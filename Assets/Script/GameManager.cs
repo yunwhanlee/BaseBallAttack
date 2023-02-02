@@ -214,6 +214,7 @@ public class GameManager : MonoBehaviour {
         bs = GameObject.Find("BallShooter").GetComponent<BallShooter>();
         bm = GameObject.Find("BlockMaker").GetComponent<BlockMaker>();
 
+        SM.ins.sfxPlay(SM.SFX.StartGame.ToString());
         light = GameObject.Find("Directional Light").GetComponent<Light>();
         hitRangeSliderTf = hitRangeSlider.GetComponent<RectTransform>();
         readyBtn = readyBtn.GetComponent<Button>();

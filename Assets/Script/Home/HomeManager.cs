@@ -144,6 +144,7 @@ public class HomeManager : MonoBehaviour
     public RenderPipelineAsset[] qualityLevels;
     public Button settingDialogCancelBtn; // アプリ最初ダイアログでは、非表示。
     public Toggle expLogToggle;
+    public Text settingNoticeTxt;
 
     //* HardMode Enable Notice Dialog
     public RectTransform hardModeEnableNoticeDialog;
@@ -224,7 +225,9 @@ public class HomeManager : MonoBehaviour
             rateOkBtnTxt.text = LANG.getTxt(LANG.TXT.Ok.ToString());
         }
         
-        //* Setting Panel Country Icon 
+        //* Setting Panel Country Icon
+        settingNoticeTxt.text = LANG.getTxt(LANG.TXT.StageSelectNotice.ToString());
+
         settingDialogCountryIconImg.sprite = 
             DM.ins.personalData.Lang == LANG.TP.EN? CountryIconSprArr[(int)LANG.TP.EN]
             : DM.ins.personalData.Lang == LANG.TP.JP? CountryIconSprArr[(int)LANG.TP.JP]
