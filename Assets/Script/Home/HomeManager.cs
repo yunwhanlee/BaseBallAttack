@@ -143,6 +143,7 @@ public class HomeManager : MonoBehaviour
     public Dropdown settingQualityDropdown;
     public RenderPipelineAsset[] qualityLevels;
     public Button settingDialogCancelBtn; // アプリ最初ダイアログでは、非表示。
+    public Toggle expLogToggle;
 
     //* HardMode Enable Notice Dialog
     public RectTransform hardModeEnableNoticeDialog;
@@ -168,16 +169,19 @@ public class HomeManager : MonoBehaviour
     void Start(){
         // onClickResetBtn();
 
+        //* Exp Log
+        expLogToggle.isOn = DM.ins.personalData.IsActiveExpLog;
+
+        //* Set Quality
+        QualitySettings.SetQualityLevel(DM.ins.personalData.Quality);
+        settingQualityDropdown.value = QualitySettings.GetQualityLevel();
+
         //* アプリ初期実行、Settingダイアログ 表示。
         if(!DM.ins.personalData.IsChoiceLang){
             DM.ins.personalData.IsChoiceLang = true;
             settingDialog.Panel.SetActive(true);
             settingDialogCancelBtn.gameObject.SetActive(false);
         }
-
-        //* Set Quality
-        QualitySettings.SetQualityLevel(DM.ins.personalData.Quality);
-        settingQualityDropdown.value = QualitySettings.GetQualityLevel();
 
         Debug.Log("Math:: -------------------------------");
         const int OFFSET = 100;
@@ -361,6 +365,8 @@ public class HomeManager : MonoBehaviour
         };
         
     }
+
+    #region SETTING
     public void onClickSettingBtn(){
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         settingDialog.Panel.SetActive(true);
@@ -385,12 +391,18 @@ public class HomeManager : MonoBehaviour
         QualitySettings.renderPipeline = qualityLevels[value];
         DM.ins.personalData.Quality = value; // Save
     }
+    public void onChangeExpLogToggle(){
+        Debug.Log("onChangeExpLogToggle:: " + expLogToggle.isOn);
+        DM.ins.personalData.IsActiveExpLog = expLogToggle.isOn;
+    }
     public void onClickSettingOkBtn(bool isOk){
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
+        // expLogToggle.isOn = DM.ins.personalData.IsActiveExpLog;
         settingDialog.Panel.SetActive(false);
         DM.ins.personalData.save();
         if(isOk) SceneManager.LoadScene(DM.SCENE.Home.ToString()); //* Re-load
     }
+    #endregion
 
     public void onClickBtnUnlock2ndSkillDialog(bool isActive){
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());

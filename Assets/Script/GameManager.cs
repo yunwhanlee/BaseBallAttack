@@ -199,6 +199,8 @@ public class GameManager : MonoBehaviour {
 
         DM.ins.transform.position = Vector3.zero; //* LoadingSceneで、モデルが見えないようにずらした位置を戻す。
 
+        showExpUIGroup.gameObject.SetActive(DM.ins.personalData.IsActiveExpLog);
+
         //* スキップに✓がされていない場合は、チュートリアルのダイアログ 表示。
         if(!DM.ins.personalData.IsSkipTutorial){
             displayTutorialDialog();
