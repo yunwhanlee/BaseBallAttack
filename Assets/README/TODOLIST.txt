@@ -347,6 +347,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     - PLAY:PassiveSkillPanelにスクロールを追加。
     ✓ 最初にアプリをスタートした時、言語を選択するダイアログ表示。
     ✓ SettingPanelへログ表示追加。
+    ✓ Admob Reward 追加。
 
 [BUG]
     ✓ Ballが壁にぶつかってから、反射角が摩擦力で少しずつ減る。
@@ -423,6 +424,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     - (BUG-45) アイテム購入が次のことになるバグ。
     - (BUG-46) ScrollSnipが出来たら、止まるべきのに、少し動くバグ。
     - (BUG-47) ColorBallPopブロックにぶつかってもボールが破壊されないBUG。
+    - (BUG-48) Admob Reward、Playシーンで実行すると、重なって広告が増えるBUG。
 
     
     

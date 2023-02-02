@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45015454, g: 0.5001945, b: 0.57542807, a: 1}
+  m_IndirectSpecularColor: {r: 0.45015407, g: 0.500194, b: 0.5754274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12992,7 +12992,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 38.2, y: -364.4, z: 0}
 --- !u!1 &712323607
 GameObject:
@@ -19442,7 +19442,7 @@ Transform:
   m_Children:
   - {fileID: 67413275}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1065166365
 MonoBehaviour:
@@ -19456,8 +19456,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 034d09eeaac97de4993a7d0300c4772c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hm: {fileID: 1887670884}
+  adType: 0
   isTestMode: 1
-  LogText: {fileID: 767585505}
   RewardAdsBtns:
   - {fileID: 508923127}
 --- !u!1 &1065295700
@@ -31889,7 +31890,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1514199603
 GameObject:
@@ -37541,6 +37542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   em: {fileID: 1584740706}
+  am: {fileID: 1065166365}
   selectPanelScrollBG: {fileID: 327609488}
   selectPanelColors:
   - {r: 0.15686275, g: 0.96470594, b: 0.52156866, a: 1}
@@ -37632,6 +37634,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 709236ba50c223d40bb39f5893ee1173, type: 3}
   focusIconObj: {fileID: 515324465}
   showAdDialog: {fileID: 1571631274}
+  showAdFreeBtn: {fileID: 0}
   adDialogTitleTxt: {fileID: 1250039935}
   adDialogContentTxt: {fileID: 891417927}
   rateDialog: {fileID: 3740557287594494759}

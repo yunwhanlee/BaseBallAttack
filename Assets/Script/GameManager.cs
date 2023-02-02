@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour {
     public BoxCollider downWallCollider;
     public TouchSlideControl touchSlideControlPanel;
     public Light light;
+    public AdmobManager am;
     
     [Header("STATUS")][Header("__________________________")]
     public int coin = 0;
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour {
     public int rewardItemCoin = 0;  public int RewardItemCoin { get => rewardItemCoin; set => rewardItemCoin = value;}
     public int rewardItemDiamond = 0;   public int RewardItemDiamond { get => rewardItemDiamond; set => rewardItemDiamond = value;}
     public int rewardItemRouletteTicket = 0;    public int RewardItemRouletteTicket { get => rewardItemRouletteTicket; set => rewardItemRouletteTicket = value;}
+    DM.REWARD reqAdType;
 
     [Header("TRIGGER")][Header("__________________________")]
     public bool isPlayingAnim;  public bool IsPlayingAnim { get => isPlayingAnim; set=> isPlayingAnim = value;}
@@ -538,17 +540,20 @@ public class GameManager : MonoBehaviour {
 
         //* Set Language
         if(type == DM.REWARD.CoinX2.ToString()){
+            reqAdType = DM.REWARD.CoinX2;
             adDialogTitleTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogCoinX2_Title.ToString());
             adDialogContentTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogCoinX2_Content.ToString());
             adPricePayBtn.gameObject.SetActive(false);
         }
         else if(type == DM.REWARD.RerotateSkillSlots.ToString()){
+            reqAdType = DM.REWARD.RerotateSkillSlots;
             adDialogTitleTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRerotateSkillSlots_Title.ToString());
             adDialogContentTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRerotateSkillSlots_Content.ToString());
             icon.sprite = DM.ins.CoinSpr;
             price.text = LM._.REROTATE_SKILLSLOTS_PRICE_COIN.ToString();
         }
         else if(type == DM.REWARD.Revive.ToString()){
+            reqAdType = DM.REWARD.Revive;
             adDialogTitleTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRevive_Title.ToString());
             adDialogContentTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRevive_Content.ToString());
             icon.sprite = DM.ins.DiamondSpr;
@@ -568,43 +573,49 @@ public class GameManager : MonoBehaviour {
     }
     public void onClickShowADButton(string rewardType){
         Debug.Log("<color=yellow> onClickShowADButton(" + rewardType.ToString() + ")</color>");
-        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
+        // SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         //* 広告
-        bool success = DM.ins.reqShowAD();
-        if(success){
-            setShowADReward(rewardType);
-        }
-        else{
-            SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
-            Util._.displayNoticeMsgDialog("ERROR！");
-        }
+        am.showRewardAd(
+            rewardType == AdmobManager.AD_TYPE.CoinX2.ToString()? AdmobManager.AD_TYPE.CoinX2
+            : rewardType == AdmobManager.AD_TYPE.RerotateSkillSlots.ToString()? AdmobManager.AD_TYPE.RerotateSkillSlots
+            : AdmobManager.AD_TYPE.Revive
+        );
+        // bool success = DM.ins.reqShowAD();
+        // if(success){
+            // setShowADReward(rewardType);
+        // }
+        // else{
+        //     SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
+        //     Util._.displayNoticeMsgDialog("ERROR！");
+        // }
     }
 
 //*---------------------------------------
 //*  関数
 //*---------------------------------------
 #region AD REWARD
-    private void setShowADReward(string rewardType){
-        if(rewardType == DM.REWARD.RerotateSkillSlots.ToString()){
-            setRerotateSkillSlots();
-        }
-        else if(rewardType == DM.REWARD.Revive.ToString()){
-            setRevive();
-        }
-        else if(rewardType == DM.REWARD.CoinX2.ToString()){
-            setCoinX2();
-        }
-        //* ダイアログ閉じる
-        showAdDialog.gameObject.SetActive(false);
-    }
+    // private void setShowADReward(string rewardType){
+    //     if(rewardType == DM.REWARD.RerotateSkillSlots.ToString()){
+    //         setRerotateSkillSlots();
+    //     }
+    //     else if(rewardType == DM.REWARD.Revive.ToString()){
+    //         setRevive();
+    //     }
+    //     else if(rewardType == DM.REWARD.CoinX2.ToString()){
+    //         setCoinX2();
+    //     }
+    //     //* ダイアログ閉じる
+    //     // showAdDialog.gameObject.SetActive(false);
+    // }
 
-    private void setRerotateSkillSlots(){
+    public void setRerotateSkillSlots(){
         Debug.Log("setRerotateSkillSlots::");
         levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
         rerotateSkillSlotsBtn.gameObject.SetActive(false);
+        showAdDialog.gameObject.SetActive(false);//* ダイアログ閉じる
     }
 
-    private void setRevive(){
+    public void setRevive(){
         State = GameManager.STATE.WAIT;
         gameoverPanel.SetActive(false);
         BossBlock boss = bm.getBoss();
@@ -615,12 +626,14 @@ public class GameManager : MonoBehaviour {
         SM.ins.sfxPlay(SM.SFX.Revive.ToString());
         em.activeUI_EF("Revive");
         bm.Start();
+        showAdDialog.gameObject.SetActive(false);//* ダイアログ閉じる
     }
 
-    private void setCoinX2(){
+    public void setCoinX2(){
         gvCoinTxt.text = (int.Parse(gvCoinTxt.text) * 2).ToString();
         coinX2Btn.gameObject.SetActive(false);
         coinX2Label.gameObject.SetActive(true);
+        showAdDialog.gameObject.SetActive(false);//* ダイアログ閉じる
     }
 #endregion
 

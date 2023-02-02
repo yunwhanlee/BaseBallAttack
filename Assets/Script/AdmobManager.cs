@@ -4,18 +4,31 @@ using UnityEngine;
 using UnityEngine.UI;
 using GoogleMobileAds.Api;
 using System;
+using UnityEngine.SceneManagement;
 
 public class AdmobManager : MonoBehaviour{
-    static public AdmobManager ins;
+    [SerializeField] HomeManager hm;
+    [SerializeField] GameManager gm;
+
+    Scene scene;
+    public enum AD_TYPE {ROULETTE_TICKET, CoinX2, RerotateSkillSlots, Revive, NULL};
+    public AD_TYPE adType = AD_TYPE.ROULETTE_TICKET;
 
     public bool isTestMode;
-    public Text LogText;
     public Button[] RewardAdsBtns;
-    public bool isAdClosed;
-    
-    void Awake() => singleton();
+    // public Text LogText;
 
     void Start(){
+        scene = SceneManager.GetActiveScene();
+        Debug.Log("AdmobManager:: scene= " + scene.name);
+
+        //* シーンによって、Managerスクリプト設定。
+        if(scene.name == DM.SCENE.Home.ToString())
+            hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
+        else if(scene.name == DM.SCENE.Play.ToString())
+            gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+
         var requestConfiguration = new RequestConfiguration
             .Builder()
             .SetTestDeviceIds(new List<string>() {"39F380C85C490BBB"}) // test Device ID
@@ -27,11 +40,9 @@ public class AdmobManager : MonoBehaviour{
     }
 
     void Update(){
-        Array.ForEach(RewardAdsBtns, adBtn => {
-            if(adBtn.gameObject.activeSelf)
-                adBtn.interactable = rewardAd.CanShowAd();
-        });
-        
+        // Array.ForEach(RewardAdsBtns, adBtn => {
+        //     adBtn.interactable = rewardAd.CanShowAd();
+        // });
     }
 
     AdRequest GetAdRequest() {
@@ -43,44 +54,58 @@ public class AdmobManager : MonoBehaviour{
     const string rewardID = "ca-app-pub-4586441545476475/8513799701";
     RewardedAd rewardAd;
 
-
     void LoadRewardAd(){
         rewardAd = new RewardedAd(isTestMode ? rewardTestID : rewardID);
         rewardAd.LoadAd(GetAdRequest());
 
-        rewardAd.OnAdOpening += (sender, e) => LogText.text = "WATCHING...";
-
-        rewardAd.OnAdClosed += (sender, e) => {
-            isAdClosed = true;
-            LogText.text = "CLOSED";
+        /* 結果についたCallBack処理　*/
+        //* 広告ロードが失敗したとき、呼び出す。
+        rewardAd.OnAdFailedToLoad += (sender, e) => {
+            SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
+            Util._.displayNoticeMsgDialog("AD Load Fail");
         };
-        
+        //* 広告表示が失敗したとき、呼び出す。
+        rewardAd.OnAdFailedToShow += (sender, e) => {
+            SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
+            Util._.displayNoticeMsgDialog("AD Show Fail");
+        };
+        //* 広告を最後まで閲覧したとき、呼び出す。(途中で出たら、実行しない)
         rewardAd.OnUserEarnedReward += (sender, e) => {
-            isAdClosed = false;
-            LogText.text = "SUCCESS";
-            Debug.Log("SUCCESS showRewardAd:: " + LogText.text);
+            Debug.Log($"<color=yellow>admob::rewardAd.OnUserEarnedReward:: {adType}</color>");
+            SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
+            switch(adType){
+                //* Home
+                case AD_TYPE.ROULETTE_TICKET: 
+                    DM.ins.personalData.RouletteTicket++;
+                    hm.showRoulettePanel();
+                    break;
+                //* Play
+                case AD_TYPE.CoinX2: 
+                    gm.setCoinX2();
+                    break;
+                case AD_TYPE.RerotateSkillSlots: 
+                    gm.setRerotateSkillSlots();
+                    break;
+                case AD_TYPE.Revive: 
+                    gm.setRevive();
+                    break;
+            }
         };
-
     }
 
-    public void showRewardAd(){
+    public void showRewardAd(AD_TYPE type){
+        Debug.Log($"<color=orange>admob::showRewardAd:: {type}</color>");
+        adType = type;
         rewardAd.Show();
         LoadRewardAd();
-        coDelayInit(1);
+        StartCoroutine(coDelayInit(1));
     }
 	#endregion
 
     IEnumerator coDelayInit(float delay){
         yield return new WaitForSeconds(delay);
-        LogText.text = "";
-        isAdClosed = false;
-    }
-    private void singleton(){
-        if(ins == null) {
-            ins = this;
-            DontDestroyOnLoad(ins);
-        }
-        else
-            Destroy(this.gameObject);
+        adType = AD_TYPE.NULL;
+        // LogText.text = adType.ToString();
+        // isAdClosed = false;
     }
 }

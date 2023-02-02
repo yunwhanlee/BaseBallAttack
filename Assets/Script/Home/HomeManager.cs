@@ -65,6 +65,7 @@ public class HomeManager : MonoBehaviour
     //* OutSide
     public enum DlgBGColor {Chara, Bat, Skill, CashShop};
     public HomeEffectManager em;
+    public AdmobManager am;
 
     [Header("SELECT PANEL COLOR")][Header("__________________________")]
     [SerializeField] Image selectPanelScrollBG;  public Image SelectPanelScrollBG {get => selectPanelScrollBG; set => selectPanelScrollBG = value;}
@@ -127,6 +128,7 @@ public class HomeManager : MonoBehaviour
     [Header("DIALOG")][Header("__________________________")]
     //* ShowAD
     public RectTransform showAdDialog;
+    public Button showAdFreeBtn;
     public Text adDialogTitleTxt;
     public Text adDialogContentTxt;
     //* Rate
@@ -359,24 +361,21 @@ public class HomeManager : MonoBehaviour
     }
     public void onClickShowADButton(){
         //* 広告要請
-        StartCoroutine(coDelayResult());
+        am.showRewardAd(AdmobManager.AD_TYPE.ROULETTE_TICKET);
     }
+        // Debug.Log("<color=green>SHOW showRewardAd:: " + AdmobManager.ins.adState.ToString() + "</color>");
 
-    IEnumerator coDelayResult(){
-        AdmobManager.ins.showRewardAd();
-        Debug.Log("<color=green>SHOW showRewardAd:: " + AdmobManager.ins.LogText.text + "</color>");
-
-        yield return new WaitUntil(() => AdmobManager.ins.LogText.text != "WATCHING...");
-        if(AdmobManager.ins.LogText.text == "SUCCESS" && !AdmobManager.ins.isAdClosed){
-            SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
-            DM.ins.personalData.RouletteTicket++;
-            showRoulettePanel();
-        }
-        else {
-            SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
-            Util._.displayNoticeMsgDialog("ERROR！");
-        };
-    }
+        // yield return new WaitUntil(() => AdmobManager.ins.adState != AdmobManager.AD_STATE.WATCHING);
+        // Debug.Log("<color=green>SUCCESS showRewardAd:: " + AdmobManager.ins.adState.ToString() + "</color>");
+        // if(AdmobManager.ins.adState == AdmobManager.AD_STATE.SUCCESS){ //&& !AdmobManager.ins.isAdClosed){
+        //     SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
+        //     DM.ins.personalData.RouletteTicket++;
+        //     showRoulettePanel();
+        // }
+        // else {
+        //     SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
+        //     Util._.displayNoticeMsgDialog("ERROR！");
+        // };
 
     #region SETTING
     public void onClickSettingBtn(){
@@ -629,7 +628,7 @@ public class HomeManager : MonoBehaviour
 //* Private Function
 //* ----------------------------------------------------------------
 #region Private Function
-    private void showRoulettePanel(){
+    public void showRoulettePanel(){
         roulettePanel.gameObject.SetActive(true);
         showAdDialog.gameObject.SetActive(false);
         homePanel.Panel.gameObject.SetActive(false);
