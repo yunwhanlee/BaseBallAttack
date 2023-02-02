@@ -345,6 +345,8 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ FastPlayBtn Hit Ballした後、早く再生するボタン追加。
     ✓ StageSelectPanel 言語設定。
     - PLAY:PassiveSkillPanelにスクロールを追加。
+    - 最初にアプリをスタートした時、言語を選択するダイアログ表示。
+    - SettingPanelへログ表示追加。
 
 [BUG]
     ✓ Ballが壁にぶつかってから、反射角が摩擦力で少しずつ減る。
@@ -415,6 +417,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-39) 最初の実行だったら、ロードデータが無くてjsonがnullなので、resetして初期値を設定する。
     ✓ (BUG-40) ROULETTEチケットが０になったとき、string not valid エラー発生対応。
     ✓ (BUG-42) PLAYシーンで終了しても、購入したデータがセーブできるように。
+    ✓ (BUG-43) ERROR Message Dialogが続いて生成されることを止める。
     - (BUG-43) ステージが終わっても、Expオブや次に進まないＢＵＧ
     - (BUG-44) onClickCheckBtn::checkAtvSkillItemSelectionIsFirstTime CHARAとBATの場合購入したら出るバグがあるため、caseによって処理を分ける。
     - (BUG-45) アイテム購入が次のことになるバグ。

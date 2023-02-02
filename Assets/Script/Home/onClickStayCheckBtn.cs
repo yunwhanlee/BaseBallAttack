@@ -10,12 +10,14 @@ public class onClickStayCheckBtn : MonoBehaviour, IPointerDownHandler, IPointerU
     [SerializeField] float span;
     [SerializeField] bool isTap;
     [SerializeField] bool isRepeatAutoPurchase;
+
+    const float WAIT_SEC = 1, DELAY = 0.2f;
     void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
     {
         Debug.Log("OnPointerDown::");
         isTap = true;
 
-        InvokeRepeating("autoPurchaseItem", 1.5f, 0.3f);
+        InvokeRepeating("autoPurchaseItem", WAIT_SEC, DELAY);
     }
 
     void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
@@ -27,8 +29,7 @@ public class onClickStayCheckBtn : MonoBehaviour, IPointerDownHandler, IPointerU
         CancelInvoke();
     }
 
-    void Update()
-    {
+    void Update(){
         if(!isTap) return;
 
         time += Time.deltaTime;
@@ -55,6 +56,5 @@ public class onClickStayCheckBtn : MonoBehaviour, IPointerDownHandler, IPointerU
                 scrollviewEvent.onClickCheckBtn(type.ToString());
                 break;
         }
-        
     }
 }

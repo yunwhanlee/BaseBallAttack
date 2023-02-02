@@ -52,6 +52,9 @@ public class Util : MonoBehaviour
     }
 
     public void displayNoticeMsgDialog(string msg){
+        //* (BUG-43) ERROR Message Dialogが続いて生成されることを止める。
+        if(GameObject.Find("NoticeMessage(Clone)")) return;
+
         //* (BUG) IN-GAMEへ行ってHOMEに戻ったたら、Missingになる。
         if(!mainPanelTf){
             Scene scene = SceneManager.GetActiveScene();
