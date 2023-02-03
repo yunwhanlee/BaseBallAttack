@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossTargetMisslePref : MonoBehaviour
 {
     [SerializeField] Rigidbody rigid;
-    [SerializeField] SphereCollider collider;
+    [SerializeField] new SphereCollider collider;
 
     GameManager gm;
 

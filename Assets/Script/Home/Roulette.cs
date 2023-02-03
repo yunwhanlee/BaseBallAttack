@@ -31,14 +31,9 @@ public class Roulette : MonoBehaviour
 
     [SerializeField] float speed;
     [SerializeField] bool isRight;
-    [SerializeField] bool isMobile;
     const int REWARD_IMG = 1;
 
     void Start(){
-    //* (BUG-38) RouletteStopSpeedCntがモバイルでは遅いので、２倍にして対応。
-    #if UNITY_ANDROID
-        isMobile = true;
-    #endif
         hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
 
         //* Lang

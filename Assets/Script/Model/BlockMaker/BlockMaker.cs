@@ -222,7 +222,6 @@ public class BlockMaker : MonoBehaviour
                 NameStr = NameStr.Split('_')[2];
 
                 // bossStgBarRectTf.anchorMin = new Vector2(0.1f, 0.5f);
-
                 StartCoroutine(coPlayBossSpawnAnim(NameStr));
         }
     }

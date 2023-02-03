@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour {
     public Transform deadLineTf;
     public BoxCollider downWallCollider;
     public TouchSlideControl touchSlideControlPanel;
-    public Light light;
+    public new Light light;
     public AdmobManager am;
     
     [Header("STATUS")][Header("__________________________")]
