@@ -208,6 +208,7 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
     public ScrollRect scrollRect;
     public HomeManager hm;
     public Transform mainCanvasTf;
+    public InAppManager im;
 
     // float rectWidth;
     [SerializeField] float curIdxBasePosX;    public float CurIdxBasePosX {get => curIdxBasePosX; set => curIdxBasePosX = value;}
@@ -231,6 +232,7 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
     void Start(){
         scrollRect = GetComponent<ScrollRect>();
         hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
+        im = GameObject.Find("InAppManager").GetComponent<InAppManager>();
         mainCanvasTf = hm.mainCanvas.transform;
         
         if(this.gameObject.name != $"ScrollView_{DM.PANEL.Skill.ToString()}" 
@@ -791,12 +793,12 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
                         }
                     }
                     else if(itemName.Contains(DM.NAME.RemoveAD.ToString())) {
-                        bool success = DM.ins.reqAppPayment();
-                        if(success){
-                            hm.displayShowRewardPanel(coin: 0, diamond: 0, rouletteTicket: 0, removeAD: true);
-                            DM.ins.personalData.IsRemoveAD = true;
-                            DM.ins.setUIRemoveAD();
-                        }
+                        // bool success = DM.ins.reqAppPayment();
+                        // if(success){
+                            // hm.displayShowRewardPanel(coin: 0, diamond: 0, rouletteTicket: 0, removeAD: true);
+                            // DM.ins.personalData.IsRemoveAD = true;
+                            // DM.ins.setUIRemoveAD();
+                        // }
                     }
                 }
                 drawCheckBtnUI();
