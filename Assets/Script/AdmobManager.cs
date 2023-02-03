@@ -12,11 +12,10 @@ public class AdmobManager : MonoBehaviour{
 
     Scene scene;
     public enum AD_TYPE {ROULETTE_TICKET, CoinX2, RerotateSkillSlots, Revive, NULL};
-    public AD_TYPE adType = AD_TYPE.ROULETTE_TICKET;
+    public AD_TYPE adType = AD_TYPE.NULL;
 
     public bool isTestMode;
     public Button[] RewardAdsBtns;
-    // public Text LogText;
 
     void Start(){
         scene = SceneManager.GetActiveScene();
@@ -40,9 +39,9 @@ public class AdmobManager : MonoBehaviour{
     }
 
     void Update(){
-        // Array.ForEach(RewardAdsBtns, adBtn => {
-        //     adBtn.interactable = rewardAd.CanShowAd();
-        // });
+        Array.ForEach(RewardAdsBtns, adBtn => {
+            adBtn.interactable = rewardAd.CanShowAd();
+        });
     }
 
     AdRequest GetAdRequest() {
@@ -61,8 +60,8 @@ public class AdmobManager : MonoBehaviour{
         /* 結果についたCallBack処理　*/
         //* 広告ロードが失敗したとき、呼び出す。
         rewardAd.OnAdFailedToLoad += (sender, e) => {
-            SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
-            Util._.displayNoticeMsgDialog("AD Load Fail");
+            // SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
+            // Util._.displayNoticeMsgDialog("AD Load Fail");
         };
         //* 広告表示が失敗したとき、呼び出す。
         rewardAd.OnAdFailedToShow += (sender, e) => {
@@ -105,7 +104,5 @@ public class AdmobManager : MonoBehaviour{
     IEnumerator coDelayInit(float delay){
         yield return new WaitForSeconds(delay);
         adType = AD_TYPE.NULL;
-        // LogText.text = adType.ToString();
-        // isAdClosed = false;
     }
 }
