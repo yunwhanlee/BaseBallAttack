@@ -575,9 +575,9 @@ public class GameManager : MonoBehaviour {
         // SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         //* 広告
         am.showRewardAd(
-            rewardType == AdmobManager.AD_TYPE.CoinX2.ToString()? AdmobManager.AD_TYPE.CoinX2
-            : rewardType == AdmobManager.AD_TYPE.RerotateSkillSlots.ToString()? AdmobManager.AD_TYPE.RerotateSkillSlots
-            : AdmobManager.AD_TYPE.Revive
+            rewardType == DM.REWARD.CoinX2.ToString()? DM.REWARD.CoinX2
+            : rewardType == DM.REWARD.RerotateSkillSlots.ToString()? DM.REWARD.RerotateSkillSlots
+            : DM.REWARD.Revive
         );
         // bool success = DM.ins.reqShowAD();
         // if(success){

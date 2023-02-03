@@ -361,21 +361,8 @@ public class HomeManager : MonoBehaviour
     }
     public void onClickShowADButton(){
         //* 広告要請
-        am.showRewardAd(AdmobManager.AD_TYPE.ROULETTE_TICKET);
+        am.showRewardAd(DM.REWARD.ROULETTE_TICKET);
     }
-        // Debug.Log("<color=green>SHOW showRewardAd:: " + AdmobManager.ins.adState.ToString() + "</color>");
-
-        // yield return new WaitUntil(() => AdmobManager.ins.adState != AdmobManager.AD_STATE.WATCHING);
-        // Debug.Log("<color=green>SUCCESS showRewardAd:: " + AdmobManager.ins.adState.ToString() + "</color>");
-        // if(AdmobManager.ins.adState == AdmobManager.AD_STATE.SUCCESS){ //&& !AdmobManager.ins.isAdClosed){
-        //     SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
-        //     DM.ins.personalData.RouletteTicket++;
-        //     showRoulettePanel();
-        // }
-        // else {
-        //     SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
-        //     Util._.displayNoticeMsgDialog("ERROR！");
-        // };
 
     #region SETTING
     public void onClickSettingBtn(){

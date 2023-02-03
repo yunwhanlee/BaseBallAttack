@@ -55,7 +55,11 @@ public class DM : MonoBehaviour
         DropBoxMagicPf, //Atv Skill Cool Down
     }
     public enum REWARD {
-        CoinX2, RerotateSkillSlots, Revive,
+        //* Home
+        ROULETTE_TICKET,
+        //* Play
+        CoinX2, RerotateSkillSlots, Revive, 
+        NULL
     }
 
     [Header("GUI")][Header("__________________________")]

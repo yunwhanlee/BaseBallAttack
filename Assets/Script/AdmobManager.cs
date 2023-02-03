@@ -11,8 +11,7 @@ public class AdmobManager : MonoBehaviour{
     [SerializeField] GameManager gm;
 
     Scene scene;
-    public enum AD_TYPE {ROULETTE_TICKET, CoinX2, RerotateSkillSlots, Revive, NULL};
-    public AD_TYPE adType = AD_TYPE.NULL;
+    DM.REWARD adType = DM.REWARD.NULL;
 
     public bool isTestMode;
     public Button[] RewardAdsBtns;
@@ -74,25 +73,25 @@ public class AdmobManager : MonoBehaviour{
             SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
             switch(adType){
                 //* Home
-                case AD_TYPE.ROULETTE_TICKET: 
+                case DM.REWARD.ROULETTE_TICKET: 
                     DM.ins.personalData.RouletteTicket++;
                     hm.showRoulettePanel();
                     break;
                 //* Play
-                case AD_TYPE.CoinX2: 
+                case DM.REWARD.CoinX2: 
                     gm.setCoinX2();
                     break;
-                case AD_TYPE.RerotateSkillSlots: 
+                case DM.REWARD.RerotateSkillSlots: 
                     gm.setRerotateSkillSlots();
                     break;
-                case AD_TYPE.Revive: 
+                case DM.REWARD.Revive: 
                     gm.setRevive();
                     break;
             }
         };
     }
 
-    public void showRewardAd(AD_TYPE type){
+    public void showRewardAd(DM.REWARD type){
         Debug.Log($"<color=orange>admob::showRewardAd:: {type}</color>");
         adType = type;
         rewardAd.Show();
@@ -103,6 +102,6 @@ public class AdmobManager : MonoBehaviour{
 
     IEnumerator coDelayInit(float delay){
         yield return new WaitForSeconds(delay);
-        adType = AD_TYPE.NULL;
+        adType = DM.REWARD.NULL;
     }
 }
