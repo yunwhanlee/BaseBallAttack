@@ -60,7 +60,6 @@ public class GameManager : MonoBehaviour {
     public int rewardItemCoin = 0;  public int RewardItemCoin { get => rewardItemCoin; set => rewardItemCoin = value;}
     public int rewardItemDiamond = 0;   public int RewardItemDiamond { get => rewardItemDiamond; set => rewardItemDiamond = value;}
     public int rewardItemRouletteTicket = 0;    public int RewardItemRouletteTicket { get => rewardItemRouletteTicket; set => rewardItemRouletteTicket = value;}
-    DM.REWARD reqAdType;
 
     [Header("TRIGGER")][Header("__________________________")]
     public bool isPlayingAnim;  public bool IsPlayingAnim { get => isPlayingAnim; set=> isPlayingAnim = value;}
@@ -534,26 +533,26 @@ public class GameManager : MonoBehaviour {
         Text price = adPricePayBtn.GetComponentInChildren<Text>();
         Image icon = Array.Find(adPricePayBtn.GetComponentsInChildren<Image>(), chd => chd.name.Contains("Icon"));
         
+        //* (BUG-44) 以前残ったイベント消す。
+        adPricePayBtn.onClick.RemoveAllListeners();
+        adFreeBtn.onClick.RemoveAllListeners();
         //* AddEventListener('onClick')
         adPricePayBtn.onClick.AddListener(() => onClickPayButton(type));
         adFreeBtn.onClick.AddListener(() => onClickShowADButton(type));
 
         //* Set Language
         if(type == DM.REWARD.CoinX2.ToString()){
-            reqAdType = DM.REWARD.CoinX2;
             adDialogTitleTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogCoinX2_Title.ToString());
             adDialogContentTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogCoinX2_Content.ToString());
             adPricePayBtn.gameObject.SetActive(false);
         }
         else if(type == DM.REWARD.RerotateSkillSlots.ToString()){
-            reqAdType = DM.REWARD.RerotateSkillSlots;
             adDialogTitleTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRerotateSkillSlots_Title.ToString());
             adDialogContentTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRerotateSkillSlots_Content.ToString());
             icon.sprite = DM.ins.CoinSpr;
             price.text = LM._.REROTATE_SKILLSLOTS_PRICE_COIN.ToString();
         }
         else if(type == DM.REWARD.Revive.ToString()){
-            reqAdType = DM.REWARD.Revive;
             adDialogTitleTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRevive_Title.ToString());
             adDialogContentTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRevive_Content.ToString());
             icon.sprite = DM.ins.DiamondSpr;
