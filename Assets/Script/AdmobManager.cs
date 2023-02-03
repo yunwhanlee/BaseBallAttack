@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class AdmobManager : MonoBehaviour{
     [SerializeField] HomeManager hm;
     [SerializeField] GameManager gm;
-
+    [SerializeField] Text adNoticeTxt;
     Scene scene;
     DM.REWARD adType = DM.REWARD.NULL;
 
@@ -21,11 +21,12 @@ public class AdmobManager : MonoBehaviour{
         Debug.Log("AdmobManager:: scene= " + scene.name);
 
         //* シーンによって、Managerスクリプト設定。
-        if(scene.name == DM.SCENE.Home.ToString())
-            hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
-        else if(scene.name == DM.SCENE.Play.ToString())
-            gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-
+        if(scene.name == DM.SCENE.Home.ToString()){
+            setAdLoadStatusNoticeTxt("HomeManager");
+        }
+        else if(scene.name == DM.SCENE.Play.ToString()){
+            setAdLoadStatusNoticeTxt("GameManager");
+        }
 
         var requestConfiguration = new RequestConfiguration
             .Builder()
@@ -40,6 +41,7 @@ public class AdmobManager : MonoBehaviour{
     void Update(){
         Array.ForEach(RewardAdsBtns, adBtn => {
             adBtn.interactable = rewardAd.CanShowAd();
+            adNoticeTxt.text = (adBtn.interactable)? "" : "AD Loading..";
         });
     }
 
@@ -99,9 +101,18 @@ public class AdmobManager : MonoBehaviour{
         StartCoroutine(coDelayInit(1));
     }
 	#endregion
-
+/// -----------------------------------------------------------------------
+/// 関数
+/// -----------------------------------------------------------------------
     IEnumerator coDelayInit(float delay){
         yield return new WaitForSeconds(delay);
         adType = DM.REWARD.NULL;
+    }
+
+    private void setAdLoadStatusNoticeTxt(string managerScriptName){
+        hm = GameObject.Find(managerScriptName).GetComponent<HomeManager>();
+        Array.ForEach(RewardAdsBtns, adBtn => {
+            adNoticeTxt = Array.Find(adBtn.GetComponentsInChildren<Text>(), (txtObj) => txtObj.transform.name == "AdNoticeTxt");
+        });
     }
 }

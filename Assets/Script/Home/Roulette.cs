@@ -29,8 +29,6 @@ public class Roulette : MonoBehaviour
     public int power = 1500;
     public float spinGauge = 0;
 
-    [SerializeField] float reduceCnt = 0;
-    [SerializeField] float reduceSpeed = 3;
     [SerializeField] float speed;
     [SerializeField] bool isRight;
     [SerializeField] bool isMobile;
@@ -51,8 +49,9 @@ public class Roulette : MonoBehaviour
 
     void Update(){
         ticketCntTxt.text = "x " + DM.ins.personalData.RouletteTicket.ToString();
+        //* ROTATE
         if(isSpin){
-            speed = 800;
+            speed = 1000;
             if(speed > 0){
                 setCenterTfUI(isSpin);
                 spinBoard.transform.Rotate(0, 0, speed * Time.deltaTime);
@@ -64,6 +63,7 @@ public class Roulette : MonoBehaviour
     public void onClickRouletteSpinBtn(){ //* -> OK Buttonにも使える！
         if(DM.ins.personalData.RouletteTicket <= 0) return;
 
+        //* STOP
         if(rewardIcon != null){
             DM.ins.personalData.RouletteTicket--;
             SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
@@ -77,13 +77,13 @@ public class Roulette : MonoBehaviour
 
             return;
         }
-    
-        if(!isSpin){
+        
+        if(!isSpin){ 
             isSpin = true;
         }
         else{
             isSpin = false;
-            init();
+            //* RESULT
             /*
             *   ⓵ transform.rotation : 0~1単位 -> eulerAnglesに変換する必要ある。
             *   ⓶ eulerAnglesでは、範囲が0~360まで。
@@ -103,11 +103,6 @@ public class Roulette : MonoBehaviour
         if(isSpin) return;
         this.gameObject.SetActive(false);
         hm.homePanel.Panel.gameObject.SetActive(true);
-    }
-
-    private void init(){
-        isSpin = false;
-        reduceCnt = 0;
     }
 
     private void setCenterTfUI(bool isInit){
