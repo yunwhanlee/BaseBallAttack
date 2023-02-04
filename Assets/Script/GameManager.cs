@@ -800,6 +800,12 @@ public class GameManager : MonoBehaviour {
             bestStageTxt.color = Color.cyan;
             //* Emoji Effect 
             bestStageTxt.transform.parent.GetChild(1).gameObject.SetActive(true);
+
+            //* LoaderBoard入力。
+            GPGSBinder.Inst.ReportLeaderboard(GPGSIds.leaderboard_best_stage
+                , DM.ins.personalData.BestStage
+                , success => {Debug.Log("LOADER BOARD入力: " + success);
+            });
         }
 
         //* UI

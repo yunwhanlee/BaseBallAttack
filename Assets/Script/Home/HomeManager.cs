@@ -127,6 +127,9 @@ public class HomeManager : MonoBehaviour
     public GameObject focusIconObj;
 
     [Header("DIALOG")][Header("__________________________")]
+    //* ErrorNetwork
+    public RectTransform errorNetworkDialog;
+
     //* ShowAD
     public RectTransform showAdDialog;
     public Button showAdFreeBtn;
@@ -280,12 +283,28 @@ public class HomeManager : MonoBehaviour
 //*   Button
 //* ----------------------------------------------------------------
 #region Button
-    public void onClickGooglePlayLeaderBoard(){
+    public void onClickGooglePlayLeaderBoard() {
         Debug.Log("onClickGooglePlayLeaderBoard()::");
+        //* GooglePlayログイン。
         GPGSBinder.Inst.Login((success, user) => {
             googlePlayLoginTxt.text = 
             $"{success}, {user.userName}, {user.id}, {user.state}, {user.underage}";
+            if(success == true){
+                // DM.ins.IsGPGSLogin = true;
+                GPGSBinder.Inst.ShowAllLeaderboardUI();
+            }
+            else{
+                errorNetworkDialog.gameObject.SetActive(true);
+            }
         });
+        //* LeaderBoard表示。
+        StartCoroutine(coDisplayLoaderBoard());
+    }
+    IEnumerator coDisplayLoaderBoard() {
+        Debug.Log("coDisplayLoaderBoard::");
+        yield return new WaitUntil(() => DM.ins.IsGPGSLogin);
+        Debug.Log("coDisplayLoaderBoard:: Display LoaderBoard");
+        GPGSBinder.Inst.ShowAllLeaderboardUI();
     }
     public void onClickBtnQuestionMarkIcon() { DM.ins.displayTutorialUI(); SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());}
     public void onClickPremiumPackIconBtn() { 

@@ -63,6 +63,9 @@ public class DM : MonoBehaviour
         NULL
     }
 
+    [Header("GPGS")][Header("__________________________")]
+    [SerializeField] bool isGPGSLogin;  public bool IsGPGSLogin {get => isGPGSLogin; set => isGPGSLogin = value;}
+
     [Header("GUI")][Header("__________________________")]
     [SerializeField] Sprite coinSpr; public Sprite CoinSpr {get => coinSpr; set => coinSpr = value;}
     [SerializeField] Sprite diamondSpr; public Sprite DiamondSpr {get => diamondSpr; set => diamondSpr = value;}
@@ -105,6 +108,19 @@ public class DM : MonoBehaviour
         if(ins == null) {
             Debug.Log("DM::singleton():: Start App Only One Time");
             ins = this;
+            //* Google Play Login
+            HomeManager hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
+            GPGSBinder.Inst.Login((success, user) => {
+                Debug.Log($"GPGS::LOGIN= {success}");
+                hm.googlePlayLoginTxt.text = 
+                $"{success}, {user.userName}, {user.id}, {user.state}, {user.underage}";
+                if(success == true) {
+                    DM.ins.IsGPGSLogin = true;
+                }
+                else {
+                    hm.errorNetworkDialog.gameObject.SetActive(true);
+                }
+            });
         }
         else if(ins != null) {
             Debug.Log("DM::singleton():: WhenEver Load Home, Repeat");
