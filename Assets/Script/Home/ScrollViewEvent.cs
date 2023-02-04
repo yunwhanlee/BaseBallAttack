@@ -8,6 +8,7 @@ using System;
 using UnityEngine.UI.Extensions;
 using UnityEngine.Serialization;
 using System.Text.RegularExpressions;
+using UnityEngine.Purchasing;
 
 [System.Serializable]
 public class ScrollView {
@@ -799,21 +800,10 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
                         DM.ins.personalData.addCoin(reward); // DM.ins.personalData.Coin += reward;
                     }
                     else if(itemName.Contains(DM.NAME.Diamond.ToString())){
-                        // bool success = DM.ins.reqAppPayment();
-                        // if(success){
-                        //     int reward = int.Parse(itemName.Split('d')[1]);
-                        //     hm.displayShowRewardPanel(coin: 0, diamond: reward);
-                        //     DM.ins.personalData.addDiamond(reward);
-                        // }
+                        callbackonClickIAPButton(curItem);
                     }
                     else if(itemName.Contains(DM.NAME.RemoveAD.ToString())) {
-                        // im.requestID(DM.NAME.RemoveAD);
-                        // bool success = DM.ins.reqAppPayment();
-                        // if(success){
-                            // hm.displayShowRewardPanel(coin: 0, diamond: 0, rouletteTicket: 0, removeAD: true);
-                            // DM.ins.personalData.IsRemoveAD = true;
-                            // DM.ins.setUIRemoveAD();
-                        // }
+                        callbackonClickIAPButton(curItem);
                     }
                 }
                 drawCheckBtnUI();
@@ -832,6 +822,13 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
             Util._.displayNoticeMsgDialog(goodsTypeStr + " " + LANG.getTxt(LANG.TXT.NotEnough.ToString()));
         }
         return goods;
+    }
+    private void callbackonClickIAPButton(ItemInfo curItem){
+        //* IAP専用 Button onClick イベント 読み出し。
+        var btns = curItem.GetComponentsInChildren<Button>();
+        var iapBtn = Array.Find(btns, btn => btn.name == "IAPBtn_Icon");
+        Debug.Log($"curItem={curItem}:: iapBtn= {iapBtn}");
+        iapBtn.onClick.Invoke();
     }
     private ItemInfo[] getItemArr(){
         var contentTf = (DM.ins.SelectItemType == DM.PANEL.Chara.ToString())? DM.ins.scrollviews[(int)DM.PANEL.Chara].ContentTf
