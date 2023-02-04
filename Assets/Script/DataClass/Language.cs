@@ -341,7 +341,7 @@ public static class LANG //* LANG
     public static string[] Ready = new string[]{"READY", "準備", "준비"};
     public static string[] Out = new string[]{"OUT", "アウト", "아웃"};
     public static string[] Strike = new string[]{"STRIKE", "ストライク", "스트라이크"};
-    public static string[] BestScore = new string[]{"BEST SCORE", "ベストスコア", "베스트 점수"};
+    public static string[] BestScore = new string[]{"BEST STAGE", "ベストステージ", "베스트 스테이지"};
     public static string[] LevelUpPanel_Title = new string[]{"LEVEL UP!", "レベル UP!", "레벨 업!"};
     public static string[] LevelUpPanel_Explain = new string[]{"Please, Select Skill", "スキルを選択してください", "스킬을 선택해주세요"};
     public static string[] Reward = new string[]{"REWARD", "リワード", "보상"};

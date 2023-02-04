@@ -9,8 +9,9 @@ public class PersonalData {
     //* Value
     [SerializeField] LANG.TP lang; public LANG.TP Lang {get => lang; set => lang = value;}
     [Header("STATUS")][Header("__________________________")]
+    [SerializeField] int bestStage; public int BestStage {get => bestStage; set => bestStage = value;}
     [SerializeField] int quality; public int Quality {get => quality; set => quality = value;}
-    [SerializeField] int playTime; public int PlayTime {get => playTime; set => playTime = value;}
+    [SerializeField] int playTime; public int PlayTime {get => playTime; set => playTime = value;} // Tutorialを出すタイミングのため
     [SerializeField] bool isActiveExpLog; public bool IsActiveExpLog {get => isActiveExpLog; set => isActiveExpLog = value;}
 
     [Header("GOODS")][Header("__________________________")]
@@ -136,6 +137,8 @@ public class PersonalData {
 
         //* Set Data
         this.Lang = data.Lang;
+
+        this.bestStage = data.BestStage;
         this.quality = data.Quality;
         this.playTime = data.PlayTime;
         this.isActiveExpLog = data.IsActiveExpLog;
@@ -231,6 +234,8 @@ public class PersonalData {
 
         //* Reset
         this.lang = LANG.TP.JP;
+
+        this.bestStage = 1;
         this.quality = 1; //* 0: Low, 1: Medium, 2: High
         this.playTime = 0;
         this.isActiveExpLog = false;

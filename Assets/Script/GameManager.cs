@@ -52,7 +52,6 @@ public class GameManager : MonoBehaviour {
     public int coin = 0;
     public int diamond = 0;
     public int stage = 1;
-    public int bestScore;
     public int strikeCnt = 0;
     public int comboCnt = 0;
     public int bossLimitCnt = 0;
@@ -140,7 +139,7 @@ public class GameManager : MonoBehaviour {
     [Header("GAMEOVER")][Header("__________________________")]
     [FormerlySerializedAs("gvCoinTxt")]   public Text gvCoinTxt;
     [FormerlySerializedAs("gvDiamondTxt")]   public Text gvDiamondTxt;
-    [FormerlySerializedAs("gvBestScoreTxt")]   public Text gvBestScoreTxt;
+    [FormerlySerializedAs("gvBestStageTxt")]   public Text gvBestStageTxt;
     [FormerlySerializedAs("gvStageTxt")]   public Text gvStageTxt;
     [FormerlySerializedAs("gvRewardItemCoinTxt")]   public Text gvRewardItemCoinTxt;
     [FormerlySerializedAs("gvRewardItemDiamondTxt")]   public Text gvRewardItemDiamondTxt;
@@ -149,7 +148,7 @@ public class GameManager : MonoBehaviour {
     [Header("VICTORY")][Header("__________________________")]
     [FormerlySerializedAs("vtrCoinTxt")]   public Text vtrCoinTxt;
     [FormerlySerializedAs("vtrDiamondTxt")]   public Text vtrDiamondTxt;
-    [FormerlySerializedAs("vtrBestScoreTxt")]   public Text vtrBestScoreTxt;
+    [FormerlySerializedAs("vtrBestStageTxt")]   public Text vtrBestStageTxt;
     [FormerlySerializedAs("vtrStageTxt")]   public Text vtrStageTxt;
     [FormerlySerializedAs("vtrRewardItemCoinTxt")]   public Text vtrRewardItemCoinTxt;
     [FormerlySerializedAs("vtrRewardItemDiamondTxt")]   public Text vtrRewardItemDiamondTxt;
@@ -767,7 +766,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log("<size=30> --- G A M E O V E R --- </size>");
         SM.ins.sfxPlay(SM.SFX.Defeat.ToString());
         setFinishGame(
-            gameoverPanel, gvBestScoreTxt, gvStageTxt, gvCoinTxt, gvDiamondTxt
+            gameoverPanel, gvBestStageTxt, gvStageTxt, gvCoinTxt, gvDiamondTxt
             , gvRewardItemCoinTxt, gvRewardItemDiamondTxt, gvRewardItemRouletteTicketTxt);
     }
 
@@ -775,7 +774,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log("<size=30> --- V I C T O R Y --- </size>");
         SM.ins.sfxPlay(SM.SFX.Victory.ToString());
         setFinishGame(
-            victoryPanel, vtrBestScoreTxt, vtrStageTxt, vtrCoinTxt, vtrDiamondTxt
+            victoryPanel, vtrBestStageTxt, vtrStageTxt, vtrCoinTxt, vtrDiamondTxt
             , vtrRewardItemCoinTxt, vtrRewardItemDiamondTxt, vtrRewardItemRouletteTicketTxt);
 
         //* HardMode unlocked
@@ -789,13 +788,20 @@ public class GameManager : MonoBehaviour {
             AcvHardModeClear.setHardModeClear();
     }
 
-    private void setFinishGame(GameObject panel, Text scoreTxt, Text stageTxt, Text coinTxt, Text diamondTxt,
+    private void setFinishGame(GameObject panel, Text bestStageTxt, Text stageTxt, Text coinTxt, Text diamondTxt,
         Text rewardItemCoinTxt, Text rewardItemDiamondTxt, Text rewardItemRouletteTicketTxt){
         State = GameManager.STATE.GAMEOVER;
         panel.SetActive(true);
 
+        //* Set Best Stage
+        Debug.Log($"setFinishGame:: Set Best Stage:: stage:{stage} > bestStage:{DM.ins.personalData.BestStage}");
+        if(stage > DM.ins.personalData.BestStage){
+            DM.ins.personalData.BestStage = stage;
+            bestStageTxt.color = Color.green;
+        }
+
         //* UI
-        scoreTxt.text = LANG.getTxt(LANG.TXT.BestScore.ToString()) + " : " + bestScore;
+        bestStageTxt.text = LANG.getTxt(LANG.TXT.BestScore.ToString()) + " : " + DM.ins.personalData.BestStage;
         stageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage;
 
         //* Set Stage
