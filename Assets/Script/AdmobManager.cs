@@ -109,8 +109,12 @@ public class AdmobManager : MonoBehaviour{
         adType = DM.REWARD.NULL;
     }
 
-    private void setAdLoadStatusNoticeTxt(string managerScriptName){
-        hm = GameObject.Find(managerScriptName).GetComponent<HomeManager>();
+    private void setAdLoadStatusNoticeTxt(string managerName){
+        if(managerName == "HomeManager")
+            hm = GameObject.Find(managerName).GetComponent<HomeManager>();
+        else if(managerName == "GameManager")
+            gm = GameObject.Find(managerName).GetComponent<GameManager>();
+
         Array.ForEach(RewardAdsBtns, adBtn => {
             adNoticeTxt = Array.Find(adBtn.GetComponentsInChildren<Text>(), (txtObj) => txtObj.transform.name == "AdNoticeTxt");
         });
