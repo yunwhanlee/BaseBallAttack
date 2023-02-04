@@ -797,7 +797,9 @@ public class GameManager : MonoBehaviour {
         Debug.Log($"setFinishGame:: Set Best Stage:: stage:{stage} > bestStage:{DM.ins.personalData.BestStage}");
         if(stage > DM.ins.personalData.BestStage){
             DM.ins.personalData.BestStage = stage;
-            bestStageTxt.color = Color.green;
+            bestStageTxt.color = Color.cyan;
+            //* Emoji Effect 
+            bestStageTxt.transform.parent.GetChild(1).gameObject.SetActive(true);
         }
 
         //* UI
