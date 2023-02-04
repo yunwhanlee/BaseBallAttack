@@ -280,7 +280,10 @@ public class HomeManager : MonoBehaviour
 //* ----------------------------------------------------------------
 #region Button
     public void onClickBtnQuestionMarkIcon() { DM.ins.displayTutorialUI(); SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());}
-    public void onClickPremiumPackIconBtn() { premiumPackPanel.SetActive(true); SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());}
+    public void onClickPremiumPackIconBtn() { 
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
+        premiumPackPanel.SetActive(true); 
+    }
     public void onClickAchivementIconBtn() { achivementPanel.SetActive(true); SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());}
     public void onCLickRewardPanelOkBtn() {
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
@@ -568,33 +571,32 @@ public class HomeManager : MonoBehaviour
         }
     }
     public void onClickPremiumPackPurchaseBtn(){
-        bool success = DM.ins.reqAppPayment();
-        if(success){
-            SM.ins.sfxPlay(SM.SFX.PurchaseSuccess.ToString());
-            DM.ins.personalData.IsPurchasePremiumPack = true;
+        // bool success = DM.ins.reqAppPayment();
+        // if(success){
+        //     SM.ins.sfxPlay(SM.SFX.PurchaseSuccess.ToString());
+        //     DM.ins.personalData.IsPurchasePremiumPack = true;
 
-            // Set Data
-            DM.ins.personalData.addRouletteTicket(LM._.PREM_PACK_ROULETTE_TICKET);
-            DM.ins.personalData.addCoin(LM._.PREM_PACK_COIN); // DM.ins.personalData.Coin += LM._.PREM_PACK_COIN;
-            DM.ins.personalData.addDiamond(LM._.PREM_PACK_DIAMOND);
-            DM.ins.personalData.IsRemoveAD = true;
+        //     // Set Data
+        //     DM.ins.personalData.addRouletteTicket(LM._.PREM_PACK_ROULETTE_TICKET);
+        //     DM.ins.personalData.addCoin(LM._.PREM_PACK_COIN); // DM.ins.personalData.Coin += LM._.PREM_PACK_COIN;
+        //     DM.ins.personalData.addDiamond(LM._.PREM_PACK_DIAMOND);
+        //     DM.ins.personalData.IsRemoveAD = true;
 
-            // UI
-            DM.ins.setUIRemoveAD();
-            checkPremiumPackPurchaseStatus();
+        //     // UI
+        //     DM.ins.setUIRemoveAD();
+        //     checkPremiumPackPurchaseStatus();
 
-            displayShowRewardPanel(
-                coin: LM._.PREM_PACK_COIN, 
-                diamond: LM._.PREM_PACK_DIAMOND, 
-                rouletteTicket: LM._.PREM_PACK_ROULETTE_TICKET,
-                removeAD: true
-            );
-
-        }else{
-            //TODO 失敗した DIALOG表示。
-            SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
-            Debug.LogError($"<size=20><color=yellow> HM::onClickPremiumPackPurchaseBtn:: IN-APP-PURCHASE FAIL! :( </color></size>");
-        }
+        //     displayShowRewardPanel(
+        //         coin: LM._.PREM_PACK_COIN, 
+        //         diamond: LM._.PREM_PACK_DIAMOND, 
+        //         rouletteTicket: LM._.PREM_PACK_ROULETTE_TICKET,
+        //         removeAD: true
+        //     );
+        // }else{
+        //     //TODO 失敗した DIALOG表示。
+        //     SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
+        //     Debug.LogError($"<size=20><color=yellow> HM::onClickPremiumPackPurchaseBtn:: IN-APP-PURCHASE FAIL! :( </color></size>");
+        // }
     }
     public void displayShowRewardPanel(int coin = 0, int diamond = 0, int rouletteTicket = 0, bool removeAD = false){
         //* Sound
@@ -798,7 +800,7 @@ public class HomeManager : MonoBehaviour
             return "";
         }
     }
-    private void checkPremiumPackPurchaseStatus(){
+    public void checkPremiumPackPurchaseStatus(){
         const int COIN = 0, DIAMOND = 1, ROULETTE_TICKET = 2, REMOVE_AD = 3;
         if(!DM.ins.personalData.IsPurchasePremiumPack){
             //* Set Language Premium Pack

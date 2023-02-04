@@ -1,42 +1,60 @@
 {
     "m_SelectedDeviceId": "RF8NA0FXKJP",
     "m_SelectedPackage": {
-        "deviceId": "",
-        "name": "",
-        "processId": 0,
-        "exited": false
+        "deviceId": "RF8NA0FXKJP",
+        "name": "com.Frontooth.BaseBallAttack",
+        "processId": 12221,
+        "exited": true
     },
-    "m_SelectedPriority": 4,
+    "m_SelectedPriority": 1,
     "m_KnownPackagesForSerialization": [
         {
             "deviceId": "RF8NA0FXKJP",
-            "name": "jp.co.matsuyafoods.officialapp.dis",
-            "processId": 8153,
-            "exited": true
-        },
-        {
-            "deviceId": "RF8NA0FXKJP",
-            "name": "com.nttdocomo.android.homezozo",
-            "processId": 10811,
-            "exited": true
-        },
-        {
-            "deviceId": "RF8NA0FXKJP",
-            "name": "com.sec.android.app.myfiles",
-            "processId": 2440,
+            "name": "com.Frontooth.BaseBallAttack",
+            "processId": 17353,
             "exited": true
         },
         {
             "deviceId": "RF8NA0FXKJP",
             "name": "com.Frontooth.BaseBallAttack",
-            "processId": 434,
+            "processId": 22033,
+            "exited": true
+        },
+        {
+            "deviceId": "RF8NA0FXKJP",
+            "name": "com.Frontooth.BaseBallAttack",
+            "processId": 26623,
             "exited": true
         },
         {
             "deviceId": "RF8NA0FXKJP",
             "name": "com.nttdocomo.android.homezozo",
-            "processId": 15675,
+            "processId": 10356,
+            "exited": true
+        },
+        {
+            "deviceId": "RF8NA0FXKJP",
+            "name": "com.Frontooth.BaseBallAttack",
+            "processId": 26872,
+            "exited": true
+        },
+        {
+            "deviceId": "RF8NA0FXKJP",
+            "name": "com.Frontooth.BaseBallAttack",
+            "processId": 7127,
             "exited": false
+        },
+        {
+            "deviceId": "RF8NA0FXKJP",
+            "name": "com.Frontooth.BaseBallAttack",
+            "processId": 12797,
+            "exited": false
+        },
+        {
+            "deviceId": "RF8NA0FXKJP",
+            "name": "com.Frontooth.BaseBallAttack",
+            "processId": 12221,
+            "exited": true
         }
     ],
     "m_Tags": {
@@ -67,18 +85,18 @@
             },
             {
                 "m_Name": "CRASH",
-                "m_Selected": false
+                "m_Selected": true
             }
         ]
     },
     "m_MemoryViewerState": {
-        "MemoryWindowHeight": 300.0,
+        "MemoryWindowHeight": 255.0,
         "MemoryWindowWidth": 170.0,
         "MemoryTypeEnabled": [
             true,
             true,
-            true,
-            true,
+            false,
+            false,
             true,
             true,
             true,
@@ -86,8 +104,8 @@
             true,
             true
         ],
-        "MemoryGroup": 2,
-        "Behavior": 0
+        "MemoryGroup": 1,
+        "Behavior": 1
     },
     "m_Filter": "",
     "m_FilterIsRegularExpression": false,

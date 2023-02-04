@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.Purchasing;
 using System;
 
 public class DM : MonoBehaviour
@@ -23,7 +24,7 @@ public class DM : MonoBehaviour
         LevelUp, PsvSkillTicket,
         TitleTxt, ContentTxt,
         //* 一回限り商品
-        RemoveAD, PurchasedPanel,
+        RemoveAD, PurchasedPanel, NULL,
     };
     public enum TAG {HitRangeArea, StrikeLine, GameOverLine, Wall, ActiveDownWall, Player,
         NormalBlock, LongBlock, TreasureChestBlock, HealBlock, BossBlock,   
@@ -144,6 +145,8 @@ public class DM : MonoBehaviour
 
         personalData = new PersonalData(charas.Length, bats.Length, skills.Length); //* DataBase
         personalData.load(ref charas, ref bats, ref skills);
+        
+        
 
         //* アップグレードデータ 初期化。
         scrollviews[(int)DM.PANEL.Upgrade].initUpgradeDt(upgrades);

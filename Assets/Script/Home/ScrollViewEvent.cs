@@ -232,7 +232,6 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
     void Start(){
         scrollRect = GetComponent<ScrollRect>();
         hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
-        im = GameObject.Find("InAppManager").GetComponent<InAppManager>();
         mainCanvasTf = hm.mainCanvas.transform;
         
         if(this.gameObject.name != $"ScrollView_{DM.PANEL.Skill.ToString()}" 
@@ -785,14 +784,15 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
                         DM.ins.personalData.addCoin(reward); // DM.ins.personalData.Coin += reward;
                     }
                     else if(itemName.Contains(DM.NAME.Diamond.ToString())){
-                        bool success = DM.ins.reqAppPayment();
-                        if(success){
-                            int reward = int.Parse(itemName.Split('d')[1]);
-                            hm.displayShowRewardPanel(coin: 0, diamond: reward);
-                            DM.ins.personalData.addDiamond(reward);
-                        }
+                        // bool success = DM.ins.reqAppPayment();
+                        // if(success){
+                        //     int reward = int.Parse(itemName.Split('d')[1]);
+                        //     hm.displayShowRewardPanel(coin: 0, diamond: reward);
+                        //     DM.ins.personalData.addDiamond(reward);
+                        // }
                     }
                     else if(itemName.Contains(DM.NAME.RemoveAD.ToString())) {
+                        // im.requestID(DM.NAME.RemoveAD);
                         // bool success = DM.ins.reqAppPayment();
                         // if(success){
                             // hm.displayShowRewardPanel(coin: 0, diamond: 0, rouletteTicket: 0, removeAD: true);
