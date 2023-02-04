@@ -166,8 +166,6 @@ public class DM : MonoBehaviour
 
         personalData = new PersonalData(charas.Length, bats.Length, skills.Length); //* DataBase
         personalData.load(ref charas, ref bats, ref skills);
-        
-        
 
         //* アップグレードデータ 初期化。
         scrollviews[(int)DM.PANEL.Upgrade].initUpgradeDt(upgrades);

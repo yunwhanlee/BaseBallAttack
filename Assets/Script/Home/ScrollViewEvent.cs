@@ -90,9 +90,9 @@ public class ScrollView {
                 case DM.PANEL.Upgrade :
                     ins.transform.localPosition = new Vector3(0,0,0); //* posZがずれるから、調整
                     //! Buy AddEventListener !//
-                    Debug.Log($"createItem:: <color=red>AddEventLister</color>(()=><color=yellow>onClickItem</color>({ins.name}))");
                     Button btn = ins.GetComponent<Button>();
                     var svEvent = ScrollRect.GetComponent<ScrollViewEvent>();
+                    Debug.Log($"createItem:: <color=red>AddEventLister</color>(()=><color=yellow>onClickItem</color>({ins.name}))");
                     btn.onClick.AddListener(delegate{svEvent.onClickItem(ins);});
                     break;
         }
@@ -456,6 +456,7 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
         }
     }
     private void setPriceUI(string price){
+        Debug.Log($"setPriceUI:: price= {price}");
         hm.checkBtn.interactable = true;
         hm.checkMarkImg.gameObject.SetActive(false);
         hm.priceTxt.gameObject.SetActive(true);
@@ -607,6 +608,11 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
 
         //* Current Index
         var btns = DM.ins.scrollviews[(int)type].ContentTf.GetComponentsInChildren<Button>();
+
+        //! (BUG-45) CASHSHOPへIAP BUTTONが追加され、onClickItem()でButton Componentで CurIdxを検索するのがずれるバグ対応。
+        if(type == DM.PANEL.CashShop)
+            btns = exceptIAPButton(btns);
+
         CurIdx = Array.FindIndex(btns, btn => btn.name == ins.name);
 
         drawCheckBtnUI();
@@ -614,6 +620,15 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
 
         var sprite = btns[CurIdx].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
         Debug.Log($"<color=yellow>onClickItem()</color>:: CurIdx= {CurIdx}, ins.name= {ins.name}, sprite= {sprite.name}");
+    }
+    private Button[] exceptIAPButton(Button[] btns){
+        List<Button> btnFilterList = new List<Button>();
+        Array.ForEach(btns, btn => {
+            if(btn.name != "IAPBtn_Icon" && btn.name != "Icon")
+                btnFilterList.Add(btn);
+        });
+        btnFilterList.ForEach(list => Debug.Log($"exceptIAPButton():: btnFilterlist.name={list.name}"));
+        return btnFilterList.ToArray();
     }
     public ItemInfo getCurItem(){
         var contents = getItemArr();
@@ -825,8 +840,8 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
         : (DM.ins.SelectItemType == DM.PANEL.CashShop.ToString())? DM.ins.scrollviews[(int)DM.PANEL.CashShop].ContentTf
         : (DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString())? DM.ins.scrollviews[(int)DM.PANEL.Upgrade].ContentTf
         : null;
-        Debug.Log("getItemArr():: contentTf= " + contentTf);
         var items = contentTf.GetComponentsInChildren<ItemInfo>();
+        Debug.Log("getItemArr():: contentTf= " + contentTf);
         return items;
     }
     private void setCheckIconColorAndOutline(){// (BUG) CharaのRightArmにあるBatにも<ItemInfo>有ったので、重複される。CharaPrefのBatを全て非活性化してOK。

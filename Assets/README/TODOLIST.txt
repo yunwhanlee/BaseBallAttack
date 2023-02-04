@@ -423,6 +423,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-42) PLAYシーンで終了しても、購入したデータがセーブできるように。
     ✓ (BUG-43) ERROR Message Dialogが続いて生成されることを止める。
     ✓ (BUG-44) Admob Reward、Playシーンで実行すると、重なって広告が増えるBUG。
+    ✓ (BUG-45) CASHSHOPへIAP BUTTONが追加され、onClickItem()でButton Componentで CurIdxを検索するのがずれるバグ発生。
     - (BUG-45) ステージが終わっても、Expオブや次に進まないＢＵＧ
     - (BUG-46) onClickCheckBtn::checkAtvSkillItemSelectionIsFirstTime CHARAとBATの場合購入したら出るバグがあるため、caseによって処理を分ける。
     - (BUG-47) アイテム購入が次のことになるバグ。
