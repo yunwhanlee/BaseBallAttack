@@ -102,8 +102,12 @@ public class DM : MonoBehaviour
     }
     void singleton(){
         //* Singleton
-        if(ins == null) ins = this;
+        if(ins == null) {
+            Debug.Log("DM::singleton():: Start App Only One Time");
+            ins = this;
+        }
         else if(ins != null) {
+            Debug.Log("DM::singleton():: WhenEver Load Home, Repeat");
             DM.ins.CoinTxt = this.CoinTxt;
             DM.ins.DiamondTxt = this.DiamondTxt;
             
@@ -126,6 +130,7 @@ public class DM : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
     void Start(){
+        Debug.Log("DM::Start()::");
         LANG.initlanguageList();
         // foreach(DM.ATV list in Enum.GetValues(typeof(DM.ATV)))Debug.LogFormat("Enums GetFindVal:: {0}", list.ToString())
 

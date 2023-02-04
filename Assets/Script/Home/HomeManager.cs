@@ -73,6 +73,7 @@ public class HomeManager : MonoBehaviour
     
     [Header("【 GUI 】")][Header("__________________________")]
     public Text versionTxt;
+    public Text googlePlayLoginTxt;
     public Canvas mainCanvas;
     public FrameUI homePanel;
     public FrameUI selectPanel;
@@ -279,6 +280,13 @@ public class HomeManager : MonoBehaviour
 //*   Button
 //* ----------------------------------------------------------------
 #region Button
+    public void onClickGooglePlayLeaderBoard(){
+        Debug.Log("onClickGooglePlayLeaderBoard()::");
+        GPGSBinder.Inst.Login((success, user) => {
+            googlePlayLoginTxt.text = 
+            $"{success}, {user.userName}, {user.id}, {user.state}, {user.underage}";
+        });
+    }
     public void onClickBtnQuestionMarkIcon() { DM.ins.displayTutorialUI(); SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());}
     public void onClickPremiumPackIconBtn() { 
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());

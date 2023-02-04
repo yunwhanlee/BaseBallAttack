@@ -7,8 +7,7 @@ using GooglePlayGames.BasicApi;
 using GooglePlayGames.BasicApi.SavedGame;
 using GooglePlayGames.BasicApi.Events;
 
-public class GPGSBinder
-{
+public class GPGSBinder{
     static GPGSBinder inst = new GPGSBinder();
     public static GPGSBinder Inst => inst;
 
