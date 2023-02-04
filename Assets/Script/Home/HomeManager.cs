@@ -639,6 +639,10 @@ public class HomeManager : MonoBehaviour
         if(rouletteTicket > 0)    createShowRewardItemPf(ROULETTE_TICKET, $"{rouletteTicket}");
         if(removeAD)    createShowRewardItemPf(REMOVE_AD, "SKIP");
     }
+    public void setCheckBtnUninteractable(){
+        checkBtn.interactable = false;
+        priceTxt.text = "done";
+    }
 #endregion
 //* ----------------------------------------------------------------
 //* Private Function

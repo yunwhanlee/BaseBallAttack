@@ -39,6 +39,7 @@ public class InAppManager : MonoBehaviour
                 hm.displayShowRewardPanel(coin: 0, diamond: 0, rouletteTicket: 0, removeAD: true);
                 DM.ins.personalData.IsRemoveAD = true;
                 DM.ins.setUIRemoveAD();
+                hm.setCheckBtnUninteractable();
                 break;
             case "diamond_small":
                 hm.displayShowRewardPanel(coin: 0, diamond: 10000);

@@ -410,13 +410,19 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
 
         //* CashShop & Upgrade Panel
         if(DM.ins.SelectItemType == DM.PANEL.CashShop.ToString()){
-            setPriceUI(curItem.price.getValue().ToString());
+            string price = curItem.price.getValue().ToString();
+            setPriceUI(price);
 
             //* 一回限り商品
             if(curItem.name.Contains(DM.NAME.RemoveAD.ToString()) && curItem.IsLock){
-                hm.checkBtn.interactable = false;
-                hm.priceTxt.text = "done";
+                hm.setCheckBtnUninteractable();
+                return;
             }
+
+            //* 課金なら、Price頭に"￥"表示。
+            if(curItem.price.Type == Price.TP.CASH)
+                hm.priceTxt.text = "¥" + price;
+
             return;
         }
         else if(DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
