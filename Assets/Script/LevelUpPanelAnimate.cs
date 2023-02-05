@@ -94,15 +94,15 @@ public class LevelUpPanelAnimate : MonoBehaviour{
                     int randIdx = Random.Range(0, skillList.Count);
                     int randPer = Random.Range(0, 100);
                     string tagName = skillList[randIdx - 1].Value.transform.tag;
-                    setRandomPsvSkill(skillSlotBtns[i], out randIdx, randPer, out tagName);
+                    setRandomPsvSkillSlot(skillSlotBtns[i], out randIdx, randPer, out tagName);
 
                     //* Set Unique or Normal
                     if(randPer < LM._.LEVELUP_SLOTS_UNIQUE_PER){
                         while(tagName == DM.TAG.PsvSkillNormal.ToString())
-                            setRandomPsvSkill(skillSlotBtns[i], out randIdx, randPer, out tagName);
+                            setRandomPsvSkillSlot(skillSlotBtns[i], out randIdx, randPer, out tagName);
                     }else{
                         while(tagName == DM.TAG.PsvSkillUnique.ToString())
-                            setRandomPsvSkill(skillSlotBtns[i], out randIdx, randPer, out tagName);
+                            setRandomPsvSkillSlot(skillSlotBtns[i], out randIdx, randPer, out tagName);
                     }
 
                     //* 指定したIndexは他のスロットと重ならないように消す
@@ -271,13 +271,13 @@ public class LevelUpPanelAnimate : MonoBehaviour{
 /// --------------------------------------------------------------------------------------
 /// 関数
 /// --------------------------------------------------------------------------------------
-    private string setRandomPsvSkill(LevelUpSkillPanelBtn slotBtn, out int randIdx, int randPer, out string tagName){
+    private string setRandomPsvSkillSlot(LevelUpSkillPanelBtn slotBtn, out int randIdx, int randPer, out string tagName){
         randIdx = Random.Range(0, skillList.Count);
         Debug.Log("setRandomPsvSkill:: randIdx= " + randIdx);
 
         //* Set Position (.Key -> PosY)
         // int spriteHalfHeight = spriteH / 2;
-        int posY = skillList[randIdx].Key;// + spriteHalfHeight; 
+        int posY = skillList[randIdx].Key + spriteH;// + spriteHalfHeight; 
         slotBtn.contentRectTf.localPosition = new Vector3(0, posY, 0);
 
         //* Set Name 
