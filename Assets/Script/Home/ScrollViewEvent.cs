@@ -168,6 +168,10 @@ public class ScrollView {
             upgrades[i].setUI(upgradeDt);
             //* Set Price
             List<int> priceList = ScrollViewEvent.setUpgradePriceCalc(upgradeDt);
+            priceList.ForEach(list => {
+                Debug.Log($"initUpgradeDt:: {upgradeDt.name}:: price -> {list}");
+            });
+            
             upgrades[i].price.setValue(priceList[upgradeDt.Lv]);
         }
     }
@@ -399,7 +403,7 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
 
     public void drawCheckBtnUI(){
         var curItem = getCurItem();
-        Debug.Log($"drawChoiceBtnUI():: curItem.name= {curItem.name}, .IsLock= {curItem.IsLock}, .price= {curItem.price.getValue()}");
+        Debug.Log($"drawChoiceBtnUI():: Type= {DM.ins.SelectItemType}, curItem.name= {curItem.name}, .IsLock= {curItem.IsLock}, .price= {curItem.price.getValue()}");
 
         //* Set PriceType Icon Sprite
         switch(curItem.price.Type){
@@ -420,16 +424,16 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
             }
 
             //* 課金なら、Price頭に"￥"表示。
-            if(curItem.price.Type == Price.TP.CASH)
+            if(curItem.price.Type == Price.TP.CASH){
                 hm.priceTxt.text = "¥" + price;
-
-            return;
+            }
+            return; //* (BUG-46) CashShopとUpgrade Panelの項目はIsLockは関係ないのにCheckBoxUI全てが、処理した後IsLockがFalseなら✓表示になってしまうこと対応。
         }
         else if(DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
             UpgradeDt upgradeDt = DM.ins.personalData.Upgrade.Arr[CurIdx];
             string priceTxt = (upgradeDt.Lv == upgradeDt.MaxLv)? "MAX" : curItem.price.getValue().ToString();
             setPriceUI(priceTxt);
-            return;
+            return; //* (BUG-46) CashShopとUpgrade Panelの項目はIsLockは関係ないのにCheckBoxUI全てが、処理した後IsLockがFalseなら✓表示になってしまうこと対応。
         }
         else if(DM.ins.SelectItemType == DM.PANEL.Skill.ToString()){
             UpgradeDt atvSkillUpgradeDt = DM.ins.personalData.AtvSkillUpgrade.Arr[CurIdx];

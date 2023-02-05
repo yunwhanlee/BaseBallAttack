@@ -120,7 +120,10 @@ public class ItemInfo : MonoBehaviour
             }
             case DM.PANEL.CashShop : { //* 追加的な特別変数へ代入。
                 try{
-                    CashShopPriceTxt.text = price.getValue().ToString();
+                    if(price.Type == Price.TP.CASH)
+                        CashShopPriceTxt.text = "¥" + price.getValue().ToString();
+                    else
+                        CashShopPriceTxt.text = price.getValue().ToString();
                 }
                 catch(Exception err){
                     Debug.LogError("ItemInfo:: rsc/home/selectItemPanel/Content/<b>CashShop</b>のPrefabのInspectorビューへ、CashShopPriceTxtがNullです。\n◆ERROR: " + err);

@@ -352,6 +352,8 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ RewardAD。
     ✓ InApp。
     ✓ cashShop:: InAppBtn onClck Event Callback.
+    ✓ cashShop:: 課金なら、Price頭に"￥"表示。
+
 
 [BUG]
     ✓ Ballが壁にぶつかってから、反射角が摩擦力で少しずつ減る。
@@ -425,11 +427,13 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-43) ERROR Message Dialogが続いて生成されることを止める。
     ✓ (BUG-44) Admob Reward、Playシーンで実行すると、重なって広告が増えるBUG。
     ✓ (BUG-45) CASHSHOPへIAP BUTTONが追加され、onClickItem()でButton Componentで CurIdxを検索するのがずれるバグ発生。
-    - (BUG-45) ステージが終わっても、Expオブや次に進まないＢＵＧ
-    - (BUG-46) onClickCheckBtn::checkAtvSkillItemSelectionIsFirstTime CHARAとBATの場合購入したら出るバグがあるため、caseによって処理を分ける。
-    - (BUG-47) アイテム購入が次のことになるバグ。
-    - (BUG-48) ScrollSnipが出来たら、止まるべきのに、少し動くバグ。
-    - (BUG-49) ColorBallPopブロックにぶつかってもボールが破壊されないBUG。    
+    - (BUG-46) CashShopとUpgrade Panelの項目はIsLockは関係ないのにCheckBoxUI全てが、処理した後IsLockがFalseなら✓表示になってしまう。
+    - (BUG) apkにビルドしたら、UpgradePanelのCheckBoxUIがMAXになってしまう。
+    - (BUG) ステージが終わっても、Expオブや次に進まないＢＵＧ
+    - (BUG) onClickCheckBtn::checkAtvSkillItemSelectionIsFirstTime CHARAとBATの場合購入したら出るバグがあるため、caseによって処理を分ける。
+    - (BUG) アイテム購入が次のことになるバグ。
+    - (BUG) ScrollSnipが出来たら、止まるべきのに、少し動くバグ。
+    - (BUG) ColorBallPopブロックにぶつかってもボールが破壊されないBUG。 
     
     ✓ 連続アップグレード可能に : Skill & Upgrade。
     ✓ レベルアップスロットイメージが表示しない。（MAXになってもスロットが残っている。）

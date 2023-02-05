@@ -1072,10 +1072,12 @@ public class GameManager : MonoBehaviour {
         Text content = dialog.Find(DM.NAME.ContentTxt.ToString()).GetComponent<Text>();
         Text notice = dialog.Find("NoticeTxt").GetComponent<Text>();
         Text okBtn = dialog.Find("OkBtn").GetComponentInChildren<Text>();
+        Text cancelBtn = dialog.Find("CancelBtn").GetComponentInChildren<Text>();
 
         title.text = LANG.getTxt(LANG.TXT.Caution.ToString());
         content.text = LANG.getTxt(LANG.TXT.Caution_Content.ToString());
         notice.text = LANG.getTxt(LANG.TXT.Caution_Notice.ToString());
         okBtn.text = LANG.getTxt(LANG.TXT.Ok.ToString());
+        cancelBtn.text = LANG.getTxt(LANG.TXT.No.ToString());
     }
 }

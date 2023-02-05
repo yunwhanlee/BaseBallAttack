@@ -11,7 +11,7 @@ public class BallShooter : MonoBehaviour
     [SerializeField] bool isBallExist;   public bool IsBallExist { get => isBallExist; set => isBallExist = value;}
     [SerializeField] bool isExclamationMarkOn;   public bool IsExclamationMarkOn { get => isExclamationMarkOn; set => isExclamationMarkOn = value;}
     [SerializeField] float time;
-    [SerializeField] float throwBallSpeed = LM._.THROW_BALL_SPEED;
+    [SerializeField] float throwBallSpeed;
     [SerializeField] float shootSpan = 3;
     [SerializeField] public GameObject ballPref;
     [SerializeField] public Transform entranceTf;
@@ -26,6 +26,7 @@ public class BallShooter : MonoBehaviour
         init();
         ExclamationMarkObj.SetActive(false);
         BossFireBallMarkObj.SetActive(false);
+        throwBallSpeed = LM._.THROW_BALL_SPEED;
     }
 
     void FixedUpdate(){

@@ -9,7 +9,7 @@ public static class LANG //* LANG
     public enum OBJNAME {NameTxt, ExplainTxt, HomeRunBonusTxt};
     public enum TXT {
         //* UI
-        Ok, Use, Get, Open,
+        Ok, No, Use, Get, Open,
         Start, Level, Stage, BossLimitCnt, Combo, Status, Back, Ready, Out, Strike,
         BestScore, LevelUpPanel_Title, LevelUpPanel_Explain, Play,
 
@@ -245,7 +245,7 @@ public static class LANG //* LANG
     };
     public static string[] Caution_Content = new string[]{
         "Are you sure give up the game?",
-        "本当にゲームを諦めますか？",
+        "本当にゲームをやめますか？",
         "정말로 게임을 포기하시겠습니까?"
     };
     public static string[] Caution_Notice = new string[]{
@@ -329,6 +329,7 @@ public static class LANG //* LANG
 
     //* UI
     public static string[] Ok = new string[]{"OK", "はい", "네"};
+    public static string[] No = new string[]{"No", "いいえ", "아니오"};
     public static string[] Use = new string[]{"USE", "使用", "사용"};
     public static string[] Get = new string[]{"GET", "取る", "얻기"};
     public static string[] Start = new string[]{"START", "スタート", "시작"};
@@ -509,6 +510,7 @@ public static class LANG //* LANG
 
         //* UI
         if(name == TXT.Ok.ToString()) res = Ok[CUR_LANG];
+        if(name == TXT.No.ToString()) res = No[CUR_LANG];
         if(name == TXT.Use.ToString()) res = Use[CUR_LANG];
         if(name == TXT.Get.ToString()) res = Get[CUR_LANG];
         if(name == TXT.Open.ToString()) res = Open[CUR_LANG];
