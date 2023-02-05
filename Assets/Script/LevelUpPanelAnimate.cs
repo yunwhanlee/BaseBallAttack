@@ -26,7 +26,7 @@ public class LevelUpPanelAnimate : MonoBehaviour{
     
     [Header("STATE")][Header("__________________________")]
     [SerializeField] int scrollSpeed;
-    [SerializeField] bool isRollingStop = false;
+    // [SerializeField] bool isRollingStop = false;
     [SerializeField] bool isPsvSkillTicket; public bool IsPsvSkillTicket { get => isPsvSkillTicket; set => isPsvSkillTicket = value;}
     [SerializeField] List<string> exceptSkNameList = new List<string>();
     [SerializeField] public List<KeyValuePair<int, GameObject>> skillList = new List<KeyValuePair<int, GameObject>>(); //* 同じnewタイプ型を代入しないと、使えない。
@@ -58,7 +58,7 @@ public class LevelUpPanelAnimate : MonoBehaviour{
         btnIdx = 0;
         time = 0;
         span = 2;
-        isRollingStop = false;
+        // isRollingStop = false;
         exceptSkNameList = new List<string>();
         skillList = new List<KeyValuePair<int, GameObject>>();
 
@@ -80,76 +80,80 @@ public class LevelUpPanelAnimate : MonoBehaviour{
         //* SCROLL ANIMATION
         if(SKILL_BTN_IDX_LEN >= btnIdx && skillList.Count > 0){
             time += Time.unscaledDeltaTime;
-            foreach(LevelUpSkillPanelBtn slotBtn in skillSlotBtns){
-                //* #1.Scrolling Down
+            for(int i = 0; i < skillSlotBtns.Length; i++){
+                //* Scrolling
                 if(time < span){
-                    if(slotBtn.contentRectTf.localPosition.y >= 0) //* ↓
-                        slotBtn.contentRectTf.Translate(0,-speed, 0);
-                    else //* 位置初期化
-                        slotBtn.contentRectTf.localPosition = new Vector3(0, spriteH * gm.psvImgRectTfTemp.childCount, 0);
+                    if(skillSlotBtns[i].contentRectTf.localPosition.y >= 0) //* ↓
+                        skillSlotBtns[i].contentRectTf.Translate(0,-speed, 0);
+                    else //* 一番目に戻す
+                        skillSlotBtns[i].contentRectTf.localPosition = new Vector3(0, spriteH * gm.psvImgRectTfTemp.childCount, 0);
                 }
-                //* #2.Stop
+                //* Stop
                 else{
+                    Debug.Log("LevelUpPanelAnimate::Slot Stop!");
                     int randIdx = Random.Range(0, skillList.Count);
                     int randPer = Random.Range(0, 100);
                     string tagName = skillList[randIdx - 1].Value.transform.tag;
-                    setRandomPsvSkill(slotBtn, out randIdx, randPer, out tagName);
+                    setRandomPsvSkill(skillSlotBtns[i], out randIdx, randPer, out tagName);
 
                     //* Set Unique or Normal
                     if(randPer < LM._.LEVELUP_SLOTS_UNIQUE_PER){
                         while(tagName == DM.TAG.PsvSkillNormal.ToString())
-                            setRandomPsvSkill(slotBtn, out randIdx, randPer, out tagName);
+                            setRandomPsvSkill(skillSlotBtns[i], out randIdx, randPer, out tagName);
                     }else{
                         while(tagName == DM.TAG.PsvSkillUnique.ToString())
-                            setRandomPsvSkill(slotBtn, out randIdx, randPer, out tagName);
+                            setRandomPsvSkill(skillSlotBtns[i], out randIdx, randPer, out tagName);
                     }
 
                     //* 指定したIndexは他のスロットと重ならないように消す
                     skillList.RemoveAt(randIdx);
                     btnIdx++;
-                    if(btnIdx == SKILL_BTN_IDX_LEN)
-                        isRollingStop = true; //* Stop Trigger On
-                }
-            }
-        }
-        //* #3.Scroll Re-Back to Correct PosY
-        else if(isRollingStop){
-            Debug.Log("LevelUpPanelAnimate::isRollingStop");
-            for(int i = 0; i<skillSlotBtns.Length;i++){
-                float posY = skillSlotBtns[i].contentRectTf.localPosition.y % spriteH;
-                const int offsetY = 1;
-                float lastIdxPosY = (skillSlotBtns[2].contentRectTf.localPosition.y % spriteH) + offsetY;
-                if(spriteH / 2 <= posY && posY <= spriteH){
-                    //Scrolling Up
-                    skillSlotBtns[i].contentRectTf.Translate(0, speed / (i+1), 0);
-                    Debug.Log($"LevelUpPanelAnimate::Update():: lastIdxPosY:{lastIdxPosY}->MathRound:{Mathf.Round(lastIdxPosY)} == spriteHeight{spriteH - spriteH * 0.1f}");
-                    //最後Idxが終わるまで待つ
-                    if(Mathf.Round(lastIdxPosY) >= spriteH - spriteH * 0.1f){ //* ピッタリ止まらないので、10％周りの範囲に来たら処理することで対応。
-                        isRollingStop = false;
-                        // Debug.Log($"最後まで待ちました。btnImg[0].Y={colSkillBtns[0].colImgRectTf.localPosition.y}, btnImg[1].Y={colSkillBtns[1].colImgRectTf.localPosition.y}, btnImg[2].Y={colSkillBtns[2].colImgRectTf.localPosition.y}");
-                        //* 少しずれた位置をピッタリ直す。
-                        int btnIdx=0;
-                        Array.ForEach(skillSlotBtns, btn => {
-                            int rest = Mathf.RoundToInt(btn.contentRectTf.localPosition.y) % spriteH;
-                            btn.contentRectTf.localPosition = new Vector3(
-                                btn.contentRectTf.localPosition.x, 
-                                btn.contentRectTf.localPosition.y - rest + (btnIdx==2? spriteH : 0), //* なぜか、３番目には高さを一回足さないと、ずれるBUGある。
-                                btn.contentRectTf.localPosition.z);
-                            btnIdx++;
-                        });
-                    }
-                }
-            }
-        }
-    }
 
+                    // if(btnIdx == SKILL_BTN_IDX_LEN)
+                        // isRollingStop = true; //* Stop Trigger On
+                }
+            }
+        }
+        //! (BUG-48) モバイルビルドで、LevelUpScrollBtnの位置がずれるバグがありため、半分下に位置して上に戻す処理しない。
+        /*
+        //* #3.Scroll Re-Back to Correct PosY
+        // else if(isRollingStop){
+        //     Debug.Log("LevelUpPanelAnimate::isRollingStop");
+        //     for(int i = 0; i<skillSlotBtns.Length;i++){
+        //         float posY = skillSlotBtns[i].contentRectTf.localPosition.y % spriteH;
+        //         const int offsetY = 1;
+        //         float lastIdxPosY = (skillSlotBtns[2].contentRectTf.localPosition.y % spriteH) + offsetY;
+        //         if(spriteH / 2 <= posY && posY <= spriteH){
+        //             //Scrolling Up
+        //             skillSlotBtns[i].contentRectTf.Translate(0, speed / (i+1), 0);
+        //             Debug.Log($"LevelUpPanelAnimate::Update():: lastIdxPosY:{lastIdxPosY}->MathRound:{Mathf.Round(lastIdxPosY)} == spriteHeight{spriteH - spriteH * 0.1f}");
+        //             //最後Idxが終わるまで待つ
+        //             if(Mathf.Round(lastIdxPosY) >= spriteH - spriteH * 0.1f){ //* ピッタリ止まらないので、10％周りの範囲に来たら処理することで対応。
+        //                 isRollingStop = false;
+        //                 // Debug.Log($"最後まで待ちました。btnImg[0].Y={colSkillBtns[0].colImgRectTf.localPosition.y}, btnImg[1].Y={colSkillBtns[1].colImgRectTf.localPosition.y}, btnImg[2].Y={colSkillBtns[2].colImgRectTf.localPosition.y}");
+        //                 //* 少しずれた位置をピッタリ直す。
+        //                 int btnIdx=0;
+        //                 Array.ForEach(skillSlotBtns, btn => {
+        //                     int rest = Mathf.RoundToInt(btn.contentRectTf.localPosition.y) % spriteH;
+        //                     btn.contentRectTf.localPosition = new Vector3(
+        //                         btn.contentRectTf.localPosition.x, 
+        //                         btn.contentRectTf.localPosition.y - rest + (btnIdx==2? spriteH : 0), //* なぜか、３番目には高さを一回足さないと、ずれるBUGある。
+        //                         btn.contentRectTf.localPosition.z);
+        //                     btnIdx++;
+        //                 });
+        //             }
+        //         }
+        //     }
+        // }
+        */
+    }
 //* --------------------------------------------------------------------------------------
 //* GUI Button
 //* --------------------------------------------------------------------------------------
     private bool stopScrolling(){
         //* (BUG)曲がりが終わるまで、SkillBtnクリックできないように(スキル名が在るかを確認)。
         if(Array.Exists(skillSlotBtns, btn => btn.name.text == "")) {
-            isRollingStop = true;
+            // isRollingStop = true;
             time = span; // スロットが曲がるのを止める。
             return true;
         }
@@ -272,8 +276,8 @@ public class LevelUpPanelAnimate : MonoBehaviour{
         Debug.Log("setRandomPsvSkill:: randIdx= " + randIdx);
 
         //* Set Position (.Key -> PosY)
-        int spriteHalfHeight = spriteH / 2;
-        int posY = skillList[randIdx].Key + spriteHalfHeight; 
+        // int spriteHalfHeight = spriteH / 2;
+        int posY = skillList[randIdx].Key;// + spriteHalfHeight; 
         slotBtn.contentRectTf.localPosition = new Vector3(0, posY, 0);
 
         //* Set Name 
