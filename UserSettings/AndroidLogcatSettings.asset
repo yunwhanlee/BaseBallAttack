@@ -1,9 +1,9 @@
 {
     "m_SelectedDeviceId": "RF8NA0FXKJP",
     "m_SelectedPackage": {
-        "deviceId": "RF8NA0FXKJP",
-        "name": "com.frontooth.baseballattack",
-        "processId": 13329,
+        "deviceId": "",
+        "name": "",
+        "processId": 0,
         "exited": false
     },
     "m_SelectedPriority": 1,
@@ -13,18 +13,6 @@
             "name": "com.nttdocomo.android.homezozo",
             "processId": 9698,
             "exited": false
-        },
-        {
-            "deviceId": "RF8NA0FXKJP",
-            "name": "com.frontooth.baseballattack",
-            "processId": 1838,
-            "exited": true
-        },
-        {
-            "deviceId": "RF8NA0FXKJP",
-            "name": "com.frontooth.baseballattack",
-            "processId": 23631,
-            "exited": true
         },
         {
             "deviceId": "RF8NA0FXKJP",
@@ -48,13 +36,31 @@
             "deviceId": "RF8NA0FXKJP",
             "name": "com.frontooth.baseballattack",
             "processId": 8042,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "RF8NA0FXKJP",
             "name": "com.frontooth.baseballattack",
             "processId": 13329,
+            "exited": true
+        },
+        {
+            "deviceId": "RF8NA0FXKJP",
+            "name": "com.frontooth.baseballattack",
+            "processId": 21803,
+            "exited": true
+        },
+        {
+            "deviceId": "RF8NA0FXKJP",
+            "name": "com.frontooth.baseballattack",
+            "processId": 7272,
             "exited": false
+        },
+        {
+            "deviceId": "RF8NA0FXKJP",
+            "name": "com.frontooth.baseballattack",
+            "processId": 23654,
+            "exited": true
         }
     ],
     "m_Tags": {
@@ -107,7 +113,7 @@
         "MemoryGroup": 1,
         "Behavior": 1
     },
-    "m_Filter": "initUpgradeDt",
+    "m_Filter": "LOAD",
     "m_FilterIsRegularExpression": false,
     "m_SymbolPaths": []
 }

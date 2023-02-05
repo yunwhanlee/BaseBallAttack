@@ -179,19 +179,14 @@ public class HomeManager : MonoBehaviour
 
         versionTxt.text = $"ver{Version.MAJOR}.{Version.MINOR}.{Version.REVISION}";
 
+        /* Setting Dialog */
         //* Exp Log
         expLogToggle.isOn = DM.ins.personalData.IsActiveExpLog;
-
         //* Set Quality
         QualitySettings.SetQualityLevel(DM.ins.personalData.Quality);
         settingQualityDropdown.value = QualitySettings.GetQualityLevel();
 
-        //* アプリ初期実行、Settingダイアログ 表示。
-        if(!DM.ins.personalData.IsChoiceLang){
-            DM.ins.personalData.IsChoiceLang = true;
-            settingDialog.Panel.SetActive(true);
-            settingDialogCancelBtn.gameObject.SetActive(false);
-        }
+        firstPlayAppShowSettingDialog();
 
         Debug.Log("Math:: -------------------------------");
         const int OFFSET = 100;
@@ -394,7 +389,16 @@ public class HomeManager : MonoBehaviour
         am.showRewardAd(DM.REWARD.ROULETTE_TICKET);
     }
 
-    #region SETTING
+#region SETTING
+    private void firstPlayAppShowSettingDialog(){
+        if(!DM.ins.personalData.IsChoiceLang){
+            //! (BUG-47) モバイルビルドしたら、最初Loadデータがなくなるバグ。*原因：最初言語設定でonClickSettingOkBtnからsaveしますが、collectionなどのデータがないまましちゃう。
+            DM.ins.personalData.reset(); //* (BUG-47)対応:: resetして、saveする前にTemplateを用意する。
+            DM.ins.personalData.IsChoiceLang = true;
+            settingDialog.Panel.SetActive(true);
+            settingDialogCancelBtn.gameObject.SetActive(false);
+        }
+    }
     public void onClickSettingBtn(){
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         settingDialog.Panel.SetActive(true);
@@ -430,7 +434,7 @@ public class HomeManager : MonoBehaviour
         DM.ins.personalData.save();
         if(isOk) SceneManager.LoadScene(DM.SCENE.Home.ToString()); //* Re-load
     }
-    #endregion
+#endregion
 
     public void onClickBtnUnlock2ndSkillDialog(bool isActive){
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());

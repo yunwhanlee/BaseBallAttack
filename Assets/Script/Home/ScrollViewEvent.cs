@@ -163,6 +163,7 @@ public class ScrollView {
     }
 
     public void initUpgradeDt(ItemInfo[] upgrades){
+        Debug.Log($"initUpgradeDt:: upgrades= {upgrades}, upgrades.Len= {upgrades.Length}");
         for(int i=0; i<upgrades.Length; i++){
             UpgradeDt upgradeDt = DM.ins.personalData.Upgrade.Arr[i];
             upgrades[i].setUI(upgradeDt);
