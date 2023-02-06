@@ -178,8 +178,8 @@ public static class LANG //* LANG
     };
     public static string[] SettingNotice = new string[]{
         "If the gameplay is not smooth with frame drop, try lowering the Quality.",
-        "프레임 드롭으로 게임 플레이가 원활하지 않으면, 퀄리티를 낮춰보세요.",
-        "フレームドロップでゲームプレイがスムーズでない場合は、クオリティーを下げてください。"
+        "フレームドロップでゲームプレイがスムーズでない場合は、クオリティーを下げてください。",
+        "프레임 드롭으로 게임 플레이가 원활하지 않으면, 퀄리티를 낮춰보세요."
     };
 
     //* DIALOG
