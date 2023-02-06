@@ -230,7 +230,7 @@ public class HomeManager : MonoBehaviour
         }
         
         //* Setting Panel Country Icon
-        settingNoticeTxt.text = LANG.getTxt(LANG.TXT.StageSelectNotice.ToString());
+        settingNoticeTxt.text = LANG.getTxt(LANG.TXT.SettingNotice.ToString());
 
         settingDialogCountryIconImg.sprite = 
             DM.ins.personalData.Lang == LANG.TP.EN? CountryIconSprArr[(int)LANG.TP.EN]
