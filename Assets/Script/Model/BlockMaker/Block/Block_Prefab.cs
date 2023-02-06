@@ -375,9 +375,20 @@ public class Block_Prefab : MonoBehaviour
         }
 
         //* ActiveSkill CoolTime Amount Down
-        gm.activeSkillBtnList.ForEach(atvSkillBtn=>{
-            atvSkillBtn.coolDownFillAmount();
-        });
+        for(int i = 0; i<gm.activeSkillBtnList.Count; i++){
+            Debug.Log("coolDownFillAmount:: gm.activeSkillBtnList.Count= " + gm.activeSkillBtnList.Count);
+            //! (BUG-49) 2ndAtvSkillBtnを解除した場合、両方Cooldownするバグ⇒一つが出来たら、残りができるように修正。
+            if(gm.activeSkillBtnList.Count == 1){
+                gm.activeSkillBtnList[i].coolDownFillAmount();
+            }
+            else{
+                if(gm.activeSkillBtnList[0].CollDownImg.fillAmount > 0)
+                    gm.activeSkillBtnList[0].coolDownFillAmount();
+                else
+                    gm.activeSkillBtnList[1].coolDownFillAmount();
+            }
+            
+        }
     }
 
     public virtual void onDestroy(GameObject target, bool isInitialize = false) {

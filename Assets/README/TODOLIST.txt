@@ -430,6 +430,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-46) CashShopの項目はIsLockは関係ないのにCheckBoxUI全てが、処理した後IsLockがFalseなら✓表示になってしまう。
     ✓ (BUG-47) モバイルビルドしたら、最初Loadデータがなくなるバグ。*原因：最初言語設定でonClickSettingOkBtnからsaveしますが、collectionなどのデータがないまましちゃう。
     ✓ (BUG-48) モバイルビルドで、LevelUpScrollBtnの位置がずれるバグがありため、半分下に位置して上に戻す処理しない。
+    ✓ (BUG-49) 2ndAtvSkillBtnを解除した場合、両方Cooldownするバグ⇒一つが出来たら、残りができるように修正。
     - (BUG) apkにビルドしたら、UpgradePanelのCheckBoxUIがMAXになってしまう。
     - (BUG) ステージが終わっても、Expオブや次に進まないＢＵＧ
     - (BUG) onClickCheckBtn::checkAtvSkillItemSelectionIsFirstTime CHARAとBATの場合購入したら出るバグがあるため、caseによって処理を分ける。

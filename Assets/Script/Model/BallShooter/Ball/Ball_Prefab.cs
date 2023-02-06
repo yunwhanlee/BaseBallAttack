@@ -83,7 +83,7 @@ public class Ball_Prefab : MonoBehaviour
                 
                 //* #1. Active SHOT Skill
                 bool isActiveSkillTrigger = false;
-                gm.activeSkillBtnList.ForEach(skillBtn=>{
+                gm.activeSkillBtnList.ForEach(skillBtn => {
                     if(skillBtn.Trigger){
                         isActiveSkillTrigger = true;
                         StartCoroutine(coPlayActiveSkillShotEF(skillBtn, 1f, arrowDir));

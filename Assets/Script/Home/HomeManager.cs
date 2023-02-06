@@ -857,6 +857,7 @@ public class HomeManager : MonoBehaviour
         var itemPf = Instantiate(showRewardItemPf, showRewardItemListGroup, false);
         Sprite IconSpr = premiumPackInfoTxtArr[idx].transform.parent.GetChild(ICON).GetComponent<Image>().sprite;
         string TextVal = valueStr;
+        
         itemPf.transform.GetChild(ICON).GetComponent<Image>().sprite = IconSpr;
         itemPf.transform.GetChild(TEXT).GetComponent<Text>().text = TextVal;
     }
