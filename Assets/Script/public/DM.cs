@@ -189,22 +189,23 @@ public class DM : MonoBehaviour
         if(DiamondTxt) DiamondTxt.text = personalData.Diamond.ToString();
     }
 
-#region EXIT GAME
+#region QUIT APP
 #if UNITY_EDITOR
     void OnApplicationQuit(){
-        Debug.Log("EXIT SAVE GAME(PC)::OnApplicationQuit():: Scene= " + SceneManager.GetActiveScene().name);
+        Debug.Log("QUIT APP(PC)::OnApplicationQuit():: Scene= " + SceneManager.GetActiveScene().name);
         //* (BUG-42) PLAYシーンで終了しても、購入したデータがセーブできるように。
         // if(SceneManager.GetActiveScene().name == DM.SCENE.Home.ToString())
         personalData.save();
     }
 #elif UNITY_ANDROID
-    //* (BUG-37) ゲームが開くときにも起動されるので注意が必要。
+    
     //* (BUG-42) PLAYシーンで終了しても、購入したデータがセーブできるように。
     void OnApplicationPause(bool paused){
-        // if(paused && SceneManager.GetActiveScene().name == DM.SCENE.Home.ToString()){
-        Debug.Log("END SAVE GAME(Mobile)::OnApplicationPause( "+paused+" ):: Scene= " + SceneManager.GetActiveScene().name);
-        personalData.save();
-        // }
+        //! (BUG-37) ゲームが開くとき（paused == true）にも起動されるので注意が必要。
+        if(paused == true){
+            Debug.Log("QUIT APP(Mobile)::OnApplicationPause( "+paused+" ):: Scene= " + SceneManager.GetActiveScene().name);
+            personalData.save();
+        }
     }
 #endif
 #endregion
@@ -217,7 +218,7 @@ public class DM : MonoBehaviour
                 if(cashCtt.GetChild(i).name.Contains(DM.NAME.RemoveAD.ToString())){
                     //* IsLock
                     cashCtt.GetChild(i).GetComponent<ItemInfo>().IsLock = true;
-                    //* PurchasedPanel
+                    //  * PurchasedPanel
                     cashCtt.GetChild(i).Find(DM.NAME.PurchasedPanel.ToString()).gameObject.SetActive(true);
                 }
             }

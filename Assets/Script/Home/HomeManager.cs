@@ -391,6 +391,7 @@ public class HomeManager : MonoBehaviour
 
 #region SETTING
     private void firstPlayAppShowSettingDialog(){
+        Debug.Log("HM::firstPlayAppShowSettingDialog():: ");
         if(!DM.ins.personalData.IsChoiceLang){
             //! (BUG-47) モバイルビルドしたら、最初Loadデータがなくなるバグ。*原因：最初言語設定でonClickSettingOkBtnからsaveしますが、collectionなどのデータがないまましちゃう。
             DM.ins.personalData.reset(); //* (BUG-47)対応:: resetして、saveする前にTemplateを用意する。
@@ -429,8 +430,8 @@ public class HomeManager : MonoBehaviour
     }
     public void onClickSettingOkBtn(bool isOk){
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
-        // expLogToggle.isOn = DM.ins.personalData.IsActiveExpLog;
         settingDialog.Panel.SetActive(false);
+        // expLogToggle.isOn = DM.ins.personalData.IsActiveExpLog;
         DM.ins.personalData.save();
         if(isOk) SceneManager.LoadScene(DM.SCENE.Home.ToString()); //* Re-load
     }

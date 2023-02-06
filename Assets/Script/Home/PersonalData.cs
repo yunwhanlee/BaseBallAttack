@@ -128,8 +128,9 @@ public class PersonalData {
         Debug.Log($"<size=15>{this}::JSON:: LOAD Data (json == “”) ? {json==""}, json= {json}</size>");
         
         //* (BUG-39) 最初の実行だったら、ロードデータが無くてjsonがnullなので、resetして初期値を設定する。
-        if(json == ""){
+        if(!PlayerPrefs.HasKey(DM.DATABASE_KEY.Json.ToString())){
             reset();
+            return;
         }
 
         //* PlayerPrefsへ保存したデータ ロード
@@ -149,12 +150,12 @@ public class PersonalData {
         this.rouletteTicket = data.RouletteTicket;
         this.rouletteTicketCoolTime = (data.RouletteTicketCoolTime != null)? data.RouletteTicketCoolTime : DateTime.Now.ToString();
 
+        this.isChoiceLang = data.IsChoiceLang;
         this.isHardmodeOn = data.IsHardmodeOn;
         this.isHardmodeEnableNotice = data.IsHardmodeEnableNotice;
         this.isRemoveAD = data.IsRemoveAD;
         this.isSkipTutorial = data.IsSkipTutorial;
         this.isPurchasePremiumPack = data.IsPurchasePremiumPack;
-        this.isChoiceLang = data.IsChoiceLang;
 
         //* Achivement
         this.clearStage = data.ClearStage;
@@ -204,36 +205,38 @@ public class PersonalData {
 
         //* Set Real Content Items IsLock
         for(int i=0; i<charas.Length; i++){
-            if(i==0)    Debug.Log("<color=green>Chara</color>LockList["+i+"].IsLock=" + this.CharaLockList[i] + ", length= <color=green>" + charas.Length + "</color>");
+            // if(i==0)    Debug.Log("<color=green>Chara</color>LockList["+i+"].IsLock=" + this.CharaLockList[i] + ", length= <color=green>" + charas.Length + "</color>");
             charas[i].GetComponent<ItemInfo>().IsLock = this.CharaLockList[i];
         }
         for(int i=0; i<bats.Length; i++){
-            if(i==0)    Debug.Log("<color=orange>Bat</color>LockList["+i+"].IsLock=" + this.BatLockList[i] + ", length= <color=orange>" + bats.Length + "</color>");
+            // if(i==0)    Debug.Log("<color=orange>Bat</color>LockList["+i+"].IsLock=" + this.BatLockList[i] + ", length= <color=orange>" + bats.Length + "</color>");
             bats[i].GetComponent<ItemInfo>().IsLock = this.BatLockList[i];
         }
         for(int i=0; i<skills.Length; i++){
-            if(i==0)    Debug.Log("<color=yellow>Skill</color>LockList["+i+"].IsLock=" + this.AtvSkillLockList[i] + ", length= <color=yellow>" + skills.Length + "</color>");
+            // if(i==0)    Debug.Log("<color=yellow>Skill</color>LockList["+i+"].IsLock=" + this.AtvSkillLockList[i] + ", length= <color=yellow>" + skills.Length + "</color>");
             skills[i].GetComponent<ItemInfo>().IsLock = this.AtvSkillLockList[i];
         }
     }
     
     public void save(){
-        Debug.Log($"<size=20><color=red>{this}::SAVE</color></size>");
         PlayerPrefs.SetString(DM.DATABASE_KEY.Json.ToString(), JsonUtility.ToJson(this, true)); //* Serialize To Json
 
         //* Print
         string json = PlayerPrefs.GetString(DM.DATABASE_KEY.Json.ToString());
+        Debug.Log("SAVE:: The Key:" + DM.DATABASE_KEY.Json.ToString() + " Exists? " + PlayerPrefs.HasKey(DM.DATABASE_KEY.Json.ToString()));
         Debug.Log($"<size=15>{this}::JSON:: SAVE Data ={json}</size>");
     }
 
     public void reset(){
-        Debug.Log("<size=30>RESET</size>");
         PlayerPrefs.DeleteAll();
+        // string json = PlayerPrefs.GetString(DM.DATABASE_KEY.Json.ToString());
+        Debug.Log($"RESET:: The Key: {DM.DATABASE_KEY.Json.ToString()} Exists? {PlayerPrefs.HasKey(DM.DATABASE_KEY.Json.ToString())}");
+
         int upgradeLen = UpgradeList.DMG_MAXLV + UpgradeList.BALL_SPEED_MAXLV + UpgradeList.CRITICAL_MAXLV 
             + UpgradeList.CRITICAL_DMG_MAXLV + UpgradeList.BOSS_DMG_MAXLV + UpgradeList.COIN_BONUS_MAXLV + UpgradeList.DEFENCE_MAXLV;
 
         //* Reset
-        this.lang = LANG.TP.JP;
+        this.lang = LANG.TP.EN;
 
         this.bestStage = 1;
         this.quality = 1; //* 0: Low, 1: Medium, 2: High
@@ -246,12 +249,12 @@ public class PersonalData {
 
         this.rouletteTicketCoolTime = DateTime.Now.ToString();
 
+        this.isChoiceLang = false;
         this.isHardmodeOn = false;
         this.isHardmodeEnableNotice = false;
         this.isRemoveAD = false;
         this.isSkipTutorial = false;
         this.isPurchasePremiumPack = false;
-        this.isChoiceLang = false;
 
         this.clearStage = 1;
         this.stageClearArr = getStageClearArr();
