@@ -78,6 +78,8 @@ public class HomeManager : MonoBehaviour
     public FrameUI homePanel;
     public FrameUI selectPanel;
     public FrameUI unlock2ndSkillDialog;
+    public Text unlock2ndSkillPriceTxt;
+    public Sprite unlock2ndSkillSprite;
 
     [Space(10)]
     public Text startBtnTxt;
@@ -178,6 +180,8 @@ public class HomeManager : MonoBehaviour
         // onClickResetBtn();
 
         versionTxt.text = $"ver{Version.MAJOR}.{Version.MINOR}.{Version.REVISION}";
+
+        unlock2ndSkillPriceTxt.text = LM._.UNLOCK_2ND_ATVSKILL_PRICE.ToString();
 
         /* Setting Dialog */
         //* Exp Log
@@ -437,6 +441,7 @@ public class HomeManager : MonoBehaviour
     }
 #endregion
 
+#region UNLOCK 2ND ATV SKILL DIALOG
     public void onClickBtnUnlock2ndSkillDialog(bool isActive){
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         if(DM.ins.personalData.IsUnlock2ndSkill) return;
@@ -447,18 +452,22 @@ public class HomeManager : MonoBehaviour
 
     public void onclickBtnBuyUnlock2ndSkill(){
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
-        int price = 1000;
+        int price = LM._.UNLOCK_2ND_ATVSKILL_PRICE;
         var unlockSkillList = DM.ins.personalData.AtvSkillLockList.FindAll(list => list == false);
         int unlockSkillListCnt = unlockSkillList.Count;
         Debug.Log("unlockSkillListCnt= " + unlockSkillListCnt);
-        if(DM.ins.personalData.Coin < price) {
-            Util._.displayNoticeMsgDialog(LANG.getTxt(LANG.TXT.NotEnough.ToString()));
+        if(DM.ins.personalData.Diamond < price) {
+            Util._.displayNoticeMsgDialog(
+                LANG.getTxt(LANG.TXT.Diamond.ToString()) + LANG.getTxt(LANG.TXT.NotEnough.ToString()));
             return;
         }
         else if(unlockSkillListCnt < 2){
             Util._.displayNoticeMsgDialog(LANG.getTxt(LANG.TXT.MsgNoSkill.ToString()));
             return;
         }
+
+        //* Purchase Success
+        displayShowRewardPanelUnLock2ndAtvSkill();
         
         DM.ins.personalData.IsUnlock2ndSkill = true;
         DM.ins.personalData.Coin -= price;
@@ -476,8 +485,9 @@ public class HomeManager : MonoBehaviour
         var sprite = prefs[remainedSkillIdxList[0]].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
         var secondSkillImg = skillBtns[1].transform.GetChild(0).GetComponent<Image>();
 
-        secondSkillImg.sprite = sprite;        
+        secondSkillImg.sprite = sprite;
     }
+#endregion
 
     public void onClickStartBtn(){
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
@@ -603,32 +613,7 @@ public class HomeManager : MonoBehaviour
         }
     }
     public void onClickPremiumPackPurchaseBtn(){
-        // bool success = DM.ins.reqAppPayment();
-        // if(success){
-        //     SM.ins.sfxPlay(SM.SFX.PurchaseSuccess.ToString());
-        //     DM.ins.personalData.IsPurchasePremiumPack = true;
-
-        //     // Set Data
-        //     DM.ins.personalData.addRouletteTicket(LM._.PREM_PACK_ROULETTE_TICKET);
-        //     DM.ins.personalData.addCoin(LM._.PREM_PACK_COIN); // DM.ins.personalData.Coin += LM._.PREM_PACK_COIN;
-        //     DM.ins.personalData.addDiamond(LM._.PREM_PACK_DIAMOND);
-        //     DM.ins.personalData.IsRemoveAD = true;
-
-        //     // UI
-        //     DM.ins.setUIRemoveAD();
-        //     checkPremiumPackPurchaseStatus();
-
-        //     displayShowRewardPanel(
-        //         coin: LM._.PREM_PACK_COIN, 
-        //         diamond: LM._.PREM_PACK_DIAMOND, 
-        //         rouletteTicket: LM._.PREM_PACK_ROULETTE_TICKET,
-        //         removeAD: true
-        //     );
-        // }else{
-        //     //TODO 失敗した DIALOG表示。
-        //     SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
-        //     Debug.LogError($"<size=20><color=yellow> HM::onClickPremiumPackPurchaseBtn:: IN-APP-PURCHASE FAIL! :( </color></size>");
-        // }
+        //* InAppManager.csへ宣言。
     }
     public void displayShowRewardPanel(int coin = 0, int diamond = 0, int rouletteTicket = 0, bool removeAD = false){
         //* Sound
@@ -643,6 +628,19 @@ public class HomeManager : MonoBehaviour
         if(diamond > 0)    createShowRewardItemPf(DIAMOND, $"{diamond}");
         if(rouletteTicket > 0)    createShowRewardItemPf(ROULETTE_TICKET, $"{rouletteTicket}");
         if(removeAD)    createShowRewardItemPf(REMOVE_AD, "SKIP");
+    }
+    public void displayShowRewardPanelUnLock2ndAtvSkill(){
+        //* Sound
+        SM.ins.sfxPlay(SM.SFX.PurchaseSuccess.ToString());
+        //* Effect
+        em.createCongratuBlastRainbowEF(mainCanvas.transform);
+        //* Open Show Reward Panel
+        showRewardPanel.SetActive(true);
+        //* Set Showreward ItemPfs
+        const int ICON = 0, TEXT = 1;
+        var itemPf = Instantiate(showRewardItemPf, showRewardItemListGroup, false);
+        itemPf.transform.GetChild(ICON).GetComponent<Image>().sprite = unlock2ndSkillSprite;
+        itemPf.transform.GetChild(TEXT).GetComponent<Text>().text = "";
     }
     public void setCheckBtnUninteractable(){
         checkBtn.interactable = false;
