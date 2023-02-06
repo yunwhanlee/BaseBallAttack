@@ -78,8 +78,10 @@ public class HomeManager : MonoBehaviour
     public FrameUI homePanel;
     public FrameUI selectPanel;
     public FrameUI unlock2ndSkillDialog;
-    public Text unlock2ndSkillPriceTxt;
     public Sprite unlock2ndSkillSprite;
+    public Text unlock2ndSkillPriceTxt;
+    public Text unlock2ndSkillOkTxt;
+    public Text unlock2ndSkillCancelTxt;
 
     [Space(10)]
     public Text startBtnTxt;
@@ -448,6 +450,8 @@ public class HomeManager : MonoBehaviour
         unlock2ndSkillDialog.Panel.SetActive(isActive);
         unlock2ndSkillDialog.TitleTxt.text = LANG.getTxt(LANG.TXT.DialogUnlock2ndSkill_Title.ToString());
         unlock2ndSkillDialog.InfoTxt.text = LANG.getTxt(LANG.TXT.DialogUnlock2ndSkill_Info.ToString());
+        unlock2ndSkillOkTxt.text = LANG.getTxt(LANG.TXT.Ok.ToString());
+        unlock2ndSkillCancelTxt.text = LANG.getTxt(LANG.TXT.No.ToString());
     }
 
     public void onclickBtnBuyUnlock2ndSkill(){
@@ -857,7 +861,7 @@ public class HomeManager : MonoBehaviour
         var itemPf = Instantiate(showRewardItemPf, showRewardItemListGroup, false);
         Sprite IconSpr = premiumPackInfoTxtArr[idx].transform.parent.GetChild(ICON).GetComponent<Image>().sprite;
         string TextVal = valueStr;
-        
+
         itemPf.transform.GetChild(ICON).GetComponent<Image>().sprite = IconSpr;
         itemPf.transform.GetChild(TEXT).GetComponent<Text>().text = TextVal;
     }

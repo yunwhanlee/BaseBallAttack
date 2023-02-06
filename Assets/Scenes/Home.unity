@@ -9515,7 +9515,7 @@ RectTransform:
   m_Children:
   - {fileID: 1778486343}
   m_Father: {fileID: 1957045159}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12163,7 +12163,7 @@ GameObject:
   - component: {fileID: 576297622}
   - component: {fileID: 576297621}
   m_Layer: 5
-  m_Name: Txt
+  m_Name: OkTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22500,7 +22500,7 @@ RectTransform:
   m_Children:
   - {fileID: 576297620}
   m_Father: {fileID: 1957045159}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -28775,18 +28775,19 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 55
+    m_FontSize: 50
     m_FontStyle: 1
     m_BestFit: 1
-    m_MinSize: 0
-    m_MaxSize: 65
+    m_MinSize: 50
+    m_MaxSize: 55
     m_Alignment: 1
     m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Active the second skill button in the game.
+  m_Text: One more skill button is added in the in-game. Would you like to purchase
+    it?
 --- !u!222 &1260738444
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -37232,7 +37233,7 @@ GameObject:
   - component: {fileID: 1778486345}
   - component: {fileID: 1778486344}
   m_Layer: 5
-  m_Name: Txt
+  m_Name: CancelTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38518,8 +38519,10 @@ MonoBehaviour:
     goBtn: {fileID: 1668992831}
     titleTxt: {fileID: 500995122}
     infoTxt: {fileID: 1260738443}
-  unlock2ndSkillPriceTxt: {fileID: 588895565}
   unlock2ndSkillSprite: {fileID: 21300000, guid: 8dc9e7ed766784b37a8763e3061695af, type: 3}
+  unlock2ndSkillPriceTxt: {fileID: 588895565}
+  unlock2ndSkillOkTxt: {fileID: 576297622}
+  unlock2ndSkillCancelTxt: {fileID: 1778486345}
   startBtnTxt: {fileID: 533489542}
   languageOptDropDown: {fileID: 1205028892}
   selectedSkillBtnIdx: 0
@@ -39435,8 +39438,8 @@ RectTransform:
   - {fileID: 379939951}
   - {fileID: 1260738442}
   - {fileID: 779057225}
-  - {fileID: 454594692}
   - {fileID: 1183243137}
+  - {fileID: 454594692}
   m_Father: {fileID: 445535723}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -56773,8 +56776,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -1017.5}
-  m_SizeDelta: {x: 0, y: 2035}
+  m_AnchoredPosition: {x: 0, y: -1077.5}
+  m_SizeDelta: {x: 0, y: 1915}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2944024702032660570
 MonoBehaviour:

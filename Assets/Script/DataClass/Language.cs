@@ -159,7 +159,7 @@ public static class LANG //* LANG
         "Not Enough", "不足", "부족"
     };
     public static string[] MsgNoSkill = new string[]{
-        "NO SKILL!", "スキルが足りない!", "스킬 부족!"
+        "Pls purchase more than one skill!", "スキルを二つ以上購入してください！", "스킬을 두개 이상 구매해주세요!"
     };
     public static string[] MsgAlreadyRegistedSkill = new string[]{
         "This Skill is Already Registed",
@@ -187,9 +187,9 @@ public static class LANG //* LANG
         "-Unlock-", "解錠", "해금"
     };
     public static string[] DialogUnlock2ndSkill_Info = new string[]{
-        "Active the second skill button in the game.",
-        "2番目スキルボタンをアクティブする。",
-        "두 번째 스킬 버튼을 액티브 한다."
+        "One more skill button is added in the in-game. Would you like to purchase it?",
+        "インゲームでスキルボタンがもう一つ追加されます。 購入しますか？",
+        "인게임에서 스킬버튼이 하나 더 추가됩니다. 구매하시겠습니까?"
     };
     public static string[] ShowAdDialogCoinX2_Title = new string[]{
         "Coin X2", "コイン二倍", "코인 두배"
