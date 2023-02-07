@@ -197,6 +197,8 @@ public class GameManager : MonoBehaviour {
     void Start() {
         // Util._.calcArithmeticProgressionList(start: 100, max: 50, d: 100, gradualUpValue: 0.1f);
 
+        DM.ins.gm = this;
+
         DM.ins.transform.position = Vector3.zero; //* LoadingSceneで、モデルが見えないようにずらした位置を戻す。
 
         showExpUIGroup.gameObject.SetActive(DM.ins.personalData.IsActiveExpLog);

@@ -7,8 +7,6 @@ using System;
 using UnityEngine.SceneManagement;
 
 public class AdmobManager : MonoBehaviour{
-    [SerializeField] HomeManager hm;
-    [SerializeField] GameManager gm;
     [SerializeField] Text adNoticeTxt;
     Scene scene;
     DM.REWARD adType = DM.REWARD.NULL;
@@ -17,16 +15,7 @@ public class AdmobManager : MonoBehaviour{
     public Button[] RewardAdsBtns;
 
     void Start(){
-        scene = SceneManager.GetActiveScene();
-        Debug.Log("AdmobManager:: scene= " + scene.name);
-
-        //* シーンによって、Managerスクリプト設定。
-        if(scene.name == DM.SCENE.Home.ToString()){
-            setAdLoadStatusNoticeTxt("HomeManager");
-        }
-        else if(scene.name == DM.SCENE.Play.ToString()){
-            setAdLoadStatusNoticeTxt("GameManager");
-        }
+        setAdLoadStatusNoticeTxt();
 
         var requestConfiguration = new RequestConfiguration
             .Builder()
@@ -74,20 +63,20 @@ public class AdmobManager : MonoBehaviour{
             Debug.Log($"<color=yellow>admob::rewardAd.OnUserEarnedReward:: {adType}</color>");
             SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
             switch(adType){
-                //* Home
+                //* Home Scene
                 case DM.REWARD.ROULETTE_TICKET: 
                     DM.ins.personalData.RouletteTicket++;
-                    hm.showRoulettePanel();
+                    DM.ins.hm.showRoulettePanel();
                     break;
-                //* Play
+                //* Home Scene
                 case DM.REWARD.CoinX2: 
-                    gm.setCoinX2();
+                    DM.ins.gm.setCoinX2();
                     break;
                 case DM.REWARD.RerotateSkillSlots: 
-                    gm.setRerotateSkillSlots();
+                    DM.ins.gm.setRerotateSkillSlots();
                     break;
                 case DM.REWARD.Revive: 
-                    gm.setRevive();
+                    DM.ins.gm.setRevive();
                     break;
             }
         };
@@ -109,14 +98,10 @@ public class AdmobManager : MonoBehaviour{
         adType = DM.REWARD.NULL;
     }
 
-    private void setAdLoadStatusNoticeTxt(string managerName){
-        if(managerName == "HomeManager")
-            hm = GameObject.Find(managerName).GetComponent<HomeManager>();
-        else if(managerName == "GameManager")
-            gm = GameObject.Find(managerName).GetComponent<GameManager>();
-
+    private void setAdLoadStatusNoticeTxt(){
         Array.ForEach(RewardAdsBtns, adBtn => {
-            adNoticeTxt = Array.Find(adBtn.GetComponentsInChildren<Text>(), (txtObj) => txtObj.transform.name == "AdNoticeTxt");
+            adNoticeTxt = Array.Find(adBtn.GetComponentsInChildren<Text>(), (txtObj) => 
+                txtObj.transform.name == DM.NAME.AdNoticeTxt.ToString());
         });
     }
 }

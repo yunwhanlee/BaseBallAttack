@@ -1859,6 +1859,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5489195237a0cb498fb93984fbf39dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hm: {fileID: 0}
+  gm: {fileID: 0}
   isGPGSLogin: 0
   coinSpr: {fileID: 21300000, guid: 575678395c08d4dbe9f1cd800a0d55bb, type: 3}
   diamondSpr: {fileID: 21300000, guid: d06a9ce0b696341a4a1844b63f11239c, type: 3}
@@ -9227,7 +9229,7 @@ MonoBehaviour:
   HARDMODE_COIN_BONUS: 4
   HARDMODE_DIAMOND_BONUS: 1.5
   VICTORY_BOSSKILL_CNT: 4
-  BOSS_STAGE_SPAN: 2
+  BOSS_STAGE_SPAN: 15
   BOSS_LIMIT_SPAN: 12
   LONG_BLOCK_SPAN: 7
   ICE_FREEZE_DURATION: 1
@@ -20079,8 +20081,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 034d09eeaac97de4993a7d0300c4772c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hm: {fileID: 1887670884}
-  gm: {fileID: 0}
   adNoticeTxt: {fileID: 0}
   isTestMode: 1
   RewardAdsBtns:

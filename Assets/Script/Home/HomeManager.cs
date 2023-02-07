@@ -183,6 +183,7 @@ public class HomeManager : MonoBehaviour
 
     void Start(){
         // onClickResetBtn();
+        DM.ins.hm = this;
 
         versionTxt.text = $"ver{Version.MAJOR}.{Version.MINOR}.{Version.REVISION}";
 

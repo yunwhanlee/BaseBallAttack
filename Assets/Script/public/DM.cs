@@ -10,6 +10,8 @@ using System;
 public class DM : MonoBehaviour
 {
     public static DM ins;    
+    public HomeManager hm;
+    public GameManager gm;
     public enum DATABASE_KEY {Json};
     public enum SCENE {Home, Play, Loading};
     public enum MODE {NORMAL, HARD};
@@ -24,7 +26,8 @@ public class DM : MonoBehaviour
         LevelUp, PsvSkillTicket,
         TitleTxt, ContentTxt,
         //* 一回限り商品
-        RemoveAD, PurchasedPanel, NULL,
+        RemoveAD, PurchasedPanel, AdNoticeTxt,
+        NULL,
     };
     public enum TAG {HitRangeArea, StrikeLine, GameOverLine, Wall, ActiveDownWall, Player,
         NormalBlock, LongBlock, TreasureChestBlock, HealBlock, BossBlock,   
@@ -123,7 +126,7 @@ public class DM : MonoBehaviour
             });
         }
         else if(ins != null) {
-            Debug.Log("DM::singleton():: WhenEver Load Home, Repeat");
+            Debug.Log($"DM::singleton():: Home Scene Repeat, Because this.object is Declared in Home Scene");
             DM.ins.CoinTxt = this.CoinTxt;
             DM.ins.DiamondTxt = this.DiamondTxt;
             
