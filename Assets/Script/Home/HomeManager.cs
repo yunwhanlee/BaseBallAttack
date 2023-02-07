@@ -186,6 +186,7 @@ public class HomeManager : MonoBehaviour
     }
     void Start(){
         // onClickResetBtn();
+        if(DM.ins.hm == null) return;
 
         versionTxt.text = $"ver{Version.MAJOR}.{Version.MINOR}.{Version.REVISION}";
 
@@ -202,13 +203,14 @@ public class HomeManager : MonoBehaviour
         QualitySettings.SetQualityLevel(DM.ins.personalData.Quality);
         settingQualityDropdown.value = QualitySettings.GetQualityLevel();
 
-        firstPlayAppShowSettingDialog();
+        firstPlayAppSettingDialog();
 
         Debug.Log("Math:: -------------------------------");
         const int OFFSET = 100;
         List<int> hpList = Util._.calcArithmeticProgressionList(start: OFFSET, max: 99, d: OFFSET, gradualUpValue: 0.01f);
         // hpList.ForEach(hp => Debug.Log($"Math:: blockHpList[{i}]= " + hpList[i++] / OFFSET));
 
+        Debug.Log("SIBALNOM1");
         onClickBtnGoToPanel(DM.SCENE.Home.ToString());
 
         setSelectSkillImg(true);
@@ -330,7 +332,7 @@ public class HomeManager : MonoBehaviour
     }
 
     public void onClickBtnGoToPanel(string name){
-        Debug.Log($"onClickBtnGoToPanel(name= {name})");
+        Debug.Log($"onClickBtnGoToPanel(name= {name}):: DM.ins.hm= {DM.ins.hm}, checkBtn= {checkBtn}");
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         //* Current Model Data & ParentTf
         DM.ins.SelectItemType = name;
@@ -358,10 +360,12 @@ public class HomeManager : MonoBehaviour
                 // なし
                 break;
             case DM.PANEL.PsvInfo :
-                checkBtn.gameObject.SetActive(false);
+                if(checkBtn)
+                    checkBtn.gameObject.SetActive(false);
                 break;
             default: //* Home
                 createCurModel(curChara, curBat, modelTf);
+                Debug.Log("SIBALLA");
                 setSelectSkillImg();
                 break;
         }
@@ -406,8 +410,8 @@ public class HomeManager : MonoBehaviour
     }
 
 #region SETTING
-    private void firstPlayAppShowSettingDialog(){
-        Debug.Log("HM::firstPlayAppShowSettingDialog():: ");
+    private void firstPlayAppSettingDialog(){
+        Debug.Log("HM::firstPlayAppSettingDialog():: ");
         if(!DM.ins.personalData.IsChoiceLang){
             //! (BUG-47) モバイルビルドしたら、最初Loadデータがなくなるバグ。*原因：最初言語設定でonClickSettingOkBtnからsaveしますが、collectionなどのデータがないまましちゃう。
             DM.ins.personalData.reset(); //* (BUG-47)対応:: resetして、saveする前にTemplateを用意する。
@@ -445,6 +449,7 @@ public class HomeManager : MonoBehaviour
         DM.ins.personalData.IsActiveExpLog = expLogToggle.isOn;
     }
     public void onClickSettingOkBtn(bool isOk){
+        Debug.Log($"HM::onClickSettingOkBtn({isOk})");
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         settingDialog.Panel.SetActive(false);
         // expLogToggle.isOn = DM.ins.personalData.IsActiveExpLog;
@@ -708,7 +713,9 @@ public class HomeManager : MonoBehaviour
     }
 
     private void setSelectSkillImg(bool isInit = false){
-        Debug.LogFormat("------setSelectSkillImg():: selectedSkillBtnIdx({0}) SelectSkillIdx({1}), SelectSkill2Idx({2})------", selectedSkillBtnIdx, DM.ins.personalData.SelectSkillIdx, DM.ins.personalData.SelectSkill2Idx);
+        Debug.Log($"HM::setSelectSkillImg({isInit}):: selectedSkillBtnIdx= {selectedSkillBtnIdx}");
+        Debug.Log($"HM::setSelectSkillImg({isInit}):: DM.ins.SelectSkillIdx= {DM.ins.personalData.SelectSkillIdx}, DM.ins.SelectSkill2Idx= {DM.ins.personalData.SelectSkill2Idx}");
+
         var ctt = DM.ins.scrollviews[(int)DM.PANEL.Skill].ContentTf;
         if(isInit){
             setSelectSkillSprite(0, ctt, DM.ins.personalData.SelectSkillIdx);
@@ -721,9 +728,11 @@ public class HomeManager : MonoBehaviour
         }else{
             check2ndSkillSprite(ctt, DM.ins.personalData.SelectSkill2Idx);
         }
-    }
-
+    }   
     private void setSelectSkillSprite(int btnIdx, RectTransform content, int idx){
+        Debug.Log($"HM::setSelectSkillSprite({btnIdx}, {content}, {idx})::");
+        Debug.Log($"1 HM::setSelectSkillSprite():: {content.GetChild(idx) == null}");
+        
         Sprite spr = content.GetChild(idx).GetChild(0).GetChild(0).GetComponent<Image>().sprite;
         Debug.Log("spr.name=" + spr.name);
         var skillImg = skillBtns[btnIdx].transform.GetChild(0).GetComponent<Image>();
@@ -779,6 +788,8 @@ public class HomeManager : MonoBehaviour
     }
     private void setGUI(){
         //* Set CheckBtn Image
+        Debug.Log("onClickBtnGoToPanel::setGUI:: checkBtn= " + checkBtn);
+        if(!checkBtn) return;
         checkBtn.gameObject.SetActive(true);
         checkMarkImg.gameObject.SetActive(true);
         priceTxt.gameObject.SetActive(false);

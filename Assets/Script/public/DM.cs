@@ -111,18 +111,15 @@ public class DM : MonoBehaviour
         if(ins == null) {
             Debug.Log("DM::singleton():: Start App Only One Time");
             ins = this;
-            //* Google Play Login
             HomeManager hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
+            //* Google Play Login
             GPGSBinder.Inst.Login((success, user) => {
                 Debug.Log($"GPGS::LOGIN= {success}");
-                hm.googlePlayLoginTxt.text = 
-                $"{success}, {user.userName}, {user.id}, {user.state}, {user.underage}";
-                if(success == true) {
+                hm.googlePlayLoginTxt.text = $"{success}, {user.userName}, {user.id}, {user.state}, {user.underage}";
+                if(success == true) 
                     DM.ins.IsGPGSLogin = true;
-                }
-                else {
+                else 
                     hm.errorNetworkDialog.gameObject.SetActive(true);
-                }
             });
         }
         else if(ins != null) {
@@ -149,7 +146,9 @@ public class DM : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
     void Start(){
-        Debug.Log("DM::Start()::");
+        Debug.Log("DM::Start():: DM.ins.hm= " + DM.ins.hm);
+        if(DM.ins.hm == null) return;
+
         LANG.initlanguageList();
         // foreach(DM.ATV list in Enum.GetValues(typeof(DM.ATV)))Debug.LogFormat("Enums GetFindVal:: {0}", list.ToString())
 

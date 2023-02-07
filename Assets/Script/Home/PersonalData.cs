@@ -129,6 +129,7 @@ public class PersonalData {
         
         //* (BUG-39) 最初の実行だったら、ロードデータが無くてjsonがnullなので、resetして初期値を設定する。
         if(!PlayerPrefs.HasKey(DM.DATABASE_KEY.Json.ToString())){
+            Debug.Log("THIS IS FIRST, RESET!");
             reset();
             return;
         }

@@ -105,9 +105,11 @@ public class ScrollView {
     }
 
     private void pushItemLanguageList(string itemType){
-        Debug.Log("ScrollViewEvent::pushItemLanguageList():: DM.ins.hm= " + DM.ins.hm);
+        Debug.Log($"ScrollViewEvent::pushItemLanguageList():: itemType= {itemType}, DM.ins.hm= {DM.ins.hm}");
         //* ItemCreateが終わったら、一回活性化して、ItemInfoに書いた言語情報をLanguageのInfoリストへ入れる。
         var hm = DM.ins.hm;
+        Debug.Log("SIBALNOM2");
+        //! (BUG) MissingReferenceException: The object of type 'Button' has been destroyed but you are still trying to access it.
         hm.onClickBtnGoToPanel(itemType);
     }
     public void setLanguage(){
