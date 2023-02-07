@@ -44,7 +44,7 @@ public class LevelUpPanelAnimate : MonoBehaviour{
     private void OnDisable() => Time.timeScale = 1; //* このパンネルが消えたら、政界の時間 戻す
 
     public void Start(){
-        Debug.Log("LevelUpPanelAnimate::Start() DM.ins.gm= " + DM.ins.gm);
+        Debug.Log("LEVELUP:: LevelUpPanelAnimate::Start() DM.ins.gm= " + DM.ins.gm);
         gm = DM.ins.gm;
         pl = gm.pl;
 
@@ -171,7 +171,7 @@ public class LevelUpPanelAnimate : MonoBehaviour{
     public void onClickSkillUpBtn(int index){//* Skill Level Up
         if(stopScrolling()) return; //* スロットを止めることなら、以下の処理をしない。
 
-        Debug.LogFormat("<color=green>onClickSkillUpBtn({0}):: pl.Lv= {1}, name= {2}</color>", index , pl.Lv, skillSlotBtns[index].name.text);
+        Debug.LogFormat("<color=green>LEVELUP:: onClickSkillUpBtn({0}):: pl.Lv= {1}, name= {2}</color>", index , pl.Lv, skillSlotBtns[index].name.text);
         //* Set Data
         var psv = DM.ins.convertPsvSkillStr2Enum(skillSlotBtns[index].name.text);
         switch(psv){
@@ -268,9 +268,12 @@ public class LevelUpPanelAnimate : MonoBehaviour{
         
         //* １回以上 LEVEL-UPした場合、順番に進む
         if(pl.BefLv != pl.Lv){
+            Debug.Log($"LEVELUP:: onClickSkillUpBtn:: Check LevelUp:: befLv= {pl.BefLv} , pl.Lv= {pl.Lv}");
             pl.Lv--;
             pl.setLevelUp();
-            gm.coCheckLevelUp();
+            gm.levelUpPanel.SetActive(true);
+            gm.levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
+            StartCoroutine(gm.coCheckLevelUp());
         }
     }
 
