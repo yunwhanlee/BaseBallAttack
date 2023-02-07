@@ -8,7 +8,7 @@ public class DarkOrb : MonoBehaviour
     GameManager gm; BlockMaker bm; Player pl; EffectManager em;
 
     void Start() {
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gm = GameObject.Find(DM.NAME.GameManager.ToString()).GetComponent<GameManager>();
         bm = gm.bm;
         pl = gm.pl;
         em = gm.em;

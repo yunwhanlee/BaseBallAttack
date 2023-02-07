@@ -19,7 +19,7 @@ public class DM : MonoBehaviour
         MainCanvas,
         Coin, Diamond,
         DownWall, Block, FireBallDotEffect, BossDieDropOrbSpot, GrayPanel, Obstacle,
-        RightArm, HomeManager,
+        RightArm, HomeManager, GameManager,
         Ball, BallPreview, Box001, Area,
         IceMat,
         MainPanel, RewardChest, 
@@ -110,8 +110,8 @@ public class DM : MonoBehaviour
         //* Singleton
         if(ins == null) {
             Debug.Log("DM::singleton():: Start App Only One Time");
+            HomeManager hm = GameObject.Find(NAME.HomeManager.ToString()).GetComponent<HomeManager>(); //* (BUG-50) 再ロードしたら、DM.ins.hmがNULLになり、全てのデータがちゃんと読みだされないバグ対応。
             ins = this;
-            HomeManager hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
             //* Google Play Login
             GPGSBinder.Inst.Login((success, user) => {
                 Debug.Log($"GPGS::LOGIN= {success}");
@@ -124,6 +124,7 @@ public class DM : MonoBehaviour
         }
         else if(ins != null) {
             Debug.Log($"DM::singleton():: Home Scene Repeat, Because this.object is Declared in Home Scene");
+            DM.ins.hm = GameObject.Find(NAME.HomeManager.ToString()).GetComponent<HomeManager>(); //* (BUG-50) 再ロードしたら、DM.ins.hmがNULLになり、全てのデータがちゃんと読みだされないバグ対応。
             DM.ins.CoinTxt = this.CoinTxt;
             DM.ins.DiamondTxt = this.DiamondTxt;
             
@@ -233,26 +234,26 @@ public class DM : MonoBehaviour
         return tuto;
     }
 
-    public bool reqShowAD(){//string type, GameManager gm){
-        //* 広告なしか確認。
-        if(personalData.IsRemoveAD) return true;
+    // public bool reqShowAD(){//string type, GameManager gm){
+    //     //* 広告なしか確認。
+    //     if(personalData.IsRemoveAD) return true;
         
-        bool success = false; //Test True
-        Debug.Log($"<color=red>reqShowAD</color>:: success= " + success);
-        //* 広告見る。
-        //TODO IN Show AD Process
-        return success;
-    }
-    public bool reqAppPayment(){
-        bool success = true; //Test True
-        Debug.Log($"<color=red>reqAppPayment</color>:: success= " + success);
-        //TODO IN App Payment Process 
-        return success;
-    }
-    public void openAppStore(){
-        Debug.Log("openAppStore::");
-        //TODO Open My Game App Store;
-    }
+    //     bool success = false; //Test True
+    //     Debug.Log($"<color=red>reqShowAD</color>:: success= " + success);
+    //     //* 広告見る。
+    //     //TODO IN Show AD Process
+    //     return success;
+    // }
+    // public bool reqAppPayment(){
+    //     bool success = true; //Test True
+    //     Debug.Log($"<color=red>reqAppPayment</color>:: success= " + success);
+    //     //TODO IN App Payment Process 
+    //     return success;
+    // }
+    // public void openAppStore(){
+    //     Debug.Log("openAppStore::");
+    //     //TODO Open My Game App Store;
+    // }
 
     public DM.PANEL getCurPanelType2Enum(string name){
         return (name == DM.PANEL.Chara.ToString())? DM.PANEL.Chara

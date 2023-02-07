@@ -360,12 +360,11 @@ public class HomeManager : MonoBehaviour
                 // なし
                 break;
             case DM.PANEL.PsvInfo :
-                if(checkBtn)
+                // if(checkBtn)
                     checkBtn.gameObject.SetActive(false);
                 break;
             default: //* Home
                 createCurModel(curChara, curBat, modelTf);
-                Debug.Log("SIBALLA");
                 setSelectSkillImg();
                 break;
         }
@@ -399,11 +398,11 @@ public class HomeManager : MonoBehaviour
             ItemPsvInfoBtn.gameObject.SetActive(false);
         }
     }
-    public void onClickRateBtn(){
-        Debug.Log("<color=yellow>TODO</color> onClickRateBtn():: Googleストアーへ移動!");
-        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
-        DM.ins.openAppStore();
-    }
+    // public void onClickRateBtn(){
+    //     Debug.Log("<color=yellow>TODO</color> onClickRateBtn():: Googleストアーへ移動!");
+    //     SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
+    //     DM.ins.openAppStore();
+    // }
     public void onClickShowADButton(){
         //* 広告要請
         am.showRewardAd(DM.REWARD.ROULETTE_TICKET);
@@ -713,10 +712,9 @@ public class HomeManager : MonoBehaviour
     }
 
     private void setSelectSkillImg(bool isInit = false){
-        Debug.Log($"HM::setSelectSkillImg({isInit}):: selectedSkillBtnIdx= {selectedSkillBtnIdx}");
-        Debug.Log($"HM::setSelectSkillImg({isInit}):: DM.ins.SelectSkillIdx= {DM.ins.personalData.SelectSkillIdx}, DM.ins.SelectSkill2Idx= {DM.ins.personalData.SelectSkill2Idx}");
-
+        Debug.Log($"HM::setSelectSkillImg({isInit}):: selectedSkillBtnIdx= {selectedSkillBtnIdx}, DM.ins.SelectSkillIdx= {DM.ins.personalData.SelectSkillIdx}, DM.ins.SelectSkill2Idx= {DM.ins.personalData.SelectSkill2Idx}");        
         var ctt = DM.ins.scrollviews[(int)DM.PANEL.Skill].ContentTf;
+
         if(isInit){
             setSelectSkillSprite(0, ctt, DM.ins.personalData.SelectSkillIdx);
             check2ndSkillSprite(ctt, DM.ins.personalData.SelectSkill2Idx);
@@ -731,7 +729,6 @@ public class HomeManager : MonoBehaviour
     }   
     private void setSelectSkillSprite(int btnIdx, RectTransform content, int idx){
         Debug.Log($"HM::setSelectSkillSprite({btnIdx}, {content}, {idx})::");
-        Debug.Log($"1 HM::setSelectSkillSprite():: {content.GetChild(idx) == null}");
         
         Sprite spr = content.GetChild(idx).GetChild(0).GetChild(0).GetComponent<Image>().sprite;
         Debug.Log("spr.name=" + spr.name);
