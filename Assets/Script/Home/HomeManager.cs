@@ -133,6 +133,9 @@ public class HomeManager : MonoBehaviour
     [Header("DIALOG")][Header("__________________________")]
     //* ErrorNetwork
     public RectTransform errorNetworkDialog;
+    public Text errorNetworkDialogTitleTxt;
+    public Text errorNetworkDialogContentTxt;
+    public Text errorNetworkDialogOkTxt;
 
     //* ShowAD
     public RectTransform showAdDialog;
@@ -184,6 +187,10 @@ public class HomeManager : MonoBehaviour
         versionTxt.text = $"ver{Version.MAJOR}.{Version.MINOR}.{Version.REVISION}";
 
         unlock2ndSkillPriceTxt.text = LM._.UNLOCK_2ND_ATVSKILL_PRICE.ToString();
+
+        errorNetworkDialogTitleTxt.text = LANG.getTxt(LANG.TXT.ErrorNetworkDialog_Title.ToString());
+        errorNetworkDialogContentTxt.text = LANG.getTxt(LANG.TXT.ErrorNetworkDialog_Content.ToString());
+        errorNetworkDialogOkTxt.text = LANG.getTxt(LANG.TXT.Ok.ToString());
 
         /* Setting Dialog */
         //* Exp Log

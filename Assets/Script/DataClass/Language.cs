@@ -16,11 +16,13 @@ public static class LANG //* LANG
         NotEnough, MsgNoSkill, MsgAlreadyRegistedSkill, MsgHardmodeLocked, 
         StageSelectNotice, SettingNotice,
 
+        //* Dialog
         DialogUnlock2ndSkill_Title, DialogUnlock2ndSkill_Info,
         ShowAdDialogCoinX2_Title, ShowAdDialogCoinX2_Content,
         ShowAdDialogRerotateSkillSlots_Title, ShowAdDialogRerotateSkillSlots_Content,
         ShowAdDialogRevive_Title, ShowAdDialogRevive_Content,
         ShowAdDialogRouletteTicket_Title, ShowAdDialogRouletteTicket_Content,
+        ErrorNetworkDialog_Title, ErrorNetworkDialog_Content,
 
 
         Tutorial, OpenTutorial_Content,
@@ -222,6 +224,16 @@ public static class LANG //* LANG
         "Not enough Roulette Ticket.\nWould you like to get a entrance of ticket?",
         "チケットが足りないです。チケットを習得しませんか？",
         "티켓이 모자랍니다. 티켓을 획득하시겠습니까?"
+    };
+    public static string[] ErrorNetworkDialog_Title = new string[]{
+        "Network connection failed.",
+        "ネットワーク接続に失敗しました。",
+        "네트워크 연결에 실패했습니다."
+    };
+    public static string[] ErrorNetworkDialog_Content = new string[]{
+        "Please check your Wi-Fi connection and retry.",
+        "Wi-Fi接続を確認して再試行してください。",
+        "Wi-Fi 연결을 확인하고 다시 시도해주세요."
     };
     public static string[] GetRewardChestPanel_Content = new string[]{
         "You get a mysterious treasure chest!",
@@ -479,6 +491,8 @@ public static class LANG //* LANG
         if(name == TXT.ShowAdDialogRevive_Content.ToString()) res = ShowAdDialogRevive_Content[CUR_LANG];
         if(name == TXT.ShowAdDialogRouletteTicket_Title.ToString()) res = ShowAdDialogRouletteTicket_Title[CUR_LANG];
         if(name == TXT.ShowAdDialogRouletteTicket_Content.ToString()) res = ShowAdDialogRouletteTicket_Content[CUR_LANG];
+        if(name == TXT.ErrorNetworkDialog_Title.ToString()) res = ErrorNetworkDialog_Title[CUR_LANG];
+        if(name == TXT.ErrorNetworkDialog_Content.ToString()) res = ErrorNetworkDialog_Content[CUR_LANG];
         if(name == TXT.RateDialog_Content1.ToString()) res = RateDialog_Content1[CUR_LANG];
         if(name == TXT.RateDialog_Content2.ToString()) res = RateDialog_Content2[CUR_LANG];
         if(name == TXT.HardMode_Content1.ToString()) res = HardMode_Content1[CUR_LANG];
