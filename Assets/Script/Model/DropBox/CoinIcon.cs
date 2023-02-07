@@ -9,7 +9,7 @@ public class CoinIcon : MonoBehaviour
 
     //* Value
     const float START_DELAY_SPAN_TIME = 0.06875f;
-    const float WAIT_COLLECTION_TIME = 0.7f;
+    // const float WAIT_COLLECTION_TIME = 0.7f;
     [SerializeField] Transform target;
     float startDelay = 0;
     [SerializeField] float speed = 8;  public float Speed { get => speed; set => speed = value;}
@@ -39,7 +39,7 @@ public class CoinIcon : MonoBehaviour
     public void setStartDelay(int i) => startDelay = i * START_DELAY_SPAN_TIME;
 
     IEnumerator coDelay(){
-        yield return new WaitForSeconds(WAIT_COLLECTION_TIME);
+        yield return Util.delay0_75;//new WaitForSeconds(WAIT_COLLECTION_TIME);
         yield return new WaitForSeconds(startDelay);
         target = gm.pl.modelMovingTf;
     }

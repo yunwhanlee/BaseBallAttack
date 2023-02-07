@@ -116,7 +116,7 @@ public class BossBlock : Block_Prefab{
         float attackAnimTime = Util._.getAnimPlayTime(attackAnimName, this.anim);
         float blessShootTiming = attackAnimTime * 0.5f;
         float targetReachTime = blessShootTiming;
-        float delayGUIActive = 0.2f;
+        // float delayGUIActive = 0.2f;
         float playerStunTime = 3;
 
         if(gm.cam2.activeSelf){
@@ -157,7 +157,7 @@ public class BossBlock : Block_Prefab{
             Vector3[] targetPosArr = new Vector3[3];
             for(int i=0; i<targetPosArr.Length; i++){
                 setAimingEFToTargetPos(i, ref targetPosArr, ref targetPosList, playerPos);
-                yield return new WaitForSeconds(0.5f);
+                yield return Util.delay0_5;
                 SM.ins.sfxPlay(SM.SFX.BossFireBallShoot.ToString());
 
                 setFireBallTrailEFToTargetPos(targetPosArr[i]);
@@ -214,10 +214,10 @@ public class BossBlock : Block_Prefab{
         #endregion
 
         gm.bs.BossFireBallMarkObj.SetActive(false);
-        yield return new WaitForSeconds(delayGUIActive);
+        yield return Util.delay0_2; //* delayGUIActive
 
         if(gm.pl.IsStun){
-            yield return new WaitForSeconds(playerStunTime);
+            yield return Util.delay3; //* playerStunTime
             gm.pl.anim.SetBool(DM.ANIM.IsIdle.ToString(), false);
             gm.setNextStage();
         }
@@ -270,11 +270,11 @@ public class BossBlock : Block_Prefab{
 
     IEnumerator coBossHeal(){
         Debug.Log("BossBlock::coBossHeal()");
-        yield return new WaitForSeconds(1);
+        yield return Util.delay1; //new WaitForSeconds(1);
         SM.ins.sfxPlay(SM.SFX.BossHealSpell.ToString());
         gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
         gm.em.createBossHealSkillEF(bossDieOrbSpawnTf.position);
-        yield return new WaitForSeconds(1);
+        yield return Util.delay1; //new WaitForSeconds(1);
         Array.ForEach(gm.blockGroup.GetComponentsInChildren<Block_Prefab>(), block => {
             int val = (int)(block.Hp * BOSS_HEAL_RATIO);
             var hp = (val == 0)? 1 : block.Hp * BOSS_HEAL_RATIO;
@@ -329,7 +329,7 @@ public class BossBlock : Block_Prefab{
 
     //* Skill #1
     IEnumerator coObstacleSpawnSFX(int cnt){
-        yield return new WaitForSeconds(0.75f);
+        yield return Util.delay0_75; //new WaitForSeconds(0.75f);
         SM.ins.sfxPlay(SM.SFX.ObstacleSpawn.ToString());
     }
     private void createObstacleSingleType(int maxCnt){

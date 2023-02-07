@@ -374,17 +374,17 @@ public class EffectManager : MonoBehaviour
     }
     IEnumerator coActivePerfectTxtEF(){
         perfectTxtPopEF.SetActive(true);
-        yield return new WaitForSeconds(3f);
+        yield return Util.delay3;
         perfectTxtPopEF.SetActive(false);
     }
     IEnumerator coActiveHomeRunTxtEF(){
         homeRunTxtPopEF.SetActive(true);
-        yield return new WaitForSeconds(3f);
+        yield return Util.delay3;
         homeRunTxtPopEF.SetActive(false);
     }
     IEnumerator coActiveReviveEF(){
         reviveEF.SetActive(true);
-        yield return new WaitForSeconds(2f);
+        yield return Util.delay2;
         reviveEF.SetActive(false);
     }
 }

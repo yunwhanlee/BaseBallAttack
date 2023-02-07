@@ -71,7 +71,7 @@ public class BallShooter : MonoBehaviour
                 gm.throwScreenAnimSetTrigger("ThrowBall");
 
                 gm.ShootCntTxt.text = "SHOOT";
-                StartCoroutine(coClearShootCntTxt(delay: 0.3f));
+                StartCoroutine(coClearShootCntTxt());
                 Debug.Log("ballPreviewDirGoal="+gm.ballPreviewDirGoal.transform.position+", entranceTfPos="+entranceTf.position);
                 Vector3 goalDir = (gm.ballPreviewDirGoal.transform.position - entranceTf.position).normalized;
                 GameObject ins = Instantiate(ballPref, entranceTf.position, Quaternion.LookRotation(goalDir), gm.ballGroup);
@@ -97,8 +97,8 @@ public class BallShooter : MonoBehaviour
         throwBallSpeed = LM._.THROW_BALL_SPEED;
     }
 
-    IEnumerator coClearShootCntTxt(float delay){
-        yield return new WaitForSeconds(delay);
+    IEnumerator coClearShootCntTxt(){
+        yield return Util.delay0_3;
         gm.ShootCntTxt.text = "";
     }
 
@@ -109,7 +109,7 @@ public class BallShooter : MonoBehaviour
             Debug.LogFormat("「！」マーク登場： per({0}) < rand({1})? -> {2} </color>", per, rand, (rand > per)? "<color=blue>TRUE" : "<color=red>FALSE");
             if(rand > per){
                 throwBallSpeed *= 1.4f;
-                StartCoroutine(coShowExclamationMark(0.2f));
+                StartCoroutine(coShowExclamationMark());
             }
         }
     }
@@ -120,10 +120,9 @@ public class BallShooter : MonoBehaviour
         ball.Speed = (throwBallSpeed + extra) * Time.fixedDeltaTime;
         ball.rigid.AddForce(goalDir * ball.Speed, ForceMode.Impulse);
     }
-    public IEnumerator coShowExclamationMark(float sec){
-        Debug.Log($"coShowExclamationMark(sec={sec})");
+    public IEnumerator coShowExclamationMark(){
         ExclamationMarkObj.SetActive(true);
-        yield return new WaitForSeconds(sec);
+        yield return Util.delay0_2;
         time = 0;
         ExclamationMarkObj.SetActive(false);
     }

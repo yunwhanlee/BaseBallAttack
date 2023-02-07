@@ -356,7 +356,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log("coRewardChestOpen()::");
         initRewardChestPanelUI(isOpen: true);
         getRewardChestPanel.GetComponentInChildren<Animator>().SetTrigger(DM.ANIM.DoOpen.ToString());
-        yield return new WaitForSecondsRealtime(1); //* (BUG-10) RewardChestPanelが表示されるとき、Time.Scaleが０のため、RealTimeで動く。
+        yield return Util.delay1; //* (BUG-10) RewardChestPanelが表示されるとき、Time.Scaleが０のため、RealTimeで動く。
         
         SM.ins.sfxPlay(SM.SFX.Upgrade.ToString());
         rewardChestOkBtn.gameObject.SetActive(true);
@@ -721,7 +721,7 @@ public class GameManager : MonoBehaviour {
         if(isOut){ //* アウト
             strikeCnt = 0;
             ShootCntTxt.text = LANG.getTxt(LANG.TXT.Out.ToString()) + "!";
-            yield return new WaitForSeconds(1.5f);
+            yield return Util.delay1_5;
             bs.init();
             switchCamera();
             foreach(var img in strikeCntImgs) img.gameObject.SetActive(false); //GUI非表示 初期化
@@ -734,7 +734,7 @@ public class GameManager : MonoBehaviour {
         else{ //* ストライク
             ShootCntTxt.text = LANG.getTxt(LANG.TXT.Strike.ToString()) + "!";
             readyBtn.gameObject.SetActive(true);
-            yield return new WaitForSeconds(1.5f);
+            yield return Util.delay1_5;
             bs.init();
         }
         bs.IsBallExist = false; //ボール発射準備 On
@@ -997,7 +997,7 @@ public class GameManager : MonoBehaviour {
             perfectTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
             em.activeUI_EF("Perfect");
             //* One More Next Stage (ボスがいなければ)
-            yield return new WaitForSeconds(1);
+            yield return Util.delay1;
             if(!boss)
                 ++stage;
             bm.DoCreateBlock = true;
@@ -1007,7 +1007,7 @@ public class GameManager : MonoBehaviour {
         //* Coroutineの中、while文でUpdate()ように活用：ExpOrbがPlayerに全て届くまで待つ。
         while(true){
             if(pl.IsLevelUp){ //* <- Player::setLevelUp()
-                yield return new WaitForSeconds(1);
+                yield return Util.delay1;
                 pl.IsLevelUp = false;
                 levelUpPanel.SetActive(true);
                 rerotateSkillSlotsBtn.gameObject.SetActive(true);

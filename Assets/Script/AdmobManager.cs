@@ -98,14 +98,14 @@ public class AdmobManager : MonoBehaviour{
         adType = type;
         rewardAd.Show();
         LoadRewardAd();
-        StartCoroutine(coDelayInit(1));
+        StartCoroutine(coDelayInit());
     }
 	#endregion
 /// -----------------------------------------------------------------------
 /// 関数
 /// -----------------------------------------------------------------------
-    IEnumerator coDelayInit(float delay){
-        yield return new WaitForSeconds(delay);
+    IEnumerator coDelayInit(){
+        yield return Util.delay1;
         adType = DM.REWARD.NULL;
     }
 

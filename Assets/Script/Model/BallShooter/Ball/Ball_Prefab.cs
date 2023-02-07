@@ -51,7 +51,7 @@ public class Ball_Prefab : MonoBehaviour
             if(gm.State == GameManager.STATE.PLAY && pl.DoSwing){
                 SM.ins.sfxPlay(SM.SFX.SwingHit.ToString());
                 
-                StartCoroutine(coDelayActiveFastPlayBtn(0.1f)); //* ホームランしたとき、見えないようにしてBUG防止。
+                StartCoroutine(coDelayActiveFastPlayBtn()); //* ホームランしたとき、見えないようにしてBUG防止。
 
                 gm.switchCamera();
                 // pl.DoSwing = false;
@@ -355,7 +355,7 @@ public class Ball_Prefab : MonoBehaviour
         var atv = DM.ins.convertAtvSkillStr2Enum(btn.Name);
         switch(atv){
             case DM.ATV.ThunderShot:
-                const float delayTime = 2;
+                // const float delayTime = 2;
                 const int maxDistance = 50;
                 const int width = 1;
                 Debug.DrawRay(this.transform.position, dir * maxDistance, Color.blue, 2f);
@@ -373,7 +373,7 @@ public class Ball_Prefab : MonoBehaviour
                 this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
 
                 gm.activeSkillBtnList.ForEach(btn => btn.init(gm));
-                yield return new WaitForSeconds(delayTime);
+                yield return Util.delay2;//new WaitForSeconds(delayTime);
                 onDestroyMe();
                 break;
             case DM.ATV.FireBall:
@@ -461,7 +461,7 @@ public class Ball_Prefab : MonoBehaviour
         Time.timeScale = 0;
         pl.setAnimTrigger(DM.ANIM.HomeRun.ToString());
 
-        yield return new WaitForSecondsRealtime(2);
+        yield return Util.delay2RT;//new WaitForSecondsRealtime(2);
         SM.ins.sfxPlay(SM.SFX.HomeRun.ToString());
         //* Animation Finish
         gm.IsPlayingAnim = false;
@@ -475,11 +475,11 @@ public class Ball_Prefab : MonoBehaviour
         Debug.Log("ActiveSkill Before Anim");
         Time.timeScale = 0;
         pl.setAnimTrigger("ActiveSkillBefSpotLight");
-        yield return new WaitForSecondsRealtime(0.3f);
+        yield return Util.delay0_3RT; //new WaitForSecondsRealtime(0.3f);
         Time.timeScale = 1;
     }
     IEnumerator coSetThunderSkill(RaycastHit hit){
-        yield return new WaitForSeconds(0.1f);
+        yield return Util.delay0_1;//new WaitForSeconds(0.1f);
         Debug.Log("<color=red>coSetThunderSkill():: isHomeRun= " + isHomeRun + "</color>");
         List<GameObject> effectList = new List<GameObject>(); //* HPが０になったら、発生するERROR対応。
 
@@ -506,8 +506,8 @@ public class Ball_Prefab : MonoBehaviour
             yield return new WaitForSeconds(i * span);
         }
     }
-    IEnumerator coDelayActiveFastPlayBtn(float delay){
-        yield return new WaitForSeconds(delay);
+    IEnumerator coDelayActiveFastPlayBtn(){
+        yield return Util.delay0_1;
         gm.fastPlayBtn.gameObject.SetActive(true);
     }
 

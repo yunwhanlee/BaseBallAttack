@@ -58,7 +58,7 @@ public class MyMesh
         Debug.Log("WHITE HIT!");
         Array.ForEach(msRds, ms => ms.material = me.whiteHitMt);
 
-        yield return new WaitForSeconds(0.05f);
+        yield return Util.delay0_05;
 
         for(int i=0; i<msRds.Length; i++)
             msRds[i].material = me.originMts[i];//* (BUG) WaitForSeconds間にまた衝突が発生したら、白くなる。
@@ -67,7 +67,7 @@ public class MyMesh
         Debug.Log("WHITE HIT!");
         Array.ForEach(msRds, ms => ms.material = me.whiteHitMt);
 
-        yield return new WaitForSeconds(0.05f);
+        yield return Util.delay0_05;
 
         for(int i=0; i<msRds.Length; i++)
             msRds[i].material = me.originMts[i];//* (BUG) WaitForSeconds間にまた衝突が発生したら、白くなる。

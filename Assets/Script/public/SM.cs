@@ -242,6 +242,7 @@ public class SM : MonoBehaviour
         switch(name){
             case "Swing":
                 if(!isSwingSFXPlaying){
+                    Debug.Log("SM::coPlayWaitingFinish:: SwingSFX.clip.length= " + SwingSFX.clip.length);
                     isSwingSFXPlaying = true;
                     SwingSFX.Play();
                     yield return new WaitForSeconds(SwingSFX.clip.length * 1.7f);

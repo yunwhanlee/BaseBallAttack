@@ -200,7 +200,14 @@ public class ObjectPool : MonoBehaviour
     }
 
     public static IEnumerator coDestroyObject(GameObject ins, Transform groupTf, float sec = 0){
-        yield return new WaitForSeconds(sec);
+        // yield return new WaitForSeconds(sec);
+        yield return (sec == 0.75f)? Util.delay0_75
+            : (sec == 0.875f)? Util.delay0_875
+            : (sec == 1)? Util.delay1
+            : (sec == 1.5f)? Util.delay1_5
+            : (sec == 2)? Util.delay2
+            : (sec == 3)? Util.delay3
+            : Util.delay0;
         returnObject(ins, groupTf);
     }
     static void returnObject(GameObject ins, Transform groupTf){

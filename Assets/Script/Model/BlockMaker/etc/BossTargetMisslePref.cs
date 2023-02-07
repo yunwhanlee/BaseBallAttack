@@ -73,7 +73,7 @@ public class BossTargetMisslePref : MonoBehaviour
 
     IEnumerator coDelay(){
         yield return new WaitUntil(()=> rigid.velocity.y < 0);
-        yield return new WaitForSeconds(0.15f);
+        yield return Util.delay0_2;
         searchBoss();
     }
 

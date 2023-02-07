@@ -11,6 +11,25 @@ using UnityEngine.SceneManagement;
 public class Util : MonoBehaviour
 {
     public static Util _;
+    
+    //* Coroutineのnew WaitforSenconds()はクラスのため、HEAP領域へ新たな空間が割り当てる。
+    //* HEAP領域は削除されたら、ガベージコレクションが読み込まれ、過負荷になる。
+    //* そのため、変数化して値を保存するCashing方式が必要。
+    [Header("CASHING COROUTINE")][Header("__________________________")]
+    public static readonly WaitForSeconds delay0 = new WaitForSeconds(0);
+    public static readonly WaitForSeconds delay0_05 = new WaitForSeconds(0.05f);
+    public static readonly WaitForSeconds delay0_1 = new WaitForSeconds(0.1f);
+    public static readonly WaitForSeconds delay0_2 = new WaitForSeconds(0.2f);
+    public static readonly WaitForSeconds delay0_3 = new WaitForSeconds(0.3f);
+    public static readonly WaitForSecondsRealtime delay0_3RT = new WaitForSecondsRealtime(0.3f);
+    public static readonly WaitForSeconds delay0_5 = new WaitForSeconds(0.5f);
+    public static readonly WaitForSeconds delay0_75 = new WaitForSeconds(0.75f);
+    public static readonly WaitForSeconds delay0_875 = new WaitForSeconds(0.875f);
+    public static readonly WaitForSeconds delay1 = new WaitForSeconds(1f);
+    public static readonly WaitForSeconds delay1_5 = new WaitForSeconds(1.5f);
+    public static readonly WaitForSeconds delay2 = new WaitForSeconds(2f);
+    public static readonly WaitForSecondsRealtime delay2RT = new WaitForSecondsRealtime(2f);
+    public static readonly WaitForSeconds delay3 = new WaitForSeconds(3f);
 
     [Header("NOTICE MESSAGE")][Header("__________________________")]
     public int noticeMsgDisplayCnt = 1;
