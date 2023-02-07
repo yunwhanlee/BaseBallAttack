@@ -81,36 +81,42 @@ public class LevelUpPanelAnimate : MonoBehaviour{
         if(SKILL_BTN_IDX_LEN >= btnIdx && skillList.Count > 0){
             time += Time.unscaledDeltaTime;
             for(int i = 0; i < skillSlotBtns.Length; i++){
-                //* Scrolling
-                if(time < span){
-                    if(skillSlotBtns[i].contentRectTf.localPosition.y >= 0) //* ↓
-                        skillSlotBtns[i].contentRectTf.Translate(0,-speed, 0);
-                    else //* 一番目に戻す
-                        skillSlotBtns[i].contentRectTf.localPosition = new Vector3(0, spriteH * gm.psvImgRectTfTemp.childCount, 0);
-                }
-                //* Stop
-                else{
-                    Debug.Log("LevelUpPanelAnimate::Slot Stop!");
-                    int randIdx = Random.Range(0, skillList.Count);
-                    int randPer = Random.Range(0, 100);
-                    string tagName = skillList[randIdx - 1].Value.transform.tag;
-                    setRandomPsvSkillSlot(skillSlotBtns[i], out randIdx, randPer, out tagName);
-
-                    //* Set Unique or Normal
-                    if(randPer < LM._.LEVELUP_SLOTS_UNIQUE_PER){
-                        while(tagName == DM.TAG.PsvSkillNormal.ToString())
-                            setRandomPsvSkillSlot(skillSlotBtns[i], out randIdx, randPer, out tagName);
-                    }else{
-                        while(tagName == DM.TAG.PsvSkillUnique.ToString())
-                            setRandomPsvSkillSlot(skillSlotBtns[i], out randIdx, randPer, out tagName);
+                try{
+                    //* Scrolling
+                    if(time < span){
+                        if(skillSlotBtns[i].contentRectTf.localPosition.y >= 0) //* ↓
+                            skillSlotBtns[i].contentRectTf.Translate(0,-speed, 0);
+                        else //* 一番目に戻す
+                            skillSlotBtns[i].contentRectTf.localPosition = new Vector3(0, spriteH * gm.psvImgRectTfTemp.childCount, 0);
                     }
+                    //* Stop
+                    else{
+                        Debug.Log($"LevelUpPanelAnimate::Slot Stop:: skillList.Count= {skillList.Count}");
+                        int randIdx = Random.Range(0, skillList.Count);
+                        int randPer = Random.Range(0, 100);
+                        string tagName = skillList[randIdx - 1].Value.transform.tag;
+                        setRandomPsvSkillSlot(skillSlotBtns[i], out randIdx, randPer, out tagName);
 
-                    //* 指定したIndexは他のスロットと重ならないように消す
-                    skillList.RemoveAt(randIdx);
-                    btnIdx++;
+                        //* Set Unique or Normal
+                        if(randPer < LM._.LEVELUP_SLOTS_UNIQUE_PER){
+                            while(tagName == DM.TAG.PsvSkillNormal.ToString())
+                                setRandomPsvSkillSlot(skillSlotBtns[i], out randIdx, randPer, out tagName);
+                        }else{
+                            while(tagName == DM.TAG.PsvSkillUnique.ToString())
+                                setRandomPsvSkillSlot(skillSlotBtns[i], out randIdx, randPer, out tagName);
+                        }
 
-                    // if(btnIdx == SKILL_BTN_IDX_LEN)
-                        // isRollingStop = true; //* Stop Trigger On
+                        //* 指定したIndexは他のスロットと重ならないように消す
+                        skillList.RemoveAt(randIdx);
+                        btnIdx++;
+
+                        // if(btnIdx == SKILL_BTN_IDX_LEN)
+                            // isRollingStop = true; //* Stop Trigger On
+                    }
+                }
+                catch(Exception err){
+                    //? Out of Indexエラーですけど、原因分からない...
+                    Debug.LogError($"ERROR => btnIdx[{i}]= " + err);
                 }
             }
         }
@@ -273,7 +279,7 @@ public class LevelUpPanelAnimate : MonoBehaviour{
 /// --------------------------------------------------------------------------------------
     private string setRandomPsvSkillSlot(LevelUpSkillPanelBtn slotBtn, out int randIdx, int randPer, out string tagName){
         randIdx = Random.Range(0, skillList.Count);
-        Debug.Log("setRandomPsvSkill:: randIdx= " + randIdx);
+        Debug.Log("setRandomPsvSkill:: " + slotBtn.name + ", randIdx= " + randIdx + " / skillList.Count= " + skillList.Count);
 
         //* Set Position (.Key -> PosY)
         // int spriteHalfHeight = spriteH / 2;

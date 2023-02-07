@@ -11,7 +11,7 @@ public class BossBlock : Block_Prefab{
     const float OBSTACLE_OFFSET_Z = -9;
     const int OBSTACLE_STONE_CNT = 1;
     const float BOSS_HEAL_RATIO = 0.2f;
-    const int BOSS_DIE_ORB_CNT = 80;
+    const int BOSS_DIE_ORB_CNT = 60;
     const int STONE_PER = 100;
     const int OBSTACLE_RESET_SPAN = 8;
     const string BOSSATK_ANIM_NAME_LV1 = "Fireball Shoot";
@@ -321,7 +321,7 @@ public class BossBlock : Block_Prefab{
 
         yield return new WaitForSecondsRealtime(playSec * 0.7f);
         for(int i=0; i < BOSS_DIE_ORB_CNT; i++)
-            bm.createDropItemExpOrbPf(bossDieOrbSpawnTf, resultExp, popPower: 250000);
+            bm.createDropItemExpOrbPf(bossDieOrbSpawnTf, resultExp, popPower: 600);
 
         yield return new WaitForSecondsRealtime(playSec * 0.3f + playSec); //* 消すのが早すぎ感じで、少し待機。
         Destroy(target);
