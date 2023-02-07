@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class ExplosionRangeGizmos : MonoBehaviour
 {
-    public Player pl;
+    // public Player pl;
 
     // void Start(){
     //     pl = GameObject.Find("Player").GetComponent<Player>();
     // }
-    public float range;
+    // public float range;
 
     // void OnDrawGizmos(){
     //     // Draw a yellow sphere at the transform's position

@@ -10,7 +10,8 @@ public class ActiveSkillGizmos : MonoBehaviour
     [SerializeField] protected bool isGizmosOn = true;
     [SerializeField] protected DM.ATV type;
     protected void Start(){
-        pl = GameObject.Find("Player").GetComponent<Player>();
+        Debug.Log("ActiveSkillGizmos::Start():: DM.ins.gm.pl= " + DM.ins.gm.pl);
+        pl = DM.ins.gm.pl;
         sprRdr = GetComponent<SpriteRenderer>();
 
         switch(type){

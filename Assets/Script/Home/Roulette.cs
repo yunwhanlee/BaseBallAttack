@@ -34,7 +34,8 @@ public class Roulette : MonoBehaviour
     const int REWARD_IMG = 1;
 
     void Start(){
-        hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
+        Debug.Log("Roulette::Start():: DM.ins.hm= " + DM.ins.hm);
+        hm = DM.ins.hm;
 
         //* Lang
         spinBtnTxt.text = LANG.getTxt(LANG.TXT.RouletteSpin.ToString());

@@ -11,7 +11,8 @@ public class HomeEffectManager : MonoBehaviour
     public Transform mainCanvasTf; 
 
     void Start() {
-        hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
+        Debug.Log("HomeEffectManager::Start():: DM.ins.hm= " + DM.ins.hm);
+        hm = DM.ins.hm;
         mainCanvasTf = hm.mainCanvas.transform;
     }
 

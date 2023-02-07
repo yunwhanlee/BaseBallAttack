@@ -181,9 +181,11 @@ public class HomeManager : MonoBehaviour
     [Header("MODEL")][Header("__________________________")]
     [SerializeField] Transform modelTf;   public Transform ModelTf {get => modelTf; set => modelTf = value;}
 
+    void Awake(){
+        DM.ins.hm = this;
+    }
     void Start(){
         // onClickResetBtn();
-        DM.ins.hm = this;
 
         versionTxt.text = $"ver{Version.MAJOR}.{Version.MINOR}.{Version.REVISION}";
 

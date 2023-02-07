@@ -321,12 +321,12 @@ public class PersonalData {
         switch(itemType){
             case DM.PANEL.Chara :  SelectCharaIdx = index; break;
             case DM.PANEL.Bat :    SelectBatIdx = index;   break;
-            case DM.PANEL.Skill :  
-                var hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
-                if(hm.selectedSkillBtnIdx == 0)
+            case DM.PANEL.Skill :
+                if(DM.ins.hm.selectedSkillBtnIdx == 0)
                     SelectSkillIdx = index; 
                 else
                     SelectSkill2Idx = index; 
+                    
                 break;
         }
     }

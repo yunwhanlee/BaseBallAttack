@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject birdFriendObj;   public GameObject BirdFriendObj {get=>birdFriendObj; set=>birdFriendObj=value;}
 
     public void Start(){
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gm = DM.ins.gm;
         em = gm.em;
 
         //* Player Model Set Parent

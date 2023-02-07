@@ -13,7 +13,8 @@ public class InAppManager : MonoBehaviour
 
     // DM.NAME id;
     void Start(){
-        hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
+        Debug.Log("InAppManager::DM.ins.hm= " + DM.ins.hm);
+        hm = DM.ins.hm;
         // checkBtn.GetComponent<IAPButton>().enabled = false;
     }
 

@@ -355,9 +355,10 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ cashShop:: 課金なら、Price頭に"￥"表示。
 
     ● SCRIPT OPTIMIZATION
-        ✓ CoRoutine Cashing
-        - GameObject.Find Cashing
-            ✅AdmobManager.cs
+        ✅CoRoutine Cashing
+        ✅GameObject.Find Cashing
+        - シーンが移動されたら DM.ins.gmとhmがNULLになること対応。
+
 
 
 

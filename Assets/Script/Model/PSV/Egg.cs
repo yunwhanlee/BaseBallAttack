@@ -10,7 +10,7 @@ public class Egg : MonoBehaviour
 
     [SerializeField] float explosionRange = 3;
     void Start(){
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gm = DM.ins.gm;
         bm = gm.bm;
         pl = gm.pl;
         em = gm.em;

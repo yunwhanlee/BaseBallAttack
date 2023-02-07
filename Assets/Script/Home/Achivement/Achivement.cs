@@ -55,7 +55,7 @@ public class Achivement : MonoBehaviour{
 
     void Awake() {
         //* Assign Object
-        hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
+        hm = DM.ins.hm;
 
         panelImg = this.GetComponent<Image>();
         infoTxt = this.transform.Find(InfoTxt).GetComponent<Text>();

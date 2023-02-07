@@ -24,8 +24,9 @@ public class SectorGizmos : MonoBehaviour
 
     Vector3 pos;
 
-    void Start(){   
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+    void Start(){
+        Debug.Log("SectorGizoms::Start():: DM.ins.gm= " + DM.ins.gm);
+        gm = DM.ins.gm;
         touchSlideCtr = gm.touchSlideControlPanel;
         var childs = gm.bm.GetComponentsInChildren<Transform>();
         var blocks = Array.FindAll(childs, child => child.name.Contains("Block") && child.name != "BlockMaker");

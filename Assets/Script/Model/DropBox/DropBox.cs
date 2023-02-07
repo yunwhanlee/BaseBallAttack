@@ -13,7 +13,7 @@ public class DropBox : MonoBehaviour{ //* Create By BlockMaker.cs
     }
 
     void Awake(){
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gm = DM.ins.gm;
     }
 
     void Update(){

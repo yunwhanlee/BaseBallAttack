@@ -77,8 +77,9 @@ public class AcvBosskillCollection : Achivement
 //*  Function
 //*---------------------------------------
     static public void collectBossKill(string name) {
+        Debug.Log("Achivement::AcvBosskillCollection::collectBossKill():: DM.ins.gm.bm= " + DM.ins.gm.bm);
         //* Check Boss Name
-        int bossCnt = GameObject.Find("BlockMaker").GetComponent<BlockMaker>().bossPrefs.Length + 1;
+        int bossCnt = DM.ins.gm.bm.bossPrefs.Length + 1;
         Debug.Log($"Achivement::collectBossKill:: bossCnt= {bossCnt}");
         int idx = -1;
         for(int i=1; i<=bossCnt; i++){

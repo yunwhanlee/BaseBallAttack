@@ -15,7 +15,7 @@ public class CoinIcon : MonoBehaviour
     [SerializeField] float speed = 8;  public float Speed { get => speed; set => speed = value;}
     
     void Awake(){
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gm = DM.ins.gm;
     }
     
     void OnEnable(){

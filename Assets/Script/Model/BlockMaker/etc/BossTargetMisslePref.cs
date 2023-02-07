@@ -15,7 +15,7 @@ public class BossTargetMisslePref : MonoBehaviour
     [SerializeField] int popPower;
 
     void Awake(){
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gm = DM.ins.gm;
         rigid = this.GetComponent<Rigidbody>();
         collider = this.GetComponent<SphereCollider>();
     }

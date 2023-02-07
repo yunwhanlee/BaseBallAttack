@@ -44,8 +44,8 @@ public class LevelUpPanelAnimate : MonoBehaviour{
     private void OnDisable() => Time.timeScale = 1; //* このパンネルが消えたら、政界の時間 戻す
 
     public void Start(){
-        Debug.Log("onClickRewardChestOkButton:: Start!");
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        Debug.Log("LevelUpPanelAnimate::Start() DM.ins.gm= " + DM.ins.gm);
+        gm = DM.ins.gm;
         pl = gm.pl;
 
         for(int i=0; i<gm.PsvImgRectTfTemp.childCount; i++){

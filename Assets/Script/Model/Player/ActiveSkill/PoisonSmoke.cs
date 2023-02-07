@@ -9,7 +9,7 @@ public class PoisonSmoke : MonoBehaviour
     [SerializeField] int keepDuration = 2;     public int KeepDuration { get => keepDuration; set => keepDuration = value;}
     [SerializeField] Text KeepCntTxt;
     void Start(){
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gm = DM.ins.gm;
         KeepDuration += gm.stage;
         transform.rotation = Quaternion.Euler(0,0,0);
     }

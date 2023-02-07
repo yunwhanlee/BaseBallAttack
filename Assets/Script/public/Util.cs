@@ -26,6 +26,7 @@ public class Util : MonoBehaviour
     public static readonly WaitForSeconds delay0_75 = new WaitForSeconds(0.75f);
     public static readonly WaitForSeconds delay0_875 = new WaitForSeconds(0.875f);
     public static readonly WaitForSeconds delay1 = new WaitForSeconds(1f);
+    public static readonly WaitForSecondsRealtime delay1RT = new WaitForSecondsRealtime(1f);
     public static readonly WaitForSeconds delay1_5 = new WaitForSeconds(1.5f);
     public static readonly WaitForSeconds delay2 = new WaitForSeconds(2f);
     public static readonly WaitForSecondsRealtime delay2RT = new WaitForSecondsRealtime(2f);
@@ -149,7 +150,7 @@ public class Util : MonoBehaviour
     }
 
     public void sphereCastAllDecreaseBlocksHp(Transform my, float radius, int dmg){
-        GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        GameManager gm = DM.ins.gm;
         //* SphereCastAll
         RaycastHit[] hits = Physics.SphereCastAll(my.position, radius, Vector3.up, 0);
         Array.ForEach(hits, hit => {

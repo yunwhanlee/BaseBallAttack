@@ -105,8 +105,9 @@ public class ScrollView {
     }
 
     private void pushItemLanguageList(string itemType){
+        Debug.Log("ScrollViewEvent::pushItemLanguageList():: DM.ins.hm= " + DM.ins.hm);
         //* ItemCreateが終わったら、一回活性化して、ItemInfoに書いた言語情報をLanguageのInfoリストへ入れる。
-        var hm = GameObject.Find(DM.NAME.HomeManager.ToString()).GetComponent<HomeManager>();
+        var hm = DM.ins.hm;
         hm.onClickBtnGoToPanel(itemType);
     }
     public void setLanguage(){
@@ -236,8 +237,9 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
     public bool isScrolling; 
 
     void Start(){
+        Debug.Log("ScrollViewEvent::Start():: DM.ins.hm= " + DM.ins.hm);
         scrollRect = GetComponent<ScrollRect>();
-        hm = GameObject.Find("HomeManager").GetComponent<HomeManager>();
+        hm = DM.ins.hm;
         mainCanvasTf = hm.mainCanvas.transform;
         
         if(this.gameObject.name != $"ScrollView_{DM.PANEL.Skill.ToString()}" 

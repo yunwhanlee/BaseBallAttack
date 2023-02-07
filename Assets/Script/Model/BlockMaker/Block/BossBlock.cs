@@ -35,8 +35,8 @@ public class BossBlock : Block_Prefab{
     }
 
     void Start() {
-        Debug.Log("BossBlock:: this.name= " + this.name);
-        GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        Debug.Log("BossBlock:: this.name= " + this.name + "::Start():: DM.ins.gm= " + DM.ins.gm);
+        GameManager gm = DM.ins.gm;
         gm.bossLimitCnt = LM._.BOSS_LIMIT_SPAN;
         gm.bossLimitCntTxt.gameObject.SetActive(true);
         bossDieOrbSpawnTf = GameObject.Find(DM.NAME.BossDieDropOrbSpot.ToString()).transform;

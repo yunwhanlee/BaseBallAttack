@@ -21,7 +21,7 @@ public class DropItem : MonoBehaviour
 
     void Awake() {
         // Debug.Log("<color=yellow>DropItem Awake() </color>");
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gm = DM.ins.gm;
         rigid = GetComponent<Rigidbody>();
         meshRdr = GetComponent<MeshRenderer>();
     }

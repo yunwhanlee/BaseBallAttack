@@ -132,7 +132,8 @@ public class Block_Prefab : MonoBehaviour
     public Text hpTxt;
 
     void Awake(){ //! 継承：親の場合、定義するソースはAwake()にしないと、Nullになる。
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        // Debug.Log("Block_Prefab::Awake():: DM.ins.gm= " + DM.ins.gm);
+        gm = DM.ins.gm;
         em = gm.em;
         pl = gm.pl;
         bm = gm.bm;

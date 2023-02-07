@@ -57,7 +57,8 @@ public class ObjectPool : MonoBehaviour
         Ins = this;
     }
     private void Start(){
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        Debug.Log("ObjectPool::Start():: DM.ins.gm= " + DM.ins.gm);
+        gm = DM.ins.gm;
         em = gm.em;
         bm = gm.bm;
         init();

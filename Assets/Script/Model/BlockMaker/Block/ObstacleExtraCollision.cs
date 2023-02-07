@@ -16,7 +16,8 @@ public class ObstacleExtraCollision : MonoBehaviour
     EffectManager em;
 
     void Start() {
-        em = GameObject.Find("EffectManager").GetComponent<EffectManager>();
+        Debug.Log("ObstacleExtraCollision::Start():: DM.ins.gm.em= " + DM.ins.gm.em);
+        em = DM.ins.gm.em;
     }
 
     void OnTriggerEnter(Collider col) {

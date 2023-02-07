@@ -84,7 +84,8 @@ public class EffectManager : MonoBehaviour
     public GameObject defenceEF;
 
     void Start(){
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        Debug.Log("EffectManager:: DM.ins.gm= " + DM.ins.gm);
+        gm = DM.ins.gm;
         
         Debug.Log("EffectManager:: gm.activeSkillDataBase.Length=" + gm.activeSkillDataBase.Length);
         int cnt = gm.activeSkillDataBase.Length;

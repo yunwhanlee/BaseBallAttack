@@ -8,7 +8,7 @@ public class IceWave : MonoBehaviour
     BlockMaker bm;
     EffectManager em;
     void Start(){
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gm = DM.ins.gm;
         bm = gm.bm;
         em = gm.em;
     }

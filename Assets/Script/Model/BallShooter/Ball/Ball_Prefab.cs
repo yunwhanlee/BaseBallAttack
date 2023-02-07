@@ -26,8 +26,9 @@ public class Ball_Prefab : MonoBehaviour
     [SerializeField] bool isDmgX2;     public bool IsDmgX2 {get => isDmgX2; set => isDmgX2 = value;}
 
     void Awake() {
+        Debug.Log("Ball_Prefab::Awake():: DM.ins.gm= " + DM.ins.gm);
         rigid = GetComponent<Rigidbody>();
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gm = DM.ins.gm;
         em = gm.em; pl = gm.pl; bm = gm.bm; bs = gm.bs;
         IsOnDarkOrb = false;
     }

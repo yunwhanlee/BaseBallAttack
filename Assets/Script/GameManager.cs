@@ -194,10 +194,12 @@ public class GameManager : MonoBehaviour {
     [Header("SKY")][Header("__________________________")]
     public GameObject skySunObj;
     public GameObject skyMoonObj;
+
+    void Awake(){
+        DM.ins.gm = this;
+    }
     void Start() {
         // Util._.calcArithmeticProgressionList(start: 100, max: 50, d: 100, gradualUpValue: 0.1f);
-
-        DM.ins.gm = this;
 
         DM.ins.transform.position = Vector3.zero; //* LoadingSceneで、モデルが見えないようにずらした位置を戻す。
 
@@ -358,7 +360,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log("coRewardChestOpen()::");
         initRewardChestPanelUI(isOpen: true);
         getRewardChestPanel.GetComponentInChildren<Animator>().SetTrigger(DM.ANIM.DoOpen.ToString());
-        yield return Util.delay1; //* (BUG-10) RewardChestPanelが表示されるとき、Time.Scaleが０のため、RealTimeで動く。
+        yield return Util.delay1RT; //* (BUG-10) RewardChestPanelが表示されるとき、Time.Scaleが０のため、RealTimeで動く。
         
         SM.ins.sfxPlay(SM.SFX.Upgrade.ToString());
         rewardChestOkBtn.gameObject.SetActive(true);
