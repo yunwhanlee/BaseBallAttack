@@ -81,42 +81,36 @@ public class LevelUpPanelAnimate : MonoBehaviour{
         if(SKILL_BTN_IDX_LEN >= btnIdx && skillList.Count > 0){
             time += Time.unscaledDeltaTime;
             for(int i = 0; i < skillSlotBtns.Length; i++){
-                try{
-                    //* Scrolling
-                    if(time < span){
-                        if(skillSlotBtns[i].contentRectTf.localPosition.y >= 0) //* ↓
-                            skillSlotBtns[i].contentRectTf.Translate(0,-speed, 0);
-                        else //* 一番目に戻す
-                            skillSlotBtns[i].contentRectTf.localPosition = new Vector3(0, spriteH * gm.psvImgRectTfTemp.childCount, 0);
-                    }
-                    //* Stop
-                    else{
-                        Debug.Log($"LevelUpPanelAnimate::Slot Stop:: skillList.Count= {skillList.Count}");
-                        int randIdx = Random.Range(0, skillList.Count);
-                        int randPer = Random.Range(0, 100);
-                        string tagName = skillList[randIdx - 1].Value.transform.tag;
-                        setRandomPsvSkillSlot(skillSlotBtns[i], out randIdx, randPer, out tagName);
-
-                        //* Set Unique or Normal
-                        if(randPer < LM._.LEVELUP_SLOTS_UNIQUE_PER){
-                            while(tagName == DM.TAG.PsvSkillNormal.ToString())
-                                setRandomPsvSkillSlot(skillSlotBtns[i], out randIdx, randPer, out tagName);
-                        }else{
-                            while(tagName == DM.TAG.PsvSkillUnique.ToString())
-                                setRandomPsvSkillSlot(skillSlotBtns[i], out randIdx, randPer, out tagName);
-                        }
-
-                        //* 指定したIndexは他のスロットと重ならないように消す
-                        skillList.RemoveAt(randIdx);
-                        btnIdx++;
-
-                        // if(btnIdx == SKILL_BTN_IDX_LEN)
-                            // isRollingStop = true; //* Stop Trigger On
-                    }
+                //* Scrolling
+                if(time < span){
+                    if(skillSlotBtns[i].contentRectTf.localPosition.y >= 0) //* ↓
+                        skillSlotBtns[i].contentRectTf.Translate(0,-speed, 0);
+                    else //* 一番目に戻す
+                        skillSlotBtns[i].contentRectTf.localPosition = new Vector3(0, spriteH * gm.psvImgRectTfTemp.childCount, 0);
                 }
-                catch(Exception err){
-                    //? Out of Indexエラーですけど、原因分からない...
-                    Debug.LogError($"ERROR => btnIdx[{i}]= " + err);
+                //* Stop
+                else{
+                    int randIdx = Random.Range(0, skillList.Count);
+                    int randPer = Random.Range(0, 100);
+                    string tagName = skillList[randIdx].Value.transform.tag; //! (BUG-54) LEVEL-UPした場合、"randIdx - 1"したことが原因で、Out Of Indexバグ発生。
+                    Debug.Log($"<color=yellow>LevelUpPanelAnimate::Slot Stop:: btn[{btnIdx}], skillName= {skillList[randIdx].Value.name} ,randIdx= {randIdx} / skillList.Count= {skillList.Count}</color>");
+                    setRandomPsvSkillSlot(skillSlotBtns[i], out randIdx, randPer, out tagName);
+
+                    //* Set Unique or Normal
+                    if(randPer < LM._.LEVELUP_SLOTS_UNIQUE_PER){
+                        while(tagName == DM.TAG.PsvSkillNormal.ToString())
+                            setRandomPsvSkillSlot(skillSlotBtns[i], out randIdx, randPer, out tagName);
+                    }else{
+                        while(tagName == DM.TAG.PsvSkillUnique.ToString())
+                            setRandomPsvSkillSlot(skillSlotBtns[i], out randIdx, randPer, out tagName);
+                    }
+
+                    //* 指定したIndexは他のスロットと重ならないように消す
+                    skillList.RemoveAt(randIdx);
+                    btnIdx++;
+
+                    // if(btnIdx == SKILL_BTN_IDX_LEN)
+                        // isRollingStop = true; //* Stop Trigger On
                 }
             }
         }
@@ -172,6 +166,9 @@ public class LevelUpPanelAnimate : MonoBehaviour{
         if(stopScrolling()) return; //* スロットを止めることなら、以下の処理をしない。
 
         Debug.LogFormat("<color=green>LEVELUP:: onClickSkillUpBtn({0}):: pl.Lv= {1}, name= {2}</color>", index , pl.Lv, skillSlotBtns[index].name.text);
+
+
+
         //* Set Data
         var psv = DM.ins.convertPsvSkillStr2Enum(skillSlotBtns[index].name.text);
         switch(psv){
@@ -257,17 +254,22 @@ public class LevelUpPanelAnimate : MonoBehaviour{
         }
         
         //* 終了
+        //* Passive Ticket
         if(!isPsvSkillTicket) //* (BUG-14) LevelUpPanelAnimate:: isPsvSkillTicket変数を生成、PSVチケットの場合は、befLv++しない。
             pl.BefLv++;
         else
             isPsvSkillTicket = false;
         // Debug.LogFormat("onClickSkillUpBtn({0}):: <color=yellow> pl.Lv= {1}, pl.befLv= {2}</color>",index, pl.Lv, pl.BefLv);
-
+        
+        //* Init
+        pl.IsLevelUp = false; //! (BUG-53) これしないと、次のタンでまたレベルアップされるバグ発生。
         this.gameObject.SetActive(false);
+
+        //* Set
         gm.displayCurPassiveSkillUI("INGAME");
         
         //* １回以上 LEVEL-UPした場合、順番に進む
-        if(pl.BefLv != pl.Lv){
+        if(pl.BefLv < pl.Lv){
             Debug.Log($"LEVELUP:: onClickSkillUpBtn:: Check LevelUp:: befLv= {pl.BefLv} , pl.Lv= {pl.Lv}");
             pl.Lv--;
             pl.setLevelUp();

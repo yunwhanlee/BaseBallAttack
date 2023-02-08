@@ -56,6 +56,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7f7f695ebf665246b5f6dbb0fb001ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   exp: 0
   isMoveToPlayer: 0
   moveSpeed: 5
@@ -140,7 +141,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8648117785770068642}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

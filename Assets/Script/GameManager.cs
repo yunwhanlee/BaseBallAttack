@@ -1011,7 +1011,7 @@ public class GameManager : MonoBehaviour {
         //* Coroutineの中、while文でUpdate()ように活用：ExpOrbがPlayerに全て届くまで待つ。
         while(true){
             if(pl.IsLevelUp){ //* <- Player::setLevelUp()
-                Debug.Log("LEVELUP:: coCheckLevelUp:: ");
+                Debug.Log($"LEVELUP:: coCheckLevelUp:: pl.IsLevelUp= {pl.IsLevelUp}");
                 yield return Util.delay1;
                 pl.IsLevelUp = false;
                 rerotateSkillSlotsBtn.gameObject.SetActive(true);

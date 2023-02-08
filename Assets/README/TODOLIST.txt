@@ -441,6 +441,8 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-50) 再ロードしたら、DM.ins.hmがNULLになり、全てのデータがちゃんと読みだされないバグ対応。
     ✓ (BUG-51) ボース死んだら出るORBの速度が大きすぎる対応。
     ✓ (BUG-52) LEVEL-UPが連続でした場合、順番通り繰り返す。
+    ✓ (BUG-53) 次のタンにまたレベルアップされちゃう。
+    ✓ (BUG-54) LEVEL-UPした場合、"randIdx - 1"したことが原因で、Out Of Indexバグ発生。
     - (BUG) 時々、Playシーンでモデルが出ない。
 
     - (BUG) apkにビルドしたら、UpgradePanelのCheckBoxUIがMAXになってしまう。

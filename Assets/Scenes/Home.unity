@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45015407, g: 0.500194, b: 0.5754274, a: 1}
+  m_IndirectSpecularColor: {r: 0.45015454, g: 0.5001945, b: 0.57542807, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9239,7 +9239,7 @@ MonoBehaviour:
   HEAL_BLOCK_INCREASE_PER: 0.1
   SKIP_BLOCK_PER: 20
   ITEM_TYPE_PER: 10
-  TREASURECHEST_BLOCK_PER: 5
+  TREASURECHEST_BLOCK_PER: 88
   TREASURECHEST_ORB_CNT: 7
   HEAL_BLOCK_PER: 5
   REWARD_CHEST_PER: 5
