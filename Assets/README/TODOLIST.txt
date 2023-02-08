@@ -446,6 +446,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
 
     ✓ (BUG-55) もしエラーで、DownWallコライダーのIsTriggerがFalseの場合、投げるボールが壁にぶつかってプレイヤーへ届かないので、Trueに戻す処理。
     ✓ (BUG-56) ボースが一気に死んでしまう : Bossは、InstantKillが出来ないように
+
     - (BUG) 時々、Playシーンでモデルが出ない。
 
     - (BUG) apkにビルドしたら、UpgradePanelのCheckBoxUIがMAXになってしまう。
@@ -455,6 +456,8 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     - (BUG) ScrollSnipが出来たら、止まるべきのに、少し動くバグ。
     - (BUG) ColorBallPopブロックにぶつかってもボールが破壊されないBUG。 
     
+
+    【作業】
     ✓ 連続アップグレード可能に : Skill & Upgrade。
     ✓ レベルアップスロットイメージが表示しない。（MAXになってもスロットが残っている。）
         ✓ Exceptリストを反映したTransformChild用意まではOK。
@@ -463,6 +466,9 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
 
     ✓ クリティカルダメージアップしても出来ない。
     ✓ TouchSlideControl.csで、ボール打つことをPointerUp -> Downに変更。
+    ✓ HOME:: StageSelects:: NightMare ComingSoonイメージ追加及びGUI改善。
+
+
 
     
 

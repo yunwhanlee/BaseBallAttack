@@ -13,7 +13,7 @@ public class DM : MonoBehaviour{
     public GameManager gm;
     public enum DATABASE_KEY {Json};
     public enum SCENE {Home, Play, Loading};
-    public enum MODE {NORMAL, HARD};
+    public enum MODE {NORMAL, HARD, NIGHTMARE};
     public enum NAME {
         MainCanvas,
         Coin, Diamond,

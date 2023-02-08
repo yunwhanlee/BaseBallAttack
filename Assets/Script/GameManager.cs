@@ -839,11 +839,18 @@ public class GameManager : MonoBehaviour {
         int resultDiamond = int.Parse(diamondTxt.text) + rewardItemDiamond;
         int resultRouletteTicket = rewardItemRouletteTicket;
 
-        DM.ins.personalData.addCoin(resultCoin); // DM.ins.personalData.Coin += int.Parse(coinTxt.text);
-        DM.ins.personalData.addDiamond(resultDiamond);
+        //* Result
+        float multiCoin = 1;
+        float multiDiamond = 1;
+
+        if(mode == DM.MODE.HARD) {multiCoin = 2; multiDiamond = 1.5f;}
+        //TODO else if(mode == DM.MODE.NIGHTMARE) {multiCoin = 2; multiDiamond = 1.5f;}
+
+        DM.ins.personalData.addCoin((int)(resultCoin * multiCoin));
+        DM.ins.personalData.addDiamond((int)(resultDiamond * multiDiamond));
         DM.ins.personalData.addRouletteTicket(resultRouletteTicket);
         
-        //* Rate Dialogを表示するため
+        //* Rate(評価) Dialogを表示するため
         DM.ins.personalData.PlayTime++;
     }
 
@@ -864,7 +871,6 @@ public class GameManager : MonoBehaviour {
                 break;
             case STATE.HOME:
                 Time.timeScale = 1;
-                
                 resetSkillStatusTable();
                 DM.ins.personalData.save();
                 SceneManager.LoadScene(DM.SCENE.Home.ToString());

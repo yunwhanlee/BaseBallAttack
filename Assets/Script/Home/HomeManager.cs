@@ -24,13 +24,17 @@ using UnityEngine.Rendering;
     //* Method
 }
 
-[System.Serializable] public class StageSelect {
+[System.Serializable] 
+public class StageSelect {
     [Header("お先に設定")]
     [SerializeField] bool isLocked;     public bool IsLocked { get => isLocked; set => isLocked = value; }
     [SerializeField] Sprite sprite;     public Sprite Sprite { get => sprite; }
     [SerializeField] string titleName;     public string TitleName { get => titleName; }
     [SerializeField] int begin;     public int Begin { get => begin; set => begin = value;}
     [SerializeField] int end;     public int End { get => end; set => end = value;}
+    [SerializeField] float bonusMultiCoin = 1;  public float BonusMultiCoin { get => bonusMultiCoin; set => bonusMultiCoin = value;}
+    [SerializeField] float bonusMultiDiamond = 1;  public float BonusMultiDiamond { get => bonusMultiDiamond; set => bonusMultiDiamond = value;}
+    [SerializeField] bool isComingSoon;     public bool IsComingSoon { get => isComingSoon; set => isComingSoon = value; }
 
     [Header("後で自動設定")]
     RectTransform rectTf;     public RectTransform RectTf { get => rectTf; set => rectTf = value; }
@@ -38,21 +42,33 @@ using UnityEngine.Rendering;
     Text title;     public Text Title { get => title; set => title = value; }
     Text range;     public Text Range { get => range; set => range = value; }
     Button imgBtn;     public Button ImgBtn { get => imgBtn; set => imgBtn = value; }
-    RectTransform bonusLabel;     RectTransform BonusLabal { get => bonusLabel; set => bonusLabel = value; }
+    RectTransform lockImgTf;    public RectTransform LockImgTf { get => lockImgTf; set => lockImgTf = value; }
+    RectTransform bonusLabel;  public RectTransform BonusLabal { get => bonusLabel; set => bonusLabel = value; }
+    Text comingSoonTxt;  public Text ComingSoonTxt { get => comingSoonTxt; set => comingSoonTxt = value; }
+    Text bonusMultiCoinTxt;  public Text BonusMultiCoinTxt { get => bonusMultiCoinTxt; set => bonusMultiCoinTxt = value;}
+    Text bonusMultiDiamondTxt;  public Text BonusMultiDiamondTxt { get => bonusMultiDiamondTxt; set => bonusMultiDiamondTxt = value;}
     
     public void setUIMember(int i){
         //* Set Object
         img = Array.Find(rectTf.GetComponentsInChildren<Image>(), img => img.gameObject.name == "StageImg");
         title = Array.Find(rectTf.GetComponentsInChildren<Text>(), txt => txt.gameObject.name == "TitleTxt");
         range = Array.Find(rectTf.GetComponentsInChildren<Text>(), txt => txt.gameObject.name == "RangeTxt");
+        comingSoonTxt = Array.Find(rectTf.GetComponentsInChildren<Text>(), obj => obj.name == "ComingSoonTxt");
         imgBtn = Array.Find(rectTf.GetComponentsInChildren<Button>(), btn => btn.gameObject.name == "ImgPanelBtn");
+        lockImgTf = Array.Find(rectTf.GetComponentsInChildren<RectTransform>(), obj => obj.name == "LockImgTf");
         bonusLabel = Array.Find(rectTf.GetComponentsInChildren<RectTransform>(), obj => obj.name == "BonusLabel");
+        bonusMultiCoinTxt = Array.Find(rectTf.GetComponentsInChildren<Text>(), obj => obj.name == "BonusMultiCoinTxt");
+        bonusMultiDiamondTxt = Array.Find(rectTf.GetComponentsInChildren<Text>(), obj => obj.name == "BonusMultiDiamondTxt");
 
         //* Set UI
         img.sprite = Sprite;
         title.text = titleName;
         range.text = $"Stage {begin} ~ {end}";
-        img.color = IsLocked? DM.ins.darkGray : Color.white;
+        img.color = IsLocked? Color.gray : Color.white;
+        lockImgTf.gameObject.SetActive(IsLocked);
+        comingSoonTxt.text = (isComingSoon)? "Coming Soon.." : "";
+        bonusMultiCoinTxt.text = $"x {bonusMultiCoin.ToString()}";
+        bonusMultiDiamondTxt.text = $"x {bonusMultiDiamond.ToString()}";
 
         //* init
         bonusLabel.gameObject.SetActive((i == (int)DM.MODE.NORMAL)? false : true);
@@ -688,16 +704,14 @@ public class HomeManager : MonoBehaviour
     private void setStageSelectUIList(){
         int value = LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN;
 
-        //* Set Stage Range
-        stageSelects[(int)DM.MODE.NORMAL].Begin = 1;
-        stageSelects[(int)DM.MODE.NORMAL].End = value;
-
-        stageSelects[(int)DM.MODE.HARD].Begin = value + 1;
-        stageSelects[(int)DM.MODE.HARD].End = value * 2;
+        //* Set Stage Range => Inspector Viewで .Beginと.End
 
         //* Check HardMode
         if(DM.ins.personalData.IsHardmodeOn)
             stageSelects[(int)DM.MODE.HARD].IsLocked = false;
+        //TODO
+        // if(DM.ins.personalData.IsHardmodeOn)
+        //     stageSelects[(int)DM.MODE.HARD].IsLocked = false;
 
         //* Set StageSelectList
         for(int i=0; i<stageSelects.Length; i++){

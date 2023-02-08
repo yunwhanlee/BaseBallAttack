@@ -38556,13 +38556,27 @@ MonoBehaviour:
   - isLocked: 0
     sprite: {fileID: 21300000, guid: 318e9d88a541f462e8261aeedff3e152, type: 3}
     titleName: Normal
-    begin: 0
-    end: 80
+    begin: 1
+    end: 60
+    bonusMultiCoin: 1
+    bonusMultiDiamond: 1
+    isComingSoon: 0
   - isLocked: 1
     sprite: {fileID: 21300000, guid: ee52549c264554fdd89b41e79ea4600d, type: 3}
     titleName: Hard
-    begin: 0
-    end: 160
+    begin: 61
+    end: 120
+    bonusMultiCoin: 2
+    bonusMultiDiamond: 1.5
+    isComingSoon: 0
+  - isLocked: 1
+    sprite: {fileID: 21300000, guid: 4731cb65876bd4cf29ce60d7b789764b, type: 3}
+    titleName: NightMare
+    begin: 121
+    end: 180
+    bonusMultiCoin: 3
+    bonusMultiDiamond: 2
+    isComingSoon: 1
   stageSelectPlayBtnTxt: {fileID: 1517290290}
   stageSelectNoticeTxt: {fileID: 474810350}
   showRewardPanel: {fileID: 1199048389}
