@@ -212,17 +212,28 @@ public class PsvSkill<T> where T: struct {
             Debug.LogFormat("PassiveSkill:: setHitTypeSkill:: Name= {0}, rand({1}) <= per({2}) : {3}",
                 Name.ToString(), rand, percent, ((rand <= percent)? "<color=blue>true</color>" : "false"));
             switch(psv){
-                case DM.PSV.InstantKill: 
+                case DM.PSV.InstantKill: {
+                    //* (BUG-56) Bossは、InstantKillが出来ないように
+                    if(col.transform.name.Contains("Boss")){
+                        Debug.Log($"<b>BOSS -> setHitTypeSkill::InstantKill:: col= {col.transform.name}</b>");
+                        int dmg = (int)(pl.dmg.Val * (2 + pl.criticalDamage.Val) * DMG_TWICE * pl.giantBall.Val);
+                        em.createCritTxtEF(col.transform.position, dmg); //* Critダメージに切り替え
+                        result = dmg;
+                        return true;
+                    }
+
                     SM.ins.sfxPlay(SM.SFX.InstantKill.ToString());
                     em.createInstantKillTextEF(col.transform.position);
                     result = PsvSkill<int>.ONE_KILL_DMG;
                     return true;
-                case DM.PSV.Critical:
+                }
+                case DM.PSV.Critical: {
                     SM.ins.sfxPlay(SM.SFX.Critical.ToString());
                     int dmg = (int)(pl.dmg.Val * (2 + pl.criticalDamage.Val) * DMG_TWICE * pl.giantBall.Val);
                     em.createCritTxtEF(col.transform.position, dmg);
                     result = dmg;
                     return true;
+                }
                 case DM.PSV.FireProperty:
                     col.transform.GetComponent<Block_Prefab>().FireDotDmg.IsOn = true;
                     break;

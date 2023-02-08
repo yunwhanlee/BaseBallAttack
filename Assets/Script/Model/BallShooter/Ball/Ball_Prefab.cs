@@ -333,7 +333,7 @@ public class Ball_Prefab : MonoBehaviour
             }
             else{//* Damage Result
                 if(isDmgX2) result *= 2;
-                Debug.Log("Set DAMAGE:: result= " + result);
+                
                 bm.decreaseBlockHP(col.gameObject, result);
                 //* (BUG-30) Ball_Prefab::CritとかOneKillテキストEFとダメージ普通EFが一緒に発動するバグ対応。
                 if(!isInstantKill && !isCritical)

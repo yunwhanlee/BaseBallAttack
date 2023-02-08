@@ -7,9 +7,7 @@ using UnityEngine.Serialization;
 using UnityEngine.Purchasing;
 using System;
 
-public class DM : MonoBehaviour
-{
-    [Range(1, 6)] public Time timeScale;
+public class DM : MonoBehaviour{
     public static DM ins;    
     public HomeManager hm;
     public GameManager gm;

@@ -292,8 +292,13 @@ public class BossBlock : Block_Prefab{
     }
 
     public new void decreaseHp(int dmg) {
+        if(PsvSkill<int>.ONE_KILL_DMG == dmg){
+            
+        }
+
         int extraBossDmg = Mathf.RoundToInt(dmg * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.BossDamage].getValue());
         Debug.Log($"BossBlock::decreaseHp(dmg={dmg} + extraBossDmg={extraBossDmg})::");
+
         base.decreaseHp(dmg + extraBossDmg);
         // anim.SetTrigger(DM.ANIM.GetHit.ToString());
     }
