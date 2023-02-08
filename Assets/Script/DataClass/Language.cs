@@ -674,7 +674,7 @@ public static class LANG //* LANG
         catch(Exception errMsg){
             Debug.LogError(errMsg + "\n");
             Debug.LogError("idx= "+idx+"："+itemType+"List.FindIndexメソッドでresListと同じテキストがないでした。\n"
-               + "<color=cyan>" + str + "</color>(Prefabオブジェクト名)がそのInspectorViewでItemInfoスクリプトの<color=cyan>NameTxts</color>変数に作成した文字が同じなのかを確認してください！");
+                + "<color=cyan>" + str + "</color>(Prefabオブジェクト名)がそのInspectorViewでItemInfoスクリプトの<color=cyan>NameTxts</color>変数に作成した文字が同じなのかを確認してください！");
 
         }
         

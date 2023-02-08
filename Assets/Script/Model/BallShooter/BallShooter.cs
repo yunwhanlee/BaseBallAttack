@@ -76,6 +76,11 @@ public class BallShooter : MonoBehaviour
                 Vector3 goalDir = (gm.ballPreviewDirGoal.transform.position - entranceTf.position).normalized;
                 GameObject ins = Instantiate(ballPref, entranceTf.position, Quaternion.LookRotation(goalDir), gm.ballGroup);
 
+                //* (BUG-55) もしエラーで、DownWallコライダーのIsTriggerがFalseの場合、
+                //* 投げるボールが壁にぶつかってプレイヤーへ届かないので、Trueに戻す処理。
+                if(!gm.downWallCollider.isTrigger) 
+                    gm.downWallCollider.isTrigger = true;
+
                 throwBall(ins, goalDir);
             }
         }

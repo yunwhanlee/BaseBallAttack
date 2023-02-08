@@ -444,9 +444,9 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-53) 次のタンにまたレベルアップされちゃう。
     ✓ (BUG-54) LEVEL-UPした場合、"randIdx - 1"したことが原因で、Out Of Indexバグ発生。
 
+    ✓ (BUG-55) もしエラーで、DownWallコライダーのIsTriggerがFalseの場合、投げるボールが壁にぶつかってプレイヤーへ届かないので、Trueに戻す処理。
     - (BUG) 時々、Playシーンでモデルが出ない。
     - (BUG) ボースが一気に死んでしまう。
-    - (BUG) ボール打った後、壁が勝手に生成されてしまい、ボール打っても、ぶつかって跳ね返る。
 
     - (BUG) apkにビルドしたら、UpgradePanelのCheckBoxUIがMAXになってしまう。
     - (BUG) ステージが終わっても、Expオブや次に進まないＢＵＧ
