@@ -336,11 +336,14 @@ public class HomeManager : MonoBehaviour
         GPGSBinder.Inst.ShowAllLeaderboardUI();
     }
     public void onClickBtnQuestionMarkIcon() { DM.ins.displayTutorialUI(); SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());}
+
     public void onClickPremiumPackIconBtn() { 
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         premiumPackPanel.SetActive(true); 
     }
+
     public void onClickAchivementIconBtn() { achivementPanel.SetActive(true); SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());}
+
     public void onCLickRewardPanelOkBtn() {
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         showRewardItemListGroup.transform.DetachChildren();
@@ -892,11 +895,17 @@ public class HomeManager : MonoBehaviour
             premiumPackPriceTxt.text = $"$ { LM._.PREM_PACK_PRICE}";
         }
         else{
-            //* Close PremiumPackPanel 
-            premiumPackPanel.SetActive(false);
-            premiumPackFocusIcon.SetActive(false);
-            premiumPackIconBtn.interactable = false;
+            //* Close PremiumPackPanel
+            StartCoroutine(coWaitClosePremiumPackPanel());
+
         }
+    }
+    IEnumerator coWaitClosePremiumPackPanel(){
+        //* (BUG-58) IAP Button PremiumPackageで購入したら親パンネルがすぐ閉じちゃうとエラー。
+        yield return Util.delay0_1;
+        premiumPackPanel.SetActive(false);
+        premiumPackFocusIcon.SetActive(false);
+        premiumPackIconBtn.interactable = false;
     }
     private void createShowRewardItemPf(int idx, string valueStr){
         const int ICON = 0, TEXT = 1;

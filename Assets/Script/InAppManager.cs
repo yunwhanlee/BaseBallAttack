@@ -7,9 +7,6 @@ using UnityEngine.Purchasing;
 public class InAppManager : MonoBehaviour
 {
     [SerializeField] HomeManager hm;
-    // [SerializeField] Button checkBtn;
-    // IAPButton iapBtn;
-
 
     // DM.NAME id;
     void Start(){
@@ -17,18 +14,6 @@ public class InAppManager : MonoBehaviour
         hm = DM.ins.hm;
         // checkBtn.GetComponent<IAPButton>().enabled = false;
     }
-
-    // public void requestID(DM.NAME reqID){
-    //     iapBtn = checkBtn.GetComponent<IAPButton>();
-    //     Debug.Log("requestID:: reqID= " + reqID + "productID= " + iapBtn.productId);
-    //     // id = reqID;
-    //     iapBtn.enabled = true;
-    //     switch(reqID){
-    //         case DM.NAME.RemoveAD:
-    //             iapBtn.productId = "remove_ad";
-    //             break;
-    //     }
-    // }
 
 /// ------------------------------------------------------------------
 /// EVENT

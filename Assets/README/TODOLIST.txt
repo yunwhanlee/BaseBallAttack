@@ -443,10 +443,10 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-52) LEVEL-UPが連続でした場合、順番通り繰り返す。
     ✓ (BUG-53) 次のタンにまたレベルアップされちゃう。
     ✓ (BUG-54) LEVEL-UPした場合、"randIdx - 1"したことが原因で、Out Of Indexバグ発生。
-
     ✓ (BUG-55) もしエラーで、DownWallコライダーのIsTriggerがFalseの場合、投げるボールが壁にぶつかってプレイヤーへ届かないので、Trueに戻す処理。
     ✓ (BUG-56) ボースが一気に死んでしまう : Bossは、InstantKillが出来ないように
     ✓ (BUG-57) 時々スタートしたとき、BatEffect Transformが活性化していることを対応。
+    ✓ (BUG-58) IAP Button PremiumPackageで購入したら親パンネルがすぐ閉じちゃうとエラー。
     - (BUG) 時々、Playシーンでモデルが出ない。
 
 
