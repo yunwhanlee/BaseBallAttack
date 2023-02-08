@@ -647,7 +647,7 @@ public class GameManager : MonoBehaviour {
         comboCnt = 0;
         pl.Lv = 1;
         pl.Exp = 0;
-        pl.MaxExp = 100;
+        // pl.MaxExp = 100;
         pl.Start();
         bm.Start();
         //* Collect Drop Items Exp

@@ -99,7 +99,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("生きているターン")] public int DROPBOX_ALIVE_SPAN = 3;
 
     [Header("PLAYER")][Header("__________________________")]
-    [Tooltip("プレイヤー最大レベル")] public int MAX_LV = 50;
+    [Tooltip("プレイヤー最大レベル")] public int MAX_LV = 20;
     public List<float> MAX_EXP_LIST = new List<float>();
 
     [Header("PSV SKILL")][Header("__________________________")]
@@ -175,7 +175,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
 
     void Start(){
         Debug.Log("<FIBONACCI SEQUENCE> Player Max Exp");
-        MAX_EXP_LIST = Util._.getCalcFibonicciSequenceList(unit: 100, fibRatio: 2, MAX_LV);
+        MAX_EXP_LIST = Util._.getCalcFibonicciSequenceList(unit: 200, fibRatio: 2, MAX_LV);
         HOMERUN_MIN_POWER = HIT_RANK[B].Power;
         const int OFFSET_CNT = 1;
         GODBLESS_COMBO_SPAN -= OFFSET_CNT;

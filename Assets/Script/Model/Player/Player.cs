@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     [SerializeField] bool isStun = false;    public bool IsStun {get=> isStun; set=> isStun=value;}
     [SerializeField] int befLv;                public int BefLv {get=> befLv; set=> befLv=value;}
     [SerializeField] int lv = 1;                public int Lv {get=> lv; set=> lv=value;}
-    [SerializeField] int maxExp = 100;        public int MaxExp {get=> maxExp; set=> maxExp=value;}
+    [SerializeField] int maxExp;        public int MaxExp {get=> maxExp; set=> maxExp=value;}
     [SerializeField] int exp = 0;               public int Exp {get=> exp; set=> exp=value;}
 
     [Header("ACTIVE SKILL")][Header("__________________________")]
@@ -72,6 +72,8 @@ public class Player : MonoBehaviour
     public void Start(){
         gm = DM.ins.gm;
         em = gm.em;
+
+        MaxExp = (int)LM._.MAX_EXP_LIST[0];
 
         //* Player Model Set Parent
         BefLv = Lv;
@@ -268,10 +270,10 @@ public class Player : MonoBehaviour
         IsLevelUp = true;
         Lv++;
         Exp = 0;
-        MaxExp = (int)LM._.MAX_EXP_LIST[Lv];
+        MaxExp = (int)LM._.MAX_EXP_LIST[Lv-1]; //* LvをMaxExpリストのIndexとして使うため、-1する。
         em.createLvUpNovaEF(this.modelMovingTf.transform.position);
         em.createShowExpUITxtEF(gm.showExpUIGroup.transform, $"LEVEL UP!!");
-        Debug.Log($"LEVELUP:: setLevelUp():: Lv={Lv}, MaxExp={MaxExp}");
+        Debug.Log($"LEVELUP:: setLevelUp():: Lv={Lv-1}, MaxExp={MaxExp}");
     }
     public void destroyAllCastEF(){
         //* Arrow Tf
