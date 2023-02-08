@@ -579,6 +579,16 @@ public class HomeManager : MonoBehaviour
         int[] lvArrTemp = getItemPsvLvArr(playerModel);
         DM.ins.personalData.ItemPassive.setLvArr(lvArrTemp);
 
+        //* (BUG-57) 時々スタートしたとき、BatEffect Transformが活性化していることを対応。
+        var bat = Array.Find(playerModel.GetComponentsInChildren<ItemInfo>(), tf => tf.name.Contains("Bat"));
+        for(int i=0; i<bat.transform.childCount; i++){
+            if(bat.transform.GetChild(i).name == "BatEffectTf" && bat.transform.GetChild(i).gameObject.activeSelf){
+                Debug.Log($"{i}: {bat.transform.GetChild(i).name}, active? {bat.transform.GetChild(i).gameObject.activeSelf} -> OFF");
+                bat.transform.GetChild(i).gameObject.SetActive(false); 
+                return;
+            }
+        }
+
         //* Set Sky Style
         Debug.Log("onClickPlayBtn:: curStageSelectIndex= " + stageIndex);
         float offsetX = (stageIndex == (int)DM.MODE.NORMAL)? LM._.SKY_MT_MORNING_VALUE : LM._.SKY_MT_DINNER_VALUE; // 1=> Morning, 1.25=> dinner, 1.5=> night

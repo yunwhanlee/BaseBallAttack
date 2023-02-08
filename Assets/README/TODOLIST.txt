@@ -446,8 +446,9 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
 
     ✓ (BUG-55) もしエラーで、DownWallコライダーのIsTriggerがFalseの場合、投げるボールが壁にぶつかってプレイヤーへ届かないので、Trueに戻す処理。
     ✓ (BUG-56) ボースが一気に死んでしまう : Bossは、InstantKillが出来ないように
-
+    ✓ (BUG-57) 時々スタートしたとき、BatEffect Transformが活性化していることを対応。
     - (BUG) 時々、Playシーンでモデルが出ない。
+
 
     - (BUG) apkにビルドしたら、UpgradePanelのCheckBoxUIがMAXになってしまう。
     - (BUG) ステージが終わっても、Expオブや次に進まないＢＵＧ
