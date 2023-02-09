@@ -56,7 +56,7 @@ public class AdmobManager : MonoBehaviour{
         //* 広告表示が失敗したとき、呼び出す。
         rewardAd.OnAdFailedToShow += (sender, e) => {
             SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
-            Util._.displayNoticeMsgDialog("AD Show Fail");
+            Util._.displayNoticeMsgDialog(LANG.getTxt(LANG.TXT.ADShowFail.ToString()));
         };
         //* 広告を最後まで閲覧したとき、呼び出す。(途中で出たら、実行しない)
         rewardAd.OnUserEarnedReward += (sender, e) => {

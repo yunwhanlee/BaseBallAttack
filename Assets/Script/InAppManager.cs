@@ -65,7 +65,7 @@ public class InAppManager : MonoBehaviour
 
     public void onPurchaseFailIAP() {
         SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
-        Util._.displayNoticeMsgDialog("Purchase Fail");
+        Util._.displayNoticeMsgDialog(LANG.getTxt(LANG.TXT.PurchaseFail.ToString()));
         // init();
     }
 

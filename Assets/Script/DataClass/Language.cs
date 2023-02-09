@@ -15,6 +15,7 @@ public static class LANG //* LANG
 
         NotEnough, MsgNoSkill, MsgAlreadyRegistedSkill, MsgHardmodeLocked, 
         StageSelectNotice, SettingNotice,
+        ADShowFail, PurchaseFail, 
 
         //* Dialog
         DialogUnlock2ndSkill_Title, DialogUnlock2ndSkill_Info,
@@ -42,12 +43,15 @@ public static class LANG //* LANG
         PremiumPack, Coin, Diamond, RemoveAllADs,
         Purchase_Complete,
         HardMode, HardMode_Content1, HardMode_Content2,
+
         //* PSV
         Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, 
         ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage, 
         Laser, FireProperty, IceProperty, ThunderProperty,
+
         //* Unique PSV
         DamageTwice, GiantBall, DarkOrb, GodBless, BirdFriend,
+
         //* Upgrade (Only Needed Language)
         BossDamage, CoinBonus, Defence,
     };
@@ -182,6 +186,16 @@ public static class LANG //* LANG
         "If the gameplay is not smooth with frame drop, try lowering the Quality.",
         "フレームドロップでゲームプレイがスムーズでない場合は、クオリティーを下げてください。",
         "프레임 드롭으로 게임 플레이가 원활하지 않으면, 퀄리티를 낮춰보세요."
+    };
+    public static string[] ADShowFail = new string[]{
+        "AD Failed to show.",
+        "広告再生 失敗。",
+        "광고재생 실패."
+    };
+    public static string [] PurchaseFail = new string[]{
+        "Purchase Failed.",
+        "購入 失敗。",
+        "구입 실패."
     };
 
     //* DIALOG
@@ -479,6 +493,8 @@ public static class LANG //* LANG
         if(name == TXT.MsgHardmodeLocked.ToString()) res = MsgHardmodeLocked[CUR_LANG];
         if(name == TXT.StageSelectNotice.ToString()) res = StageSelectNotice[CUR_LANG];
         if(name == TXT.SettingNotice.ToString()) res = SettingNotice[CUR_LANG];
+        if(name == TXT.ADShowFail.ToString()) res = ADShowFail[CUR_LANG];
+        if(name == TXT.PurchaseFail.ToString()) res = PurchaseFail[CUR_LANG];
 
         //* DIALOG
         if(name == TXT.DialogUnlock2ndSkill_Title.ToString()) res = DialogUnlock2ndSkill_Title[CUR_LANG];
