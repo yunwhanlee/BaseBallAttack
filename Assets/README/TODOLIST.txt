@@ -468,6 +468,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ クリティカルダメージアップしても出来ない。
     ✓ TouchSlideControl.csで、ボール打つことをPointerUp -> Downに変更。
     ✓ HOME:: StageSelects:: NightMare ComingSoonイメージ追加及びGUI改善。
+    ✓ BlockMaker:: Heal Block Max超過したら 生成しない。
 
     【レベルリング】
     目標：最大プレイ時間：４時間ぐらい。
@@ -481,6 +482,21 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
             GOD : DIA 1000
 
         AtvSKill
+            Purchase : 300
+        
+    
+    BLOCK
+        TreasureChest
+            Hp : 1
+        Heal
+            Hp : 1
+            IncreasePercent : 0.05
+        Long
+            Hp : resHp * 5
+        Normal 
+            Hp : resHp
+        Obstacle
+            Hp : resHp
 
 
 

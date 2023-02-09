@@ -207,13 +207,11 @@ public class Block_Prefab : MonoBehaviour
 
         switch(kind){
             case BlockMaker.KIND.TreasureChest:
+            case BlockMaker.KIND.Heal:
                 Hp = 1;
                 break;
             case BlockMaker.KIND.Long:
                 Hp = resHp * 5;
-                break;
-            case BlockMaker.KIND.Heal:
-                Hp =  resHp / 2;
                 break;
             case BlockMaker.KIND.Normal:
             case BlockMaker.KIND.Obstacle:

@@ -86,6 +86,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("宝箱 ブロック％")] [Range(0, 100)] public int TREASURECHEST_BLOCK_PER = 5;
     [Tooltip("宝箱から出るオーブ数")] public int TREASURECHEST_ORB_CNT = 7;
     [Tooltip("ヒール ブロック％")] [Range(0, 100)] public int HEAL_BLOCK_PER = 5;
+    [Tooltip("ヒール ブロック 生成MAX数")] public int HEAL_BLOCK_CREATE_MAX_CNT = 3;
 
     [Header("DROP ITEM PERCENT")][Header("__________________________")]
     [Tooltip("リワード箱 ドロップ％(0～1000)")] [Range(0, 1000)] public int REWARD_CHEST_PER = 5;

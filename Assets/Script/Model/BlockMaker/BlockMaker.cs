@@ -90,6 +90,7 @@ public class BlockMaker : MonoBehaviour
                     for(int h=0; h<MAX_HORIZONTAL_GRID;h++){ //* 横⇔
                         i++;
                         var ins = blockPrefs[(int)type];
+
                         #region Block Kind or Skip
                         //* #1. Block Skip?
                         int rand = Random.Range(0,100);
@@ -101,15 +102,23 @@ public class BlockMaker : MonoBehaviour
 
                         //* #3. Block HealBlock?
                         rand = Random.Range(0,100);
-                        if(rand < LM._.HEAL_BLOCK_PER)   ins = blockPrefs[(int)KIND.Heal];
-
+                        if(rand < LM._.HEAL_BLOCK_PER){
+                            //* BlockMaker:: Heal Block Max超過したら 生成しない。
+                            if(getBlockCnt(KIND.Heal.ToString()) <= LM._.HEAL_BLOCK_CREATE_MAX_CNT){
+                                ins = blockPrefs[(int)KIND.Heal];
+                            }
+                            else Debug.Log($"Heal Block Max({LM._.HEAL_BLOCK_CREATE_MAX_CNT})!! 生成しない。");
+                        }
                         //* #4. Block生成
                         float x = offsetPosX + h * xs;
                         float y = (isFirstStage)? 0 : ins.transform.position.y + gm.blockGroup.position.y;
                         float z = (isFirstStage)? -v : OFFSET_POS_Z;
+
                         Vector3 pos = new Vector3(x, y, z);
                         Vector3 setPos = (isFirstStage)? pos + gm.blockGroup.position : pos;
+
                         var block = Instantiate(ins, setPos, Quaternion.identity, gm.blockGroup);
+
                         block.name = (i + block.name).ToString();
                         // block.transform.localPosition = new Vector3(x, y, z);
                         #endregion
@@ -318,5 +327,14 @@ public class BlockMaker : MonoBehaviour
             //* 属性が増えたら、下へ追加。
 
         }
+    }
+
+    private int getBlockCnt(string kind){
+        int cnt = 0;
+        for(int i = 0; i < gm.blockGroup.childCount; i++){
+            if(gm.blockGroup.GetChild(i).name.Contains(kind))
+                cnt++;
+        }
+        return cnt + 1; //* 現在Blockは含めなかったので、+1する。
     }
 }
