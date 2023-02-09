@@ -22,7 +22,7 @@ public class HealBlock : Block_Prefab
                         && hitBlock.kind != BlockMaker.KIND.TreasureChest
                         && hitBlock.kind != BlockMaker.KIND.Heal){
                         int v = (int)(hitBlock.Hp * LM._.HEAL_BLOCK_INCREASE_PER);
-                        int addHp = (v==0)? 2 : v;
+                        int addHp = (v==0)? 1 : v;
                         hitBlock.increaseHp(addHp);
                     }
                 }

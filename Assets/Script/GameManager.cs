@@ -219,6 +219,15 @@ public class GameManager : MonoBehaviour {
         bs = GameObject.Find("BallShooter").GetComponent<BallShooter>();
         bm = GameObject.Find("BlockMaker").GetComponent<BlockMaker>();
 
+        //* (BUG-59) Player Transform ZERO 初期化
+        Transform charaTf = pl.modelMovingTf.GetChild(0);
+        Debug.Log($"GM::Start():: Player({charaTf.name}) Transform ZERO初期化 : pos= {charaTf.localPosition} -> Vector3.zero, rot= {charaTf.localRotation} -> Quaternion.identity");
+        charaTf.localPosition = Vector3.zero;
+        charaTf.localRotation = Quaternion.identity;
+        
+        
+        
+
         SM.ins.sfxPlay(SM.SFX.StartGame.ToString());
         light = GameObject.Find("Directional Light").GetComponent<Light>();
         hitRangeSliderTf = hitRangeSlider.GetComponent<RectTransform>();

@@ -592,11 +592,6 @@ public class HomeManager : MonoBehaviour
             }
         }
 
-        //* (BUG-59) 時々、Playシーンでモデルが出ないこと対応。
-        Debug.Log("onClickPlayBtn:: playerModel.position= " + playerModel.position + ", rotation= " + playerModel.rotation);
-        playerModel.position = Vector3.zero;
-        playerModel.rotation = Quaternion.identity;
-
         //* Set Sky Style
         Debug.Log("onClickPlayBtn:: curStageSelectIndex= " + stageIndex);
         float offsetX = (stageIndex == (int)DM.MODE.NORMAL)? LM._.SKY_MT_MORNING_VALUE : LM._.SKY_MT_DINNER_VALUE; // 1=> Morning, 1.25=> dinner, 1.5=> night

@@ -447,7 +447,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-56) ボースが一気に死んでしまう : Bossは、InstantKillが出来ないように
     ✓ (BUG-57) 時々スタートしたとき、BatEffect Transformが活性化していることを対応。
     ✓ (BUG-58) IAP Button PremiumPackageで購入したら親パンネルがすぐ閉じちゃうとエラー。
-    ✓ (BUG-59) 時々、Playシーンでモデルが出ないこと対応。
+    ✓ (BUG-59) Player Transform ZERO 初期化。(再修正)
 
 
     - (BUG) apkにビルドしたら、UpgradePanelのCheckBoxUIがMAXになってしまう。
@@ -468,6 +468,20 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ クリティカルダメージアップしても出来ない。
     ✓ TouchSlideControl.csで、ボール打つことをPointerUp -> Downに変更。
     ✓ HOME:: StageSelects:: NightMare ComingSoonイメージ追加及びGUI改善。
+
+    【レベルリング】
+    目標：最大プレイ時間：４時間ぐらい。
+
+    PRICE
+        Player, Bat
+            GENERAL : COIN 5000
+            RARE : COIN 12000
+            UNIQUE : COIN 35000
+            LEGEND : COIN 80000
+            GOD : DIA 1000
+
+        AtvSKill
+
 
 
 
