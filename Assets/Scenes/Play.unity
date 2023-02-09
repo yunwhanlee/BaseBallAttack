@@ -33857,7 +33857,7 @@ GameObject:
   - component: {fileID: 1041613553}
   - component: {fileID: 1041613552}
   m_Layer: 5
-  m_Name: Label
+  m_Name: SkipTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62403,6 +62403,7 @@ MonoBehaviour:
   getRewardChestPanel: {fileID: 1195625194}
   showAdDialog: {fileID: 194144789}
   openTutorialDialog: {fileID: 1450830724}
+  openTutorialSkipTxt: {fileID: 1041613552}
   adDialogTitleTxt: {fileID: 1949728634}
   adDialogContentTxt: {fileID: 1274578847}
   askGiveUpDialog: {fileID: 1224453326}

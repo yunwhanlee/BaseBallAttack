@@ -26,7 +26,7 @@ public static class LANG //* LANG
         ErrorNetworkDialog_Title, ErrorNetworkDialog_Content,
 
 
-        Tutorial, OpenTutorial_Content,
+        Tutorial, OpenTutorial_Content, Skip_NextTime,
         TutorialA_Title, TutorialA_Content,
         TutorialB_Title, TutorialB_Content,
         TutorialC_Title, TutorialC_Content,
@@ -286,6 +286,11 @@ public static class LANG //* LANG
         "チュートリアルを見ますか？",
         "튜토리얼을 보시겠습니까?"
     };
+    public static string[] Skip_NextTime = new string[]{
+        "Skip Next Time",
+        "次からスキップする。",
+        "다음부터 스킵하기."
+    };
     public static string[] TutorialA_Title = new string[]{
         "1. Block", "1. ブロック", "1. 블록"
     };
@@ -522,6 +527,7 @@ public static class LANG //* LANG
         //* TUTORIAL
         if(name == TXT.Tutorial.ToString()) res = Tutorial[CUR_LANG];
         if(name == TXT.OpenTutorial_Content.ToString()) res = OpenTutorial_Content[CUR_LANG];
+        if(name == TXT.Skip_NextTime.ToString()) res = Skip_NextTime[CUR_LANG];
         if(name == TXT.TutorialA_Title.ToString()) res = TutorialA_Title[CUR_LANG];
         if(name == TXT.TutorialA_Content.ToString()) res = TutorialA_Content[CUR_LANG];
         if(name == TXT.TutorialB_Title.ToString()) res = TutorialB_Title[CUR_LANG];

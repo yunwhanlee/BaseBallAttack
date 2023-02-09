@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour {
     [Header("DIALOG")][Header("__________________________")]
     public RectTransform showAdDialog;
     public RectTransform openTutorialDialog;
+    public Text openTutorialSkipTxt;
     public Text adDialogTitleTxt;
     public Text adDialogContentTxt;
     public RectTransform askGiveUpDialog;
@@ -228,6 +229,7 @@ public class GameManager : MonoBehaviour {
         Array.ForEach(statusTxts, txt => txt.text = LANG.getTxt(LANG.TXT.Status.ToString()));
         rewardChestTitleTxt.text = LANG.getTxt(LANG.TXT.Reward.ToString());
         rewardChestOpenBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Open.ToString());
+        openTutorialSkipTxt.text = LANG.getTxt(LANG.TXT.Skip_NextTime.ToString());
 
         //* Ball Preview Dir Goal Set Z-Center
         setBallPreviewGoalRandomPos();
@@ -1069,10 +1071,12 @@ public class GameManager : MonoBehaviour {
         Text title = dialog.Find(DM.NAME.TitleTxt.ToString()).GetComponent<Text>();
         Text content = dialog.Find(DM.NAME.ContentTxt.ToString()).GetComponent<Text>();
         Text okBtn = dialog.Find("OkBtn").GetComponentInChildren<Text>();
+        Text cancelBtn = dialog.Find("CancelBtn").GetComponentInChildren<Text>();
 
         title.text = LANG.getTxt(LANG.TXT.Tutorial.ToString());
         content.text = LANG.getTxt(LANG.TXT.OpenTutorial_Content.ToString());
         okBtn.text = LANG.getTxt(LANG.TXT.Ok.ToString());
+        cancelBtn.text = LANG.getTxt(LANG.TXT.No.ToString());
     }
 
     public void displayAskGiveUpDialog(){

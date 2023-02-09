@@ -20,6 +20,9 @@ public class TutorialPanel : MonoBehaviour
     [SerializeField] RectTransform pageNaviGroup;
     [SerializeField] GameObject pageNaviIconPf;
     [SerializeField] GameObject[] pageNaviFocusIconArr;
+    [Header("Text")][Header("__________________________")]
+    [SerializeField] Text SkipTxt;
+
 
     void Start(){
         lastIdx = contentArr.Length - 1;
