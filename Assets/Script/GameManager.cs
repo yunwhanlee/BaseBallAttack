@@ -678,6 +678,7 @@ public class GameManager : MonoBehaviour {
             bs.init();
         }
         else{//* CAM1 On
+        Debug.Log("CAM1 On");
             State = GameManager.STATE.WAIT;
             ManageActiveObjects(isOnCam2);
             setTextReadyBtn(LANG.getTxt(LANG.TXT.Ready.ToString()));
@@ -685,6 +686,7 @@ public class GameManager : MonoBehaviour {
             setActivePreviewBendle(true);
             //* ActiveSkill Status
             StopCoroutine("corSetStrike");
+            bs.stopCoStop();
         }
     }
     
