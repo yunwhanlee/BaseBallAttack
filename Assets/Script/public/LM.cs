@@ -160,7 +160,8 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Header("AD REWARD")][Header("__________________________")]
     [Tooltip("レベルアップスロット、再回転に要するコイン")] public int REROTATE_SKILLSLOTS_PRICE_COIN = 200;
     [Tooltip("復活に要するダイアモンド")] public int REVIVE_PRICE_DIAMOND = 50;
-    [Tooltip("ルーレットチケットの待機時間")] public int ROULETTE_TICKET_COOLTIME_MINUTE = 30;
+    [Tooltip("ルーレットチケットの待機時間")] public int ROULETTE_TICKET_COOLTIME_MINUTE = 60;
+    [Tooltip("一日、ルーレットチケットAD制限数")] public int ROULETTE_TICKET_ONEDAY_AD_PLAY_MAX_CNT = 5;
 
     [Header("PREMIUM PACKAGE")][Header("__________________________")]
     [Tooltip("プレミアムパック購入：ルーレットチケット数")] public int PREM_PACK_ROULETTE_TICKET = 7;

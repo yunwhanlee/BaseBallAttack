@@ -64,7 +64,8 @@ public class AdmobManager : MonoBehaviour{
             SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
             switch(adType){
                 //* Home Scene
-                case DM.REWARD.ROULETTE_TICKET: 
+                case DM.REWARD.ROULETTE_TICKET:                     
+                    DM.ins.personalData.RouletteTicketOneDayAdPlayCnt++;
                     DM.ins.personalData.RouletteTicket++;
                     DM.ins.hm.showRoulettePanel();
                     break;

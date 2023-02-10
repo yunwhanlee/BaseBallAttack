@@ -19,6 +19,8 @@ public class PersonalData {
     [SerializeField] int diamond; public int Diamond {get => diamond; set => diamond = value;}
     [SerializeField] int rouletteTicket; public int RouletteTicket {get => rouletteTicket; set => rouletteTicket = value;}
     [SerializeField] string rouletteTicketCoolTime; public string RouletteTicketCoolTime {get => rouletteTicketCoolTime; set => rouletteTicketCoolTime = value;}
+    [SerializeField] int rouletteTicketOneDayShowAdCnt; public int RouletteTicketOneDayAdPlayCnt {get => rouletteTicketOneDayShowAdCnt; set => rouletteTicketOneDayShowAdCnt = value;}
+    [SerializeField] string rouletteTicketOneDayAdCntCoolTime; public string RouletteTicketOneDayAdCntCoolTime {get => rouletteTicketOneDayAdCntCoolTime; set => rouletteTicketOneDayAdCntCoolTime = value;}
 
     [Header("ONE TIME TRIGGER")][Header("__________________________")]
     [SerializeField] bool isHardmodeOn; public bool IsHardmodeOn {get => isHardmodeOn; set => isHardmodeOn = value;}
@@ -150,6 +152,8 @@ public class PersonalData {
         this.Diamond = data.Diamond;
         this.rouletteTicket = data.RouletteTicket;
         this.rouletteTicketCoolTime = (data.RouletteTicketCoolTime != null)? data.RouletteTicketCoolTime : DateTime.Now.ToString();
+        this.rouletteTicketOneDayShowAdCnt = data.rouletteTicketOneDayShowAdCnt;
+        this.rouletteTicketOneDayAdCntCoolTime = (data.rouletteTicketOneDayAdCntCoolTime != null)? data.rouletteTicketOneDayAdCntCoolTime : DateTime.Now.ToString();
 
         this.isChoiceLang = data.IsChoiceLang;
         this.isHardmodeOn = data.IsHardmodeOn;
@@ -248,6 +252,8 @@ public class PersonalData {
         this.diamond = 0;
         this.rouletteTicket = 1; //* 1つ上げるのは、ボーナス感じ。
 
+        this.rouletteTicketOneDayShowAdCnt = 0;
+        this.rouletteTicketOneDayAdCntCoolTime = DateTime.Now.ToString();;
         this.rouletteTicketCoolTime = DateTime.Now.ToString();
 
         this.isChoiceLang = false;

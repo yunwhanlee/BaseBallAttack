@@ -15,7 +15,7 @@ public static class LANG //* LANG
 
         NotEnough, MsgNoSkill, MsgAlreadyRegistedSkill, MsgHardmodeLocked, 
         StageSelectNotice, SettingNotice,
-        ADShowFail, PurchaseFail, 
+        ADShowFail, PurchaseFail, OneDayUsingMaxCntOver,
 
         //* Dialog
         DialogUnlock2ndSkill_Title, DialogUnlock2ndSkill_Info,
@@ -196,6 +196,11 @@ public static class LANG //* LANG
         "Purchase Failed.",
         "購入 失敗。",
         "구입 실패."
+    };
+    public static string [] OneDayUsingMaxCntOver = new string[]{
+        "1day Ad views exceeded!",
+        "1일 광고 조회수 초과!",
+        "1日の広告再生数 超過!"
     };
 
     //* DIALOG
@@ -500,6 +505,7 @@ public static class LANG //* LANG
         if(name == TXT.SettingNotice.ToString()) res = SettingNotice[CUR_LANG];
         if(name == TXT.ADShowFail.ToString()) res = ADShowFail[CUR_LANG];
         if(name == TXT.PurchaseFail.ToString()) res = PurchaseFail[CUR_LANG];
+        if(name == TXT.OneDayUsingMaxCntOver.ToString()) res = OneDayUsingMaxCntOver[CUR_LANG];
 
         //* DIALOG
         if(name == TXT.DialogUnlock2ndSkill_Title.ToString()) res = DialogUnlock2ndSkill_Title[CUR_LANG];

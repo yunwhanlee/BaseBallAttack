@@ -115,6 +115,7 @@ public class HomeManager : MonoBehaviour
     public GameObject roulettePanel;
     public Button rouletteIconBtn;
     public Text rouletteIconCoolTimeTxt;
+    public Text rouletteOnedayAdPlayCntTxt;
 
     [Header("PREMIUM PACKAGE")][Header("__________________________")]
     public GameObject premiumPackPanel;
@@ -407,10 +408,30 @@ public class HomeManager : MonoBehaviour
     public void onClickRouletteIconBtn(){
         Debug.Log("onClickRouletteIconBtn:: RouletteTicket= " + DM.ins.personalData.RouletteTicket);
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
-        if(DM.ins.personalData.RouletteTicket <= 0){
+        if(DM.ins.personalData.RouletteTicket <= 0){ //* AD Show Dialog 表示
+
+            //* 一日が過ぎたら、OneDay Ad Play Cnt 初期化
+            TimeSpan spanTime = DateTime.Now - DateTime.Parse(DM.ins.personalData.RouletteTicketOneDayAdCntCoolTime); //* TEST NEXT DAY => .AddHours(25);
+            if(Math.Abs(spanTime.Days) >= 1){
+                Debug.Log($"onClickRouletteIconBtn:: spanTime= {spanTime}, spanTime.Days= {Math.Abs(spanTime.Days)}");
+                DM.ins.personalData.RouletteTicketOneDayAdPlayCnt = 0;
+                DM.ins.personalData.RouletteTicketOneDayAdCntCoolTime = DateTime.Now.ToString();
+            }
+
+            //* 一日、AD利用回数をチェック
+            if(DM.ins.personalData.RouletteTicketOneDayAdPlayCnt >= LM._.ROULETTE_TICKET_ONEDAY_AD_PLAY_MAX_CNT){
+                Debug.Log("<color=red>onClickRouletteIconBtn:: RouletteTicket OneDay ShowAd Max Cnt OVER!!</color>");
+                Util._.displayNoticeMsgDialog(LANG.getTxt(LANG.TXT.OneDayUsingMaxCntOver.ToString()));
+                return;
+            }
             showAdDialog.gameObject.SetActive(true);
+
+            //* Oneday AD PlayCnt Text
+            rouletteOnedayAdPlayCntTxt.text = $"{DM.ins.personalData.RouletteTicketOneDayAdPlayCnt} / {LM._.ROULETTE_TICKET_ONEDAY_AD_PLAY_MAX_CNT}";
         }
-        else{
+        else{ //* Rolette Panel 表示
+            Debug.Log("onClickRouletteIconBtn:: Dialog表示");
+
             roulettePanel.gameObject.SetActive(true);
             homePanel.Panel.gameObject.SetActive(false);
             homePanel.GoBtn.gameObject.SetActive(false);
