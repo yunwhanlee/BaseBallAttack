@@ -34,8 +34,6 @@ public class BallShooter : MonoBehaviour
             isBallExist = true;
             coShootCountID = StartCoroutine(coShootCount());
         }
-        else{//* ボールが存在し、飛んでいる。★
-        }
     }
     public void init() {
         IsExclamationMarkOn = false;
