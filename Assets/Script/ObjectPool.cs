@@ -208,6 +208,7 @@ public class ObjectPool : MonoBehaviour
             : (sec == 1.5f)? Util.delay1_5
             : (sec == 2)? Util.delay2
             : (sec == 3)? Util.delay3
+            : (sec == 999)? Util.delayInfinite
             : Util.delay0;
         returnObject(ins, groupTf);
     }

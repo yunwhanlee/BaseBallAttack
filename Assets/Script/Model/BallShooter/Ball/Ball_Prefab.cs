@@ -12,6 +12,8 @@ public class Ball_Prefab : MonoBehaviour
     public Rigidbody rigid;
     public int aliveTime;
 
+    const int DELAY_INFINITE = 999;
+
     //* Value
     [SerializeField] bool isHitedByBlock = false;
     [SerializeField] bool isHomeRun = false;
@@ -258,7 +260,7 @@ public class Ball_Prefab : MonoBehaviour
                         }
                         case DM.ATV.PoisonSmoke:{
                             SM.ins.sfxPlay(SM.SFX.PoisonExplosion.ToString());
-                            int destroyCnt = 999;
+                            int destroyCnt = DELAY_INFINITE; //* (BUG-60) PoisonSmokeスキルでない。CoRoutine WaitforSencondsCashingについて、999秒のことがなかったため。
                             var ins = em.createAtvSkExplosionEF(skillIdx, this.transform, destroyCnt);
                             if(isHomeRun){
                                 float sc = 1.3f;

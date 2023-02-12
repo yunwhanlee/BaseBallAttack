@@ -271,7 +271,7 @@ public class EffectManager : MonoBehaviour
         //* Skill Idx
         string key = ObjectPool.DIC.AtvSkExplosionEF.ToString() + (gm.SelectAtvSkillBtnIdx == 0 ? "" : "2");
         var ins = ObjectPool.getObject(key, parentTf.position, rotate, gm.effectGroup);
-
+        Debug.Log($"SKILL=> {ins.name}, time= {time}");
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, time));
         return ins;
     }
