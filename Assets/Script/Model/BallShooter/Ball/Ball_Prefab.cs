@@ -38,7 +38,7 @@ public class Ball_Prefab : MonoBehaviour
     void FixedUpdate(){
         //* Destroy by Checking Velocity
         if(rigid.velocity.magnitude != 0 && rigid.velocity.magnitude < 0.9875f){
-            // Debug.Log($"BallGroup.childCount= {gm.ballGroup.childCount}, velocity.magnitude= {rigid.velocity.magnitude}");
+            Debug.Log($"BALL:: BallGroup.childCount= {gm.ballGroup.childCount}, velocity.magnitude= {rigid.velocity.magnitude}");
             checkDestroyBall();
         }
 
@@ -213,6 +213,7 @@ public class Ball_Prefab : MonoBehaviour
 //*
 //----------------------------------------------------------------
     void OnCollisionEnter(Collision col) { 
+        Debug.Log($"BALL:: OnCollisionEnter:: col= {col.transform.name}");
         #region ATV (HIT BLOCK)
         if(col.transform.name.Contains(DM.NAME.Block.ToString())
         || col.transform.name.Contains(DM.NAME.Obstacle.ToString())){ //* (BUG-3) 障害物もFreezeからだめーず受けるように。

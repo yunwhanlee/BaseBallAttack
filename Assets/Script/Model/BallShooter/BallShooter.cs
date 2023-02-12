@@ -8,7 +8,10 @@ public class BallShooter : MonoBehaviour
     //* OutSide
     public GameManager gm;
     public Player pl;
-    [SerializeField] bool isBallExist;   public bool IsBallExist { get => isBallExist; set => isBallExist = value;}
+
+    const string TWO = "2", ONE = "1", ZERO = "0", SHOOT = "SHOOT", NULL = "";
+
+    [SerializeField] bool isReadyShoot;   public bool IsReadyShoot { get => isReadyShoot; set => isReadyShoot = value;}
     [SerializeField] bool isExclamationMarkOn;   public bool IsExclamationMarkOn { get => isExclamationMarkOn; set => isExclamationMarkOn = value;}
     [SerializeField] float throwBallSpeed;
     [SerializeField] public GameObject ballPref;
@@ -28,27 +31,30 @@ public class BallShooter : MonoBehaviour
         if(gm.State == GameManager.STATE.GAMEOVER) return;
         if(gm.State == GameManager.STATE.WAIT) return;
 
-        //* 発射 前) ボールが存在しない (毎一回実行)
-        if(!isBallExist){
-            Debug.Log("BallShooter::");
-            isBallExist = true;
-            coShootCountID = StartCoroutine(coShootCount());
+        //* Ball Shoot (毎一回実行)
+        if(!isReadyShoot){
+            isReadyShoot = true;
+            coShootCountID = StartCoroutine(coShootCount()); //* ID登録
         }
     }
+/// -----------------------------------------------------------------
+/// 関数
+/// -----------------------------------------------------------------
     public void init() {
         IsExclamationMarkOn = false;
         throwBallSpeed = LM._.THROW_BALL_SPEED;
     }
+
     public IEnumerator coShootCount(){
         gm.readyBtn.gameObject.SetActive(true);
 
         //* Shoot Cnt
         SM.ins.sfxPlay(SM.SFX.CountDown.ToString()); 
-        gm.ShootCntTxt.text = "2";
+        gm.ShootCntTxt.text = TWO;
         yield return Util.delay1;
 
         SM.ins.sfxPlay(SM.SFX.CountDown.ToString()); 
-        gm.ShootCntTxt.text = "1";
+        gm.ShootCntTxt.text = ONE;
 
         //* 「!」Mark
         int rand = Random.Range(0, 100);
@@ -65,7 +71,7 @@ public class BallShooter : MonoBehaviour
             yield return Util.delay1;
 
             SM.ins.sfxPlay(SM.SFX.CountDown.ToString());
-            gm.ShootCntTxt.text = "0";
+            gm.ShootCntTxt.text = ZERO;
             yield return Util.delay1;
 
             SM.ins.sfxPlay(SM.SFX.CountDown.ToString());
@@ -74,12 +80,12 @@ public class BallShooter : MonoBehaviour
         //* Shoot Ball
         Debug.Log("BALL 発射！");
         SM.ins.sfxPlay(SM.SFX.CountDownShoot.ToString());
-        gm.throwScreenAnimSetTrigger("ThrowBall");
+        gm.throwScreenAnimSetTrigger(DM.ANIM.ThrowBall.ToString());
 
-        gm.ShootCntTxt.text = "SHOOT";
+        gm.ShootCntTxt.text = SHOOT;
         yield return Util.delay0_3;
-
-        gm.ShootCntTxt.text = "";
+        
+        gm.ShootCntTxt.text = NULL;
 
         Debug.Log("ballPreviewDirGoal="+gm.ballPreviewDirGoal.transform.position+", entranceTfPos="+entranceTf.position);
         Vector3 goalDir = (gm.ballPreviewDirGoal.transform.position - entranceTf.position).normalized;
@@ -93,16 +99,16 @@ public class BallShooter : MonoBehaviour
         throwBall(ins, goalDir);
     }
 
-    public void stopCoStop(){
+    public void stopCoShootCount(){
         if(coShootCountID != null){
             StopCoroutine(coShootCountID);
-            isBallExist = false;
+            coShootCountID = null;
+            isReadyShoot = false;
         }
     }
 
     public void throwBall(GameObject ins, Vector3 goalDir){
         gm.readyBtn.gameObject.SetActive(false);
-
         var ball = ins.GetComponent<Ball_Prefab>();
         int extra = Random.Range(0, 5);
         ball.Speed = (throwBallSpeed + extra) * Time.fixedDeltaTime;

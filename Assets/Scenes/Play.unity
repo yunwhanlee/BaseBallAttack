@@ -11287,7 +11287,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &312359681
 Transform:
   m_ObjectHideFlags: 0
@@ -62506,7 +62506,6 @@ MonoBehaviour:
   state: 1
   mode: 0
   timelineNum: 1
-  postProcessAnim: {fileID: 1335980416}
   effectGroup: {fileID: 831947632}
   ballGroup: {fileID: 1179223822}
   blockGroup: {fileID: 397967615}

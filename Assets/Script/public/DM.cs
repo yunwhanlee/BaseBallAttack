@@ -34,7 +34,10 @@ public class DM : MonoBehaviour{
         PsvSkillNormal, PsvSkillUnique,
     };
     public enum LAYER {BallPreview};
-    public enum ANIM {BossSpawnTxt_Spawn, DoSpawn, DoShake, Swing, DoBossSpawn, Die, IsHit, IsHitBall, IsIdle, IsFly, GetHit, Scream, Attack, Touch, HomeRun, DoOpen, DoBlur};
+    public enum ANIM {BossSpawnTxt_Spawn, DoSpawn, 
+        DoShake, Swing, DoBossSpawn, Die, IsHit, IsHitBall, 
+        IsIdle, IsFly, GetHit, Scream, Attack, Touch, HomeRun, 
+        DoOpen, DoBlur, ThrowBall};
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
     public enum HITRANK{S, A, B, C, D, E};
     public enum PANEL {Chara, Bat, Skill, CashShop, PsvInfo, Upgrade, NULL};

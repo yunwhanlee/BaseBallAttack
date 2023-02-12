@@ -675,8 +675,9 @@ public class GameManager : MonoBehaviour {
             ManageActiveObjects(isOnCam2);
             setTextReadyBtn(LANG.getTxt(LANG.TXT.Back.ToString()));
             setBallPreviewGoalImgRGBA(new Color(0.8f,0.8f,0.8f, 0.2f));
-            // pl.previewBundle.SetActive(false);
             bs.init();
+
+            pl.previewBundle.SetActive(false);
         }
         else{//* CAM1 On
         Debug.Log("CAM1 On");
@@ -685,9 +686,16 @@ public class GameManager : MonoBehaviour {
             setTextReadyBtn(LANG.getTxt(LANG.TXT.Ready.ToString()));
             //* (BUG)STRIKEになってから、BACKボタン押すと、PreviewLineが消えてしまう。
             setActivePreviewBendle(true);
+            bs.ExclamationMarkObj.SetActive(false);
             //* ActiveSkill Status
-            StopCoroutine("corSetStrike");
-            bs.stopCoStop();
+            // StopCoroutine(corSetStrike());
+            bs.stopCoShootCount();
+
+            //* 途中で辞めて戻ったら、PreviewBundle表示。
+            if(!bs.IsReadyShoot && !pl.DoSwing){
+                Debug.Log($"GM:: bs.IsReadyShoot= {bs.IsReadyShoot}, pl.DoSwing= {pl.DoSwing}");
+                pl.previewBundle.SetActive(true);
+            }
         }
     }
     
@@ -755,7 +763,7 @@ public class GameManager : MonoBehaviour {
             yield return Util.delay1_5;
             bs.init();
         }
-        bs.IsBallExist = false; //ボール発射準備 On
+        bs.IsReadyShoot = false; //ボール発射準備 On
         setBallPreviewGoalImgRGBA(new Color(0.8f,0.8f,0.8f, 0.2f));
     }
 
@@ -960,7 +968,7 @@ public class GameManager : MonoBehaviour {
         bm.DoCreateBlock = true; //* Block 生成
         downWallCollider.isTrigger = true; //* 下壁 物理 無視。
         Debug.Log($"<color=yellow>setNextStage:: downWallCollider.isTrigger={downWallCollider.isTrigger}</color>");
-        bs.IsBallExist = false;
+        bs.IsReadyShoot = false;
         pl.IsStun = false;
         readyBtn.gameObject.SetActive(true);
         fastPlayBtn.gameObject.SetActive(false);
