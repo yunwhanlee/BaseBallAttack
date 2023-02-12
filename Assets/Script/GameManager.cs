@@ -675,6 +675,7 @@ public class GameManager : MonoBehaviour {
             ManageActiveObjects(isOnCam2);
             setTextReadyBtn(LANG.getTxt(LANG.TXT.Back.ToString()));
             setBallPreviewGoalImgRGBA(new Color(0.8f,0.8f,0.8f, 0.2f));
+            // pl.previewBundle.SetActive(false);
             bs.init();
         }
         else{//* CAM1 On

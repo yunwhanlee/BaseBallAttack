@@ -138,7 +138,7 @@
         }
     },
     "m_Path": "Shader Graphs",
-    "m_ConcretePrecision": 0,
+    "m_ConcretePrecision": 1,
     "m_PreviewMode": 2,
     "m_OutputNode": {
         "m_Id": ""
@@ -304,6 +304,12 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.Rendering.Universal.ShaderGraph.UniversalSpriteUnlitSubTarget",
+    "m_ObjectId": "38f07791efeb4fae8d2a20910a0184f7"
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
     "m_ObjectId": "3e0c8cfc2685478da22ba613f22ebfda",
     "m_Group": {
@@ -335,12 +341,6 @@
     "m_Property": {
         "m_Id": "51517c8e479d4e6bb786342357fdbc5b"
     }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.Rendering.Universal.ShaderGraph.UniversalUnlitSubTarget",
-    "m_ObjectId": "4668d6e2f76a46e889a0cbfa5089e417"
 }
 
 {
@@ -803,7 +803,7 @@
     "m_Type": "UnityEditor.Rendering.Universal.ShaderGraph.UniversalTarget",
     "m_ObjectId": "ce535ed7e5b24ca29a9b5e7cc8e6783d",
     "m_ActiveSubTarget": {
-        "m_Id": "4668d6e2f76a46e889a0cbfa5089e417"
+        "m_Id": "38f07791efeb4fae8d2a20910a0184f7"
     },
     "m_SurfaceType": 1,
     "m_AlphaMode": 0,

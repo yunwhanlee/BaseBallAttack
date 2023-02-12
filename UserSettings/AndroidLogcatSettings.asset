@@ -11,18 +11,6 @@
         {
             "deviceId": "RF8NA0FXKJP",
             "name": "com.frontooth.baseballattack",
-            "processId": 23654,
-            "exited": true
-        },
-        {
-            "deviceId": "RF8NA0FXKJP",
-            "name": "com.Frontooth.BaseBallAttack",
-            "processId": 11573,
-            "exited": true
-        },
-        {
-            "deviceId": "RF8NA0FXKJP",
-            "name": "com.frontooth.baseballattack",
             "processId": 12898,
             "exited": true
         },
@@ -36,6 +24,18 @@
             "deviceId": "RF8NA0FXKJP",
             "name": "com.frontooth.baseballattack",
             "processId": 15545,
+            "exited": true
+        },
+        {
+            "deviceId": "RF8NA0FXKJP",
+            "name": "com.frontooth.baseballattack",
+            "processId": 25921,
+            "exited": true
+        },
+        {
+            "deviceId": "RF8NA0FXKJP",
+            "name": "com.frontooth.baseballattack",
+            "processId": 19301,
             "exited": true
         }
     ],
@@ -77,8 +77,8 @@
         "MemoryTypeEnabled": [
             true,
             true,
-            false,
-            false,
+            true,
+            true,
             true,
             true,
             true,
@@ -89,7 +89,7 @@
         "MemoryGroup": 1,
         "Behavior": 1
     },
-    "m_Filter": "LOAD",
+    "m_Filter": "",
     "m_FilterIsRegularExpression": false,
     "m_SymbolPaths": []
 }

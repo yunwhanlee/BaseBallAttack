@@ -102,7 +102,7 @@ public class DM : MonoBehaviour{
     public Material simpleSkyMt;
 
     void Awake() {
-        // Application.targetFrameRate = 60;
+        Application.targetFrameRate = 40;
         singleton();
     }
     void singleton(){
