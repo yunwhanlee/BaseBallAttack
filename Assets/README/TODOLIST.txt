@@ -450,7 +450,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-58) IAP Button PremiumPackageで購入したら親パンネルがすぐ閉じちゃうとエラー。
     ✓ (BUG-59) Player Transform ZERO 初期化。(再修正)
 
-
+    - (BUG) PoisonSmokeスキルでない。
     - (BUG) apkにビルドしたら、UpgradePanelのCheckBoxUIがMAXになってしまう。
     - (BUG) ステージが終わっても、Expオブや次に進まないＢＵＧ
     - (BUG) onClickCheckBtn::checkAtvSkillItemSelectionIsFirstTime CHARAとBATの場合購入したら出るバグがあるため、caseによって処理を分ける。
