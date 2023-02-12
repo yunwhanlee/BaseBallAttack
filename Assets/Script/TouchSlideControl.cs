@@ -39,8 +39,11 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     void Start(){
         playerOffsetX = pl.transform.position.x;
     }
-    
-    //*Event
+
+
+/// -------------------------------------------------------------------------
+/// TOUCH EVENT
+/// -------------------------------------------------------------------------
     public void OnPointerDown(PointerEventData eventData){
         if(gm.IsPlayingAnim) return;
         if(pl.IsStun) {
@@ -134,19 +137,18 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         }
 
         // SM.ins.sfxPlay(SM.SFX.PlayerPointerUp.ToString());
-
-        //* ボタンUI 活性化。
-        if(gm.ballGroup.childCount == 0){ //* (BUG)ただし、ボールが存在する場合はしない。
-            gm.readyBtn.gameObject.SetActive(true);
-            gm.activeSkillBtnGroup.gameObject.SetActive(true);
-        }
-        //* ボタンUI 活性化。
+        //* ボースの攻撃なら、ボタンUI 非表示
         BossBlock boss = bm.getBoss();
         if(boss && boss.isAttack){ //* ボスが存在し、攻撃のモーション中なら、表示しない。
             gm.readyBtn.gameObject.SetActive(false);
             gm.activeSkillBtnGroup.gameObject.SetActive(false);
         }
-        
+        //* ボタンUI 活性化。
+        else if(gm.ballGroup.childCount == 0){ //* (BUG)ただし、ボールが存在する場合はしない。
+            gm.readyBtn.gameObject.SetActive(true);
+            gm.activeSkillBtnGroup.gameObject.SetActive(true);
+        }
+
         backOriginPlayerMeshRdr();
 
         gm.isPointUp = true;

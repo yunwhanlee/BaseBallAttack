@@ -27,7 +27,7 @@ public class BossBlock : Block_Prefab{
     [SerializeField] List<Vector3> obstaclePosList;
     [SerializeField] Transform bossDieOrbSpawnTf;
     [SerializeField] Transform mouthTf;
-    public bool isAttack;
+    public bool isAttack;   public bool IsAttack { get => isAttack; set => isAttack = value;}
 
 
     private void OnDisable() {
@@ -48,7 +48,11 @@ public class BossBlock : Block_Prefab{
 
         float delay = isFirst? 0.45f : 0.1f;
         StartCoroutine(coBossScreamSFX(delay));
+
+        //* Scream
         this.anim.SetTrigger(DM.ANIM.Scream.ToString());
+
+
         // gm.postProcessAnim.SetTrigger(DM.ANIM.DoBlur.ToString());
         
         var randPer = Random.Range(0, 10);
@@ -110,8 +114,8 @@ public class BossBlock : Block_Prefab{
     IEnumerator coBossAttack(string attackAnimName){
         isAttack = true;
         Debug.Log($"BossBlock::coBossAttack()::"); //2.333333f
-        const float offsetX = 1.3f;
-        Vector3 playerPos = new Vector3(gm.pl.transform.position.x + offsetX, gm.pl.transform.position.y, gm.pl.transform.position.z);
+        const float OFFSET_X = 1.3f;
+        Vector3 playerPos = new Vector3(gm.pl.transform.position.x + OFFSET_X, gm.pl.transform.position.y, gm.pl.transform.position.z);
         float screamAnimTime = Util._.getAnimPlayTime(DM.ANIM.Scream.ToString(), this.anim);
         float attackAnimTime = Util._.getAnimPlayTime(attackAnimName, this.anim);
         float blessShootTiming = attackAnimTime * 0.5f;
@@ -123,7 +127,7 @@ public class BossBlock : Block_Prefab{
             gm.switchCamera();
         }
 
-        //* GUI OFF
+        //* Button UI OFF
         gm.readyBtn.gameObject.SetActive(false);
         gm.activeSkillBtnGroup.gameObject.SetActive(false);
 
@@ -186,7 +190,8 @@ public class BossBlock : Block_Prefab{
             });
         }
         else if(attackAnimName == BOSSATK_ANIM_NAME_LV4){ //* LV 4
-            for(int k=0; k<8; k++){
+            int randAttackCnt = Random.Range(3,6);
+            for(int k = 0; k < randAttackCnt; k++){
                 //* 途中でファイルボールを当たったら、すぐFor文を終了。
                 if(gm.pl.IsStun) break;
 
@@ -221,7 +226,8 @@ public class BossBlock : Block_Prefab{
             gm.pl.anim.SetBool(DM.ANIM.IsIdle.ToString(), false);
             gm.setNextStage();
         }
-        //* GUI ON
+
+        //* Button UI ON
         gm.readyBtn.gameObject.SetActive(true);
         gm.activeSkillBtnGroup.gameObject.SetActive(true);
         isAttack = false;
