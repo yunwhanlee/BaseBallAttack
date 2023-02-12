@@ -49,7 +49,7 @@ public class BossBlock : Block_Prefab{
         float delay = isFirst? 0.45f : 0.1f;
         StartCoroutine(coBossScreamSFX(delay));
         this.anim.SetTrigger(DM.ANIM.Scream.ToString());
-        gm.postProcessAnim.SetTrigger(DM.ANIM.DoBlur.ToString());
+        // gm.postProcessAnim.SetTrigger(DM.ANIM.DoBlur.ToString());
         
         var randPer = Random.Range(0, 10);
         if(obstacleResetCnt == 0) randPer = 0;
