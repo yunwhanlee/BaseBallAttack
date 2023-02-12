@@ -93,8 +93,9 @@ public class BallShooter : MonoBehaviour
 
         //* (BUG-55) もしエラーで、DownWallコライダーのIsTriggerがFalseの場合、
         //* 投げるボールが壁にぶつかってプレイヤーへ届かないので、Trueに戻す処理。
-        if(!gm.downWallCollider.isTrigger) 
-            gm.downWallCollider.isTrigger = true;
+        // if(!gm.downWallCollider.isTrigger){
+        //     gm.downWallCollider.isTrigger = true;
+        // }
 
         throwBall(ins, goalDir);
     }

@@ -196,6 +196,17 @@ public class GameManager : MonoBehaviour {
     public GameObject skySunObj;
     public GameObject skyMoonObj;
 
+    [Header("DropBox List")][Header("__________________________")]
+    public List<DropBox> dropBoxList;
+
+# if UNITY_EDITOR
+    [Header("DEBUG MT")][Header("__________________________")]
+    [SerializeField] bool isDownWallDebugMode;
+    [SerializeField]  GameObject activeDownWallArea;
+    [SerializeField]  Material debugRedMt;
+    [SerializeField]  Material debugBlueMt;
+# endif
+
     void Awake(){
         DM.ins.gm = this;
     }
@@ -296,7 +307,11 @@ public class GameManager : MonoBehaviour {
     }
 
     void Update(){
-        // Time.timeScale = timelineNum;
+        //* Debug Mode
+        # if UNITY_EDITOR
+            downWallCollider.GetComponent<MeshRenderer>().enabled = isDownWallDebugMode;
+            activeDownWallArea.GetComponent<MeshRenderer>().enabled = isDownWallDebugMode;
+        # endif
 
         BossBlock boss = bm.getBoss();
 
@@ -943,7 +958,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public List<DropBox> dropBoxList;
+    
     public void setNextStage() {
         if(IsFastPlay){
             IsFastPlay = false;
@@ -966,8 +981,12 @@ public class GameManager : MonoBehaviour {
         ++stage;
         comboCnt = 0;
         bm.DoCreateBlock = true; //* Block 生成
+
         downWallCollider.isTrigger = true; //* 下壁 物理 無視。
-        Debug.Log($"<color=yellow>setNextStage:: downWallCollider.isTrigger={downWallCollider.isTrigger}</color>");
+        #if UNITY_EDITOR
+        debugDownWallColliderTriggerMtColor(true); 
+        #endif
+
         bs.IsReadyShoot = false;
         pl.IsStun = false;
         readyBtn.gameObject.SetActive(true);
@@ -1116,4 +1135,13 @@ public class GameManager : MonoBehaviour {
         okBtn.text = LANG.getTxt(LANG.TXT.Ok.ToString());
         cancelBtn.text = LANG.getTxt(LANG.TXT.No.ToString());
     }
+
+    # if UNITY_EDITOR
+        public void debugDownWallColliderTriggerMtColor(bool isActive){
+            //? Blue色：collider.trigger= true  ボールが発射してプレイヤーが打つまで、下壁を非活性化(*物理演算 ON)。
+            //! Red色 : collider.trigger= false ボールが来てプレイヤーが打ち、ActiveDownWallAreaに届いたら、下壁を活性化(*物理演算 OFF)。
+            downWallCollider.GetComponent<MeshRenderer>().material = isActive? debugBlueMt : debugRedMt;
+        }
+    
+    # endif
 }

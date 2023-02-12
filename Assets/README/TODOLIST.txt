@@ -449,7 +449,13 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-57) 時々スタートしたとき、BatEffect Transformが活性化していることを対応。
     ✓ (BUG-58) IAP Button PremiumPackageで購入したら親パンネルがすぐ閉じちゃうとエラー。
     ✓ (BUG-59) Player Transform ZERO 初期化。(再修正)
-    - (BUG-60) PoisonSmokeスキルでない。CoRoutine WaitforSencondsCashingについて、999秒のことがなかったため。
+    ✓ (BUG-60) PoisonSmokeスキルでない。CoRoutine WaitforSencondsCashingについて、999秒のことがなかったため。
+    ✓ (BUG-61) nextStage()に行く時、時々downWallCollider.isTriggerがfalseのままになるBUG対応。
+        原因：原因：ボールが来る間にプレイヤーがSwingするとpl.Doswingがtrueになり、来ている領域がActiveDownWallだから、下の条件式に合ってしまうisTriggerが早くfalseなる。
+
+    - (BUG) POISONSMOKEスキルがボース戦で、カウントが下がらない。
+    - (BUG) ボールがまた打ったら、消えてしまう。。
+
     - (BUG) apkにビルドしたら、UpgradePanelのCheckBoxUIがMAXになってしまう。
     - (BUG) ステージが終わっても、Expオブや次に進まないＢＵＧ
     - (BUG) onClickCheckBtn::checkAtvSkillItemSelectionIsFirstTime CHARAとBATの場合購入したら出るバグがあるため、caseによって処理を分ける。
@@ -471,7 +477,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ BlockMaker:: Heal Block Max超過したら 生成しない。
     ✓ Roulette Ad Play Cnt & Max 生成、実装。
     ✓ Cam1に途中で辞めて戻ったら、PreviewBundle表示。
-    
+
     【レベルリング】
     目標：最大プレイ時間：４時間ぐらい。
 

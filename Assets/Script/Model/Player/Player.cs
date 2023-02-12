@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
 
     [Header("STATUS")][Header("__________________________")]
     [SerializeField] bool doSwing = false;      public bool DoSwing {get=> doSwing; set=> doSwing=value;}
+    [SerializeField] bool isHited = false;      public bool IsHited {get=> isHited; set=> isHited=value;}
     [SerializeField] bool isLevelUp = false;    public bool IsLevelUp {get=> isLevelUp; set=> isLevelUp=value;}
     [SerializeField] bool isGetRewardChest = false;    public bool IsGetRewardChest {get=> isGetRewardChest; set=> isGetRewardChest=value;}
     [SerializeField] bool isBarrier = false;    public bool IsBarrier {get=> isBarrier; set=> isBarrier=value;}

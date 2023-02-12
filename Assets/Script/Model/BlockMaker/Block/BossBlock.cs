@@ -11,9 +11,9 @@ public class BossBlock : Block_Prefab{
     const float OBSTACLE_OFFSET_Z = -9;
     const int OBSTACLE_STONE_CNT = 1;
     const float BOSS_HEAL_RATIO = 0.2f;
-    const int BOSS_DIE_ORB_CNT = 60;
+    const int BOSS_DIE_ORB_CNT = 30;
     const int STONE_PER = 100;
-    const int OBSTACLE_RESET_SPAN = 8;
+    const int OBSTACLE_RESET_SPAN = 5;
     const string BOSSATK_ANIM_NAME_LV1 = "Fireball Shoot";
     const string BOSSATK_ANIM_NAME_LV2 = "Flame Attack";
     const string BOSSATK_ANIM_NAME_LV3 = "Horn Attack";
@@ -51,31 +51,29 @@ public class BossBlock : Block_Prefab{
 
         //* Scream
         this.anim.SetTrigger(DM.ANIM.Scream.ToString());
-
-
         // gm.postProcessAnim.SetTrigger(DM.ANIM.DoBlur.ToString());
         
         var randPer = Random.Range(0, 10);
-        if(obstacleResetCnt == 0) randPer = 0;
+        // if(obstacleResetCnt == 0) randPer = 0;
         Debug.Log($"<color=yellow>BossBlock::activeBossSkill():: isFirst= {isFirst}, bossLevel= {bossLevel}, randPer= {randPer}, obstacleResetCnt= {obstacleResetCnt} / {OBSTACLE_RESET_SPAN}</color>");
         switch(bossLevel){
             case 1:
-                if(randPer <= 0){createObstacleSingleType(4);}
+                if(gm.obstacleGroup.childCount == 0){createObstacleSingleType(5);}
                 else if(randPer <= 3){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack(BOSSATK_ANIM_NAME_LV1));
                 break;
             case 2:
-                if(randPer <= 0 && obstacleResetCnt == 0){createObstaclePatternType(0, 2);}
+                if(gm.obstacleGroup.childCount == 0){createObstaclePatternType(0, 2);}
                 else if(randPer <= 3){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack(BOSSATK_ANIM_NAME_LV2));
                 break;
             case 3:
-                if(randPer <= 3 && obstacleResetCnt == 0){createObstaclePatternType(2, 4);}
+                if(gm.obstacleGroup.childCount == 0){createObstaclePatternType(2, 4);}
                 else if(randPer <= 3){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack(BOSSATK_ANIM_NAME_LV3));
                 break;
             case 4:
-                if(randPer <= 3 && obstacleResetCnt == 0){createObstaclePatternType(4, 7);}
+                if(gm.obstacleGroup.childCount == 0){createObstaclePatternType(4, 7);}
                 else if(randPer <= 3){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack(BOSSATK_ANIM_NAME_LV4));
                 break;
@@ -350,7 +348,7 @@ public class BossBlock : Block_Prefab{
         if(maxCnt > obstaclePosList.Count)
             maxCnt = obstaclePosList.Count;
         StartCoroutine(coObstacleSpawnSFX(obstaclePosList.Count));
-        singleRandom(Random.Range(1, maxCnt));
+        singleRandom(Random.Range(3, maxCnt));
     }
     private void createObstaclePatternType(int minIndex, int maxIndex){
         Debug.Log($"BossBlock::createObstacleStoneSkillPatternType()");

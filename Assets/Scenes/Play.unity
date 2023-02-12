@@ -138,7 +138,7 @@ GameObject:
   m_Layer: 11
   m_Name: DownWall
   m_TagString: Wall
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -188,7 +188,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1a0418b150dc1e1448c35ae9aa39157c, type: 2}
+  - {fileID: 2100000, guid: 338970dfe3d7f364a9dc75e128bcf626, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -17878,6 +17878,7 @@ MonoBehaviour:
   - {fileID: 725560445}
   hitRank: []
   doSwing: 0
+  isHited: 0
   isLevelUp: 0
   isGetRewardChest: 0
   isBarrier: 0
@@ -48801,7 +48802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gm: {fileID: 1623732227}
   pl: {fileID: 702911506}
-  isBallExist: 0
+  isReadyShoot: 0
   isExclamationMarkOn: 0
   throwBallSpeed: 20
   ballPref: {fileID: 2295754910549213891, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
@@ -62724,6 +62725,10 @@ MonoBehaviour:
   skySunObj: {fileID: 312059687}
   skyMoonObj: {fileID: 312059691}
   dropBoxList: []
+  isDownWallDebugMode: 0
+  activeDownWallArea: {fileID: 1957708814}
+  debugRedMt: {fileID: 2100000, guid: f4b42f7359e019947b7d92359bc4333b, type: 2}
+  debugBlueMt: {fileID: 2100000, guid: 338970dfe3d7f364a9dc75e128bcf626, type: 2}
 --- !u!1 &1628368614
 GameObject:
   m_ObjectHideFlags: 0
@@ -82438,7 +82443,7 @@ GameObject:
   m_Layer: 0
   m_Name: ActiveDownWallArea
   m_TagString: ActiveDownWall
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -82488,7 +82493,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1a0418b150dc1e1448c35ae9aa39157c, type: 2}
+  - {fileID: 2100000, guid: 338970dfe3d7f364a9dc75e128bcf626, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -48,10 +48,11 @@ public class Ball_Prefab : MonoBehaviour
     }
 
     void OnTriggerStay(Collider col) {
-        #region SWING BALL
+        #region HIT BALL
         if(col.transform.CompareTag(DM.TAG.HitRangeArea.ToString())){
             pl.setSwingArcColor("red");
             if(gm.State == GameManager.STATE.PLAY && pl.DoSwing){
+                pl.IsHited = true;
                 SM.ins.sfxPlay(SM.SFX.SwingHit.ToString());
                 
                 StartCoroutine(coDelayActiveFastPlayBtn()); //* ホームランしたとき、見えないようにしてBUG防止。
@@ -184,14 +185,20 @@ public class Ball_Prefab : MonoBehaviour
 //*
 //----------------------------------------------------------------
     void OnTriggerEnter(Collider col) {
-        //* (BUG-33) nextStage()に行く時、時々downWallCollider.isTriggerがfalseのままになるBUG対応。
+        //? (BUG-61) nextStage()に行く時、時々downWallCollider.isTriggerがfalseのままになるBUG対応。
+        //! 原因：ボールが来る間にプレイヤーがSwingするとpl.Doswingがtrueになり、
+        //!      来ている領域がActiveDownWallだから、下の条件式に合ってしまうisTriggerが早くfalseなる。
         // Debug.Log("Ball::OnTriggerEnter:: pl.DoSwing= " + pl.DoSwing + ", col.transform.tag= " + col.transform.tag);
-        if(pl.DoSwing && col.transform.CompareTag(DM.TAG.ActiveDownWall.ToString())){
+        if(pl.IsHited && pl.DoSwing && col.transform.CompareTag(DM.TAG.ActiveDownWall.ToString())){
             pl.DoSwing = false;
-            if(gm.State == GameManager.STATE.WAIT){
-                gm.downWallCollider.isTrigger = false;//*下壁 物理適用
-                Debug.Log("Ball::OnTriggerEnter:: setNextStage:: DM.TAG.ActiveDownWall col= " + col.name + ", downWallTrigger= " + gm.downWallCollider.isTrigger);
-            }
+            pl.IsHited = false;
+
+            gm.downWallCollider.isTrigger = false;//*下壁 物理適用
+            #if UNITY_EDITOR
+            gm.debugDownWallColliderTriggerMtColor(false);
+            #endif
+
+            Debug.Log("Ball::OnTriggerEnter:: setNextStage:: DM.TAG.ActiveDownWall col= " + col.name + ", downWallCollider.isTrigger= " + gm.downWallCollider.isTrigger);
         }
     }
 //----------------------------------------------------------------
