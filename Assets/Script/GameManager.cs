@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour {
     public EffectManager em;
     public BallShooter bs;
     public BlockMaker bm;
-    public GameObject throwScreen;
+    public Animator throwScreenAnim;
     public Transform hitRangeStartTf;
     public Transform hitRangeEndTf;
     public Transform deadLineTf;
@@ -68,11 +68,13 @@ public class GameManager : MonoBehaviour {
     [Header("PANEL")][Header("__________________________")]
     public GameObject strikePanel;
     public GameObject levelUpPanel;
+    private LevelUpPanelAnimate levelUpPanelAnimate;
     public GameObject pausePanel;
     public GameObject gameoverPanel;
     public GameObject victoryPanel;
     public RectTransform statusFolderPanel;
     public GameObject getRewardChestPanel;
+    private Animator getRewardChestPanelAnim;
 
     [Header("DIALOG")][Header("__________________________")]
     public RectTransform showAdDialog;
@@ -88,8 +90,9 @@ public class GameManager : MonoBehaviour {
     public Text stateTxt;
     public Text[] statusTxts = new Text[2];
     [SerializeField] Text shootCntTxt;      public Text ShootCntTxt { get => shootCntTxt; set => shootCntTxt = value;}
-    public RectTransform homeRunTxtTf;
+    public RectTransform homeRunTxtTf, bossStageBarRectTf;
     public Slider expBar, bossStageBar;
+    public Image bossStageBarFillImg, bossStageBarFrameImg, bossStageBarIconImg;
     public Color bossStageBarColorGray;
     public Color bossStageBarColorPink;
     public Text expBarTxt, bossStageTxt;
@@ -164,7 +167,9 @@ public class GameManager : MonoBehaviour {
 
     [Header("BUTTON")][Header("__________________________")]
     public Button readyBtn; //normal
+    private Text readyBtnTxt;
     public Button fastPlayBtn; //normal & hit ball
+    private Image fastPlayBtnImg;
     public Button reGameBtn; //gameoverPanel
     public Button pauseBtn; //pausePanel
     public Button continueBtn; //pausePanel
@@ -244,7 +249,6 @@ public class GameManager : MonoBehaviour {
         SM.ins.sfxPlay(SM.SFX.StartGame.ToString());
         light = GameObject.Find("Directional Light").GetComponent<Light>();
         hitRangeSliderTf = hitRangeSlider.GetComponent<RectTransform>();
-        readyBtn = readyBtn.GetComponent<Button>();
 
         bossLimitCntTxt.gameObject.SetActive(false);
         fastPlayBtn.gameObject.SetActive(false);
@@ -269,16 +273,16 @@ public class GameManager : MonoBehaviour {
             Vector3 pos = new Vector3(activeSkillBtnPf.anchoredPosition3D.x,
                 (i == 0)? activeSkillBtnPf.anchoredPosition3D.y : activeSkillBtnPf.anchoredPosition3D.y - 170,
                 activeSkillBtnPf.anchoredPosition3D.z);
-            RectTransform btn = Instantiate(activeSkillBtnPf, Vector3.zero, Quaternion.identity, activeSkillBtnGroup);
-            btn.anchoredPosition3D = pos;
+            Button btn = Instantiate(activeSkillBtnPf, Vector3.zero, Quaternion.identity, activeSkillBtnGroup).GetComponent<Button>();
+            btn.GetComponent<RectTransform>().anchoredPosition3D = pos;
             // var btn = activeSkillBtnGroup.GetChild(i).GetComponent<Button>();
             // btn.gameObject.SetActive(true);
             int idx = (i==0)? DM.ins.personalData.SelectSkillIdx : DM.ins.personalData.SelectSkill2Idx;
             //* ReActive AddEventListener
             int btnIdx = (idx==DM.ins.personalData.SelectSkillIdx)? 0 : 1;
-            btn.GetComponent<Button>().onClick.AddListener(() => onClickActiveSkillButton(btnIdx));
+            btn.onClick.AddListener(() => onClickActiveSkillButton(btnIdx));
             Debug.LogFormat("activeSkillBtn[{0}].onClick.AddListener => onClickActiveSkillButton({1})", i,btnIdx);
-            activeSkillBtnList.Add(new AtvSkillBtnUI(i, LM._.ATV_COOLDOWN_UNIT, pl.activeSkills[idx].Name, btn.GetComponent<Button>(), pl.activeSkills[idx].UISprite, activeSkillBtnEfMt));
+            activeSkillBtnList.Add(new AtvSkillBtnUI(i, LM._.ATV_COOLDOWN_UNIT, pl.activeSkills[idx].Name, btn, pl.activeSkills[idx].UISprite, activeSkillBtnEfMt));
         }
 
         //* Set Active Skill Damage
@@ -325,7 +329,7 @@ public class GameManager : MonoBehaviour {
         
 
         //* BOSS BAR & TEXT
-        bossStageBar.GetComponent<RectTransform>().anchorMin = new Vector2((boss? 0.15f : 0.5f), 0.5f);
+        bossStageBarRectTf.anchorMin = new Vector2((boss? 0.15f : 0.5f), 0.5f);
         bossStageBar.value = Mathf.Lerp(bossStageBar.value, 
             boss? ((float)boss.Hp / boss.MaxHp >= 0)? (float)boss.Hp / boss.MaxHp : 0
                 : (float)(stage % LM._.BOSS_STAGE_SPAN) / (float)LM._.BOSS_STAGE_SPAN
@@ -334,12 +338,9 @@ public class GameManager : MonoBehaviour {
             : sb.AppendFormat("{0} / {1}", stage % LM._.BOSS_STAGE_SPAN, LM._.BOSS_STAGE_SPAN).ToString(); // bossStageTxt.text = boss? $"{boss.Hp} / {boss.MaxHp}" : $"{stage % LM._.BOSS_STAGE_SPAN} / {LM._.BOSS_STAGE_SPAN}";
         sb.Length = 0;
         
-        Image fillImg = Array.Find(bossStageBar.GetComponentsInChildren<Image>(), img => img.transform.name == "Fill");
-        fillImg.color = boss? bossStageBarColorPink : bossStageBarColorGray;
-        Image iconFrameImg = Array.Find(bossStageBar.GetComponentsInChildren<Image>(), img => img.transform.name == "IconFrame");
-        iconFrameImg.color = boss? Color.white : bossStageBarColorGray;
-        Image iconImgImg = Array.Find(bossStageBar.GetComponentsInChildren<Image>(), img => img.transform.name == "IconImg");
-        iconImgImg.color = boss? Color.white : bossStageBarColorGray;
+        bossStageBarFillImg.color = boss? bossStageBarColorPink : bossStageBarColorGray;
+        bossStageBarFrameImg.color = boss? Color.white : bossStageBarColorGray;
+        bossStageBarIconImg.color = boss? Color.white : bossStageBarColorGray;
 
         //* ANOTHER TEXT
         stateTxt.text = State.ToString();
@@ -358,7 +359,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void setBallPreviewGoalImgRGBA(Color color) => ballPreviewGoalImg.color = color;
-    public void throwScreenAnimSetTrigger(string name) => throwScreen.GetComponent<Animator>().SetTrigger(name);
+    public void throwScreenAnimSetTrigger(string name) => throwScreenAnim.SetTrigger(name);
     public void setLightDarkness(bool isOn){ //* During Skill Casting ...
         light.color = (isOn)? Color.black : Color.white;
         // light.type = (isOn)? LightType.Spot : LightType.Directional;
@@ -385,7 +386,7 @@ public class GameManager : MonoBehaviour {
     public void onClickFastPlayButton(){
         Debug.Log("onClickFastPlayButton::");
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
-        fastPlayBtn.GetComponent<Image>().color = Color.red;
+        fastPlayBtnImg.color = Color.red;
         isFastPlay = true;
         Time.timeScale = 2.5f;
     }
@@ -395,7 +396,7 @@ public class GameManager : MonoBehaviour {
     IEnumerator coRewardChestOpen(){
         Debug.Log("coRewardChestOpen()::");
         initRewardChestPanelUI(isOpen: true);
-        getRewardChestPanel.GetComponentInChildren<Animator>().SetTrigger(DM.ANIM.DoOpen.ToString());
+        getRewardChestPanelAnim.SetTrigger(DM.ANIM.DoOpen.ToString());
         yield return Util.delay1RT; //* (BUG-10) RewardChestPanelが表示されるとき、Time.Scaleが０のため、RealTimeで動く。
         
         SM.ins.sfxPlay(SM.SFX.Upgrade.ToString());
@@ -485,10 +486,10 @@ public class GameManager : MonoBehaviour {
                 break;
             case PSVSKILL_TICKET:
                 Debug.Log("onClickRewardChestOkButton:: PSVSKILL_TICKET!");
-                levelUpPanel.GetComponent<LevelUpPanelAnimate>().IsPsvSkillTicket = true;
                 levelUpPanel.SetActive(true);
-                levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
-                levelUpPanel.GetComponent<LevelUpPanelAnimate>().setUI(DM.NAME.PsvSkillTicket.ToString());
+                levelUpPanelAnimate.IsPsvSkillTicket = true;
+                levelUpPanelAnimate.Start();
+                levelUpPanelAnimate.setUI(DM.NAME.PsvSkillTicket.ToString());
                 break;
             case ROULETTE_TICKET:
                 // DM.ins.personalData.addRouletteTicket(1);
@@ -633,12 +634,21 @@ public class GameManager : MonoBehaviour {
         pl.Exp = 0;
         bossLimitCnt = 0;
         sb = new StringBuilder();
+        bossStageBarRectTf = bossStageBar.GetComponent<RectTransform>();
+        bossStageBarFillImg = Array.Find(bossStageBar.GetComponentsInChildren<Image>(), img => img.transform.name == "Fill");
+        bossStageBarFrameImg = Array.Find(bossStageBar.GetComponentsInChildren<Image>(), img => img.transform.name == "IconFrame");
+        bossStageBarIconImg =  Array.Find(bossStageBar.GetComponentsInChildren<Image>(), img => img.transform.name == "IconImg");
+        getRewardChestPanelAnim = getRewardChestPanel.GetComponentInChildren<Animator>();
+        levelUpPanelAnimate = levelUpPanel.GetComponent<LevelUpPanelAnimate>();
+        readyBtn = readyBtn.GetComponent<Button>();
+        readyBtnTxt = readyBtn.GetComponentInChildren<Text>();
+        fastPlayBtnImg = fastPlayBtn.GetComponentInChildren<Image>();
     }
 
 #region AD REWARD
     public void setRerotateSkillSlots(){
         Debug.Log("setRerotateSkillSlots::");
-        levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
+        levelUpPanelAnimate.Start();
         rerotateSkillSlotsBtn.gameObject.SetActive(false);
         showAdDialog.gameObject.SetActive(false);//* ダイアログ閉じる
     }
@@ -712,7 +722,7 @@ public class GameManager : MonoBehaviour {
         }
     }
     private void setTextReadyBtn(string str){
-        readyBtn.GetComponentInChildren<Text>().text = str;
+        readyBtnTxt.text = str;
     }
     private void setActivePreviewBendle(bool trigger){
         if(0 < strikeCnt && ballGroup.childCount == 0)  
@@ -915,6 +925,7 @@ public class GameManager : MonoBehaviour {
             if(lv.Value > 0){
                 String levelTxt = (type == STATE.PAUSE.ToString())? ("x " + lv.Value.ToString()) : lv.Value.ToString();
                 var rowTf = Instantiate(pref, Vector3.zero, Quaternion.identity, parentTf).transform;
+                Text rowTxt = rowTf.GetComponentInChildren<Text>();
 
                 var imgObj = Instantiate(PsvSkillImgPrefs[i], Vector3.zero, Quaternion.identity, rowTf);
                 // Debug.Log("displayCurPassiveSkillUI:: imgObj.name= " + imgObj.name);
@@ -927,11 +938,11 @@ public class GameManager : MonoBehaviour {
                 //* Max Level TXT 表示。
                 var maxLv = PsvSkill<int>.getPsvMaxLVList(pl).Find(maxLv => (maxLv.Key == lv.Key));
                 if(lv.Value < maxLv.Value){
-                    rowTf.GetComponentInChildren<Text>().text = levelTxt;
+                    rowTxt.text = levelTxt;
                 }else{
-                    rowTf.GetComponentInChildren<Text>().text = "MAX";
+                    rowTxt.text = "MAX";
                     Color orange = new Color(1.0f, 0.4f, 0.0f);
-                    rowTf.GetComponentInChildren<Text>().color = orange;
+                    rowTxt.color = orange;
                 }
             }
             i++;
@@ -976,7 +987,7 @@ public class GameManager : MonoBehaviour {
         pl.IsStun = false;
         readyBtn.gameObject.SetActive(true);
         fastPlayBtn.gameObject.SetActive(false);
-        fastPlayBtn.GetComponent<Image>().color = Color.white;
+        fastPlayBtnImg.color = Color.white;
         pl.previewBundle.SetActive(true);
         destroyEveryBalls();
         setBallPreviewGoalRandomPos();
@@ -1049,7 +1060,7 @@ public class GameManager : MonoBehaviour {
                 rerotateSkillSlotsBtn.gameObject.SetActive(true);
                 //! (BUG-52) LEVEL-UPが連続でした場合、順番通り繰り返す。
                 levelUpPanel.SetActive(true);
-                levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
+                levelUpPanelAnimate.Start();
                 break;
             }
             yield return null;

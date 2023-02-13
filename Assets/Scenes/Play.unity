@@ -62525,7 +62525,7 @@ MonoBehaviour:
   em: {fileID: 689221855}
   bs: {fileID: 1350307814}
   bm: {fileID: 579925511}
-  throwScreen: {fileID: 1322018822}
+  throwScreenAnim: {fileID: 1322018826}
   hitRangeStartTf: {fileID: 896793084}
   hitRangeEndTf: {fileID: 2033124274}
   deadLineTf: {fileID: 587487858}
@@ -62566,8 +62566,12 @@ MonoBehaviour:
   - {fileID: 1008511334}
   shootCntTxt: {fileID: 946186242}
   homeRunTxtTf: {fileID: 477910093}
+  bossStageBarRectTf: {fileID: 0}
   expBar: {fileID: 1579494044}
   bossStageBar: {fileID: 205888219}
+  bossStageBarFillImg: {fileID: 0}
+  bossStageBarFrameImg: {fileID: 0}
+  bossStageBarIconImg: {fileID: 0}
   bossStageBarColorGray: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   bossStageBarColorPink: {r: 0.8980393, g: 0.3254902, b: 0.36862746, a: 1}
   expBarTxt: {fileID: 917257447}

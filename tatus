@@ -1,0 +1,1094 @@
+[33m68046a04[m[33m ([m[1;36mHEAD -> [m[1;32mdev[m[33m, [m[1;31morigin/dev[m[33m)[m ObjectPool:: SetTransformAndRotation(9
+[33m23a74963[m GM:: Update():: String -> StringBuilder
+[33m3dd062b7[m //* (BUG-62) POISONSMOKEスキルがボース戦で、カウントが下がらない。
+[33mcb4f2606[m (BUG-61) nextStage()に行く時、時々downWallCollider.isTriggerがfalseのままになるBUG対応。 原因：原因：ボールが来る間にプレイヤーがSwingするとpl.Doswingがtrueになり、来ている領域がActiveDownWallだから、下の条件式に合ってしまうisTriggerが早くfalseなる。
+[33ma30422da[m Boss Attack 時に、Button UI表示しない。
+[33mb5d90ac0[m expOrb Size Small & Rotation Freeze
+[33m4dbc3603[m Cam1に途中で辞めて戻ったら、PreviewBundle表示。
+[33m2f3a64ed[m Optimization Asset Mt
+[33m96fb7a30[m (BUG-60) PoisonSmokeスキルでない。CoRoutine WaitforSencondsCashingについて、999秒のことがなかったため。
+[33m27f3b6e5[m PostProcessing: Blur OFF -> Mobileでコストが沢山かかるたえ。
+[33mf8c478d6[m Block Mt 256 => 64に減らす。
+[33m01264f24[m Shader Optimization
+[33mb6b76aa3[m Profiling -> Texture2D Down Grade.
+[33m1456641e[m BallShooter:: Update -> CoroutineにReFactory
+[33me3ef91de[m Roulette Ad Play Cnt & Max 生成、実装。
+[33mbc75b7f2[m BlockMaker:: Heal Block Max超過したら 生成しない。
+[33mca2ad204[m (BUG-59) Player Transform ZERO 初期化。(再修正)
+[33m624b1636[m SkipTxt 言語設定。
+[33m0078cbcf[m LANG ADShowFail
+[33m69ec8aab[m (BUG-59) 時々、Playシーンでモデルが出ないこと対応。
+[33ma75b271a[m (BUG-58) IAP Button PremiumPackageで購入したら親パンネルがすぐ閉じちゃうとエラー。
+[33mac407005[m (BUG-57) 時々スタートしたとき、BatEffect Transformが活性化していることを対応。
+[33m706ad73d[m HOME:: StageSelects:: NightMare ComingSoonイメージ追加及びGUI改善。
+[33md265a3f6[m Ver1.0.5
+[33m9f0ec4e2[m (BUG-56) ボースが一気に死んでしまう : Bossは、InstantKillが出来ないように
+[33mc4574586[m (BUG-55) もしエラーで、DownWallコライダーのIsTriggerがFalseの場合、投げるボールが壁にぶつかってプレイヤーへ届かないので、Trueに戻す処理。
+[33m3f47a6bb[m MaxLevelList & LvをIndexに使うとき、-1する。
+[33meaba8674[m (BUG-53) これしないと、次のタンでまたレベルアップされるバグ発生。
+[33m79fd77ee[m (BUG-52) LEVEL-UPが連続でした場合、順番通り繰り返す。
+[33md89d9bbb[m (BUG-51) ボース死んだら出るORBの速度が大きすぎる対応。
+[33m78aa235d[m (BUG-50) 再ロードしたら、DM.ins.hmがNULLになり、全てのデータがちゃんと読みだされないバグ対応。
+[33mecebb313[m 最適化中、再シーンロードするとは発生するBUG直している。
+[33m1e9d6da4[m SCRIPT OPTIMIZATION:: ✅CoRoutine, GameObject.Find Cashing
+[33m91429efc[m GameObject.Find Cashing:: AdmobManager.cs
+[33md8297ac0[m SCRIPT OPTIMIZATION:: CoRoutine Cashing
+[33m3debc240[m errorNetworkDialog言語設定。
+[33meae013ac[m Play:: PausePanel TopNav 修正。＋Unlock2ndPanel言語修正。
+[33m5c03cead[m SettingNotice 順番間違えたこと修正。＋Home::TopNavへPanel生成。
+[33macaaae63[m LM::Cooldown -> 0.004に修正。
+[33m3271b57d[m FireDotDmgEF グラフィックが高くかかることを低く修正。
+[33m0cc5af60[m (BUG-49) 2ndAtvSkillBtnを解除した場合、両方Cooldownするバグ⇒一つが出来たら、残りができるように修正。
+[33m11fcfb9d[m unlock2nd
+[33m300ef8ae[m Favicon Registration
+[33m2fa3a335[m Dialog Panel Ratio 合わせる。
+[33m47a44b46[m (BUG-37) ゲームが開くとき（paused == true）にも起動されるので注意が必要。
+[33m6a007e9f[m Bat God Coin -> Diamond
+[33m865c54ed[m LevelUpPanelAnimate:: setRandomPsvSkillSlot():: 柔軟なスクロールのため、Idx追加したので、spriteHも＋
+[33m533717fd[m (BUG-48) モバイルビルドで、LevelUpScrollBtnの位置がずれるバグがありため、半分下に位置して上に戻す処理しない。
+[33m2e30c121[m (BUG-47) モバイルビルドしたら、最初Loadデータがなくなるバグ。*原因：最初言語設定でonClickSettingOkBtnからsaveしますが、collectionなどのデータがないまましちゃう。
+[33md426a3e4[m (BUG-46) CashShopの項目はIsLockは関係ないのにCheckBoxUI全てが、処理した後IsLockがFalseなら✓表示になってしまう。
+[33m6ba4631d[m cashShop:: RemoveADような一回のみ商品は、hm.setCheckBtnUninteractable()
+[33m127f30f7[m cashShop:: InAppBtn onClck Event Callback.
+[33m4f111cab[m (BUG-45) CASHSHOPへIAP BUTTONが追加され、onClickItem()でButton Componentで CurIdxを検索するのがずれるバグ対応。
+[33m68f9ae28[m ErrorNetwork Dialog +
+[33me38f2e74[m BestStage Emoji & Color Style 追加。
+[33mdb3e6298[m AdmobManager.cs:: setAdLoadStatusNoticeTxt() gmがNULLのこと対応。
+[33m10eb8f9d[m DM::BestStage適用
+[33me48353a9[m GPGS Login.
+[33mb1180cb5[m IAP Android.
+[33m449e77ad[m Key 追加　＋　IAPテスト：未実装。
+[33mf3ba6155[m Bat Light Set
+[33m426b8d70[m ！マーク少し対応。
+[33mfbbb54c0[m Admob Refactory12
+[33m55ebe7a2[m Admob Refactory
+[33m09496dff[m Admob a little bit Refactory
+[33mdb842959[m (BUG-44) 以前残ったイベント消す。
+[33mfde068fe[m Admob Reward 追加。Playシーンで、複数をテストすると、数が重なるバグ。
+[33m81405362[m Google Admob 適用中。
+[33mdfebfb7d[m Version class追加。
+[33m1e4cfff7[m Powel Panel box Revise
+[33mf846e122[m StartGame SFX 追加。
+[33md9123c9d[m SettingPanel ExpLog。
+[33m6ab49928[m 最初にアプリをスタートした時、言語を選択するダイアログ表示。
+[33m655c948b[m (BUG-43) ERROR Message Dialogが続いて生成されることを止める。
+[33m0d73c1c1[m StageSelectPanel 言語設定。
+[33mcd25a481[m //* (BUG-42) PLAYシーンで終了しても、購入したデータがセーブできるように。
+[33m991b01d4[m FastPlayBtn Hit Ballした後、早く再生するボタン追加。
+[33m34ab5332[m PLAY:: 途中でホームに戻ると、セーブができないことを教えるダイアログ表示。
+[33mcb6b06c3[m SetFinishGame RewwardChest 項目別に表示。
+[33m67f3155d[m PLAY:PassiveSkillPanelにスクロールを追加。
+[33m495b66c1[m HOME:: 現在 アイテムと回りのみ表示 ソースコード活性化。
+[33mb4569796[m HOME::CharaとBatの最後に選択したものが再開いても見えるようにする。
+[33m010d973d[m Leveling:: Upgrade項目価格とCoinBonus、BossDmg、DefenceをCoin⇒Diamondに切り替え。
+[33m3442cae5[m 連続アップグレード可能に : Skill & Upgrade。
+[33mb09bed62[m RouletteTicket Spin -> BtnClick Stopに変更。
+[33me6ca94d6[m PersonalData 初期化データ部分とUpgradeDt初期化部分を作成。
+[33mca95d05f[m ColorballPop SetGlowEF LenへColorBallPopCnt適用。
+[33md719d490[m AtvSkill Value -> LMか
+[33m8cef9790[m (BUG-40) ROULETTEチケットが０になったとき、string not valid エラー発生対応。
+[33mc5113749[m Drop Item Percent LM化
+[33m0ae0eb12[m BossDie -> createDropItemExpOrb popPower Set
+[33m982e965e[m BossFlySound 14sec -> 1sec切り替え。
+[33m80e7a0e7[m Bat ScrollRect AuraEF y 90 -> 0°に切り替え、表示非表示処理コメント処理。
+[33m7b37f155[m Optimization:: Bat :: 2D Image
+[33mcbdafd48[m BatScrollRect Item 3DModel as Child Image Add
+[33m4ebd6056[m Bat Items Texture Lower
+[33m099ec9af[m Scroll Bug 周りのみ表示することで、位置がずれることを選択したときに、全てを活性化することでできましたが、これもよくなさそう。改善中。
+[33m2cb90a3f[m Scroll Bug 改善する必要がある、改善中。
+[33m3dbc0f46[m TouchSlideControl.csで、ボール打つことをPointerUp -> Downに変更。
+[33m979a5e6e[m 最適化:: Chara, Bat選択するとき、プレームドロップ。-> 目に見えるObjectのみ表示。(最適化)
+[33m086e6e19[m ScrollView Frame Freeze 対策中。
+[33m32fe34c9[m LevelUpPanel Clickしてもできるようにもう一度修正。
+[33m82441662[m (BUG-40) ボースが死んでもボーススキールEFFFECTがする+ボース死んだら出るオブPOWERがデバイスによって違うので、強すぎる対応。
+[33m1eb49f31[m LEVELアップスロット:: 曲がる止めるのをパンネル全体範囲にする＋MaxLevelが有ったら、空のボックスがあるBUG修正。
+[33m3fe82e4f[m レベルアップスロットイメージが表示しない。（MAXになってもスロットが残っている。）半分OK
+[33m6e57c6c3[m Merge branch 'dev' of https://github.com/yunwhanlee/BaseBallAttack into dev
+[33m80e5457b[m CriticalDamage LevelPanel目録がなかったので、追加。
+[33m2e1ab54b[m Home UI Maskable On
+[33ma6b2ccbe[m 最適化:: 要らないRayCastをOFFPrefab
+[33m5e15f946[m 最適化:: PlayScene UI要素：要らないRaycastTarget Off
+[33m78b5034e[m Play::要らないオブジェクトのShadow Off
+[33ma833a79a[m 最適化:: Home: Setting Quality Opt済。
+[33m2ecfeab5[m 最適化:: Home:: GUI Quality Option追加。処理未、　Cube Plain -> Normalに切り替え。
+[33m188e8e21[m 最適化：Cloud Lightning OFF
+[33me442778b[m Terrain delete -> Jpg Image Change
+[33meaadf970[m Graphic My Very Low URP & Project Setting- Quailty.
+[33mfa010c4a[m 最適化：Project Setting Physics & Effect Collision Off
+[33m1d040e4e[m 最適化：Physics Check Refactory
+[33md4017c7e[m 最適化 Sound
+[33mc51c9e1a[m 最適化：要らないEventメソッド削除。
+[33m8100c377[m 最適化：More Low At Android Format
+[33m6e9a0b6b[m 最適化：Epic＆GUI。ObjectPoolingActiveOFF
+[33m6a974d92[m EPIC TOON Texture Memory less Work.
+[33mf95bb604[m (BUG-38) + (BUG-39)
+[33mfee081bf[m (BUG-38) RouletteStopSpeedCntがモバイルでは遅いので、２倍にして対応。
+[33m910e979a[m (BUG-37) ゲームが開くときにも起動されるので注意が必要。
+[33m964f62a8[m 最適化：SOUND & Model
+[33m2a9ecd04[m 最適化 Asset Animation Read/Write off & Texture maxSize , Compression ✓.
+[33m7b03af6f[m up
+[33m0f6a4ca1[m 最低化：要らないもの削除：AssetBundle.
+[33m316fc601[m All Object UnPrefabed
+[33m644f4c7e[m Gizmos Only Move in UnityEditor #if endif
+[33mcefc48a0[m TouchSpot Sound & Rerotate Btn Clicked -> erase.
+[33m9b41745c[m SM::SFX LASERはHOMERUNした時には、DELAY, HOME::UI::CheckBtnクリック音, バットを振る時、連続でタッチしても音が重ならないようにする
+[33md26d0353[m When Boss Scream, PostProcessBlur Ef
+[33m7a54c9da[m コンボー　⇒　コンボ。
+[33m6355fcb7[m ボースファイヤーボール & Heal EF修正。
+[33m886a7d7b[m SM::SFX ボース関連したSFX
+[33m7d3641e8[m SM::SFX Boss FireBallShoot & Explostion.
+[33madbdf6ca[m SM::SFX BossTargetMissle.
+[33m3edcd10f[m SM::SFX Defence, Stun.
+[33m5b52dcbf[m SM::SFX PSV Crit & InstantKill
+[33m807e2d2f[m SM::SFX PSV SKill. not yet Crit & OneKill
+[33m38e1fe17[m SM::SFX Psv Fire, Ice, Thunder, Laser
+[33mfe424d81[m (BUG-33) nextStage()に行く時、時々downWallCollider.isTriggerがfalseのままになるBUG対応。
+[33m1995aa32[m DownWall IsTriggerが変わらないバグを対応している中。
+[33m717c5b74[m SM::SFX AtvSkill
+[33m29582d5d[m SM::SFX Heal
+[33mad2b3c1d[m SM::SFX BlockSpan
+[33m58a727dc[m SM::SFX SwingHit Ballに当たらなかったのに、音出るバグ対応。
+[33m527737b0[m SM.SFX:: DropBox Pick & Spawn SFX
+[33m6a128b5f[m SM::SFX GetRewardChest
+[33mfc4d0020[m SM::SFX ExpUp
+[33m841bf560[m SM::SFX Swing & SwingHit & HomeRunCameraAnim追加。
+[33mec9baf7b[m SM:: AudioClip -> AudioSource形式に変更。 + CountDown SFX追加。
+[33me4c10cb4[m SM::SFX Home:: onClickPlayBtn Fail Sound set
+[33m6eb7c274[m Home::Roulette Spin Time.deltaTime 適用。
+[33m1639589f[m SM::SFX HOME:: RouletteReward SFX
+[33m2a966bc4[m SM::SFX LevelUpPanel, Victory, Defeat, Revive 追加。
+[33mc0297359[m SM::SFX GAME UI-Sound.
+[33m491f4bde[m SFX音声 SM追加 HOME OK。
+[33mb6083dbb[m (BUG-33) onClickCheckBtn::checkAtvSkillItemSelectionIsFirstTime CHARAとBATの場合購入したら出るバグがあるため、caseによって処理を分ける。
+[33mf127a5b0[m 他のスキルが選択されていないときは、✓表示する。選択されたら値段表示する。-> checkAtvSkillItemSelectionIsFirstTime
+[33medca307a[m %ダメージをInt化して０になるBUG対応。
+[33mddf04ae1[m AtvSkill::Upgradeダメージ設定(初期化)+LV表示
+[33m3255c8c1[m スキルアップグレードデータ 初期化。
+[33md73c41f7[m DataManager名がIceWaveになる小さなバグ対応。
+[33m1e88c74d[m DM:: DMなのに、EnumへDM.書いていること削除。
+[33m7b66daa1[m AtvSkillUpgradeList クラス作成。(PersonalDataへ保存・登録)
+[33m58bed154[m Skill_Infomation:: AtvSkill Thunder -> ThunderShotに変更。ダメージは一般にする。ボーナスが２倍ダメージに修正。（詐欺の気がしたから）
+[33m97cfbe7f[m Set Atv Skill Value Txt
+[33m6cefc879[m ATV SKILL DATA & COOL DOWN VALUE -> LV宣言。
+[33m585e31d7[m AtvSkillPanel Prefデザイン修正。
+[33m3cdb1fc7[m Ball_Prefab::Update -> FixedUpdate()
+[33m1f7af6ed[m StunEF改善。
+[33m0405c373[m PsvExplotionEF改善
+[33mdef602ee[m Premium CoinとDiaの変数が間違っていること対応。
+[33m1cd33aae[m HealEF & DarkOrbEF改善。
+[33m4d553148[m HealEF改善。
+[33m968a3127[m キャラクター位置移動するとき、テキスチャーそのままに変更。
+[33me7789867[m ボース制限時間UI改善。
+[33m7ebac310[m (BUG-31) 始めての場合、ダメージが０になるバグ対応。(BUG-32) ボールが投げて来ているとき、途中でブロックとぶつかるバグ対応。
+[33mcdef74fc[m Psv Damage LV当たり＋ & LV当たり * 0.1f 増加をパーセント追加。 && (BUG-30) Ball_Prefab::CritとかOneKillテキストEFとダメージ普通EFが一緒に発動するバグ対応。
+[33m6ab1e624[m em.createDmgTxtEF：一般ダメージ表示EF追加。criticalEF改善。
+[33mf897a303[m Achivement:: FocusIcon表示。(受け取るものがあればお知らせ用。)
+[33mfc32eac3[m Achivement:: InfoLangTxts
+[33m3f68ab2a[m Achivement::継承。
+[33m8a65cf39[m Achivement::collectBossKill():: bossCnt自動せってい。
+[33m9da77565[m Achivement::処理的には済み。
+[33m70cc0812[m GAME::PausePanel::ModeTxt追加。
+[33mee14c8b9[m Achivement:: UpgradeCnt & 飛んじゃったこと戻す(Achivement::AtvSkill,Bat,Chara)
+[33m98bf29c5[m Roulette UI sequence ずれたこと修正。＋Achivement Name const化
+[33mfbca9a83[m Achivement:: Goods 設定。
+[33m09f5ba73[m Achivement DestroyBlocksCnt Refactory
+[33m88fdbe48[m DestroyBlocksCnt
+[33ma5bb3354[m Achivement:: StageClear Refactory
+[33mea6a4646[m Achivement:: StageClear DisplayRewardPanel & Set Dt Reward. Not Refactory
+[33me9426ca4[m Achivement:: Set Data Sequence of StageClear
+[33m403bcc0b[m removeAll -> FindAllにしてBUG対応。
+[33m454c5d51[m Achivementスクリプト 作成。スタイルとかデータ設定は未。
+[33m045c67ec[m AchivementPanel active & Inactive func
+[33m1af2a657[m achivement Panel 生成。
+[33mdcb20c97[m Home:: AchivementIcon Btn & LeaderBoardIcon Btn 追加。
+[33mae690115[m 要らないPACKAGE DEMO削除。
+[33m2c5d3c72[m GUI PRO KITにある、Charactor_Detailを通じて、SKILLとSTATS関したICON追加及びGUI修正。
+[33m310dd13f[m Skill Purchase Coin -> Diamond
+[33m6927b08e[m Not Enough GoodsTypeStrにして、ダイアログ表示改善。
+[33m1c8d30ab[m (BUG-29) HOME::ItemInfo:: SkillはRANK値段が適用しないように。
+[33mafb1f57e[m HARDMODE GET REWARD COIN & DIAMOND + DISPLAY PLAY BTN ICON COIN & DIAMOND BONUS UI.
+[33mc4110627[m hardmode coin & diamond add bonus
+[33m8e1d9b11[m GM::setFinishGame -> setVictory & setGameOver
+[33m8a1d9163[m Boss HardMode Set HP Prefab + TreasureChest_Orb_Cnt 10 -> 7
+[33m67c08d4f[m HM:: setStageSelectUIList:: Set Stage Range Set
+[33mea33137d[m Boss HardMode kind of 4type Add
+[33m79a3f433[m Sky Sun And Moon Style Set
+[33m28cae85b[m Android Platform Apply :: Terrain light is so Bright resolve?
+[33m46ecb432[m Sky Design HOME:: onClickPlayBtn => Morning or Night.
+[33mb1994cdc[m 壁にぶつかったEFFECTや他のEFFECT改善。
+[33m99ac04da[m MsgHardmodeLocked
+[33m170e8423[m REFACTORY:: Block_Prefab.csで、setHpするとき、毎回リストを作る無駄な部分をbm.HpCalcList変数生成して改善。
+[33mee61defd[m (BUG-28) LM::MAX_STAGE変数追加。blockHpListを作るとき、MAX値を超えると、実行できないBUGを対応。+ HarModeEnablePanel Set Lang
+[33mf3164a28[m HardModeNoticeDialog表示＋StageSelectPanel 追加。
+[33m720314b0[m VictoryPanel Effect改善。LM::VICTORY_BOSSKILL_CNT追加。
+[33mebd0ca6c[m In-GAME:: Panel Btn Text追加。Victoryパンネル追加。
+[33me9c21ba5[m Wall BottomRockBlock Design追加。
+[33m6f363ffa[m CashShop::チェックボタン⇒ Doller Iconが横向きだと左にずれるので、縦整列に修正。
+[33m920b1db4[m (BUG-27) DM::setUIRemoveAD:: IsRemove ItemInfoのIsLockパラメータをTrueにする。
+[33m1dbdb324[m //* (BUG-27) DM::setUIRemoveAD:: IsRemoveを購入したら、CashShopにある目録も購入完了にする。
+[33m28973632[m (BUG-26) HomeEFManager::createItemBuyEF:: parent -> MainCanvasにして、後ろのGUIボタンが押されるバグを対応。
+[33m26bcf777[m Map Design Terrian + BackGround Obstacle
+[33m9bd01a9f[m LANG::Purchase_Complete
+[33me931d0ca[m (BUG-25) Util::displayNoticeMsgDialog() z軸もっと前に調整。Sub-Canvas設定して、PlayerとBatモデルの場合も手前に対応。
+[33md8c4516c[m Sky Cloud Anim.
+[33m50a359cc[m BallShooter::coClearShootCntTxt
+[33m8fe56ad6[m baseball Filed Design.
+[33m477e7cea[m Upgrade Item Set LVデザイン化。
+[33m5e32b29c[m Roulette Set Min Speed
+[33m4f646a2a[m RemoveADなど一回限り商品：再購入できないように。
+[33m23801ca2[m setShowADreward DM.ins.personal.IsRemoveAD
+[33m1b0b9868[m Merge Lang
+[33m3df03302[m ゲームを３回以上プレイしたら、App-Reviewダイアログ表  まだみかん。
+[33m58d3bc08[m CashShop:: Purchase Item Show Reward Panel and Set Coin or Diamond Data.
+[33mbe63aa3f[m Home AtvSkill 枠色と太さ修正。
+[33mf08924d9[m RateDialog Language Set
+[33m725c4155[m BossTargetMissile Speed And Delay Time Revise
+[33m307d5ed5[m Set LM:: Stage Per Coin + AD -> CoinX2Label
+[33m7982ede8[m DropBOX 日程ターンが過ぎたら、削除。
+[33ma08b0b99[m 選択したステージに合わせて、Playしたら、ステージ数が変わる。
+[33m377ee287[m ステージ NEW LABEL追加。
+[33m230110e8[m ステージGUI用意。+ (BUG-22) For分内にonClick.AddListener(int i)すると、Indexが全てLast+1になるバグ対応。
+[33m0a4ec0bf[m StageSelectPanel Basic
+[33m314ad1b4[m PremiumPack checkPremiumPackPurchaseStatus Coroutineになったことなしにする。要らないから。
+[33mb4e1b13f[m (BUG-21) ObstacleがBlockに当たっても、破壊されない。
+[33m25b1ee6f[m DropBox: Coin Image changed.
+[33m40717fc7[m Upgrade Panelでは、MAXレベルになったら、CheckBoxBtnのUIもアイテムによって変更。
+[33m5d576335[m HOME:UPGRADEアイテム購入したら、EF(揺れるアニメ, UpgradeItemEF)追加。 +  (BUG-20) MAX-LVなら、「お金が足りない」ダイアログ表示しない。
+[33m183af39b[m HOME:CheckBox、PriceクラスへCASHアイコン追加及び対応。
+[33m892b61c2[m PREMIUM PACKAGE Set ShowReward ItemPfs 購入したら、中身を確認するPANEL追加。
+[33mfaaf57f0[m onClickPremiumPackPurchaseBtn - IN-APP-PURCHASE
+[33m88a56b42[m これからTODOリスト作成。
+[33m3d3897a4[m チュートリアル:LoadingSceneで、モデルが見えないように、Gameシーンになったらモデルが見えないようにずらした位置を戻す。 & PREMIUM PACKAGE:HOME SCENE:: UIと基本の処理済み。
+[33m295325a1[m Loadingシーンで、大きさが違うこと改善、Gameシーンで、DialogをOpenボタン押したら、非表示。
+[33m37a41a00[m Loading画面同期化。ランダム。 & GameScene TutorialOpenダイアログ表示＋PauseパンネルでTutorialアイコンボタン追加。
+[33m9a76c5d3[m Tutorialダイアログ。
+[33mc09779d8[m チュートリアル：Panel And Page 表示処理。
+[33md783aa02[m Tutorial イメージ追加。
+[33mdb59724f[m JoyStick Design変更。
+[33m23de0260[m Roulette タイトルUI追加。
+[33ma0e882d4[m BossStageBar Color Set
+[33mb364b615[m (BUG-19) BossTargetMissilePrefが再度登場したら、init()で初期化したのに、速度とかCoroutine待機時間などが可笑しい。
+[33m2e9a0bc1[m (BUG-18) BombBlockの処理が可笑しい。(エフェクトとかか重なったり)
+[33m466d0726[m BallShooter Y Axis調整。
+[33m49b04e16[m DropBox:: PsvSkillCoolDown処理も完了。+ 単一に分けていた変数削除：DropBoxPfArrだけで管理。Dm.でDROPBOXのEnum作成。--amend
+[33m50920e05[m DropBox:: PsvSkillCoolDown処理も完了。
+[33m3eb855d8[m PSVスキルクールタイム無くすAtvSkillCoolDown追加
+[33m0c9d7980[m ShieldBarrierEF中にGetSpawnEF 追加。
+[33m3c17b3cd[m DropBox:: Questionボックスを得たら、コインが習得するＵＩ表示。
+[33mc58cf118[m (BUG-17) ボールがベットから打たれる前に(BallShooterから投げる)時にはDropBoxと当たり判定処理しない。
+[33m9734b060[m DropBox: Speed調整は可笑しい部分が有るので、startDelay変数追加。Coroutineで自然に対応。
+[33m589a3929[m Ballが早かったら、物理衝突が上手くできない。Ball_PrefabのSpeedに関した部分 * Time.DeltaTimeがないでした。        対応：
+[33ma9b41b30[m CoinIconPf生成。QuestionBoxの場合、生成及びLerpで位置移動。
+[33mc12ebb85[m ボースの攻撃を防止したら、Barrierを消す。-> pl.getBarrierObj()生成。
+[33md29ec4ad[m DropBox Shieldが活性化していたら、重ならないようにIndexから除外(０番目 INDEX)
+[33mdcf714f9[m DropBox:: OnCollision処理➡Triggerに変更。　当たったら習得関したEffect適用＋効果EFFECTも追加＋テキスト。
+[33m75d654d0[m DropBox.csで、Ballを当たったら、ObjectPoolに戻す処理。しかし、物理演算があり、無くす必要ある。
+[33maac23980[m DropBox ランダムでフィールドに生成されるお得なボックス: ランダムで生成。BlockMakerで、createRandomDropBox()関数生成。
+[33m9e04d7eb[m ブロックが壊れたら、ボースを攻撃するミサイル生成。
+[33m353bb222[m 要らないスクリプト削除：OverLapCheckBoxCollider
+[33ma7976901[m EXP表示UIで、LevelUpPanelとかRewardChestPanelが出た場合、Indexが後ろにするように。
+[33m420bc4a5[m EXP表示UI追加。-> GM:: ShowExpUIGroup, EffectManager:: showExpUITxtEF。
+[33mfe4a6462[m coCheckGetRewardChestは待機時間あると、フリーズかかるBUGあるので、消す。
+[33m1b60c501[m LvUpNovaEF追加。
+[33mdd1427a3[m Leveling:: HealBlock
+[33m1ef98742[m (BUG-12)LevelUpPanelが最初に表示するとき、Start()が実行される、PSVスキル選びがLevelに上書きされるバグ対応。
+[33m5c27d2a6[m (BUG-16)LevelUpPanelが最初に表示するとき、Start()が実行されるので、UIスタイル変更が上書きされ、できない。-> Lv2まではPSV_TICKETができないように設定。+LevelUpPanel setUI追加。
+[33m2c61fdbd[m (BUG-15) Reward Or LevelUpPanel出た時、ボスが動くので、タイム停止する処理。
+[33m55794e41[m Bug-12, 13, 14, 15, GM::Coroutineの中、while文でUpdate()ように活用。
+[33mc6ae3a82[m UpgradePanel Item Listで、順番が間違えたこと修正：Critical <-> CriticalDamage
+[33md0a2a56f[m (BUG-11) UpgradePanel:: UpgradeDt.getVal2Strで、致命打が10%になった場合、Floatなので、9.9999999になるエラー対応。
+[33mdd83bf96[m (BUG-10) RewardChestPanelが表示されるとき、ボース攻撃とかを無効にしないとだめなので、Timeを０にする。
+[33ma1d819a4[m レベルリング。Block.Hp
+[33m891070d4[m レベルリング Block.Hp
+[33m4dbc3f8f[m Home:: Panel TitleName Set Language, 1st, 2nd Skill set Lang
+[33m0633c068[m ItemPanel GUI テキストフォントなど改善。
+[33m7ffac6de[m Prefabディレクトリ整理：TempPrefab
+[33m06942b8b[m ItemPsvInfoBtn:: 位置調整。
+[33md3f7d912[m CharaとBatのItemPanelの場合、Infoボタンクリックで、Passiveダイアログ表示。
+[33m3d578099[m CharaとBatのItemPanelの場合、Infoボタン追加。(クリックしたら、PassiveSkill情報見やすく表示。)
+[33m5e2ba501[m Home:: Chara & Bat ItemPassivePanel Scale 大きく調整。よく見えない。
+[33mb866a8fe[m Batモデル Rank＋スキル 設定。
+[33m6952ecb8[m Playerモデル Rank＋スキル 設定。+ CharaとBatのPassiveスキルの種類分ける。
+[33mf0fb1510[m LMスクリプト。ValueへToopTop作成 + InfoInfo:: ItemPsvDtへimgPrefがInspectorViewで邪魔なので、HideInInspectorする。
+[33mb0396e28[m LMスクリプト。ValueへToopTop作成。
+[33m0649c123[m LM InspectorView整理。
+[33mf444622c[m Roulette 取得Btnがある場合は、Exitでそのまま出るBUG対応。EFFECT追加。
+[33m8d7aba4c[m Roulette UI 言語。
+[33mb3522abe[m Roulette広告：DateTimeを使って、クールタイム実装 + RouletteスライドPower機能追加
+[33m81e5f284[m Roulette角度に合わせて、補償決める + 基本機能実装 + REFACTORY~
+[33mf9d32aeb[m Roulette角度についてベース対応＋ShowAdパンネル追加。
+[33m81490a1a[m RouletteSpin & Rouletteスクリプト作成。
+[33m137ba6f7[m RoulettePanel.SetActive On Off
+[33m9cb8527d[m Game::Gm::setRewardChestPanel()で、GM自分を消すBUGをフィックス。
+[33ma7d00990[m (BUG-9) 各々モデルPrefabのInspectorViewで、ItemInfoスクリプトのNameTxtsへ書いたのテキストが自分のObject名と違うと、int idxが nullになるので、エラ発生。対応。
+[33m8443ad9e[m (BUG-8) Home:: Bat.getChild(0).getChild(0)-> Null ---> getChild(0)が正しい。
+[33m2e372fe9[m Home:: ItemBuyEF SkillPanelのみ動くように。
+[33m58aff46f[m RoulettePanel Design生成。
+[33m71bf57de[m Reward Chest Refactory
+[33ma999077d[m Reward Chest 処理
+[33m9b20f83a[m RewwardChestOepn: Language
+[33ma28edf18[m RewwardChestOepn: Animation + イメージ登録及び、テキスト切り替え。
+[33mb9f0c0a9[m RewardChest開く時、スキルとお金がランダムで出す。←LevelUpPanel活用コピーすることで、現在はただLEVELUPPANEL開くだけで。未実装。
+[33me37f5ca6[m getTreasureChestPanel + DropItemPrefebとして、RewardChest追加（処理は未）。
+[33md974e6ce[m getTreasureChestPanel + DropItemPrefebとして、RewardChest追加（処理は未）。
+[33m27600dc4[m PropertyPsvSkill初期値Value正しく調整。
+[33mba3f2e08[m (BUG-7) ItemBuyEF-UIがスキルの場合は、似合わないこと対応：該当なスキルイメージ生成、メダルの真ん中に位置調整。
+[33m1ee2bda7[m ReviveEF追加。
+[33m30b192d4[m 凍ったブロックにボールが当たったら、アイスが壊すようなSnowExplosionEF追加。
+[33me2accbb5[m (BUG-6)後で破壊したブロックからでるOrbがPlayerに行かない。Invokeで0.5秒を待た後で収集。
+[33m1f78e1f2[m ADとPayMoneyの中身処理をREFECTORY
+[33mcea5dad4[m お金を実際に決算する処理。
+[33m362968b6[m onClickPayBtn()のコインとダイTYPE決定、金額設定できるように。+  onClickPayBtn自体が要らない場合は、抜ける処理。EX) CoinX2~
+[33mfc496337[m GameOverパンネルデザイン改善。　ShowADDialog表示 CoinX2, RerotateSkillSlots, Revive種類を分けて適用。　言語とAddEventListenerとして、Rewardタイプによって、自動で合わせてOnClickBtnメソッド生成。
+[33m3bf34de3[m GameOver Panel Design is Changing not finish
+[33mf46e1c2a[m ボース制限時間用意し、この時間が過ぎたらゲームオーバになる。
+[33m05134508[m BossStageBar Fill Color Switch
+[33m0a22490f[m (BUG-5) GiantBallスキル レベルアップする前に処理されるので、０になるバグ対応。
+[33mf4342d7f[m Boss2 FlameFireBall Attack Pos BUG 対応。
+[33m7ac0e796[m OverLapCheckBoxCollider:: Obstacle専用のスクリプトに変更：ブロックと当たったら、自分自身を破壊する。
+[33m3e1724cf[m (BUG-4) 障害物もPoisonSmokeへダメージを受けるように。
+[33m70a58095[m (BUG-3) 障害物もFreezeからだめーず受けるように。+ IceWaveのHomeRunボーナス適用。
+[33mad372a27[m ThunderStrike LightningEF 修正。
+[33mdf9d3798[m FireProperty DotDmgEffect Change
+[33md9baf2a5[m NovaFrost & Dmg LM._.Value化
+[33mb9ea11bf[m UI-EF criticalTxtEF 数字が二つに重なっていること対応。
+[33m7ea1f1c5[m (BUG) ICE PROPERTY - BOSS & OBSTACLE 禁止。
+[33md4aafc4b[m TouchSlideControl.cs:: OnPointerUp:: ボスが存在し、攻撃のモーション中なら、表示しない。
+[33meb3e62d6[m Block_Stone 曇りぼやぼやするParticleSystemじゃまだから OFF
+[33mcb6b09db[m タッチOFFしたとき、ボールが存在する場合はGUI表示しない。
+[33m80fa4c3c[m PlayerSpace移動の場合、カメラーも一緒に動くように。
+[33mc84c4d27[m ✓ ジョイステックのコントロール改善：X軸左右調整だけで、Y軸の位置も合わせて切り替える処理。
+[33m19f8e56b[m (BUG) PlayerDrag位置調整：：タッチをドラッグする時に、Y軸を動かないと角度がちゃんと出来ない。
+[33mb06576c2[m (BUG) タッチをドラッグする時に、Y軸を動かないと角度がちゃんと出来ない。
+[33mf8207cc0[m NoticeMsgPanel Design Change
+[33meb33f0a0[m Pause Panel Design Change
+[33m26ea1f7c[m AtvSkillPanel Alpha OutLine 制作。
+[33m70224e22[m WarningBossAttackEF 改善。
+[33m0473f584[m Uniqueスキルの確率設定。処理
+[33m8e33f6c5[m All Script InspectorView [Header(_____________________)]追加。区別を見やすくするため。
+[33m1252cbd2[m Home SCENE:: PSVInfoパンネル：UniqueアイテムへSparkleEffect追加。-> 3DParticleを2Dに切り替えるため、UIParticleコンポネント活用。
+[33m04a4543e[m EPIC TOOM FX CARDエフェクトできなかったこと解決。
+[33m2fa673f8[m GAME SCENE:: LEVEL UP PANEL ANIMATION 修正。
+[33me6181a95[m GAME SCENE:: Change -> Exp Font & Boss Attack Icon & StikeTxt Font.
+[33m6d2e1674[m HOME SCENE:: Main BG IMG 追加。
+[33m9bd2e093[m GAME SCENE:: LevelUp Panel Buttonメソッド処理。
+[33ma68bf6a4[m GAME SCENE:: LevelUp Panel ReRotateBtn Clickしたら出るShowAD_DialogPANEL制作。
+[33m1a14e482[m GAME SCENE:: LevelUp Panel ReRotateBtn政策。
+[33m1850567e[m GAME SCENE GUI Design:: Level Panel Change
+[33m3213a49c[m (BUG) IN-GAMEへ行ってHOMEに戻ったたら、Missingになる。~
+[33m29f7131c[m GAME SCENE GUI Design:: Pause Panel Change.
+[33me28a6677[m GAME SCENE GUI Design:: LevelUpPanel
+[33m3d16b2be[m GAME SCENE GUI Design:: Bat Icon , nado
+[33m7fc8efef[m GAME SCENE GUI Design:: StatusFolder 閉じらないBUｇ対応。
+[33m4bda5de6[m GAME SCENE GUI Design:: BossSpawn AnimPanel
+[33me673680e[m GAME SCENE GUI Design:: ShowHitBallInfo Panel
+[33m49c6410d[m GAME SCENE GUI Design:: Strike Ball Panel
+[33mc35fe9b3[m GAME SCENE GUI Design:: GameOverPanel
+[33m6fe59aa7[m GAME SCENE GUI Design:: PAUSE PANEL
+[33m784146b5[m GAME SCENE GUI Design:: BossBar
+[33mc9cfa580[m GAME SCENE GUI Design:: TOP EXP BAR
+[33m289c03ec[m Home GUI Design:: ItemBuyEF
+[33m9782d8dc[m Home GUI Design:: Second Skill Panel & Icon.
+[33ma8ec48a5[m Loading Scene GUI Design::
+[33m1ad982fa[m Home GUI Design:: Setting Dialog
+[33mc32663fe[m Home GUI Design:: TopMenu Coin & Diamond Panel
+[33m8c1f00d2[m Home GUI Design:: ItemSkillBoxPref
+[33m433c0175[m Home GUI Design:: Home Content Prefab Change
+[33mbe2437e2[m Home GUI Design:: Upgrade Icon
+[33m7de74d7c[m BatIcon Change.
+[33mab644bac[m Home GUI Design:: Active Skill Box & CashShop prefab icon & Panel.
+[33m81fb04a0[m Home GUI Design:: Top Nav Coin & Dia & Panel , Exit icon , CashShop Icon Change.
+[33m25c8dfcd[m Home GUI Design:: PSvInfo, Upgrade, CashShop Panel Title追加、Settingアイコン変更。
+[33mb245fcd4[m Home GUI SelectItemPanel : PSVInfo, Upgrade, CashShop Design Change.
+[33m037cdf81[m Hoe GUI Design UPGRADE
+[33m4c5d5bba[m SIMPLE GUI TOOL KIT ICON Import
+[33me3acdc58[m Upgrade::目録追加。
+[33m0dbb98d6[m Boss Dragon Name Set -> Not 対応すべての言語。
+[33mef0c6719[m BossNameTxt連動。
+[33m4d1a0703[m BossHp < 0 防止。
+[33m92c93ee3[m DMとScrollViewEvent.cs:: Upgrades.price.set Value
+[33mfa6beff1[m 等差数列関数追加：calcArithmeticProgressionList()
+[33m0879f4f2[m Upgrade::等比数列メソッド生成。適用は未。
+[33m393231e6[m Upgrades.Price.SetValue(Fabonichi方法適用)しましたが、修正必要。
+[33m16f618e7[m PANELのUIにも同じく適用。⇒replaceSettingNumber()適用できないBUG -> setLanguage()ではなく、getTxtList()へ宣言して対応。
+[33m4df5dc24[m UpgradeListから、初期化した値をUpgrade-PANELのUIにも同じく適用。⇒replaceSettingNumber()作成。
+[33mef9b947f[m UPGRADE VALUEを実際に適用。LEVELINGはまだ
+[33md4a559f3[m UPGRADE::Value適用。-> Player.csのinitSkillDtへ、しかし、CritとCrit-Dmg順番間違ったらしい＋BallSpeed増加量が大きいので下げる必要あり。
+[33m602dc185[m  (BUG-1) Upgrade-PANELも入ってきて、再ロードした場合 Out Of Indexバグの発生すること対応。
+[33mf05928b1[m setUpgradeGUI()生成。
+[33mc3111176[m UPGRADE::LVとMAX値計算＋GetVal()関数生成。
+[33m9ac74abf[m @
+[33m699dae33[m Rainbow Folders 2 Import適用。
+[33m80fe18e3[m UPGRADE PANEL:: SAVE DATA:: コンテンツが生成されてから、追加LOADデータを適用する。
+[33m035c0def[m DM:: DATABASE_KEY Enum追加。
+[33m8e26c530[m PersonalData:: UpgradeDt & Listクラス宣言。SAVE及びLOADに関して未完了。
+[33m8cdfc415[m UpgradeValeTxt  追加的な特別変数へ代入。
+[33m6e2d4f5f[m Upgrade Table GUI:: 購入ボタン ＋ 値段表示。
+[33m626f40fa[m HOME::UpGrade GUI UI変更。もっと見やすく。
+[33mf54735db[m Home::UpGrade GUI言語設定。
+[33maeaa7741[m UpGrade Table GUI::UI表示完了。
+[33m99c7e390[m BossBlock AttackSkill REFACTORY STEP1) setExplosionEFAndPlayerStun()メソッド生成。
+[33ma4ee9d2f[m BossBlock AttackSkill REFACTORY STEP1) setExplosionEFAndPlayerStun()メソッド生成。
+[33m1b714fc2[m Strikeになったら、NextStage()を直接に読みだすことで、次に行かない問題解決。
+[33m096b05d0[m Boss Aiming IconEFが複数できない問題解決。
+[33mf78f3847[m Boss Preview DebugSphereに関して、狙うアイコンのEFEECT: 複数の場合は位置がずれるバグ
+[33meab126de[m Boss Preview DebugSphereに関して、狙うアイコンのEFEECT追加。
+[33me5a8210c[m Boss Lv4 LV1とLV3タイプを合わせた攻撃８回。
+[33m89d3469b[m Boss Lv3 HORN ATTACKタイプ。三つの場所中で、一つ残り、二つ同時に爆発。
+[33m410e0d67[m BossBlock::FireBall LV2 ブレスタイプ。-> 三つのファイルボール発射。
+[33m53425353[m BossBlock:: BossLevelがずれること対応。
+[33m74888a00[m getTagObjFromRaySphereCast::BUG修正。
+[33m7c5fc83b[m Util:: AnimGetClipLength=>Secを探索方法変更(Index->名前)。
+[33mf7d86235[m BossBlock:: BossFireBall-> ソースコードREFACTORY。
+[33m1da33b68[m Player TOuchSlideConrolで、PointDownの場合、Stunになったら、MESH戻す。
+[33m258e851c[m BossFireBall-> Player STUNになったら、このターンは何もできないように処理。
+[33m1ee5cb16[m BossBlock BossFireBall -> PLAYER StunEF.
+[33m1d273d34[m BossBlock::coFireBallAttack() 整理。 BossFireBall専用アイコン追加。
+[33me460d290[m BossBlock::coFireBallAttack() 整理。
+[33m2038f7c2[m Anim Clip List Check Log
+[33m527b8d51[m coFireBallAttack() RaycastHit Player -> stun
+[33mc947cd45[m bossAttack FireBall Level1Bossのみ。未完成。当たり判定X
+[33m46994035[m BossBlock:: bossAttack:: FireBall Debug.Logまで実装。
+[33m36285c8c[m Boss Collider Position調整
+[33m2e3c4a2f[m     ✓ PSV MaxLevel以上に上がったら、Out of Index エラー。
+[33m810c2f77[m LevelUpPanelAnimateで、直接止めたら、Y座標が少しずつズレて気持ち悪いこと対応。
+[33m67c9140b[m MoveTowardsはLerpと同じだ。しかし、速度がmaxDeltaを超過しないことを保障する。
+[33mcc18d30c[m ObjectPool:: init:: if(em.activeSkillExplosionEFs[DM.ins.personalData.SelectSkillIdx])追加⇒ThunderShotスキルはこれがないので条件文で対応
+[33md6a4b98d[m BossSapwnObjstacle わける。STEP2
+[33m6210243d[m BossSingleSpawn Block 次の位置と重ならないように。IsRemoveAt()したことをそのまま使うことで、未完成。
+[33m9c0d44c6[m BossActiveSkill まず、LEVEL１ボスからやり直しSTEP2＋(BUG) BlockではないのにBlock文字が含まれ、Nullエラーになること防止。
+[33m5ae11818[m calcMathRoundDecimal()
+[33md4fd6f82[m BOSSスキルランダム生成シート制作。STEP1（未完成）
+[33m5c56b49c[m 障害物(STONE)が、一般のフロックと重ならないように。
+[33m3948782e[m Util:: isColBlock(Collider col)作成。
+[33mde218c5f[m Loading Scene 追加。非同期。
+[33m24301bdc[m BossBlock:: patternStone エラー対応。
+[33m216935e1[m BossBlock.csスキル::patternCutColumnLine & RowLine修正。
+[33m7a682c04[m ATV::ThunderShotで、Block6_OBSTACLEのGLOWEFFECTがINActiveになって、ERRORになることを対応。
+[33md45d9cb2[m (BUG) ATVスキルを登録する際に、em.EffectObjectが元々無いことがある。これが ObjectPoolで既に活性化する処理で「NULL Refereceエラー」になるため、em.ObjがNullなら、Addしないように対応。
+[33m1d7cf1ac[m BossStageBarデザインサイズ調整、　ボースOBSTACLE_RESET_SPANとCnt用意して、５周期になったらRESETすること。
+[33m3426005f[m ObjectPool::activateEveryObjects(poolDtList)OBJECT-POOL EFFECTを読み込む。
+[33mfc5926ac[m 複数のEFが活性化したら、フリーズ掛かる問題解決：原因⇒ObjectPoolしても、一回活性化して読み込まないと、複数が出たら重くなるのは同じでした。
+[33m792b3d8e[m Boss Bar & Text UI: Boss Stageto
+[33mebbeb95d[m InGame UI LV-UI位置 変更。
+[33m481ca17c[m 4 BossBlock Animation Regist & BUG対応。
+[33m0033a691[m Boss Prefab 4個 配列に追加。
+[33md6c78f1f[m Explosionに関したメソッド統一制作：EGGPOPとGODBLESS：：sphereCastAllDecreaseBlocksHp()関数制作。
+[33m16ec7085[m StatusFolder整理＋GodBlessが最初に発動した場合、フリーズ掛ける問題を対応している（未完）
+[33me2e43d11[m StatusFolder UI 整理
+[33m30daaf82[m BirdFriend 途中でPSV習得した場合、モデルが出ない。
+[33m6d2fd952[m GodBless PSV Skill 適用。
+[33mf667c488[m StatusFolder UI 整理。STEP1 未完成。
+[33mbfbac289[m キャラーとバットの足元に等級を表すアウラEF::全てのモデルへRankAuraEF追加
+[33m832a841a[m PSV Unique:: BirdFriend EggPopEFまで完了。
+[33m5c86b223[m BirdFriendプレイヤー隣に召喚。
+[33m09dcca93[m DarkOrb 完了。Hit Effect追加。
+[33m1f78a398[m DarkOrb Body ParticleEffect Add.
+[33m9fe0acd1[m DarkOrb STEP1 Obj登録まで。
+[33mc99df713[m GiantBall修正：打った瞬間、SCALE返納。
+[33m3380c0c9[m PSV::Unique GiantBall適用。
+[33m33cbcfa2[m region REFACTORY
+[33mc032580c[m Pause PSV Skill Img Table Set 修正。
+[33m987f44ce[m damageTwice適用。UI表示も
+[33m74b0c923[m BUG)位置がずれる問題：PassiveSkillListImgPref  サイズ変更：250x250 -> 270x270。
+[33m0ab181a3[m PassiveSkillListImgPref修正：PanelとImageを分けてChildTf生成。＋Uniqueスキルの背景は赤に変更。一般はまずそのまま。
+[33mc73b40db[m ThunderProperty 完了。
+[33mb11d9c26[m checkIceFreeze():: 毎プレームマテリアルICEMTに切り替えることで、凍らないBUG修正。
+[33m62b9acee[m SkillProperty:: CheckProperty関連したメソッドをREFACTORY
+[33m8f29c22b[m checkFireDotDmg実装。
+[33md7cd5e21[m InspectorView:: PsvInfoのPrefab　言語設定：タイトル＋Explain
+[33m7a58c3de[m Uniqueと属性スキルを追加完了。処理はまだ。
+[33m72468a7b[m Psv skill Img 追加。
+[33mdc5e23f5[m Ballが壁にぶつかってから、反射角が摩擦力で少しずつ減る Physics Material Friction数値調整でできました。
+[33mbc8bee5e[m FREEZE BLOCK CALC OVERLAP STEP5: RAY形式をあきらめて、OverLapCheckBoxColliderスクリプトをブロックの子供TFを生成し、貼り付けでColliderとして計算。
+[33mec438f4b[m BlockGroup Down -> Foreach BlockGroup.getchild(i) Down z
+[33m32cf0319[m Ray FREEZE BLOCK CALC OVERLAP NOT FINISH STEP4: LongType originPos エラー対応。
+[33m431a0186[m Ray FREEZE BLOCK CALC OVERLAP NOT FINISH STEP3: gm.Stage方式代わりに、BefPropertyCnt宣言。
+[33ma9d74fd6[m isMySelfでは、TreasureとかHealブロックは一般ブロックにみない限定があり、IceMatがあるかで判断することで対応。
+[33m25d3b3d1[m IceWave.cs:: OnTriggerEnter ItemBlockDirLineTrailEFも探索するので、除外する処理追加。
+[33mfcf95bc0[m DropOrbがPlayerに来ること、左だけ来るBUG対応：PlayerTfにあるBoxCollider削削除⇒  modelMovingTfにBoxColliderを移す。
+[33mff046fb2[m Strike Outの時、PreviewBundle活性化。
+[33m837d86f6[m Ray FREEZE BLOCK CALC OVERLAP NOT FINISH STEP2: LongType 対応。 End１Timeソースコード上に変更してBUG対応。BOSSの時は、STAGEが上がらないので、対応できない。
+[33m71e40cf7[m Ray FREEZE BLOCK CALC OVERLAP NOT FINISH STEP1
+[33me2b7afca[m  ボール速度が０になると、待機されず次のステージに進むBUGが有るので、this.rigid.velocity = Vector3.zeroはコメント処理。
+[33m29173350[m ICEWAVE 壁にぶつかり、反射して衝突した場合、方向が逆になるBUG対応。
+[33m7fb82d6a[m Ball_Prefab.cs ATV (BAT):: EX)ICE WAVE 打って飛ぶか角度が間違う問題対応。
+[33m1acb2205[m ✓ BALLタイプATVスキルEX）ColorBallがブロックに当たっても、生きている⇒速度を０に設定して対応。
+[33m4baccb28[m const ONE KILL DMG Skill＿Infomation.csへ移動。ColorBallダメージへも適用。
+[33md01a7f7c[m ICEWAVE::ブロックを凍らせる:ICEマテリアル適用とカウント設定溶かすpropertyDuration。
+[33ma0a1fe33[m Boss登場とHOMERUN ANIMが再生する場合、画面クリックしたらカメラ転換ボタンが出るBUG対応。
+[33mece0dfb8[m ColorBallPop ATVSkill UpDate: カウントを設定。普通だったら５個のみ、HOMERUNではすべて。
+[33m3404e1d9[m ShowHitBallInfoメソッド。RankTxt、Power、正確度表示UIです。
+[33mfbf72bf3[m HomeRunTxtPopEF ParticleのEMIT２０個に減らす。HOMERUN-Activeスキルが良く見えないため。
+[33me0362427[m ThunderShotのホームランについて、createThunderStrikeEF追加生成。LV.cs::HOMERUN_MIN_POWER変数生成。
+[33m533aaf06[m Ballが壁にぶつかってから、反射角が摩擦力で少しずつ減るBUG対応。
+[33mbf7e15a1[m BossBlock CreateObstacleStone Method化完了。
+[33m4286d591[m BossSumonStone　＋三角形パータン、碁盤EVENとかODD、碁盤ランダム。
+[33m33b07ebe[m BossBlock:: createObstacleStoneSkill:: 色んなパータン制作：EVEN、ODD、CUT COLUMN LINE、三角形（◥、◤、▼）
+[33m915d8d61[m GameManager:: SwitchCam SetActive関連したメソッド生成。REFACTORY
+[33mcf04cce6[m BossBlock:: createObstacleInstanceテスト。
+[33m1acf1047[m blockMaker & BossBlock:: createBlock & createObstacle Revice & TEST
+[33mce256596[m Just Smoke EF HOME SCENE FIRST TIME.
+[33m72eb47aa[m BOTH_SIDE_SPACE ０と１インデックスボックスが重なるBUG対応。（X＿SCALE　1.9　➡　1.8に変更。）
+[33m8612ec4a[m BossObstaclePrefab Effect：Reach Ground SmokeEF & RockBrokenEF 追加。
+[33m885fcafa[m ObstacleBlock Spawn & Design Step1
+[33mec0ce0eb[m Chara Model 追加。適用完了。五つ
+[33m2cb85e2f[m IsBallExistの場合、PlayerBattingSpot移動できないように。
+[33m6ae34d2c[m Util::checkRayHitTagIsExist生成 REFACTORY
+[33m98bcc426[m Chara Model 追加作業完了。
+[33md84197cf[m CharaModel追加。
+[33mc4cc637f[m TouchSlideControl:: PlayerModelTf Right PosX 3 -> 3.5に変更。
+[33m3dfca363[m BlockMaker:: Block_Center_GAP削除　⇒　BOTH＿SIDE_SPACEに代替。
+[33m016d2a3b[m TouchSlideControl:: REFACTORY-> movePlayerBattingSpotとmoveModelTfメソッド作成。
+[33m8957e641[m Touch PlayerTf Animation 修正。
+[33m28105318[m TouchSlidecontrol.cs:: REFACTORY
+[33mb7d89b04[m Touch PlayerTf Animation 追加。
+[33m6ecbb6ae[m TouchSlideControl:: REFACTORY
+[33m085e7392[m BallPreviewDirGoal & HitRange SetParent To PlayerTf
+[33m7227bd55[m TouchSlideControl:: PlayerTf タッチで左右移動させ　＋　Player:: modelMovingTf 宣言。
+[33mc7b3f92a[m PlayerBattingSpot Move Work Step1
+[33m610f1c23[m (BUG)GAMESTART->HOMEに戻り、CharaとBatのロックモデルマテリアルが初期化されず、購入しても黒色のまま問題対応。
+[33m6026f961[m setModelMeshGray().
+[33m4d53ab12[m ATV Skill DMG revice FIREBALL & ICEWAVE
+[33me1a6fabc[m decreaseBlockHP 少し修正。まだ 未完成。
+[33ma898d10b[m TODO LIST作成。
+[33m4684674a[m setLevelUp():: MaxExp フィボナッチ数列適用。
+[33m2e65f068[m Util.cs -> calcFibonicciSequence()制作。For Player MaxExp
+[33m4d87449a[m LM:: hitRank整理。
+[33m7e90b594[m LM BALL ThrowBall 抜け出す。宣言。
+[33m9df27aa6[m BossKill onDisable()-> eraseObstacle
+[33m30d04fe0[m TouchPanel カチカチ反応しないこと、Tfの順番を切り替えて対応。＋OrbGetEF　GlowYellowマテリアルに指定。
+[33mf468f113[m ThunderShot Material ReRegist
+[33me4de7a34[m 等比数列
+[33m7c867cfc[m GameManager.cs value:: IsBossSpawn削除。修正。
+[33m8ab723c5[m GmeManager.cs:: nextStage() Check EVENT 二つを分けて関数化。REFACTORY.
+[33m7cfd3cdd[m ocCheckEvent生成。NextStage関数REFACTORY.
+[33mcfddd26f[m PerfectTxtEFとHomeRunTxtEF -> PerfectTxtPopEFとHomeRunTxtPopEFに変更。
+[33mf751b1e4[m bm.getBoss() -> var bossに簡潔化。REFACTORY。~
+[33mbaf278ee[m LeveingManager.cs生成。
+[33m23fb12d5[m LEVELING WORK a little bit. PERFECTに関した関数を抜け出さないと。
+[33m3904eb8f[m LevelUpPanelAnimate.cs REFACTORY
+[33m001d07c7[m LevelUpPanelAnimate.cs REFACTORY & SpriteHeightサイズ変更してSTOP位置が合わないBUG修正。
+[33m731800e0[m StartBtnTxt Lang ADD
+[33m2a8065b7[m LANGUAGE.cs NOTICE MSG 追加。
+[33mbb6eec70[m Pause Panel Design Up 2
+[33me80fded5[m In Game, Pause Panel Design.
+[33m7756444f[m displayNoticeMsgDialog Util.csに変更。
+[33m9a76b5a3[m HomaManager REFACTORY: setGUI一つに
+[33m56a45934[m Set CheckBtn Image
+[33m5d8f28b6[m  Bat Language指定 + CheckButton各々ScrollViewEventにあったことをHomeManagerに移動。
+[33m06bdae1b[m Price Class生成。CoinとDiamond分けて処理。
+[33m2c9f16ac[m Langauge Player Name Txt 適用。
+[33m79fbaa57[m CashShop AddEventListener追加。
+[33mbabba844[m Boss Stone Cnt 2 -> 1.
+[33m8336e3b2[m initlanguageList
+[33mc4433b66[m LANG LIST PUSH WORK5 PSVINFO OK
+[33m3a611d2e[m LANG LIST PUSH WORK4 CASHSHOP OK
+[33m9531617c[m LANG LIST PUSH WORK3 SKILL OK
+[33m42928cc7[m LANG Switch String -> Enum REFACTORY
+[33m0f11168b[m LANG LIST PUSH WORK2 BAT OK
+[33m07ba8b9e[m LanguageリストをLangスクリプトで宣言ではなく、ItemInfoのInspectorビューで書く、自動でLangにある該当のリストへPUSH。まずCharaのみ反映。
+[33m9edccc4a[m Player Model 追加。　＋　RightArm Util.csへ関数化。
+[33m552105b5[m Character 追加。まずFBXのみ。
+[33m5e108456[m Player Maids 4 set 追加。
+[33m74ab0c12[m Block_Prefav.cs:: setHp() Long Type と Normal,Heal Type 分ける。
+[33mf839f677[m DM.SCENE ENUM ＋ PsvInfo Panelでは、checkBtn非活性か。
+[33mdf0bd4bb[m getCurItemTypeIdx -> Enum変更。
+[33m9ac4b929[m HOME:: PSV Skill INFO 追加。LANG対応。
+[33mffe285c8[m BossHeal.
+[33mc195c87d[m LevelUpPanel Active: TimeScale0 InActive: TimeScale1 But This Panel Is Moving.
+[33m205e3267[m Util.cs生成。 getAnimPlayTime合わせてメソッド作成。
+[33m452e41a3[m Boss Die & DropOrb Power set
+[33m765fd1c4[m Boss GetHit
+[33m5229dafc[m createObstacleStone()生成
+[33meec959ec[m Obstacle_Stone Spawn Anim
+[33m916a40a3[m Boss Skill -> Obstacle Spawn & Erase実装。
+[33m9b71de8a[m BossSpawnAnim Revice MainCam1に分けて分離。
+[33md7912edd[m Ball_Prefab.cs REFACTORY
+[33m84d3c104[m Ball_Prefab Refactiry 未完成。
+[33mdb98368b[m Explostion Psv Skill BUG UnhitAreaのみ反応。
+[33mdee92a54[m Boss Obstacle Stone Pos revice
+[33m221af790[m BlockMaker.cs 少しREFACTORY＋Editorシーンで、ブロックのGrid表示。
+[33m4f14f8ba[m NULL Error対応＋Bossソースコード整理。
+[33m3d896b1b[m Boss Attack Go Debugのみ。
+[33m11085330[m Lazer できないBUG修正＋setDecreateHP()適用。
+[33m201e6e98[m blockMaker.csで、setDecreaseHP()生成：TAGで親と子の正しいCLASSを判別してから、処理。
+[33m27df4010[m Block TAG -> NAME 探しに変更。
+[33m4bbf6cc3[m Block ItemType Does not Affect To Boss
+[33ma16396cb[m setType Refactory.
+[33mb40cf9d5[m Boss Spawn Anim 修正。
+[33mae863159[m Camera Shake Refactory
+[33m55514c31[m BlockMaker TAG 整理、.tag -> .CompareTagに切り替え。
+[33m4b8635c6[m coPlayBossSpawnAnim & Animation PlayTime Get。from clip.length
+[33m0fa22128[m Boss Spawn Anim TimeScale 適用。
+[33m151d38c7[m Assets Folder 整理。
+[33meb02b571[m Block_Prefab REFACTORY
+[33mfe82fdda[m block_PrefabとHealBlock分け。
+[33mf3d345a3[m Block_Prefabを継承：親にする。em, gmがNULLになるBUGがあり、宣言ソース部分をAwakeにして解決。
+[33mb96031b6[m AssetBundle 要らない部分少し削除。
+[33m3571ce73[m Block Parent & Child 関係準備。
+[33m7462622d[m Block_Prefab.cs setBossComponent()メソッド追加。
+[33m7acf92ef[m Ball_Prefab.cs REFACTORY
+[33m1eae2388[m Inspector 各々スクリプト Attributes 整理。
+[33ma4dbc9e5[m MyMesh Class 宣言。ボースとブロックのスクリプト統一及びWhiteHitEF Meshクラス化
+[33m21fc72de[m DM.ANIM Enum系生成。
+[33m1e33192b[m BossSpawn Anim revice
+[33m5afa2936[m SHOOT Width ++
+[33mc00e29f3[m Boss Spawn & Heal 0+ BUG対応。
+[33m12deb2b7[m bossStageTxt Span
+[33m797d2e65[m Boss Slider Bar
+[33m1069b6e3[m convertPsvSkillStr2Enum():: (BUG) All Lang 対応。
+[33me3a75ae4[m Exp Txt
+[33m170514f7[m Thunder Skill Size Revice & Heal BLock 15%に下げる。
+[33m9e9d4c7b[m Lang ScrollViewEvent.cs setLanguage()作成。
+[33md84b99cb[m LANG Loadデータで初期化. HomeManager.csで
+[33m968681d5[m LANGUAGE:: DM.csでPersonalData前と後に宣言必要なもの分ける。
+[33m097d6529[m personalData.Langに統一。まだBUGある。
+[33m85c6e9bd[m Dialog LANG 反映。
+[33mb980ba4a[m LANG DropDown Event. SaveDataまでは未完成。
+[33me0bd9651[m setting Language DropBox
+[33m89742423[m LANG switch -> if分に切り替え。enum TXT 生成。一応、LANG クラスの内に
+[33m3bb3147a[m LevelUpPanel PSV Text 反映。
+[33med528838[m LevelUpPanel UI TEXT LANG 適用。PSVはまだ。
+[33mb716bf08[m StatusTxt Value Add & Revice.
+[33mbd10e5ac[m PSV LANG 反映。JUST　Status部分のみ。SkillPanelScrollはまだ。
+[33mc88c402b[m GameManger.cs LANG反映。（未完）
+[33m7bbf1254[m CashShop Language
+[33m1fa5d8f2[m LANGUEGE INDEX HASH
+[33mc0ab9adf[m getLanguageTxtList:: REFECTORY
+[33m5541319a[m Home:: ScrollViewEvent.cs Skill Language OK
+[33m5d534a04[m Languege BAT
+[33mc4970d7c[m Language START
+[33m994828fe[m laserはTable UIへ要らないからコメントにする。
+[33mfdee6ba9[m createLaserEF Design Revice & Speed 6000 * Time.delta
+[33md9dcd6ba[m Skill_Infomation.csへ　calcMultiShotDeg2Dir()生成　＋　Ball＿PrefabにあるMultiソースコードREFACTORY
+[33mefe00881[m Skill_Infomation.cs getPsvMaxLVList()追加。MaxLevelを判断して適用。
+[33m5b7c50f1[m BUG) Hit Ball Direction (Deg)が 設定されていなかったので対応。 + Laser SetLevelUp 登録。
+[33m531bf30c[m Set Laser PsvSkill & EF
+[33ma237f237[m Laser UI Image 追加。　RayCastで、PsvSkill処理　初期ぐらい作成。
+[33ma1c9fc98[m Dragon Boss Prefab 追加　＋　Laser Skill追加。
+[33md904859d[m findSameColorBlocks生成。　ColorBall　Skill　REFACTORY
+[33mc0cf153d[m BUG) Btn Offしたら、全てGlowもOFF。
+[33m8b363f85[m ColorBallPop Bug 対応。　GlowEF　＆　Null Referance
+[33m7a5ba62e[m Heal Block Add & QuestionMark Block Add Heal Block is Bug yet
+[33m35805a64[m Heal Block 追加。
+[33m55446d67[m IceWave BUG BlockMaker -> BlockGroupに変更。
+[33m8f6f5258[m Block_Prefab REFECTORY
+[33m6f16a537[m BlockMaker Transformになるのを、全てBlockGroupというTF生成し、変更。
+[33m14f501f4[m BlockMaker 自体を親にしないー＞BlockGroupTfに変更。(PerfectTxtとmoveToDown()修正。)
+[33m73c1096d[m GroupTf GameManagerスクリプトから変数を全て管理。
+[33m87d0594a[m (BUG) rigidBody None Error : OnEnable()はStart()より構造的に呼び出しが早そうから、Start -> Awake()に修正。
+[33m6acb40f0[m DropObj ObjectPoolか。GroupTf割り当て。まだBUGあり・
+[33m8116952c[m ObjectPool EF & Obj 分ける。　OrbPref適用。
+[33mc8b8bf0f[m ObjectPool PoolData Class生成。key , obj, cnt = 生成するObjカウント。
+[33ma87f5acb[m ObjectPool Add InstantKill
+[33mdc3228df[m OBJECT POOL:: CriticalTxtEF ADD + TransformがmultiCiritical生成の時、Hit.transformがなくなるため、BUG発生したので、parameterをtransform -> vector3 posに変更。
+[33me6b23436[m (BUG)ObjectPool createNewObject前に、DicにあるリストがNULLなら次に飛ぶ。
+[33m2ae33c6a[m IceWave BallPreviewSphere[0],[1]の角度　調整。~
+[33m7417a9f3[m ColorBallPop BallPreview2に合わせてBUG
+[33mfc106c6c[m ObjectPool getObject():: REFACTORY
+[33m86e4a25e[m ObjectPool AtvSkill Shot & ExplosionEFのみ、castEFはいらない。
+[33m2a1ddae6[m 一応Title Sceen 削除。
+[33m085fe8c8[m 2ndBallPreviewSphere AtvSk CastEF Pos合わせ： destroyAllCastEF()追加。
+[33m6e327c5e[m REFACTORY: psvSkill getAllPsvSkillLVList() & ReadMe: How to Add PsvSkill
+[33m4f3fe589[m REFACTORY: psvSkill getAllSkillInfo2Str
+[33mb1832971[m CritDmg Apply
+[33m6246ff66[m PoisonSmoke Skill HomeRunBonus 対応。+ CrtDmg Sprite 追加。
+[33m34e223e8[m rain PF ready
+[33mf491016c[m PoisonSmoke CntTxt 適用。
+[33mc07c2aa2[m ballPreviewSphere[1] & Line 2 非活性か。
+[33m8b17268e[m REFACTORY
+[33m771004ed[m �ColorBall GlowEF Skill_Infomation.csへ含め。
+[33me1e3524e[m BallPreview2 HitPos2 reflect完成。
+[33m26e69015[m PreviewLine(2)追加 反射角 反映。
+[33m5ae99375[m checkBlocksIsDotDmg AtvSkill Class化　＋　FireBall Dot Damage 適用。
+[33mf894aad9[m FireBall HomeRun Bonus DotDmg EF & Proccess 追加。
+[33mf5c540e2[m IceWave ShowTxt() Add
+[33m3533da17[m ATV Skill getDotDmg() 0になるエラー防止。
+[33m715d683a[m AtvSkill_DMG_ Value化。
+[33mfc4419d4[m PVS MAX LV Color Orange Change
+[33m6e3bacb0[m LevelUpPanelAnimate.csで、MAXレベールだったら、できるまで他に切り替える実装。
+[33md65589fb[m VerticalMultiShotをLVしても、ItemSpawnが上がるBUG修正。
+[33mb68d6300[m shootCntTxt set() get()化
+[33mf9e00130[m InGame Psv Skill Level -> MAX 表示。
+[33md770008a[m GM. enum State -> STATEに変更。 DM.csへconvertGameState2Enum()生成。
+[33m041d4273[m home:: SkillPanel HomeRunBonus Txt 追加。
+[33m0336fab9[m coSetThunderSkill() with HomeRun Bonus
+[33m28efc0dd[m ThunderSkill Multi Ciritical Dmg 5回実装。
+[33m61e6152e[m オブの動きを「線形補間」から「放物線」に切り替え。
+[33m24d5db9b[m #if elif endifで　PCとモバイルで終了した場合の、セーブを各々対応。
+[33m8d21cc30[m OnApplicationPause Android Save Data
+[33mb85a1b64[m Bat Hit Spark Effect追加。　HomeRun AnimUI追加。
+[33mf929c5af[m setSuddenlyThrowBall()作成。
+[33m178c93ec[m 「！」マークいきなりボール投げる。
+[33m0d8355f3[m BallShooter.cs ビックリマーク追加。(急に投げる処理)
+[33m687e68fe[m TODO ボール投げる　レベルリング
+[33m1a5cfe6d[m InstantKill & Critical Font Change & Effect 追加。
+[33m9d6a8883[m (BUG) スクロールアイテムを最後を超えると、Out of Indexエラー発生。Clampで最大値LastIndexに固定。
+[33me06756ad[m ScrollItemView Chara と Batの矢印アニメーション追加。
+[33mde4ffcf9[m PersonalData.csで、DM.ITEMタイプをconvert化。
+[33mcecfdc27[m スロットが曲がるのを止める。
+[33m78364e41[m PSV multiShot value & Vertical MultiShot Value 反映できないBUG修正。
+[33m7e18b679[m STAGE % 5 == 0だったら、LONGブロックが続けて生成するBUG対応。
+[33m9ede961c[m Create animateItemTypeGlowEF()
+[33m4941b479[m block itemType BOMB tag BUG revice
+[33m1924bec1[m InstantKill 発動できないBUG修正。ダメージ固定。
+[33m716860b1[m treasureChest HP UI OFF & HP is must 1
+[33mfdb1c415[m Thunder AtvSkill 発動してから、０番目スキルボタンのみ初期化される。
+[33mf4a219b7[m Critical Psv Skill Effect Apply。
+[33m0da6ab6e[m Hit Type Passive SKills Critical InstantKill Explosion resultが適用できないバグ修正。
+[33m2823abd8[m OrbSpeed Time.delta適用＋LevelUpScroll Speed Value 計算式整理。
+[33mca48c0a7[m tag NormalBlock 変数化して、FireBallなどで発生するエラー防止。
+[33md4ececb8[m AtvSkill Tag Name Error 修正。 Normal -> NormalBlock
+[33mc04deb83[m (BUG) 宝箱はmeshRendererがないので場外。
+[33m219d5d9c[m setBlockKindEnum() BUG対応。
+[33m16deb6c3[m オリジナルMt保存BUG
+[33mda4226db[m block Hit Origin Material BUG 対応。
+[33m152f58f9[m InstanKill & Critical LevelがValueへ反映されていないBUG対応。
+[33m0132f901[m SkillBtn Reactive 処理　＋　宝箱はColorBallSkillで探索しない処理でBUG対応。
+[33m4c6aff33[m Bat ScrollUI ずらす問題解決。
+[33m680838b0[m Add Title Scene + ScrollView Chara UI ModelParentPf AnchoredPos3D 調整。
+[33m38fd144d[m onClickSkillUpBtn:: DM.PSV.ENUM化
+[33mbb4e3b64[m Vertical MultiShot Psv Skill Add.
+[33mbbe22c27[m Set InfoTxt List
+[33m2ed32226[m Status Info Canvas Panel in Game. Percent * 100 処理。
+[33m3d385a77[m BlockMaker():: skipBlockPer Coding Revice & Block TreasureChestPer Apply。
+[33m9973afbd[m LevelUpPnaelAnimate LvTxt 追加。
+[33m8ba4e9e0[m ColorBall TreasureChest BUG 対応。
+[33m83d62e4c[m setBlockKindEnum()
+[33m2bee399e[m setBlockKindEnum()++
+[33ma4322de1[m １回以上 LEVEL-UPした場合、順番に進む。
+[33m2c088d1d[m Block3 TreasureChest Particle System Aura。
+[33m472b9352[m TreasureChest Block3 Orb x 15 処理。及び分岐：完ぺきではない。
+[33m2ef71d79[m Treasure Chest Block3
+[33maa23c7d8[m destroy Ball(Clone)(Clone) BUG 対応。
+[33m851c1ee0[m Status Btn Active
+[33m4b2f6e39[m onClickStatusFolderButton():: Set InfoTxt
+[33me40ade79[m GameOver Panel:: showAD Btn & Save Data
+[33mfdefa071[m blockMaker Enum 宣言。
+[33meb2b4202[m block2 (xScaleが３倍)生成。
+[33mc7895109[m Block Pref Animation Spawn DefScle 0 Sequence BUG Revise
+[33mefb3be54[m Block Spawn Animでスケールを固定するから、横長いBlock生成ができないBUGあり、BlockスクリプトのUpdateから直接 Animation作業処理。
+[33m82c98bc0[m Switch文 ENUM　convertPsvSkillStr2Enum関数制作REFACTORY 及びOutline2D Skillできないこと修正。
+[33mb8689486[m PsvSkill Speed Unit 調整。熊キャラのSpeed＋３
+[33m8ae76e45[m CashShop Btn Click Not Finish
+[33m3a4aca92[m ScrollViewEvent:: Data 初期化 Start() Set Rank Color & Text & OutLine。
+[33mf65fae90[m Home:: ScrollViewEvent() Magnatic AutoできないBUG。
+[33m4cc698ca[m CashShopList & PriceTxt
+[33m631f59f0[m CashShop Panel Design
+[33m81eac7a9[m ScrollViewEvent() Null Referance Error 防止。
+[33mf1b4b8fc[m MatalicとGrayが有った場合、黒くならないBUG対応。
+[33m8a72d3da[m Home:: Bat ITEM panel Transform 調整。
+[33m06af84af[m getCurSkillIdx() :: Active Skill 1, 2FINISH
+[33mc2fd3927[m onTriggerActiveSkillBtn 1, 2 Bat & Cast EF。 not yet another EF
+[33m93966879[m Active Skill Btns To Play Scene
+[33m941e3de5[m 2nd Data Set & DrawSkillPanelOutline finish
+[33m37fef8cd[m exceptAlreadySelectedAnotherSkill Show
+[33m5caf5410[m 2nd Select Btn ＋ SkillPref修正。（IceとPoison）
+[33m41ab51d0[m setSelectSkillImg Idx++ BUG 修正。　未完成。
+[33m34b7617f[m hm:: getActiveSkillList():: setSelectSkillSprite()
+[33m428e2c44[m setSelectIdx():: Skill:: SelectSkill2Idx 反映。
+[33maaaf6d0c[m Skill2 Unlock? 初期化：スクロールにあるスキル目録。
+[33m9b5d930f[m set all child active exceptAlreadySelectedAnotherSkill():: not Finish。
+[33m8b4a0502[m NoticeMessageTxt & 2ndSkill Img Set(Not Finished) At HomeManager.Script。
+[33m3f019847[m second Skill Img change
+[33m817c2db5[m SkillBtn Idx 反映。
+[33m33ebf556[m Unlock2ndSkillBtn Draw GrayPanel()
+[33me0161911[m 2ndSkillImg at Home revice
+[33m73fdab31[m Just Make 2nd SkillBtn UnLock Pref
+[33m30f1fe08[m PsvSkill Table Scale 1 -> 1.2
+[33m5b984421[m Leveling Change
+[33m311e323e[m Mobile Screen Aspect Ratio Adjust。+ Depth Buffer Bug 解決。
+[33md423662b[m PerfectUIEF
+[33md5fe3d1c[m AtvSkillした後、ブロックがい切っているとき、GlowEfがそのまま残るBUG:　setGlowEFAllBlocks()生成。
+[33mfb30d85a[m ComboTxt System.
+[33mea79579f[m DoShake AtvSkill
+[33m8fe98478[m Home:: AtvSkill Color Revice.
+[33mafba5c71[m Home:: AtvSkillBtns Color Change & Color Multiploer Change
+[33m6e9c2531[m Thunder DelayTime Set + Effect Delay 0.1秒設定。
+[33m82fffaed[m AtvSkill Cast Rotationずらした部分対応。
+[33m2155a71e[m Delay Explosion AtvSkill EF
+[33me0af4918[m IceWave Sector Collider At SectorGizmos.Sc 作成。適用。
+[33m950b6df5[m IceWave Basic Regist OK
+[33m458951e6[m IceWave All Effect Ready.
+[33m6d31fe24[m IceWave Prefab Finish
+[33m07578baf[m IceWave Skill Add. Prefab Effect
+[33m83025560[m PoisonSmoke UI Image Add .
+[33m3ba7e857[m DotDmg PoisonSmoke。
+[33mc5b242e4[m PoisonSmoke Add . SHot Trail EF Bug修正：selectAtvSkillIdxに変更。
+[33m70a3d14a[m checkDestroyBall Original Ball Or MultiBall To Next Stage Cnt Only 1
+[33m128fc082[m LevelUpPanel_Spawn Anim
+[33m1aae58ca[m Apply Psv Data
+[33maeb9d8bf[m Leveling a little bit Touch
+[33mc962c0cd[m DropItem Rigid -> Transformに変換。
+[33m77fcd3bd[m checkLimitTimeToDeleteBall。
+[33m761ea8c3[m AtvSkill Gismos inherit Script作成。
+[33m0cb3edcc[m ThunderGizmos Cast Update
+[33m2a5e5056[m Check Before Cam1 Light : Darkness or Normal
+[33ma79e4671[m FireBallGizmos TriggerEnter & Exit Cast Block Glow Apply
+[33md9a92c04[m FireBall Gizmos Script Refactory。
+[33m85ba92a2[m createDropItemExpOrbEF生成。
+[33m7dda67c5[m coWaitPlayerCollectOrb。
+[33m74d60ef9[m DropItem ShootPopUp()作成。
+[33m80f6fbec[m Play Scene Get Coin Orb Prefab & Collect
+[33m35d2caa5[m Cam1 DoShake Anim 追加。
+[33mb435e5bc[m ANIM Folder REFACTORY
+[33m66bf6ee6[m BatEffectTf BatPref Add .
+[33m11af7325[m setGUI REFACTORY
+[33mbda8ec0e[m ColorBall AtvSkill Hited SameBlock Destroy -> DecreaseHPに変更。これが正しいから。
+[33m3aa71f9b[m enableSelectedActiveSkillBatEF() 生成。
+[33m7d9ab1ca[m SelectAtvSkill Apply to Bat Effect In Play Scene.
+[33m212670a5[m Show the SelectType Item。
+[33m3b023f3b[m Charactor6_Girl1 Add
+[33mda2bf29a[m Bat BoxSprRdr 見えない部分修正。
+[33m7c9e757d[m (BUG-防止) Homeシーンに戻った場合、scrollViewsがnullなくても、ItemPassiveが宣言しないためエラー。
+[33m40ea2467[m PersonalData Classで ItemPassive宣言して、NullRefエラー防止。
+[33m70c45423[m DM Singleton Upgrade not finish
+[33m7763d1a5[m Item Passive Dt NullReferance Instance Error。
+[33m8dacf1f7[m Set Item Passive Data。
+[33m9b48dc63[m PersonalData itemPassive部分を Privateする。GameStartの時、BUG発生対応？
+[33m633175ec[m PersonalData.cs内、Debug Item(Chara, Bat), Skills Color Style.
+[33m00c7b0a2[m PSV_INDEX ENUM 活用して、Playシーンでデータ渡す。
+[33mbb0b0b69[m ItemPsvDt & ItemPassiveList REFACTORY　＆　ゲームスタートし、ItemPassiveData反映。
+[33mcef06669[m Bat ItemPassive Setting. Lv Text 反映まで。
+[33m20de0042[m ItemPassive ImgPref & Box Pref Add
+[33m4cb040d8[m PassiveSkillList Show ScrollView UI ItemPassive。not Finish
+[33mac46908c[m Switch Scene Gray Light Error Fix
+[33m1054d4c3[m Skill Connect to HOME -> PLAY scene。
+[33m6fc150ff[m setSelectSkillImg() & REFACTORY
+[33me2633769[m ScrollViewEvent setCheckIconColorAndOutline() REFACTORY
+[33mdcd30a46[m ScrollViewEvent Get ItemArr & Get CurItem ReFactory
+[33m02e3bb68[m PersonalData Refactory + ScrollViewevent SetCheckUI Refactory
+[33m4ec42c18[m onClickSelectItem -> onClickCheckBtnに名前変更。＋Skill部分も反映。
+[33mfa28a382[m ItemInfo Skill Set GrayPanel。
+[33m049fe93a[m ScrollViewEvent Color Valuable Refactory
+[33md32a933f[m ItemDialog Text Update Delete Because there is Error
+[33m40d6c9d7[m Enum ITEM Chara, Bat, Skill
+[33mfe3bdbec[m DataManager -> DMに変更。 (BUG)Item CharaとBatのダイアログに入ったら、以前のUIデータが残ていることをbool isUIUpdate宣言で解決。
+[33m7736d704[m ScrollView_Skill Select Click Btn Event a little bit
+[33m679b9da4[m Select Skill Table Btn Active delegate。not Finish
+[33m11552a53[m ScrollView Class Refactory
+[33m9037c3f2[m ScrollView Class化
+[33m31622359[m Home:: Select Skills Table Prefab
+[33m57f29b43[m Skill Panel
+[33m13a45a80[m SkillPanel Basic OK
+[33m1230ac8f[m PlayerModel Copy And Load Play Scene
+[33m9640f089[m (BUG) SceneがHomeのみセーブできる。
+[33mdcbbc8b3[m HomeManager Refactory : setGUI() & createCurModel with Enum SelectType HashIndex。
+[33mc36d5795[m StartGameBtn
+[33m847008f7[m ScrollBG Image Color & SpriteUnlit revice Colors Apply
+[33m5243adf3[m ScrollBG Shader
+[33m15c0f682[m Bat EveryThing Position Control. Not Penguin Model
+[33mee865490[m asdasd
+[33m0240cf83[m Bat & Chara Prefab IsLock Default is Falseにしないと、黒のままになる。
+[33m04b1bb40[m Normal Bat Position Revice
+[33m0b71072d[m Bat ItemInfo Class 重複されたこと整理。BUG対応。
+[33m6c4d9b01[m Bat Affect to Scroll
+[33me147b38b[m Player IsIdle SetBool Param Add.
+[33m84c5cae1[m (BUG) CharaのRightArmにあるBatにも<ItemInfo>有ったので、重複される。CharaPrefのBatを全て非活性化してOK。
+[33m2055de9d[m save Revise 中 Bat Items Addによって。
+[33m43d14545[m Bat Model Angle Rotation 統一。Prefab整理。
+[33m9c8c095e[m Bat Scroll Angle And Code Write Not Finish
+[33me75a315d[m Bat ScrollGUIした。でも、位置がずっとずれている問題ある。
+[33m71240454[m Bat 25 type Add
+[33m830fec7e[m Bat ICON。追加。
+[33m7b64ac4f[m (BUG) 買わないのにロードしたらChara選択されるバグ防止。
+[33mf86260c0[m Bat Model 追加。
+[33m65f92777[m Bat 追加する段階。
+[33m246d30fa[m Bat - PePero 追加。
+[33m4d27807f[m キャラ選択。お金ないなら、SelectCharaIdx保存しない。
+[33m24e5966f[m Reset Game With Exit Editor & Application
+[33m9897f7af[m Reset isLock Data At Home Chara in ContentTf
+[33md04fad32[m Save & Load ReFactory Only Json. this is so Awesomegit add .git add .
+[33mb8266aca[m curChara SelectIdx Load Save OK
+[33me776a162[m Save() & Load() Not Finish
+[33m062578ce[m Select Charactor Dt -> Move Home Instantiate CurChara。not Yet isLock (Gray Mt Setting)。
+[33m546e8324[m HomeScreen + Background Set Not Finish
+[33m97409945[m ScrollViewEvent.cs内、ReFactory & BUY処理。
+[33m6bb5c153[m PersonalData Class 生成。 coin diamond Text 適用。
+[33mccee31cf[m Home : UI Coin & DiaMond Panel
+[33mf345b1e7[m Player5_Cat Add
+[33mfee97ef5[m Chara毎に、BatEffectTf探索、割り当て。
+[33m79556da5[m Select Chara With OutLine3D Effect : Assets Quick OutLine。
+[33m927f3b3a[m Is Buy(UnLock)? Set Price or CheckMark Next -> Select or Not。
+[33m252e3e70[m Is Buy(UnLock)? Set Price or CheckMark。
+[33m17b4d475[m Chara Info Is Buy(UnLock)? : isLockなら、grayBlack Material 追加。
+[33m4c0df63b[m Chara ScrollView Sprite Glow BoxSpriteRenderer Apply
+[33m987f56a4[m ScrollStop 先端・末端BUG：早くドラッグすると、速度が１００以上になってInfo取れない。Elasticオプションにして解決完了。
+[33m8f0fd2a3[m ScrollView Charactor Name Change & Set Rank, Price, Name Text.
+[33mb528ca84[m CharactorInfo スクリプト作成。Set Price By Rank
+[33mc878f247[m setScrollStopCharaInfo() not Yet Price
+[33m1765cdf2[m ScrollView set Scroll Speed & Stop Scrolling To Near Chara PosX.
+[33m46a51212[m ScrollView Event DragEnd:: Go to Current Index Base Charactor Position.
+[33m665d9b99[m ScrollViewEvent Class 生成　＋　Drag Event適用。
+[33m028be90f[m ScrollView
+[33meff4b4d2[m Home Scene : Select Charactors Regist
+[33m7267cd3c[m Home Scene : Select Charactor Scroll view
+[33m02485368[m Seperate Home Scene & Play Scene + CamResolution.cs Recfactory
+[33m7954da95[m setState => STATEに変更。
+[33m506e6950[m Model Dir / Prefab Dir -> Delete inside bat & Ball Get Outside
+[33m5a11ea02[m Player4 Boy1 Add
+[33m8e94973b[m Player3_Bear Add
+[33mda78d476[m ColorBall AtvSkill Btn サイクリック場合、Glow効果OFFにする。+ REFACTORY
+[33mb84076d8[m Player Dir Refactory Fbx & Prefabに分けて保管。
+[33m996093e0[m Player2 PenGuin Animation Apply And Bat Apply
+[33mefab4ff6[m Player Model Add Penguin & Animation Action And Canvas Space Split
+[33m04a4d9c4[m If ColorBallSkill のみ、実行できるように処理。(Refactory未)
+[33m99caee8b[m ColorBallSkill BallPreview Hited Block Glow Effect On & 他のBlockに当たったら、初期化
+[33mde0197e3[m ColorBall SpriteGlowEf On Of with touched by ballPreviewObj
+[33ma5047ddf[m ColorBall ExplostionEF + 処理。
+[33me3118182[m ColorBallCast 作成＋適用。
+[33m1ee40d8e[m ColorBall GM:: skill Btn SelectIdx 表示作業。（未完成）
+[33mc9f4166d[m Refactory : Set Active Skills Name & Data in Player.cs
+[33mce84d649[m ActiveSkillTable -> ActiveSkillDataBaseに名前変更　＋　タグ色を付ける。
+[33mf8bcd7e7[m AtvSkill Cnt Auto Apply To EffectManager EFs
+[33meb3ff980[m ColorBall AtvSkill Add Not Finish
+[33m9c3edf06[m Block Colors & Mts : Block_Prefab -> BlockMakerで管理。
+[33ma98263e7[m ThunderCastGlow2DShader
+[33m8039ebd3[m SpriteGlow(2D)。FireBallCast ⇐ Sprite Glow。
+[33m0fd8bdb3[m Glow PostProcessing 3D not 2D Canvas yet
+[33m5c2cc3e9[m Stick(Arrow)角度によって、Player位置が自動で左右移動。
+[33m0ff4ead6[m (BUG) onClickActiveSkillButton:: 再クリック。Cancel Selected Btn & 重複選択禁止。
+[33m6a2dc5df[m ThrowScreenAnim & ShootCntText Change。
+[33medc29af5[m ThrowScreen UIImage Ready not yet Animation
+[33m746074e4[m coPlayActiveSkillBefSpotLightAnim() time : 3.25f -> 3.5f 変更
+[33m0c7de111[m DownWallHitEF実装。
+[33m9bda04f7[m Passive Skills 実装：ExpUp & ItemSpawn
+[33m3e29608b[m ActiveSkillBefSpotLightAnim実装。
+[33mc2874b78[m coPlayActiveSkillBefSpotLightAnim() CoroutineHomerun() Inside CoroutineActiveSkillBefore()
+[33m0178c456[m itemBlock 処理＋Effect 実装。
+[33mec369983[m Player Previous Get Set() RecFactory
+[33m536f5823[m PassiveSkill 新しいImage書く作業＋２種の追加：7.Exp Up,8.ItemSpawn Up.
+[33md92ffe79[m Gizmos Value化=>Thunder & FireBall Width
+[33m4baa21d3[m MultiShot & Thunder Skill OverLap BUG
+[33mb9b42cf1[m Magic Spell Circle。(Thunder FileBall)。
+[33mf9e6608d[m Hit Base Passive Skills Func ReFactory。
+[33m3e4c655b[m ReFactory: Class Get Set Line Arrange
+[33mb597d839[m Block ItemType Img Apply
+[33m6697c7cd[m ActiveSkill CastEf生成＋適用。
+[33m2d45952d[m BlockItemImage : UpDown , LeftRight Arrow , Bomb
+[33m230ee377[m (BUG)途中でスキル活性化できないように
+[33m41514d73[m activeSKillBtnボタン複数適用完了。Array化。
+[33m81957cb5[m activeSKillBtnGroup ForEach文変更。
+[33m7bc38fc3[m FireBall Explosion Effect Collider And Function 制作。
+[33mbe250205[m ActiveSkill createActiveSkillShotEF() isTrailEffect Param 追加。
+[33m16eac9ac[m ActiveSkill Thunder (BUG) ボールはなしにする。修正。
+[33mf145a635[m Active Skill EF Info -> regist EffectManager & In Class Initialize + EffectManager ActiveSkillEffect三つタイプに統一。
+[33m9fca1b8a[m GMで、ActiveSkillTable生成。Playerで、レジストリ登録。
+[33m178d69bb[m FileBallExplosion Skill制作。ActiveSkill専用の関数を構築する必要あり。(未完)
+[33m8387e96d[m FireBall Hit Effect Pref Ready
+[33m2ef6a587[m ActiveSkill: FileBall Test + ActiveSkillBtn1 Class修正(スキルEFとイメージ登録できるように)。
+[33m2f480b81[m (BUG)Thunder Active Skillを使った場合、ボールも動くこと停し（遠く場所に送る＋マルチShotはしない）
+[33m1201ff6e[m ActiveSkill Class 生成＋PlayerにBatEffectTf生成
+[33m669b99b0[m BatFireBallある程度OK　＆　FireBallEFParticlePrefだけ用意未完。
+[33m47c9f0d0[m Bat ThunderEF
+[33m76c08d06[m LevelText Add
+[33m7018985c[m ActiveSkillBtn SelectFenceImage Particle Eage Effect。
+[33m69506531[m UI-ParticleSystem Package Add
+[33m7e49f9b3[m (BUG)曲がりが終わるまで、SkillBtnクリックできないように(スキル名が在るかを確認)。
+[33m4bd4235b[m displaySkillInfo:: INGAME(BUG) 情報が重ならないように、一回 初期化する。
+[33mfe2c81f3[m TextMeshPro Remove + Effect Done (PassiveSkillTable未完)
+[33md8406c62[m Passive Skill Table InGame
+[33m39ea2b17[m CriticalTextEF damage apply Func + instantKillEF生成。
+[33m9f5415af[m assetBundle Directory 生成　＋　CriticalEffect
+[33m1edc8b93[m TextMeshPro Import + criticalTextEF生成。
+[33ma19bcc4d[m ActiveSkill 基本的な部分実装。
+[33m413839ad[m ActiveSkillBtn生成。メソッドなど未完
+[33m8e58f9bb[m SkillBtnShader+Material And onTriggerActiveSkillButton()制作（未完）。
+[33m40e4c37c[m ActiveSkill: ThunderShot rayhits boxCastAll 処理。(未完)
+[33m83f0c48c[m ActiveSkill: ThunderShot Effect Prefab。
+[33me2c32bf8[m ActiveSkill: ThunderShot Img Add。
+[33m67c9bbbd[m Leveling a little bit & (BUG) ボールが複数ある時、同時に消えたら、次に進まないこと対応
+[33mc49bd9de[m Block SpawnAnimation + Ball Preview Dir Goal (CAM2): crossHairImg switch
+[33m19026838[m HitRank Class
+[33md646a4cb[m PausePanel : スキルStatus表示OK。
+[33m169c0153[m SkillImgObjPrefs LevelUpPanelAnimate -> gmスクリプトから管理するように修正。
+[33ma3021153[m PausePanel: PAUSE, CONTINUE, HOME Button onClick Event -> setGame(string type)。
+[33m0698b7b6[m LevelUp Skill 名前が大文字ではなくて、Switch文でできないBUGを直し。
+[33m11f3fbfa[m PausePanel UI Images Ready。And Directory Arrange
+[33m9974533f[m GameOverしたら、プレイヤー情報も初期化。
+[33mc9911589[m DataClassである「Skill_Infomation」クラスを作り、スキル情報を分離 Refactory
+[33m503b115d[m PauseGUI structor ready
+[33mb260cbbc[m (BUG)BlockがHitされたとき、OriginMeterial変数で戻して、白くなるエラー防止しましたが、カラーを抜けたから、含めて反映。
+[33mf0b0ea7c[m (BUG) WaitForSeconds間にまた衝突が発生したら、白くなる。+ 爆発なら、単一HITはしないように
+[33mdbc995c6[m (BUG) 爆発に対応するため、BlockPrefのLayerを変更しましたがDotLinePreviewがズレる。lockPref layer: Block削除⇒BallPreviewに戻す。　raycastHits処理で、tagから判断することにする。
+[33ma9e7b9d5[m EffectManager生成: Explosion(未完）。
+[33m09930463[m EffectManager生成。brokeBlockEffect生成（Particle）。
+[33m6641c311[m WhiteHitEffect
+[33m1aae89af[m Add Skills : ImmediateKill, Critical, Explosion。Effectは未。
+[33m50a67bf5[m (BUG)STRIKEになってから、BACKボタン押すと、PreviewLineが消えてしまう。
+[33m8bae88fb[m 物理エンジン：ボールが壁を通過してしまうBUG対応２番目。
+[33mf7a09595[m (BUG)矢印角度の左右によって、MinとMax設定したら、また左なのに右に行ってしまう。convertDir2DegWithRange()：関数作成。
+[33m48839bbb[m onClickSkillUpBtn: multiShot
+[33m83c2ea48[m onClickSkillUpBtn: Dmg Up + SpeedPercent Up処理。(Multi Shot未実装)。
+[33m9fca0acb[m onClickSkillUpBtn -> Player データ反映。
+[33m3edd1c4f[m HomeRunAnim : 単一再生　SWING→HomeRun。エフェクトまだ。
+[33m8928ce02[m HomeRunAnim : アニメSolo再生。エフェクトはまだ
+[33m02551075[m HomeRunAnim : アニメSolo再生。エフェクトはまだ
+[33m58d48766[m HomeRunAnim : カメラ、ボールまで、エフェクト未完。
+[33m3d9f9d21[m HomeRunAnim : Revise Swing Bat 未完
+[33m8037f70f[m LevelUpPanelAnimate: (BUG)nameずれると初期化
+[33m77730ebf[m LevelUpPanelAnimate: ScrollDown&Up Anim
+[33md752f31a[m LevelUpPanelAnimate: (BUG) 再度LEVELUPしたとき、データ初期化　Init childs of imgRectTf & SelectList
+[33m39694ca8[m LevelUpPanelAnimate: SkillNameTxt.Split(_);
+[33mf2801bdd[m LevelUpPanelAnimate: struct化に変更済み。
+[33me2b9cfca[m LevelUpPanelAnimate Btn : imgRectTfs + names Function & struct配列基礎な部分構築
+[33mea42d617[m ボールが消えた地点で、LevelUpしたらLevelUpPanel表示。
+[33m5958bf56[m Add 2D Sprite Package, LevelUp Select SkillBtnPanel & Add TestImg(SkillImgSprite.png)
+[33me5a14e92[m (BUG) GAMEOVER後、再スタートときは、EXPを増えないように。
+[33mf38f3107[m set 5kind of materials set by checking HP
+[33ma547e763[m Add WorldMaterialsFree Package & Material Instancing
+[33me9b3e9a3[m Hp Leveing by Stage Number:: 簡単に1~4まで仕組み制作
+[33m80a356d0[m ボールがパワーが強くと、DownWallを超えていくBUGあり、DownWallのColliderをもっと広げる調整。
+[33ma569b74c[m 「GAMEOVER」後、Block再生成するように＋Refactory
+[33m8e76dba3[m GameOver Stop Function
+[33m8f2bbee3[m (BUG)ActiveDownWallArea Collider Volume ReviseボールがGameOverLineに近いBlockを打つと、速度のためにColliderを超えてしまう。
+[33mf9d892d2[m BlockがGameOverまである時に、ボールとぶつかる: 0から0.05fにして、少しでもランダム値は反映。
+[33m6f06912f[m (BUG)STRIKE CNT RESET
+[33mc48105f2[m (BUG) BlockがGameOverまである時に、ボールとぶつかる。
+[33m202fab8b[m Ball Collide with Block -> DecreaseHp & themselve Check Destroy
+[33ma87311df[m Merge branch 'canControlDegType' of https://github.com/yunwhanlee/BaseBallAttack into canControlDegType
+[33m95633487[m STAGE Text & Block HpTxt
+[33me8e06201[m 予想ボール地点をボールが投げるとき、ランダムで設定：gm.setBallPreviewGoalRandomPos()
+[33mff0fe072[m (BUG対応)Arrow Y-Axis 左に固定できなく、右になってしまうこと修正。
+[33mb3a0253e[m drawPreview ReFactory
+[33mcdfc0e21[m Merge branch 'canControlDegType' of https://github.com/yunwhanlee/BaseBallAttack into canControlDegType
+[33m5347e92a[m Add URL + PipeRenderer
+[33mdd5a8b35[m +Package URP(UniversalRendererPipeline) : BallPreviewLine DotLineShader
+[33mf6999d0d[m PreviewLine
+[33m57847089[m BallPreviewSphere
+[33m8487a0db[m Set Power by Distance between Ball & HitArea
+[33mb5b3ca9b[m ReadyボタンSetActive()処理。
+[33m57017ea3[m setBall Distance & PreviewImgAlphaValue
+[33m0ef160fd[m Ball to Ball Preview Dir GoalPosのDirection Set
+[33m437c5017[m BallShooter Entrance Y Reset
+[33me3202009[m STRIKE Counting関連機能の実装
+[33m9308b89a[m STRIKEGUI表示Coroutine関数で
+[33md59c5098[m Cam2 : BallViewerLineBox生成＋cam1,2Canvas変数生成。
+[33m85f96b9d[m 「カメラ両方＋READYボタン」追加。機能はまだ
+[33m4de2551a[m homeRunSpot：randPosX
+[33m17e10c67[m homeRunSpot -> homeRunRange名変更＋まずPercentage長さをUIで表示。
+[33m4c6cfb05[m HomeRunSpot in SliderBallViewer
+[33m58f0965f[m Revise Ball Bounds detail
+[33mdfa214e8[m setCreateBlock() ボールが破壊されたら、ブロック生成
+[33md6f0ca00[m Ball Slider Size & DownWall Tag Add : ActiveDownWall。
+[33m79702113[m 角度に向けて発射
+[33m943db6de[m TouchSlideControl Pad & Stick
+[33m56cc38c8[m[33m ([m[1;31morigin/noTurnType[m[33m)[m 「swingArcAreaと矢印範囲を自動調整」（BUG）：localScaleじゃないくて、Parent.LocalScaleで修正。OffsetHitDegがずらす問題解決。
+[33m74159ddf[m 「BlockDown機能」＋「TURNシステム削除」＋Playerスクリプトへ、値を設定することで、swingArcAreaと矢印範囲を自動調整
+[33mbff0da90[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m GameManager State + Destroy Ball Codition + Shooting Cnt UI.
+[33m9c46b480[m BlockMaker実装
+[33m038a98fc[m 「SwingArcRange」実装。
+[33m3be09c5f[m HitAxis矢印追加＋HitRange関数化＋ペッド左右Sign方向＋AxisのOffset反映済み
+[33mea9f60e5[m 「BasicBlock」実装。
+[33m29447dd3[m 「Pad 左右」に対して、打つ角度(-, +)反映。まだ、詳しく調整必要。未完
+[33m6d5c9ec9[m (BUG対応)：HitArea前にUnHitAreaボックス生成し、ベット降ってもボールがまだHitAreaに届かなかったら、player.doSwingをfalseに戻す。
+[33mbaf61a02[m 「HitBox」削除→「HitRangeArea」に切り替え。
+[33m4bb3232a[m 「RayCastAll Hits配列」：逆順にIdx返すため、PadとSwingが同時に実行されるBUG直す。
+[33mc58ad99e[m HitBixDegSlider Set 初期  + model update ball.v1 and bat.v1
+[33m8c2d315d[m 「Hit」(BUG)-角度でも、0から360範囲で返す値を正しく変換する
+[33md1e344b3[m 「Hit」HitBox and Power and Degree反映。
+[33m54233107[m 「Anim」Player Swing & Touch
+[33ma36697b6[m 「GroundPad」左右タッチで、プレイヤー配置
+[33m56767f38[m 「BallShooter」発射＋BallPrefab
+[33m1c51b651[m firstCommit : Player & CameraRatio Setting

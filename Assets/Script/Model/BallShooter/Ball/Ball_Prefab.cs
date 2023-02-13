@@ -9,8 +9,10 @@ public class Ball_Prefab : MonoBehaviour
 {
     //* OutSide
     GameManager gm; EffectManager em; Player pl; BlockMaker bm; BallShooter bs;
-    public Rigidbody rigid;
+    public Rigidbody myRigid;
     public int aliveTime;
+    Transform myTransform;
+    SphereCollider myCollider;
 
     const int DELAY_INFINITE = 999;
 
@@ -29,21 +31,25 @@ public class Ball_Prefab : MonoBehaviour
 
     void Awake() {
         Debug.Log("Ball_Prefab::Awake():: DM.ins.gm= " + DM.ins.gm);
-        rigid = GetComponent<Rigidbody>();
         gm = DM.ins.gm;
         em = gm.em; pl = gm.pl; bm = gm.bm; bs = gm.bs;
+
+        myTransform = transform;
+        myRigid = GetComponent<Rigidbody>();
+        myCollider = GetComponent<SphereCollider>();
+        
         IsOnDarkOrb = false;
     }
 
     void FixedUpdate(){
         //* Destroy by Checking Velocity
-        if(rigid.velocity.magnitude != 0 && rigid.velocity.magnitude < 0.9875f){
-            Debug.Log($"BALL:: BallGroup.childCount= {gm.ballGroup.childCount}, velocity.magnitude= {rigid.velocity.magnitude}");
+        if(myRigid.velocity.magnitude != 0 && myRigid.velocity.magnitude < 0.9875f){
+            Debug.Log($"BALL:: BallGroup.childCount= {gm.ballGroup.childCount}, velocity.magnitude= {myRigid.velocity.magnitude}");
             checkDestroyBall();
         }
 
         //* Ball Preview Direction Goal Img
-        distance = Vector3.Distance(gm.ballPreviewDirGoal.transform.position, this.transform.position);
+        distance = Vector3.Distance(gm.ballPreviewDirGoal.transform.position, myTransform.position);
         gm.setBallPreviewImgAlpha(distance);
     }
 
@@ -59,10 +65,10 @@ public class Ball_Prefab : MonoBehaviour
 
                 gm.switchCamera();
                 // pl.DoSwing = false;
-                rigid.useGravity = true;
+                myRigid.useGravity = true;
                 
                 //* (BUG-32) ボールが投げて来ているとき、途中でブロックとぶつかるバグ対応。
-                this.GetComponent<SphereCollider>().isTrigger = false;
+                myCollider.isTrigger = false;
 
                 //* Init STRIKEデータ
                 gm.strikeCnt = 0;
@@ -95,11 +101,11 @@ public class Ball_Prefab : MonoBehaviour
                 });
 
                 //* Effect
-                em.createBatHitSparkEF(this.transform.position);
+                em.createBatHitSparkEF(myTransform.position);
 
                 //* HomeRun
                 if(power >= LM._.HOMERUN_MIN_POWER){
-                    em.createHomeRunHitSparkEF(this.transform.position);
+                    em.createHomeRunHitSparkEF(myTransform.position);
                     StartCoroutine(coPlayHomeRunAnim(isActiveSkillTrigger));
                 }
                 // else if(isActiveSkillTrigger){ //* ActiveSkill Before
@@ -143,7 +149,7 @@ public class Ball_Prefab : MonoBehaviour
 
                 //* 【 Giant Ball 】
                 if(pl.giantBall.Level == 1){
-                    var ballTexture = this.transform.GetChild(0).GetChild(0);
+                    var ballTexture = myTransform.GetChild(0).GetChild(0);
                     const float sc = PsvSkill<float>.GIANTBALL_SCALE;
                     ballTexture.transform.localScale = new Vector3(sc, sc, sc);
                 }
@@ -237,7 +243,7 @@ public class Ball_Prefab : MonoBehaviour
                         case DM.ATV.ThunderShot: //なし
                             break;
                         case DM.ATV.FireBall:{
-                            em.createAtvSkExplosionEF(skillIdx, this.transform);
+                            em.createAtvSkExplosionEF(skillIdx, myTransform);
                             decreaseBlocksHp(atv, AtvSkill.FireballDmg);
                             if(isHomeRun)
                                 decreaseBlocksHp(atv, 0, AtvSkill.FireballDot); //* + DOT DAMAGE
@@ -269,20 +275,20 @@ public class Ball_Prefab : MonoBehaviour
                         case DM.ATV.PoisonSmoke:{
                             SM.ins.sfxPlay(SM.SFX.PoisonExplosion.ToString());
                             int destroyCnt = DELAY_INFINITE; //* (BUG-60) PoisonSmokeスキルでない。CoRoutine WaitforSencondsCashingについて、999秒のことがなかったため。
-                            var ins = em.createAtvSkExplosionEF(skillIdx, this.transform, destroyCnt);
+                            var ins = em.createAtvSkExplosionEF(skillIdx, myTransform, destroyCnt);
                             if(isHomeRun){
                                 float sc = 1.3f;
                                 ins.GetComponent<PoisonSmoke>().Duration += 2;
                                 ins.transform.localScale = new Vector3(sc, sc, sc);
                             }
-                            RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.PoisonSmokeCastWidth, Vector3.up, 0);
+                            RaycastHit[] hits = Physics.SphereCastAll(myTransform.position, pl.PoisonSmokeCastWidth, Vector3.up, 0);
                             decreaseBlocksHp(atv, 0, AtvSkill.PoisonSmokeDot);
                             // this.rigid.velocity = Vector3.zero;
                             break;
                         }
                         case DM.ATV.IceWave:{
                             SM.ins.sfxPlay(SM.SFX.IceExplosion.ToString());
-                            var effect = em.createAtvSkExplosionEF(skillIdx, this.transform);
+                            var effect = em.createAtvSkExplosionEF(skillIdx, myTransform);
                             // this.rigid.velocity = Vector3.zero;
                             if(isHomeRun) {
                                 effect.transform.GetChild(effect.transform.childCount-1).gameObject.SetActive(true);
@@ -292,7 +298,7 @@ public class Ball_Prefab : MonoBehaviour
                     }
                     skillBtn.init(gm);
                     gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
-                    this.gameObject.GetComponent<SphereCollider>().enabled = false; //* ボール動きなし
+                    myCollider.enabled = false; //* ボール動きなし
 
                     //* Delay Next Stage
                     Invoke("onDestroyMeInvoke", delayTime);
@@ -308,12 +314,12 @@ public class Ball_Prefab : MonoBehaviour
                 if(gm.comboCnt != 0 && gm.comboCnt % LM._.GODBLESS_COMBO_SPAN == 0){
                     Debug.Log("GOD BLESS YOU!");
                     float radius = 4;
-                    Util._.DebugSphere(this.transform.position, radius, 0.5f, "blue");
+                    Util._.DebugSphere(myTransform.position, radius, 0.5f, "blue");
 
                     //* Explosion
                     SM.ins.sfxPlay(SM.SFX.FlashHit.ToString());
-                    em.createGodBlessEF(this.transform.position);
-                    Util._.sphereCastAllDecreaseBlocksHp(this.transform, radius, pl.dmg.Val * 3);
+                    em.createGodBlessEF(myTransform.position);
+                    Util._.sphereCastAllDecreaseBlocksHp(myTransform, radius, pl.dmg.Val * 3);
                 }
             }
 
@@ -347,12 +353,12 @@ public class Ball_Prefab : MonoBehaviour
                 bm.decreaseBlockHP(col.gameObject, result);
                 //* (BUG-30) Ball_Prefab::CritとかOneKillテキストEFとダメージ普通EFが一緒に発動するバグ対応。
                 if(!isInstantKill && !isCritical)
-                    em.createDmgTxtEF(this.transform.position, result);
+                    em.createDmgTxtEF(myTransform.position, result);
             }
         #endregion            
         }
         else if(col.transform.CompareTag(DM.TAG.Wall.ToString()) && col.gameObject.name == DM.NAME.DownWall.ToString()){
-            Vector3 pos = new Vector3(this.transform.position.x, col.gameObject.transform.position.y, col.gameObject.transform.position.z);
+            Vector3 pos = new Vector3(myTransform.position.x, col.gameObject.transform.position.y, col.gameObject.transform.position.z);
             em.createDownWallHitEF(pos);
         }
     }
@@ -369,19 +375,19 @@ public class Ball_Prefab : MonoBehaviour
                 // const float delayTime = 2;
                 const int maxDistance = 50;
                 const int width = 1;
-                Debug.DrawRay(this.transform.position, dir * maxDistance, Color.blue, 2f);
+                Debug.DrawRay(myTransform.position, dir * maxDistance, Color.blue, 2f);
 
                 gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
                 em.createAtvSkShotEF(skillIdx, this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
 
                 //* Collider 
-                RaycastHit[] hits = Physics.BoxCastAll(this.transform.position, Vector3.one * width, dir, Quaternion.identity, maxDistance);
+                RaycastHit[] hits = Physics.BoxCastAll(myTransform.position, Vector3.one * width, dir, Quaternion.identity, maxDistance);
                 Array.ForEach(hits, hit => {
                     if(hit.transform.name.Contains(DM.NAME.Block.ToString())){
                         StartCoroutine(coSetThunderSkill(hit)); //* With HomeRun Bonus
                     }
                 });
-                this.gameObject.GetComponent<SphereCollider>().enabled = false;//ボール動きなし
+                myCollider.enabled = false;//ボール動きなし
 
                 gm.activeSkillBtnList.ForEach(btn => btn.init(gm));
                 yield return Util.delay2;//new WaitForSeconds(delayTime);
@@ -391,7 +397,7 @@ public class Ball_Prefab : MonoBehaviour
             case DM.ATV.ColorBall:
             case DM.ATV.PoisonSmoke:
             case DM.ATV.IceWave:
-                this.rigid.velocity = this.rigid.velocity / 5;
+                this.myRigid.velocity = this.myRigid.velocity / 5;
                 em.createAtvSkShotEF(skillIdx, this.gameObject.transform, Quaternion.identity, true); //Trail
                 break;
         }
@@ -404,21 +410,21 @@ public class Ball_Prefab : MonoBehaviour
 //*  関数
 //*------------------------------------------------------------------------------
     private float setgetHitBallSpeed(float power, Vector3 arrowDir){
-        rigid.velocity = Vector3.zero;
+        myRigid.velocity = Vector3.zero;
         float force = Speed * power * pl.speed.Val * Time.fixedDeltaTime;
-        rigid.AddForce(arrowDir * force, ForceMode.Impulse);
+        myRigid.AddForce(arrowDir * force, ForceMode.Impulse);
         return force;
     }
 
     void instantiateMultiShot(Vector3 dir, float force, float ratio){
-        var ins = Instantiate(this.gameObject, this.transform.position, Quaternion.identity, gm.ballGroup);
+        var ins = Instantiate(this.gameObject, myTransform.position, Quaternion.identity, gm.ballGroup);
         ins.GetComponent<Rigidbody>().AddForce(dir * force * ratio, ForceMode.Impulse);
         Vector3 scale = ins.transform.localScale;
         ins.transform.localScale = new Vector3(scale.x * ratio, scale.y * ratio, scale.z * ratio);
     }
 
     private void decreaseBlocksHp(DM.ATV atv, int dmg, float dotDmgPer = 0){
-        RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, pl.FireBallCastWidth, Vector3.up, 0);
+        RaycastHit[] hits = Physics.SphereCastAll(myTransform.position, pl.FireBallCastWidth, Vector3.up, 0);
         Array.ForEach(hits, hit => {
             if(hit.transform.name.Contains(DM.NAME.Block.ToString())
             || hit.transform.name.Contains(DM.NAME.Obstacle.ToString())){
@@ -447,7 +453,7 @@ public class Ball_Prefab : MonoBehaviour
         }
     }
     private void checkDestroyBall(){
-        if(this.name == "Ball(Clone)" && this.transform.localScale.x == 0.4f){
+        if(this.name == "Ball(Clone)" && myTransform.localScale.x == 0.4f){
             onDestroyMe();
         }
         else
@@ -526,13 +532,13 @@ public class Ball_Prefab : MonoBehaviour
     // void OnDrawGizmos(){
         //* Explosion Skill Range Preview
         // Gizmos.color = Color.yellow;
-        // Gizmos.DrawWireSphere(this.transform.position, pl.explosion.Val.range);
+        // Gizmos.DrawWireSphere(myTransform.position, pl.explosion.Val.range);
 
         //* ThunderShot Skill Range Preview => ArrowAxisAnchorObjに付いているThunderGizmosスクリプト。
 
         //* FireBall Skill Range Preview
         // Gizmos.color = Color.red;
-        // Gizmos.DrawWireSphere(this.transform.position, pl.FireBallCastWidth);
+        // Gizmos.DrawWireSphere(myTransform.position, pl.FireBallCastWidth);
     // }
 #endif
 }

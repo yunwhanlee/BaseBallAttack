@@ -113,6 +113,6 @@ public class BallShooter : MonoBehaviour
         var ball = ins.GetComponent<Ball_Prefab>();
         int extra = Random.Range(0, 5);
         ball.Speed = (throwBallSpeed + extra) * Time.fixedDeltaTime;
-        ball.rigid.AddForce(goalDir * ball.Speed, ForceMode.Impulse);
+        ball.myRigid.AddForce(goalDir * ball.Speed, ForceMode.Impulse);
     }
 }
