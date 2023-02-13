@@ -422,15 +422,15 @@ public class AtvSkill{
 
         IcewaveDmg = (int)(ballDmg * (LM._.ICEWAVE_DEF_DMG_PER + upgradeArr[(int)DM.ATV.IceWave].getValue()));
 
-        Debug.Log("<color=white>ActiveSkill(gm, pl) Set Dmg:: "
-            + "     ThunderShotHitCnt= " + ThunderShotHitCnt
-            + "     ThunderShotCrit= " + ThunderShotCrit
-            + ",    FireballDmg= " + FireballDmg
-            + ",    FireballDot= " + FireballDot
-            + ",    ColorBallPopCnt= " + ColorBallPopCnt
-            + ",    PoisonSmokeDot= " + PoisonSmokeDot
-            + ",    IcewaveDmg= " + IcewaveDmg +"</color>"
-        );
+        // Debug.Log("<color=white>ActiveSkill(gm, pl) Set Dmg:: "
+        //     + "     ThunderShotHitCnt= " + ThunderShotHitCnt
+        //     + "     ThunderShotCrit= " + ThunderShotCrit
+        //     + ",    FireballDmg= " + FireballDmg
+        //     + ",    FireballDot= " + FireballDot
+        //     + ",    ColorBallPopCnt= " + ColorBallPopCnt
+        //     + ",    PoisonSmokeDot= " + PoisonSmokeDot
+        //     + ",    IcewaveDmg= " + IcewaveDmg +"</color>"
+        // );
     }
 
     //* method

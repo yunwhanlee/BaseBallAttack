@@ -236,27 +236,6 @@ public class DM : MonoBehaviour{
         return tuto;
     }
 
-    // public bool reqShowAD(){//string type, GameManager gm){
-    //     //* 広告なしか確認。
-    //     if(personalData.IsRemoveAD) return true;
-        
-    //     bool success = false; //Test True
-    //     Debug.Log($"<color=red>reqShowAD</color>:: success= " + success);
-    //     //* 広告見る。
-    //     //TODO IN Show AD Process
-    //     return success;
-    // }
-    // public bool reqAppPayment(){
-    //     bool success = true; //Test True
-    //     Debug.Log($"<color=red>reqAppPayment</color>:: success= " + success);
-    //     //TODO IN App Payment Process 
-    //     return success;
-    // }
-    // public void openAppStore(){
-    //     Debug.Log("openAppStore::");
-    //     //TODO Open My Game App Store;
-    // }
-
     public DM.PANEL getCurPanelType2Enum(string name){
         return (name == DM.PANEL.Chara.ToString())? DM.PANEL.Chara
             : (name == DM.PANEL.Bat.ToString())? DM.PANEL.Bat

@@ -65,7 +65,7 @@ public class BlockMaker : MonoBehaviour
             //* DropBox AliveSapn Down
             for(int i=0; i<gm.dropBoxGroup.childCount; i++){
                 DropBox dropBox = gm.dropBoxGroup.GetChild(i).GetComponent<DropBox>();
-                Debug.Log(dropBox.gameObject.activeSelf + ", " + dropBox.name);
+                // Debug.Log(dropBox.gameObject.activeSelf + ", " + dropBox.name);
                 if(dropBox.gameObject.activeSelf){
                     dropBox.AliveSpan--;
                 }

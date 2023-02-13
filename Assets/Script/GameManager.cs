@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using System;
+using System.Text;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
@@ -199,6 +200,8 @@ public class GameManager : MonoBehaviour {
     [Header("DropBox List")][Header("__________________________")]
     public List<DropBox> dropBoxList;
 
+    private StringBuilder sb;
+
 # if UNITY_EDITOR
     [Header("DEBUG MT")][Header("__________________________")]
     [SerializeField] bool isDownWallDebugMode;
@@ -237,9 +240,6 @@ public class GameManager : MonoBehaviour {
         Debug.Log($"GM::Start():: Player({charaTf.name}) Transform ZERO初期化 : pos= {charaTf.localPosition} -> Vector3.zero, rot= {charaTf.localRotation} -> Quaternion.identity");
         charaTf.localPosition = Vector3.zero;
         charaTf.localRotation = Quaternion.identity;
-        
-        
-        
 
         SM.ins.sfxPlay(SM.SFX.StartGame.ToString());
         light = GameObject.Find("Directional Light").GetComponent<Light>();
@@ -320,7 +320,9 @@ public class GameManager : MonoBehaviour {
         //* GUI *//
         //* EXP BAR & TEXT
         expBar.value = Mathf.Lerp(expBar.value, (float)pl.Exp / (float)pl.MaxExp, Time.deltaTime * 10);
-        expBarTxt.text = $"{pl.Exp} / {pl.MaxExp}";
+        expBarTxt.text = sb.AppendFormat("{0} / {1}", pl.Exp, pl.MaxExp).ToString(); // expBarTxt.text = $"{pl.Exp} / {pl.MaxExp}";
+        sb.Length = 0;
+        
 
         //* BOSS BAR & TEXT
         bossStageBar.GetComponent<RectTransform>().anchorMin = new Vector2((boss? 0.15f : 0.5f), 0.5f);
@@ -328,8 +330,9 @@ public class GameManager : MonoBehaviour {
             boss? ((float)boss.Hp / boss.MaxHp >= 0)? (float)boss.Hp / boss.MaxHp : 0
                 : (float)(stage % LM._.BOSS_STAGE_SPAN) / (float)LM._.BOSS_STAGE_SPAN
             , Time.deltaTime * 10);
-        bossStageTxt.text = boss? $"{boss.Hp} / {boss.MaxHp}"
-            : $"{stage % LM._.BOSS_STAGE_SPAN} / {LM._.BOSS_STAGE_SPAN}";
+        bossStageTxt.text = boss? sb.AppendFormat("{0} / {1}", boss.Hp, boss.MaxHp).ToString()
+            : sb.AppendFormat("{0} / {1}", stage % LM._.BOSS_STAGE_SPAN, LM._.BOSS_STAGE_SPAN).ToString(); // bossStageTxt.text = boss? $"{boss.Hp} / {boss.MaxHp}" : $"{stage % LM._.BOSS_STAGE_SPAN} / {LM._.BOSS_STAGE_SPAN}";
+        sb.Length = 0;
         
         Image fillImg = Array.Find(bossStageBar.GetComponentsInChildren<Image>(), img => img.transform.name == "Fill");
         fillImg.color = boss? bossStageBarColorPink : bossStageBarColorGray;
@@ -340,10 +343,15 @@ public class GameManager : MonoBehaviour {
 
         //* ANOTHER TEXT
         stateTxt.text = State.ToString();
-        levelTxt.text = LANG.getTxt(LANG.TXT.Level.ToString()) + " : " + pl.Lv;
-        stageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage.ToString();
-        comboTxt.text = LANG.getTxt(LANG.TXT.Combo.ToString()) + "\n" + comboCnt.ToString();
-        bossLimitCntTxt.text = LANG.getTxt(LANG.TXT.BossLimitCnt.ToString()) + " : " + bossLimitCnt.ToString();
+        
+        levelTxt.text = sb.AppendFormat("{0} : {1}", LANG.getTxt(LANG.TXT.Level.ToString()), pl.Lv).ToString(); //LANG.getTxt(LANG.TXT.Level.ToString()) + " : " + pl.Lv;
+        sb.Length = 0;
+        stageTxt.text = sb.AppendFormat("{0} : {1}", LANG.getTxt(LANG.TXT.Stage.ToString()), stage).ToString(); //LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage.ToString();
+        sb.Length = 0;
+        comboTxt.text = sb.AppendFormat("{0}\n{1}", LANG.getTxt(LANG.TXT.Combo.ToString()), comboCnt).ToString(); //LANG.getTxt(LANG.TXT.Combo.ToString()) + "\n" + comboCnt.ToString();
+        sb.Length = 0;
+        bossLimitCntTxt.text = sb.AppendFormat("{0} : {1}", LANG.getTxt(LANG.TXT.BossLimitCnt.ToString()), bossLimitCnt).ToString(); //LANG.getTxt(LANG.TXT.BossLimitCnt.ToString()) + " : " + bossLimitCnt.ToString();
+        sb.Length = 0;
 
         //* ActiveSkill Status
         activeSkillBtnList.ForEach(btn=> btn.setActiveSkillEF());
@@ -610,14 +618,6 @@ public class GameManager : MonoBehaviour {
             : rewardType == DM.REWARD.RerotateSkillSlots.ToString()? DM.REWARD.RerotateSkillSlots
             : DM.REWARD.Revive
         );
-        // bool success = DM.ins.reqShowAD();
-        // if(success){
-            // setShowADReward(rewardType);
-        // }
-        // else{
-        //     SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
-        //     Util._.displayNoticeMsgDialog("ERROR！");
-        // }
     }
 
 //*---------------------------------------
@@ -632,6 +632,7 @@ public class GameManager : MonoBehaviour {
         pl.Lv = 1;
         pl.Exp = 0;
         bossLimitCnt = 0;
+        sb = new StringBuilder();
     }
 
 #region AD REWARD
