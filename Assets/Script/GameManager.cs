@@ -78,6 +78,8 @@ public class GameManager : MonoBehaviour {
 
     [Header("DIALOG")][Header("__________________________")]
     public RectTransform showAdDialog;
+    public Text showAdDialogCoinTxt;
+    public Text showAdDialogDiamondTxt;
     public RectTransform openTutorialDialog;
     public Text openTutorialSkipTxt;
     public Text adDialogTitleTxt;
@@ -569,6 +571,8 @@ public class GameManager : MonoBehaviour {
     public void onClickBtnOpenShowAdDialog(string type) {
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         showAdDialog.gameObject.SetActive(true);
+        showAdDialogCoinTxt.text = DM.ins.personalData.Coin.ToString();
+        showAdDialogDiamondTxt.text = DM.ins.personalData.Diamond.ToString();
         adPricePayBtn.gameObject.SetActive(true);
         Text price = adPricePayBtn.GetComponentInChildren<Text>();
         Image icon = Array.Find(adPricePayBtn.GetComponentsInChildren<Image>(), chd => chd.name.Contains("Icon"));
@@ -603,10 +607,22 @@ public class GameManager : MonoBehaviour {
         Debug.Log($"onClickPayButton:: {rewardType}");
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         if(rewardType == DM.REWARD.RerotateSkillSlots.ToString()){
-            setRerotateSkillSlots();
+            if(DM.ins.personalData.Coin > LM._.REROTATE_SKILLSLOTS_PRICE_COIN){
+                DM.ins.personalData.Coin -= LM._.REROTATE_SKILLSLOTS_PRICE_COIN;
+                setRerotateSkillSlots();
+            }
+            else{
+                Util._.displayNoticeMsgDialog($"{LANG.getTxt(LANG.TXT.Coin.ToString())} {LANG.getTxt(LANG.TXT.NotEnough.ToString())}!" );
+            }
         }
         else if(rewardType == DM.REWARD.Revive.ToString()){
-            setRevive();
+            if(DM.ins.personalData.Diamond > LM._.REVIVE_PRICE_DIAMOND){
+                DM.ins.personalData.Diamond -= LM._.REVIVE_PRICE_DIAMOND;
+                setRevive();
+            }
+            else{
+                Util._.displayNoticeMsgDialog($"{LANG.getTxt(LANG.TXT.Diamond.ToString())} {LANG.getTxt(LANG.TXT.NotEnough.ToString())}!");
+            }
         }
         showAdDialog.gameObject.SetActive(false); //* ダイアログ閉じる
     }
