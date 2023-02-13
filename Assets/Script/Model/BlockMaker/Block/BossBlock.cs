@@ -309,6 +309,8 @@ public class BossBlock : Block_Prefab{
 
     public override void onDestroy(GameObject target, bool isInitialize = false) {
         Debug.Log($"BossBlock:: onDestroy():: target= {target}, Contains Boss1 = {name.Contains("Boss1")}");
+        //* 初期化
+        // gm.bossLimitCnt = 0; 
         //* Achivement
         AcvBosskillCollection.collectBossKill(this.name);
         //* Boss Die        

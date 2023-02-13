@@ -9511,7 +9511,7 @@ GameObject:
   - component: {fileID: 4258605079286305277}
   - component: {fileID: 1272972542581817615}
   m_Layer: 0
-  m_Name: KeepCntTxt
+  m_Name: DurationTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14500,8 +14500,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6fe8fbcfbf780740a405087f4db1168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keepDuration: 2
-  KeepCntTxt: {fileID: 4258605079286305277}
+  duration: 2
+  durationTxt: {fileID: 4258605079286305277}
 --- !u!1 &2875716881886187867
 GameObject:
   m_ObjectHideFlags: 0

@@ -213,6 +213,8 @@ public class GameManager : MonoBehaviour {
     void Start() {
         // Util._.calcArithmeticProgressionList(start: 100, max: 50, d: 100, gradualUpValue: 0.1f);
 
+        init();
+
         DM.ins.transform.position = Vector3.zero; //* LoadingSceneで、モデルが見えないようにずらした位置を戻す。
 
         showExpUIGroup.gameObject.SetActive(DM.ins.personalData.IsActiveExpLog);
@@ -621,21 +623,18 @@ public class GameManager : MonoBehaviour {
 //*---------------------------------------
 //*  関数
 //*---------------------------------------
-#region AD REWARD
-    // private void setShowADReward(string rewardType){
-    //     if(rewardType == DM.REWARD.RerotateSkillSlots.ToString()){
-    //         setRerotateSkillSlots();
-    //     }
-    //     else if(rewardType == DM.REWARD.Revive.ToString()){
-    //         setRevive();
-    //     }
-    //     else if(rewardType == DM.REWARD.CoinX2.ToString()){
-    //         setCoinX2();
-    //     }
-    //     //* ダイアログ閉じる
-    //     // showAdDialog.gameObject.SetActive(false);
-    // }
+    public void init(){
+        State = GameManager.STATE.WAIT;
+        gameoverPanel.SetActive(false);
+        stage = 1;
+        strikeCnt = 0;
+        comboCnt = 0;
+        pl.Lv = 1;
+        pl.Exp = 0;
+        bossLimitCnt = 0;
+    }
 
+#region AD REWARD
     public void setRerotateSkillSlots(){
         Debug.Log("setRerotateSkillSlots::");
         levelUpPanel.GetComponent<LevelUpPanelAnimate>().Start();
@@ -664,21 +663,6 @@ public class GameManager : MonoBehaviour {
         showAdDialog.gameObject.SetActive(false);//* ダイアログ閉じる
     }
 #endregion
-
-    public void init(){
-        State = GameManager.STATE.WAIT;
-        gameoverPanel.SetActive(false);
-        stage = 1;
-        strikeCnt = 0;
-        comboCnt = 0;
-        pl.Lv = 1;
-        pl.Exp = 0;
-        // pl.MaxExp = 100;
-        pl.Start();
-        bm.Start();
-        //* Collect Drop Items Exp
-        var dropObjs = dropItemGroup.GetComponentsInChildren<DropItem>();
-    }
 
     public void switchCamera(){
         if(State == GameManager.STATE.GAMEOVER) return;
