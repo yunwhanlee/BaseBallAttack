@@ -32,9 +32,9 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     public Material onClickedMt;
 
     //* Arrow Axis
-    public int offsetDeg2DTo3D = 60;
-    public int MIN_ARROW_DEG_Y = 0;
-    public int MAX_ARROW_DEG_Y = 120;
+    public float offsetDeg2DTo3D = 60;
+    public float MIN_ARROW_DEG_Y = 7.5f;
+    public float MAX_ARROW_DEG_Y = 112.5f;
 
     void Start(){
         playerOffsetX = pl.transform.position.x;
@@ -92,9 +92,15 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         }
         else if(gm.State == GameManager.STATE.PLAY){
             //* Swing !
-            pl.setAnimTrigger(DM.ANIM.Swing.ToString());
+            StartCoroutine(coSwingBat());
         }
+    }
 
+    IEnumerator coSwingBat(){
+        pl.DoSwing = true;
+        pl.setAnimTrigger(DM.ANIM.Swing.ToString());
+        yield return Util.delay0_2;
+        pl.DoSwing = false;
     }
 
     public void OnDrag(PointerEventData eventData){
@@ -224,7 +230,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     private void rotateArrowTf(Vector2 dir){
         //* Stick(Arrow)角度によって、Player位置が自動で左右移動。
         float deg = convertDir2DegWithRange(dir, MIN_ARROW_DEG_Y, MAX_ARROW_DEG_Y);
-        Debug.Log("OnDrag::rotateArrowTf:: Stick(Arrow) Deg=" + deg + ", dir=" + dir + ", " + ((dir.x < 0)? "Left" : "Right").ToString());
+        // Debug.Log("OnDrag::rotateArrowTf:: Stick(Arrow) Deg=" + deg + ", dir=" + dir + ", " + ((dir.x < 0)? "Left" : "Right").ToString());
 
         //* Player矢印(Arrow)角度に適用
         pl.arrowAxisAnchor.transform.rotation = Quaternion.Euler(0, offsetDeg2DTo3D - deg, 0);
@@ -298,12 +304,12 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         pl.ballPreviewSphere[1].SetActive(is2ndBallPreviewOn? true : false);
     }
 
-    private float convertDir2DegWithRange(Vector3 dir, int min, int max){
+    private float convertDir2DegWithRange(Vector3 dir, float min, float max){
         //! (BUG) タッチをドラッグする時に、Y軸を動かないと角度がちゃんと出来ない。
         //* NormalizeしたX軸の距離(CosΘ)であれば、Y軸の距離(SinΘ)を予想して反映。
         float normalX = dir.x / (pad.rect.width * 0.5f); // -1 ~ 1
         dir = dir.normalized;
-        Debug.Log($"normalX= Atan2({Util._.setNumDP(0 <= normalX? 1-normalX : 1+normalX, 2)}, {Util._.setNumDP(normalX, 2)})");
+        // Debug.Log($"normalX= Atan2({Util._.setNumDP(0 <= normalX? 1-normalX : 1+normalX, 2)}, {Util._.setNumDP(normalX, 2)})");
 
         // (BUG) float deg = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         float deg = Mathf.Atan2(((0 <= normalX)? 1-normalX : 1+normalX), normalX) * Mathf.Rad2Deg;

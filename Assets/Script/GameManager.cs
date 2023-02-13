@@ -215,6 +215,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField]  GameObject activeDownWallArea;
     [SerializeField]  Material debugRedMt;
     [SerializeField]  Material debugBlueMt;
+    [SerializeField]  [Range(0,1)] float timeScale = 1;
 # endif
 
     void Awake(){
@@ -317,6 +318,7 @@ public class GameManager : MonoBehaviour {
     void Update(){
         //* Debug Mode
         # if UNITY_EDITOR
+            if(isDownWallDebugMode) Time.timeScale = timeScale;
             downWallCollider.GetComponent<MeshRenderer>().enabled = isDownWallDebugMode;
             activeDownWallArea.GetComponent<MeshRenderer>().enabled = isDownWallDebugMode;
         # endif
@@ -1000,6 +1002,7 @@ public class GameManager : MonoBehaviour {
         #endif
 
         bs.IsReadyShoot = false;
+        pl.IsHited = false;
         pl.IsStun = false;
         readyBtn.gameObject.SetActive(true);
         fastPlayBtn.gameObject.SetActive(false);
@@ -1150,6 +1153,7 @@ public class GameManager : MonoBehaviour {
 
     # if UNITY_EDITOR
         public void debugDownWallColliderTriggerMtColor(bool isActive){
+            Debug.Log("debugDownWallColliderTriggerMtColor("+ (isActive? "<color=blue>true (GM::setNextStage)</color>" : "<color=red>false (Ball_Prefab::OnTriggerEnter)</color>") + "):: col.trigger");
             //? Blue色：collider.trigger= true  ボールが発射してプレイヤーが打つまで、下壁を非活性化(*物理演算 ON)。
             //! Red色 : collider.trigger= false ボールが来てプレイヤーが打ち、ActiveDownWallAreaに届いたら、下壁を活性化(*物理演算 OFF)。
             downWallCollider.GetComponent<MeshRenderer>().material = isActive? debugBlueMt : debugRedMt;

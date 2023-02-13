@@ -242,7 +242,6 @@ public class Player : MonoBehaviour
         switch(name){
             case "Swing":
                 SM.ins.sfxPlay(SM.SFX.Swing.ToString());
-                doSwing = true;
                 break;
             case "HomeRun": 
                 SM.ins.sfxPlay(SM.SFX.HomeRunCameraAnim.ToString());

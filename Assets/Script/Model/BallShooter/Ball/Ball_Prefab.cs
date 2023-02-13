@@ -19,7 +19,7 @@ public class Ball_Prefab : MonoBehaviour
     //* Value
     [SerializeField] bool isHitedByBlock = false;
     [SerializeField] bool isHomeRun = false;
-    float deleteLimitTime = 2.0f;
+    [SerializeField] float deleteLimitTime = 2.0f;
     [SerializeField] float speed;    public float Speed {get => speed; set => speed = value;}
     float distance;
     [Header("PSV UNIQUE")][Header("__________________________")]
@@ -44,8 +44,8 @@ public class Ball_Prefab : MonoBehaviour
     void FixedUpdate(){
         //* Destroy by Checking Velocity
         if(myRigid.velocity.magnitude != 0 && myRigid.velocity.magnitude < 0.9875f){
-            Debug.Log($"BALL:: BallGroup.childCount= {gm.ballGroup.childCount}, velocity.magnitude= {myRigid.velocity.magnitude}");
-            checkDestroyBall();
+            Debug.Log($"Ball_Prefab::BallGroup.childCount= {gm.ballGroup.childCount}, velocity.magnitude= {myRigid.velocity.magnitude}");
+            checkDestroyMainBall();
         }
 
         //* Ball Preview Direction Goal Img
@@ -157,13 +157,13 @@ public class Ball_Prefab : MonoBehaviour
                     //* 【 Multi Shot (横) 】
                     for(int i=0; i<pl.multiShot.Val;i++){ // Debug.Log($"<color=blue>【 Multi Shot (横) 】: {pl.multiShot.Value}</color>");
                         Vector3 dir = pl.multiShot.calcMultiShotDeg2Dir(arrowDeg, i); //* Arrow Direction with Extra Deg
-                        instantiateMultiShot(dir, force, ratio: 0.75f);
+                        instantiateMultiShot(dir, force, ratio: 1);
                     }
 
                     //* 【 Vertical Multi Shot (縦) 】
                     for(int i=0; i<pl.verticalMultiShot.Val;i++){ // Debug.Log($"<color=blue>【 Vertical Multi Shot (縦) 】: {pl.verticalMultiShot.Value}</color>");
                         Vector3 dir = pl.arrowAxisAnchor.transform.forward;
-                        instantiateMultiShot(dir, force, ratio: 0.8f);
+                        instantiateMultiShot(dir, force, ratio: 0.95f);
                     }
                 }
                 //* 【 Laser 】
@@ -215,10 +215,15 @@ public class Ball_Prefab : MonoBehaviour
         if(col.transform.CompareTag(DM.TAG.HitRangeArea.ToString())){ //* HIT BALL
             isHitedByBlock = true;
             pl.setSwingArcColor("yellow");
-            InvokeRepeating("checkLimitTimeToDeleteBall", 0, deleteLimitTime);//* 日程時間が過ぎたら、ボール削除。
+            Debug.Log($"Ball_Prefab::OnTriggerExit(col= {col.name}):: Invoke(checkLimitTimeToDeleteBall, deleteLimitTime= {deleteLimitTime})");
+
+            //! (BUG) ここに問題が合って、打ったボールが急にすぐなくなる。
+            // InvokeRepeating("checkLimitTimeToDeleteBall",0,  deleteLimitTime);//* 日程時間が過ぎたら、ボール削除。
         }
         else if(col.transform.CompareTag(DM.TAG.StrikeLine.ToString())){ //* ストライク
-            onDestroyMe(true);
+            Debug.Log($"<color=red>Ball_Prefab:: OnTriggerExit:: this.name= {this.name}, col= {col.name}, deleteLimitTime= {deleteLimitTime}</color>");
+            checkDestroyMainBall();
+            // onDestroyMe(true);
         }
     }
 #endregion
@@ -391,6 +396,7 @@ public class Ball_Prefab : MonoBehaviour
 
                 gm.activeSkillBtnList.ForEach(btn => btn.init(gm));
                 yield return Util.delay2;//new WaitForSeconds(delayTime);
+                Debug.Log("Ball_Prefab::coPlayActiveSkillShotEF()::");
                 onDestroyMe();
                 break;
             case DM.ATV.FireBall:
@@ -405,7 +411,10 @@ public class Ball_Prefab : MonoBehaviour
     }
     #endregion
 
-    private void onDestroyMeInvoke() => onDestroyMe();
+    private void onDestroyMeInvoke() {
+        Debug.Log("Ball_Prefab::onDestroyMeInvoke()::");
+        onDestroyMe();
+    }
 //*------------------------------------------------------------------------------
 //*  関数
 //*------------------------------------------------------------------------------
@@ -449,11 +458,13 @@ public class Ball_Prefab : MonoBehaviour
         if(isHitedByBlock)
             isHitedByBlock = false;
         else{
-            checkDestroyBall();
+            Debug.Log("Ball_Prefab::checkLimitTimeToDeleteBall()::");
+            checkDestroyMainBall();
         }
     }
-    private void checkDestroyBall(){
+    private void checkDestroyMainBall(){
         if(this.name == "Ball(Clone)" && myTransform.localScale.x == 0.4f){
+            Debug.Log("Ball_Prefab::checkDestryBall()::");
             onDestroyMe();
         }
         else
@@ -462,7 +473,7 @@ public class Ball_Prefab : MonoBehaviour
 
     private void onDestroyMe(bool isStrike = false){
         if(!isStrike){
-            Debug.Log("Ball_Prefab:: onDestroyMe:: gm.setNextStage()");
+            Debug.Log($"<color=red>Ball_Prefab:: onDestroyMe:: gm.setNextStage(), this.name= {this.name}</color>");
             gm.setNextStage();//* ボールが消えたら次に進む。
         }else{
             gm.setStrike();

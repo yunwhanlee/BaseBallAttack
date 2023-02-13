@@ -49261,7 +49261,7 @@ MonoBehaviour:
   pl: {fileID: 702911506}
   isReadyShoot: 0
   isExclamationMarkOn: 0
-  throwBallSpeed: 20
+  throwBallSpeed: 999
   ballPref: {fileID: 2295754910549213891, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
   entranceTf: {fileID: 747844806}
   exclamationMarkObj: {fileID: 840195234}
@@ -63267,6 +63267,7 @@ MonoBehaviour:
   activeDownWallArea: {fileID: 1957708814}
   debugRedMt: {fileID: 2100000, guid: f4b42f7359e019947b7d92359bc4333b, type: 2}
   debugBlueMt: {fileID: 2100000, guid: 338970dfe3d7f364a9dc75e128bcf626, type: 2}
+  timeScale: 1
 --- !u!1 &1628368614
 GameObject:
   m_ObjectHideFlags: 0
