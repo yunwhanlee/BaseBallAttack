@@ -184,8 +184,9 @@ public class ObjectPool : MonoBehaviour
         
         //* 属性
         obj.SetActive(true);
-        obj.transform.position = pos;
-        obj.transform.localRotation = rot;
+        obj.transform.SetPositionAndRotation(pos, rot);
+        // obj.transform.position = pos;
+        // obj.transform.localRotation = rot;
         if(groupTf != null)  obj.transform.SetParent(groupTf);
 
         return obj;
