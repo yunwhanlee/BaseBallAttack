@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4430069, g: 0.49219602, b: 0.57192457, a: 1}
+  m_IndirectSpecularColor: {r: 0.44300717, g: 0.49219608, b: 0.57192516, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7655,8 +7655,8 @@ MonoBehaviour:
   plTfMeshRdrs: []
   onClickedMt: {fileID: 2100000, guid: 1a0418b150dc1e1448c35ae9aa39157c, type: 2}
   offsetDeg2DTo3D: 90
-  MIN_ARROW_DEG_Y: 30
-  MAX_ARROW_DEG_Y: 150
+  MIN_ARROW_DEG_Y: 37.5
+  MAX_ARROW_DEG_Y: 142.5
 --- !u!1 &149286362
 GameObject:
   m_ObjectHideFlags: 0
@@ -63263,7 +63263,7 @@ MonoBehaviour:
   skySunObj: {fileID: 312059687}
   skyMoonObj: {fileID: 312059691}
   dropBoxList: []
-  isDownWallDebugMode: 0
+  isDownWallDebugMode: 1
   activeDownWallArea: {fileID: 1957708814}
   debugRedMt: {fileID: 2100000, guid: f4b42f7359e019947b7d92359bc4333b, type: 2}
   debugBlueMt: {fileID: 2100000, guid: 338970dfe3d7f364a9dc75e128bcf626, type: 2}

@@ -99,12 +99,12 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     IEnumerator coSwingBat(){
         pl.DoSwing = true;
         pl.setAnimTrigger(DM.ANIM.Swing.ToString());
-        yield return Util.delay0_2;
-        pl.DoSwing = false;
+        yield return null; //Util.delay0_2;
+        // pl.DoSwing = false;
     }
 
     public void OnDrag(PointerEventData eventData){
-        Debug.Log($"OnDrag:: gm.IsPlayingAnim= {gm.IsPlayingAnim}, gm.IsStun= {pl.IsStun}");
+        // Debug.Log($"OnDrag:: gm.IsPlayingAnim= {gm.IsPlayingAnim}, gm.IsStun= {pl.IsStun}");
         if(gm.State != GameManager.STATE.WAIT) return;
         if(gm.IsPlayingAnim) return;
         if(pl.IsStun) return;

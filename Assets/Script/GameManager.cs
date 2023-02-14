@@ -14,6 +14,15 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private DM.MODE mode;       public DM.MODE Mode {get => mode; set => mode = value;}
     public float timelineNum;
     // public Animator postProcessAnim;
+
+# if UNITY_EDITOR
+    [Header("DEBUG MT")][Header("__________________________")]
+    [SerializeField] bool isDownWallDebugMode;
+    [SerializeField]  GameObject activeDownWallArea;
+    [SerializeField]  Material debugRedMt;
+    [SerializeField]  Material debugBlueMt;
+    [SerializeField]  [Range(0,1)] float timeScale = 1;
+# endif
     
     [Header("GROUP")][Header("__________________________")]
     public Transform effectGroup;
@@ -208,15 +217,6 @@ public class GameManager : MonoBehaviour {
     public List<DropBox> dropBoxList;
 
     private StringBuilder sb;
-
-# if UNITY_EDITOR
-    [Header("DEBUG MT")][Header("__________________________")]
-    [SerializeField] bool isDownWallDebugMode;
-    [SerializeField]  GameObject activeDownWallArea;
-    [SerializeField]  Material debugRedMt;
-    [SerializeField]  Material debugBlueMt;
-    [SerializeField]  [Range(0,1)] float timeScale = 1;
-# endif
 
     void Awake(){
         DM.ins.gm = this;
@@ -770,6 +770,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private IEnumerator corSetStrike(bool isOut = false){
+        Debug.Log($"corSetStrike(isOut= {isOut}):: ");
         SM.ins.sfxPlay(SM.SFX.CountDownStrike.ToString());
         strikeCntImgs[strikeCnt++].gameObject.SetActive(true);
         if(isOut){ //* アウト
@@ -778,7 +779,8 @@ public class GameManager : MonoBehaviour {
             yield return Util.delay1_5;
             bs.init();
             switchCamera();
-            foreach(var img in strikeCntImgs) img.gameObject.SetActive(false); //GUI非表示 初期化
+            for(int i=0; i<strikeCntImgs.Length; i++)
+                strikeCntImgs[i].gameObject.SetActive(false); //GUI非表示 初期化
             // stage++;
             // bm.DoCreateBlock = true; //ブロック生成
             // readyBtn.gameObject.SetActive(true);
@@ -996,9 +998,9 @@ public class GameManager : MonoBehaviour {
         comboCnt = 0;
         bm.DoCreateBlock = true; //* Block 生成
 
-        downWallCollider.isTrigger = true; //* 下壁 物理 無視。
+        downWallCollider.isTrigger = true; //* 衝突ON
         #if UNITY_EDITOR
-        debugDownWallColliderTriggerMtColor(true); 
+        debugDownWallColTrigger(true); 
         #endif
 
         bs.IsReadyShoot = false;
@@ -1152,11 +1154,17 @@ public class GameManager : MonoBehaviour {
     }
 
     # if UNITY_EDITOR
-        public void debugDownWallColliderTriggerMtColor(bool isActive){
-            Debug.Log("debugDownWallColliderTriggerMtColor("+ (isActive? "<color=blue>true (GM::setNextStage)</color>" : "<color=red>false (Ball_Prefab::OnTriggerEnter)</color>") + "):: col.trigger");
+        public void debugDownWallColTrigger(bool isActive){
+            Debug.Log("<color=magenta>debugDownWallColTrigger</color>("+ (isActive? "<color=cyan>TRUE 物理 OFF</color> (GM::setNextStage)" : "<color=red>FALSE 物理 ON</color> (Ball_Prefab::OnTriggerEnter)") + ")::");
             //? Blue色：collider.trigger= true  ボールが発射してプレイヤーが打つまで、下壁を非活性化(*物理演算 ON)。
             //! Red色 : collider.trigger= false ボールが来てプレイヤーが打ち、ActiveDownWallAreaに届いたら、下壁を活性化(*物理演算 OFF)。
             downWallCollider.GetComponent<MeshRenderer>().material = isActive? debugBlueMt : debugRedMt;
+
+            //* TIME STOP
+            if(isActive == false){
+                Debug.Log("<color=red>TIME STOP! 下壁：物理演算 ON! </color>");
+                timeScale = 0;
+            }
         }
     
     # endif

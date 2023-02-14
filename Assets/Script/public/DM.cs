@@ -19,7 +19,7 @@ public class DM : MonoBehaviour{
         Coin, Diamond,
         DownWall, Block, FireBallDotEffect, BossDieDropOrbSpot, GrayPanel, Obstacle,
         RightArm, HomeManager, GameManager,
-        Ball, BallPreview, Box001, Area,
+        Ball, BallPreview, Box001, Area, MainBall, SubBall,
         IceMat,
         MainPanel, RewardChest, 
         LevelUp, PsvSkillTicket,

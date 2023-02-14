@@ -90,6 +90,7 @@ public class BallShooter : MonoBehaviour
         Debug.Log("ballPreviewDirGoal="+gm.ballPreviewDirGoal.transform.position+", entranceTfPos="+entranceTf.position);
         Vector3 goalDir = (gm.ballPreviewDirGoal.transform.position - entranceTf.position).normalized;
         GameObject ins = Instantiate(ballPref, entranceTf.position, Quaternion.LookRotation(goalDir), gm.ballGroup);
+        ins.name = DM.NAME.MainBall.ToString();
 
         //* (BUG-55) もしエラーで、DownWallコライダーのIsTriggerがFalseの場合、
         //* 投げるボールが壁にぶつかってプレイヤーへ届かないので、Trueに戻す処理。

@@ -15,6 +15,7 @@ public class Ball_Prefab : MonoBehaviour
     SphereCollider myCollider;
 
     const int DELAY_INFINITE = 999;
+    const string MAIN_BALL = "MainBall";
 
     //* Value
     [SerializeField] bool isHitedByBlock = false;
@@ -30,7 +31,7 @@ public class Ball_Prefab : MonoBehaviour
     [SerializeField] bool isDmgX2;     public bool IsDmgX2 {get => isDmgX2; set => isDmgX2 = value;}
 
     void Awake() {
-        Debug.Log("Ball_Prefab::Awake():: DM.ins.gm= " + DM.ins.gm);
+        // Debug.Log("Ball_Prefab::Awake():: DM.ins.gm= " + DM.ins.gm);
         gm = DM.ins.gm;
         em = gm.em; pl = gm.pl; bm = gm.bm; bs = gm.bs;
 
@@ -52,7 +53,29 @@ public class Ball_Prefab : MonoBehaviour
         distance = Vector3.Distance(gm.ballPreviewDirGoal.transform.position, myTransform.position);
         gm.setBallPreviewImgAlpha(distance);
     }
+//----------------------------------------------------------------
+//*
+//----------------------------------------------------------------
+    void OnTriggerEnter(Collider col) {
+        //? (BUG-61) nextStage()に行く時、時々downWallCollider.isTriggerがfalseのままになるBUG対応。
+        //! 原因：ボールが来る間にプレイヤーがSwingするとpl.Doswingがtrueになり、
+        //!      来ている領域がActiveDownWallだから、下の条件式に合ってしまうisTriggerが早くfalseなる。
+        
+        //* ActiveDownWall Areaへ衝突したら、DownWallの物理が活性化。
+        if(pl.IsHited && pl.DoSwing && col.transform.CompareTag(DM.TAG.ActiveDownWall.ToString())){
+            //* Main Ballではなければ、以下の処理しない。
+            if(this.name != MAIN_BALL) return;
+            Debug.Log("Ball::OnTriggerEnter:: col= " + col.name + ", this.name= " + this.name + ", downWallCollider.isTrigger= " + gm.downWallCollider.isTrigger);
+            pl.DoSwing = false;
+            pl.IsHited = false;
 
+            gm.downWallCollider.isTrigger = false;//* 衝突OFF
+            #if UNITY_EDITOR
+            gm.debugDownWallColTrigger(false);
+            #endif
+
+        }
+    }
     void OnTriggerStay(Collider col) {
         #region HIT BALL
         if(col.transform.CompareTag(DM.TAG.HitRangeArea.ToString())){
@@ -157,13 +180,13 @@ public class Ball_Prefab : MonoBehaviour
                     //* 【 Multi Shot (横) 】
                     for(int i=0; i<pl.multiShot.Val;i++){ // Debug.Log($"<color=blue>【 Multi Shot (横) 】: {pl.multiShot.Value}</color>");
                         Vector3 dir = pl.multiShot.calcMultiShotDeg2Dir(arrowDeg, i); //* Arrow Direction with Extra Deg
-                        instantiateMultiShot(dir, force, ratio: 1);
+                        instantiateMultiShot(dir, force, ratio: 0.9f);
                     }
 
                     //* 【 Vertical Multi Shot (縦) 】
                     for(int i=0; i<pl.verticalMultiShot.Val;i++){ // Debug.Log($"<color=blue>【 Vertical Multi Shot (縦) 】: {pl.verticalMultiShot.Value}</color>");
                         Vector3 dir = pl.arrowAxisAnchor.transform.forward;
-                        instantiateMultiShot(dir, force, ratio: 0.95f);
+                        instantiateMultiShot(dir, force, ratio: 0.925f);
                     }
                 }
                 //* 【 Laser 】
@@ -190,48 +213,28 @@ public class Ball_Prefab : MonoBehaviour
 //----------------------------------------------------------------
 //*
 //----------------------------------------------------------------
-    void OnTriggerEnter(Collider col) {
-        //? (BUG-61) nextStage()に行く時、時々downWallCollider.isTriggerがfalseのままになるBUG対応。
-        //! 原因：ボールが来る間にプレイヤーがSwingするとpl.Doswingがtrueになり、
-        //!      来ている領域がActiveDownWallだから、下の条件式に合ってしまうisTriggerが早くfalseなる。
-        // Debug.Log("Ball::OnTriggerEnter:: pl.DoSwing= " + pl.DoSwing + ", col.transform.tag= " + col.transform.tag);
-        if(pl.IsHited && pl.DoSwing && col.transform.CompareTag(DM.TAG.ActiveDownWall.ToString())){
-            pl.DoSwing = false;
-            pl.IsHited = false;
-
-            gm.downWallCollider.isTrigger = false;//*下壁 物理適用
-            #if UNITY_EDITOR
-            gm.debugDownWallColliderTriggerMtColor(false);
-            #endif
-
-            Debug.Log("Ball::OnTriggerEnter:: setNextStage:: DM.TAG.ActiveDownWall col= " + col.name + ", downWallCollider.isTrigger= " + gm.downWallCollider.isTrigger);
-        }
-    }
-//----------------------------------------------------------------
-//*
-//----------------------------------------------------------------
     void OnTriggerExit(Collider col) {
-#region SWING BAT
-        if(col.transform.CompareTag(DM.TAG.HitRangeArea.ToString())){ //* HIT BALL
+        //* HIT BALL
+        if(col.transform.CompareTag(DM.TAG.HitRangeArea.ToString())){ 
             isHitedByBlock = true;
             pl.setSwingArcColor("yellow");
-            Debug.Log($"Ball_Prefab::OnTriggerExit(col= {col.name}):: Invoke(checkLimitTimeToDeleteBall, deleteLimitTime= {deleteLimitTime})");
+            // Debug.Log($"Ball_Prefab::OnTriggerExit(col= {col.name}):: Invoke(checkLimitTimeToDeleteBall, deleteLimitTime= {deleteLimitTime})");
 
             //! (BUG) ここに問題が合って、打ったボールが急にすぐなくなる。
             // InvokeRepeating("checkLimitTimeToDeleteBall",0,  deleteLimitTime);//* 日程時間が過ぎたら、ボール削除。
         }
-        else if(col.transform.CompareTag(DM.TAG.StrikeLine.ToString())){ //* ストライク
-            Debug.Log($"<color=red>Ball_Prefab:: OnTriggerExit:: this.name= {this.name}, col= {col.name}, deleteLimitTime= {deleteLimitTime}</color>");
+        //* STRIKE BALL
+        else if(col.transform.CompareTag(DM.TAG.StrikeLine.ToString())){
+            Debug.Log($"<color=red>Ball_Prefab:: OnTriggerExit:: this.name= {this.name}, col= {col.name}</color>");
             checkDestroyMainBall();
             // onDestroyMe(true);
         }
     }
-#endregion
 //----------------------------------------------------------------
 //*
 //----------------------------------------------------------------
     void OnCollisionEnter(Collision col) { 
-        Debug.Log($"BALL:: OnCollisionEnter:: col= {col.transform.name}");
+        // Debug.Log($"BALL:: OnCollisionEnter:: col= {col.transform.name}");
         #region ATV (HIT BLOCK)
         if(col.transform.name.Contains(DM.NAME.Block.ToString())
         || col.transform.name.Contains(DM.NAME.Obstacle.ToString())){ //* (BUG-3) 障害物もFreezeからだめーず受けるように。
@@ -427,6 +430,7 @@ public class Ball_Prefab : MonoBehaviour
 
     void instantiateMultiShot(Vector3 dir, float force, float ratio){
         var ins = Instantiate(this.gameObject, myTransform.position, Quaternion.identity, gm.ballGroup);
+        ins.name = DM.NAME.SubBall.ToString();
         ins.GetComponent<Rigidbody>().AddForce(dir * force * ratio, ForceMode.Impulse);
         Vector3 scale = ins.transform.localScale;
         ins.transform.localScale = new Vector3(scale.x * ratio, scale.y * ratio, scale.z * ratio);
@@ -454,21 +458,23 @@ public class Ball_Prefab : MonoBehaviour
             }
         });
     }
-    private void checkLimitTimeToDeleteBall(){
-        if(isHitedByBlock)
-            isHitedByBlock = false;
-        else{
-            Debug.Log("Ball_Prefab::checkLimitTimeToDeleteBall()::");
-            checkDestroyMainBall();
-        }
-    }
+    // private void checkLimitTimeToDeleteBall(){
+    //     if(isHitedByBlock)
+    //         isHitedByBlock = false;
+    //     else{
+    //         Debug.Log("Ball_Prefab::checkLimitTimeToDeleteBall()::");
+    //         checkDestroyMainBall();
+    //     }
+    // }
     private void checkDestroyMainBall(){
-        if(this.name == "Ball(Clone)" && myTransform.localScale.x == 0.4f){
-            Debug.Log("Ball_Prefab::checkDestryBall()::");
+        if(this.name == MAIN_BALL && myTransform.localScale.x == 0.4f){
+            Debug.Log("Ball_Prefab::checkDestroyMainBall():: this is Main Ball -> onDestroyMe()");
             onDestroyMe();
         }
-        else
+        else{
+            Debug.Log("Ball_Prefab::checkDestroyMainBall():: this is not Main Ball -> Destroy(this)");
             Destroy(this.gameObject);
+        }
     }
 
     private void onDestroyMe(bool isStrike = false){
