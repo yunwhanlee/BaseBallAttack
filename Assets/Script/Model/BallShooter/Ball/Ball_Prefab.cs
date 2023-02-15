@@ -91,7 +91,7 @@ public class Ball_Prefab : MonoBehaviour
                 pl.IsHited = true;
                 SM.ins.sfxPlay(SM.SFX.SwingHit.ToString());
                 
-                StartCoroutine(coDelayActiveFastPlayBtn()); //* ホームランしたとき、見えないようにしてBUG防止。
+                // StartCoroutine(coDelayActiveFastPlayBtn()); //* ホームランしたとき、見えないようにしてBUG防止。
 
                 gm.switchCamera();
                 // pl.DoSwing = false;

@@ -390,12 +390,12 @@ public class GameManager : MonoBehaviour {
     }
     public void onClickFastPlayButton(){
         Debug.Log("onClickFastPlayButton::");
-        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
-        fastPlayBtnImg.color = Color.red;
+        // SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
+        // fastPlayBtnImg.color = Color.red;
         isFastPlay = true;
-        Time.timeScale = 3;
+        Time.timeScale = 2.5f;
         #if UNITY_EDITOR
-            timeScale = 3;
+            timeScale = 2.5f;
         #endif
     }
 /// --------------------------------------------------------------------------
