@@ -37,9 +37,10 @@ public class UpgradeDt {
             || name == DM.UPGRADE.CriticalDamage.ToString()
             || name == DM.UPGRADE.Defence.ToString())
             return $"{Mathf.Round(value * 100)}%"; //* (BUG-11)
+
         //* ATV Skill
         else if(name == DM.ATV.ThunderShot.ToString())
-            return $"HIT {LM._.THUNDERSHOT_DEF_HIT + value}";
+            return $"HIT {LM._.THUNDERSHOT_DEF_HIT + value} CRT {(int)(LM._.THUNDERSHOT_CRIT + value * 0.1f)}";
         else if(name == DM.ATV.FireBall.ToString())
             return $"DMG {(LM._.FIREBALL_DEF_DMG_PER + value) * 100}%";
         else if(name == DM.ATV.ColorBall.ToString())
@@ -386,8 +387,13 @@ public class AtvSkill{
     [SerializeField] GameObject castEfPref;    public GameObject CastEfPref {get=> castEfPref;}
 
     //* Damage value
-    public static int ThunderShotHitCnt, FireballDmg, ColorBallPopCnt, IcewaveDmg;
-    public static float ThunderShotCrit, FireballDot, PoisonSmokeDot;
+    public static int ThunderShotHitCnt;
+    public static float ThunderShotDmg;
+    public static int FireballDmg;
+    public static float FireballDot;
+    public static int ColorBallPopCnt;
+    public static int IcewaveDmg;
+    public static float PoisonSmokeDot;
 
     //* constructor
     //* A. Resource
@@ -411,7 +417,7 @@ public class AtvSkill{
         var upgradeArr = DM.ins.personalData.AtvSkillUpgrade.Arr;
 
         ThunderShotHitCnt = (int)(LM._.THUNDERSHOT_DEF_HIT + upgradeArr[(int)DM.ATV.ThunderShot].getValue());
-        ThunderShotCrit = LM._.THUNDERSHOT_CRIT;
+        ThunderShotDmg = LM._.THUNDERSHOT_CRIT + (upgradeArr[(int)DM.ATV.ThunderShot].getValue() * 0.1f);
 
         FireballDmg = (int)(ballDmg * (LM._.FIREBALL_DEF_DMG_PER + (int)upgradeArr[(int)DM.ATV.FireBall].getValue()));
         FireballDot = LM._.FIREBALL_DOT_DMG_PER;
@@ -422,15 +428,15 @@ public class AtvSkill{
 
         IcewaveDmg = (int)(ballDmg * (LM._.ICEWAVE_DEF_DMG_PER + upgradeArr[(int)DM.ATV.IceWave].getValue()));
 
-        // Debug.Log("<color=white>ActiveSkill(gm, pl) Set Dmg:: "
-        //     + "     ThunderShotHitCnt= " + ThunderShotHitCnt
-        //     + "     ThunderShotCrit= " + ThunderShotCrit
-        //     + ",    FireballDmg= " + FireballDmg
-        //     + ",    FireballDot= " + FireballDot
-        //     + ",    ColorBallPopCnt= " + ColorBallPopCnt
-        //     + ",    PoisonSmokeDot= " + PoisonSmokeDot
-        //     + ",    IcewaveDmg= " + IcewaveDmg +"</color>"
-        // );
+        Debug.Log("<color=white>ActiveSkill(gm, pl) Set Dmg:: "
+            + "     ThunderShotHitCnt= " + ThunderShotHitCnt
+            + "     ThunderShotDmg= " + ThunderShotDmg
+            + ",    FireballDmg= " + FireballDmg
+            + ",    FireballDot= " + FireballDot
+            + ",    ColorBallPopCnt= " + ColorBallPopCnt
+            + ",    PoisonSmokeDot= " + PoisonSmokeDot
+            + ",    IcewaveDmg= " + IcewaveDmg +"</color>"
+        );
     }
 
     //* method

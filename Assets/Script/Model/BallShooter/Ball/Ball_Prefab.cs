@@ -531,7 +531,7 @@ public class Ball_Prefab : MonoBehaviour
 
         //* HomeRun Bonus
         float critDmgRatio = (isHomeRun)? 
-            AtvSkill.ThunderShotCrit + 1 : AtvSkill.ThunderShotCrit;
+            AtvSkill.ThunderShotDmg + 1 : AtvSkill.ThunderShotDmg;
 
         //* Set Dmg & CriticalTextEF
         int dmg = (int)(pl.dmg.Val * critDmgRatio);
