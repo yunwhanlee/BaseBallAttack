@@ -233,8 +233,10 @@ public class Ball_Prefab : MonoBehaviour
         //* STRIKE BALL
         else if(col.transform.CompareTag(DM.TAG.StrikeLine.ToString())){
             Debug.Log($"<color=red>Ball_Prefab:: OnTriggerExit:: this.name= {this.name}, col= {col.name}</color>");
-            checkDestroyMainBall();
-            // onDestroyMe(true);
+            // checkDestroyMainBall();
+            if(this.name == MAIN_BALL && myTransform.localScale.x == 0.4f){
+                onDestroyMe(true);
+            }
         }
     }
 //----------------------------------------------------------------
@@ -421,10 +423,10 @@ public class Ball_Prefab : MonoBehaviour
     }
     #endregion
 
-    private void onDestroyMeInvoke() {
-        Debug.Log("Ball_Prefab::onDestroyMeInvoke()::");
-        onDestroyMe();
-    }
+    // private void onDestroyMeInvoke() {
+    //     Debug.Log("Ball_Prefab::onDestroyMeInvoke()::");
+    //     onDestroyMe();
+    // }
 //*---------------------------------------------------------------
 //*  関数
 //*---------------------------------------------------------------
