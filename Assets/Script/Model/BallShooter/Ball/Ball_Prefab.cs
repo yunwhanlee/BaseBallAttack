@@ -18,7 +18,7 @@ public class Ball_Prefab : MonoBehaviour
     const string MAIN_BALL = "MainBall";
 
     //* Value
-    [SerializeField] bool isHitedByBlock = false;
+    [SerializeField] bool isHited = false;
     [SerializeField] bool isHomeRun = false;
     [SerializeField] float deleteLimitTime = 2.0f;
     [SerializeField] float speed;    public float Speed {get => speed; set => speed = value;}
@@ -42,6 +42,13 @@ public class Ball_Prefab : MonoBehaviour
         IsOnDarkOrb = false;
     }
 
+    // void Start() {
+    //     if(name == DM.NAME.MainBall.ToString()){
+    //         Debug.Log("Ball_Prefab:: name= " + name);
+    //         coFastPlayOn();
+    //     }
+    // }
+
     void FixedUpdate(){
         //* Destroy by Checking Velocity
         if(myRigid.velocity.magnitude != 0 && myRigid.velocity.magnitude < 0.9875f){
@@ -54,7 +61,7 @@ public class Ball_Prefab : MonoBehaviour
         gm.setBallPreviewImgAlpha(distance);
     }
 //----------------------------------------------------------------
-//*
+//* Trigger Event
 //----------------------------------------------------------------
     void OnTriggerEnter(Collider col) {
         //? (BUG-61) nextStage()に行く時、時々downWallCollider.isTriggerがfalseのままになるBUG対応。
@@ -210,14 +217,14 @@ public class Ball_Prefab : MonoBehaviour
         }
         #endregion
     }
-//----------------------------------------------------------------
-//*
-//----------------------------------------------------------------
     void OnTriggerExit(Collider col) {
         //* HIT BALL
         if(col.transform.CompareTag(DM.TAG.HitRangeArea.ToString())){ 
-            isHitedByBlock = true;
+            isHited = true;
             pl.setSwingArcColor("yellow");
+
+            // gm.onClickFastPlayButton();
+            StartCoroutine(coFastPlayOn());
             // Debug.Log($"Ball_Prefab::OnTriggerExit(col= {col.name}):: Invoke(checkLimitTimeToDeleteBall, deleteLimitTime= {deleteLimitTime})");
 
             //! (BUG) ここに問題が合って、打ったボールが急にすぐなくなる。
@@ -231,7 +238,7 @@ public class Ball_Prefab : MonoBehaviour
         }
     }
 //----------------------------------------------------------------
-//*
+//* Collision Event
 //----------------------------------------------------------------
     void OnCollisionEnter(Collision col) { 
         // Debug.Log($"BALL:: OnCollisionEnter:: col= {col.transform.name}");
@@ -239,7 +246,7 @@ public class Ball_Prefab : MonoBehaviour
         if(col.transform.name.Contains(DM.NAME.Block.ToString())
         || col.transform.name.Contains(DM.NAME.Obstacle.ToString())){ //* (BUG-3) 障害物もFreezeからだめーず受けるように。
             SM.ins.sfxPlay(SM.SFX.HitBlock.ToString());
-            isHitedByBlock = true;
+            isHited = true;
             gm.activeSkillBtnList.ForEach(skillBtn => {
 
                 if(skillBtn.Trigger){
@@ -371,7 +378,7 @@ public class Ball_Prefab : MonoBehaviour
         }
     }
 //----------------------------------------------------------------
-//*
+//* Active Bat Skill
 //----------------------------------------------------------------
     #region ATV (BAT)
     IEnumerator coPlayActiveSkillShotEF(AtvSkillBtnUI btn, float waitTime, Vector3 dir){
@@ -418,9 +425,14 @@ public class Ball_Prefab : MonoBehaviour
         Debug.Log("Ball_Prefab::onDestroyMeInvoke()::");
         onDestroyMe();
     }
-//*------------------------------------------------------------------------------
+//*---------------------------------------------------------------
 //*  関数
-//*------------------------------------------------------------------------------
+//*---------------------------------------------------------------
+    IEnumerator coFastPlayOn(){
+        yield return Util.delay2;
+        Debug.Log($"Ball_Prefab::coFastPlayOn():: this.name= {name}");
+        gm.onClickFastPlayButton();
+    }
     private float setgetHitBallSpeed(float power, Vector3 arrowDir){
         myRigid.velocity = Vector3.zero;
         float force = Speed * power * pl.speed.Val * Time.fixedDeltaTime;

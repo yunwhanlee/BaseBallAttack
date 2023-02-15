@@ -455,7 +455,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
 
     ✓ (BUG-62) POISONSMOKEスキルがボース戦で、カウントが下がらない。
 
-    - (BUG) ボールが複数の時に、いろんなバグ発生。
+    ✓ (BUG) ボールが複数の時に、いろんなバグ発生。
 
     - (BUG) apkにビルドしたら、UpgradePanelのCheckBoxUIがMAXになってしまう。
     - (BUG) ステージが終わっても、Expオブや次に進まないＢＵＧ
@@ -479,6 +479,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ Roulette Ad Play Cnt & Max 生成、実装。
     ✓ Cam1に途中で辞めて戻ったら、PreviewBundle表示。
     ✓ Ball_PrefabとGameManager内、GetComponent最初化。
+    ✓ RateDialog、rateOkボタン押すと、Google App Storeへリンク。
 
     【レベルリング】
     目標：最大プレイ時間：４時間ぐらい。

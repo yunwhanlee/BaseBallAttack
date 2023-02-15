@@ -438,11 +438,11 @@ public class HomeManager : MonoBehaviour
             ItemPsvInfoBtn.gameObject.SetActive(false);
         }
     }
-    // public void onClickRateBtn(){
-    //     Debug.Log("<color=yellow>TODO</color> onClickRateBtn():: Googleストアーへ移動!");
-    //     SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
-    //     DM.ins.openAppStore();
-    // }
+    public void onClickRateOkBtn(){
+        Debug.Log("<color=yellow>TODO</color> onClickRateBtn():: Googleストアーへ移動!");
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
+        Application.OpenURL("https://play.google.com/store/games");
+    }
     public void onClickShowADButton(){
         //* 広告要請
         am.showRewardAd(DM.REWARD.ROULETTE_TICKET);
