@@ -18,10 +18,11 @@ public class GameManager : MonoBehaviour {
 # if UNITY_EDITOR
     [Header("DEBUG MT")][Header("__________________________")]
     [SerializeField] bool isDownWallDebugMode;
+    [SerializeField] bool isHitedTimeStop;
     [SerializeField]  GameObject activeDownWallArea;
     [SerializeField]  Material debugRedMt;
     [SerializeField]  Material debugBlueMt;
-    [SerializeField]  [Range(0,1)] float timeScale = 1;
+    [Range(0,1)] public float timeScale = 1;
 # endif
     
     [Header("GROUP")][Header("__________________________")]
@@ -392,7 +393,10 @@ public class GameManager : MonoBehaviour {
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         fastPlayBtnImg.color = Color.red;
         isFastPlay = true;
-        Time.timeScale = 2.5f;
+        Time.timeScale = 3;
+        #if UNITY_EDITOR
+            timeScale = 3;
+        #endif
     }
 /// --------------------------------------------------------------------------
 /// REWARD CHEST RANDOM OPEN
@@ -979,6 +983,9 @@ public class GameManager : MonoBehaviour {
         if(IsFastPlay){
             IsFastPlay = false;
             Time.timeScale = 1;
+            #if UNITY_EDITOR
+                timeScale = 1;
+            #endif
         }
 
         //* Victory
@@ -1161,7 +1168,7 @@ public class GameManager : MonoBehaviour {
             downWallCollider.GetComponent<MeshRenderer>().material = isActive? debugBlueMt : debugRedMt;
 
             //* TIME STOP
-            if(isActive == false){
+            if(isHitedTimeStop && isActive == false){
                 Debug.Log("<color=red>TIME STOP! 下壁：物理演算 ON! </color>");
                 timeScale = 0;
             }

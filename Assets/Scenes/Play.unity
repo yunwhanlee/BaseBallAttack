@@ -63039,6 +63039,12 @@ MonoBehaviour:
   state: 1
   mode: 0
   timelineNum: 1
+  isDownWallDebugMode: 0
+  isHitedTimeStop: 1
+  activeDownWallArea: {fileID: 1957708814}
+  debugRedMt: {fileID: 2100000, guid: f4b42f7359e019947b7d92359bc4333b, type: 2}
+  debugBlueMt: {fileID: 2100000, guid: 338970dfe3d7f364a9dc75e128bcf626, type: 2}
+  timeScale: 1
   effectGroup: {fileID: 831947632}
   ballGroup: {fileID: 1179223822}
   blockGroup: {fileID: 397967615}
@@ -63263,11 +63269,6 @@ MonoBehaviour:
   skySunObj: {fileID: 312059687}
   skyMoonObj: {fileID: 312059691}
   dropBoxList: []
-  isDownWallDebugMode: 1
-  activeDownWallArea: {fileID: 1957708814}
-  debugRedMt: {fileID: 2100000, guid: f4b42f7359e019947b7d92359bc4333b, type: 2}
-  debugBlueMt: {fileID: 2100000, guid: 338970dfe3d7f364a9dc75e128bcf626, type: 2}
-  timeScale: 1
 --- !u!1 &1628368614
 GameObject:
   m_ObjectHideFlags: 0
