@@ -177,6 +177,10 @@ public class DM : MonoBehaviour{
         scrollviews[(int)DM.PANEL.Upgrade].initUpgradeDt(upgrades);
         scrollviews[(int)DM.PANEL.Skill].initAtvSkillUpgradeDt(skills);
 
+        //* 3DモデルパンネルはsetLanguageないから、ここでタイトルを言語設定。
+        scrollviews[(int)DM.PANEL.Chara].ScrollRect.GetComponent<ScrollViewEvent>().TitleTxt.text = LANG.getTxt(LANG.TXT.Character.ToString());
+        scrollviews[(int)DM.PANEL.Bat].ScrollRect.GetComponent<ScrollViewEvent>().TitleTxt.text = LANG.getTxt(LANG.TXT.Bat.ToString());
+
         //* PersonalData後に処理必要なもの（LANGUAGEため）
         scrollviews[(int)DM.PANEL.Skill].setLanguage();
         scrollviews[(int)DM.PANEL.CashShop].setLanguage();

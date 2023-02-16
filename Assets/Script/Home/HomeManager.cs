@@ -114,6 +114,7 @@ public class HomeManager : MonoBehaviour
     public Roulette roulette;
     public GameObject roulettePanel;
     public Button rouletteIconBtn;
+    public Text roulettePanelTitleTxt;
     public Text rouletteIconCoolTimeTxt;
     public Text rouletteOnedayAdPlayCntTxt;
 
@@ -142,6 +143,7 @@ public class HomeManager : MonoBehaviour
 
     [Header("ACHIVEMENT PANEL")][Header("__________________________")]
     public GameObject achivementPanel;
+    public Text achivementPanelTitleTxt;
     public RectTransform achivementContent;
     public GameObject[] achivementPfs;
     public Sprite[] rewardIconSprs;
@@ -239,6 +241,7 @@ public class HomeManager : MonoBehaviour
 
         checkPremiumPackPurchaseStatus();
 
+        achivementPanelTitleTxt.text = LANG.getTxt(LANG.TXT.Achivement.ToString());
         Array.ForEach(achivementPfs, pref => {
             var ins = Instantiate(pref, achivementContent.transform);
             ins.name = ins.name.Split('(')[0]; //* 名前 + (Clone)削除。
@@ -249,7 +252,9 @@ public class HomeManager : MonoBehaviour
         LanguageOptDropDown.value = (int)DM.ins.personalData.Lang; //* Loadデータで初期化
 
         rouletteIconBtn.GetComponent<Image>().color = Color.grey;
+        roulettePanelTitleTxt.text = LANG.getTxt(LANG.TXT.Roulette.ToString());
         startBtnTxt.text = LANG.getTxt(LANG.TXT.Start.ToString());
+
 
         adDialogTitleTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRouletteTicket_Title.ToString());
         adDialogContentTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRouletteTicket_Content.ToString());

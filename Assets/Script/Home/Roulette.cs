@@ -51,7 +51,7 @@ public class Roulette : MonoBehaviour
             if(speed > 0){
                 setCenterTfUI(isSpin);
                 spinBoard.transform.Rotate(0, 0, speed * Time.deltaTime);
-                spinBtnTxt.text = "STOP";
+                spinBtnTxt.text = LANG.getTxt(LANG.TXT.RouletteStop.ToString());
             }
         }
     }

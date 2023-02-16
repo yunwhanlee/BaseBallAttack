@@ -117,6 +117,9 @@ public class ScrollView {
         //* タイトル。
         var title = scrollRect.GetComponent<ScrollViewEvent>().TitleTxt;
         if(this.type == DM.PANEL.CashShop.ToString()) title.text = LANG.getTxt(LANG.TXT.CashShop.ToString());
+        // else if(this.type == DM.PANEL.Chara.ToString()) title.text = LANG.getTxt(LANG.TXT.Character.ToString());
+        // else if(this.type == DM.PANEL.Bat.ToString()) title.text = LANG.getTxt(LANG.TXT.Bat.ToString());
+        else if(this.type == DM.PANEL.Skill.ToString()) title.text = LANG.getTxt(LANG.TXT.AtvSkill.ToString());
         else if(this.type == DM.PANEL.PsvInfo.ToString()) title.text = LANG.getTxt(LANG.TXT.PsvSkillInfo.ToString());
         else if(this.type == DM.PANEL.Upgrade.ToString()) title.text = LANG.getTxt(LANG.TXT.Upgrade.ToString());
 

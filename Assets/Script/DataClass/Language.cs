@@ -38,8 +38,8 @@ public static class LANG //* LANG
         Caution, Caution_Content, Caution_Notice,
 
         Rate, Later, RateDialog_Content1, RateDialog_Content2,
-        Reward, GetRewardChestPanel_Content, Empty, PsvSkillTicket, RouletteTicket, RouletteSpin,
-        FirstSkill, SecondSkill, PsvSkillInfo, Upgrade, CashShop, 
+        Reward, GetRewardChestPanel_Content, Empty, Roulette, PsvSkillTicket, RouletteTicket, RouletteSpin, RouletteStop,
+        FirstSkill, SecondSkill, PsvSkillInfo, AtvSkill, Character, Bat, Achivement, Upgrade, CashShop, 
         PremiumPack, Coin, Diamond, RemoveAllADs,
         Purchase_Complete,
         HardMode, HardMode_Content1, HardMode_Content2,
@@ -384,12 +384,18 @@ public static class LANG //* LANG
     public static string[] Reward = new string[]{"REWARD", "リワード", "보상"};
     public static string[] Open = new string[]{"Open", "開く", "열기"};
     public static string[] Empty = new string[]{"Empty", "空箱", "빈 상자"};
+    public static string[] Roulette = new string[]{"Roulette", "ルーレット", "룰렛"};
     public static string[] PsvSkillTicket = new string[]{"Passive Skill ticket!", "パッシブスキル チケット!", "패시브 스킬 티켓!"};
     public static string[] RouletteTicket = new string[]{"Roulette ticket!", "ルーレット チケット!", "룰렛 티켓!"};
     public static string[] RouletteSpin = new string[]{"Spin!", "回す!", "돌리기!"};
+    public static string[] RouletteStop = new string[]{"Stop!", "停止!", "정지!"};
     public static string[] FirstSkill = new string[]{"1st Skill", "一番目 スキル", "첫번째 스킬"};
     public static string[] SecondSkill = new string[]{"2nd Skill", "二番目 スキル", "두번째 스킬"};
     public static string[] PsvSkillInfo = new string[]{"Passive Skill info", "パッシブスキル情報", "패시브 스킬 정보"};
+    public static string[] AtvSkill = new string[]{"Active Skill", "アクティブ スキル", "엑티브 스킬"};
+    public static string[] Character = new string[]{"Character", "キャラクター", "캐릭터"};
+    public static string[] Bat = new string[]{"Bat", "バット", "베트"};
+    public static string[] Achivement = new string[]{"Achivement", "業績", "업적"};
     public static string[] Upgrade = new string[]{"Upgrade", "アップグレード", "업그레이드"};
     public static string[] CashShop = new string[]{"Cash Shop", "課金ショップ", "캐시샾"};
     public static string[] Tutorial = new string[]{"Tutorial", "チュートリアル", "튜토리얼"};
@@ -572,12 +578,18 @@ public static class LANG //* LANG
         if(name == TXT.Reward.ToString()) res = Reward[CUR_LANG];
         if(name == TXT.GetRewardChestPanel_Content.ToString()) res = GetRewardChestPanel_Content[CUR_LANG];
         if(name == TXT.Empty.ToString()) res = Empty[CUR_LANG];
+        if(name == TXT.Roulette.ToString()) res = Roulette[CUR_LANG];
         if(name == TXT.PsvSkillTicket.ToString()) res = PsvSkillTicket[CUR_LANG];
         if(name == TXT.RouletteTicket.ToString()) res = RouletteTicket[CUR_LANG];
         if(name == TXT.RouletteSpin.ToString()) res = RouletteSpin[CUR_LANG];
+        if(name == TXT.RouletteStop.ToString()) res = RouletteStop[CUR_LANG];
         if(name == TXT.FirstSkill.ToString()) res = FirstSkill[CUR_LANG];
         if(name == TXT.SecondSkill.ToString()) res = SecondSkill[CUR_LANG];
         if(name == TXT.PsvSkillInfo.ToString()) res = PsvSkillInfo[CUR_LANG];
+        if(name == TXT.AtvSkill.ToString()) res = AtvSkill[CUR_LANG];
+        if(name == TXT.Character.ToString()) res = Character[CUR_LANG];
+        if(name == TXT.Bat.ToString()) res = Bat[CUR_LANG];
+        if(name == TXT.Achivement.ToString()) res = Achivement[CUR_LANG];
         if(name == TXT.Upgrade.ToString()) res = Upgrade[CUR_LANG];
         if(name == TXT.CashShop.ToString()) res = CashShop[CUR_LANG];
         if(name == TXT.PremiumPack.ToString()) res = PremiumPack[CUR_LANG];

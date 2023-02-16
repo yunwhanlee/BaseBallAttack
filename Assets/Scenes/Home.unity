@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45015454, g: 0.5001945, b: 0.57542807, a: 1}
+  m_IndirectSpecularColor: {r: 0.45015407, g: 0.500194, b: 0.5754274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1365,7 +1365,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 625}
+  m_AnchoredPosition: {x: 0, y: 820}
   m_SizeDelta: {x: 1000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &75135410
@@ -14577,7 +14577,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 625}
+  m_AnchoredPosition: {x: 0, y: 820}
   m_SizeDelta: {x: 1000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &719667103
@@ -15183,7 +15183,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 440, y: -220}
+  m_AnchoredPosition: {x: 440, y: -410}
   m_SizeDelta: {x: 125, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &741219842
@@ -18103,7 +18103,7 @@ MonoBehaviour:
   scrollBefFramePosX: 0
   uiGroup: {fileID: 144212381}
   boxSprRdr: {fileID: 0}
-  titleTxt: {fileID: 0}
+  titleTxt: {fileID: 395898304}
   rankTxt: {fileID: 343015043}
   nameTxt: {fileID: 72889156}
   downArrowImg: {fileID: 0}
@@ -19792,7 +19792,7 @@ MonoBehaviour:
   scrollBefFramePosX: 0
   uiGroup: {fileID: 841652357}
   boxSprRdr: {fileID: 0}
-  titleTxt: {fileID: 0}
+  titleTxt: {fileID: 279687706}
   rankTxt: {fileID: 1656664068}
   nameTxt: {fileID: 701541039}
   downArrowImg: {fileID: 0}
@@ -31037,7 +31037,7 @@ MonoBehaviour:
   scrollBefFramePosX: 0
   uiGroup: {fileID: 0}
   boxSprRdr: {fileID: 0}
-  titleTxt: {fileID: 0}
+  titleTxt: {fileID: 231924002}
   rankTxt: {fileID: 0}
   nameTxt: {fileID: 0}
   downArrowImg: {fileID: 0}
@@ -32192,8 +32192,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -268, y: 750}
-  m_SizeDelta: {x: 110, y: 110}
+  m_AnchoredPosition: {x: -427, y: 738}
+  m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1447419495
 MonoBehaviour:
@@ -32962,7 +32962,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6, y: 625}
+  m_AnchoredPosition: {x: 6, y: 820}
   m_SizeDelta: {x: 1000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1495305808
@@ -39786,6 +39786,7 @@ MonoBehaviour:
   roulette: {fileID: 1732122244}
   roulettePanel: {fileID: 1732122242}
   rouletteIconBtn: {fileID: 807839746}
+  roulettePanelTitleTxt: {fileID: 1018137451}
   rouletteIconCoolTimeTxt: {fileID: 705399369}
   rouletteOnedayAdPlayCntTxt: {fileID: 725261148}
   premiumPackPanel: {fileID: 4041380315914218744}
@@ -39834,6 +39835,7 @@ MonoBehaviour:
   showRewardItemListGroup: {fileID: 1503350621}
   showRewardItemPf: {fileID: 4721498982054872567, guid: 20f367e8fea7d604c8d86f0b90b59feb, type: 3}
   achivementPanel: {fileID: 7286630997084819611}
+  achivementPanelTitleTxt: {fileID: 7286630996939526292}
   achivementContent: {fileID: 7286630998144184893}
   achivementPfs:
   - {fileID: 2682170137326998400, guid: 1595392a720bd324eb3971a6c5d8889e, type: 3}
@@ -40138,7 +40140,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -427, y: -171}
+  m_AnchoredPosition: {x: -427, y: -1658}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1939486119
@@ -72941,7 +72943,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 284.8, y: -50}
-  m_SizeDelta: {x: 308.25, y: 70}
+  m_SizeDelta: {x: 310, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7286630996939526291
 GameObject:
@@ -72956,7 +72958,7 @@ GameObject:
   - component: {fileID: 7286630996939526292}
   - component: {fileID: 7286630996939526293}
   m_Layer: 0
-  m_Name: Text_Challenge
+  m_Name: TitleTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73241,7 +73243,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 66.175, y: -50}
+  m_AnchoredPosition: {x: 65.3, y: -50}
   m_SizeDelta: {x: 69, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7286630996974382279
