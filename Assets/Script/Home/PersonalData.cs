@@ -13,6 +13,7 @@ public class PersonalData {
     [SerializeField] int quality; public int Quality {get => quality; set => quality = value;}
     [SerializeField] int playTime; public int PlayTime {get => playTime; set => playTime = value;} // Tutorialを出すタイミングのため
     [SerializeField] bool isActiveExpLog; public bool IsActiveExpLog {get => isActiveExpLog; set => isActiveExpLog = value;}
+    [SerializeField] bool isActiveBGM; public bool IsActiveBGM {get => isActiveBGM; set => isActiveBGM = value;}
 
     [Header("GOODS")][Header("__________________________")]
     [SerializeField] int coin; public int Coin {get => coin; set => coin = value;}
@@ -146,6 +147,7 @@ public class PersonalData {
         this.quality = data.Quality;
         this.playTime = data.PlayTime;
         this.isActiveExpLog = data.IsActiveExpLog;
+        this.isActiveBGM = data.IsActiveBGM;
 
 
         this.Coin = data.Coin;
@@ -247,6 +249,7 @@ public class PersonalData {
         this.quality = 1; //* 0: Low, 1: Medium, 2: High
         this.playTime = 0;
         this.isActiveExpLog = false;
+        this.isActiveBGM = true;
 
         this.coin = 0;
         this.diamond = 0;

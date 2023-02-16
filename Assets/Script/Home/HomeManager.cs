@@ -175,6 +175,7 @@ public class HomeManager : MonoBehaviour
     public RenderPipelineAsset[] qualityLevels;
     public Button settingDialogCancelBtn; // アプリ最初ダイアログでは、非表示。
     public Toggle expLogToggle;
+    public Toggle bgmToggle;
     public Text settingNoticeTxt;
 
     //* HardMode Enable Notice Dialog
@@ -216,6 +217,8 @@ public class HomeManager : MonoBehaviour
         /* Setting Dialog */
         //* Exp Log
         expLogToggle.isOn = DM.ins.personalData.IsActiveExpLog;
+        bgmToggle.isOn = DM.ins.personalData.IsActiveBGM;
+
         //* Set Quality
         QualitySettings.SetQualityLevel(DM.ins.personalData.Quality);
         settingQualityDropdown.value = QualitySettings.GetQualityLevel();
@@ -486,6 +489,10 @@ public class HomeManager : MonoBehaviour
     public void onChangeExpLogToggle(){
         Debug.Log("onChangeExpLogToggle:: " + expLogToggle.isOn);
         DM.ins.personalData.IsActiveExpLog = expLogToggle.isOn;
+    }
+    public void onChangeBGMToggle(){
+        Debug.Log("onChangeBGMToggle:: " + bgmToggle.isOn);
+        DM.ins.personalData.IsActiveBGM = bgmToggle.isOn;
     }
     public void onClickSettingOkBtn(bool isOk){
         Debug.Log($"HM::onClickSettingOkBtn({isOk})");

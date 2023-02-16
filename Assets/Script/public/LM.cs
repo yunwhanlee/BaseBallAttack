@@ -71,6 +71,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Header("BLOCK SPAN")][Header("__________________________")]
     [Tooltip("ボース登場ステージ周期")] public int BOSS_STAGE_SPAN = 10;
     [Tooltip("ボース制限ステージ時間")] public int BOSS_LIMIT_SPAN = 20;
+    [Tooltip("ボース制限ステージお知らせNUMBER")] public int BOSS_LIMIT_CNT_ALERT_NUM = 5;
     [Tooltip("LONGブロック登場ステージ周期")] public int LONG_BLOCK_SPAN = 5;
     [Tooltip("ブロック フリーズ 持続時間")] public int ICE_FREEZE_DURATION = 1;
     [Tooltip("ブロック 火ドットダメージ 持続時間")] public int FIRE_DOT_DMG_DURATION = 2;

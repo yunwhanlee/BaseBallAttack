@@ -70,6 +70,7 @@ public class EffectManager : MonoBehaviour
     public GameObject perfectTxtPopEF;
     public GameObject homeRunTxtPopEF;
     public GameObject reviveEF;
+    public GameObject bossLimitCntAlertTxtEF;
     //CREATE TYEP
     public GameObject showExpUITxtEF;
     public GameObject dmgTxtEF;
@@ -364,14 +365,14 @@ public class EffectManager : MonoBehaviour
 /// UI EF
 /// -------------------------------------------------------------
     public void activeUI_EF(string name){
-        switch(name){
-            case "Perfect":
-                StartCoroutine(coActivePerfectTxtEF());   break;
-            case "HomeRun":
-                StartCoroutine(coActiveHomeRunTxtEF());   break;
-            case "Revive":
-                StartCoroutine(coActiveReviveEF());   break;
-        }
+        if(name == DM.ANIM.Perfect.ToString())
+            StartCoroutine(coActivePerfectTxtEF());
+        else if(name == DM.ANIM.HomeRun.ToString())
+            StartCoroutine(coActiveHomeRunTxtEF());
+        else if(name == DM.REWARD.Revive.ToString())
+            StartCoroutine(coActiveReviveEF());
+        else if(name == DM.ANIM.BossLimitcntAlertTxtEF.ToString())
+            StartCoroutine(coBossLimitCntAlertTxtEF());
     }
     IEnumerator coActivePerfectTxtEF(){
         perfectTxtPopEF.SetActive(true);
@@ -387,5 +388,11 @@ public class EffectManager : MonoBehaviour
         reviveEF.SetActive(true);
         yield return Util.delay2;
         reviveEF.SetActive(false);
+    }
+    IEnumerator coBossLimitCntAlertTxtEF(){
+        SM.ins.sfxPlay(SM.SFX.Clock.ToString());
+        bossLimitCntAlertTxtEF.SetActive(true);
+        yield return Util.delay3;
+        bossLimitCntAlertTxtEF.SetActive(false);
     }
 }

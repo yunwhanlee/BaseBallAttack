@@ -16,7 +16,7 @@ public class SM : MonoBehaviour
         Warning, LevelUpPanel, Victory, Defeat, Revive, 
         HomeRun, HomeRunCameraAnim,
         CountDown, CountDownShoot, CountDownStrike,
-        StartGame,
+        StartGame, Clock,
 
         //* PLAY
         ExpUp, PlayerLevelUp,
@@ -53,6 +53,7 @@ public class SM : MonoBehaviour
     [SerializeField] AudioSource CountDownShootSFX;
     [SerializeField] AudioSource CountDownStrikeSFX;
     [SerializeField] AudioSource StartGameSFX;
+    [SerializeField] AudioSource ClockSFX;
     
     [Header("PLAY")][Header("__________________________")]
     [SerializeField] AudioSource ExpUpSFX;
@@ -140,6 +141,8 @@ public class SM : MonoBehaviour
             CountDownStrikeSFX.Play();
         else if(name == SFX.StartGame.ToString())
             StartGameSFX.Play();
+        else if(name == SFX.Clock.ToString())
+            ClockSFX.Play();
         //* PLAY
         else if(name == SFX.ExpUp.ToString())
             ExpUpSFX.Play();

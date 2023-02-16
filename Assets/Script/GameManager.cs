@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour {
     public TouchSlideControl touchSlideControlPanel;
     public new Light light;
     public AdmobManager am;
+    public AudioSource bgm;
     
     [Header("STATUS")][Header("__________________________")]
     public int coin = 0;
@@ -230,6 +231,7 @@ public class GameManager : MonoBehaviour {
         DM.ins.transform.position = Vector3.zero; //* LoadingSceneで、モデルが見えないようにずらした位置を戻す。
 
         showExpUIGroup.gameObject.SetActive(DM.ins.personalData.IsActiveExpLog);
+        bgm.gameObject.SetActive(DM.ins.personalData.IsActiveBGM);
 
         //* スキップに✓がされていない場合は、チュートリアルのダイアログ 表示。
         if(!DM.ins.personalData.IsSkipTutorial){
@@ -684,7 +686,7 @@ public class GameManager : MonoBehaviour {
         reviveBtn.gameObject.SetActive(false);
         Invoke("collectDropOrb", 0.5f);
         SM.ins.sfxPlay(SM.SFX.Revive.ToString());
-        em.activeUI_EF("Revive");
+        em.activeUI_EF(DM.REWARD.Revive.ToString());
         bm.Start();
         showAdDialog.gameObject.SetActive(false);//* ダイアログ閉じる
     }
@@ -1036,6 +1038,11 @@ public class GameManager : MonoBehaviour {
         if(boss){
             stage--; //ステージは同じく維持
             bossLimitCnt--;
+
+            if(bossLimitCnt == LM._.BOSS_LIMIT_CNT_ALERT_NUM){
+                em.activeUI_EF(DM.ANIM.BossLimitcntAlertTxtEF.ToString());
+            }
+
             //* ボース制限時間が０になったら、GAMEOVER!!
             if(bossLimitCnt <= 0){
                 setGameOver();
@@ -1070,7 +1077,7 @@ public class GameManager : MonoBehaviour {
     private IEnumerator coCheckPerfectBonus(BossBlock boss){
         if(blockGroup.childCount == 0){
             perfectTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
-            em.activeUI_EF("Perfect");
+            em.activeUI_EF(DM.ANIM.Perfect.ToString());
             //* One More Next Stage (ボスがいなければ)
             yield return Util.delay1;
             if(!boss)
