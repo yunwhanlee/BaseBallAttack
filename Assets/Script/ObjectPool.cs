@@ -117,7 +117,7 @@ public class ObjectPool : MonoBehaviour
         poolDtList.Add(new PoolData(DIC.GodBlessEF.ToString(), em.godBlessEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.BossHealSkillEF.ToString(), em.bossHealSkillEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.BossObstacleSpawnEF.ToString(), em.bossObstacleSpawnEF, 1, em.gm.effectGroup));
-        poolDtList.Add(new PoolData(DIC.RockObstacleBrokenEF.ToString(), em.rockObstacleBrokenEF, 1, em.gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.RockObstacleBrokenEF.ToString(), em.rockObstacleBrokenEF, 3, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.BossFireBallTrailEF.ToString(), em.bossFireBallTrailEF, 1, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.AimingEF.ToString(), em.aimingEF, 2, em.gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.DefenceEF.ToString(), em.defenceEF, 1, em.gm.effectGroup));

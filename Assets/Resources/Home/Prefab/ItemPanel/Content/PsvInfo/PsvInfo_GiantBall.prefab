@@ -567,17 +567,17 @@ MonoBehaviour:
   - "\uC790\uC774\uC5B8\uD2B8\uBCFC"
   explainTxts:
   - Collect all the multi-ball and make a huge ball.
-  - "\u5168\u3066\u306E\u30DE\u30EB\u30C1\u30DC\u30FC\u30EB\u3092\u96C6\u3081\u3066\u3001\u5F37\u529B\u5927\u304D\u306A\u30DC\u30FC\u30EB\u306B\u3057\u307E\u3059\u3002"
+  - "\u5168\u3066\u306E\u30DE\u30EB\u30C1\u30DC\u30FC\u30EB\u3092\u96C6\u3081\u3066\u3001\n\u5F37\u529B\u5927\u304D\u306A\u30DC\u30FC\u30EB\u306B\u3057\u307E\u3059\u3002"
   - "\uBAA8\uB4E0 \uBA40\uD2F0\uBCFC\uC744 \uBAA8\uC544\uC11C \uAC70\uB300\uD55C
     \uACF5\uC744 \uB9CC\uB4E0\uB2E4."
   homeRunBonusTxts:
   - 
   - 
   - 
+  atvSkillValueTxt: {fileID: 0}
   price:
     type: 0
-    coin: 0
-    diamond: 0
+    val: 0
   isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 3811945637865038421}
@@ -587,9 +587,9 @@ MonoBehaviour:
   rank: 0
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
-  cashShopPriceTxt: {fileID: 0}
   upgradeValueTxt: {fileID: 0}
   lvTxt: {fileID: 0}
+  cashShopPriceTxt: {fileID: 0}
   itemPassive:
     arr: []
   rankAuraEF: {fileID: 0}

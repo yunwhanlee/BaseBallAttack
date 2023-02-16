@@ -12,7 +12,7 @@ public class ItemInfo : MonoBehaviour
     [FormerlySerializedAs("nameTxts")]
     [SerializeField] string[] nameTxts = new string[System.Enum.GetValues(typeof(LANG.TP)).Length];
 
-    [FormerlySerializedAs("explainTxts")]
+    [TextArea] [FormerlySerializedAs("explainTxts")]
     [SerializeField] string[] explainTxts = new string[System.Enum.GetValues(typeof(LANG.TP)).Length];
 
     [FormerlySerializedAs("homeRunBonusTxts")] 

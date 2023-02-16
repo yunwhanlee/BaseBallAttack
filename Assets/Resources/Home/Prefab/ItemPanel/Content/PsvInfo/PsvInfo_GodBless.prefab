@@ -567,17 +567,17 @@ MonoBehaviour:
   - "\uC2E0\uC758\uCD95\uBCF5"
   explainTxts:
   - Whenever combo become 10, explosion of light is happend.
-  - "\u30B3\u30F3\u30DC\u306E10\u306B\u306A\u308B\u305F\u3073\u3001\u5149\u306E\u7206\u767A\u3092\u3057\u307E\u3059\u3002"
+  - "\u30B3\u30F3\u30DC\u306E10\u306B\u306A\u308B\u305F\u3073\u3001\n\u5149\u306E\u7206\u767A\u304C\u3057\u307E\u3059\u3002"
   - "\uCF64\uBCF4\uAC00 10\uC774 \uB420 \uB54C\uB9C8\uB2E4 \uBE5B\uC758 \uD3ED\uBC1C\uC774
     \uC77C\uC5B4\uB09C\uB2E4."
   homeRunBonusTxts:
   - 
   - 
   - 
+  atvSkillValueTxt: {fileID: 0}
   price:
     type: 0
-    coin: 0
-    diamond: 0
+    val: 0
   isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 3811945637865038421}
@@ -587,9 +587,9 @@ MonoBehaviour:
   rank: 0
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
-  cashShopPriceTxt: {fileID: 0}
   upgradeValueTxt: {fileID: 0}
   lvTxt: {fileID: 0}
+  cashShopPriceTxt: {fileID: 0}
   itemPassive:
     arr: []
   rankAuraEF: {fileID: 0}

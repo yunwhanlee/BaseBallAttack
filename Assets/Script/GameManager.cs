@@ -120,6 +120,7 @@ public class GameManager : MonoBehaviour {
     public GameObject bossSapwnAnimObj;
     public Text bossNameTxt;
     public Text showHitBallInfoTf;
+    public Text bossLimitCntAlertTxt;
 
     [Header("PREVIEW BALL SILDER ➡ 現在使っていない")][Header("__________________________")] //! あんまり要らないかも。
     public Slider hitRangeSlider;
@@ -318,6 +319,8 @@ public class GameManager : MonoBehaviour {
         //* ModeTxt Anim
         modeTxt.text = mode.ToString() + " MODE";
         modeTxt.color = (mode == DM.MODE.HARD)? Color.red : Color.white;
+
+        bossLimitCntAlertTxt.text = LANG.getTxt(LANG.TXT.BossLimitCntAlert.ToString());
     }
 
     void Update(){
@@ -694,6 +697,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void setCoinX2(){
+        SM.ins.sfxPlay(SM.SFX.DropBoxCoinPick.ToString());
         gvCoinTxt.text = (int.Parse(gvCoinTxt.text) * 2).ToString();
         coinX2Btn.gameObject.SetActive(false);
         coinX2Label.gameObject.SetActive(true);

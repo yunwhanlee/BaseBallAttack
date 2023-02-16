@@ -28,8 +28,8 @@ public class ObstacleExtraCollision : MonoBehaviour
 
         //* (BUG-21) ObstacleがBlockに当たっても、破壊されないこと対応。
         if(col.transform.name.Contains(DM.NAME.Block.ToString())){
-            em.createRockObstacleBrokenEF(this.transform.position);
-            Destroy(this.transform.parent.gameObject);
+            em.createRockObstacleBrokenEF(col.transform.position);
+            Destroy(transform.parent.gameObject);
         }
     }
 }

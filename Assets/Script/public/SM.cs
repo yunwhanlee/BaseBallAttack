@@ -30,7 +30,7 @@ public class SM : MonoBehaviour
         DarkHit, FlashHit, EggPop,
         Stun, Defence,
         BossTargetMissle, 
-        BossFireBallShoot, BossFireBallExplosion, BossFly, BossDie, BossHealSpell,
+        BossFireBallShoot, BossFireBallExplosion, BossFly, BossDie, BossHealSpell, BossAttackWarning,
         BossScream1, BossScream2, BossScream3, BossScream4, 
         ObstacleSpawn, PlayerPointerUp
     }
@@ -95,6 +95,7 @@ public class SM : MonoBehaviour
     [SerializeField] AudioSource BossScream2SFX;
     [SerializeField] AudioSource BossScream3SFX;
     [SerializeField] AudioSource BossScream4SFX;
+    [SerializeField] AudioSource BossAttackWarningSFX;
     [SerializeField] AudioSource ObstacleSpawnSFX;
     [SerializeField] AudioSource PlayerPointerUpSFX;
 
@@ -231,6 +232,8 @@ public class SM : MonoBehaviour
             BossScream3SFX.Play();
         else if(name == SFX.BossScream4.ToString())
             BossScream4SFX.Play();
+        else if(name == SFX.BossAttackWarning.ToString())
+            BossAttackWarningSFX.Play();
         else if(name == SFX.ObstacleSpawn.ToString())
             ObstacleSpawnSFX.Play();
         else if(name == SFX.PlayerPointerUp.ToString())

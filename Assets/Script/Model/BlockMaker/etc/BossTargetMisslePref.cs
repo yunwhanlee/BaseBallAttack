@@ -14,6 +14,8 @@ public class BossTargetMisslePref : MonoBehaviour
     [SerializeField] float curSpeed;
     [SerializeField] int popPower;
 
+    const float DEC_DMG_PER = 0.5f; //* このミサイルは、あくまでも補助用だから、ダメージを減る。
+
     void Awake(){
         gm = DM.ins.gm;
         rigid = this.GetComponent<Rigidbody>();
@@ -52,8 +54,14 @@ public class BossTargetMisslePref : MonoBehaviour
     void OnCollisionEnter(Collision col){
         if(col.transform.CompareTag(DM.TAG.BossBlock.ToString())){
             SM.ins.sfxPlay(SM.SFX.BossTargetMissle.ToString());
-            int dmg = gm.stage / 10 + 1;
+            
+            //* ダメージ計算。
+            const float offset100Percent = 1;
+            float upgradeBossDmgPer = offset100Percent + DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.BossDamage].getValue();
+            int dmg = (int)((gm.pl.dmg.Val * upgradeBossDmgPer) * DEC_DMG_PER);
+            Debug.Log($"BossTargetMisslePerf:: dmg= {dmg} ({gm.pl.dmg.Val} * {upgradeBossDmgPer} * {DEC_DMG_PER})");
             col.gameObject.GetComponent<BossBlock>().decreaseHp(dmg);
+
             gm.em.createBossTargetMissileEF(this.transform.position);
             StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropItemGroup));
         }

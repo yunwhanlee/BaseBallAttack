@@ -10,7 +10,8 @@ public static class LANG //* LANG
     public enum TXT {
         //* UI
         Ok, No, Use, Get, Open,
-        Start, Level, Stage, BossLimitCnt, Combo, Status, Back, Ready, Out, Strike,
+        Start, Level, Stage, BossLimitCnt, BossLimitCntAlert,
+        Combo, Status, Back, Ready, Out, Strike,
         BestScore, LevelUpPanel_Title, LevelUpPanel_Explain, Play,
 
         NotEnough, MsgNoSkill, MsgAlreadyRegistedSkill, MsgHardmodeLocked, 
@@ -37,6 +38,7 @@ public static class LANG //* LANG
         TutorialG_Title, TutorialG_Content,
 
         Caution, Caution_Content, Caution_Notice,
+
 
         Rate, Later, RateDialog_Content1, RateDialog_Content2,
         Reward, GetRewardChestPanel_Content, Empty, Roulette, PsvSkillTicket, RouletteTicket, RouletteSpin, RouletteStop,
@@ -388,6 +390,7 @@ public static class LANG //* LANG
     public static string[] Level = new string[]{"LV", "レベル", "레벨"};
     public static string[] Stage = new string[]{"STAGE", "ステージ", "스테이지"};
     public static string[] BossLimitCnt = new string[]{"BossLimitCnt", "制限時間", "제한시간"};
+    public static string[] BossLimitCntAlert = new string[]{"you have 5 turns left!", "残り5ターンです！", "5턴 남았어요!"};
     public static string[] Combo = new string[]{"COMBO", "コンボ", "콤보"};
     public static string[] Status = new string[]{"STATUS", "状　態", "상　태"};
     public static string[] Back = new string[]{"BACK", "戻す", "뒤로"};
@@ -587,6 +590,7 @@ public static class LANG //* LANG
         if(name == TXT.Level.ToString()) res = Level[CUR_LANG];
         if(name == TXT.Stage.ToString()) res = Stage[CUR_LANG];
         if(name == TXT.BossLimitCnt.ToString()) res = BossLimitCnt[CUR_LANG];
+        if(name == TXT.BossLimitCntAlert.ToString()) res = BossLimitCntAlert[CUR_LANG];
         if(name == TXT.Combo.ToString()) res = Combo[CUR_LANG];
         if(name == TXT.Status.ToString()) res = Status[CUR_LANG];
         if(name == TXT.Back.ToString()) res = Back[CUR_LANG];

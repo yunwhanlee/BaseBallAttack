@@ -585,18 +585,18 @@ MonoBehaviour:
   - "\u30A2\u30A4\u30C6\u30E0\u751F\u6210UP"
   - "\uC544\uC774\uD0EC\uC0DD\uC131UP"
   explainTxts:
-  - Item block spawn +5%
-  - "\u30A2\u30A4\u30C6\u30E0\u30D6\u30ED\u30C3\u30AF\u306E\u78BA\u7387\u30A2\u30C3\u30D7
+  - Special block spawn +5%
+  - "\u7279\u96C6\u30D6\u30ED\u30C3\u30AF\u306E\u51FA\u308B\n\u78BA\u7387\u30A2\u30C3\u30D7
     +5%"
-  - "\uC544\uC774\uD0EC \uBE14\uB85D \uD655\uB960 \uC99D\uAC00 +5%"
+  - "\uD2B9\uC218\uBE14\uB85D \uB4F1\uC7A5 \uD655\uB960 \uC99D\uAC00 +5%"
   homeRunBonusTxts:
   - 
   - 
   - 
+  atvSkillValueTxt: {fileID: 0}
   price:
     type: 0
-    coin: 0
-    diamond: 0
+    val: 0
   isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 3811945637865038421}
@@ -606,9 +606,9 @@ MonoBehaviour:
   rank: 0
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
-  cashShopPriceTxt: {fileID: 0}
   upgradeValueTxt: {fileID: 0}
   lvTxt: {fileID: 0}
+  cashShopPriceTxt: {fileID: 0}
   itemPassive:
     arr: []
   rankAuraEF: {fileID: 0}

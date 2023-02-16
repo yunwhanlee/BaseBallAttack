@@ -130,8 +130,10 @@ public class BossBlock : Block_Prefab{
         gm.activeSkillBtnGroup.gameObject.SetActive(false);
 
         //* Wait Scream Anim
-        yield return new WaitForSeconds(screamAnimTime);
+        yield return new WaitForSeconds(screamAnimTime * 0.7f);
         gm.bs.BossFireBallMarkObj.SetActive(true);
+        SM.ins.sfxPlay(SM.SFX.BossAttackWarning.ToString());
+        yield return new WaitForSeconds(screamAnimTime * 0.3f);
         
         //* Begin Attack Anim
         Debug.Log($"coFireBallAttack:: attackAnimTime= {attackAnimTime}");
