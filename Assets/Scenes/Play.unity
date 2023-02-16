@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44300717, g: 0.49219608, b: 0.57192516, a: 1}
+  m_IndirectSpecularColor: {r: 0.4430069, g: 0.49219602, b: 0.57192457, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -63276,6 +63276,7 @@ MonoBehaviour:
   light: {fileID: 705507994}
   am: {fileID: 2121862688}
   bgm: {fileID: 8760532}
+  postProccessingObj: {fileID: 1335980414}
   coin: 0
   diamond: 0
   stage: 1
@@ -63399,6 +63400,7 @@ MonoBehaviour:
   - {fileID: 7576626188995224481, guid: 8e3affcbcd68a2b4b8f7400b931ab9b3, type: 3}
   - {fileID: 5646658460974134969, guid: 9c3959f2820441145a232b352b0eddc0, type: 3}
   psvImgRectTfTemp: {fileID: 5086017060394339300}
+  inGamePassiveSkillTablePanel: {fileID: 238427010}
   inGameSkillStatusTableTf: {fileID: 790088329}
   inGameSkillImgBtnPref: {fileID: 2010402386914571623, guid: 0913717a214136445b6658417b86152b, type: 3}
   pauseSkillStatusTableTf: {fileID: 114093873}

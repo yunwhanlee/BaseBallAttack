@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour {
     public new Light light;
     public AdmobManager am;
     public AudioSource bgm;
+    public GameObject postProccessingObj;
     
     [Header("STATUS")][Header("__________________________")]
     public int coin = 0;
@@ -143,6 +144,7 @@ public class GameManager : MonoBehaviour {
     [Header("PASSIVE TABLE")][Header("__________________________")]
     [SerializeField] private GameObject[] psvSkillImgPrefs;    public GameObject[] PsvSkillImgPrefs { get => psvSkillImgPrefs; set => psvSkillImgPrefs = value;}
     public RectTransform psvImgRectTfTemp;  public RectTransform PsvImgRectTfTemp {get => psvImgRectTfTemp; set => psvImgRectTfTemp = value;}
+    public GameObject inGamePassiveSkillTablePanel;
     public RectTransform inGameSkillStatusTableTf;
     public GameObject inGameSkillImgBtnPref;
     
@@ -711,7 +713,11 @@ public class GameManager : MonoBehaviour {
             setBallPreviewGoalImgRGBA(new Color(0.8f,0.8f,0.8f, 0.2f));
             bs.init();
 
+            //* 要らないオブジェクトは非活性して、コストを減らす。
             pl.previewBundle.SetActive(false);
+            postProccessingObj.SetActive(false);
+            inGamePassiveSkillTablePanel.SetActive(false);
+
         }
         else{//* CAM1 On
         Debug.Log("CAM1 On");
@@ -720,6 +726,8 @@ public class GameManager : MonoBehaviour {
             setTextReadyBtn(LANG.getTxt(LANG.TXT.Ready.ToString()));
             //* (BUG)STRIKEになってから、BACKボタン押すと、PreviewLineが消えてしまう。
             setActivePreviewBendle(true);
+            postProccessingObj.SetActive(true);
+            inGamePassiveSkillTablePanel.SetActive(true);
             bs.ExclamationMarkObj.SetActive(false);
             //* ActiveSkill Status
             // StopCoroutine(corSetStrike());
