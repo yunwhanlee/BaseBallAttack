@@ -179,6 +179,13 @@ public class HomeManager : MonoBehaviour
     public Toggle expLogToggle;
     public Toggle bgmToggle;
     public Text settingNoticeTxt;
+    public Text settingTitleTxt;
+    public Text settingLanguageTxt;
+    public Text settingQualityTxt;
+    public Text settingExpLogTxt;
+    public Text settingBGMTxt;
+    public Text settingOkTxt;
+    public Text settingCancelTxt;
 
     //* HardMode Enable Notice Dialog
     public RectTransform hardModeEnableNoticeDialog;
@@ -274,6 +281,13 @@ public class HomeManager : MonoBehaviour
         
         //* Setting Panel Country Icon
         settingNoticeTxt.text = LANG.getTxt(LANG.TXT.SettingNotice.ToString());
+        settingTitleTxt.text = LANG.getTxt(LANG.TXT.Setting.ToString());
+        settingLanguageTxt.text = LANG.getTxt(LANG.TXT.Language.ToString());
+        settingQualityTxt.text = LANG.getTxt(LANG.TXT.Quality.ToString());
+        settingExpLogTxt.text = LANG.getTxt(LANG.TXT.ExpLog.ToString());
+        settingBGMTxt.text = LANG.getTxt(LANG.TXT.BGM.ToString());
+        settingOkTxt.text =  LANG.getTxt(LANG.TXT.Ok.ToString());
+        settingCancelTxt.text =  LANG.getTxt(LANG.TXT.No.ToString());
 
         settingDialogCountryIconImg.sprite = 
             DM.ins.personalData.Lang == LANG.TP.EN? CountryIconSprArr[(int)LANG.TP.EN]

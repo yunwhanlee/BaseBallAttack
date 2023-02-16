@@ -14,7 +14,8 @@ public static class LANG //* LANG
         BestScore, LevelUpPanel_Title, LevelUpPanel_Explain, Play,
 
         NotEnough, MsgNoSkill, MsgAlreadyRegistedSkill, MsgHardmodeLocked, 
-        StageSelectNotice, SettingNotice,
+        StageSelectNotice, 
+        Setting, Language, Quality, ExpLog, BGM, SettingNotice,
         ADShowFail, PurchaseFail, OneDayUsingMaxCntOver,
 
         //* Dialog
@@ -181,6 +182,21 @@ public static class LANG //* LANG
         "After Select the image, press the Play button.",
         "画像を選択したら、プレイボタンを押してください。",
         "이미지를 선택한 후 플레이 버튼을 눌러주세요."
+    };
+    public static string[] Setting = new string[]{
+        "Setting", "設定", "설정"
+    };
+    public static string[] Language = new string[]{
+        "Language", "言語", "언어"
+    };
+    public static string[] Quality = new string[]{
+        "Quality", "グラフィック", "그래픽"
+    };
+    public static string[] ExpLog = new string[]{
+        "ExpLog", "経験値ログ", "경험치표시"
+    };
+    public static string[] BGM = new string[]{
+        "BGM", "背景音", "배경음"
     };
     public static string[] SettingNotice = new string[]{
         "If the gameplay is not smooth with frame drop, try lowering the Quality.",
@@ -509,6 +525,11 @@ public static class LANG //* LANG
         if(name == TXT.MsgHardmodeLocked.ToString()) res = MsgHardmodeLocked[CUR_LANG];
         if(name == TXT.StageSelectNotice.ToString()) res = StageSelectNotice[CUR_LANG];
         if(name == TXT.SettingNotice.ToString()) res = SettingNotice[CUR_LANG];
+        if(name == TXT.Setting.ToString()) res = Setting[CUR_LANG];
+        if(name == TXT.Language.ToString()) res = Language[CUR_LANG];
+        if(name == TXT.Quality.ToString()) res = Quality[CUR_LANG];
+        if(name == TXT.ExpLog.ToString()) res = ExpLog[CUR_LANG];
+        if(name == TXT.BGM.ToString()) res = BGM[CUR_LANG];
         if(name == TXT.ADShowFail.ToString()) res = ADShowFail[CUR_LANG];
         if(name == TXT.PurchaseFail.ToString()) res = PurchaseFail[CUR_LANG];
         if(name == TXT.OneDayUsingMaxCntOver.ToString()) res = OneDayUsingMaxCntOver[CUR_LANG];
