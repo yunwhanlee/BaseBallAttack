@@ -176,8 +176,10 @@ public class LevelUpPanelAnimate : MonoBehaviour{
                 UpgradeDt[] upgradeArr = DM.ins.personalData.Upgrade.Arr;
                 int upgradeDmg = (int)upgradeArr[(int)DM.UPGRADE.Dmg].getValue();
                 //* Calc
-                int val = (pl.dmg.Unit * (pl.dmg.Level+1)) + upgradeDmg;
+                const int BASIC_DMG = 1;
+                int val = BASIC_DMG + pl.dmg.Val + upgradeDmg; //! (BUG-64) 攻撃力をアップグレードしても、ちゃんと反映できなかった問題修正。
                 float plusPer = 1 + (pl.dmg.Level+1) * 0.1f;
+                Debug.Log($"LevelUpPanelAnimate:: onClickSkillUpBtn:: Dmg: {(int)(val * plusPer)} = val({val}) * plusPer({plusPer})");
                 //* Set
                 pl.dmg.setLvUp((int)(val * plusPer));
                 break;
