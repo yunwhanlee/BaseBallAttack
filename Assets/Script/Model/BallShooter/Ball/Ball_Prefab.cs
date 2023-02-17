@@ -269,17 +269,18 @@ public class Ball_Prefab : MonoBehaviour
                             break;
                         }
                         case DM.ATV.ColorBall:{
-                            if(col.gameObject.GetComponent<Block_Prefab>().kind != BlockMaker.KIND.TreasureChest){
+                            if(col.gameObject.GetComponent<Block_Prefab>().kind != BlockMaker.KIND.TreasureChest 
+                                && col.gameObject.GetComponent<Block_Prefab>().kind != BlockMaker.KIND.Obstacle){
                                 SM.ins.sfxPlay(SM.SFX.ColorBallPop.ToString());
                                 Block_Prefab[] sameColorBlocks = AtvSkill.findSameColorBlocks(gm, col.transform.gameObject);
-                                //* Set Max Cnt
-                                int max = AtvSkill.ColorBallPopCnt;
-                                
-                                if(isHomeRun) 
-                                    max = sameColorBlocks.Length;
+                                //* Set Max Cnt (BUG-67) ColorBallPop Upgrade Max数値が基本を超えると、UndefinedIndexになるバグ対応。
+                                int max = (sameColorBlocks.Length > AtvSkill.ColorBallPopCnt)? AtvSkill.ColorBallPopCnt : sameColorBlocks.Length;
+                                if(isHomeRun) max = sameColorBlocks.Length;
+                                Debug.Log($"Ball_Prefab:: OnCollisionEnter:: max= {max}");
 
                                 //* Erase Same Color Blocks
                                 for(int i=0; i<max; i++){
+                                    
                                     em.createAtvSkExplosionEF(skillIdx, sameColorBlocks[i].transform);
                                     if(isHomeRun)
                                         em.createColorBallStarExplosionEF(sameColorBlocks[i].transform.position);
