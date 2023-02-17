@@ -317,8 +317,9 @@ public class Ball_Prefab : MonoBehaviour
                     gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
                     myCollider.enabled = false; //* ボール動きなし
 
-                    //* Delay Next Stage
-                    Invoke("onDestroyMeInvoke", delayTime);
+                    //* Delay Next Stage 
+                    
+                    StartCoroutine(coDelayDestroyMe()); //* (BUG-65) ColorBallPopブロックにぶつかってもボールが破壊されない。-> coDelayDestroyMe()生成して対応。
                 }
             });
         #endregion
@@ -423,10 +424,11 @@ public class Ball_Prefab : MonoBehaviour
     }
     #endregion
 
-    // private void onDestroyMeInvoke() {
-    //     Debug.Log("Ball_Prefab::onDestroyMeInvoke()::");
-    //     onDestroyMe();
-    // }
+    IEnumerator coDelayDestroyMe() {
+        Debug.Log("Ball_Prefab::coDelayDestroyMe()::");
+        yield return Util.delay2;
+        onDestroyMe();
+    }
 //*---------------------------------------------------------------
 //*  関数
 //*---------------------------------------------------------------

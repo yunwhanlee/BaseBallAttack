@@ -452,19 +452,15 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-60) PoisonSmokeスキルでない。CoRoutine WaitforSencondsCashingについて、999秒のことがなかったため。
     ✓ (BUG-61) nextStage()に行く時、時々downWallCollider.isTriggerがfalseのままになるBUG対応。
         原因：原因：ボールが来る間にプレイヤーがSwingするとpl.Doswingがtrueになり、来ている領域がActiveDownWallだから、下の条件式に合ってしまうisTriggerが早くfalseなる。
-
     ✓ (BUG-62) POISONSMOKEスキルがボース戦で、カウントが下がらない。
-
     ✓ (BUG-63) ボールが複数の時に、いろんなバグ発生。
-
     ✓ (BUG-64) 攻撃力をアップグレードしても、ちゃんと反映できなかった問題修正。
-
+    ✓ (BUG-65) ColorBallPopブロックにぶつかってもボールが破壊されない。-> coDelayDestroyMe()生成して対応。
+    
     - (BUG) apkにビルドしたら、UpgradePanelのCheckBoxUIがMAXになってしまう。
-    - (BUG) ステージが終わっても、Expオブや次に進まないＢＵＧ
-    - (BUG) onClickCheckBtn::checkAtvSkillItemSelectionIsFirstTime CHARAとBATの場合購入したら出るバグがあるため、caseによって処理を分ける。
-    - (BUG) アイテム購入が次のことになるバグ。
-    - (BUG) ScrollSnipが出来たら、止まるべきのに、少し動くバグ。
-    - (BUG) ColorBallPopブロックにぶつかってもボールが破壊されないBUG。 
+    - (BUG) ステージが終わっても、ボースとか進んでいるバグ。
+    - (BUG) リワード広告をホームとインゲームに届いたら、お先にロードしておく。
+    - (BUG) ブロックがActiveDownWall領域より下に来ると、ボールを釣っても急に無くなる。
     
 
     【作業】
