@@ -683,6 +683,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void setRevive(){
+        Time.timeScale = 1;
         State = GameManager.STATE.WAIT;
         gameoverPanel.SetActive(false);
         BossBlock boss = bm.getBoss();
@@ -864,6 +865,8 @@ public class GameManager : MonoBehaviour {
 
     private void setFinishGame(GameObject panel, Text bestStageTxt, Text stageTxt, Text coinTxt, Text diamondTxt,
         Text rewardItemCoinTxt, Text rewardItemDiamondTxt, Text rewardItemRouletteTicketTxt){
+        //* (BUG-66) ステージが終わっても、ボースとか進んでいるバグ -> Time.scaleを０にして対応。GameOverとVictoryAnimationはRealTimeScaleとして反応するように。
+        Time.timeScale = 0;
         State = GameManager.STATE.GAMEOVER;
         panel.SetActive(true);
 

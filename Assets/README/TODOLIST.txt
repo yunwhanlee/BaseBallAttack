@@ -456,9 +456,10 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-63) ボールが複数の時に、いろんなバグ発生。
     ✓ (BUG-64) 攻撃力をアップグレードしても、ちゃんと反映できなかった問題修正。
     ✓ (BUG-65) ColorBallPopブロックにぶつかってもボールが破壊されない。-> coDelayDestroyMe()生成して対応。
-    
+    ✓ (BUG-66) ステージが終わっても、ボースとか進んでいるバグ -> Time.scaleを０にして対応。GameOverとVictoryAnimationはRealTimeScaleとして反応するように。
+
     - (BUG) apkにビルドしたら、UpgradePanelのCheckBoxUIがMAXになってしまう。
-    - (BUG) ステージが終わっても、ボースとか進んでいるバグ。
+    
     - (BUG) リワード広告をホームとインゲームに届いたら、お先にロードしておく。
     - (BUG) ブロックがActiveDownWall領域より下に来ると、ボールを釣っても急に無くなる。
     
