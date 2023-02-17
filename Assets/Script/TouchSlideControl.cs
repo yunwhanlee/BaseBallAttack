@@ -236,7 +236,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         pl.arrowAxisAnchor.transform.rotation = Quaternion.Euler(0, offsetDeg2DTo3D - deg, 0);
         // pl.arrowAxisAnchor.transform.position = new Vector3(pl.arrowAxisAnchor.transform.position.x + Mathf.Cos(deg), pl.arrowAxisAnchor.transform.position.y, pl.arrowAxisAnchor.transform.position.z + Mathf.Sin(deg));
     }
-    private void drawBallPreviewSphereCast(Transform arrowAnchorTf){
+    public void drawBallPreviewSphereCast(Transform arrowAnchorTf){
         RaycastHit hit, hit2;
         float radius = pl.ballPreviewSphere[0].GetComponent<SphereCollider>().radius * pl.ballPreviewSphere[0].transform.localScale.x;
         if(Physics.SphereCast(arrowAnchorTf.position, radius, arrowAnchorTf.forward, out hit, 1000, 1 << LayerMask.NameToLayer(DM.LAYER.BallPreview.ToString()))){
@@ -266,7 +266,6 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
             }
             //* 🌟ColorBall ActiveSkill
             gm.activeSkillDataBase[0].setColorBallSkillGlowEF(gm, ref bm, hit, ref hitBlockByBallPreview);
-            
         }
     }
     private void setBallPreviewCenterPos(ref GameObject ballPrevObj, RaycastHit hit, float radius){

@@ -526,6 +526,9 @@ public class GameManager : MonoBehaviour {
         //(BUG)再クリック。Cancel Selected Btn
         if(isActive){
             activeSkillBtnList[i].init(this, true);
+            
+            Transform arrowAnchorTf = pl.arrowAxisAnchor.transform;
+            touchSlideControlPanel.drawBallPreviewSphereCast(arrowAnchorTf);
             return;
         }
         else{

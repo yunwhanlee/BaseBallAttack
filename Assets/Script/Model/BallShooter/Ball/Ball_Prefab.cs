@@ -270,7 +270,9 @@ public class Ball_Prefab : MonoBehaviour
                         }
                         case DM.ATV.ColorBall:{
                             if(col.gameObject.GetComponent<Block_Prefab>().kind != BlockMaker.KIND.TreasureChest 
-                                && col.gameObject.GetComponent<Block_Prefab>().kind != BlockMaker.KIND.Obstacle){
+                            && col.gameObject.GetComponent<Block_Prefab>().kind != BlockMaker.KIND.Obstacle
+                            && col.gameObject.GetComponent<Block_Prefab>().kind != BlockMaker.KIND.Boss
+                            ){
                                 SM.ins.sfxPlay(SM.SFX.ColorBallPop.ToString());
                                 Block_Prefab[] sameColorBlocks = AtvSkill.findSameColorBlocks(gm, col.transform.gameObject);
                                 //* Set Max Cnt (BUG-67) ColorBallPop Upgrade Max数値が基本を超えると、UndefinedIndexになるバグ対応。
