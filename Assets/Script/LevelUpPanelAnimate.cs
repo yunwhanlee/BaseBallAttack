@@ -167,10 +167,11 @@ public class LevelUpPanelAnimate : MonoBehaviour{
 
         Debug.LogFormat("<color=green>LEVELUP:: onClickSkillUpBtn({0}):: pl.Lv= {1}, name= {2}</color>", index , pl.Lv, skillSlotBtns[index].name.text);
 
-
-
         //* Set Data
         var psv = DM.ins.convertPsvSkillStr2Enum(skillSlotBtns[index].name.text);
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
+        SM.ins.sfxPlay(SM.SFX.DropBoxPick.ToString());
+
         switch(psv){
             case DM.PSV.Dmg:
                 UpgradeDt[] upgradeArr = DM.ins.personalData.Upgrade.Arr;
