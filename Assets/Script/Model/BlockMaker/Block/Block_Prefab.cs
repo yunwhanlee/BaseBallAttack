@@ -155,7 +155,8 @@ public class Block_Prefab : MonoBehaviour
     void Start(){
         setType(); //* (NormalBlockのみ)
         setHp();
-        setExpAndStyle(); //* (TreasureChest、healBlock、Boss 除外)
+        setExp();
+        setMesh(); //* (TreasureChest、healBlock、Boss 除外)
         spawnAnim("Init");
     }
 
@@ -198,8 +199,8 @@ public class Block_Prefab : MonoBehaviour
     }
     private void setHp(){
         //* ブロック HPリスト 準備
-        // const int OFFSET = 100;
-        int resHp = bm.HpCalcList[gm.stage]; // OFFSET;
+        int idx = gm.stage - 1;
+        int resHp = bm.HpCalcList[idx];
 
         //* ランダム要素
         int rand = Random.Range(0, 100);
@@ -211,7 +212,7 @@ public class Block_Prefab : MonoBehaviour
                 Hp = 1;
                 break;
             case BlockMaker.KIND.Long:
-                Hp = resHp * 5;
+                Hp = resHp * 3;
                 break;
             case BlockMaker.KIND.Normal:
             case BlockMaker.KIND.Obstacle:
@@ -221,25 +222,27 @@ public class Block_Prefab : MonoBehaviour
         hpTxt.text = Hp.ToString();
     }
 
-    public void setExpAndStyle(){
+    private void setExp(){
+        //* Set Exp 
+        int calc = (int)(Hp * 0.1f); //* (Hp / 10)と同じ => 演算コストを減らすため。
+        int v = (calc == 0)? 1 : calc + 1;
+        Exp = v * 10;
+        // Debug.Log("setExp : " + Exp);
+    }
+
+    public void setMesh(){
         if(kind == BlockMaker.KIND.Normal || kind == BlockMaker.KIND.Long){
             // Debug.LogFormat("Block_Prefab:: kind={0}", kind);
-            //* Set Exp & Material
-            if(0 < Hp && Hp <= 10){
-                Exp = 10;   mesh.block[0].material = bm.Mts[(int)BlockMt.PLAIN]; 
-            }
-            else if(11 < Hp && Hp <= 20){
-                Exp = 20;   mesh.block[0].material = bm.Mts[(int)BlockMt.WOOD];
-            }
-            else if(21 < Hp && Hp <= 30){
-                Exp = 30;   mesh.block[0].material = bm.Mts[(int)BlockMt.SAND];
-            }
-            else if(31 < Hp && Hp <= 40){
-                Exp = 40;   mesh.block[0].material = bm.Mts[(int)BlockMt.REDBRICK];
-            }
-            else if(41 < Hp){
-                Exp = 50;   mesh.block[0].material = bm.Mts[(int)BlockMt.IRON];
-            }
+            if(Hp < 10)
+                mesh.block[0].material = bm.Mts[(int)BlockMt.PLAIN]; 
+            else if(Hp < 20)
+                mesh.block[0].material = bm.Mts[(int)BlockMt.WOOD];
+            else if(Hp < 30)
+                mesh.block[0].material = bm.Mts[(int)BlockMt.SAND];
+            else if(Hp < 40)
+                mesh.block[0].material = bm.Mts[(int)BlockMt.REDBRICK];
+            else if(Hp < 50)
+                mesh.block[0].material = bm.Mts[(int)BlockMt.IRON];
 
             //* 色
             int randIdx = Random.Range(0, bm.Colors.Length);
