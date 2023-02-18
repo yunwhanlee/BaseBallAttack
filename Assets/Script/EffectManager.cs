@@ -129,7 +129,7 @@ public class EffectManager : MonoBehaviour
     }
     public void createBossObstacleSpawnEF(Vector3 parentPos){
         var ins = ObjectPool.getObject(ObjectPool.DIC.BossObstacleSpawnEF.ToString(), parentPos, QI, gm.effectGroup);
-        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 3));
+        StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 2));
     }
     public void createBossHealSkillEF(Vector3 parentPos){
         var ins = ObjectPool.getObject(ObjectPool.DIC.BossHealSkillEF.ToString(), parentPos, QI, gm.effectGroup);

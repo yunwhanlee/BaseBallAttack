@@ -5464,7 +5464,7 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_ReflectionProbeUsage: 0
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
@@ -5803,3 +5803,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba11a124771ce4445bad39f96f712ab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  em: {fileID: 0}

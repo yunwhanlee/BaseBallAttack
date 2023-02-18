@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour {
-    public enum STATE {PLAY, WAIT, GAMEOVER, PAUSE, CONTINUE, HOME, NULL};
+    public enum STATE {PLAY, WAIT, GAMEOVER, PAUSE, CONTINUE, HOME, GIVEUP, NULL};
     [SerializeField] private STATE state;     public STATE State {get => state; set => state = value;}
     [SerializeField] private DM.MODE mode;       public DM.MODE Mode {get => mode; set => mode = value;}
     public float timelineNum;
@@ -72,6 +72,9 @@ public class GameManager : MonoBehaviour {
     public int rewardItemCoin = 0;  public int RewardItemCoin { get => rewardItemCoin; set => rewardItemCoin = value;}
     public int rewardItemDiamond = 0;   public int RewardItemDiamond { get => rewardItemDiamond; set => rewardItemDiamond = value;}
     public int rewardItemRouletteTicket = 0;    public int RewardItemRouletteTicket { get => rewardItemRouletteTicket; set => rewardItemRouletteTicket = value;}
+    [SerializeField] int resultCoin;
+    [SerializeField] int resultDiamond;
+    [SerializeField] int resultRouletteTicket;
 
     [Header("TRIGGER")][Header("__________________________")]
     public bool isPlayingAnim;  public bool IsPlayingAnim { get => isPlayingAnim; set=> isPlayingAnim = value;}
@@ -228,7 +231,6 @@ public class GameManager : MonoBehaviour {
     }
     void Start() {
         // Util._.calcArithmeticProgressionList(start: 100, max: 50, d: 100, gradualUpValue: 0.1f);
-
         init();
 
         DM.ins.transform.position = Vector3.zero; //* LoadingSceneで、モデルが見えないようにずらした位置を戻す。
@@ -634,6 +636,7 @@ public class GameManager : MonoBehaviour {
         else if(rewardType == DM.REWARD.Revive.ToString()){
             if(DM.ins.personalData.Diamond > LM._.REVIVE_PRICE_DIAMOND){
                 DM.ins.personalData.Diamond -= LM._.REVIVE_PRICE_DIAMOND;
+                pauseDiamondTxt.text = DM.ins.personalData.Diamond.ToString();
                 setRevive();
             }
             else{
@@ -665,6 +668,9 @@ public class GameManager : MonoBehaviour {
         pl.Lv = 1;
         pl.Exp = 0;
         bossLimitCnt = 0;
+        resultCoin = 0;
+        resultDiamond = 0;
+        resultRouletteTicket = 0;
         sb = new StringBuilder();
         bossStageBarRectTf = bossStageBar.GetComponent<RectTransform>();
         bossStageBarFillImg = Array.Find(bossStageBar.GetComponentsInChildren<Image>(), img => img.transform.name == "Fill");
@@ -688,6 +694,7 @@ public class GameManager : MonoBehaviour {
     public void setRevive(){
         Time.timeScale = 1;
         State = GameManager.STATE.WAIT;
+
         gameoverPanel.SetActive(false);
         BossBlock boss = bm.getBoss();
         if(boss) bossLimitCnt = LM._.BOSS_LIMIT_SPAN;
@@ -702,7 +709,10 @@ public class GameManager : MonoBehaviour {
 
     public void setCoinX2(){
         SM.ins.sfxPlay(SM.SFX.DropBoxCoinPick.ToString());
+
+        resultCoin = resultCoin * 2; //* (BUG-69) CoinX2広告みても、適用できされないバグ対応。
         gvCoinTxt.text = (int.Parse(gvCoinTxt.text) * 2).ToString();
+
         coinX2Btn.gameObject.SetActive(false);
         coinX2Label.gameObject.SetActive(true);
         showAdDialog.gameObject.SetActive(false);//* ダイアログ閉じる
@@ -897,8 +907,8 @@ public class GameManager : MonoBehaviour {
             stage -= LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN;
 
         //* Coin & Diamond
-        coin += stage * LM._.STAGE_PER_COIN_PRICE;
-        diamond += stage * LM._.STAGE_PER_DIAMOND_PRICE;
+        coin = stage * LM._.STAGE_PER_COIN_PRICE; //* (BUG-70)
+        diamond = stage * LM._.STAGE_PER_DIAMOND_PRICE; //* (BUG-70)
         int extraUpgradeCoin = Mathf.RoundToInt(coin * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.CoinBonus].getValue());
 
         //* Show Goods => setGameでも使う。
@@ -911,23 +921,11 @@ public class GameManager : MonoBehaviour {
         rewardItemRouletteTicketTxt.text = rewardItemRouletteTicket.ToString();
 
         //* Add Reward Goods
-        int resultCoin = int.Parse(coinTxt.text) + rewardItemCoin;
-        int resultDiamond = int.Parse(diamondTxt.text) + rewardItemDiamond;
-        int resultRouletteTicket = rewardItemRouletteTicket;
+        resultCoin = int.Parse(coinTxt.text) + rewardItemCoin;
+        resultDiamond = int.Parse(diamondTxt.text) + rewardItemDiamond;
+        resultRouletteTicket = rewardItemRouletteTicket;
 
-        //* Result
-        float multiCoin = 1;
-        float multiDiamond = 1;
-
-        if(mode == DM.MODE.HARD) {multiCoin = 2; multiDiamond = 1.5f;}
-        //TODO else if(mode == DM.MODE.NIGHTMARE) {multiCoin = 2; multiDiamond = 1.5f;}
-
-        DM.ins.personalData.addCoin((int)(resultCoin * multiCoin));
-        DM.ins.personalData.addDiamond((int)(resultDiamond * multiDiamond));
-        DM.ins.personalData.addRouletteTicket(resultRouletteTicket);
-        
-        //* Rate(評価) Dialogを表示するため
-        DM.ins.personalData.PlayTime++;
+        //* -> 財貨の結果は、GM::setGame()で行う。
     }
 
     public void setGame(string type){
@@ -948,10 +946,33 @@ public class GameManager : MonoBehaviour {
             case STATE.HOME:
                 Time.timeScale = 1;
                 resetSkillStatusTable();
+                setPlayedMoneyResult(); //* PLAYした財貨の結果
                 DM.ins.personalData.save();
                 SceneManager.LoadScene(DM.SCENE.Home.ToString());
                 break;
+            case STATE.GIVEUP:
+                Time.timeScale = 1;
+                resetSkillStatusTable();
+                DM.ins.personalData.save(); //* (BUG-68) GiveUpしたら以前に購入したアイテムデータが保存できないこと対応。
+                SceneManager.LoadScene(DM.SCENE.Home.ToString());
+                break;
         }
+    }
+
+    private void setPlayedMoneyResult(){
+        //* モード
+        float multiplyCoin = 1;
+        float multiplyDiamond = 1;
+        if(mode == DM.MODE.HARD) {multiplyCoin = 2; multiplyDiamond = 1.5f;}
+        //TODO else if(mode == DM.MODE.NIGHTMARE) {multiCoin = 2; multiDiamond = 1.5f;}
+
+        //* 財貨
+        DM.ins.personalData.addCoin((int)(resultCoin * multiplyCoin));
+        DM.ins.personalData.addDiamond((int)(resultDiamond * multiplyDiamond));
+        DM.ins.personalData.addRouletteTicket(resultRouletteTicket);
+
+        //* Rate(評価) Dialogを表示するため
+        DM.ins.personalData.PlayTime++;
     }
 
     public void displayCurPassiveSkillUI(string type){

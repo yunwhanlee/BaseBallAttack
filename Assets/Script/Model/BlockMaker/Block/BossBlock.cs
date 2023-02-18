@@ -406,6 +406,8 @@ public class BossBlock : Block_Prefab{
         for(int i=0; i<gm.obstacleGroup.childCount; i++){
             // Debug.Log($"eraseObstacle():: obstacleGroup.GetChild({i})= {gm.obstacleGroup.GetChild(i)}");
             var childTf = gm.obstacleGroup.GetChild(i);
+            if(gm.em != null)
+                gm.em.createRockObstacleBrokenEF(childTf.position);
             Destroy(childTf.gameObject);
         }
     }

@@ -28,7 +28,7 @@ public class ObstacleExtraCollision : MonoBehaviour
         if(col.transform.name.Contains(DM.NAME.Block.ToString())){
             Debug.Log($"ObstacleExtraCollision:: OnTriggerEnter:: this= {transform.name}");
             Debug.Log($"ObstacleExtraCollision:: OnTriggerEnter:: this= {transform.parent.name}");
-            em.createRockObstacleBrokenEF(transform.parent.position);
+            // em.createRockObstacleBrokenEF(transform.parent.position);
             Destroy(transform.parent.gameObject);
         }
     }

@@ -96,7 +96,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("（値が重なる）3. リワード ROULETTE_TICKET％")] public int REWARD_ROULETTE_TICKET_PER = 80;
 
     [Header("DROP BOX PERCENT")][Header("__________________________")]
-    [Tooltip("BUFFドロップボックス ドロップ％(0～1000)")] [Range(0, 1000)] public int DROP_BOX_PER = 5;
+    [Tooltip("BUFFドロップボックス ドロップ％(0～1000)")] [Range(0, 1000)] public int DROPBOX_PER = 5;
     [Tooltip("QuestionPfで得るコイン単位")] public int DROPBOX_COIN_VALUE = 10;
     [Tooltip("生きているターン")] public int DROPBOX_ALIVE_SPAN = 3;
 

@@ -31,8 +31,8 @@ public class DropBox : MonoBehaviour{ //* Create By BlockMaker.cs
     void OnTriggerEnter(Collider col){
         if(Util._.isColBlockOrObstacle(col.transform.GetComponent<Collider>())){
             Debug.Log("DropBox::OnCollisionEnter:: col= " + col);
-            StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropBoxGroup));
-            // this.transform.position = setRandPos();
+            // StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropBoxGroup));
+            this.transform.position = setRandPos();
         }
         else if(col.transform.CompareTag(DM.NAME.Ball.ToString())){
             //* (BUG-17) ボールがベットから打たれる前に(BallShooterから投げる)時にはDropBoxと当たり判定処理しない。

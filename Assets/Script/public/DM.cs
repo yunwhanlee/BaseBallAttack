@@ -258,6 +258,7 @@ public class DM : MonoBehaviour{
             :(name == GameManager.STATE.PAUSE.ToString())? GameManager.STATE.PAUSE
             :(name == GameManager.STATE.CONTINUE.ToString())? GameManager.STATE.CONTINUE
             :(name == GameManager.STATE.HOME.ToString())? GameManager.STATE.HOME
+            :(name == GameManager.STATE.GIVEUP.ToString())? GameManager.STATE.GIVEUP
             : GameManager.STATE.NULL;
     }
 

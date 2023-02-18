@@ -170,7 +170,7 @@ public class BlockMaker : MonoBehaviour
 
     public void createRandomDropBox(){
         int rand = Random.Range(0, 1000);
-        if(rand < LM._.DROP_BOX_PER){
+        if(rand < LM._.DROPBOX_PER){
             //! Prefab名でgetObject()を判断するので、形式を守ること！=> 「DropBox{名}Pf」
 
             //* DropBox Shieldが活性化していたら、重ならないようにIndexから除外(０番目 INDEX)
