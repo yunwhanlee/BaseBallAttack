@@ -198,8 +198,8 @@ public class Block_Prefab : MonoBehaviour
     }
     private void setHp(){
         //* ブロック HPリスト 準備
-        const int OFFSET = 100;
-        int resHp = bm.HpCalcList[gm.stage] / OFFSET;
+        // const int OFFSET = 100;
+        int resHp = bm.HpCalcList[gm.stage]; // OFFSET;
 
         //* ランダム要素
         int rand = Random.Range(0, 100);

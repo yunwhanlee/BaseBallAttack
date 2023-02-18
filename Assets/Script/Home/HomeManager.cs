@@ -234,11 +234,6 @@ public class HomeManager : MonoBehaviour
 
         firstPlayAppSettingDialog();
 
-        Debug.Log("Math:: -------------------------------");
-        const int OFFSET = 100;
-        List<int> hpList = Util._.calcArithmeticProgressionList(start: OFFSET, max: 99, d: OFFSET, gradualUpValue: 0.01f);
-        // hpList.ForEach(hp => Debug.Log($"Math:: blockHpList[{i}]= " + hpList[i++] / OFFSET));
-
         Debug.Log("SIBALNOM1");
         onClickBtnGoToPanel(DM.SCENE.Home.ToString());
 

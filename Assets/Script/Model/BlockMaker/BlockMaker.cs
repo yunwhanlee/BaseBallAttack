@@ -42,6 +42,12 @@ public class BlockMaker : MonoBehaviour
         //* ブロック HPリスト 準備
         const int OFFSET = 100;
         hpCalcList = Util._.calcArithmeticProgressionList(start: OFFSET, max: LM._.MAX_STAGE, d: OFFSET, gradualUpValue: 0.01f);
+        
+        //* hp計算結果が整数(100％)基準なので、少数に転換
+        const float DECIMAL_OFFSET = 0.01f;
+        for(int i = 0; i < hpCalcList.Count; i++){
+            hpCalcList[i] = Mathf.RoundToInt(hpCalcList[i] * DECIMAL_OFFSET);
+        }
 
         //* Init Or AD-Revive
         var blocks = gm.blockGroup.GetComponentsInChildren<Block_Prefab>(); //* Previous Blocks Erase
