@@ -99,8 +99,8 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     IEnumerator coSwingBat(){
         pl.DoSwing = true;
         pl.setAnimTrigger(DM.ANIM.Swing.ToString());
-        yield return null; //Util.delay0_2;
-        // pl.DoSwing = false;
+        yield return Util.delay0_5; //* (BUG-71) ボールが来る前ベット降ったらDoswingがTrueに永遠になり、何もしないのにボールが打ってしまうこと対応。
+        pl.DoSwing = false;
     }
 
     public void OnDrag(PointerEventData eventData){
