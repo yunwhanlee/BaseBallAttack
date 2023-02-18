@@ -76,6 +76,13 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("ブロック フリーズ 持続時間")] public int ICE_FREEZE_DURATION = 1;
     [Tooltip("ブロック 火ドットダメージ 持続時間")] public int FIRE_DOT_DMG_DURATION = 2;
 
+    [Header("BLOCK SET MESH HP UNIT(以下)")][Header("__________________________")]
+    [Tooltip("PLAIN MT HP単位")] public int BLOCK_MESH_PLAIN_HP_UNIT = 30;
+    [Tooltip("PLAIN MT HP単位")] public int BLOCK_MESH_WOOD_HP_UNIT = 60;
+    [Tooltip("PLAIN MT HP単位")] public int BLOCK_MESH_SAND_HP_UNIT = 90;
+    [Tooltip("PLAIN MT HP単位")] public int BLOCK_MESH_REDBRICK_HP_UNIT = 120;
+    [Tooltip("PLAIN MT HP単位")] public int BLOCK_MESH_IRON_HP_UNIT = 150;
+
     [Header("BLOCK ITEM PROPERTY PERCENT")][Header("__________________________")]
     [Tooltip("フリーズ ダメージ")] [Range(0, 1)] public float ICE_FREEZE_DMG_PER = 0.1f;
     [Tooltip("火ドット ダメージ")] [Range(0, 1)] public float FIRE_DOT_DMG_PER = 0.2f;

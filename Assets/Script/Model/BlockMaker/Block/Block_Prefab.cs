@@ -198,13 +198,13 @@ public class Block_Prefab : MonoBehaviour
         }
     }
     private void setHp(){
-        //* ブロック HPリスト 準備
-        int idx = gm.stage - 1;
-        int resHp = bm.HpCalcList[idx];
-
-        //* ランダム要素
         int rand = Random.Range(0, 100);
-        int extraVal = (rand < 60)? -1 : (rand < 90)? 0 : 1;
+
+        //* ブロック HPリスト 準備
+        int rv = (rand < 85)? 0 : (rand < 95)? 1 : 2;
+        // Debug.Log($"Block_Prefab:: setHp:: rand= {rand}, rv= " + rv);
+        int idx = (gm.stage - 1) + rv;
+        int resHp = bm.HpCalcList[idx];
 
         switch(kind){
             case BlockMaker.KIND.TreasureChest:
@@ -233,15 +233,15 @@ public class Block_Prefab : MonoBehaviour
     public void setMesh(){
         if(kind == BlockMaker.KIND.Normal || kind == BlockMaker.KIND.Long){
             // Debug.LogFormat("Block_Prefab:: kind={0}", kind);
-            if(Hp < 10)
+            if(Hp < LM._.BLOCK_MESH_PLAIN_HP_UNIT)
                 mesh.block[0].material = bm.Mts[(int)BlockMt.PLAIN]; 
-            else if(Hp < 20)
+            else if(Hp < LM._.BLOCK_MESH_WOOD_HP_UNIT)
                 mesh.block[0].material = bm.Mts[(int)BlockMt.WOOD];
-            else if(Hp < 30)
+            else if(Hp < LM._.BLOCK_MESH_SAND_HP_UNIT)
                 mesh.block[0].material = bm.Mts[(int)BlockMt.SAND];
-            else if(Hp < 40)
+            else if(Hp < LM._.BLOCK_MESH_REDBRICK_HP_UNIT)
                 mesh.block[0].material = bm.Mts[(int)BlockMt.REDBRICK];
-            else if(Hp < 50)
+            else if(Hp < LM._.BLOCK_MESH_IRON_HP_UNIT)
                 mesh.block[0].material = bm.Mts[(int)BlockMt.IRON];
 
             //* 色
