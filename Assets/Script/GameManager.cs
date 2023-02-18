@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour {
     public BallShooter bs;
     public BlockMaker bm;
     public Animator throwScreenAnim;
+    public Transform hitRangeAreaTf;
     public Transform hitRangeStartTf;
     public Transform hitRangeEndTf;
     public Transform deadLineTf;

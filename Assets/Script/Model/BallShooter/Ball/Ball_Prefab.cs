@@ -86,7 +86,7 @@ public class Ball_Prefab : MonoBehaviour
     void OnTriggerStay(Collider col) {
         #region HIT BALL
         if(col.transform.CompareTag(DM.TAG.HitRangeArea.ToString())){
-            pl.setSwingArcColor("red");
+            // pl.setSwingArcColor("red");
             if(gm.State == GameManager.STATE.PLAY && pl.DoSwing){
                 pl.IsHited = true;
                 SM.ins.sfxPlay(SM.SFX.SwingHit.ToString());
@@ -138,15 +138,13 @@ public class Ball_Prefab : MonoBehaviour
                     em.createHomeRunHitSparkEF(myTransform.position);
                     StartCoroutine(coPlayHomeRunAnim(isActiveSkillTrigger));
                 }
-                // else if(isActiveSkillTrigger){ //* ActiveSkill Before
-                    // StartCoroutine(coPlayActiveSkillBefSpotLightAnim());
-                // }
-                var force = setgetHitBallSpeed(power, arrowDir);
+                var force = setAddForce(power, arrowDir);
 
                 //* Show HitBall Infomation
                 string rankTxt = gm.setHitRankTxt(power, hitRank);
                 float per = Util._.getCalcCurValPercentage(distance, LM._.MAX_DISTANCE);
 
+                //* Hit Info UI
                 gm.showHitBallInfoTf.GetComponent<Animator>().SetTrigger(DM.ANIM.IsHitBall.ToString());
                 var iconTxtList = gm.showHitBallInfoTf.transform.GetComponentsInChildren<Text>();
                 const int POWER_RANK = 0, BALL_SPEED = 1, ACCURACY = 2;
@@ -440,8 +438,12 @@ public class Ball_Prefab : MonoBehaviour
         Debug.Log($"Ball_Prefab::coFastPlayOn():: this.name= {name}");
         gm.onClickFastPlayButton();
     }
-    private float setgetHitBallSpeed(float power, Vector3 arrowDir){
+    private float setAddForce(float power, Vector3 arrowDir){
         myRigid.velocity = Vector3.zero;
+        
+        //* (BUG-72) ボールを打つ位置によって、PreviewBallと、ボールが飛ぶ角度がずれる問題：HitRangeAreaの原点(絶対座標)に設定することで対応。
+        transform.position = gm.hitRangeAreaTf.localPosition;
+
         float force = Speed * power * pl.speed.Val * Time.fixedDeltaTime;
         myRigid.AddForce(arrowDir * force, ForceMode.Impulse);
         return force;
