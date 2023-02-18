@@ -24,12 +24,10 @@ public class ObstacleExtraCollision : MonoBehaviour
         //* (BUG-21) Obstacleへ貼ってあるメインコライダーとは衝突しないように。
         if(col.transform.name.Contains(DM.NAME.Obstacle.ToString())) return;
 
-        
-
         //* (BUG-21) ObstacleがBlockに当たっても、破壊されないこと対応。
         if(col.transform.name.Contains(DM.NAME.Block.ToString())){
-            Debug.Log($"ObstacleExtraCollision:: OnTriggerEnter:: col= {col.name}, em= {em.name}");
-            em.createRockObstacleBrokenEF(transform.position);
+            Debug.Log($"ObstacleExtraCollision:: OnTriggerEnter:: this= {transform.name}");
+            em.createRockObstacleBrokenEF(transform.parent.position);
             Destroy(transform.parent.gameObject);
         }
     }
