@@ -103,6 +103,7 @@ public class EffectManager : MonoBehaviour
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 2));
     }
     public void createRockObstacleBrokenEF(Vector3 parentPos){
+        Debug.Log($"createRockObstacleBrokenEF(parentPos= {parentPos})");
         var ins = ObjectPool.getObject(ObjectPool.DIC.RockObstacleBrokenEF.ToString(), parentPos, QI, gm.effectGroup);
         StartCoroutine(ObjectPool.coDestroyObject(ins, gm.effectGroup, 1));
     }

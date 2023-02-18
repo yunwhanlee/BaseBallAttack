@@ -481,6 +481,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ Ball_PrefabとGameManager内、GetComponent最初化。
     ✓ RateDialog、rateOkボタン押すと、Google App Storeへリンク。
     ✓ BossLimitCntAlertTxtEF追加。
+    ✓ ボールがぶつかったら、角度に影響を上げることを、RigidのYAngleを固定することで対応。
 
     【レベルリング】
     目標：最大プレイ時間：４時間ぐらい。

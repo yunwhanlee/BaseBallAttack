@@ -13,7 +13,7 @@ public class ObstacleExtraCollision : MonoBehaviour
         collider(O) => isTrigger = false
     */
 
-    EffectManager em;
+    [SerializeField] EffectManager em;
 
     void Start() {
         Debug.Log("ObstacleExtraCollision::Start():: DM.ins.gm.em= " + DM.ins.gm.em);
@@ -24,11 +24,12 @@ public class ObstacleExtraCollision : MonoBehaviour
         //* (BUG-21) Obstacleへ貼ってあるメインコライダーとは衝突しないように。
         if(col.transform.name.Contains(DM.NAME.Obstacle.ToString())) return;
 
-        Debug.Log($"ObstacleExtraCollision:: OnTriggerEnter:: col= {col.name}");
+        
 
         //* (BUG-21) ObstacleがBlockに当たっても、破壊されないこと対応。
         if(col.transform.name.Contains(DM.NAME.Block.ToString())){
-            em.createRockObstacleBrokenEF(col.transform.position);
+            Debug.Log($"ObstacleExtraCollision:: OnTriggerEnter:: col= {col.name}, em= {em.name}");
+            em.createRockObstacleBrokenEF(transform.position);
             Destroy(transform.parent.gameObject);
         }
     }
