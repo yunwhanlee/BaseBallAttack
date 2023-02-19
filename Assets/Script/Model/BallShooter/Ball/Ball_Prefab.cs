@@ -204,7 +204,7 @@ public class Ball_Prefab : MonoBehaviour
                     RaycastHit[] hits = Physics.RaycastAll(start, dir, 100);
                     Array.ForEach(hits, hit => {
                         if(hit.transform.name.Contains(DM.NAME.Block.ToString())){  // Debug.Log("LAZER Hit Obj -> " + hit.transform.name);
-                            int laserDmg = pl.dmg.Val * (pl.laser.Level + 1);
+                            int laserDmg = pl.calcPlDmg();//pl.dmg.Val * (pl.laser.Level + 1);
                             em.createCritTxtEF(hit.transform.position, laserDmg);
                             bm.decreaseBlockHP(hit.transform.gameObject, laserDmg);
                         }
@@ -338,7 +338,7 @@ public class Ball_Prefab : MonoBehaviour
                     //* Explosion
                     SM.ins.sfxPlay(SM.SFX.FlashHit.ToString());
                     em.createGodBlessEF(myTransform.position);
-                    Util._.sphereCastAllDecreaseBlocksHp(myTransform, radius, pl.dmg.Val * 3);
+                    Util._.sphereCastAllDecreaseBlocksHp(myTransform, radius, pl.calcPlDmg() * 3);//pl.dmg.Val * 3);
                 }
             }
 
@@ -549,7 +549,7 @@ public class Ball_Prefab : MonoBehaviour
             AtvSkill.ThunderShotDmg + 1 : AtvSkill.ThunderShotDmg;
 
         //* Set Dmg & CriticalTextEF
-        int dmg = (int)(pl.dmg.Val * critDmgRatio);
+        int dmg = Mathf.RoundToInt(pl.calcPlDmg() * critDmgRatio);//(int)(pl.dmg.Val * critDmgRatio);
         int hitCnt = AtvSkill.ThunderShotHitCnt;
 
         SM.ins.sfxPlay(SM.SFX.Lightning.ToString());
@@ -561,7 +561,7 @@ public class Ball_Prefab : MonoBehaviour
     IEnumerator coMultiCriticalDmgEF(float critDmgRatio, int cnt, Vector3 hitPos){
         float span = 0.03875f;
         for(int i=0; i<cnt; i++){
-            em.createCritTxtEF(hitPos, (int)(pl.dmg.Val * critDmgRatio));
+            em.createCritTxtEF(hitPos, Mathf.RoundToInt(pl.calcPlDmg() * critDmgRatio));//(int)(pl.dmg.Val * critDmgRatio));
             if(isHomeRun) 
                 em.createThunderStrikeEF(hitPos);
             yield return new WaitForSeconds(i * span);

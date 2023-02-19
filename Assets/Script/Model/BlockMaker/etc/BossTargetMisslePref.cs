@@ -58,8 +58,8 @@ public class BossTargetMisslePref : MonoBehaviour
             //* ダメージ計算。
             const float offset100Percent = 1;
             float upgradeBossDmgPer = offset100Percent + DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.BossDamage].getValue();
-            int dmg = (int)((gm.pl.dmg.Val * upgradeBossDmgPer) * DEC_DMG_PER);
-            Debug.Log($"BossTargetMisslePerf:: dmg= {dmg} ({gm.pl.dmg.Val} * {upgradeBossDmgPer} * {DEC_DMG_PER})");
+            int dmg = Mathf.RoundToInt((gm.pl.calcPlDmg() * upgradeBossDmgPer) * DEC_DMG_PER); //(int)((gm.pl.dmg.Val * upgradeBossDmgPer) * DEC_DMG_PER);
+            Debug.Log($"BossTargetMisslePerf:: dmg= {dmg} (({gm.pl.calcPlDmg()} * {upgradeBossDmgPer}) * {DEC_DMG_PER})");
             col.gameObject.GetComponent<BossBlock>().decreaseHp((dmg <= 0)? 1 : dmg); //* Dmgが０なら、１にする。
 
             gm.em.createBossTargetMissileEF(this.transform.position);

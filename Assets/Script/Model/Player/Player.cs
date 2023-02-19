@@ -292,4 +292,8 @@ public class Player : MonoBehaviour
         }
         return obj;
     }
+    public int calcPlDmg(){
+        int DMG_TWICE = (damageTwice.Level == 1)? 2 : 1;
+        return Mathf.RoundToInt(dmg.Val * DMG_TWICE * giantBall.Val);
+    }
 }

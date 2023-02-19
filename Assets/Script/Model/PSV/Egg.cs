@@ -22,7 +22,7 @@ public class Egg : MonoBehaviour
             //* Explosion
             SM.ins.sfxPlay(SM.SFX.EggPop.ToString());
             em.createEggPopEF(this.transform.position);
-            Util._.sphereCastAllDecreaseBlocksHp(this.transform, explosionRange, pl.dmg.Val * 3);
+            Util._.sphereCastAllDecreaseBlocksHp(this.transform, explosionRange, gm.pl.calcPlDmg() * 3);//pl.dmg.Val * 3);
 
             Destroy(this.gameObject);
         }

@@ -24,6 +24,7 @@ public class DM : MonoBehaviour{
         MainPanel, RewardChest, 
         LevelUp, PsvSkillTicket,
         TitleTxt, ContentTxt,
+        IconPanel, IconImg, NameTxt, ValueTxt,
         //* 一回限り商品
         RemoveAD, PurchasedPanel, AdNoticeTxt,
         NULL,

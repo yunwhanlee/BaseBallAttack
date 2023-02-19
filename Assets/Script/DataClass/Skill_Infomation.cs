@@ -217,7 +217,7 @@ public class PsvSkill<T> where T: struct {
                     //* (BUG-56) Bossは、InstantKillが出来ないように
                     if(col.transform.name.Contains("Boss")){
                         Debug.Log($"<b>BOSS -> setHitTypeSkill::InstantKill:: col= {col.transform.name}</b>");
-                        int dmg = (int)(pl.dmg.Val * (2 + pl.criticalDamage.Val) * DMG_TWICE * pl.giantBall.Val);
+                        int dmg = Mathf.RoundToInt(pl.calcPlDmg() * (2 + pl.criticalDamage.Val));//(int)(pl.dmg.Val * (2 + pl.criticalDamage.Val) * DMG_TWICE * pl.giantBall.Val);
                         em.createCritTxtEF(col.transform.position, dmg); //* Critダメージに切り替え
                         result = dmg;
                         return true;
@@ -230,7 +230,7 @@ public class PsvSkill<T> where T: struct {
                 }
                 case DM.PSV.Critical: {
                     SM.ins.sfxPlay(SM.SFX.Critical.ToString());
-                    int dmg = (int)(pl.dmg.Val * (2 + pl.criticalDamage.Val) * DMG_TWICE * pl.giantBall.Val);
+                    int dmg =  Mathf.RoundToInt(pl.calcPlDmg() * (2 + pl.criticalDamage.Val));//(int)(pl.dmg.Val * (2 + pl.criticalDamage.Val) * DMG_TWICE * pl.giantBall.Val);
                     em.createCritTxtEF(col.transform.position, dmg);
                     result = dmg;
                     return true;
@@ -244,7 +244,7 @@ public class PsvSkill<T> where T: struct {
                 case DM.PSV.ThunderProperty:
                     SM.ins.sfxPlay(SM.SFX.ThunderHit.ToString());
                     em.createThunderStrikeEF(col.transform.position);
-                    em.createCritTxtEF(col.transform.position, Mathf.RoundToInt(pl.dmg.Val * DMG_TWICE * pl.giantBall.Val));
+                    em.createCritTxtEF(col.transform.position, pl.calcPlDmg());//Mathf.RoundToInt(pl.dmg.Val * DMG_TWICE * pl.giantBall.Val));
                     result *= 2;
                     break;
                 case DM.PSV.Explosion:
@@ -256,7 +256,7 @@ public class PsvSkill<T> where T: struct {
 
         //*「InstantKill」とか「Critical」が発動しなかったら
         if(result == 0){
-            result = Mathf.RoundToInt(pl.dmg.Val * DMG_TWICE * pl.giantBall.Val); //普通のダメージをそのまま代入。
+            result = pl.calcPlDmg(); //Mathf.RoundToInt(pl.dmg.Val * DMG_TWICE * pl.giantBall.Val); //普通のダメージをそのまま代入。
         }
         return false;
     }
@@ -283,12 +283,12 @@ public class PsvSkill<T> where T: struct {
         return direction;
     }
 
-    public static List<string> getPsvStatusInfo2Str(Player pl){
+    public static List<string> setPsvStatusInfo2Str(Player pl){
         //* PSV Unique Skill
         int DMG_TWICE = (pl.damageTwice.Level == 1)? 2 : 1;
 
         return new List<string>(){
-            pl.dmg.Name,                    Mathf.RoundToInt(pl.dmg.Val * DMG_TWICE * pl.giantBall.Val).ToString(),
+            pl.dmg.Name,                    pl.calcPlDmg().ToString(),//Mathf.RoundToInt(pl.dmg.Val * DMG_TWICE * pl.giantBall.Val).ToString(),
             pl.speed.Name,                  (Mathf.RoundToInt(pl.speed.Val * 100) + "m/s").ToString(),
             pl.multiShot.Name,              (pl.multiShot.Val).ToString(),
             pl.verticalMultiShot.Name,      (pl.verticalMultiShot.Val).ToString(),
@@ -413,7 +413,7 @@ public class AtvSkill{
     //* B. Set Dmg
     public AtvSkill(GameManager gm, Player pl){ //@ Overload
         int DMG_TWICE = (pl.damageTwice.Level == 1)? 2 : 1;
-        int ballDmg = Mathf.RoundToInt(pl.dmg.Val * DMG_TWICE * pl.giantBall.Val);
+        int ballDmg = pl.calcPlDmg();//Mathf.RoundToInt(pl.dmg.Val * DMG_TWICE * pl.giantBall.Val);
         var upgradeArr = DM.ins.personalData.AtvSkillUpgrade.Arr;
 
         ThunderShotHitCnt = (int)(LM._.THUNDERSHOT_DEF_HIT + upgradeArr[(int)DM.ATV.ThunderShot].getValue());

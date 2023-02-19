@@ -22,7 +22,7 @@ public class DarkOrb : MonoBehaviour
     private void OnTriggerEnter(Collider col) {
         if(col.transform.name.Contains(DM.NAME.Block.ToString())){
             var block = col.GetComponent<Block_Prefab>();
-            int dmg = pl.dmg.Val;
+            int dmg = gm.pl.calcPlDmg(); //pl.dmg.Val;
             Debug.Log($"DarkOrb::OnTriggerEnter:: HIT->{block}");
             SM.ins.sfxPlay(SM.SFX.DarkHit.ToString());
             em.createDarkOrbHitEF(col.transform.position);

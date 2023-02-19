@@ -560,7 +560,7 @@ public class GameManager : MonoBehaviour {
             Destroy(statusInfoContents.GetChild(i).gameObject);
 
         //* Set InfoTxt List
-        List<string> infoTxtList = PsvSkill<int>.getPsvStatusInfo2Str(pl);
+        List<string> infoTxtList = PsvSkill<int>.setPsvStatusInfo2Str(pl);
         List<string> nameList = new List<string>();
         List<string> valueList = new List<string>();
 
@@ -574,14 +574,14 @@ public class GameManager : MonoBehaviour {
             const int BLUE = 0, RED = 1, ORANGE = 2, GREEN = 3;
             int i=0;
             nameList.ForEach(list => {
-                if(i == 0 || i == 1) statusInfoPf.transform.Find("IconPanel").GetComponent<Image>().color = statusIconColorArr[BLUE];
-                else if(i == 2 || i == 3) statusInfoPf.transform.Find("IconPanel").GetComponent<Image>().color = statusIconColorArr[RED];
-                else if(i == 4 || i == 5 || i == 6 || i == 7) statusInfoPf.transform.Find("IconPanel").GetComponent<Image>().color = statusIconColorArr[ORANGE];
-                else statusInfoPf.transform.Find("IconPanel").GetComponent<Image>().color = statusIconColorArr[GREEN];
+                if(i == 0 || i == 1) statusInfoPf.transform.Find(DM.NAME.IconPanel.ToString()).GetComponent<Image>().color = statusIconColorArr[BLUE];
+                else if(i == 2 || i == 3) statusInfoPf.transform.Find(DM.NAME.IconPanel.ToString()).GetComponent<Image>().color = statusIconColorArr[RED];
+                else if(i == 4 || i == 5 || i == 6 || i == 7) statusInfoPf.transform.Find(DM.NAME.IconPanel.ToString()).GetComponent<Image>().color = statusIconColorArr[ORANGE];
+                else statusInfoPf.transform.Find(DM.NAME.IconPanel.ToString()).GetComponent<Image>().color = statusIconColorArr[GREEN];
 
-                statusInfoPf.transform.Find("IconPanel").transform.Find("IconImg").GetComponentInChildren<Image>().sprite = statusIconSprArr[i];
-                statusInfoPf.transform.Find("NameTxt").GetComponent<Text>().text = nameList[i];
-                statusInfoPf.transform.Find("ValueTxt").GetComponent<Text>().text = valueList[i];
+                statusInfoPf.transform.Find(DM.NAME.IconPanel.ToString()).transform.Find(DM.NAME.IconImg.ToString()).GetComponentInChildren<Image>().sprite = statusIconSprArr[i];
+                statusInfoPf.transform.Find(DM.NAME.NameTxt.ToString()).GetComponent<Text>().text = nameList[i];
+                statusInfoPf.transform.Find(DM.NAME.ValueTxt.ToString()).GetComponent<Text>().text = valueList[i];
                 Instantiate(statusInfoPf, Vector3.zero, Quaternion.identity, statusInfoContents);
                 i++;
             });
