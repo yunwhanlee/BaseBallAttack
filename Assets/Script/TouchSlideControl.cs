@@ -19,7 +19,9 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     public GameObject hitBlockByBallPreview;
 
     //* Player BattingSpot Moving 
-    enum POS_X {LEFT, CENTER, RIGHT};
+    public enum POS_X {LEFT, CENTER, RIGHT};
+    public POS_X playerSpotPosX = POS_X.CENTER;
+
     const float BEGIN_POS_X = -1;
     const float STICK_RANGE = 2;
     const float MIN_PL_TF_POS_X = -4.3f;
@@ -191,7 +193,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     private void movePlayerSpace(Transform playerTf, Vector2 dir){
         float normalX = dir.x / (pad.rect.width * 0.5f); // -1 ~ 1
 
-        const int LEFT = 0, MIDDLE = 1, RIGHT = 2;
+        const int LEFT = 0, CENTER = 1, RIGHT = 2;
         const int SplitCnt = 3;
         const float AmountDist = 2, MinPosX = -1;
         float distUnit = AmountDist / SplitCnt;
@@ -200,17 +202,23 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         float[] plTfPosArr = {-4.3f, -1.3f, 1.8f};
         float[] cam2TfPosArr = {-3, 0, 3.1f};
         for(int i=0; i<3; i++) posArr[i] = MinPosX + distUnit * (i+1);
+
+        playerSpotPosX = (MinPosX < normalX && normalX <= posArr[LEFT])? POS_X.LEFT
+            : (MinPosX < normalX && normalX <= posArr[CENTER])? POS_X.CENTER
+            : POS_X.RIGHT;
+
+        Debug.Log($"TouchSlideControl:: playerSpotPosX= {playerSpotPosX}");
         // Debug.Log($"movePlayerSpace:: normalX= {Util._.setNumDP(normalX,2)}, posArr=[{Util._.setNumDP(posArr[0],2)}, {Util._.setNumDP(posArr[1],2)}, {Util._.setNumDP(posArr[2],2)}]");
 
-        if(MinPosX < normalX && normalX <= posArr[LEFT]){
+        if(playerSpotPosX == POS_X.LEFT){
             playerTf.transform.position = new Vector3(plTfPosArr[LEFT], playerTf.transform.position.y, playerTf.transform.position.z);
             gm.cam2.transform.position = new Vector3(cam2TfPosArr[LEFT], gm.cam2.transform.position.y, gm.cam2.transform.position.z);
         }
-        else if(posArr[LEFT] < normalX && normalX <= posArr[MIDDLE]){
-            playerTf.transform.position = new Vector3(plTfPosArr[MIDDLE], playerTf.transform.position.y, playerTf.transform.position.z);
-            gm.cam2.transform.position = new Vector3(cam2TfPosArr[MIDDLE], gm.cam2.transform.position.y, gm.cam2.transform.position.z);
+        else if(playerSpotPosX == POS_X.CENTER){
+            playerTf.transform.position = new Vector3(plTfPosArr[CENTER], playerTf.transform.position.y, playerTf.transform.position.z);
+            gm.cam2.transform.position = new Vector3(cam2TfPosArr[CENTER], gm.cam2.transform.position.y, gm.cam2.transform.position.z);
         }
-        else if(posArr[MIDDLE] < normalX && normalX <= posArr[RIGHT]){
+        else if(playerSpotPosX == POS_X.RIGHT){
             playerTf.transform.position = new Vector3(plTfPosArr[RIGHT], playerTf.transform.position.y, playerTf.transform.position.z);
             gm.cam2.transform.position = new Vector3(cam2TfPosArr[RIGHT], gm.cam2.transform.position.y, gm.cam2.transform.position.z);
         }

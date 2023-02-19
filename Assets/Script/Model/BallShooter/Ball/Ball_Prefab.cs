@@ -374,7 +374,7 @@ public class Ball_Prefab : MonoBehaviour
                 if(!isInstantKill && !isCritical)
                     em.createDmgTxtEF(myTransform.position, result);
             }
-        #endregion            
+        #endregion
         }
         else if(col.transform.CompareTag(DM.TAG.Wall.ToString()) && col.gameObject.name == DM.NAME.DownWall.ToString()){
             Vector3 pos = new Vector3(myTransform.position.x, col.gameObject.transform.position.y, col.gameObject.transform.position.z);
@@ -438,11 +438,17 @@ public class Ball_Prefab : MonoBehaviour
         Debug.Log($"Ball_Prefab::coFastPlayOn():: this.name= {name}");
         gm.onClickFastPlayButton();
     }
+
     private float setAddForce(float power, Vector3 arrowDir){
         myRigid.velocity = Vector3.zero;
-        
+
         //* (BUG-72) ボールを打つ位置によって、PreviewBallと、ボールが飛ぶ角度がずれる問題：HitRangeAreaの原点(絶対座標)に設定することで対応。
-        transform.position = gm.hitRangeAreaTf.localPosition;
+        const float LEFT_OFFSET_X = -3f, RIGHT_OFFSET_Y = 3.1f;
+
+        float posX = (gm.touchSlideControlPanel.playerSpotPosX == TouchSlideControl.POS_X.LEFT)? LEFT_OFFSET_X
+            : (gm.touchSlideControlPanel.playerSpotPosX == TouchSlideControl.POS_X.CENTER)? 0
+            : RIGHT_OFFSET_Y;
+        transform.position = new Vector3(gm.hitRangeAreaTf.localPosition.x + posX, gm.hitRangeAreaTf.localPosition.y, gm.hitRangeAreaTf.localPosition.z);
 
         float force = Speed * power * pl.speed.Val * Time.fixedDeltaTime;
         myRigid.AddForce(arrowDir * force, ForceMode.Impulse);
