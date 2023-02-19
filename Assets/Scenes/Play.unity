@@ -150,7 +150,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 779754}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -2.25}
+  m_LocalPosition: {x: 0, y: 1, z: -2.28}
   m_LocalScale: {x: 12, y: 2, z: 0.05}
   m_Children: []
   m_Father: {fileID: 1634056560}
@@ -167,8 +167,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.4999996, y: 9.445673, z: 13.075674}
-  m_Center: {x: 0.016114512, y: 3.4947672, z: -6.0378394}
+  m_Size: {x: 1.4999996, y: 9.445673, z: 20}
+  m_Center: {x: 0.016114512, y: 3.4947672, z: -10}
 --- !u!23 &779757
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -176,13 +176,13 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 779754}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
@@ -7778,6 +7778,7 @@ MonoBehaviour:
   stick: {fileID: 1665828883}
   wallNormalVec: {x: 0, y: 0, z: 0}
   hitBlockByBallPreview: {fileID: 0}
+  playerSpotPosX: 1
   modelOriginMtList: []
   plTfMeshRdrs: []
   onClickedMt: {fileID: 2100000, guid: 1a0418b150dc1e1448c35ae9aa39157c, type: 2}
@@ -83323,7 +83324,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1957708814}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.31, z: 1.93}
+  m_LocalPosition: {x: 0, y: 1.31, z: 1}
   m_LocalScale: {x: 10, y: 2, z: 6}
   m_Children: []
   m_Father: {fileID: 749492863}
@@ -83340,8 +83341,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1.1862373}
-  m_Center: {x: 0, y: 0, z: -0.093119375}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1957708817
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -83349,7 +83350,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1957708814}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

@@ -1552,7 +1552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db125c7de00668f4e98849d0aaf366d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectColor: {r: 0.16981131, g: 0.11614452, b: 0.11614452, a: 1}
   m_EffectDistance: {x: 3, y: -3}
   m_UseGraphicAlpha: 1
 --- !u!114 &76051938
@@ -4471,7 +4471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db125c7de00668f4e98849d0aaf366d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectColor: {r: 0.10546457, g: 0.14150941, b: 0.09945709, a: 0.8}
   m_EffectDistance: {x: 3, y: -4}
   m_UseGraphicAlpha: 1
 --- !u!1 &174595240
@@ -5378,8 +5378,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db125c7de00668f4e98849d0aaf366d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 2, y: -2}
+  m_EffectColor: {r: 0.16862746, g: 0.11764706, b: 0.11764706, a: 1}
+  m_EffectDistance: {x: 3, y: -3}
   m_UseGraphicAlpha: 1
 --- !u!114 &219680611
 MonoBehaviour:
@@ -6118,8 +6118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db125c7de00668f4e98849d0aaf366d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 7, y: -7}
+  m_EffectColor: {r: 0.11868102, g: 0.15212616, b: 0.1981132, a: 0.8}
+  m_EffectDistance: {x: 6, y: -6}
   m_UseGraphicAlpha: 1
 --- !u!114 &251569728
 MonoBehaviour:
@@ -8248,7 +8248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db125c7de00668f4e98849d0aaf366d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectColor: {r: 0.13274297, g: 0.17398849, b: 0.1792453, a: 0.8}
   m_EffectDistance: {x: 3, y: -4}
   m_UseGraphicAlpha: 1
 --- !u!114 &339284019
@@ -16008,6 +16008,7 @@ GameObject:
   - component: {fileID: 807839748}
   - component: {fileID: 807839747}
   - component: {fileID: 807839746}
+  - component: {fileID: 807839749}
   m_Layer: 5
   m_Name: RouletteIconBtn
   m_TagString: Untagged
@@ -16129,6 +16130,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 807839744}
   m_CullTransparentMesh: 1
+--- !u!114 &807839749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807839744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db125c7de00668f4e98849d0aaf366d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.16862746, g: 0.11764706, b: 0.11764706, a: 1}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &810525561
 GameObject:
   m_ObjectHideFlags: 0
@@ -16349,7 +16365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db125c7de00668f4e98849d0aaf366d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectColor: {r: 0.21698111, g: 0.16578713, b: 0.16273583, a: 0.8}
   m_EffectDistance: {x: 3, y: -4}
   m_UseGraphicAlpha: 1
 --- !u!114 &823545791
@@ -19248,7 +19264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db125c7de00668f4e98849d0aaf366d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectColor: {r: 0.14150941, g: 0.12687583, b: 0.07809718, a: 0.8}
   m_EffectDistance: {x: 3, y: -4}
   m_UseGraphicAlpha: 1
 --- !u!114 &988653908
@@ -22546,7 +22562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db125c7de00668f4e98849d0aaf366d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectColor: {r: 0.16862746, g: 0.11764706, b: 0.11764706, a: 1}
   m_EffectDistance: {x: 3, y: -3}
   m_UseGraphicAlpha: 1
 --- !u!114 &1133978060
@@ -30348,7 +30364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db125c7de00668f4e98849d0aaf366d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectColor: {r: 0.17382443, g: 0.14110893, b: 0.1981132, a: 0.8}
   m_EffectDistance: {x: 3, y: -4}
   m_UseGraphicAlpha: 1
 --- !u!114 &1324393190
@@ -39238,7 +39254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db125c7de00668f4e98849d0aaf366d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectColor: {r: 0.21698111, g: 0.15713353, b: 0.11360803, a: 0.8}
   m_EffectDistance: {x: 3, y: -4}
   m_UseGraphicAlpha: 1
 --- !u!114 &1836562021
