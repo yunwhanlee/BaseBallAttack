@@ -8,7 +8,7 @@ using SpriteGlow;
 
 [System.Serializable]
 public class SkillProperty{
-    string name; public string Name {get => name;}
+    string name; public string Name {get => name;}    
     [SerializeField] bool isOn;  public bool IsOn {get => isOn; set => isOn = value;}
     [SerializeField] int befCnt; public int BefCnt {get => befCnt; set => befCnt = value;}
     [SerializeField] int duration;   public int Duration {get => duration; set => duration = value;}
@@ -138,7 +138,6 @@ public class Block_Prefab : MonoBehaviour
         pl = gm.pl;
         bm = gm.bm;
 
-        MaxHp = Hp;
         sprGlowEf = GetComponentInChildren<SpriteGlowEffect>();
         boxCollider = GetComponent<BoxCollider>();
         anim = GetComponent<Animator>();
@@ -219,6 +218,7 @@ public class Block_Prefab : MonoBehaviour
                 Hp =  resHp;
                 break;
         }
+        maxHp = Hp;
         hpTxt.text = Hp.ToString();
     }
 
@@ -331,10 +331,12 @@ public class Block_Prefab : MonoBehaviour
         }
     }
     public void increaseHp(int heal){
-        SM.ins.sfxPlay(SM.SFX.Heal.ToString());
-        Hp += heal;
-        em.createHealTxtEF(this.transform.position, heal);
-        em.createHeartEF(new Vector3(transform.position.x, transform.position.y+2, transform.position.z));
+        if(hp < Mathf.RoundToInt(maxHp * 1.5f)){
+            SM.ins.sfxPlay(SM.SFX.Heal.ToString());
+            hp += heal;
+            em.createHealTxtEF(this.transform.position, heal);
+            em.createHeartEF(new Vector3(transform.position.x, transform.position.y+2, transform.position.z));
+        }
     }
 
     public void decreaseHp(int dmg) {
