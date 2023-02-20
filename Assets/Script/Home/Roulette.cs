@@ -12,7 +12,7 @@ public class Roulette : MonoBehaviour
     enum ITEM {coin, gem, RouletteTicket, bomb};
     const float rotOffset = 22.5f;
     const int itemCnt = 8;
-    const int SPEED = 50;
+    const int SPEED = 1000;
     const int REWARD_IMG = 1;
     const int MAX_CHALLENGE_CNT = 3;
     [SerializeField] GameObject[] itemObjArr;
