@@ -9,36 +9,41 @@ public class Roulette : MonoBehaviour
     HomeManager hm;
 
     enum ITEM_OBJ_NAME {coin, gem, RouletteTicket, poop};
-    const float rotOffset = -22.5f;
+    const float rotOffset = 22.5f;
     const int itemCnt = 8;
+    const int REWARD_IMG = 1;
+    const int SPEED = 1000;
     [SerializeField] GameObject[] itemObjArr;  public GameObject[] ItemObjArr { get => itemObjArr; set => itemObjArr = value;}
-    [SerializeField] bool isSpin; public bool IsSpin { get => isSpin; set => isSpin = value;}
+    [SerializeField] bool isSpin;
     public RectTransform spinBoard;
     public RectTransform centerTf;
     public Text ticketCntTxt;
+    public Button spinBtn;
     public Image spinBtnIconImg;
     public Text spinBtnTxt;
-    // public Slider SpinPowerSlider;
+    public Button challengeBtn;
     public GameObject ContgraturationBlastEF;
     public Button exitBtn;
     
+    
     public Sprite rewardIcon;
     private int rewardPrice;
-    const int SPIN_POWER_MIN = 200;
-    const int SPIN_POWER_MAX = 1200;
-    public int power = 1500;
-    public float spinGauge = 0;
 
-    [SerializeField] float speed;
-    [SerializeField] bool isRight;
-    const int REWARD_IMG = 1;
+    [SerializeField] float curSpeed;
+
+    void OnEnable() {
+        isSpin = true;
+    }
 
     void Start(){
         Debug.Log("Roulette::Start():: DM.ins.hm= " + DM.ins.hm);
         hm = DM.ins.hm;
 
+        curSpeed = 0;
+        challengeBtn.gameObject.SetActive(false);
+
         //* Lang
-        spinBtnTxt.text = LANG.getTxt(LANG.TXT.RouletteSpin.ToString());
+        spinBtnTxt.text = LANG.getTxt(LANG.TXT.Ready.ToString());
 
         setCenterTfUI(isInit: true);
     }
@@ -46,25 +51,59 @@ public class Roulette : MonoBehaviour
     void Update(){
         ticketCntTxt.text = "x " + DM.ins.personalData.RouletteTicket.ToString();
         //* ROTATE
-        if(isSpin){
-            speed = 1000;
-            if(speed > 0){
+        if(curSpeed > 0){
+            if(isSpin){
+                spinBoard.transform.Rotate(0, 0, curSpeed * Time.deltaTime);
+                // spinBtnTxt.text = LANG.getTxt(LANG.TXT.RouletteStop.ToString());
                 setCenterTfUI(isSpin);
-                spinBoard.transform.Rotate(0, 0, speed * Time.deltaTime);
-                spinBtnTxt.text = LANG.getTxt(LANG.TXT.RouletteStop.ToString());
+            }
+            else{
+                const float t = 0.9f; //* AとBの返し値。
+                curSpeed = (curSpeed <= 2)? 0 : Mathf.Lerp(0, curSpeed, t);
+
+                if(curSpeed == 0){
+                    spinBtn.interactable = true;
+                    spinBtnTxt.text = LANG.getTxt(LANG.TXT.Get.ToString());
+
+                    //* 角度による、Index値
+                    float zRot = spinBoard.eulerAngles.z;
+                    float ang = zRot % 360; //* one lap(１回り): 360°
+                    int devide = (360 / itemCnt);
+                    int idx =  (int)((ang + rotOffset) / devide);
+                    idx = (idx == itemCnt)? 0 : idx; //* (BUG-75) RouletteのResult角度が少しずれているバグ対応。
+                    Debug.Log("Roulette::Update:: speed= " + curSpeed + ", angle= " + ang + ", devide= " + devide +", index=" + idx);
+
+                    SM.ins.sfxPlay(SM.SFX.RouletteReward.ToString());
+                    setRewardData(idx);
+                    setCenterTfUI(isSpin);
+                    challengeBtn.gameObject.SetActive(true);
+                }
+                spinBoard.transform.Rotate(0, 0, curSpeed * Time.deltaTime);
             }
         }
+        // float _zRot = spinBoard.eulerAngles.z;
+        // float _angle = _zRot % 360; //* one lap(１回り): 360°
+        // int devideVal = (360 / itemCnt);
+        // int _idx = (int)((_angle + rotOffset) / devideVal);
+        // _idx = _idx == itemCnt? 0 : _idx;
+        // // Debug.Log("Roulette::Update:: speed= " + speed + ", angle= " + _angle + ", index=" + _index);
+        // Debug.Log("_zRot= " + _zRot + " index= " + _idx + " devideVal= " + devideVal);
     }
 
     public void onClickRouletteSpinBtn(){ //* -> OK Buttonにも使える！
         if(DM.ins.personalData.RouletteTicket <= 0) return;
 
-        //* STOP
+        //* GET RESULT
         if(rewardIcon != null){
+            Debug.Log("onClickRouletespinBtn:: GET RESULT");
             DM.ins.personalData.RouletteTicket--;
             SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
-            setRewardResult();
 
+            spinBoard.rotation = Quaternion.identity;
+            spinBtnTxt.text = LANG.getTxt(LANG.TXT.Ready.ToString());
+            challengeBtn.gameObject.SetActive(false);
+
+            setRewardResult();
             setCenterTfUI(isInit: true);
             setRewardData();
 
@@ -75,28 +114,33 @@ public class Roulette : MonoBehaviour
         }
         
         if(!isSpin){ 
+            Debug.Log("onClickRouletespinBtn:: SET STOP");
             isSpin = true;
+            curSpeed = SPEED;
+            spinBtnTxt.text = LANG.getTxt(LANG.TXT.RouletteStop.ToString());
         }
         else{
+            Debug.Log($"onClickRouletespinBtn:: SET SPIN:: speed= {curSpeed}");
             isSpin = false;
-            //* RESULT
+            spinBtn.interactable = (curSpeed > 0)? false : true;
+            spinBtnTxt.text = LANG.getTxt(LANG.TXT.RouletteSpin.ToString());
             /*
             *   ⓵ transform.rotation : 0~1単位 -> eulerAnglesに変換する必要ある。
             *   ⓶ eulerAnglesでは、範囲が0~360まで。
             *      しかし、InspectorViewでは、範囲が-180~180まで。
             */
-            float zRot = spinBoard.eulerAngles.z;
-            float angle = zRot % (360 + rotOffset); //* one lap(１回り): 360°
-            int index = (int)(angle / ((360 + rotOffset) / itemCnt));
-            Debug.Log("Roulette::Update:: speed= " + speed + ", angle= " + angle + ", index=" + index);
-            SM.ins.sfxPlay(SM.SFX.RouletteReward.ToString());
-            setRewardData(index);
-            setCenterTfUI(isSpin);
+            // float zRot = spinBoard.eulerAngles.z;
+            // float angle = zRot % (360 + rotOffset); //* one lap(１回り): 360°
+            // int index = (int)(angle / ((360 + rotOffset) / itemCnt));
+            // Debug.Log("Roulette::Update:: speed= " + speed + ", angle= " + angle + ", index=" + index);
+            // SM.ins.sfxPlay(SM.SFX.RouletteReward.ToString());
+            // setRewardData(index);
+            // setCenterTfUI(isSpin);
         }
     }
 
     public void onClickRouletteExitBtn(){
-        if(isSpin) return;
+        if(isSpin && curSpeed != 0) return;
         this.gameObject.SetActive(false);
         hm.homePanel.Panel.gameObject.SetActive(true);
     }
@@ -110,8 +154,8 @@ public class Roulette : MonoBehaviour
         centerTf.GetComponentInChildren<Text>().text = (isInit? "" : rewardPrice.ToString());
 
         spinBtnIconImg.gameObject.SetActive(isInit? true : false);
-        spinBtnTxt.text = (isInit? spinBtnTxt.text = LANG.getTxt(LANG.TXT.RouletteSpin.ToString())
-            : LANG.getTxt(LANG.TXT.Get.ToString()));
+        // spinBtnTxt.text = (isInit? spinBtnTxt.text = LANG.getTxt(LANG.TXT.RouletteSpin.ToString())
+        //     : LANG.getTxt(LANG.TXT.Get.ToString()));
     }
 
     private void setRewardData(int index = -1){
