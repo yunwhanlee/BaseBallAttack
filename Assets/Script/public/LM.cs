@@ -71,6 +71,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Header("BLOCK SPAN")][Header("__________________________")]
     [Tooltip("ボース登場ステージ周期")] public int BOSS_STAGE_SPAN = 10;
     [Tooltip("ボース制限ステージ時間")] public int BOSS_LIMIT_SPAN = 20;
+    [Tooltip("ボース死んだら出るオブ")] public int BOSS_DIE_ORB_CNT = 25;
     [Tooltip("ボース制限ステージお知らせNUMBER")] public int BOSS_LIMIT_CNT_ALERT_NUM = 5;
     [Tooltip("LONGブロック登場ステージ周期")] public int LONG_BLOCK_SPAN = 5;
     [Tooltip("ブロック フリーズ 持続時間")] public int ICE_FREEZE_DURATION = 1;
@@ -186,7 +187,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     void Start(){
         Debug.Log("<FIBONACCI SEQUENCE> Player Max Exp");
         // MAX_EXP_LIST = Util._.getCalcFibonicciSequenceList(unit: 200, fibRatio: 2, MAX_LV);
-        MAX_EXP_LIST = Util._.calcArithmeticProgressionList(start: 200, max: 30, d: 100, gradualUpValue: 1f);
+        MAX_EXP_LIST = Util._.calcArithmeticProgressionList(start: 300, max: 30, d: 100, gradualUpValue: 1f);
 
         HOMERUN_MIN_POWER = HIT_RANK[B].Power;
         const int OFFSET_CNT = 1;

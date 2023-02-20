@@ -298,10 +298,6 @@ public class BossBlock : Block_Prefab{
     }
 
     public new void decreaseHp(int dmg) {
-        if(PsvSkill<int>.ONE_KILL_DMG == dmg){
-            
-        }
-
         int extraBossDmg = Mathf.RoundToInt(dmg * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.BossDamage].getValue());
         Debug.Log($"BossBlock::decreaseHp(dmg={dmg} + extraBossDmg={extraBossDmg})::");
 
@@ -326,15 +322,15 @@ public class BossBlock : Block_Prefab{
 
         this.transform.rotation = Quaternion.Euler(0,250,0);
         boxCollider.enabled = false;
-        int resultExp = gm.stage * 10;
+        int resultExp = (int)(Exp * gm.pl.expUp.Val);//gm.stage * 10;
 
         float playSec = Util._.getAnimPlayTime(DM.ANIM.Die.ToString(), this.anim);
 
         anim.SetTrigger(DM.ANIM.Die.ToString());
 
         yield return new WaitForSecondsRealtime(playSec * 0.7f);
-        for(int i=0; i < BOSS_DIE_ORB_CNT; i++)
-            bm.createDropItemExpOrbPf(bossDieOrbSpawnTf, resultExp, popPower: 600);
+        for(int i=0; i < LM._.BOSS_DIE_ORB_CNT; i++)
+            bm.createDropItemExpOrbPf(bossDieOrbSpawnTf, resultExp, popPower: 800);
 
         yield return new WaitForSecondsRealtime(playSec * 0.3f + playSec); //* 消すのが早すぎ感じで、少し待機。
         Destroy(target);
