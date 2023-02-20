@@ -9,14 +9,18 @@ public class Roulette : MonoBehaviour
     //* OutSide
     HomeManager hm;
 
-    enum ITEM_OBJ_NAME {coin, gem, RouletteTicket, poop};
+    enum ITEM {coin, gem, RouletteTicket, bomb};
     const float rotOffset = 22.5f;
     const int itemCnt = 8;
     const int SPEED = 1000;
     const int REWARD_IMG = 1;
     [SerializeField] GameObject[] itemObjArr;
+    [SerializeField] List<Sprite> originItemSprList;
+    [SerializeField] List<string> originItemPriceStrList;
     [SerializeField] bool isSpin;
+    [SerializeField] bool isChallengeTrigger;
     [SerializeField] int challengeCnt;
+
     public RectTransform spinBoard;
     public RectTransform centerTf;
     [SerializeField] Image centerImg;
@@ -31,7 +35,6 @@ public class Roulette : MonoBehaviour
     public Sprite rewardIcon;
     public Sprite iconClover;
     public Sprite iconBomb;
-    
     private int rewardPrice;
 
     [SerializeField] float curSpeed;
@@ -39,16 +42,30 @@ public class Roulette : MonoBehaviour
     void OnEnable() {
         isSpin = true;
         challengeCnt = 0;
+        isChallengeTrigger = false;
+
+        if(originItemSprList.Count > 0)
+            initItemList();
     }
 
     void Start(){
         Debug.Log("Roulette::Start():: DM.ins.hm= " + DM.ins.hm);
         hm = DM.ins.hm;
+        
+        //* Set Origin Item List
+        Array.ForEach(itemObjArr, arr => {
+            var img = arr.GetComponentsInChildren<Image>()[0];
+            var txt = arr.GetComponentsInChildren<Text>()[0];
+            
+            originItemSprList.Add(img.sprite);
+            originItemPriceStrList.Add(txt.text);
+        });
 
         centerImg = centerTf.GetComponentsInChildren<Image>()[REWARD_IMG];
         centerTxt = centerTf.GetComponentInChildren<Text>();
 
         curSpeed = 0;
+        isChallengeTrigger = false;
         challengeBtn.gameObject.SetActive(false);
 
         //* Lang
@@ -87,39 +104,66 @@ public class Roulette : MonoBehaviour
                     idx = (idx == itemCnt)? 0 : idx; //* (BUG-75) RouletteのResult角度が少しずれているバグ対応。
                     Debug.Log("Roulette::Update:: speed= " + curSpeed + ", angle= " + ang + ", devide= " + devide +", index=" + idx);
 
-                    SM.ins.sfxPlay(SM.SFX.RouletteReward.ToString());
+                    //* Reward
                     setRewardData(idx);
                     setCenterTfUI(isSpin);
-                    challengeBtn.gameObject.SetActive(true);
                 }
                 spinBoard.transform.Rotate(0, 0, curSpeed * Time.deltaTime);
             }
         }
     }
 
+    private void initItemList(){
+        challengeCnt = 0;
+
+        int i=0;
+        Array.ForEach(itemObjArr, arr => {
+            var img = arr.GetComponentsInChildren<Image>()[0];
+            var txt = arr.GetComponentsInChildren<Text>()[0];
+
+            img.sprite = originItemSprList[i];
+            txt.text = originItemPriceStrList[i];
+
+            i++;
+        });
+    }
     public void onClickRouletteSpinBtn(){ //* -> OK Buttonにも使える！
         if(DM.ins.personalData.RouletteTicket <= 0) return;
 
         //* GET RESULT
         if(rewardIcon != null){
-            Debug.Log("onClickRouletespinBtn:: GET RESULT");
-            DM.ins.personalData.RouletteTicket--;
-            SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
+            if(!isChallengeTrigger){
+                Debug.Log("onClickRouletespinBtn:: GET RESULT");
+                DM.ins.personalData.RouletteTicket--;
+                SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
 
-            spinBoard.rotation = Quaternion.identity;
-            spinBtnTxt.text = LANG.getTxt(LANG.TXT.Ready.ToString());
-            challengeBtn.gameObject.SetActive(false);
+                spinBoard.rotation = Quaternion.identity;
+                spinBtnTxt.text = LANG.getTxt(LANG.TXT.Ready.ToString());
+                challengeBtn.gameObject.SetActive(false);
 
-            setRewardResult();
-            setCenterTfUI(isInit: true);
-            setRewardData();
+                setRewardResult();
+                setCenterTfUI(isInit: true);
+                setRewardData();
 
-            if(DM.ins.personalData.RouletteTicket <= 0)
-                onClickRouletteExitBtn();
+                if(DM.ins.personalData.RouletteTicket <= 0)
+                    onClickRouletteExitBtn();
+            }else{
+                // isChallengeTrigger = false;
+                Debug.Log("onClickRouletespinBtn:: CHALLENGE DOUBLE");
+                SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
+
+                spinBtnTxt.text = LANG.getTxt(LANG.TXT.RouletteSpin.ToString());
+                challengeBtn.gameObject.SetActive(false);
+
+                setSpin();
+            }
 
             return;
         }
-        
+        setSpin();
+    }
+
+    private void setSpin(){
         if(!isSpin){ 
             Debug.Log("onClickRouletespinBtn:: SET STOP");
             isSpin = true;
@@ -131,6 +175,7 @@ public class Roulette : MonoBehaviour
             isSpin = false;
             spinBtn.interactable = (curSpeed > 0)? false : true;
             spinBtnTxt.text = LANG.getTxt(LANG.TXT.RouletteSpin.ToString());
+            isChallengeTrigger = false;
         }
     }
 
@@ -141,46 +186,63 @@ public class Roulette : MonoBehaviour
     }
 
     public void onClickChallengeBtn(){
+        isChallengeTrigger = true;
         challengeCnt++;
         centerTf.transform.localScale = Vector3.one;
+        challengeBtn.gameObject.SetActive(false);
+        spinBtnTxt.text = LANG.getTxt(LANG.TXT.Ready.ToString());
+
         int i = 0;
-        switch(challengeCnt){
-            case 1:
-                Array.ForEach(itemObjArr, list => {
-                    if(i % 2 == 0)  list.GetComponentsInChildren<Image>()[0].sprite = iconClover;
-                    else  list.GetComponentsInChildren<Image>()[0].sprite = iconBomb;
-                    i++;
-                });
-                break;
-            case 2:
-                Array.ForEach(itemObjArr, list => {
-                    if(i % 4 == 0)  list.GetComponentsInChildren<Image>()[0].sprite = iconClover;
-                    else  list.GetComponentsInChildren<Image>()[0].sprite = iconBomb;
-                    i++;
-                });
-                break;
-            case 3:
-                Array.ForEach(itemObjArr, list => {
-                    if(i == 0)  list.GetComponentsInChildren<Image>()[0].sprite = iconClover;
-                    else  list.GetComponentsInChildren<Image>()[0].sprite = iconBomb;
-                    i++;
-                });
-                break;
-        }
+        Array.ForEach(itemObjArr, list => {
+            var img = list.GetComponentsInChildren<Image>()[0];
+            var txt = list.GetComponentsInChildren<Text>()[0];
+            int v = (challengeCnt == 1)? 2 : (challengeCnt == 2)? 4 : 8;
+
+            if(i % v == 0) {
+                img.sprite = rewardIcon;
+                txt.text = (rewardPrice * 2).ToString();
+            }
+            else {
+                img.sprite = iconBomb;
+                txt.text = (0).ToString();
+            }
+            i++;
+        });
+
     }
 
     private void setCenterTfUI(bool isInit){
-        exitBtn.gameObject.SetActive(isInit? true : false); //* 取得Btnがある場合は、Exitでそのまま出るBUG対応。
-        ContgraturationBlastEF.SetActive(isInit? false : true); //* Effect追加。
-        centerTf.transform.localScale = Vector3.one * (isInit? 1 : 5.5f);
+        if(isInit){
+            exitBtn.gameObject.SetActive(true);
+            spinBtnIconImg.gameObject.SetActive(true);
+            ContgraturationBlastEF.SetActive(false);
+            
+            centerTf.transform.localScale = Vector3.one;
+            centerImg.enabled = false;
+            centerImg.sprite = null;
+            centerTxt.text = "";
+        }
+        else{
+            exitBtn.gameObject.SetActive(false);
+            spinBtnIconImg.gameObject.SetActive(false);
 
-        centerImg.enabled = (isInit? false : true);
-        centerImg.sprite = (isInit? null : rewardIcon);
-        centerTxt.text = (isInit? "" : rewardPrice.ToString());
+            if(rewardIcon.name.Contains(ITEM.bomb.ToString())){
+                SM.ins.sfxPlay(SM.SFX.FireBallExplosion.ToString());
+                challengeBtn.gameObject.SetActive(false);
+                spinBtnTxt.text = "back";
+            }
+            else{
+                SM.ins.sfxPlay(SM.SFX.RouletteReward.ToString());
+                ContgraturationBlastEF.SetActive(true);
+                challengeBtn.gameObject.SetActive(true);
+            }
 
-        spinBtnIconImg.gameObject.SetActive(isInit? true : false);
-        // spinBtnTxt.text = (isInit? spinBtnTxt.text = LANG.getTxt(LANG.TXT.RouletteSpin.ToString())
-        //     : LANG.getTxt(LANG.TXT.Get.ToString()));
+            
+            centerTf.transform.localScale = Vector3.one * 5.5f;
+            centerImg.enabled = true;
+            centerImg.sprite = rewardIcon;
+            centerTxt.text = rewardPrice.ToString();
+        }
     }
 
     private void setRewardData(int index = -1){
@@ -190,13 +252,13 @@ public class Roulette : MonoBehaviour
 
     private void setRewardResult(){
         Debug.Log("onClickRouletteSpinBtn::setRewardResult:: rewardIcon= " + rewardIcon.name + ", rewardPrice= " + rewardPrice);
-        if(rewardIcon.name.Contains(ITEM_OBJ_NAME.coin.ToString()))
+        if(rewardIcon.name.Contains(ITEM.coin.ToString()))
             DM.ins.personalData.addCoin(rewardPrice); // DM.ins.personalData.Coin += rewardPrice;
-        else if(rewardIcon.name.Contains(ITEM_OBJ_NAME.gem.ToString()))
+        else if(rewardIcon.name.Contains(ITEM.gem.ToString()))
             DM.ins.personalData.addDiamond(rewardPrice);
-        else if(rewardIcon.name.Contains(ITEM_OBJ_NAME.RouletteTicket.ToString()))
+        else if(rewardIcon.name.Contains(ITEM.RouletteTicket.ToString()))
             DM.ins.personalData.addRouletteTicket(rewardPrice);
-        else if(rewardIcon.name.Contains(ITEM_OBJ_NAME.poop.ToString())){}
-            //なし
+        else if(rewardIcon.name.Contains(ITEM.bomb.ToString()))
+            initItemList();
     }
 }
