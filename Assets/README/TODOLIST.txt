@@ -463,7 +463,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-70) coinとdiamondへ結果が+=になり、Revive広告見るとプレイした財貨の結果が二倍にもらえるバグ対応。
     ✓ (BUG-71) ボールが来る前ベット降ったらDoswingがTrueに永遠になり、何もしないのにボールが打ってしまうこと対応。
     ✓ (BUG-72) ボールを打つ位置によって、PreviewBallと、ボールが飛ぶ角度がずれる問題：HitRangeAreaの原点(絶対座標)に設定することで対応。
-    - (BUG-73) BlockのZ位置が-11の場合、ActiveDownWallコライダーより下になるため、当たらなくDownWallが活性化しない。 
+    ✓ (BUG-73) BlockのZ位置が-11の場合、ActiveDownWallコライダーより下になるため、当たらなくDownWallが活性化しない。 
 
     - (BUG) リワード広告をホームとインゲームに届いたら、お先にロードしておく。
     - (BUG) ColorBallが障害物にぶつかったら、エラーになること。

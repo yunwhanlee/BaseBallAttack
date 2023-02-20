@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4430069, g: 0.49219602, b: 0.57192457, a: 1}
+  m_IndirectSpecularColor: {r: 0.44300717, g: 0.49219608, b: 0.57192516, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -176,7 +176,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 779754}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -49744,7 +49744,7 @@ GameObject:
   - component: {fileID: 1369034200}
   - component: {fileID: 1369034199}
   m_Layer: 0
-  m_Name: Area
+  m_Name: HitArea
   m_TagString: HitRangeArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49796,7 +49796,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1a0418b150dc1e1448c35ae9aa39157c, type: 2}
+  - {fileID: 2100000, guid: 338970dfe3d7f364a9dc75e128bcf626, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -63247,6 +63247,7 @@ MonoBehaviour:
   isDownWallDebugMode: 0
   isHitedTimeStop: 1
   activeDownWallArea: {fileID: 1957708814}
+  hitArea: {fileID: 1369034197}
   debugRedMt: {fileID: 2100000, guid: f4b42f7359e019947b7d92359bc4333b, type: 2}
   debugBlueMt: {fileID: 2100000, guid: 338970dfe3d7f364a9dc75e128bcf626, type: 2}
   timeScale: 1
@@ -83350,7 +83351,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1957708814}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

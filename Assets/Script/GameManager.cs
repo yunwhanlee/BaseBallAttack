@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] bool isDownWallDebugMode;
     [SerializeField] bool isHitedTimeStop;
     [SerializeField]  GameObject activeDownWallArea;
+    [SerializeField]  GameObject hitArea;
     [SerializeField]  Material debugRedMt;
     [SerializeField]  Material debugBlueMt;
     [Range(0,1)] public float timeScale = 1;
@@ -332,6 +333,9 @@ public class GameManager : MonoBehaviour {
             if(isDownWallDebugMode) Time.timeScale = timeScale;
             downWallCollider.GetComponent<MeshRenderer>().enabled = isDownWallDebugMode;
             activeDownWallArea.GetComponent<MeshRenderer>().enabled = isDownWallDebugMode;
+            hitArea.GetComponent<MeshRenderer>().enabled = isDownWallDebugMode;
+
+            debugHitBallTrigger();
         # endif
 
         BossBlock boss = bm.getBoss();
@@ -1219,6 +1223,10 @@ public class GameManager : MonoBehaviour {
                 Debug.Log("<color=red>TIME STOP! 下壁：物理演算 ON! </color>");
                 timeScale = 0;
             }
+        }
+
+        public void debugHitBallTrigger(){
+            hitArea.GetComponent<MeshRenderer>().material = (pl.DoSwing && pl.IsHited)? debugRedMt : debugBlueMt;
         }
     
     # endif

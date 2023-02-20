@@ -102,7 +102,10 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         pl.DoSwing = true;
         pl.setAnimTrigger(DM.ANIM.Swing.ToString());
         yield return Util.delay0_5; //* (BUG-71) ボールが来る前ベット降ったらDoswingがTrueに永遠になり、何もしないのにボールが打ってしまうこと対応。
-        pl.DoSwing = false;
+
+        //* (BUG-74) pl.IsHitedがHITしたのに、時間が過ぎてDoSwingがFalseになるバグ。（DownWallが活性化できなくなる）対応。
+        if(!pl.IsHited)
+            pl.DoSwing = false;
     }
 
     public void OnDrag(PointerEventData eventData){

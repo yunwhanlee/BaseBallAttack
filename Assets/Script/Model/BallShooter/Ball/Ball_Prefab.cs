@@ -73,6 +73,7 @@ public class Ball_Prefab : MonoBehaviour
             //* Main Ballではなければ、以下の処理しない。
             if(this.name != MAIN_BALL) return;
             Debug.Log("Ball::OnTriggerEnter:: col= " + col.name + ", this.name= " + this.name + ", downWallCollider.isTrigger= " + gm.downWallCollider.isTrigger);
+
             pl.DoSwing = false;
             pl.IsHited = false;
 
