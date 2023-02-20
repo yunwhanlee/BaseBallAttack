@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class Roulette : MonoBehaviour
 {
@@ -11,12 +12,15 @@ public class Roulette : MonoBehaviour
     enum ITEM_OBJ_NAME {coin, gem, RouletteTicket, poop};
     const float rotOffset = 22.5f;
     const int itemCnt = 8;
-    const int REWARD_IMG = 1;
     const int SPEED = 1000;
-    [SerializeField] GameObject[] itemObjArr;  public GameObject[] ItemObjArr { get => itemObjArr; set => itemObjArr = value;}
+    const int REWARD_IMG = 1;
+    [SerializeField] GameObject[] itemObjArr;
     [SerializeField] bool isSpin;
+    [SerializeField] int challengeCnt;
     public RectTransform spinBoard;
     public RectTransform centerTf;
+    [SerializeField] Image centerImg;
+    [SerializeField] Text centerTxt;
     public Text ticketCntTxt;
     public Button spinBtn;
     public Image spinBtnIconImg;
@@ -24,20 +28,25 @@ public class Roulette : MonoBehaviour
     public Button challengeBtn;
     public GameObject ContgraturationBlastEF;
     public Button exitBtn;
-    
-    
     public Sprite rewardIcon;
+    public Sprite iconClover;
+    public Sprite iconBomb;
+    
     private int rewardPrice;
 
     [SerializeField] float curSpeed;
 
     void OnEnable() {
         isSpin = true;
+        challengeCnt = 0;
     }
 
     void Start(){
         Debug.Log("Roulette::Start():: DM.ins.hm= " + DM.ins.hm);
         hm = DM.ins.hm;
+
+        centerImg = centerTf.GetComponentsInChildren<Image>()[REWARD_IMG];
+        centerTxt = centerTf.GetComponentInChildren<Text>();
 
         curSpeed = 0;
         challengeBtn.gameObject.SetActive(false);
@@ -64,8 +73,13 @@ public class Roulette : MonoBehaviour
                 if(curSpeed == 0){
                     spinBtn.interactable = true;
                     spinBtnTxt.text = LANG.getTxt(LANG.TXT.Get.ToString());
-
+                    
                     //* 角度による、Index値
+                    /*
+                    *   ⓵ transform.rotation : 0~1単位 -> eulerAnglesに変換する必要ある。
+                    *   ⓶ eulerAnglesでは、範囲が0~360まで。
+                    *      しかし、InspectorViewでは、範囲が-180~180まで。
+                    */
                     float zRot = spinBoard.eulerAngles.z;
                     float ang = zRot % 360; //* one lap(１回り): 360°
                     int devide = (360 / itemCnt);
@@ -81,13 +95,6 @@ public class Roulette : MonoBehaviour
                 spinBoard.transform.Rotate(0, 0, curSpeed * Time.deltaTime);
             }
         }
-        // float _zRot = spinBoard.eulerAngles.z;
-        // float _angle = _zRot % 360; //* one lap(１回り): 360°
-        // int devideVal = (360 / itemCnt);
-        // int _idx = (int)((_angle + rotOffset) / devideVal);
-        // _idx = _idx == itemCnt? 0 : _idx;
-        // // Debug.Log("Roulette::Update:: speed= " + speed + ", angle= " + _angle + ", index=" + _index);
-        // Debug.Log("_zRot= " + _zRot + " index= " + _idx + " devideVal= " + devideVal);
     }
 
     public void onClickRouletteSpinBtn(){ //* -> OK Buttonにも使える！
@@ -124,18 +131,6 @@ public class Roulette : MonoBehaviour
             isSpin = false;
             spinBtn.interactable = (curSpeed > 0)? false : true;
             spinBtnTxt.text = LANG.getTxt(LANG.TXT.RouletteSpin.ToString());
-            /*
-            *   ⓵ transform.rotation : 0~1単位 -> eulerAnglesに変換する必要ある。
-            *   ⓶ eulerAnglesでは、範囲が0~360まで。
-            *      しかし、InspectorViewでは、範囲が-180~180まで。
-            */
-            // float zRot = spinBoard.eulerAngles.z;
-            // float angle = zRot % (360 + rotOffset); //* one lap(１回り): 360°
-            // int index = (int)(angle / ((360 + rotOffset) / itemCnt));
-            // Debug.Log("Roulette::Update:: speed= " + speed + ", angle= " + angle + ", index=" + index);
-            // SM.ins.sfxPlay(SM.SFX.RouletteReward.ToString());
-            // setRewardData(index);
-            // setCenterTfUI(isSpin);
         }
     }
 
@@ -145,13 +140,43 @@ public class Roulette : MonoBehaviour
         hm.homePanel.Panel.gameObject.SetActive(true);
     }
 
+    public void onClickChallengeBtn(){
+        challengeCnt++;
+        centerTf.transform.localScale = Vector3.one;
+        int i = 0;
+        switch(challengeCnt){
+            case 1:
+                Array.ForEach(itemObjArr, list => {
+                    if(i % 2 == 0)  list.GetComponentsInChildren<Image>()[0].sprite = iconClover;
+                    else  list.GetComponentsInChildren<Image>()[0].sprite = iconBomb;
+                    i++;
+                });
+                break;
+            case 2:
+                Array.ForEach(itemObjArr, list => {
+                    if(i % 4 == 0)  list.GetComponentsInChildren<Image>()[0].sprite = iconClover;
+                    else  list.GetComponentsInChildren<Image>()[0].sprite = iconBomb;
+                    i++;
+                });
+                break;
+            case 3:
+                Array.ForEach(itemObjArr, list => {
+                    if(i == 0)  list.GetComponentsInChildren<Image>()[0].sprite = iconClover;
+                    else  list.GetComponentsInChildren<Image>()[0].sprite = iconBomb;
+                    i++;
+                });
+                break;
+        }
+    }
+
     private void setCenterTfUI(bool isInit){
         exitBtn.gameObject.SetActive(isInit? true : false); //* 取得Btnがある場合は、Exitでそのまま出るBUG対応。
         ContgraturationBlastEF.SetActive(isInit? false : true); //* Effect追加。
         centerTf.transform.localScale = Vector3.one * (isInit? 1 : 5.5f);
-        centerTf.GetComponentsInChildren<Image>()[REWARD_IMG].enabled = (isInit? false : true);
-        centerTf.GetComponentsInChildren<Image>()[REWARD_IMG].sprite = (isInit? null : rewardIcon);
-        centerTf.GetComponentInChildren<Text>().text = (isInit? "" : rewardPrice.ToString());
+
+        centerImg.enabled = (isInit? false : true);
+        centerImg.sprite = (isInit? null : rewardIcon);
+        centerTxt.text = (isInit? "" : rewardPrice.ToString());
 
         spinBtnIconImg.gameObject.SetActive(isInit? true : false);
         // spinBtnTxt.text = (isInit? spinBtnTxt.text = LANG.getTxt(LANG.TXT.RouletteSpin.ToString())

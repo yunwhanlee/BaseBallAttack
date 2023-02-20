@@ -18418,7 +18418,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1732122244}
         m_TargetAssemblyTypeName: Roulette, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: onClickChallengeBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -38036,8 +38036,11 @@ MonoBehaviour:
   - {fileID: 851365899}
   - {fileID: 253276318}
   isSpin: 0
+  challengeCnt: 0
   spinBoard: {fileID: 1572601975}
   centerTf: {fileID: 941705770}
+  centerImg: {fileID: 0}
+  centerTxt: {fileID: 0}
   ticketCntTxt: {fileID: 288450473}
   spinBtn: {fileID: 1481442997}
   spinBtnIconImg: {fileID: 981580271}
@@ -38046,7 +38049,9 @@ MonoBehaviour:
   ContgraturationBlastEF: {fileID: 1271770798825480021}
   exitBtn: {fileID: 1941981530}
   rewardIcon: {fileID: 0}
-  speed: 0
+  iconClover: {fileID: 21300000, guid: 55f0d03c9b19146fab2851411534147a, type: 3}
+  iconBomb: {fileID: 21300000, guid: 1ad951e4c63a441d5b08a08f5737cd39, type: 3}
+  curSpeed: 0
 --- !u!1 &1735133232
 GameObject:
   m_ObjectHideFlags: 0
