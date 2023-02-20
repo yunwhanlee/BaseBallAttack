@@ -258,13 +258,18 @@ public class Roulette : MonoBehaviour
 
     private void setRewardResult(){
         Debug.Log("onClickRouletteSpinBtn::setRewardResult:: rewardIcon= " + rewardIcon.name + ", rewardPrice= " + rewardPrice);
-        SM.ins.sfxPlay(SM.SFX.DropBoxCoinPick.ToString());
-        if(rewardIcon.name.Contains(ITEM.coin.ToString()))
+        if(rewardIcon.name.Contains(ITEM.coin.ToString())){
+            SM.ins.sfxPlay(SM.SFX.DropBoxCoinPick.ToString());
             DM.ins.personalData.addCoin(rewardPrice); // DM.ins.personalData.Coin += rewardPrice;
-        else if(rewardIcon.name.Contains(ITEM.gem.ToString()))
+        }
+        else if(rewardIcon.name.Contains(ITEM.gem.ToString())){
+            SM.ins.sfxPlay(SM.SFX.DropBoxCoinPick.ToString());
             DM.ins.personalData.addDiamond(rewardPrice);
-        else if(rewardIcon.name.Contains(ITEM.RouletteTicket.ToString()))
+        }
+        else if(rewardIcon.name.Contains(ITEM.RouletteTicket.ToString())){
+            SM.ins.sfxPlay(SM.SFX.DropBoxCoinPick.ToString());
             DM.ins.personalData.addRouletteTicket(rewardPrice);
+        }
         else if(rewardIcon.name.Contains(ITEM.bomb.ToString())) {}
 
         initItemList();
