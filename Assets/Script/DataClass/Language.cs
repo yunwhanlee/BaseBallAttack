@@ -41,7 +41,7 @@ public static class LANG //* LANG
 
 
         Rate, Later, RateDialog_Content1, RateDialog_Content2,
-        Reward, GetRewardChestPanel_Content, Empty, Roulette, PsvSkillTicket, RouletteTicket, RouletteSpin, RouletteStop,
+        Reward, GetRewardChestPanel_Content, Empty, Roulette, PsvSkillTicket, RouletteTicket, RouletteSpin, RouletteStop, Challenge,
         FirstSkill, SecondSkill, PsvSkillInfo, AtvSkill, Character, Bat, Achivement, Upgrade, CashShop, 
         PremiumPack, Coin, Diamond, RemoveAllADs,
         Purchase_Complete,
@@ -408,6 +408,7 @@ public static class LANG //* LANG
     public static string[] RouletteTicket = new string[]{"Roulette ticket!", "ルーレット チケット!", "룰렛 티켓!"};
     public static string[] RouletteSpin = new string[]{"Spin!", "回す!", "돌리기!"};
     public static string[] RouletteStop = new string[]{"Stop!", "停止!", "정지!"};
+    public static string[] Challenge = new string[]{"Challenge!", "挑戦!", "도전!"};
     public static string[] FirstSkill = new string[]{"1st Skill", "一番目 スキル", "첫번째 스킬"};
     public static string[] SecondSkill = new string[]{"2nd Skill", "二番目 スキル", "두번째 스킬"};
     public static string[] PsvSkillInfo = new string[]{"Passive Skill info", "パッシブスキル情報", "패시브 스킬 정보"};
@@ -608,6 +609,7 @@ public static class LANG //* LANG
         if(name == TXT.RouletteTicket.ToString()) res = RouletteTicket[CUR_LANG];
         if(name == TXT.RouletteSpin.ToString()) res = RouletteSpin[CUR_LANG];
         if(name == TXT.RouletteStop.ToString()) res = RouletteStop[CUR_LANG];
+        if(name == TXT.Challenge.ToString()) res = Challenge[CUR_LANG];
         if(name == TXT.FirstSkill.ToString()) res = FirstSkill[CUR_LANG];
         if(name == TXT.SecondSkill.ToString()) res = SecondSkill[CUR_LANG];
         if(name == TXT.PsvSkillInfo.ToString()) res = PsvSkillInfo[CUR_LANG];

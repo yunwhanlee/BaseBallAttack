@@ -12,8 +12,9 @@ public class Roulette : MonoBehaviour
     enum ITEM {coin, gem, RouletteTicket, bomb};
     const float rotOffset = 22.5f;
     const int itemCnt = 8;
-    const int SPEED = 1000;
+    const int SPEED = 50;
     const int REWARD_IMG = 1;
+    const int MAX_CHALLENGE_CNT = 3;
     [SerializeField] GameObject[] itemObjArr;
     [SerializeField] List<Sprite> originItemSprList;
     [SerializeField] List<string> originItemPriceStrList;
@@ -157,7 +158,6 @@ public class Roulette : MonoBehaviour
 
                 setSpin();
             }
-
             return;
         }
         setSpin();
@@ -186,6 +186,7 @@ public class Roulette : MonoBehaviour
     }
 
     public void onClickChallengeBtn(){
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         isChallengeTrigger = true;
         challengeCnt++;
         centerTf.transform.localScale = Vector3.one;
@@ -229,12 +230,17 @@ public class Roulette : MonoBehaviour
             if(rewardIcon.name.Contains(ITEM.bomb.ToString())){
                 SM.ins.sfxPlay(SM.SFX.FireBallExplosion.ToString());
                 challengeBtn.gameObject.SetActive(false);
-                spinBtnTxt.text = "back";
+                spinBtnTxt.text = LANG.getTxt(LANG.TXT.Back.ToString()); 
             }
             else{
                 SM.ins.sfxPlay(SM.SFX.RouletteReward.ToString());
                 ContgraturationBlastEF.SetActive(true);
-                challengeBtn.gameObject.SetActive(true);
+                if(challengeCnt < MAX_CHALLENGE_CNT){
+                    challengeBtn.gameObject.SetActive(true);
+                    int multiplyBonus = challengeCnt == 0? 2 : challengeCnt == 1? 4 : 8;
+                    challengeBtn.GetComponentInChildren<Text>().text = 
+                        $"x{multiplyBonus.ToString()} {LANG.getTxt(LANG.TXT.Challenge.ToString())} ";
+                }
             }
 
             
@@ -252,13 +258,15 @@ public class Roulette : MonoBehaviour
 
     private void setRewardResult(){
         Debug.Log("onClickRouletteSpinBtn::setRewardResult:: rewardIcon= " + rewardIcon.name + ", rewardPrice= " + rewardPrice);
+        SM.ins.sfxPlay(SM.SFX.DropBoxCoinPick.ToString());
         if(rewardIcon.name.Contains(ITEM.coin.ToString()))
             DM.ins.personalData.addCoin(rewardPrice); // DM.ins.personalData.Coin += rewardPrice;
         else if(rewardIcon.name.Contains(ITEM.gem.ToString()))
             DM.ins.personalData.addDiamond(rewardPrice);
         else if(rewardIcon.name.Contains(ITEM.RouletteTicket.ToString()))
             DM.ins.personalData.addRouletteTicket(rewardPrice);
-        else if(rewardIcon.name.Contains(ITEM.bomb.ToString()))
-            initItemList();
+        else if(rewardIcon.name.Contains(ITEM.bomb.ToString())) {}
+
+        initItemList();
     }
 }
