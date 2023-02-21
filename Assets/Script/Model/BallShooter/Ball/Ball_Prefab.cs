@@ -18,8 +18,8 @@ public class Ball_Prefab : MonoBehaviour
     const string MAIN_BALL = "MainBall";
 
     //* Value
-    [SerializeField] bool isHited = false;
     [SerializeField] bool isHomeRun = false;
+    [SerializeField] bool isHitedByBlock = false;
     [SerializeField] float deleteLimitTime = 2.0f;
     [SerializeField] float speed;    public float Speed {get => speed; set => speed = value;}
     float distance;
@@ -63,33 +63,33 @@ public class Ball_Prefab : MonoBehaviour
 //----------------------------------------------------------------
 //* Trigger Event
 //----------------------------------------------------------------
-    void OnTriggerEnter(Collider col) {
-        //? (BUG-61) nextStage()に行く時、時々downWallCollider.isTriggerがfalseのままになるBUG対応。
-        //! 原因：ボールが来る間にプレイヤーがSwingするとpl.Doswingがtrueになり、
-        //!      来ている領域がActiveDownWallだから、下の条件式に合ってしまうisTriggerが早くfalseなる。
+    // void OnTriggerEnter(Collider col) {
+    //     //? (BUG-61) nextStage()に行く時、時々downWallCollider.isTriggerがfalseのままになるBUG対応。
+    //     //! 原因：ボールが来る間にプレイヤーがSwingするとpl.Doswingがtrueになり、
+    //     //!      来ている領域がActiveDownWallだから、下の条件式に合ってしまうisTriggerが早くfalseなる。
         
-        //* ActiveDownWall Areaへ衝突したら、DownWallの物理が活性化。
-        if(pl.IsHited && pl.DoSwing && col.transform.CompareTag(DM.TAG.ActiveDownWall.ToString())){
-            //* Main Ballではなければ、以下の処理しない。
-            if(this.name != MAIN_BALL) return;
-            Debug.Log("Ball::OnTriggerEnter:: col= " + col.name + ", this.name= " + this.name + ", downWallCollider.isTrigger= " + gm.downWallCollider.isTrigger);
+    //     //* ActiveDownWall Areaへ衝突したら、DownWallの物理が活性化。
+    //     if(pl.IsHitBall && pl.DoSwing && col.transform.CompareTag(DM.TAG.ActiveDownWall.ToString())){
+    //         //* Main Ballではなければ、以下の処理しない。
+    //         if(name != MAIN_BALL) return;
+    //         Debug.Log("Ball::OnTriggerEnter:: col= " + col.name + ", this.name= " + this.name + ", downWallCollider.isTrigger= " + gm.downWallCollider.isTrigger);
 
-            pl.DoSwing = false;
-            pl.IsHited = false;
+    //         // pl.DoSwing = false;
+    //         // pl.IsHitBall = false;
 
-            gm.downWallCollider.isTrigger = false;//* 衝突OFF
-            #if UNITY_EDITOR
-            gm.debugDownWallColTrigger(false);
-            #endif
+    //         // gm.downWallCollider.isTrigger = false;//* 衝突ON
+    //         // #if UNITY_EDITOR
+    //         // gm.debugDownWallColTrigger(false);
+    //         // #endif
 
-        }
-    }
+    //     }
+    // }
     void OnTriggerStay(Collider col) {
         #region HIT BALL
         if(col.transform.CompareTag(DM.TAG.HitRangeArea.ToString())){
             // pl.setSwingArcColor("red");
             if(gm.State == GameManager.STATE.PLAY && pl.DoSwing){
-                pl.IsHited = true;
+                pl.IsHitBall = true;
                 SM.ins.sfxPlay(SM.SFX.SwingHit.ToString());
                 
                 // StartCoroutine(coDelayActiveFastPlayBtn()); //* ホームランしたとき、見えないようにしてBUG防止。
@@ -219,7 +219,7 @@ public class Ball_Prefab : MonoBehaviour
     void OnTriggerExit(Collider col) {
         //* HIT BALL
         if(col.transform.CompareTag(DM.TAG.HitRangeArea.ToString())){ 
-            isHited = true;
+            // isHited = true;
             pl.setSwingArcColor("yellow");
 
             // gm.onClickFastPlayButton();
@@ -241,15 +241,20 @@ public class Ball_Prefab : MonoBehaviour
 //----------------------------------------------------------------
 //* Collision Event
 //----------------------------------------------------------------
-    void OnCollisionEnter(Collision col) { 
-        // Debug.Log($"BALL:: OnCollisionEnter:: col= {col.transform.name}");
-        #region ATV (HIT BLOCK)
-        if(col.transform.name.Contains(DM.NAME.Block.ToString())
-        || col.transform.name.Contains(DM.NAME.Obstacle.ToString())){ //* (BUG-3) 障害物もFreezeからだめーず受けるように。
+    void OnCollisionEnter(Collision col) {
+        //* HIT BLOCK
+        if(col.transform.CompareTag(DM.TAG.Wall.ToString())){
+            setDownWallTriggerOff();
+            em.createDownWallHitEF(myTransform.position);
+        }
+        else if(col.transform.name.Contains(DM.NAME.Block.ToString()) || col.transform.name.Contains(DM.NAME.Obstacle.ToString())){ //* (BUG-3) 障害物もFreezeからだめーず受けるように。
             SM.ins.sfxPlay(SM.SFX.HitBlock.ToString());
-            isHited = true;
-            gm.activeSkillBtnList.ForEach(skillBtn => {
 
+            // isHitedByBlock = true;
+            setDownWallTriggerOff();
+            
+            #region ATV
+            gm.activeSkillBtnList.ForEach(skillBtn => {
                 if(skillBtn.Trigger){
                     const float delayTime = 2;
                     int skillIdx = gm.getCurSkillIdx();
@@ -324,15 +329,15 @@ public class Ball_Prefab : MonoBehaviour
                     StartCoroutine(coDelayDestroyMe()); //* (BUG-65) ColorBallPopブロックにぶつかってもボールが破壊されない。-> coDelayDestroyMe()生成して対応。
                 }
             });
-        #endregion
-        #region PSV (HIT BLOCK) + DAMAGE RESULT
+            #endregion
+
+            #region PSV + DAMAGE RESULT
             int result = 0;
             bool isInstantKill= false, isCritical= false, isOnExplosion = false;
 
             //* GodBless
             if(pl.godBless.Level == 1){
                 if(gm.comboCnt != 0 && gm.comboCnt % LM._.GODBLESS_COMBO_SPAN == 0){
-                    Debug.Log("GOD BLESS YOU!");
                     float radius = 4;
                     Util._.DebugSphere(myTransform.position, radius, 0.5f, "blue");
 
@@ -375,12 +380,9 @@ public class Ball_Prefab : MonoBehaviour
                 if(!isInstantKill && !isCritical)
                     em.createDmgTxtEF(myTransform.position, result);
             }
-        #endregion
+            #endregion
         }
-        else if(col.transform.CompareTag(DM.TAG.Wall.ToString()) && col.gameObject.name == DM.NAME.DownWall.ToString()){
-            Vector3 pos = new Vector3(myTransform.position.x, col.gameObject.transform.position.y, col.gameObject.transform.position.z);
-            em.createDownWallHitEF(pos);
-        }
+        
     }
 //----------------------------------------------------------------
 //* Active Bat Skill
@@ -434,6 +436,18 @@ public class Ball_Prefab : MonoBehaviour
 //*---------------------------------------------------------------
 //*  関数
 //*---------------------------------------------------------------
+    private void setDownWallTriggerOff() {
+        //* (★BUG-77) ブロックがActiveDownWall領域より下に来ると、ボールを釣っても急に無くなる。
+        //* 対応：OncollisionEnter()で、BlockやWallにぶつかったら、DownWallのTriggerがOffになるようにする。
+        if(gm.downWallCollider.isTrigger && name == MAIN_BALL){
+            gm.downWallCollider.isTrigger = false;//* 衝突ON
+            pl.DoSwing = false;
+            pl.IsHitBall = false;
+            #if UNITY_EDITOR
+                gm.debugDownWallColTrigger(false);
+            #endif
+        }
+    }
     IEnumerator coFastPlayOn(){
         yield return Util.delay2;
         Debug.Log($"Ball_Prefab::coFastPlayOn():: this.name= {name}");

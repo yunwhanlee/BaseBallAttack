@@ -104,7 +104,7 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         yield return Util.delay0_5; //* (BUG-71) ボールが来る前ベット降ったらDoswingがTrueに永遠になり、何もしないのにボールが打ってしまうこと対応。
 
         //* (BUG-74) pl.IsHitedがHITしたのに、時間が過ぎてDoSwingがFalseになるバグ。（DownWallが活性化できなくなる）対応。
-        if(!pl.IsHited)
+        if(!pl.IsHitBall)
             pl.DoSwing = false;
     }
 

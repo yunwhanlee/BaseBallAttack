@@ -1053,13 +1053,13 @@ public class GameManager : MonoBehaviour {
         comboCnt = 0;
         bm.DoCreateBlock = true; //* Block 生成
 
-        downWallCollider.isTrigger = true; //* 衝突ON
+        downWallCollider.isTrigger = true; //* 衝突OFF
         #if UNITY_EDITOR
         debugDownWallColTrigger(true); 
         #endif
 
         bs.IsReadyShoot = false;
-        pl.IsHited = false;
+        pl.IsHitBall = false;
         pl.IsStun = false;
         readyBtn.gameObject.SetActive(true);
         fastPlayBtn.gameObject.SetActive(false);
@@ -1228,7 +1228,7 @@ public class GameManager : MonoBehaviour {
         }
 
         public void debugHitBallTrigger(){
-            hitArea.GetComponent<MeshRenderer>().material = (pl.DoSwing && pl.IsHited)? debugRedMt : debugBlueMt;
+            hitArea.GetComponent<MeshRenderer>().material = (pl.DoSwing && pl.IsHitBall)? debugRedMt : debugBlueMt;
         }
     
     # endif
