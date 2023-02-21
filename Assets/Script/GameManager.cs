@@ -729,9 +729,9 @@ public class GameManager : MonoBehaviour {
         if(pl.IsStun) return;
         bool isOnCam2 = !cam2.activeSelf;
 
-        if(isOnCam2){//* CAM2 On
+        if(isOnCam2){//* CAM2 ON
             State = GameManager.STATE.PLAY;
-            ManageActiveObjects(isOnCam2);
+            ManageActiveObjects(true);
             setTextReadyBtn(LANG.getTxt(LANG.TXT.Back.ToString()));
             setBallPreviewGoalImgRGBA(new Color(0.8f,0.8f,0.8f, 0.2f));
             bs.init();
@@ -742,10 +742,9 @@ public class GameManager : MonoBehaviour {
             inGamePassiveSkillTablePanel.SetActive(false);
 
         }
-        else{//* CAM1 On
-        Debug.Log("CAM1 On");
+        else{//* CAM1 ON
             State = GameManager.STATE.WAIT;
-            ManageActiveObjects(isOnCam2);
+            ManageActiveObjects(false);
             setTextReadyBtn(LANG.getTxt(LANG.TXT.Ready.ToString()));
             //* (BUG)STRIKEになってから、BACKボタン押すと、PreviewLineが消えてしまう。
             setActivePreviewBendle(true);
