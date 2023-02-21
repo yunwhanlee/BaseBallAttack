@@ -467,12 +467,13 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-74) pl.IsHitedがHITしたのに、時間が過ぎてDoSwingがFalseになるバグ。（DownWallが活性化できなくなる）対応。
     ✓ (BUG-75) RouletteのResult角度が少しずれているバグ対応。
     ✓ (BUG-76) setFinishGame:: CoinX2してからReviveしたら、X2が適用されないバグ対応。
+    ✓ (BUG-77) シーンをロードするときに、ボタンの音がじゃなになること。
 
     ✓ (★BUG-77) ブロックがActiveDownWall領域より下に来ると、ボールを釣っても急に無くなる。
     　　　対応：OncollisionEnter()で、BlockやWallにぶつかったら、DownWallのTriggerがOffになるようにする。
     - (BUG) リワード広告をホームとインゲームに届いたら、お先にロードしておく。
     - (BUG) ColorBallが障害物にぶつかったら、エラーになること。
-    - (BUG) シーンをロードするときに、ボタンの音がじゃなになること。
+    
     
     【作業】
     ✓ 連続アップグレード可能に : Skill & Upgrade。

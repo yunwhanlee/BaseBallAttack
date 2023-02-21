@@ -82,6 +82,7 @@ public class HomeManager : MonoBehaviour
     public enum DlgBGColor {Chara, Bat, Skill, CashShop};
     public HomeEffectManager em;
     public AdmobManager am;
+    [SerializeField] bool isMuteBtnSfx = true;
 
     [Header("SELECT PANEL COLOR")][Header("__________________________")]
     [SerializeField] Image selectPanelScrollBG;  public Image SelectPanelScrollBG {get => selectPanelScrollBG; set => selectPanelScrollBG = value;}
@@ -215,6 +216,9 @@ public class HomeManager : MonoBehaviour
         // onClickResetBtn();
         if(DM.ins.hm == null) return;
 
+        //* (BUG-77) シーンをロードするときに、ボタンの音がじゃなになること対応。
+        StartCoroutine(coWaitInitTriggerBtnSfxOff());
+
         versionTxt.text = $"ver{Version.MAJOR}.{Version.MINOR}.{Version.REVISION}";
 
         unlock2ndSkillPriceTxt.text = LM._.UNLOCK_2ND_ATVSKILL_PRICE.ToString();
@@ -234,7 +238,6 @@ public class HomeManager : MonoBehaviour
 
         firstPlayAppSettingDialog();
 
-        Debug.Log("SIBALNOM1");
         onClickBtnGoToPanel(DM.SCENE.Home.ToString());
 
         setSelectSkillImg(true);
@@ -370,7 +373,7 @@ public class HomeManager : MonoBehaviour
 
     public void onClickBtnGoToPanel(string name){
         Debug.Log($"onClickBtnGoToPanel(name= {name}):: DM.ins.hm= {DM.ins.hm}, checkBtn= {checkBtn}");
-        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
+        if(!isMuteBtnSfx) SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         //* Current Model Data & ParentTf
         DM.ins.SelectItemType = name;
         var curChara = DM.ins.scrollviews[(int)DM.PANEL.Chara].ItemPrefs[DM.ins.personalData.SelectCharaIdx];
@@ -740,6 +743,10 @@ public class HomeManager : MonoBehaviour
 //* Private Function
 //* ----------------------------------------------------------------
 #region Private Function
+    IEnumerator coWaitInitTriggerBtnSfxOff(){
+        yield return Util.delay1;
+        isMuteBtnSfx = false;
+    }
     public void showRoulettePanel(){
         roulettePanel.gameObject.SetActive(true);
         showAdDialog.gameObject.SetActive(false);
