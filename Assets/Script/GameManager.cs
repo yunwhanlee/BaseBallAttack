@@ -799,8 +799,15 @@ public class GameManager : MonoBehaviour {
     }
 
     public void setStrike(){//ストライク GUI表示
-        if(strikeCnt < 2)
+        if(strikeCnt < 2){
             StartCoroutine(corSetStrike());
+
+            //* (BUG-78) 時々、NextStageが呼び出されなくなり、DownWallのTriggerがTrueに戻らない。
+            downWallCollider.isTrigger = true; //* 衝突OFF
+            #if UNITY_EDITOR
+                debugDownWallColTrigger(true); 
+            #endif
+        }
         else
             StartCoroutine(corSetStrike(true));
     }
@@ -1054,7 +1061,7 @@ public class GameManager : MonoBehaviour {
 
         downWallCollider.isTrigger = true; //* 衝突OFF
         #if UNITY_EDITOR
-        debugDownWallColTrigger(true); 
+            debugDownWallColTrigger(true); 
         #endif
 
         bs.IsReadyShoot = false;

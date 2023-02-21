@@ -471,6 +471,8 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
 
     ✓ (★BUG-77) ブロックがActiveDownWall領域より下に来ると、ボールを釣っても急に無くなる。
     　　　対応：OncollisionEnter()で、BlockやWallにぶつかったら、DownWallのTriggerがOffになるようにする。
+    - (BUG-78) 時々、NextStageが呼び出されなくなり、DownWallのTriggerがTrueに戻らない。
+
     - (BUG) リワード広告をホームとインゲームに届いたら、お先にロードしておく。
     - (BUG) ColorBallが障害物にぶつかったら、エラーになること。
     
