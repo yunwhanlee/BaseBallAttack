@@ -68,7 +68,7 @@ public class SkillProperty{
                 const float RADIUS = 1.2f;
                 int dmg = (int)((bl.Hp * per < 1)? 1 : bl.Hp * per); //* 5 Percent Damage
                 bl.gm.em.createIcePropertyNovaFrostEF(new Vector3(bl.transform.position.x, bl.transform.localPosition.y + 1.3f, bl.transform.position.z));
-                Util._.DebugSphere(bl.transform.position, radius: RADIUS);
+                // Util._.displayDebugSphere(bl.transform.position, radius: RADIUS);
                 Util._.sphereCastAllDecreaseBlocksHp(bl.transform, radius: RADIUS, dmg);
             }
         }

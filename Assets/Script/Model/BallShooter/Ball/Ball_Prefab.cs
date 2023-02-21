@@ -339,7 +339,7 @@ public class Ball_Prefab : MonoBehaviour
             if(pl.godBless.Level == 1){
                 if(gm.comboCnt != 0 && gm.comboCnt % LM._.GODBLESS_COMBO_SPAN == 0){
                     float radius = 4;
-                    Util._.DebugSphere(myTransform.position, radius, 0.5f, "blue");
+                    // Util._.displayDebugSphere(myTransform.position, radius, 0.5f, "blue");
 
                     //* Explosion
                     SM.ins.sfxPlay(SM.SFX.FlashHit.ToString());

@@ -143,7 +143,7 @@ public class Util : MonoBehaviour
         return (int)(value / max * 100);
     }
 
-    public void DebugSphere(Vector3 pos, float radius, float destroyCnt = 0.5f, string color = "red"){
+    public void displayDebugSphere(Vector3 pos, float radius, float destroyCnt = 0.5f, string color = "red"){
         GameObject obj = (color == "red" || color == "Red")? debugSphereObjRed : debugSphereObjBlue;
         var ins = Instantiate(obj, pos, Quaternion.identity);
         ins.transform.localScale = Vector3.one * (radius * 2); // 2: {radius * 2 = diameter}

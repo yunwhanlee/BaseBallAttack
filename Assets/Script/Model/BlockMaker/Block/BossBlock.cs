@@ -142,7 +142,7 @@ public class BossBlock : Block_Prefab{
         #region BOSS ATTACK LV TYPE
         //* FireBallEF 生成
         if(attackAnimName == BOSSATK_ANIM_NAME_LV1){ //* LV 1
-            Util._.DebugSphere(playerPos, radius: 1.25f);//* Preview Spot 生成
+            // Util._.displayDebugSphere(playerPos, radius: 1.25f);//* Preview Spot 生成
             gm.em.createAimingEF(playerPos);
             yield return new WaitForSeconds(blessShootTiming);
             SM.ins.sfxPlay(SM.SFX.BossFireBallShoot.ToString());
@@ -238,7 +238,7 @@ public class BossBlock : Block_Prefab{
         int index  = (isLv2_FlameAttack)? 0 : Random.Range(0, targetPosList.Count);
         targetPosArr[i] = new Vector3(targetPosList[index], playerPos.y, playerPos.z);
         targetPosList.RemoveAt(index);
-        Util._.DebugSphere(targetPosArr[i], radius: 1.25f);//* Preview Spot 生成
+        // Util._.displayDebugSphere(targetPosArr[i], radius: 1.25f);//* Preview Spot 生成
         gm.em.createAimingEF(targetPosArr[i]);
     }
     private void setFireBallTrailEFToTargetPos(Vector3 tergetPos){
