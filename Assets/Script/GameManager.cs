@@ -917,7 +917,9 @@ public class GameManager : MonoBehaviour {
         int extraUpgradeCoin = Mathf.RoundToInt(coin * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.CoinBonus].getValue());
 
         //* Show Goods => setGameでも使う。
-        coinTxt.text = (coin + extraUpgradeCoin * (mode == DM.MODE.HARD? LM._.HARDMODE_COIN_BONUS : 1)).ToString();
+        coinTxt.text = (coin + extraUpgradeCoin * (mode == DM.MODE.HARD? LM._.HARDMODE_COIN_BONUS : 1)).ToString();        
+        coinTxt.text = (coinX2Label.activeSelf)? (int.Parse(coinTxt.text) * 2).ToString() : coinTxt.text; //* (BUG-76) setFinishGame:: CoinX2してからReviveしたら、X2が適用されないバグ対応。
+
         diamondTxt.text = (diamond * (mode == DM.MODE.HARD? LM._.HARDMODE_DIAMOND_BONUS : 1)).ToString();
 
         //* Show Reward Item Goods
