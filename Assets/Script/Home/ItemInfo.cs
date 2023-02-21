@@ -115,7 +115,7 @@ public class ItemInfo : MonoBehaviour
                 Outline2D = this.GetComponent<UnityEngine.UI.Extensions.NicerOutline>();
 
                 var imgs = this.GetComponentsInChildren<Image>();
-                grayPanel2D = Array.FindLast(imgs, img => img.gameObject.name == "GrayPanel");
+                grayPanel2D = Array.FindLast(imgs, img => img.gameObject.name == DM.NAME.GrayPanel.ToString());
                 break; 
             }
             case DM.PANEL.CashShop : { //* 追加的な特別変数へ代入。
@@ -161,6 +161,6 @@ public class ItemInfo : MonoBehaviour
     public void setUI(UpgradeDt item){
         Debug.Log($"ItenInfo::setUpgradeGUI(UpgradeDt item):: name= {item.name}, ValueTxt= {item.getVal2Str()}");
         this.upgradeValueTxt.text = item.getVal2Str();
-        this.LvTxt.text = (item.MaxLv == item.Lv)? "MAX" : $"{item.Lv}/{item.MaxLv}";
+        this.lvTxt.text = (item.MaxLv == item.Lv)? "MAX" : $"{item.Lv}/{item.MaxLv}";
     }
 }

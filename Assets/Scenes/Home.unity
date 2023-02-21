@@ -9643,7 +9643,8 @@ MonoBehaviour:
   UPGRADE_ATVSKILL:
     start: 100
     commonDiffrence: 50
-    gradualUpValue: 0.1
+    gradualUpValue: 0.5
+  UPGRADE_ATVSKILL_PRICE_LIST: 
   REWARD_CHEST_COINARR: 64000000c80000002c01000090010000f4010000e8030000
   REWARD_CHEST_DIAMONDARR: 0a0000001e00000032000000460000006400000096000000
   REROTATE_SKILLSLOTS_PRICE_COIN: 500
@@ -40026,6 +40027,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   em: {fileID: 1584740706}
   am: {fileID: 1065166365}
+  isMuteBtnSfx: 1
   selectPanelScrollBG: {fileID: 327609488}
   selectPanelColors:
   - {r: 0.15686275, g: 0.96470594, b: 0.52156866, a: 1}

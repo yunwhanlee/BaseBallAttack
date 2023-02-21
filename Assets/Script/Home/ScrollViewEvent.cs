@@ -186,8 +186,12 @@ public class ScrollView {
             UpgradeDt atvSkUpgDt = DM.ins.personalData.AtvSkillUpgrade.Arr[i];
             skills[i].setUI(atvSkUpgDt);
             //* Set Price
-            List<int> priceList = ScrollViewEvent.setAtvSkillUpgradePriceCalc(atvSkUpgDt);
-            skills[i].price.setValue(priceList[atvSkUpgDt.Lv]);
+            if(i == 0)
+                LM._.UPGRADE_ATVSKILL_PRICE_LIST = ScrollViewEvent.setAtvSkillUpgradePriceCalc(atvSkUpgDt);
+            
+            int price = LM._.UPGRADE_ATVSKILL_PRICE_LIST[atvSkUpgDt.Lv];
+            skills[i].price.setValue(skills[i].IsLock? price * 2 : price);
+            // skills[i].setUI()
         }
     }
 
@@ -227,8 +231,8 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
     [SerializeField] int curIdx;     public int CurIdx {get => curIdx; set => curIdx = value;}
 
     [Header("SCROLL SPEED")][Header("__________________________")]
-    [SerializeField] float scrollStopSpeed;
     float scrollSpeed;
+    [SerializeField] float scrollStopSpeed;
     [SerializeField] float scrollBefFramePosX;
 
     [Header("【 UI 】")][Header("__________________________")]
@@ -364,7 +368,6 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
         // string name = curItem.name.Split('_')[1];
         // int idx = LANG.CharaList.FindIndex(list => name == list[(int)LANG.TP.EN]);
         // NameTxt.text = LANG.CharaList[idx][(int)DM.ins.Language]; //name;
-        Debug.Log("KOKOKO?!");
         
         NameTxt.text = LANG.getTxtList(curItem.name)[LANG.NAME]; //* (BUG-1) 対応
 
@@ -749,6 +752,10 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
                     case "Skill":
                         //* (BUG-8) Home:: Bat.getChild(0).getChild(0)-> Null ---> getChild(0)が正しい。
                         imgObj = curItem.transform.GetChild(0).gameObject;
+                        // UpgradeDt atvSkUpgDt = DM.ins.personalData.AtvSkillUpgrade.Arr[CurIdx];
+                        // List<int> priceList = setAtvSkillUpgradePriceCalc(atvSkUpgDt);
+                        curItem.price.setValue(LM._.UPGRADE_ATVSKILL_PRICE_LIST[0]);
+
                         break;
                     case "Bat":
                         imgObj = curItem.transform.GetChild(curItem.transform.childCount - 1).gameObject;
@@ -801,8 +808,8 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
                             SM.ins.sfxPlay(SM.SFX.Upgrade.ToString());
 
                         //* Set Price
-                        List<int> priceList = setAtvSkillUpgradePriceCalc(atvSkUpgDt);
-                        curItem.price.setValue(priceList[atvSkUpgDt.Lv]);
+                        // List<int> priceList = setAtvSkillUpgradePriceCalc(atvSkUpgDt);
+                        curItem.price.setValue(LM._.UPGRADE_ATVSKILL_PRICE_LIST[atvSkUpgDt.Lv]);
 
                         em.createUpgradeItemEF(curItem.UpgradeValueTxt.transform);
                     }

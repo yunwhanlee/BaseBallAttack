@@ -161,6 +161,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Header("ATV SKILL UPGRADE PRICE")][Header("__________________________")]
     [Tooltip("UnLock2ndAtvスキル値段")] public int UNLOCK_2ND_ATVSKILL_PRICE;
     [Tooltip("アクティブスキルアップグレード値段クラス")] public UpgradePriceCalcSetting UPGRADE_ATVSKILL;
+    [Tooltip("アクティブスキルアップグレード値段リスト")] public List<int> UPGRADE_ATVSKILL_PRICE_LIST;
 
     [Header("REWARD CHEST")][Header("__________________________")]
     [Tooltip("REWARD CHEST GOODS COIN配列")] public int[] REWARD_CHEST_COINARR = {100, 250, 500, 1000, 2000, 5000};
@@ -187,7 +188,12 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     void Start(){
         Debug.Log("<FIBONACCI SEQUENCE> Player Max Exp");
         // MAX_EXP_LIST = Util._.getCalcFibonicciSequenceList(unit: 200, fibRatio: 2, MAX_LV);
-        MAX_EXP_LIST = Util._.calcArithmeticProgressionList(start: 300, max: 30, d: 100, gradualUpValue: 1f);
+        MAX_EXP_LIST = Util._.calcArithmeticProgressionList(
+            start: 300, 
+            max: 30, 
+            d: 100, 
+            gradualUpValue: 1f
+        );
 
         HOMERUN_MIN_POWER = HIT_RANK[B].Power;
         const int OFFSET_CNT = 1;
