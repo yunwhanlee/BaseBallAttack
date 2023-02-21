@@ -427,20 +427,28 @@ public class PersonalData {
     }
     private AchivementInfo[] getCollectedCoinArr(){
         return new AchivementInfo[] {
-            new AchivementInfo(50000, 100),
+            new AchivementInfo(10000, 50),
+            new AchivementInfo(25000, 100),
+            new AchivementInfo(50000, 150),
             new AchivementInfo(100000, 200),
             new AchivementInfo(200000, 300),
-            new AchivementInfo(500000, 400),
-            new AchivementInfo(1000000, 500),
+            new AchivementInfo(400000, 400),
+            new AchivementInfo(800000, 500),
+            new AchivementInfo(1000000, 600),
         };
     }
     private AchivementInfo[] getCollectedDiamondArr(){
         return new AchivementInfo[] {
-            new AchivementInfo(500, 100),
-            new AchivementInfo(1000, 200),
-            new AchivementInfo(2000, 300),
-            new AchivementInfo(5000, 400),
-            new AchivementInfo(10000, 500),
+            new AchivementInfo(500, 50),
+            new AchivementInfo(1000, 100),
+            new AchivementInfo(2500, 150),
+            new AchivementInfo(5000, 200),
+            new AchivementInfo(10000, 300),
+            new AchivementInfo(20000, 400),
+            new AchivementInfo(40000, 500),
+            new AchivementInfo(80000, 500),
+            new AchivementInfo(160000, 700),
+            new AchivementInfo(300000, 1000),
         };
     }
     private AchivementInfo[] getCollectedRouletteTicketArr(){

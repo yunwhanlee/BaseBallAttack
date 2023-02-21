@@ -122,7 +122,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("アクティブスキル MAXレベル値")] public int ATVSKILL_MAXLV = 20;
     [Space(10)]
     [Tooltip("サンダーショット クリティカル 倍数")] public float THUNDERSHOT_CRIT = 1f;
-    [Tooltip("サンダーショット デフォルト ヒットカウント")] public int THUNDERSHOT_DEF_HIT = 3;
+    [Tooltip("サンダーショット デフォルト ヒットカウント")] public int THUNDERSHOT_DEF_HIT = 5;
     [Tooltip("サンダーショット アップグレード ヒットカウント")] public int THUNDERSHOT_UPG_HIT = 1;
     [Space(10)]
     [Tooltip("カラーボール デフォルト カウント")] public int COLORBALLPOP_DEF_CNT = 5;

@@ -85,7 +85,8 @@ public class Achivement : MonoBehaviour{
         //* Set Color
         if(allClear){
             panelImg.color = Color.gray;
-            claimBtn.GetComponent<Image>().color = Color.gray;
+            claimBtn.GetComponent<Image>().color = Color.black;
+            claimBtn.GetComponentInChildren<Text>().text = "FINISH";
         }
         else{
             var pDt = DM.ins.personalData;
@@ -156,19 +157,20 @@ public class Achivement : MonoBehaviour{
         if(_allClear) this.allClear = _allClear;
     }
     protected int acceptReward(PersonalData pDt, int idx){
-        SM.ins.sfxPlay(SM.SFX.PurchaseSuccess.ToString());
+        SM.ins.sfxPlay(SM.SFX.DropBoxCoinPick.ToString());
         //* 処理。
         targetArr[idx].IsAccept = true;
         int reward = targetArr[idx].Reward;
         //* Reward Type
-        switch(this.rewardType){
-            case REWARD_TYPE.COIN :
-                hm.displayShowRewardPanel(coin: reward); break;
-            case REWARD_TYPE.DIAMOND :
-                hm.displayShowRewardPanel(coin: 0, diamond: reward); break;
-            case REWARD_TYPE.ROULETTE_TICKET :
-                hm.displayShowRewardPanel(coin: 0, diamond: 0, rouletteTicket: reward); break;
-        }
+        // SM.ins.sfxPlay(SM.SFX.PurchaseSuccess.ToString());
+        // switch(this.rewardType){
+        //     case REWARD_TYPE.COIN :
+        //         hm.displayShowRewardPanel(coin: reward); break;
+        //     case REWARD_TYPE.DIAMOND :
+        //         hm.displayShowRewardPanel(coin: 0, diamond: reward); break;
+        //     case REWARD_TYPE.ROULETTE_TICKET :
+        //         hm.displayShowRewardPanel(coin: 0, diamond: 0, rouletteTicket: reward); break;
+        // }
         return reward;
     }
 #endregion

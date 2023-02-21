@@ -40,7 +40,7 @@ public class UpgradeDt {
 
         //* ATV Skill
         else if(name == DM.ATV.ThunderShot.ToString())
-            return $"HIT {LM._.THUNDERSHOT_DEF_HIT + value} CRT {(int)(LM._.THUNDERSHOT_CRIT + value * 0.1f)}";
+            return $"HIT {LM._.THUNDERSHOT_DEF_HIT + value} CRT {(int)(LM._.THUNDERSHOT_CRIT + value * 0.2f)}";
         else if(name == DM.ATV.FireBall.ToString())
             return $"DMG {(LM._.FIREBALL_DEF_DMG_PER + value) * 100}%";
         else if(name == DM.ATV.ColorBall.ToString())

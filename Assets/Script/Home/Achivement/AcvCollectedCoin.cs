@@ -5,7 +5,9 @@ using System;
 
 public class AcvCollectedCoin : Achivement
 {
-    const int CLTCOIN10000 = 0, CLTCOIN25000 = 1, CLTCOIN50000 = 2, CLTCOIN100000 = 3, CLTCOIN1000000 = 4;
+    enum CLTCOIN {
+        _10000, _25000, _50000, _100000, _200000, _400000, _800000, _1000000
+    };
 
     void Start(){
         var pDt = DM.ins.personalData;
@@ -13,18 +15,22 @@ public class AcvCollectedCoin : Achivement
         cnt = pDt.CollectedCoin;
         Debug.Log($"Achivement:: {this.name}:: cnt= {cnt}");
         //* Init
-        if(pDt.CollectedCoinArr[CLTCOIN1000000].IsAccept)
-            setNext(pDt, CLTCOIN1000000, _allClear: true);
-        else if(pDt.CollectedCoinArr[CLTCOIN100000].IsAccept)
-            setNext(pDt, CLTCOIN1000000);
-        else if(pDt.CollectedCoinArr[CLTCOIN50000].IsAccept)
-            setNext(pDt, CLTCOIN100000);
-        else if(pDt.CollectedCoinArr[CLTCOIN25000].IsAccept)
-            setNext(pDt, CLTCOIN50000);
-        else if(pDt.CollectedCoinArr[CLTCOIN10000].IsAccept)
-            setNext(pDt, CLTCOIN25000);
+        if(pDt.CollectedCoinArr[(int)CLTCOIN._800000].IsAccept)
+            setNext(pDt, (int)CLTCOIN._1000000, _allClear: true);
+        else if(pDt.CollectedCoinArr[(int)CLTCOIN._400000].IsAccept)
+            setNext(pDt, (int)CLTCOIN._800000);
+        else if(pDt.CollectedCoinArr[(int)CLTCOIN._200000].IsAccept)
+            setNext(pDt, (int)CLTCOIN._400000);
+        else if(pDt.CollectedCoinArr[(int)CLTCOIN._100000].IsAccept)
+            setNext(pDt, (int)CLTCOIN._200000);
+        else if(pDt.CollectedCoinArr[(int)CLTCOIN._50000].IsAccept)
+            setNext(pDt, (int)CLTCOIN._100000);
+        else if(pDt.CollectedCoinArr[(int)CLTCOIN._25000].IsAccept)
+            setNext(pDt, (int)CLTCOIN._50000);
+        else if(pDt.CollectedCoinArr[(int)CLTCOIN._10000].IsAccept)
+            setNext(pDt, (int)CLTCOIN._25000);
         else if(!Array.Exists(pDt.CollectedCoinArr, arr => arr.IsAccept))
-            setNext(pDt, CLTCOIN10000);
+            setNext(pDt, (int)CLTCOIN._10000);
     }
 
 
@@ -34,26 +40,35 @@ public class AcvCollectedCoin : Achivement
     public override void onClickCalimBtn(){
         Debug.Log("Achivement::onClickCalimBtn:: " + this.name);
         var pDt = DM.ins.personalData;
+        var coinArr = pDt.CollectedCoinArr;
 
-        if(pDt.CollectedCoinArr[CLTCOIN10000].IsComplete && !pDt.CollectedCoinArr[CLTCOIN10000].IsAccept){
-            DM.ins.personalData.addDiamond(acceptReward(pDt, CLTCOIN10000));
-            setNext(pDt, CLTCOIN25000);
+        if(coinArr[(int)CLTCOIN._10000].IsComplete && !coinArr[(int)CLTCOIN._10000].IsAccept){
+            DM.ins.personalData.addDiamond(acceptReward(pDt, (int)CLTCOIN._10000));
+            setNext(pDt, (int)CLTCOIN._25000);
         }
-        else if(pDt.CollectedCoinArr[CLTCOIN25000].IsComplete && !pDt.CollectedCoinArr[CLTCOIN25000].IsAccept){
-            DM.ins.personalData.addDiamond(acceptReward(pDt, CLTCOIN25000));
-            setNext(pDt, CLTCOIN50000);
+        else if(coinArr[(int)CLTCOIN._25000].IsComplete && !coinArr[(int)CLTCOIN._25000].IsAccept){
+            DM.ins.personalData.addDiamond(acceptReward(pDt, (int)CLTCOIN._25000));
+            setNext(pDt, (int)CLTCOIN._50000);
         }
-        else if(pDt.CollectedCoinArr[CLTCOIN50000].IsComplete && !pDt.CollectedCoinArr[CLTCOIN50000].IsAccept){
-            DM.ins.personalData.addDiamond(acceptReward(pDt, CLTCOIN50000));
-            setNext(pDt, CLTCOIN100000);
+        else if(coinArr[(int)CLTCOIN._50000].IsComplete && !coinArr[(int)CLTCOIN._50000].IsAccept){
+            DM.ins.personalData.addDiamond(acceptReward(pDt, (int)CLTCOIN._50000));
+            setNext(pDt, (int)CLTCOIN._100000);
         }
-        else if(pDt.CollectedCoinArr[CLTCOIN100000].IsComplete && !pDt.CollectedCoinArr[CLTCOIN100000].IsAccept){
-            DM.ins.personalData.addDiamond(acceptReward(pDt, CLTCOIN100000));
-            setNext(pDt, CLTCOIN1000000);
+        else if(coinArr[(int)CLTCOIN._100000].IsComplete && !coinArr[(int)CLTCOIN._100000].IsAccept){
+            DM.ins.personalData.addDiamond(acceptReward(pDt, (int)CLTCOIN._100000));
+            setNext(pDt, (int)CLTCOIN._200000);
         }
-        else if(pDt.CollectedCoinArr[CLTCOIN1000000].IsComplete && !pDt.CollectedCoinArr[CLTCOIN1000000].IsAccept){
-            DM.ins.personalData.addDiamond(acceptReward(pDt, CLTCOIN1000000));
-            setNext(pDt, CLTCOIN1000000, _allClear: true);
+        else if(coinArr[(int)CLTCOIN._200000].IsComplete && !coinArr[(int)CLTCOIN._200000].IsAccept){
+            DM.ins.personalData.addDiamond(acceptReward(pDt, (int)CLTCOIN._200000));
+            setNext(pDt, (int)CLTCOIN._400000);
+        }
+        else if(coinArr[(int)CLTCOIN._400000].IsComplete && !coinArr[(int)CLTCOIN._400000].IsAccept){
+            DM.ins.personalData.addDiamond(acceptReward(pDt, (int)CLTCOIN._400000));
+            setNext(pDt, (int)CLTCOIN._800000);
+        }
+        else if(coinArr[(int)CLTCOIN._800000].IsComplete && !coinArr[(int)CLTCOIN._800000].IsAccept){
+            DM.ins.personalData.addDiamond(acceptReward(pDt, (int)CLTCOIN._800000));
+            setNext(pDt, (int)CLTCOIN._1000000, _allClear: true);
         }
     }
 //*---------------------------------------

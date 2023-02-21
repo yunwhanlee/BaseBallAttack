@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45015454, g: 0.5001945, b: 0.57542807, a: 1}
+  m_IndirectSpecularColor: {r: 0.45015407, g: 0.500194, b: 0.5754274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9590,7 +9590,7 @@ MonoBehaviour:
   LEVELUP_SLOTS_UNIQUE_PER: 10
   DARKORB_SPEED: 250
   GODBLESS_COMBO_SPAN: 15
-  ATV_COOLDOWN_UNIT: 0.498
+  ATV_COOLDOWN_UNIT: 0.005
   ATVSKILL_MAXLV: 10
   THUNDERSHOT_CRIT: 1
   THUNDERSHOT_DEF_HIT: 5
@@ -9610,7 +9610,7 @@ MonoBehaviour:
   RARE_PRICE: 12000
   UNIQUE_PRICE: 35000
   LEGEND_PRICE: 80000
-  GOD_PRICE: 2000
+  GOD_PRICE: 5000
   UPGRADE_DMG:
     start: 200
     commonDiffrence: 200
@@ -9653,7 +9653,7 @@ MonoBehaviour:
   ROULETTE_TICKET_ONEDAY_AD_PLAY_MAX_CNT: 5
   PREM_PACK_ROULETTE_TICKET: 7
   PREM_PACK_COIN: 100000
-  PREM_PACK_DIAMOND: 50000
+  PREM_PACK_DIAMOND: 10000
   PREM_PACK_PRICE: 10
   DISPLAY_RATE_DIALOG_PLAYTIME: 3
 --- !u!1 &439245470
