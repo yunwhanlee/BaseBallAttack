@@ -35,7 +35,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("ステージ")] public int STAGE_NUM = 1;
 
     [Header("THROW BALL")][Header("__________________________")]
-    [Tooltip("ボール投げる速度")] public float THROW_BALL_SPEED = 25; 
+    [Tooltip("ボール投げる速度")] public float THROW_BALL_SPEED = 25;
     [Tooltip("ボールいきなり投げる％")] [Range(0, 100)] public int SUDDENLY_THORW_PER = 50;
 
     [Header("HIT BALL")][Header("__________________________")]

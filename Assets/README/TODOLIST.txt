@@ -471,7 +471,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
 
     ✓ (★BUG-77) ブロックがActiveDownWall領域より下に来ると、ボールを釣っても急に無くなる。
     　　　対応：OncollisionEnter()で、BlockやWallにぶつかったら、DownWallのTriggerがOffになるようにする。
-    - (BUG-78) 時々、NextStageが呼び出されなくなり、DownWallのTriggerがTrueに戻らない。
+    ✓ (BUG-78) 時々、NextStageが呼び出されなくなり、DownWallのTriggerがTrueに戻らない。
 
     - (BUG) リワード広告をホームとインゲームに届いたら、お先にロードしておく。
     - (BUG) ColorBallが障害物にぶつかったら、エラーになること。
@@ -499,6 +499,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ Achivement Rewward Get EF削除＋Coin＆Diamondリワード追加。
     ✓ debugSphereが出ることコメント処理。
     ✓ パンネルの幅が少し足りなくて、見にくい部分を改善（左ー５０、右ー５０）。
+    ✓ GameTutorial準備。
     - ガイドライン：アイテム購入、ルーレット、業績、ボース攻撃よける＋制限時間。
     - 業績パンネルで、受ける時簡単にもらえるようにUI修正。
     - Cam２になると、まだフレームドロップ発生すること対応。

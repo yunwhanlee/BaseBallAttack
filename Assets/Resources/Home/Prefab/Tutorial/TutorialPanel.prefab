@@ -838,7 +838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5009433143134781786
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3340,7 +3340,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5009433144333966889
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4197,6 +4197,7 @@ MonoBehaviour:
   pageNaviGroup: {fileID: 5009433144888160952}
   pageNaviIconPf: {fileID: 4490268972060729133, guid: 2d3626b7972a8094194e6f0dea169832, type: 3}
   pageNaviFocusIconArr: []
+  SkipTxt: {fileID: 0}
 --- !u!1 &5009433144608944586
 GameObject:
   m_ObjectHideFlags: 0
