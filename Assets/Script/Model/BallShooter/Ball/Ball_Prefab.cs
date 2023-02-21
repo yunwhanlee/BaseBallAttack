@@ -19,7 +19,7 @@ public class Ball_Prefab : MonoBehaviour
 
     //* Value
     [SerializeField] bool isHomeRun = false;
-    [SerializeField] bool isHitedByBlock = false;
+    // [SerializeField] bool isHitedByBlock = false;
     [SerializeField] float deleteLimitTime = 2.0f;
     [SerializeField] float speed;    public float Speed {get => speed; set => speed = value;}
     float distance;
@@ -574,12 +574,12 @@ public class Ball_Prefab : MonoBehaviour
         StartCoroutine(coMultiCriticalDmgEF(critDmgRatio, hitCnt, hit.transform.position));
     }
     IEnumerator coMultiCriticalDmgEF(float critDmgRatio, int cnt, Vector3 hitPos){
-        float span = 0.03875f;
+        cnt = (int)(cnt * 0.7f); //* カウント全てをすると、コストが掛かるため、70%のみ描画する。
         for(int i=0; i<cnt; i++){
             em.createCritTxtEF(hitPos, Mathf.RoundToInt(pl.calcPlDmg() * critDmgRatio));//(int)(pl.dmg.Val * critDmgRatio));
             if(isHomeRun) 
                 em.createThunderStrikeEF(hitPos);
-            yield return new WaitForSeconds(i * span);
+            yield return Util.delay0_1;
         }
     }
     IEnumerator coDelayActiveFastPlayBtn(){
