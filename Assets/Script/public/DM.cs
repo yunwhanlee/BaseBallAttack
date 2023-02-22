@@ -25,8 +25,8 @@ public class DM : MonoBehaviour{
         LevelUp, PsvSkillTicket,
         TitleTxt, ContentTxt,
         IconPanel, IconImg, NameTxt, ValueTxt,
-        //* 一回限り商品
-        RemoveAD, PurchasedPanel, AdNoticeTxt,
+        RemoveAD, PurchasedPanel, AdNoticeTxt, //* 一回限り商品
+        IAPBtn_Icon,
         NULL,
     };
     public enum TAG {HitRangeArea, StrikeLine, GameOverLine, Wall, ActiveDownWall, Player,

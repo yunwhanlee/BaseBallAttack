@@ -817,13 +817,22 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
                 else if(DM.ins.SelectItemType == DM.PANEL.CashShop.ToString()){
                     goods -= price;
                     string itemName = curItem.name.Split('_')[1];
-                    Debug.Log($"ScrollViewEvent::purchaseItem():: itemName= {itemName}");
+                    Debug.Log($"<color=yellow>ScrollViewEvent::purchaseItem():: itemName= {itemName}</color>");
                     if(itemName.Contains(DM.NAME.Coin.ToString())){
-                        int reward = int.Parse(itemName.Split('n')[1]);
-                        hm.displayShowRewardPanel(coin: reward);
-                        DM.ins.personalData.addCoin(reward); // DM.ins.personalData.Coin += reward;
+                        if(itemName.Contains(DM.NAME.Diamond.ToString())){
+                            Debug.Log("CoinToDiamond");
+                            int reward = int.Parse(itemName.Split('d')[1]); // Diamondの'd'
+                            hm.displayShowRewardPanel(coin: 0, diamond: reward);
+                            DM.ins.personalData.addDiamond(reward);
+                        }
+                        else{
+                            Debug.Log("Coin");
+                            int reward = int.Parse(itemName.Split('n')[1]); // Coinの'n'
+                            hm.displayShowRewardPanel(coin: reward);
+                            DM.ins.personalData.addCoin(reward);
+                        }
                     }
-                    else if(itemName.Contains(DM.NAME.Diamond.ToString())){
+                    else if(itemName.Contains(DM.NAME.Diamond.ToString())){// && !itemName.Contains("CoinTo")){
                         callbackonClickIAPButton(curItem);
                     }
                     else if(itemName.Contains(DM.NAME.RemoveAD.ToString())) {
@@ -850,7 +859,7 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
     private void callbackonClickIAPButton(ItemInfo curItem){
         //* IAP専用 Button onClick イベント 読み出し。
         var btns = curItem.GetComponentsInChildren<Button>();
-        var iapBtn = Array.Find(btns, btn => btn.name == "IAPBtn_Icon");
+        var iapBtn = Array.Find(btns, btn => btn.name == DM.NAME.IAPBtn_Icon.ToString());
         Debug.Log($"curItem={curItem}:: iapBtn= {iapBtn}");
         iapBtn.onClick.Invoke();
     }
