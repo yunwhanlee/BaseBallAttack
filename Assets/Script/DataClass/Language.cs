@@ -37,6 +37,17 @@ public static class LANG //* LANG
         TutorialF_Title, TutorialF_Content,
         TutorialG_Title, TutorialG_Content,
 
+        GameTutorial_Content1,
+        GameTutorial_Content2,
+        GameTutorial_Content3,
+        GameTutorial_Content4,
+        GameTutorial_Content5,
+        GameTutorial_Content6,
+        GameTutorial_Content7,
+        GameTutorial_Content8,
+        GameTutorial_Content9,
+        GameTutorial_Content10,
+
         Caution, Caution_Content, Caution_Notice,
 
 
@@ -381,6 +392,56 @@ public static class LANG //* LANG
         "혹시 괜찮으시다면, 소중한 평가 부탁드립니다! 많은 힘이 됩니다!"
     };
 
+    public static string[] GameTutorial_Content1 = new string[]{
+        "Hello! I'm a baseball fairy who teaches me how to play game.",
+        "こんにちは！私はゲームの仕方を教えてくれる野球の妖精です。",
+        "안녕! 나는 게임방법을 알려줄 야구의 요정이에요."
+    };
+    public static string[] GameTutorial_Content2 = new string[]{
+        "Blocks come down every turn. You have to destroy blocks! So easy!",
+        "ブロックは1ターンごとに降りてきます。 ブロックは壊さないと！ 簡単だね！",
+        "매턴 블록이 내려온답니다. 블록을 파괴해야되요! 간단하죠?"
+    };
+    public static string[] GameTutorial_Content3 = new string[]{
+        "If the block reaches this red line, it's a game over.",
+        "ブロックがこの赤い線に達したらゲームオーバーです。",
+        "블록이 이 빨간선에 닿으면, 게임오버에요."
+    };
+    public static string[] GameTutorial_Content4 = new string[]{
+        "Touch around the player to move from side to side! You need it to avoid the boss's attack, so remember it!",
+        "プレイヤーの周りをタッチすると左右に移動ができます！ ",
+        "플레이어 주위를 터치하면 좌우로 이동이 가능해요!"
+    };
+    public static string[] GameTutorial_Content5 = new string[]{
+        "You need it to avoid the boss's attack, so remember it!!",
+        "ボスの攻撃を避ける時必要だから覚えてね！!",
+        "보스공격을 피할때 꼭 필요하니 기억해 놓으세요!!"
+    };
+    public static string[] GameTutorial_Content6 = new string[]{
+        "After setting the angle of the ball, press the ready button.",
+        "ボールの角度が設定できたら、Readyボタンを押してください.",
+        "공의 각도가 설정되었다면, 준비버튼을 누르세요."
+    };
+    public static string[] GameTutorial_Content7 = new string[]{
+        "Wow! The viewpoint has changed! The ball will fly in after the countdown.",
+        "わぁ！視点が変わった！ カウントダウンの後、ボールが飛んできます。",
+        "와! 시점이 바뀌었어요! 카운트다운 후에, 공이 날아올거에요."
+    };
+    public static string[] GameTutorial_Content8 = new string[]{
+        "Home Run Tip: Aim when this aiming point becomes the darkest blue!",
+        "ホームランヒント: この照準点が最も濃い青色になった時を狙ってください！",
+        "홈런팁: 이 조준점이 가장 진한 파란색이 되었을 때를 노리세요!"
+    };
+    public static string[] GameTutorial_Content9 = new string[]{
+        "Finally, you can check your ability by pressing the status window!",
+        "最後に「状態」を押すと、能力値を確認することができます!",
+        "마지막으로 상태창을 누르시면 능력치를 확인하실 수 있습니다!"
+    };
+    public static string[] GameTutorial_Content10 = new string[]{
+        "If you want to check the tutorial again, press the stop button and click the icon below! Good luck!",
+        "チュートリアルをまた確認したい場合、停止ボタンを押して下のアイコンをクリックしてくださいね! さあ、行こう!",
+        "튜토리얼을 다시 확인하려면 중지 버튼을 누르고 아래 아이콘을 클릭하세요! 화이팅!"
+    };
     //* UI
     public static string[] Ok = new string[]{"OK", "はい", "네"};
     public static string[] No = new string[]{"No", "いいえ", "아니오"};
@@ -579,7 +640,17 @@ public static class LANG //* LANG
         if(name == TXT.TutorialF_Content.ToString()) res = TutorialF_Content[CUR_LANG];
         if(name == TXT.TutorialG_Title.ToString()) res = TutorialG_Title[CUR_LANG];
         if(name == TXT.TutorialG_Content.ToString()) res = TutorialG_Content[CUR_LANG];
-        
+
+        if(name == TXT.GameTutorial_Content1.ToString()) res = GameTutorial_Content1[CUR_LANG];
+        if(name == TXT.GameTutorial_Content2.ToString()) res = GameTutorial_Content2[CUR_LANG];
+        if(name == TXT.GameTutorial_Content3.ToString()) res = GameTutorial_Content3[CUR_LANG];
+        if(name == TXT.GameTutorial_Content4.ToString()) res = GameTutorial_Content4[CUR_LANG];
+        if(name == TXT.GameTutorial_Content5.ToString()) res = GameTutorial_Content5[CUR_LANG];
+        if(name == TXT.GameTutorial_Content6.ToString()) res = GameTutorial_Content6[CUR_LANG];
+        if(name == TXT.GameTutorial_Content7.ToString()) res = GameTutorial_Content7[CUR_LANG];
+        if(name == TXT.GameTutorial_Content8.ToString()) res = GameTutorial_Content8[CUR_LANG];
+        if(name == TXT.GameTutorial_Content9.ToString()) res = GameTutorial_Content9[CUR_LANG];
+        if(name == TXT.GameTutorial_Content10.ToString()) res = GameTutorial_Content10[CUR_LANG];
 
         //* UI
         if(name == TXT.Ok.ToString()) res = Ok[CUR_LANG];

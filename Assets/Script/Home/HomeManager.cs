@@ -356,7 +356,10 @@ public class HomeManager : MonoBehaviour
         Debug.Log("coDisplayLoaderBoard:: Display LoaderBoard");
         GPGSBinder.Inst.ShowAllLeaderboardUI();
     }
-    public void onClickBtnQuestionMarkIcon() { DM.ins.displayTutorialUI(); SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());}
+    public void onClickBtnQuestionMarkIcon() {
+        DM.ins.displayTutorialUI();
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
+    }
 
     public void onClickPremiumPackIconBtn() { 
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());

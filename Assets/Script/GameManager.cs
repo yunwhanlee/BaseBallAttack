@@ -92,6 +92,7 @@ public class GameManager : MonoBehaviour {
     public RectTransform statusFolderPanel;
     public GameObject getRewardChestPanel;
     private Animator getRewardChestPanelAnim;
+    public GameObject gameTutorialPanel;
 
     [Header("DIALOG")][Header("__________________________")]
     public RectTransform showAdDialog;
@@ -231,7 +232,7 @@ public class GameManager : MonoBehaviour {
     void Awake(){
         DM.ins.gm = this;
     }
-    void Start() {
+    void Start(){
         // Util._.calcArithmeticProgressionList(start: 100, max: 50, d: 100, gradualUpValue: 0.1f);
         init();
 
@@ -242,8 +243,10 @@ public class GameManager : MonoBehaviour {
 
         //* スキップに✓がされていない場合は、チュートリアルのダイアログ 表示。
         if(!DM.ins.personalData.IsSkipTutorial){
-            displayTutorialDialog();
-        }
+            // displayTutorialDialog();
+            DM.ins.personalData.IsSkipTutorial = true;
+            gameTutorialPanel.gameObject.SetActive(true);
+        }        
 
         stage = LM._.STAGE_NUM;
         Debug.Log("<color=red>----------------------------------------------P L A Y   S C E N E----------------------------------------------</color>");
@@ -391,11 +394,15 @@ public class GameManager : MonoBehaviour {
     public void onClickReadyButton() { switchCamera(); SM.ins.sfxPlay(SM.SFX.BtnClick.ToString()); }
     public void onClickSkillButton() { levelUpPanel.SetActive(false); SM.ins.sfxPlay(SM.SFX.BtnClick.ToString()); }
     public void onClickGiveUpButton() => displayAskGiveUpDialog();
-    public void onClickOpenTutorialButton() {
-        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
-        DM.ins.displayTutorialUI();
-        openTutorialDialog.gameObject.SetActive(false);
+    public void onClickPauseQuestionMark() {
+        pausePanel.SetActive(false);
+        gameTutorialPanel.gameObject.SetActive(true);
     }
+    // public void onClickOpenTutorialButton() {
+    //     SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
+    //     DM.ins.displayTutorialUI();
+    //     openTutorialDialog.gameObject.SetActive(false);
+    // }
     public void onClickSkipTutorialNextTimeToggle() {DM.ins.personalData.IsSkipTutorial = skipTutorialToggle.isOn; SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());}
     public void onClickRewardChestOpenButton() {
         Debug.Log("onClickRewardChestOpenButton()::");
