@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class TutorialPanel : MonoBehaviour
-{
+public class TutorialPanel : MonoBehaviour{
     [SerializeField]  string[] titleObjNameArr;    public string[] TitleObjNameArr { get => titleObjNameArr; set => titleObjNameArr = value;}
     [SerializeField]  string[] contentObjNameArr;  public string[] ContentObjNameArr { get => contentObjNameArr; set => contentObjNameArr = value;}
     int lastIdx;
@@ -31,6 +30,7 @@ public class TutorialPanel : MonoBehaviour
         nextArrowBtn.interactable = true;
         createFocusIconArr();
         setLanguage();
+        Array.ForEach(contentArr, ctt => ctt.SetActive(false));
     }
 
     void Update(){
