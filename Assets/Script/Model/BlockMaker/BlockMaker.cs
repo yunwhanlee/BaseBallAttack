@@ -30,11 +30,11 @@ public class BlockMaker : MonoBehaviour
     public Material[] mts;   public Material[] Mts {get => mts;}
 
     [Header("PREFAB")][Header("__________________________")]
-    //*Drop Items
+    //* Drop Items
     public GameObject dropItemExpOrbPf;
     public GameObject dropItemRewardChestPf;
     public GameObject bossTargetMisslePf;
-    //*Drop Box
+    //* Drop Box
     public GameObject[] dropBoxPfArr;
     public GameObject coinIconPf; //dropBoxQuestionPfで出るコインUIアイコン
 

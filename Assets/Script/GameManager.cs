@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour {
     
     [Header("GROUP")][Header("__________________________")]
     public Transform effectGroup;
+    public Transform ballStorage;
     public Transform ballGroup;
     public Transform blockGroup;
     public Transform dropItemGroup;
@@ -235,6 +236,8 @@ public class GameManager : MonoBehaviour {
         DM.ins.gm = this;
     }
     void Start(){
+        Debug.Log("ballGroup.childCount=" + ballGroup.childCount);
+
         // Util._.calcArithmeticProgressionList(start: 100, max: 50, d: 100, gradualUpValue: 0.1f);
         init();
 
@@ -1098,7 +1101,7 @@ public class GameManager : MonoBehaviour {
         fastPlayBtn.gameObject.SetActive(false);
         fastPlayBtnImg.color = Color.white;
         pl.previewBundle.SetActive(true);
-        destroyEveryBalls();
+        // destroyEveryBalls();
         setBallPreviewGoalRandomPos();
 
         //* Check Event

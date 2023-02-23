@@ -14,7 +14,9 @@ public class BallShooter : MonoBehaviour
     [SerializeField] bool isReadyShoot;   public bool IsReadyShoot { get => isReadyShoot; set => isReadyShoot = value;}
     [SerializeField] bool isExclamationMarkOn;   public bool IsExclamationMarkOn { get => isExclamationMarkOn; set => isExclamationMarkOn = value;}
     [SerializeField] float throwBallSpeed;
-    [SerializeField] public GameObject ballPref;
+    [SerializeField] public GameObject mainBall;
+    [SerializeField] public GameObject subBall;
+
     [SerializeField] public Transform entranceTf;
     [SerializeField] GameObject exclamationMarkObj;   public GameObject ExclamationMarkObj { get => exclamationMarkObj; set => exclamationMarkObj = value;}
     [SerializeField] GameObject bossFireBallMarkObj;    public GameObject BossFireBallMarkObj { get => bossFireBallMarkObj; set => bossFireBallMarkObj = value;}
@@ -89,8 +91,10 @@ public class BallShooter : MonoBehaviour
 
         Debug.Log("ballPreviewDirGoal="+gm.ballPreviewDirGoal.transform.position+", entranceTfPos="+entranceTf.position);
         Vector3 goalDir = (gm.ballPreviewDirGoal.transform.position - entranceTf.position).normalized;
-        GameObject ins = Instantiate(ballPref, entranceTf.position, Quaternion.LookRotation(goalDir), gm.ballGroup);
+        // GameObject ins = Instantiate(ballPref, entranceTf.position, Quaternion.LookRotation(goalDir), gm.ballGroup);
+        GameObject ins = ObjectPool.getObject(ObjectPool.DIC.MainBall.ToString(), entranceTf.position, Quaternion.LookRotation(goalDir), gm.ballStorage);
         ins.name = DM.NAME.MainBall.ToString();
+        ins.transform.SetParent(gm.ballGroup);
 
         //* (BUG-55) もしエラーで、DownWallコライダーのIsTriggerがFalseの場合、
         //* 投げるボールが壁にぶつかってプレイヤーへ届かないので、Trueに戻す処理。

@@ -10,7 +10,7 @@ public class Ball_Prefab : MonoBehaviour
     //* OutSide
     GameManager gm; EffectManager em; Player pl; BlockMaker bm; BallShooter bs;
     public Rigidbody myRigid;
-    public int aliveTime;
+    // public int aliveTime;
     Transform myTransform;
     SphereCollider myCollider;
 
@@ -20,7 +20,7 @@ public class Ball_Prefab : MonoBehaviour
     //* Value
     [SerializeField] bool isHomeRun = false;
     // [SerializeField] bool isHitedByBlock = false;
-    [SerializeField] float deleteLimitTime = 2.0f;
+    // [SerializeField] float deleteLimitTime = 2.0f;
     [SerializeField] float speed;    public float Speed {get => speed; set => speed = value;}
     float distance;
     [Header("PSV UNIQUE")][Header("__________________________")]
@@ -31,7 +31,6 @@ public class Ball_Prefab : MonoBehaviour
     [SerializeField] bool isDmgX2;     public bool IsDmgX2 {get => isDmgX2; set => isDmgX2 = value;}
 
     void Awake() {
-        // Debug.Log("Ball_Prefab::Awake():: DM.ins.gm= " + DM.ins.gm);
         gm = DM.ins.gm;
         em = gm.em; pl = gm.pl; bm = gm.bm; bs = gm.bs;
 
@@ -42,12 +41,7 @@ public class Ball_Prefab : MonoBehaviour
         IsOnDarkOrb = false;
     }
 
-    // void Start() {
-    //     if(name == DM.NAME.MainBall.ToString()){
-    //         Debug.Log("Ball_Prefab:: name= " + name);
-    //         coFastPlayOn();
-    //     }
-    // }
+    void OnDisable() => init();
 
     void FixedUpdate(){
         //* Destroy by Checking Velocity
@@ -227,7 +221,9 @@ public class Ball_Prefab : MonoBehaviour
         else if(col.transform.CompareTag(DM.TAG.StrikeLine.ToString())){
             Debug.Log($"<color=red>Ball_Prefab:: OnTriggerExit:: this.name= {this.name}, col= {col.name}</color>");
             // checkDestroyMainBall();
-            if(this.name == MAIN_BALL && myTransform.localScale.x == 0.4f){
+            //* (BUG-79) MainBallをまずObjectPool化しましたが、localScale.xが0.4なのに、0.39999になって、Strike条件式に入らないBUGあるため、条件式からこの部分抜ける。
+            if(this.name == MAIN_BALL){// && myTransform.localScale.x == 0.4f){
+                Debug.Log("this.name :: Strike!");
                 onDestroyMe(true);
             }
         }
@@ -430,6 +426,18 @@ public class Ball_Prefab : MonoBehaviour
 //*---------------------------------------------------------------
 //*  関数
 //*---------------------------------------------------------------
+    private void init(){
+        myRigid.velocity = Vector3.zero;
+        myRigid.angularVelocity = Vector3.zero;
+        myRigid.useGravity = false;
+        myTransform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+        myCollider.isTrigger = true;
+        isHomeRun = false;
+        IsOnDarkOrb = false;
+        isDmgX2 = false;
+        speed = 0;
+    }
+
     private void setDownWallTriggerOff() {
         //* (★BUG-77) ブロックがActiveDownWall領域より下に来ると、ボールを釣っても急に無くなる。
         //* 対応：OncollisionEnter()で、BlockやWallにぶつかったら、DownWallのTriggerがOffになるようにする。
@@ -466,6 +474,7 @@ public class Ball_Prefab : MonoBehaviour
 
     void instantiateMultiShot(Vector3 dir, float force, float ratio){
         var ins = Instantiate(this.gameObject, myTransform.position, Quaternion.identity, gm.ballGroup);
+        // var ins = ObjectPool.getObject(ObjectPool.DIC.MainBallPf.ToString(), myTransform.position, Quaternion.identity, gm.ballGroup);
         ins.name = DM.NAME.SubBall.ToString();
         ins.GetComponent<Rigidbody>().AddForce(dir * force * ratio, ForceMode.Impulse);
         Vector3 scale = ins.transform.localScale;
@@ -503,13 +512,15 @@ public class Ball_Prefab : MonoBehaviour
     //     }
     // }
     private void checkDestroyMainBall(){
-        if(this.name == MAIN_BALL && myTransform.localScale.x == 0.4f){
+        //* (BUG-79) MainBallをまずObjectPool化しましたが、localScale.xが0.4なのに、0.39999になって、Strike条件式に入らないBUGあるため、条件式からこの部分抜ける。
+        if(this.name == MAIN_BALL){// && myTransform.localScale.x == 0.4f){
             Debug.Log("Ball_Prefab::checkDestroyMainBall():: this is Main Ball -> onDestroyMe()");
             onDestroyMe();
         }
         else{
             Debug.Log("Ball_Prefab::checkDestroyMainBall():: this is not Main Ball -> Destroy(this)");
-            Destroy(this.gameObject);
+            // Destroy(this.gameObject);
+            StartCoroutine(ObjectPool.coDestroyObject(gameObject, gm.ballStorage));
         }
     }
 
@@ -521,7 +532,8 @@ public class Ball_Prefab : MonoBehaviour
             gm.setStrike();
             gm.setBallPreviewGoalRandomPos();
         }
-        Destroy(this.gameObject);
+        // Destroy(this.gameObject);
+        StartCoroutine(ObjectPool.coDestroyObject(gameObject, gm.ballStorage));
     }
 
     IEnumerator coPlayHomeRunAnim(bool isActiveSkillTrigger){

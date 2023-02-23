@@ -26,6 +26,7 @@ public class ObjectPool : MonoBehaviour
         ThunderStrikeEF, ColorBallStarExplosionEF, //* ATV HomeRun Bonus
 
         //* OBJ
+        MainBall, SubBall,
         DropItemExpOrbPf, DropItemRewardChest,
         BossTargetMisslePf,
         DropBoxQuestionPf, DropBoxShieldPf, DropBoxSpeedPf, DropBoxStarPf, DropBoxMagicPf,
@@ -50,6 +51,7 @@ public class ObjectPool : MonoBehaviour
     private GameManager gm;
     private EffectManager em;
     private BlockMaker bm; 
+    private BallShooter bs;
 
     [SerializeField] Dictionary<string, GameObject> poolObjDtDict;
 
@@ -61,6 +63,8 @@ public class ObjectPool : MonoBehaviour
         gm = DM.ins.gm;
         em = gm.em;
         bm = gm.bm;
+        bs = gm.bs;
+        
         init();
     }
 
@@ -126,6 +130,8 @@ public class ObjectPool : MonoBehaviour
         poolDtList.Add(new PoolData(DIC.ColorBallStarExplosionEF.ToString(), em.colorBallStarExplosionEF, 1, em.gm.effectGroup));
 
         // OBJ 
+        poolDtList.Add(new PoolData(DIC.MainBall.ToString(), bs.mainBall, 1, gm.ballStorage));
+        // poolDtList.Add(new PoolData(DIC.SubBallPf.ToString(), bs.subBallPref, 5, gm.effectGroup));
         poolDtList.Add(new PoolData(DIC.DropItemExpOrbPf.ToString(), bm.dropItemExpOrbPf, 30, gm.dropItemGroup));
         poolDtList.Add(new PoolData(DIC.BossTargetMisslePf.ToString(), bm.bossTargetMisslePf, 15, gm.dropItemGroup));
 
@@ -175,7 +181,7 @@ public class ObjectPool : MonoBehaviour
 
         var obj = childList.Find(ch => ch.name == key && !ch.gameObject.activeSelf);
         if(obj){
-            // Debug.Log("getObject():: Active obj= " + obj);
+            Debug.Log("getObject():: Active obj= " + obj);
         }
         else{
             // Debug.Log("getObject():: New Create!");
@@ -202,6 +208,7 @@ public class ObjectPool : MonoBehaviour
     }
 
     public static IEnumerator coDestroyObject(GameObject ins, Transform groupTf, float sec = 0){
+        // Debug.Log($"ObjectPool::coDestroyObject():: ins= {ins}, groupTf= {groupTf}, sec= {sec}");
         // yield return new WaitForSeconds(sec);
         yield return (sec == 0.75f)? Util.delay0_75
             : (sec == 0.875f)? Util.delay0_875

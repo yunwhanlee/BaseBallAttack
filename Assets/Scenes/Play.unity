@@ -10817,6 +10817,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 09062dc0008857b46aaacdb7206f1453, type: 3}
   m_PrefabInstance: {fileID: 233524048}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &236825957
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 236825958}
+  m_Layer: 0
+  m_Name: BallStorage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &236825958
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236825957}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2121181892}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &238427010
 GameObject:
   m_ObjectHideFlags: 0
@@ -53447,7 +53477,8 @@ MonoBehaviour:
   isReadyShoot: 0
   isExclamationMarkOn: 0
   throwBallSpeed: 999
-  ballPref: {fileID: 2295754910549213891, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
+  mainBall: {fileID: 2295754910549213891, guid: 66e914d1d69e7b84ea971fb024a194e9, type: 3}
+  subBall: {fileID: 0}
   entranceTf: {fileID: 747844806}
   exclamationMarkObj: {fileID: 840195234}
   bossFireBallMarkObj: {fileID: 1908226854}
@@ -68052,6 +68083,7 @@ MonoBehaviour:
   debugBlueMt: {fileID: 2100000, guid: 338970dfe3d7f364a9dc75e128bcf626, type: 2}
   timeScale: 1
   effectGroup: {fileID: 831947632}
+  ballStorage: {fileID: 236825958}
   ballGroup: {fileID: 1179223822}
   blockGroup: {fileID: 397967615}
   dropItemGroup: {fileID: 54044119}
@@ -96122,6 +96154,7 @@ Transform:
   - {fileID: 831947632}
   - {fileID: 54044119}
   - {fileID: 1325408698}
+  - {fileID: 236825958}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
