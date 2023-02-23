@@ -217,17 +217,11 @@ public class Ball_Prefab : MonoBehaviour
         #endregion
     }
     void OnTriggerExit(Collider col) {
-        //* HIT BALL
+        //* HITED BALL GET OUT FROM HITAREA
         if(col.transform.CompareTag(DM.TAG.HitRangeArea.ToString())){ 
-            // isHited = true;
-            pl.setSwingArcColor("yellow");
-
-            // gm.onClickFastPlayButton();
+            // pl.setSwingArcColor("yellow");
             StartCoroutine(coFastPlayOn());
             // Debug.Log($"Ball_Prefab::OnTriggerExit(col= {col.name}):: Invoke(checkLimitTimeToDeleteBall, deleteLimitTime= {deleteLimitTime})");
-
-            //! (BUG) ここに問題が合って、打ったボールが急にすぐなくなる。
-            // InvokeRepeating("checkLimitTimeToDeleteBall",0,  deleteLimitTime);//* 日程時間が過ぎたら、ボール削除。
         }
         //* STRIKE BALL
         else if(col.transform.CompareTag(DM.TAG.StrikeLine.ToString())){
@@ -441,11 +435,11 @@ public class Ball_Prefab : MonoBehaviour
         //* 対応：OncollisionEnter()で、BlockやWallにぶつかったら、DownWallのTriggerがOffになるようにする。
         if(gm.downWallCollider.isTrigger && name == MAIN_BALL){
             gm.downWallCollider.isTrigger = false;//* 衝突ON
-            pl.DoSwing = false;
-            pl.IsHitBall = false;
             #if UNITY_EDITOR
                 gm.debugDownWallColTrigger(false);
             #endif
+            pl.DoSwing = false;
+            pl.IsHitBall = false;
         }
     }
     IEnumerator coFastPlayOn(){

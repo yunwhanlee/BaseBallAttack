@@ -79,8 +79,9 @@ public class GameManager : MonoBehaviour {
     [SerializeField] int resultRouletteTicket;
 
     [Header("TRIGGER")][Header("__________________________")]
-    public bool isPlayingAnim;  public bool IsPlayingAnim { get => isPlayingAnim; set=> isPlayingAnim = value;}
-    public bool isFastPlay;  public bool IsFastPlay { get => isFastPlay; set => isFastPlay = value;}
+    [SerializeField] bool isPlayingAnim;  public bool IsPlayingAnim { get => isPlayingAnim; set=> isPlayingAnim = value;}
+    [SerializeField] bool isFastPlay;  public bool IsFastPlay { get => isFastPlay; set => isFastPlay = value;}
+    [SerializeField] bool isResolveNextStageProblem;  public bool IsResolveNextStageProblem { get => isResolveNextStageProblem; set => isResolveNextStageProblem = value;}
 
     [Header("PANEL")][Header("__________________________")]
     public GameObject strikePanel;
@@ -246,7 +247,7 @@ public class GameManager : MonoBehaviour {
             // displayTutorialDialog();
             DM.ins.personalData.IsSkipTutorial = true;
             gameTutorialPanel.gameObject.SetActive(true);
-        }        
+        }
 
         stage = LM._.STAGE_NUM;
         Debug.Log("<color=red>----------------------------------------------P L A Y   S C E N E----------------------------------------------</color>");
@@ -341,6 +342,11 @@ public class GameManager : MonoBehaviour {
             debugHitBallTrigger();
         # endif
 
+        if(isResolveNextStageProblem && !downWallCollider.isTrigger && ballGroup.childCount == 0){
+            isResolveNextStageProblem = false;
+            StartCoroutine(coResolveDoNotNextStage());
+        }
+
         BossBlock boss = bm.getBoss();
 
         //* GUI *//
@@ -414,14 +420,17 @@ public class GameManager : MonoBehaviour {
         // SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         // fastPlayBtnImg.color = Color.red;
         isFastPlay = true;
+        isResolveNextStageProblem = true;
         Time.timeScale = 2.5f;
         #if UNITY_EDITOR
             timeScale = 2.5f;
         #endif
     }
+
 /// --------------------------------------------------------------------------
 /// REWARD CHEST RANDOM OPEN
 /// --------------------------------------------------------------------------
+
     IEnumerator coRewardChestOpen(){
         Debug.Log("coRewardChestOpen()::");
         initRewardChestPanelUI(isOpen: true);
@@ -482,6 +491,13 @@ public class GameManager : MonoBehaviour {
         //* AddEventListener('onClick')
         rewardChestOkBtn.onClick.RemoveAllListeners(); //* (BUG-13) リワート種類によって処理が変わるのでAddListenerをしましたが、繰り返したら重なるバグを初期化する形で対応。
         rewardChestOkBtn.onClick.AddListener(() => onClickRewardChestOkButton(reward, goodsPriceDic));
+    }
+
+    IEnumerator coResolveDoNotNextStage(){
+        yield return Util.delay3;
+        yield return Util.delay3;
+        Debug.Log($"GM::coResolveDoNotNextStage()::");
+        setNextStage();
     }
     private void initRewardChestPanelUI(bool isOpen){
         rewardChestOpenBtn.gameObject.SetActive(!isOpen? true : false);
@@ -712,7 +728,7 @@ public class GameManager : MonoBehaviour {
         if(boss) bossLimitCnt = LM._.BOSS_LIMIT_SPAN;
         setActiveCam(false); // cam1 ON, cam2 OFF
         reviveBtn.gameObject.SetActive(false);
-        Invoke("collectDropOrb", 0.5f);
+        StartCoroutine(collectDropOrb());
         SM.ins.sfxPlay(SM.SFX.Revive.ToString());
         em.activeUI_EF(DM.REWARD.Revive.ToString());
         bm.Start();
@@ -1086,12 +1102,9 @@ public class GameManager : MonoBehaviour {
         bm.setBlockPropertyDuration();
 
         activeSkillDataBase[0].checkBlocksIsDotDmg(this);
-        StartCoroutine(coCheckPerfectBonus(boss));
-        StartCoroutine(coCheckLevelUp());
-        StartCoroutine(coCheckGetRewardChest());
 
-        //* オーブを集める
-        Invoke("collectDropOrb", 0.5f);
+        StartCoroutine(coCheckGetRewardChest());
+        StartCoroutine(coNextStage(boss));
         
         //* BossSkill
         if(boss){
@@ -1119,38 +1132,44 @@ public class GameManager : MonoBehaviour {
         AcvStageClear.setStageClear(stage);
     }
 
+    private IEnumerator coNextStage(BossBlock boss){
+        yield return StartCoroutine(coCheckPerfectBonus(boss));
+        yield return StartCoroutine(collectDropOrb()); //* オーブを集める
+        yield return StartCoroutine(coCheckLevelUp());
+    }
+
     private void destroyEveryBalls(){
         if(ballGroup.childCount > 0){
             for(int i=0; i<ballGroup.childCount; i++)
                 Destroy(ballGroup.GetChild(i).gameObject);
         }
     }
-
-    private void collectDropOrb(){
-        //* (BUG-6) 後で破壊したブロックからでるOrbがPlayerに行かない。Invokeで0.5秒を待た後で収集。
-        var orbs = dropItemGroup.GetComponentsInChildren<DropItem>();
-        Debug.Log("setNextStage():: Invoke(collectDropOrb):: MoveToPlayer ON -> orbs.Length= " + orbs.Length);
-        Array.ForEach(orbs, orb => orb.IsMoveToPlayer = true);
-    }
-
     private IEnumerator coCheckPerfectBonus(BossBlock boss){
         if(blockGroup.childCount == 0){
             perfectTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
             em.activeUI_EF(DM.ANIM.Perfect.ToString());
+
+            yield return Util.delay0_5;
             //* One More Next Stage (ボスがいなければ)
-            yield return Util.delay1;
             if(!boss)
                 ++stage;
             bm.DoCreateBlock = true;
         }
     }
+    private IEnumerator collectDropOrb(){
+        //* (BUG-6) 後で破壊したブロックからでるOrbがPlayerに行かない。Invokeで0.5秒を待た後で収集。
+        yield return Util.delay0_5;
+        var orbs = dropItemGroup.GetComponentsInChildren<DropItem>();
+        Debug.Log("setNextStage():: collectDropOrb:: MoveToPlayer ON -> orbs.Length= " + orbs.Length);
+        Array.ForEach(orbs, orb => orb.IsMoveToPlayer = true);
+    }
     public IEnumerator coCheckLevelUp(){
         //* Coroutineの中、while文でUpdate()ように活用：ExpOrbがPlayerに全て届くまで待つ。
         while(true){
             if(pl.IsLevelUp){ //* <- Player::setLevelUp()
-                Debug.Log($"LEVELUP:: coCheckLevelUp:: pl.IsLevelUp= {pl.IsLevelUp}");
-                yield return Util.delay1;
+                Debug.Log($"setNextStage():: coCheckLevelUp:: pl.IsLevelUp= {pl.IsLevelUp}");
                 pl.IsLevelUp = false;
+                yield return Util.delay1;
                 rerotateSkillSlotsBtn.gameObject.SetActive(true);
                 //! (BUG-52) LEVEL-UPが連続でした場合、順番通り繰り返す。
                 levelUpPanel.SetActive(true);
