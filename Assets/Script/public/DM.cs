@@ -27,6 +27,7 @@ public class DM : MonoBehaviour{
         IconPanel, IconImg, NameTxt, ValueTxt,
         RemoveAD, PurchasedPanel, AdNoticeTxt, //* 一回限り商品
         IAPBtn_Icon,
+        DropBoxStarTrailEF, DropBoxSpeedTrailEF,
         NULL,
     };
     public enum TAG {HitRangeArea, StrikeLine, GameOverLine, Wall, ActiveDownWall, Player,

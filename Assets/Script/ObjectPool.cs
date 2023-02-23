@@ -131,7 +131,7 @@ public class ObjectPool : MonoBehaviour
 
         // OBJ 
         poolDtList.Add(new PoolData(DIC.MainBall.ToString(), bs.mainBall, 1, gm.ballStorage));
-        // poolDtList.Add(new PoolData(DIC.SubBallPf.ToString(), bs.subBallPref, 5, gm.effectGroup));
+        poolDtList.Add(new PoolData(DIC.SubBall.ToString(), bs.mainBall, 5, gm.ballStorage));
         poolDtList.Add(new PoolData(DIC.DropItemExpOrbPf.ToString(), bm.dropItemExpOrbPf, 30, gm.dropItemGroup));
         poolDtList.Add(new PoolData(DIC.BossTargetMisslePf.ToString(), bm.bossTargetMisslePf, 15, gm.dropItemGroup));
 

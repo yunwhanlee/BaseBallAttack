@@ -25,7 +25,7 @@ public class Ball_Prefab : MonoBehaviour
     float distance;
     [Header("PSV UNIQUE")][Header("__________________________")]
     [SerializeField] bool isOnDarkOrb; public bool IsOnDarkOrb {get => isOnDarkOrb; set => isOnDarkOrb = value;}
-    [SerializeField] GameObject darkOrbPf; public GameObject DarkOrbPf {get => darkOrbPf; set => darkOrbPf = value;}
+    [SerializeField] GameObject darkOrbPf;
 
     [Header("DROP BOX")][Header("__________________________")]
     [SerializeField] bool isDmgX2;     public bool IsDmgX2 {get => isDmgX2; set => isDmgX2 = value;}
@@ -41,12 +41,13 @@ public class Ball_Prefab : MonoBehaviour
         IsOnDarkOrb = false;
     }
 
-    void OnDisable() => init();
+    void OnEnable() => init(name);
 
     void FixedUpdate(){
         //* Destroy by Checking Velocity
         if(myRigid.velocity.magnitude != 0 && myRigid.velocity.magnitude < 0.9875f){
-            Debug.Log($"Ball_Prefab::BallGroup.childCount= {gm.ballGroup.childCount}, velocity.magnitude= {myRigid.velocity.magnitude}");
+            Debug.Log($"Ball_Prefab::BallGroup.childCount= {gm.ballGroup.childCount}, velocity.magnitude= {myRigid.velocity.magnitude}, name= {name}");
+            myRigid.velocity = Vector3.zero;
             checkDestroyMainBall();
         }
 
@@ -167,7 +168,7 @@ public class Ball_Prefab : MonoBehaviour
                 if(pl.darkOrb.Level == 1){
                     Debug.Log("DARKORB ON!");
                     IsOnDarkOrb = true;
-                    DarkOrbPf.SetActive(IsOnDarkOrb);
+                    darkOrbPf.SetActive(IsOnDarkOrb);
                 }
 
                 //* 【 Giant Ball 】
@@ -186,7 +187,7 @@ public class Ball_Prefab : MonoBehaviour
                     //* 【 Vertical Multi Shot (縦) 】
                     for(int i=0; i<pl.verticalMultiShot.Val;i++){ // Debug.Log($"<color=blue>【 Vertical Multi Shot (縦) 】: {pl.verticalMultiShot.Value}</color>");
                         Vector3 dir = pl.arrowAxisAnchor.transform.forward;
-                        instantiateMultiShot(dir, force, ratio: 0.925f);
+                        instantiateMultiShot(dir, force, ratio: 0.9f);
                     }
                 }
                 //* 【 Laser 】
@@ -426,16 +427,29 @@ public class Ball_Prefab : MonoBehaviour
 //*---------------------------------------------------------------
 //*  関数
 //*---------------------------------------------------------------
-    private void init(){
+    private void init(string name){
         myRigid.velocity = Vector3.zero;
         myRigid.angularVelocity = Vector3.zero;
-        myRigid.useGravity = false;
+        myRigid.useGravity = (name == DM.NAME.MainBall.ToString())? false : true;
         myTransform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
-        myCollider.isTrigger = true;
+        myTransform.localScale = Vector3.one * 0.4f;
+        myCollider.isTrigger = (name == DM.NAME.MainBall.ToString())? true : false;
         isHomeRun = false;
         IsOnDarkOrb = false;
+        darkOrbPf.SetActive(false);
         isDmgX2 = false;
         speed = 0;
+
+        //* Trailエフェクト消す（DropBoxアイテムで適用された）
+        for(int i=0; i<transform.childCount; i++){
+            Transform child = transform.GetChild(i);
+            if(child.name == DM.NAME.DropBoxStarTrailEF.ToString()) Destroy(child.gameObject);
+            if(child.name == DM.NAME.DropBoxSpeedTrailEF.ToString()) Destroy(child.gameObject);
+        }
+
+        //* サイズ初期化 (GaintBallで大きくなった)
+        Transform ballTf = Array.Find(transform.GetComponentsInChildren<Transform>(), tf => tf.name == DM.NAME.Box001.ToString());
+        if(ballTf)  ballTf.localScale = Vector3.one;
     }
 
     private void setDownWallTriggerOff() {
@@ -473,9 +487,11 @@ public class Ball_Prefab : MonoBehaviour
     }
 
     void instantiateMultiShot(Vector3 dir, float force, float ratio){
-        var ins = Instantiate(this.gameObject, myTransform.position, Quaternion.identity, gm.ballGroup);
-        // var ins = ObjectPool.getObject(ObjectPool.DIC.MainBallPf.ToString(), myTransform.position, Quaternion.identity, gm.ballGroup);
+        // var ins = Instantiate(this.gameObject, myTransform.position, Quaternion.identity, gm.ballGroup);
+        var ins = ObjectPool.getObject(ObjectPool.DIC.SubBall.ToString(), myTransform.position, Quaternion.identity, gm.ballStorage);
         ins.name = DM.NAME.SubBall.ToString();
+        ins.transform.SetParent(gm.ballGroup);
+
         ins.GetComponent<Rigidbody>().AddForce(dir * force * ratio, ForceMode.Impulse);
         Vector3 scale = ins.transform.localScale;
         ins.transform.localScale = new Vector3(scale.x * ratio, scale.y * ratio, scale.z * ratio);
@@ -513,8 +529,8 @@ public class Ball_Prefab : MonoBehaviour
     // }
     private void checkDestroyMainBall(){
         //* (BUG-79) MainBallをまずObjectPool化しましたが、localScale.xが0.4なのに、0.39999になって、Strike条件式に入らないBUGあるため、条件式からこの部分抜ける。
-        if(this.name == MAIN_BALL){// && myTransform.localScale.x == 0.4f){
-            Debug.Log("Ball_Prefab::checkDestroyMainBall():: this is Main Ball -> onDestroyMe()");
+        if(name == MAIN_BALL){// && myTransform.localScale.x == 0.4f){
+            Debug.Log($"Ball_Prefab::checkDestroyMainBall():: this.name= {name}");
             onDestroyMe();
         }
         else{
