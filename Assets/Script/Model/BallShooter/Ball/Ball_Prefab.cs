@@ -527,11 +527,13 @@ public class Ball_Prefab : MonoBehaviour
     IEnumerator coPlayHomeRunAnim(bool isActiveSkillTrigger){
         isHomeRun = true;
         gm.IsPlayingAnim = true;
+        gm.dontLookCam2ObjsGroup.SetActive(true);
         Debug.Log("HOMERUH!!!!" + "isHomeRun= " + isHomeRun);
         Time.timeScale = 0;
         pl.setAnimTrigger(DM.ANIM.HomeRun.ToString());
 
-        yield return Util.delay2RT;//new WaitForSecondsRealtime(2);
+        yield return Util.delay2RT;
+        gm.dontLookCam2ObjsGroup.SetActive(false);
         SM.ins.sfxPlay(SM.SFX.HomeRun.ToString());
         //* Animation Finish
         gm.IsPlayingAnim = false;
