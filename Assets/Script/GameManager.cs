@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour {
 
 # if UNITY_EDITOR
     [Header("DEBUG MT")][Header("__________________________")]
-    [SerializeField] bool isDownWallDebugMode;
+    [SerializeField] bool isDebugMode;  public bool IsDebugMode {get => isDebugMode; set => isDebugMode = value;}
     [SerializeField] bool isHitedTimeStop;
     [SerializeField]  GameObject activeDownWallArea;
     [SerializeField]  GameObject hitArea;
@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour {
     public Transform obstacleGroup;
     public Transform activeSkillBtnGroup;
     public RectTransform showExpUIGroup;
+    public GameObject dontLookCam2ObjsGroup;
     
     [Header("CAMERA")][Header("__________________________")]
     public GameObject cam1;
@@ -334,10 +335,10 @@ public class GameManager : MonoBehaviour {
     void Update(){
         //* Debug Mode
         # if UNITY_EDITOR
-            if(isDownWallDebugMode) Time.timeScale = timeScale;
-            downWallCollider.GetComponent<MeshRenderer>().enabled = isDownWallDebugMode;
-            activeDownWallArea.GetComponent<MeshRenderer>().enabled = isDownWallDebugMode;
-            hitArea.GetComponent<MeshRenderer>().enabled = isDownWallDebugMode;
+            if(isDebugMode) Time.timeScale = timeScale;
+            downWallCollider.GetComponent<MeshRenderer>().enabled = isDebugMode;
+            activeDownWallArea.GetComponent<MeshRenderer>().enabled = isDebugMode;
+            hitArea.GetComponent<MeshRenderer>().enabled = isDebugMode;
 
             debugHitBallTrigger();
         # endif
@@ -763,6 +764,7 @@ public class GameManager : MonoBehaviour {
             pl.previewBundle.SetActive(false);
             postProccessingObj.SetActive(false);
             inGamePassiveSkillTablePanel.SetActive(false);
+            dontLookCam2ObjsGroup.SetActive(false);
 
         }
         else{//* CAM1 ON
@@ -773,6 +775,8 @@ public class GameManager : MonoBehaviour {
             setActivePreviewBendle(true);
             postProccessingObj.SetActive(true);
             inGamePassiveSkillTablePanel.SetActive(true);
+            dontLookCam2ObjsGroup.SetActive(true);
+
             bs.ExclamationMarkObj.SetActive(false);
             //* ActiveSkill Status
             // StopCoroutine(corSetStrike());
