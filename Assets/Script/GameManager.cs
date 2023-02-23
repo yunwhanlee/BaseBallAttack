@@ -764,7 +764,7 @@ public class GameManager : MonoBehaviour {
             pl.previewBundle.SetActive(false);
             postProccessingObj.SetActive(false);
             inGamePassiveSkillTablePanel.SetActive(false);
-            dontLookCam2ObjsGroup.SetActive(false);
+            // dontLookCam2ObjsGroup.SetActive(false);
 
         }
         else{//* CAM1 ON
@@ -775,7 +775,7 @@ public class GameManager : MonoBehaviour {
             setActivePreviewBendle(true);
             postProccessingObj.SetActive(true);
             inGamePassiveSkillTablePanel.SetActive(true);
-            dontLookCam2ObjsGroup.SetActive(true);
+            // dontLookCam2ObjsGroup.SetActive(true);
 
             bs.ExclamationMarkObj.SetActive(false);
             //* ActiveSkill Status

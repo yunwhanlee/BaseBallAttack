@@ -261,6 +261,7 @@ public class BlockMaker : MonoBehaviour
         Time.timeScale = 0.1f;
         camAnim.SetTrigger(DM.ANIM.DoBossSpawn.ToString());
         uiAnim.SetTrigger(DM.ANIM.DoSpawn.ToString());
+        gm.dontLookCam2ObjsGroup.SetActive(true);
         bossNameTxt.text = bossName;
 
         yield return new WaitForSecondsRealtime(animPlayTime);
@@ -269,6 +270,7 @@ public class BlockMaker : MonoBehaviour
         gm.setActiveSkillBtns(true);
         gm.readyBtn.gameObject.SetActive(true);
         gm.statusFolderPanel.gameObject.SetActive(true);
+        gm.dontLookCam2ObjsGroup.SetActive(false);
         Time.timeScale = 1;
     }
     public void setGlowEF(Block_Prefab[] blocks, bool isOn){
