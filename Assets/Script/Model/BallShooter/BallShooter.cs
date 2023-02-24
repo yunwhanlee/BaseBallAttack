@@ -107,7 +107,7 @@ public class BallShooter : MonoBehaviour
     }
     public GameObject setBallObject(string name, Transform tf, Quaternion rotation){
         GameObject ins = ObjectPool.getObject(name, tf.position, rotation, gm.ballStorage);
-        if(ins.name != name)    ins.name = name;
+        ins.name = name;
         ins.transform.SetParent(gm.ballGroup);
 
         return ins;

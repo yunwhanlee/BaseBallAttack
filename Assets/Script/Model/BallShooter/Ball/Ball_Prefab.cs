@@ -43,6 +43,13 @@ public class Ball_Prefab : MonoBehaviour
 
     void OnEnable() => init(name);
 
+    void FixedUpdate() {
+        if(myCollider.isTrigger == true) return;
+
+        if(transform.position.y > 0.5f){
+            transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
+        }
+    }
     void Update(){
         //* Destroy by Checking Velocity
         //! (BUG-80) Ball_Prefab:: FixedUpdate::checkDestroyMainBall()が重なって読み出すBUGある。
@@ -434,6 +441,7 @@ public class Ball_Prefab : MonoBehaviour
         myTransform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
         myTransform.localScale = Vector3.one * 0.4f;
         myCollider.isTrigger = (name == DM.NAME.MainBall.ToString())? true : false;
+        myCollider.enabled = true; //* (BUG-81) 急にボールがStrike領域とかHitAreaをそのまま追加していく。
         isHomeRun = false;
         IsOnDarkOrb = false;
         darkOrbPf.SetActive(false);
