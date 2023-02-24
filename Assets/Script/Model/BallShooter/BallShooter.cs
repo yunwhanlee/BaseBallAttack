@@ -91,10 +91,11 @@ public class BallShooter : MonoBehaviour
 
         Debug.Log("ballPreviewDirGoal="+gm.ballPreviewDirGoal.transform.position+", entranceTfPos="+entranceTf.position);
         Vector3 goalDir = (gm.ballPreviewDirGoal.transform.position - entranceTf.position).normalized;
-        // GameObject ins = Instantiate(ballPref, entranceTf.position, Quaternion.LookRotation(goalDir), gm.ballGroup);
-        GameObject ins = ObjectPool.getObject(ObjectPool.DIC.MainBall.ToString(), entranceTf.position, Quaternion.LookRotation(goalDir), gm.ballStorage);
-        ins.name = DM.NAME.MainBall.ToString();
-        ins.transform.SetParent(gm.ballGroup);
+        
+        // GameObject ins = ObjectPool.getObject(ObjectPool.DIC.MainBall.ToString(), entranceTf.position, Quaternion.LookRotation(goalDir), gm.ballStorage);
+        // ins.name = DM.NAME.MainBall.ToString();
+        // ins.transform.SetParent(gm.ballGroup);
+        GameObject ins = setBallObject(DM.NAME.MainBall.ToString(), entranceTf, Quaternion.LookRotation(goalDir));
 
         //* (BUG-55) もしエラーで、DownWallコライダーのIsTriggerがFalseの場合、
         //* 投げるボールが壁にぶつかってプレイヤーへ届かないので、Trueに戻す処理。
@@ -104,7 +105,13 @@ public class BallShooter : MonoBehaviour
 
         throwBall(ins, goalDir);
     }
+    public GameObject setBallObject(string name, Transform tf, Quaternion rotation){
+        GameObject ins = ObjectPool.getObject(name, tf.position, rotation, gm.ballStorage);
+        if(ins.name != name)    ins.name = name;
+        ins.transform.SetParent(gm.ballGroup);
 
+        return ins;
+    }
     public void stopCoShootCount(){
         if(coShootCountID != null){
             StopCoroutine(coShootCountID);
@@ -112,7 +119,6 @@ public class BallShooter : MonoBehaviour
             isReadyShoot = false;
         }
     }
-
     public void throwBall(GameObject ins, Vector3 goalDir){
         gm.readyBtn.gameObject.SetActive(false);
         var ball = ins.GetComponent<Ball_Prefab>();

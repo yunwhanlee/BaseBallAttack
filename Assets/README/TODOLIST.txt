@@ -474,7 +474,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-78) 時々、NextStageが呼び出されなくなり、DownWallのTriggerがTrueに戻らない。
     ✓ (BUG-79) MainBallをまずObjectPool化しましたが、localScale.xが0.4なのに、0.39999になって、Strike条件式に入らないBUGあるため、条件式からこの部分抜ける。
 
-    - (BUG-80) Ball_Prefab:: FixedUpdate::checkDestroyMainBall()が重なって読み出すBUGある。
+    ✓ (BUG-80) Ball_Prefab:: FixedUpdate::checkDestroyMainBall()が重なって読み出すBUGある。
 
     - (BUG) リワード広告をホームとインゲームに届いたら、お先にロードしておく。
     - (BUG) ColorBallが障害物にぶつかったら、エラーになること。

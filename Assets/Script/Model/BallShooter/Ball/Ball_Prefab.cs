@@ -43,12 +43,13 @@ public class Ball_Prefab : MonoBehaviour
 
     void OnEnable() => init(name);
 
-    void FixedUpdate(){
+    void Update(){
         //* Destroy by Checking Velocity
-        if(myRigid.velocity.magnitude != 0 && myRigid.velocity.magnitude < 0.9875f){
-            Debug.Log($"Ball_Prefab::BallGroup.childCount= {gm.ballGroup.childCount}, velocity.magnitude= {myRigid.velocity.magnitude}, name= {name}");
+        //! (BUG-80) Ball_Prefab:: FixedUpdate::checkDestroyMainBall()が重なって読み出すBUGある。
+        if(myRigid.velocity != Vector3.zero && myRigid.velocity.sqrMagnitude < 0.9875f){
+            // Debug.Log($"Ball_Prefab:: BallGroup.childCount= {gm.ballGroup.childCount}, velocity.magnitude= {Util._.setNumDP(myRigid.velocity.sqrMagnitude, 3)}, name= {name}, parent= {transform.parent.name}");
             myRigid.velocity = Vector3.zero;
-            checkDestroyMainBall();
+            checkDestroyObjName();
         }
 
         //* Ball Preview Direction Goal Img
@@ -316,7 +317,6 @@ public class Ball_Prefab : MonoBehaviour
                     myCollider.enabled = false; //* ボール動きなし
 
                     //* Delay Next Stage 
-                    
                     StartCoroutine(coDelayDestroyMe()); //* (BUG-65) ColorBallPopブロックにぶつかってもボールが破壊されない。-> coDelayDestroyMe()生成して対応。
                 }
             });
@@ -487,14 +487,14 @@ public class Ball_Prefab : MonoBehaviour
     }
 
     void instantiateMultiShot(Vector3 dir, float force, float ratio){
-        // var ins = Instantiate(this.gameObject, myTransform.position, Quaternion.identity, gm.ballGroup);
-        var ins = ObjectPool.getObject(ObjectPool.DIC.SubBall.ToString(), myTransform.position, Quaternion.identity, gm.ballStorage);
-        ins.name = DM.NAME.SubBall.ToString();
-        ins.transform.SetParent(gm.ballGroup);
+        // var ins = ObjectPool.getObject(ObjectPool.DIC.SubBall.ToString(), myTransform.position, Quaternion.identity, gm.ballStorage);
+        // ins.name = DM.NAME.SubBall.ToString();
+        // ins.transform.SetParent(gm.ballGroup);
+        var ins = gm.bs.setBallObject(DM.NAME.SubBall.ToString(), myTransform, Quaternion.identity);
 
         ins.GetComponent<Rigidbody>().AddForce(dir * force * ratio, ForceMode.Impulse);
         Vector3 scale = ins.transform.localScale;
-        ins.transform.localScale = new Vector3(scale.x * ratio, scale.y * ratio, scale.z * ratio);
+        // ins.transform.localScale = new Vector3(scale.x * ratio, scale.y * ratio, scale.z * ratio);
     }
 
     private void decreaseBlocksHp(DM.ATV atv, int dmg, float dotDmgPer = 0){
@@ -527,16 +527,15 @@ public class Ball_Prefab : MonoBehaviour
     //         checkDestroyMainBall();
     //     }
     // }
-    private void checkDestroyMainBall(){
+    private void checkDestroyObjName(){
         //* (BUG-79) MainBallをまずObjectPool化しましたが、localScale.xが0.4なのに、0.39999になって、Strike条件式に入らないBUGあるため、条件式からこの部分抜ける。
         if(name == MAIN_BALL){// && myTransform.localScale.x == 0.4f){
-            Debug.Log($"Ball_Prefab::checkDestroyMainBall():: this.name= {name}");
+            Debug.Log($"Ball_Prefab:: checkDestroyObjName():: MAIN BALL");
             onDestroyMe();
         }
         else{
-            Debug.Log("Ball_Prefab::checkDestroyMainBall():: this is not Main Ball -> Destroy(this)");
-            // Destroy(this.gameObject);
-            StartCoroutine(ObjectPool.coDestroyObject(gameObject, gm.ballStorage));
+            Debug.Log("Ball_Prefab:: checkDestroyObjName():: SUB BALL");
+            StartCoroutine(ObjectPool.coDestroyObject(gameObject, gm.ballStorage)); // Destroy(this.gameObject);
         }
     }
 
@@ -548,8 +547,7 @@ public class Ball_Prefab : MonoBehaviour
             gm.setStrike();
             gm.setBallPreviewGoalRandomPos();
         }
-        // Destroy(this.gameObject);
-        StartCoroutine(ObjectPool.coDestroyObject(gameObject, gm.ballStorage));
+        StartCoroutine(ObjectPool.coDestroyObject(gameObject, gm.ballStorage)); // Destroy(this.gameObject);
     }
 
     IEnumerator coPlayHomeRunAnim(bool isActiveSkillTrigger){
