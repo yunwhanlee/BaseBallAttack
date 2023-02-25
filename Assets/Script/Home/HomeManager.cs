@@ -636,7 +636,7 @@ public class HomeManager : MonoBehaviour
             if(bat.transform.GetChild(i).name == "BatEffectTf" && bat.transform.GetChild(i).gameObject.activeSelf){
                 Debug.Log($"{i}: {bat.transform.GetChild(i).name}, active? {bat.transform.GetChild(i).gameObject.activeSelf} -> OFF");
                 bat.transform.GetChild(i).gameObject.SetActive(false); 
-                return;
+                break; //* (BUG-87) for文のif文に該当するなら、処理してfor文を抜ける処理をしたくてreturnをしましたが、これは関数()を抜ける処理でした。breakに切り替え修正。
             }
         }
 

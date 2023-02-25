@@ -482,6 +482,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     - (BUG-84) Perfectの場合、DropBoxが生成されると同じが二つ出てくる。
     ✓ (BUG-85) BossLimitCntがブロックのPerfectの場合ー２になる。ボースステージに固定。
     ✓ (BUG-86) ボース生成するとき、BossBlockのStart()からgm.bossLimitCntを設定したが、処理順番がGM::setNextStage()より遅い。BlockMaker::bossSpawn()でInstantiateするとき、ここで値を代入。
+    ✓ (BUG-87) for文のif文に該当するなら、処理してfor文を抜ける処理をしたくてreturnをしましたが、これは関数()を抜ける処理でした。breakに切り替え修正。
 
     - (BUG) リワード広告をホームとインゲームに届いたら、お先にロードしておく。
     - (BUG) ColorBallが障害物にぶつかったら、エラーになること。
