@@ -41,7 +41,9 @@ public class Ball_Prefab : MonoBehaviour
         IsOnDarkOrb = false;
     }
 
-    void OnEnable() => init(name);
+    void OnDisable() => init(name);
+
+    
 
     void FixedUpdate() {
         if(myCollider.isTrigger == true) return;

@@ -968,5 +968,26 @@ public class HomeManager : MonoBehaviour
         itemPf.transform.GetChild(ICON).GetComponent<Image>().sprite = IconSpr;
         itemPf.transform.GetChild(TEXT).GetComponent<Text>().text = TextVal;
     }
+    public void onClickBtnTestPruchasePremiumPackage(){
+        SM.ins.sfxPlay(SM.SFX.PurchaseSuccess.ToString());
+        DM.ins.personalData.IsPurchasePremiumPack = true;
+
+        // Set Data
+        DM.ins.personalData.addRouletteTicket(LM._.PREM_PACK_ROULETTE_TICKET);
+        DM.ins.personalData.addCoin(LM._.PREM_PACK_COIN); // DM.ins.personalData.Coin += LM._.PREM_PACK_COIN;
+        DM.ins.personalData.addDiamond(LM._.PREM_PACK_DIAMOND);
+        DM.ins.personalData.IsRemoveAD = true;
+
+        // UI
+        DM.ins.setUIRemoveAD();
+        checkPremiumPackPurchaseStatus();
+
+        displayShowRewardPanel(
+            coin: LM._.PREM_PACK_COIN,
+            diamond: LM._.PREM_PACK_DIAMOND,
+            rouletteTicket: LM._.PREM_PACK_ROULETTE_TICKET,
+            removeAD: true
+        );
+    }
 #endregion
 }
