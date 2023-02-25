@@ -478,7 +478,8 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-81) 急にボールがStrike領域とかHitAreaをそのまま追加していく。
     ✓ (BUG-82) ボールがスピードが早くて、床を通り抜けて、スピードが止まらないバグあるため、VisibleArea生成、抜けたら非活性化する処理。
     ✓ (BUG-83) CoinX2したら、なぜかTime.Scaleの０が１になること対応。
-
+    - (BUG-84) Perfectの場合、DropBoxが生成されると同じが二つ出てくる。
+    ✓ (BUG-85) BossLimitCntがブロックのPerfectの場合ー２になる。ボースステージに固定。
 
     - (BUG) リワード広告をホームとインゲームに届いたら、お先にロードしておく。
     - (BUG) ColorBallが障害物にぶつかったら、エラーになること。

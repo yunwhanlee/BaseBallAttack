@@ -69,8 +69,8 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("勝利ボースカウンター")] public int VICTORY_BOSSKILL_CNT = 4;
     
     [Header("BLOCK SPAN")][Header("__________________________")]
-    [Tooltip("ボース登場ステージ周期")] public int BOSS_STAGE_SPAN = 10;
-    [Tooltip("ボース制限ステージ時間")] public int BOSS_LIMIT_SPAN = 20;
+    [Tooltip("ボース登場ステージ周期")] public int BOSS_STAGE_SPAN = 15;
+    [Tooltip("ボース制限ステージ時間")] public int BOSS_LIMIT_SPAN = 12;
     [Tooltip("ボース死んだら出るオブ")] public int BOSS_DIE_ORB_CNT = 25;
     [Tooltip("ボース制限ステージお知らせNUMBER")] public int BOSS_LIMIT_CNT_ALERT_NUM = 5;
     [Tooltip("LONGブロック登場ステージ周期")] public int LONG_BLOCK_SPAN = 5;

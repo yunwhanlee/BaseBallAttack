@@ -1113,11 +1113,15 @@ public class GameManager : MonoBehaviour {
         activeSkillDataBase[0].checkBlocksIsDotDmg(this);
 
         StartCoroutine(coCheckGetRewardChest());
-        StartCoroutine(coNextStage(boss));
+        StartCoroutine(coNextStageProcess(boss));
         
         //* BossSkill
         if(boss){
-            stage--; //ステージは同じく維持
+            //* (BUG-85) BossLimitCntがブロックのPerfectの場合ー２になる。ボースステージに固定。
+            // Debug.Log($"bossStage: {boss.BossLevel * LM._.BOSS_LIMIT_SPAN}");
+            int bossStage = boss.BossLevel * LM._.BOSS_LIMIT_SPAN;
+            stage = bossStage; //* ステージ固定。
+
             bossLimitCnt--;
 
             if(bossLimitCnt == LM._.BOSS_LIMIT_CNT_ALERT_NUM){
@@ -1141,7 +1145,7 @@ public class GameManager : MonoBehaviour {
         AcvStageClear.setStageClear(stage);
     }
 
-    private IEnumerator coNextStage(BossBlock boss){
+    private IEnumerator coNextStageProcess(BossBlock boss){
         yield return StartCoroutine(coCheckPerfectBonus(boss));
         yield return StartCoroutine(collectDropOrb()); //* オーブを集める
         yield return StartCoroutine(coCheckLevelUp());
@@ -1160,8 +1164,9 @@ public class GameManager : MonoBehaviour {
 
             yield return Util.delay0_5;
             //* One More Next Stage (ボスがいなければ)
-            if(!boss)
+            if(!boss){
                 ++stage;
+            }
             bm.DoCreateBlock = true;
         }
     }

@@ -21,7 +21,7 @@ public class BossBlock : Block_Prefab{
     // [SerializeField]  string skillType;
 
     [Header("【BOSS STATUS】")][Header("__________________________")]
-    [SerializeField] int bossLevel;
+    [SerializeField] int bossLevel;   public int BossLevel {get => bossLevel;}
     [SerializeField] int obstacleResetCnt = 0;
     [SerializeField] GameObject obstacleStonePf;
     [SerializeField] List<Vector3> obstaclePosList;
