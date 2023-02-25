@@ -10,7 +10,7 @@ public class BossBlock : Block_Prefab{
     const float STONE_SCALE_X = 2.8f;
     const float OBSTACLE_OFFSET_Z = -9;
     const int OBSTACLE_STONE_CNT = 1;
-    const float BOSS_HEAL_RATIO = 0.2f;
+    const float BOSS_HEAL_RATIO = 0.1f;
     const int BOSS_DIE_ORB_CNT = 30;
     const int STONE_PER = 100;
     const int OBSTACLE_RESET_SPAN = 5;

@@ -15,7 +15,7 @@ public class VisibalArea : MonoBehaviour
         //* (BUG-82) ボールがスピードが早くて、床を通り抜けて、スピードが止まらないバグあるため、VisibleArea生成、抜けたら非活性化する処理。
         if(col.CompareTag(DM.NAME.Ball.ToString())){
             Debug.Log($"<color=red>VisibalArea:: OnTriggerExit:: col= {col.name}, pos= {col.transform.position}</color>");
-        StartCoroutine(ObjectPool.coDestroyObject(col.gameObject, gm.ballStorage)); // Destroy(this.gameObject);
+            col.GetComponent<Ball_Prefab>().checkDestroyObjName();
         }
     }
 }

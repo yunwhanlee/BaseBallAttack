@@ -477,6 +477,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-80) Ball_Prefab:: FixedUpdate::checkDestroyMainBall()が重なって読み出すBUGある。
     ✓ (BUG-81) 急にボールがStrike領域とかHitAreaをそのまま追加していく。
     ✓ (BUG-82) ボールがスピードが早くて、床を通り抜けて、スピードが止まらないバグあるため、VisibleArea生成、抜けたら非活性化する処理。
+    ✓ (BUG-83) CoinX2したら、なぜかTime.Scaleの０が１になること対応。
 
 
     - (BUG) リワード広告をホームとインゲームに届いたら、お先にロードしておく。

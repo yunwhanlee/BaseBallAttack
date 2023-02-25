@@ -537,7 +537,7 @@ public class Ball_Prefab : MonoBehaviour
     //         checkDestroyMainBall();
     //     }
     // }
-    private void checkDestroyObjName(){
+    public void checkDestroyObjName(){
         //* (BUG-79) MainBallをまずObjectPool化しましたが、localScale.xが0.4なのに、0.39999になって、Strike条件式に入らないBUGあるため、条件式からこの部分抜ける。
         if(name == MAIN_BALL){// && myTransform.localScale.x == 0.4f){
             Debug.Log($"Ball_Prefab:: checkDestroyObjName():: MAIN BALL");

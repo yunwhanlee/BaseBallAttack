@@ -679,7 +679,7 @@ public class GameManager : MonoBehaviour {
     }
     public void onClickShowADButton(string rewardType){
         Debug.Log("<color=yellow> onClickShowADButton(" + rewardType.ToString() + ")</color>");
-        // SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
+
         //* 広告
         am.showRewardAd(
             rewardType == DM.REWARD.CoinX2.ToString()? DM.REWARD.CoinX2
@@ -740,6 +740,8 @@ public class GameManager : MonoBehaviour {
     }
 
     public void setCoinX2(){
+        //* (BUG-83) CoinX2したら、なぜかTime.Scaleの０が１になること対応。
+        Time.timeScale = 0;
         SM.ins.sfxPlay(SM.SFX.DropBoxCoinPick.ToString());
 
         resultCoin = resultCoin * 2; //* (BUG-69) CoinX2広告みても、適用できされないバグ対応。
