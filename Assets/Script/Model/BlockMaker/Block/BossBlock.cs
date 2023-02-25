@@ -37,7 +37,8 @@ public class BossBlock : Block_Prefab{
     void Start() {
         Debug.Log("BossBlock:: this.name= " + this.name + "::Start():: DM.ins.gm= " + DM.ins.gm);
         GameManager gm = DM.ins.gm;
-        gm.bossLimitCnt = LM._.BOSS_LIMIT_SPAN;
+        // gm.bossLimitCnt = LM._.BOSS_LIMIT_SPAN; //! (BUG-86) ボース生成するとき、BossBlockのStart()からgm.bossLimitCntを設定したが、処理順番がGM::setNextStage()より遅い。BlockMaker::bossSpawn()でInstantiateするとき、ここで値を代入。
+        Debug.Log($"bossLimitCnt::BossBlock= {gm.bossLimitCnt}");
         gm.bossLimitCntTxt.gameObject.SetActive(true);
         bossDieOrbSpawnTf = GameObject.Find(DM.NAME.BossDieDropOrbSpot.ToString()).transform;
         activeBossSkill(isFirst: true);
@@ -403,9 +404,10 @@ public class BossBlock : Block_Prefab{
         for(int i=0; i<gm.obstacleGroup.childCount; i++){
             // Debug.Log($"eraseObstacle():: obstacleGroup.GetChild({i})= {gm.obstacleGroup.GetChild(i)}");
             var childTf = gm.obstacleGroup.GetChild(i);
-            if(childTf)
+            if(childTf){
                 gm.em.createRockObstacleBrokenEF(childTf.position);
-            Destroy(childTf.gameObject);
+                Destroy(childTf.gameObject);
+            }
         }
     }
 

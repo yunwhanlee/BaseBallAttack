@@ -19,6 +19,7 @@ public class Ball_Prefab : MonoBehaviour
 
     //* Value
     [SerializeField] bool isHomeRun = false;
+    [SerializeField] bool isActive = true;
     // [SerializeField] bool isHitedByBlock = false;
     // [SerializeField] float deleteLimitTime = 2.0f;
     [SerializeField] float speed;    public float Speed {get => speed; set => speed = value;}
@@ -43,8 +44,6 @@ public class Ball_Prefab : MonoBehaviour
 
     void OnDisable() => init(name);
 
-    
-
     void FixedUpdate() {
         if(myCollider.isTrigger == true) return;
 
@@ -55,8 +54,10 @@ public class Ball_Prefab : MonoBehaviour
     void Update(){
         //* Destroy by Checking Velocity
         //! (BUG-80) Ball_Prefab:: FixedUpdate::checkDestroyMainBall()が重なって読み出すBUGある。
-        if(myRigid.velocity != Vector3.zero && myRigid.velocity.sqrMagnitude < 0.9875f){
+        //! まだ問題あり、isActiveトリガーを用意して対応。(まだ注意必要)
+        if(isActive && myRigid.velocity != Vector3.zero && myRigid.velocity.sqrMagnitude < 0.9875f){
             // Debug.Log($"Ball_Prefab:: BallGroup.childCount= {gm.ballGroup.childCount}, velocity.magnitude= {Util._.setNumDP(myRigid.velocity.sqrMagnitude, 3)}, name= {name}, parent= {transform.parent.name}");
+            isActive = false;
             myRigid.velocity = Vector3.zero;
             checkDestroyObjName();
         }
@@ -437,6 +438,7 @@ public class Ball_Prefab : MonoBehaviour
 //*  関数
 //*---------------------------------------------------------------
     private void init(string name){
+        isActive = true;
         myRigid.velocity = Vector3.zero;
         myRigid.angularVelocity = Vector3.zero;
         myRigid.useGravity = (name == DM.NAME.MainBall.ToString())? false : true;
@@ -540,11 +542,11 @@ public class Ball_Prefab : MonoBehaviour
     public void checkDestroyObjName(){
         //* (BUG-79) MainBallをまずObjectPool化しましたが、localScale.xが0.4なのに、0.39999になって、Strike条件式に入らないBUGあるため、条件式からこの部分抜ける。
         if(name == MAIN_BALL){// && myTransform.localScale.x == 0.4f){
-            Debug.Log($"Ball_Prefab:: checkDestroyObjName():: MAIN BALL");
+            Debug.Log($"AAA Ball_Prefab:: checkDestroyObjName():: MAIN BALL-> name= {name}");
             onDestroyMe();
         }
         else{
-            Debug.Log("Ball_Prefab:: checkDestroyObjName():: SUB BALL");
+            Debug.Log($"Ball_Prefab:: checkDestroyObjName():: SUB BALL-> name= {name}");
             StartCoroutine(ObjectPool.coDestroyObject(gameObject, gm.ballStorage)); // Destroy(this.gameObject);
         }
     }

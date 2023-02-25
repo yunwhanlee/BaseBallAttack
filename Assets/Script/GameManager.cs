@@ -1084,7 +1084,7 @@ public class GameManager : MonoBehaviour {
         BossBlock boss = bm.getBoss();
 
         //* (BUG-34) nextStage()に行く前、ballCountが1になり、downWallCollider.isTriggerがfalseのままになるBUG。
-        Debug.Log($"<color=white>setNextStage:: ballCnt={ballGroup.childCount}</color>");
+        Debug.Log($"<color=white>AAA setNextStage:: ballCnt={ballGroup.childCount}</color>");
 
         //* Set
         ++stage;
@@ -1116,10 +1116,12 @@ public class GameManager : MonoBehaviour {
         StartCoroutine(coNextStageProcess(boss));
         
         //* BossSkill
+        Debug.Log($"setNextStage:: boss= {boss}, gm.bossLimitCnt= {bossLimitCnt}");
+
         if(boss){
             //* (BUG-85) BossLimitCntがブロックのPerfectの場合ー２になる。ボースステージに固定。
             // Debug.Log($"bossStage: {boss.BossLevel * LM._.BOSS_LIMIT_SPAN}");
-            int bossStage = boss.BossLevel * LM._.BOSS_LIMIT_SPAN;
+            int bossStage = boss.BossLevel * LM._.BOSS_STAGE_SPAN;
             stage = bossStage; //* ステージ固定。
 
             bossLimitCnt--;
@@ -1129,6 +1131,7 @@ public class GameManager : MonoBehaviour {
             }
 
             //* ボース制限時間が０になったら、GAMEOVER!!
+            Debug.Log($"bossLimitCnt= {bossLimitCnt}");
             if(bossLimitCnt <= 0){
                 setGameOver();
                 return;
@@ -1158,6 +1161,7 @@ public class GameManager : MonoBehaviour {
         }
     }
     private IEnumerator coCheckPerfectBonus(BossBlock boss){
+        Debug.Log("AAA setNextStage:: coCheckPerfectBonus::");
         if(blockGroup.childCount == 0){
             perfectTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
             em.activeUI_EF(DM.ANIM.Perfect.ToString());
