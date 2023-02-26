@@ -182,11 +182,12 @@ public class BlockMaker : MonoBehaviour
             //* DropBox Shieldが活性化していたら、重ならないようにIndexから除外(０番目 INDEX)
             const int DROPBOX_SHIELD = 0, DROPBOX_QUESTION = 1;
             int startIdx = gm.pl.IsBarrier? DROPBOX_QUESTION : DROPBOX_SHIELD;
-            int randIdx = Random.Range(startIdx, dropBoxPfArr.Length);
+            int randIdx = Random.Range(startIdx, 2);//dropBoxPfArr.Length);
             var randPos = dropBoxPfArr[0].GetComponent<DropBox>().setRandPos();
             Debug.Log($"createRandomDropBox:: idx= {randIdx}, name= {dropBoxPfArr[randIdx].name}, randPos= {randPos}");
+
             SM.ins.sfxPlay(SM.SFX.DropBoxSpawn.ToString());
-            var ins = ObjectPool.getObject(dropBoxPfArr[randIdx].name, randPos, dropBoxPfArr[randIdx].transform.rotation, gm.dropBoxGroup);
+            var ins = ObjectPool.getObject(dropBoxPfArr[DROPBOX_SHIELD].name, randPos, dropBoxPfArr[DROPBOX_SHIELD].transform.rotation, gm.dropBoxGroup);
         }
     }
 

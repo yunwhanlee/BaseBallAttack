@@ -65,10 +65,13 @@ public class DropBox : MonoBehaviour{ //* Create By BlockMaker.cs
             }
             else if(this.gameObject.name == ObjectPool.DIC.DropBoxShieldPf.ToString()){
                 SM.ins.sfxPlay(SM.SFX.DropBoxPick.ToString());
-                gm.em.createDropBoxShieldEF(this.transform);
-                gm.em.createDropBoxShieldBarrierEF(gm.pl.modelMovingTf);
-                //* 処理
-                gm.pl.IsBarrier = true;
+                //* (BUG-93) DropBox Sheildを習得してもうpl.IsBarrierがTrueであれば、もう一ど習得しても処理しない。
+                if(!gm.pl.IsBarrier){
+                    gm.em.createDropBoxShieldEF(this.transform);
+                    gm.em.createDropBoxShieldBarrierEF(gm.pl.modelMovingTf);
+                    //* 処理
+                    gm.pl.IsBarrier = true;
+                }
             }
             else if(this.gameObject.name == ObjectPool.DIC.DropBoxSpeedPf.ToString()){
                 SM.ins.sfxPlay(SM.SFX.DropBoxPick.ToString());

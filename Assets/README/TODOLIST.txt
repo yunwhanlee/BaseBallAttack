@@ -489,7 +489,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-91) CoinIcon時々プレイヤーと衝突しても消えないので、日程時間過ぎたら破壊。
 
     ✓ (BUG-92) RerotateADしたら、タイムスケールが１になること対応。
-    - (BUG-93) Sheildが起動しない、攻撃当たったのにSheildが消えない。
+    ✓ (BUG-93) DropBox Sheildを習得してもうpl.IsBarrierがTrueであれば、もう一ど習得しても処理しない。
 
 
     - InstantKill 2 -> 1%に変更。 
