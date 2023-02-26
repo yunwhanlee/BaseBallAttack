@@ -64,7 +64,7 @@ public static class LANG //* LANG
         Laser, FireProperty, IceProperty, ThunderProperty,
 
         //* Unique PSV
-        DamageTwice, GiantBall, DarkOrb, GodBless, BirdFriend,
+        DamageHalfUp, GiantBall, DarkOrb, GodBless, BirdFriend,
 
         //* Upgrade (Only Needed Language)
         BossDamage, CoinBonus, Defence,
@@ -505,7 +505,7 @@ public static class LANG //* LANG
     public static string[] FireProperty = new string[]{DM.PSV.FireProperty.ToString(), "火属性", "불속성"};
     public static string[] IceProperty = new string[]{DM.PSV.IceProperty.ToString(), "氷属性", "빙속성"};
     public static string[] ThunderProperty = new string[]{DM.PSV.ThunderProperty.ToString(), "雷属性", "뇌속성"};
-    public static string[] DamageTwice = new string[]{DM.PSV.DamageTwice.ToString(), "ダメージ200%", "데미지200%"};
+    public static string[] DamageHalfUp = new string[]{DM.PSV.DamageHalfUp.ToString(), "ダメージ150%", "데미지150%"};
     public static string[] GiantBall = new string[]{DM.PSV.GiantBall.ToString(), "ジャイアントボール", "자이언트볼"};
     public static string[] DarkOrb = new string[]{DM.PSV.DarkOrb.ToString(), "闇のオーブ", "어둠의오브"};
     public static string[] GodBless = new string[]{DM.PSV.GodBless.ToString(), "神の祝福", "신의축복"};
@@ -716,7 +716,7 @@ public static class LANG //* LANG
         if(name == TXT.FireProperty.ToString()) res = FireProperty[CUR_LANG];
         if(name == TXT.IceProperty.ToString()) res = IceProperty[CUR_LANG];
         if(name == TXT.ThunderProperty.ToString()) res = ThunderProperty[CUR_LANG];
-        if(name == TXT.DamageTwice.ToString()) res = DamageTwice[CUR_LANG];
+        if(name == TXT.DamageHalfUp.ToString()) res = DamageHalfUp[CUR_LANG];
         if(name == TXT.GiantBall.ToString()) res = GiantBall[CUR_LANG];
         if(name == TXT.DarkOrb.ToString()) res = DarkOrb[CUR_LANG];
         if(name == TXT.GodBless.ToString()) res = GodBless[CUR_LANG];

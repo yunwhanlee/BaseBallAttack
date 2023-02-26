@@ -418,10 +418,10 @@ MonoBehaviour:
   - 
   - 
   - 
+  atvSkillValueTxt: {fileID: 0}
   price:
     type: 0
-    coin: 0
-    diamond: 0
+    val: 0
   isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 3811945637865038421}
@@ -431,9 +431,9 @@ MonoBehaviour:
   rank: 0
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
-  cashShopPriceTxt: {fileID: 0}
   upgradeValueTxt: {fileID: 0}
   lvTxt: {fileID: 0}
+  cashShopPriceTxt: {fileID: 0}
   itemPassive:
     arr: []
   rankAuraEF: {fileID: 0}
@@ -759,7 +759,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7113350106559060599, guid: cfe0b9f7bc9a699409860c061ffd9b55, type: 3}
+  m_Sprite: {fileID: 7113350106559060599, guid: 60fe165dc6826d54f812e85038899111, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

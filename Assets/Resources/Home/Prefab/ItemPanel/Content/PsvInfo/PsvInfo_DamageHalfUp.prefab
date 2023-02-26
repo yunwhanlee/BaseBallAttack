@@ -512,7 +512,7 @@ GameObject:
   - component: {fileID: 3811945637619119264}
   - component: {fileID: 3811945637619119271}
   m_Layer: 5
-  m_Name: PsvInfo_DamageTwice
+  m_Name: PsvInfo_DamageHalfUp
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -562,21 +562,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameTxts:
-  - DamageTwice
-  - "\u30C0\u30E1\u30FC\u30B8200%"
-  - "\uB370\uBBF8\uC9C0200%"
+  - DamageHalfUp
+  - "\u30C0\u30E1\u30FC\u30B8150%"
+  - "\uB370\uBBF8\uC9C0150%"
   explainTxts:
-  - Increase Damage 200% Up.
-  - "\u653B\u6483\u529B 200\uFF05\u30A2\u30C3\u30D7\u3002"
-  - "\uACF5\uACA9\uB825 200% \uC5C5."
+  - Increase Damage 150% Up.
+  - "\u653B\u6483\u529B 150\uFF05\u30A2\u30C3\u30D7\u3002"
+  - "\uACF5\uACA9\uB825 150% \uC99D\uAC00."
   homeRunBonusTxts:
   - 
   - 
   - 
+  atvSkillValueTxt: {fileID: 0}
   price:
     type: 0
-    coin: 0
-    diamond: 0
+    val: 0
   isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 3811945637865038421}
@@ -586,9 +586,9 @@ MonoBehaviour:
   rank: 0
   outline3D: {fileID: 0}
   outline2D: {fileID: 0}
-  cashShopPriceTxt: {fileID: 0}
   upgradeValueTxt: {fileID: 0}
   lvTxt: {fileID: 0}
+  cashShopPriceTxt: {fileID: 0}
   itemPassive:
     arr: []
   rankAuraEF: {fileID: 0}
@@ -833,7 +833,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: DamageTwice
+  m_Text: DamageHalfUp
 --- !u!114 &3811945637915868280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -915,7 +915,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -6515452838685300054, guid: cfe0b9f7bc9a699409860c061ffd9b55, type: 3}
+  m_Sprite: {fileID: -6515452838685300054, guid: 60fe165dc6826d54f812e85038899111, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

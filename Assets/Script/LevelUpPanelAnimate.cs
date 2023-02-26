@@ -237,7 +237,7 @@ public class LevelUpPanelAnimate : MonoBehaviour{
                 pl.thunderProperty.setLvUp(pl.thunderProperty.Val + pl.thunderProperty.Unit);
                 break;
             //* Unique-------------------------------------------------------------------------------------
-            case DM.PSV.DamageTwice:
+            case DM.PSV.DamageHalfUp:
                 pl.damageTwice.setLvUp(pl.damageTwice.Val + pl.damageTwice.Unit);
                 break;
             case DM.PSV.GiantBall:{ //* (BUG-5) レベルアップする前に処理されるので、０になるバグ対応。

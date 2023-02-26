@@ -2332,8 +2332,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 106605947}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 4200}
-  m_LocalScale: {x: 2.1, y: 2.1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 6000}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 2001013461}
   m_RootOrder: 0
@@ -9617,7 +9617,7 @@ MonoBehaviour:
   HARDMODE_COIN_BONUS: 4
   HARDMODE_DIAMOND_BONUS: 1.5
   VICTORY_BOSSKILL_CNT: 4
-  BOSS_STAGE_SPAN: 2
+  BOSS_STAGE_SPAN: 15
   BOSS_LIMIT_SPAN: 12
   BOSS_DIE_ORB_CNT: 25
   BOSS_LIMIT_CNT_ALERT_NUM: 5
@@ -9642,7 +9642,7 @@ MonoBehaviour:
   REWARD_GOODS_PER: 40
   REWARD_PSVSKILL_TICKET_PER: 60
   REWARD_ROULETTE_TICKET_PER: 80
-  DROPBOX_PER: 863
+  DROPBOX_PER: 120
   DROPBOX_COIN_VALUE: 10
   DROPBOX_ALIVE_SPAN: 3
   MAX_LV: 30
@@ -9650,7 +9650,7 @@ MonoBehaviour:
   LEVELUP_SLOTS_UNIQUE_PER: 5
   DARKORB_SPEED: 250
   GODBLESS_COMBO_SPAN: 15
-  ATV_COOLDOWN_UNIT: 0.005
+  ATV_COOLDOWN_UNIT: 0.004
   ATVSKILL_MAXLV: 10
   THUNDERSHOT_CRIT: 1
   THUNDERSHOT_DEF_HIT: 5
@@ -9699,7 +9699,7 @@ MonoBehaviour:
     start: 100
     commonDiffrence: 50
     gradualUpValue: 0.1
-  UNLOCK_2ND_ATVSKILL_PRICE: 500
+  UNLOCK_2ND_ATVSKILL_PRICE: 1000
   UPGRADE_ATVSKILL:
     start: 100
     commonDiffrence: 50

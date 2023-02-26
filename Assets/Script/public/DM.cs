@@ -49,7 +49,7 @@ public class DM : MonoBehaviour{
         Dmg, MultiShot, Speed, InstantKill, Critical, Explosion, ExpUp, ItemSpawn, VerticalMultiShot, CriticalDamage,
         Laser, FireProperty, IceProperty, ThunderProperty,
         //* Unique Passive
-        DamageTwice, GiantBall, DarkOrb, GodBless, BirdFriend,
+        DamageHalfUp, GiantBall, DarkOrb, GodBless, BirdFriend,
         NULL
     };
     public enum UPGRADE {
@@ -281,7 +281,7 @@ public class DM : MonoBehaviour{
             FPT = LANG.FireProperty,
             IPT = LANG.IceProperty,
             TPT = LANG.ThunderProperty,
-            DTW = LANG.DamageTwice,
+            DTW = LANG.DamageHalfUp,
             GTB = LANG.GiantBall,
             DOB = LANG.DarkOrb,
             GBS = LANG.GodBless,
@@ -304,7 +304,7 @@ public class DM : MonoBehaviour{
             :(n == IPT[EN] || n == IPT[JP] || n == IPT[KR])? PSV.IceProperty
             :(n == TPT[EN] || n == TPT[JP] || n == TPT[KR])? PSV.ThunderProperty
             //* Unique Psv 
-            :(n == DTW[EN] || n == DTW[JP] || n == DTW[KR])? PSV.DamageTwice
+            :(n == DTW[EN] || n == DTW[JP] || n == DTW[KR])? PSV.DamageHalfUp
             :(n == GTB[EN] || n == GTB[JP] || n == GTB[KR])? PSV.GiantBall
             :(n == DOB[EN] || n == DOB[JP] || n == DOB[KR])? PSV.DarkOrb
             :(n == GBS[EN] || n == GBS[JP] || n == GBS[KR])? PSV.GodBless

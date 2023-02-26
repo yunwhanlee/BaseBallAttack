@@ -148,7 +148,7 @@ public class Player : MonoBehaviour
         thunderProperty = new PsvSkill<float>(LANG.getTxt(DM.PSV.ThunderProperty.ToString()), psvLvArr[(int)DM.PSV.ThunderProperty].lv, 
             value: 0, unit: 0.15f, maxLv: 3);
         //* Unique
-        damageTwice = new PsvSkill<int>(LANG.getTxt(DM.PSV.DamageTwice.ToString()), psvLvArr[(int)DM.PSV.DamageTwice].lv,
+        damageTwice = new PsvSkill<int>(LANG.getTxt(DM.PSV.DamageHalfUp.ToString()), psvLvArr[(int)DM.PSV.DamageHalfUp].lv,
             value: 0, unit: 1, maxLv: 1);
         giantBall = new PsvSkill<float>(LANG.getTxt(DM.PSV.GiantBall.ToString()), psvLvArr[(int)DM.PSV.GiantBall].lv,
             value: 1, unit: 1.5f, maxLv: 1);
@@ -293,7 +293,7 @@ public class Player : MonoBehaviour
         return obj;
     }
     public int calcPlDmg(){
-        int DMG_TWICE = (damageTwice.Level == 1)? 2 : 1;
+        float DMG_TWICE = (damageTwice.Level == 1)? 1.5f : 1;
         return Mathf.RoundToInt(dmg.Val * DMG_TWICE * giantBall.Val);
     }
 }

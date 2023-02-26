@@ -131,7 +131,7 @@ public class ItemPsvList{
         new ItemPsvDt(DM.PSV.FireProperty.ToString()),
         new ItemPsvDt(DM.PSV.IceProperty.ToString()),
         new ItemPsvDt(DM.PSV.ThunderProperty.ToString()),
-        new ItemPsvDt(DM.PSV.DamageTwice.ToString()),
+        new ItemPsvDt(DM.PSV.DamageHalfUp.ToString()),
         new ItemPsvDt(DM.PSV.GiantBall.ToString()),
         new ItemPsvDt(DM.PSV.DarkOrb.ToString()),
         new ItemPsvDt(DM.PSV.GodBless.ToString()),
@@ -201,7 +201,7 @@ public class PsvSkill<T> where T: struct {
         int percent = Mathf.RoundToInt(per * 100); //百分率
 
         //* PSV Unique Skill
-        int DMG_TWICE = (pl.damageTwice.Level == 1)? 2 : 1;
+        // int DMG_TWICE = (pl.damageTwice.Level == 1)? 2 : 1;
         // float GIANT_BALL_CALC = (pl.giantBall.Level == 1)? 
         //     (pl.multiShot.Val + pl.verticalMultiShot.Val + pl.giantBall.Val) * pl.giantBall.Unit
         //     : 1;
@@ -285,7 +285,6 @@ public class PsvSkill<T> where T: struct {
 
     public static List<string> setPsvStatusInfo2Str(Player pl){
         //* PSV Unique Skill
-        int DMG_TWICE = (pl.damageTwice.Level == 1)? 2 : 1;
 
         return new List<string>(){
             pl.dmg.Name,                    pl.calcPlDmg().ToString(),//Mathf.RoundToInt(pl.dmg.Val * DMG_TWICE * pl.giantBall.Val).ToString(),
@@ -412,7 +411,6 @@ public class AtvSkill{
 
     //* B. Set Dmg
     public AtvSkill(GameManager gm, Player pl){ //@ Overload
-        int DMG_TWICE = (pl.damageTwice.Level == 1)? 2 : 1;
         int ballDmg = pl.calcPlDmg();//Mathf.RoundToInt(pl.dmg.Val * DMG_TWICE * pl.giantBall.Val);
         var upgradeArr = DM.ins.personalData.AtvSkillUpgrade.Arr;
 

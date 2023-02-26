@@ -491,9 +491,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-92) RerotateADしたら、タイムスケールが１になること対応。
     ✓ (BUG-93) DropBox Sheildを習得してもうpl.IsBarrierがTrueであれば、もう一ど習得しても処理しない。
 
-
     - InstantKill 2 -> 1%に変更。 
-    - Unique Dmg200%を 150%に修正。詐欺。
 
     - (BUG) リワード広告をホームとインゲームに届いたら、お先にロードしておく。
     - (BUG) ColorBallが障害物にぶつかったら、エラーになること。
@@ -524,6 +522,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ GameTutorial準備。
     ✓ GameTutorial妖精コンテンツ追加。
     ✓ 業績パンネルで、受ける時簡単にもらえるようにUI修正。
+    ✓ Unique Dmg200%を 150%に修正。詐欺だから…
     - Cam２になると、まだフレームドロップ発生すること対応。
     - GameSpeed X 3倍 -> AD見ることに。
     - PlayArea : この領域をボールが出るとき、
