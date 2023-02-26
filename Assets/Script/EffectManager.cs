@@ -69,6 +69,7 @@ public class EffectManager : MonoBehaviour
     //ON OFF TYPE
     public GameObject perfectTxtPopEF;
     public GameObject homeRunTxtPopEF;
+    public GameObject BossClearTxtEF;
     public GameObject reviveEF;
     public GameObject bossLimitCntAlertTxtEF;
     //CREATE TYEP
@@ -370,6 +371,8 @@ public class EffectManager : MonoBehaviour
             StartCoroutine(coActivePerfectTxtEF());
         else if(name == DM.ANIM.HomeRun.ToString())
             StartCoroutine(coActiveHomeRunTxtEF());
+        else if(name == DM.ANIM.BossClear.ToString())
+            StartCoroutine(coActiveBossClearTxtEF());
         else if(name == DM.REWARD.Revive.ToString())
             StartCoroutine(coActiveReviveEF());
         else if(name == DM.ANIM.BossLimitcntAlertTxtEF.ToString())
@@ -384,6 +387,12 @@ public class EffectManager : MonoBehaviour
         homeRunTxtPopEF.SetActive(true);
         yield return Util.delay3;
         homeRunTxtPopEF.SetActive(false);
+    }
+    IEnumerator coActiveBossClearTxtEF(){
+        BossClearTxtEF.SetActive(true);
+        SM.ins.sfxPlay(SM.SFX.BossClear.ToString());
+        yield return Util.delay1_5;
+        BossClearTxtEF.SetActive(false);
     }
     IEnumerator coActiveReviveEF(){
         reviveEF.SetActive(true);

@@ -334,6 +334,7 @@ public class BossBlock : Block_Prefab{
             bm.createDropItemExpOrbPf(bossDieOrbSpawnTf, resultExp, popPower: 800);
 
         yield return new WaitForSecondsRealtime(playSec * 0.3f + playSec); //* 消すのが早すぎ感じで、少し待機。
+        gm.em.activeUI_EF(DM.ANIM.BossClear.ToString());
         Destroy(target);
     }
 
