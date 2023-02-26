@@ -718,6 +718,7 @@ public class GameManager : MonoBehaviour {
 #region AD REWARD
     public void setRerotateSkillSlots(){
         Debug.Log("setRerotateSkillSlots::");
+        Time.timeScale = 0; //* (BUG-92) RerotateADしたら、タイムスケールが１になること対応。
         levelUpPanelAnimate.Start();
         rerotateSkillSlotsBtn.gameObject.SetActive(false);
         showAdDialog.gameObject.SetActive(false);//* ダイアログ閉じる
