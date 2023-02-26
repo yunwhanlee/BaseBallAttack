@@ -1076,7 +1076,8 @@ public class GameManager : MonoBehaviour {
         }
 
         //* Victory
-        if(bossKillCnt > LM._.VICTORY_BOSSKILL_CNT){
+        //* (BUG) BossKillCntにしたら、重複されて急にVictoryになるバグあり、Stageで計算。
+        if(stage > LM._.BOSS_STAGE_SPAN * LM._.VICTORY_BOSSKILL_CNT){// if(bossKillCnt > LM._.VICTORY_BOSSKILL_CNT){
             setVictory();
             return;
         }
