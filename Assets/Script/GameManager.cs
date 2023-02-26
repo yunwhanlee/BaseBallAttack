@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField]  Material debugBlueMt;
     [Range(0,1)] public float timeScale = 1;
 # endif
+    [SerializeField]  Text bossKillCntTxt;
     
     [Header("GROUP")][Header("__________________________")]
     public Transform effectGroup;
@@ -345,6 +346,8 @@ public class GameManager : MonoBehaviour {
 
             debugHitBallTrigger();
         # endif
+
+        bossKillCntTxt.text = "BK : " + bossKillCnt;
 
         if(isResolveNextStageProblem && !downWallCollider.isTrigger && ballGroup.childCount == 0){
             isResolveNextStageProblem = false;
@@ -1076,8 +1079,7 @@ public class GameManager : MonoBehaviour {
         }
 
         //* Victory
-        //* (BUG) BossKillCntにしたら、重複されて急にVictoryになるバグあり、Stageで計算。
-        if(stage > LM._.BOSS_STAGE_SPAN * LM._.VICTORY_BOSSKILL_CNT){// if(bossKillCnt > LM._.VICTORY_BOSSKILL_CNT){
+        if(bossKillCnt > LM._.VICTORY_BOSSKILL_CNT){
             setVictory();
             return;
         }
