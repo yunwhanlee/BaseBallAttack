@@ -564,14 +564,26 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
         Debug.Log($"<b>onClickCheckBtn(type={type}):: CurIdx= {CurIdx}</b>");
         var curItem = getCurItem();
 
+        //* (BUG) 買わないのにロードしたらChara選択されるバグ防止。
+        int befIdx = DM.ins.personalData.getSelectIdx(type);
+        DM.ins.personalData.setSelectIdx(CurIdx);
+
         if(type == DM.PANEL.Skill.ToString() && curItem.IsChecked){
             Util._.displayNoticeMsgDialog(LANG.getTxt(LANG.TXT.MsgAlreadyRegistedSkill.ToString()));
             return;
         }
-        
-        //* (BUG) 買わないのにロードしたらChara選択されるバグ防止。
-        int befIdx = DM.ins.personalData.getSelectIdx(type);
-        DM.ins.personalData.setSelectIdx(CurIdx);
+
+        //* (BUG-90) AtvSkillがUnLockされたのに、CheckBtnクリックで選択されてしまうこと対応。
+        if(type == DM.PANEL.Skill.ToString() && curItem.IsLock){
+            Debug.Log("Purchase UnLock This Skill");
+            if(curItem.price.Type == Price.TP.COIN){
+                DM.ins.personalData.Coin = purchaseItem(DM.ins.personalData.Coin, curItem, befIdx);
+            }
+            else if(curItem.price.Type == Price.TP.DIAMOND){
+                DM.ins.personalData.Diamond = purchaseItem(DM.ins.personalData.Diamond, curItem, befIdx);
+            }
+            return;
+        }
 
         #region PARCHASE
         Debug.Log("PARCHASE==> curItem= " + curItem.name + ", IsLock=> " + curItem.IsLock);
