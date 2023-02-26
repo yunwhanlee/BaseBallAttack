@@ -484,6 +484,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-86) ボース生成するとき、BossBlockのStart()からgm.bossLimitCntを設定したが、処理順番がGM::setNextStage()より遅い。BlockMaker::bossSpawn()でInstantiateするとき、ここで値を代入。
     ✓ (BUG-87) for文のif文に該当するなら、処理してfor文を抜ける処理をしたくてreturnをしましたが、これは関数()を抜ける処理でした。breakに切り替え修正。
     ✓ (BUG-88) DownWallとGameOverRedLineの隙間が短くて、早い速度に対応できない。RedLineを上に上げ、DownWwallを下に下げて間隔を広げた。
+    ✓ (BUG-89) LevelUp Psv DmgアップスキルがUpgradeDmgがまた適用され、非常に強くなるバグ対応。
 
     - (BUG) リワード広告をホームとインゲームに届いたら、お先にロードしておく。
     - (BUG) ColorBallが障害物にぶつかったら、エラーになること。

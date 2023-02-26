@@ -9673,31 +9673,31 @@ MonoBehaviour:
   GOD_PRICE: 5000
   UPGRADE_DMG:
     start: 200
-    commonDiffrence: 200
-    gradualUpValue: 0.1
-  UPGRADE_BALLSPD:
-    start: 300
-    commonDiffrence: 300
-    gradualUpValue: 0.1
-  UPGRADE_BOSSDMG:
-    start: 100
     commonDiffrence: 100
     gradualUpValue: 0.1
-  UPGRADE_COINBONUS:
-    start: 100
+  UPGRADE_BALLSPD:
+    start: 200
     commonDiffrence: 100
     gradualUpValue: 0.1
   UPGRADE_CRIT:
-    start: 400
-    commonDiffrence: 400
+    start: 300
+    commonDiffrence: 300
     gradualUpValue: 0.1
   UPGRADE_CRITDMG:
     start: 300
     commonDiffrence: 300
     gradualUpValue: 0.1
+  UPGRADE_BOSSDMG:
+    start: 100
+    commonDiffrence: 50
+    gradualUpValue: 0.1
+  UPGRADE_COINBONUS:
+    start: 100
+    commonDiffrence: 50
+    gradualUpValue: 0.1
   UPGRADE_DEFENCE:
     start: 100
-    commonDiffrence: 100
+    commonDiffrence: 50
     gradualUpValue: 0.1
   UNLOCK_2ND_ATVSKILL_PRICE: 500
   UPGRADE_ATVSKILL:

@@ -152,10 +152,10 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Header("UPGRADE PRICE")][Header("__________________________")]
     [Tooltip("ダメージ")] public UpgradePriceCalcSetting UPGRADE_DMG;
     [Tooltip("ボール速度")] public UpgradePriceCalcSetting UPGRADE_BALLSPD;
-    [Tooltip("ボースダメージ")] public UpgradePriceCalcSetting UPGRADE_BOSSDMG;
-    [Tooltip("コインぼなーす")] public UpgradePriceCalcSetting UPGRADE_COINBONUS;
     [Tooltip("クリティカル")] public UpgradePriceCalcSetting UPGRADE_CRIT;
     [Tooltip("クリティカルダメージ")] public UpgradePriceCalcSetting UPGRADE_CRITDMG;
+    [Tooltip("ボースダメージ")] public UpgradePriceCalcSetting UPGRADE_BOSSDMG;
+    [Tooltip("コインぼなーす")] public UpgradePriceCalcSetting UPGRADE_COINBONUS;
     [Tooltip("ディフェンス")] public UpgradePriceCalcSetting UPGRADE_DEFENCE;
 
     [Header("ATV SKILL UPGRADE PRICE")][Header("__________________________")]
