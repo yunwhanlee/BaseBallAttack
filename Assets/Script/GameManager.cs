@@ -1075,7 +1075,7 @@ public class GameManager : MonoBehaviour {
         }
 
         //* Victory
-        if(bossKillCnt >= LM._.VICTORY_BOSSKILL_CNT){
+        if(bossKillCnt > LM._.VICTORY_BOSSKILL_CNT){
             setVictory();
             return;
         }

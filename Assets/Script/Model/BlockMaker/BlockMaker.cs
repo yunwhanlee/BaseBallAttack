@@ -41,7 +41,7 @@ public class BlockMaker : MonoBehaviour
     public void Start() {
         //* ブロック HPリスト 準備
         const int OFFSET = 100;
-        hpCalcList = Util._.calcArithmeticProgressionList(start: OFFSET, max: LM._.MAX_STAGE, d: OFFSET, gradualUpValue: 0.01f);
+        hpCalcList = Util._.calcArithmeticProgressionList(start: OFFSET, max: LM._.MAX_STAGE, d: OFFSET, gradualUpValue: 0.02f);
         
         //* hp計算結果が整数(100％)基準なので、少数に転換
         const float DECIMAL_OFFSET = 0.01f;

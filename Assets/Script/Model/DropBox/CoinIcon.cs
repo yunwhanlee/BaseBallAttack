@@ -42,6 +42,11 @@ public class CoinIcon : MonoBehaviour
         yield return Util.delay0_75;//new WaitForSeconds(WAIT_COLLECTION_TIME);
         yield return new WaitForSeconds(startDelay);
         target = gm.pl.modelMovingTf;
+
+        //* (BUG-91) 時々プレイヤーと衝突しても消えないので、日程時間過ぎたら破壊。
+        yield return Util.delay3;
+        if(gameObject.activeSelf)
+            StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropItemGroup));
     }
 
 

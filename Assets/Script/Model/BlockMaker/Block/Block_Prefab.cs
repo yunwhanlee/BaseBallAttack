@@ -214,8 +214,10 @@ public class Block_Prefab : MonoBehaviour
                 Hp = resHp * 3;
                 break;
             case BlockMaker.KIND.Normal:
-            case BlockMaker.KIND.Obstacle:
                 Hp =  resHp;
+                break;
+            case BlockMaker.KIND.Obstacle:
+                Hp =  resHp * 2;
                 break;
         }
         maxHp = Hp;

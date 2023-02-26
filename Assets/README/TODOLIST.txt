@@ -486,6 +486,14 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-88) DownWallとGameOverRedLineの隙間が短くて、早い速度に対応できない。RedLineを上に上げ、DownWwallを下に下げて間隔を広げた。
     ✓ (BUG-89) LevelUp Psv DmgアップスキルがUpgradeDmgがまた適用され、非常に強くなるバグ対応。
     ✓ (BUG-90) AtvSkillがUnLockされたのに、CheckBtnクリックで選択されてしまう。
+    ✓ (BUG-91) CoinIcon時々プレイヤーと衝突しても消えないので、日程時間過ぎたら破壊。
+
+    - (BUG-91) RerotateADしたら、タイムスケールが１になること。
+    - (BUG-92) Sheildが起動しない、攻撃当たったのにSheildが消えない。
+
+
+    - InstantKill 2 -> 1%に変更。 
+    - Unique Dmg200%を 150%に修正。詐欺。
 
     - (BUG) リワード広告をホームとインゲームに届いたら、お先にロードしておく。
     - (BUG) ColorBallが障害物にぶつかったら、エラーになること。
@@ -527,8 +535,8 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     PRICE
         Player, Bat
             GENERAL : COIN 5000
-            RARE : COIN 12000
-            UNIQUE : COIN 35000
+            RARE : COIN 15000
+            UNIQUE : COIN 40000
             LEGEND : COIN 80000
             GOD : DIA 1000
 
@@ -549,6 +557,10 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
         Obstacle
             Hp : resHp
 
+Unique Percent : 10 -> 5%
+DropBox Percent : 200 -> 120
+RewardChest Percent : 5 -> 4
+
 1 play 
     coin 1500(ad: 3000), dia 150
     upgrade : dmg:4, spd:1, crit:1
@@ -556,6 +568,10 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
 2 play 
     coin 3300(ad: 6600), dia 300
     upgrade : dmg:4, spd:1, crit:1
+
+3 play
+    coin 15000, dia 600
+    chara : 13000, bat : 13000
 
 
 
