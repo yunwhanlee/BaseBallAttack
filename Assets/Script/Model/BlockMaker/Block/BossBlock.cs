@@ -398,6 +398,7 @@ public class BossBlock : Block_Prefab{
     }
     public void eraseObstacle(){
         if(gm == null) return; //* (BUG-24) BossBlock::eraseObstacle()がゲームオーバーになっても反応して、NULLになるBUG対応。
+        if(gm.em == null) return; 
         if(gm.obstacleGroup == null) return;
         if(gm.obstacleGroup.childCount <= 0) return;
 

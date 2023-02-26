@@ -175,10 +175,11 @@ public class LevelUpPanelAnimate : MonoBehaviour{
         switch(psv){
             case DM.PSV.Dmg:
                 UpgradeDt[] upgradeArr = DM.ins.personalData.Upgrade.Arr;
-                int upgradeDmg = (int)upgradeArr[(int)DM.UPGRADE.Dmg].getValue();
+                // int upgradeDmg = (int)upgradeArr[(int)DM.UPGRADE.Dmg].getValue();
                 //* Calc
                 const int BASIC_DMG = 1;
-                int val = BASIC_DMG + pl.dmg.Val + upgradeDmg; //! (BUG-64) 攻撃力をアップグレードしても、ちゃんと反映できなかった問題修正。
+                int val = BASIC_DMG + pl.dmg.Val; //! (BUG-89) LevelUp Psv DmgアップスキルがUpgradeDmgがまた適用され、非常に強くなるバグ対応。
+                Debug.Log($"LevelUpPanelAnimate:: onClickSkillUpBtn:: Dmg Val= {val} -> {BASIC_DMG} + {pl.dmg.Val}");
                 float plusPer = 1 + (pl.dmg.Level+1) * 0.1f;
                 Debug.Log($"LevelUpPanelAnimate:: onClickSkillUpBtn:: Dmg: {(int)(val * plusPer)} = val({val}) * plusPer({plusPer})");
                 //* Set
