@@ -349,12 +349,10 @@ public class GameManager : MonoBehaviour {
 
         bossKillCntTxt.text = "BK : " + bossKillCnt;
 
-        if(isResolveNextStageProblem && !downWallCollider.isTrigger && ballGroup.childCount == 0){
-            isResolveNextStageProblem = false;
-            StartCoroutine(coResolveDoNotNextStage());
-        }
-
-        BossBlock boss = bm.getBoss();
+        // if(isResolveNextStageProblem && !downWallCollider.isTrigger && ballGroup.childCount == 0){
+        //     isResolveNextStageProblem = false;
+        //     StartCoroutine(coResolveDoNotNextStage());
+        // }
 
         //* GUI *//
         //* EXP BAR & TEXT
@@ -364,6 +362,7 @@ public class GameManager : MonoBehaviour {
         
 
         //* BOSS BAR & TEXT
+        BossBlock boss = bm.getBoss();
         bossStageBarRectTf.anchorMin = new Vector2((boss? 0.15f : 0.5f), 0.5f);
         bossStageBar.value = Mathf.Lerp(bossStageBar.value, 
             boss? ((float)boss.Hp / boss.MaxHp >= 0)? (float)boss.Hp / boss.MaxHp : 0

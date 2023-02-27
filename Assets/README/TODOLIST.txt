@@ -487,12 +487,10 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-89) LevelUp Psv DmgアップスキルがUpgradeDmgがまた適用され、非常に強くなるバグ対応。
     ✓ (BUG-90) AtvSkillがUnLockされたのに、CheckBtnクリックで選択されてしまう。
     ✓ (BUG-91) CoinIcon時々プレイヤーと衝突しても消えないので、日程時間過ぎたら破壊。
-
     ✓ (BUG-92) RerotateADしたら、タイムスケールが１になること対応。
     ✓ (BUG-93) DropBox Sheildを習得してもうpl.IsBarrierがTrueであれば、もう一ど習得しても処理しない。
-
-    - InstantKill 2 -> 1%に変更。 
-
+    - (BUG) isResolveNextStageProblemが勝手に呼び出されるバグあるそう。
+    - (BUG) Play::AnimationTxtを非活性化したら、Cam2でフレームドロップがほとんど無くなった…こちらでコストが結構かかったようです。
     - (BUG) リワード広告をホームとインゲームに届いたら、お先にロードしておく。
     - (BUG) ColorBallが障害物にぶつかったら、エラーになること。
     
@@ -525,7 +523,9 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ Unique Dmg200%を 150%に修正。詐欺だから…
     ✓ 急にゲームが終わってしまうBUGがあるためbossKillCntを表示するDEBUG-UI追加。
     ✓ Home::scrollviewのスクロールバーを全て非表示。
-    - Cam２になると、まだフレームドロップ発生すること対応。
+    ✓ ステージセレクタパンネル側へ言語化。
+    - Cam２になると、まだフレームドロップ発生 : AnimationTxtEFが非活性化したら、よくなった。。。
+    - InstantKill 2 -> 1%に変更。 
     - GameSpeed X 3倍 -> AD見ることに。
     - PlayArea : この領域をボールが出るとき、
     

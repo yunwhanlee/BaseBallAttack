@@ -55,15 +55,16 @@ public class StageSelect {
         range = Array.Find(rectTf.GetComponentsInChildren<Text>(), txt => txt.gameObject.name == "RangeTxt");
         comingSoonTxt = Array.Find(rectTf.GetComponentsInChildren<Text>(), obj => obj.name == "ComingSoonTxt");
         imgBtn = Array.Find(rectTf.GetComponentsInChildren<Button>(), btn => btn.gameObject.name == "ImgPanelBtn");
+
         lockImgTf = Array.Find(rectTf.GetComponentsInChildren<RectTransform>(), obj => obj.name == "LockImgTf");
         bonusLabel = Array.Find(rectTf.GetComponentsInChildren<RectTransform>(), obj => obj.name == "BonusLabel");
         bonusMultiCoinTxt = Array.Find(rectTf.GetComponentsInChildren<Text>(), obj => obj.name == "BonusMultiCoinTxt");
         bonusMultiDiamondTxt = Array.Find(rectTf.GetComponentsInChildren<Text>(), obj => obj.name == "BonusMultiDiamondTxt");
 
-        //* Set UI
+        //* UI
         img.sprite = Sprite;
-        title.text = titleName;
-        range.text = $"Stage {begin} ~ {end}";
+        title.text = $"{i+1}.{LANG.getTxt(titleName)}";
+        range.text = $"{LANG.getTxt(LANG.TXT.Stage.ToString())} {begin} ~ {end}";
         img.color = IsLocked? Color.gray : Color.white;
         lockImgTf.gameObject.SetActive(IsLocked);
         comingSoonTxt.text = (isComingSoon)? "Coming Soon.." : "";
@@ -136,6 +137,7 @@ public class HomeManager : MonoBehaviour
     public StageSelect[] stageSelects;
     public Text stageSelectPlayBtnTxt;
     public Text stageSelectNoticeTxt;
+    public Text stageSelectBackBtnTxt;
 
     [Header("SHOW REWARD PANEL")][Header("__________________________")]
     public GameObject showRewardPanel;
@@ -307,6 +309,7 @@ public class HomeManager : MonoBehaviour
         //* StageSelect Panel
         stageSelectPlayBtnTxt.text = LANG.getTxt(LANG.TXT.Play.ToString());
         stageSelectNoticeTxt.text = LANG.getTxt(LANG.TXT.StageSelectNotice.ToString());
+        stageSelectBackBtnTxt.text = LANG.getTxt(LANG.TXT.Back.ToString());
     }
 
     void Update(){

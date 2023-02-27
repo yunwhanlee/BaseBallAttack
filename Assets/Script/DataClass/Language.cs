@@ -10,7 +10,9 @@ public static class LANG //* LANG
     public enum TXT {
         //* UI
         Ok, No, Use, Get, Open,
-        Start, Level, Stage, BossLimitCnt, BossLimitCntAlert,
+        Start, Level, 
+        Stage, Normal, Hard, NightMare,
+        BossLimitCnt, BossLimitCntAlert,
         Combo, Status, Back, Ready, Out, Strike,
         BestScore, LevelUpPanel_Title, LevelUpPanel_Explain, Play,
 
@@ -450,6 +452,12 @@ public static class LANG //* LANG
     public static string[] Start = new string[]{"START", "スタート", "시작"};
     public static string[] Level = new string[]{"LV", "レベル", "레벨"};
     public static string[] Stage = new string[]{"STAGE", "ステージ", "스테이지"};
+    public static string[] Normal = new string[]{"Normal", "ノーマル", "노멀"};
+    public static string[] Hard = new string[]{"Hard", "ハード", "하드"};
+    public static string[] NightMare = new string[]{"NightMare", "ナイトメアー", "나이트메어"};
+    
+
+
     public static string[] BossLimitCnt = new string[]{"BossLimitCnt", "制限時間", "제한시간"};
     public static string[] BossLimitCntAlert = new string[]{"you have 5 turns left!", "残り5ターンです！", "5턴 남았어요!"};
     public static string[] Combo = new string[]{"COMBO", "コンボ", "콤보"};
@@ -660,7 +668,12 @@ public static class LANG //* LANG
         if(name == TXT.Open.ToString()) res = Open[CUR_LANG];
         if(name == TXT.Start.ToString()) res = Start[CUR_LANG];
         if(name == TXT.Level.ToString()) res = Level[CUR_LANG];
+
         if(name == TXT.Stage.ToString()) res = Stage[CUR_LANG];
+        if(name == TXT.Normal.ToString()) res = Normal[CUR_LANG];
+        if(name == TXT.Hard.ToString()) res = Hard[CUR_LANG];
+        if(name == TXT.NightMare.ToString()) res = NightMare[CUR_LANG];
+
         if(name == TXT.BossLimitCnt.ToString()) res = BossLimitCnt[CUR_LANG];
         if(name == TXT.BossLimitCntAlert.ToString()) res = BossLimitCntAlert[CUR_LANG];
         if(name == TXT.Combo.ToString()) res = Combo[CUR_LANG];
