@@ -530,7 +530,8 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
       対応３．Canvas_Dynamicキャンバス下にCanvas_Animatorを分ける。(再生しなくても毎フレーム実行されるからやばい)
       対応４．Canvas_Animator下の全てオブジェクトを非活性化する作業：modeTxtEF適用。
       対応５．Canvas_Animator下の全てオブジェクトを非活性化する作業：PrefectTxtEF。
-      
+      対応６．Canvas_Animator下の全てオブジェクトを非活性化する作業：HomeRunTxtEF。
+
     - InstantKill 2 -> 1%に変更。 
     - GameSpeed X 3倍 -> AD見ることに。
     - PlayArea : この領域をボールが出るとき、

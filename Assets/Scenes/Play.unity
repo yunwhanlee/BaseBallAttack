@@ -10779,7 +10779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db125c7de00668f4e98849d0aaf366d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.032704405, g: 0, b: 0.33962262, a: 1}
+  m_EffectColor: {r: 0.053754807, g: 0.038180854, b: 0.20754719, a: 1}
   m_EffectDistance: {x: 12, y: -12}
   m_UseGraphicAlpha: 0
 --- !u!114 &226840308
@@ -16098,7 +16098,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &477910093
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20839,7 +20839,7 @@ MonoBehaviour:
   dropBoxMagicEF: {fileID: 6556537971877461243, guid: 05a4ae28f105c944e83f32f52ee31033, type: 3}
   modeTxtEF: {fileID: 618763350}
   perfectTxtEF: {fileID: 687656590}
-  homeRunTxtPopEF: {fileID: 2005072966}
+  homeRunTxtEF: {fileID: 477910092}
   BossClearTxtEF: {fileID: 1534495926}
   reviveEF: {fileID: 1778961970}
   bossLimitCntAlertTxtEF: {fileID: 1754930093}
@@ -95376,7 +95376,7 @@ GameObject:
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2005072967
 RectTransform:
   m_ObjectHideFlags: 0
@@ -96060,7 +96060,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 20
     size3D: 1
     rotation3D: 0
     gravityModifier:

@@ -69,7 +69,7 @@ public class EffectManager : MonoBehaviour
     //ON OFF TYPE
     [SerializeField] GameObject modeTxtEF;
     [SerializeField] GameObject perfectTxtEF;
-    public GameObject homeRunTxtPopEF;
+    public GameObject homeRunTxtEF;
     public GameObject BossClearTxtEF;
     public GameObject reviveEF;
     public GameObject bossLimitCntAlertTxtEF;
@@ -392,9 +392,9 @@ public class EffectManager : MonoBehaviour
         perfectTxtEF.SetActive(false);
     }
     IEnumerator coActiveHomeRunTxtEF(){
-        homeRunTxtPopEF.SetActive(true);
+        homeRunTxtEF.SetActive(true);
         yield return Util.delay3;
-        homeRunTxtPopEF.SetActive(false);
+        homeRunTxtEF.SetActive(false);
     }
     IEnumerator coActiveBossClearTxtEF(){
         BossClearTxtEF.SetActive(true);
