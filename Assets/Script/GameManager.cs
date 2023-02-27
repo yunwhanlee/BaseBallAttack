@@ -124,10 +124,9 @@ public class GameManager : MonoBehaviour {
     public GameObject coinX2Label;
     public Text modeTxt;
 
-    [Header("TEXT EFFECT")][Header("__________________________")]
+    [Header("UI TEXT ANIM")][Header("__________________________")]
     public Text comboTxt;
     public Text perfectTxt;
-    public GameObject bossSapwnAnimObj;
     public Text bossNameTxt;
     public Text showHitBallInfoTf;
     public Text bossLimitCntAlertTxt;

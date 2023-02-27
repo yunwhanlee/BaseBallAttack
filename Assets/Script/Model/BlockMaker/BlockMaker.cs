@@ -250,7 +250,7 @@ public class BlockMaker : MonoBehaviour
 
         //* 再生時間 習得
         Animator camAnim = gm.cam1.GetComponent<Animator>();
-        Animator uiAnim = gm.bossSapwnAnimObj.GetComponent<Animator>();
+        // Animator uiAnim = gm.em.BossSpawnTxtEF.GetComponent<Animator>();
         var bossNameTxt = gm.bossNameTxt.GetComponent<Text>();
 
         //* InActive
@@ -261,21 +261,22 @@ public class BlockMaker : MonoBehaviour
         gm.readyBtn.gameObject.SetActive(false);
         gm.statusFolderPanel.gameObject.SetActive(false);
 
-        float animPlayTime = Util._.getAnimPlayTime(DM.ANIM.BossSpawnTxt_Spawn.ToString(), uiAnim);
-
         Time.timeScale = 0.1f;
         camAnim.SetTrigger(DM.ANIM.DoBossSpawn.ToString());
-        uiAnim.SetTrigger(DM.ANIM.DoSpawn.ToString());
+        // uiAnim.SetTrigger(DM.ANIM.DoSpawn.ToString());
+        gm.em.BossSpawnTxtEF.SetActive(true);
         gm.dontLookCam2ObjsGroup.SetActive(true);
         bossNameTxt.text = bossName;
 
-        yield return new WaitForSecondsRealtime(animPlayTime);
+        // float animPlayTime = Util._.getAnimPlayTime(DM.ANIM.BossSpawnTxt_Spawn.ToString(), uiAnim);
+        yield return Util.delay4RT;//new WaitForSecondsRealtime(animPlayTime);
         //* Animation Finish
         gm.IsPlayingAnim = false;
         gm.setActiveSkillBtns(true);
         gm.readyBtn.gameObject.SetActive(true);
         gm.statusFolderPanel.gameObject.SetActive(true);
         gm.dontLookCam2ObjsGroup.SetActive(false);
+        gm.em.BossSpawnTxtEF.SetActive(false);
         Time.timeScale = 1;
     }
     public void setGlowEF(Block_Prefab[] blocks, bool isOn){

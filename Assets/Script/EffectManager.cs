@@ -70,6 +70,7 @@ public class EffectManager : MonoBehaviour
     [SerializeField] GameObject modeTxtEF;
     [SerializeField] GameObject perfectTxtEF;
     public GameObject homeRunTxtEF;
+    public GameObject bossSpawnTxtEF;   public GameObject BossSpawnTxtEF { get => bossSpawnTxtEF; set => bossSpawnTxtEF = value;}
     public GameObject BossClearTxtEF;
     public GameObject reviveEF;
     public GameObject bossLimitCntAlertTxtEF;
