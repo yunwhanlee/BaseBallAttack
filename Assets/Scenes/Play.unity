@@ -19501,7 +19501,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &618763351
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19569,7 +19569,7 @@ MonoBehaviour:
     m_MaxSize: 200
     m_Alignment: 4
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
@@ -19589,7 +19589,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 618763350}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
   m_Name: 
@@ -20677,7 +20677,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &687656591
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20873,6 +20873,7 @@ MonoBehaviour:
   dropBoxStarEF: {fileID: 5719256869302807481, guid: 5a1ab196ecaa5e646b8bc87d2a8803bf, type: 3}
   dropBoxStarTrailEF: {fileID: 6758366890978482176, guid: cecb7d72c4c936845b6577942f71874f, type: 3}
   dropBoxMagicEF: {fileID: 6556537971877461243, guid: 05a4ae28f105c944e83f32f52ee31033, type: 3}
+  modeTxtEF: {fileID: 618763350}
   perfectTxtPopEF: {fileID: 1250287897}
   homeRunTxtPopEF: {fileID: 2005072966}
   BossClearTxtEF: {fileID: 1534495926}

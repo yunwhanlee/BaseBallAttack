@@ -67,7 +67,8 @@ public class EffectManager : MonoBehaviour
 
     [Header("UI EF")][Header("__________________________")]
     //ON OFF TYPE
-    public GameObject perfectTxtPopEF;
+    [SerializeField] GameObject modeTxtEF;
+    [SerializeField] GameObject perfectTxtPopEF;
     public GameObject homeRunTxtPopEF;
     public GameObject BossClearTxtEF;
     public GameObject reviveEF;
@@ -367,7 +368,9 @@ public class EffectManager : MonoBehaviour
 /// UI EF
 /// -------------------------------------------------------------
     public void activeUI_EF(string name){
-        if(name == DM.ANIM.Perfect.ToString())
+        if(name == DM.ANIM.Mode.ToString())
+            StartCoroutine(coActiveModeTxtEF());
+        else if(name == DM.ANIM.Perfect.ToString())
             StartCoroutine(coActivePerfectTxtEF());
         else if(name == DM.ANIM.HomeRun.ToString())
             StartCoroutine(coActiveHomeRunTxtEF());
@@ -377,6 +380,11 @@ public class EffectManager : MonoBehaviour
             StartCoroutine(coActiveReviveEF());
         else if(name == DM.ANIM.BossLimitcntAlertTxtEF.ToString())
             StartCoroutine(coBossLimitCntAlertTxtEF());
+    }
+    IEnumerator coActiveModeTxtEF(){
+        modeTxtEF.SetActive(true);
+        yield return Util.delay3;
+        modeTxtEF.SetActive(false);
     }
     IEnumerator coActivePerfectTxtEF(){
         perfectTxtPopEF.SetActive(true);

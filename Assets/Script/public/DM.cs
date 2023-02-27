@@ -38,7 +38,7 @@ public class DM : MonoBehaviour{
     public enum LAYER {BallPreview};
     public enum ANIM {BossSpawnTxt_Spawn, DoSpawn, 
         DoShake, Swing, DoBossSpawn, Die, IsHit, IsHitBall, 
-        IsIdle, IsFly, GetHit, Scream, Attack, Touch, HomeRun, Perfect, BossClear, BossLimitcntAlertTxtEF,
+        IsIdle, IsFly, GetHit, Scream, Attack, Touch, HomeRun, Mode, Perfect, BossClear, BossLimitcntAlertTxtEF,
         DoOpen, DoBlur, ThrowBall};
     public enum RANK {GENERAL, RARE, UNIQUE, LEGEND, GOD};
     public enum HITRANK{S, A, B, C, D, E};

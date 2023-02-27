@@ -332,6 +332,7 @@ public class GameManager : MonoBehaviour {
         //* ModeTxt Anim
         modeTxt.text = mode.ToString() + " MODE";
         modeTxt.color = (mode == DM.MODE.HARD)? Color.red : Color.white;
+        em.activeUI_EF(DM.ANIM.Mode.ToString());
 
         bossLimitCntAlertTxt.text = LANG.getTxt(LANG.TXT.BossLimitCntAlert.ToString());
     }
