@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45015454, g: 0.5001945, b: 0.57542807, a: 1}
+  m_IndirectSpecularColor: {r: 0.45015407, g: 0.500194, b: 0.5754274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9617,7 +9617,7 @@ MonoBehaviour:
   HARDMODE_COIN_BONUS: 4
   HARDMODE_DIAMOND_BONUS: 1.5
   VICTORY_BOSSKILL_CNT: 4
-  BOSS_STAGE_SPAN: 15
+  BOSS_STAGE_SPAN: 3
   BOSS_LIMIT_SPAN: 12
   BOSS_DIE_ORB_CNT: 25
   BOSS_LIMIT_CNT_ALERT_NUM: 5

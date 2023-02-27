@@ -28,6 +28,7 @@ public class BossBlock : Block_Prefab{
     [SerializeField] Transform bossDieOrbSpawnTf;
     [SerializeField] Transform mouthTf;
     public bool isAttack;   public bool IsAttack { get => isAttack; set => isAttack = value;}
+    private bool isDead;
 
 
     private void OnDisable() {
@@ -39,6 +40,7 @@ public class BossBlock : Block_Prefab{
         GameManager gm = DM.ins.gm;
         // gm.bossLimitCnt = LM._.BOSS_LIMIT_SPAN; //! (BUG-86) ボース生成するとき、BossBlockのStart()からgm.bossLimitCntを設定したが、処理順番がGM::setNextStage()より遅い。BlockMaker::bossSpawn()でInstantiateするとき、ここで値を代入。
         Debug.Log($"bossLimitCnt::BossBlock= {gm.bossLimitCnt}");
+        isDead = false;
         gm.bossLimitCntTxt.gameObject.SetActive(true);
         bossDieOrbSpawnTf = GameObject.Find(DM.NAME.BossDieDropOrbSpot.ToString()).transform;
         activeBossSkill(isFirst: true);
@@ -307,7 +309,14 @@ public class BossBlock : Block_Prefab{
     }
 
     public override void onDestroy(GameObject target, bool isInitialize = false) {
-        Debug.Log($"BossBlock:: onDestroy():: target= {target}, Contains Boss1 = {name.Contains("Boss1")}");
+        Debug.Log($"BossBlock:: onDestroy():: target= {target}, isDead= {isDead}");
+        if(isDead) {
+            //* (BUG-94) ボースキールが死んだとき、onDestroy()が何回も呼び出されるバグで、BossKillCntが重複＋する問題。BossBlockにIsDead変数宣言し、一回トリガーで対応。
+            Debug.Log("<color=red>BossBlock:: onDestroy():: もう死んだら、また処理しない。</color>");
+            return;
+        }
+        
+        isDead = true;
         //* 初期化
         // gm.bossLimitCnt = 0; 
         //* Achivement
