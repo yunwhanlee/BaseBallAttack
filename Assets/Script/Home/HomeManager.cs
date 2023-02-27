@@ -577,24 +577,13 @@ public class HomeManager : MonoBehaviour
     }
 #endregion
 
-    public void onClickStartBtn(){
+    public void onClickStartBtn() => setStageSelectPanel(true);
+    public void onClickStageSelectExitBtn() => setStageSelectPanel(false);
+    
+    private void setStageSelectPanel(bool isOn){
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
-        //* Open StageSelectPanel
-        stageSelectPanel.SetActive(true);
-
-        /*
-        //* Model Copy
-        var playerModel = modelTf.GetChild(0);
-        playerModel.GetComponent<Animator>().SetBool(DM.ANIM.IsIdle.ToString(), false); //Ready Pose
-        playerModel.SetParent(DM.ins.transform);
-        // var copyModel = Instantiate(playerModel, Vector3.zero, Quaternion.identity, DM.ins.transform);
-
-        //* Set Item Passive Data
-        int[] lvArrTemp = getItemPsvLvArr(playerModel);
-        DM.ins.personalData.ItemPassive.setLvArr(lvArrTemp);
-
-        SceneManager.LoadScene(DM.SCENE.Loading.ToString());
-        */
+        stageSelectPanel.SetActive(isOn); //* Open StageSelectPanel
+        modelTf.gameObject.SetActive(!isOn); //* 3DモデルがUIパンネルを突き抜けるので、非表示
     }
 
     public void onClickStageSelectImgBtn(int idxNum){

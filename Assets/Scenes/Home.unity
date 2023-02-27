@@ -58347,7 +58347,7 @@ GameObject:
   - component: {fileID: 2383291513218865643}
   - component: {fileID: 2383291513218865642}
   m_Layer: 0
-  m_Name: BackBtn
+  m_Name: ExitBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58471,10 +58471,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2383291514987288976}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1887670884}
+        m_TargetAssemblyTypeName: HomeManager, Assembly-CSharp
+        m_MethodName: onClickStageSelectExitBtn
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
