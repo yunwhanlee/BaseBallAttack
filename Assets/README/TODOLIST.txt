@@ -526,6 +526,8 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ ステージセレクタパンネル側へ言語化。
     - Cam２フレームドロップ : AnimationTxtEFが非活性化したら、よくなった。
     　対応１．Canvas_Static、Canvas_Dynamic分割＋RaycastTargetOff
+      対応２．ブロックになるCanvas最適化。
+      対応３．Canvas_Dynamicキャンバス下にCanvas_Animatorを分ける。(再生しなくても毎フレーム実行されるからやばい)
     - InstantKill 2 -> 1%に変更。 
     - GameSpeed X 3倍 -> AD見ることに。
     - PlayArea : この領域をボールが出るとき、
