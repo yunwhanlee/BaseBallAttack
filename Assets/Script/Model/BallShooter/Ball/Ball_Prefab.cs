@@ -149,20 +149,10 @@ public class Ball_Prefab : MonoBehaviour
 
                 //* Show HitBall Infomation
                 string rankTxt = gm.setHitRankTxt(power, hitRank);
-                float per = Util._.getCalcCurValPercentage(distance, LM._.MAX_DISTANCE);
+                float per = 100 - Util._.getCalcCurValPercentage(distance, LM._.MAX_DISTANCE);
 
-                //* Hit Info UI
-                gm.showHitBallInfoTf.GetComponent<Animator>().SetTrigger(DM.ANIM.IsHitBall.ToString());
-                var iconTxtList = gm.showHitBallInfoTf.transform.GetComponentsInChildren<Text>();
-                const int POWER_RANK = 0, BALL_SPEED = 1, ACCURACY = 2;
-
-                iconTxtList[POWER_RANK].text = rankTxt;
-                iconTxtList[BALL_SPEED].text = " : " + power.ToString();
-                iconTxtList[ACCURACY].text = " : " + ((100 - per) + "%").ToString();
-
-                //* RankTxt Color Style
-                iconTxtList[POWER_RANK].color =
-                    (rankTxt == DM.HITRANK.S.ToString() || rankTxt == DM.HITRANK.A.ToString())? Color.red : Color.white;
+                //* ボール打った情報表示
+                gm.displayHitBallInfoUI(rankTxt, power.ToString(), per.ToString());
 
                 //* Active Skillなら、下記は実行しない----------------------------------------
                 if(isActiveSkillTrigger) return;

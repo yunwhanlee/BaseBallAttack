@@ -123,12 +123,12 @@ public class GameManager : MonoBehaviour {
     public Toggle skipTutorialToggle;
     public GameObject coinX2Label;
     public Text modeTxt;
+    public GameObject showHitBallInfoUIObj;
 
     [Header("UI TEXT ANIM")][Header("__________________________")]
     public Text comboTxt;
     public Text perfectTxt;
     public Text bossNameTxt;
-    public Text showHitBallInfoTf;
     public Text bossLimitCntAlertTxt;
 
     [Header("PREVIEW BALL SILDER ➡ 現在使っていない")][Header("__________________________")] //! あんまり要らないかも。
@@ -230,7 +230,7 @@ public class GameManager : MonoBehaviour {
     [Header("DropBox List")][Header("__________________________")]
     public List<DropBox> dropBoxList;
 
-    private StringBuilder sb;
+    public StringBuilder sb;
 
     void Awake(){
         DM.ins.gm = this;
@@ -1264,6 +1264,29 @@ public class GameManager : MonoBehaviour {
         notice.text = LANG.getTxt(LANG.TXT.Caution_Notice.ToString());
         okBtn.text = LANG.getTxt(LANG.TXT.Ok.ToString());
         cancelBtn.text = LANG.getTxt(LANG.TXT.No.ToString());
+    }
+
+    public void displayHitBallInfoUI(string rankTxt, string powerTxt, string perTxt){
+        string[] strs = {rankTxt, powerTxt, perTxt};
+        StartCoroutine(coShowHitBallInfoUI(strs));
+    }
+    IEnumerator coShowHitBallInfoUI(string[] strs){
+        showHitBallInfoUIObj.SetActive(true);
+
+        var iconTxtList = showHitBallInfoUIObj.transform.GetComponentsInChildren<Text>();
+        const int POWER_RANK = 0, BALL_SPEED = 1, ACCURACY = 2;
+        sb.Length = 0;
+        iconTxtList[POWER_RANK].text = sb.Append(strs[POWER_RANK]).ToString(); //rankTxt
+        sb.Length = 0;
+        iconTxtList[BALL_SPEED].text = sb.AppendFormat(" : {0}", strs[BALL_SPEED]).ToString(); //power
+        sb.Length = 0;
+        iconTxtList[ACCURACY].text = sb.AppendFormat(" : {0}%", strs[ACCURACY]).ToString(); // per
+
+        iconTxtList[POWER_RANK].color =
+            (strs[0] == DM.HITRANK.S.ToString() || strs[0] == DM.HITRANK.A.ToString())? Color.red : Color.white;
+
+        yield return Util.delay3;
+        showHitBallInfoUIObj.SetActive(false);
     }
 
     # if UNITY_EDITOR
