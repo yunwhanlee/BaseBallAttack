@@ -236,6 +236,10 @@ public class Ball_Prefab : MonoBehaviour
     void OnCollisionEnter(Collision col) {
         //* HIT BLOCK
         if(col.transform.CompareTag(DM.TAG.Wall.ToString())){
+            if(name == "MainBall")
+                Debug.Log($"<color=green>Ball_Prefab:: OnCollisionEnter:: name= {name} col= {col.transform.name}</color>");
+            else
+                Debug.Log($"<color=white>Ball_Prefab:: OnCollisionEnter:: name= {name} col= {col.transform.name}</color>");
             setDownWallTriggerOff();
             em.createDownWallHitEF(myTransform.position);
         }
