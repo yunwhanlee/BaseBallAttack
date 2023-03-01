@@ -10829,9 +10829,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 229465357}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: RightWall
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -20169,7 +20169,7 @@ GameObject:
   - component: {fileID: 661175647}
   m_Layer: 6
   m_Name: ColliderBox
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967294
@@ -35543,9 +35543,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 895115809}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: LeftWall
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -51657,7 +51657,7 @@ Transform:
   m_GameObject: {fileID: 1218167950}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.5, z: -3.4095235}
-  m_LocalScale: {x: 12, y: 3, z: 2}
+  m_LocalScale: {x: 12, y: 4, z: 2}
   m_Children: []
   m_Father: {fileID: 1090933720}
   m_RootOrder: 0
@@ -51669,7 +51669,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218167950}
-  m_Material: {fileID: 13400000, guid: 937902dbc2254fb429a0593fd3275c5b, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
@@ -51682,7 +51682,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218167950}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -73636,7 +73636,7 @@ GameObject:
   - component: {fileID: 1608692364}
   m_Layer: 6
   m_Name: ColliderBox
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -87925,7 +87925,7 @@ GameObject:
   - component: {fileID: 1856742468}
   m_Layer: 6
   m_Name: ColliderBox
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -94082,9 +94082,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1920708888}
   - component: {fileID: 1920708889}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: TopWall
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
