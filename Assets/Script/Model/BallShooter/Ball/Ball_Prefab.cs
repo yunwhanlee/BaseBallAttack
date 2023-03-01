@@ -163,6 +163,7 @@ public class Ball_Prefab : MonoBehaviour
                     var ins = Instantiate(gm.eggPf, pl.BirdFriendObj.transform.position, Quaternion.identity, gm.ballGroup);
                     Vector3 throwDir = new Vector3(arrowDir.x, 1, arrowDir.z);
                     ins.GetComponent<Rigidbody>().AddForce((throwDir * 90), ForceMode.Impulse);
+                    Destroy(ins, 10);
                 }
 
                 //* 【 Dark Orb 】

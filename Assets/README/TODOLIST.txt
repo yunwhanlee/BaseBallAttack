@@ -539,6 +539,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
       対応６．Canvas_Animator下の全てオブジェクトを非活性化する作業：HomeRunTxtEF。
       対応７．Canvas_Animator下の全てオブジェクトを非活性化する作業：BossSpawnTxtEF。
     ✓ ★ボール速度が早かったら、何故かInterPolateとCollision Detectionをちゃんと設定しても壁を通りぬく問題解決。原因：Cubeを消して、BoxColliderだけで壁を構成しましたが、Collision Detectionが"Continuous-"の場合に急に起動できないエラーがある。
+    ✓ BossKillCnt４になったらVictoryになる。Eggを１０秒後に削除。
 
     - InstantKill 2 -> 1%に変更。 
     - GameSpeed X 3倍 -> AD見ることに。
