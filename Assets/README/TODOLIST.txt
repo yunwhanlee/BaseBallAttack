@@ -492,7 +492,8 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-94) ボースキールが死んだとき、onDestroy()が何回も呼び出されるバグで、BossKillCntが重複＋する問題。BossBlockにIsDead変数宣言し、一回トリガーで対応。
         -> ★★対応ができなしたが、実はonDestroy()がなぜ重なって読み出されるのかメインになるバグは解決できませんでした。
     
-    - (BUG) ボール速度が早かったら、ムンテンイでブロックがダメージ受けてしまう。
+    ✓ (BUG) ボール速度が早かったら、ムンテンイでブロックがダメージ受けてしまう。
+    - (BUG) ボールがObjstacleブロックの隙間に挟んでしまう時があるので、時間が過ぎたら消えるようにする必要がある。
 
 
     - (BUG) isResolveNextStageProblemが勝手に呼び出されるバグあるそう。
@@ -543,12 +544,14 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ PlayArea : この領域をボールが出るとき、
     ✓ 途中で辞める時、ボースをキールしたことによって、リワード受ける。
     ✓ ハードモードにしたら、レベル３にスタート。
-    - RewardChestがボースキールすると、ほとんど出るようにする。
+    ✓ RewardChestがボースキールすると、出るようにする。
+    ✓ Obstacleを破壊することでは、ExpOrbとBossTargetMissileが出ないように。
     - BlockGroupが０の場合は、ボールが消えるまで待つことではなく、すぐNextStageに行くように。
-
-    
-
     - InstantKill 2 -> 1%に変更。 
+    - Reviveしたら、BossLimitCntを半分にすること。（レベルリング）
+    - BossTargetMissileDamageを減る。
+    - モードクリアーしたら、ホーム画面でクリアー👑が表示するように！！
+
     - GameSpeed X 3倍 -> AD見ることに。
     
 

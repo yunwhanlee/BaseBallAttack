@@ -409,9 +409,12 @@ public class Block_Prefab : MonoBehaviour
         Debug.Log("virtual onDestroy():: resultExp= " + resultExp);
         em.createBrokeBlockEF(targetTf.position, color);
         
-        bm.createDropItemExpOrbPf(targetTf, resultExp);
-        bm.createBossTargetMisslePf(targetTf);
-        
+        //* Obstacleを破壊することでは、ExpOrbとBossTargetMissileが出ないように。
+        if(kind != BlockMaker.KIND.Obstacle){
+            bm.createDropItemExpOrbPf(targetTf, resultExp);
+            bm.createBossTargetMisslePf(targetTf);
+        }
+
         if(kind == BlockMaker.KIND.TreasureChest)
             for(int i=0; i<LM._.TREASURECHEST_ORB_CNT; i++)
                 bm.createDropItemExpOrbPf(targetTf, resultExp);

@@ -341,6 +341,8 @@ public class BossBlock : Block_Prefab{
         yield return new WaitForSecondsRealtime(playSec * 0.7f);
         for(int i=0; i < LM._.BOSS_DIE_ORB_CNT; i++)
             bm.createDropItemExpOrbPf(bossDieOrbSpawnTf, resultExp, popPower: 800);
+        var ins2 = Instantiate(gm.bm.dropItemRewardChestPf, bossDieOrbSpawnTf.position, Quaternion.identity, gm.dropItemGroup);
+            ins2.GetComponent<DropItem>().spawnPopUp((int)(800));
 
         yield return new WaitForSecondsRealtime(playSec * 0.3f + playSec); //* 消すのが早すぎ感じで、少し待機。
         gm.em.playUIAnimEF(DM.ANIM.BossClear.ToString());
