@@ -14,7 +14,7 @@ public class BossTargetMisslePref : MonoBehaviour
     [SerializeField] float curSpeed;
     [SerializeField] int popPower;
 
-    const float DEC_DMG_PER = 0.5f; //* このミサイルは、あくまでも補助用だから、ダメージを減る。
+    const float DEC_DMG_PER = 0.3f; //* このミサイルは、あくまでも補助用だから、ダメージを減る。
 
     void Awake(){
         gm = DM.ins.gm;
