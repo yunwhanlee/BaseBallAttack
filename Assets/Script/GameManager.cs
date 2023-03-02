@@ -737,7 +737,7 @@ public class GameManager : MonoBehaviour {
 
         gameoverPanel.SetActive(false);
         BossBlock boss = bm.getBoss();
-        if(boss) bossLimitCnt = LM._.BOSS_LIMIT_SPAN;
+        if(boss) bossLimitCnt = 8; //* ペナルティでリミットタイムを８にする。
         setActiveCam(false); // cam1 ON, cam2 OFF
         reviveBtn.gameObject.SetActive(false);
         StartCoroutine(collectDropOrb());

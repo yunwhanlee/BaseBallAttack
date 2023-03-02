@@ -263,9 +263,9 @@ public static class LANG //* LANG
         "Revive", "復活", "부활"
     };
     public static string[] ShowAdDialogRevive_Content = new string[]{
-        "Would you like to revive and continue to play the game? (blocks would be initialized.)",
-        "復活してゲームを続きますか? (ブロックは初期化されます。)",
-        "부활하여 게임을 계속 진행하시겠습니까? (블록은 초기화됩니다.)"
+        "Would you like to revive and continue to play the game? (penalty：Boss limit count 8)",
+        "復活してゲームを続きますか? (ペナルティ：ボス制限カウント 8)",
+        "부활하여 게임을 계속 진행하시겠습니까? (패널티：보스제한 카운트 8)"
     };
     public static string[] ShowAdDialogRouletteTicket_Title = new string[]{
         "Roulette Ticket", "ルーレットチケット", "룰렛티켓"
