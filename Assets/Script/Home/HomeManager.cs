@@ -129,7 +129,7 @@ public class HomeManager : MonoBehaviour
     public Text premiumPackPriceTxt;
 
     [Header("STAGE SELECT PANEL")][Header("__________________________")]
-    public int stageIndex;
+    public int stageIdx;
     public Color navyGray;
     public GameObject stageSelectPanel;
     public RectTransform stageSelectContent;    
@@ -594,7 +594,7 @@ public class HomeManager : MonoBehaviour
 
         int i=0;
         Array.ForEach(stageSelects, stageSelect => {
-            if(i == idxNum) stageIndex = i;
+            if(i == idxNum) stageIdx = i;
             stageSelect.ImgBtn.GetComponent<Image>().color = (i == idxNum)? Color.yellow : navyGray;
             i++;
         });
@@ -604,14 +604,15 @@ public class HomeManager : MonoBehaviour
 
     public void onClickPlayBtn(){
         //* Fail
-        if(stageSelects[stageIndex].IsLocked){
+        if(stageSelects[stageIdx].IsLocked){
             SM.ins.sfxPlay(SM.SFX.PurchaseFail.ToString());
             Util._.displayNoticeMsgDialog(LANG.getTxt(LANG.TXT.MsgHardmodeLocked.ToString()));
             return;
         }
     
-        //* スタートするステージ数を設定。
-        LM._.STAGE_NUM = stageSelects[stageIndex].Begin;
+        //* Set Stage & Mode
+        DM.ins.StageNum = stageSelects[stageIdx].Begin;
+        DM.ins.Mode = (stageIdx == 0)? DM.MODE.NORMAL : (stageIdx == 1)? DM.MODE.HARD : DM.MODE.NIGHTMARE;
 
         var playerModel = modelTf.GetChild(0);
         playerModel.GetComponent<Animator>().SetBool(DM.ANIM.IsIdle.ToString(), false); //Ready Pose
@@ -633,8 +634,8 @@ public class HomeManager : MonoBehaviour
         }
 
         //* Set Sky Style
-        Debug.Log("onClickPlayBtn:: curStageSelectIndex= " + stageIndex);
-        float offsetX = (stageIndex == (int)DM.MODE.NORMAL)? LM._.SKY_MT_MORNING_VALUE : LM._.SKY_MT_DINNER_VALUE; // 1=> Morning, 1.25=> dinner, 1.5=> night
+        Debug.Log("onClickPlayBtn:: curStageSelectIndex= " + stageIdx);
+        float offsetX = (stageIdx == (int)DM.MODE.NORMAL)? LM._.SKY_MT_MORNING_VALUE : LM._.SKY_MT_DINNER_VALUE; // 1=> Morning, 1.25=> dinner, 1.5=> night
         DM.ins.simpleSkyMt.SetTextureOffset("_MainTex", new Vector2(offsetX, 0));
 
         //* シーン 読込み。

@@ -572,7 +572,7 @@ public class Ball_Prefab : MonoBehaviour
         gm.IsPlayingAnim = false;
         gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
         gm.homeRunTxtTf.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
-        em.activeUI_EF(DM.ANIM.HomeRun.ToString());
+        em.playUIAnimEF(DM.ANIM.HomeRun.ToString());
         Time.timeScale = 1;
     }
 

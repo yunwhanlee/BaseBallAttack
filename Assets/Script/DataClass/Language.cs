@@ -311,9 +311,9 @@ public static class LANG //* LANG
         "정말로 게임을 포기하시겠습니까?"
     };
     public static string[] Caution_Notice = new string[]{
-        "The played data will not be saved.",
-        "プレイしたデータが保存されません。",
-        "플레이한 데이터가 저장되지 않습니다."
+        "The played data will not be saved",
+        "プレイしたデータが保存されません",
+        "플레이한 데이터가 저장되지 않습니다"
     };
     public static string[] Caution_Notice_PartSaved = new string[]{
         "You can only get a reward for the last boss you knocked down.",

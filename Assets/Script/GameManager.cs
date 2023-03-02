@@ -11,7 +11,6 @@ using UnityEngine.Serialization;
 public class GameManager : MonoBehaviour {
     public enum STATE {PLAY, WAIT, GAMEOVER, PAUSE, CONTINUE, HOME, GIVEUP, NULL};
     [SerializeField] private STATE state;     public STATE State {get => state; set => state = value;}
-    [SerializeField] private DM.MODE mode;       public DM.MODE Mode {get => mode; set => mode = value;}
     public float timelineNum;
     // public Animator postProcessAnim;
 
@@ -253,7 +252,8 @@ public class GameManager : MonoBehaviour {
             gameTutorialPanel.gameObject.SetActive(true);
         }
 
-        stage = LM._.STAGE_NUM;
+        stage = DM.ins.StageNum;
+
         Debug.Log("<color=red>----------------------------------------------P L A Y   S C E N E----------------------------------------------</color>");
         //! init()宣言したら、キャラクターモデルを読み込むことができないBUG
         pl = GameObject.Find("Player").GetComponent<Player>();
@@ -317,21 +317,22 @@ public class GameManager : MonoBehaviour {
             skyMoonObj.SetActive(true);
 
         //* Set Mode
-        Debug.Log($"Set Mode:: {stage} > {LM._.VICTORY_BOSSKILL_CNT} * {LM._.BOSS_STAGE_SPAN} : {stage > LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN}");
-        if(stage > LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN){
-            mode = DM.MODE.HARD;
+        if(DM.ins.Mode == DM.MODE.HARD){
+            pl.IsLevelUp = true;
+            pl.Lv = 3;
+            StartCoroutine(coCheckLevelUp());
         }
 
         //* Pause Panel UI
         pauseCoinTxt.text = DM.ins.personalData.Coin.ToString();
         pauseDiamondTxt.text = DM.ins.personalData.Diamond.ToString();
-        pauseModeTxt.text = mode.ToString() + " MODE";
-        pauseModeTxt.color = (mode == DM.MODE.HARD)? Color.red : Color.white;
+        pauseModeTxt.text = DM.ins.Mode.ToString() + " MODE";
+        pauseModeTxt.color = getModeTxtColor();
 
         //* ModeTxt Anim
-        modeTxt.text = mode.ToString() + " MODE";
-        modeTxt.color = (mode == DM.MODE.HARD)? Color.red : Color.white;
-        em.activeUI_EF(DM.ANIM.Mode.ToString());
+        modeTxt.text = DM.ins.Mode.ToString() + " MODE";
+        modeTxt.color = getModeTxtColor();
+        em.playUIAnimEF(DM.ANIM.Mode.ToString());
 
         bossLimitCntAlertTxt.text = LANG.getTxt(LANG.TXT.BossLimitCntAlert.ToString());
     }
@@ -391,7 +392,11 @@ public class GameManager : MonoBehaviour {
         //* ActiveSkill Status
         activeSkillBtnList.ForEach(btn=> btn.setActiveSkillEF());
     }
-
+    private Color getModeTxtColor(){
+        return (DM.ins.Mode == DM.MODE.NORMAL)? Color.white
+            : (DM.ins.Mode == DM.MODE.HARD)? Color.red
+            : Color.magenta;
+    }
     public void setBallPreviewGoalImgRGBA(Color color) => ballPreviewGoalImg.color = color;
     public void throwScreenAnimSetTrigger(string name) => throwScreenAnim.SetTrigger(name);
     public void setLightDarkness(bool isOn){ //* During Skill Casting ...
@@ -737,7 +742,7 @@ public class GameManager : MonoBehaviour {
         reviveBtn.gameObject.SetActive(false);
         StartCoroutine(collectDropOrb());
         SM.ins.sfxPlay(SM.SFX.Revive.ToString());
-        em.activeUI_EF(DM.REWARD.Revive.ToString());
+        em.playUIAnimEF(DM.REWARD.Revive.ToString());
         bm.Start();
         showAdDialog.gameObject.SetActive(false);//* ダイアログ閉じる
     }
@@ -896,12 +901,12 @@ public class GameManager : MonoBehaviour {
         ballPreviewDirGoal.transform.position = new Vector3(ballPreviewDirGoal.transform.position.x + rx, 0.6f + ry, zCenter);
     }
 
-    public void setGameOver(){
+    public void setGameOver(bool isGiveUp = false){
         Debug.Log("<size=30> --- G A M E O V E R --- </size>");
         SM.ins.sfxPlay(SM.SFX.Defeat.ToString());
         setFinishGame(
             gameoverPanel, gvBestStageTxt, gvStageTxt, gvCoinTxt, gvDiamondTxt
-            , gvRewardItemCoinTxt, gvRewardItemDiamondTxt, gvRewardItemRouletteTicketTxt);
+            , gvRewardItemCoinTxt, gvRewardItemDiamondTxt, gvRewardItemRouletteTicketTxt, isGiveUp);
     }
 
     public void setVictory(){
@@ -916,18 +921,19 @@ public class GameManager : MonoBehaviour {
             DM.ins.personalData.IsHardmodeOn = true;
 
         //* Achivement
-        if(mode == DM.MODE.NORMAL)
+        if(DM.ins.Mode == DM.MODE.NORMAL)
             AcvNormalModeClear.setNormalModeClear();
-        else if(mode == DM.MODE.HARD)
+        else if(DM.ins.Mode == DM.MODE.HARD)
             AcvHardModeClear.setHardModeClear();
     }
 
     private void setFinishGame(GameObject panel, Text bestStageTxt, Text stageTxt, Text coinTxt, Text diamondTxt,
-        Text rewardItemCoinTxt, Text rewardItemDiamondTxt, Text rewardItemRouletteTicketTxt){
+        Text rewardItemCoinTxt, Text rewardItemDiamondTxt, Text rewardItemRouletteTicketTxt, bool isGiveUp = false){
         //* (BUG-66) ステージが終わっても、ボースとか進んでいるバグ -> Time.scaleを０にして対応。GameOverとVictoryAnimationはRealTimeScaleとして反応するように。
         Time.timeScale = 0;
         State = GameManager.STATE.GAMEOVER;
         panel.SetActive(true);
+        if(isGiveUp) coinX2Btn.gameObject.SetActive(false);
 
         //* Set Best Stage
         Debug.Log($"setFinishGame:: Set Best Stage:: stage:{stage} > bestStage:{DM.ins.personalData.BestStage}");
@@ -949,8 +955,8 @@ public class GameManager : MonoBehaviour {
         stageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage;
 
         //* Set Stage
-        if(mode == DM.MODE.HARD)
-            stage -= LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN;
+        if(DM.ins.Mode == DM.MODE.HARD)
+            stage -= DM.ins.StageNum;//LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN;
 
         //* Coin & Diamond
         coin = stage * LM._.STAGE_PER_COIN_PRICE; //* (BUG-70)
@@ -958,10 +964,10 @@ public class GameManager : MonoBehaviour {
         int extraUpgradeCoin = Mathf.RoundToInt(coin * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.CoinBonus].getValue());
 
         //* Show Goods => setGameでも使う。
-        coinTxt.text = (coin + extraUpgradeCoin * (mode == DM.MODE.HARD? LM._.HARDMODE_COIN_BONUS : 1)).ToString();        
+        coinTxt.text = (coin + extraUpgradeCoin * (DM.ins.Mode == DM.MODE.HARD? LM._.HARDMODE_COIN_BONUS : 1)).ToString();        
         coinTxt.text = (coinX2Label.activeSelf)? (int.Parse(coinTxt.text) * 2).ToString() : coinTxt.text; //* (BUG-76) setFinishGame:: CoinX2してからReviveしたら、X2が適用されないバグ対応。
 
-        diamondTxt.text = (diamond * (mode == DM.MODE.HARD? LM._.HARDMODE_DIAMOND_BONUS : 1)).ToString();
+        diamondTxt.text = (diamond * (DM.ins.Mode == DM.MODE.HARD? LM._.HARDMODE_DIAMOND_BONUS : 1)).ToString();
 
         //* Show Reward Item Goods
         rewardItemCoinTxt.text = rewardItemCoin.ToString();
@@ -1005,11 +1011,11 @@ public class GameManager : MonoBehaviour {
                     DM.ins.personalData.save(); //* (BUG-68) GiveUpしたら以前に購入したアイテムデータが保存できないこと対応。
                     SceneManager.LoadScene(DM.SCENE.Home.ToString());
                 }
-                else{
+                else{ //* ボースを倒したことが有ったら、ここまでのリワードをもらえる。
                     pausePanel.SetActive(false);
                     askGiveUpDialog.gameObject.SetActive(false);
                     stage = bossKillCnt * LM._.BOSS_STAGE_SPAN;
-                    setGameOver();
+                    setGameOver(isGiveUp: true);
                 }
 
                 break;
@@ -1018,10 +1024,10 @@ public class GameManager : MonoBehaviour {
 
     private void setPlayedMoneyResult(){
         //* モード
-        float multiplyCoin = 1;
-        float multiplyDiamond = 1;
-        if(mode == DM.MODE.HARD) {multiplyCoin = 2; multiplyDiamond = 1.5f;}
-        //TODO else if(mode == DM.MODE.NIGHTMARE) {multiCoin = 2; multiDiamond = 1.5f;}
+        float multiplyCoin = 1, multiplyDiamond = 1;
+
+        if(DM.ins.Mode == DM.MODE.HARD) {multiplyCoin = 2; multiplyDiamond = 1.5f;}
+        else if(DM.ins.Mode == DM.MODE.NIGHTMARE) {multiplyCoin = 3; multiplyDiamond = 2;}
 
         //* 財貨
         DM.ins.personalData.addCoin((int)(resultCoin * multiplyCoin));
@@ -1139,7 +1145,7 @@ public class GameManager : MonoBehaviour {
             bossLimitCnt--;
 
             if(bossLimitCnt == LM._.BOSS_LIMIT_CNT_ALERT_NUM){
-                em.activeUI_EF(DM.ANIM.BossLimitcntAlertTxtEF.ToString());
+                em.playUIAnimEF(DM.ANIM.BossLimitcntAlertTxtEF.ToString());
             }
 
             //* ボース制限時間が０になったら、GAMEOVER!!
@@ -1176,7 +1182,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log("AAA setNextStage:: coCheckPerfectBonus::");
         if(blockGroup.childCount == 0){
             perfectTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
-            em.activeUI_EF(DM.ANIM.Perfect.ToString());
+            em.playUIAnimEF(DM.ANIM.Perfect.ToString());
 
             yield return Util.delay0_5;
             //* One More Next Stage (ボスがいなければ)

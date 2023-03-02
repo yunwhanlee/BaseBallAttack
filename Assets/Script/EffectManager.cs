@@ -368,7 +368,7 @@ public class EffectManager : MonoBehaviour
 /// -------------------------------------------------------------
 /// UI EF
 /// -------------------------------------------------------------
-    public void activeUI_EF(string name){
+    public void playUIAnimEF(string name){
         if(name == DM.ANIM.Mode.ToString())
             StartCoroutine(coActiveModeTxtEF());
         else if(name == DM.ANIM.Perfect.ToString())

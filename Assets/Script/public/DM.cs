@@ -73,6 +73,10 @@ public class DM : MonoBehaviour{
     [Header("GPGS")][Header("__________________________")]
     [SerializeField] bool isGPGSLogin;  public bool IsGPGSLogin {get => isGPGSLogin; set => isGPGSLogin = value;}
 
+    [Header("STAGE MODE")][Header("__________________________")]
+    [SerializeField] int stageNum = 1; public int StageNum {get => stageNum; set => stageNum = value;}
+    [SerializeField] MODE mode; public MODE Mode {get => mode; set => mode = value;}
+
     [Header("GUI")][Header("__________________________")]
     [SerializeField] Sprite coinSpr; public Sprite CoinSpr {get => coinSpr; set => coinSpr = value;}
     [SerializeField] Sprite diamondSpr; public Sprite DiamondSpr {get => diamondSpr; set => diamondSpr = value;}
