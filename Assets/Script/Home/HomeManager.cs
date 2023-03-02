@@ -937,7 +937,7 @@ public class HomeManager : MonoBehaviour
             premiumPackInfoTxtArr[DIAMOND].text = $"{LM._.PREM_PACK_DIAMOND} {LANG.getTxt(LANG.TXT.Coin.ToString())}";
             premiumPackInfoTxtArr[ROULETTE_TICKET].text = $"x {LM._.PREM_PACK_ROULETTE_TICKET}";
             premiumPackInfoTxtArr[REMOVE_AD].text = $"{LANG.getTxt(LANG.TXT.RemoveAllADs.ToString())}";
-            premiumPackPriceTxt.text = $"$ { LM._.PREM_PACK_PRICE}";
+            premiumPackPriceTxt.text = $"￥{ LM._.PREM_PACK_PRICE}";
         }
         else{
             //* Close PremiumPackPanel

@@ -178,8 +178,8 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("プレミアムパック購入：コイン")] public int PREM_PACK_COIN = 50000;
     [Tooltip("プレミアムパック購入：ダイア")] public int PREM_PACK_DIAMOND = 5000;
 
-    [Header("IN-APP PURCHASE PRICE ($ DOLLER)")][Header("__________________________")]
-    [Tooltip("プレミアムパック値段")] public int PREM_PACK_PRICE = 10;
+    [Header("IN-APP PURCHASE PRICE(￥)")][Header("__________________________")]
+    [Tooltip("プレミアムパック価額")] public int PREM_PACK_PRICE = 999;
     [Header("RATE DIALOG SHOW PLAYTIME CNT")][Header("__________________________")]
     [Tooltip("評価ダイアログを表示するプレイタイム")] public int DISPLAY_RATE_DIALOG_PLAYTIME = 3;
 
