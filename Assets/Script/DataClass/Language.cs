@@ -50,7 +50,7 @@ public static class LANG //* LANG
         GameTutorial_Content9,
         GameTutorial_Content10,
 
-        Caution, Caution_Content, Caution_Notice,
+        Caution, Caution_Content, Caution_Notice, Caution_Notice_PartSaved,
 
 
         Rate, Later, RateDialog_Content1, RateDialog_Content2,
@@ -314,6 +314,11 @@ public static class LANG //* LANG
         "The played data will not be saved.",
         "プレイしたデータが保存されません。",
         "플레이한 데이터가 저장되지 않습니다."
+    };
+    public static string[] Caution_Notice_PartSaved = new string[]{
+        "You can only get a reward for the last boss you knocked down.",
+        "最後に倒したボースのリワードまでしかもらえません。",
+        "마지막으로 쓰러뜨린 보스의 보상까지밖에 받을 수 없습니다."
     };
 
     //* Tutorial
@@ -628,6 +633,7 @@ public static class LANG //* LANG
         if(name == TXT.Caution.ToString()) res = Caution[CUR_LANG];
         if(name == TXT.Caution_Content.ToString()) res = Caution_Content[CUR_LANG];
         if(name == TXT.Caution_Notice.ToString()) res = Caution_Notice[CUR_LANG];
+        if(name == TXT.Caution_Notice_PartSaved.ToString()) res = Caution_Notice_PartSaved[CUR_LANG];
 
 
         //* TUTORIAL

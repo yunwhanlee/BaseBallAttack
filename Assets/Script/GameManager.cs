@@ -1000,9 +1000,18 @@ public class GameManager : MonoBehaviour {
                 break;
             case STATE.GIVEUP:
                 Time.timeScale = 1;
-                resetSkillStatusTable();
-                DM.ins.personalData.save(); //* (BUG-68) GiveUpしたら以前に購入したアイテムデータが保存できないこと対応。
-                SceneManager.LoadScene(DM.SCENE.Home.ToString());
+                if(bossKillCnt <= 0){
+                    resetSkillStatusTable();
+                    DM.ins.personalData.save(); //* (BUG-68) GiveUpしたら以前に購入したアイテムデータが保存できないこと対応。
+                    SceneManager.LoadScene(DM.SCENE.Home.ToString());
+                }
+                else{
+                    pausePanel.SetActive(false);
+                    askGiveUpDialog.gameObject.SetActive(false);
+                    stage = bossKillCnt * LM._.BOSS_STAGE_SPAN;
+                    setGameOver();
+                }
+
                 break;
         }
     }
@@ -1261,7 +1270,11 @@ public class GameManager : MonoBehaviour {
 
         title.text = LANG.getTxt(LANG.TXT.Caution.ToString());
         content.text = LANG.getTxt(LANG.TXT.Caution_Content.ToString());
-        notice.text = LANG.getTxt(LANG.TXT.Caution_Notice.ToString());
+
+        notice.text = 
+            (bossKillCnt <= 0)? LANG.getTxt(LANG.TXT.Caution_Notice.ToString())
+                : LANG.getTxt(LANG.TXT.Caution_Notice_PartSaved.ToString());
+
         okBtn.text = LANG.getTxt(LANG.TXT.Ok.ToString());
         cancelBtn.text = LANG.getTxt(LANG.TXT.No.ToString());
     }
