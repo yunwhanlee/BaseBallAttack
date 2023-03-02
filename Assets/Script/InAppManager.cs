@@ -27,18 +27,24 @@ public class InAppManager : MonoBehaviour
                 DM.ins.setUIRemoveAD();
                 hm.setCheckBtnUninteractable();
                 break;
-            case "diamond_small":
-                hm.displayShowRewardPanel(coin: 0, diamond: 10000);
-                DM.ins.personalData.addDiamond(10000);
+            case "diamond_small":{
+                const int value = 1000;
+                hm.displayShowRewardPanel(coin: 0, diamond: value);
+                DM.ins.personalData.addDiamond(value);
                 break;
-            case "diamond_medium":
-                hm.displayShowRewardPanel(coin: 0, diamond: 50000);
-                DM.ins.personalData.addDiamond(50000);
+            }
+            case "diamond_medium":{
+                const int value = 5000;
+                hm.displayShowRewardPanel(coin: 0, diamond: value);
+                DM.ins.personalData.addDiamond(value);
                 break;
-            case "diamond_big":
-                hm.displayShowRewardPanel(coin: 0, diamond: 100000);
-                DM.ins.personalData.addDiamond(100000);
+            }
+            case "diamond_big":{
+                const int value = 10000;
+                hm.displayShowRewardPanel(coin: 0, diamond: value);
+                DM.ins.personalData.addDiamond(value);
                 break;
+            }
             case "premiumpackage":
                 SM.ins.sfxPlay(SM.SFX.PurchaseSuccess.ToString());
                 DM.ins.personalData.IsPurchasePremiumPack = true;

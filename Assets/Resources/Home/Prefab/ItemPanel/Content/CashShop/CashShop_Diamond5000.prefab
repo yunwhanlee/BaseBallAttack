@@ -416,7 +416,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Diamond 50000
+  m_Text: Diamond 5000
 --- !u!114 &6252180515394020083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -446,7 +446,7 @@ GameObject:
   - component: {fileID: 6252180515462008428}
   - component: {fileID: 6252180515462008429}
   m_Layer: 5
-  m_Name: CashShop_Diamond50000
+  m_Name: CashShop_Diamond5000
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -496,9 +496,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameTxts:
-  - Diamond 50000
-  - "\u30C0\u30A4\u30A2 50000"
-  - "\uB2E4\uC774\uC544 50000"
+  - Diamond 5000
+  - "\u30C0\u30A4\u30A2 5000"
+  - "\uB2E4\uC774\uC544 5000"
   explainTxts:
   - Get Diamond 50000.
   - "50000\u30C0\u30A4\u30A2\u3092\u8CFC\u5165\u3002"
@@ -510,7 +510,7 @@ MonoBehaviour:
   atvSkillValueTxt: {fileID: 0}
   price:
     type: 2
-    val: 2000
+    val: 520
   isLock: 0
   isChecked: 0
   isCheckedImgObj: {fileID: 0}
@@ -754,9 +754,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: e110c919ea5e84fea8cbc2f0556ecfef, type: 3}
     m_FontSize: 55
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 300
@@ -952,7 +952,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Get Diamond 50000
+  m_Text: Get Diamond 5000
 --- !u!1 &6300866872112315294
 GameObject:
   m_ObjectHideFlags: 0
