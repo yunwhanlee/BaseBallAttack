@@ -32,6 +32,7 @@ public class Util : MonoBehaviour
     public static readonly WaitForSecondsRealtime delay2RT = new WaitForSecondsRealtime(2f);
     public static readonly WaitForSeconds delay3 = new WaitForSeconds(3f);
     public static readonly WaitForSecondsRealtime delay4RT = new WaitForSecondsRealtime(4f);
+    public static readonly WaitForSeconds delay9 = new WaitForSeconds(9f);
     public static readonly WaitForSeconds delayInfinite = new WaitForSeconds(999f);
 
     [Header("NOTICE MESSAGE")][Header("__________________________")]

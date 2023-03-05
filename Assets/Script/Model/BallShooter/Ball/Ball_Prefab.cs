@@ -42,6 +42,11 @@ public class Ball_Prefab : MonoBehaviour
         IsOnDarkOrb = false;
     }
 
+    void OnEnable() {
+        //* (BUG-97) ボールがObjstacleブロックの隙間に挟んでしまう時があるので、時間が過ぎたら削除。
+        StartCoroutine(coDelayDestroy());
+    }
+
     void OnDisable() => init(name);
 
     void FixedUpdate() {
@@ -446,6 +451,7 @@ public class Ball_Prefab : MonoBehaviour
         darkOrbPf.SetActive(false);
         isDmgX2 = false;
         speed = 0;
+        StopAllCoroutines();
 
         //* Trailエフェクト消す（DropBoxアイテムで適用された）
         for(int i=0; i<transform.childCount; i++){
@@ -471,6 +477,15 @@ public class Ball_Prefab : MonoBehaviour
             pl.IsHitBall = false;
         }
     }
+
+    IEnumerator coDelayDestroy(){
+        yield return Util.delay9;
+        if(isActive) {
+            Debug.Log("coDelayDestroy():: delay 9sec");
+            checkDestroyObjName();
+        }
+    }
+
     IEnumerator coFastPlayOn(){
         yield return Util.delay2;
         Debug.Log($"Ball_Prefab::coFastPlayOn():: this.name= {name}");
