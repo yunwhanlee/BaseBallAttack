@@ -120,7 +120,6 @@ public class GameManager : MonoBehaviour {
     public Color bossStageBarColorPink;
     public Text expBarTxt, bossStageTxt;
     public Toggle skipTutorialToggle;
-    public GameObject coinX2Label;
     public Text modeTxt;
     public GameObject showHitBallInfoUIObj;
 
@@ -167,6 +166,8 @@ public class GameManager : MonoBehaviour {
 
     [Header("GAMEOVER")][Header("__________________________")]
     [FormerlySerializedAs("gvCoinTxt")]   public Text gvCoinTxt;
+    [FormerlySerializedAs("gvCoinX2Btn")]   public Button gvCoinX2Btn;
+    [FormerlySerializedAs("gvCoinX2Label")]   public GameObject gvCoinX2Label;
     [FormerlySerializedAs("gvDiamondTxt")]   public Text gvDiamondTxt;
     [FormerlySerializedAs("gvBestStageTxt")]   public Text gvBestStageTxt;
     [FormerlySerializedAs("gvStageTxt")]   public Text gvStageTxt;
@@ -176,6 +177,8 @@ public class GameManager : MonoBehaviour {
 
     [Header("VICTORY")][Header("__________________________")]
     [FormerlySerializedAs("vtrCoinTxt")]   public Text vtrCoinTxt;
+    [FormerlySerializedAs("vtrCoinX2Btn")]   public Button vtrCoinX2Btn;
+    [FormerlySerializedAs("vtrCoinX2Label")]   public GameObject vtrCoinX2Label;
     [FormerlySerializedAs("vtrDiamondTxt")]   public Text vtrDiamondTxt;
     [FormerlySerializedAs("vtrBestStageTxt")]   public Text vtrBestStageTxt;
     [FormerlySerializedAs("vtrStageTxt")]   public Text vtrStageTxt;
@@ -201,7 +204,6 @@ public class GameManager : MonoBehaviour {
     public Button statusFolderBtn;
     public Button rerotateSkillSlotsBtn; //levelUpPanel
     public Button reviveBtn; //gameoverPanel
-    public Button coinX2Btn; //gameoverPanel
     public Button adPricePayBtn;
     public Button adFreeBtn;
     public Button rewardChestOpenBtn;
@@ -748,13 +750,22 @@ public class GameManager : MonoBehaviour {
     }
 
     public void setCoinX2(){
+        Debug.Log("setCoinX2():: gameoverPanel= " + gameoverPanel.activeSelf);
         //* (BUG-83) CoinX2したら、なぜかTime.Scaleの０が１になること対応。
         Time.timeScale = 0;
         SM.ins.sfxPlay(SM.SFX.DropBoxCoinPick.ToString());
 
         resultCoin = resultCoin * 2; //* (BUG-69) CoinX2広告みても、適用できされないバグ対応。
-        gvCoinTxt.text = (int.Parse(gvCoinTxt.text) * 2).ToString();
 
+        //* (BUG-95) VictoryでCoin2Xをしても適用できない。GameOverのみ対応になっていました。
+        //* Check GameOver or Victory Panel
+        bool isGameOverPanel = gameoverPanel.activeSelf;
+        Text coinTxt = isGameOverPanel? gvCoinTxt : vtrCoinTxt;
+        var coinX2Label = isGameOverPanel? gvCoinX2Label : vtrCoinX2Label;
+        Button coinX2Btn = isGameOverPanel? gvCoinX2Btn : vtrCoinX2Btn;
+
+        //* UI
+        coinTxt.text = (int.Parse(coinTxt.text) * 2).ToString();
         coinX2Btn.gameObject.SetActive(false);
         coinX2Label.gameObject.SetActive(true);
         showAdDialog.gameObject.SetActive(false);//* ダイアログ閉じる
@@ -933,7 +944,7 @@ public class GameManager : MonoBehaviour {
         Time.timeScale = 0;
         State = GameManager.STATE.GAMEOVER;
         panel.SetActive(true);
-        if(isGiveUp) coinX2Btn.gameObject.SetActive(false);
+        if(isGiveUp) gvCoinX2Btn.gameObject.SetActive(false);
 
         //* Set Best Stage
         Debug.Log($"setFinishGame:: Set Best Stage:: stage:{stage} > bestStage:{DM.ins.personalData.BestStage}");
@@ -965,7 +976,7 @@ public class GameManager : MonoBehaviour {
 
         //* Show Goods => setGameでも使う。
         coinTxt.text = (coin + extraUpgradeCoin * (DM.ins.Mode == DM.MODE.HARD? LM._.HARDMODE_COIN_BONUS : 1)).ToString();        
-        coinTxt.text = (coinX2Label.activeSelf)? (int.Parse(coinTxt.text) * 2).ToString() : coinTxt.text; //* (BUG-76) setFinishGame:: CoinX2してからReviveしたら、X2が適用されないバグ対応。
+        coinTxt.text = (gvCoinX2Label.activeSelf)? (int.Parse(coinTxt.text) * 2).ToString() : coinTxt.text; //* (BUG-76) setFinishGame:: CoinX2してからReviveしたら、X2が適用されないバグ対応。
 
         diamondTxt.text = (diamond * (DM.ins.Mode == DM.MODE.HARD? LM._.HARDMODE_DIAMOND_BONUS : 1)).ToString();
 

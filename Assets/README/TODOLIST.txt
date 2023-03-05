@@ -491,8 +491,9 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-93) DropBox Sheildを習得してもうpl.IsBarrierがTrueであれば、もう一ど習得しても処理しない。
     ✓ (BUG-94) ボースキールが死んだとき、onDestroy()が何回も呼び出されるバグで、BossKillCntが重複＋する問題。BossBlockにIsDead変数宣言し、一回トリガーで対応。
         -> ★★対応ができなしたが、実はonDestroy()がなぜ重なって読み出されるのかメインになるバグは解決できませんでした。
-    
     ✓ (BUG) ボール速度が早かったら、ムンテンイでブロックがダメージ受けてしまう。
+    ✓ (BUG-95) VictoryでCoin2Xをしても適用できない。GameOverのみ対応になっていました。
+
     - (BUG) ボールがObjstacleブロックの隙間に挟んでしまう時があるので、時間が過ぎたら消えるようにする必要がある。
 
 
