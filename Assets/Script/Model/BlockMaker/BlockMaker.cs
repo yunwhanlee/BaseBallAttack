@@ -21,6 +21,7 @@ public class BlockMaker : MonoBehaviour
     [Header("STATUS")][Header("__________________________")]
     public bool doCreateBlock;  public bool DoCreateBlock {get => doCreateBlock; set => doCreateBlock = value;}
     [SerializeField] List<int>  hpCalcList;    public List<int> HpCalcList { get => hpCalcList; set => hpCalcList = value;}
+    [SerializeField] List<int>  expList;    public List<int> ExpList { get => expList; set => expList = value;}
 
     [Header("RESOURCE")][Header("__________________________")]
     public GameObject[] blockPrefs;
@@ -39,14 +40,28 @@ public class BlockMaker : MonoBehaviour
     public GameObject coinIconPf; //dropBoxQuestionPfで出るコインUIアイコン
 
     public void Start() {
-        //* ブロック HPリスト 準備
-        const int OFFSET = 100;
-        hpCalcList = Util._.calcArithmeticProgressionList(start: OFFSET, max: LM._.MAX_STAGE, d: OFFSET, gradualUpValue: 0.02f);
-        
-        //* hp計算結果が整数(100％)基準なので、少数に転換
+        //* HPリスト 準備
+        const int HP_OFFSET = 100;
         const float DECIMAL_OFFSET = 0.01f;
-        for(int i = 0; i < hpCalcList.Count; i++){
+        hpCalcList = Util._.calcArithmeticProgressionList(start: HP_OFFSET, max: LM._.MAX_STAGE, d: HP_OFFSET, gradualUpValue: 0.02f);
+        //* hp計算結果が整数(100％)基準なので、少数に転換
+        for(int i = 0; i < hpCalcList.Count; i++)
             hpCalcList[i] = Mathf.RoundToInt(hpCalcList[i] * DECIMAL_OFFSET);
+
+        //* EXPリスト 準備
+        const int NORMAL = 10, HARD = 5, NIGHTMARE = 3;
+        for(int i=0; i<hpCalcList.Count; i++){
+            int calc = (int)(hpCalcList[i] * 0.1f);
+            int v = (calc == 0)? 1 : calc + 1;
+            if(i < 60){
+                expList.Add(v * NORMAL);
+            }
+            else if(i < 120){
+                expList.Add(v * HARD);
+            }
+            else{
+                expList.Add(v * NIGHTMARE);
+            }
         }
 
         //* Init Or AD-Revive

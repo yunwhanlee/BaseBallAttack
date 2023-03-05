@@ -226,10 +226,7 @@ public class Block_Prefab : MonoBehaviour
 
     private void setExp(){
         //* Set Exp 
-        int calc = (int)(Hp * 0.1f); //* (Hp / 10)と同じ => 演算コストを減らすため。
-        int v = (calc == 0)? 1 : calc + 1;
-        Exp = v * 10;
-        // Debug.Log("setExp : " + Exp);
+        exp = bm.ExpList[gm.stage];
     }
 
     public void setMesh(){

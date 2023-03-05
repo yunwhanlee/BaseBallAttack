@@ -968,8 +968,8 @@ public class GameManager : MonoBehaviour {
         stageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage;
 
         //* Set Stage
-        if(DM.ins.Mode == DM.MODE.HARD)
-            stage -= DM.ins.StageNum;//LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN;
+        // if(DM.ins.Mode == DM.MODE.HARD)
+            // stage -= DM.ins.StageNum;//LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN;
 
         //* Coin & Diamond
         coin = stage * LM._.STAGE_PER_COIN_PRICE; //* (BUG-70)
