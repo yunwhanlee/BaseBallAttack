@@ -49,6 +49,8 @@ public class StageSelect {
     Text bonusMultiDiamondTxt;  public Text BonusMultiDiamondTxt { get => bonusMultiDiamondTxt; set => bonusMultiDiamondTxt = value;}
     
     public void setUIMember(int i){
+        Debug.Log($"StageSelect:: setUIMember(i={i})::");
+
         //* Set Object
         img = Array.Find(rectTf.GetComponentsInChildren<Image>(), img => img.gameObject.name == "StageImg");
         title = Array.Find(rectTf.GetComponentsInChildren<Text>(), txt => txt.gameObject.name == "TitleTxt");
@@ -760,9 +762,16 @@ public class HomeManager : MonoBehaviour
     }
 
     private void setStageSelectUIList(){
-        int value = LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN;
+        //* Set Stage Range (Beginと.End)
+        int stageCnt = LM._.BOSS_STAGE_SPAN * LM._.VICTORY_BOSSKILL_CNT;
+        stageSelects[(int)DM.MODE.NORMAL].Begin = 1;
+        stageSelects[(int)DM.MODE.NORMAL].End = stageCnt;
 
-        //* Set Stage Range => Inspector Viewで .Beginと.End
+        stageSelects[(int)DM.MODE.HARD].Begin = 1 + stageCnt;
+        stageSelects[(int)DM.MODE.HARD].End = stageCnt * 2;
+        
+        stageSelects[(int)DM.MODE.NIGHTMARE].Begin = 1 + (stageCnt * 2);
+        stageSelects[(int)DM.MODE.NIGHTMARE].End = stageCnt * 3;
 
         //* Check HardMode
         if(DM.ins.personalData.IsHardmodeOn)
