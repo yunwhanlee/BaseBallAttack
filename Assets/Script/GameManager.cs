@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] int resultRouletteTicket;
 
     [Header("TRIGGER")][Header("__________________________")]
+    [SerializeField] bool isQualityLow;
     [SerializeField] bool isPlayingAnim;  public bool IsPlayingAnim { get => isPlayingAnim; set=> isPlayingAnim = value;}
     [SerializeField] bool isFastPlay;  public bool IsFastPlay { get => isFastPlay; set => isFastPlay = value;}
     [SerializeField] bool isResolveNextStageProblem;  public bool IsResolveNextStageProblem { get => isResolveNextStageProblem; set => isResolveNextStageProblem = value;}
@@ -702,6 +703,7 @@ public class GameManager : MonoBehaviour {
 //*---------------------------------------
     public void init(){
         State = GameManager.STATE.WAIT;
+        isQualityLow = DM.ins.personalData.Quality == (int)DM.QUALITY.Low;
         gameoverPanel.SetActive(false);
         stage = 1;
         strikeCnt = 0;
@@ -786,8 +788,8 @@ public class GameManager : MonoBehaviour {
 
             //* 要らないオブジェクトは非活性して、コストを減らす。
             pl.previewBundle.SetActive(false);
-            postProccessingObj.SetActive(false);
             inGamePassiveSkillTablePanel.SetActive(false);
+            if(isQualityLow) postProccessingObj.SetActive(false);
             // dontLookCam2ObjsGroup.SetActive(false);
 
         }
@@ -797,7 +799,7 @@ public class GameManager : MonoBehaviour {
             setTextReadyBtn(LANG.getTxt(LANG.TXT.Ready.ToString()));
             //* (BUG)STRIKEになってから、BACKボタン押すと、PreviewLineが消えてしまう。
             setActivePreviewBendle(true);
-            postProccessingObj.SetActive(true);
+            if(isQualityLow) postProccessingObj.SetActive(true);
             inGamePassiveSkillTablePanel.SetActive(true);
             // dontLookCam2ObjsGroup.SetActive(true);
 

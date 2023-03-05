@@ -12,6 +12,7 @@ public class DM : MonoBehaviour{
     public HomeManager hm;
     public GameManager gm;
     public enum DATABASE_KEY {Json};
+    public enum QUALITY {Low, Medium, High};
     public enum SCENE {Home, Play, Loading};
     public enum MODE {NORMAL, HARD, NIGHTMARE};
     public enum NAME {

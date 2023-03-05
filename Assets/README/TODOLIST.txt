@@ -550,6 +550,8 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ InstantKill 2 -> 1%に変更。 
     ✓ Reviveしたら、BossLimitCntを8にすること。（パネルティ）
     ✓ BossTargetMissileDamageを減る。0.5 -> 0.3
+    ✓ postProccessingがLowクオリティー以外には活性化するように。
+
     - BlockGroupが０の場合は、ボールが消えるまで待つことではなく、すぐNextStageに行くように。
     - モードクリアーしたら、ホーム画面でクリアー👑が表示するように！！
 
