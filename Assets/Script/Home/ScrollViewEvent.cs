@@ -575,7 +575,7 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
 
         //* (BUG-90) AtvSkillがUnLockされたのに、CheckBtnクリックで選択されてしまうこと対応。
         if(type == DM.PANEL.Skill.ToString() && curItem.IsLock){
-            Debug.Log("Purchase UnLock This Skill");
+            Debug.Log("Purchase UnLock This Skillの値段 表示");
             if(curItem.price.Type == Price.TP.COIN){
                 DM.ins.personalData.Coin = purchaseItem(DM.ins.personalData.Coin, curItem, befIdx);
             }
@@ -593,12 +593,15 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
             case DM.PANEL.Bat :
             case DM.PANEL.CashShop :
             case DM.PANEL.Upgrade :
-                if(curItem.price.Type == Price.TP.COIN){
+                //* 除外 (BUG-96) CHARAとBATを買ったのに、他を選択してから、再クリックするとき買ったのにUnLockをお先に検討しなくて選択ができない。
+                if(enumType == DM.PANEL.Chara || enumType == DM.PANEL.Bat){
+                    if(!curItem.IsLock) break;
+                }
+
+                if(curItem.price.Type == Price.TP.COIN)
                     DM.ins.personalData.Coin = purchaseItem(DM.ins.personalData.Coin, curItem, befIdx);
-                }
-                else if(curItem.price.Type == Price.TP.DIAMOND){
+                else if(curItem.price.Type == Price.TP.DIAMOND)
                     DM.ins.personalData.Diamond = purchaseItem(DM.ins.personalData.Diamond, curItem, befIdx);
-                }
                 else if(curItem.price.Type == Price.TP.CASH){
                     const int justEnter = 9999999;
                     purchaseItem(justEnter, curItem, befIdx);
