@@ -44,7 +44,7 @@ public class Ball_Prefab : MonoBehaviour
 
     void OnEnable() {
         //* (BUG-97) ボールがObjstacleブロックの隙間に挟んでしまう時があるので、時間が過ぎたら削除。
-        StartCoroutine(coDelayDestroy());
+        StartCoroutine(coSolveUndestroyError());
     }
 
     void OnDisable() => init(name);
@@ -478,10 +478,10 @@ public class Ball_Prefab : MonoBehaviour
         }
     }
 
-    IEnumerator coDelayDestroy(){
+    IEnumerator coSolveUndestroyError(){
         yield return Util.delay9;
         if(isActive) {
-            Debug.Log("coDelayDestroy():: delay 9sec");
+            Debug.Log("coSolveUndestroyError():: delay 9sec後 destroy");
             checkDestroyObjName();
         }
     }
