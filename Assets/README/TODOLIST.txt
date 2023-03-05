@@ -495,6 +495,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-95) VictoryでCoin2Xをしても適用できない。GameOverのみ対応になっていました。
     ✓ (BUG-96) CHARAとBATを買ったのに、他を選択してから、再クリックするとき買ったのにUnLockをお先に検討しなくて選択ができない。
     ✓ (BUG-97) ボールがObjstacleブロックの隙間に挟んでしまう時があるので、時間が過ぎたら削除。
+    ✓ (BUG-98) モードによって、ボースのステージを固定することが対応されていないこと解決。
 
 
     - (BUG) isResolveNextStageProblemが勝手に呼び出されるバグあるそう。

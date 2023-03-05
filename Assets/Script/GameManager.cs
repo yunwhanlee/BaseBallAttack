@@ -1152,7 +1152,8 @@ public class GameManager : MonoBehaviour {
         if(boss){
             //* (BUG-85) BossLimitCntがブロックのPerfectの場合ー２になる。ボースステージに固定。
             // Debug.Log($"bossStage: {boss.BossLevel * LM._.BOSS_LIMIT_SPAN}");
-            int bossStage = boss.BossLevel * LM._.BOSS_STAGE_SPAN;
+            int offsetStage = LM._.BOSS_STAGE_SPAN * LM._.VICTORY_BOSSKILL_CNT;
+            int bossStage = boss.BossLevel * LM._.BOSS_STAGE_SPAN + getStageOffsetByMode();
             stage = bossStage; //* ステージ固定。
 
             bossLimitCnt--;
@@ -1177,6 +1178,14 @@ public class GameManager : MonoBehaviour {
 
         //* Achivement (StageClear IsComplete)
         AcvStageClear.setStageClear(stage);
+    }
+    
+    private int getStageOffsetByMode(){
+        //* (BUG-98) モードによって、ボースのステージを固定することが対応されていないこと解決。
+        int stgOffset = LM._.BOSS_STAGE_SPAN * LM._.VICTORY_BOSSKILL_CNT;
+        return (DM.ins.Mode == DM.MODE.NORMAL)? 0
+                : (DM.ins.Mode == DM.MODE.HARD)? stgOffset
+                : stgOffset * 2; // -> NIGHTMARE
     }
 
     private IEnumerator coNextStageProcess(BossBlock boss){
