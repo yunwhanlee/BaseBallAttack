@@ -967,18 +967,36 @@ public class GameManager : MonoBehaviour {
         bestStageTxt.text = LANG.getTxt(LANG.TXT.BestScore.ToString()) + " : " + DM.ins.personalData.BestStage;
         stageTxt.text = LANG.getTxt(LANG.TXT.Stage.ToString()) + " : " + stage;
 
-        //* Set Stage
-        // if(DM.ins.Mode == DM.MODE.HARD)
-            // stage -= DM.ins.StageNum;//LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN;
+        //* モード  (BUG-99) モードによって、CoinとDiamondを貰える適用＋StageOffset設定。
+        int stageOffset = LM._.VICTORY_BOSSKILL_CNT * LM._.BOSS_STAGE_SPAN;
+        int resStage = 0;
+        float coinBonus = 1;
+        float diaBonus = 1;
+
+        if(DM.ins.Mode == DM.MODE.NORMAL){
+            resStage = stage;
+        }
+        else if(DM.ins.Mode == DM.MODE.HARD){
+            resStage = stage - stageOffset;
+            coinBonus = LM._.HARDMODE_COIN_BONUS;
+            diaBonus = LM._.HARDMODE_DIAMOND_BONUS; 
+        }
+        else if(DM.ins.Mode == DM.MODE.NIGHTMARE){
+            resStage = stage - stageOffset * 2;
+            coinBonus = LM._.NIGHTMARE_COIN_BONUS;
+            diaBonus = LM._.NIGHTMARE_DIAMOND_BONUS; 
+        }
+        Debug.Log($"setFinishGame():: resStage= {resStage} * LM._.STAGE_PER_COIN_PRICE= {LM._.STAGE_PER_COIN_PRICE} * coinBonus= {coinBonus}");
 
         //* Coin & Diamond
-        coin = stage * LM._.STAGE_PER_COIN_PRICE; //* (BUG-70)
-        diamond = stage * LM._.STAGE_PER_DIAMOND_PRICE; //* (BUG-70)
+        coin = (int)(resStage * LM._.STAGE_PER_COIN_PRICE * coinBonus); //* (BUG-70)
+        diamond = (int)(resStage * LM._.STAGE_PER_DIAMOND_PRICE * diaBonus); //* (BUG-70)
         int extraUpgradeCoin = Mathf.RoundToInt(coin * DM.ins.personalData.Upgrade.Arr[(int)DM.UPGRADE.CoinBonus].getValue());
 
         //* Show Goods => setGameでも使う。
-        coinTxt.text = (coin + extraUpgradeCoin * (DM.ins.Mode == DM.MODE.HARD? LM._.HARDMODE_COIN_BONUS : 1)).ToString();        
+        coinTxt.text = (coin + extraUpgradeCoin).ToString();        
         coinTxt.text = (gvCoinX2Label.activeSelf)? (int.Parse(coinTxt.text) * 2).ToString() : coinTxt.text; //* (BUG-76) setFinishGame:: CoinX2してからReviveしたら、X2が適用されないバグ対応。
+
 
         diamondTxt.text = (diamond * (DM.ins.Mode == DM.MODE.HARD? LM._.HARDMODE_DIAMOND_BONUS : 1)).ToString();
 
@@ -1036,15 +1054,9 @@ public class GameManager : MonoBehaviour {
     }
 
     private void setPlayedMoneyResult(){
-        //* モード
-        float multiplyCoin = 1, multiplyDiamond = 1;
-
-        if(DM.ins.Mode == DM.MODE.HARD) {multiplyCoin = 2; multiplyDiamond = 1.5f;}
-        else if(DM.ins.Mode == DM.MODE.NIGHTMARE) {multiplyCoin = 3; multiplyDiamond = 2;}
-
         //* 財貨
-        DM.ins.personalData.addCoin((int)(resultCoin * multiplyCoin));
-        DM.ins.personalData.addDiamond((int)(resultDiamond * multiplyDiamond));
+        DM.ins.personalData.addCoin((int)(resultCoin));
+        DM.ins.personalData.addDiamond((int)(resultDiamond));
         DM.ins.personalData.addRouletteTicket(resultRouletteTicket);
 
         //* Rate(評価) Dialogを表示するため

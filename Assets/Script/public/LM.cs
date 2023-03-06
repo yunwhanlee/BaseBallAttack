@@ -61,9 +61,12 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     
     [HideInInspector] public int HOMERUN_MIN_POWER;
     [Header("STAGE")][Header("__________________________")]
-    [Tooltip("マックスステージ数")] public int MAX_STAGE = 300;
-    [Tooltip("ハードモードコイン掛け算ボーナス")] public int HARDMODE_COIN_BONUS = 2;
-    [Tooltip("ハードモードダイア掛け算ボーナス")] public float HARDMODE_DIAMOND_BONUS = 1.5f;
+    [Tooltip("マックスステージ数")] public int MAX_STAGE = 180;
+    [Tooltip("ハードモードコインボーナス")] public float HARDMODE_COIN_BONUS = 2;
+    [Tooltip("ハードモードダイアボーナス")] public float HARDMODE_DIAMOND_BONUS = 1.5f;
+    [Tooltip("ナイトメアモードコインボーナス")] public float NIGHTMARE_COIN_BONUS = 3;
+    [Tooltip("ナイトメアモードダイアボーナス")] public float NIGHTMARE_DIAMOND_BONUS = 2;
+
 
     [Header("VICTORY")][Header("__________________________")]
     [Tooltip("勝利ボースカウンター")] public int VICTORY_BOSSKILL_CNT = 4;
