@@ -16,6 +16,7 @@ public class Price
         return val;
     }
     public void setValue(float value){
+        Debug.Log($"Price::setValue():: value= {value}");
         val = (int)value;
     }
 }

@@ -75,7 +75,7 @@ public class ItemInfo : MonoBehaviour
 
     void Start(){
         if(this.name.Contains(DM.PANEL.Chara.ToString())
-            || this.name.Contains(DM.PANEL.Bat.ToString())){
+        || this.name.Contains(DM.PANEL.Bat.ToString())){
             checkLockedModel();
             //* Set Price By Rank
             switch(rank){

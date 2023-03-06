@@ -190,7 +190,7 @@ public class ScrollView {
                 LM._.UPGRADE_ATVSKILL_PRICE_LIST = ScrollViewEvent.setAtvSkillUpgradePriceCalc(atvSkUpgDt);
             
             int price = LM._.UPGRADE_ATVSKILL_PRICE_LIST[atvSkUpgDt.Lv];
-            skills[i].price.setValue(skills[i].IsLock? price * 2 : price);
+            skills[i].price.setValue(skills[i].IsLock? LM._.PURCHASE_ATVSKILL_PRICE : price);
             // skills[i].setUI()
         }
     }
@@ -415,15 +415,15 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
         var curItem = getCurItem();
         Debug.Log($"drawChoiceBtnUI():: Type= {DM.ins.SelectItemType}, curItem.name= {curItem.name}, .IsLock= {curItem.IsLock}, .price= {curItem.price.getValue()}");
 
-        //* Set PriceType Icon Sprite
+        //* Icon Sprite (PriceType)
         switch(curItem.price.Type){
             case Price.TP.COIN: hm.priceTypeIconImg.sprite = hm.CoinSpr; break;
             case Price.TP.DIAMOND: hm.priceTypeIconImg.sprite = hm.DiamondSpr; break;
             case Price.TP.CASH: hm.priceTypeIconImg.sprite = hm.CashSpr; break;
         }
 
-        //* CashShop & Upgrade Panel
-        if(DM.ins.SelectItemType == DM.PANEL.CashShop.ToString()){
+        //* Set Price
+        if(DM.PANEL.CashShop.ToString() == DM.ins.SelectItemType){
             string price = curItem.price.getValue().ToString();
             setPriceUI(price);
 
@@ -439,13 +439,13 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
             }
             return; //* (BUG-46) CashShopとUpgrade Panelの項目はIsLockは関係ないのにCheckBoxUI全てが、処理した後IsLockがFalseなら✓表示になってしまうこと対応。
         }
-        else if(DM.ins.SelectItemType == DM.PANEL.Upgrade.ToString()){
+        else if(DM.PANEL.Upgrade.ToString() == DM.ins.SelectItemType){
             UpgradeDt upgradeDt = DM.ins.personalData.Upgrade.Arr[CurIdx];
             string priceTxt = (upgradeDt.Lv == upgradeDt.MaxLv)? "MAX" : curItem.price.getValue().ToString();
             setPriceUI(priceTxt);
             return; //* (BUG-46) CashShopとUpgrade Panelの項目はIsLockは関係ないのにCheckBoxUI全てが、処理した後IsLockがFalseなら✓表示になってしまうこと対応。
         }
-        else if(DM.ins.SelectItemType == DM.PANEL.Skill.ToString()){
+        else if(DM.PANEL.Skill.ToString() == DM.ins.SelectItemType){
             UpgradeDt atvSkillUpgradeDt = DM.ins.personalData.AtvSkillUpgrade.Arr[CurIdx];
             string priceTxt = (atvSkillUpgradeDt.Lv == atvSkillUpgradeDt.MaxLv)? "MAX" : (curItem.price.getValue()).ToString();
 
@@ -453,9 +453,11 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
             int curItemIdx = Array.IndexOf(DM.ins.scrollviews[(int)DM.PANEL.Skill].ContentTf.GetComponentsInChildren<ItemInfo>(), curItem);
             if(skillIdx == curItemIdx){
                 setPriceUI(priceTxt);
-            }else{
+            }
+            else{
                 //* Model Pattern Panel
                 if(curItem.IsLock){//* 💲表示
+                    Debug.Log($"drawCheckBtnUI()::curItem= {curItem}");
                     setPriceUI(curItem.price.getValue().ToString());
                 }else{//* ✅表示
                     hm.checkMarkImg.gameObject.SetActive(true);
@@ -463,7 +465,6 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
                     hm.priceTypeIconImg.gameObject.SetActive(false);
                 }
             }
-            
             return;
         }
 
@@ -635,6 +636,7 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
     }
 
     public void onClickItem(GameObject ins){
+        Debug.Log($"ScrollViewEvent:: onClickItem(ins= {ins})");
         DM.PANEL type = ins.name.Contains(DM.PANEL.Skill.ToString())? DM.PANEL.Skill
             : ins.name.Contains(DM.PANEL.CashShop.ToString())? DM.PANEL.CashShop
             : ins.name.Contains(DM.PANEL.Upgrade.ToString())? DM.PANEL.Upgrade
@@ -767,8 +769,6 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
                     case "Skill":
                         //* (BUG-8) Home:: Bat.getChild(0).getChild(0)-> Null ---> getChild(0)が正しい。
                         imgObj = curItem.transform.GetChild(0).gameObject;
-                        // UpgradeDt atvSkUpgDt = DM.ins.personalData.AtvSkillUpgrade.Arr[CurIdx];
-                        // List<int> priceList = setAtvSkillUpgradePriceCalc(atvSkUpgDt);
                         curItem.price.setValue(LM._.UPGRADE_ATVSKILL_PRICE_LIST[0]);
 
                         break;

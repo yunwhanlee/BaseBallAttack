@@ -168,6 +168,7 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("ディフェンス")] public UpgradePriceCalcSetting UPGRADE_DEFENCE;
 
     [Header("ATV SKILL UPGRADE PRICE")][Header("__________________________")]
+    [Tooltip("アクティブスキル UnLock価格")] public int PURCHASE_ATVSKILL_PRICE;
     [Tooltip("UnLock2ndAtvスキル値段")] public int UNLOCK_2ND_ATVSKILL_PRICE;
     [Tooltip("アクティブスキルアップグレード値段クラス")] public UpgradePriceCalcSetting UPGRADE_ATVSKILL;
     [Tooltip("アクティブスキルアップグレード値段リスト")] public List<int> UPGRADE_ATVSKILL_PRICE_LIST;
