@@ -65,7 +65,7 @@ public class StageSelect {
 
         //* UI
         img.sprite = Sprite;
-        title.text = $"{i+1}.{LANG.getTxt(titleName)}";
+        title.text = $"{LANG.getTxt(titleName)}";
         range.text = $"{LANG.getTxt(LANG.TXT.Stage.ToString())} {begin} ~ {end}";
         img.color = IsLocked? Color.gray : Color.white;
         lockImgTf.gameObject.SetActive(IsLocked);
