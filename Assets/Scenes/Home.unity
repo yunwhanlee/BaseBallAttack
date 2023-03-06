@@ -2295,7 +2295,7 @@ MonoBehaviour:
       - name: CoinBonus
         lv: 0
         maxLv: 0
-        unit: 0.1
+        unit: 0.05
       - name: Defence
         lv: 0
         maxLv: 0
@@ -9618,7 +9618,7 @@ MonoBehaviour:
   HARDMODE_COIN_BONUS: 4
   HARDMODE_DIAMOND_BONUS: 1.5
   VICTORY_BOSSKILL_CNT: 4
-  BOSS_STAGE_SPAN: 15
+  BOSS_STAGE_SPAN: 2
   BOSS_LIMIT_SPAN: 12
   BOSS_DIE_ORB_CNT: 25
   BOSS_LIMIT_CNT_ALERT_NUM: 5

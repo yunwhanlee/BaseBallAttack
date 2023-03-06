@@ -78,11 +78,11 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("ブロック 火ドットダメージ 持続時間")] public int FIRE_DOT_DMG_DURATION = 2;
 
     [Header("BLOCK SET MESH HP UNIT(以下)")][Header("__________________________")]
-    [Tooltip("PLAIN MT HP単位")] public int BLOCK_MESH_PLAIN_HP_UNIT = 30;
-    [Tooltip("PLAIN MT HP単位")] public int BLOCK_MESH_WOOD_HP_UNIT = 60;
-    [Tooltip("PLAIN MT HP単位")] public int BLOCK_MESH_SAND_HP_UNIT = 90;
-    [Tooltip("PLAIN MT HP単位")] public int BLOCK_MESH_REDBRICK_HP_UNIT = 120;
-    [Tooltip("PLAIN MT HP単位")] public int BLOCK_MESH_IRON_HP_UNIT = 150;
+    [Tooltip("PLAIN MT HP単位")] public int BLOCK_MESH_PLAIN_HP_UNIT;
+    [Tooltip("PLAIN MT HP単位")] public int BLOCK_MESH_WOOD_HP_UNIT;
+    [Tooltip("PLAIN MT HP単位")] public int BLOCK_MESH_SAND_HP_UNIT;
+    [Tooltip("PLAIN MT HP単位")] public int BLOCK_MESH_REDBRICK_HP_UNIT;
+    [Tooltip("PLAIN MT HP単位")] public int BLOCK_MESH_IRON_HP_UNIT;
 
     [Header("BLOCK ITEM PROPERTY PERCENT")][Header("__________________________")]
     [Tooltip("フリーズ ダメージ")] [Range(0, 1)] public float ICE_FREEZE_DMG_PER = 0.1f;
@@ -111,6 +111,15 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Header("PLAYER")][Header("__________________________")]
     [Tooltip("プレイヤー最大レベル")] public int MAX_LV = 30;
     public List<int> MAX_EXP_LIST = new List<int>();
+
+    [Header("UPGRADE UNIT")][Header("__________________________")]
+    public int UPG_DMG_UNIT = 1;    public int UPG_DMG_MAXLV = 100;
+    public float UPG_BALL_SPEED_UNIT = 0.05f;    public int UPG_SPEED_MAXLV = 20;
+    public float UPG_CRIT_UNIT = 0.01f;    public int UPG_CRIT_MAXLV = 30;
+    public float UPG_CRIT_DMG_UNIT = 0.1f;    public int UPG_CRIT_DMG_MAXLV = 20;
+    public float UPG_BOSS_DMG_UNIT = 0.05f;    public int UPG_BOSS_DMG_MAXLV = 30;
+    public float UPG_COIN_BONUS_UNIT = 0.05f;    public int UPG_COIN_BONUS_MAXLV = 20;
+    public float UPG_DEFENCE_UNIT = 0.05f;    public int UPG_DEFENCE_MAXLV = 10;
 
     [Header("PSV SKILL")][Header("__________________________")]
     [Tooltip("レベルアップスロット、ユニックスキルの出現％")] [Range(0, 100)] public int LEVELUP_SLOTS_UNIQUE_PER = 10;

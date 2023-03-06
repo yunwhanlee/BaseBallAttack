@@ -94,8 +94,7 @@ public class PersonalData {
 
     //* constructor
     public PersonalData(int charaLen, int batLen, int skillLen){
-        int upgradeLen = UpgradeList.DMG_MAXLV + UpgradeList.BALL_SPEED_MAXLV + UpgradeList.CRITICAL_MAXLV 
-            + UpgradeList.CRITICAL_DMG_MAXLV + UpgradeList.BOSS_DMG_MAXLV + UpgradeList.COIN_BONUS_MAXLV + UpgradeList.DEFENCE_MAXLV;
+        int upgradeLen = getUpgradeLength();
         Debug.Log($"PersonalData::constructor:: charaLen={charaLen}, batLen={batLen}, upgradeLen={upgradeLen}");
         
         //* 初期化
@@ -104,8 +103,8 @@ public class PersonalData {
         this.batLockList = new List<bool>();
         this.atvSkillLockList = new List<bool>();
         this.itemPassive = new ItemPsvList();
-        this.upgrade = new UpgradeList();
-        this.atvSkillUpgrade = new AtvSkillUpgradeList(getAtvSkillUpgrade());
+        this.upgrade = new UpgradeList(setUpgrade());
+        this.atvSkillUpgrade = new AtvSkillUpgradeList(setAtvSkillUpgrade());
         
         this.stageClearArr = getStageClearArr();
         this.destroyBlockArr = getDestroyBlockArr();
@@ -239,8 +238,7 @@ public class PersonalData {
         // string json = PlayerPrefs.GetString(DM.DATABASE_KEY.Json.ToString());
         Debug.Log($"RESET:: The Key: {DM.DATABASE_KEY.Json.ToString()} Exists? {PlayerPrefs.HasKey(DM.DATABASE_KEY.Json.ToString())}");
 
-        int upgradeLen = UpgradeList.DMG_MAXLV + UpgradeList.BALL_SPEED_MAXLV + UpgradeList.CRITICAL_MAXLV 
-            + UpgradeList.CRITICAL_DMG_MAXLV + UpgradeList.BOSS_DMG_MAXLV + UpgradeList.COIN_BONUS_MAXLV + UpgradeList.DEFENCE_MAXLV;
+        int upgradeLen = getUpgradeLength();
 
         //* Reset
         this.lang = LANG.TP.EN;
@@ -299,10 +297,10 @@ public class PersonalData {
         this.IsUnlock2ndSkill = false;
         this.SelectSkill2Idx = -1;
         this.atvSkillLockList = new List<bool>();
-        this.atvSkillUpgrade = new AtvSkillUpgradeList(getAtvSkillUpgrade());
+        this.atvSkillUpgrade = new AtvSkillUpgradeList(setAtvSkillUpgrade());
 
         // this.ItemPassive = new ItemPassiveList();
-        this.Upgrade = new UpgradeList();
+        this.Upgrade = new UpgradeList(setUpgrade());
 
         for(int i=0; i<DM.ins.scrollviews[(int)DM.PANEL.Chara].ItemPrefs.Length; i++){
             if(i==0) this.CharaLockList.Add(false);//    items[0].IsLock = false;}
@@ -396,7 +394,29 @@ public class PersonalData {
         AcvCollectedRouletteTicket.collectRouletteTicket(amount);
     }
 
-    private UpgradeDt[] getAtvSkillUpgrade(){
+    private int getUpgradeLength(){
+        return LM._.UPG_DMG_MAXLV
+            + LM._.UPG_SPEED_MAXLV
+            + LM._.UPG_CRIT_MAXLV 
+            + LM._.UPG_CRIT_DMG_MAXLV
+            + LM._.UPG_BOSS_DMG_MAXLV 
+            + LM._.UPG_COIN_BONUS_MAXLV 
+            + LM._.UPG_DEFENCE_MAXLV;
+    }
+
+    private UpgradeDt[] setUpgrade(){
+        return new UpgradeDt[] {
+            new UpgradeDt(DM.UPGRADE.Dmg.ToString(), LM._.UPG_DMG_UNIT, 100),
+            new UpgradeDt(DM.UPGRADE.BallSpeed.ToString(), LM._.UPG_BALL_SPEED_UNIT, 20),
+            new UpgradeDt(DM.UPGRADE.Critical.ToString(), LM._.UPG_CRIT_UNIT, 30),
+            new UpgradeDt(DM.UPGRADE.CriticalDamage.ToString(), LM._.UPG_CRIT_DMG_UNIT, 20),
+            new UpgradeDt(DM.UPGRADE.BossDamage.ToString(), LM._.UPG_BOSS_DMG_UNIT, 30),
+            new UpgradeDt(DM.UPGRADE.CoinBonus.ToString(), LM._.UPG_COIN_BONUS_UNIT, 20),
+            new UpgradeDt(DM.UPGRADE.Defence.ToString(), LM._.UPG_DEFENCE_UNIT, 10),
+        };
+    }
+
+    private UpgradeDt[] setAtvSkillUpgrade(){
         return new UpgradeDt[] {
             new UpgradeDt(DM.ATV.ThunderShot.ToString(), LM._.THUNDERSHOT_UPG_HIT, LM._.ATVSKILL_MAXLV),
             new UpgradeDt(DM.ATV.FireBall.ToString(), LM._.FIREBALL_UPG_DMG_PER, LM._.ATVSKILL_MAXLV),

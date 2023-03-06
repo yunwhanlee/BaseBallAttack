@@ -58,34 +58,12 @@ public class UpgradeDt {
 //--------------------------------------------------------------------------------------------------
 [System.Serializable]
 public class UpgradeList {
-    //* Value
-    const int DMG_UNIT = 1;
-    const float BALL_SPEED_UNIT = 0.05f;
-    const float CRITICAL_UNIT = 0.01f;
-    const float CRITICAL_DMG_UNIT = 0.10f;
-    const float BOSS_DMG_UNIT = 0.10f;
-    const float COIN_BONUS_UNIT = 0.1f;
-    const float DEFENCE_UNIT = 0.05f;
-
-    static public int DMG_MAXLV = 100;
-    static public int BALL_SPEED_MAXLV = 20;
-    static public int CRITICAL_MAXLV = 30;
-    static public int CRITICAL_DMG_MAXLV = 20;
-    static public int BOSS_DMG_MAXLV = 30;
-    static public int COIN_BONUS_MAXLV = 20;
-    static public int DEFENCE_MAXLV = 10;
-
     //* Init
-    [SerializeField] UpgradeDt[] arr = {
-        new UpgradeDt(DM.UPGRADE.Dmg.ToString(), DMG_UNIT, DMG_MAXLV),
-        new UpgradeDt(DM.UPGRADE.BallSpeed.ToString(), BALL_SPEED_UNIT, BALL_SPEED_MAXLV),
-        new UpgradeDt(DM.UPGRADE.Critical.ToString(), CRITICAL_UNIT, CRITICAL_MAXLV),
-        new UpgradeDt(DM.UPGRADE.CriticalDamage.ToString(), CRITICAL_DMG_UNIT, CRITICAL_DMG_MAXLV),
-        new UpgradeDt(DM.UPGRADE.BossDamage.ToString(), BOSS_DMG_UNIT, BOSS_DMG_MAXLV),
-        new UpgradeDt(DM.UPGRADE.CoinBonus.ToString(), COIN_BONUS_UNIT, COIN_BONUS_MAXLV),
-        new UpgradeDt(DM.UPGRADE.Defence.ToString(), DEFENCE_UNIT, DEFENCE_MAXLV),
-    };
-    public UpgradeDt[] Arr {get => arr; set => arr = value;}
+    [SerializeField] UpgradeDt[] arr;   public UpgradeDt[] Arr {get => arr; set => arr = value;}
+
+    public UpgradeList(UpgradeDt[] data) {
+        arr = data;
+    }
 }
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------
