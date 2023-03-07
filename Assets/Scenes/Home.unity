@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45015407, g: 0.500194, b: 0.5754274, a: 1}
+  m_IndirectSpecularColor: {r: 0.45015454, g: 0.5001945, b: 0.57542807, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2005,7 +2005,7 @@ MonoBehaviour:
     - {fileID: 4092482586131365199, guid: bb8ea9bc4f4fb3c40be95dee7b50463f, type: 3}
     - {fileID: 6649917821122581872, guid: fbdeb70e1d3eaa347b6a2416a5fb1a4a, type: 3}
     - {fileID: 6252180515462008431, guid: f7f63fdae8c8afc4e8dbf4932b415d00, type: 3}
-    - {fileID: 4092482586131365199, guid: 4435b7b5ebd8fe24e9ba03ff409a61af, type: 3}
+    - {fileID: 4092482586131365199, guid: 04c1dde3dcad4f54ba01f4aa47a75811, type: 3}
   - type: PsvInfo
     scrollRect: {fileID: 995331208}
     contentTf: {fileID: 1289905845}
@@ -2306,6 +2306,8 @@ MonoBehaviour:
   rankLegendClr: {r: 1, g: 0, b: 0, a: 0.5019608}
   rankGodClr: {r: 1, g: 1, b: 0, a: 0.68235296}
   darkGray: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  hardModeSkyClr: {r: 0.8980392, g: 0.8156863, b: 0.8156863, a: 1}
+  nightmareModeSkyClr: {r: 0.41568628, g: 0.38431373, b: 0.8392157, a: 1}
   tutorialPanel: {fileID: 5631821220257666727, guid: 0eb691fb79fb47e49a65dea3633be40e, type: 3}
   simpleSkyMt: {fileID: 2100000, guid: 9650ef21762a3a74a90fa6ad82762464, type: 2}
 --- !u!1 &106605947
@@ -9617,6 +9619,8 @@ MonoBehaviour:
   MAX_STAGE: 180
   HARDMODE_COIN_BONUS: 2
   HARDMODE_DIAMOND_BONUS: 1.5
+  NIGHTMARE_COIN_BONUS: 3
+  NIGHTMARE_DIAMOND_BONUS: 2
   VICTORY_BOSSKILL_CNT: 4
   BOSS_STAGE_SPAN: 15
   BOSS_LIMIT_SPAN: 12
