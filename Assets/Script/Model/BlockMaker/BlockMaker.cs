@@ -53,15 +53,12 @@ public class BlockMaker : MonoBehaviour
         for(int i=0; i<hpCalcList.Count; i++){
             int calc = (int)(hpCalcList[i] * 0.1f);
             int v = (calc == 0)? 1 : calc + 1;
-            if(i < 60){
+            if(i < 60)
                 expList.Add(v * NORMAL);
-            }
-            else if(i < 120){
+            else if(i < 120)
                 expList.Add(v * HARD);
-            }
-            else{
+            else
                 expList.Add(v * NIGHTMARE);
-            }
         }
 
         //* Init Or AD-Revive
@@ -230,7 +227,8 @@ public class BlockMaker : MonoBehaviour
         }
 
         //* Next Set Block Type
-        if(gm.stage % LM._.LONG_BLOCK_SPAN == 0){
+        //* (BUG-100) LongBlockがボース場合は、出ないように
+        if(gm.stage % LM._.LONG_BLOCK_SPAN == 0 && gm.bossGroup.childCount == 0){
             createBlockRow(KIND.Long);
         }else{
             createBlockRow(KIND.Normal);
