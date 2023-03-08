@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4430069, g: 0.49219602, b: 0.57192457, a: 1}
+  m_IndirectSpecularColor: {r: 0.44300717, g: 0.49219608, b: 0.57192516, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -16063,7 +16063,6 @@ GameObject:
   - component: {fileID: 481750532}
   - component: {fileID: 481750535}
   - component: {fileID: 481750534}
-  - component: {fileID: 481750533}
   m_Layer: 5
   m_Name: StrikePanel
   m_TagString: Untagged
@@ -16093,32 +16092,6 @@ RectTransform:
   m_AnchoredPosition: {x: -359, y: -730}
   m_SizeDelta: {x: 260, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &481750533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 481750531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 10
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 3
-  m_Spacing: 5
-  m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!114 &481750534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16132,7 +16105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 0.3882353}
+  m_Color: {r: 0.4, g: 0.4, b: 0.38679248, a: 0.4}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -18286,6 +18259,7 @@ MonoBehaviour:
   gm: {fileID: 1623732227}
   doCreateBlock: 0
   hpCalcList: 
+  expList: 
   blockPrefs:
   - {fileID: 1376276108105304710, guid: 71f96bca88b0fd940a48a70f1bfe1885, type: 3}
   - {fileID: 1376276108105304710, guid: dd9607447bace8c439bb5466658dbfbb, type: 3}
@@ -20263,7 +20237,7 @@ GameObject:
   - component: {fileID: 677223624}
   - component: {fileID: 677223623}
   m_Layer: 5
-  m_Name: BallImg2
+  m_Name: StrikeImg2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49785,7 +49759,7 @@ GameObject:
   - component: {fileID: 1138305772}
   - component: {fileID: 1138305771}
   m_Layer: 5
-  m_Name: BallImg3
+  m_Name: StrikeImg3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73930,6 +73904,7 @@ MonoBehaviour:
   resultCoin: 0
   resultDiamond: 0
   resultRouletteTicket: 0
+  isQualityLow: 0
   isPlayingAnim: 0
   isFastPlay: 0
   isResolveNextStageProblem: 0
@@ -94493,7 +94468,7 @@ GameObject:
   - component: {fileID: 1964554611}
   - component: {fileID: 1964554610}
   m_Layer: 5
-  m_Name: BallImg
+  m_Name: StrikeImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95294,7 +95269,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2001013457}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 

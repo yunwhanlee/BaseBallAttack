@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 6649917821122581887}
   - component: {fileID: 6649917821122581886}
   m_Layer: 5
-  m_Name: CashShop_CoinToDiamond1000
+  m_Name: CashShop_CoinToDiamond500
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -234,9 +234,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameTxts:
-  - Diamond 1000
-  - "\u30C0\u30A4\u30A2 1000"
-  - "\uB2E4\uC774\uC544 1000"
+  - Diamond 500
+  - "\u30C0\u30A4\u30A2 500"
+  - "\uB2E4\uC774\uC544 500"
   explainTxts:
   - Get Diamond 1000.
   - "1000\u30C0\u30A4\u30A2\u3092\u8CFC\u5165\u3002"
@@ -523,7 +523,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Get Diamond 1000
+  m_Text: Get Diamond 500
 --- !u!1 &6649917822602841860
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,7 +800,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Diamond 1000
+  m_Text: Diamond 500
 --- !u!114 &6649917822774559682
 MonoBehaviour:
   m_ObjectHideFlags: 0

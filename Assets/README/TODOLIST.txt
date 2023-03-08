@@ -554,8 +554,10 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ BossTargetMissileDamageを減る。0.5 -> 0.3
     ✓ postProccessingがLowクオリティー以外には活性化するように。
     ✓ UpgradeListクラスの設定(UNITとMAXLV)をLMから纏めるように修正。
+    ✓ BlockGroupが０の場合は、ボールが消えるまで待つことではなく、すぐNextStageに行くように。
 
-    - BlockGroupが０の場合は、ボールが消えるまで待つことではなく、すぐNextStageに行くように。
+    - Coin2倍を1.5倍にする。
+    - Canvas形をもっと最適化して分ける。
     - モードクリアーしたら、ホーム画面でクリアー👑が表示するように！！
 
     - GameSpeed X 3倍 -> AD見ることに。
