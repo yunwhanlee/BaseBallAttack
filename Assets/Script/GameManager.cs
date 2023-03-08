@@ -1053,7 +1053,7 @@ public class GameManager : MonoBehaviour {
                 else{ //* ボースを倒したことが有ったら、ここまでのリワードをもらえる。
                     pausePanel.SetActive(false);
                     askGiveUpDialog.gameObject.SetActive(false);
-                    stage = bossKillCnt * LM._.BOSS_STAGE_SPAN;
+                    // stage = bossKillCnt * LM._.BOSS_STAGE_SPAN;
                     setGameOver(isGiveUp: true);
                 }
 

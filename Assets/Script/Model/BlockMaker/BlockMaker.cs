@@ -223,11 +223,10 @@ public class BlockMaker : MonoBehaviour
             gm.blockGroup.GetChild(i).transform.localPosition = new Vector3(
                 blockPos.x, blockPos.y, blockPos.z - 1
             );
-
         }
 
         //* Next Set Block Type
-        //* (BUG-100) LongBlockがボース場合は、出ないように
+        //* (BUG-100) LongBlockがボース場合は、出ないように 
         if(gm.stage % LM._.LONG_BLOCK_SPAN == 0 && gm.bossGroup.childCount == 0){
             createBlockRow(KIND.Long);
         }else{
