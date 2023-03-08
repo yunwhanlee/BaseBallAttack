@@ -43,7 +43,7 @@ public class BlockMaker : MonoBehaviour
         //* HPリスト 準備
         const int HP_OFFSET = 100;
         const float DECIMAL_OFFSET = 0.01f;
-        hpCalcList = Util._.calcArithmeticProgressionList(start: HP_OFFSET, max: LM._.MAX_STAGE, d: HP_OFFSET, gradualUpValue: 0.02f);
+        hpCalcList = Util._.calcArithmeticProgressionList(start: HP_OFFSET, max: LM._.MAX_STAGE, d: HP_OFFSET, gradualUpValue: 0.03f);
         //* hp計算結果が整数(100％)基準なので、少数に転換
         for(int i = 0; i < hpCalcList.Count; i++)
             hpCalcList[i] = Mathf.RoundToInt(hpCalcList[i] * DECIMAL_OFFSET);
