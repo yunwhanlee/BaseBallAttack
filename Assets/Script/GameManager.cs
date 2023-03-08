@@ -276,10 +276,13 @@ public class GameManager : MonoBehaviour {
 
         bossLimitCntTxt.gameObject.SetActive(false);
         fastPlayBtn.gameObject.SetActive(false);
+
+        //* Lang
         Array.ForEach(statusTxts, txt => txt.text = LANG.getTxt(LANG.TXT.Status.ToString()));
         rewardChestTitleTxt.text = LANG.getTxt(LANG.TXT.Reward.ToString());
         rewardChestOpenBtn.GetComponentInChildren<Text>().text = LANG.getTxt(LANG.TXT.Open.ToString());
         openTutorialSkipTxt.text = LANG.getTxt(LANG.TXT.Skip_NextTime.ToString());
+        bossLimitCntAlertTxt.text = LANG.getTxt(LANG.TXT.BossLimitCntAlert.ToString());
 
         //* Ball Preview Dir Goal Set Z-Center
         setBallPreviewGoalRandomPos();
@@ -312,32 +315,37 @@ public class GameManager : MonoBehaviour {
         //* Set Active Skill Damage
         new AtvSkill(this, pl);
 
-        //* Sky Style
-        Debug.Log("SkyMt.offsetX= " + DM.ins.simpleSkyMt.GetTextureOffset("_MainTex").x);
-        if(DM.ins.simpleSkyMt.GetTextureOffset("_MainTex").x == LM._.SKY_MT_MORNING_VALUE)
-            skySunObj.SetActive(true);
-        else if(DM.ins.simpleSkyMt.GetTextureOffset("_MainTex").x == LM._.SKY_MT_DINNER_VALUE)
-            skyMoonObj.SetActive(true);
-
-        //* Set Mode
-        if(DM.ins.Mode == DM.MODE.HARD){
-            pl.IsLevelUp = true;
-            pl.Lv = 3;
-            StartCoroutine(coCheckLevelUp());
-        }
-
         //* Pause Panel UI
         pauseCoinTxt.text = DM.ins.personalData.Coin.ToString();
         pauseDiamondTxt.text = DM.ins.personalData.Diamond.ToString();
         pauseModeTxt.text = DM.ins.Mode.ToString() + " MODE";
         pauseModeTxt.color = getModeTxtColor();
 
+        //* Set Mode
+        if(DM.ins.Mode == DM.MODE.HARD){
+            pl.IsLevelUp = true;
+            pl.Lv = 3;
+            StartCoroutine(coCheckLevelUp());
+            light.color = DM.ins.hardModeSkyClr;
+        }
+        else if(DM.ins.Mode == DM.MODE.HARD){
+            pl.IsLevelUp = true;
+            pl.Lv = 4;
+            StartCoroutine(coCheckLevelUp());
+            light.color = DM.ins.nightmareModeSkyClr;
+        }
+
         //* ModeTxt Anim
         modeTxt.text = DM.ins.Mode.ToString() + " MODE";
         modeTxt.color = getModeTxtColor();
         em.playUIAnimEF(DM.ANIM.Mode.ToString());
 
-        bossLimitCntAlertTxt.text = LANG.getTxt(LANG.TXT.BossLimitCntAlert.ToString());
+        //* Sky Style
+        Debug.Log("SkyMt.offsetX= " + DM.ins.simpleSkyMt.GetTextureOffset("_MainTex").x);
+        if(DM.ins.simpleSkyMt.GetTextureOffset("_MainTex").x == LM._.SKY_MT_MORNING_VALUE)
+            skySunObj.SetActive(true);
+        else if(DM.ins.simpleSkyMt.GetTextureOffset("_MainTex").x == LM._.SKY_MT_DINNER_VALUE)
+            skyMoonObj.SetActive(true);
     }
 
     void Update(){

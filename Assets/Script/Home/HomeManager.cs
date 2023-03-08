@@ -635,7 +635,7 @@ public class HomeManager : MonoBehaviour
             }
         }
 
-        //* Set Sky Style
+        //* Set Sky By Mode
         Debug.Log("onClickPlayBtn:: curStageSelectIndex= " + stageIdx);
         float offsetX = (stageIdx == (int)DM.MODE.NORMAL)? LM._.SKY_MT_MORNING_VALUE : LM._.SKY_MT_DINNER_VALUE; // 1=> Morning, 1.25=> dinner, 1.5=> night
         DM.ins.simpleSkyMt.SetTextureOffset("_MainTex", new Vector2(offsetX, 0));
