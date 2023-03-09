@@ -193,11 +193,12 @@ public class HomeManager : MonoBehaviour
     public Text settingCancelTxt;
 
     //* HardMode Enable Notice Dialog
-    public RectTransform hardModeEnableNoticeDialog;
-    public Text hardModeEnableNoticeTitleTxt;
-    public Text hardModeEnableNoticeContent1Txt;
-    public Text hardModeEnableNoticeContent2Txt;
-    public Text hardModeEnableNoticeOkBtnTxt;
+    public RectTransform nextModeEnableNoticeDialog;
+    public Image hardModeImg;
+    public Image nightmareModeImg;
+    public Text nextModeEnableNoticeTitleTxt;
+    public Text nextModeEnableNoticeContent1Txt;
+    public Text nextModeEnableNoticeOkBtnTxt;
 
     [Header("BUY OR CHECK BTN")][Header("__________________________")]
     public Button checkBtn;
@@ -299,13 +300,11 @@ public class HomeManager : MonoBehaviour
         //* HardMode Enable Notice Dialog (Only OneTime)
         if(DM.ins.personalData.IsHardmodeOn && !DM.ins.personalData.IsHardmodeEnableNotice){
             DM.ins.personalData.IsHardmodeEnableNotice = true;
-            hardModeEnableNoticeDialog.gameObject.SetActive(true);
-
-            //* Lang
-            hardModeEnableNoticeTitleTxt.text = LANG.getTxt(LANG.TXT.HardMode.ToString());
-            hardModeEnableNoticeContent1Txt.text = LANG.getTxt(LANG.TXT.HardMode_Content1.ToString());
-            hardModeEnableNoticeContent2Txt.text = LANG.getTxt(LANG.TXT.HardMode_Content2.ToString());
-            hardModeEnableNoticeOkBtnTxt.text = LANG.getTxt(LANG.TXT.Ok.ToString());
+            setNextModeEnableDialogUI(DM.MODE.HARD.ToString());
+        }
+        if(DM.ins.personalData.IsNightMaremodeOn && !DM.ins.personalData.IsNightMaremodeEnableNotice){
+            DM.ins.personalData.IsNightMaremodeEnableNotice = true;
+            setNextModeEnableDialogUI(DM.MODE.NIGHTMARE.ToString());
         }
 
         //* StageSelect Panel
@@ -335,7 +334,7 @@ public class HomeManager : MonoBehaviour
     }
 
 //* ----------------------------------------------------------------
-//*   Button
+//* Button
 //* ----------------------------------------------------------------
 #region Button
     public void onClickGooglePlayLeaderBoard() {
@@ -738,9 +737,24 @@ public class HomeManager : MonoBehaviour
     }
 #endregion
 //* ----------------------------------------------------------------
-//* Private Function
+//* Function
 //* ----------------------------------------------------------------
-#region Private Function
+#region Function
+    private void setNextModeEnableDialogUI(string mode){
+        //* 表示
+        nextModeEnableNoticeDialog.gameObject.SetActive(true);
+        //* Lang
+        if(mode == DM.MODE.HARD.ToString()){
+            hardModeImg.gameObject.SetActive(true);
+            nextModeEnableNoticeTitleTxt.text = LANG.getTxt(LANG.TXT.HardMode.ToString());
+        }else{
+            nightmareModeImg.gameObject.SetActive(true);
+            nextModeEnableNoticeTitleTxt.text = LANG.getTxt(LANG.TXT.NightmareMode.ToString());
+        }
+        nextModeEnableNoticeContent1Txt.text = LANG.getTxt(LANG.TXT.NextMode_Content.ToString());
+        nextModeEnableNoticeOkBtnTxt.text = LANG.getTxt(LANG.TXT.Ok.ToString());
+    }
+
     IEnumerator coWaitInitTriggerBtnSfxOff(){
         yield return Util.delay1;
         isMuteBtnSfx = false;

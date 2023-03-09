@@ -26,6 +26,8 @@ public class PersonalData {
     [Header("ONE TIME TRIGGER")][Header("__________________________")]
     [SerializeField] bool isHardmodeOn; public bool IsHardmodeOn {get => isHardmodeOn; set => isHardmodeOn = value;}
     [SerializeField] bool isHardmodeEnableNotice; public bool IsHardmodeEnableNotice {get => isHardmodeEnableNotice; set => isHardmodeEnableNotice = value;}
+    [SerializeField] bool isNightMaremodeOn; public bool IsNightMaremodeOn {get => isNightMaremodeOn; set => isNightMaremodeOn = value;}
+    [SerializeField] bool isNightMaremodeEnableNotice; public bool IsNightMaremodeEnableNotice {get => isNightMaremodeEnableNotice; set => isNightMaremodeEnableNotice = value;}
     [SerializeField] bool isRemoveAD; public bool IsRemoveAD {get => isRemoveAD; set => isRemoveAD = value;}
     [SerializeField] bool isSkipTutorial; public bool IsSkipTutorial {get => isSkipTutorial; set => isSkipTutorial = value;}
     [SerializeField] bool isPurchasePremiumPack; public bool IsPurchasePremiumPack {get => isPurchasePremiumPack; set => isPurchasePremiumPack = value;}
@@ -158,7 +160,9 @@ public class PersonalData {
 
         this.isChoiceLang = data.IsChoiceLang;
         this.isHardmodeOn = data.IsHardmodeOn;
+        this.isNightMaremodeOn = data.IsNightMaremodeOn;
         this.isHardmodeEnableNotice = data.IsHardmodeEnableNotice;
+        this.isNightMaremodeEnableNotice = data.IsNightMaremodeEnableNotice;
         this.isRemoveAD = data.IsRemoveAD;
         this.isSkipTutorial = data.IsSkipTutorial;
         this.isPurchasePremiumPack = data.IsPurchasePremiumPack;
@@ -259,7 +263,9 @@ public class PersonalData {
 
         this.isChoiceLang = false;
         this.isHardmodeOn = false;
+        this.isNightMaremodeOn = false;
         this.isHardmodeEnableNotice = false;
+        this.isNightMaremodeEnableNotice = false;
         this.isRemoveAD = false;
         this.isSkipTutorial = false;
         this.isPurchasePremiumPack = false;
