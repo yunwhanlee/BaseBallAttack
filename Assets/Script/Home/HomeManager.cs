@@ -271,7 +271,6 @@ public class HomeManager : MonoBehaviour
         roulettePanelTitleTxt.text = LANG.getTxt(LANG.TXT.Roulette.ToString());
         startBtnTxt.text = LANG.getTxt(LANG.TXT.Start.ToString());
 
-
         adDialogTitleTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRouletteTicket_Title.ToString());
         adDialogContentTxt.text = LANG.getTxt(LANG.TXT.ShowAdDialogRouletteTicket_Content.ToString());
 
@@ -781,7 +780,9 @@ public class HomeManager : MonoBehaviour
         homePanel.GoBtn.gameObject.SetActive(false);
         ItemPsvInfoBtn.gameObject.SetActive(false);
     }
-    private void setRateDialog(bool isActive){
+    public void setRateDialog(bool isActive){
+        updateDialog.gameObject.SetActive(false);
+
         rateDialog.gameObject.SetActive(isActive);
         rateTitleTxt.text = LANG.getTxt(LANG.TXT.Rate.ToString());
         rateContentTxt1.text = LANG.getTxt(LANG.TXT.RateDialog_Content1.ToString());
