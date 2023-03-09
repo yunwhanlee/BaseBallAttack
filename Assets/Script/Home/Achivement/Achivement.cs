@@ -35,6 +35,7 @@ public class Achivement : MonoBehaviour{
     const string CharactorCollection = "CharactorCollection";
     const string NormalModeClear = "NormalModeClear";
     const string HardModeClear = "HardModeClear";
+    const string NightmareModeClear = "NightmareModeClear";
     const string BosskillCollection = "BosskillCollection";
     const string UpgradeCnt = "UpgradeCnt";
 
@@ -143,6 +144,7 @@ public class Achivement : MonoBehaviour{
                 : (this.name == BosskillCollection)? pDt.BosskillCollectionArr
                 : (this.name == NormalModeClear)? pDt.NormalModeClear
                 : (this.name == HardModeClear)? pDt.HardModeClear
+                : (this.name == NightmareModeClear)? pDt.NightmareModeClear
                 //* 追加
                 : null;
         }catch(Exception err){

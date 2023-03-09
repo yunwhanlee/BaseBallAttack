@@ -2053,7 +2053,7 @@ MonoBehaviour:
     rouletteTicketCoolTime: 
     rouletteTicketOneDayShowAdCnt: 0
     rouletteTicketOneDayAdCntCoolTime: 
-    isHardmodeOn: 1
+    isHardmodeOn: 0
     isHardmodeEnableNotice: 0
     isNightMaremodeOn: 0
     isNightMaremodeEnableNotice: 0
@@ -2183,6 +2183,7 @@ MonoBehaviour:
     bosskillCollectionArr: []
     normalModeClear: []
     hardModeClear: []
+    nightmareModeClear: []
     selectCharaIdx: 0
     charaLockList: 
     selectBatIdx: 0
@@ -9623,7 +9624,7 @@ MonoBehaviour:
   HARDMODE_DIAMOND_BONUS: 1.5
   NIGHTMARE_COIN_BONUS: 3
   NIGHTMARE_DIAMOND_BONUS: 2
-  VICTORY_BOSSKILL_CNT: 4
+  VICTORY_BOSSKILL_CNT: 1
   BOSS_STAGE_SPAN: 2
   BOSS_LIMIT_SPAN: 12
   BOSS_DIE_ORB_CNT: 25
@@ -40324,7 +40325,7 @@ MonoBehaviour:
     bonusMultiCoin: 1
     bonusMultiDiamond: 1
     isComingSoon: 0
-  - isLocked: 0
+  - isLocked: 1
     sprite: {fileID: 21300000, guid: ee52549c264554fdd89b41e79ea4600d, type: 3}
     titleName: Hard
     begin: 61

@@ -937,15 +937,19 @@ public class GameManager : MonoBehaviour {
             victoryPanel, vtrBestStageTxt, vtrStageTxt, vtrCoinTxt, vtrDiamondTxt
             , vtrRewardItemCoinTxt, vtrRewardItemDiamondTxt, vtrRewardItemRouletteTicketTxt);
 
-        //* HardMode unlocked
-        if(!DM.ins.personalData.IsHardmodeOn)
+        //* Next Mode Unlocked
+        if(DM.ins.Mode == DM.MODE.NORMAL && !DM.ins.personalData.IsHardmodeOn)
             DM.ins.personalData.IsHardmodeOn = true;
+        else if(DM.ins.Mode == DM.MODE.HARD && !DM.ins.personalData.IsNightMaremodeOn)
+            DM.ins.personalData.IsNightMaremodeOn = true;
 
         //* Achivement
         if(DM.ins.Mode == DM.MODE.NORMAL)
             AcvNormalModeClear.setNormalModeClear();
         else if(DM.ins.Mode == DM.MODE.HARD)
             AcvHardModeClear.setHardModeClear();
+        else if(DM.ins.Mode == DM.MODE.NIGHTMARE)
+            AcvNightmareModeClear.setNightmareModeClear();
     }
 
     private void setFinishGame(GameObject panel, Text bestStageTxt, Text stageTxt, Text coinTxt, Text diamondTxt,

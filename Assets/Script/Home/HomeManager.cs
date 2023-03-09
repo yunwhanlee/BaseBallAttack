@@ -787,12 +787,11 @@ public class HomeManager : MonoBehaviour
         stageSelects[(int)DM.MODE.NIGHTMARE].Begin = 1 + (stageCnt * 2);
         stageSelects[(int)DM.MODE.NIGHTMARE].End = stageCnt * 3;
 
-        //* Check HardMode
+        //* Check Mode Data
         if(DM.ins.personalData.IsHardmodeOn)
             stageSelects[(int)DM.MODE.HARD].IsLocked = false;
-        //TODO
-        // if(DM.ins.personalData.IsHardmodeOn)
-        //     stageSelects[(int)DM.MODE.HARD].IsLocked = false;
+        if(DM.ins.personalData.IsNightMaremodeOn)
+            stageSelects[(int)DM.MODE.NIGHTMARE].IsLocked = false;
 
         //* Set StageSelectList
         for(int i=0; i<stageSelects.Length; i++){

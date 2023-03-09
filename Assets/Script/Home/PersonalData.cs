@@ -66,6 +66,7 @@ public class PersonalData {
 
     [SerializeField] AchivementInfo[] normalModeClear ; public AchivementInfo[] NormalModeClear {get => normalModeClear; set => normalModeClear = value;}
     [SerializeField] AchivementInfo[] hardModeClear ; public AchivementInfo[] HardModeClear {get => hardModeClear; set => hardModeClear = value;}
+    [SerializeField] AchivementInfo[] nightmareModeClear ; public AchivementInfo[] NightmareModeClear {get => nightmareModeClear; set => nightmareModeClear = value;}
 
     [Header("CHARACTOR")][Header("__________________________")]
     [SerializeField] int selectCharaIdx;  public int SelectCharaIdx {get => selectCharaIdx; set => selectCharaIdx = value;}
@@ -120,6 +121,7 @@ public class PersonalData {
         this.bosskillCollectionArr = getBosskillCollectionArr();
         this.normalModeClear = new AchivementInfo[] { new AchivementInfo(1, 1000)};
         this.hardModeClear = new AchivementInfo[] { new AchivementInfo(1, 2000)};
+        this.nightmareModeClear = new AchivementInfo[] { new AchivementInfo(1, 4000)};
 
         // Debug.Log("PersonalData::upgrade.Arr[0].lv-->" + upgrade.Arr[0].lv);
     }
@@ -196,6 +198,7 @@ public class PersonalData {
 
         this.normalModeClear = data.NormalModeClear;
         this.hardModeClear = data.HardModeClear;
+        this.nightmareModeClear = data.NightmareModeClear;
 
         //* Item
         this.SelectCharaIdx = data.SelectCharaIdx;
@@ -292,6 +295,7 @@ public class PersonalData {
         this.bosskillCollectionArr = getBosskillCollectionArr();
         this.normalModeClear = new AchivementInfo[] { new AchivementInfo(1, 1000)};
         this.hardModeClear = new AchivementInfo[] { new AchivementInfo(1, 2000)};
+        this.nightmareModeClear = new AchivementInfo[] { new AchivementInfo(1, 4000)};
 
         this.SelectCharaIdx = 0;
         this.CharaLockList = new List<bool>();
@@ -379,6 +383,7 @@ public class PersonalData {
             || Array.Exists(pDt.BosskillCollectionArr, arr => arr.IsComplete && !arr.IsAccept)
             || Array.Exists(pDt.NormalModeClear, arr => arr.IsComplete && !arr.IsAccept)
             || Array.Exists(pDt.HardModeClear, arr => arr.IsComplete && !arr.IsAccept)
+            || Array.Exists(pDt.NightmareModeClear, arr => arr.IsComplete && !arr.IsAccept)
         ){
             res = true;
         }
