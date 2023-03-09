@@ -12,7 +12,6 @@ public class AcvNightmareModeClear : Achivement
         setNext(pDt, idx: 0, pDt.NightmareModeClear[0].IsAccept);
     }
 
-
 //*---------------------------------------
 //*  Button Event Function
 //*---------------------------------------
