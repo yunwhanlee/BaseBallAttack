@@ -304,13 +304,17 @@ public class HomeManager : MonoBehaviour
             : CountryIconSprArr[(int)LANG.TP.KR];
 
         //* HardMode Enable Notice Dialog (Only OneTime)
-        if(DM.ins.personalData.IsHardmodeOn && !DM.ins.personalData.IsHardmodeEnableNotice){
+        if(DM.ins.personalData.IsNormalModeClear && !DM.ins.personalData.IsHardmodeEnableNotice){
             DM.ins.personalData.IsHardmodeEnableNotice = true;
             setNextModeEnableDialogUI(DM.MODE.Hard.ToString());
         }
-        if(DM.ins.personalData.IsNightMaremodeOn && !DM.ins.personalData.IsNightMaremodeEnableNotice){
+        if(DM.ins.personalData.IsHardModeClear && !DM.ins.personalData.IsNightMaremodeEnableNotice){
             DM.ins.personalData.IsNightMaremodeEnableNotice = true;
             setNextModeEnableDialogUI(DM.MODE.Nightmare.ToString());
+        }
+        if(DM.ins.personalData.IsNightmareModeClear && !DM.ins.personalData.IsUpdateNotice){
+            DM.ins.personalData.IsUpdateNotice = true;
+            updateDialog.gameObject.SetActive(true);
         }
 
         //* StageSelect Panel
@@ -799,9 +803,9 @@ public class HomeManager : MonoBehaviour
         stageSelects[(int)DM.MODE.Nightmare].End = stageCnt * 3;
 
         //* Check Mode Data
-        if(DM.ins.personalData.IsHardmodeOn)
+        if(DM.ins.personalData.IsNormalModeClear)
             stageSelects[(int)DM.MODE.Hard].IsLocked = false;
-        if(DM.ins.personalData.IsNightMaremodeOn)
+        if(DM.ins.personalData.IsHardModeClear)
             stageSelects[(int)DM.MODE.Nightmare].IsLocked = false;
 
         //* Set StageSelectList

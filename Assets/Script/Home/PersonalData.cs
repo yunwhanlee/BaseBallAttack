@@ -24,10 +24,15 @@ public class PersonalData {
     [SerializeField] string rouletteTicketOneDayAdCntCoolTime; public string RouletteTicketOneDayAdCntCoolTime {get => rouletteTicketOneDayAdCntCoolTime; set => rouletteTicketOneDayAdCntCoolTime = value;}
 
     [Header("ONE TIME TRIGGER")][Header("__________________________")]
-    [SerializeField] bool isHardmodeOn; public bool IsHardmodeOn {get => isHardmodeOn; set => isHardmodeOn = value;}
-    [SerializeField] bool isHardmodeEnableNotice; public bool IsHardmodeEnableNotice {get => isHardmodeEnableNotice; set => isHardmodeEnableNotice = value;}
-    [SerializeField] bool isNightMaremodeOn; public bool IsNightMaremodeOn {get => isNightMaremodeOn; set => isNightMaremodeOn = value;}
-    [SerializeField] bool isNightMaremodeEnableNotice; public bool IsNightMaremodeEnableNotice {get => isNightMaremodeEnableNotice; set => isNightMaremodeEnableNotice = value;}
+    [SerializeField] bool isNormalModeClear; public bool IsNormalModeClear {get => isNormalModeClear; set => isNormalModeClear = value;}
+    [SerializeField] bool isHardModeEnableNotice; public bool IsHardmodeEnableNotice {get => isHardModeEnableNotice; set => isHardModeEnableNotice = value;}
+
+    [SerializeField] bool isHardModeClear; public bool IsHardModeClear {get => isHardModeClear; set => isHardModeClear = value;}
+    [SerializeField] bool isNightmareModeEnableNotice; public bool IsNightMaremodeEnableNotice {get => isNightmareModeEnableNotice; set => isNightmareModeEnableNotice = value;}
+
+    [SerializeField] bool isNightmareModeClear; public bool IsNightmareModeClear {get => isNightmareModeClear; set => isNightmareModeClear = value;}
+    [SerializeField] bool isUpdateNotice; public bool IsUpdateNotice {get => isUpdateNotice; set => isUpdateNotice = value;}
+    
     [SerializeField] bool isRemoveAD; public bool IsRemoveAD {get => isRemoveAD; set => isRemoveAD = value;}
     [SerializeField] bool isSkipTutorial; public bool IsSkipTutorial {get => isSkipTutorial; set => isSkipTutorial = value;}
     [SerializeField] bool isPurchasePremiumPack; public bool IsPurchasePremiumPack {get => isPurchasePremiumPack; set => isPurchasePremiumPack = value;}
@@ -161,10 +166,15 @@ public class PersonalData {
         this.rouletteTicketOneDayAdCntCoolTime = (data.rouletteTicketOneDayAdCntCoolTime != null)? data.rouletteTicketOneDayAdCntCoolTime : DateTime.Now.ToString();
 
         this.isChoiceLang = data.IsChoiceLang;
-        this.isHardmodeOn = data.IsHardmodeOn;
-        this.isNightMaremodeOn = data.IsNightMaremodeOn;
-        this.isHardmodeEnableNotice = data.IsHardmodeEnableNotice;
-        this.isNightMaremodeEnableNotice = data.IsNightMaremodeEnableNotice;
+
+        this.isNormalModeClear = data.IsNormalModeClear;
+        this.isHardModeClear = data.IsHardModeClear;
+        this.isNightmareModeClear = data.IsNightmareModeClear;
+
+        this.isHardModeEnableNotice = data.IsHardmodeEnableNotice;
+        this.isNightmareModeEnableNotice = data.IsNightMaremodeEnableNotice;
+        this.isUpdateNotice = data.IsUpdateNotice;
+
         this.isRemoveAD = data.IsRemoveAD;
         this.isSkipTutorial = data.IsSkipTutorial;
         this.isPurchasePremiumPack = data.IsPurchasePremiumPack;
@@ -265,10 +275,15 @@ public class PersonalData {
         this.rouletteTicketCoolTime = DateTime.Now.ToString();
 
         this.isChoiceLang = false;
-        this.isHardmodeOn = false;
-        this.isNightMaremodeOn = false;
-        this.isHardmodeEnableNotice = false;
-        this.isNightMaremodeEnableNotice = false;
+
+        this.isNormalModeClear = false;
+        this.isHardModeClear = false;
+        this.isNightmareModeClear = false;
+
+        this.isHardModeEnableNotice = false;
+        this.isNightmareModeEnableNotice = false;
+        this.isUpdateNotice = false;
+        
         this.isRemoveAD = false;
         this.isSkipTutorial = false;
         this.isPurchasePremiumPack = false;

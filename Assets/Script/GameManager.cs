@@ -937,10 +937,12 @@ public class GameManager : MonoBehaviour {
             , vtrRewardItemCoinTxt, vtrRewardItemDiamondTxt, vtrRewardItemRouletteTicketTxt);
 
         //* Next Mode Unlocked
-        if(DM.ins.Mode == DM.MODE.Normal && !DM.ins.personalData.IsHardmodeOn)
-            DM.ins.personalData.IsHardmodeOn = true;
-        else if(DM.ins.Mode == DM.MODE.Hard && !DM.ins.personalData.IsNightMaremodeOn)
-            DM.ins.personalData.IsNightMaremodeOn = true;
+        if(DM.ins.Mode == DM.MODE.Normal && !DM.ins.personalData.IsNormalModeClear)
+            DM.ins.personalData.IsNormalModeClear = true;
+        else if(DM.ins.Mode == DM.MODE.Hard && !DM.ins.personalData.IsHardModeClear)
+            DM.ins.personalData.IsHardModeClear = true;
+        else if(DM.ins.Mode == DM.MODE.Nightmare && !DM.ins.personalData.IsNightmareModeClear)
+            DM.ins.personalData.IsNightmareModeClear = true;
 
         //* Achivement
         if(DM.ins.Mode == DM.MODE.Normal)
