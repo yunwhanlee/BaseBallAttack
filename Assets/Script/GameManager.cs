@@ -1181,7 +1181,7 @@ public class GameManager : MonoBehaviour {
 
             bossLimitCnt--;
 
-            if(bossLimitCnt == LM._.BOSS_LIMIT_CNT_ALERT_NUM){
+            if(bossLimitCnt == LM._.BOSS_LIMIT_CNT_ALERT_NUM && boss.Hp > 0){
                 em.playUIAnimEF(DM.ANIM.BossLimitcntAlertTxtEF.ToString());
             }
 
