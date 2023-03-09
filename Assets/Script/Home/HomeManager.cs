@@ -634,10 +634,10 @@ public class HomeManager : MonoBehaviour
             }
         }
 
-        //* Set Sky By Mode
+        //* Set Sky X Value
         Debug.Log("onClickPlayBtn:: curStageSelectIndex= " + stageIdx);
-        float offsetX = (stageIdx == (int)DM.MODE.Normal)? LM._.SKY_MT_MORNING_VALUE : LM._.SKY_MT_DINNER_VALUE; // 1=> Morning, 1.25=> dinner, 1.5=> night
-        DM.ins.simpleSkyMt.SetTextureOffset("_MainTex", new Vector2(offsetX, 0));
+        float x = (DM.ins.Mode == DM.MODE.Normal)? LM._.SKY_MT_X_MORNING : (DM.ins.Mode == DM.MODE.Hard)? LM._.SKY_MT_X_DINNER : LM._.SKY_MT_X_NIGHT;
+        DM.ins.simpleSkyMt.SetTextureOffset("_MainTex", new Vector2(x, 0));
 
         //* シーン 読込み。
         SM.ins.sfxPlay(SM.SFX.PlayBtn.ToString());

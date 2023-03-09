@@ -328,7 +328,7 @@ public class GameManager : MonoBehaviour {
             StartCoroutine(coCheckLevelUp());
             light.color = DM.ins.hardModeSkyClr;
         }
-        else if(DM.ins.Mode == DM.MODE.Hard){
+        else if(DM.ins.Mode == DM.MODE.Nightmare){
             pl.IsLevelUp = true;
             pl.Lv = 4;
             StartCoroutine(coCheckLevelUp());
@@ -341,10 +341,9 @@ public class GameManager : MonoBehaviour {
         em.playUIAnimEF(DM.ANIM.Mode.ToString());
 
         //* Sky Style
-        Debug.Log("SkyMt.offsetX= " + DM.ins.simpleSkyMt.GetTextureOffset("_MainTex").x);
-        if(DM.ins.simpleSkyMt.GetTextureOffset("_MainTex").x == LM._.SKY_MT_MORNING_VALUE)
+        if(DM.ins.Mode == DM.MODE.Normal)
             skySunObj.SetActive(true);
-        else if(DM.ins.simpleSkyMt.GetTextureOffset("_MainTex").x == LM._.SKY_MT_DINNER_VALUE)
+        else
             skyMoonObj.SetActive(true);
     }
 
@@ -406,7 +405,7 @@ public class GameManager : MonoBehaviour {
     private Color getModeTxtColor(){
         return (DM.ins.Mode == DM.MODE.Normal)? Color.white
             : (DM.ins.Mode == DM.MODE.Hard)? Color.red
-            : Color.yellow;
+            : Color.yellow; // Nightmare
     }
     public void setBallPreviewGoalImgRGBA(Color color) => ballPreviewGoalImg.color = color;
     public void throwScreenAnimSetTrigger(string name) => throwScreenAnim.SetTrigger(name);
