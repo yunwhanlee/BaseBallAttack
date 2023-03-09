@@ -74,8 +74,8 @@ public class StageSelect {
         bonusMultiDiamondTxt.text = $"x {bonusMultiDiamond.ToString()}";
 
         //* init
-        bonusLabel.gameObject.SetActive((i == (int)DM.MODE.NORMAL)? false : true);
-        imgBtn.GetComponent<Image>().color = (i == (int)DM.MODE.NORMAL)? Color.yellow : Color.white;
+        bonusLabel.gameObject.SetActive((i == (int)DM.MODE.Normal)? false : true);
+        imgBtn.GetComponent<Image>().color = (i == (int)DM.MODE.Normal)? Color.yellow : Color.white;
     }
 }
 
@@ -300,11 +300,11 @@ public class HomeManager : MonoBehaviour
         //* HardMode Enable Notice Dialog (Only OneTime)
         if(DM.ins.personalData.IsHardmodeOn && !DM.ins.personalData.IsHardmodeEnableNotice){
             DM.ins.personalData.IsHardmodeEnableNotice = true;
-            setNextModeEnableDialogUI(DM.MODE.HARD.ToString());
+            setNextModeEnableDialogUI(DM.MODE.Hard.ToString());
         }
         if(DM.ins.personalData.IsNightMaremodeOn && !DM.ins.personalData.IsNightMaremodeEnableNotice){
             DM.ins.personalData.IsNightMaremodeEnableNotice = true;
-            setNextModeEnableDialogUI(DM.MODE.NIGHTMARE.ToString());
+            setNextModeEnableDialogUI(DM.MODE.Nightmare.ToString());
         }
 
         //* StageSelect Panel
@@ -613,7 +613,7 @@ public class HomeManager : MonoBehaviour
     
         //* Set Stage & Mode
         DM.ins.StageNum = stageSelects[stageIdx].Begin;
-        DM.ins.Mode = (stageIdx == 0)? DM.MODE.NORMAL : (stageIdx == 1)? DM.MODE.HARD : DM.MODE.NIGHTMARE;
+        DM.ins.Mode = (stageIdx == 0)? DM.MODE.Normal : (stageIdx == 1)? DM.MODE.Hard : DM.MODE.Nightmare;
 
         var playerModel = modelTf.GetChild(0);
         playerModel.GetComponent<Animator>().SetBool(DM.ANIM.IsIdle.ToString(), false); //Ready Pose
@@ -636,7 +636,7 @@ public class HomeManager : MonoBehaviour
 
         //* Set Sky By Mode
         Debug.Log("onClickPlayBtn:: curStageSelectIndex= " + stageIdx);
-        float offsetX = (stageIdx == (int)DM.MODE.NORMAL)? LM._.SKY_MT_MORNING_VALUE : LM._.SKY_MT_DINNER_VALUE; // 1=> Morning, 1.25=> dinner, 1.5=> night
+        float offsetX = (stageIdx == (int)DM.MODE.Normal)? LM._.SKY_MT_MORNING_VALUE : LM._.SKY_MT_DINNER_VALUE; // 1=> Morning, 1.25=> dinner, 1.5=> night
         DM.ins.simpleSkyMt.SetTextureOffset("_MainTex", new Vector2(offsetX, 0));
 
         //* シーン 読込み。
@@ -744,7 +744,7 @@ public class HomeManager : MonoBehaviour
         //* 表示
         nextModeEnableNoticeDialog.gameObject.SetActive(true);
         //* Lang
-        if(mode == DM.MODE.HARD.ToString()){
+        if(mode == DM.MODE.Hard.ToString()){
             hardModeImg.gameObject.SetActive(true);
             nextModeEnableNoticeTitleTxt.text = LANG.getTxt(LANG.TXT.HardMode.ToString());
         }else{
@@ -778,20 +778,20 @@ public class HomeManager : MonoBehaviour
     private void setStageSelectUIList(){
         //* Set Stage Range (Beginと.End)
         int stageCnt = LM._.BOSS_STAGE_SPAN * LM._.VICTORY_BOSSKILL_CNT;
-        stageSelects[(int)DM.MODE.NORMAL].Begin = 1;
-        stageSelects[(int)DM.MODE.NORMAL].End = stageCnt;
+        stageSelects[(int)DM.MODE.Normal].Begin = 1;
+        stageSelects[(int)DM.MODE.Normal].End = stageCnt;
 
-        stageSelects[(int)DM.MODE.HARD].Begin = 1 + stageCnt;
-        stageSelects[(int)DM.MODE.HARD].End = stageCnt * 2;
+        stageSelects[(int)DM.MODE.Hard].Begin = 1 + stageCnt;
+        stageSelects[(int)DM.MODE.Hard].End = stageCnt * 2;
         
-        stageSelects[(int)DM.MODE.NIGHTMARE].Begin = 1 + (stageCnt * 2);
-        stageSelects[(int)DM.MODE.NIGHTMARE].End = stageCnt * 3;
+        stageSelects[(int)DM.MODE.Nightmare].Begin = 1 + (stageCnt * 2);
+        stageSelects[(int)DM.MODE.Nightmare].End = stageCnt * 3;
 
         //* Check Mode Data
         if(DM.ins.personalData.IsHardmodeOn)
-            stageSelects[(int)DM.MODE.HARD].IsLocked = false;
+            stageSelects[(int)DM.MODE.Hard].IsLocked = false;
         if(DM.ins.personalData.IsNightMaremodeOn)
-            stageSelects[(int)DM.MODE.NIGHTMARE].IsLocked = false;
+            stageSelects[(int)DM.MODE.Nightmare].IsLocked = false;
 
         //* Set StageSelectList
         for(int i=0; i<stageSelects.Length; i++){

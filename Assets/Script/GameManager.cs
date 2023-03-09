@@ -318,17 +318,17 @@ public class GameManager : MonoBehaviour {
         //* Pause Panel UI
         pauseCoinTxt.text = DM.ins.personalData.Coin.ToString();
         pauseDiamondTxt.text = DM.ins.personalData.Diamond.ToString();
-        pauseModeTxt.text = DM.ins.Mode.ToString() + " MODE";
+        pauseModeTxt.text = DM.ins.Mode.ToString();
         pauseModeTxt.color = getModeTxtColor();
 
         //* Set Mode
-        if(DM.ins.Mode == DM.MODE.HARD){
+        if(DM.ins.Mode == DM.MODE.Hard){
             pl.IsLevelUp = true;
             pl.Lv = 3;
             StartCoroutine(coCheckLevelUp());
             light.color = DM.ins.hardModeSkyClr;
         }
-        else if(DM.ins.Mode == DM.MODE.HARD){
+        else if(DM.ins.Mode == DM.MODE.Hard){
             pl.IsLevelUp = true;
             pl.Lv = 4;
             StartCoroutine(coCheckLevelUp());
@@ -336,7 +336,7 @@ public class GameManager : MonoBehaviour {
         }
 
         //* ModeTxt Anim
-        modeTxt.text = DM.ins.Mode.ToString() + " MODE";
+        modeTxt.text = LANG.getTxt(DM.ins.Mode.ToString()) + " " + LANG.getTxt(LANG.TXT.Mode.ToString());
         modeTxt.color = getModeTxtColor();
         em.playUIAnimEF(DM.ANIM.Mode.ToString());
 
@@ -404,9 +404,9 @@ public class GameManager : MonoBehaviour {
         activeSkillBtnList.ForEach(btn=> btn.setActiveSkillEF());
     }
     private Color getModeTxtColor(){
-        return (DM.ins.Mode == DM.MODE.NORMAL)? Color.white
-            : (DM.ins.Mode == DM.MODE.HARD)? Color.red
-            : Color.magenta;
+        return (DM.ins.Mode == DM.MODE.Normal)? Color.white
+            : (DM.ins.Mode == DM.MODE.Hard)? Color.red
+            : Color.yellow;
     }
     public void setBallPreviewGoalImgRGBA(Color color) => ballPreviewGoalImg.color = color;
     public void throwScreenAnimSetTrigger(string name) => throwScreenAnim.SetTrigger(name);
@@ -938,17 +938,17 @@ public class GameManager : MonoBehaviour {
             , vtrRewardItemCoinTxt, vtrRewardItemDiamondTxt, vtrRewardItemRouletteTicketTxt);
 
         //* Next Mode Unlocked
-        if(DM.ins.Mode == DM.MODE.NORMAL && !DM.ins.personalData.IsHardmodeOn)
+        if(DM.ins.Mode == DM.MODE.Normal && !DM.ins.personalData.IsHardmodeOn)
             DM.ins.personalData.IsHardmodeOn = true;
-        else if(DM.ins.Mode == DM.MODE.HARD && !DM.ins.personalData.IsNightMaremodeOn)
+        else if(DM.ins.Mode == DM.MODE.Hard && !DM.ins.personalData.IsNightMaremodeOn)
             DM.ins.personalData.IsNightMaremodeOn = true;
 
         //* Achivement
-        if(DM.ins.Mode == DM.MODE.NORMAL)
+        if(DM.ins.Mode == DM.MODE.Normal)
             AcvNormalModeClear.setNormalModeClear();
-        else if(DM.ins.Mode == DM.MODE.HARD)
+        else if(DM.ins.Mode == DM.MODE.Hard)
             AcvHardModeClear.setHardModeClear();
-        else if(DM.ins.Mode == DM.MODE.NIGHTMARE)
+        else if(DM.ins.Mode == DM.MODE.Nightmare)
             AcvNightmareModeClear.setNightmareModeClear();
     }
 
@@ -985,15 +985,15 @@ public class GameManager : MonoBehaviour {
         float coinBonus = 1;
         float diaBonus = 1;
 
-        if(DM.ins.Mode == DM.MODE.NORMAL){
+        if(DM.ins.Mode == DM.MODE.Normal){
             resStage = stage;
         }
-        else if(DM.ins.Mode == DM.MODE.HARD){
+        else if(DM.ins.Mode == DM.MODE.Hard){
             resStage = stage - stageOffset;
             coinBonus = LM._.HARDMODE_COIN_BONUS;
             diaBonus = LM._.HARDMODE_DIAMOND_BONUS; 
         }
-        else if(DM.ins.Mode == DM.MODE.NIGHTMARE){
+        else if(DM.ins.Mode == DM.MODE.Nightmare){
             resStage = stage - stageOffset * 2;
             coinBonus = LM._.NIGHTMARE_COIN_BONUS;
             diaBonus = LM._.NIGHTMARE_DIAMOND_BONUS; 
@@ -1010,7 +1010,7 @@ public class GameManager : MonoBehaviour {
         coinTxt.text = (gvCoinX2Label.activeSelf)? (int.Parse(coinTxt.text) * 2).ToString() : coinTxt.text; //* (BUG-76) setFinishGame:: CoinX2してからReviveしたら、X2が適用されないバグ対応。
 
 
-        diamondTxt.text = (diamond * (DM.ins.Mode == DM.MODE.HARD? LM._.HARDMODE_DIAMOND_BONUS : 1)).ToString();
+        diamondTxt.text = (diamond * (DM.ins.Mode == DM.MODE.Hard? LM._.HARDMODE_DIAMOND_BONUS : 1)).ToString();
 
         //* Show Reward Item Goods
         rewardItemCoinTxt.text = rewardItemCoin.ToString();
@@ -1207,8 +1207,8 @@ public class GameManager : MonoBehaviour {
     private int getStageOffsetByMode(){
         //* (BUG-98) モードによって、ボースのステージを固定することが対応されていないこと解決。
         int stgOffset = LM._.BOSS_STAGE_SPAN * LM._.VICTORY_BOSSKILL_CNT;
-        return (DM.ins.Mode == DM.MODE.NORMAL)? 0
-                : (DM.ins.Mode == DM.MODE.HARD)? stgOffset
+        return (DM.ins.Mode == DM.MODE.Normal)? 0
+                : (DM.ins.Mode == DM.MODE.Hard)? stgOffset
                 : stgOffset * 2; // -> NIGHTMARE
     }
 
