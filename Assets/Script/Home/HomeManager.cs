@@ -200,6 +200,12 @@ public class HomeManager : MonoBehaviour
     public Text nextModeEnableNoticeContent1Txt;
     public Text nextModeEnableNoticeOkBtnTxt;
 
+    //* Update Dialog
+    public RectTransform updateDialog;
+    public Text updateDialogTitleTxt;
+    public Text updateDialogContentTxt;
+    public Text updateDialogOkBtnTxt;
+
     [Header("BUY OR CHECK BTN")][Header("__________________________")]
     public Button checkBtn;
     public Image checkMarkImg;
@@ -311,6 +317,11 @@ public class HomeManager : MonoBehaviour
         stageSelectPlayBtnTxt.text = LANG.getTxt(LANG.TXT.Play.ToString());
         stageSelectNoticeTxt.text = LANG.getTxt(LANG.TXT.StageSelectNotice.ToString());
         stageSelectBackBtnTxt.text = LANG.getTxt(LANG.TXT.Back.ToString());
+
+        //* UpdateDialog
+        updateDialogTitleTxt.text = LANG.getTxt(LANG.TXT.UpdateDialog_Title.ToString());
+        updateDialogContentTxt.text = LANG.getTxt(LANG.TXT.UpdateDialog_Content.ToString());
+        updateDialogOkBtnTxt.text = LANG.getTxt(LANG.TXT.Ok.ToString());
     }
 
     void Update(){

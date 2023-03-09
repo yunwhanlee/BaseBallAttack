@@ -28,6 +28,7 @@ public static class LANG //* LANG
         ShowAdDialogRevive_Title, ShowAdDialogRevive_Content,
         ShowAdDialogRouletteTicket_Title, ShowAdDialogRouletteTicket_Content,
         ErrorNetworkDialog_Title, ErrorNetworkDialog_Content,
+        UpdateDialog_Title, UpdateDialog_Content,
 
 
         Tutorial, OpenTutorial_Content, Skip_NextTime,
@@ -391,6 +392,16 @@ public static class LANG //* LANG
         "もしよろしければ、大切な評価をお願いします！ とても力になります！",
         "혹시 괜찮으시다면, 소중한 평가 부탁드립니다! 많은 힘이 됩니다!"
     };
+    public static string[] UpdateDialog_Title = new string[]{
+        "Thank you for play !",
+        "ありがとうございます！",
+        "감사합니다 !"
+    };
+    public static string[] UpdateDialog_Content = new string[]{
+        "Please wait for the update. If you don't mind, please evaluate it!",
+        "アップデート予定中です。 よろしければ、ゲーム評価をお願いします！",
+        "업데이트 예정중입니다. 괜찮으시다면 게임평가 한번 부탁드리겠습니다!"
+    };
 
     public static string[] GameTutorial_Content1 = new string[]{
         "Hello! I'm a baseball fairy who teaches me how to play game.",
@@ -620,6 +631,8 @@ public static class LANG //* LANG
         if(name == TXT.ErrorNetworkDialog_Content.ToString()) res = ErrorNetworkDialog_Content[CUR_LANG];
         if(name == TXT.RateDialog_Content1.ToString()) res = RateDialog_Content1[CUR_LANG];
         if(name == TXT.RateDialog_Content2.ToString()) res = RateDialog_Content2[CUR_LANG];
+        if(name == TXT.UpdateDialog_Title.ToString()) res = UpdateDialog_Title[CUR_LANG];
+        if(name == TXT.UpdateDialog_Content.ToString()) res = UpdateDialog_Content[CUR_LANG];
         if(name == TXT.NextMode_Content.ToString()) res = NextMode_Content[CUR_LANG];
 
         if(name == TXT.Caution.ToString()) res = Caution[CUR_LANG];

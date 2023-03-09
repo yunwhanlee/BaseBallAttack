@@ -560,6 +560,8 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ BlockGroupが０の場合は、ボールが消えるまで待つことではなく、すぐNextStageに行くように。
     ✓ ボースの色を纏めて調整、NightModeのボースPrefab準備。
     ✓ NightMareモードまで対応＋SkyMt_X値設定。
+    ✓ UpdateDialog作成。：NightModeまでクリアーしたら、出るようにする。閉じたら評価Dialog表示するようにも。
+    
 
     - Coin2倍を1.5倍にする。
     - Canvas形をもっと最適化して分ける。
