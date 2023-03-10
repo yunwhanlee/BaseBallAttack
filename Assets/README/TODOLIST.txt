@@ -563,6 +563,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ UpdateDialog作成。：NightModeまでクリアーしたら、出るようにする。閉じたら評価Dialog表示するようにも。
 
     ✓ Optimization:: Camera Projection Far 1000 -> 150に下げる。
+    - Optimization:: Blockに張ってある、canvas(SubCanvas)がBatchingが全てBreakされている。
     
 
     - Coin2倍を1.5倍にする。
