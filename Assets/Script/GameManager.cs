@@ -786,9 +786,12 @@ public class GameManager : MonoBehaviour {
         if(pl.IsStun) return;
         bool isOnCam2 = !cam2.activeSelf;
 
-        if(isOnCam2){//* CAM2 ON
+        if(isOnCam2){//* CAM2 ON (Top View)
             State = GameManager.STATE.PLAY;
+            //* 表示
             ManageActiveObjects(true);
+            setActiveBlocksCanvas(false);
+
             setTextReadyBtn(LANG.getTxt(LANG.TXT.Back.ToString()));
             setBallPreviewGoalImgRGBA(new Color(0.8f,0.8f,0.8f, 0.2f));
             bs.init();
@@ -802,7 +805,10 @@ public class GameManager : MonoBehaviour {
         }
         else{//* CAM1 ON
             State = GameManager.STATE.WAIT;
+            //* 非表示
             ManageActiveObjects(false);
+            setActiveBlocksCanvas(true);
+
             setTextReadyBtn(LANG.getTxt(LANG.TXT.Ready.ToString()));
             //* (BUG)STRIKEになってから、BACKボタン押すと、PreviewLineが消えてしまう。
             setActivePreviewBendle(true);
@@ -833,6 +839,12 @@ public class GameManager : MonoBehaviour {
         foreach(Transform child in activeSkillBtnGroup){
             Button btn = child.GetComponent<Button>();
             btn.gameObject.SetActive(trigger);
+        }
+    }
+    private void setActiveBlocksCanvas(bool trigger){
+        for(int i=0; i<blockGroup.childCount; i++){
+            var block = blockGroup.GetChild(i).GetComponent<Block_Prefab>();
+            if(block.canvas) block.canvas.gameObject.SetActive(trigger);
         }
     }
     private void setTextReadyBtn(string str){
