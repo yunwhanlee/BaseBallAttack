@@ -129,6 +129,7 @@ public class Block_Prefab : MonoBehaviour
     [SerializeField] float spawnAnimSpeed;
 
     [Header("GUI")][Header("__________________________")]
+    public Canvas canvas;
     public Text hpTxt;
 
     void Awake(){ //! 継承：親の場合、定義するソースはAwake()にしないと、Nullになる。
