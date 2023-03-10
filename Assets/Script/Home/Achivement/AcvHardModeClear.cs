@@ -16,7 +16,7 @@ public class AcvHardModeClear : Achivement
 //*---------------------------------------
 //*  Button Event Function
 //*---------------------------------------
-    public override void onClickCalimBtn(){
+    public override void onClickClaimBtn(){
         var pDt = DM.ins.personalData;
 
         if(pDt.HardModeClear[0].IsComplete && !pDt.HardModeClear[0].IsAccept){

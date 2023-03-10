@@ -26,7 +26,7 @@ public class AcvBatCollection : Achivement
 //*---------------------------------------
 //*  Button Event Function
 //*---------------------------------------
-    public override void onClickCalimBtn(){
+    public override void onClickClaimBtn(){
         var pDt = DM.ins.personalData;
 
         if(pDt.BatCollectionArr[CLTBATQUATER].IsComplete && !pDt.BatCollectionArr[CLTBATQUATER].IsAccept){

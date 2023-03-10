@@ -37,7 +37,7 @@ public class AcvCollectedCoin : Achivement
 //*---------------------------------------
 //*  Button Event Function
 //*---------------------------------------
-    public override void onClickCalimBtn(){
+    public override void onClickClaimBtn(){
         Debug.Log("Achivement::onClickCalimBtn:: " + this.name);
         var pDt = DM.ins.personalData;
         var coinArr = pDt.CollectedCoinArr;

@@ -37,7 +37,7 @@ public class AcvBosskillCollection : Achivement
 //*---------------------------------------
 //*  Button Event Function
 //*---------------------------------------
-    public override void onClickCalimBtn(){
+    public override void onClickClaimBtn(){
         var pDt = DM.ins.personalData;
 
         if(pDt.BosskillCollectionArr[CLTBOSSKILL1].IsComplete && !pDt.BosskillCollectionArr[CLTBOSSKILL1].IsAccept){

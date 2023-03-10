@@ -28,7 +28,7 @@ public class AcvCharactorCollection : Achivement
 //*---------------------------------------
 //*  Button Event Function
 //*---------------------------------------
-    public override void onClickCalimBtn(){
+    public override void onClickClaimBtn(){
         var pDt = DM.ins.personalData;
 
         if(pDt.CharaCollectionArr[CLTCHARAQUATER].IsComplete && !pDt.CharaCollectionArr[CLTCHARAQUATER].IsAccept){

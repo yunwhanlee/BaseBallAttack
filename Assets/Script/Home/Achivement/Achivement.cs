@@ -115,7 +115,7 @@ public class Achivement : MonoBehaviour{
 //*---------------------------------------
 //*  Button Event Function
 //*---------------------------------------
-    public virtual void onClickCalimBtn(){
+    public virtual void onClickClaimBtn(){
         Debug.Log("Achivement::onClickCalimBtn:: " + this.name);
         var pDt = DM.ins.personalData;
         //* Set Text

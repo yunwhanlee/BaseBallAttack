@@ -201,8 +201,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3084040544451741746}
-        m_TargetAssemblyTypeName: AcvHardModeClear, Assembly-CSharp
+      - m_Target: {fileID: 4278510067452812576}
+        m_TargetAssemblyTypeName: AcvNightmareModeClear, Assembly-CSharp
         m_MethodName: onClickCalimBtn
         m_Mode: 1
         m_Arguments:
@@ -640,7 +640,7 @@ GameObject:
   - component: {fileID: 2682170137326998412}
   - component: {fileID: 2682170137326998413}
   - component: {fileID: 2682170137326998414}
-  - component: {fileID: 3084040544451741746}
+  - component: {fileID: 4278510067452812576}
   m_Layer: 0
   m_Name: NightmareModeClear
   m_TagString: Untagged
@@ -726,7 +726,7 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.050980393}
   m_EffectDistance: {x: 0, y: -6}
   m_UseGraphicAlpha: 1
---- !u!114 &3084040544451741746
+--- !u!114 &4278510067452812576
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -735,14 +735,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2682170137326998400}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b596996a962fcf84d8bdfa40907ab60c, type: 3}
+  m_Script: {fileID: 11500000, guid: 0af6e01f156b8bf4daf0805bfa8bf614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rewardType: 1
   infoLangTxts:
-  - HardMode Clear
-  - "\u30CF\u30FC\u30C9\u30E2\u30FC\u30C9 \u30AF\u30EA\u30A2\u30FC"
-  - "\uD558\uB4DC\uBAA8\uB4DC \uD074\uB9AC\uC5B4"
+  - NightmareMode Clear
+  - "\u30CA\u30A4\u30C8\u30E1\u30A2\u30FC\u30E2\u30FC\u30C9 \u30AF\u30EA\u30A2\u30FC"
+  - "\uB098\uC774\uD2B8\uBA54\uC5B4 \uD074\uB9AC\uC5B4"
   cnt: 0
   max: 0
   allClear: 0

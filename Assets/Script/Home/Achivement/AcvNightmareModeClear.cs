@@ -15,7 +15,7 @@ public class AcvNightmareModeClear : Achivement
 //*---------------------------------------
 //*  Button Event Function
 //*---------------------------------------
-    public override void onClickCalimBtn(){
+    public override void onClickClaimBtn(){
         var pDt = DM.ins.personalData;
 
         if(pDt.NightmareModeClear[0].IsComplete && !pDt.NightmareModeClear[0].IsAccept){

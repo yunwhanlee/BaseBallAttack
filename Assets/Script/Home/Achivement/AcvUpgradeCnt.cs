@@ -30,7 +30,7 @@ public class AcvUpgradeCnt : Achivement
 //*---------------------------------------
 //*  Button Event Function
 //*---------------------------------------
-    public override void onClickCalimBtn(){
+    public override void onClickClaimBtn(){
         var pDt = DM.ins.personalData;
 
         if(pDt.UpgradeCntArr[UPG20PER].IsComplete && !pDt.UpgradeCntArr[UPG20PER].IsAccept){

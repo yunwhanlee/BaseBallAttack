@@ -31,7 +31,7 @@ public class AcvCollectedRouletteTicket : Achivement
 //*---------------------------------------
 //*  Button Event Function
 //*---------------------------------------
-    public override void onClickCalimBtn(){
+    public override void onClickClaimBtn(){
         var pDt = DM.ins.personalData;
 
         if(pDt.CollectedRouletteTicketArr[CLTTICKET10].IsComplete && !pDt.CollectedRouletteTicketArr[CLTTICKET10].IsAccept){

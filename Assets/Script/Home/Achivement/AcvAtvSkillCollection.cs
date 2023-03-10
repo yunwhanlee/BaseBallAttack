@@ -25,7 +25,7 @@ public class AcvAtvSkillCollection : Achivement
 //*---------------------------------------
 //*  Button Event Function
 //*---------------------------------------
-    public override void onClickCalimBtn(){
+    public override void onClickClaimBtn(){
         var pDt = DM.ins.personalData;
 
         if(pDt.AtvSkillCollectionArr[CLTSKILLHALF].IsComplete && !pDt.AtvSkillCollectionArr[CLTSKILLHALF].IsAccept){

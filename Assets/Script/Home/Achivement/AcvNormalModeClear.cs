@@ -16,7 +16,7 @@ public class AcvNormalModeClear : Achivement
 //*---------------------------------------
 //*  Button Event Function
 //*---------------------------------------
-    public override void onClickCalimBtn(){
+    public override void onClickClaimBtn(){
         var pDt = DM.ins.personalData;
 
         if(pDt.NormalModeClear[0].IsComplete && !pDt.NormalModeClear[0].IsAccept){
