@@ -845,6 +845,11 @@ public class GameManager : MonoBehaviour {
             var block = blockGroup.GetChild(i).GetComponent<Block_Prefab>();
             if(block.canvas) block.canvas.gameObject.SetActive(trigger);
         }
+
+        for(int i=0; i<obstacleGroup.childCount; i++){
+            var obstacle = obstacleGroup.GetChild(i).GetComponentInChildren<Block_Prefab>();
+            if(obstacle.canvas) obstacle.canvas.gameObject.SetActive(trigger);
+        }
     }
     private void setTextReadyBtn(string str){
         readyBtnTxt.text = str;
