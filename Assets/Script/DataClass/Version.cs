@@ -6,6 +6,6 @@ using UnityEngine;
 public static class Version{
     public static int MAJOR = 1;
     public static int MINOR = 0;
-    public static int REVISION = 9;
-    public static string DATE = "2023.03.07";
+    public static int REVISION = 10;
+    public static string DATE = "2023.03.11";
 }
