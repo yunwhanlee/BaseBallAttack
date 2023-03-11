@@ -780,7 +780,6 @@ public class GameManager : MonoBehaviour {
         showAdDialog.gameObject.SetActive(false);//* ダイアログ閉じる
     }
 #endregion
-
     public void switchCamera(){
         if(State == GameManager.STATE.GAMEOVER) return;
         if(pl.IsStun) return;
