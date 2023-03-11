@@ -124,7 +124,8 @@ public class BossBlock : Block_Prefab{
         // float delayGUIActive = 0.2f;
         float playerStunTime = 3;
 
-        if(gm.cam2.activeSelf){
+        // if(gm.cam2.activeSelf){
+        if(gm.IsPlayCamOn){
             gm.switchCamera();
         }
 
@@ -281,7 +282,7 @@ public class BossBlock : Block_Prefab{
         Debug.Log("BossBlock::coBossHeal()");
         yield return Util.delay1; //new WaitForSeconds(1);
         SM.ins.sfxPlay(SM.SFX.BossHealSpell.ToString());
-        gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
+        gm.cam.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
         gm.em.createBossHealSkillEF(bossDieOrbSpawnTf.position);
         yield return Util.delay1; //new WaitForSeconds(1);
         Array.ForEach(gm.blockGroup.GetComponentsInChildren<Block_Prefab>(), block => {

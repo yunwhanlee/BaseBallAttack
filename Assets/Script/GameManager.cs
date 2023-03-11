@@ -40,10 +40,14 @@ public class GameManager : MonoBehaviour {
     public GameObject dontLookCam2ObjsGroup;
     
     [Header("CAMERA")][Header("__________________________")]
-    public GameObject cam1;
-    public GameObject cam2;
-    public GameObject cam1Canvas;
-    public GameObject cam2Canvas;
+    [SerializeField] bool isPlayCamOn;  public bool IsPlayCamOn { get => isPlayCamOn; set => isPlayCamOn = value;}
+    [SerializeField] Vector3 waitCamPos;
+    [SerializeField] Quaternion waitCamRot;
+    [SerializeField] Vector3 playCamPos;    public Vector3 PlayCamPos { get => playCamPos; set => playCamPos = value;}
+    [SerializeField] Quaternion playCamRot;
+    public Animator camAnim;
+    public GameObject cam;
+    public GameObject playCamCanvas;
 
     //* OutSide
     [Space]
@@ -783,9 +787,11 @@ public class GameManager : MonoBehaviour {
     public void switchCamera(){
         if(State == GameManager.STATE.GAMEOVER) return;
         if(pl.IsStun) return;
-        bool isOnCam2 = !cam2.activeSelf;
+        // bool isOnCam2 = !cam2.activeSelf;
+        isPlayCamOn = !isPlayCamOn;
 
-        if(isOnCam2){//* CAM2 ON (Top View)
+        // if(isOnCam2){//* CAM2 ON (Top View)
+        if(isPlayCamOn){//* CAM2 ON (Top View)
             State = GameManager.STATE.PLAY;
             //* 表示
             ManageActiveObjects(true);
@@ -828,11 +834,17 @@ public class GameManager : MonoBehaviour {
         }
     }
     
-    public void setActiveCam(bool isOnCam2){
-        cam1.SetActive(!isOnCam2);
-        cam1Canvas.SetActive(!isOnCam2);
-        cam2.SetActive(isOnCam2);
-        cam2Canvas.SetActive(isOnCam2);
+    public void setActiveCam(bool isPlayCamOn){
+        if(!isPlayCamOn){
+            cam.transform.SetPositionAndRotation(waitCamPos, waitCamRot);
+            camAnim.enabled = true;
+        }
+        else{
+            Vector3 vecPosXOffset = touchSlideControlPanel.getPlayerSpotPosXVec();
+            cam.transform.SetPositionAndRotation(playCamPos + vecPosXOffset, playCamRot);
+            camAnim.enabled = false;
+        }
+        playCamCanvas.SetActive(isPlayCamOn);
     }
     public void setActiveSkillBtns(bool trigger){
         foreach(Transform child in activeSkillBtnGroup){
@@ -846,6 +858,7 @@ public class GameManager : MonoBehaviour {
             if(block.canvas) block.canvas.gameObject.SetActive(trigger);
         }
 
+        
         for(int i=0; i<obstacleGroup.childCount; i++){
             var obstacle = obstacleGroup.GetChild(i).GetComponentInChildren<Block_Prefab>();
             if(obstacle.canvas) obstacle.canvas.gameObject.SetActive(trigger);

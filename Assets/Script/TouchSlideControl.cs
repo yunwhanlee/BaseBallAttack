@@ -29,6 +29,8 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     const int SPLIT_CNT = 3;
     bool isClickBattingSpot = false;
     float playerOffsetX;
+    float[] plTfPosArr = {-4.3f, -1.3f, 1.8f};
+    float[] camTfPosArr = {-3, 0, 3.1f};
     public List<Material> modelOriginMtList;
     public MeshRenderer[] plTfMeshRdrs;
     public Material onClickedMt;
@@ -202,8 +204,6 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         float distUnit = AmountDist / SplitCnt;
 
         float[] posArr = new float[3];
-        float[] plTfPosArr = {-4.3f, -1.3f, 1.8f};
-        float[] cam2TfPosArr = {-3, 0, 3.1f};
         for(int i=0; i<3; i++) posArr[i] = MinPosX + distUnit * (i+1);
 
         playerSpotPosX = (MinPosX < normalX && normalX <= posArr[LEFT])? POS_X.LEFT
@@ -214,17 +214,25 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         // Debug.Log($"movePlayerSpace:: normalX= {Util._.setNumDP(normalX,2)}, posArr=[{Util._.setNumDP(posArr[0],2)}, {Util._.setNumDP(posArr[1],2)}, {Util._.setNumDP(posArr[2],2)}]");
 
         if(playerSpotPosX == POS_X.LEFT){
-            playerTf.transform.position = new Vector3(plTfPosArr[LEFT], playerTf.transform.position.y, playerTf.transform.position.z);
-            gm.cam2.transform.position = new Vector3(cam2TfPosArr[LEFT], gm.cam2.transform.position.y, gm.cam2.transform.position.z);
+            playerTf.transform.position = new Vector3(plTfPosArr[LEFT], playerTf.transform.position.y, playerTf.transform.position.z);            
         }
         else if(playerSpotPosX == POS_X.CENTER){
-            playerTf.transform.position = new Vector3(plTfPosArr[CENTER], playerTf.transform.position.y, playerTf.transform.position.z);
-            gm.cam2.transform.position = new Vector3(cam2TfPosArr[CENTER], gm.cam2.transform.position.y, gm.cam2.transform.position.z);
+            playerTf.transform.position = new Vector3(plTfPosArr[CENTER], playerTf.transform.position.y, playerTf.transform.position.z);            
         }
         else if(playerSpotPosX == POS_X.RIGHT){
-            playerTf.transform.position = new Vector3(plTfPosArr[RIGHT], playerTf.transform.position.y, playerTf.transform.position.z);
-            gm.cam2.transform.position = new Vector3(cam2TfPosArr[RIGHT], gm.cam2.transform.position.y, gm.cam2.transform.position.z);
+            playerTf.transform.position = new Vector3(plTfPosArr[RIGHT], playerTf.transform.position.y, playerTf.transform.position.z);            
         }
+    }
+    public Vector3 getPlayerSpotPosXVec(){
+        Vector3 res = Vector3.zero;
+        if(playerSpotPosX == TouchSlideControl.POS_X.LEFT)
+            res = new Vector3(camTfPosArr[0], 0, 0);
+        else if(playerSpotPosX == TouchSlideControl.POS_X.CENTER)
+            res = new Vector3(camTfPosArr[1], 0, 0);
+        else if(playerSpotPosX == TouchSlideControl.POS_X.RIGHT)
+            res = new Vector3(camTfPosArr[2], 0, 0);
+            
+        return res;
     }
     private void moveModelTf(Vector2 dir){
         if(dir.x < 0){//* Right

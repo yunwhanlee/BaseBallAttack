@@ -261,7 +261,7 @@ public class BlockMaker : MonoBehaviour
         gm.IsPlayingAnim = true;
 
         //* 再生時間 習得
-        Animator camAnim = gm.cam1.GetComponent<Animator>();
+        Animator camAnim = gm.cam.GetComponent<Animator>();
         // Animator uiAnim = gm.em.BossSpawnTxtEF.GetComponent<Animator>();
         var bossNameTxt = gm.bossNameTxt.GetComponent<Text>();
 

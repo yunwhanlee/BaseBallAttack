@@ -54,7 +54,7 @@ public class GameTutorial : MonoBehaviour
         }
         
         // Camera
-        gm.setActiveCam(isOnCam2: pgIdx == 6 || pgIdx == 7);
+        gm.setActiveCam(isPlayCamOn: pgIdx == 6 || pgIdx == 7);
     }
 
     IEnumerator coDelaytimeScale(){

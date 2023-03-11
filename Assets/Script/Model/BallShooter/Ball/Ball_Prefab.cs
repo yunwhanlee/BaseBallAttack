@@ -323,7 +323,7 @@ public class Ball_Prefab : MonoBehaviour
                         }
                     }
                     skillBtn.init(gm);
-                    gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
+                    gm.cam.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
                     myCollider.enabled = false; //* ボール動きなし
 
                     //* Delay Next Stage 
@@ -400,7 +400,7 @@ public class Ball_Prefab : MonoBehaviour
                 const int width = 1;
                 Debug.DrawRay(myTransform.position, dir * maxDistance, Color.blue, 2f);
 
-                gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
+                gm.cam.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
                 em.createAtvSkShotEF(skillIdx, this.gameObject.transform, pl.arrowAxisAnchor.transform.rotation);
 
                 //* Collider 
@@ -585,7 +585,7 @@ public class Ball_Prefab : MonoBehaviour
         SM.ins.sfxPlay(SM.SFX.HomeRun.ToString());
         //* Animation Finish
         gm.IsPlayingAnim = false;
-        gm.cam1.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
+        gm.cam.GetComponent<Animator>().SetTrigger(DM.ANIM.DoShake.ToString());
         gm.homeRunTxtTf.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
         em.playUIAnimEF(DM.ANIM.HomeRun.ToString());
         Time.timeScale = 1;
