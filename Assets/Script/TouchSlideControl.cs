@@ -226,12 +226,12 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
     public Vector3 getPlayerSpotPosXVec(){
         Vector3 res = Vector3.zero;
         if(playerSpotPosX == TouchSlideControl.POS_X.LEFT)
-            res = new Vector3(camTfPosArr[0], 0, 0);
+            res = new Vector3(camTfPosArr[(int)POS_X.LEFT], 0, 0);
         else if(playerSpotPosX == TouchSlideControl.POS_X.CENTER)
-            res = new Vector3(camTfPosArr[1], 0, 0);
+            res = new Vector3(camTfPosArr[(int)POS_X.CENTER], 0, 0);
         else if(playerSpotPosX == TouchSlideControl.POS_X.RIGHT)
-            res = new Vector3(camTfPosArr[2], 0, 0);
-            
+            res = new Vector3(camTfPosArr[(int)POS_X.RIGHT], 0, 0);
+
         return res;
     }
     private void moveModelTf(Vector2 dir){

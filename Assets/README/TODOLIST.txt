@@ -498,8 +498,8 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-98) モードによって、ボースのステージを固定することが対応されていないこと解決。
     ✓ (BUG-99) モードによって、CoinとDiamondを貰える適用＋StageOffset設定。
     ✓ (BUG-100) LongBlockがボース場合は、出ないように。
-    ✓ (BUG) ハードモードの場合、ボースを倒して途中で辞めたら、もらえる財貨がーになる。
-    - (BUG) BossObstacleBlockが破壊されても、BoxColliderのみ残っている。
+    ✓ (BUG-101) ハードモードの場合、ボースを倒して途中で辞めたら、もらえる財貨がーになる。
+    ✓ (BUG-102) BossObstacleBlockが破壊されても、BoxColliderのみ残っている。
     
 
 

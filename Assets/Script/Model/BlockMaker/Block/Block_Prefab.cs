@@ -416,8 +416,12 @@ public class Block_Prefab : MonoBehaviour
         if(kind == BlockMaker.KIND.TreasureChest)
             for(int i=0; i<LM._.TREASURECHEST_ORB_CNT; i++)
                 bm.createDropItemExpOrbPf(targetTf, resultExp);
-        else if(kind == BlockMaker.KIND.Obstacle)
+        else if(kind == BlockMaker.KIND.Obstacle){
             em.createRockObstacleBrokenEF(targetTf.position);
+            //* (BUG-102) BossObstacleBlockが破壊されても、BoxColliderのみ残っている。
+            Destroy(target.transform.parent.gameObject);
+            return;
+        }
 
         //* Add Destroy Blocks
         if(!isInitialize) 
