@@ -107,9 +107,6 @@ public class DM : MonoBehaviour{
     [FormerlySerializedAs("hardModeLightClr")] public Color hardModeSkyClr;
     [FormerlySerializedAs("nightmareModeLightClr")] public Color nightmareModeSkyClr;
 
-    [Header("TUTORIAL")][Header("__________________________")]
-    public TutorialPanel tutorialPanel;
-
     [Header("SKY")][Header("__________________________")]
     public Material simpleSkyMt;
 
@@ -241,12 +238,6 @@ public class DM : MonoBehaviour{
                 }
             }
         }
-    }
-
-    public TutorialPanel displayTutorialUI(){
-        Transform canvas = GameObject.Find(DM.NAME.MainCanvas.ToString()).GetComponent<RectTransform>();
-        TutorialPanel tuto = Instantiate(tutorialPanel, canvas, false);
-        return tuto;
     }
 
     public DM.PANEL getCurPanelType2Enum(string name){

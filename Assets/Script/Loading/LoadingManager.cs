@@ -24,11 +24,11 @@ public class LoadingManager : MonoBehaviour
     void Start(){
         //* 初期化
         DM.ins.transform.position = new Vector3(-100, -100, -100);
-        var tuto = DM.ins.displayTutorialUI();
-        tuto.transform.Find("ScreenDim").gameObject.SetActive(false);
-        tuto.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
-        Debug.Log($"LoadingManager:: Start:: tuto.gameObject.name= " + tuto.gameObject.name);
-        tuto.PageIdx = Random.Range(0, tuto.ContentArr.Length);
+        // var tuto = DM.ins.displayTutorialUI();
+        // tuto.transform.Find("ScreenDim").gameObject.SetActive(false);
+        // tuto.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
+        // Debug.Log($"LoadingManager:: Start:: tuto.gameObject.name= " + tuto.gameObject.name);
+        // tuto.PageIdx = Random.Range(0, tuto.ContentArr.Length);
         //* 非同期 処理
         StartCoroutine(coLoadScene(DM.SCENE.Play.ToString()));
     }

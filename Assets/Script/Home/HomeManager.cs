@@ -375,7 +375,6 @@ public class HomeManager : MonoBehaviour
         GPGSBinder.Inst.ShowAllLeaderboardUI();
     }
     public void onClickBtnQuestionMarkIcon() {
-        DM.ins.displayTutorialUI();
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
     }
 
