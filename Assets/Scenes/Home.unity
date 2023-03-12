@@ -9714,8 +9714,8 @@ MonoBehaviour:
   HARDMODE_DIAMOND_BONUS: 1.5
   NIGHTMARE_COIN_BONUS: 3
   NIGHTMARE_DIAMOND_BONUS: 2
-  VICTORY_BOSSKILL_CNT: 1
-  BOSS_STAGE_SPAN: 2
+  VICTORY_BOSSKILL_CNT: 4
+  BOSS_STAGE_SPAN: 15
   BOSS_LIMIT_SPAN: 12
   BOSS_DIE_ORB_CNT: 25
   BOSS_LIMIT_CNT_ALERT_NUM: 5
@@ -30847,15 +30847,15 @@ RectTransform:
   m_GameObject: {fileID: 1258905204}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.7, y: 1.7, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2001013461}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 735}
-  m_SizeDelta: {x: 512, y: 256}
+  m_AnchoredPosition: {x: 0, y: 700}
+  m_SizeDelta: {x: 650, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1258905206
 MonoBehaviour:
@@ -30877,7 +30877,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: adb3da71b988a914881409713c69bfce, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 04c0c0c811976ec4ea0a4ae79d74bd6d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -38140,7 +38140,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -427, y: 370}
+  m_AnchoredPosition: {x: -427, y: 529}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1668992829
@@ -45198,7 +45198,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -427, y: 550}
+  m_AnchoredPosition: {x: -427, y: 709}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2142333600
