@@ -999,7 +999,7 @@ public class GameManager : MonoBehaviour {
             bestStageTxt.transform.parent.GetChild(1).gameObject.SetActive(true);
 
             //* LoaderBoard入力。
-            GPGSBinder.Inst.ReportLeaderboard(GPGSIds.leaderboard_best_stage
+            GPGSBinder.Inst.ReportLeaderboard(GPGSIds.leaderboard
                 , DM.ins.personalData.BestStage
                 , success => {Debug.Log("LOADER BOARD入力: " + success);
             });
