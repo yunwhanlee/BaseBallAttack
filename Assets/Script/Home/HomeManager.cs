@@ -481,7 +481,7 @@ public class HomeManager : MonoBehaviour
     public void onClickRateOkBtn(){
         Debug.Log("<color=yellow>TODO</color> onClickRateBtn():: Googleストアーへ移動!");
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
-        Application.OpenURL("https://play.google.com/store/games");
+        Application.OpenURL("https://play.google.com/store/apps/details?id=com.frontooth.baseballattack");
     }
     public void onClickShowADButton(){
         //* 広告要請

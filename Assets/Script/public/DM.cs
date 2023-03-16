@@ -70,7 +70,6 @@ public class DM : MonoBehaviour{
         CoinX2, RerotateSkillSlots, Revive, 
         NULL
     }
-
     [Header("GPGS")][Header("__________________________")]
     [SerializeField] bool isGPGSLogin;  public bool IsGPGSLogin {get => isGPGSLogin; set => isGPGSLogin = value;}
 
