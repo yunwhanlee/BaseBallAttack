@@ -29,8 +29,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2990328448088776588}
-  m_RootOrder: 1
+  m_Father: {fileID: 2981916450211259086}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &3147309410652121852
 ParticleSystem:
@@ -4922,7 +4922,7 @@ GameObject:
   - component: {fileID: 3147889448869127778}
   - component: {fileID: 3146515705902600268}
   - component: {fileID: 8637819559928122440}
-  - component: {fileID: 6267747957770643100}
+  - component: {fileID: 4977056487043183899}
   m_Layer: 0
   m_Name: DropBoxMagicPf
   m_TagString: Untagged
@@ -4937,15 +4937,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2984737634495618150}
-  m_LocalRotation: {x: -0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2981916450211259086}
-  - {fileID: 2990026822428764682}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &3147889448869127778
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -9837,8 +9836,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aliveSpan: 0
---- !u!135 &6267747957770643100
-SphereCollider:
+  randPosList: []
+--- !u!65 &4977056487043183899
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -9848,8 +9848,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: -0.05, z: -0.05}
+  m_Size: {x: 1.35, y: 1.5, z: 0.9}
+  m_Center: {x: 0, y: -0.3, z: 0}
 --- !u!1 &2984912159339120214
 GameObject:
   m_ObjectHideFlags: 0
@@ -9878,7 +9878,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2990026822428764682}
   m_Father: {fileID: 2990328448088776588}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}

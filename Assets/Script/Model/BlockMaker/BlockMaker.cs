@@ -18,10 +18,16 @@ public class BlockMaker : MonoBehaviour
     public const float OFFSET_POS_X = -4.5f;
     public const float LONG_OFFSET_POS_X = -2.7f;
 
+    //* DropBox Pos List
+    readonly float[] DROPBOX_XPOSARR = new float[] {-4.5f, -2.7f, -0.9f, 0.9f, 2.7f, 4.5f};
+    const int DROPBOX_ZPOS_MIN = -12,  DROPBOX_ZPOS_MAX = -7;
+    
+
     [Header("STATUS")][Header("__________________________")]
     public bool doCreateBlock;  public bool DoCreateBlock {get => doCreateBlock; set => doCreateBlock = value;}
     [SerializeField] List<int>  hpCalcList;    public List<int> HpCalcList { get => hpCalcList; set => hpCalcList = value;}
     [SerializeField] List<int>  expList;    public List<int> ExpList { get => expList; set => expList = value;}
+    [SerializeField] List<Vector3> dropBoxRandPosList;    public List<Vector3> DropBoxRandPosList { get => dropBoxRandPosList;}
 
     [Header("RESOURCE")][Header("__________________________")]
     public GameObject[] blockPrefs;
@@ -40,6 +46,14 @@ public class BlockMaker : MonoBehaviour
     public GameObject coinIconPf; //dropBoxQuestionPfで出るコインUIアイコン
 
     public void Start() {
+        //* DropBox RandPosリスト 準部
+        dropBoxRandPosList = new List<Vector3>();
+        for(int z=DROPBOX_ZPOS_MIN; z<DROPBOX_ZPOS_MAX; z++){
+            for(int xidx=0; xidx<DROPBOX_XPOSARR.Length; xidx++){
+                dropBoxRandPosList.Add(new Vector3(DROPBOX_XPOSARR[xidx], 1, z));
+            }
+        }
+
         //* HPリスト 準備
         const int HP_OFFSET = 100;
         const float DECIMAL_OFFSET = 0.01f;
@@ -97,7 +111,7 @@ public class BlockMaker : MonoBehaviour
     public void createBlockRow(KIND type, bool isFirstStage = false, int verticalCnt = 1){
         SM.ins.sfxPlay(SM.SFX.BlockSpawn.ToString());
         //* Value
-        float xs = blockPrefs[(int)type].transform.localScale.x;
+        float xScale = blockPrefs[(int)type].transform.localScale.x;
         float offsetPosX = (type == KIND.Normal)? OFFSET_POS_X : LONG_OFFSET_POS_X; //* Pivotが真ん中なので、OffsetPosX設定。
 
         switch(type){
@@ -124,11 +138,12 @@ public class BlockMaker : MonoBehaviour
                             //* BlockMaker:: Heal Block Max超過したら 生成しない。
                             if(getBlockCnt(KIND.Heal.ToString()) <= LM._.HEAL_BLOCK_CREATE_MAX_CNT){
                                 ins = blockPrefs[(int)KIND.Heal];
+                            
                             }
                             else Debug.Log($"Heal Block Max({LM._.HEAL_BLOCK_CREATE_MAX_CNT})!! 生成しない。");
                         }
                         //* #4. Block生成
-                        float x = offsetPosX + h * xs;
+                        float x = offsetPosX + h * xScale;
                         float y = (isFirstStage)? 0 : ins.transform.position.y + gm.blockGroup.position.y;
                         float z = (isFirstStage)? -v : OFFSET_POS_Z;
 
@@ -146,7 +161,7 @@ public class BlockMaker : MonoBehaviour
             case KIND.Long : 
                 for(int h=0; h<2; h++){
                     var ins = blockPrefs[(int)type];
-                    float x = (h < 1)? offsetPosX + h * xs : offsetPosX + h * xs;
+                    float x = (h < 1)? offsetPosX + h * xScale : offsetPosX + h * xScale;
                     float y = ins.transform.position.y + gm.blockGroup.position.y;
                     Vector3 pos = new Vector3(x, y, OFFSET_POS_Z);
                     var block = Instantiate(ins, pos, Quaternion.identity, gm.blockGroup);
@@ -195,11 +210,13 @@ public class BlockMaker : MonoBehaviour
             const int DROPBOX_SHIELD = 0, DROPBOX_QUESTION = 1;
             int startIdx = gm.pl.IsBarrier? DROPBOX_QUESTION : DROPBOX_SHIELD;
             int randIdx = Random.Range(startIdx, dropBoxPfArr.Length);
-            var randPos = dropBoxPfArr[0].GetComponent<DropBox>().setRandPos();
-            Debug.Log($"createRandomDropBox:: idx= {randIdx}, name= {dropBoxPfArr[randIdx].name}, randPos= {randPos}");
+            // var randPos = dropBoxPfArr[0].GetComponent<DropBox>().setRandPos();
+            // Debug.Log($"createRandomDropBox:: idx= {randIdx}, name= {dropBoxPfArr[randIdx].name}, randPos= {randPos}");
 
             SM.ins.sfxPlay(SM.SFX.DropBoxSpawn.ToString());
-            var ins = ObjectPool.getObject(dropBoxPfArr[randIdx].name, randPos, dropBoxPfArr[randIdx].transform.rotation, gm.dropBoxGroup);
+            // var ins = ObjectPool.getObject(dropBoxPfArr[randIdx].name, randPos, dropBoxPfArr[randIdx].transform.rotation, gm.dropBoxGroup);
+            var ins = ObjectPool.getObject(dropBoxPfArr[randIdx].name, Vector3.zero, dropBoxPfArr[randIdx].transform.rotation, gm.dropBoxGroup);
+            ins.GetComponent<DropBox>().setRandPos();
         }
     }
 

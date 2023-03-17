@@ -4922,7 +4922,7 @@ GameObject:
   - component: {fileID: 4317218987793701917}
   - component: {fileID: 4293011013439159507}
   - component: {fileID: -681936989625461970}
-  - component: {fileID: 4522781069495837346}
+  - component: {fileID: 5649068747376118602}
   m_Layer: 0
   m_Name: DropBoxSpeedPf
   m_TagString: Untagged
@@ -4937,15 +4937,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4130510353200909505}
-  m_LocalRotation: {x: -0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4132474079853426911}
   - {fileID: 4127053879694807645}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &4317218987793701917
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -9837,8 +9837,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aliveSpan: 0
---- !u!135 &4522781069495837346
-SphereCollider:
+  randPosList: []
+--- !u!65 &5649068747376118602
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -9848,8 +9849,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: -0.05, z: -0.05}
+  m_Size: {x: 1.35, y: 1.5, z: 0.9}
+  m_Center: {x: 0, y: -0.3, z: 0}
 --- !u!1 &4130906599148170439
 GameObject:
   m_ObjectHideFlags: 0

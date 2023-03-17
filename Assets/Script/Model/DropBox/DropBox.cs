@@ -5,11 +5,12 @@ using UnityEngine;
 public class DropBox : MonoBehaviour{ //* Create By BlockMaker.cs
     GameManager gm;
     [SerializeField] int aliveSpan;     public int AliveSpan { get => aliveSpan; set => aliveSpan = value;}
-    public const int MIN_X = -5, MAX_X = 5;
-    public const int MIN_Z = -12,  MAX_Z = -6;
+    [SerializeField] List<Vector3> randPosList;
 
     void OnEnable(){
         aliveSpan = LM._.DROPBOX_ALIVE_SPAN;
+        //* Deep Copy
+        randPosList = gm.bm.DropBoxRandPosList.ConvertAll(vec => new Vector3(vec.x, vec.y, vec.z));
     }
 
     void Awake(){
@@ -21,18 +22,22 @@ public class DropBox : MonoBehaviour{ //* Create By BlockMaker.cs
             StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropBoxGroup));
     }
 
-    public Vector3 setRandPos(){
-        int rx = Random.Range(DropBox.MIN_X, DropBox.MAX_X+1);
-        int rz = Random.Range(DropBox.MIN_Z, DropBox.MAX_Z+1);
-        Vector3 randPos = new Vector3(rx, 1, rz);
-        return randPos;
+    public void setRandPos() {
+        int rand = Random.Range(0, randPosList.Count);
+        Vector3 result = randPosList[rand];
+        randPosList.RemoveAt(rand);
+        transform.position = result;
+        Debug.Log($"DropBox::setRandPos():: randPosList.Count={randPosList.Count}, pos= {result}");
+        if(randPosList.Count < 10){
+            Debug.Log("DropBox::setRandPos():: Countが10以下なので、Destroy！");
+            ObjectPool.coDestroyObject(this.gameObject, gm.dropBoxGroup);
+        }
     }
 
     void OnTriggerEnter(Collider col){
         if(Util._.isColBlockOrObstacle(col.transform.GetComponent<Collider>())){
             Debug.Log("DropBox::OnCollisionEnter:: col= " + col);
-            // StartCoroutine(ObjectPool.coDestroyObject(this.gameObject, gm.dropBoxGroup));
-            this.transform.position = setRandPos();
+            setRandPos();
         }
         else if(col.transform.CompareTag(DM.NAME.Ball.ToString())){
             //* (BUG-17) ボールがベットから打たれる前に(BallShooterから投げる)時にはDropBoxと当たり判定処理しない。
