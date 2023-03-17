@@ -51,7 +51,7 @@ public class InAppManager : MonoBehaviour
 
                 // Set Data
                 DM.ins.personalData.addRouletteTicket(LM._.PREM_PACK_ROULETTE_TICKET);
-                DM.ins.personalData.addCoin(LM._.PREM_PACK_COIN); // DM.ins.personalData.Coin += LM._.PREM_PACK_COIN;
+                DM.ins.personalData.addCoin(LM._.PREM_PACK_COIN);
                 DM.ins.personalData.addDiamond(LM._.PREM_PACK_DIAMOND);
                 DM.ins.personalData.IsRemoveAD = true;
 

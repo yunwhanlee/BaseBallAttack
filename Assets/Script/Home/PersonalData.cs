@@ -24,6 +24,7 @@ public class PersonalData {
     [SerializeField] string rouletteTicketOneDayAdCntCoolTime; public string RouletteTicketOneDayAdCntCoolTime {get => rouletteTicketOneDayAdCntCoolTime; set => rouletteTicketOneDayAdCntCoolTime = value;}
 
     [Header("ONE TIME TRIGGER")][Header("__________________________")]
+    [SerializeField] bool isGetCoupon; public bool IsGetCoupon {get => isGetCoupon; set => isGetCoupon = value;}
     [SerializeField] bool isNormalModeClear; public bool IsNormalModeClear {get => isNormalModeClear; set => isNormalModeClear = value;}
     [SerializeField] bool isHardModeEnableNotice; public bool IsHardmodeEnableNotice {get => isHardModeEnableNotice; set => isHardModeEnableNotice = value;}
 
@@ -167,6 +168,7 @@ public class PersonalData {
 
         this.isChoiceLang = data.IsChoiceLang;
 
+        this.isGetCoupon = data.IsGetCoupon;
         this.isNormalModeClear = data.IsNormalModeClear;
         this.isHardModeClear = data.IsHardModeClear;
         this.isNightmareModeClear = data.IsNightmareModeClear;
@@ -276,6 +278,7 @@ public class PersonalData {
 
         this.isChoiceLang = false;
 
+        this.isGetCoupon = false;
         this.isNormalModeClear = false;
         this.isHardModeClear = false;
         this.isNightmareModeClear = false;

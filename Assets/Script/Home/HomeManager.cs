@@ -180,6 +180,7 @@ public class HomeManager : MonoBehaviour
     public Sprite[] CountryIconSprArr;
     public Dropdown settingQualityDropdown;
     public RenderPipelineAsset[] qualityLevels;
+    public Button settingDialogCouponIconBtn;
     public Button settingDialogCancelBtn; // アプリ最初ダイアログでは、非表示。
     public Toggle expLogToggle;
     public Toggle bgmToggle;
@@ -191,6 +192,10 @@ public class HomeManager : MonoBehaviour
     public Text settingBGMTxt;
     public Text settingOkTxt;
     public Text settingCancelTxt;
+
+    //* Coupon Dialog
+    public RectTransform couponDialog;
+    public Text couponInputTxt;
 
     //* HardMode Enable Notice Dialog
     public RectTransform nextModeEnableNoticeDialog;
@@ -205,6 +210,7 @@ public class HomeManager : MonoBehaviour
     public Text updateDialogTitleTxt;
     public Text updateDialogContentTxt;
     public Text updateDialogOkBtnTxt;
+
 
     [Header("BUY OR CHECK BTN")][Header("__________________________")]
     public Button checkBtn;
@@ -496,12 +502,14 @@ public class HomeManager : MonoBehaviour
             DM.ins.personalData.reset(); //* (BUG-47)対応:: resetして、saveする前にTemplateを用意する。
             DM.ins.personalData.IsChoiceLang = true;
             settingDialog.Panel.SetActive(true);
+            settingDialogCouponIconBtn.gameObject.SetActive(false);
             settingDialogCancelBtn.gameObject.SetActive(false);
         }
     }
     public void onClickSettingBtn(){
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
         settingDialog.Panel.SetActive(true);
+        settingDialogCouponIconBtn.gameObject.SetActive(true);
     }
     public void onDropDownLanguageOpt(){
         int idx = LanguageOptDropDown.value;
@@ -539,6 +547,38 @@ public class HomeManager : MonoBehaviour
         DM.ins.personalData.save();
         if(isOk) SceneManager.LoadScene(DM.SCENE.Home.ToString()); //* Re-load
     }
+    public void onClickCouponIconBtn(){
+        //* display CouponDialog
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
+        couponDialog.gameObject.SetActive(true);
+    }
+    public void onClickCouponApplyBtn(){
+        Debug.Log("onClickCouponApplyBtn::");
+        SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
+
+        //* Check Coupon Number!
+        if(couponInputTxt.text != LM._.COUPON_KEY){
+            Util._.displayNoticeMsgDialog("Wrong Coupon key.");
+        }
+        else{
+            if(!DM.ins.personalData.IsGetCoupon){
+                //* Dialog Off
+                settingDialog.Panel.SetActive(false);
+                couponDialog.gameObject.SetActive(false);
+                //* Trigger On
+                DM.ins.personalData.IsGetCoupon = true;
+                //* Set Goods
+                DM.ins.personalData.addCoin(LM._.COUPON_REWARD_COIN);
+                DM.ins.personalData.addDiamond(LM._.COUPON_REWARD_DIAMOND);
+                //* Display
+                displayShowRewardPanel(coin: LM._.COUPON_REWARD_COIN, diamond: LM._.COUPON_REWARD_DIAMOND);
+            }
+            else{
+                Util._.displayNoticeMsgDialog("Already used.");
+            }
+        }
+    }
+
 #endregion
 
 #region UNLOCK 2ND ATV SKILL DIALOG
@@ -779,6 +819,7 @@ public class HomeManager : MonoBehaviour
         homePanel.GoBtn.gameObject.SetActive(false);
         ItemPsvInfoBtn.gameObject.SetActive(false);
     }
+
     public void setRateDialog(bool isActive){
         updateDialog.gameObject.SetActive(false);
 

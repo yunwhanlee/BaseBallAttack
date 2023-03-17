@@ -34,6 +34,11 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
 
     // [Header("GAME MANAGER")]
     // [Tooltip("ステージ")] public int STAGE_NUM = 1;
+    [Header("COUPON KEY")][Header("__________________________")]
+    [Tooltip("クーポンキー")] public string COUPON_KEY = "Ft7v2";
+    [Tooltip("クーポンリーワードコイン")] public int COUPON_REWARD_COIN = 10000;
+    [Tooltip("クーポンリーワードコイン")] public int COUPON_REWARD_DIAMOND = 1000;
+
 
     [Header("THROW BALL")][Header("__________________________")]
     [Tooltip("ボール投げる速度")] public float THROW_BALL_SPEED = 25;
