@@ -435,7 +435,9 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
 
             //* 課金なら、Price頭に"￥"表示。
             if(curItem.price.Type == Price.TP.CASH){
-                hm.priceTxt.text = "¥" + price;
+                // hm.priceTxt.text = "¥" + price;
+                //* IAP Country Price Unit Auto Apply.
+                hm.priceTxt.text = curItem.CashShopPriceTxt.text;
             }
             return; //* (BUG-46) CashShopとUpgrade Panelの項目はIsLockは関係ないのにCheckBoxUI全てが、処理した後IsLockがFalseなら✓表示になってしまうこと対応。
         }
