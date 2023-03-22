@@ -1,5 +1,14 @@
-PRICE LEVELING
+---------------------------------------------------------------------------
+RELEASE
+---------------------------------------------------------------------------
 
+ver.1.0.10(0319)
+    ・Coin -> Diamondを1/2にバランス調整(10000 -> 250, 50000 -> 1250, 100000 -> 2500).
+    ・CASH SHOP -> IAP Country Price Unit Auto Apply.
+
+
+
+PRICE LEVELING
 お金稼ぐ
 
 1 Stage : 100 coin + 10 diamond.
@@ -500,6 +509,8 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-100) LongBlockがボース場合は、出ないように。
     ✓ (BUG-101) ハードモードの場合、ボースを倒して途中で辞めたら、もらえる財貨がーになる。
     ✓ (BUG-102) BossObstacleBlockが破壊されても、BoxColliderのみ残っている。
+    ✓ (BUG-103) CoinでDiamondを買う場合、業績に適用しない。
+    ✓ (BUG-104) Shader無地になるエラー対応：Precesion : Half -> Single
     
 
 
@@ -617,6 +628,7 @@ RewardChest Percent : 5 -> 4
 3 play
     coin 15000, dia 600
     chara : 13000, bat : 13000
+
 
 
 

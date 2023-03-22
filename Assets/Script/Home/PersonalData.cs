@@ -414,9 +414,10 @@ public class PersonalData {
         coin += amount;
         AcvCollectedCoin.collectCoin(amount);
     }
-    public void addDiamond(int amount){
+    public void addDiamond(int amount, bool isApplyAchivement = true){
         diamond += amount;
-        AcvCollectedDiamond.collectDiamond(amount);
+        if(isApplyAchivement)
+            AcvCollectedDiamond.collectDiamond(amount);
     }
     public void addRouletteTicket(int amount){
         rouletteTicket += amount;

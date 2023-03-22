@@ -435,7 +435,9 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
 
             //* 課金なら、Price頭に"￥"表示。
             if(curItem.price.Type == Price.TP.CASH){
-                hm.priceTxt.text = "¥" + price;
+                // hm.priceTxt.text = "¥" + price;
+                //* IAP Country Price Unit Auto Apply.
+                hm.priceTxt.text = curItem.CashShopPriceTxt.text;
             }
             return; //* (BUG-46) CashShopとUpgrade Panelの項目はIsLockは関係ないのにCheckBoxUI全てが、処理した後IsLockがFalseなら✓表示になってしまうこと対応。
         }
@@ -835,13 +837,13 @@ public class ScrollViewEvent : MonoBehaviour//, IBeginDragHandler, IEndDragHandl
                     Debug.Log($"<color=yellow>ScrollViewEvent::purchaseItem():: itemName= {itemName}</color>");
                     if(itemName.Contains(DM.NAME.Coin.ToString())){
                         if(itemName.Contains(DM.NAME.Diamond.ToString())){
-                            Debug.Log("CoinToDiamond");
+                            Debug.Log("Coin -> Diamond");
                             int reward = int.Parse(itemName.Split('d')[1]); // Diamondの'd'
                             hm.displayShowRewardPanel(coin: 0, diamond: reward);
-                            DM.ins.personalData.addDiamond(reward);
+                            DM.ins.personalData.addDiamond(reward, isApplyAchivement: false); //* (BUG-103) CoinでDiamondを買う場合、業績に適用しない。
                         }
                         else{
-                            Debug.Log("Coin");
+                            Debug.Log("Diamond -> Coin");
                             int reward = int.Parse(itemName.Split('n')[1]); // Coinの'n'
                             hm.displayShowRewardPanel(coin: reward);
                             DM.ins.personalData.addCoin(reward);
