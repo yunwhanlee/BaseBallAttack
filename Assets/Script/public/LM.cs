@@ -140,21 +140,21 @@ public class LM : MonoBehaviour //* LEVEING MANAGER
     [Tooltip("アクティブスキル MAXレベル値")] public int ATVSKILL_MAXLV = 20;
     [Space(10)]
     [Tooltip("サンダーショット クリティカル 倍数")] public float THUNDERSHOT_CRIT = 1f;
-    [Tooltip("サンダーショット デフォルト ヒットカウント")] public int THUNDERSHOT_DEF_HIT = 5;
+    [Tooltip("サンダーショット デフォルト ヒットカウント")] public int THUNDERSHOT_DEF_HIT = 8;
     [Tooltip("サンダーショット アップグレード ヒットカウント")] public int THUNDERSHOT_UPG_HIT = 1;
     [Space(10)]
     [Tooltip("カラーボール デフォルト カウント")] public int COLORBALLPOP_DEF_CNT = 5;
     [Tooltip("カラーボール アップグレード カウント")] public int COLORBALLPOP_UPG_CNT = 1;
     [Space(10)]
-    [Tooltip("ファイヤーボール デフォルト ダーメジ％")] public float FIREBALL_DEF_DMG_PER = 3f;
-    [Tooltip("ファイヤーボール アップグレード ダーメジ％")] public float FIREBALL_UPG_DMG_PER = 0.5f;
+    [Tooltip("ファイヤーボール デフォルト ダーメジ X 100％")] public float FIREBALL_DEF_DMG_PER = 5f;
+    [Tooltip("ファイヤーボール アップグレード ダーメジ％")] public float FIREBALL_UPG_DMG_PER = 1;
     [Tooltip("ファイヤーボール ドット ダーメジ％")] public float FIREBALL_DOT_DMG_PER = 0.15f;
     [Space(10)]
     [Tooltip("ポイズン毒ドット デフォルト ダーメジ％")] public float POISONSMOKE_DEF_DMG_PER = 0.2f;
     [Tooltip("ポイズン毒ドット アップグレード ダーメジ％")] public float POISONSMOKE_UPG_DMG_PER = 0.05f;
     [Space(10)]
-    [Tooltip("アイスウェイブ デフォルト ダーメジ％")] public float ICEWAVE_DEF_DMG_PER = 2.5f;
-    [Tooltip("アイスウェイブ アップグレード％")] public float ICEWAVE_UPG_DMG_PER = 0.4f;
+    [Tooltip("アイスウェイブ デフォルト ダーメジ％")] public float ICEWAVE_DEF_DMG_PER = 4;
+    [Tooltip("アイスウェイブ アップグレード％")] public float ICEWAVE_UPG_DMG_PER = 0.8f;
 
     [Header("STAGE FINISH PRICE")][Header("__________________________")]
     [Tooltip("ステージ当たりコイン手当")] public int STAGE_PER_COIN_PRICE = 100;

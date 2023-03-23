@@ -618,8 +618,8 @@ public class Ball_Prefab : MonoBehaviour
         StartCoroutine(coMultiCriticalDmgEF(critDmgRatio, hitCnt, hit.transform.position));
     }
     IEnumerator coMultiCriticalDmgEF(float critDmgRatio, int cnt, Vector3 hitPos){
-        cnt = (int)(cnt * 0.7f); //* カウント全てをすると、コストが掛かるため、70%のみ描画する。
-        for(int i=0; i<cnt; i++){
+        cnt = (int)(cnt * 0.5f); //* カウント全てをすると、コストが掛かるため、50%のみ描画する。
+        for(int i=0; i < cnt; i++){
             em.createCritTxtEF(hitPos, Mathf.RoundToInt(pl.calcPlDmg() * critDmgRatio));//(int)(pl.dmg.Val * critDmgRatio));
             if(isHomeRun) 
                 em.createThunderStrikeEF(hitPos);

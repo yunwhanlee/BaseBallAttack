@@ -2204,7 +2204,7 @@ MonoBehaviour:
       - name: FireBall
         lv: 0
         maxLv: 10
-        unit: 0.2
+        unit: 1
       - name: ColorBall
         lv: 0
         maxLv: 10
@@ -2216,7 +2216,7 @@ MonoBehaviour:
       - name: IceWave
         lv: 0
         maxLv: 10
-        unit: 0.2
+        unit: 8
     itemPassive:
       arr:
       - name: Dmg
@@ -9856,8 +9856,8 @@ MonoBehaviour:
   NIGHTMARE_COIN_BONUS: 3
   NIGHTMARE_DIAMOND_BONUS: 2
   VICTORY_BOSSKILL_CNT: 4
-  BOSS_STAGE_SPAN: 15
-  BOSS_LIMIT_SPAN: 12
+  BOSS_STAGE_SPAN: 2
+  BOSS_LIMIT_SPAN: 2
   BOSS_DIE_ORB_CNT: 25
   BOSS_LIMIT_CNT_ALERT_NUM: 5
   LONG_BLOCK_SPAN: 7
@@ -9910,13 +9910,13 @@ MonoBehaviour:
   THUNDERSHOT_UPG_HIT: 1
   COLORBALLPOP_DEF_CNT: 5
   COLORBALLPOP_UPG_CNT: 1
-  FIREBALL_DEF_DMG_PER: 3
-  FIREBALL_UPG_DMG_PER: 0.5
+  FIREBALL_DEF_DMG_PER: 5
+  FIREBALL_UPG_DMG_PER: 1
   FIREBALL_DOT_DMG_PER: 0.15
   POISONSMOKE_DEF_DMG_PER: 0.2
   POISONSMOKE_UPG_DMG_PER: 0.05
-  ICEWAVE_DEF_DMG_PER: 2.5
-  ICEWAVE_UPG_DMG_PER: 0.4
+  ICEWAVE_DEF_DMG_PER: 4
+  ICEWAVE_UPG_DMG_PER: 0.8
   STAGE_PER_COIN_PRICE: 100
   STAGE_PER_DIAMOND_PRICE: 10
   GENERAL_PRICE: 5000

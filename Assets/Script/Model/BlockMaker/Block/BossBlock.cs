@@ -13,7 +13,7 @@ public class BossBlock : Block_Prefab{
     const float BOSS_HEAL_RATIO = 0.1f;
     const int BOSS_DIE_ORB_CNT = 30;
     const int STONE_PER = 100;
-    const int OBSTACLE_RESET_SPAN = 5;
+    const int OBSTACLE_RESET_SPAN = 4;
     const string BOSSATK_ANIM_NAME_LV1 = "Fireball Shoot";
     const string BOSSATK_ANIM_NAME_LV2 = "Flame Attack";
     const string BOSSATK_ANIM_NAME_LV3 = "Horn Attack";
@@ -49,34 +49,32 @@ public class BossBlock : Block_Prefab{
     public void activeBossSkill(bool isFirst = false){ //* at NextStage
         if(Hp <= 0) return; //* (BUG) ボースが死んだら、ボーススキル処理をしない。
 
+        //* Scream
         float delay = isFirst? 0.45f : 0.1f;
         StartCoroutine(coBossScreamSFX(delay));
-
-        //* Scream
         this.anim.SetTrigger(DM.ANIM.Scream.ToString());
         // gm.postProcessAnim.SetTrigger(DM.ANIM.DoBlur.ToString());
         
         var randPer = Random.Range(0, 10);
-        // if(obstacleResetCnt == 0) randPer = 0;
         Debug.Log($"<color=yellow>BossBlock::activeBossSkill():: isFirst= {isFirst}, bossLevel= {bossLevel}, randPer= {randPer}, obstacleResetCnt= {obstacleResetCnt} / {OBSTACLE_RESET_SPAN}</color>");
         switch(bossLevel){
             case 1:
-                if(gm.obstacleGroup.childCount == 0){createObstacleSingleType(5);}
+                if(obstacleResetCnt == 0){createObstacleSingleType(5);}
                 else if(randPer <= 3){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack(BOSSATK_ANIM_NAME_LV1));
                 break;
             case 2:
-                if(gm.obstacleGroup.childCount == 0){createObstaclePatternType(0, 2);}
+                if(obstacleResetCnt == 0){createObstaclePatternType(0, 2);}
                 else if(randPer <= 3){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack(BOSSATK_ANIM_NAME_LV2));
                 break;
             case 3:
-                if(gm.obstacleGroup.childCount == 0){createObstaclePatternType(2, 4);}
+                if(obstacleResetCnt == 0){createObstaclePatternType(2, 4);}
                 else if(randPer <= 3){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack(BOSSATK_ANIM_NAME_LV3));
                 break;
             case 4:
-                if(gm.obstacleGroup.childCount == 0){createObstaclePatternType(4, 7);}
+                if(obstacleResetCnt == 0){createObstaclePatternType(4, 7);}
                 else if(randPer <= 3){StartCoroutine(coBossHeal());}
                 else StartCoroutine(coBossAttack(BOSSATK_ANIM_NAME_LV4));
                 break;
@@ -84,7 +82,7 @@ public class BossBlock : Block_Prefab{
         obstacleResetCnt++;
 
         //* Reset
-        if(obstacleResetCnt == OBSTACLE_RESET_SPAN){
+        if(obstacleResetCnt >= OBSTACLE_RESET_SPAN){
             obstacleResetCnt = 0;
             obstaclePosList = new List<Vector3>{};
             if(gm.obstacleGroup.childCount > 0) eraseObstacle();
@@ -359,8 +357,7 @@ public class BossBlock : Block_Prefab{
         //* OBSTACLE LIST 準備
         var obstaclePosList = getObstaclePosList();
         Debug.Log($"BossBlock::createObstacleSingleType:: maxCnt= {maxCnt}, obstaclePosList= {obstaclePosList.Count}");
-        if(maxCnt > obstaclePosList.Count)
-            maxCnt = obstaclePosList.Count;
+        if(maxCnt > obstaclePosList.Count) maxCnt = obstaclePosList.Count;
         StartCoroutine(coObstacleSpawnSFX(obstaclePosList.Count));
         singleRandom(Random.Range(3, maxCnt));
     }
@@ -417,10 +414,10 @@ public class BossBlock : Block_Prefab{
 
         for(int i=0; i<gm.obstacleGroup.childCount; i++){
             // Debug.Log($"eraseObstacle():: obstacleGroup.GetChild({i})= {gm.obstacleGroup.GetChild(i)}");
-            var childTf = gm.obstacleGroup.GetChild(i);
-            if(childTf){
-                gm.em.createRockObstacleBrokenEF(childTf.position);
-                Destroy(childTf.gameObject);
+            var obstacle = gm.obstacleGroup.GetChild(i);
+            if(obstacle){
+                gm.em.createRockObstacleBrokenEF(obstacle.position);
+                Destroy(obstacle.gameObject);
             }
         }
     }

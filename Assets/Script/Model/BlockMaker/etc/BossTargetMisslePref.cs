@@ -33,6 +33,7 @@ public class BossTargetMisslePref : MonoBehaviour
     }
 
     void Update(){
+        Debug.Log("TargetMissile velocity.y= " + this.rigid.velocity.y);
         if(target){
             //* ボースが死んだら、追いかけることやめて破壊。
             if(target.GetComponent<BossBlock>().Hp <= 0){
@@ -80,8 +81,8 @@ public class BossTargetMisslePref : MonoBehaviour
     }
 
     IEnumerator coDelay(){
-        yield return new WaitUntil(()=> rigid.velocity.y < 0);
-        yield return Util.delay0_2;
+        yield return new WaitUntil(()=> rigid.velocity.y < 0.1f);
+        yield return Util.delay0_1;
         searchBoss();
     }
 

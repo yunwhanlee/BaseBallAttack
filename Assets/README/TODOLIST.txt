@@ -6,6 +6,15 @@ ver.1.0.10(0319)
     ・Coin -> Diamondを1/2にバランス調整(10000 -> 250, 50000 -> 1250, 100000 -> 2500).
     ・CASH SHOP -> IAP Country Price Unit Auto Apply.
 
+ver.1.0.13(0323)
+    ・AtvSkill
+        - THUNDERSHOT_DEF_HIT 5 -> 8
+        - FIREBALL_DEF_DMG_PER 300% -> 500%, UPG_DMG_PER 50% -> 100%.
+        - ICEWAVE_DEF_DMG_PER 250% -> 400%, UPG_DMG_PER 40% -> 80%.
+    ・(BUG) ボスが障害物を召喚することがキャンセルしても、このエフェクトが残る及びブロックとぶつかったら破壊されるとき、エフェクトがでない。
+    ・(BUG) ボスがターゲットミサイルが全て届く前に、次のタンになってしまい、急に死んでしなう⇒ExpオブとRewardChestなどが収集できなく、残るBUG。
+
+
 
 
 PRICE LEVELING
@@ -512,7 +521,15 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ (BUG-103) CoinでDiamondを買う場合、業績に適用しない。
     ✓ (BUG-104) Shader無地になるエラー対応：Precesion : Half -> Single
     
+    ✓ (BUG) ボスが障害物を召喚することがキャンセルしても、このエフェクトが残り、完成度が下がるように見える。
+        : ibstackeGroup.childCount == 0 を obstacleResetCnt == 0に変更。
+        : Blockとぶっつかたら、破壊のEffectが出るようにする。
+        : OBSTACLE_RESET_SPAN 5 -> 4に周期を変更。
 
+    ✓ (BUG) ボスがターゲットミサイルが全て届く前に、次のタンになってしまい、急に死んでしなう⇒ExpオブとRewardChestなどが収集できなく、残るBUG。
+        : ターゲットミサイルの追跡速度をもっと早くした。
+        : GM::coNextStageProcess()coWaitTargetMissilesAreDisappear()を追加した。
+        : GM::coNextStageProcess()内、coCheckBossLimitCnt(boss)生成　⇒ 順番によって処理するようにする。
 
     - (BUG) isResolveNextStageProblemが勝手に呼び出されるバグあるそう。
     - (BUG) Play::AnimationTxtを非活性化したら、Cam2でフレームドロップがほとんど無くなった…こちらでコストが結構かかったようです。
@@ -524,7 +541,7 @@ REWARD_CHEST_DIAMONDARR = {10, 50, 100, 150, 250, 400};
     ✓ 連続アップグレード可能に : Skill & Upgrade。
     ✓ レベルアップスロットイメージが表示しない。（MAXになってもスロットが残っている。）
         ✓ Exceptリストを反映したTransformChild用意まではOK。
-        ✓ MaxLevelが有ったら、空のボックスがあるBUG修正。 
+        ✓ MaxLevelが有ったら、空のボックスがあるBUG修正。
         ✓ LEVELアップスロット止める範囲を全体ができるように。
 
     ✓ クリティカルダメージアップしても出来ない。

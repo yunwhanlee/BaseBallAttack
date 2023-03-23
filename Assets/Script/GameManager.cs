@@ -755,7 +755,7 @@ public class GameManager : MonoBehaviour {
         if(boss) bossLimitCnt = 8; //* ペナルティでリミットタイムを８にする。
         setActiveCam(false); // cam1 ON, cam2 OFF
         reviveBtn.gameObject.SetActive(false);
-        StartCoroutine(collectDropOrb());
+        StartCoroutine(coCollectDropOrb());
         SM.ins.sfxPlay(SM.SFX.Revive.ToString());
         em.playUIAnimEF(DM.REWARD.Revive.ToString());
         bm.Start();
@@ -1199,39 +1199,6 @@ public class GameManager : MonoBehaviour {
 
         StartCoroutine(coCheckGetRewardChest());
         StartCoroutine(coNextStageProcess(boss));
-        
-        //* BossSkill
-        Debug.Log($"setNextStage:: boss= {boss}, gm.bossLimitCnt= {bossLimitCnt}");
-
-        if(boss){
-            //* (BUG-85) BossLimitCntがブロックのPerfectの場合ー２になる。ボースステージに固定。
-            // Debug.Log($"bossStage: {boss.BossLevel * LM._.BOSS_LIMIT_SPAN}");
-            int offsetStage = LM._.BOSS_STAGE_SPAN * LM._.VICTORY_BOSSKILL_CNT;
-            int bossStage = boss.BossLevel * LM._.BOSS_STAGE_SPAN + getStageOffsetByMode();
-            stage = bossStage; //* ステージ固定。
-
-            bossLimitCnt--;
-
-            if(bossLimitCnt == LM._.BOSS_LIMIT_CNT_ALERT_NUM && boss.Hp > 0){
-                em.playUIAnimEF(DM.ANIM.BossLimitcntAlertTxtEF.ToString());
-            }
-
-            //* ボース制限時間が０になったら、GAMEOVER!!
-            Debug.Log($"bossLimitCnt= {bossLimitCnt}");
-            if(bossLimitCnt <= 0){
-                setGameOver();
-                return;
-            }
-            boss.activeBossSkill();
-        }
-
-        //* Achivement (StageClear)
-        if(DM.ins.personalData.ClearStage <= stage){
-            DM.ins.personalData.ClearStage = stage;
-        }
-
-        //* Achivement (StageClear IsComplete)
-        AcvStageClear.setStageClear(stage);
     }
     
     private int getStageOffsetByMode(){
@@ -1244,7 +1211,9 @@ public class GameManager : MonoBehaviour {
 
     private IEnumerator coNextStageProcess(BossBlock boss){
         yield return StartCoroutine(coCheckPerfectBonus(boss));
-        yield return StartCoroutine(collectDropOrb()); //* オーブを集める
+        yield return StartCoroutine(coWaitTargetMissilesAreDisappear(boss));
+        yield return StartCoroutine(coCheckBossLimitCntAndStage(boss));
+        yield return StartCoroutine(coCollectDropOrb()); //* オーブを集める
         yield return StartCoroutine(coCheckLevelUp());
     }
 
@@ -1252,43 +1221,6 @@ public class GameManager : MonoBehaviour {
         if(ballGroup.childCount > 0){
             for(int i=0; i<ballGroup.childCount; i++)
                 Destroy(ballGroup.GetChild(i).gameObject);
-        }
-    }
-    private IEnumerator coCheckPerfectBonus(BossBlock boss){
-        Debug.Log("AAA setNextStage:: coCheckPerfectBonus::");
-        if(blockGroup.childCount == 0){
-            perfectTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
-            em.playUIAnimEF(DM.ANIM.Perfect.ToString());
-
-            yield return Util.delay0_5;
-            //* One More Next Stage (ボスがいなければ)
-            if(!boss){
-                ++stage;
-            }
-            bm.DoCreateBlock = true;
-        }
-    }
-    private IEnumerator collectDropOrb(){
-        //* (BUG-6) 後で破壊したブロックからでるOrbがPlayerに行かない。Invokeで0.5秒を待た後で収集。
-        yield return Util.delay0_5;
-        var orbs = dropItemGroup.GetComponentsInChildren<DropItem>();
-        Debug.Log("setNextStage():: collectDropOrb:: MoveToPlayer ON -> orbs.Length= " + orbs.Length);
-        Array.ForEach(orbs, orb => orb.IsMoveToPlayer = true);
-    }
-    public IEnumerator coCheckLevelUp(){
-        //* Coroutineの中、while文でUpdate()ように活用：ExpOrbがPlayerに全て届くまで待つ。
-        while(true){
-            if(pl.IsLevelUp){ //* <- Player::setLevelUp()
-                Debug.Log($"setNextStage():: coCheckLevelUp:: pl.IsLevelUp= {pl.IsLevelUp}");
-                pl.IsLevelUp = false;
-                yield return Util.delay1;
-                rerotateSkillSlotsBtn.gameObject.SetActive(true);
-                //! (BUG-52) LEVEL-UPが連続でした場合、順番通り繰り返す。
-                levelUpPanel.SetActive(true);
-                levelUpPanelAnimate.Start();
-                break;
-            }
-            yield return null;
         }
     }
     public IEnumerator coCheckGetRewardChest(){
@@ -1301,6 +1233,89 @@ public class GameManager : MonoBehaviour {
             }
             yield return null;
         }
+    }
+    private IEnumerator coCheckPerfectBonus(BossBlock boss){
+        Debug.Log("<color=yellow>setNextStage()::coCheckPerfectBonus()::</color>");
+        if(blockGroup.childCount == 0){
+            perfectTxt.GetComponent<Animator>().SetTrigger(DM.ANIM.DoSpawn.ToString());
+            em.playUIAnimEF(DM.ANIM.Perfect.ToString());
+
+            yield return Util.delay0_5;
+            //* One More Next Stage (ボスがいなければ)
+            if(!boss){
+                ++stage;
+            }
+            bm.DoCreateBlock = true;
+        }
+    }
+    private IEnumerator coWaitTargetMissilesAreDisappear(BossBlock boss){
+        if(boss){
+            var tgMissiles = dropItemGroup.GetComponentsInChildren<BossTargetMisslePref>();
+            bool isActived = Array.Find(tgMissiles, tgMissile => tgMissile.gameObject.activeSelf == true);
+            yield return new WaitUntil(() => isActived == false);
+            Debug.Log("<color=yellow>setNextStage():: coWaitUntilTargetMissileDone():: isActived= " + isActived + "</color>");
+        }
+        else{
+            yield return null;
+        }
+    }
+    private IEnumerator coCollectDropOrb(){
+        //* (BUG-6) 後で破壊したブロックからでるOrbがPlayerに行かない。Invokeで0.5秒を待た後で収集。
+        yield return Util.delay0_5;
+        var orbs = dropItemGroup.GetComponentsInChildren<DropItem>();
+        Debug.Log("setNextStage():: collectDropOrb:: MoveToPlayer ON -> orbs.Length= " + orbs.Length);
+        Array.ForEach(orbs, orb => orb.IsMoveToPlayer = true);
+    }
+    public IEnumerator coCheckLevelUp(){
+        //* Coroutineの中、while文でUpdate()ように活用：ExpOrbがPlayerに全て届くまで待つ。
+        while(true){
+            if(pl.IsLevelUp){ //* <- Player::setLevelUp()
+                Debug.Log($"setNextStage()::coCheckLevelUp:: pl.IsLevelUp= {pl.IsLevelUp}");
+                pl.IsLevelUp = false;
+                yield return Util.delay1;
+                rerotateSkillSlotsBtn.gameObject.SetActive(true);
+                //! (BUG-52) LEVEL-UPが連続でした場合、順番通り繰り返す。
+                levelUpPanel.SetActive(true);
+                levelUpPanelAnimate.Start();
+                break;
+            }
+            yield return null;
+        }
+    }
+    private IEnumerator coCheckBossLimitCntAndStage(BossBlock boss){
+        if(boss){
+            //* (BUG-85) BossLimitCntがブロックのPerfectの場合ー２になる。ボースステージに固定。
+            int offsetStage = LM._.BOSS_STAGE_SPAN * LM._.VICTORY_BOSSKILL_CNT;
+            int bossStage = boss.BossLevel * LM._.BOSS_STAGE_SPAN + getStageOffsetByMode();
+            stage = bossStage; //* ステージ固定。
+
+            bossLimitCnt--;
+
+            //*「残り５ターン」お知らせ 表示。
+            if(bossLimitCnt == LM._.BOSS_LIMIT_CNT_ALERT_NUM && boss.Hp > 0){
+                em.playUIAnimEF(DM.ANIM.BossLimitcntAlertTxtEF.ToString());
+            }
+
+            //* ボース制限時間が０になったら、GAMEOVER!!
+            Debug.Log($"<color=yellow>setNextStage()::coCheckBossLimitCntProcess():: bossLimitCnt= {bossLimitCnt}</color>");
+            if(bossLimitCnt <= 0){
+                if(boss.Hp > 0){ //* (BUG) ボースが後続打を受けた場合も考え、最後に倒したらゲームオーバを回避。
+                    setGameOver();
+                }
+            }
+            else{
+                boss.activeBossSkill();
+            }
+        }
+
+        //* Achivement (StageClear)
+        if(DM.ins.personalData.ClearStage <= stage)
+            DM.ins.personalData.ClearStage = stage;
+
+        //* Achivement (StageClear IsComplete)
+        AcvStageClear.setStageClear(stage);
+
+        yield return null;
     }
     public int getCurSkillIdx(){
         return (SelectAtvSkillBtnIdx == 0)? DM.ins.personalData.SelectSkillIdx : DM.ins.personalData.SelectSkill2Idx;
