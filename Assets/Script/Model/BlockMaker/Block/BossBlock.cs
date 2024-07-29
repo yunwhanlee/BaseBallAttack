@@ -46,6 +46,22 @@ public class BossBlock : Block_Prefab{
         activeBossSkill(isFirst: true);
     }
 
+    int idx = 0;
+    void Update() {
+        if(Input.GetKeyDown(KeyCode.A)) {
+            Debug.Log("IDX= " + idx);
+            if(idx == 0) singleRandom(5);
+            if(idx == 1) patternColEven();
+            if(idx == 2) patternColOdd();
+            if(idx == 3) patternCutColumnLine();
+            if(idx == 4) patternCntRowLine();
+            if(idx == 5) patternGoBoard();
+            if(idx == 6) patternGoBoardRandom();
+            if(idx == 7) patternTriangle();
+            idx++;
+        }
+    }
+
     public void activeBossSkill(bool isFirst = false){ //* at NextStage
         if(Hp <= 0) return; //* (BUG) ボースが死んだら、ボーススキル処理をしない。
 

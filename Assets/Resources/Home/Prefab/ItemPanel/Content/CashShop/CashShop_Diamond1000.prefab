@@ -662,6 +662,9 @@ MonoBehaviour:
   productId: diamond_small
   buttonType: 0
   consumePurchase: 1
+  onTransactionsRestored:
+    m_PersistentCalls:
+      m_Calls: []
   onPurchaseComplete:
     m_PersistentCalls:
       m_Calls:

@@ -40,7 +40,7 @@ public class AdmobManager : MonoBehaviour{
 
     #region REWARD AD
     const string rewardTestID = "ca-app-pub-3940256099942544/5224354917";
-    const string rewardID = "ca-app-pub-4586441545476475/8513799701";
+    const string rewardID = "ca-app-pub-3908204064369314/3519376638";
     RewardedAd rewardAd;
 
     void LoadRewardAd(){

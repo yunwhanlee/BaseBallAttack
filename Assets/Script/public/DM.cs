@@ -8,7 +8,7 @@ using UnityEngine.Purchasing;
 using System;
 
 public class DM : MonoBehaviour{
-    public static DM ins;    
+    public static DM ins;
     public HomeManager hm;
     public GameManager gm;
     public enum DATABASE_KEY {Json};

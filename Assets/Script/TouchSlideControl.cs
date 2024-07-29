@@ -255,36 +255,35 @@ public class TouchSlideControl : MonoBehaviour, IPointerDownHandler, IPointerUpH
         pl.arrowAxisAnchor.transform.rotation = Quaternion.Euler(0, offsetDeg2DTo3D - deg, 0);
         // pl.arrowAxisAnchor.transform.position = new Vector3(pl.arrowAxisAnchor.transform.position.x + Mathf.Cos(deg), pl.arrowAxisAnchor.transform.position.y, pl.arrowAxisAnchor.transform.position.z + Mathf.Sin(deg));
     }
+    /// <summary>
+    /// ボールベッティング前に予想経路の表示 (1クッションまで)
+    /// </summary>
+    /// <param name="arrowAnchorTf"></param>プレイヤー打席の矢印方向<summary>
     public void drawBallPreviewSphereCast(Transform arrowAnchorTf){
+        var previewSphere1 = pl.ballPreviewSphere[0];
         RaycastHit hit, hit2;
-        float radius = pl.ballPreviewSphere[0].GetComponent<SphereCollider>().radius * pl.ballPreviewSphere[0].transform.localScale.x;
+        //* ボールの半径
+        float radius = previewSphere1.GetComponent<SphereCollider>().radius * previewSphere1.transform.localScale.x;
+        //* 最初に発射する予想経路をBallPreview[0]の位置に代入
         if(Physics.SphereCast(arrowAnchorTf.position, radius, arrowAnchorTf.forward, out hit, 1000, 1 << LayerMask.NameToLayer(DM.LAYER.BallPreview.ToString()))){
-            setBallPreviewCenterPos(ref pl.ballPreviewSphere[0], hit, radius);
+            //* 最初の予想経路の位置調整
+            setBallPreviewCenterPos(ref previewSphere1, hit, radius);
+            //* もし、壁にぶつかったら
             if(hit.transform.CompareTag(DM.TAG.Wall.ToString())){
                 //* Set 法線ベクトル
                 wallNormalVec = (hit.transform.position.x < 0)? Vector3.right : Vector3.left;
 
                 //* 反射角
                 var originPos = arrowAnchorTf.GetChild(0).transform.position;
-                var hitPos = pl.ballPreviewSphere[0].transform.position;
+                var hitPos = previewSphere1.transform.position;
                 var reflectVec = calcReflectVec(originPos, hitPos, wallNormalVec);
-                // Debug.DrawRay(hit.point, reflectVec, Color.red, 1);
 
-                // RaycastHit
+                //* ２番目に跳ね返した経路をBallPreview[1]の位置に代入
                 if(Physics.SphereCast(hit.point, radius, reflectVec, out hit2, 1000, 1 << LayerMask.NameToLayer(DM.LAYER.BallPreview.ToString()))){
+                    //* ２番目の予想経路の位置調整
                     setBallPreviewCenterPos(ref pl.ballPreviewSphere[1], hit2, radius);
                 }
-                
-                //* 🌟ColorBall ActiveSkill
-                if(hit2.transform)
-                    gm.activeSkillDataBase[0].setColorBallSkillGlowEF(gm, ref bm, hit2, ref hitBlockByBallPreview);
-                return;
             }
-            else{
-                wallNormalVec = Vector3.zero;
-            }
-            //* 🌟ColorBall ActiveSkill
-            gm.activeSkillDataBase[0].setColorBallSkillGlowEF(gm, ref bm, hit, ref hitBlockByBallPreview);
         }
     }
     private void setBallPreviewCenterPos(ref GameObject ballPrevObj, RaycastHit hit, float radius){
