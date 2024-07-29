@@ -60,7 +60,7 @@ TextureImporter:
       213: -7303129862257537525
     second: PassiveSkillSprite 1_18
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -81,6 +81,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -119,6 +120,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -166,6 +168,18 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 1
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -580,6 +594,26 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      PassiveSkillSprite 1_0: 3022441733741400822
+      PassiveSkillSprite 1_1: 7664128123278667581
+      PassiveSkillSprite 1_10: 7818926999902503129
+      PassiveSkillSprite 1_11: -6602433458210342831
+      PassiveSkillSprite 1_12: -6879826735880928176
+      PassiveSkillSprite 1_13: -2454095757011341444
+      PassiveSkillSprite 1_14: -6515452838685300054
+      PassiveSkillSprite 1_15: 6136885967172124349
+      PassiveSkillSprite 1_16: -7735911892687545204
+      PassiveSkillSprite 1_17: 7912658078843397918
+      PassiveSkillSprite 1_18: -7303129862257537525
+      PassiveSkillSprite 1_2: 9127423197153601824
+      PassiveSkillSprite 1_3: 819117497857225752
+      PassiveSkillSprite 1_4: 6512346148945283836
+      PassiveSkillSprite 1_5: -5447646577162066692
+      PassiveSkillSprite 1_6: 5169688831908918579
+      PassiveSkillSprite 1_7: -1183667871557456570
+      PassiveSkillSprite 1_8: 6937638309715011675
+      PassiveSkillSprite 1_9: 7113350106559060599
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

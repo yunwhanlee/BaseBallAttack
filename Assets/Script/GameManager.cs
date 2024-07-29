@@ -702,7 +702,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log("<color=yellow> onClickShowADButton(" + rewardType.ToString() + ")</color>");
 
         //* 広告
-        am.showRewardAd(
+        am.ShowRewardAd(
             rewardType == DM.REWARD.CoinX2.ToString()? DM.REWARD.CoinX2
             : rewardType == DM.REWARD.RerotateSkillSlots.ToString()? DM.REWARD.RerotateSkillSlots
             : DM.REWARD.Revive
@@ -982,6 +982,13 @@ public class GameManager : MonoBehaviour {
             AcvNightmareModeClear.setNightmareModeClear();
     }
 
+    /// <summary>
+    /// リーダボード登録 (ベストスコア)
+    /// </summary>
+    public static void updateLeaderboard(int bestScore) {
+        Social.ReportScore(bestScore, GPGSIds.leaderboard,(bool success) => {});
+    }
+
     private void setFinishGame(GameObject panel, Text bestStageTxt, Text stageTxt, Text coinTxt, Text diamondTxt,
         Text rewardItemCoinTxt, Text rewardItemDiamondTxt, Text rewardItemRouletteTicketTxt, bool isGiveUp = false){
         //* (BUG-66) ステージが終わっても、ボースとか進んでいるバグ -> Time.scaleを０にして対応。GameOverとVictoryAnimationはRealTimeScaleとして反応するように。
@@ -998,11 +1005,8 @@ public class GameManager : MonoBehaviour {
             //* Emoji Effect 
             bestStageTxt.transform.parent.GetChild(1).gameObject.SetActive(true);
 
-            //* LoaderBoard入力。
-            GPGSBinder.Inst.ReportLeaderboard(GPGSIds.leaderboard
-                , DM.ins.personalData.BestStage
-                , success => {Debug.Log("LOADER BOARD入力: " + success);
-            });
+            //* LoaderBoard入力
+            updateLeaderboard(DM.ins.personalData.BestStage);
         }
 
         //* UI

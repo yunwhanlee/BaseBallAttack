@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 using UnityEngine.UI.Extensions;
 using UnityEngine.Serialization;
 using UnityEngine.Rendering;
@@ -353,6 +355,27 @@ public class HomeManager : MonoBehaviour
         focusIconObj.SetActive(DM.ins.personalData.checkAcceptableAchivement());
     }
 
+    /// <summary>
+    /// リーダボード登録 (ベストスコア)
+    /// </summary>
+    public static void updateLeaderboard(int bestScore) {
+        Social.ReportScore(bestScore, GPGSIds.leaderboard,(bool success) => {});
+    }
+
+    /// <summary>
+    /// リーダボード閲覧
+    /// </summary>
+    public void ShowLeaderboard() {
+        //* ログインできたら
+        if(Social.localUser.authenticated) {
+            //* リーダボードにベストスコア入力
+            updateLeaderboard(DM.ins.personalData.BestStage);
+        }
+        else {
+            errorNetworkDialog.gameObject.SetActive(true);
+            DM.ins.Login();
+        }
+    }
 //* ----------------------------------------------------------------
 //* Button
 //* ----------------------------------------------------------------
@@ -360,26 +383,17 @@ public class HomeManager : MonoBehaviour
     public void onClickGooglePlayLeaderBoard() {
         Debug.Log("onClickGooglePlayLeaderBoard()::");
         //* GooglePlayログイン。
-        GPGSBinder.Inst.Login((success, user) => {
-            googlePlayLoginTxt.text = 
-            $"{success}, {user.userName}, {user.id}, {user.state}, {user.underage}";
-            if(success == true){
-                // DM.ins.IsGPGSLogin = true;
-                GPGSBinder.Inst.ShowAllLeaderboardUI();
-            }
-            else{
-                errorNetworkDialog.gameObject.SetActive(true);
-            }
-        });
+        ShowLeaderboard();
         //* LeaderBoard表示。
         StartCoroutine(coDisplayLoaderBoard());
     }
     IEnumerator coDisplayLoaderBoard() {
         Debug.Log("coDisplayLoaderBoard::");
         yield return new WaitUntil(() => DM.ins.IsGPGSLogin);
-        Debug.Log("coDisplayLoaderBoard:: Display LoaderBoard");
-        GPGSBinder.Inst.ShowAllLeaderboardUI();
+        Debug.Log("coDisplayLoaderBoard:: リーダボード閲覧");
+        ((PlayGamesPlatform)Social.Active).ShowLeaderboardUI(GPGSIds.leaderboard);
     }
+
     public void onClickBtnQuestionMarkIcon() {
         SM.ins.sfxPlay(SM.SFX.BtnClick.ToString());
     }
@@ -491,7 +505,7 @@ public class HomeManager : MonoBehaviour
     }
     public void onClickShowADButton(){
         //* 広告要請
-        am.showRewardAd(DM.REWARD.ROULETTE_TICKET);
+        am.ShowRewardAd(DM.REWARD.ROULETTE_TICKET);
     }
 
 #region SETTING
@@ -977,7 +991,7 @@ public class HomeManager : MonoBehaviour
         if(child.name == DM.NAME.GrayPanel.ToString()) child.gameObject.SetActive(isActive);
     }
     private string updateADCoolTime(){
-        TimeSpan coolTime;
+        TimeSpan coolTime = TimeSpan.Zero;  // 초기값 할당
         DateTime finishTime = DateTime.MinValue;
         try{
             //! (BUG-40) ROULETTEチケットが０になったとき、string not valid エラー発生。

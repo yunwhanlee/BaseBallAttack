@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.Purchasing;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 using System;
 
 public class DM : MonoBehaviour{
@@ -109,6 +111,18 @@ public class DM : MonoBehaviour{
     [Header("SKY")][Header("__________________________")]
     public Material simpleSkyMt;
 
+    public void Login() {
+        PlayGamesPlatform.Instance.Authenticate(ProcessAuthentication);
+    }
+
+    internal void ProcessAuthentication(SignInStatus status) {
+        if (status == SignInStatus.Success) {
+            IsGPGSLogin = true; // Google Login Success
+        } else {
+            hm.errorNetworkDialog.gameObject.SetActive(true); // Google Login Fail
+        }
+    }
+
     void Awake() {
         Application.targetFrameRate = 40;
         singleton();
@@ -119,24 +133,15 @@ public class DM : MonoBehaviour{
             Debug.Log("DM::singleton():: Start App Only One Time");
             HomeManager hm = GameObject.Find(NAME.HomeManager.ToString()).GetComponent<HomeManager>(); //* (BUG-50) 再ロードしたら、DM.ins.hmがNULLになり、全てのデータがちゃんと読みだされないバグ対応。
             ins = this;
-            //* Google Play Login
-            GPGSBinder.Inst.Login((success, user) => {
-                Debug.Log($"GPGS::LOGIN= {success}");
-                hm.googlePlayLoginTxt.text = $"{success}, {user.userName}, {user.id}, {user.state}, {user.underage}";
-                if(success == true) 
-                    DM.ins.IsGPGSLogin = true;
-                else 
-                    hm.errorNetworkDialog.gameObject.SetActive(true);
-            });
         }
         else if(ins != null) {
             Debug.Log($"DM::singleton():: Home Scene Repeat, Because this.object is Declared in Home Scene");
-            DM.ins.hm = GameObject.Find(NAME.HomeManager.ToString()).GetComponent<HomeManager>(); //* (BUG-50) 再ロードしたら、DM.ins.hmがNULLになり、全てのデータがちゃんと読みだされないバグ対応。
-            DM.ins.CoinTxt = this.CoinTxt;
-            DM.ins.DiamondTxt = this.DiamondTxt;
+            hm = GameObject.Find(NAME.HomeManager.ToString()).GetComponent<HomeManager>(); //* (BUG-50) 再ロードしたら、DM.ins.hmがNULLになり、全てのデータがちゃんと読みだされないバグ対応。
+            CoinTxt = this.CoinTxt;
+            DiamondTxt = this.DiamondTxt;
             
             int i=0;
-            Array.ForEach(DM.ins.scrollviews, sv => {
+            Array.ForEach(scrollviews, sv => {
                 sv.ScrollRect = this.scrollviews[i].ScrollRect;
                 sv.ContentTf = this.scrollviews[i].ContentTf;
                 sv.ItemPrefs = this.scrollviews[i].ItemPrefs;
@@ -144,9 +149,9 @@ public class DM : MonoBehaviour{
             });
 
             //! (BUG-防止) "Home"シーンに戻った場合、scrollViewsがnullなくても、ItemPassiveが宣言しないためエラー。
-            DM.ins.personalData.ItemPassive = this.personalData.ItemPassive;
+            personalData.ItemPassive = this.personalData.ItemPassive;
 
-            DM.ins.Start();
+            Start();
             
             Destroy(this.gameObject);
             return;
@@ -154,8 +159,11 @@ public class DM : MonoBehaviour{
         DontDestroyOnLoad(this.gameObject);
     }
     void Start(){
-        Debug.Log("DM::Start():: DM.ins.hm= " + DM.ins.hm);
-        if(DM.ins.hm == null) return;
+        Debug.Log("DM::Start():: hm= " + hm);
+        if(hm == null) return;
+
+        //* Google Play Login
+        Login();
 
         LANG.initlanguageList();
         // foreach(DM.ATV list in Enum.GetValues(typeof(DM.ATV)))Debug.LogFormat("Enums GetFindVal:: {0}", list.ToString())
